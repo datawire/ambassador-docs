@@ -43,6 +43,7 @@ metadata:
 spec:
   prefix: /
   service: https://example-service
+  tls: tls
 ```
 
 The `example-service` service must now support tls v1.3 for Ambassador to connect.
