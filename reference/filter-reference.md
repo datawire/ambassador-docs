@@ -117,7 +117,7 @@ spec:
     injectRequestHeaders:           # optional; default is []
     - name:   "header-name-string"    # required
       value:  "go-template-string"    # required
-       
+
     errorResponse:                  # optional
       contentType: "string"           # deprecated; use 'headers' instead
       headers:                        # optional; default is [{name: "Content-Type", value: "application/json"}]
@@ -414,9 +414,16 @@ spec:
         - "scope2"
         insteadOfRedirect:        # optional; default is to do a redirect to the identity provider
           httpStatusCode: integer # optional; default is 403
+          errorResponse:                      # optional
+            headers:                          # optional; default is [{name: "Content-Type", value: "application/json"}]
+            - name: "header-name-string"      # required
+              value: "go-template-string"     # required
+            bodyTemplate: "string"          # optional; default is `{{ . | json "" }}`
           ifRequestHeader:        # optional; default is to return httpStatusCode for all requests that would redirect-to-identity-provider
             name: "string"        # required
             value: "string"       # optional; default is any non-empty string
+
+
 ```
 
  - `scopes`: A list of OAuth scope values to include in the scope of
@@ -449,17 +456,35 @@ spec:
    User-Agent does not have an currently-authenticated session, then
    Ambassador will redirect the User-Agent to the identity provider.
    Setting `insteadOfRedirect` causes it to instead serve an
-   authorization-denied error page; by default HTTP 403 ("Forbidden"),
-   but this can be configured by the `httpStatusCode` sub-argument.
-   By default, `insteadOfRedirect` will apply to all requests that
-   would cause the redirect; setting the `ifRequestHeader`
-   sub-argument causes it to only apply to requests that have the HTTP
-   header field `name` (case-insensitive) set to `value`
-   (case-sensitive); or requests that have `name` set to any non-empty
-   string if `value` is unset.  `ifRequestHeader` does nothing when
-   `grantType: "ClientCredentials"`, because Ambassador will never
-   redirect the User-Agent to the identity provider for the client
-   credentials grant type.
+   authorization-denied error page
+   - `httpStatusCode`: by default HTTP 403 ("Forbidden") will be returned,
+     but this can be configured by the `httpStatusCode` sub-argument.
+   - `ifRequestHeader`: by default, `insteadOfRedirect` will apply to all
+     Templaterequests that would cause the redirect; setting the `ifRequestHeader`
+     sub-argument causes it to only apply to requests that have the HTTP
+     header field `name` (case-insensitive) set to `value`; or requests that
+     have `name` set to any non-empty string if `value` is unset.
+     `ifRequestHeader` does nothing when `grantType: "ClientCredentials"`,
+     because Ambassador will never redirect the User-Agent to the identity
+     provider for the client credentials grant type.
+   - `errorResponse` allows templating the error response. Make sure you
+     validate and test your template, not to generate server-side errors
+     on top of client errors.
+      * `headers` sets extra HTTP header fields in the error response.
+        The value is specified as a [Go `text/template`][] string,
+        with the following data made available to it:
+         * `.access_token` -> `string`: the access token
+         * `.token_type` -> `string`: the token type
+         * `.expire_at` -> `string`: the expiration time
+         * `.scope` -> `string`: the scope.
+         * `.status_code` → `integer` the HTTP status code to be returned
+         * `.httpStatus` → `integer` an alias for `.status_code` (hidden from `{{ . | json "" }}`)
+         * `.message` → `string` the error message string
+         * `.error` → `error` the raw Go `error` object that generated `.message` (hidden from `{{ . | json "" }}`)
+         * `.error.ValidationError` → [`jwt.ValidationError`][] the JWT validation error.
+         * `.request_id` → `string` the Envoy request ID, for correlation (hidden from `{{ . | json "" }}` unless `.status_code` is in the 5XX range)
+         * `.requestId` → `string` an alias for `.request_id` (hidden from `{{ . | json "" }}`)
+
 
 ### Filter Type: `Plugin`
 
@@ -631,7 +656,7 @@ spec:
     - name: auth0
 ```
 
-**Note:** Ambassador will choose the first `FilterPolicy` rule that matches the incoming request. 
+**Note:** Ambassador will choose the first `FilterPolicy` rule that matches the incoming request.
 As in the above example, you must list your rules in the order of least to most generic.
 
 ## Installing self-signed certificates
