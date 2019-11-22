@@ -6,7 +6,7 @@ This is mostly true of AWS as well. The various methods of deploying Ambassador 
 
 However, Kubernetes exposes various annotations for controlling the configuration of the AWS load balancer deployed via a Kubernetes `type: LoadBalancer` service. 
 
-This guide goes over considerations that must be made when using these annotations with Ambassador.
+This guide goes over considerations that must be made when using these annotations with Ambassador. You can 
 
 **Note:** By default `type: LoadBalancer` will deploy an Elastic Load Balancer (ELB) running in L4 mode. This is typically enough for most users and the configuration options laid out below are not required.
 
@@ -46,6 +46,9 @@ There are a number of `aws-load-balancer` annotations that can be configured in 
 
 - `service.beta.kubernetes.io/aws-load-balancer-backend-protocol`:
     Configures the ELB to operate in L4 or L7 mode. Can be set to `"tcp"`/`"ssl"` for an L4 listener or `"http"`/`"https"` for an L7 listener. Defaults to `"http"` and uses `"https"` if `aws-load-balancer-ssl-cert` is set.
+
+- `service.beta.kubernetes.io/aws-load-balancer-type: "nlb"`:
+    When this annotation is set it will launch a Network Load Balancer (NLB) instead of a classic ELB.
     
 - `service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled`:
     Configures the ELB to load balance across zones. For high availability, it is typical to deploy nodes across availability zones so this should be set to `"true"`.
