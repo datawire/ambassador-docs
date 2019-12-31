@@ -347,7 +347,7 @@ This section will focus on setting up Prometheus to scrape stats from Ambassador
     metadata:
       name: ambassador-monitor
       labels:
-        release: prometheus
+        release: prometheus-operator
     spec:
       namespaceSelector:
         matchNames:
@@ -356,7 +356,8 @@ This section will focus on setting up Prometheus to scrape stats from Ambassador
         matchLabels:
           service: ambassador-admin
       endpoints:
-      - port: ambassador-admin
+        - port: admin
+          path: /metrics
     ```
 
     If you are scraping metrics from a `statsd-sink` deployment:
