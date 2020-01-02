@@ -58,7 +58,7 @@ In this section, we will deploy the Prometheus Operator using the standard YAML 
 
     ```
     kubectl apply -f https://www.getambassador.io/early-access/yaml/monitoring/prometheus-rbac.yaml
-    ``` 
+    ```
 
     Then, copy the YAML below, and save it in a file called `prometheus.yaml`
 
@@ -141,7 +141,7 @@ This section will focus on setting up Prometheus to scrape stats from Ambassador
     helm install -n prometheus stable/prometheus-operator
     ```
 
-2. Create a `ServiceMonitor` 
+2. Create a `ServiceMonitor`
 
     The Prometheus Operator Helm chart creates a Prometheus instance that is looking for `ServiceMonitor`s with `label: release=prometheus`.
 
@@ -189,7 +189,7 @@ This section will focus on setting up Prometheus to scrape stats from Ambassador
       - port: prometheus-metrics
     ```
 
-Prometheus is now configured to gather metrics from Ambassador Edge Stack. 
+Prometheus is now configured to gather metrics from Ambassador Edge Stack.
 
 #### Prometheus Operator CRDs
 
@@ -304,7 +304,7 @@ spec:     
   service: grafana.{{GRAFANA_NAMESPACE}}
 ```
 
-Now, access Grafana by going to `{AMBASSADOR_IP}/grafana/` and logging in with `username: admin` : `password: admin`. 
+Now, access Grafana by going to `{AMBASSADOR_IP}/grafana/` and logging in with `username: admin` : `password: admin`.
 
 Import the [provided dashboard](https://grafana.com/dashboards/10434) by clicking the plus sign in the left side-bar, clicking `New Dashboard` in the top left, selecting `Import Dashboard`, and entering the dashboard ID(10434).
 
@@ -351,12 +351,12 @@ If running a pre-`0.71.0` version of Ambassador, you will need to configure Envo
             - name: AMBASSADOR_NAMESPACE
               valueFrom:
                 fieldRef:
-                  fieldPath: metadata.namespace  
+                  fieldPath: metadata.namespace
             - name: STATSD_ENABLED
               value: "true"
             - name: STATSD_HOST
               value: "statsd-sink.default.svc.cluster.local"
-    ...  
+    ...
     ```
 
 Ambassador Edge Stack is now configured to output statistics to the Prometheus StatsD exporter.
