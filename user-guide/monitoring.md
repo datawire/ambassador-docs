@@ -40,7 +40,9 @@ spec:     
 
 The [Prometheus Operator](https://github.com/coreos/prometheus-operator) for Kubernetes provides an easy way to manage your Prometheus deployment using Kubernetes-style resources with Custom Resource Definitions (CRDs).
 
-In this section, we will deploy the Prometheus Operator using the standard YAML files. You can also install it with [helm](/user-guide/monitoring#prometheus-operator-gather-metrics-from-ambassador-edge-stack) if you prefer.
+#### Prometheus Operator with standard YAML
+
+In this section, we will deploy the Prometheus Operator using the standard YAML files. Alternatively, you can install it with [Helm](#prometheus-operator-with-helm) if you prefer.
 
 1. Deploy the Prometheus Operator
 
@@ -125,7 +127,71 @@ In this section, we will deploy the Prometheus Operator using the standard YAML 
 
 Prometheus is now configured to gather metrics from Ambassador Edge Stack.
 
-#### Notes on the Prometheus Operator
+#### Prometheus Operator with Helm
+
+In this section, we will deploy the Prometheus Operator using Helm. Alternatively, you can install it with [kubectl YAML](#prometheus-operator-with-standard-yaml) if you prefer.
+
+The default [Helm Chart](https://github.com/helm/charts/tree/master/stable/prometheus-operator) will install Prometheus and configure it to monitor your Kubernetes cluster.
+
+This section will focus on setting up Prometheus to scrape stats from Ambassador Edge Stack. Configuration of the Helm Chart and analysis of stats from other cluster components is outside of the scope of this documentation.
+
+1. Install the Prometheus Operator from the helm chart
+
+    ```
+    helm install -n prometheus stable/prometheus-operator
+    ```
+
+2. Create a `ServiceMonitor` 
+
+    The Prometheus Operator Helm chart creates a Prometheus instance that is looking for `ServiceMonitor`s with `label: release=prometheus`.
+
+    If you are running an Ambassador version higher than 0.71.0 and want to scrape metrics directly from the `/metrics` endpoint of Ambassador Edge Stack running in the `default` namespace:
+
+    ```yaml
+    ---
+    apiVersion: monitoring.coreos.com/v1
+    kind: ServiceMonitor
+    metadata:
+      name: ambassador-monitor
+      namespace: monitoring
+      labels:
+        release: prometheus
+    spec:
+      namespaceSelector:
+        matchNames:
+        - default
+      selector:
+        matchLabels:
+          service: ambassador-admin
+      endpoints:
+      - port: ambassador-admin
+    ```
+
+    If you are scraping metrics from a `statsd-sink` deployment:
+
+    ```yaml
+    ---
+    apiVersion: monitoring.coreos.com/v1
+    kind: ServiceMonitor
+    metadata:
+      name: statsd-monitor
+      namespace: monitoring
+      labels:
+        release: prometheus
+    spec:
+      namespaceSelector:
+        matchNames:
+        - default
+      selector:
+        matchLabels:
+          service: statsd-sink
+      endpoints:
+      - port: prometheus-metrics
+    ```
+
+Prometheus is now configured to gather metrics from Ambassador Edge Stack. 
+
+#### Prometheus Operator CRDs
 
 The Prometheus Operator creates a series of Kubernetes Custom Resource Definitions (CRDs) for managing Prometheus in Kubernetes.
 
@@ -317,65 +383,3 @@ spec:
   endpoints:
   - port: prometheus-metrics
 ```
-
-### Prometheus Operator: Gather Metrics from Ambassador Edge Stack
-
-You can also use Helm to install Prometheus via the Prometheus Operator. The default [Helm Chart](https://github.com/helm/charts/tree/master/stable/prometheus-operator) will install Prometheus and configure it to monitor your Kubernetes cluster.
-
-This section will focus on setting up Prometheus to scrape stats from Ambassador Edge Stack. Configuration of the Helm Chart and analysis of stats from other cluster components is outside of the scope of this documentation.
-
-1. Install the Prometheus Operator from the helm chart
-
-    ```
-    helm install -n prometheus stable/prometheus-operator
-    ```
-
-2. Create a `ServiceMonitor` 
-
-    The Prometheus Operator Helm chart creates a Prometheus instance that is looking for `ServiceMonitor`s with `label: release=prometheus`.
-
-    If you are running an Ambassador version higher than 0.71.0 and want to scrape metrics directly from the `/metrics` endpoint of Ambassador Edge Stack running in the `default` namespace:
-
-    ```yaml
-    ---
-    apiVersion: monitoring.coreos.com/v1
-    kind: ServiceMonitor
-    metadata:
-      name: ambassador-monitor
-      namespace: monitoring
-      labels:
-        release: prometheus
-    spec:
-      namespaceSelector:
-        matchNames:
-        - default
-      selector:
-        matchLabels:
-          service: ambassador-admin
-      endpoints:
-      - port: ambassador-admin
-    ```
-
-    If you are scraping metrics from a `statsd-sink` deployment:
-
-    ```yaml
-    ---
-    apiVersion: monitoring.coreos.com/v1
-    kind: ServiceMonitor
-    metadata:
-      name: statsd-monitor
-      namespace: monitoring
-      labels:
-        release: prometheus
-    spec:
-      namespaceSelector:
-        matchNames:
-        - default
-      selector:
-        matchLabels:
-          service: statsd-sink
-      endpoints:
-      - port: prometheus-metrics
-    ```
-
-Prometheus is now configured to gather metrics from Ambassador Edge Stack. 
