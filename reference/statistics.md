@@ -64,7 +64,7 @@ For example, by default each service that the API Gateway serves will create a n
 
 #### Configuring for Helm
 
-If you deploy using Helm the value that you should change is `prometheusExporter.configuration`. Set it to something like this:
+If you deploy Prometheus using Helm the value that you should change is `prometheusExporter.configuration`. Set it to something like this:
 
 ```yaml
   configuration: |
