@@ -2,7 +2,7 @@
 
 ## Set up Saleforce
 
-To use Salesforce as your IDP, you will first need to register an OAuth application with your Salesforce tenant. This guide will walk you through the most basic setup via the "Salesforce Classic Experience".
+To use Salesforce as your IdP, you will first need to register an OAuth application with your Salesforce tenant. This guide will walk you through the most basic setup via the "Salesforce Classic Experience".
 
 1. In the `Setup` page, under `Build` click the dropdown next to `Create` and select `Apps`
 
@@ -10,13 +10,13 @@ To use Salesforce as your IDP, you will first need to register an OAuth applicat
 
 3. Fill in the following fields with whichever values you want
 
-    - Connected App Name 
+    - Connected App Name
     - API Name
     - Contact Email 
 
 4. Under `API (Enable OAuth Settings)` check the box next to `Enable OAuth Settings`
 
-5. Fill in the `Callback URL` section with `https://{{AMBASSADOR_HOST}}/callback`
+5. Fill in the `Callback URL` section with `https://{{AMBASSADOR_HOST}}/.ambassador/oauth2/redirection-endpoint`
 
 6. Under `Selected OAuth Scopes` you must select the `openid` scope at the minimum. Select any other scopes you want included in the response as well.
 
@@ -26,13 +26,11 @@ To use Salesforce as your IDP, you will first need to register an OAuth applicat
 
 After waiting for salesforce to register the application with their servers, you should be ready to configure Ambassador Edge Stack to Salesforce as an IdP.
 
-
-
 ## Set up Ambassador Edge Stack
 
 After configuring an OAuth application in Salesforce, configuring Ambassador Edge Stack to make use it for authentication is simple.
 
-1. Create an [OAuth Filter](/reference/filter-reference#filter-type-oauth2) with the credentials from above
+1. Create an [OAuth Filter](../../filter-reference#filter-type-oauth2) with the credentials from above
 
     ```yaml
     apiVersion: getambassador.io/v2
@@ -51,7 +49,7 @@ After configuring an OAuth application in Salesforce, configuring Ambassador Edg
         secret: {{Consumer Secret}}
     ```
 
-2. Create a [FilterPolicy](/reference/filter-reference#filterpolicy-definition) to use the `Filter` created above
+2. Create a [FilterPolicy](../../filter-reference#filterpolicy-definition) to use the `Filter` created above
 
     ```yaml
     apiVersion: getambassador.io/v2
@@ -62,7 +60,7 @@ After configuring an OAuth application in Salesforce, configuring Ambassador Edg
       rules:
           # Requires authentication on requests from any hostname
         - host: "*"
-          # Tells Ambassador Edge Stack to apply the Filter only on request to the /backend/get-quote/ endpoint
+          # Tells Ambassador Edge Stack to apply the Filter only on request to the quote /backend/get-quote/ endpoint
           path: /backend/get-quote/
           # Identifies which Filter to use for the path and hose above
           filters:
@@ -82,5 +80,3 @@ After configuring an OAuth application in Salesforce, configuring Ambassador Edg
     ```
 
 Now any requests to `https://{{AMBASSADOR_URL}}/backend/get-quote/` will require authentication from Salesforce.
-
-

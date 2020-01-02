@@ -1,8 +1,10 @@
-# Enabling HTTPS in Ambassador Edge Stack
+# TLS Termination and Enabling HTTPS
 
-TLS encryption is one of the basic requirements of having a secure system. Ambassador Edge Stack makes enabling TLS encryption easy, centralizing TLS termination for all of your services in Kubernetes.
+TLS encryption is one of the basic requirements of having a secure system. Ambassador Edge Stack makes enabling TLS encryption easy, centralizing TLS termination for all of your services in Kubernetes automatically during configuration if you have a fully qualified domain name (FQDN).
 
-This guide will show you how to quickly enable TLS termination in Ambassador Edge Stack with a self-signed certificate.
+However, if you don't have a FQDN for your Ambassador Edge Stack, you can manually enable TLS. This guide will show you how to quickly enable TLS termination in Ambassador Edge Stack with a self-signed certificate.
+
+**Note** that these instructions do not work with the Ambassador API Gateway.
 
 ## Prerequisites
 
@@ -14,7 +16,7 @@ This guide requires you have the following installed:
 
 ## Install Ambassador Edge Stack
 
-Install Ambassador Edge Stack in Kubernetes using the [YAML manifests](/user-guide/getting-started).
+Install Ambassador Edge Stack in Kubernetes using the [YAML manifests](../install).
 
 ## Create a Self-Signed Certificate
 
@@ -114,9 +116,8 @@ This guide walked you through how to enable basic TLS termination in Ambassador 
 
 While a self-signed certificate is a simple and quick way to get Ambassador Edge Stack to terminate TLS, it should not be used by production systems. In order to serve HTTPS traffic without being returned a security warning, you will need to get a certificate from an official Certificate Authority like Let's Encrypt.
 
-In Kubernetes, Jetstack's `cert-manager` provides a simple way to manage certificates from Let's Encrypt. See our documentation for more information on how to [use `cert-manager` with Ambassador Edge Stack](/user-guide/cert-manager).
+In Kubernetes, Jetstack's `cert-manager` provides a simple way to manage certificates from Let's Encrypt. See our documentation for more information on how to [use `cert-manager` with Ambassador Edge Stack](../cert-manager).
 
 ### Enable advanced TLS options
 
-Ambassador Edge Stack exposes configuration for many more advanced options around TLS termination, origination, client certificate validation, and SNI support. See the full [TLS reference](/reference/core/tls) for more information.
-
+Ambassador Edge Stack exposes configuration for many more advanced options around TLS termination, origination, client certificate validation, and SNI support. See the full [TLS reference](../../reference/core/tls) for more information.

@@ -1,7 +1,6 @@
-# Kubernetes Canary Releases
+# Safely Testing in Production 
 
 Canary release is a technique to reduce the risk of introducing a new version of software in production by slowly rolling out the change to a small subset of users, before rolling it out to the entire infrastructure and making it available to everybody.
-
 
 ## Benefits of Canary Releases
 
@@ -12,7 +11,7 @@ This technique is called "canary" releasing because just like canaries that were
 Canary tests can be automated, and are typically run after testing in a pre-production environment has been completed. The canary release is only visible to a fraction of actual users, and any bugs or negative changes can be reversed quickly by either routing traffic away from the canary or by rolling-back the canary deployment.
 
 
-![Canary release process overview](../../doc-images/canary-release-overview.png)
+![Canary release process overview](../../../doc-images/canary-release-overview.png)
 
 
 ## Basic Kubernetes Canary Releases: Deployments
@@ -144,5 +143,5 @@ metadata:
 ```
 
 
-We've written more about canary releases on the [Ambassador Edge Stack blog](https://blog.getambassador.io). To learn more about this pattern, you can [read more here](https://blog.getambassador.io/cloud-native-patterns-canary-release-1cb8f82d371a).
+We've written more about canary releases on the [Ambassador Edge Stack blog](https://blog.getambassador.io/search?q=canary). To learn more about this pattern, you can [read more here](https://blog.getambassador.io/cloud-native-patterns-canary-release-1cb8f82d371a).
 

@@ -8,7 +8,7 @@
    - Select `Applications`
    - Select `Add Application`
    - Choose `Web` and `OpenID Connect`. Then click `Create`.
-   - Give it a name, enter the URL of your Ambassador load balancer in `Base URIs` and the callback URL `{AMBASSADOR_URL}/callback` as the `Login redirect URIs`
+   - Give it a name, enter the URL of your Ambassador load balancer in `Base URIs` and the callback URL `{AMBASSADOR_URL}/.ambassador/oauth2/redirection-endpoint` as the `Login redirect URIs`
 
 2. Copy the `Client ID` and `Client Secret` and use them to fill in the `ClientID` and `Secret` of you Okta OAuth `Filter`.
 
@@ -19,7 +19,10 @@
    - If you are using the default, the `audience` of your Okta OAuth `Filter` is `api://default`
    - The value of the `authorizationURL` is the `Issuer URI` of the `Authorization Server`
 
-4. Configure your OAuth `Filter` and `FilterPolicy`
+## Configure Filter and FilterPolicy
+
+Configure your OAuth `Filter` and `FilterPolicy` with the following:
+
 
    ```yaml
    ---
@@ -56,6 +59,4 @@
                - "profile"
    ```
 
-   **Note:** Scopes `openid` and `profile` are required at a minimum. Other scopes can be added to the `Authorization Server`
-
-
+**Note:** Scopes `openid` and `profile` are required at a minimum. Other scopes can be added to the `Authorization Server`

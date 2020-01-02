@@ -1,4 +1,4 @@
-# Running the Ambassador Edge Stack
+# Running and Deployment
 
 This section is intended for operators running the Ambassador Edge Stack, and covers various aspects of deploying and configuring the Ambassador Edge Stack in production.
 
@@ -33,7 +33,7 @@ spec:
         service: ambassador
     spec:
       containers:
-        image: quay.io/datawire/ambassador:0.50.0
+        image: quay.io/datawire/aes:$version$
         name: ambassador
      restartPolicy: Always
      securityContext:
@@ -66,11 +66,11 @@ existing file into a directory will fail.)
 
 ## Running as daemonset
 
-Ambassador can be deployed as daemonset to have one pod per node in Kubernetes cluster. This setup is especially helpful when you have Kubernetes cluster running on a private cloud.
+Ambassador can be deployed as daemonset to have one pod per node in a Kubernetes cluster. This setup is especially helpful when you have a Kubernetes cluster running on a private cloud.
 
-* Ideal scenario could be when you are running containers on Kubernetes along side with your non containerized applications running exposed via VIP using BIG-IP or similar products. In such cases, east-west traffic is routed based on iRules to certain set of application pools consisting of application or web servers. In this setup, along side of traditonal application servers, two or more Ambassador pods can also be part of the application pools. In case of failure there is atleast one Ambassdor pod available to BIG-IP and can take care of routing traffic to kubernetes cluster.
+* In an ideal example scenario, you are running containers on Kubernetes alongside with your non containerized applications running exposed via VIP using BIG-IP or similar products. In such cases, east-west traffic is routed based on iRules to certain a set of application pools consisting of application or web servers. In this setup, alongside of traditonal application servers, two or more Ambassador pods can also be part of the application pools. In case of failure there is at least one Ambassdor pod available to BIG-IP that can take care of routing traffic to the Kubernetes cluster.
 
-* In manifest files `kind: Deployment` needs to be updated to `kind: DaemonSet`  and  `replicas` should be removed in `spec`section.
+* In manifest files `kind: Deployment` needs to be updated to `kind: DaemonSet`  and  `replicas` should be removed in `spec` section.
 
 ## Namespaces
 
@@ -81,14 +81,14 @@ env:
 - name: AMBASSADOR_NAMESPACE
   valueFrom:
     fieldRef:
-      fieldPath: metadata.namespace          
+      fieldPath: metadata.namespace
 ```
 
-Given that `AMBASSADOR_NAMESPACE` is set, Ambassador [mappings](/reference/mappings) can operate within the same namespace, or across namespaces. **Note well** that mappings will have to explicitly include the namespace with the service to cross namespaces; see the [mapping](/reference/mappings) documentation for more information.
+Given that `AMBASSADOR_NAMESPACE` is set, Ambassador [mappings](../mappings) can operate within the same namespace, or across namespaces. **Note well** that mappings will have to explicitly include the namespace with the service to cross namespaces; see the [mapping](../mappings) documentation for more information.
 
-If you only want Ambassador to only work within a single namespace, set `AMBASSADOR_SINGLE_NAMESPACE` as an environment variable.
+If you want Ambassador to only work within a single namespace, set `AMBASSADOR_SINGLE_NAMESPACE` as an environment variable.
 
-```
+```yaml
 env:
 - name: AMBASSADOR_NAMESPACE
   valueFrom:
@@ -98,10 +98,7 @@ env:
   value: "true"
 ```
 
-If you are using the Ambassador Edge Stack, if you set `AMBASSADOR_NAMESPACE` or `AMBASSADOR_SINGLE_NAMESPACE`, you will need to set them in **both** containers in the deployment.
-
-
-
+With the Ambassador Edge Stack, if you set `AMBASSADOR_NAMESPACE` or `AMBASSADOR_SINGLE_NAMESPACE`, set it in deployment container. 
 
 ## `AMBASSADOR_ID`
 
@@ -126,9 +123,9 @@ env:
   value: ambassador-1
 ```
 
-If you are using the Ambassador Edge Stack, if you set `AMBASSADOR_ID`, you will need to set it in **both** containers in the deployment.
+With Ambassador Edge Stack, if you set `AMBASSADOR_ID`, you will need to set it in the deployment container.
 
-Ambassador will then only use YAML objects that include an appropriate `ambassador_id` attribute. For example, if Ambassador is given the ID `ambassador-1` as above, then of these YAML objects, only the first two will be used:
+Ambassador will then only use YAML objects that include an appropriate `ambassador_id` attribute. For example, if Ambassador is given the ID `ambassador-1` as above, only the first two YAML objects below will be used:
 
 ```yaml
 ---
@@ -168,7 +165,7 @@ spec:
   service: demo4
 ```
 
-The list syntax (shown in `mapping_used_2` above) permits including a given object in the configuration for multiple Ambassadors. In this case `mapping_used_2` will be included in the configuration for `ambassador-1` and also for `ambassador-2`.
+The list syntax (shown in `mapping-used-2` above) permits including a given object in the configuration for multiple Ambassador instances. In this case `mapping-used-2` will be included in the configuration for `ambassador-1` and also for `ambassador-2`.
 
 **Note well that _any_ object can and should have an `ambassador_id` included** so, for example, it is _fully supported_ to use `ambassador_id` to qualify the `ambassador Module`, `TLS`, and `AuthService` objects. You will need to set Ambassador_id in all resources you want to use for the Ambassador Edge Stack.
 
@@ -188,7 +185,7 @@ Also note that the YAML files in the configuration directory must contain the Am
 
 ## Log levels and debugging
 
-Ambassador Open Source and the Ambassador Edge Stack support more verbose debugging levels. If using Ambassador Open Source, the [diagnostics](/reference/diagnostics/) service has a button to enable debug logging. Be aware that if you're running Ambassador on multiple pods, the debug log levels are not enabled for all pods -- they are configured on a per-pod basis.
+The Ambassador API Gateway and the Ambassador Edge Stack support more verbose debugging levels. If using the Ambassador API Gateway, the [diagnostics](../diagnostics) service has a button to enable debug logging. Be aware that if you're running Ambassador on multiple pods, the debug log levels are not enabled for all pods -- they are configured on a per-pod basis.
 
 If using the Ambassador Edge Stack, you can adjust the log level by setting the `APP_LOG_LEVEL` environment variable; from least verbose to most verbose, the valid values are `error`, `warn`/`warning`, `info`, `debug`, and `trace`; the default is `info`.
 
@@ -198,12 +195,12 @@ The Ambassador Edge Stack uses some TCP ports in the range 8000-8499 internally,
 
 ## The Ambassador Edge Stack Update Checks (Scout)
 
-AThe mbassador Edge Stack integrates Scout, a service that periodically checks with Datawire servers to advise of available updates. Scout also sends anonymized usage data and the Ambassador Edge Stack version. This information is important to us as we prioritize test coverage, bug fixes, and feature development. Note that the Ambassador Edge Stack will run regardless of the status of Scout (i.e., our uptime has zero impact on your uptime.)
+The Ambassador Edge Stack integrates Scout, a service that periodically checks with Datawire servers to advise of available updates. Scout also sends anonymized usage data and the Ambassador Edge Stack version. This information is important to us as we prioritize test coverage, bug fixes, and feature development. Note that the Ambassador Edge Stack will run regardless of the status of Scout (i.e., our uptime has zero impact on your uptime.)
 
-We do not recommend you disable Scout, since we use this mechanism to notify users of new release (including critical fixes and security issues). This check can be disabled by setting the environment
+We do not recommend you disable Scout, since we use this mechanism to notify users of new releases (including critical fixes and security issues). This check can be disabled by setting the environment
 variable `SCOUT_DISABLE` to `1` in your Ambassador Edge Stack deployment.
   
-Each Ambassador Edge Stack installation generates a unique cluster ID based on the UID of its Kubernetes namespace and its Ambassador Edge Stack ID: the resulting cluster ID is a UUID which cannot be used to reveal the namespace name nor Ambassador Edge Stack ID itself. Ambassador nEdge Stack eeds RBAC permission to get namespaces for this purpose, as shown in the  default YAML files provided by Datawire; if not granted this permission it will generate a UUID based only on the Ambassador Edge Stack ID. To disable cluster ID generation entirely, set the environment variable `AMBASSADOR_CLUSTER_ID` to a UUID that will be used for the cluster ID.
+Each Ambassador Edge Stack installation generates a unique cluster ID based on the UID of its Kubernetes namespace and its Ambassador Edge Stack ID: the resulting cluster ID is a UUID which cannot be used to reveal the namespace name nor Ambassador Edge Stack ID itself. Ambassador Edge Stack needs RBAC permission to get namespaces for this purpose, as shown in the  default YAML files provided by Datawire; if not granted this permission it will generate a UUID based only on the Ambassador Edge Stack ID. To disable cluster ID generation entirely, set the environment variable `AMBASSADOR_CLUSTER_ID` to a UUID that will be used for the cluster ID.
 
 Unless disabled, the Ambassador Edge Stack will also report the following anonymized information back to Datawire:
 
@@ -268,8 +265,8 @@ Unless disabled, the Ambassador Edge Stack will also report the following anonym
 | `service_resource_total` | int | total count of service resources loaded from all discovery sources | 
 | `tls_origination_count` | int | count of TLS origination contexts |
 | `tls_termination_count` | int | count of TLS termination contexts |
-| `tls_using_contexts` | bool | is the old TLS module in use? |
-| `tls_using_module` | bool | are new TLSContext resources in use? |
+| `tls_using_contexts` | bool | are new TLSContext resources in use? ? |
+| `tls_using_module` | bool |is the old TLS module in use |
 | `tracing` | bool | is tracing in use? |
 | `tracing_driver` | str | tracing driver in use ('zipkin', 'lightstep', 'datadog', or `null` if not active) |
 | `use_proxy_proto` | bool | is the `PROXY` protocol in use? |

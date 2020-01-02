@@ -1,6 +1,6 @@
-# Ambassador Edge Stack and Istio: Edge Proxy and Service Mesh
+# Instio Integration
 
-The Ambassador Edge Stack is a Kubernetes-native API gateway for microservices. The Edge Stack is deployed at the edge of your network, and routes incoming traffic to your internal services (aka "north-south" traffic).  [Istio](https://istio.io/) is a service mesh for microservices, and is designed to add application-level Layer (L7) observability, routing, and resilience to service-to-service traffic (aka "east-west" traffic). Both Istio and the Ambassador Edge Stack are built using [Envoy](https://www.envoyproxy.io).
+Ambassador Edge Stack and Istio: Edge Proxy and Service Mesh together in one. The Edge Stack is deployed at the edge of your network, and routes incoming traffic to your internal services (aka "north-south" traffic).  [Istio](https://istio.io/) is a service mesh for microservices, and is designed to add application-level Layer (L7) observability, routing, and resilience to service-to-service traffic (aka "east-west" traffic). Both Istio and the Ambassador Edge Stack are built using [Envoy](https://www.envoyproxy.io).
 
 Ambassador Edge Stack and Istio can be deployed together on Kubernetes. In this configuration, incoming traffic from outside the cluster is first routed through the Ambassador Edge Stack, which then routes the traffic to Istio-powered services. The Ambassador Edge Stack handles authentication, edge routing, TLS termination, and other traditional edge functions.
 
@@ -16,35 +16,8 @@ Getting the Ambassador Edge Stack working with Istio is straightforward. In this
 
 By default, the Bookinfo application uses the Istio ingress. To use the Ambassador Edge Stack, we need to:
 
-1. Install the Ambassador Edge Stack.
-
-First you will need to deploy the Ambassador Edge Stack ambassador-admin service to your cluster:
-
-It's simplest to use the YAML files we have online for this (though of course you can download them and use them locally if you prefer!).
-
-First, you need to check if Kubernetes has RBAC enabled:
-
-```shell
-kubectl cluster-info dump --namespace kube-system | grep authorization-mode
-```
-If you see something like `--authorization-mode=Node,RBAC` in the output, then RBAC is enabled.
-
-If RBAC is enabled, you'll need to use:
-
-
-```shell
-kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-rbac.yaml
-```
-
-Without RBAC, you can use:
-
-```shell
-kubectl apply -f https://getambassador.io/yaml/ambassador/ambassador-no-rbac.yaml
-```
-
-(Note that if you are planning to use mutual TLS for communication between the Ambassador Edge Stack and Istio/services in the future, then the order in which you deploy the ambassador-admin service and the ambassador LoadBalancer service below may need to be swapped)
-
-Next you will deploy an `ambassador` service that acts as a point of ingress into the cluster via the LoadBalancer type. Create the following YAML and put it in a file called `ambassador-service.yaml`.
+1. Install the Ambassador Edge Stack following [these instructions](../install#install-the-ambassador-edge-stack).\
+2. Install a sample `Mapping` in the Ambassador Edge Stack by creating a YAML file named `httpbin.yaml` and paste in the following contents:
 
 ```yaml
 ---
@@ -61,10 +34,10 @@ spec:
 Then, apply it to the Kubernetes with `kubectl`:
 
 ```shell
-kubectl apply -f ambassador-service.yaml
+kubectl apply -f httpbin.yaml
 ```
 
-The YAML above does several things:
+The steps above does several things:
 
 * It creates a Kubernetes service for the Ambassador Edge Stack, of type `LoadBalancer`. Note that if you're not deploying in an environment where `LoadBalancer` is a supported type (i.e. MiniKube), you'll need to change this to a different type of service, e.g., `NodePort`.
 * It creates a test route that will route traffic from `/httpbin/` to the public `httpbin.org` HTTP Request and Response service (which provides useful endpoint that can be used for diagnostic purposes). In the Ambassador Edge Stack, Kubernetes annotations (as shown above) are used for configuration. More commonly, you'll want to configure routes as part of your service deployment process, as shown in [this more advanced example](https://www.datawire.io/faster/canary-workflow/).
@@ -180,7 +153,7 @@ spec:
       serviceAccountName: ambassador
       containers:
       - name: ambassador
-        image: quay.io/datawire/ambassador:0.50.1
+        image: quay.io/datawire/aes:$version$
         resources:
           limits:
             cpu: 1
@@ -272,7 +245,7 @@ spec:
 ```
 Note the `tls: istio-upstream`, which lets the Ambassador Edge Stack know which certificate to use when communicating with that service.
 
-In the definition above we also have TLS termination enabled; please see [the TLS termination tutorial](/user-guide/tls-termination) for more details.
+In the definition above we also have TLS termination enabled; please see [the TLS termination tutorial](../tls-termination) for more details.
 
 ### PERMISSIVE mTLS
 
@@ -331,15 +304,15 @@ spec:
   config: {}
 ```
 
-*Note:* We are using the DNS entry `zipkin.istio-system` as well as the port that our service is running, in this case `9411`. Please see [Distributed Tracing](/reference/services/tracing-service) for more details on Tracing configuration.
+*Note:* We are using the DNS entry `zipkin.istio-system` as well as the port that our service is running, in this case `9411`. Please see [Distributed Tracing](../../reference/services/tracing-service) for more details on Tracing configuration.
 
 ## Monitoring/Statistics Integration
 
 Istio also provides a Prometheus service that is an open-source monitoring and alerting system which is supported by the Ambassador Edge Stack as well. It is possible to integrate the Ambassador Edge Stack into Istio's Prometheus to have all statistics and monitoring in a single place.
 
-First we need to change our Ambassador Edge Stack Deployment to use the [Prometheus StatsD Exporter](https://github.com/prometheus/statsd_exporter) as its sidecar. Do this by applying the [ambassador-rbac-prometheus.yaml](https://www.getambassador.io/yaml/ambassador/ambassador-rbac-prometheus.yaml):
+First we need to change our Ambassador Edge Stack Deployment to use the [Prometheus StatsD Exporter](https://github.com/prometheus/statsd_exporter) as its sidecar. Do this by applying the [ambassador-rbac-prometheus.yaml](../../yaml/ambassador/ambassador-rbac-prometheus.yaml):
 ```sh
-$ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac-prometheus.yaml
+$ kubectl apply -f https://www.getambassador.io/early-access/yaml/ambassador/ambassador-rbac-prometheus.yaml
 ```
 
 This YAML is changing the StatsD container definition on our Deployment to use the Prometheus StatsD Exporter as a sidecar:
@@ -369,7 +342,7 @@ spec:
 
 Now we need to add a `scrape` configuration to Istio's Prometheus so that it can pool data from our Ambassador Edge Stack. This is done by applying the new ConfigMap:
 ```sh
-$ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-istio-configmap.yaml
+$ kubectl apply -f https://www.getambassador.io/early-access/yaml/ambassador/ambassador-istio-configmap.yaml
 ```
 
 This ConfigMap YAML changes the `prometheus` ConfigMap that is on `istio-system` Namespace and adds the following:
@@ -390,7 +363,7 @@ $ export PROMETHEUS_POD=`kubectl get pods -n istio-system | grep prometheus | aw
 $ kubectl delete pod $PROMETHEUS_POD -n istio-system
 ```
 
-More details can be found in [Statistics and Monitoring](/reference/statistics).
+More details can be found in [Statistics and Monitoring](../../reference/statistics).
 
 
 ## Grafana Dashboard

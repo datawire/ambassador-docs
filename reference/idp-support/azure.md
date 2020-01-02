@@ -2,7 +2,7 @@
 
 ## Set up Azure AD
 
-To use Azure as your IDP, you will first need to register an OAuth application with your Azure tenant.
+To use Azure as your IdP, you will first need to register an OAuth application with your Azure tenant.
 
 1. Follow the steps in the Azure documentation [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-protocols-openid-connect-code#register-your-application-with-your-ad-tenant) to register your application. Make sure to select web application and not native application when creating your OAuth application.
 
@@ -10,16 +10,13 @@ To use Azure as your IDP, you will first need to register an OAuth application w
 
 3. Make a note of both the client and tenant IDs as these will be used later when configuring Ambassador Edge Stack.
 
+4. Click on `Authentication` in the left sidebar.
 
-
-4.  Click on `Authentication` in the left sidebar.
-
-   - Under `Redirect URIs` at the top, add a `Redirect URI` with the type `Web` and set it to `https://{{AMBASSADOR_URL}}/callback`
-
-      **Note:** Azure AD requires the redirect endpoint to handle TLS
-
-   - Under `Advanced settings`, make sure the application is issuing `Access tokens` by checking next to the box that says `Access tokens`
-   - Under `Supported account types` select whichever option fits your usecase
+      - Under `Redirect URIs` at the top, add a `Redirect URI` with the type `Web` and set it to `https://{{AMBASSADOR_URL}}/.ambassador/oauth2/redirection-endpoint`
+        
+        **Note:** Azure AD requires the redirect endpoint to handle TLS
+      - Under `Advanced settings`, make sure the application is issuing `Access tokens` by checking next to the box that says `Access tokens`
+      - Under `Supported account types` select whichever option fits your usecase
 
 5. Click on `Certificates & secrets` in the left sidebar. Click `+ New client secret` and set the expiration date you wish. Copy the value of this secret somewhere. You will need it when configuring Ambassador Edge Stack.
 
@@ -27,7 +24,7 @@ To use Azure as your IDP, you will first need to register an OAuth application w
 
 After configuring an OAuth application in Azure AD, configuring Ambassador Edge Stack to make use it for authentication is simple.
 
-1. Create an [OAuth Filter](/reference/filter-reference#filter-type-oauth2) with the credentials from above
+1. Create an [OAuth Filter](../../filter-reference#filter-type-oauth2) with the credentials from above
 
     ```yaml
     apiVersion: getambassador.io/v2
@@ -46,7 +43,7 @@ After configuring an OAuth application in Azure AD, configuring Ambassador Edge 
         secret: CLIENT_SECRET
     ```
 
-2. Create a [FilterPolicy](/reference/filter-reference#filterpolicy-definition) to use the `Filter` created above
+2. Create a [FilterPolicy](../../filter-reference#filterpolicy-definition) to use the `Filter` created above
 
     ```yaml
     apiVersion: getambassador.io/v2
@@ -57,7 +54,7 @@ After configuring an OAuth application in Azure AD, configuring Ambassador Edge 
       rules:
           # Requires authentication on requests from any hostname
         - host: "*"
-          # Tells Ambassador Edge Stack to apply the Filter only on request to the /backend/get-quote/ endpoint 
+          # Tells Ambassador Edge Stack to apply the Filter only on request to the quote /backend/get-quote/ endpoint 
           path: /backend/get-quote/
           # Identifies which Filter to use for the path and hose above
           filters:
@@ -72,5 +69,3 @@ After configuring an OAuth application in Azure AD, configuring Ambassador Edge 
     ```
 
 Now any requests to `https://{{AMBASSADOR_URL}}/backend/get-quote/` will require authentication from Azure AD.
-
-

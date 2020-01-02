@@ -1,18 +1,18 @@
-# Monitoring with Prometheus and Grafana
+# Monitoring Ingress with Prometheus and Grafana
 
-Prometheus is an open-source monitoring and alerting system. When used along with Grafana, we can create a dynamic dashboard for monitoring ingress into our Kubernetes cluster.
+Prometheus is an open-source monitoring and alerting system. When used along with Grafana, you can create a dynamic dashboard for monitoring ingress into our Kubernetes cluster.
 
 ## Deployment
 
 This guide will focus on deploying Prometheus and Grafana alongside Ambassador Edge Stack in Kubernetes using the [Prometheus Operator](https://github.com/coreos/prometheus-operator).
 
-**Note:** Both Prometheus and Grafana can be deployed as standalone applications outside of Kubernetes. This process is well-documented within the website and docs for their respective projects.
+**Note:** Both Prometheus and Grafana can be deployed as standalone applications outside of Kubernetes. This process is well-documented within the website and docs within their respective projects.
 
 ### Ambassador Edge Stack
 
 Ambassador Edge Stack makes it easy to output Envoy-generated statistics to Prometheus. For the remainder of this guide, it is assumed that you have installed and configured Ambassador Edge Stack into your Kubernetes cluster, and that it is possible for you to modify the global configuration of the Ambassador Edge Stack deployment.
 
-Starting with Ambassador `0.71.0`, Prometheus can scrape stats/metrics directly from Envoy's `/metrics` endpoint, removing the need to [configure Ambassador Edge Stack to output stats to StatsD](/user-guide/monitoring#statsd-exporter-output-statistics-to-ambassador-edge-stack).
+Starting with Ambassador `0.71.0`, Prometheus can scrape stats/metrics directly from Envoy's `/metrics` endpoint, removing the need to [configure Ambassador Edge Stack to output stats to StatsD](#statsd-exporter-output-statistics-to-ambassador-edge-stack).
 
 The `/metrics` endpoint can be accessed internally via the Ambassador Edge Stack admin port (default 8877):
 
@@ -38,7 +38,7 @@ spec:     
 
 ### Prometheus Operator
 
-The [Prometheus Operator](https://github.com/coreos/prometheus-operator) for Kubernetes provides an easy way to manage your Prometheus deployment using Kubernetes-style resources with custom resource definitions (CRDs).
+The [Prometheus Operator](https://github.com/coreos/prometheus-operator) for Kubernetes provides an easy way to manage your Prometheus deployment using Kubernetes-style resources with Custom Resource Definitions (CRDs).
 
 In this section, we will deploy the Prometheus Operator using the standard YAML files. You can also install it with [helm](/user-guide/monitoring#prometheus-operator-gather-metrics-from-ambassador-edge-stack) if you prefer.
 
@@ -55,7 +55,7 @@ In this section, we will deploy the Prometheus Operator using the standard YAML 
     First, create RBAC resources for your Prometheus instance
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/monitoring/prometheus-rbac.yaml
+    kubectl apply -f https://www.getambassador.io/early-access/yaml/monitoring/prometheus-rbac.yaml
     ``` 
 
     Then, copy the YAML below, and save it in a file called `prometheus.yaml`
@@ -102,7 +102,7 @@ In this section, we will deploy the Prometheus Operator using the standard YAML 
 
    Finally, we need tell Prometheus where to scrape metrics from. The Prometheus Operator easily manages this using a `ServiceMonitor` CRD. To tell Prometheus to scrape metrics from Ambassador Edge Stack's `/metrics` endpoint, copy the following YAML to a file called `ambassador-monitor.yaml`, and apply it with `kubectl`.
 
-    If you are running an Ambassador version higher than 0.71.0 and want to scrape metrics directly from the `/metrics` endpoint of Ambassador Edge Stack running in the `default` namespace:
+    If you are running an Ambassador version higher than 0.71.0 and want to scrape metrics directly from the `/metrics` endpoint of Ambassador Edge Stack running in the `ambassador` namespace:
 
     ```yaml
     ---
@@ -110,13 +110,12 @@ In this section, we will deploy the Prometheus Operator using the standard YAML 
     kind: ServiceMonitor
     metadata:
       name: ambassador-monitor
-      namespace: monitoring
       labels:
         app: ambassador
     spec:
       namespaceSelector:
         matchNames:
-        - default
+        - ambassador
       selector:
         matchLabels:
           service: ambassador-admin
@@ -143,59 +142,87 @@ CoreOS has published a full [API reference](https://coreos.com/operators/prometh
 
 Grafana is an open source graphing tool for plotting data points. Grafana allows you to create dynamic dashboards for monitoring your ingress traffic stats collected from Prometheus.
 
-We have published a [sample dashboard](https://grafana.com/dashboards/10434) you can use for monitoring your ingress traffic. Since the stats from the `/metrics` and `/stats` endpoints are different, you will see a section in the dashboard for each use case.
+We have published a [sample dashboard](https://grafana.com/grafana/dashboards/4698) you can use for monitoring your ingress traffic. Since the stats from the `/metrics` and `/stats` endpoints are different, you will see a section in the dashboard for each use case.
 
 **Note:** If you deployed the Prometheus Operator via the Helm Chart, a Grafana dashboard is created by default. You can use this dashboard or set `grafana.enabled: false` and follow the instructions below.
 
-To deploy Grafana behind Ambassador Edge Stack: replace `{{AMBASSADOR_IP}}` with the IP address of your Ambassador Edge Stack service, copy the YAML below, and apply it with `kubectl`:
+To deploy Grafana behind Ambassador Edge Stack: replace `{{AMBASSADOR_IP}}` with the IP address or DNS name of your Ambassador Edge Stack service, copy the YAML below, and apply it with `kubectl`:
 
 ```yaml
 ---
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   name: grafana
-  namespace: default
+  labels:
+    app: grafana
+    component: core
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: grafana
-      componenet: core
+      component: core
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app: grafana
         component: core
+      annotations:
+        sidecar.istio.io/inject: 'false'
     spec:
-      containers:
-      - image: grafana/grafana:6.2.0
-        name: grafana-core
-        imagePullPolicy: IfNotPresent
-        resources:
-          limits:
-            cpu: 100m
-            memory: 100Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        env:
-          - name: GF_SERVER_ROOT_URL
-            value: {{AMBASSADOR_IP}}/grafana
-          - name: GF_AUTH_BASIC_ENABLED
-            value: "true"
-          - name: GF_AUTH_ANONYMOUS_ENABLED
-            value: "false"
-        readinessProbe:
-          httpGet:
-            path: /login
-            port: 3000
-        volumeMounts:
-        - name: grafana-persistent-storage
-          mountPath: /var
       volumes:
-      - name: grafana-persistent-storage
-        emptyDir: {}
+        - name: data
+          emptyDir: {}
+      containers:
+        - name: grafana
+          image: 'grafana/grafana:6.4.3'
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          env:
+            - name: GF_SERVER_ROOT_URL
+              value: {{AMBASSADOR_IP}}/grafana
+            - name: GRAFANA_PORT
+              value: '3000'
+            - name: GF_AUTH_BASIC_ENABLED
+              value: 'false'
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: 'true'
+            - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+              value: Admin
+            - name: GF_PATHS_DATA
+              value: /data/grafana
+          resources:
+            requests:
+              cpu: 10m
+          volumeMounts:
+            - name: data
+              mountPath: /data/grafana
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+              scheme: HTTP
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+spec:
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: grafana
+    component: core
 ```
 
 Now, create a service and `Mapping` to expose Grafana behind Ambassador Edge Stack:
@@ -206,23 +233,9 @@ apiVersion: getambassador.io/v2
 kind: Mapping
 metadata: 
   name: grafana
-  namespace: monitoring
 spec:     
   prefix: /grafana/
-  service: grafana.monitoring
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: grafana
-  namespace: monitoring
-spec:
-  ports:
-    - port: 80
-      targetPort: 3000
-  selector:
-    app: grafana
-    component: core
+  service: grafana.{{GRAFANA_NAMESPACE}}
 ```
 
 Now, access Grafana by going to `{AMBASSADOR_IP}/grafana/` and logging in with `username: admin` : `password: admin`. 
@@ -242,11 +255,11 @@ To view the full set of stats available to Prometheus you can access the Prometh
 ```
 kubectl port-forward -n monitoring service/prometheus 9090
 ```
-and going to http://localhost:9090/ from a web browser
+and going to `http://localhost:9090/` from a web browser
 
-In the UI, click the dropdown and see all of the stats Prometheus is able to scrape from Ambassador Edge Stack!
+In the UI, click the dropdown and see all of the stats Prometheus is able to scrape from Ambassador Edge Stack.
 
-The Prometheus data model is, at it's core, time-series based. Therefore, it makes it easy to represent rates, averages, peaks, minimums, and histograms. Review the [Prometheus documentation](https://prometheus.io/docs/concepts/data_model/) for a full reference on how to work with this data model.
+The Prometheus data model is, at its core, time-series based. Therefore, it makes it easy to represent rates, averages, peaks, minimums, and histograms. Review the [Prometheus documentation](https://prometheus.io/docs/concepts/data_model/) for a full reference on how to work with this data model.
 
 ---
 
@@ -254,12 +267,12 @@ The Prometheus data model is, at it's core, time-series based. Therefore, it mak
 
 ### Statsd Exporter: Output Statistics to Ambassador Edge Stack
 
-If running a pre-`0.71.0` version of Ambassador Edge Stack, you will need to configure Envoy to output stats to a separate collector before being scraped by Prometheus. You will use the [Prometheus StatsD Exporter](https://github.com/prometheus/statsd_exporter) to do this.
+If running a pre-`0.71.0` version of Ambassador, you will need to configure Envoy to output stats to a separate collector before being scraped by Prometheus. You will use the [Prometheus StatsD Exporter](https://github.com/prometheus/statsd_exporter) to do this.
 
 1. Deploy the StatsD Exporter in the `default` namespace
 
     ```
-    kubectl apply -f https://getambassador.io/yaml/monitoring/statsd-sink.yaml
+    kubectl apply -f https://www.getambassador.io/early-access/yaml/monitoring/statsd-sink.yaml
     ```
 
 2. Configure Ambassador Edge Stack to output statistics to statsd
@@ -292,7 +305,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: statsd-monitor
-  namespace: monitoring
   labels:
     app: ambassador
 spec:
@@ -303,7 +315,7 @@ spec:
     matchLabels:
       service: statsd-sink
   endpoints:
-  - port: prometheus-metrics -->
+  - port: prometheus-metrics
 ```
 
 ### Prometheus Operator: Gather Metrics from Ambassador Edge Stack

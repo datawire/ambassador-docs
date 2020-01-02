@@ -3,9 +3,10 @@
 # - /docs
 # - /reference
 # 
-		
-- /about/support
-- reference/dev-portal/
+
+- /reference/host-crd
+- /about/edge-policy-console	
+- /reference/dev-portal
 - /user-guide/certified-builds		
 - /reference/filter-reference
 - /reference/pro/authentication		
@@ -18,7 +19,6 @@
 - /reference/idp-support/azure		
 - /reference/idp-support/salesforce
 - /reference/services/access-control		 
-- /docs/dev-guide/service-preview
 - /user-guide/advanced-rate-limiting
 - /user-guide/oauth-oidc-auth
 - /docs/guides/filter-dev-guide		

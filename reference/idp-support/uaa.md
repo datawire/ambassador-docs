@@ -1,8 +1,6 @@
-# Cloud Foundry User Account and Authentication Service (UAA)
+# User Account and Authentication Service (UAA)
 
-**IMPORTANT:** Ambassador Edge Stack requires the IDP return a JWT signed by the RS256 algorithm (asymmetric key). UAA defaults to symmetric key encryption which Ambassador Edge Stack cannot read. You will need to provide your own asymmetric key when configuring UAA. e.g.
-
-
+**IMPORTANT:** Ambassador Edge Stack requires the IdP return a JWT signed by the RS256 algorithm (asymmetric key). Cloud Foundry's UAA defaults to symmetric key encryption which Ambassador Edge Stack cannot read. You will need to provide your own asymmetric key when configuring UAA. e.g.
 
 
 `uaa.yml`
@@ -22,12 +20,15 @@ jwt:
 1. Create an OIDC Client
 
    ```shell
-   uaac client add ambassador --name ambassador-client --scope openid --authorized_grant_types authorization_code,refresh_token --redirect_uri {AMBASSADOR_URL}/callback --secret CLIENT_SECRET
+   uaac client add ambassador --name ambassador-client --scope openid --authorized_grant_types authorization_code,refresh_token --redirect_uri {AMBASSADOR_URL}/.ambassador/oauth2/redirection-endpoint --secret CLIENT_SECRET
    ```
 
    **Note:** Change the value of `{AMBASSADOR_URL}` with the IP or DNS of your Ambassador load balancer.
 
-2. Configure you OAuth `Filter` and `FilterPolicy`
+## Configure Filter and FilterPolicy
+
+Configure you OAuth `Filter` and `FilterPolicy` with the following: 
+
 
    Use the id (ambassador) and secret (CLIENT_SECRET) from step 1 to configure the OAuth `Filter`.
 
@@ -66,6 +67,4 @@ jwt:
                - "openid"
    ```
 
-   **Note:** The `scopes` field was set when creating the client in step 1. You can add any scopes you would like when creating the client.
-
-
+**Note:** The `scopes` field was set when creating the client in step 1. You can add any scopes you would like when creating the client.

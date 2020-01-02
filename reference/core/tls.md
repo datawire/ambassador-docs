@@ -2,17 +2,17 @@
 
 Ambassador Edge Stack's robust TLS support exposes configuration options for different TLS use cases including:
 
-- [Client Certification Validation](/reference/tls/client-cert-validation)
-- [HTTP -> HTTPS Redirection](/reference/tls/cleartext-redirection)
-- [Mutual TLS](/reference/tls/mtls)
-- [Server Name Indication (SNI)](/user-guide/sni)
-- [TLS Origination](/reference/tls/origination)
+- [Client Certificate Validation](../../tls/client-cert-validation)
+- [HTTP -> HTTPS Redirection](../../tls/cleartext-redirection)
+- [Mutual TLS](../../tls/mtls)
+- [Server Name Indication (SNI)](../../../user-guide/sni)
+- [TLS Origination](../../tls/origination)
 
 ## TLSContext
 
 You control TLS configuration in Ambassador Edge Stack using `TLSContext` resources. Multiple `TLSContext`s can be defined in your cluster and can be used for any combination of TLS use cases.
 
-A full schema of the `TLSContext` can be found below with descriptions of the different configuration options. Reference documentation for configuring different use cases are linked to at the top of this document.
+A full schema of the `TLSContext` can be found below with descriptions of the different configuration options. 
 
 ```yaml
 ---
@@ -21,7 +21,7 @@ kind: TLSContext
 metadata:
   name: tls-context-1
 spec:
-  # 'hosts' defines which the hosts for which this TLSContext is relevant.
+  # 'hosts' defines the hosts for which this TLSContext is relevant.
   # It ties into SNI. A TLSContext without "hosts" is useful only for 
   # originating TLS. 
   # type: array of strings
@@ -101,7 +101,7 @@ spec:
   hosts: ["*"]
   alpn_protocols: h2[, http/1.1]
 ```
-Without setting setting alpn_protocols as shown above, HTTP2 will not be available via negotiation and will have to be explicitly requested by the client.
+Without setting alpn_protocols as shown above, HTTP2 will not be available via negotiation and will have to be explicitly requested by the client.
 
 If you leave off http/1.1, only HTTP2 connections will be supported.
 

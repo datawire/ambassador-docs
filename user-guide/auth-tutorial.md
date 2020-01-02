@@ -4,7 +4,7 @@ Ambassador Edge Stack can authenticate incoming requests before routing them to 
 
 ## Before You Get Started
 
-This tutorial assumes you have already followed the Ambassador Edge Stack [Getting Started](/user-guide/getting-started) guide. If you haven't done that already, you should do that now.
+This tutorial assumes you have already followed the Ambassador Edge Stack [Installation](../install) guide. If you haven't done that already, you should do that now.
 
 Once complete, you'll have a Kubernetes cluster running Ambassador Edge Stack. Let's walk through adding authentication to this setup.
 
@@ -66,12 +66,12 @@ spec:
             memory: 100Mi
 ```
 
-Note that the service does _not_ yet contain any Ambassador Edge Stack annotations. This is intentional: we want the service running before we tell Ambassador about it.
+Note that the cluster does not yet contain any Ambassador Edge Stack AuthService definition. This is intentional: we want the service running before we tell Ambassador about it.
 
 The YAML above is published at getambassador.io, so if you like, you can just do
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/demo/demo-auth.yaml
+kubectl apply -f https://www.getambassador.io/early-access/yaml/demo/demo-auth.yaml
 ```
 
 to spin everything up. (Of course, you can also use a local file, if you prefer.)
@@ -86,7 +86,8 @@ Note that the `READY` field says `1/1` which means the pod is up and running.
 
 ## 2. Configure Ambassador Edge Stack authentication
 
-Once the auth service is running, we need to tell Ambassador Edge Stack about it. The easiest way to do that is to annotate the `example-auth` service. While we could use `kubectl patch` for this, it's simpler to just modify the service definition and re-apply. Here's the new YAML:
+Once the auth service is running, we need to tell Ambassador Edge Stack about it. The easiest way to do that is to map the `example-auth` service with the following:
+
 
 ```yaml
 ---
@@ -101,35 +102,22 @@ spec:
   - "x-qotm-session"
   allowed_authorization_headers:
   - "x-qotm-session"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: example-auth
-spec:
-  type: ClusterIP
-  selector:
-    app: example-auth
-  ports:
-  - port: 3000
-    name: http-example-auth
-    targetPort: http-api
 ```
 
 This configuration tells Ambassador Edge Stack about the auth service, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_headers` are optional.
 
 If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillatoolkit.org) which enforces strict slashes as HTTP path separators, it is possible to end up with an infinite redirect where the auth service's framework redirects any request with non-conformant slashing. This would arise if the above example had ```path_prefix: "/extauth/"```, the auth service would see a request for ```/extauth//backend/get-quote/``` which would then be redirected to ```/extauth/backend/get-quote/``` rather than actually be handled by the
-authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to```path_prefix``` regardless of non-conformant slashing.
+authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to ```path_prefix``` regardless of non-conformant slashing.
 
 You can apply this file from getambassador.io with
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/demo/demo-auth-enable.yaml
+kubectl apply -f https://www.getambassador.io/early-access/yaml/demo/demo-auth-enable.yaml
 ```
 
 or, again, apply it from a local file if you prefer.
 
-Ambassador Edge Stack will see the annotations and reconfigure itself within a few seconds.
+Note that the cluster does not yet contain any Ambassador Edge Stack AuthService definition.
 
 ## 3. Test authentication
 
@@ -187,23 +175,20 @@ $ curl -v -u username:password $AMBASSADORURL/backend/get-quote/
 }
 ```
 
-## More
-
-For more details about configuring authentication, read the documentation on [external authentication](/reference/services/auth-service).
-
 ## Legacy v0 API
 
 If using Ambassador v0.40.2 or earlier, use the deprecated v0 `AuthService` API
+
 ```yaml
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: example-auth
-  annotations:
+  mappings:
     getambassador.io/config: |
       ---
-      apiVersion: getambassador.io/v2
+      apiVersion: getambassador.io/v0
       kind:  AuthService
       name:  authentication
       auth_service: "example-auth:3000"
@@ -219,3 +204,7 @@ spec:
     name: http-example-auth
     targetPort: http-api
 ```
+
+## More
+
+For more details about configuring authentication, read the documentation on [external authentication](../../reference/services/auth-service).

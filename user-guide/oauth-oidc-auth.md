@@ -1,8 +1,6 @@
-# Configuring OAuth/OIDC Authentication
+# Single Sign-On with OAuth & OIDC
 
-Ambassador Edge Stack adds native support for the OAuth and OIDC authentication schemes for single sign-on with an external identity providers (IDP). Ambassador Edge Stack has been tested with Keycloak, Auth0, Okta, and UAA although other OAuth/OIDC-compliant identity providers should work. Please contact us on [Slack](https://d6e.co/slack) if you have questions about IDPs not listed below.
-
-
+Ambassador Edge Stack adds native support for configuring single sign-on with OAuth and OIDC authentication schemes for single sign-on with an external identity providers (IDP). Ambassador Edge Stack has been tested with Keycloak, Auth0, Okta, and UAA although other OAuth/OIDC-compliant identity providers should work. Please contact us on [Slack](https://d6e.co/slack) if you have questions about IDPs not listed below.
 
 ## 1. Configure an OAuth2 filter
 
@@ -49,17 +47,17 @@ spec:
             - "scope2"
 ```
 
-Save the configuration to a file and apply it to the cluster: `kubectl apply -f httpbin-filter-policy.yaml`. For more information about filters and filter policies, consult the [filter reference](/reference/filter-reference).
+Save the configuration to a file and apply it to the cluster: `kubectl apply -f httpbin-filter-policy.yaml`. For more information about filters and filter policies, consult the [filter reference](../../reference/filter-reference).
 
 ## IDP Configuration
 
 You will need to configure your IDP to handle authentication requests. The way to do this varies by IDP.
 
-- [Auth0](/reference/idp-support/auth0)
-- [Google](/reference/idp-support/google)
-- [Keycloak](/reference/idp-support/keycloak)
-- [Okta](/reference/idp-support/okta)
-- [UAA](/reference/idp-support/uaa)
+- [Auth0](../../reference/idp-support/auth0)
+- [Google](../../reference/idp-support/google)
+- [Keycloak](../../reference/idp-support/keycloak)
+- [Okta](../../reference/idp-support/okta)
+- [UAA](../../reference/idp-support/uaa)
 
 ## Configure Authentication Across Multiple Domains (Optional)
 
@@ -69,7 +67,7 @@ To configure multi-domain access, you will need to create another authentication
 
 Example:
 
-```
+```yaml
 ---
 apiVersion: getambassador.io/v2
 kind: Filter
@@ -100,6 +98,4 @@ Create a separate `FilterPolicy` that specifies which specific filters are appli
 
 ## Further reading
 
-The [filter reference](/reference/filter-reference) covers the specifics of filters and filter policies in much more detail.
-
-
+The [filter reference](../../reference/filter-reference) covers the specifics of filters and filter policies in much more detail.

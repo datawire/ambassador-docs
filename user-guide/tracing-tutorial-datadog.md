@@ -4,7 +4,7 @@ In this tutorial, we'll configure Ambassador Edge Stack to initiate a trace on s
 
 ## Before You Get Started
 
-This tutorial assumes you have already followed the Ambassador Edge Stack [Getting Started](/user-guide/getting-started) guide. If you haven't done that already, you should do that now.
+This tutorial assumes you have already followed the Ambassador Edge Stack [Getting Started](../getting-started) guide. If you haven't done that already, you should do that now.
 
 After completing the Getting Started guide you will have a Kubernetes cluster running Ambassador Edge Stack and the Quote of the Moment service. Let's walk through adding tracing to this setup.
 
@@ -54,9 +54,9 @@ $ curl $AMBASSADOR_IP/httpbin/ip
 
 ## 5. Test traces
 
-Once you have made some requests you should be able to [view your traces](https://app.datadoghq.com/apm/traces) within a few minutes in the DataDog UI. If you would like more information on DataDog APM to learn about it's features and benefits you can view the [documentation](https://docs.datadoghq.com/tracing/).
+Once you have made some requests you should be able to [view your traces](https://app.datadoghq.com/apm/traces) within a few minutes in the DataDog UI. If you would like more information on DataDog APM to learn about its features and benefits you can view the [documentation](https://docs.datadoghq.com/tracing/).
 
 ## More
 
-For more details about configuring the external tracing service, read the documentation on [external tracing](/reference/services/tracing-service).
+For more details about configuring the external tracing service, read the documentation on [external tracing](../../reference/services/tracing-service).
 

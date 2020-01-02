@@ -1,10 +1,10 @@
-# Routing TCP connections
+# Routing TCP Connections
 
 In addition to managing HTTP, GRPC, and Websockets at layer 7, Ambassador Edge Stack can also manage TCP connections at layer 4. The core abstraction used to support TCP connections is the `TCPMapping`.
 
 ## TCPMapping
 
-An Ambassador Edge Stack `TCPMapping` associates TCP connections with Kubernetes [_services_](#services). Cleartext TCP connections are defined by destination IP address and/or destination TCP port; TLS TCP connections can also by defined by the hostname presented using SNI. A service is exactly the same as in Kubernetes.
+An Ambassador Edge Stack `TCPMapping` associates TCP connections with Kubernetes _services_. Cleartext TCP connections are defined by destination IP address and/or destination TCP port; TLS TCP connections can also be defined by the hostname presented using SNI. A service is exactly the same as in Kubernetes.
 
 ## TCPMapping Configuration
 
@@ -15,23 +15,23 @@ Ambassador Edge Stack supports a number of attributes to configure and customize
 | `address`         | (optional) the IP address on which Ambassador Edge Stack should listen for connections for this Mapping -- if not present, Ambassador Edge Stack will listen on all addresses )
 | `port`            | (required) the TCP port on which Ambassador Edge Stack should listen for connections for this Mapping |
 | `idle_timeout_ms` | (optional) the timeout, in milliseconds, after which the connection will be terminated if no traffic is seen -- if not present, no timeout is applied |
-| `enable_ipv4` | (optional) if true, enables IPv4 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](/reference/modules)) |
-| `enable_ipv6` | (optional) if true, enables IPv6 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](/reference/modules)) |
+| `enable_ipv4` | (optional) if true, enables IPv4 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](../modules)) |
+| `enable_ipv6` | (optional) if true, enables IPv6 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](../modules)) |
 
-If both `enable_ipv4` and `enable_ipv6` are set, Ambassador Edge Stack will prefer IPv6 to IPv4. See the [`ambassador Module`](/reference/modules) documentation for more information.
+If both `enable_ipv4` and `enable_ipv6` are set, Ambassador Edge Stack will prefer IPv6 to IPv4. See the [`ambassador Module`](../modules) documentation for more information.
 
 Ambassador Edge Stack can manage TCP connections using TLS:
 
 | Attribute                 | Description               |
 | :------------------------ | :------------------------ |
-| [`host`](/reference/host) | (optional) enables TLS _termination_, and specifies the hostname that must be presented using SNI for this `TCPMapping` to match -- **FORCES TLS TERMINATION**, see below |
+| [`host`](../host) | (optional) enables TLS _termination_, and specifies the hostname that must be presented using SNI for this `TCPMapping` to match -- **FORCES TLS TERMINATION**, see below |
 | [`tls`](#using-tls)       | (optional) enables TLS _origination_, and may specify the name of a `TLSContext` that will determine the certificate to offer to the upstream service | 
 
 Ambassador Edge Stack supports multiple deployment patterns for your services. These patterns are designed to let you safely release new versions of your service, while minimizing its impact on production users.
 
 | Attribute                 | Description               |
 | :------------------------ | :------------------------ |
-| [`weight`](/reference/canary)        | (optional) specifies the (integer) percentage of traffic for this resource that will be routed using this mapping |
+| [`weight`](../canary)        | (optional) specifies the (integer) percentage of traffic for this resource that will be routed using this mapping |
 
 The name of the mapping must be unique.
 
@@ -114,7 +114,7 @@ spec:
   service: upstream-host-2:9999
 ```
 
-The example above will accept a TLS connection with SNI on port 2222. If the client requests SNI host `my-host-1`, the decrypted traffic will be relayed to `upstream-host-1`, port 9999. If the client requests SNI host `my-host-2`, the decrypted traffic will be relayed to `upstream-host-1`, port 9999. Any other SNI host will cause the TLS handshake to fail.
+The example above will accept a TLS connection with SNI on port 2222. If the client requests SNI host `my-host-1`, the decrypted traffic will be relayed to `upstream-host-1`, port 9999. If the client requests SNI host `my-host-2`, the decrypted traffic will be relayed to `upstream-host-2`, port 9999. Any other SNI host will cause the TLS handshake to fail.
 
 #### `host` and `tls` are both set
 
@@ -213,7 +213,7 @@ The example above will accept **any** connection to port 2222 and relay it over 
 
 - `name` is a string identifying the `Mapping` (e.g. in diagnostics)
 - `port` is an integer specifying which port to listen on for connections
-- `service` is the name of the [service](#services) handling the resource; must include the namespace (e.g. `myservice.othernamespace`) if the service is in a different namespace than Ambassador Edge Stack
+- `service` is the name of the service handling the resource; must include the namespace (e.g. `myservice.othernamespace`) if the service is in a different namespace than Ambassador Edge Stack
 
 Note that the `service` in a `TCPMapping` should include a port number, and must not include a scheme.
 

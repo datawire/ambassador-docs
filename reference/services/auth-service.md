@@ -1,6 +1,6 @@
-# Authentication
+# AuthService Plugin
 
-Ambassador Edge Stack supports a highly flexible mechanism for authentication. An `AuthService` manifest configures Ambassador to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
+The Ambassador Edge Stack supports a highly flexible mechanism for authentication. An `AuthService` manifest configures Ambassador to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
 
 The currently supported version of the `AuthService` resource is `getambassador.io/v2`. Earlier versions are deprecated.
 
@@ -28,7 +28,16 @@ spec:
   cluster_idle_timeout_ms: 30000
 ```
 
-- `proto` (optional) specifies the protocol to use when communicating with the auth service. Valid options are `http` (default) or `grpc`.
+- `add_linkerd_headers` (optional) when true, adds `l5d-dst-override` to the authorization request and set the hostname of the authorization server as the header value.
+
+- `allowed_authorization_headers` (optional) lists headers that will be sent from the auth service to the upstream service when the request is allowed, and also headers that will be sent from the auth service back to the client when the request is denied. These headers are always included:
+    * `Authorization`
+    * `Location`
+    * `Proxy-Authenticate`
+    * `Set-cookie`
+    * `WWW-Authenticate`
+
+- `allow_request_body` is deprecated. It was exactly equivalent to `include_body` with `max_bytes` 4096 and `allow_partial` true.
 
 - `allowed_request_headers` (optional) lists headers that will be sent from the client to the auth service. These headers are always included:
     * `Authorization`
@@ -40,29 +49,20 @@ spec:
     * `X-Forwarded-Host`
     * `X-Forwarded-Proto`
 
-- `allowed_authorization_headers` (optional) lists headers that will be sent from the auth service to the upstream service when the request is allowed, and also headers that will be sent from the auth service back to the client when the request is denied. These headers are always included:
-    * `Location`
-    * `Authorization`
-    * `Proxy-Authenticate`
-    * `Set-cookie`
-    * `WWW-Authenticate`
+- `cluster_idle_timeout_ms` (optional) sets the timeout, in milliseconds, before an idle connection upstream is closed. The default is provided by the `ambassador Module`; if no `cluster_idle_timeout_ms` is specified, upstream connections will never be closed due to idling.
+
+- `failure_mode_allow` (optional) if requests should be allowed on auth service failure. Defaults to false
 
 - `include_body` (optional) controls how much of the request body to pass to the auth service, for use cases such as computing an HMAC or request signature:
     * `max_bytes` controls the amount of body data that will be passed to the auth service
     * `allow_partial` controls what happens to messages with bodies larger than `max_bytes`:
        * if `allow_partial` is `true`, the first `max_bytes` of the body are sent to the auth service
-       * if false, the message is rejected. 
+       * if `false`, the message is rejected.
 
-- `allow_request_body` is deprecated. It is exactly equivalent to `include_body` with `max_bytes` 4096 and `allow_partial` true.
+- `proto` (optional) specifies the protocol to use when communicating with the auth service. Valid options are `http` (default) or `grpc`.
 
 - `status_on_error` (optional) status code returned when unable to communicate with auth service. 
     * `code` Defaults to 403
-
-- `failure_mode_allow` (optional) if requests should be allowed on auth service failure. Defaults to false
-
-- `add_linkerd_headers` (optional) when true, adds `l5d-dst-override` to the authorization request and set the hostname of the authorization server as the header value.
-
-- `cluster_idle_timeout_ms` (optional) sets the timeout, in milliseconds, before an idle connection upstream is closed. The default is provided by the `ambassador Module`; if no `cluster_idle_timeout_ms` is specified, upstream connections will never be closed due to idling.
 
 ## Multiple AuthService resources
 
@@ -73,9 +73,9 @@ You may use multiple `AuthService` manifests to round-robin authentication reque
 By design, the AuthService interface is highly flexible. The authentication service is the first external service invoked on an incoming request (e.g., it runs before the rate limit filter). Because the logic of authentication is encapsulated in an external service, you can use this to support a wide variety of use cases. For example:
 
 * Supporting traditional SSO authentication protocols, e.g., OAuth, OpenID Connect, etc.
-* Support HTTP basic authentication (sample implementation available at:  https://github.com/datawire/ambassador-auth-httpbasic)
-* Only authenticating requests that are under a rate limit, and rejecting authentication requests above the rate limit
-* Authenticating specific services (URLs), and not others
+* Support HTTP basic authentication (sample implementation available [here](https://github.com/datawire/ambassador-auth-httpbasic).
+* Only authenticating requests that are under a rate limit, and rejecting authentication requests above the rate limit.
+* Authenticating specific services (URLs), and not others.
 
 ## AuthService and TLS
 
@@ -87,7 +87,7 @@ If `tls` is present with a value that is not `true`, the value is assumed to be 
 
 The external auth service receives information about every request through Ambassador Edge Stack, and must indicate whether the request is to be allowed, or not. If not, the external auth service provides the response which is to be handed back to the client. The control flow for Authentication is shown below.
 
-![Authentication flow](/doc-images/auth-flow.png)
+![Authentication flow](../../../doc-images/auth-flow.png)
 
 ### The Request
 
@@ -146,4 +146,4 @@ Authentication can be disabled for a mapping by setting `bypass_auth` to `true`.
 
 ## Example
 
-See [the Ambassador Edge Stack Authentication Tutorial](/user-guide/auth-tutorial) for an example.
+See [the Ambassador Edge Stack Authentication Tutorial](../../../user-guide/auth-tutorial) for an example.

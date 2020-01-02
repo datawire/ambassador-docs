@@ -1,6 +1,6 @@
 # Traffic Shadowing
 
-Traffic shadowing is a deployment pattern where production traffic is asynchronously copied to a non-production service for testing. Shadowing is a close cousin to two other commonly known deployment patterns, [canary releases](/reference/canary) and blue/green deployments. Shadowing traffic has several important benefits over blue/green and canary testing:
+Traffic shadowing is a deployment pattern where production traffic is asynchronously copied to a non-production service for testing. Shadowing is a close cousin to two other commonly known deployment patterns, [canary releases](../canary) and blue/green deployments. Shadowing traffic has several important benefits over blue/green and canary testing:
 
 * Zero production impact. Since traffic is duplicated, any bugs in services that are processing shadow data have no impact on production.
 
@@ -12,9 +12,9 @@ Traffic shadowing is a deployment pattern where production traffic is asynchrono
 
 Ambassador Edge Stack lets you easily shadow traffic to a given endpoint. In Ambassador Edge Stack, only requests are shadowed; responses from a service are dropped. All normal metrics are collected for the shadow services. This makes it easy to compare the performance of the shadow service versus the production service on the same data set. Ambassador Edge Stack also prioritizes the production path, i.e., it will return responses from the production service without waiting for any responses from the shadow service.
 
-![Shadowing](/doc-images/shadowing.png)
+![Shadowing](../../doc-images/shadowing.png)
 
-## The `shadow` annotation
+## The `shadow` Mapping
 
 In Ambassador Edge Stack, you can enable shadowing for a given mapping by setting `shadow: true` in your `Mapping`.  One copy proceeds as if the shadowing `Mapping` was not present: the request is handed onward per the `service`(s) defined by the non-shadow `Mapping`s, and the reply from whichever `service` is picked is handed back to the client.
 
@@ -26,7 +26,7 @@ During shadowing, the host header is modified such that `-shadow` is appended.
 
 ## Example
 
-The following example may help illustrate how shadowing can be used. This first annotation sets up a basic mapping between the `myservice` Kubernetes service and the `/myservice/` prefix, as expected.
+The following example may help illustrate how shadowing can be used. This first attribute sets up a basic mapping between the `myservice` Kubernetes service and the `/myservice/` prefix, as expected.
 
 ```yaml
 ---
@@ -53,7 +53,7 @@ spec:
   shadow: true
 ```
 
-The `prefix` is set to be the same as the first annotation, which tells Ambassador Edge Stack which production traffic to shadow. The destination service, where the shadow traffic is routed, is a *different* Kubernetes service, `myservice-shadow`. Finally, the `shadow: true` annotation actually enables shadowing.
+The `prefix` is set to be the same as the first mapping, which tells Ambassador Edge Stack which production traffic to shadow. The destination service, where the shadow traffic is routed, is a *different* Kubernetes service, `myservice-shadow`. Finally, the `shadow: true` attribute actually enables shadowing.
 
 ### Shadow traffic weighting
 

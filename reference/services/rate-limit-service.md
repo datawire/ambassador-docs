@@ -1,4 +1,4 @@
-# Rate Limiting with the RateLimitService
+# RateLimitService Plugin
 
 Rate limiting is a powerful technique to improve the [availability and resilience of your services](https://blog.getambassador.io/rate-limiting-a-useful-tool-with-distributed-systems-6be2b1a4f5f4). In Ambassador Edge Stack, each request can have one or more *labels*. These labels are exposed to a third party service via a gRPC API. The third party service can then rate limit requests based on the request labels.
 
@@ -19,7 +19,7 @@ spec:
     - service: catalog
 ```
 
-For more information on request labels, see the [Rate Limit reference](/reference/rate-limits).
+For more information on request labels, see the [Rate Limit reference](../../rate-limits).
 
 ## Domains
 
@@ -65,9 +65,9 @@ If Ambassador Edge Stack cannot contact the rate limit service, it will allow th
 It is the external rate limit service's responsibility to determine whether rate limiting should take place, depending on custom business logic. The rate limit service must simply respond to the request with an `OK` or `OVER_LIMIT` code:
 
 * If Envoy receives an `OK` response from the rate limit service, then Ambassador Edge Stack allows the client request to resume being processed by the normal Ambassador Envoy flow.
-* If Ambassador Edge Stack receives an `OVER_LIMIT` response, then Ambassador will return an HTTP 429 response to the client and will end the transaction flow, preventing the request from reaching the backing service.
+* If Envoy receives an `OVER_LIMIT` response, then the Ambassador Edge Stack will return an HTTP 429 response to the client and will end the transaction flow, preventing the request from reaching the backing service.
 
-The headers injected by the [AuthService](/reference/services/auth-service) can also be passed to the rate limit service since the `AuthService` is invoked before the `RateLimitService`.
+The headers injected by the [AuthService](../auth-service) can also be passed to the rate limit service since the `AuthService` is invoked before the `RateLimitService`.
 
 ## Configuring the Rate Limit Service
 
@@ -95,7 +95,7 @@ If `tls` is present with a value that is not `true`, the value is assumed to be 
 
 ## Example
 
-The [Ambassador Edge Stack Rate Limiting Tutorial](/user-guide/rate-limiting-tutorial) has a simple rate limiting example. For a more advanced example, read the [advanced rate limiting tutorial](/user-guide/advanced-rate-limiting) with Ambassador Edge Stack tutorial.
+The [Ambassador Edge Stack Rate Limiting Tutorial](../../../user-guide/rate-limiting-tutorial) has a simple rate limiting example. For a more advanced example, read the [advanced rate limiting tutorial](../../../user-guide/advanced-rate-limiting) with Ambassador Edge Stack tutorial.
 
 ## Further reading
 

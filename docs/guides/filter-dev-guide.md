@@ -1,4 +1,4 @@
-# Developing Filters
+# Developing Custom Filters for Routing
 
 Sometimes you may want Ambassador Edge Stack to manipulate an incoming request. Some example use cases:
 
@@ -38,21 +38,20 @@ We've created an example filter that you can customize for your particular use c
 4. Push the image to your Docker registry: `docker push $DOCKER_REGISTRY/amb-sidecar-plugin:VERSION`.
 
 5. Configure Ambassador Edge Stack to use the plugin by creating a `Filter`
-   and `FilterPolicy` CRD, as per the [filter reference](/reference/filter-reference).
+   and `FilterPolicy` CRD, as per the [filter reference](../../../reference/filter-reference).
 
 6. Update the standard Ambassador Edge Stack manifest to use your Docker
    image instead of the standard sidecar.
 
    ```patch
-      containers:
-      - name: ambassador-pro
-   -    image: quay.io/datawire/ambassador_pro:amb-sidecar-$aproVersion$
-   +    image: DOCKER_REGISTRY/amb-sidecar-plugin:VERSION
-        ports:
-        - name: ratelimit-grpc
-          containerPort: 8081
-        - name: ratelimit-debug
-          containerPort: 6070
+              value: https://127.0.0.1:8443
+            - name: AMBASSADOR_ADMIN_URL
+              value: http://127.0.0.1:8877
+   -        image: quay.io/datawire/aes:$version$
+   +        image: DOCKER_REGISTRY/aes-plugin:VERSION
+            imagePullPolicy: Always
+            livenessProbe:
+              httpGet:
    ```
 
 ## Rapid development of a custom filter
@@ -96,4 +95,4 @@ Note in the example above the `X-Dc` header is added. This lets you inspect the 
 
 ## Further reading
 
-For more details about configuring filters and the `plugin` interface, see the [filter reference](/reference/filter-reference).
+For more details about configuring filters and the `plugin` interface, see the [filter reference](../../../reference/filter-reference).

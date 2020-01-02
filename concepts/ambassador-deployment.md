@@ -8,7 +8,7 @@ If you're using a public cloud provider such as Amazon, Azure, or Google, the Am
 
 ## On-Premise Data Center
 
-In an on-premise data center, the Ambassador Edge Stack is deployed on the Kubernetes cluster. Instead of exposing it via the `LoadBalancer` service type, the Ambassador Edge Stack is exposed as a `NodePort`. Traffic is sent to a specific port on any of the nodes in the cluster, which route the traffic to the Ambassador Edge Stack , which then routes the traffic to your services running in Kubernetes. In addition, you'll need to deploy a separate load balancer to route traffic from your core routers to Ambassador Edge Stack . [MetalLB](https://metallb.universe.tf/) is an open source external load balancer for Kubernetes designed for this problem. Other options are traditional TCP load balancers such as F5 or Citrix Netscaler.
+In an on-premise data center, the Ambassador Edge Stack is deployed on the Kubernetes cluster. Instead of exposing it via the `LoadBalancer` service type, the Ambassador Edge Stack is exposed as a `NodePort`. Traffic is sent to a specific port on any of the nodes in the cluster, which route the traffic to the Ambassador Edge Stack, which then routes the traffic to your services running in Kubernetes. In addition, you'll need to deploy a separate load balancer to route traffic from your core routers to Ambassador Edge Stack . [MetalLB](https://metallb.universe.tf/) is an open source external load balancer for Kubernetes designed for this problem. Other options are traditional TCP load balancers such as F5 or Citrix Netscaler.
 
 ## Hybrid data center
 
@@ -18,4 +18,4 @@ Many data centers include services that are running outside of Kubernetes on vir
 
 The diagram below details a common network architecture for a hybrid on-premise data center. Traffic flows from core routers to MetalLB, which routes to the Ambassador Edge Stack running in Kubernetes. The Ambassador Edge Stack routes traffic to individual services running on both Kubernetes and VMs. Consul tracks the real-time network location of the services, which the Ambassador Edge Stack uses to route to the given services.
 
-![Architecture](/doc-images/consul-ambassador.png)
+![Architecture](../../doc-images/consul-ambassador.png)

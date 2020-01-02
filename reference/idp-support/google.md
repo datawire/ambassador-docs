@@ -10,18 +10,17 @@ To use Google as and IdP for Single Sign-On, you will first need to create an OA
 4. Under **Restrictions**, fill in the **Authorized redirect URIs** with
    
    ```
-   http(s)://{{AMBASSADOR_URL}}/callback
+   http(s)://{{AMBASSADOR_URL}}/.ambassador/oauth2/redirection-endpoint
    ```
 5. Click `Create` 
 6. Record the `client ID` and `client secret` in the pop-up window. You will need these when configuring Ambassador Edge Stack
-
 
 
 ## Set up Ambassador Edge Stack
 
 After creating an OAuth client in Google, configuring Ambassador Edge Stack to make use it for authentication is simple.
 
-1. Create an [OAuth Filter](/reference/filter-reference#filter-type-oauth2) with the credentials from above
+1. Create an [OAuth Filter](../../filter-reference#filter-type-oauth2) with the credentials from above
 
     ```yaml
     apiVersion: getambassador.io/v2
@@ -39,7 +38,7 @@ After creating an OAuth client in Google, configuring Ambassador Edge Stack to m
         # Secret created in step 6 above
         secret: CLIENT_SECRET
     ```
-2. Create a [FilterPolicy](/reference/filter-reference#filterpolicy-definition) to use the `Filter` created above
+2. Create a [FilterPolicy](../../filter-reference#filterpolicy-definition) to use the `Filter` created above
 
     ```yaml
     apiVersion: getambassador.io/v2
@@ -50,7 +49,7 @@ After creating an OAuth client in Google, configuring Ambassador Edge Stack to m
       rules:
           # Requires authentication on requests from any hostname
         - host: "*"
-          # Tells Ambassador Edge Stack to apply the Filter only on request to the /backend/get-quote/ endpoint 
+          # Tells Ambassador Edge Stack to apply the Filter only on request to the quote /backend/get-quote/ endpoint 
           path: /backend/get-quote/
           # Identifies which Filter to use for the path and hose above
           filters:
