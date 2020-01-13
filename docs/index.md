@@ -1,13 +1,15 @@
 # Welcome
+The Ambassador Edge Stack provides app-developers a comprehensive,
+self-service edge stack that is built on the Envoy Proxy and fully
+Kubernetes-native, as well as the ability to manage the "edge" without
+centralized operational intervention.
 
-Ambassador is a production tested, open source API Gateway that exposes the power of [Envoy Proxy](https://www.envoyproxy.io) in Kubernetes.
+<FeaturesBlock />
 
-* [Install Ambassador](/user-guide/install). Quick start instructions for deploying Ambassador for both development environments (Docker, Docker Compose) and Kubernetes (via Kubernetes YAML or Helm).
+## New to Ambassador?
+It's easy to get started with Ambassador Edge Stack. Follow the Quick
+Start guide to map to your services in your Ambassador Edge Stack
+instance now!
 
-* [Concepts](/concepts/overview). Core concepts that cover Ambassador's architecture and how it should be used.
+<Button color="orange" to="/user-guide/install/">Begin Quick Start</Button>
 
-* [Guides](/docs/guides). Hands-on tutorials that walk through how to configure Ambassador for specific use cases, from [rate limiting](/user-guide/advanced-rate-limiting) to [Istio integration](/user-guide/with-istio) to [gRPC](/user-guide/grpc).
-
-* [Reference](/reference/configuration). Detailed documentation on configuring and managing all aspects of Ambassador.
-
-If you have feedback or questions, please feel free to [join our Slack](https://d6e.co/slack) or [open a pull request](https://github.com/datawire/ambassador/pulls).
