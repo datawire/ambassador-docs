@@ -10,4 +10,4 @@ Ambassador is a production tested, open source API Gateway that exposes the powe
 
 * [Reference](/reference/configuration). Detailed documentation on configuring and managing all aspects of Ambassador.
 
-If you have feedback or questions, please feel free to [join our Slack](https://d6e.co/slack) or [open a pull request](https://github.com/datawire/ambassador/pulls). 
+If you have feedback or questions, please feel free to [join our Slack](https://d6e.co/slack) or [open a pull request](https://github.com/datawire/ambassador/pulls).
