@@ -4,7 +4,7 @@ In this tutorial, we'll configure Ambassador to initiate a trace on some sample 
 
 ## Before You Get Started
 
-This tutorial assumes you have already followed the [Ambassador Getting Started](/user-guide/getting-started.html) guide. If you haven't done that already, you should do that now.
+This tutorial assumes you have already followed the [Ambassador Getting Started](/user-guide/getting-started) guide. If you haven't done that already, you should do that now.
 
 After completing the Getting Started guide you will have a Kubernetes cluster running Ambassador and the Quote of the Moment service. Let's walk through adding tracing to this setup.
 
@@ -22,7 +22,8 @@ When using JSON logging with Envoy, Ambassador will automatically append the `dd
 ---
 apiVersion: getambassador.io/v1
 kind: Module
-name: ambassador
+metadata:
+  name: ambassador
 config:
   envoy_log_type: json
 ```
