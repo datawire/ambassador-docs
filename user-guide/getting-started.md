@@ -52,11 +52,11 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
 
     Use any of the URLs listed next to `ambassador` to access the Ambassador Edge Stack.
 
-3. Navigate to `http://<your-IP-address>` and click through the certificate warning for access the Edge Policy Console interface. The certificate warning appears because, by default, the Ambassador Edge Stack uses a self-signed certificate for HTTPS.
+3. Navigate to `http://<your-IP-address>` and click through the certificate warning for access to the Edge Policy Console interface. The certificate warning appears because, by default, the Ambassador Edge Stack uses a self-signed certificate for HTTPS.
     * Chrome users should click **Advanced > Proceed to website**.
     * Safari users should click **Show details > visit the website** and provide your password.
 
-4. To login to the [Edge Policy Console](../../about/edge-policy-console), download and install `edgectl`, the command line tool Edge Control, by following the provided instructions on the page. The Console lists the correct command to run, and provides download links for the edgectl binary.
+4. To login to the [Edge Policy Console](../../about/edge-policy-console), download and install `edgectl`, the command line tool Edge Control, by following the provided instructions on the page. The Console lists the correct command to run and provides download links for the `edgectl` binary.
 
 The Edge Policy Console must authenticate your session using a Kubernetes Secret in your cluster. Edge Control accesses that secret using `kubectl`, then sends a URL to your browser that contains the corresponding session key. This extra step ensures that access to the Edge Policy Console is just as secure as access to your Kubernetes cluster.
 
@@ -77,7 +77,7 @@ If you have the ability to update your DNS, Ambassador can automatically configu
    * Click the **Save** button.
   You'll see the newly created `Host` resource appear in the UI with a status of Pending. This will change to Ready once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS following [these instructions](../../reference/core/tls).
 
-3. Once the Host is ready, navigate to `https://<hostname>` in your browser. Note that the certificate warning has gone away. In addition, the Ambassador Edge Stack automatically will redirect HTTP connections to HTTPS.
+3. Once the Host is ready, navigate to `https://<hostname>` in your browser. Note that the certificate warning has gone away. Additionally, the Ambassador Edge Stack automatically will redirect HTTP connections to HTTPS.
 
 ## Create a Mapping
 
@@ -127,7 +127,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 
 2. Deploy the `quote` service to the cluster by typing the command `kubectl apply -f quote.yaml`.
 
-3. Now, create a `Mapping` configuration that tells Ambassador to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save to a file called `quote-backend.yaml`.
+3. Now, create a `Mapping` configuration that tells Ambassador to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
 
    ```
    ---
@@ -172,7 +172,7 @@ The Quote service we just deployed publishes its API as a Swagger document. This
 
 1. In the Edge Policy Console, navigate to the **APIs** tab. You'll see the documentation there for internal use.
 
-2. Navigate to `https://<hostname>/docs/` or `https://<IP address>/docs/` to see the externally visible Developer Portal (make sure you include the trailing `/`). This is a fully customizable portal that you can share with third parties who need to information about your APIs. 
+2. Navigate to `https://<hostname>/docs/` or `https://<IP address>/docs/` to see the externally visible Developer Portal (make sure you include the trailing `/`). This is a fully customizable portal that you can share with third parties who need information about your APIs.
 
 ## What’s Next?
 
