@@ -52,7 +52,7 @@ GO111MODULE=on go get github.com/datawire/ambassador/cmd/edgectl`
 
 leaves you with a binary that has no embedded version number. If you really want to build from source, clone the repository and run `./builder/build_push_cli.sh build`, which will leave a binary in the `~/bin directory`. We will have a better answer for building from source soon.
 
-2. Launch the daemon component using sudo
+2. Launch the daemon component using `sudo`:
 
 ```bash
 $ sudo edgectl daemon
@@ -89,7 +89,7 @@ Depending on the type of cluster, your operations team may be involved. If you o
 
 ### Traffic Manager
 
-1. Install the Traffic Manager Kubernetes Deployment and Service using `kubectl`. 
+1. Install the Traffic Manager Kubernetes Deployment and Service using `kubectl`.
 2. Fill in the Traffic Manager image and your license key before applying these manifests.
 3. Save these manifests in a YAML file:
 
@@ -192,7 +192,7 @@ spec:
             - containerPort: 8000   # Application port
 ```
 
-Here is a modified set of manifests that includes the traffic agent.
+Here is a modified set of manifests that includes the traffic agent:
 
 ```yaml
 # This is hello-intercept.yaml
@@ -274,7 +274,7 @@ NAME                          READY   UP-TO-DATE   AVAILABLE   AGE
 deployment.extensions/hello   0/1     1            0           7s
 ```
 
-2.Use Edge Control to set up outbound connectivity to your cluster.
+2. Use Edge Control to set up outbound connectivity to your cluster.
 
 ```bash
 $ edgectl status
@@ -310,7 +310,7 @@ $ edgectl status
 Not connected
 ```
 
-## Usage: Intercept 
+## Usage: Intercept
 
 1. Install the traffic manager in your cluster and the traffic agent in the simple microservice as described above.
 

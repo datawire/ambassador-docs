@@ -14,7 +14,7 @@ By default, `.ambassador-internal` is not publicly exposed by the Ambassador Edg
 
  Note that these URLs are not publicly exposed by the Ambassador Edge Stack, and are internal-only.
 
-## Dev Portal configuration
+## Dev Portal Configuration
 
 The Dev Portal supports configuring the following environment variables for configuration:
 
