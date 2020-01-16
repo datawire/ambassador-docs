@@ -10,7 +10,7 @@ Ambassador Edge Stack makes it easy to direct this information to a statistics a
 - `envoy.cluster.usersvc_cluster.upstream_rq_2xx` is the total number of requests to which `usersvc` responded with an HTTP response indicating success. This value divided by the prior one, taken on an rolling window basis, represents the recent success rate of the service. There are corresponding `4xx` and `5xx` counters that can help clarify the nature of unsuccessful requests.
 - `envoy.cluster.usersvc_cluster.upstream_rq_time` is a StatsD timer that tracks the latency in milliseconds of `usersvc` from Ambassador Edge Stack's perspective. StatsD timers include information about means, standard deviations, and decile values.
 
-## Exposing statistics via StatsD
+## Exposing Statistics via StatsD
 
 Statistics can be exposed via the ubiquitous and well-tested [StatsD](https://github.com/etsy/statsd) protocol.
 

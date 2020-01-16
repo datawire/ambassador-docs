@@ -1,6 +1,6 @@
 # Continuous Delivery with Declarative Config and DVCS as the Source of Truth
 
-No code provides value to end users until it is running in production. Many of the architectural patterns that are associated with today's cloud-native applications, such as microservices and serverless, promote looser coupling between components, which enables a faster iteration cycle. However, traditional software continuous integration and delivery mechanisms need to adapt to be able to support this increase in speed.
+No code provides value to end-users until it is running in production. Many of the architectural patterns that are associated with today's cloud-native applications, such as microservices and serverless, promote looser coupling between components, which enables a faster iteration cycle. However, traditional software continuous integration and delivery mechanisms need to adapt to be able to support this increase in speed.
 
 ## Components of Cloud Native Continuous Delivery
 
@@ -12,7 +12,7 @@ High-performing organisations combine all three of these approaches to drive suc
 
 ## How Ambassador Edge Stack Supports Continuous Delivery of Cloud Services
 
-As engineering teams take advantage of the ability to iterate faster by using loosely coupled architectures, such as microservices, they frequently find that they require a new workflow in order to expose their services to end users. With a monolithic application this was easy: there was typically a single ingress point (via an edge gateway or Application Delivery Controller), and routing additions or updates were simply added into the monolith's codebase. With microservices there may be multiple points of ingress into a system, and the routing is typically decoupled from any single (monolithic) application -- which is often pushed downstream into the edge gateway. This in turn means that the edge gateways becomes integral with your continuous delivery process.
+As engineering teams take advantage of the ability to iterate faster by using loosely coupled architectures, such as microservices, they frequently find that they require a new workflow in order to expose their services to end-users. With a monolithic application this was easy: there was typically a single ingress point (via an edge gateway or Application Delivery Controller), and routing additions or updates were simply added into the monolith's codebase. With microservices there may be multiple points of ingress into a system, and the routing is typically decoupled from any single (monolithic) application -- which is often pushed downstream into the edge gateway. This in turn means that the edge gateways becomes integral with your continuous delivery process.
 
 What is required is a mechanism to decentralise edge configuration and also support the continuous delivery of new changes. Ambassador Edge Stack supports this by allowing routing configuration to be specified in code next to a team's Kubernetes' service definitions.
 

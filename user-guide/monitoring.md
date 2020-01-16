@@ -202,7 +202,7 @@ CoreOS has published a full [API reference](https://coreos.com/operators/prometh
 
 ### Grafana
 
-Grafana is an open source graphing tool for plotting data points. Grafana allows you to create dynamic dashboards for monitoring your ingress traffic stats collected from Prometheus.
+Grafana is an open-source graphing tool for plotting data points. Grafana allows you to create dynamic dashboards for monitoring your ingress traffic stats collected from Prometheus.
 
 We have published a [sample dashboard](https://grafana.com/grafana/dashboards/4698) you can use for monitoring your ingress traffic. Since the stats from the `/metrics` and `/stats` endpoints are different, you will see a section in the dashboard for each use case.
 

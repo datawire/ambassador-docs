@@ -7,7 +7,7 @@ Ambassador Edge Stack Community Edition! <a href="/editions">Click here to learn
 
 If you are already using Ambassador open source, upgrading to using Ambassador Pro is straight-forward. In this demo we will walk-through integrating Ambassador Pro into your currently running Ambassador instance and show how quickly you can secure your APIs with JWT authentication.
 
-Information about open source code used in Ambassador Pro can be found in `/*.opensource.tar.gz` files in each Docker image.
+Information about open-source code used in Ambassador Pro can be found in `/*.opensource.tar.gz` files in each Docker image.
 
 ## 1. Clone the Ambassador Pro configuration repository
 

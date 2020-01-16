@@ -1,6 +1,6 @@
 # Environment Variables for the Ambassador Container
 
-Use the following variables for the environment of your Ambassdor container:
+Use the following variables for the environment of your Ambassador container:
 
 | Purpose                                 | Variable                         | Default value                                     | Value type                                                                    |
 |-----------------------------------------|----------------------------------|---------------------------------------------------|-------------------------------------------------------------------------------|

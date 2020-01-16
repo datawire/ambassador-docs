@@ -1,6 +1,6 @@
 # Rate Limiting Concepts at the Edge
 
-Rate limiting at the edge is a technique that is used to prevent a sudden or sustained increase in user traffic from breaking an API or underlying service. On the Internet, users can do whatever they want to your APIs, as you have no direct control over these end users. Whether it’s intentional or not, these users can impact the availability, responsiveness, and scalability of your service.
+Rate limiting at the edge is a technique that is used to prevent a sudden or sustained increase in user traffic from breaking an API or underlying service. On the Internet, users can do whatever they want to your APIs, as you have no direct control over these end-users. Whether it’s intentional or not, these users can impact the availability, responsiveness, and scalability of your service.
 
 ## Two Approaches: Rate Limiting and Load Shedding
 
