@@ -2,7 +2,7 @@
 
 Ambassador Edge Stack enables you to control timeouts in several different ways.
 
-## Request timeout: `timeout_ms`
+## Request imeout: `timeout_ms`
 
 `timeout_ms` is the timeout for an entire user-level transaction. By default, this is 3000ms. This spans the point at which the entire downstream request has been processed (i.e., end of stream) to the point where the upstream response has been processed. This timeout includes all retries.
 
@@ -16,7 +16,7 @@ Ambassador Edge Stack enables you to control timeouts in several different ways.
 
 ### Example
 
-The various timeouts are applied onto a Mapping resource and can be combined.
+The various timeouts are applied on to a Mapping resource and can be combined.
 
 ```yaml
 ---

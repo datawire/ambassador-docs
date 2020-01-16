@@ -16,7 +16,6 @@ The Ambassador Edge Stack is designed to run in Kubernetes for production. The m
 
 The Ambassador Edge Stack is typically deployed to Kubernetes from the command line. If you don't have Kubernetes, you should use our [Docker](../../about/quickstart) image to deploy the Ambassador Edge Stack locally.
 
-
 1. In your terminal, run the following command:
 
     ```bash
@@ -85,7 +84,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 
 1. We'll start by deploying the `quote` service. Save the below configuration into a file named `quote.yaml`. This is a basic configuration that tells Kubernetes to deploy the `quote` container and create a Kubernetes `service` that points to the `quote` container.
 
-   ```
+   ```yaml
    ---
    apiVersion: v1
    kind: Service
@@ -129,7 +128,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 
 3. Now, create a `Mapping` configuration that tells Ambassador to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
 
-   ```
+   ```yaml
    ---
    apiVersion: getambassador.io/v2
    kind: Mapping
