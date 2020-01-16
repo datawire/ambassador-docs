@@ -32,7 +32,7 @@ The Ambassador Edge Stack supports authenticating incoming requests. When config
 
 ## Rate Limiting
 
-The Ambassador Edge Stack supports rate limiting incoming requests. When configured, the Ambassador Edge Stack will check with a third party rate limit service prior to routing an incoming request. For more information, see the [rate-limiting tutorial](../../user-guide/rate-limiting-tutorial).
+The Ambassador Edge Stack supports rate limiting incoming requests. When configured, the Ambassador Edge Stack will check with a third party rate limit service prior to routing an incoming request. For more information, see the [rate limiting tutorial](../../user-guide/rate-limiting-tutorial).
 
 ## Integrated Diagnostics
 
