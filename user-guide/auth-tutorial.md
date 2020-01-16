@@ -71,7 +71,7 @@ Note that the cluster does not yet contain any Ambassador Edge Stack AuthService
 The YAML above is published at getambassador.io, so if you like, you can just do
 
 ```shell
-kubectl apply -f https://www.getambassador.io/early-access/yaml/demo/demo-auth.yaml
+kubectl apply -f https://www.getambassador.io/yaml/demo/demo-auth.yaml
 ```
 
 to spin everything up. (Of course, you can also use a local file, if you prefer.)
@@ -106,13 +106,12 @@ spec:
 
 This configuration tells Ambassador Edge Stack about the auth service, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_headers` are optional.
 
-If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillatoolkit.org) which enforces strict slashes as HTTP path separators, it is possible to end up with an infinite redirect where the auth service's framework redirects any request with non-conformant slashing. This would arise if the above example had ```path_prefix: "/extauth/"```, the auth service would see a request for ```/extauth//backend/get-quote/``` which would then be redirected to ```/extauth/backend/get-quote/``` rather than actually be handled by the
-authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to ```path_prefix``` regardless of non-conformant slashing.
+If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillatoolkit.org) which enforces strict slashes as HTTP path separators, it is possible to end up with an infinite redirect where the auth service's framework redirects any request with non-conformant slashing. This would arise if the above example had ```path_prefix: "/extauth/"```, the auth service would see a request for ```/extauth//backend/get-quote/``` which would then be redirected to ```/extauth/backend/get-quote/``` rather than actually be handled by the authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to ```path_prefix``` regardless of non-conformant slashing.
 
 You can apply this file from getambassador.io with
 
 ```shell
-kubectl apply -f https://www.getambassador.io/early-access/yaml/demo/demo-auth-enable.yaml
+kubectl apply -f https://www.getambassador.io/yaml/demo/demo-auth-enable.yaml
 ```
 
 or, again, apply it from a local file if you prefer.
