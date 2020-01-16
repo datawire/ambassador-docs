@@ -1,6 +1,6 @@
 # Rate Limits
 
-Rate limits are a powerful way to improve availability and scalability for your microservices. With Ambassador Edge Stack, individual requests can be annotated with metadata, called labels.  These labels can then be passed to a third party [rate limiting service](../services/rate-limit-service) which can then rate limit based on this data. If you do not want to write your own rate limiting service, [Ambassador Edge Stack](../../user-guide/install) includes an integrated, flexible rate limiting service.
+Rate limits are a powerful way to improve availability and scalability for your microservices. With Ambassador Edge Stack, individual requests can be annotated with metadata, called labels.  These labels can then be passed to a third party [rate-limiting service](../services/rate-limit-service) which can then rate limit based on this data. If you do not want to write your own rate limiting service, [Ambassador Edge Stack](../../user-guide/install) includes an integrated, flexible rate limiting service.
 
 ## Request labels
 
@@ -72,7 +72,7 @@ This will annotate every request with the string `default`, creating a key for a
 
 ## The `rate_limits` attribute
 
-In pre-0.50 versions of the Ambassador API Gateway, a mapping can specify the `rate_limits` list attribute and at least one `rate-limit` rule which will call the external [RateLimitService](../services/rate-limit-service) before proceeding with the request. Read about Envoy's rate limit service [here](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/rate_limit_filter.html?highlight=rate%20limit%20header).
+In pre-0.50 versions of the Ambassador API Gateway, a mapping can specify the `rate_limits` list attribute and at least one `rate limit` rule which will call the external [RateLimitService](../services/rate-limit-service) before proceeding with the request. Read about Envoy's rate limit service [here](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/rate_limit_filter.html?highlight=rate%20limit%20header).
 
 An example:
 

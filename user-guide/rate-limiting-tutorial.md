@@ -1,6 +1,6 @@
 # Rate Limiting
 
-The Ambassador Edge Stack can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure the Ambassador Edge Stack to use a simple third party rate limit service. If you don't want to implement your own rate limiting service, the Ambassador Edge Stack integrates a [powerful, flexible rate-limiting service](../advanced-rate-limiting).
+The Ambassador Edge Stack can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure the Ambassador Edge Stack to use a simple third party rate limit service. If you don't want to implement your own rate limiting service, the Ambassador Edge Stack integrates a [powerful, flexible rate limiting service](../advanced-rate-limiting).
 
 ## Before You Get Started
 
