@@ -6,7 +6,7 @@
       link: /about/why-ambassador
     - title: Need help?
       link: /about/support
-
+        
 - title: Install Ambassador Edge Stack
   link: /user-guide/install
   items: 
@@ -20,16 +20,17 @@
       link: /user-guide/upgrade-to-edge-stack
     - title: Upgrade to a Newer Version
       link: /reference/upgrading  
-    - title: Install the Ambassador API Gateway
-      link: /user-guide/install-ambassador-oss  
     - title: Install with Helm
       link: /user-guide/helm
     - title: Install with Docker
       link: /about/quickstart
     - title: Install with Bare Metal
       link: /user-guide/bare-metal
+    - title: Install the Ambassador API Gateway
+      link: /user-guide/install-ambassador-oss  
     - title: Early Access Releases
       link: /user-guide/early-access
+
 
 - title: Concepts
   link: /concepts/overview
@@ -120,17 +121,21 @@
   items: 
     - title: Configuring Ambassador Edge Stack
       link: /reference/configuration
-    - title: Using Custom Resource Definitions
-      link: /reference/core/crds
-    - title: Using Kubernetes Service Annotations  
-      link: /reference/core/annotations/ 
-    - title: Environmental Variables
-      link: /reference/environment  
-    - title: Ambassador as an Ingress Controller
-      link: /reference/core/ingress-controller
     - title: Configuration Format
-      link: /reference/config-format
-    - title: Global and Core Configuration
+      items:
+        - title: Format Overview
+          link: /reference/config-format
+        - title: Kubernetes Service Annotations  
+          link: /reference/core/annotations/ 
+        - title: Using Custom Resource Definitions
+          link: /reference/core/crds
+        - title: Ambassador as an Ingress Controller
+          link: /reference/core/ingress-controller
+        - title: Authentication and Identity Aware Proxy
+          link: /reference/authentication
+        - title: Environmental Variables
+          link: /reference/environment  
+    - title: Global Configuration
       items:
         - title: Modules Overview
           link: /reference/modules
@@ -142,12 +147,22 @@
           link: /reference/core/load-balancer
         - title: Service Discovery and Resolver Configuration
           link: /reference/core/resolvers
-    - title: Configuration Resources
+    - title: TLS & Cryptography
       items:
-        - title: Host CRD
-          link: /reference/host-crd        
-        - title: Routing TCP Connections
-          link: /reference/tcpmappings        
+      - title: Transport Layer Security (TLS)
+        link: /reference/core/tls
+      - title: Client Certificate Validation
+        link: /reference/tls/client-cert-validation
+      - title: HTTP -> HTTPS Redirection
+        link: /reference/tls/cleartext-redirection
+      - title: Mutual TLS (mTLS)
+        link: /reference/tls/mtls
+      - title: Server Name Indication (SNI)
+        link: /user-guide/sni
+      - title: TLS Origination
+        link: /reference/tls/origination
+    - title: Configuring Kubernetes Services
+      items:
         - title: Mapping Services
           link: /reference/mappings
         - title: Canary Releases
@@ -160,6 +175,8 @@
           link: /reference/headers
         - title: Host Header
           link: /reference/host
+        - title: Host CRD
+          link: /reference/host-crd
         - title: Prefix Regex
           link: /reference/prefix_regex
         - title: Rate Limits
@@ -178,6 +195,8 @@
           link: /reference/retries
         - title: Rewrites
           link: /reference/rewrites
+        - title: Routing TCP Connections
+          link: /reference/tcpmappings
         - title: Timeouts
           link: /reference/timeouts
         - title: Traffic Shadowing
@@ -190,36 +209,10 @@
         link: /reference/services/access-control
       - title: AuthService Plugin
         link: /reference/services/auth-service
-      - title: RateLimitingService Plugin
+      - title: RateLimtingService Plugin
         link: /reference/services/rate-limit-service
       - title: TracingService Plugin
         link: /reference/services/tracing-service
-    - title: Running Ambassador Edge Stack
-      items:  
-      - title: Running and Deployment 
-        link: /reference/running
-      - title: Ambassador Edge Stack on AWS
-        link: /reference/ambassador-with-aws
-      - title: Diagnostics
-        link: /reference/diagnostics
-      - title: Debugging
-        link: /reference/debugging    
-    - title: TLS & Cryptography
-      items:
-      - title: Transport Layer Security (TLS)
-        link: /reference/core/tls
-      - title: Client Certificate Validation
-        link: /reference/tls/client-cert-validation
-      - title: HTTP -> HTTPS Redirection
-        link: /reference/tls/cleartext-redirection
-      - title: Mutual TLS (mTLS)
-        link: /reference/tls/mtls
-      - title: Server Name Indication (SNI)
-        link: /user-guide/sni
-      - title: TLS Origination
-        link: /reference/tls/origination
-      - title: Authentication and Identity Aware Proxy
-        link: /reference/authentication
     - title: IDP Support
       items:
       - title: Auth0
@@ -244,14 +237,23 @@
           link: /reference/edge-control
         - title: Edge Control in CI
           link: /reference/edge-control-in-ci
-    - title: Advanced Usage
-      items:      
-      - title: Developer Portal
-        link: /reference/dev-portal    
-      - title: Filter Reference
-        link: /reference/filter-reference
-      - title: Statistics and Monitoring
-        link: /reference/statistics
+    - title: Developer Portal
+      link: /reference/dev-portal    
+    - title: Running Ambassador Edge Stack
+      items:  
+      - title: Running and Deployment 
+        link: /reference/running
+      - title: Ambassador Edge Stack on AWS
+        link: /reference/ambassador-with-aws
+      - title: Diagnostics
+        link: /reference/diagnostics
+      - title: Debugging
+        link: /reference/debugging  
+    - title: Filter Reference
+      link: /reference/filter-reference
+    - title: Statistics and Monitoring
+      link: /reference/statistics
+
 - title: Contributors
   items:
     - title: Building Ambassador Edge Stack (GitHub)
