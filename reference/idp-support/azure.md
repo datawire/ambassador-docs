@@ -20,7 +20,7 @@ To use Azure as your IdP, you will first need to register an OAuth application w
 
 5. Click on `Certificates & secrets` in the left sidebar. Click `+ New client secret` and set the expiration date you wish. Copy the value of this secret somewhere. You will need it when configuring Ambassador Edge Stack.
 
-## Set up Ambassador Edge Stack
+## Set Up the Ambassador Edge Stack
 
 After configuring an OAuth application in Azure AD, configuring Ambassador Edge Stack to make use of it for authentication is simple.
 
