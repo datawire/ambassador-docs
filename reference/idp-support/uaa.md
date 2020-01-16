@@ -1,9 +1,9 @@
 # User Account and Authentication Service (UAA)
 
-**IMPORTANT:** Ambassador Edge Stack requires the IdP return a JWT signed by the RS256 algorithm (asymmetric key). Cloud Foundry's UAA defaults to symmetric key encryption which Ambassador Edge Stack cannot read. You will need to provide your own asymmetric key when configuring UAA. e.g.
-
+**IMPORTANT:** Ambassador Edge Stack requires the that the IdP returns a JWT signed by the RS256 algorithm (asymmetric key). Cloud Foundry's UAA defaults to symmetric key encryption which Ambassador Edge Stack cannot read. You will need to provide your own asymmetric key when configuring UAA. For example:
 
 `uaa.yml`
+
 ```yaml
 jwt:
    token:
@@ -27,10 +27,9 @@ jwt:
 
 ## Configure Filter and FilterPolicy
 
-Configure you OAuth `Filter` and `FilterPolicy` with the following: 
+Configure your OAuth `Filter` and `FilterPolicy` with the following:
 
-
-   Use the id (ambassador) and secret (CLIENT_SECRET) from step 1 to configure the OAuth `Filter`.
+   Use the id (`ambassador`) and secret (`CLIENT_SECRET`) from step 1 to configure the OAuth `Filter`.
 
    ```yaml
    ---
@@ -47,7 +46,8 @@ Configure you OAuth `Filter` and `FilterPolicy` with the following:
        clientID: ambassador
        secret: CLIENT_SECRET
    ```
-   **Note:** The `authorizationURL` and `audience` are the same for UAA configuration. 
+  
+   **Note:** The `authorizationURL` and `audience` are the same for UAA configuration.
 
    ```yaml
    ---
