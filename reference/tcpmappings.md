@@ -41,7 +41,7 @@ The name of the mapping must be unique.
 
 This leaves four cases:
 
-#### Neither `host` nor `tls` are set
+#### Neither `host` Nor `tls` are Set
 
 In this case, Ambassador Edge Stack simply proxies bytes between the client and the upstream. TLS may or may not be involved, and Ambassador Edge Stack doesn't care. You should specify the port to use for the upstream connection; if you don't, Ambassador Edge Stack will guess port 80.
 
@@ -73,7 +73,7 @@ spec:
 
 could proxy a CockroachDB connection.
 
-#### `host` is set, but `tls` is not
+#### `host` is Set, But `tls` is Not
 
 In this case, Ambassador Edge Stack will terminate the TLS connection, require that the host offered with SNI match the `host` attribute, and then make a **cleartext** connection to the upstream host. You should specify the port to use for the upstream connection; if you don't, Ambassador Edge Stack will guess port **80**.
 
@@ -174,7 +174,7 @@ If the client requests SNI host `my-host-2`, the decrypted traffic will be relay
 
 Any other SNI host will cause the TLS handshake to fail.
 
-#### Host is Not Set, but `tls` is
+#### Host is Not Set, But `tls` is
 
 Here, Ambassador Edge Stack will accept the connection **without terminating TLS**, then relay traffic over a **TLS** connection upstream. This is probably useful only to accept unencrypted traffic and force it to be encrypted when it leaves Ambassador Edge Stack.
 
