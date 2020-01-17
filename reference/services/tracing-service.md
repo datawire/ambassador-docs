@@ -40,7 +40,7 @@ Please note that you must use the HTTP/2 pseudo-header names. For example:
 ### `zipkin` Driver Configurations
 
 - `collector_endpoint` gives the API endpoint of the Zipkin service where the spans will be sent. The default value is `/api/v1/spans`
-- `trace_id_128bit` whether a 128bit trace id will be used when creating a new trace instance. Defaults to `true`. Setting to `false` will result in a 64-bit trace id being used.
+- `trace_id_128bit` whether a 128-bit `trace id` will be used when creating a new trace instance. Defaults to `true`. Setting to `false` will result in a 64-bit trace id being used.
 - `shared_span_context` whether client and server spans will share the same `span id`. The default value is `true`.
 
 ### `datadog` Driver Configurations
