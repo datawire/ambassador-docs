@@ -55,7 +55,7 @@ spec:
 
 The `prefix` is set to be the same as the first mapping, which tells Ambassador Edge Stack which production traffic to shadow. The destination service, where the shadow traffic is routed, is a *different* Kubernetes service, `myservice-shadow`. Finally, the `shadow: true` attribute actually enables shadowing.
 
-### Shadow traffic weighting
+### Shadow Traffic Weighting
 
 It is possible to shadow a portion of the traffic by specifying the `weight` in the mapping. For example:
 
