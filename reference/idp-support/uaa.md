@@ -66,4 +66,4 @@ Configure your OAuth `Filter` and `FilterPolicy` with the following:
                - "openid"
    ```
 
-**Note:** The `scopes` field was set when creating the client in step 1. You can add any scopes you would like when creating the client.
+**Note:** The `scopes` field was set when creating the client in Step 2. You can add any scopes you would like when creating the client.
