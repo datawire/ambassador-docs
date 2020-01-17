@@ -10,7 +10,7 @@ The Ambassador Edge Stack relies on Kubernetes for reliability, availability, an
 
 The default configuration of the Ambassador Edge Stack includes default [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container), as well as [readiness and liveness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/). These values should be adjusted for your specific environment.
 
-## Running as nNn-root
+## Running as Non-root
 
 Starting with Ambassador 0.35, we support running the Ambassador Edge Stack as non-root. This is the recommended configuration, and will be the default configuration in future releases. We recommend you configure the Ambassador Edge Stack to run as non-root as follows:
 
