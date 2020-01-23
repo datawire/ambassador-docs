@@ -40,7 +40,7 @@ You can run `kubectl get ambassador-crds` to see the CRDs you've created to conf
 
 The full set of CRDs supported by the Ambassador Edge Stack are the following:
 
-| `Kind` | Kubernetes singular | Kubernetes plural |
+| **`Kind`** | **Kubernetes singular** | **Kubernetes plural** |
 | :----- | :------------------ | :---------------- |
 | `AuthService` | `authservice` | `authservices` |
 | `ConsulResolver` | `consulresolver` | `consulresolvers` |
