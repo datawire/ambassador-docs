@@ -149,9 +149,8 @@ This section will focus on setting up Prometheus to scrape stats from Ambassador
     kind: ServiceMonitor
     metadata:
       name: ambassador-monitor
-      namespace: monitoring
       labels:
-        release: prometheus
+        release: prometheus-operator
     spec:
       namespaceSelector:
         matchNames:
@@ -160,10 +159,13 @@ This section will focus on setting up Prometheus to scrape stats from Ambassador
         matchLabels:
           service: ambassador-admin
       endpoints:
-      - port: ambassador-admin
+        - port: admin
+          path: /metrics
     ```
 
     If you are scraping metrics from a `statsd-sink` deployment:
+
+ If you are scraping metrics from a `statsd-sink` deployment:
 
     ```yaml
     ---
@@ -171,7 +173,6 @@ This section will focus on setting up Prometheus to scrape stats from Ambassador
     kind: ServiceMonitor
     metadata:
       name: statsd-monitor
-      namespace: monitoring
       labels:
         release: prometheus
     spec:
