@@ -1,15 +1,6 @@
 
 
 
-
-
-
-- title: Introduction
-  link: 
-  collapsable: false
-  items: 
-    - title: 
-
 - title: First Steps
   collapsable: false
   items: 
@@ -23,260 +14,323 @@
       link: /tutorial/set-up-auth
     - title: Set Up Monitoring Tutorial
       link: /tutorial/set-up-monitoring
-
-
-- title: Installation
-  link: /topics/install
-  items: 
-    - title: Upgrade to the Ambassador Edge Stack
-      link: /topics/upgrade-to-edge-stack
-    - title: Install with Helm
-      link: /topics/helm
-    - title: Install with Docker
-      link: /topics/docker
-    - title: Install with Kubernetes YAML
-      link: /topics/k8s-yaml
-    - title: Install with Bare Metal
-      link: /topics/bare-metal
-    - title: Install the Ambassador API Gateway
-      link: /topics/install-ambassador-oss
-    - title: Early Access Releases
-      link: /topics/early-access
-
-- title: Kubernetes and Ambassador
-  items: 
-    - title: Network Architecture
-      link: /topics/k8s-network-architecture
-    - title: Kubernetes Ingress Differences  
-      link: /topics/k8s-ingress-differences
-    - title: GitOps, Declarative Configuration, and CRDs
-      link: /topics/gitops-dc-crd
-      items:
-        - title:  Continuous Delivery with Declarative Config and DVCS as the Source of Truth
-          link: /topics/cd-declarative-gitops/
-        - title: Self-Service Routing and Deployment Control
-          link: /topics/developers/
-        - title: Implementing GitOps with Ambassador Edge Stack
-          link: /topics/gitops-ambassador/
-        - title: Ambassador Edge Stack Configuration with Custom Resource Definitions
-          link: /topics/crds/
-    - title: The Ambassador Operating Module
-      link: /topics/aes-operator
-    - title: Ambassador Architecture
-      link: /topics/architecture/
-      items:
-        - title: Deployment Architecture
-          link: /topics/ambassador-deployment/
-    - title: Progressive Delivery
-      link: /topics/progressive-delivery
-      items:
-        - title: Testing in Production
-          link: /topics/test-in-prod/
-        - title: Canary Release Concepts
-          link: /topics/canary-release/
-
-- title: Using Ambassador
-  link: /topics/ambassador-edge-policies
-  items: 
-    - title: The Mapping Object
-      link: /topics/mappings
+- title: Topics
+  items:
+    - title: Installation
+      link: /topics/install
       items: 
-        - title: Example Mappings YAML
-          link: /topics/mappings-yaml
-    - title: Mapping Configuration
-      link: /topics/mapping-config
+        - title: Upgrade to the Ambassador Edge Stack
+          link: /topics/upgrade-to-edge-stack
+        - title: Install with Helm
+          link: /topics/helm
+        - title: Install with Docker
+          link: /topics/docker
+        - title: Install with Kubernetes YAML
+          link: /topics/k8s-yaml
+        - title: Install with Bare Metal
+          link: /topics/bare-metal
+        - title: Install the Ambassador API Gateway
+          link: /topics/install-ambassador-oss
+        - title: Early Access Releases
+          link: /topics/early-access
+    - title: Kubernetes and Ambassador
       items: 
-        - title: Automatic Retries
-          link: /topics/retries
-        - title: Canary Releases
-          link: /topics/canary
-        - title: Circuit Breakers
-          link: /topics/circuit-breakers
-        - title: CORS
-          link: /topics/cors
-        - title: Headers
-          link: /topics/headers
+        - title: Network Architecture
+          link: /topics/k8s-network-architecture
+        - title: Kubernetes Ingress Differences  
+          link: /topics/k8s-ingress-differences
+        - title: GitOps, Declarative Configuration, and CRDs
+          link: /topics/gitops-dc-crd
+          items:
+            - title:  Continuous Delivery with Declarative Config and DVCS as the Source of Truth
+              link: /topics/cd-declarative-gitops/
+            - title: Self-Service Routing and Deployment Control
+              link: /topics/developers/
+            - title: Implementing GitOps with Ambassador Edge Stack
+              link: /topics/gitops-ambassador/
+            - title: Ambassador Edge Stack Configuration with Custom Resource Definitions
+              link: /topics/crds/
+        - title: The Ambassador Operating Module
+          link: /topics/aes-operator
+        - title: Ambassador Architecture
+          link: /topics/architecture/
+          items:
+            - title: Deployment Architecture
+              link: /topics/ambassador-deployment/
+        - title: Progressive Delivery
+          link: /topics/progressive-delivery
+          items:
+            - title: Testing in Production
+              link: /topics/test-in-prod/
+            - title: Canary Release Concepts
+              link: /topics/canary-release/
+    - title: Using Ambassador
+      link: /topics/ambassador-edge-policies
+      items: 
+        - title: The Mapping Object
+          link: /topics/mappings
           items: 
-            - title: Add Request Headers
-              link: /topics/add-request-headers
-            - title: Remove Request Headers
-              link: /topics/remove-request-headers
-            - title: Add Response Headers
-              link: /topics/add-response-headers
-            - title: Remove Response Headers
-              link: /topics/remove-response-headers
-            - title: Header Based Routing
-              link: /topics/header-based-routing
-            - title: Host Header
-              link: /topics/host-header
-        - title: Prefix Regex
-          link: /topics/prefix_regex
-        - title: Rate Limits
-          link: /topics/rate-limits
-          items:
-            - title: Rate Limiting Concepts
-              link: /topics/rate-limiting/
-            - title: Rate Limiting Tutorial
-              link: /topics/rate-limiting-tutorial/
-            - title: Advanced Rate Limiting
-              link: topics/advanced-rate-limiting/
-        - title: Redirects
-          link: /topics/redirects
-        - title: Rewrites
-          link: /topics/rewrites
-        - title: Protocols Overview
-          link: /topics/protocols-overview
-          items:
-            - title: Envoy and External Authorization
-              link: /topics/ext_authz/
-            - title: TCP Mappings
-              link: /topics/tcpmappings
-            - title: gRPC and gRPC-Web
-              link: /topics/grpc
-            - title: HTTP/1.0
-              link: /topics/http1
-            - title: WebSockets
-              link: /topics/websockets-ambassador
-        - title: Timeouts
-          link: /topics/timeouts
-        - title: Traffic Shadowing
-          link: /topics/shadowing
-    - title: Filters and Authentication
-      link: /topics/filters-overview
-      items:  
-        - title: OAuth and OIDC Overview
-          link: /topics/auth-overview/
-        - title: OAuth2 Filter
-          link: /topics/oauth2-filter
-        - title: Authentication
-          link: /topics/authentication/
-        - title: Identity Provider Configuration
-          items:
-            - title: Google SSO
-              link: /topics/google/
-            - title: Okta
-              link: /topics/okta/
-            - title: Auth0
-              link: /topics/auth0/
-            - title: OneLogin
-              link: /topics/onelogin/
-            - title: Azure
-              link: /topics/azure/
-            - title: Salesforce
-              link: /topics/salesforce/
-            - title: UAA
-              link: /topics/uaa/
-        - title: Custom Filters
-          link: /topics/custom-filters
-        - title: Filter Plugin Policy for Access Control
-          link: /topics/access-control/
-    - title: Edge Control
-      link: /topics/edge-control
-    - title: Developer Portal
-      link: /topics/dev-portal
-    - title: Edge Policy Console
-      link: /topics/edge-policy-console
-
-
-- title: Running Ambassador in Production
-  items: 
-    - title: The Ambassador Module
-      link: /topics/ambassador
-    - title: The Host CRD
-      link: /topics/host-crd
-      items:
-        - title: Integrated ACME Support
-          link: /topics/acme-support
-    - title: Load Balancing and Service Discovery
-      link: /topics/lb-service-discovery
-      items:
-        - title: Load Balancing
-          link: /topics/load-balancer/
-        - title: Service Discovery and Resolvers
-          link: /topics/resolvers/
-    - title: gZip Compression
-      link: /topics/gzip/
-    - title: Deploying Ambassador
-      link: /topics/deployment-overview
-      items:
-        - title: Ambassador with AWS
-          link: /topics/ambassador-with-aws/
-        - title: Ambassador with GKE
-          link: /topics/ambassador-with-gke
-        - title: Running Ambassador
-          link: /topics/running/
-    - title: TLS
-      link: /topics/tls-overview
-      items:
-        - title: Client Certificate Validation
-          link: /topics/client-cert-validation
-        - title: HTTP -> HTTPS Redirection
-          link: /topics/cleartext-redirection
-        - title: Mutual TLS (mTLS)
-          link: /topics/mtls
-        - title: Server Name Indication (SNI)
-          link: /topics/sni
-        - title: TLS Origination
-          link: /topics/origination
-    - title: Capturing Client IP Addresses
-      link: /topics/client-ip-address
+            - title: Example Mappings YAML
+              link: /topics/mappings-yaml
+        - title: Mapping Configuration
+          link: /topics/mapping-config
+          items: 
+            - title: Automatic Retries
+              link: /topics/retries
+            - title: Canary Releases
+              link: /topics/canary
+            - title: Circuit Breakers
+              link: /topics/circuit-breakers
+            - title: CORS
+              link: /topics/cors
+            - title: Headers
+              link: /topics/headers
+              items: 
+                - title: Add Request Headers
+                  link: /topics/add-request-headers
+                - title: Remove Request Headers
+                  link: /topics/remove-request-headers
+                - title: Add Response Headers
+                  link: /topics/add-response-headers
+                - title: Remove Response Headers
+                  link: /topics/remove-response-headers
+                - title: Header Based Routing
+                  link: /topics/header-based-routing
+                - title: Host Header
+                  link: /topics/host-header
+            - title: Prefix Regex
+              link: /topics/prefix_regex
+            - title: Rate Limits
+              link: /topics/rate-limits
+              items:
+                - title: Rate Limiting Concepts
+                  link: /topics/rate-limiting/
+                - title: Rate Limiting Tutorial
+                  link: /topics/rate-limiting-tutorial/
+                - title: Advanced Rate Limiting
+                  link: topics/advanced-rate-limiting/
+            - title: Redirects
+              link: /topics/redirects
+            - title: Rewrites
+              link: /topics/rewrites
+            - title: Protocols Overview
+              link: /topics/protocols-overview
+              items:
+                - title: Envoy and External Authorization
+                  link: /topics/ext_authz/
+                - title: TCP Mappings
+                  link: /topics/tcpmappings
+                - title: gRPC and gRPC-Web
+                  link: /topics/grpc
+                - title: HTTP/1.0
+                  link: /topics/http1
+                - title: WebSockets
+                  link: /topics/websockets-ambassador
+            - title: Timeouts
+              link: /topics/timeouts
+            - title: Traffic Shadowing
+              link: /topics/shadowing
+        - title: Filters and Authentication
+          link: /topics/filters-overview
+          items:  
+            - title: OAuth and OIDC Overview
+              link: /topics/auth-overview/
+            - title: OAuth2 Filter
+              link: /topics/oauth2-filter
+            - title: Authentication
+              link: /topics/authentication/
+            - title: Identity Provider Configuration
+              items:
+                - title: Google SSO
+                  link: /topics/google/
+                - title: Okta
+                  link: /topics/okta/
+                - title: Auth0
+                  link: /topics/auth0/
+                - title: OneLogin
+                  link: /topics/onelogin/
+                - title: Azure
+                  link: /topics/azure/
+                - title: Salesforce
+                  link: /topics/salesforce/
+                - title: UAA
+                  link: /topics/uaa/
+            - title: Custom Filters
+              link: /topics/custom-filters
+            - title: Filter Plugin Policy for Access Control
+              link: /topics/access-control/
+        - title: Edge Control
+          link: /topics/edge-control
+        - title: Developer Portal
+          link: /topics/dev-portal
+        - title: Edge Policy Console
+          link: /topics/edge-policy-console
+    - title: Running Ambassador in Production
       items: 
-        - title: The externalTrafficPolicy
-          link: /topics/externalTrafficPolicy
-        - 
-
-/topics/monitoring/
-
-/topics/statistics/
-/topics/plugin-services/
-/topics/auth-service
-/topics/log-service
-/topics/rate-limit-service
-/topics/tracing-service
-/topics/troubleshooting-ambassador
-/topics/diagnostics/
-/topics/debugging/
-/topics/ingress-controller/
-/topics/running-multi-ambassador-cluster
-/topics/ambassador-project
-/topics/contributors-guide
-/topics/changelog
-
-/howto/service-mesh
-/howto/consul
-/howto/istio
-/howto/linkerd2
-/howto/tracing-tutorial
-howto/external-dns
-howto/external-routing
-/howto/route-to-service
-/howto/route-to-github
-/howto/manage-route
-/howto/auth-and-sec
-/howto/cert-manager
-/howto/custom-filter
-/howto/knative
-/reference/crds
-
-
-
-
-
-/reference/environment/
-/reference/annotations/
-/faq/why-ambassador/
-/faq/alternatives/
-/faq/microservices-api-gateways/
-/faq/features-and-benefits/
-/faq/ambassador-oss-aes
-/faq/using-ambassador-in-org/
-/faq/ambassador-license
-/faq/envoy-in-ambassador
-/faq/ambassador-service-mesh
-/faq/ambassador-performance
-/faq/troubleshooting-ambassador
-/faq/no-healthy-upstream
-/faq/503-errors
+        - title: The Ambassador Module
+          link: /topics/ambassador
+        - title: The Host CRD
+          link: /topics/host-crd
+          items:
+            - title: Integrated ACME Support
+              link: /topics/acme-support
+        - title: Load Balancing and Service Discovery
+          link: /topics/lb-service-discovery
+          items:
+            - title: Load Balancing
+              link: /topics/load-balancer/
+            - title: Service Discovery and Resolvers
+              link: /topics/resolvers/
+        - title: gZip Compression
+          link: /topics/gzip/
+        - title: Deploying Ambassador
+          link: /topics/deployment-overview
+          items:
+            - title: Ambassador with AWS
+              link: /topics/ambassador-with-aws/
+            - title: Ambassador with GKE
+              link: /topics/ambassador-with-gke
+            - title: Running Ambassador
+              link: /topics/running/
+        - title: TLS
+          link: /topics/tls-overview
+          items:
+            - title: Client Certificate Validation
+              link: /topics/client-cert-validation
+            - title: HTTP -> HTTPS Redirection
+              link: /topics/cleartext-redirection
+            - title: Mutual TLS (mTLS)
+              link: /topics/mtls
+            - title: Server Name Indication (SNI)
+              link: /topics/sni
+            - title: TLS Origination
+              link: /topics/origination
+        - title: Capturing Client IP Addresses
+          link: /topics/client-ip-address
+          items: 
+            - title: The externalTrafficPolicy
+              link: /topics/externalTrafficPolicy
+            - title: L7 Load Balancer Considerations
+              link: 
+        - title: Monitoring Options
+          link: /topics/monitoring/
+          items:
+            - title: Statistics
+              link: /topics/statistics/
+        - title: Plugin Services
+          link: /topics/plugin-services/
+          items:
+            - title: AuthService Plugin
+              link: /topics/auth-service
+            - title: LogService Plugin
+              link: /topics/log-service
+            - title: RateLimitingService Plugin
+              link: /topics/rate-limit-service
+            - title: TracingService Plugin
+              link: /topics/tracing-service
+        - title: Troubleshooting Ambassador
+          link: /topics/troubleshooting-ambassador
+          items:
+            - title: Diagnostics
+              link: /topics/diagnostics/
+            - title: Debugging
+              link: /topics/debugging/
+        - title: Ambassador as an Ingress Controller
+          link: /topics/ingress-controller/
+        - title: Running Multiple Instances in a Single Cluster
+          link: /topics/running-multi-ambassador-cluster
+    - title: The Ambassador Project
+      link: /topics/ambassador-project
+      items:
+        - title: The Contributor's Guide
+          link: /topics/contributors-guide
+        - title: Changelog
+          link: /topics/changelog
+- title: How To
+  items: 
+    - title: Service Mesh Integration
+      link: /howto/service-mesh
+      items:
+        - title: Consul
+          link: /howto/consul
+        - title: Istio
+          link: /howto/istio
+        - title: Linkerd2
+          link: /howto/linkerd2
+    - title: Distributed Tracing
+      link: /howto/tracing-tutorial/
+      items:
+        - title: DataDog
+          link: /howto/datadog
+        - title: Zipkin
+          link: /howto/zipkin
+        - title: Knative
+          link: /howto/knative
+    - title: External DNS
+      link: /howto/external-dns
+    - title: External Routing
+      link: /howto/external-routing
+      items:
+        - title: Route to a Service
+          link: /howto/route-to-service
+        - title: Route to Github
+          link: /howto/route-to-github
+        - title: Manage my Routes
+          link: /howto/manage-route
+    - title: Authentication and Security
+      link: /howto/auth-and-sec
+      items:
+        - title: Using a cert-manager
+          link: /howto/cert-manager
+    - title: Develop Custom Filters for Routing
+      link: /howto/custom-filter
+- title: Reference
+  items:
+    - title: CRDs
+      link: /reference/crds
+      items:
+        - title: Host CRD
+          link: 
+        - title: Mappings CRD
+          link: /reference/mappings-crd
+        - title: TLSContext CRD
+          link:  /reference/tlscontext-crd
+        - title: Filter CRD
+          link: /reference/filter-crd
+        - title: FilterPolicy CRD
+          link: /reference/filterpolicy-crd
+    - title: Environmental Variables
+      link: /reference/environment/
+- title: Frequently Asked Questions
+  items:
+    - title: Why Ambassador?
+      link: /faq/why-ambassador/
+      items:
+        - title: Ambassador Alternatives
+          link: /faq/alternatives/
+        - title: Microservices API Gateways vs. Traditional Enterprise API Gateways
+          link: /faq/microservices-api-gateways/
+        - title: Features and Benefits
+          link: /faq/features-and-benefits/
+    - title: What's the difference between the API Gateway and the Edge Stack? 
+      link: /faq/ambassador-oss-aes
+    - title: What are some common use cases for Ambassador?
+      link: /faq/using-ambassador-in-org/
+    - title: How is Ambassador Licensed?
+      link: /faq/ambassador-license
+    - title: How is Envoy Proxy used in Ambassador?
+      link: /faq/envoy-in-ambassador
+    - title: What's the difference between a service mesh like Istio, and Ambassador?
+      link: /faq/ambassador-service-mesh
+    - title: What is the performance of Ambassador?
+      link:   /faq/ambassador-performance
+    - title: Troubleshooting Ambassador
+      link: /faq/troubleshooting-ambassador
+      items:
+        - title: I'm not getting any healthy upstream
+          link: /faq/no-healthy-upstream
+        - title: I'm getting intermittant 503 errors
+          link: /faq/503-errors
 
 
 
