@@ -57,7 +57,7 @@ Windows. For other options, such as Docker, read the [detailed instructions](/us
 Your terminal will print something similar to the following as it provisions a load balancer, configures TLS, and provides you with an `edgestack.me` subdomain:
 
 ```
-$ edgectl install
+$ **edgectl install**
 -> Installing the Ambassador Edge Stack $version$.
 -> Remote Kubernetes cluster detected.
 -> Provisioning a cloud load balancer. (This may take 
@@ -65,7 +65,7 @@ a minute, depending on your cloud provider.)
 -> Automatically configuring TLS.
 Please enter an email address. We’ll use this email 
 address to notify you prior to domain and certification 
-expiration [None]: john@example.com.
+expiration [None]: **john@example.com.**
 ```
 
 Provide an email address as required by the ACME TLS certificate provider, Let's
