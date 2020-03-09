@@ -57,7 +57,6 @@ Windows. For other options, such as Docker, read the [detailed instructions](/us
 Your terminal will print something similar to the following as it provisions a load balancer, configures TLS, and provides you with an `edgestack.me` subdomain:
 
 ```
-$ **edgectl install**
 -> Installing the Ambassador Edge Stack $version$.
 -> Remote Kubernetes cluster detected.
 -> Provisioning a cloud load balancer. (This may take 
