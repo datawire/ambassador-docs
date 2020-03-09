@@ -10,6 +10,8 @@ The Ambassador Edge Stack is deployed to Kubernetes via YAML for MacOS, Linux, a
 Windows. For other options, such as Docker, read the [detailed instructions](/user-guide/install).
 
 
+<img src="/../doc-images/apple-logo.png" width="100"> 
+
 <button class="accordion">Install on MacOS</button>
 <div class="panel">
   <p>
@@ -19,7 +21,7 @@ Windows. For other options, such as Docker, read the [detailed instructions](/us
     sudo curl -fL https://metriton.datawire.io/downloads/darwin/edgectl -o /usr/local/bin/edgectl && sudo chmod a+X /usr/local/bin/edgectl
     ```
 
-    If you decide to download the file, you may encounter a security block. To change this:
+  If you decide to download the file, you may encounter a security block. To change this:
     * Go to **System Preferences > Security & Privacy > General**.
     * Click the **Open Anyway** button.
     * On the new dialog, click the **Open** button.
@@ -28,6 +30,7 @@ Windows. For other options, such as Docker, read the [detailed instructions](/us
 </p>
 </div>
 
+<img src="/../doc-images/linux-logo.png" width="100">
 <button class="accordion">Install on Linux</button>
 <div class="panel">
   <p>
@@ -42,6 +45,7 @@ Windows. For other options, such as Docker, read the [detailed instructions](/us
 </p>
 </div>
 
+<img src="/../doc-images/windows-logo.png" width="100">
 <button class="accordion">Install on Windows</button>
 <div class="panel">
   <p>
