@@ -7,7 +7,7 @@ In just four minutes, your cluster will be routing HTTPS requests from the
 Internet to a backend service.
 
 The Ambassador Edge Stack is deployed to Kubernetes via YAML for MacOS, Linux, and
-Windows. For other options, such as Docker, click [here](/user-guide/install).
+Windows. For other options, such as Docker, read the [detailed instructions](/user-guide/install).
 
 ### Install on MacOS
 
@@ -73,7 +73,7 @@ Ambassador Edge Stack to automatically provision TLS and HTTPS for a domain
 name, so you can get started right away.
 
 Your new [Edge Policy Console](/about/edge-policy-console) will open
-automatically in your browser at the provided URL or IP address. **Note that the provided `random-word.edgestack.me` domain name will expire after 90 days**.
+automatically in your browser at the provided URL or IP address. 
 
 ![AES success](/../../doc-images/aes-success.png)
 
@@ -109,3 +109,5 @@ check out the [Welcome page](/docs/) or read the [Ambassador
 Story](/about/why-ambassador).
 
 For a custom configuration, you can install the Ambassador Edge Stack [manually](/user-guide/manual-install).
+
+**Note that the provided `random-word.edgestack.me` domain name will expire after 90 days**.
