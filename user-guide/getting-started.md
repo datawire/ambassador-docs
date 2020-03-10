@@ -9,7 +9,8 @@ Internet to a backend service.
 The Ambassador Edge Stack is deployed to Kubernetes via YAML for MacOS, Linux, and
 Windows. For other options, such as Docker, click [here](/user-guide/install).
 
-### Install on MacOS
+<details>
+<summary>### Install on MacOS</summary>
 
 1. Download the `edgectl` file [here](https://metriton.datawire.io/downloads/darwin/edgectl) or download it with a curl command:
 
@@ -23,8 +24,9 @@ Windows. For other options, such as Docker, click [here](/user-guide/install).
     * On the new dialog, click the **Open** button.
 
 2. Run the installer with `./edgectl install`
-
-### Install on Linux
+</details>
+<details>
+<summary>### Install on Linux</summary>
 
 1. Download the `edgectl` file
    [here](https://metriton.datawire.io/downloads/linux/edgectl) or download it with a curl
@@ -34,13 +36,14 @@ Windows. For other options, such as Docker, click [here](/user-guide/install).
     sudo curl -fL https://metriton.datawire.io/downloads/linux/edgectl -o /usr/local/bin/edgectl && sudo chmod a+x /usr/local/bin/edgectl
     ```
 2. Run the installer with `./edgectl install`
-
-### Install on Windows
+</details>
+<details>
+<summary>### Install on Windows</summary>
 
 1. Download the `edgectl` file
    [here](https://metriton.datawire.io/downloads/windows/edgectl.exe).
 2. Run the installer with `edgectl.exe install`
-
+</details>
 ## Installation
 
 Your terminal will print something similar to the following as it provisions a load balancer, configures TLS, and provides you with an `edgestack.me` subdomain:
