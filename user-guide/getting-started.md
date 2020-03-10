@@ -11,6 +11,9 @@ Windows. For other options, such as Docker, click [here](/user-guide/install).
 
 ### Install on MacOS
 
+```<button>Click Me</button>```
+```<button>Click Me Too
+</button>```
 1. Download the `edgectl` file [here](https://metriton.datawire.io/downloads/darwin/edgectl) or download it with a curl command:
 
     ```shell
