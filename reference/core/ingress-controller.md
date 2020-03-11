@@ -14,7 +14,7 @@ If you're new to the Ambassador Edge Stack and to Kubernetes, we'd recommend you
 
    Starting in Kubernetes 1.14, the `Ingress` was added to the new `networking.k8s.io` api.
 
-   **Note:** If you are using 1.14 and above, it is recommended to use `apiVersion: networking.k8s.io/v1beta1` when defining `Ingresses`. Since both are still supported in all 1.14+ versions of Kubernetes, this document will use `extensions/v1beta1` for compatibility reasons.
+   **Note:** If you are using 1.14 and above, Ambassador supports both `v1` and `v1beta1` when defining `Ingresses`. Since both are still supported in all 1.14+ versions of Kubernetes, this document will use `extensions/v1` for compatibility reasons, but you can still use `v1beta1`.
 
 - You will need RBAC permissions to create `Ingress` resources in either
   the `extensions` `apiGroup` (present in all supported versions of
@@ -107,7 +107,7 @@ For example, this `Ingress` resource
 
 ```yaml
 ---
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1
 kind: Ingress
 metadata:
   annotations:
@@ -140,7 +140,7 @@ This means that the following YAML:
 
 ```yaml
 ---
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1
 kind: Ingress
 metadata:
   annotations:
@@ -171,7 +171,7 @@ will set up the Ambassador Edge Stack to do canary routing where 50% of the traf
 An `Ingress` resource must provide at least some routes or a [default backend](https://kubernetes.io/docs/concepts/services-networking/ingress/#default-backend). The default backend provides for a simple way to direct all traffic to some upstream service:
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1
 kind: Ingress
 metadata:
   annotations:
@@ -200,7 +200,7 @@ spec:
 
 ```yaml
 ---
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1
 kind: Ingress
 metadata:
   annotations:
@@ -255,7 +255,7 @@ Read more from Kubernetes [here](https://kubernetes.io/docs/concepts/services-ne
 ### TLS Termination
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1
 kind: Ingress
 metadata:
   annotations:

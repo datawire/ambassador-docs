@@ -2,19 +2,22 @@
 
 Google offers a [L7 load balancer](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) to 
 leverage network services such as managed SSL certificates, SSL offloading or the Google content delivery network. 
-A L7 load balancer in front of Ambassador can be configured by hand or by using the ingress-gce resource. Using the 
-ingress resource also allows you to create google managed SSL certificates through kubernetes.
+
+A L7 load balancer in front of Ambassador can be configured by hand or by using the ingress-gce resource. Using the ingress resource also allows you to create google managed SSL certificates through Kubernetes.
 
 With this setup, HTTPS will be terminated at the Google load balancer. The load balancer will be created and configured by 
 the ingress-gce resource. The load balancer consists of a set of 
 [forwarding rules](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#https_lb) and a set of
 [backend service](https://cloud.google.com/load-balancing/docs/backend-service). 
-In this setup the ingress resource creates two forwarding rules, one for HTTP and one for HTTPS. The HTTPS
-forwarding rule has the SSL certificates attached. In addition one backend service will be created to point to
+
+In this setup, the ingress resource creates two forwarding rules, one for HTTP and one for HTTPS. The HTTPS
+forwarding rule has the SSL certificates attached. In addition, one backend service will be created to point to
 a list of instance groups at a static port. This will be the NodePort of the Ambassador service. 
 
-With this setup the load balancer terminates HTTPS and then directs the traffic to the Ambassador service 
+With this setup, the load balancer terminates HTTPS and then directs the traffic to the Ambassador service 
 via the NodePort. Ambassador is then doing all the routing to the other internal/external services. 
+
+Currently, the Ambassador Edge Stack supports Kubernetes the `Ingress` apiVersion `v1` and `v1beta1`.
 
 # Overview of steps
 
@@ -28,7 +31,7 @@ Ambassador will be running as NodePort service. Health checks will be configured
 
 ## 0. Ambassador Edge Stack
 
-This guide will install Ambassador API gateway. You can also install Ambassador Edge Stack. Please note:
+This guide will install the Ambassador API gateway. You can also install Ambassador Edge Stack. Please note:
 - The ingress and the ambassador service need to run in the same namespace
 - The Ambassador service needs to be of type `NodePort` and not `LoadBalancer`. Also remove the line with `externalTrafficPolicy: Local`
 - Ambassador-Admin needs to be of type `NodePort` instead of `ClusterIP` since it needs to be available for health checks
@@ -67,8 +70,8 @@ You will now have a ambassador service running next to your ingress.
 
 ## 3.  Configure and connect ambassador to the ingress
 
-You need to change the ingress for it to send traffic to ambassador. Assuming you have followed the tutorial, you should
-have a file named basic-ingress.yaml. Change it to point to ambassador instead of web:
+You need to change the ingress for it to send traffic to Ambassador. Assuming you have followed the tutorial, you should
+have a file named `basic-ingress.yaml`. Change it to point to ambassador instead of web:
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -81,7 +84,20 @@ spec:
     servicePort: 8080
 ```
 
-Now let's connect the other service from the tutorial to ambassador by specifying a mapping:
+Or 
+
+```yaml
+apiVersion: extensions/v1
+kind: Ingress
+metadata:
+  name: basic-ingress
+spec:
+  backend:
+    serviceName: ambassador
+    servicePort: 8080
+```
+
+Now let's connect the other service from the tutorial to Ambassador by specifying a mapping:
 
 ```yaml
 apiVersion: getambassador.io/v2
@@ -94,7 +110,8 @@ spec:
   service: web:8080
 ```
 
-All traffic will now go to ambassador and from ambassador to the web service. You should be able to hit your load balancer and get the output. It may take some time until the load balancer infrastructure has rolled out all changes and you might see gateway errors during that time.
+All traffic will now go to Ambassador and from ambassador to the web service. You should be able to hit your load balancer and get the output. It may take some time until the load balancer infrastructure has rolled out all changes and you might see gateway errors during that time.
+
 As a side note: right now all traffic will go to the `web` service, including the load balancer health check.
 
 ## 4. Create an SSL certificate and enable HTTPS
@@ -104,6 +121,7 @@ a DNS name and point it to the external IP of the load balancer. Going forward i
 is www.example.com .
 
 certificate.yaml:
+
 ```yaml 
 apiVersion: networking.gke.io/v1beta1
 kind: ManagedCertificate
@@ -115,8 +133,23 @@ spec:
 ```
 
 Modify the ingress from before:
+
 ```yaml
 apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: basic-ingress
+  annotations:
+    networking.gke.io/managed-certificates: www-example-com
+spec:
+  backend:
+    serviceName: ambassador
+    servicePort: 8080
+```
+ or 
+
+```yaml
+apiVersion: extensions/v1
 kind: Ingress
 metadata:
   name: basic-ingress
