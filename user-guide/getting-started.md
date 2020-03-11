@@ -9,37 +9,67 @@ Internet to a backend service.
 The Ambassador Edge Stack is deployed to Kubernetes via YAML for MacOS, Linux, and
 Windows. For other options, such as Docker, click [here](/user-guide/install).
 
-### Install on MacOS
+<div>
 
-1. Download the `edgectl` file [here](https://metriton.datawire.io/downloads/darwin/edgectl) or download it with a curl command:
+<style>
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
 
-    ```shell
-    sudo curl -fL https://metriton.datawire.io/downloads/darwin/edgectl -o /usr/local/bin/edgectl && sudo chmod a+X /usr/local/bin/edgectl
-    ```
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
 
-    If you decide to download the file, you may encounter a security block. To change this:
-    * Go to **System Preferences > Security & Privacy > General**.
-    * Click the **Open Anyway** button.
-    * On the new dialog, click the **Open** button.
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+</style>
 
-2. Run the installer with `./edgectl install`
+<button class="accordion">Install on MacOS</button>
+<div class="panel">
+<p><ol><li><p>Download the <code>edgectl</code> file <a href="https://metriton.datawire.io/downloads/darwin/edgectl" target="_blank" rel="nofollow noopener noreferrer">here</a> or download it with a curl command:</p><div class="styles-module--CodeBlock--1UB4s"><pre class="language-shell"><button class="styles-module--CopyButton--3-6vF">Copy</button><div class="token-line"><span class="token function">sudo</span><span class="token plain"> </span><span class="token function">curl</span><span class="token plain"> -fL https://metriton.datawire.io/downloads/darwin/edgectl -o /usr/local/bin/edgectl </span><span class="token operator">&amp;&amp;</span><span class="token plain"> </span><span class="token function">sudo</span><span class="token plain"> </span><span class="token function">chmod</span><span class="token plain"> a+X /usr/local/bin/edgectl</span></div></pre></div><p>If you decide to download the file, you may encounter a security block. To change this:</p><ul><li>Go to <strong>System Preferences &gt; Security &amp; Privacy &gt; General</strong>.</li><li>Click the <strong>Open Anyway</strong> button.</li><li>On the new dialog, click the <strong>Open</strong> button.</li></ul></li><li><p>Run the installer with <code>./edgectl install</code></p></li></ol></p>
+</div>
 
-### Install on Linux
+<button class="accordion">Install on Linux</button>
+<div class="panel">
+<p><ol><li><p>Download the <code>edgectl</code> file <a href="https://metriton.datawire.io/downloads/linux/edgectl" target="_blank" rel="nofollow noopener noreferrer">here</a> or download it with a curl command:</p><div class="styles-module--CodeBlock--1UB4s"><pre class="language-shell"><button class="styles-module--CopyButton--3-6vF">Copy</button><div class="token-line"><span class="token function">sudo</span><span class="token plain"> </span><span class="token function">curl</span><span class="token plain"> -fL https://metriton.datawire.io/downloads/linux/edgectl -o /usr/local/bin/edgectl </span><span class="token operator">&amp;&amp;</span><span class="token plain"> </span><span class="token function">sudo</span><span class="token plain"> </span><span class="token function">chmod</span><span class="token plain"> a+x /usr/local/bin/edgectl</span></div></pre></div></li><li><p>Run the installer with <code>./edgectl install</code></p></li></ol></p>
+</div>
 
-1. Download the `edgectl` file
-   [here](https://metriton.datawire.io/downloads/linux/edgectl) or download it with a curl
-   command:
+<button class="accordion">Install on Windows</button>
+<div class="panel">
+<p><ol><li>Download the <code>edgectl</code> file <a href="https://metriton.datawire.io/downloads/windows/edgectl.exe" target="_blank" rel="nofollow noopener noreferrer">here</a>.</li><li>Run the installer with <code>edgectl.exe install</code></li></ol></p>
+</div>
 
-    ```shell
-    sudo curl -fL https://metriton.datawire.io/downloads/linux/edgectl -o /usr/local/bin/edgectl && sudo chmod a+x /usr/local/bin/edgectl
-    ```
-2. Run the installer with `./edgectl install`
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
 
-### Install on Windows
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.display === "block") {
+      panel.style.display = "none";
+    } else {
+      panel.style.display = "block";
+    }
+  });
+}
+</script>
 
-1. Download the `edgectl` file
-   [here](https://metriton.datawire.io/downloads/windows/edgectl.exe).
-2. Run the installer with `edgectl.exe install`
+</div>
 
 ## Installation
 
