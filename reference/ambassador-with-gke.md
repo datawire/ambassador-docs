@@ -17,7 +17,7 @@ a list of instance groups at a static port. This will be the NodePort of the Amb
 With this setup, the load balancer terminates HTTPS and then directs the traffic to the Ambassador service 
 via the NodePort. Ambassador is then doing all the routing to the other internal/external services. 
 
-Currently, the Ambassador Edge Stack supports Kubernetes the `Ingress` apiVersion `v1` and `v1beta1`.
+Currently, both the Ambassador Edge Stack and the API Gateway supports Kubernetes the `Ingress` apiVersion `v1` and `v1beta1`.
 
 # Overview of steps
 

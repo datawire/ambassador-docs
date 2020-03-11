@@ -14,7 +14,7 @@ If you're new to the Ambassador Edge Stack and to Kubernetes, we'd recommend you
 
    Starting in Kubernetes 1.14, the `Ingress` was added to the new `networking.k8s.io` api.
 
-   **Note:** If you are using 1.14 and above, Ambassador supports both `v1` and `v1beta1` when defining `Ingresses`. Since both are still supported in all 1.14+ versions of Kubernetes, this document will use `extensions/v1` for compatibility reasons, but you can still use `v1beta1`.
+    **Note:** If you are using Kubernetes 1.19 and above, Ambassador supports `apiVersion: networking.k8s.io/v1`. For compatibility reasons, Ambassador also supports the deprecated `apiVersion: networking.k8s.io/v1beta1` and `apiVersion: extensions/v1beta1` when defining Ingresses if you are using an older version of Kubernetes.
 
 - You will need RBAC permissions to create `Ingress` resources in either
   the `extensions` `apiGroup` (present in all supported versions of
