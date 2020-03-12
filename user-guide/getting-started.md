@@ -3,13 +3,19 @@
 ---
 # Quick Start Installation Guide
 
-In just four minutes, your cluster will be routing HTTPS requests from the
-Internet to a backend service.
+In just a few simple steps, your cluster will be routing HTTPS requests from the
+Internet to a backend service. 
+
+All you need to do is:
+1. Download the installer, `edgectl` and
+2. Run the installer with a single command
 
 The Ambassador Edge Stack is deployed to Kubernetes via YAML for MacOS, Linux, and
 Windows. For other options, such as Docker, read the [detailed instructions](/user-guide/install).
 
-## Install on MacOS
+## Download the Installer
+
+### Install on MacOS
 
 1. Download the `edgectl` file [here](https://metriton.datawire.io/downloads/darwin/edgectl) or download it with a curl command:
 
@@ -24,7 +30,7 @@ Windows. For other options, such as Docker, read the [detailed instructions](/us
 
 2. Run the installer with `./edgectl install`
 
-## Install on Linux
+### Install on Linux
 
 1. Download the `edgectl` file
    [here](https://metriton.datawire.io/downloads/linux/edgectl) or download it with a curl
@@ -35,16 +41,14 @@ Windows. For other options, such as Docker, read the [detailed instructions](/us
     ```
 2. Run the installer with `./edgectl install`
 
-## Install on Windows
+### Install on Windows
 
 1. Download the `edgectl` file
    [here](https://metriton.datawire.io/downloads/windows/edgectl.exe).
 2. Run the installer with `edgectl.exe install`
-</p>
-</div>
 
 
-## Installation
+## Run the Installer
 
 Your terminal will print something similar to the following as it provisions a load balancer, configures TLS, and provides you with an `edgestack.me` subdomain:
 
@@ -56,7 +60,7 @@ a minute, depending on your cloud provider.)
 -> Automatically configuring TLS.
 Please enter an email address. We’ll use this email 
 address to notify you prior to domain and certification 
-expiration [None]: **john@example.com.**
+expiration [None]: john@example.com.
 ```
 
 Provide an email address as required by the ACME TLS certificate provider, Let's
@@ -84,7 +88,6 @@ automatically in your browser at the provided URL or IP address.
 Minikube users will see something similar to the following:
 
 ```
-$ edgectl install
 -> Installing the Ambassador Edge Stack $version$.
 -> Automatically configuring TLS.
 -> Cluster is not publicly accessible. Please ensure 
