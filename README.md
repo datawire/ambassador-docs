@@ -1,3 +1,7 @@
+---
+## This repository has been archived and is no longer maintained. Documentation has moved to https://github.com/datawire/ambassador.
+---
+
 # Ambassador documentation
 
 We've switched to GatsbyJS for generating the documentation, which gives us more control and flexibility over the layout.
