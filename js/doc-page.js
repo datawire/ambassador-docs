@@ -244,7 +244,7 @@ export default ({ data, location }) => {
             </div>
           </main>
         </div>
-        <DocFooter page={page} branch="release/v1.3" />
+        <DocFooter page={page} branch="1.3" />
       </Layout>
     </React.Fragment>
   );
