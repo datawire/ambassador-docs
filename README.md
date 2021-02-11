@@ -1,23 +1,9 @@
----
-## This repository has been archived and is no longer maintained. Documentation has moved to https://github.com/datawire/ambassador.
----
 
 # Ambassador documentation
 
 We've switched to GatsbyJS for generating the documentation, which gives us more control and flexibility over the layout.
 
 ## Authoring documentation
-
- - If you are improving the documentation of for the current release
-   of Ambassador or Ambassador Edge Stack, you should submit your
-   pull-request to [ambassador-docs.git][].
- - If you are writing documentation for changes in an upcoming release
-   of Ambassador, you should submit your pull-request to
-   [ambassador.git][] (in the `docs/` folder).
- - If you are writing documentation for changes in an upcoming release
-   of Ambassador Edge Stack, you should submit your pull-request to
-   [apro.git][] (in the `docs/` folder).
-
 
 If you're authoring the documentation, just edit the Markdown files. You can use GitHub to preview the Markdown.
 
@@ -58,6 +44,4 @@ right along-side the code changes.  When a release is cut, and you are
 ready to publicize it, simply do a `git subtree push`.
 
 [ambassador-docs.git]: https://github.com/datawire/ambassador-docs
-[ambassador.git]: https://github.com/datawire/ambassador
-[apro.git]: https://github.com/datawire/apro
 [getambassador.io.git]: https://github.com/datawire/getambassador.io
