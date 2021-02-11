@@ -52,8 +52,6 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
    kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && \
    kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
    ```
-   
-   If you're on GKE, or haven't previously created the Edge Stack service, please see [the quick start guide](../../tutorials/getting-started).
 
 4. Configure Edge Stack to add Linkerd 2 Headers to requests.
 
