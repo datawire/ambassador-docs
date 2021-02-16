@@ -290,7 +290,13 @@
             - title: Context Propagation
               link: /docs/pre-release/telepresence/concepts/context-prop
         - title: Technical Reference
-          link: /docs/pre-release/telepresence/reference/
+          items:
+            - title: Architecture
+              link: /docs/pre-release/telepresence/reference/architecture.md
+              - title: Client Reference
+              link: /docs/pre-release/telepresence/reference/client.md
+              - title: Environment Variables
+              link: /docs/pre-release/telepresence/reference/environment.md
         - title: FAQs
           link: /docs/pre-release/telepresence/faqs
         - title: Troubleshooting
