@@ -292,11 +292,11 @@
         - title: Technical Reference
           items:
             - title: Architecture
-              link: /docs/latest/telepresence/reference/architecture.md
-              - title: Client Reference
-              link: /docs/latest/telepresence/reference/client.md
-              - title: Environment Variables
-              link: /docs/latest/telepresence/reference/environment.md
+              link: /docs/latest/telepresence/reference/architecture
+            - title: Client Reference
+              link: /docs/latest/telepresence/reference/client
+            - title: Environment Variables
+              link: /docs/latest/telepresence/reference/environment
         - title: FAQs
           link: /docs/latest/telepresence/faqs
         - title: Troubleshooting
