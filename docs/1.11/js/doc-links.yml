@@ -297,6 +297,8 @@
               link: /docs/latest/telepresence/reference/client
             - title: Environment Variables
               link: /docs/latest/telepresence/reference/environment
+            - title: Volume Mounts
+              link: /docs/latest/telepresence/reference/volume
         - title: FAQs
           link: /docs/latest/telepresence/faqs
         - title: Troubleshooting
