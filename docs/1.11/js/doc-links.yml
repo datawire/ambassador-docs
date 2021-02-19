@@ -299,6 +299,8 @@
               link: /docs/latest/telepresence/reference/environment
             - title: Volume Mounts
               link: /docs/latest/telepresence/reference/volume
+            - title: DNS Resolution
+              link: /docs/latest/telepresence/reference/dns
         - title: FAQs
           link: /docs/latest/telepresence/faqs
         - title: Troubleshooting
