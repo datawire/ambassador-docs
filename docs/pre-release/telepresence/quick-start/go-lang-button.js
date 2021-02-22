@@ -71,12 +71,12 @@ export default function CustomizedMenus() {
       >
         <MenuItem 
             component="a"
-            href="qs-python/"
-            >Python</MenuItem>
+            href="../"
+            >Node</MenuItem>
         <MenuItem 
             component="a"
-            href="qs-go/"onClick={handleClose}
-            >Go</MenuItem>
+            href="../qs-python/"onClick={handleClose}
+            >Python</MenuItem>
       </StyledMenu>
     </div>
   );
