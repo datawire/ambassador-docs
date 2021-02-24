@@ -201,6 +201,6 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
-* Get started with authentication by [installing Edge Stack]
+* Get started with authentication by [installing Edge Stack](../../tutorials/getting-started/).
 
 * For more details see the [`External` filter](../../topics/using/filters) documentation.
