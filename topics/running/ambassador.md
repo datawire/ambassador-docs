@@ -146,11 +146,11 @@ If set, `cluster_idle_timeout_ms` specifies the timeout (in milliseconds) after 
 
 ### Upstream Max Lifetime (`cluster_max_connection_lifetime_ms`)
 
-If set, `cluster_max_connection_lifetime_ms` specifies the maximum amount of time (in milliseconds) after which a connection upstream is closed, regardless of whether it is idle or not. If `cluster_max_connection_lifetime_ms` is disabled by setting it to 0, you risk upstream connections never getting closed if you do not set [`max_connection_lifetime_ms` on each `Mapping`](../../using/timeouts/).
+If set, `cluster_max_connection_lifetime_ms` specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. If `cluster_max_connection_lifetime_ms` is not set, then upstream connections may remain open for arbitrarily long. This can be set on a per-Mapping basis by setting [`cluster_max_connection_lifetime_ms` on the `Mapping`](../../using/timeouts/).
 
 ### Request Timeout (`cluster_request_timeout_ms`)
 
-If set, `cluster_request_timeout_ms` specifies the default end-to-end timeout for the requests. This can be overriden on a per-Mapping basis by setting [`timeout_ms` on the Mapping](../../using/timeouts/).
+If set, `cluster_request_timeout_ms` specifies the default end-to-end timeout for the requests. This can be set on a per-Mapping basis by setting [`timeout_ms` on the `Mapping`](../../using/timeouts/).
 
 ### Defaults (`defaults`)
 
