@@ -1,8 +1,8 @@
+import Alert from '@material-ui/lab/Alert';
+
 # External Filters
 
-> **Important:** This guide applies to Ambassador Edge Stack, use of this guide
- on the Ambassador API Gateway is not recommended.  Use 
- [Authentication](../basic-auth) instead.
+<Alert severity="info">This guide applies to Ambassador Edge Stack, use of this guide on the Ambassador API Gateway is not recommended.  Use <a href="../basic-auth/">Authentication]</a> instead.</Alert>
 
 Ambassador can authenticate incoming requests before routing them to a backing 
 service. In this tutorial, we'll configure Ambassador to use an external third 
@@ -199,6 +199,8 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
 }
 ```
 
-## More
+## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
-For more details see the [`External` filter](../../topics/using/filters) documentation.
+* Get started with authentication by [installing Edge Stack]
+
+* For more details see the [`External` filter](../../topics/using/filters) documentation.
