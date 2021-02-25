@@ -12,7 +12,7 @@ Preview URLs are all managed through Ambassador Cloud.  You must run `telepresen
 
 While preview URLs selectively proxy traffic to your laptop, you can also run an [intercept without creating a preview URL](#creating-an-intercept-without-a-preview-url), which will proxy all traffic to the service.
 
-> For a detailed walk though on creating intercepts, follow the [Telepresence tutorial](../../tutorial/).
+> For a detailed walk though on creating intercepts, follow the [Telepresence tutorial](../../quick-start/).
 
 
 ## Creating an Intercept
