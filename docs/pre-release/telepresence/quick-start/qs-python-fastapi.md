@@ -2,9 +2,9 @@ import Alert from '@material-ui/lab/Alert';
 import QSTabs from './qs-tabs'
 import QSCards from './qs-cards'
 
-# Telepresence Quick Start - Python using FastAPI
+# Telepresence Quick Start - Python (FastAPI)
 
-<Alert severity="info">While Telepresence works with any language, this guide uses a sample app written in Python using the FastAPI framework. We have versions in <a href="../qs-go/">Go</a>, <a href="../">Node</a>, and <a href="../qs-python/">Python using Flask</a> if you prefer.</Alert>
+<Alert severity="info">While Telepresence works with any language, this guide uses a sample app written in Python using the FastAPI framework. We have versions in <a href="../qs-python/">Python (Flask)</a>, <a href="../qs-go/">Go</a>, <a href="../qs-java/">Java</a>, and <a href="../">NodeJS</a> if you prefer.</Alert>
 
 ## Prerequisites
 You’ll need `kubectl` installed and configured to use a Kubernetes cluster, preferably an empty test cluster.  You must have RBAC permissions in the cluster to create and update deployments and services.
@@ -34,10 +34,12 @@ Telepresence connects your local workstation to a remote Kubernetes cluster.
   <Alert severity="info"> macOS users: If you receive an error when running Telepresence that the developer cannot be verified, open <b>System Preferences → Security & Privacy → General</b>. Click <b>Open Anyway</b> at the bottom to bypass the security block. Then retry the <code>telepresence connect</code> command.</Alert>
 
 2. Test that Telepresence is working properly by connecting to the Kubernetes API server:  
-`curl -ik https://kubernetes.default.svc.cluster.local`
+`curl -ik https://kubernetes.default`
+
+  <Alert severity="info"><b>Didn't work?</b> Make sure you are using Telepresence 2.0.3 or greater, check with <code>telepresence version</code> and upgrade <a href="../../howtos/upgrading/">here</a> if needed.</Alert>
 
   ```
-  $ curl -ik https://kubernetes.default.svc.cluster.local
+  $ curl -ik https://kubernetes.default
     
     HTTP/1.1 401 Unauthorized
     Cache-Control: no-cache, private
@@ -53,11 +55,11 @@ Telepresence connects your local workstation to a remote Kubernetes cluster.
 
 <Alert severity="success"><b>Congratulations! You’ve just accessed your remote Kubernetes API server, as if you were on the same network!</b> With Telepresence, you’re able to use any tool that you have locally to connect to any service in the cluster.</Alert>
 
-## 3. Install a sample FastAPI application
+## 3. Install a sample Python application
 
 Your local workstation may not have the compute or memory resources necessary to run all the services in a multi-service application. In this example, we’ll show you how Telepresence can give you a fast development loop, even in this situation.
 
-<Alert severity="info">While Telepresence works with any language, this guide uses a sample app written in Python using the FastAPI framework. We have versions in <a href="../qs-go/">Go</a>, <a href="../">Node</a>, and <a href="../qs-python/">Python with Flask</a> if you prefer.</Alert>
+<Alert severity="info">While Telepresence works with any language, this guide uses a sample app written in Python using the FastAPI framework. We have versions in <a href="../qs-python/">Python (Flask)</a>, <a href="../qs-go/">Go</a>, <a href="../qs-java/">Java</a>, and <a href="../">NodeJS</a> if you prefer.</Alert>
 
 1. Start by installing a sample application that consists of multiple services:  
 `kubectl apply -f https://raw.githubusercontent.com/datawire/edgey-corp-python-fastapi/main/k8s-config/edgey-corp-web-app-no-mapping.yaml`
@@ -84,7 +86,7 @@ Your local workstation may not have the compute or memory resources necessary to
     dataprocessingservice-5f6bfdcf7b-qvd27       1/1     Running   0          79s
   ```
 
-3. Once all the pods are in a `Running` state, go to the frontend service in your browser at [http://verylargejavaservice.default.svc.cluster.local:8080](http://verylargejavaservice.default.svc.cluster.local:8080).
+3. Once all the pods are in a `Running` state, go to the frontend service in your browser at [http://verylargejavaservice.default:8080](http://verylargejavaservice.default:8080).
 
 4. You should see the EdgyCorp WebApp with a <span style="color:green" class="bold">green</span> title and <span style="color:green" class="bold">green</span> pod in the diagram.
 
@@ -152,7 +154,7 @@ Next, we’ll create an intercept. An intercept is a rule that tells Telepresenc
 
 2. Go to the frontend service again in your browser. Since the service is now intercepted it can be reached directly by its service name at [http://verylargejavaservice:8080](http://verylargejavaservice:8080). You will now see the <span style="color:blue" class="bold">blue</span> elements in the app.
 
-<Alert severity="success"><b>The frontend’s request to DataProcessingService is being intercepted and rerouted to the Python FastAPI server on your laptop!</b></Alert>
+<Alert severity="success"><b>The frontend’s request to DataProcessingService is being intercepted and rerouted to the Python  server on your laptop!</b></Alert>
 
 ## 6. Make a code change
 We’ve now set up a local development environment for the DataProcessingService, and we’ve created an intercept that sends traffic in the cluster to our local environment. We can now combine these two concepts to show how we can quickly make and test changes.
