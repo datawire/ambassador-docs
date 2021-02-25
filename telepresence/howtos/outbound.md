@@ -8,7 +8,7 @@ While preview URLs are a powerful feature, there are other options to use Telepr
 
 ## Prerequistes
 
-It is assumed that you have the demo web app from the [tutorial](../../tutorial/) running in your cluster, but deployment names used below can be substituted for any other running deployment.
+It is assumed that you have the demo web app from the [tutorial](../../quick-start/) running in your cluster, but deployment names used below can be substituted for any other running deployment.
 
 ## Proxying Outbound Traffic
 
