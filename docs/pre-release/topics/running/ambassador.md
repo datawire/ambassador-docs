@@ -25,6 +25,8 @@ spec:
 | `admin_port` | The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this. | `admin_port: 8001` |
 | `ambassador_id` | Use only if you are using multiple ambassadors in the same cluster. See [this page](../running/#ambassador_id) for more information. | `ambassador_id: "<ambassador_id>"` |
 | `cluster_idle_timeout_ms` | Set the default upstream-connection idle timeout. Default is 1 hour. | `cluster_idle_timeout_ms: 30000` |
+| `cluster_max_connection_lifetime_ms` | Set the default maximum upstream-connection lifetime. Default is 0 which means unlimited. | `cluster_max_connection_lifetime_ms: 0` |
+| `cluster_request_timeout_ms` | Set the default end-to-end timeout for requests. Default is 3000ms.  | `cluster_request_timeout_ms: 3000` |
 | `default_label_domain  and default_labels` | Set a default domain and request labels to every request for use by rate limiting. For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups). | None |
 | `defaults` | The `defaults` element allows setting system-wide defaults that will be applied to various Ambassador resources. See [using defaults](../../using/defaults) for more information. | None |
 | `diagnostics.enabled` | Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  See below for more details. | None |
@@ -141,6 +143,14 @@ When using Linkerd, requests going to an upstream service need to include the `l
 ### Upstream Idle Timeout (`cluster_idle_timeout_ms`)
 
 If set, `cluster_idle_timeout_ms` specifies the timeout (in milliseconds) after which an idle connection upstream is closed. If `cluster_idle_timeout` is disabled by setting it to 0, you risk upstream connections never getting closed due to idling if you do not set [`idle_timeout_ms` on each `Mapping`](../../using/timeouts/).
+
+### Upstream Max Lifetime (`cluster_max_connection_lifetime_ms`)
+
+If set, `cluster_max_connection_lifetime_ms` specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. If `cluster_max_connection_lifetime_ms` is not set, then upstream connections may remain open for arbitrarily long. This can be set on a per-Mapping basis by setting [`cluster_max_connection_lifetime_ms` on the `Mapping`](../../using/timeouts/).
+
+### Request Timeout (`cluster_request_timeout_ms`)
+
+If set, `cluster_request_timeout_ms` specifies the default end-to-end timeout for the requests. This can be set on a per-Mapping basis by setting [`timeout_ms` on the `Mapping`](../../using/timeouts/).
 
 ### Defaults (`defaults`)
 
