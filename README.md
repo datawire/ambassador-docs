@@ -1,26 +1,22 @@
 
-# Ambassador documentation
+# Ambassador Documentation
 
-We've switched to GatsbyJS for generating the documentation, which gives us more control and flexibility over the layout.
+The documentation in this repository is built with [Gatsby](https://www.gatsbyjs.com/), which gives us control and flexibility over the layout.
 
-## Authoring documentation
+## Authoring Documentation
 
 If you're authoring the documentation, just edit the Markdown files. You can use GitHub to preview the Markdown.
 
-In both YAML and Markdown files, strings like `$variable$` are
-substituted with the values defined in `versions.yml`.
+Strings like `$variable$` are substituted with the values defined in `versions.yml`.
 
-The `doc-links.yml` file is the table-of-contents.
+The `doc-links.yml` file is the table of contents (TOC) that appears on the left sidebar.
 
-The `pro-pages.yml` file identifies which pages should be marked as
-"Pro" pages.
+The `aes-pages.yml` file identifies which pages should be marked as "Ambassador Edge Stack" pages.
 
-## Documentation infrastructure notes
+## Documentation Infrastructure Notes
 
-The docs canonically live at [ambassador-docs.git][], which is
-"vendored" in to several other repositories using `git subtree`.
-Repositories that do this are encouraged to include some kind of
-convenience tooling to make syncing the docs easier.  For example, the
+The docs in this repository can be "vendored" into other repositories using `git subtree`.
+Repositories that do this are encouraged to include some kind of convenience tooling to make syncing the docs easier.  For example, the
 following Makefile snippet:
 
 ```Makefile
@@ -31,17 +27,12 @@ push-docs: ## Publish ./docs to https://github.com/datawire/ambassador-docs
 .PHONY: pull-docs push-docs
 ```
 
-Pushing to the `master` branch of [ambassador-docs.git][] causes
-Travis CI to update [getambassador.io.git][]'s subtree of the docs,
-which will cause a website update.  That repository contains the
-Gatsby-based toolchain that compiles the docs in to a website. Still
-TODO is to provide a local/public version of this toolchain.
+The (private) [getambassador.io.git][] repository contains the Gatsby-based toolchain that compiles the docs into website at [https://www.getambassador.io/][].
 
-Repositories that include the docs as a subtree should get in the
-habit of doing a `git subtree pull` from their `master` branch
-periodically.  Documentation for code changes can then be committed
-right along-side the code changes.  When a release is cut, and you are
+Other repositories that include the docs as a subtree should get in the habit of doing a `git subtree pull` from their `master` branch
+periodically.  Documentation for code changes can then be committed right along-side the code changes.  When a release is cut, and you are
 ready to publicize it, simply do a `git subtree push`.
 
 [ambassador-docs.git]: https://github.com/datawire/ambassador-docs
 [getambassador.io.git]: https://github.com/datawire/getambassador.io
+[https://www.getambassador.io/]: https://www.getambassador.io/
