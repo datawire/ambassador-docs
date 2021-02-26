@@ -1,5 +1,5 @@
 - title: Home
-  link: /docs/pre-release/
+  link: /docs/
 
 - title: Products
   collapsable: false
@@ -275,10 +275,12 @@
           link: /docs/pre-release/telepresence/quick-start
         - title: How-to Guides
           items:
-            - title: Intercepts
+            - title: Intercept a Service
               link: /docs/pre-release/telepresence/howtos/intercepts
             - title: Collaborating with Preview URLs
               link: /docs/pre-release/telepresence/howtos/preview-urls
+            - title: Create a Demo Cluster
+              link: /docs/pre-release/telepresence/howtos/democluster
             - title: Outbound Sessions
               link: /docs/pre-release/telepresence/howtos/outbound
             - title: Upgrading and Previous Versions
