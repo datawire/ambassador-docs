@@ -275,7 +275,7 @@
           link: /docs/latest/telepresence/quick-start
         - title: How-to Guides
           items:
-            - title: Intercepts
+            - title: Intercept a Service
               link: /docs/latest/telepresence/howtos/intercepts
             - title: Collaborating with Preview URLs
               link: /docs/latest/telepresence/howtos/preview-urls
