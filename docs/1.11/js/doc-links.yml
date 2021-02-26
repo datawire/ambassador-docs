@@ -279,6 +279,8 @@
               link: /docs/latest/telepresence/howtos/intercepts
             - title: Collaborating with Preview URLs
               link: /docs/latest/telepresence/howtos/preview-urls
+            - title: Create a Demo Cluster
+              link: /docs/latest/telepresence/howtos/democluster
             - title: Outbound Sessions
               link: /docs/latest/telepresence/howtos/outbound
             - title: Upgrading and Previous Versions
