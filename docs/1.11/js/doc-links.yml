@@ -1,5 +1,5 @@
 - title: Home
-  link: /docs/latest/
+  link: /docs/
 
 - title: Products
   collapsable: false
@@ -275,10 +275,12 @@
           link: /docs/latest/telepresence/quick-start
         - title: How-to Guides
           items:
-            - title: Intercepts
+            - title: Intercept a Service
               link: /docs/latest/telepresence/howtos/intercepts
             - title: Collaborating with Preview URLs
               link: /docs/latest/telepresence/howtos/preview-urls
+            - title: Create a Demo Cluster
+              link: /docs/latest/telepresence/howtos/democluster
             - title: Outbound Sessions
               link: /docs/latest/telepresence/howtos/outbound
             - title: Upgrading and Previous Versions
@@ -290,7 +292,17 @@
             - title: Context Propagation
               link: /docs/latest/telepresence/concepts/context-prop
         - title: Technical Reference
-          link: /docs/latest/telepresence/reference/
+          items:
+            - title: Architecture
+              link: /docs/latest/telepresence/reference/architecture
+            - title: Client Reference
+              link: /docs/latest/telepresence/reference/client
+            - title: Environment Variables
+              link: /docs/latest/telepresence/reference/environment
+            - title: Volume Mounts
+              link: /docs/latest/telepresence/reference/volume
+            - title: DNS Resolution
+              link: /docs/latest/telepresence/reference/dns
         - title: FAQs
           link: /docs/latest/telepresence/faqs
         - title: Troubleshooting

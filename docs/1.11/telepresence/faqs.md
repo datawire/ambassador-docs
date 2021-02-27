@@ -29,27 +29,11 @@ If you need another protocol supported, please [drop us a line](../../../../feed
 
 ** When using Telepresence to intercept a pod, are the Kubernetes cluster environment variables proxied to my local machine?**
 
-Yes, you have three options for getting the environment variables from
-the cluster; when creating the intercept with `telepresence
-intercept`, you can:
-
-  1. Use the `--env-file=FILENAME` flag to write the environment
-     variables to a [Docker Compose
-     env-file](https://docs.docker.com/compose/env-file/).
-  2. Use the `--env-json=FILENAME` flag to write the environment
-     variables to a JSON blob file.
-  3. Append a command to `telepresence intercept`, separating it from
-     the usual arguments with `--` (`telepresence intercept
-     YOURSERVICE -- <COMMAND>`) to run a command with the environment
-     variables set.
+Yes, please see [this document](../reference/environment/) for more information.
 
 ** When using Telepresence to intercept a pod, are the associated pod volume mounts also proxied and shared with my local machine?**
 
-This feature is coming soon.
-
-For the moment you can `kubectl exec` into a container running on the pod in order to explore the volumes.
-
-If you are using Kubernetes 1.16+, you can also create an ephemeral container (an alpha feature) within a pod, and explore the volumes using this approach.
+Yes, please see [this doc on using volume mounts](../reference/volume/).
 
 ** When connected to a Kubernetes cluster via Telepresence, can I access cluster-based services via their DNS name?**
 
@@ -83,7 +67,7 @@ On Fedora, Telepresence also creates a virtual network device (a TUN network) fo
 
 ** What components get installed in the cluster when running Telepresence?**
 
-A single Traffic Manager service is deployed in the default namespace within your cluster, and this manages resilient intercepts and connections between your local machine and the cluster.
+A single Traffic Manager service is deployed in the `ambassador` namespace within your cluster, and this manages resilient intercepts and connections between your local machine and the cluster.
 
 A Traffic Agent container is injected per pod that is being intercepted. The first time a deployment is intercepted all pods associated with this deployment will be restarted with the Traffic Agent automatically injected.
 
