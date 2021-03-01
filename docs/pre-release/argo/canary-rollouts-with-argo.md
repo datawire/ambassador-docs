@@ -1,6 +1,6 @@
 # Argo Rollouts and Edge Stack Quick Start
 
-This tutorial will walk you through the process of configuring Argo Rollouts to work with Edge Stack to facilitate canary releases. This will enable users to safely [rollout new versions](https://blog.getambassador.io/deploying-argo-rollouts-for-canary-releases-on-kubernetes-f5910ed1fd61) of services on Kubernetes.
+This tutorial will walk you through the process of configuring Argo Rollouts to work with Edge Stack to facilitate canary releases. This will enable users to safely [rollout new versions](https://blog.getambassador.io/deploying-argo-rollouts-for-canary-releases-on-kubernetes-f5910ed1fd61) of services on Kubernetes. 
 
 ## 1. Install and configure Edge Stack
 
@@ -32,7 +32,7 @@ kubectl create namespace argo-rollouts
 kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/datawire/argo-rollouts/ambassador/deploy/manifests/install.yaml
 ```
 
-Finally, install the `kubectl` plugin, which will let you manage and visualize rollouts from the command line.
+Finally, install the Argo `kubectl` plugin, which will let you manage and visualize rollouts from the command line.
 
 Mac OS X:
 
@@ -55,7 +55,7 @@ kubectl argo rollouts version
 
 ## 3. Create the Kubernetes Services
 
-We'll create two Kubernetes services, named `echo-stable` and `echo-canary`:
+We'll create two Kubernetes services, named `echo-stable` and `echo-canary`. Save this configuration to the file `echo-service.yaml`.
 
 ```
 apiVersion: v1
@@ -91,7 +91,7 @@ spec:
     app: echo 
 ```
 
-We'll also create an Edge Stack route to the services:
+We'll also create an Edge Stack route to the services. Save the following configuration to a file called `echo-mapping.yaml`.
 
 ```
 apiVersion: getambassador.io/v2
@@ -105,11 +105,18 @@ spec:
   resolver: endpoint
 ```
 
+Apply both of these configurations to the Kubernetes cluster:
+
+```
+kubectl apply -f echo-service.yaml
+kubectl apply -f echo-mapping.yaml
+```
+
 ## 4. Deploy the Echo Service
 
-Argo Rollouts is orchestrated via the `Rollouts` resource. A `Rollout` resource is a superset of the standard Kubernetes `deployment` resource, and adds the ability to manage the process by which your service is deployed.
+Argo Rollouts is orchestrated via the `Rollouts` resource. A `Rollout` resource is an alternative of the standard Kubernetes `deployment` resource, and adds the ability to manage the process by which your service is deployed.
 
-Create a `Rollout` resource and save it to a file called `rollout.yaml`:
+Create a `Rollout` resource and save it to a file called `rollout.yaml`. Note the `trafficRouting` attribute, which tells Argo to use Edge Stack for routing.
 
 ```
 apiVersion: argoproj.io/v1alpha1
@@ -150,7 +157,7 @@ spec:
       - pause: {duration: 10}
 ```
 
-Apply the rollout to your cluster `kubectl apply -f rollout.yaml`. Note that no canary rollout will occur, as this is the first version of the service being deployed.
+Apply the rollout to your cluster `kubectl apply -f rollout.yaml`. Note that no canary rollout will occur, as this is the first version of the service being deployed. 
 
 ## 5. Test the service
 
