@@ -22,6 +22,7 @@ Use the following variables for the environment of your Ambassador container:
 | Core                              | `AMBASSADOR_LEGACY_MODE`                    | `false`                                             | Boolean; [Go `strconv.ParseBool`][]                            |
 | Core                              | `AMBASSADOR_FAST_RECONFIGURE`               | `false`                                             | EXPERIMENTAL -- Boolean; `true`=true, any other value=false                   |
 | Core                              | `AMBASSADOR_UPDATE_MAPPING_STATUS`          | `false`                                             | Boolean; `true`=true, any other value=false                                   |
+| Core                              | `AMBASSADOR_DISABLE_SNAPSHOT_SERVER`        | `false`                                             | Boolean; non-empty=true, empty=false                                          |
 | Edge Stack                        | `AES_LOG_LEVEL`                             | `info`                                              | Log level (see below)                                                         |
 | Edge Stack                        | `AES_RATELIMIT_PREVIEW`                     | `false`                                             | Boolean; [Go `strconv.ParseBool`][]                                           |
 | Primary Redis (L4)                | `REDIS_SOCKET_TYPE`                         | `tcp`                                               | Go network such as `tcp` or `unix`; see [Go `net.Dial`][]                     |
@@ -219,15 +220,16 @@ mode. Set `AES_RATELIMIT_PREVIEW` to `true` to access these features.
 
 The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traffic automatically via TCP:
 
-| Port | Process | Function                                                |
-|------|---------|---------------------------------------------------------|
-| 8001 | envoy   | Internal stats, logging, etc.; not exposed outside pod  |
-| 8002 | watt    | Internal watt snapshot access; not exposed outside pod  |
-| 8003 | ambex   | Internal ambex snapshot access; not exposed outside pod |
-| 8004 | diagd   | Internal `diagd` access when `AMBASSADOR_FAST_RECONFIGURE` is set; not exposed outside pod |
-| 8080 | envoy   | Default HTTP service port                               |
-| 8443 | envoy   | Default HTTPS service port                              |
-| 8877 | diagd   | Direct access to diagnostics UI; provided by `busyambassador entrypoint` when `AMBASSADOR_FAST_RECONFIGURE` is set |
+| Port | Process  | Function                                                |
+|------|----------|---------------------------------------------------------|
+| 8001 | envoy    | Internal stats, logging, etc.; not exposed outside pod  |
+| 8002 | watt     | Internal watt snapshot access; not exposed outside pod  |
+| 8003 | ambex    | Internal ambex snapshot access; not exposed outside pod |
+| 8004 | diagd    | Internal `diagd` access when `AMBASSADOR_FAST_RECONFIGURE` is set; not exposed outside pod |
+| 8005 | snapshot | Exposes a scrubbed ambassador snapshot outside of the pod |
+| 8080 | envoy    | Default HTTP service port                               |
+| 8443 | envoy    | Default HTTPS service port                              |
+| 8877 | diagd    | Direct access to diagnostics UI; provided by `busyambassador entrypoint` when `AMBASSADOR_FAST_RECONFIGURE` is set |
 
 [^1]: This may change in a future release to reflect the Pods's
       namespace if deployed to a namespace other than `default`.
