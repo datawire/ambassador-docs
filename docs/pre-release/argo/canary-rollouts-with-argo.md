@@ -25,11 +25,11 @@ If you're using Google Kubernetes Engine, grant your account the ability to crea
 kubectl create clusterrolebinding YOURNAME-cluster-admin-binding --clusterrole=cluster-admin --user=YOUREMAIL@gmail.com
 ```
 
-Now, install the Argo Rollouts controller in your cluster. Note that Argo must be installed in the `argo-rollouts` namespace.
+Now, install the Argo Rollouts controller in your cluster that [supports Edge Stack](https://github.com/datawire/argo-rollouts/). Note that Argo must be installed in the `argo-rollouts` namespace.
 
 ```
 kubectl create namespace argo-rollouts
-kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/datawire/argo-rollouts/ambassador/deploy/manifests/install.yaml
+kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/datawire/argo-rollouts/ambassador/release/manifests/install.yaml
 ```
 
 Finally, install the Argo `kubectl` plugin, which will let you manage and visualize rollouts from the command line.
