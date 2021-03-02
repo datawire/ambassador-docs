@@ -38,6 +38,17 @@ for the same service.
 > will not try to obtain documentation unless a `docs` attribute is specified.
 > Users should set `docs.path` to `/.ambassador-internal/openapi-docs` in their `Mapping`s
 > in order to keep the previous behavior.
+>
+>
+> The `docs` field of Mappings was not introduced until `Ambassador Edge Stack` version 1.9 because of the behavior listed above. 
+> Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of Ambassador.
+
+```yaml
+ `kubectl apply -f https://getambassador.io/yaml/aes-crds.yaml`
+```
+
+> If you are on an earlier version of Ambassador, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`
+ 
 
 Example:
 
@@ -194,6 +205,13 @@ spec:
       - aws-demo            ## matches all the services in the `aws-demo` namespace
                             ## (note that Mappings must contain a `docs` attribute)
 ```
+
+> Note:
+>
+> The free and unlicensed versions of `Ambassador Edge Stack` only support documentation for five services in the `DevPortal`.
+> When you start publishing documentation for more services to your `DevPortal`, keep in mind that you will not see more than 5 OpenAPI documents even if you have more than 5 services properly configured to report their OpenAPI specifications.
+> For more information on extending the number of services in your `DevPortal` please contact sales via our [pricing information page](https://www.getambassador.io/editions/).
+
 
 #### <a href="#styling"></a>Styling the `DevPortal`
 
