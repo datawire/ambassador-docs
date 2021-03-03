@@ -1,3 +1,10 @@
+---
+description: "Use Edge Stack and Argo to facilitate canary releases in your Kubernetes cluster."
+---
+
+import Alert from '@material-ui/lab/Alert';
+import Tabs from './tabs'
+
 # Argo Rollouts and Edge Stack Quick Start
 
 This tutorial will walk you through the process of configuring Argo Rollouts to work with Edge Stack to facilitate canary releases. This will enable users to safely [rollout new versions](https://blog.getambassador.io/deploying-argo-rollouts-for-canary-releases-on-kubernetes-f5910ed1fd61) of services on Kubernetes. 
@@ -8,14 +15,15 @@ You'll need to first install Edge Stack in your cluster. Follow the [Edge Stack 
 
 By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use endpoint routing. Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
 
-```
+```yaml
 apiVersion: getambassador.io/v2
 kind: KubernetesEndpointResolver
 metadata:
   name: endpoint
 ```
 
-Apply this configuration to your cluster: `kubectl apply -f resolver.yaml`.
+Apply this configuration to your cluster:  
+`kubectl apply -f resolver.yaml`
 
 ## 2. Install and configure Argo Rollouts
 
@@ -34,18 +42,7 @@ kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/datawire/arg
 
 Finally, install the Argo `kubectl` plugin, which will let you manage and visualize rollouts from the command line.
 
-Mac OS X:
-
-```
-brew install argoproj/tap/kubectl-argo-rollouts
-```
-
-Linux:
-
-```
-sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts
-sudo chmod a+x /usr/local/bin/kubectl-argo-rollouts
-```
+<Tabs/>
 
 Verify correct installation:
 
@@ -97,10 +94,10 @@ We'll also create an Edge Stack route to the services. Save the following config
 apiVersion: getambassador.io/v2
 kind:  Mapping
 metadata:
-  name:  rollouts-demo
+  name:  echo
 spec:
-  prefix: /demo
-  rewrite: /demo
+  prefix: /echo
+  rewrite: /echo
   service: echo-stable:80
   resolver: endpoint
 ```
@@ -114,9 +111,9 @@ kubectl apply -f echo-mapping.yaml
 
 ## 4. Deploy the Echo Service
 
-Argo Rollouts is orchestrated via the `Rollouts` resource. A `Rollout` resource is an alternative of the standard Kubernetes `deployment` resource, and adds the ability to manage the process by which your service is deployed.
+Argo Rollouts is orchestrated via the Rollouts resource. A Rollout resource is an alternative to the standard Kubernetes Deployment resource, and adds the ability to manage the process by which your service is deployed.
 
-Create a `Rollout` resource and save it to a file called `rollout.yaml`. Note the `trafficRouting` attribute, which tells Argo to use Edge Stack for routing.
+Create a Rollout resource and save it to a file called `rollout.yaml`. Note the `trafficRouting` attribute, which tells Argo to use Edge Stack for routing.
 
 ```
 apiVersion: argoproj.io/v1alpha1
@@ -168,14 +165,18 @@ We'll now test that this rollout works as expected.  Open a new terminal window.
 export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
 ```
 
-Send a request to the `echo` service:
+Send a request to the `echo` service:  
+`curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/echo/"`
 
 ```
-curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/echo/"
-VERSION 1
+$ curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/echo/"
+  
+  VERSION 1
 ```
 
-Congratulations, you've deployed your first Rollout service successfully!
+<Alert severity="success">
+    <strong>Congratulations</strong>, you've deployed your first Rollout service successfully!
+</Alert>
 
 ## 6. Rollout a new version 
 
@@ -266,6 +267,8 @@ In your other terminal window, you can verify that the canary is progressing app
 while true; do curl -k https://$AMBASSAOR_LB_ENDPOINT/echo/; sleep 0.2; done
 ```
 
-will display a running list of responses from the service that will gradually transition from VERSION 1 strings to VERSION 2 strings.
+This will display a running list of responses from the service that will gradually transition from VERSION 1 strings to VERSION 2 strings.
 
-Congratulations! You've successfully integrated Argo Rollouts with Edge Stack.
+<Alert severity="success">
+    <strong>Victory!</strong> You've successfully integrated Argo Rollouts with Edge Stack!
+</Alert>
