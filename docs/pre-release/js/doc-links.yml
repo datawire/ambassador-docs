@@ -308,7 +308,7 @@
         - title: Troubleshooting
           link: /docs/pre-release/telepresence/troubleshooting
     - title: Argo
-      link: /docs/pre-release/argo/canary-rollouts-with-argo
+      link: /docs/pre-release/argo/
     - title: Developer Portal
       link: /docs/pre-release/topics/using/dev-portal/
     - title: Service Preview
