@@ -263,7 +263,7 @@ NAME                                      KIND        STATUS        AGE    INFO
 In your other terminal window, you can verify that the canary is progressing appropriately by sending requests in a loop:
 
 ```
-while true; do curl -k https://$AMBASSAOR_LB_ENDPOINT/echo/; sleep 0.2; done
+while true; do curl -k https://$AMBASSADOR_LB_ENDPOINT/echo/; sleep 0.2; done
 ```
 
 This will display a running list of responses from the service that will gradually transition from VERSION 1 strings to VERSION 2 strings.
