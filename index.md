@@ -145,7 +145,7 @@ spec:
       trafficRouting:
         ambassador:
           mappings:
-            - echo
+            - rollouts-demo
       steps:
       - setWeight: 30
       - pause: {duration: 30s}
@@ -169,9 +169,8 @@ Send a request to the `echo` service:
 `curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/echo/"`
 
 ```
-$ curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/echo/"
-  
-  VERSION 1
+curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/demo/"
+VERSION 1
 ```
 
 <Alert severity="success">
@@ -212,7 +211,7 @@ spec:
       trafficRouting:
         ambassador:
           mappings:
-            - echo
+            - rollouts-demo
       steps:
       - setWeight: 30
       - pause: {duration: 30s}
@@ -264,7 +263,7 @@ NAME                                      KIND        STATUS        AGE    INFO
 In your other terminal window, you can verify that the canary is progressing appropriately by sending requests in a loop:
 
 ```
-while true; do curl -k https://$AMBASSAOR_LB_ENDPOINT/echo/; sleep 0.2; done
+while true; do curl -k https://$AMBASSAOR_LB_ENDPOINT/demo/; sleep 0.2; done
 ```
 
 This will display a running list of responses from the service that will gradually transition from VERSION 1 strings to VERSION 2 strings.
