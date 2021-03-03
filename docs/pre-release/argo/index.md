@@ -166,12 +166,12 @@ export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador -o "go-
 ```
 
 Send a request to the `echo` service:  
-`curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/echo/"`
 
 ```
 curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/demo/"
-VERSION 1
 ```
+
+You should get a response of "VERSION 1".
 
 <Alert severity="success">
     <strong>Congratulations</strong>, you've deployed your first Rollout service successfully!
