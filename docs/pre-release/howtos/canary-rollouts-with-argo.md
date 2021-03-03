@@ -147,7 +147,8 @@ spec:
       canaryService: echo-canary
       trafficRouting:
         ambassador:
-          mapping: echo
+          mappings:
+            - echo
       steps:
       - setWeight: 30
       - pause: {duration: 30s}
@@ -209,7 +210,8 @@ spec:
       canaryService: echo-canary
       trafficRouting:
         ambassador:
-          mapping: echo
+          mappings:
+            - echo
       steps:
       - setWeight: 30
       - pause: {duration: 30s}
