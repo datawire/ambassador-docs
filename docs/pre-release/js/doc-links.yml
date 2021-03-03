@@ -56,8 +56,6 @@
                   link: /docs/pre-release/howtos/sso/uaa
                 - title: Using the OAuth2 filter
                   link: /docs/pre-release/howtos/oauth-oidc-auth
-            - title: Canary Releases with Argo Rollouts
-              link: /docs/pre-release/howtos/canary-rollouts-with-argo
             - title: Custom Filters
               link: /docs/pre-release/howtos/filter-dev-guide
             - title: Deploying to Kubernetes from GitHub
@@ -309,6 +307,8 @@
           link: /docs/pre-release/telepresence/faqs
         - title: Troubleshooting
           link: /docs/pre-release/telepresence/troubleshooting
+    - title: Argo Rollouts
+      link: /docs/pre-release/argo/canary-rollouts-with-argo
     - title: Developer Portal
       link: /docs/pre-release/topics/using/dev-portal/
     - title: Service Preview
