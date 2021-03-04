@@ -6,7 +6,7 @@ import Alert from '@material-ui/lab/Alert';
 <h3>Contents</h3>
 
 * [About Annotations](#about-annotations)  
-* [Metadata Keys](#metadata-keys)  
+* [Supported Annotations](#supported-annotations)  
 * [Annotate via `kubectl`](#annotate-via-kubectl)  
 * [Annotate via YAML](#annotate-via-yaml)  
 * [Example YAML](#annotate-via-kubectl)
@@ -17,15 +17,15 @@ import Alert from '@material-ui/lab/Alert';
 
 [Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) are used to attach metadata to your Kubernetes objects.  Typically they are used to provide contextual information around the object for teammates or information used by third-party tools.  Service Catalog combines these uses to build a readily available catalog of your services, accessible by your teammates via [Ambassador Cloud](https://app.getambassador.io/cloud/catalog).
 
-## Metadata Keys
+## Supported Annotations
 
-Service Catalog annotation keys all start with [`a8r.io`](http://a8r.io) followed by the specific field. These are the metadata keys that Service Catalog supports:
+Service Catalog's supported annotation keys all start with [`a8r.io`](http://a8r.io) followed by the specific field. These are the metadata keys that Service Catalog supports:
 
 | Key | Description | Example |
 | --- | --- | --- |
 | `a8r.io/description` | Unstructured text description of the service for humans. | `Edge Stack, responsible for handling all ingress traffic` |
 | `a8r.io/owner` | GitHub or equivalent username (prefix with @), email address, or unstructured owner description. | `@edgey` |
-| `a8r.io/chat` | Slack channel, or link other to external chat system. | `#ambassador` |
+| `a8r.io/chat` | Slack channel, or link to other external chat system. | `#ambassador` |
 | `a8r.io/bugs` | Link to external bug tracker. | `https://github.com/datawire/ambassador/issues` |
 | `a8r.io/logs` | Link to external log viewer. | `https://kibana.getambassador.io` |
 | `a8r.io/documentation` | Link to external project documentation. | `https://www.getambassador.io/docs/latest/` |
