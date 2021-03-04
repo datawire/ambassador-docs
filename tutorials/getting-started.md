@@ -32,7 +32,7 @@ Quickly install Edge Stack into your cluster.
 
 Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define Edge Stack’s desired state. The workflow you are going to build uses a simple demo app and the Mapping CRD, which is the core resource that you will use with Edge Stack. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
 
-First apply the YAML for the “Quote of the Moment" service.
+First, apply the YAML for the “Quote of the Moment" service.
 
 ```
 kubectl apply -f https://www.getambassador.io/yaml/quickstart/qotm.yaml
@@ -96,8 +96,18 @@ Follow the instructions that match your Edge Stack installation method below to 
 
 When the installation completes, refresh the Ambassador Cloud page.  All of your services running in the cluster are now listed in Service Catalog!
 
-<Alert severity="success"><b>Fantastic!</b> You can now see all your services in your Ambassador Cloud account! Metadata on your services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="../../service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your services.</Alert>
+<Alert severity="success"><b>Fantastic!</b> You can now see all your services in your Ambassador Cloud account! Metadata on your services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="../../cloud/service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your services.</Alert>
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
-(links to other common Edge Stack docs)
+Explore some of the popular tutorials on Edge Stack:
+
+* [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from 
+the edge of your cluster to a Kubernetes service
+* [Host resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
+* [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads
+
+The Ambassador Edge Stack has a comprehensive range of [features](/features/) to
+support the requirements of any edge microservice.
+
+To learn more about how Edge Stack works, read the [Ambassador Story](../../about/why-ambassador).

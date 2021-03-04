@@ -52,18 +52,18 @@ Annotations added to a service via any method will persist after a Kubernetes cl
 
 Annotations added to a Kubernetes Service via YAML (or associated config template) will be reapplied upon each new deployment. Any annotations added via `kubectl annotate` will be overwritten by the annotations in the YAML config being applied. This includes the removal of annotations if they are not specified in the new YAML config.
 
-**Why can’t I connect my cluster and services to Ambassador Cloud service catalog?**
+**Why can’t I connect my cluster and services to Ambassador Cloud?**
 
 TBD
 
-**Why have my cluster/services disappeared from the service catalog?**
+**Why have my cluster/services disappeared from the Service Catalog?**
 
 TBD
 
-**What components get installed into my cluster when connecting to the service catalog?**
+**What components get installed into my cluster when connecting to the Service Catalog?**
 
 TBD
 
-**How do I share my feedback on Ambassador Cloud and the service catalog?**
+**How do I share my feedback on Ambassador Cloud and the sService Catalog?**
 
 Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../../feedback), or you can join our [Slack channel](http://d6e.co/slack) to share your thoughts.
