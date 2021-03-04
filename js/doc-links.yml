@@ -305,6 +305,8 @@
           link: /docs/pre-release/telepresence/faqs
         - title: Troubleshooting
           link: /docs/pre-release/telepresence/troubleshooting
+    - title: Argo
+      link: /docs/pre-release/argo/
     - title: Cloud
       items:
         - title: Service Catalog
