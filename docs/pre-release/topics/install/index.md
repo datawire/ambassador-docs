@@ -41,7 +41,7 @@ import './index.less'
 and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 	
 allows the Ambassador Edge Stack to automatically provision TLS and HTTPS	
 for a domain name, so you can get started right away.	
-<span id="index-installLinux"></span><br/
+<span id="index-installLinux"></span><br/>
 
 4. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
@@ -60,7 +60,7 @@ for a domain name, so you can get started right away.
 and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 	
 allows the Ambassador Edge Stack to automatically provision TLS and HTTPS	
 for a domain name, so you can get started right away.	
-<p id="index-installWindows"></p><br/
+<p id="index-installWindows"></p><br/>
 
 4. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
