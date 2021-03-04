@@ -8,8 +8,6 @@
       items:
         - title: Quick Start
           link: /docs/pre-release/tutorials/getting-started
-        - title: Tutorial
-          link: /docs/pre-release/tutorials/quickstart-demo
         - title: Install Edge Stack
           link: /docs/pre-release/topics/install/
           items:
@@ -307,8 +305,24 @@
           link: /docs/pre-release/telepresence/faqs
         - title: Troubleshooting
           link: /docs/pre-release/telepresence/troubleshooting
-    - title: Developer Portal
-      link: /docs/pre-release/topics/using/dev-portal/
+    - title: Cloud
+      items:
+        - title: Service Catalog
+          items:
+            - title: Quick Start
+              link: /docs/pre-release/cloud/service-catalog/quick-start/
+            - title: How Do I...
+              items:
+                - title: Annotate a Service
+                  link: /docs/pre-release/cloud/service-catalog/howtos/annotate/
+            - title: Technical Reference
+              items:
+                - title: Annotations
+                  link: /docs/pre-release/cloud/service-catalog/reference/annotations/
+            - title: FAQs
+              link: /docs/pre-release/cloud/service-catalog/faqs/
+        - title: Developer Portal
+          link: /docs/pre-release/topics/using/dev-portal/
     - title: Service Preview
       items:
         - title: Quick Start
@@ -324,6 +338,6 @@
             - title: Using Edge Control in CI
               link: /docs/pre-release/topics/using/edgectl/edge-control-in-ci
         - title: Technical Reference
-          link: /docs/pre-release/topics/using/edgectl/service-preview-reference
-
+          link: /docs/pre-release/topics/using/edgectl/service-preview-reference    
+    
 
