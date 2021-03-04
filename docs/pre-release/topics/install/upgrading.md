@@ -34,7 +34,7 @@ ambassador         1/1     1            1           ...
 If none of the commands above return resources, you probably have an old installation and you should follow
 the instructions for [upgrading to Ambassador Edge Stack](../upgrade-to-edge-stack/).
 
-## Upgrading an installation with manifests
+## Upgrading an Installation with Manifests
 
 If you're using the YAML files supplied by Datawire, you'll be able to upgrade simply by repeating
 the following `kubectl apply` command:
@@ -48,3 +48,7 @@ This will trigger a rolling upgrade of Ambassador Edge Stack.
 
 If you're using your own YAML, check the Datawire YAML to be sure of other changes, but at minimum,
 you'll need to change the pulled `image` for the Ambassador Edge Stack container and redeploy.
+
+## Set Up Service Catalog
+
+Upgrading to version 1.12 or higher adds support for Service Catalog. [Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.

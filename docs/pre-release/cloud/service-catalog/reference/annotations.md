@@ -19,7 +19,7 @@ import Alert from '@material-ui/lab/Alert';
 
 ## Metadata Keys
 
-Service Catalog annotation keys all start with the [`a8r.io`](http://a8r.io) domain followed by the specific field. These are the metadata keys that Service Catalog supports:
+Service Catalog annotation keys all start with [`a8r.io`](http://a8r.io) followed by the specific field. These are the metadata keys that Service Catalog supports:
 
 | Key | Description | Example |
 | --- | --- | --- |
@@ -39,16 +39,22 @@ Service Catalog annotation keys all start with the [`a8r.io`](http://a8r.io) dom
 
 ## Annotate via `kubectl`
 
-<Alert severity="info">Annotations made via <code>kubectl</code> will not be retained if the service YAML is reapplied. <a href="../../../topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops">Best practice</a> is to modify and track annotations via YAML under version control.</Alert>
+<Alert severity="info">Annotations made via <code>kubectl</code> will not be retained if the service is redeployed via a CI/CD pipeline or other means. <a href="../../../../topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops">GitOps best practice</a> is to modify and track annotations via YAML under version control.</Alert>
 
 ```
-kubectl annotate svc your_service_name a8r.io/owner="your_github_username"
+kubectl annotate svc <service name> a8r.io/owner="<your name>"
 ```
 
-If an annotation already exists for that key you will get an error, add the `--overwrite` flag:
+If an annotation already exists for that key, you will get an error. You must add the `--overwrite` flag:
 
 ```
-kubectl annotate --overwrite svc your_service_name a8r.io/owner="your_github_username"
+kubectl annotate --overwrite svc <service name> a8r.io/owner="<your name>"
+```
+
+If your service is in a namespace other than `default`, you must specify it with the `--namespace` flag:
+
+```
+kubectl annotate svc <service name> --namespace <namespace> a8r.io/owner="<your name>"
 ```
 
 ## Annotate via YAML
@@ -59,7 +65,7 @@ kind: Service
 metadata:
   Name: your_service_name
   annotations:
-    a8r.io/repository: "https://github.com/your_org/your_repo"
+    a8r.io/repository: "https://github.com/<your org>/<your repo>"
 ```
 
 ## Example YAML

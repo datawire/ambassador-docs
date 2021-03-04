@@ -30,9 +30,9 @@ Quickly install Edge Stack into your cluster.
 
 ## 2. Routing Traffic from the Edge
 
-Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define Edge Stack’s desired state. The workflow you are going to build uses a sample deployment and the Mapping CRD, which is the core resource that you will use with Edge Stack to manage your edge. It enables you to route requests by host and URL path from the edge of your cluster to Kubernetes services.
+Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define Edge Stack’s desired state. The workflow you are going to build uses a simple demo app and the Mapping CRD, which is the core resource that you will use with Edge Stack. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
 
-First apply a Service and Deployment for a simple “Quote of the moment" service.
+First apply the YAML for the “Quote of the Moment" service.
 
 ```
 kubectl apply -f https://www.getambassador.io/yaml/quickstart/qotm.yaml
@@ -40,7 +40,7 @@ kubectl apply -f https://www.getambassador.io/yaml/quickstart/qotm.yaml
 
 <hr style="height:0px; visibility:hidden;" />
 
-<Alert severity="info">The Service and Deployment are created in the Ambassador namespace.  You can use <code>kubectl get services,deployments quote --namespace ambassador</code> to see thir status.</Alert>
+<Alert severity="info">The Service and Deployment are created in the Ambassador namespace.  You can use <code>kubectl get services,deployments quote --namespace ambassador</code> to see their status.</Alert>
 
 Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells Edge Stack to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
@@ -95,10 +95,6 @@ Follow the instructions that match your Edge Stack installation method below to 
 <GSTabs2/>
 
 When the installation completes, refresh the Ambassador Cloud page.  All of your services running in the cluster are now listed in Service Catalog!
-
-If you installed Edge Stack and the `quote` service in an empty cluster, you will see the following list of services in your catalog:
-
-(screenshot)
 
 <Alert severity="success"><b>Fantastic!</b> You can now see all your services in your Ambassador Cloud account! Metadata on your services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="../../service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your services.</Alert>
 
