@@ -126,7 +126,11 @@ requestPolicy:
     additionalPort: insecure-port
 ```
 
-> **WARNING:** `requestPolicy` is applied globally, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config.
+> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
+> 
+> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
+> 
+> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
 
 The `insecure-action` can be one of:
 
@@ -172,17 +176,27 @@ It's important to realize that Envoy manages the `X-Forwarded-Proto` header such
 In the definitions below, "L4 LB" refers to a layer 4 load balancer, while "L7
 LB" refers to a layer 7 load balancer.
 
-* [HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext)
-* [HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080](#https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080)
-* [HTTP-only](#http-only)
-* [L4 LB, HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext](#l4-lb-https-only-tls-terminated-at-ambassador-not-redirecting-cleartext)
-* [L4 LB, HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080](#l4-lb-https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080)
-* [L4 LB, HTTP-only](#l4-lb-http-only)
-* [L4 LB, TLS terminated at LB, LB speaks cleartext to Ambassador](#l4-lb-tls-terminated-at-lb-lb-speaks-cleartext-to-ambassador)
-* [L4 LB, TLS terminated at LB, LB speaks TLS to Ambassador](#l4-lb-tls-terminated-at-lb-lb-speaks-tls-to-ambassador)
-* [L4 split LB, TLS terminated at Ambassador](#l4-split-lb-tls-terminated-at-ambassador)
-* [L4 split LB, TLS terminated at LB](#l4-split-lb-tls-terminated-at-lb)
-* [L7 LB](#l7-lb)
+- [The `Host` CRD, ACME Support, and External Load Balancer Configuration](#the-host-crd-acme-support-and-external-load-balancer-configuration)
+  - [ACME and TLS Settings](#acme-and-tls-settings)
+    - [ACME Support](#acme-support)
+    - [TLS Configuration](#tls-configuration)
+  - [Secure and Insecure Requests](#secure-and-insecure-requests)
+  - [Load Balancers, the `Host` Resource, and `X-Forwarded-Proto`](#load-balancers-the-host-resource-and-x-forwarded-proto)
+  - [Use Cases and Examples](#use-cases-and-examples)
+    - [HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext)
+    - [HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080](#https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080)
+    - [HTTP-only](#http-only)
+    - [L4 LB, HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext](#l4-lb-https-only-tls-terminated-at-ambassador-not-redirecting-cleartext)
+    - [L4 LB, HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080](#l4-lb-https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080)
+    - [L4 LB, HTTP-only](#l4-lb-http-only)
+    - [L4 LB, TLS terminated at LB, LB speaks cleartext to Ambassador](#l4-lb-tls-terminated-at-lb-lb-speaks-cleartext-to-ambassador)
+    - [L4 LB, TLS terminated at LB, LB speaks TLS to Ambassador](#l4-lb-tls-terminated-at-lb-lb-speaks-tls-to-ambassador)
+    - [L4 split LB, TLS terminated at Ambassador](#l4-split-lb-tls-terminated-at-ambassador)
+    - [L4 split LB, TLS terminated at LB](#l4-split-lb-tls-terminated-at-lb)
+    - [L7 LB](#l7-lb)
+  - [Service Preview URLs](#service-preview-urls)
+  - [`Host` Specification](#host-specification)
+    - [CRD Specification](#crd-specification)
 
 ### HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext
 
