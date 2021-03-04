@@ -18,7 +18,7 @@ Take a note of the service name and run this command, filling in the service nam
 kubectl annotate svc <service name> a8r.io/owner="<your name>"
 ```
 
-Refresh your browser and you should see the owner name updated.
+Refresh your browser and you should see the owner field updated.
 
 <Alert severity="info">It may take up to 30 seconds for Service Catalog to sync with your cluster and your annotation to appear. If there is no owner listed, wait a moment then refresh again.</Alert>
 
