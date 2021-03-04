@@ -2,7 +2,8 @@ import './index.less'
 
 # Installing the Ambassador Edge Stack
 <div id="index-installContainer">
-<span id="index-installContainerText">The Ambassador Edge Stack can be installed many different ways.</span><span>&nbsp;&nbsp;</span>
+<span id="index-installContainerText">The Ambassador Edge Stack can be installed many different ways.</span>
+<span>&nbsp;&nbsp;</span>
 <div class="index-dropdown">
   <button class="index-dropBtn">Jump to Installation Type</button>
   <div class="index-dropdownContent">
@@ -40,7 +41,9 @@ import './index.less'
 and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 	
 allows the Ambassador Edge Stack to automatically provision TLS and HTTPS	
 for a domain name, so you can get started right away.	
-<span id="index-installLinux"></span><br/>	
+<span id="index-installLinux"></span><br/
+
+4. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
 ## <img class="os-logo" src="../../images/linux.png"/> Install from Linux 	
 
@@ -57,7 +60,9 @@ for a domain name, so you can get started right away.
 and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 	
 allows the Ambassador Edge Stack to automatically provision TLS and HTTPS	
 for a domain name, so you can get started right away.	
-<p id="index-installWindows"></p><br/>	
+<p id="index-installWindows"></p><br/
+
+4. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
 ## <img class="os-logo" src="../../images/windows.png"/> Install from Windows 	
 
@@ -67,7 +72,8 @@ for a domain name, so you can get started right away.
 and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 	
 allows the Ambassador Edge Stack to automatically provision TLS and HTTPS	
 for a domain name, so you can get started right away.	
-<p id="index-installKubernetesYaml"></p><br/>	
+<p id="index-installKubernetesYaml"></p><br/>
+4. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
 ## <img class="os-logo" src="../../images/kubernetes.png"/> Install via Kubernetes YAML 
 Kubernetes via YAML is the most common approach to install Ambassador Edge Stack,

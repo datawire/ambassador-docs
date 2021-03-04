@@ -44,21 +44,23 @@ deploy it with either version of the tool.
 4. Finish the installation by running the following command: `edgectl install` (optional) \*
 5. Provide an email address when prompted to receive notices if your domain or TLS certificate is about to expire. (optional)
 
-Your terminal should print something similar to the following:
-```
-   $ edgectl install
-   -> Installing the Ambassador Edge Stack 1.0.
-   -> Existing Ambassador Edge Stack installation detected.
-   -> Automatically configuring TLS.
-   Please enter an email address. We’ll use this email address to notify you prior to domain and certification expiration [None]: john@example.com.
-   -> Obtaining a TLS certificate from Let’s Encrypt.
+  Your terminal should print something similar to the following:
+  ```
+     $ edgectl install
+     -> Installing the Ambassador Edge Stack 1.0.
+     -> Existing Ambassador Edge Stack installation detected.
+     -> Automatically configuring TLS.
+     Please enter an email address. We’ll use this email address to notify you prior to domain and certification expiration [None]: john@example.com.
+     -> Obtaining a TLS certificate from Let’s Encrypt.  
 
-   Congratulations, you’ve successfully installed the Ambassador Edge Stack in your Kubernetes cluster. Visit https://random-word.edgestack.me to access your Edge Stack installation and for additional configuration.
-```
+     Congratulations, you’ve successfully installed the Ambassador Edge Stack in your Kubernetes cluster. Visit https://random-word.edgestack.me to access your Edge Stack installation and for additional configuration.
+  ```  
 
-\* [Edge Control](../../using/edgectl/edge-control) (`edgectl`) automatically configures TLS for your instance and provisions a domain name for your Ambassador Edge Stack.  This is not necessary if you already have a domain name and certificates.
+  \* [Edge Control](../../using/edgectl/edge-control) (`edgectl`) automatically configures TLS for your instance and provisions a domain name for your Ambassador Edge Stack.  This is not necessary if you already have a domain name and certificates.  
 
-This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for the Ambassador Edge Stack to route traffic. Details on how to configure Ambassador using the Helm chart can be found in the Helm chart [README](https://github.com/datawire/ambassador-chart/tree/master).
+  This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for the Ambassador Edge Stack to route traffic. Details on how to configure Ambassador using the Helm chart can be found in the Helm chart [README](https://github.com/datawire/ambassador-chart/tree/master).
+
+6. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
 
 ## Upgrading an Existing Ambassador Edge Stack Installation
 
@@ -78,7 +80,9 @@ Upgrading an existing installation of the Ambassador Edge Stack is a two-step pr
    helm upgrade ambassador datawire/ambassador
    ```
 
-This will upgrade the image and deploy and other necessary resources for the Ambassador Edge Stack.
+  This will upgrade the image and deploy and other necessary resources for the Ambassador Edge Stack.
+
+3. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
 ## Migrating to the Ambassador Edge Stack
 
