@@ -4,13 +4,13 @@
 
 Log in to Service Catalog [here](https://app.getambassador.io/cloud/catalog).
 
-<!-- 
+**Why Service Catalog?**
 
-**Why Ambassador Cloud Service Catalog?**
+Service Catalog provides a comprehensive view of all services deployed across your cluster.
 
-TBD
+Service Catalog also supports [a set of annotations](../reference/annotations#supported-annotations) that you can add to your services to provide critical human-visible metadata: the owner of the service, a link to the GitHub repo, and more.
 
--->
+Having this type of service metadata easily available in a single location is invaluable when reacting to a production incident.
 
 **What type of services can be added to the Service Catalog?**
 
@@ -62,20 +62,26 @@ Annotations added to a service via any method will persist after a Kubernetes cl
 
 Annotations added to a Kubernetes Service via YAML (or associated config template) will be reapplied upon each new deployment. Any annotations added via `kubectl annotate` will be overwritten by the annotations in the YAML config being applied. This includes the removal of annotations if they are not specified in the new YAML config.
 
-<!-- 
-**Why can’t I connect my cluster and services to Ambassador Cloud?**
 
-TBD
+**Why can’t I connect my cluster and services to Service Catalog?**
 
-**Why have my cluster/services disappeared from the Service Catalog?**
+Please check the following:
 
-TBD
+* Has the Edge Stack been successfully installed in your cluster? Are all of the Edge Stack Pods in a healthy state (e.g. no status of `CrashLoopBackoff`)?
+* Have you successfully applied your Cloud Connect token to your installation of the Edge Stack? If not, please log in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) and follow the instructions to add a cluster to the Service Catalog.
+* Are you running Ambassador Edge Stack 1.12 or later? Earlier versions of the Edge Stack, or an Edge Stack running in “legacy” mode, do not support reporting Service metadata to Ambassador Cloud.
 
-**What components get installed into my cluster when connecting to the Service Catalog?**
+**Why have my cluster/services disappeared from Service Catalog?**
 
-TBD
--->
+Please check the following:
 
-**How do I share my feedback on Ambassador Cloud and the Service Catalog?**
+* Is your cluster still running? For example, if you are using `minikube`, the cluster will stop when the Docker daemon is stopped.
+* Is the Edge Stack still installed in your cluster? Are all of the associated Services and Pods in a healthy state (e.g. no status of `CrashLoopBackoff`)?
+
+**What components get installed into my cluster when connecting to Service Catalog?**
+
+The standard [Edge Stack Services](../../../topics/install/) get installed within your cluster. The Edge Stack components are responsible for synchronizing the list of Services within your cluster with the list displayed within the Service Catalog.
+
+**How do I share my feedback on Ambassador Cloud and Service Catalog?**
 
 Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../../feedback), or you can join our [Slack channel](http://d6e.co/slack) to share your thoughts.
