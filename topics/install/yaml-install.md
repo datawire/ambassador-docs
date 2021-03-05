@@ -67,8 +67,8 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
   For more information, see [Edge Control](../../../topics/using/edgectl/edge-control).
 
 5. To access the Edge Policy Console going forward, you can access it using one of the following options:
-* `edgectl login -n <namespace> <AES_host>` or
-* `https://{{AES_URL}}/edge_stack/admin`
+  * `edgectl login -n <namespace> <AES_host>` or
+  * `https://{{AES_URL}}/edge_stack/admin`
 
 ## Configure TLS Termination and Automatic HTTPS
 
@@ -164,6 +164,10 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
     "time": "2019-12-11T20:10:16.525471212Z"
    }
    ```
+
+## View your Service Metadata using Service Catalog
+
+[Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
 ## A Single Source of Configuration
 

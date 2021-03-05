@@ -25,6 +25,8 @@ spec:
 | `admin_port` | The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this. | `admin_port: 8001` |
 | `ambassador_id` | Use only if you are using multiple ambassadors in the same cluster. See [this page](../running/#ambassador_id) for more information. | `ambassador_id: "<ambassador_id>"` |
 | `cluster_idle_timeout_ms` | Set the default upstream-connection idle timeout. Default is 1 hour. | `cluster_idle_timeout_ms: 30000` |
+| `cluster_max_connection_lifetime_ms` | Set the default maximum upstream-connection lifetime. Default is 0 which means unlimited. | `cluster_max_connection_lifetime_ms: 0` |
+| `cluster_request_timeout_ms` | Set the default end-to-end timeout for requests. Default is 3000ms.  | `cluster_request_timeout_ms: 3000` |
 | `default_label_domain  and default_labels` | Set a default domain and request labels to every request for use by rate limiting. For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups). | None |
 | `defaults` | The `defaults` element allows setting system-wide defaults that will be applied to various Ambassador resources. See [using defaults](../../using/defaults) for more information. | None |
 | `diagnostics.enabled` | Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  See below for more details. | None |
@@ -52,6 +54,8 @@ spec:
 | `service_port` | If present, service_port will be the port Ambassador listens on for microservice access. If not present, Ambassador will use 8443 if TLS is configured, 8080 otherwise. | `service_port: 8080` |
 | `set_current_client_cert_details` | Specify how to handle the X-Forwarded-Client-Cert header. See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto.html?highlight=xfcc#envoy-api-enum-config-filter-network-http-connection-manager-v2-httpconnectionmanager-forwardclientcertdetails) for more information. | `set_current_client_cert_details: SANITIZE` |
 | `statsd` | Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd). | None |
+| `strip_matching_host_port` | If true, Ambassador will strip the port from host/authority headers before processing and routing the request. This only applies if the port matches the underlying Envoy listener port. | `strip_matching_host_port: false` |
+| `suppress_envoy_headers` | If true, Ambassador will not emit certain additional headers to HTTP requests and responses. For the exact set of headers covered by this config, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#config-http-filters-router-headers-set) | `suppress_envoy_headers: false` |
 | `use_proxy_proto` | Controls whether Envoy will honor the PROXY protocol on incoming requests. | `use_proxy_proto: false` |
 | `use_remote_address` | Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header. | `use_remote_address: true` |
 | `use_ambassador_namespace_for_service_resolution` | Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them, e.g. a Mapping in namespace `foo` will look for its service in namespace `foo`. If `true`, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace. | `use_ambassador_namespace_for_service_resolution: false` |
@@ -141,6 +145,16 @@ When using Linkerd, requests going to an upstream service need to include the `l
 ### Upstream Idle Timeout (`cluster_idle_timeout_ms`)
 
 If set, `cluster_idle_timeout_ms` specifies the timeout (in milliseconds) after which an idle connection upstream is closed. If `cluster_idle_timeout` is disabled by setting it to 0, you risk upstream connections never getting closed due to idling if you do not set [`idle_timeout_ms` on each `Mapping`](../../using/timeouts/).
+
+### Upstream Max Lifetime (`cluster_max_connection_lifetime_ms`)
+
+If set, `cluster_max_connection_lifetime_ms` specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
+
+If `cluster_max_connection_lifetime_ms` is not set (or set to zero), then upstream connections may remain open for arbitrarily long. This can be set on a per-Mapping basis by setting [`cluster_max_connection_lifetime_ms` on the `Mapping`](../../using/timeouts/).
+
+### Request Timeout (`cluster_request_timeout_ms`)
+
+If set, `cluster_request_timeout_ms` specifies the default end-to-end timeout for the requests. This can be set on a per-Mapping basis by setting [`timeout_ms` on the `Mapping`](../../using/timeouts/).
 
 ### Defaults (`defaults`)
 

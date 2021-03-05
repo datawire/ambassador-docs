@@ -107,17 +107,23 @@ and their default values.
 Example:
 
 ```yaml
-helmValues:
-  image:
-    pullPolicy: Always
-  namespace:
-    name: ambassador
-  service:
-    ports:
-      - name: http
-        port: 80
-        targetPort: 8080
-    type: NodePort
+apiVersion: getambassador.io/v2
+kind: AmbassadorInstallation
+metadata:
+  name: ambassador
+spec:
+  version: "*"
+  helmValues:
+    image:
+      pullPolicy: Always
+    namespace:
+      name: ambassador
+    service:
+      ports:
+        - name: http
+          port: 80
+          targetPort: 8080
+      type: NodePort
 ```
 
 * Note that the `spec.installOSS` parameter should be used instead of `spec.helmValues.enableAES` to control whether 
