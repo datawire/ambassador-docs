@@ -80,7 +80,7 @@ export default function SimpleTabs() {
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
             '\n \n' +
-            '# Create Namespace and Install' +
+            '# Create Namespace and Install:' +
             '\n' +
             'kubectl create namespace ambassador && \\' +
             '\n' +
@@ -102,7 +102,7 @@ export default function SimpleTabs() {
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
             '\n \n' +
-            '# Create Namespace and Install' +
+            '# Create Namespace and Install:' +
             '\n' +
             'kubectl create namespace ambassador && \\' +
             '\n' +
@@ -138,7 +138,7 @@ export default function SimpleTabs() {
         {/*Edgectl install instructions*/}
         <CodeBlock>
           {
-            '# macOS' +
+            '# macOS:' +
             '\n' +
             'sudo curl -fL https://metriton.datawire.io/downloads/darwin/edgectl \\' + 
             '\n' +
@@ -148,7 +148,7 @@ export default function SimpleTabs() {
             '\n' +
             'edgectl install' +
             '\n \n' +
-            '# Linux' +
+            '# Linux:' +
             '\n' +
             'sudo curl -fL https://metriton.datawire.io/downloads/linux/edgectl \\' + 
             '\n' +
@@ -158,9 +158,9 @@ export default function SimpleTabs() {
             '\n' +
             'edgectl install' +
             '\n \n' +
-            '# Windows' +
+            '# Windows:' +
             '\n' +
-            '# Download here: https://metriton.datawire.io/downloads/windows/edgectl.exe'
+            '# Download here - https://metriton.datawire.io/downloads/windows/edgectl.exe'
 
           }
         </CodeBlock>

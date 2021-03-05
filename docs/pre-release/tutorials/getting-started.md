@@ -20,7 +20,7 @@ import GSTabs2 from './gs-tabs2'
 
 ## 1. Installation
 
-Quickly install Edge Stack into your cluster.
+We'll start by installing Edge Stack into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
@@ -30,73 +30,76 @@ Quickly install Edge Stack into your cluster.
 
 ## 2. Routing Traffic from the Edge
 
-Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define Edge Stack’s desired state. The workflow you are going to build uses a simple demo app and the Mapping CRD, which is the core resource that you will use with Edge Stack. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
+Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define Edge Stack’s desired state. The workflow you are going to build uses a simple demo app and the **Mapping CRD**, which is the core resource that you will use with Edge Stack. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
 
-First, apply the YAML for the “Quote of the Moment" service.
+1. First, apply the YAML for the “Quote of the Moment" service.
 
-```
-kubectl apply -f https://www.getambassador.io/yaml/quickstart/qotm.yaml
-```
+  ```
+  kubectl apply -f https://www.getambassador.io/yaml/quickstart/qotm.yaml
+  ```  
 
-<hr style="height:0px; visibility:hidden;" />
+  <Alert severity="info">The Service and Deployment are created in the Ambassador namespace.  You can use <code>kubectl get services,deployments quote --namespace ambassador</code> to see their status.</Alert>
 
-<Alert severity="info">The Service and Deployment are created in the Ambassador namespace.  You can use <code>kubectl get services,deployments quote --namespace ambassador</code> to see their status.</Alert>
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells Edge Stack to route all traffic inbound to the `/backend/` path to the `quote` Service.  
 
-Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells Edge Stack to route all traffic inbound to the `/backend/` path to the `quote` Service.
+  ```yaml
+  ---
+  apiVersion: getambassador.io/v2
+  kind: Mapping
+  metadata:
+    name: quote-backend
+    namespace: ambassador
+  spec:
+    prefix: /backend/
+    service: quote
+  ```
 
-```yaml
----
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: quote-backend
-  namespace: ambassador
-spec:
-  prefix: /backend/
-  service: quote
-```
+3. Apply the configuration to the cluster:
 
-Apply the configuration to the cluster:
+  ```
+  kubectl apply -f quote-backend.yaml
+  ```  
 
-```
-kubectl apply -f quote-backend.yaml
-```
+  With our Mapping created, now we need to access it!
 
-Now with our Mapping created, we need to access it!
+4. Store the Edge Stack load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
 
-Store the Edge Stack load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
+  ```
+  export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador \
+    -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
+  ```
 
-```
-export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador \
-  -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
-```
+5. Test the configuration by accessing the service through the Ambassador load balancer:
 
-Test the configuration by accessing the service through the Ambassador load balancer:
-`curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/`
+  `curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/`  
 
-```
-$ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/
+  ```
+  $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/  
 
-  {
-   "server": "idle-cranberry-8tbb6iks",
-   "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
-   "time": "2021-02-26T15:55:06.884798988Z"
-  }
-```
+    {
+     "server": "idle-cranberry-8tbb6iks",
+     "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
+     "time": "2021-02-26T15:55:06.884798988Z"
+    }
+  ```  
 
 <Alert severity="success"><b>Victory!</b> You have created your first Edge Stack Mapping, routing a request from your cluster's edge to a service!</Alert>
 
 ## 3. Connect your Cluster to Ambassador Cloud
 
-The Service Catalog within Ambassador Cloud allows you to easily list all of your cluster's services. You can view, add, and update metadata associated with each service, such as the owner, version control repository, and associated Slack channel.
+The Service Catalog is a web-based interface that lists all of your cluster's Services. You can view, add, and update metadata associated with each Service, such as the owner, version control repository, and associated Slack channel.
 
-Follow the instructions that match your Edge Stack installation method below to connect your cluster and start using Service Catalog.
+1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your GitHub account.
 
-<GSTabs2/>
+2. At the top, hover over **All Clusters** then click **Add a Cluster**.
 
-When the installation completes, refresh the Ambassador Cloud page.  All of your services running in the cluster are now listed in Service Catalog!
+3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 
-<Alert severity="success"><b>Fantastic!</b> You can now see all your services in your Ambassador Cloud account! Metadata on your services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="../../cloud/service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your services.</Alert>
+4. Follow the prompts to install the cloud token into your cluster.
+
+5. When the token installation completes, refresh the Service Catalog page.  
+
+<Alert severity="success"><b>Fantastic!</b> You can now see all your Services in your Ambassador Cloud account! Metadata on your Services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="../../cloud/service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your Services.</Alert>
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
