@@ -15,7 +15,7 @@ import GSTabs2 from '../../../tutorials/gs-tabs2'
 
 </div>
 
-<Alert severity="info">Looking for the link to login to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty, you will need to continue with the quick start guide below.</Alert>
+<Alert severity="info">Looking for the link to log in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty, you first need to complete with this quick start guide.</Alert>
 
 ## The Power of Kubernetes Annotations 
 
@@ -119,7 +119,7 @@ Follow the instructions that match your Edge Stack installation method below to 
 
 5. When the token installation completes, refresh the Service Catalog page.  
 
-<Alert severity="success"><b>Victory!</b>All the Services running in your cluster are now listed in Service Catalog!</Alert>
+<Alert severity="success"><b>Victory!</b> All the Services running in your cluster are now listed in Service Catalog!</Alert>
 
 If you installed Edge Stack into an empty cluster you won't see any services in your catalog (except for the Edge Stack services which start with `ambassador`).  Apply this sample app to quickly see an example of a service in the catalog:
 
