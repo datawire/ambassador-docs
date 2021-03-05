@@ -19,23 +19,23 @@ import Alert from '@material-ui/lab/Alert';
 
 ## Supported Annotations
 
-Service Catalog's supported annotation keys all start with [`a8r.io`](http://a8r.io) followed by the specific field. These are the metadata keys that Service Catalog supports:
+[Service Catalog's](https://app.getambassador.io/cloud/catalog) supported annotation keys all start with [`a8r.io`](http://a8r.io) followed by the specific field. These are the metadata keys that Service Catalog supports:
 
 | Key | Description | Example |
 | --- | --- | --- |
-| `a8r.io/description` | Unstructured text description of the service for humans. | `Edge Stack, responsible for handling all ingress traffic` |
-| `a8r.io/owner` | GitHub or equivalent username (prefix with @), email address, or unstructured owner description. | `@edgey` |
-| `a8r.io/chat` | Slack channel, or link to other external chat system. | `#ambassador` |
-| `a8r.io/bugs` | Link to external bug tracker. | `https://github.com/datawire/ambassador/issues` |
-| `a8r.io/logs` | Link to external log viewer. | `https://kibana.getambassador.io` |
-| `a8r.io/documentation` | Link to external project documentation. | `https://www.getambassador.io/docs/latest/` |
-| `a8r.io/repository` | Link to external VCS repository. | `https://github.com/datawire/ambassador` |
-| `a8r.io/support` | Link to external support center. | `https://d6e.co/slack` |
-| `a8r.io/runbook` | Link to external project runbook. | `https://www.getambassador.io/docs/latest/topics/running/debugging/` |
-| `a8r.io/incidents`  | Link to external incident dashboard. | `https://incidents.getambassador.io` |
-| `a8r.io/uptime` | Link to external uptime dashboard. | `https://uptime.getambassador.io` |
-| `a8r.io/performance` | Link to external performance dashboard. | `https://performance.getambassador.io` |
-| `a8r.io/dependencies` | Unstructured text description of the service dependencies for humans. | `Redis` |
+| `a8r.io/description` | Unstructured text description of the service for humans | `Edge Stack, responsible for handling all ingress traffic` |
+| `a8r.io/owner` | GitHub or equivalent username (prefix with @), email address, or unstructured owner description | `@edgey` |
+| `a8r.io/chat` | Slack channel, or link to other external chat system | `#ambassador` |
+| `a8r.io/bugs` | Link to external bug tracker | `https://github.com/datawire/ambassador/issues` |
+| `a8r.io/logs` | Link to external log viewer | `https://kibana.getambassador.io` |
+| `a8r.io/documentation` | Link to external project documentation | `https://www.getambassador.io/docs/latest/` |
+| `a8r.io/repository` | Link to external VCS repository | `https://github.com/datawire/ambassador` |
+| `a8r.io/support` | Link to external support center | `https://d6e.co/slack` |
+| `a8r.io/runbook` | Link to external project runbook | `https://www.getambassador.io/docs/latest/topics/running/debugging/` |
+| `a8r.io/incidents`  | Link to external incident dashboard | `https://incidents.getambassador.io` |
+| `a8r.io/uptime` | Link to external uptime dashboard | `https://uptime.getambassador.io` |
+| `a8r.io/performance` | Link to external performance dashboard | `https://performance.getambassador.io` |
+| `a8r.io/dependencies` | Unstructured text description of the service dependencies for humans | `Redis` |
 
 ## Annotate via `kubectl`
 
