@@ -208,7 +208,7 @@ spec:
 >
 > The free and unlicensed versions of `Ambassador Edge Stack` only support documentation for five services in the `DevPortal`.
 > When you start publishing documentation for more services to your `DevPortal`, keep in mind that you will not see more than 5 OpenAPI documents even if you have more than 5 services properly configured to report their OpenAPI specifications.
-> For more information on extending the number of services in your `DevPortal` please contact sales via our [pricing information page](https://www.getambassador.io/editions/).
+> For more information on extending the number of services in your `DevPortal` please contact sales via our [pricing information page](/editions/).
 
 
 #### <a href="#styling"></a>Styling the `DevPortal`

@@ -166,7 +166,7 @@ The Host is declared here because we are using gRPC without TLS.  Since Ambassad
 > * `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
 > * `Reject`: reject the request with a 400 response
 >
-> For more information, please refer to the [`Host` documentation](../topics/running/host-crd#secure-and-insecure-requests).
+> For more information, please refer to the [`Host` documentation](../../topics/running/host-crd#secure-and-insecure-requests).
 
 
 Once you have the YAML file and the correct Docker registry, deploy it to your cluster with `kubectl`.
