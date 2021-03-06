@@ -11,7 +11,7 @@ This tutorial will walk you through the process of configuring Argo Rollouts to 
 
 ## 1. Install and configure Edge Stack
 
-You'll need to first install Edge Stack in your cluster. Follow the [Edge Stack installation](../../tutorials/getting-started) to install Edge Stack via Kubernetes YAML, Helm, or the command-line installer in your cluster.
+You'll need to first install Edge Stack in your cluster. Follow the [Edge Stack installation](../tutorials/getting-started) to install Edge Stack via Kubernetes YAML, Helm, or the command-line installer in your cluster.
 
 By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use endpoint routing. Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
 
