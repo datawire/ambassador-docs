@@ -167,7 +167,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 
 ## View your Service Metadata using Service Catalog
 
-[Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
+[Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
 ## A Single Source of Configuration
 
