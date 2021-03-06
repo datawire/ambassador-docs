@@ -34,7 +34,7 @@ If your service is in a namespace other than `default`, you must specify it with
 kubectl annotate svc <service name> --namespace <namespace> a8r.io/owner="<your name>"
 ```
 
-While this is a quick and effective way to set a single annotation on a service, it doesn't scale well to setting multiple annotations.  It also doesn't follow <a href="../../../topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps best practices</b></a> as normally such resource updates should be stored in version control and applied via a deployment pipeline.
+While this is a quick and effective way to set a single annotation on a service, it doesn't scale well to setting multiple annotations.  It also doesn't follow <a href="../../../../topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps best practices</b></a> as normally such resource updates should be stored in version control and applied via a deployment pipeline.
 
 To accomplish this, you can annotate instead using YAML.
 

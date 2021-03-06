@@ -82,7 +82,7 @@ Upgrading an existing installation of the Ambassador Edge Stack is a two-step pr
 
   This will upgrade the image and deploy and other necessary resources for the Ambassador Edge Stack.
 
-3. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
+3. [Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
 ## Migrating to the Ambassador Edge Stack
 
