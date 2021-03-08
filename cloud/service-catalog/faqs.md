@@ -4,6 +4,10 @@
 
 Log in to Service Catalog [here](https://app.getambassador.io/cloud/catalog).
 
+**How can I see Service Catalog in action?**
+
+Check out our [demo video](https://www.youtube.com/watch?v=Osedx_ksD7Q)!
+
 **Why Service Catalog?**
 
 Service Catalog provides a comprehensive view of all services deployed across your cluster.
