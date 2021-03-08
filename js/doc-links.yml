@@ -297,6 +297,8 @@
               link: /docs/latest/telepresence/reference/client
             - title: Environment Variables
               link: /docs/latest/telepresence/reference/environment
+            - title: Intercepts
+              link: /docs/latest/telepresence/reference/intercepts
             - title: Volume Mounts
               link: /docs/latest/telepresence/reference/volume
             - title: DNS Resolution
