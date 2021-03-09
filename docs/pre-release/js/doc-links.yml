@@ -29,6 +29,19 @@
             link: /docs/pre-release/topics/install/aes-operator
           - title: Install with Edgectl
             link: /docs/pre-release/topics/install/help/
+        - title: Core Concepts
+          link: /docs/pre-release/topics/concepts/
+          items:
+            - title: Kubernetes Network Architecture
+              link: /docs/pre-release/topics/concepts/kubernetes-network-architecture
+            - title: "The Ambassador Operating Model: GitOps and Continuous Delivery"
+              link: /docs/pre-release/topics/concepts/gitops-continuous-delivery
+            - title: Progressive Delivery
+              link: /docs/pre-release/topics/concepts/progressive-delivery
+            - title: Microservices API Gateways
+              link: /docs/pre-release/topics/concepts/microservices-api-gateways
+            - title: Edge Stack Architecture
+              link: /docs/pre-release/topics/concepts/architecture 
         - title: How-to Guides
           link: /docs/pre-release/howtos
           items:
@@ -96,19 +109,6 @@
                   link: /docs/pre-release/howtos/cert-manager
                 - title: Client Certificate Validation
                   link: /docs/pre-release/howtos/client-cert-validation
-        - title: Core Concepts
-          link: /docs/pre-release/topics/concepts/
-          items:
-            - title: Kubernetes Network Architecture
-              link: /docs/pre-release/topics/concepts/kubernetes-network-architecture
-            - title: "The Ambassador Operating Model: GitOps and Continuous Delivery"
-              link: /docs/pre-release/topics/concepts/gitops-continuous-delivery
-            - title: Progressive Delivery
-              link: /docs/pre-release/topics/concepts/progressive-delivery
-            - title: Microservices API Gateways
-              link: /docs/pre-release/topics/concepts/microservices-api-gateways
-            - title: Edge Stack Architecture
-              link: /docs/pre-release/topics/concepts/architecture 
         - title: Technical Reference
           items: 
             - title: Using AES for Developers
@@ -271,6 +271,18 @@
       items:
         - title: Quick Start
           link: /docs/pre-release/telepresence/quick-start
+        - title: Install Telepresence
+          items:
+            - title: Install
+              link: /docs/pre-release/telepresence/install/
+            - title: Upgrade
+              link: /docs/pre-release/telepresence/install/upgrade/
+        - title: Core Concepts
+          items:
+            - title: Inner and Outer Dev Loop
+              link: /docs/pre-release/telepresence/concepts/devloop
+            - title: Context Propagation
+              link: /docs/pre-release/telepresence/concepts/context-prop
         - title: How-to Guides
           items:
             - title: Intercept a Service
@@ -281,14 +293,6 @@
               link: /docs/pre-release/telepresence/howtos/democluster
             - title: Outbound Sessions
               link: /docs/pre-release/telepresence/howtos/outbound
-            - title: Upgrading and Previous Versions
-              link: /docs/pre-release/telepresence/howtos/upgrading
-        - title: Core Concepts
-          items:
-            - title: Inner and Outer Dev Loop
-              link: /docs/pre-release/telepresence/concepts/devloop
-            - title: Context Propagation
-              link: /docs/pre-release/telepresence/concepts/context-prop
         - title: Technical Reference
           items:
             - title: Architecture
@@ -297,6 +301,8 @@
               link: /docs/pre-release/telepresence/reference/client
             - title: Environment Variables
               link: /docs/pre-release/telepresence/reference/environment
+            - title: Intercepts
+              link: /docs/pre-release/telepresence/reference/intercepts
             - title: Volume Mounts
               link: /docs/pre-release/telepresence/reference/volume
             - title: DNS Resolution

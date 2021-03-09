@@ -1,8 +1,8 @@
 # Service Catalog FAQs
 
-**Where do I log in to Service Catalog?**
+**Where do I sign in to Service Catalog?**
 
-Log in to Service Catalog [here](https://app.getambassador.io/cloud/catalog).
+Sign in to Service Catalog [here](https://app.getambassador.io/cloud/catalog).
 
 **Why Service Catalog?**
 
@@ -68,7 +68,7 @@ Annotations added to a Kubernetes Service via YAML (or associated config templat
 Please check the following:
 
 * Has the Edge Stack been successfully installed in your cluster? Are all of the Edge Stack Pods in a healthy state (e.g. no status of `CrashLoopBackoff`)?
-* Have you successfully applied your Cloud Connect token to your installation of the Edge Stack? If not, please log in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) and follow the instructions to add a cluster to the Service Catalog.
+* Have you successfully applied your Cloud Connect token to your installation of the Edge Stack? If not, please sign in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) and follow the instructions to add a cluster to the Service Catalog.
 * Are you running Ambassador Edge Stack 1.12 or later? Earlier versions of the Edge Stack, or an Edge Stack running in “legacy” mode, do not support reporting Service metadata to Ambassador Cloud.
 
 **Why have my cluster/services disappeared from Service Catalog?**
