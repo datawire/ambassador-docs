@@ -202,6 +202,8 @@ export default ({ data, location }) => {
 
   const { canonicalUrl, schema } = useDocSEO({ slug, title });
 
+  console.log('slug =>', slug);
+
   return (
     <React.Fragment>
       <Helmet>
@@ -211,6 +213,9 @@ export default ({ data, location }) => {
         <link rel="canonical" href={canonicalUrl} />
         {metaDescription && (
           <meta name="description" content={metaDescription} />
+        )}
+        {slug === '/docs/latest/argo/' && (
+          <meta property="og:image" content="/images/meta-argo.png" />
         )}
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
