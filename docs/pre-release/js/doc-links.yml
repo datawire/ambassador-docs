@@ -283,15 +283,15 @@
               link: /docs/pre-release/telepresence/concepts/devloop
             - title: Context Propagation
               link: /docs/pre-release/telepresence/concepts/context-prop
-        - title: How-to Guides
+        - title: How Do I...
           items:
             - title: Intercept a Service
               link: /docs/pre-release/telepresence/howtos/intercepts
-            - title: Collaborating with Preview URLs
+            - title: Collaborate using Preview URLs
               link: /docs/pre-release/telepresence/howtos/preview-urls
             - title: Create a Demo Cluster
               link: /docs/pre-release/telepresence/howtos/democluster
-            - title: Outbound Sessions
+            - title: Proxy Outbound Traffic to My Cluster
               link: /docs/pre-release/telepresence/howtos/outbound
         - title: Technical Reference
           items:
