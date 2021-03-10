@@ -213,7 +213,7 @@ export default ({ data, location }) => {
           <meta name="description" content={metaDescription} />
         )}
         {slug === '/docs/latest/argo/' && (
-          <meta property="og:image" content="/images/meta-argo.png" />
+          <meta property="og:image" content="https://www.getambassador.io/images/meta-argo.png" />
         )}
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
