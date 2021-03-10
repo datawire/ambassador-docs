@@ -202,8 +202,6 @@ export default ({ data, location }) => {
 
   const { canonicalUrl, schema } = useDocSEO({ slug, title });
 
-  console.log('slug =>', slug);
-
   return (
     <React.Fragment>
       <Helmet>
