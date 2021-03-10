@@ -209,14 +209,17 @@
                   items:
                     - title: Deployment Architecture
                       link: /docs/latest/topics/running/ambassador-deployment
+                    - title: The Ambassador Container
+                      link: /docs/latest/topics/running/environment
+                    - title: Ambassador Edge Stack and Redis
+                      link: /docs/lates/topics/running/aes-redis
                     - title: Ambassador with AWS
                       link: /docs/latest/topics/running/ambassador-with-aws
                     - title: Ambassador with GKE
                       link: /docs/latest/topics/running/ambassador-with-gke
                     - title: Advanced Deployment Configuration
                       link: /docs/latest/topics/running/running
-                    - title: The Ambassador Container
-                      link: /docs/latest/topics/running/environment
+
                 - title: Gzip Compression
                   link: /docs/latest/topics/running/gzip
                 - title: Host CRD, ACME Support, and External Load Balancer Configuration
