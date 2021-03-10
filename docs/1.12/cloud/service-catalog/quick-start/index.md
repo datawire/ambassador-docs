@@ -15,7 +15,7 @@ import GSTabs2 from '../../../tutorials/gs-tabs2'
 
 </div>
 
-<Alert severity="info">Looking for the link to log in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty, you first need to complete with this quick start guide.</Alert>
+<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty, you first need to complete with this quick start guide.</Alert>
 
 ## The Power of Kubernetes Annotations 
 
@@ -109,7 +109,7 @@ Follow the instructions that match your Edge Stack installation method below to 
 <GSTabs2/>
 -->
 
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your GitHub account.
+1. Sign in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your GitHub account.
 
 2. At the top, hover over **All Clusters** then click **Add a Cluster**.
 
