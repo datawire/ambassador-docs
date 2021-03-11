@@ -212,7 +212,7 @@
                     - title: The Ambassador Container
                       link: /docs/latest/topics/running/environment
                     - title: Ambassador Edge Stack and Redis
-                      link: /docs/lates/topics/running/aes-redis
+                      link: /docs/latest/topics/running/aes-redis
                     - title: Ambassador with AWS
                       link: /docs/latest/topics/running/ambassador-with-aws
                     - title: Ambassador with GKE

@@ -13,7 +13,7 @@ Rate limiting in Ambassador is composed of two parts:
 
 There are two ways of setting labels on a request:
 
-1. Per [`Mapping`](../../mappings#configuring-mappings).  Labels set
+1. Per [`Mapping`](../mappings#configuring-mappings).  Labels set
    here will only apply to requests that use that Mapping
 
    ```yaml
@@ -130,8 +130,8 @@ This is determined by your `RateLimitService` implementation.
 The Ambassador Edge Stack provides a `RateLimitService` implementation that is 
 configured by a `RateLimit` custom resource.
 
-See the [AES RateLimit Reference](./rate-limits.md) for information on how 
+See the [AES RateLimit Reference](./rate-limits) for information on how 
 to configure `RateLimit`s in Ambassador Edge Stack.
 
-See the [Basic Rate Limiting](../../howtos/rate-limit-tutorial.md) for an 
+See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an 
 example `RateLimitService` implementation for Ambassador OSS.
