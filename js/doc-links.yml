@@ -43,7 +43,7 @@
             - title: Edge Stack Architecture
               link: /docs/latest/topics/concepts/architecture
             - title: Rate Limiting at the Edge
-              link: /docs/lates/topics/concepts/rate-limiting-at-the-edge
+              link: /docs/latest/topics/concepts/rate-limiting-at-the-edge
         - title: How-to Guides
           link: /docs/latest/howtos
           items:
