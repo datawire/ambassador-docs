@@ -212,6 +212,9 @@ export default ({ data, location }) => {
         {metaDescription && (
           <meta name="description" content={metaDescription} />
         )}
+        {slug === '/docs/latest/argo/' && (
+          <meta property="og:image" content="https://www.getambassador.io/images/meta-argo.png" />
+        )}
         <script type="application/ld+json">{JSON.stringify(schema)}</script>
       </Helmet>
       <Layout location={location}>
