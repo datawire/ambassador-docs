@@ -219,7 +219,6 @@
                       link: /docs/latest/topics/running/ambassador-with-gke
                     - title: Advanced Deployment Configuration
                       link: /docs/latest/topics/running/running
-
                 - title: Gzip Compression
                   link: /docs/latest/topics/running/gzip
                 - title: Host CRD, ACME Support, and External Load Balancer Configuration
