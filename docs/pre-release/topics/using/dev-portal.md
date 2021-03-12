@@ -38,6 +38,15 @@ for the same service.
 > will not try to obtain documentation unless a `docs` attribute is specified.
 > Users should set `docs.path` to `/.ambassador-internal/openapi-docs` in their `Mapping`s
 > in order to keep the previous behavior.
+> 
+>
+> The `docs` field of Mappings was not introduced until `Ambassador Edge Stack` version 1.9 because Ambassador was automatically searching for docs on `/.ambassador-internal/openapi-docs`
+> Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of Ambassador.
+```yaml
+ `kubectl apply -f https://getambassador.io/yaml/aes-crds.yaml`
+```
+
+> If you are on an earlier version of Ambassador, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`
 
 Example:
 
@@ -195,6 +204,13 @@ spec:
                             ## (note that Mappings must contain a `docs` attribute)
 ```
 
+> Note:
+>
+> The free and unlicensed versions of `Ambassador Edge Stack` only support documentation for five services in the `DevPortal`.
+> When you start publishing documentation for more services to your `DevPortal`, keep in mind that you will not see more than 5 OpenAPI documents even if you have more than 5 services properly configured to report their OpenAPI specifications.
+> For more information on extending the number of services in your `DevPortal` please contact sales via our [pricing information page](/editions/).
+
+
 #### <a href="#styling"></a>Styling the `DevPortal`
 
 The look and feel of a `DevPortal` can be fully customized for your particular
@@ -268,10 +284,10 @@ defined in the AES `Deployment`. This configuration method is considered depreca
 kept only for backwards compatibility: users should configure the default values with
 the `ambassador` `DevPortal`.
 
-| Setting                          |   Description       |
-| -------------------------------- | ------------------- |
-| AMBASSADOR_URL                   | External URL of Ambassador Edge Stack; include the protocol (e.g., `https://`) |
-| POLL_EVERY_SECS                  | Interval for polling OpenAPI docs; default 60 seconds |
-| DEVPORTAL_CONTENT_URL            | Default URL to the repository hosting the content for the Portal |
-| DEVPORTAL_CONTENT_DIR            | Default content subdir (defaults to `/`) |
-| DEVPORTAL_CONTENT_BRANCH         | Default content branch (defaults to `master`) |
+| Setting                  | Description                                                                    |
+| ------------------------ | ------------------------------------------------------------------------------ |
+| AMBASSADOR_URL           | External URL of Ambassador Edge Stack; include the protocol (e.g., `https://`) |
+| POLL_EVERY_SECS          | Interval for polling OpenAPI docs; default 60 seconds                          |
+| DEVPORTAL_CONTENT_URL    | Default URL to the repository hosting the content for the Portal               |
+| DEVPORTAL_CONTENT_DIR    | Default content subdir (defaults to `/`)                                       |
+| DEVPORTAL_CONTENT_BRANCH | Default content branch (defaults to `master`)                                  |
