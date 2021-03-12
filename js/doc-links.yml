@@ -11,24 +11,24 @@
         - title: Install Edge Stack
           link: /docs/pre-release/topics/install/
           items:
-          - title: Install with Helm
-            link: /docs/pre-release/topics/install/helm
-          - title: Upgrade to the Ambassador Edge Stack
-            link: /docs/pre-release/topics/install/upgrade-to-edge-stack
-          - title: Upgrade to a Newer Version
-            link: /docs/pre-release/topics/install/upgrading
-          - title: Install the Ambassador API Gateway
-            link: /docs/pre-release/topics/install/install-ambassador-oss
-          - title: Install with Docker
-            link: /docs/pre-release/topics/install/docker
-          - title: Install with Bare Metal
-            link: /docs/pre-release/topics/install/bare-metal
-          - title: Install Manually
-            link: /docs/pre-release/topics/install/yaml-install
-          - title: Ambassador Edge Stack Operator
-            link: /docs/pre-release/topics/install/aes-operator
-          - title: Install with Edgectl
-            link: /docs/pre-release/topics/install/help/
+            - title: Install with Helm
+              link: /docs/pre-release/topics/install/helm
+            - title: Upgrade to the Ambassador Edge Stack
+              link: /docs/pre-release/topics/install/upgrade-to-edge-stack
+            - title: Upgrade to a Newer Version
+              link: /docs/pre-release/topics/install/upgrading
+            - title: Install the Ambassador API Gateway
+              link: /docs/pre-release/topics/install/install-ambassador-oss
+            - title: Install with Docker
+              link: /docs/pre-release/topics/install/docker
+            - title: Install with Bare Metal
+              link: /docs/pre-release/topics/install/bare-metal
+            - title: Install Manually
+              link: /docs/pre-release/topics/install/yaml-install
+            - title: Ambassador Edge Stack Operator
+              link: /docs/pre-release/topics/install/aes-operator
+            - title: Install with Edgectl
+              link: /docs/pre-release/topics/install/help/
         - title: Core Concepts
           link: /docs/pre-release/topics/concepts/
           items:
@@ -43,7 +43,7 @@
             - title: Edge Stack Architecture
               link: /docs/pre-release/topics/concepts/architecture
             - title: Rate Limiting at the Edge
-              link: /docs/latest/topics/concepts/rate-limiting-at-the-edge
+              link: /docs/pre-release/topics/concepts/rate-limiting-at-the-edge
         - title: How-to Guides
           link: /docs/pre-release/howtos
           items:
@@ -112,7 +112,7 @@
                 - title: Client Certificate Validation
                   link: /docs/pre-release/howtos/client-cert-validation
         - title: Technical Reference
-          items: 
+          items:
             - title: Using AES for Developers
               link: /docs/pre-release/topics/using/
               items:
@@ -181,10 +181,10 @@
                     - title: Plugin Filter
                       link: /docs/pre-release/topics/using/filters/plugin
                 - title: Rate Limiting
-                  link: /docs/latest/topics/using/rate-limits/
+                  link: /docs/pre-release/topics/using/rate-limits/
                   items:
-                  - title: AES RateLimit Reference
-                    link: /docs/latest/topics/using/rate-limits/rate-limits
+                    - title: AES RateLimit Reference
+                      link: /docs/pre-release/topics/using/rate-limits/rate-limits
                 - title: Edge Policy Console
                   items:
                     - title: Introduction to Edge Policy Console
@@ -210,9 +210,9 @@
                     - title: Deployment Architecture
                       link: /docs/pre-release/topics/running/ambassador-deployment
                     - title: The Ambassador Container
-                      link: /docs/latest/topics/running/environment
+                      link: /docs/pre-release/topics/running/environment
                     - title: Ambassador Edge Stack and Redis
-                      link: /docs/latest/topics/running/aes-redis
+                      link: /docs/pre-release/topics/running/aes-redis
                     - title: Ambassador with AWS
                       link: /docs/pre-release/topics/running/ambassador-with-aws
                     - title: Ambassador with GKE
@@ -350,6 +350,4 @@
             - title: Using Edge Control in CI
               link: /docs/pre-release/topics/using/edgectl/edge-control-in-ci
         - title: Technical Reference
-          link: /docs/pre-release/topics/using/edgectl/service-preview-reference    
-    
-
+          link: /docs/pre-release/topics/using/edgectl/service-preview-reference
