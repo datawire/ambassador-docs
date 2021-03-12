@@ -2,7 +2,7 @@
 # Ex:
 # - /docs
 # - /reference
-# 
+#
 
 - /docs/pre-release/topics/using/filters/
 - /docs/pre-release/topics/using/filters/oauth2
@@ -19,4 +19,4 @@
 - /docs/pre-release/topics/using/edge-policy-console
 - /docs/pre-release/topics/using/rate-limits/rate-limits/
 - /docs/pre-release/topics/using/rate-limit-speedometers
-- /docs/latest/topics/running/aes-redis
+- /docs/pre-release/topics/running/aes-redis
