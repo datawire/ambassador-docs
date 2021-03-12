@@ -23,8 +23,8 @@ Use the following variables for the environment of your Ambassador container:
 | Core                              | `AMBASSADOR_FAST_RECONFIGURE`                                                         | `false`                                             | EXPERIMENTAL -- Boolean; `true`=true, any other value=false |
 | Core                              | `AMBASSADOR_UPDATE_MAPPING_STATUS`                                                    | `false`                                             | Boolean; `true`=true, any other value=false |
 | Core                              | `AMBASSADOR_DISABLE_SNAPSHOT_SERVER`                                                  | `false`                                             | Boolean; non-empty=true, empty=false |
-| Edge Stack                        | `AES_LOG_LEVEL`                                                                       | `info`                                              | Log level (see below) |
-| Edge Stack                        | [`AES_RATELIMIT_PREVIEW`](../aes-redis#aes-ratelimit_preview)                         | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
+| Edge Stack                        | [`AES_LOG_LEVEL`](../aes-extensions/#aes_log_level)                                   | `warn`                                              | Log level |
+| Edge Stack                        | [`AES_RATELIMIT_PREVIEW`](../aes-extensions/rate-limiting#aes-ratelimit_preview)      | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
 | Edge Stack                        | [`AES_AUTH_TIMEOUT`](../aes-extensions/authentication#aes_auth_timeout)               | `4s`                                                | Duration; [Go `time.ParseDuration`][]  
 | Primary Redis (L4)                | [`REDIS_SOCKET_TYPE`](../aes-redis#socket_type)                                       | `tcp`                                               | Go network such as `tcp` or `unix`; see [Go `net.Dial`][] |
 | Primary Redis (L4)                | [`REDIS_URL`](../aes-redis#url)                                                       | None, must be set explicitly                        | Go network address; for TCP this is a `host:port` pair; see [Go `net.Dial`][] |
@@ -76,10 +76,6 @@ Use the following variables for the environment of your Ambassador container:
 | Envoy                             | `STATSD_ENABLED`                                                                      | `false`                                             | Boolean; Python `value.lower() == "true"` |
 | Envoy                             | `DOGSTATSD`                                                                           | `false`                                             | Boolean; Python `value.lower() == "true"` |
 | Envoy                             | `ENVOY_CONCURRENCY`                                                                   | Empty                                               | Integer
-
-Log level names are case-insensitive.  From least verbose to most
-verbose, valid log levels are `error`, `warn`/`warning`, `info`,
-`debug`, and `trace`.
 
 ## Port Assignments
 

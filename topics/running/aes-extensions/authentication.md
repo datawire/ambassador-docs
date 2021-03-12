@@ -23,7 +23,7 @@ as:
 apiVersion: getambassador.io/v2
 kind: AuthService
 metadata:
-  name: ambassador-auth
+  name: ambassador-edge-stack-ratelimit
   namespace: ambassador
 spec:
   auth_service: 127.0.0.1:8500
