@@ -43,7 +43,7 @@ and one service.
 
 ## 2. Install Ambassador
 
-Follow the first section of the [Ambassador API installation guide](../../install/install-ambassador-oss)  to install Ambassador API.
+Follow the first section of the [Ambassador API installation guide](../../install/install-ambassador-oss)  to install Ambassador Edge Stack.
 Stop before defining the `ambassador` service.
 
 Ambassador needs to be deployed as `NodePort` instead of `LoadBalancer` to work with the L7 load balancer and the ingress.
@@ -148,11 +148,6 @@ spec:
   timeoutsec: 30
   connectiondraining:
     drainingtimeoutsec: 30
-  customrequestheaders:
-    headers:
-      - "x-client-region:{client_region}"
-      - "x-client-city:{client_city}"
-      - "x-client-citylatlong:{client_city_lat_long}"
   logging:
     enable: true
     samplerate: 1.0
