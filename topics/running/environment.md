@@ -25,6 +25,7 @@ Use the following variables for the environment of your Ambassador container:
 | Core                              | `AMBASSADOR_DISABLE_SNAPSHOT_SERVER`        | `false`                                             | Boolean; non-empty=true, empty=false                                          |
 | Edge Stack                        | `AES_LOG_LEVEL`                             | `info`                                              | Log level (see below)                                                         |
 | Edge Stack                        | `AES_RATELIMIT_PREVIEW`                     | `false`                                             | Boolean; [Go `strconv.ParseBool`][]                                           |
+| Edge Stack                        | `AES_AUTH_TIMEOUT`                          | `4s`                                                | Duration; [Go `time.ParseDuration`][]  
 | Primary Redis (L4)                | `REDIS_SOCKET_TYPE`                         | `tcp`                                               | Go network such as `tcp` or `unix`; see [Go `net.Dial`][]                     |
 | Primary Redis (L4)                | `REDIS_URL`                                 | None, must be set explicitly                        | Go network address; for TCP this is a `host:port` pair; see [Go `net.Dial`][] |
 | Primary Redis (L4)                | `REDIS_TLS_ENABLED`                         | `false`                                             | Boolean; [Go `strconv.ParseBool`][]                                           |
