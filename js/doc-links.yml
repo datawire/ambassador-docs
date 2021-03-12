@@ -41,7 +41,9 @@
             - title: Microservices API Gateways
               link: /docs/latest/topics/concepts/microservices-api-gateways
             - title: Edge Stack Architecture
-              link: /docs/latest/topics/concepts/architecture 
+              link: /docs/latest/topics/concepts/architecture
+            - title: Rate Limiting at the Edge
+              link: /docs/latest/topics/concepts/rate-limiting-at-the-edge
         - title: How-to Guides
           link: /docs/latest/howtos
           items:
@@ -158,11 +160,6 @@
                           link: /docs/latest/howtos/websockets
                     - title: Query Parameter-Based Routing
                       link: /docs/latest/topics/using/query_parameters/
-                    - title: Rate Limit Concepts
-                      link: /docs/latest/topics/using/rate-limits/
-                      items:
-                        - title: Using Rate Limits
-                          link: /docs/latest/topics/using/rate-limits/rate-limits
                     - title: Redirects
                       link: /docs/latest/topics/using/redirects
                     - title: Rewrites
@@ -183,6 +180,11 @@
                       link: /docs/latest/topics/using/filters/external
                     - title: Plugin Filter
                       link: /docs/latest/topics/using/filters/plugin
+                - title: Rate Limiting
+                  link: /docs/latest/topics/using/rate-limits/
+                  items:
+                  - title: AES RateLimit Reference
+                    link: /docs/latest/topics/using/rate-limits/rate-limits
                 - title: Edge Policy Console
                   items:
                     - title: Introduction to Edge Policy Console
@@ -207,14 +209,16 @@
                   items:
                     - title: Deployment Architecture
                       link: /docs/latest/topics/running/ambassador-deployment
+                    - title: The Ambassador Container
+                      link: /docs/latest/topics/running/environment
+                    - title: Ambassador Edge Stack and Redis
+                      link: /docs/latest/topics/running/aes-redis
                     - title: Ambassador with AWS
                       link: /docs/latest/topics/running/ambassador-with-aws
                     - title: Ambassador with GKE
                       link: /docs/latest/topics/running/ambassador-with-gke
                     - title: Advanced Deployment Configuration
                       link: /docs/latest/topics/running/running
-                    - title: The Ambassador Container
-                      link: /docs/latest/topics/running/environment
                 - title: Gzip Compression
                   link: /docs/latest/topics/running/gzip
                 - title: Host CRD, ACME Support, and External Load Balancer Configuration
