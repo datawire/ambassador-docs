@@ -269,32 +269,6 @@
           link: /docs/1.10/community
         - title: Troubleshooting
           link: /docs/1.10/topics/running/debugging
-    - title: Telepresence
-      items:
-        - title: Quick Start
-          link: /docs/1.10/telepresence/quick-start
-        - title: How-to Guides
-          items:
-            - title: Intercepts
-              link: /docs/1.10/telepresence/howtos/intercepts
-            - title: Collaborating with Preview URLs
-              link: /docs/1.10/telepresence/howtos/preview-urls
-            - title: Outbound Sessions
-              link: /docs/1.10/telepresence/howtos/outbound
-            - title: Upgrading and Previous Versions
-              link: /docs/1.10/telepresence/howtos/upgrading
-        - title: Core Concepts
-          items:
-            - title: Inner and Outer Dev Loop
-              link: /docs/1.10/telepresence/concepts/devloop
-            - title: Context Propagation
-              link: /docs/1.10/telepresence/concepts/context-prop
-        - title: Technical Reference
-          link: /docs/1.10/telepresence/reference/
-        - title: FAQs
-          link: /docs/1.10/telepresence/faqs
-        - title: Troubleshooting
-          link: /docs/1.10/telepresence/troubleshooting
     - title: Developer Portal
       link: /docs/1.10/topics/using/dev-portal/
     - title: Service Preview

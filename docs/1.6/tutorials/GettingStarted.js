@@ -30,6 +30,10 @@ class GettingStarted extends Component {
         case "other":
           document.getElementById("QS-showLinux").style.display = "inline-block";
           document.getElementById("QS-showLinuxAside1").style.display = "inline-block";
+          break;
+        default:
+          document.getElementById("QS-showLinux").style.display = "inline-block";
+          document.getElementById("QS-showLinuxAside1").style.display = "inline-block";
       }
     };
     renderHeader(os);
@@ -39,11 +43,11 @@ class GettingStarted extends Component {
     return (
     <div className="QS-grid">
 	
-      <span className="QS-os" id="QS-showMac" data-os="mac"><img className="QS-osLogo" src="../../images/apple.png" /></span>	
+      <span className="QS-os" id="QS-showMac" data-os="mac"><img className="QS-osLogo" src="../../images/apple.png" alt="Apple logo" /></span>	
 
-      <span className="QS-os" id="QS-showLinux" data-os="linux"><img className="QS-osLogo" src="../../images/linux.png" /></span>	
+      <span className="QS-os" id="QS-showLinux" data-os="linux"><img className="QS-osLogo" src="../../images/linux.png" alt="Linux logo" /></span>	
 
-      <span className="QS-os" id="QS-showWindows" data-os="windows"><img className="QS-osLogo" src="../../images/windows.png" /></span>
+      <span className="QS-os" id="QS-showWindows" data-os="windows"><img className="QS-osLogo" src="../../images/windows.png" alt="Windows logo"/></span>
 
       <div className="QS-aside QS-aside1">	
         <ul id="QS-asideBullets">	
@@ -126,7 +130,7 @@ class GettingStarted extends Component {
         </ul>	
       </div>	
 
-      <span className="QS-k8"><img className="QS-osLogo" src="../../images/kubernetes.png"/></span>
+      <span className="QS-k8"><img className="QS-osLogo" src="../../images/kubernetes.png" alt="Kubernetes logo" /></span>
 
       <div className="QS-aside QS-aside2">
         <div className="QS-asideText">
@@ -256,7 +260,7 @@ class GettingStarted extends Component {
           </div>
         </div>
 
-        <span className="QS-helm"><img className="QS-osLogo" src="../../images/helm-navy.png"/></span>
+        <span className="QS-helm"><img className="QS-osLogo" src="../../images/helm-navy.png" alt="Helm logo" /></span>
 
         <div className="QS-aside QS-aside3">
           <div className="QS-asideText">
