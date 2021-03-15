@@ -38,7 +38,7 @@ There are two ways of setting labels on a request:
    ```
 
 2. Globally, in the [`ambassador`
-   `Module`](../../../running/ambassador).  Labels set here are
+   `Module`](../../running/ambassador).  Labels set here are
    applied to every single request that goes through Ambassador.  This
    includes requests go through a `Mapping` that sets more labels; for
    those requests, the global labels are prepended to each of the
