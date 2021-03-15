@@ -5,11 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import HubspotForm from 'react-hubspot-form';
-import CodeBlock from '../../../../../src/components/CodeBlock';
-import LinuxIcon from '../../../../../src/assets/icons/linux.inline.svg';
-import AppleIcon from '../../../../../src/assets/icons/apple.inline.svg';
-import WindowsIcon from '../../../../../src/assets/icons/windows.inline.svg';
+import CodeBlock from '../../../../src/components/CodeBlock';
+import LinuxIcon from '../../../../src/assets/icons/linux.inline.svg';
+import AppleIcon from '../../../../src/assets/icons/apple.inline.svg';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -65,51 +63,25 @@ export default function SimpleTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="operating system tabs">
           <Tab icon={<AppleIcon />} label="macOS" {...a11yProps(0)} style={{ minWidth: "10%", textTransform: 'none' }} />
           <Tab icon={<LinuxIcon />} label="Linux" {...a11yProps(1)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab icon={<WindowsIcon />} label="Windows" {...a11yProps(2)} style={{ minWidth: "10%", textTransform: 'none' }} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <CodeBlock>
         {
-          '# 1. Download the latest binary (~60 MB):' +
-          '\n' +
-          'sudo curl -fL https://app.getambassador.io/download/tel2/darwin/amd64/latest/telepresence -o /usr/local/bin/telepresence' +
-          '\n \n' +
-          '# 2. Make the binary executable:' +
-          '\n' +
-          'sudo chmod a+x /usr/local/bin/telepresence'
+          'brew install argoproj/tap/kubectl-argo-rollouts'
         }
         </CodeBlock>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CodeBlock>
         {
-          '# 1. Download the latest binary (~50 MB):' +
+          'sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts' +
           '\n' +
-          'sudo curl -fL https://app.getambassador.io/download/tel2/linux/amd64/latest/telepresence -o /usr/local/bin/telepresence' +
-          '\n \n' +
-          '# 2. Make the binary executable:' +
-          '\n' +
-          'sudo chmod a+x /usr/local/bin/telepresence'
+          'sudo chmod a+x /usr/local/bin/kubectl-argo-rollouts'
         }
         </CodeBlock>
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        <div class="docs-hubspot-formwrapper">
-          <p>
-            Telepresence for Windows is coming soon! Sign up here to notified when it is available.
-          </p>
-          <div class="docs-hubspot-form">
-            <HubspotForm
-              portalId='485087'
-              formId='2f542f1b-3da8-4319-8057-96fed78e4c26'
-              onSubmit={() => console.log('Submit!')}
-              onReady={(form) => console.log('Form ready!')}
-              loading={<div>Loading...</div>}
-            />
-          </div>
-        </div>
-      </TabPanel>
+     
     </div >
   );
 }
