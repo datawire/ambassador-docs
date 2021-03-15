@@ -13,8 +13,8 @@ Rate limiting in Ambassador is composed of two parts:
 
 There are two ways of setting labels on a request:
 
-1. Per [`Mapping`](../mappings#configuring-mappings).  Labels set
-   here will only apply to requests that use that Mapping
+1. On an individual [Mapping](../mappings#configuring-mappings).  Labels set
+   here will only apply to requests that use that Mapping.
 
    ```yaml
    ---
@@ -38,9 +38,9 @@ There are two ways of setting labels on a request:
    ```
 
 2. Globally, in the [`ambassador`
-   `Module`](../../running/ambassador).  Labels set here are
+   Module](../../running/ambassador).  Labels set here are
    applied to every single request that goes through Ambassador.  This
-   includes requests go through a `Mapping` that sets more labels; for
+   includes requests go through a Mapping that sets more labels; for
    those requests, the global labels are prepended to each of the
    Mapping's label groups for the matching domain; otherwise the
    global labels are put in to a new label group named "default" for
