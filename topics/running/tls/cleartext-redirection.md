@@ -44,7 +44,7 @@ spec:
 > 
 > Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
 > 
-> For more information, please refer to the [`Host` documentation](../host-crd#secure-and-insecure-requests).
+> For more information, please refer to the [`Host` documentation](../../host-crd#secure-and-insecure-requests).
 >
 >The `insecure-action` can be one of:
 >
