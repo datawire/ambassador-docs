@@ -103,7 +103,6 @@ version, you can do it in one of the following ways.
     - [`alpn_protocols`](#alpn_protocols)
       - [HTTP/2 Support](#http2-support)
     - [TLS Parameters](#tls-parameters)
-    - [Cipher Suites supported in `Ambassador Edge Stack`](#cipher-suites-supported-in-ambassador-edge-stack)
   - [TLS `Module` (*Deprecated*)](#tls-module-deprecated)
 
 #### Create a `TLSContext` with the name `{{HOST}}-context`
@@ -339,29 +338,27 @@ The `ecdh_curves` setting configures the supported ECDH curves when negotiating
 a TLS connection.  When a client does not support a matching ECDH a handshake 
 error will result.
 
-### Cipher Suites supported in `Ambassador Edge Stack`
-
 ```
   - AES128-SHA
   - AES256-SHA
-  - ECDHE-RSA-AES128-SHA
-  - ECDHE-RSA-AES256-SHA
-  - ECDHE-ECDSA-AES128-SHA
-  - ECDHE-ECDSA-AES256-SHA
-  - PSK-AES128-CBC-SHA
-  - PSK-AES256-CBC-SHA
   - AES128-GCM-SHA256
   - AES256-GCM-SHA384
-  - ECDHE-ECDSA-AES128-GCM-SHA256
-  - ECDHE-ECDSA-AES256-GCM-SHA384
+  - ECDHE-RSA-AES128-SHA
+  - ECDHE-RSA-AES256-SHA
   - ECDHE-RSA-AES128-GCM-SHA256
   - ECDHE-RSA-AES256-GCM-SHA384
   - ECDHE-RSA-CHACHA20-POLY1305
+  - ECDHE-ECDSA-AES128-SHA
+  - ECDHE-ECDSA-AES256-SHA
+  - ECDHE-ECDSA-AES128-GCM-SHA256
+  - ECDHE-ECDSA-AES256-GCM-SHA384
   - ECDHE-ECDSA-CHACHA20-POLY1305
-  - DES-CBC3-SHA
-  - ECDHE-PSK-AES256-CBC-SHA
   - ECDHE-PSK-AES128-CBC-SHA
+  - ECDHE-PSK-AES256-CBC-SHA
   - ECDHE-PSK-CHACHA20-POLY1305
+  - PSK-AES128-CBC-SHA
+  - PSK-AES256-CBC-SHA
+  - DES-CBC3-SHA
 ```
 
 ```yaml
