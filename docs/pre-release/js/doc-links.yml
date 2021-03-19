@@ -32,6 +32,8 @@
         - title: Core Concepts
           link: /docs/pre-release/topics/concepts/
           items:
+            - title: Introduction to Modern Network Load Balancing and Proxying
+              link: /docs/pre-release/topics/concepts/modern-lb-and-proxying
             - title: Kubernetes Network Architecture
               link: /docs/pre-release/topics/concepts/kubernetes-network-architecture
             - title: "The Ambassador Operating Model: GitOps and Continuous Delivery"
