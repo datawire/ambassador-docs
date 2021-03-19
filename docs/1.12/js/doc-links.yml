@@ -303,6 +303,8 @@
               link: /docs/latest/telepresence/reference/architecture
             - title: Client Reference
               link: /docs/latest/telepresence/reference/client
+            - title: Configuration File
+              link: /docs/latest/telepresence/reference/config
             - title: Environment Variables
               link: /docs/latest/telepresence/reference/environment
             - title: Intercepts
