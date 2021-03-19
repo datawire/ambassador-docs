@@ -329,15 +329,37 @@ using a higher version attempts to connect to the server, the handshake will
 result in the following error: 
 `tls: server selected unsupported protocol version`.
 
-The `cipher_suites` setting configures the supported 
-[cipher list](https://commondatastorage.googleapis.com/chromium-boringssl-docs/ssl.h.html#Cipher-suite-configuration) 
-when negotiating a TLS 1.0-1.2 connection. This setting has no effect when 
-negotiating a TLS 1.3 connection.  When a client does not support a matching 
-cipher a handshake error will result.
+The `cipher_suites` setting configures the supported ciphers found below using the 
+[configuration parameters for BoringSSL](https://commondatastorage.googleapis.com/chromium-boringssl-docs/ssl.h.html#Cipher-suite-configuration) when negotiating a TLS 1.0-1.2 connection. 
+This setting has no effect when negotiating a TLS 1.3 connection.  When a client does not 
+support a matching cipher a handshake error will result.
 
 The `ecdh_curves` setting configures the supported ECDH curves when negotiating
 a TLS connection.  When a client does not support a matching ECDH a handshake 
 error will result.
+
+```
+  - AES128-SHA
+  - AES256-SHA
+  - AES128-GCM-SHA256
+  - AES256-GCM-SHA384
+  - ECDHE-RSA-AES128-SHA
+  - ECDHE-RSA-AES256-SHA
+  - ECDHE-RSA-AES128-GCM-SHA256
+  - ECDHE-RSA-AES256-GCM-SHA384
+  - ECDHE-RSA-CHACHA20-POLY1305
+  - ECDHE-ECDSA-AES128-SHA
+  - ECDHE-ECDSA-AES256-SHA
+  - ECDHE-ECDSA-AES128-GCM-SHA256
+  - ECDHE-ECDSA-AES256-GCM-SHA384
+  - ECDHE-ECDSA-CHACHA20-POLY1305
+  - ECDHE-PSK-AES128-CBC-SHA
+  - ECDHE-PSK-AES256-CBC-SHA
+  - ECDHE-PSK-CHACHA20-POLY1305
+  - PSK-AES128-CBC-SHA
+  - PSK-AES256-CBC-SHA
+  - DES-CBC3-SHA
+```
 
 ```yaml
 ---
