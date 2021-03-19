@@ -1,6 +1,20 @@
 # Introduction to Modern Network Load Balancing and Proxying
 
-[Matt Klein](https://blog.envoyproxy.io/@mattklein123?source=post_page-----a57f6ff80236----------------------)
+Author: [Matt Klein](https://blog.envoyproxy.io/@mattklein123?source=post_page-----a57f6ff80236----------------------)
+
+<div class="docs-article-toc">
+<h3>Contents</h3>
+
+* [What is network load balancing and proxying?](#what-is-network-load-balancing-and-proxying)
+* [Load balancer features](#load-balancer-features)
+* [Types of load balancer topologies](#types-of-load-balancer-topologies)
+* [Current state of the art in L4 load balancing](#current-state-of-the-art-in-l4-load-balancing)
+* [Current state of the art in L7 load balancing](#current-state-of-the-art-in-l7-load-balancing)
+* [Global load balancing and the centralized control plane](#global-load-balancing-and-the-centralized-control-plane)
+* [The evolution from hardware to software](#the-evolution-from-hardware-to-software)
+* [Conclusion and the future of load balancing](#conclusion-and-the-future-of-load-balancing)
+
+</div>
 
 There’s a dearth of introductory educational material available about modern network load balancing and proxying. Which doesn’t necessarily make much sense, since load balancing is one of the core concepts required for building reliable distributed systems. 
 
