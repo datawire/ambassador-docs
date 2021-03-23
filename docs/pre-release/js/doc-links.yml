@@ -97,6 +97,8 @@
                   link: /docs/pre-release/howtos/rate-limiting-tutorial
                 - title: Advanced Rate Limiting
                   link: /docs/pre-release/howtos/advanced-rate-limiting
+                - title: Rate Limiting on Token Claims
+                  link: /docs/pre-release/howtos/token-ratelimit
             - title: Service Mesh Integration
               items:
                 - title: Consul
