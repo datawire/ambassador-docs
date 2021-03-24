@@ -136,7 +136,7 @@ spec:
   - name: julians-rule-enforcement
     action: Enforce
     pattern:
-    - headerkey: "Julian" # Only matches for x-token-name = "Julian Jones"
+    - headerkey: "Julian" # Only matches for x-token-name = "Julian"
     rate: 2
     unit: "minute"
   - name: token-name-per-minute
