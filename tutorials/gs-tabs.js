@@ -7,7 +7,9 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CodeBlock from '../../../../src/components/CodeBlock/CodeBlock'
-
+import HelmIcon from '../../../../src/assets/icons/helm.inline.svg';
+import KubernetesIcon from '../../../../src/assets/icons/kubernetes.inline.svg';
+import TerminalIcon from '../../../../src/assets/icons/terminal.inline.svg';
 
 
 function TabPanel(props) {
@@ -64,10 +66,10 @@ export default function SimpleTabs() {
     <div className={classes.root}>
       <AppBar elevation={0} style={{ background: 'transparent', color: 'black', borderBottom: '1px solid #e8e8e8', }} position="static">
         <Tabs TabIndicatorProps={{ style: { background: '#AF5CF8' } }} value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Helm 3" {...a11yProps(0)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab label="Helm 2" {...a11yProps(1)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab label="Kubernetes YAML" {...a11yProps(2)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab label="Quick CLI Install" {...a11yProps(3)} style={{ minWidth: "10%", textTransform: 'none' }} />
+          <Tab icon={<HelmIcon />} label="Helm 3" {...a11yProps(0)} style={{ minWidth: "10%", textTransform: 'none' }} />
+          <Tab icon={<HelmIcon />}label="Helm 2" {...a11yProps(1)} style={{ minWidth: "10%", textTransform: 'none' }} />
+          <Tab icon={<KubernetesIcon />}label="Kubernetes YAML" {...a11yProps(2)} style={{ minWidth: "10%", textTransform: 'none' }} />
+          <Tab icon={<TerminalIcon />}label="Quick CLI Install" {...a11yProps(3)} style={{ minWidth: "10%", textTransform: 'none' }} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
