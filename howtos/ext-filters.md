@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# External Filters
+# Custom Filters
 
 <Alert severity="info">This guide applies to Ambassador Edge Stack, use of this guide on the Ambassador API Gateway is not recommended.  Use <a href="../basic-auth/">Authentication</a> instead.</Alert>
 
