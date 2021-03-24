@@ -293,7 +293,7 @@
           items:
             - title: Intercept a Service
               link: /docs/pre-release/telepresence/howtos/intercepts
-            - title: Collaborate using Preview URLs
+            - title: Share Dev Environments with Preview URLs
               link: /docs/pre-release/telepresence/howtos/preview-urls
             - title: Create a Demo Cluster
               link: /docs/pre-release/telepresence/howtos/democluster
