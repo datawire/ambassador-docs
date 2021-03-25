@@ -126,7 +126,7 @@ See the [TLS HOWTO](../../../howtos/tls-termination) to quickly enable HTTPS sup
 In the following instructions, we'll install the open-source Ambassador API
 Gateway with Helm. 
 
-Although the [Helm chart](https://github.com/datawire/ambassador-chart) installs
+Although the [Helm chart](https://github.com/datawire/ambassador/tree/master/charts/ambassador) installs
 the Ambassador Edge Stack by default, the Ambassador API Gateway is still
 available for installation for both Helm 2 and Helm 3.
 
