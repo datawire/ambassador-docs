@@ -84,7 +84,7 @@ spec:
   prefix: /httpbin/
   service: httpbin.org
   docs:
-    url: https://api.swaggerhub.com/apis/helen/httpbin/1.0-oas3/swagger.json
+    url: https://httpbin.org/spec.json
 ```
 
 > Notes on access to documentation `path`s:
