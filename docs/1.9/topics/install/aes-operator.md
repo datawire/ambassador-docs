@@ -101,7 +101,7 @@ Default: `false`.
 ## Customizing the installation with some Helm values
 
 `helmValues` is an optional map of configurable parameters of the Ambassador chart
-with some overriden values. Take a look at the [current list of values](https://github.com/datawire/ambassador-chart#configuration)
+with some overriden values. Take a look at the [current list of values](https://github.com/datawire/ambassador/tree/master/charts/ambassador#configuration)
 and their default values.
 
 Example:
