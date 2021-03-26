@@ -147,4 +147,4 @@ spec:
     unit: "minute" # Per-minute tracking is useful for debugging
 ```
 
-This tutorial only scratches the surface of the rate limiting capabilities of Edge Stack.  Please see our documentation [here](../../topics/using/rate-limits/) and [here](../../using/rate-limits/rate-limits/) to learn more about how you can use rate limiting.
+This tutorial only scratches the surface of the rate limiting capabilities of Edge Stack.  Please see our documentation [here](../../topics/using/rate-limits/) and [here](../../topics/using/rate-limits/rate-limits/) to learn more about how you can use rate limiting.
