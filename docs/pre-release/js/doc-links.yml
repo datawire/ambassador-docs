@@ -317,6 +317,8 @@
               link: /docs/pre-release/telepresence/reference/volume
             - title: DNS Resolution
               link: /docs/pre-release/telepresence/reference/dns
+            - title: RBAC
+              link: /docs/pre-release/telepresence/reference/rbac
         - title: FAQs
           link: /docs/pre-release/telepresence/faqs
         - title: Troubleshooting
