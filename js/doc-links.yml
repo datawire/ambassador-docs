@@ -32,6 +32,8 @@
         - title: Core Concepts
           link: /docs/latest/topics/concepts/
           items:
+            - title: Introduction to Modern Network Load Balancing and Proxying
+              link: /docs/latest/topics/concepts/modern-lb-and-proxying
             - title: Kubernetes Network Architecture
               link: /docs/latest/topics/concepts/kubernetes-network-architecture
             - title: "The Ambassador Operating Model: GitOps and Continuous Delivery"
@@ -70,7 +72,7 @@
                 - title: Using the OAuth2 filter
                   link: /docs/latest/howtos/oauth-oidc-auth
             - title: Custom Filters
-              link: /docs/latest/howtos/filter-dev-guide
+              link: /docs/latest/howtos/ext-filters
             - title: Deploying to Kubernetes from GitHub
               link: /docs/latest/tutorials/projects
             - title: Distributed Tracing
@@ -95,6 +97,8 @@
                   link: /docs/latest/howtos/rate-limiting-tutorial
                 - title: Advanced Rate Limiting
                   link: /docs/latest/howtos/advanced-rate-limiting
+                - title: Rate Limiting on Token Claims
+                  link: /docs/latest/howtos/token-ratelimit
             - title: Service Mesh Integration
               items:
                 - title: Consul
@@ -295,7 +299,7 @@
           items:
             - title: Intercept a Service
               link: /docs/latest/telepresence/howtos/intercepts
-            - title: Collaborate using Preview URLs
+            - title: Share Dev Environments with Preview URLs
               link: /docs/latest/telepresence/howtos/preview-urls
             - title: Create a Demo Cluster
               link: /docs/latest/telepresence/howtos/democluster
@@ -307,6 +311,8 @@
               link: /docs/latest/telepresence/reference/architecture
             - title: Client Reference
               link: /docs/latest/telepresence/reference/client
+            - title: Configuration File
+              link: /docs/latest/telepresence/reference/config
             - title: Environment Variables
               link: /docs/latest/telepresence/reference/environment
             - title: Intercepts
@@ -315,6 +321,8 @@
               link: /docs/latest/telepresence/reference/volume
             - title: DNS Resolution
               link: /docs/latest/telepresence/reference/dns
+            - title: RBAC
+              link: /docs/latest/telepresence/reference/rbac
         - title: FAQs
           link: /docs/latest/telepresence/faqs
         - title: Troubleshooting

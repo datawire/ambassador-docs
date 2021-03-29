@@ -12,7 +12,7 @@ Telepresence enables you to connect your local development machine seamlessly to
 
 Ultimately, this empowers you to develop services locally and still test integrations with dependent services or data stores running in the remote cluster. 
 
-You can “intercept” any requests made to a target Kubernetes deployment, and code and debug your associated service locally using your favourite local IDE and in-process debugger. You can test your integrations by making requests against the remote cluster’s ingress and watching how the resulting internal traffic is handled by your service running locally.
+You can “intercept” any requests made to a target Kubernetes workload, and code and debug your associated service locally using your favourite local IDE and in-process debugger. You can test your integrations by making requests against the remote cluster’s ingress and watching how the resulting internal traffic is handled by your service running locally.
 
 By using the preview URL functionality you can share access with additional developers or stakeholders to the application via an entry point associated with your intercept and locally developed service. You can make changes that are visible in near real-time to all of the participants authenticated and viewing the preview URL. All other viewers of the application entrypoint will not see the results of your changes.
 
@@ -29,17 +29,11 @@ If you need another protocol supported, please [drop us a line](../../../../feed
 
 ** When using Telepresence to intercept a pod, are the Kubernetes cluster environment variables proxied to my local machine?**
 
- This feature is coming soon.
+Yes, you can either set the pod's environment variables on your machine or write the variables to a file to use with Docker or another build process. Please see [the environment variable reference doc](../reference/environment) for more information.
 
-For the moment you can `kubectl exec` into a container running on the pod in order to explore the environment variables that are available.
+** When using Telepresence to intercept a pod, can the associated pod volume mounts also be mounted my local machine?**
 
-If you are using Kubernetes 1.16+, you can also create an ephemeral container (an alpha feature) within a pod, and explore the volumes using this approach.
-
-** When using Telepresence to intercept a pod, are the associated pod volume mounts also proxied and shared with my local machine?**
-
-Yes, please see [this doc on using volume mounts](../reference/volume/).
-
-For the moment you can `kubectl exec` into a container running on the pod in order to explore the volumes.
+Yes, please see [the volume mounts reference doc](../reference/volume/) for more information.
 
 ** When connected to a Kubernetes cluster via Telepresence, can I access cluster-based services via their DNS name?**
 
@@ -63,7 +57,7 @@ You can connect to databases or middleware running in the cluster, such as MySQL
 
 Telepresence will discover/prompt during first use for this info and make its best guess at figuring this out and ask you to confirm or update this. 
 
-** Will Telepresence be able to intercept deployments running on a private cluster or cluster running within a virtual private cloud (VPC)?**
+** Will Telepresence be able to intercept workloads running on a private cluster or cluster running within a virtual private cloud (VPC)?**
 
  Yes. The cluster has to have outbound access to the internet for the preview URLs to function correctly, but it doesn’t need to have a publicly accessible IP address. 
 
@@ -79,7 +73,7 @@ On Fedora, Telepresence also creates a virtual network device (a TUN network) fo
 
  A single Traffic Manager service is deployed in the `ambassador` namespace within your cluster, and this manages resilient intercepts and connections between your local machine and the cluster.
 
-A Traffic Agent container is injected per pod that is being intercepted. The first time a deployment is intercepted all pods associated with this deployment will be restarted with the Traffic Agent automatically injected.
+A Traffic Agent container is injected per pod that is being intercepted. The first time a workload is intercepted all pods associated with this workload will be restarted with the Traffic Agent automatically injected.
 
 ** How can I remove all of the Telepresence components installed within my cluster?**
 
@@ -95,9 +89,12 @@ Running this command will also stop the local daemon running.
 
  The connection between your laptop and cluster is established via the standard `kubectl` mechanisms and SSH tunnelling.
 
+<a name="idps"></a>
+
 ** What identity providers are supported for authenticating to view a preview URL?**
 
- Currently GitHub is used to authenticate a user of Telepresence (triggered via the `telepresence login` command) and any viewers of a preview URL.
+ Currently GitHub and GitLab are used to authenticate a user of Telepresence (triggered via the `telepresence login` command) and any viewers of a preview URL.
+
 
 More authentication mechanisms and identity provider support will be added soon. Please [let us know](../../../../feedback) which providers are the most important to you and your team in order for us to prioritize those.
 

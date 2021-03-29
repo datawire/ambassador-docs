@@ -195,10 +195,11 @@ Next, we’ll create an intercept. An intercept is a rule that tells Telepresenc
   ```
   $ telepresence intercept dataprocessingservice --port 3000
 
-    Using deployment dataprocessingservice
+    Using Deployment dataprocessingservice
     intercepted
         Intercept name: dataprocessingservice
         State         : ACTIVE
+        Workload kind : Deployment
         Destination   : 127.0.0.1:3000
         Intercepting  : all TCP connections
   ```
@@ -233,12 +234,12 @@ Create preview URLs to do selective intercepts, meaning only traffic coming from
 2. Login to Ambassador Cloud, a web interface for managing and sharing preview URLs:
 `telepresence login`
 
-  This opens your browser; login with your GitHub account and choose your org.
+  This opens your browser; login with your preferred identity provider and choose your org.
 
   ```
   $ telepresence login
     Launching browser authentication flow...
-    <browser opens, login with GitHub>
+    <browser opens, login>
     Login successful.
   ```
 
@@ -272,10 +273,11 @@ Create preview URLs to do selective intercepts, meaning only traffic coming from
       
              [default: verylargejavaservice.default]:
       
-      Using deployment dataprocessingservice
+      Using Deployment dataprocessingservice
       intercepted
           Intercept name  : dataprocessingservice
           State           : ACTIVE
+          Workload kind   : Deployment
           Destination     : 127.0.0.1:3000
           Intercepting    : HTTP requests that match all of:
             header("x-telepresence-intercept-id") ~= regexp("86cb4a70-c7e1-1138-89c2-d8fed7a46cae:dataprocessingservice")
