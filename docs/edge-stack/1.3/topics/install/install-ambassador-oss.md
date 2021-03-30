@@ -11,7 +11,7 @@ If you still want to use just the Ambassador API Gateway, don't worry! You can f
 
 ## Kubernetes YAML
 
-In this tutorial, we'll walk through the process of deploying the Ambassador API Gateway in Kubernetes for ingress routing. The Ambassador API Gateway provides all the functionality of a traditional ingress controller (i.e., path-based routing) while exposing many additional capabilities such as authentication, URL rewriting, CORS, rate limiting, and automatic metrics collection (the [mappings reference](../using/intro-mappings) contains a full list of supported options). Note that the Ambassador Edge Stack can be used as an [Ingress Controller](../running/ingress-controller).
+In this tutorial, we'll walk through the process of deploying the Ambassador API Gateway in Kubernetes for ingress routing. The Ambassador API Gateway provides all the functionality of a traditional ingress controller (i.e., path-based routing) while exposing many additional capabilities such as authentication, URL rewriting, CORS, rate limiting, and automatic metrics collection (the [mappings reference](../../using/intro-mappings) contains a full list of supported options). Note that the Ambassador Edge Stack can be used as an [Ingress Controller](../../running/ingress-controller).
 
 For more background on Kubernetes ingress, [read this blog post](https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d).
 
@@ -95,7 +95,7 @@ the Ambassador API Gateway includes an integrated diagnostics service to help wi
 
 By default, this is exposed to the internet at the URL `http://{{AMBASSADOR_HOST}}/ambassador/v0/diag/`. Go to that URL from a web browser to view the diagnostic UI.
 
-You can change the default so it is not exposed externally by default by setting `diagnostics.enabled: false` in the [ambassador `Module`](../running/ambassador).
+You can change the default so it is not exposed externally by default by setting `diagnostics.enabled: false` in the [ambassador `Module`](../../running/ambassador).
 
 ```yaml
 apiVersion: getambassador.io/v2
