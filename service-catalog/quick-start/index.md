@@ -1,5 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
-import GSTabs2 from '../../../tutorials/gs-tabs2'
+import GSTabs2 from '../tutorials/gs-tabs2'
 
 # Service Catalog Quick Start
 
@@ -85,7 +85,7 @@ Ambassador Cloud Service Catalog provides a centralized view with an easily navi
 
 Service Catalog requires **Edge Stack version 1.12 or greater** to be installed in your cluster.
 
-**Install** Edge Stack <a href="../../../tutorials/getting-started/">from here</a> if needed.
+**Install** Edge Stack <a href="../../../../edge-stack/latest/tutorials/getting-started/">from here</a> if needed.
 
 If you already have Edge Stack installed, **check your version** by running this command:
 
@@ -95,11 +95,11 @@ kubectl get deploy -n ambassador ambassador -o jsonpath='{.spec.template.spec.co
 
 Is the `image` at version 1.12 or greater?  Then you are ready to start using Service Catalog!
 
-If not, [follow this doc](../../../topics/install/upgrading/) to **upgrade** Edge Stack.
+If not, [follow this doc](../../../../edge-stack/latest/topics/install/upgrading/) to **upgrade** Edge Stack.
 
 ## 1. Connect your Cluster to Ambassador Cloud
 
-<Alert severity="info">If you followed the <a href="../../../tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.</Alert>
+<Alert severity="info">If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.</Alert>
 
 The Service Catalog is a web-based interface that lists all of your cluster's Services. You can view, add, and update metadata associated with each Service, such as the owner, version control repository, and associated Slack channel.
 
@@ -133,7 +133,7 @@ Then refresh your Service Catalog page and you should see the `quote` service li
 
 
 
-<Alert severity="info">If you follow <a href="../../../topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps practices</b></a> please follow your organization's best practices to add the token to your configuration.</Alert>
+<Alert severity="info">If you follow <a href="../../../../edge-stack/latest/topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps practices</b></a> please follow your organization's best practices to add the token to your configuration.</Alert>
 
 ## 2. Claim Ownership of a Service
 
@@ -196,6 +196,6 @@ Open the YAML config file of one of your services.  If you applied our `quote` s
 
 <Alert severity="success"><b>Fantastic!</b> You should see the Git repo metadata change for your service in the catalog! Now any of your teammates can quickly find the repo for the service.</Alert>
 
-## <img class="os-logo" src="../../../images/logo.png"/> What's Next?
+## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
 You've updated the owner and repo URL, but **Service Catalog supports many more annotations!**  See the full list [here](../reference/annotations/).
