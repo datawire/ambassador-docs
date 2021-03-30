@@ -82,9 +82,10 @@ export default ({ data, location }) => {
             return;
         }
         setVersionList(selectedProduct.version);
-        setVersion(selectedProduct.version[0]);
+        const newVersion = selectedProduct.version.filter(v => v.id === "latest")[0] || selectedProduct.version[0];
+        setVersion(newVersion);
         navigate(
-            `/docs/${selectedProduct.slug}/${selectedProduct.version[0].link}/`,
+            `/docs/${selectedProduct.slug}/${newVersion.link}/`,
         );
     };
 
