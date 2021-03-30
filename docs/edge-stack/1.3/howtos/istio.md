@@ -16,7 +16,7 @@ Getting the Ambassador Edge Stack working with Istio is straightforward. In this
 
 By default, the Bookinfo application uses the Istio ingress. To use the Ambassador Edge Stack, we need to:
 
-1. [Install the Ambassador Edge Stack](../../topics/install).\
+1. [Install the Ambassador Edge Stack](../topics/install).\
 2. Install a sample `Mapping` in the Ambassador Edge Stack by creating a YAML file named `httpbin.yaml` and paste in the following contents:
 
 ```yaml
@@ -245,7 +245,7 @@ spec:
 ```
 Note the `tls: istio-upstream`, which lets the Ambassador Edge Stack know which certificate to use when communicating with that service.
 
-In the definition above we also have TLS termination enabled; please see [the TLS termination tutorial](../../howtos/tls-termination) or the [Host CRD](../../topics/running/host-crd) for more details.
+In the definition above we also have TLS termination enabled; please see [the TLS termination tutorial](../howtos/tls-termination) or the [Host CRD](../topics/running/host-crd) for more details.
 
 ### PERMISSIVE mTLS
 
@@ -303,7 +303,7 @@ spec:
   config: {}
 ```
 
-*Note:* We are using the DNS entry `zipkin.istio-system` as well as the port that our service is running, in this case, `9411`. Please see [Distributed Tracing](../../topics/running/services/tracing-service) for more details on Tracing configuration.
+*Note:* We are using the DNS entry `zipkin.istio-system` as well as the port that our service is running, in this case, `9411`. Please see [Distributed Tracing](../topics/running/services/tracing-service) for more details on Tracing configuration.
 
 ## Monitoring/Statistics Integration
 

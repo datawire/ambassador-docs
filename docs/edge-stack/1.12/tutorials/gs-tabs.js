@@ -6,10 +6,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import CodeBlock from '../../../../src/components/CodeBlock/CodeBlock'
-import HelmIcon from '../../../../src/assets/icons/helm.inline.svg';
-import KubernetesIcon from '../../../../src/assets/icons/kubernetes.inline.svg';
-import TerminalIcon from '../../../../src/assets/icons/terminal.inline.svg';
+import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock'
+import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
+import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
+import TerminalIcon from '../../../../../src/assets/icons/terminal.inline.svg';
 
 
 function TabPanel(props) {
@@ -25,7 +25,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -67,18 +67,18 @@ export default function SimpleTabs() {
       <AppBar elevation={0} style={{ background: 'transparent', color: 'black', borderBottom: '1px solid #e8e8e8', }} position="static">
         <Tabs TabIndicatorProps={{ style: { background: '#AF5CF8' } }} value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab icon={<HelmIcon />} label="Helm 3" {...a11yProps(0)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab icon={<HelmIcon />}label="Helm 2" {...a11yProps(1)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab icon={<KubernetesIcon />}label="Kubernetes YAML" {...a11yProps(2)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab icon={<TerminalIcon />}label="Quick CLI Install" {...a11yProps(3)} style={{ minWidth: "10%", textTransform: 'none' }} />
+          <Tab icon={<HelmIcon />} label="Helm 2" {...a11yProps(1)} style={{ minWidth: "10%", textTransform: 'none' }} />
+          <Tab icon={<KubernetesIcon />} label="Kubernetes YAML" {...a11yProps(2)} style={{ minWidth: "10%", textTransform: 'none' }} />
+          <Tab icon={<TerminalIcon />} label="Quick CLI Install" {...a11yProps(3)} style={{ minWidth: "10%", textTransform: 'none' }} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
 
         {/*Helm 3 install instructions*/}
 
-         <CodeBlock>
+        <CodeBlock>
           {
-            '# Add the Repo:' + 
+            '# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
             '\n \n' +
@@ -94,13 +94,13 @@ export default function SimpleTabs() {
 
       </TabPanel>
 
-            <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={1}>
 
         {/*Helm 2 install instructions*/}
 
-         <CodeBlock>
+        <CodeBlock>
           {
-            '# Add the Repo:' + 
+            '# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
             '\n \n' +
@@ -119,10 +119,10 @@ export default function SimpleTabs() {
       <TabPanel value={value} index={2}>
 
         {/*YAML install instructions*/}
-        
-         <CodeBlock>
+
+        <CodeBlock>
           {
-            'kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \\' + 
+            'kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \\' +
             '\n' +
             'kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \\' +
             '\n' +
@@ -133,7 +133,7 @@ export default function SimpleTabs() {
           }
         </CodeBlock>
 
-        </TabPanel>
+      </TabPanel>
 
       <TabPanel value={value} index={3}>
 
@@ -142,7 +142,7 @@ export default function SimpleTabs() {
           {
             '# macOS:' +
             '\n' +
-            'sudo curl -fL https://metriton.datawire.io/downloads/darwin/edgectl \\' + 
+            'sudo curl -fL https://metriton.datawire.io/downloads/darwin/edgectl \\' +
             '\n' +
             '   -o /usr/local/bin/edgectl &&' +
             '\n' +
@@ -152,7 +152,7 @@ export default function SimpleTabs() {
             '\n \n' +
             '# Linux:' +
             '\n' +
-            'sudo curl -fL https://metriton.datawire.io/downloads/linux/edgectl \\' + 
+            'sudo curl -fL https://metriton.datawire.io/downloads/linux/edgectl \\' +
             '\n' +
             '   -o /usr/local/bin/edgectl &&' +
             '\n' +

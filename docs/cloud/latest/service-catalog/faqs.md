@@ -84,7 +84,7 @@ Please check the following:
 
 **What components get installed into my cluster when connecting to Service Catalog?**
 
-The standard [Edge Stack Services](../../../topics/install/) get installed within your cluster. The Edge Stack components are responsible for synchronizing the list of Services within your cluster with the list displayed within the Service Catalog.
+The standard [Edge Stack Services](../../../../edge-stack/latest/topics/install/) get installed within your cluster. The Edge Stack components are responsible for synchronizing the list of Services within your cluster with the list displayed within the Service Catalog.
 
 **How do I share my feedback on Ambassador Cloud and Service Catalog?**
 
