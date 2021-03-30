@@ -2,11 +2,11 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+
 import Layout from '../../src/components/Layout';
+import Icon from '../../src/components/Icon';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import SlackIcon from './images/slack-icon.inline.svg';
-import MailIcon from './images/mail-icon.inline.svg';
 import { products, oldStructure } from './config';
 import DocsHome from './components/DocsHome';
 import { goToSlack, goToContactUs } from '../../src/utils/routes';
@@ -215,21 +215,21 @@ export default ({ data, location }) => {
 
                 <div className={`${!isHome ? 'docs__doc-body-container' : ''}`}>
 
-                    <hr className={`docs__separator docs__container`} />
+                    <hr className="docs__separator docs__container" />
 
-                    <section className={`docs__contact docs__container`}>
+                    <section className="docs__contact docs__container">
                         <span className="docs__heading-secondary">Questions?</span>
                         <p>We’re here to help if you have questions.</p>
                         <ul className="docs__contact-list">
                             <li>
                                 <a href={goToSlack} target="_blank">
-                                    <SlackIcon className="docs__contact-list--icon" />
+                                    <Icon name="slack-icon" className="docs__contact-list--icon" />
                                     Join our Slack
                                 </a>
                             </li>
                             <li>
                                 <Link to={goToContactUs}>
-                                    <MailIcon className="docs__contact-list--icon" />
+                                    <Icon name="mail-icon" className="docs__contact-list--icon" />
                                     Contact Us
                                 </Link>
                             </li>
