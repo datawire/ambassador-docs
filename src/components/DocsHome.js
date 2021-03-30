@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
-import AmbassadorCloud from '../images/ambassador-cloud.inline.svg';
-import RightArrow from '../images/right-arrow.inline.svg';
-import TelepresenceIcon from '../images/telepresence-icon.inline.svg';
-import EdgeStackIcon from '../images/edge-stack-icon.inline.svg';
+import Icon from '../../../src/components/Icon';
 import {
     goToGetAmbassador, goToTelepresenceDocs, goToTutorialsGettingStarted, goToTelepresenceHowTo,
     goToTelepresenceEnv, goToTelepresenceOutbound, goToMappings, goToOauth, goToRateLimits
@@ -20,11 +17,11 @@ const DocsHome = () => (
                     <span className="docs__heading-secondary">Ambassador Cloud</span>
                     <p>Adopt an integrated workflow for quickly coding, testing, and releasing microservices on Kubernetes.</p>
                     <Link to={goToGetAmbassador} className="docs__button-secondary">
-                        Get Started <RightArrow className="docs__button-secondary--arrow" />
+                        Get Started <Icon name="right-arrow" className="docs__button-secondary--arrow" />
                     </Link>
                 </div>
                 <div className="docs__info--second">
-                    <AmbassadorCloud className="docs__ambassador-cloud-image" />
+                    <Icon name="ambassador-cloud" className="docs__ambassador-cloud-image" />
                 </div>
             </div>
         </section>
@@ -36,11 +33,11 @@ const DocsHome = () => (
             <div className="docs__cards">
                 <div className="docs__card">
                     <div className="docs__card--heading">
-                        <TelepresenceIcon />
+                        <Icon name="telepresence-icon" />
                         Telepresence
                     </div>
                     <p>Code and test microservices locally against a remote Kubernetes cluster.</p>
-                    <Link to={goToTelepresenceDocs} className="docs__button-tertiary">Get Started <RightArrow className="docs__button-tertiary--arrow" /></Link>
+                    <Link to={goToTelepresenceDocs} className="docs__button-tertiary">Get Started <Icon name="right-arrow" className="docs__button-tertiary--arrow" /></Link>
                     <hr className="docs__card--separator" />
                     <span className="docs__heading-tertiary">Popular Tutorials</span>
                     <ul className="docs__popular-list">
@@ -51,11 +48,11 @@ const DocsHome = () => (
                 </div>
                 <div className="docs__card">
                     <div className="docs__card--heading">
-                        <EdgeStackIcon />
+                        <Icon name="edge-stack-icon" />
                         Edge Stack
                     </div>
                     <p>Route and secure traffic to your cluster with a Kubernetes-native API Gateway.</p>
-                    <Link to={goToTutorialsGettingStarted} className="docs__button-tertiary">Get Started <RightArrow className="docs__button-tertiary--arrow" /></Link>
+                    <Link to={goToTutorialsGettingStarted} className="docs__button-tertiary">Get Started <Icon name="right-arrow" className="docs__button-tertiary--arrow" /></Link>
                     <hr className="docs__card--separator" />
                     <span className="docs__heading-tertiary">Popular Tutorials</span>
                     <ul className="docs__popular-list">
