@@ -2,7 +2,7 @@
 # Ex:
 # - /docs
 # - /reference
-# 
+#
 
 - /docs/latest/topics/using/filters/
 - /docs/latest/topics/using/filters/oauth2
@@ -20,3 +20,4 @@
 - /docs/latest/topics/using/rate-limits/rate-limits/
 - /docs/latest/topics/using/rate-limit-speedometers
 - /docs/latest/topics/running/aes-redis
+- /docs/latest/topics/running/aes-extensions/authentication
