@@ -4,22 +4,21 @@
 # - /reference
 #
 
-- /docs/latest/topics/using/filters/
-- /docs/latest/topics/using/filters/oauth2
-- /docs/latest/topics/using/filters/jwt
-- /docs/latest/topics/using/filters/external
-- /docs/latest/topics/using/filters/plugin
-- /docs/latest/topics/using/edgectl/
-- /docs/latest/topics/using/edgectl/edge-control
-- /docs/latest/topics/using/edgectl/edge-control-in-ci
-- /docs/latest/topics/using/edgectl/service-preview-install
-- /docs/latest/topics/using/edgectl/service-preview-reference
-- /docs/latest/topics/using/edgectl/service-preview-tutorial
-- /docs/latest/topics/using/dev-portal
-- /docs/latest/topics/using/edge-policy-console
-- /docs/latest/topics/using/rate-limits/rate-limits/
-- /docs/latest/topics/using/rate-limit-speedometers
-- /docs/latest/topics/running/aes-redis
-- /docs/latest/topics/running/aes-extensions/
-- /docs/latest/topics/running/aes-extensions/authentication
-- /docs/latest/topics/running/aes-extensions/ratelimit
+- /docs/edge-stack/latest/topics/using/filters/
+- /docs/edge-stack/latest/topics/using/filters/oauth2
+- /docs/edge-stack/latest/topics/using/filters/jwt
+- /docs/edge-stack/latest/topics/using/filters/external
+- /docs/edge-stack/latest/topics/using/filters/plugin
+- /docs/edge-stack/latest/topics/using/edgectl/
+- /docs/edge-stack/latest/topics/using/edgectl/edge-control
+- /docs/edge-stack/latest/topics/using/edgectl/edge-control-in-ci
+- /docs/edge-stack/latest/topics/using/edgectl/service-preview-install
+- /docs/edge-stack/latest/topics/using/edgectl/service-preview-reference
+- /docs/edge-stack/latest/topics/using/edgectl/service-preview-tutorial
+- /docs/edge-stack/latest/topics/using/edge-policy-console
+- /docs/edge-stack/latest/topics/using/rate-limits/rate-limits/
+- /docs/edge-stack/latest/topics/using/rate-limit-speedometers
+- /docs/edge-stack/latest/topics/running/aes-redis
+- /docs/edge-stack/latest/topics/running/aes-extensions/
+- /docs/edge-stack/latest/topics/running/aes-extensions/authentication
+- /docs/edge-stack/latest/topics/running/aes-extensions/ratelimit
