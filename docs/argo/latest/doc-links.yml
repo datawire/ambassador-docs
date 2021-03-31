@@ -6,5 +6,21 @@
   items:
     - title: Argo
       items: 
-        - title: Quick Start
-          link: /
+        - title: Argo CD Quick Start
+          link: /qs-cd
+        - title: Argo Rollouts Quick Start
+          link: /qs-rollouts
+        - title: Core Concepts
+          items:
+            - title: Article 1
+              link: /concepts/1
+            - title: Article 2
+              link: /concepts/2
+        - title: How Do I...
+          items:
+            - title: Do Canary Releases
+              link: /howtos/canary
+        - title: Technical Reference
+          items:
+            - title: Rollout CRD
+              link: /reference/rolloutcrd
