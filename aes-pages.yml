@@ -20,3 +20,6 @@
 - /docs/pre-release/topics/using/rate-limits/rate-limits/
 - /docs/pre-release/topics/using/rate-limit-speedometers
 - /docs/pre-release/topics/running/aes-redis
+- /docs/edge-stack/latest/topics/running/aes-extensions/
+- /docs/edge-stack/latest/topics/running/aes-extensions/authentication
+- /docs/edge-stack/latest/topics/running/aes-extensions/ratelimit
