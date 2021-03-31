@@ -13,6 +13,7 @@ import { goToSlack, goToContactUs } from '../../src/utils/routes';
 import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
+import isAesPage from './utils/isAesPage';
 import './style.less';
 
 export default ({ data, location }) => {
@@ -36,9 +37,11 @@ export default ({ data, location }) => {
     const [version, setVersion] = useState(initialVersion);
     const [showVersion, setShowVersion] = useState(!isHome && isProduct);
     const [versionList, setVersionList] = useState(initialProduct.version);
+    const [showAesPage, setShowAesPage] = useState(false);
 
     useEffect(() => {
         loadJS();
+        isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
     }, []);
 
     const parseLinksByVersion = (vers, links) => {
@@ -206,6 +209,13 @@ export default ({ data, location }) => {
                         />
                         <div className="docs__doc-body-container">
                             <div className="docs__doc-body doc-body">
+                                <div className="doc-tags">
+                                    {showAesPage && (
+                                        <Link className="doc-tag aes" to="/editions">
+                                            Ambassador Edge Stack
+                                        </Link>
+                                    )}
+                                </div>
                                 <MDXRenderer slug={page.fields.slug}>
                                     {template(page.body, getVersions())}
                                 </MDXRenderer>
