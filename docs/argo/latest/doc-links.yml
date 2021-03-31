@@ -12,10 +12,18 @@
           link: /qs-rollouts
         - title: Core Concepts
           items:
-            - title: Article 1
-              link: /concepts/1
-            - title: Article 2
-              link: /concepts/2
+            - title: Safely Shipping Software Faster
+              link: /concepts/faster
+            - title: What is Argo?
+              link: /concepts/argo
+            - title: CI/CD and Progressive Delivery
+              link: /concepts/cicd
+            - title: GitOps
+              link: /concepts/gitops
+            - title: Canary Deployments
+              link: /concepts/canary
+            - title: Key Metrics
+              link: /concepts/metrics
         - title: How Do I...
           items:
             - title: Do Canary Releases

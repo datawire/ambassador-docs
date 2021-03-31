@@ -10,6 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 * [Kubectl](https://kubernetes.io/docs/tasks/tools/) 
 * A cluster
 * [Edge stack installed](../../tutorials/getting-started/)
+* a GitHub account
 
 ## 1. How to set up your source repos
 
@@ -28,17 +29,6 @@ First, fork the app into your own account so you can make changes to it later:
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-```
-
-Install the Argo CD CLI:
-```
-# macOS:
-brew install argocd
-
-# Linux:
-VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
-curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64
-chmod +x /usr/local/bin/argocd
 ```
 
 ## 3. Set up Argo CD
@@ -67,24 +57,30 @@ argocd account update-password
 ## 4. Deploy sample app from repo
 
 From UI, create new "Quote of the Moment" app
+(this could change to be a different, more complex app later, I just chose something small to start with)
 
-Application Name: `qotm`
-> must be a valid DNS name
+Application Name (this must be a valid DNS name): `qotm`
 
 Project: `default`
+
 Leave next options on their default
 
 Repo URL: `https://github.com/<your github username>/argotest.git`
+
 Revision: leave set on `HEAD`
+
 Path: `yaml` (NO slashes)
 
 Cluster URL: click and select `https://kubernetes.default.svc` (the cluster Argo is running on)
+
 Namespace is `default`
 
 Leave **Directory** settings on defaults
+
 Click **Create** at the top
 
 This creates the app but nothing gets deployed until you click **Sync** on the app.
+
 This deploys the app to your cluster
 
 Wait until status is healthy
@@ -107,10 +103,12 @@ Go to `http://<cluster IP>/quote/`
 </Alert>
 
 
-## 5. Change app config and resync
+## 6. Change app config and resync
 
 Go to your fork of the repo in GitHub, edit `\yaml\mapping.yaml`
+
 This URL should take you straight there:
+
 `https://github.com/<your github username>/argotest/edit/main/yaml/mapping.yaml`
 
 Change `prefix:` from `/quote/` to `/coolquote/`, click **Commit changes** at the bottom
@@ -125,9 +123,22 @@ Argo synced the YAML from your repo, saw the updated `mapping.yaml`, and redeplo
     <strong>Victory!</strong> Using Argo CD you can redeploy changes to your app's manifests in one click, applying your desired state to the current live state. From a small, single service app like this one to an app with hundreds of services, Argo CD makes app deployments and lifecycle management way easier to manage.
 </Alert>
 
-## 6. Deploy app using the CLI
+## 7. Deploy app using the CLI
 
-Delete the app we just made in the UI, click **Delete** button, this deletes the app from the UI and all the resources (the Pod and Svc) from the cluster
+If you prefer the terminal over a web interface, Argo CD has a CLI tool that has much of the same functionality as the web version.
+
+Install the CLI:
+```
+# macOS:
+brew install argocd
+  
+# Linux:
+VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64
+chmod +x /usr/local/bin/argocd
+```
+
+Delete the app we made earlier in the web UI, click **Delete** button, this deletes the app from the UI and all the resources (the Pod and Svc) from the cluster
 
 Now recreate it using only the CLI:
 ```
@@ -144,6 +155,6 @@ Go to `http://<cluster IP>/coolquote/`
 
 # What's Next?
 
-* [Argo Rollouts Quick Start](/qs-rollouts)
-* [How Do I > Rollouts w/ Ambassador Cloud](/howtos/rollouts)
-* [Technical Ref > the Rollout CRD](/reference/rolloutscrd)
+* [Argo Rollouts Quick Start](../qs-rollouts)
+* [How Do I > Rollouts w/ Ambassador Cloud](../howtos/canary)
+* [Technical Ref > the Rollout CRD](../reference/rolloutcrd)
