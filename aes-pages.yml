@@ -4,22 +4,22 @@
 # - /reference
 #
 
-- /docs/pre-release/topics/using/filters/
-- /docs/pre-release/topics/using/filters/oauth2
-- /docs/pre-release/topics/using/filters/jwt
-- /docs/pre-release/topics/using/filters/external
-- /docs/pre-release/topics/using/filters/plugin
-- /docs/pre-release/topics/using/edgectl/
-- /docs/pre-release/topics/using/edgectl/edge-control
-- /docs/pre-release/topics/using/edgectl/edge-control-in-ci
-- /docs/pre-release/topics/using/edgectl/service-preview-install
-- /docs/pre-release/topics/using/edgectl/service-preview-reference
-- /docs/pre-release/topics/using/edgectl/service-preview-tutorial
-- /docs/pre-release/topics/using/dev-portal
-- /docs/pre-release/topics/using/edge-policy-console
-- /docs/pre-release/topics/using/rate-limits/rate-limits/
-- /docs/pre-release/topics/using/rate-limit-speedometers
-- /docs/pre-release/topics/running/aes-redis
-- /docs/edge-stack/latest/topics/running/aes-extensions/
-- /docs/edge-stack/latest/topics/running/aes-extensions/authentication
-- /docs/edge-stack/latest/topics/running/aes-extensions/ratelimit
+/topics/using/filters/
+/topics/using/filters/oauth2
+/topics/using/filters/jwt
+/topics/using/filters/external
+/topics/using/filters/plugin
+/topics/using/edgectl/
+/topics/using/edgectl/edge-control
+/topics/using/edgectl/edge-control-in-ci
+/topics/using/edgectl/service-preview-install
+/topics/using/edgectl/service-preview-reference
+/topics/using/edgectl/service-preview-tutorial
+/topics/using/dev-portal
+/topics/using/edge-policy-console
+/topics/using/rate-limits/rate-limits/
+/topics/using/rate-limit-speedometers
+/topics/running/aes-redis
+/topics/running/aes-extensions/
+/topics/running/aes-extensions/authentication
+/topics/running/aes-extensions/ratelimit
