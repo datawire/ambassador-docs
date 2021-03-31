@@ -6,10 +6,8 @@
   items:
     - title: Argo
       items: 
-        - title: Argo CD Quick Start
-          link: /qs-cd
-        - title: Argo Rollouts Quick Start
-          link: /qs-rollouts
+        - title: Quick Start
+          link: /quick-start
         - title: Core Concepts
           items:
             - title: Safely Shipping Software Faster

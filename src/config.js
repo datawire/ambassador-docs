@@ -50,6 +50,14 @@ export const products = [
         version: [
             { id: "latest", name: "Latest", link: "latest" }
         ]
+    },
+    {
+        slug: "kubernetes",
+        name: "Your Kubernetes Environment",
+        link: "/docs/kubernetes/latest/",
+        version: [
+            { id: "latest", name: "Latest", link: "latest" }
+        ]
     }
 ];
 
