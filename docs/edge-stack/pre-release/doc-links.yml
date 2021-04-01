@@ -209,9 +209,9 @@
                   link: /topics/running/aes-extensions/
                   items:
                     - title: Ambassador Edge Stack Authentication Extension
-                      value: /topics/running/aes-extensions/authentication
+                      link: /topics/running/aes-extensions/authentication
                     - title: Ambassador Edge Stack Rate Limiting Extension
-                      value: /topics/running/aes-extensions/ratelimit
+                      link: /topics/running/aes-extensions/ratelimit
                 - title: The Ambassador Module
                   link: /topics/running/ambassador
                 - title: Custom Error Responses
