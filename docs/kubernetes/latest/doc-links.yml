@@ -10,8 +10,12 @@
           link: /quick-start
         - title: Core Concepts
           items:
-            - title: test
-              link: /concepts/test
+            - title: Kubernetes Basics - Code and Ship Faster
+              link: /concepts/basics
+            - title: Kubernetes Dev Loop 101
+              link: /concepts/devloop
+            - title: Using K8s for App Development
+              link: /concepts/appdev
         - title: How Do I...
           items:
             - title: Debug My Kubernetes Deployments
