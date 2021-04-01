@@ -1,0 +1,24 @@
+- title: Home
+  link: /docs/
+
+- title: Products
+  collapsable: false
+  items:
+    - title: Cloud
+      items:
+        - title: Service Catalog
+          items:
+            - title: Quick Start
+              link: /service-catalog/quick-start/
+            - title: How Do I...
+              items:
+                - title: Annotate a Service
+                  link: /service-catalog/howtos/annotate/
+            - title: Technical Reference
+              items:
+                - title: Annotations
+                  link: /service-catalog/reference/annotations/
+            - title: FAQs
+              link: /service-catalog/faqs/
+        - title: Developer Portal
+          link: /topics/using/dev-portal/

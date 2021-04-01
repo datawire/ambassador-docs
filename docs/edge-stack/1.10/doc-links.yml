@@ -1,0 +1,291 @@
+- title: Home
+  link: /
+
+- title: Products
+  collapsable: false
+  items:
+    - title: Edge Stack
+      items:
+        - title: Quick Start
+          link: /tutorials/getting-started
+        - title: Tutorial
+          link: /tutorials/quickstart-demo
+        - title: Install Edge Stack
+          link: /topics/install/
+          items:
+          - title: Install with Helm
+            link: /topics/install/helm
+          - title: Upgrade to the Ambassador Edge Stack
+            link: /topics/install/upgrade-to-edge-stack
+          - title: Upgrade to a Newer Version
+            link: /topics/install/upgrading
+          - title: Install the Ambassador API Gateway
+            link: /topics/install/install-ambassador-oss
+          - title: Install with Docker
+            link: /topics/install/docker
+          - title: Install with Bare Metal
+            link: /topics/install/bare-metal
+          - title: Install Manually
+            link: /topics/install/yaml-install
+          - title: Ambassador Edge Stack Operator
+            link: /topics/install/aes-operator
+          - title: Install with Edgectl
+            link: /topics/install/help/
+        - title: How-to Guides
+          link: /howtos
+          items:
+            - title: Authentication
+              items:
+                - title: Basic Authentication
+                  link: /howtos/basic-auth
+                - title: Single Sign-On with Auth0
+                  link: /howtos/sso/auth0
+                - title: Single Sign-On with Azure Active Directory
+                  link: /howtos/sso/azure
+                - title: Single Sign-On with Google
+                  link: /howtos/sso/google
+                - title: Single Sign-On with Keycloak
+                  link: /howtos/sso/keycloak
+                - title: Single Sign-On with Okta
+                  link: /howtos/sso/okta
+                - title: Single Sign-On with OneLogin
+                  link: /howtos/sso/onelogin
+                - title: Single Sign-On with Salesforce
+                  link: /howtos/sso/salesforce
+                - title: Single Sign-On with UAA
+                  link: /howtos/sso/uaa
+                - title: Using the OAuth2 filter
+                  link: /howtos/oauth-oidc-auth
+            - title: Custom Filters
+              link: /howtos/filter-dev-guide
+            - title: Deploying to Kubernetes from GitHub
+              link: /tutorials/projects
+            - title: Distributed Tracing
+              items:
+                - title: DataDog
+                  link: /howtos/tracing-datadog
+                - title: Zipkin
+                  link: /howtos/tracing-zipkin
+            - title: Knative Serverless Framework
+              link: /howtos/knative
+            - title: Protocols
+              items:
+                - title: gRPC
+                  link: /howtos/grpc
+                - title: WebSockets
+                  link: /howtos/websockets
+            - title: Prometheus monitoring
+              link: /howtos/prometheus
+            - title: Rate Limiting
+              items:
+                - title: Basic Rate Limiting
+                  link: /howtos/rate-limiting-tutorial
+                - title: Advanced Rate Limiting
+                  link: /howtos/advanced-rate-limiting
+            - title: Service Mesh Integration
+              items:
+                - title: Consul
+                  link: /howtos/consul
+                - title: Istio
+                  link: /howtos/istio
+                - title: Linkerd 2
+                  link: /howtos/linkerd2
+            - title: TLS
+              items:
+                - title: TLS Termination
+                  link: /howtos/tls-termination
+                - title: Using cert-manager
+                  link: /howtos/cert-manager
+                - title: Client Certificate Validation
+                  link: /howtos/client-cert-validation
+        - title: Core Concepts
+          link: /topics/concepts/
+          items:
+            - title: Kubernetes Network Architecture
+              link: /topics/concepts/kubernetes-network-architecture
+            - title: "The Ambassador Operating Model: GitOps and Continuous Delivery"
+              link: /topics/concepts/gitops-continuous-delivery
+            - title: Progressive Delivery
+              link: /topics/concepts/progressive-delivery
+            - title: Microservices API Gateways
+              link: /topics/concepts/microservices-api-gateways
+            - title: Edge Stack Architecture
+              link: /topics/concepts/architecture 
+        - title: Technical Reference
+          items: 
+            - title: Using AES for Developers
+              link: /topics/using/
+              items:
+                - title: The Mapping Resource
+                  link: /topics/using/intro-mappings
+                - title: Mapping Configuration
+                  link: /topics/using/mappings
+                  items:
+                    - title: Automatic Retries
+                      link: /topics/using/retries
+                    - title: Canary Releases
+                      link: /topics/using/canary
+                    - title: Circuit Breakers
+                      link: /topics/using/circuit-breakers
+                    - title: Cross-Origin Resource Sharing
+                      link: /topics/using/cors
+                    - title: Headers
+                      link: /topics/using/headers/headers
+                      items:
+                        - title: Add Request Headers
+                          link: /topics/using/headers/add_request_headers
+                        - title: Remove Request Headers
+                          link: /topics/using/headers/remove_request_headers
+                        - title: Add Response Headers
+                          link: /topics/using/headers/add_response_headers
+                        - title: Remove Response Headers
+                          link: /topics/using/headers/remove_response_headers
+                        - title: Header-Based Routing
+                          link: /topics/using/headers/headers
+                        - title: Host Header
+                          link: /topics/using/headers/host
+                    - title: Keepalive
+                      link: /topics/using/keepalive
+                    - title: Method-Based Routing
+                      link: /topics/using/method
+                    - title: Prefix Regex
+                      link: /topics/using/prefix_regex
+                    - title: Protocols
+                      items:
+                        - title: TCP
+                          link: /topics/using/tcpmappings
+                        - title: gRPC and gRPC-Web
+                          link: /howtos/grpc
+                        - title: WebSockets
+                          link: /howtos/websockets
+                    - title: Query Parameter-Based Routing
+                      link: /topics/using/query_parameters/
+                    - title: Rate Limit Concepts
+                      link: /topics/using/rate-limits/
+                      items:
+                        - title: Using Rate Limits
+                          link: /topics/using/rate-limits/rate-limits
+                    - title: Redirects
+                      link: /topics/using/redirects
+                    - title: Rewrites
+                      link: /topics/using/rewrites
+                    - title: Timeouts
+                      link: /topics/using/timeouts
+                    - title: Traffic Shadowing
+                      link: /topics/using/shadowing
+                - title: Filters and Authentication
+                  items:
+                    - title: Filters and Filter Policies
+                      link: /topics/using/filters/
+                    - title: OAuth2 Filter
+                      link: /topics/using/filters/oauth2
+                    - title: JWT Filter
+                      link: /topics/using/filters/jwt
+                    - title: External Filter
+                      link: /topics/using/filters/external
+                    - title: Plugin Filter
+                      link: /topics/using/filters/plugin
+                - title: Edge Policy Console
+                  items:
+                    - title: Introduction to Edge Policy Console
+                      link: /topics/using/edge-policy-console
+                    - title: Rate Limit Speedometers
+                      link: /topics/using/rate-limit-speedometers
+                - title: The Project Resource
+                  link: /topics/using/projects
+                  items:
+                    - title: Configuring Authentication
+                      link: /topics/using/project-authentication
+                    - title: Customizing Deployment
+                      link: /topics/using/project-customization
+            - title: Running AES for SREs/Operations
+              link: /topics/running/
+              items:
+                - title: The Ambassador Module
+                  link: /topics/running/ambassador
+                - title: Custom Error Responses
+                  link: /topics/running/custom-error-responses
+                - title: Deploying Ambassador
+                  items:
+                    - title: Deployment Architecture
+                      link: /topics/running/ambassador-deployment
+                    - title: Ambassador with AWS
+                      link: /topics/running/ambassador-with-aws
+                    - title: Ambassador with GKE
+                      link: /topics/running/ambassador-with-gke
+                    - title: Advanced Deployment Configuration
+                      link: /topics/running/running
+                    - title: The Ambassador Container
+                      link: /topics/running/environment
+                - title: Gzip Compression
+                  link: /topics/running/gzip
+                - title: Host CRD, ACME Support, and External Load Balancer Configuration
+                  link: /topics/running/host-crd
+                - title: Ingress Controller
+                  link: /topics/running/ingress-controller
+                - title: Load Balancing and Service Discovery
+                  items:
+                    - title: Load Balancing
+                      link: /topics/running/load-balancer
+                    - title: Service Discovery and Resolvers
+                      link: /topics/running/resolvers
+                - title: Statistics and Monitoring
+                  link: /topics/running/statistics
+                  items:
+                    - title: Envoy statistics with StatsD
+                      link: /topics/running/statistics/envoy-statsd
+                    - title: The `:8877/metrics` endpoint
+                      link: /topics/running/statistics/8877-metrics
+                - title: Plug-in Services
+                  items:
+                    - title: Authentication Service
+                      link: /topics/running/services/auth-service
+                    - title: ExtAuth Protocol
+                      link: /topics/running/services/ext_authz
+                    - title: Log Service
+                      link: /topics/running/services/log-service
+                    - title: Rate Limit Service
+                      link: /topics/running/services/rate-limit-service
+                    - title: Tracing Service
+                      link: /topics/running/services/tracing-service
+                - title: TLS
+                  link: /topics/running/tls/
+                  items:
+                    - title: Simultaneously Routing HTTP and HTTPS
+                      link: /topics/running/tls/cleartext-redirection#cleartext-routing
+                    - title: HTTP -> HTTPS Redirection
+                      link: /topics/running/tls/cleartext-redirection#http---https-redirection
+                    - title: Mutual TLS (mTLS)
+                      link: /topics/running/tls/mtls
+                    - title: Server Name Indication (SNI)
+                      link: /topics/running/tls/sni
+                    - title: TLS Origination
+                      link: /topics/running/tls/origination
+                - title: Scaling Ambassador
+                  link: /topics/running/scaling
+        - title: FAQs
+          link: /about/faq
+        - title: Community
+          link: /community
+        - title: Troubleshooting
+          link: /topics/running/debugging
+        - title: Developer Portal
+          link: /topics/using/dev-portal/
+        - title: Service Preview
+          items:
+            - title: Quick Start
+              link: /topics/using/edgectl/service-preview-install
+            - title: Tutorial
+              link: /topics/using/edgectl/service-preview-tutorial
+            - title: How-to Guides
+              items:
+                - title: Service Mesh and Service Preview
+                  link: /topics/using/edgectl/service-mesh-sp
+                - title: Edge Control Reference
+                  link: /topics/using/edgectl/edge-control
+                - title: Using Edge Control in CI
+                  link: /topics/using/edgectl/edge-control-in-ci
+            - title: Technical Reference
+              link: /topics/using/edgectl/service-preview-reference
+
+

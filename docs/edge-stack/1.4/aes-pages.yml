@@ -1,0 +1,15 @@
+# AES pages should be represented in a yaml array with the pathnames as the value
+# Ex:
+# - /docs
+# - /reference
+# 
+
+/topics/using/filters/
+/topics/using/filters/oauth2
+/topics/using/filters/jwt
+/topics/using/filters/external
+/topics/using/filters/plugin
+/topics/using/edgectl/edge-control
+/topics/using/edgectl/edge-control-in-ci
+/topics/using/dev-portal
+/topics/using/edge-policy-console 
