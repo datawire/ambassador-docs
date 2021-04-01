@@ -46,15 +46,7 @@ export const products = [
     {
         slug: "argo",
         name: "Argo",
-        link: "/docs/argo/latest/",
-        version: [
-            { id: "latest", name: "Latest", link: "latest" }
-        ]
-    },
-    {
-        slug: "kubernetes",
-        name: "Your Kubernetes Environment",
-        link: "/docs/kubernetes/latest/",
+        link: "/docs/argo/latest/quick-start/",
         version: [
             { id: "latest", name: "Latest", link: "latest" }
         ]

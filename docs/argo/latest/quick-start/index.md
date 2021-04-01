@@ -1,5 +1,6 @@
 
 import Alert from '@material-ui/lab/Alert';
+import Tabs from './tabs'
 
 # Argo Quick Start
 
@@ -19,39 +20,60 @@ import Alert from '@material-ui/lab/Alert';
 
 * [Kubectl](https://kubernetes.io/docs/tasks/tools/) 
 * A cluster
-* [Edge stack installed](../../tutorials/getting-started/)
 * a GitHub account
 
-# Argo CD
+## 1. Install and configure Edge Stack
+
+You'll need to first install Edge Stack in your cluster. Follow the [Edge Stack installation](../../edge-stack/latest/tutorials/getting-started) to install Edge Stack via Kubernetes YAML, Helm, or the command-line installer in your cluster.
+
+By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use [endpoint routing](../../../edge-stack/latest/topics/running/resolvers/). Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
+
+```yaml
+apiVersion: getambassador.io/v2
+kind: KubernetesEndpointResolver
+metadata:
+  name: endpoint
+```
+
+Apply this configuration to your cluster:  
+`kubectl apply -f resolver.yaml`
+
+## 2. Install Argo in your cluster
+
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl create namespace argo-rollouts
+kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/datawire/argo-rollouts/ambassador/release/manifests/install.yaml
+```
+
+Now some tools to your laptop: the Argo CD CLI (for building pipelines) and the Argo Rollouts plugin (for managing and visualizing rollouts):
+
+<Tabs/>
 
 ## 1. How to set up your source repos
 
-Argo CD needs access to a repo with your k8s projects in order to deploy them into a cluster.
+Argo needs access to a repo with your k8s projects in order to deploy them into a cluster.
 
 It reads your repo, parses out the projects and YAML manifests that are in the repo, then lets you choose from those projects to deploy into your cluster.  It supports different methods of creating templates for apps (Helm, Kustomize, etc.) but we'll just focus on repos with plain k8s YAML files.
 
-If repo is public then you're good to go. Otherwise if it is private you can give Argo CD GitHub creds for access.
+If repo is public then you're good to go. Otherwise if it is private you can give Argo GitHub creds for access.
 We'll use a public repo with a sample app for this guide.
 
 First, fork the app into your own account so you can make changes to it later:
 `https://github.com/mattmcclure-dw/argotest`
 
-## 2. Install Argo CD
 
-```
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-```
 
-## 3. Set up Argo CD
+## 3. Set up Argo 
 
-Setup port forwarding to access Argo CD server UI and API:
+Setup port forwarding to access Argo server UI and API:
 (ideally we use Edge Stack for ingress, I had trouble getting it working and skipped it for now so I wasn't blocked finishing this draft)
 ```
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-Retrieve the default admin password, it is name of the Argo CD API server Pod:
+Retrieve the default admin password, it is name of the Argo API server Pod:
 ```
 kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
 ```
@@ -66,6 +88,7 @@ Set new admin password:
 argocd account update-password
 ```
 
+<!--
 ## 4. Deploy sample app from repo
 
 From UI, create new "Quote of the Moment" app
@@ -98,6 +121,7 @@ This deploys the app to your cluster
 Wait until status is healthy
 
 Check status with `kubectl get deployment,pods,services`
+-->
 
 ## 5. Configure Edge Stack
 
@@ -140,15 +164,7 @@ Argo synced the YAML from your repo, saw the updated `mapping.yaml`, and redeplo
 If you prefer the terminal over a web interface, Argo CD has a CLI tool that has much of the same functionality as the web version.
 
 Install the CLI:
-```
-# macOS:
-brew install argocd
-  
-# Linux:
-VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
-curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64
-chmod +x /usr/local/bin/argocd
-```
+
 
 Delete the app we made earlier in the web UI, click **Delete** button, this deletes the app from the UI and all the resources (the Pod and Svc) from the cluster
 
@@ -170,9 +186,11 @@ Go to `http://<cluster IP>/coolquote/`
 
 This tutorial will walk you through the process of configuring Argo Rollouts to work with Edge Stack to facilitate canary releases. This will enable users to safely [rollout new versions](https://blog.getambassador.io/deploying-argo-rollouts-for-canary-releases-on-kubernetes-f5910ed1fd61) of services on Kubernetes. 
 
+<!--
 ## 1. Install and configure Edge Stack
 
 You'll need to first install Edge Stack in your cluster. Follow the [Edge Stack installation](../../edge-stack/latest/tutorials/getting-started) to install Edge Stack via Kubernetes YAML, Helm, or the command-line installer in your cluster.
+
 
 By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use endpoint routing. Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
 
@@ -185,7 +203,7 @@ metadata:
 
 Apply this configuration to your cluster:  
 `kubectl apply -f resolver.yaml`
-
+-->
 ## 2. Install and configure Argo Rollouts
 
 If you're using Google Kubernetes Engine, grant your account the ability to create new Cluster Roles:
@@ -203,7 +221,46 @@ kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/datawire/arg
 
 Finally, install the Argo `kubectl` plugin, which will let you manage and visualize rollouts from the command line.
 
-<Tabs/>
+<!--
+<AppStateContext>
+         {state => {
+           return (<CodeBlockMultiLang state={state}  type="terminal" data={
+             {
+               tabs: [
+                   {
+                     id: "Linux",
+                     display: "Linux",
+                     os:"linux",
+                     prompt: "$",
+                     commands: [
+                       {
+                         input: [
+                           "linux command",
+                           "moar"
+                         ]
+                         outputs: [
+                           "Linux output"
+                         ]
+                       }
+                     ]
+                   },
+                   {
+                     id: "macOS",
+                     display: "macOS",
+                     prompt: "$",
+                     os:"macos",
+                     commands: [
+                       {
+                         input: "brew install argocd",
+                       }
+                     ]
+                   }
+                 ]
+             }} />)
+         }
+       }
+</AppStateContext>
+-->
 
 Verify correct installation:
 
