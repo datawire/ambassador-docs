@@ -85,7 +85,7 @@ metadata:
     a8r.io/logs: "https://kibana.getambassador.io"
     a8r.io/documentation: "https://www.getambassador.io/docs/latest/"
     a8r.io/repository: "https://github.com/datawire/ambassador"
-    a8r.io/support: "http://d6e.co/slack"
+    a8r.io/support: "https://a8r.io/Slack"
     a8r.io/runbook: "https://www.getambassador.io/docs/latest/topics/running/debugging/"
     a8r.io/incidents: "https://incidents.getambassador.io"
     a8r.io/uptime: "https://uptime.getambassador.io"
