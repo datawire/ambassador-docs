@@ -10,4 +10,4 @@ Update your installation to Ambassador API Gateway first and rerun the upgrader.
   resource with `kubectl edit -n ambassador ambassadorinstallations ambassador` and remove
   the `updateWindow`.
 
-* Reach out for help in our [Slack](http://d6e.co/slack).
+* Reach out for help in our [Slack](https://a8r.io/Slack).
