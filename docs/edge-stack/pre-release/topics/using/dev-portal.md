@@ -14,9 +14,10 @@ This documentation endpoint is defined by the optional `docs` attribute in the `
 
 ```yaml
   docs:
-    path: "string"   # optional; default is ""
-    url: "string"    # optional; default is ""
-    ignored: bool    # optional; default is false
+    path: "string"          # optional; default is ""
+    url: "string"           # optional; default is ""
+    ignored: bool           # optional; default is false
+    display_name: "string"  # optional; default is ""
 ```
 
 where:
@@ -30,6 +31,7 @@ your microservice to return a Swagger or OAPI document at this URL.
 * `ignored`: ignore this `Mapping` for documenting services. Note that the service
 will appear in the _Dev Portal_ anyway if another, non-ignored `Mapping` exists
 for the same service.
+* `display_name`: custom name to show for this service in the devportal.
 
 > Note:
 >
@@ -38,7 +40,7 @@ for the same service.
 > will not try to obtain documentation unless a `docs` attribute is specified.
 > Users should set `docs.path` to `/.ambassador-internal/openapi-docs` in their `Mapping`s
 > in order to keep the previous behavior.
-> 
+>
 >
 > The `docs` field of Mappings was not introduced until `Ambassador Edge Stack` version 1.9 because Ambassador was automatically searching for docs on `/.ambassador-internal/openapi-docs`
 > Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of Ambassador.
@@ -137,6 +139,7 @@ spec:
       - "string"
     matchLabels:          ## optional; default is {}
       "string": "string"
+  naming_scheme: "string" ## optional; supported values [ "namespace.name", "name.prefix" ]; default "namespace.name"
 ```
 
 where:
@@ -157,6 +160,13 @@ where:
   * `url`: a full URL to a OpenAPI document for this service. This document will be
   served _as it is_, with no extra processing from the _Dev Portal_ (besides replacing
   the _hostname_).
+* `naming_scheme`: Configures how DevPortal docs are displayed and linked to in the UI.
+  * "namespace.name" will display the docs with the namespace and name of the mapping.
+  e.g. a Mapping named `quote` in namespace `default` will be displayed as `default.quote`
+  and its docs will have the relative path of `/default/quote`
+  * "name.prefix" will display the docs with the name and prefix of the mapping.
+  e.g. a Mapping named `quote` with a prefix `backend` will be displayed as `quote.backend`
+  and its docs will have the relative path of `/quote/backend`
 
 Example:
 
@@ -173,7 +183,7 @@ metadata:
 spec:
   default: true
   content:
-    url: https://github.com/datawire/devportal-content.git
+    url: https://github.com/datawire/devportal-content-v2.git
   selector:
     matchLabels:
       public-api: "true"    ## labels for matching only some Mappings
@@ -223,7 +233,7 @@ The default _Dev Portal_ content is loaded in order from:
 
 - the `ambassador` `DevPortal` resource.
 - the Git repo specified in the optional `DEVPORTAL_CONTENT_URL` environment variable.
-- the default repository at [GitHub](https://github.com/datawire/devportal-content.git).
+- the default repository at [GitHub](https://github.com/datawire/devportal-content-v2.git).
 
 To use your own styling, clone or copy the repository, create an `ambassador` `DevPortal`
 and update the `content` attribute to point to the repository. If you wish to use a
@@ -272,6 +282,66 @@ docker run -it --rm --volume $PWD:/content --publish 8877:8877 \
 and open `http://localhost:8877` in your browser. Any changes made locally to
 devportal content will be reflected immediately on page refresh.
 
+#### Customizing documentation names and paths
+
+The _Dev Portal_ displays the documentation's Mapping name and namespace by default,
+but you can override this behavior.
+
+To change the documentation naming scheme for the entire _Dev Portal_, you can set
+`naming_scheme` in the `DevPortal` resource:
+
+```yaml
+---
+apiVersion: getambassador.io/v2
+kind:  DevPortal
+metadata:
+  name:  ambassador
+spec:
+  default: true
+  naming_scheme: "name.prefix"
+```
+
+With the above configuration, a mapping for `service-a`:
+
+```yaml
+---
+apiVersion: getambassador.io/v2
+kind:  Mapping
+metadata:
+  name:  service-a
+spec:
+  prefix: /path/
+  service: service-a:5000
+  docs:
+    path: /openapi/
+```
+
+Will be displayed in the _Dev Portal_ as `service-a.path`,
+and the API documentation will be accessed at `$AMBASSADOR_URL/docs/doc/service-a/path`.
+
+You can also override the display name of documentation on a per-mapping basis.
+Per-mapping overrides will take precedence over the `DevPortal` `naming_scheme`.
+
+A mapping for `service-b` with `display_name` set:
+
+```yaml
+---
+apiVersion: getambassador.io/v2
+kind:  Mapping
+metadata:
+  name:  service-b
+spec:
+  prefix: /otherpath/
+  service: service-b:5000
+  docs:
+    path: /openapi/
+    display_name: "Cat Service"
+```
+
+Will be displayed in the _Dev Portal_ as `Cat Service`, and the documentation will be
+accessed at `$AMBASSADOR_URL/docs/doc/Cat%20Service`.
+
+
 ## <a href="#global-config"></a>Default Configuration
 
 The _Dev Portal_ supports some default configuration in some environment variables
@@ -291,3 +361,4 @@ the `ambassador` `DevPortal`.
 | DEVPORTAL_CONTENT_URL    | Default URL to the repository hosting the content for the Portal               |
 | DEVPORTAL_CONTENT_DIR    | Default content subdir (defaults to `/`)                                       |
 | DEVPORTAL_CONTENT_BRANCH | Default content branch (defaults to `master`)                                  |
+| DEVPORTAL_DOCS_BASE_PATH | Base path for api docs (defaults to `/doc/`)                                   |
