@@ -1,9 +1,9 @@
-# Canary Deployments
+# Canary deployments
 
 
 ## What is a canary deployment?
 
-A **canary deployment** is designed to make sure that a "simple fix" or change to code won't kill your application. Like the proverbial canary being sent into the coal mine, only a small subset of users will be exposed to new code to test what happens. Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things, i.e. keeping the canary alive.
+A **[canary deployment](https://www.getambassador.io/docs/edge-stack/latest/topics/using/canary/)** is designed to make sure that a "simple fix" or change to code won't kill your application. Like the proverbial canary being sent into the coal mine, only a small subset of users will be exposed to new code to test what happens. Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things, i.e. keeping the canary alive.
 
 ## How do canary releases limit risk when rolling out software changes?
 
@@ -11,11 +11,11 @@ Canary releases limit risk because changes can easily and quickly be reversed by
 
 Because changes are rolled out incrementally at set intervals until rolled out to the entire user base or platform, or until something goes wrong and has to be rolled back, the majority of users are protected from bugs or negative effects introduced by code changes. Detailed monitoring of core service metrics is an essential part of canary releasing to ensure the rapid detection of problems in the canary release.
 
-## How does a canary deployment work?
+## How does canary deployment work?
 
 A canary release diverts a small amount of traffic, for example 1% or 5%, to the new version of a service while still routing the majority of traffic to the old version. This incremental rollout lets you observe how a change will work in practice and roll back if you detect signs of trouble. 
 
-(diagram)
+![Canary release diagram](../../images/canary.png)
 
 ## When should I use a canary deployment strategy?
 

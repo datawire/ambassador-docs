@@ -1,4 +1,6 @@
-# Key Metrics: What should I monitor in the canary deployment process? 
+# How to monitor the canary deployment 
+
+## What key metrics should I monitor in the canary deployment?
 
 Observability is crucial to understanding the quality of the canary version you release. Without being able to monitor the canary's behavior, you can't readily assess whether your new version is ready for wider deployment. Increasingly, developers need to understand these key metrics as part of taking full responsibility for the full build-it, run-it (i.e., availability, reliability and code quality) paradigm. This shift is possible by enabling monitoring for visibility and setting clear metrics to measure performance and troubleshoot problems.
 

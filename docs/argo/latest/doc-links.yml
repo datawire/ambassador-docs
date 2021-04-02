@@ -10,23 +10,13 @@
           link: /quick-start
         - title: Core Concepts
           items:
-            - title: Safely Shipping Software Faster
-              link: /concepts/faster
             - title: What is Argo?
               link: /concepts/argo
-            - title: CI/CD and Progressive Delivery
+            - title: CI/CD and progressive delivery - Safely shipping code
               link: /concepts/cicd
-            - title: GitOps
+            - title: Developer-centric GitOps-style deployment
               link: /concepts/gitops
             - title: Canary Deployments
               link: /concepts/canary
-            - title: Key Metrics
+            - title: How to monitor the canary deployment
               link: /concepts/metrics
-        - title: How Do I...
-          items:
-            - title: Do Canary Releases
-              link: /howtos/canary
-        - title: Technical Reference
-          items:
-            - title: Rollout CRD
-              link: /reference/rolloutcrd
