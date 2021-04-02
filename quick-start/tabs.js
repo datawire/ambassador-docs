@@ -84,7 +84,7 @@ export default function SimpleTabs() {
           'curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.14/argocd-linux-amd64' +
           '\n' +
           'chmod +x /usr/local/bin/argocd' +
-          '\n' +
+          '\n \n' +
           '# Arco Rollouts plugin' +
           '\n' +
           'sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts' +
