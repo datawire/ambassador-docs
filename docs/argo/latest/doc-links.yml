@@ -9,6 +9,7 @@
         - title: Quick Start
           link: /quick-start
         - title: Core Concepts
+          collapsable: false
           items:
             - title: What is Argo?
               link: /concepts/argo
@@ -20,3 +21,7 @@
               link: /concepts/canary
             - title: How to monitor the canary deployment
               link: /concepts/metrics
+        - title: Technical Reference
+          items:
+            - title: Rollout CRD
+              link: /reference/rolloutcrd 
