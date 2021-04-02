@@ -46,7 +46,7 @@ export const products = [
     {
         slug: "argo",
         name: "Argo",
-        link: "/docs/argo/latest/",
+        link: "/docs/argo/latest/quick-start/",
         version: [
             { id: "latest", name: "Latest", link: "latest" }
         ]
