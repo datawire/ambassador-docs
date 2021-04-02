@@ -1,5 +1,6 @@
 # Rollouts CRD
 
+The Rollout CRD is installed to your cluster when you install Argo Rollouts.  This is similar to a Deployment, but it adds a rollout strategy section that defines how the rollout will incrementally happen once started. In the example below, it will route 30% of traffic to the new service for 30 seconds, followed by 60% of the traffic for another 30 seconds, then 100% of the traffic.
 Example YAML:
 
 ```yaml
@@ -26,13 +27,11 @@ spec:
     canary:
       stableService: example-stable  # must match your service name
       canaryService: example-canary  # must match your service name
-      trafficRouting:  #required to use Edge Stack for routing
+      trafficRouting:  # this section required to use Edge Stack for routing
         ambassador:
           mappings:
             - example
       steps:    # describes the strategy for sending traffic to the canary
-      - setWeight: 10   # 10% of the traffic will go to the canary until manually promoted
-      - pause: {}
       - setWeight: 30   # 30% of the traffic will go to the canary for 30 seconds
       - pause: {duration: 30}
       - setWeight: 60   # 60% of the traffic will go to the canary for 45 seconds   

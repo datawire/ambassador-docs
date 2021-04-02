@@ -157,7 +157,7 @@ argocd app sync echo
 Verify that the canary is progressing appropriately by sending curl requests in a loop:
 
 ```
-for i in {1..100}; do curl -Lk https://$LOAD_BALANCER_IP/echo/; sleep 1; done
+while true; do curl -k https://$LOAD_BALANCER_IP/echo/ ; sleep 0.2; done
 ```
 
 This will display a running list of responses from the service that will gradually transition from `Canary v1` strings to `Canary v2` strings.

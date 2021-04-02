@@ -18,7 +18,7 @@ Developing for fast-moving, cloud-native environments poses new challenges that 
 
 **Continuous deployment** is a software release process that uses automated integration and end-to-end testing to validate changes, along with the observability of the system’s health signals, to autonomously change the state of a production environment. 
 
-Continuous deployment extends continuous delivery. While both CDs are automated, humans do not intervene in continuous deployment. Deployment and release happen automatically, and the only way a change won't be deployed to production is if an automated check fails. 
+[Continuous deployment](https://www.getambassador.io/continuous-deployment-pyramid/) extends continuous delivery. While both CDs are automated, humans do not intervene in continuous deployment. Deployment and release happen automatically, and the only way a change won't be deployed to production is if an automated check fails. 
 
 With continuous deployment, developers can get their code into real-world conditions and benefit from faster feedback loops, better decision-making, and the ability to safely deploy more code.
 
@@ -27,7 +27,7 @@ A **CI/CD pipeline** is a process specifying steps that must be taken to deliver
 
 ## What is the difference between deployment and release?
 
-The terminology around CI/CD/CD and progressive delivery starts to get murky when defining different phases of the software shipping cycle. Terms are _not_ interchangeable. Precise definitions based on specific uses of terms helps to clarify the roles of each phase.
+The terminology around CI/CD and progressive delivery starts to get murky when defining different phases of the software shipping cycle. The terms are _not_ interchangeable. Precise definitions based on specific uses of terms helps to clarify the roles of each phase.
 
 “Deployment” and “release” are two different, though similar, steps in the ship cycle. 
 
@@ -35,11 +35,13 @@ The terminology around CI/CD/CD and progressive delivery starts to get murky whe
 
 **Release** is the process of moving production traffic to the new version of the software and getting it in front of users. 
 
-## What is progressive delivery and how can rollouts make shipping code safer?
+## What is progressive delivery?
 
-**[Progressive delivery](https://www.getambassador.io/docs/edge-stack/latest/topics/concepts/progressive-delivery/)** is a practice that builds on CI/CD principles but adds processes and techniques for gradually rolling out new features with good observability and tight feedback loops. Progressive delivery provides a fast-moving but risk-sensitive way to exert more fine-grained control over delivery. Progressive delivery makes the rollout of new features and testing them in a production environment possible without introducing significant disruption. 
+**[Progressive delivery](https://www.getambassador.io/docs/edge-stack/latest/topics/concepts/progressive-delivery/)** is a practice that builds on CI/CD principles but adds processes and techniques for gradually rolling out new features with good observability and tight feedback loops. Progressive delivery provides a [fast-moving but risk-sensitive way](https://www.getambassador.io/continuous-deployment-pyramid/proactive-mitigation) to exert more fine-grained control over delivery. Progressive delivery makes the rollout of new features and testing them in a production environment possible without introducing significant disruption. 
 
-Experiment-oriented progressive rollout techniques, such as **blue-green deployments**, **canary releases** and other advanced deployment capabilities, facilitate proactive risk mitigation with:
+## How can rollouts make shipping code safer?
+
+Experiment-oriented progressive rollout techniques, such as **blue-green deployments**, **[canary releases](https://blog.getambassador.io/cloud-native-patterns-canary-release-1cb8f82d371a)** and other advanced deployment capabilities, facilitate proactive risk mitigation with:
 
 *   realistic test environments
 *   the ability to apply fine-grained control of traffic and introduce automated rollbacks

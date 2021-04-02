@@ -11,7 +11,7 @@ In the GitOps model, configuration changes go through a specific pull-based work
 *   The pull request is approved and merged into the production branch.
 *   Automated systems (e.g., a build pipeline or Kubernetes Operator) ensure the configuration of the production branch is in full sync with actual production systems.
 
-Changes are automated via the source control system; GitOps enables Kubernetes clusters themselves to "pull" updates from source control manifests. This entire GitOps workflow is also self-service; an operations team does not need to be directly involved in managing the change process (except in the review/approval process, if desirable). 
+Changes are automated via the source control system; GitOps enables Kubernetes clusters themselves to "pull" updates from source control manifests. The entire GitOps workflow is also self-service; an operations team does not need to be directly involved in managing the change process (except in the review/approval process). 
 
 ## Why GitOps for progressive delivery?
 

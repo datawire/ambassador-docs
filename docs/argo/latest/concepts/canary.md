@@ -54,11 +54,11 @@ Canary releases don't fit every case. For example, mission or life-critical case
 
 To get started with canary releasing, you'll need:
 
-*   an API Gateway to manage the flow of traffic to your services, e.g. Ambassador Edge Stack
+*   an [API Gateway](https://www.getambassador.io/docs/edge-stack/latest/topics/install/install-ambassador-oss/#the-ambassador-api-gateway) to manage the flow of traffic to your services, e.g. Ambassador Edge Stack
 *   a CI/CD pipeline integrated with a continuous deployment workflow, e.g., Argo
 *   an observability system
 
-Canary releases are typically implemented via a proxy like [Envo](https://www.envoyproxy.io/)y, a smart router, or configurable load balancer. Releases can be triggered by continuous integration/delivery pipeline tooling. 
+Canary releases are typically implemented via a proxy like [Envoy](https://www.envoyproxy.io/)y, a smart router, or configurable load balancer. Releases can be triggered by continuous integration/delivery pipeline tooling. 
 
 ## What is required for a successful canary deployment?
 
