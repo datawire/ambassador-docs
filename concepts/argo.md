@@ -1,6 +1,8 @@
 # What is Argo? 
 
-[Argo](https://www.getambassador.io/products/argo/) is an open source suite of projects that helps developers deliver software more rapidly and safely. Argo tools enable progressive delivery by letting developers define a set of tasks required for shipping and distributing their services. Kubernetes-native Argo makes it easier for developers to deploy and release their own applications. 
+[Argo](https://www.getambassador.io/products/argo/) is an open source suite of projects that helps developers deliver software more rapidly and safely. Kubernetes-native Argo makes it easier for developers to deploy and release their own applications. 
+
+Argo tools enable progressive delivery by letting developers define a set of tasks required for shipping and distributing their services. 
 
 **Argo Workflows and Pipelines** is a container-native workflow engine for orchestrating parallel jobs on Kubernetes. 
 
