@@ -24,7 +24,7 @@ spec:
     service: ambassador
 ```
 
-Using a `NodePort` leaves Ambassador isolated from the host network, allowing the Kubernetes service to handle routing to Ambassador pods. You can drop-in this YAML to replace the `LoadBalancer` service in the [YAML installation guide](../install/yaml-install) and use `http://<External-Node-IP>:<NodePort>/` as the host for requests.
+Using a `NodePort` leaves Ambassador isolated from the host network, allowing the Kubernetes service to handle routing to Ambassador pods. You can drop-in this YAML to replace the `LoadBalancer` service in the [YAML installation guide](../../install/yaml-install) and use `http://<External-Node-IP>:<NodePort>/` as the host for requests.
 
 ## Exposing Ambassador via Host Network
 

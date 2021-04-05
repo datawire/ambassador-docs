@@ -185,9 +185,9 @@ Greeter client received: Hello, you!
 
 There is some extra configuration required to connect to a gRPC service through Ambassador Edge Stack over an encrypted channel. Currently, the gRPC call is being sent over cleartext to Ambassador Edge Stack which proxies it to the gRPC application.
 
-![](../images/grpc-tls.png)
+![](../../images/grpc-tls.png)
 
-If you want to add TLS encryption to your gRPC calls, first you need to tell Ambassador Edge Stack to add [ALPN protocols](../topics/running/tls) which are required by HTTP/2 to do TLS.
+If you want to add TLS encryption to your gRPC calls, first you need to tell Ambassador Edge Stack to add [ALPN protocols](../../topics/running/tls) which are required by HTTP/2 to do TLS.
 
 For example:
 
@@ -218,13 +218,13 @@ Next, you need to change the client code slightly and tell it to open a secure R
 
 Ambassador Edge Stack is now terminating TLS from the gRPC client and proxying the call to the application over cleartext.
 
-![](../images/gRPC-TLS-Ambassador.png)
+![](../../images/gRPC-TLS-Ambassador.png)
 
 If you want to configure authentication in another language, [gRPC provides examples](https://grpc.io/docs/guides/auth.html) with proper syntax for other languages.
 
 #### Originating TLS with gRPC Service
 
-![](../images/gRPC-TLS-Originate.png)
+![](../../images/gRPC-TLS-Originate.png)
 
 Ambassador Edge Stack can originate TLS with your gRPC service so the entire RPC channel is encrypted. To configure this, first get some TLS certificates and configure the server to open a secure channel with them. Using self-signed certs this can be done with OpenSSL and adding a couple of lines to the server code.
 
@@ -297,7 +297,7 @@ spec:
 
 We need to tell Ambassador Edge Stack to route to the `service:` over https and have the service listen on `443`. We also need to tell Ambassador Edge Stack to use ALPN protocols when originating TLS with the application, the same way we did with TLS termination. This is done by setting `alpn_protocols: ["h2"]` in a `TLSContext` telling the service to use that tls-context in the mapping by setting `tls: upstream`.
 
-Refer to the [TLS document](../topics/running/tls/origination#advanced-configuration-using-a-tlscontext) for more information on TLS origination.
+Refer to the [TLS document](../../topics/running/tls/origination#advanced-configuration-using-a-tlscontext) for more information on TLS origination.
 
 ### gRPC Headers
 
@@ -312,8 +312,8 @@ headers:
 
 Some [Kubernetes ingress controllers](https://kubernetes.io/docs/concepts/services-networking/ingress/) do not support HTTP/2 fully. As a result, if you are running Ambassador with an ingress controller in front, you may find that gRPC requests fail even with correct Ambassador Edge Stack configuration.
 
-A simple way around this is to use Ambassador Edge Stack with a `LoadBalancer` service, rather than an Ingress controller. You can also consider using [Ambassador Edge Stack as your Ingress Controller](../topics/running/ingress-controller).
+A simple way around this is to use Ambassador Edge Stack with a `LoadBalancer` service, rather than an Ingress controller. You can also consider using [Ambassador Edge Stack as your Ingress Controller](../../topics/running/ingress-controller).
 
 ## gRPC-Web
 
-Ambassador Edge Stack also supports the [gRPC-Web](../topics/running/ambassador#grpc-web-enable_grpc_web) protocol for browser-based gRPC applications.
+Ambassador Edge Stack also supports the [gRPC-Web](../../topics/running/ambassador#grpc-web-enable_grpc_web) protocol for browser-based gRPC applications.
