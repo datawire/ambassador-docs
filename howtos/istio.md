@@ -128,7 +128,7 @@ Newer versions of Istio support Kubernetes initializers to [automatically inject
 
 ## Istio Mutual TLS
 
-Istio versions prior to 1.5 store its TLS certificates as Kubernetes secrets by default, so accessing them is a matter of YAML configuration changes. Istio 1.5 changes how secrets are handled; please contact us on [Slack](https://d6e.co/slack) for more details.
+Istio versions prior to 1.5 store its TLS certificates as Kubernetes secrets by default, so accessing them is a matter of YAML configuration changes. Istio 1.5 changes how secrets are handled; please contact us on [Slack](https://a8r.io/Slack) for more details.
 
 1. Load Istio's TLS certificates
 
