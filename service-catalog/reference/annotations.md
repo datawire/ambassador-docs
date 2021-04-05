@@ -30,7 +30,7 @@ import Alert from '@material-ui/lab/Alert';
 | `a8r.io/logs` | Link to external log viewer | `https://kibana.getambassador.io` |
 | `a8r.io/documentation` | Link to external project documentation | `https://www.getambassador.io/docs/edge-stack/latest/` |
 | `a8r.io/repository` | Link to external VCS repository | `https://github.com/datawire/ambassador` |
-| `a8r.io/support` | Link to external support center | `https://d6e.co/slack` |
+| `a8r.io/support` | Link to external support center | `https://a8r.io/Slack` |
 | `a8r.io/runbook` | Link to external project runbook | `https://www.getambassador.io/docs/edge-stack/latest/topics/running/debugging/` |
 | `a8r.io/incidents`  | Link to external incident dashboard | `https://incidents.getambassador.io` |
 | `a8r.io/uptime` | Link to external uptime dashboard | `https://uptime.getambassador.io` |
