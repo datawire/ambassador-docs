@@ -104,7 +104,7 @@ The YAML Download page stores all of the configuration changes you make across t
 
 The APIs page shows you all of the existing APIs with documentation that you configured from the Developer Portal.
 
-See the [Developer Portal](../../../../../cloud/latest/topics/using/dev-portal) documentation for more information.
+See the [Developer Portal](../dev-portal) documentation for more information.
 
 ### Documentation
 
