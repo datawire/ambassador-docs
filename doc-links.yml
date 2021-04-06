@@ -71,6 +71,8 @@
                   link: /howtos/sso/uaa
                 - title: Using the OAuth2 filter
                   link: /howtos/oauth-oidc-auth
+                - title: Kubernetes Single Sign-On with OIDC and Keycloak
+                  link: /howtos/auth-kubectl-keycloak
             - title: Custom Filters
               link: /howtos/ext-filters
             - title: Deploying to Kubernetes from GitHub
