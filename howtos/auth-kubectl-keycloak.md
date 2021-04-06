@@ -8,8 +8,11 @@ In this tutorial, we walk through how to set up your Kubernetes cluster to add S
 
 This tutorial relies on Ambassador Edge Stack to manage access to your Kubernetes cluster, and uses Keycloak as your identity provider. To get started:
 
-* Install Edge Stack (install docs)
-* Deploy Keycloak on Kubernetes (here)
+*Note* This guide was designed and validated using an Azure AKS Cluster.  It's possible that this procedure will work with other cloud providers, but there is a lot of variance in the Authentication mechanisms for the Kubernetes API.  See the troubleshooting note at the bottom for more info.
+
+* Azure AKS Cluster [here](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
+* Install Edge Stack [here](https://www.getambassador.io/docs/edge-stack/latest/topics/install/)
+* Deploy Keycloak on Kubernetes [here](https://www.keycloak.org/getting-started/getting-started-kube)
 
 ## Cluster Setup
 
@@ -18,36 +21,137 @@ In this section, we'll configure your Kubernetes cluster for single-sign on.
 ### 1. Authenticate Ambassador with Kubernetes API
 
 1. Delete the openapi mapping from the Ambassador namespace `kubectl delete -n ambassador ambassador-devportal-api`. (this mapping can conflict with `kubectl` commands)
-2. Get the token from your KUBECONFIG yaml, and encode it into a base64 basic token and add it to a kube-api mapping in place of `<token>`. 
 
- (The most reliable way I've found to do this is to `curl -v <some-valid-url> -u "admin:<token>"` and copy the Authorization header from the -v output.  I've noticed that sometimes doing an `echo "admin:token" | base64` doesn't always yield the correct token, not sure why)
+2. Create a new private key using `openssl genrsa -out aes-key.pem 4096`.
+
+3. Create a file `aes-csr.cnf` and paste the following config.
+
+    ```cnf
+    [ req ]
+    default_bits = 2048
+    prompt = no
+    default_md = sha256
+    distinguished_name = dn
+
+    [ dn ]
+    CN = ambassador-kubeapi # Required
+
+    [ v3_ext ]
+    authorityKeyIdentifier=keyid,issuer:always
+    basicConstraints=CA:FALSE
+    keyUsage=keyEncipherment,dataEncipherment
+    extendedKeyUsage=serverAuth,clientAuth
+    ```
+
+4. Create a certificate signing request with the config file we just created.  `openssl req -config ./aes-csr.cnf -new -key aes-key.pem -nodes -out aes-csr.csr`.
+
+5. Create and apply the following YAML for a CertificateSigningRequest.  Replace {{BASE64_CSR}} with the value from `cat aes-csr.csr | base64`.  Note that this is `aes-csr.csr`, and not `aes-csr.cnf`.
+
+    ```yaml
+    apiVersion: certificates.k8s.io/v1beta1
+    kind: CertificateSigningRequest
+    metadata:
+      name: aes-csr
+    spec:
+      groups:
+      - system:authenticated
+      request: {{BASE64_CSR}} # Base64 encoded aes-csr.csr
+      usages:
+      - digital signature
+      - key encipherment
+      - server auth
+      - client auth
+    ```
+
+6. Check csr was created: `kubectl get csr` (it will be in pending state).  After confirmation, run `kubectl certificate approve aes-csr`.  You can check `kubectl get csr` again to see that it's in the `Approved, Issued` state.
+
+7. Get the resulting certificate and put it into a pem file.  `kubectl get csr aes-csr -o jsonpath='{.status.certificate}' | base64 -d > aes-cert.pem`.
+
+8. Create a TLS `Secret` using our private key and public certificate.  `kubectl create secret tls -n ambassador aes-kubeapi --cert ./aes-cert.pem --key ./aes-key.pem`
+
+9. Create a `Mapping` and `TLSContext` for the Kube API.
 
     ```yaml
     ---
     apiVersion: getambassador.io/v2
+    kind: TLSContext
+    metadata:
+      name: aes-kubeapi-context
+      namespace: ambassador
+    spec:
+      hosts:
+      - "*"
+      secret: aes-kubeapi
+    ---
+    apiVersion: getambassador.io/v2
     kind: Mapping
     metadata:
-      name: ambassador-kube-api-mapping
+      name: aes-kubeapi-mapping
       namespace: ambassador
     spec:
       prefix: /
       allow_upgrade:
       - spdy/3.1
-      add_request_headers:
-        authorization: "Basic <token>"
-      remove_request_headers:
-        - authorization
-      service: https://kubernetes.default
+      service: https://kubernetes.default.svc
+      timeout_ms: 0
+      tls: aes-kubeapi-context
     ```
 
-3. Test that the API works and is responding correctly.  `curl https://<ambassador>/api/v1/namespaces/default/services?limit=500` and `curl https://<ambassador>/api/v1/namespaces/default/pods?limit=500`.
+10. Create RBAC for the "aes-kubeapi" user by applying the following YAML.
 
-### 2. Create a ClusterRole and ClusterRoleBinding for a generic user "john"
+    ```yaml
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: aes-impersonator-role
+    rules:
+    - apiGroups: [""]
+      resources: ["users", "groups", "serviceaccounts"]
+      verbs: ["impersonate"]
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: aes-impersonator-rolebinding
+    subjects:
+    - apiGroup: rbac.authorization.k8s.io 
+      kind: User
+      name: aes-kubeapi
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: aes-impersonator-role
+    ```
 
-XXX: do we always impersonate John? if so, should we create a more generic name e.g., ambassador-kubectl-impersonation
-XXX: we should clarify that we should add the RBAC that we expect the user to use
+As a quick check, you should be able to `curl https://<ambassador-domain>/api` and get a response similar to the following:
 
-1. Add the following RBAC to create a user "john" that will only have get/list access to services.
+  ```json
+  {
+    "kind": "APIVersions",
+    "versions": [
+      "v1"
+    ],
+    "serverAddressByClientCIDRs": [
+      {
+        "clientCIDR": "0.0.0.0/0",
+        "serverAddress": "\"<some-kubernetes-service-address>\":443"
+      }
+    ]
+  }%
+  ```
+
+### 2. Set up Keycloak config
+
+1. Create a new Realm and Client (e.g. ambassador, ambassador)
+2. Make sure that `http://localhost:8000` and `http://localhost:18000` are valid Redirect URIs
+3. Set access type to confidential and Save
+4. Go to the Credentials tab and note down the secret
+5. Go to the user tab and create a user with the first name "john"
+
+### 3. Create a ClusterRole and ClusterRoleBinding for the OIDC user "john"
+
+1. Add the following RBAC to create a user "john" that only allowed to perform `kubectl get services` in the cluster.
 
     ```yaml
     ---
@@ -63,7 +167,6 @@ XXX: we should clarify that we should add the RBAC that we expect the user to us
       apiGroup: rbac.authorization.k8s.io
       kind: ClusterRole
       name: john-role
-
     ---
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
@@ -75,7 +178,7 @@ XXX: we should clarify that we should add the RBAC that we expect the user to us
         verbs: ["get", "list"]
     ```
 
-2. Test again with the same two curls but now include impersonation headers with `-H "Impersonate-User: john"`.  Notice, however, that the while the first curl responds correctly, the second will respond with the following:
+2. Test the API again with the following 2 `curls`: `curl https://<ambassador-domain>/api/v1/namespaces/default/services?limit=500 -H "Impersonate-User: "john"` and `curl https://<ambassador-domain>/api/v1/namespaces/default/pods?limit=500 -H "Impersonate-User: "john"`.  You will find that the first curl should succeeds and the second curl should fail with the following response.
 
 ```json
 {
@@ -93,14 +196,6 @@ XXX: we should clarify that we should add the RBAC that we expect the user to us
   "code": 403
 }
 ```
-
-### 3. Set up Keycloak config
-
-1. Create a new Realm and Client (e.g. ambassador, ambassador)
-2. Make sure that `http://localhost:8000` and `http://localhost:18000` are valid Redirect URIs
-3. Set access type to confidential and Save
-4. Go to the Credentials tab and note down the secret
-5. Go to the user tab and create a user with the first name "john"
 
 ### 4. Create a JWT filter to authenticate the user
 
@@ -137,77 +232,64 @@ XXX: we should clarify that we should add the RBAC that we expect the user to us
 
 Now, we need to set up the client. Each user who needs to access the Kubernetes cluster will need to follow these steps.
 
-
-### 1. Install kubelogin 
+### 1. Install kubelogin
 
 1. Install [kubelogin](https://github.com/int128/kubelogin#getting-started). Kubelogin is a `kubectl` plugin that enables OpenID Connect login with `kubectl`.
 
-2. Edit your local Kubernetes YAML file to include the following, making sure to replace the templated values. XXX: WHere is this file? Echo $KUBECONFIG?
+2. Edit your local Kubernetes config file (either `~/.kube/config`, or your `$KUBECONFIG` file) to include the following, making sure to replace the templated values.
 
-```yaml
-apiVersion: v1
-kind: Config
-clusters:
-- cluster:
-    server: https://<my-ambassador-domain>
-  name: ambassador
-contexts:
-- context:
-  name: ambassador-kube-api
-    cluster: ambassador
-    user: ambassador
-users:
-- name: ambassador
-  user:
-    exec:
-      apiVersion: client.authentication.k8s.io/v1beta1
-      command: kubectl
-      args:
-      - oidc-login
-      - get-token
-      - --oidc-issuer-url=https://<keycloak-domain>/auth/realms/<my-realm>
-      - --oidc-client-id=<client-id>
-      - --oidc-client-secret=<client-secret>
-```
+    ```yaml
+    apiVersion: v1
+    kind: Config
+    clusters:
+    - name: azure-ambassador
+      cluster:
+        server: https://<ambassador-domain>
+    contexts:
+    - name: azure-ambassador-kube-api
+      context:
+        cluster: azure-ambassador
+        user: azure-ambassador
+    users:
+    - name: azure-ambassador
+      user:
+        exec:
+          apiVersion: client.authentication.k8s.io/v1beta1
+          command: kubectl
+          args:
+          - oidc-login
+          - get-token
+          - --oidc-issuer-url=https://<keycloak-domain>/auth/realms/<my-realm>
+          - --oidc-client-id=<client-id>
+          - --oidc-client-secret=<client-secret>
+    ```
 
+3. Switch to the context set above (in the example it's `azure-ambassador-kube-api`).
 
-3. Switch to the context we set in 4.2 (in the example it's `ambassador-kube-api` ) XXX: Do you mean above?
+4. Run `kubectl get svc`.  This should open a browser page to the Keycloak login.  Type in the credentials for "john" and, on success, return to the terminal to see the kubectl response. Congratulations, you've set up Single Sign-On with Kubernetes!
 
-4. Run `kubectl get svc`.  This should open a browser page to the Keycloak login.  Type in your credentials and, on success, return to the terminal to see the kubectl response. Congratulations, you've set up Single Sign-On with Kubernetes!
+5. Now try running `kubectl get pods`, and notice we get an `Error from server (Forbidden): pods is forbidden: User "john" cannot list resource "pods" in API group "" in the namespace "default"`.  This is expected because we explicitly set up "john" to only have access to view `Service` resources, and not `Pods`.
 
+### 7. Logging Out
 
-# ## 7. Logging Out
 1. Delete the token cache with `rm -r ~/.kube/cache/oidc-login`
 2. You may also have to remove session cookies in your browser or do a remote logout in the keycloak admin page.
 
+### Troubleshooting
 
-Troubleshooting?
-
- Now try running `kubectl get pods`, and notice we get an `Error from server (Forbidden): pods is forbidden: User "john" cannot list resource "pods" in API group "" in the namespace "default"`.
-
+1. Why isn't this process working in my `<insert-cloud-provider-here>` cluster?
+  Authentication to the Kubernetes API is highly cluster specific.  Many use x509 certificates, but as a notable exception, Amazon's Elastic Kubernetes Service, for example, uses an Authenticating Webhook that connects to their IAM solution for Authentication, and so is not compatible specifically with this guide.
+2. What if I want to use RBAC Groups?
+  User impersonation allows you to specify a Group using the `Impersonate-Group` header.  As such, if you wanted to use any kind of custom claims for the ID token, they can be mapped to the `Impersonate-Group` header.  Note that you always have to use an `Impersonate-Name` header, even if you're relying solely on the Group for Authorization.
+3. I keep getting a 401 `Failure`, `Unauthorized` message, even for `https://<ambassador-domain>/api`.
+  This likely means that there is either something wrong with the Certificate that was issued, or there's something wrong with your `TLSContext` or `Mapping` config.  Ambassador must present the correct certificate to the Kubernetes API and the RBAC usernames and the CN of the certificate have to be consistent with one another.
+4. Do I have to use `kubelogin`?
+  Technically no.  Any method of obtaining an ID or Access token from an Identity Provider will work.  You can then pass the token using `--token <jwt-token>` when running `kubectl`.  `kubelogin` simply automates the process of getting the ID token and attaching it to a `kubectl` request.
 
 ## Under the Hood
 
-
-
-In this tutorial, we set up Ambassador Edge Stack to [impersonate a user](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation) to access the Kubernetes API. Requests get sent to Edge Stack, which functions as an Authenticating Proxy. Edge Stack uses its integrated authentication mechanism to authenticate the external request's identity and sets the User and Group based on Claims recieved by the `Filter`. 
-
+In this tutorial, we set up Ambassador Edge Stack to [impersonate a user](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation) to access the Kubernetes API. Requests get sent to Edge Stack, which functions as an Authenticating Proxy. Edge Stack uses its integrated authentication mechanism to authenticate the external request's identity and sets the User and Group based on Claims recieved by the `Filter`.
 
 The general flow of the `kubectl` command is as follows: On making an unauthenticated kubectl command, `kubelogin` does a browser open/redirect in order to do OIDC token negotiation.  `kubelogin` obtains an OIDC Identity Token (notice this is not an access token) and sends it to Ambassador in an Authorization header.  Ambassador validates the Identity Token and parses Claims from it to put into `Impersonate-XXX` headers.  Ambassador then scrubs the Authorization header and replaces it with the Admin token we set up in step 1.  Ambassador then forwards this request with the new Authorization and Impersonate headers to the KubeAPI to first Authenticate, and then Authorize based on Kubernetes RBAC.
 
 (draw flow diagram)
-
-
-#### XXX: Are these internal notes?
-
- This does still present the problem of establishing the special Authentication for Ambassador, however we only have to do it once in this case instead of having to create either a Service Account or an x509 cert for every user or group that we want to implement.  As a result, we just have to specify some custom Claims to be put on a JWT so that we can use header injection to directly map them to the `Impersonate-User`, `Impersonate-Group` and `Impersonate-Extra` headers.
-
-*Note* Regarding Cloud Provider Authentication: Ambassador needs to have some kind of Authentication mechanism in place between Ambassador and the Kube API such that the Kube API knows that Ambassador is allowed to impersonate users.  This mechanism can be highly cloud specific (Azure uses x509 certificates, EKS uses an IAM webhook, GKE has legacy support for x509 certs, while generally supporting IAM or OIDC identity tokens).  Utilizing service accounts for this would probably be the most "universal" (there are no k8s clusters that don't use service accounts), but there are some complications when it comes to reading secrets and attaching them to Headers.  If the token never changes, then it's just a matter of physically copying the service account token value to the `add_request_headers` field.  Some clusters, however, have a token rotation policy for service accounts, and so Ambassador needs the most up-to-date token in order to authenticate with Kube API.  There is currently no mechanism for Ambassador to be able to put information either in a K8s Secret/Configmap or from the Pod's Filesystem into a Header. (If we did, probably the easiest way to do this is to give impersonation permission to the `ambassador` Service Account and use the token mounted on a volume in the Ambassador `Pod`, but, again, we have no mechanism for putting something in the file system into a Header).
-
-Requirements:
-1. Ambassador Edge Stack
-2. Keycloak Deployment (technically any OIDC provider can be substituted)
-
-Kubeception Specific Instructions:
-Note, Kubeception does not support x509 certificate authentication, it uses static tokens for Authentication.  This does have the downside that Ambassador technically has full cluster admin access, though with a proper `Filter` and `FilterPolicy` in place, this should not present an overt problem.  Note that a different cluster might have a different step 1 in this process based on the above "Cloud Provider Authentication" note.
-
