@@ -104,7 +104,7 @@ Next, you will need to install the Argo CD CLI (for building pipelines) and the 
               },
               {
                  comments:[
-                    "# Arco Rollouts plugin"
+                    "# Argo Rollouts plugin"
                  ],
                 input: "sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts"
               },
