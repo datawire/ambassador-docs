@@ -64,7 +64,61 @@ kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/datawire/arg
 
 Next, you will need to install the Argo CD CLI (for building pipelines) and the Argo Rollouts plugin (for managing and visualizing rollouts) on your laptop:
 
-<Tabs/>
+<AppStateContext>
+{state => {
+  return (<CodeBlockMultiLang type="terminal" state={state}  data={
+    {
+      tabs: [
+          {
+            id: "macOS",
+            display: "macOS",
+            os:"macos",
+            prompt: "",
+            commands: [
+              {
+                input: "brew install argocd"
+              },
+              {
+                input: "brew install argoproj/tap/kubectl-argo-rollouts",
+                outputs: [
+                  "# Need brew? https://brew.sh/"
+                ]
+              }
+            ]
+          },
+          {
+            id: "linux",
+            display: "Linux",
+            os:"linux",
+            prompt: "",
+            commands: [
+              {
+                 comments:[
+                    "# Argo CD CLI"
+                 ],
+                input: "curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.14/argocd-linux-amd64"
+              },
+              {
+                comments:[],
+                input: "chmod +x /usr/local/bin/argocd"
+              },
+              {
+                 comments:[
+                    "# Argo Rollouts plugin"
+                 ],
+                input: "sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts"
+              },
+              {
+                comments:[],
+                input: "sudo chmod a+x /usr/local/bin/kubectl-argo-rollouts"
+              },
+            ]
+          }
+        ]
+    }} />)
+}
+}
+</AppStateContext>
 
 ## 3. Set up Argo
 
