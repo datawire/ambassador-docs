@@ -18,7 +18,7 @@ Developing for fast-moving, cloud-native environments poses new challenges that 
 
 **Continuous deployment** is a software release process that uses automated integration and end-to-end testing to validate changes, along with the observability of the system’s health signals, to autonomously change the state of a production environment. 
 
-[Continuous deployment](https://www.getambassador.io/continuous-deployment-pyramid/) extends continuous delivery. While both CDs are automated, humans do not intervene in continuous deployment. Deployment and release happen automatically, and the only way a change won't be deployed to production is if an automated check fails. 
+[Continuous deployment](/continuous-deployment-pyramid/) extends continuous delivery. While both CDs are automated, humans do not intervene in continuous deployment. Deployment and release happen automatically, and the only way a change won't be deployed to production is if an automated check fails. 
 
 With continuous deployment, developers can get their code into real-world conditions and benefit from faster feedback loops, better decision-making, and the ability to safely deploy more code.
 
@@ -37,7 +37,7 @@ The terminology around CI/CD and progressive delivery starts to get murky when d
 
 ## What is progressive delivery?
 
-**[Progressive delivery](https://www.getambassador.io/docs/edge-stack/latest/topics/concepts/progressive-delivery/)** is a practice that builds on CI/CD principles but adds processes and techniques for gradually rolling out new features with good observability and tight feedback loops. Progressive delivery provides a [fast-moving but risk-sensitive way](https://www.getambassador.io/continuous-deployment-pyramid/proactive-mitigation) to exert more fine-grained control over delivery. Progressive delivery makes the rollout of new features and testing them in a production environment possible without introducing significant disruption. 
+**[Progressive delivery](/docs/edge-stack/latest/topics/concepts/progressive-delivery/)** is a practice that builds on CI/CD principles but adds processes and techniques for gradually rolling out new features with good observability and tight feedback loops. Progressive delivery provides a [fast-moving but risk-sensitive way](/continuous-deployment-pyramid/proactive-mitigation) to exert more fine-grained control over delivery. Progressive delivery makes the rollout of new features and testing them in a production environment possible without introducing significant disruption. 
 
 ## How can rollouts make shipping code safer?
 

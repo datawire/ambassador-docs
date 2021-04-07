@@ -2,7 +2,7 @@
 
 ## What is GitOps?
 
-[GitOps](https://www.getambassador.io/learn/kubernetes-glossary/gitops/) is an approach to continuous deployment that relies on using a version control/source control system as a single source of truth for all infrastructure and configuration for a Kubernetes deployment. The source code itself as well as deployment metadata that describe how the application should run inside the cluster live within this source control system. 
+[GitOps](/learn/kubernetes-glossary/gitops/) is an approach to continuous deployment that relies on using a version control/source control system as a single source of truth for all infrastructure and configuration for a Kubernetes deployment. The source code itself as well as deployment metadata that describe how the application should run inside the cluster live within this source control system. 
 
 In the GitOps model, configuration changes go through a specific pull-based workflow:
 

@@ -244,4 +244,4 @@ This will install into your cluster:
 
 ## More Information
 
-For more about Ambassador Edge Stack's integration with Consul, read the [service discovery configuration](../topics/running/resolvers) documentation.
+For more about Ambassador Edge Stack's integration with Consul, read the [service discovery configuration](../../topics/running/resolvers) documentation.

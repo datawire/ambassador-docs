@@ -32,7 +32,7 @@ Argo can use Kubernetes projects formatted using different templating systems (H
 
 ## 1. Install and configure Edge Stack
 
-You'll first need to install Edge Stack in your cluster. Follow the [Edge Stack installation](../../edge-stack/latest/tutorials/getting-started) to install via Kubernetes YAML, Helm, or the command-line installer in your cluster.
+You'll first need to install Edge Stack in your cluster. Follow the [Edge Stack installation](../../../edge-stack/latest/tutorials/getting-started) to install via Kubernetes YAML, Helm, or the command-line installer in your cluster.
 
 By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use [endpoint routing](../../../edge-stack/latest/topics/running/resolvers/). Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
 
