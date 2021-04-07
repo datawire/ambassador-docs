@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import Icon from '../../../src/components/Icon';
 import {
     goToGetAmbassador, goToTelepresenceDocs, goToTutorialsGettingStarted, goToTelepresenceHowTo,
-    goToTelepresenceEnv, goToTelepresenceOutbound, goToMappings, goToOauth, goToRateLimits
+    goToTelepresenceEnv, goToTelepresenceOutbound, goToMappings, goToOauth, goToRateLimits, goToKubeSSO,
 } from '../../../src/utils/routes';
 
 const DocsHome = () => (
@@ -56,9 +56,9 @@ const DocsHome = () => (
                     <hr className="docs__card--separator" />
                     <span className="docs__heading-tertiary">Popular Tutorials</span>
                     <ul className="docs__popular-list">
-                        <li><Link to={goToMappings}>Intro to Mappings</Link></li>
-                        <li><Link to={goToOauth}>Single Sign-On Authentication</Link></li>
-                        <li><Link to={goToRateLimits}>Rate Limiting</Link></li>
+                        <li><Link to={goToMappings}>Introduction to Mappings</Link></li>
+                        <li><Link to={goToOauth}>Single Sign-On Authentication with OpenID Connect</Link></li>
+                        <li><Link to={goToKubeSSO}>Setting up Single Sign-On with Kubectl</Link></li>
                     </ul>
                 </div>
             </div>
