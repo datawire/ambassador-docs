@@ -3,7 +3,7 @@
 
 ## What is a canary deployment?
 
-A **[canary deployment](https://www.getambassador.io/docs/edge-stack/latest/topics/using/canary/)** is designed to make sure that a "simple fix" or change to code won't kill your application. Like the proverbial canary being sent into the coal mine, only a small subset of users will be exposed to new code to test what happens. Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things, i.e. keeping the canary alive.
+A **[canary deployment](/docs/edge-stack/latest/topics/using/canary/)** is designed to make sure that a "simple fix" or change to code won't kill your application. Like the proverbial canary being sent into the coal mine, only a small subset of users will be exposed to new code to test what happens. Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things, i.e. keeping the canary alive.
 
 ## How do canary releases limit risk when rolling out software changes?
 
@@ -54,7 +54,7 @@ Canary releases don't fit every case. For example, mission or life-critical case
 
 To get started with canary releasing, you'll need:
 
-*   an [API Gateway](https://www.getambassador.io/docs/edge-stack/latest/topics/install/install-ambassador-oss/#the-ambassador-api-gateway) to manage the flow of traffic to your services, e.g. Ambassador Edge Stack
+*   an [API Gateway](/docs/edge-stack/latest/topics/install/install-ambassador-oss/#the-ambassador-api-gateway) to manage the flow of traffic to your services, e.g. Ambassador Edge Stack
 *   a CI/CD pipeline integrated with a continuous deployment workflow, e.g., Argo
 *   an observability system
 
