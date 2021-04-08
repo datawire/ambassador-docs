@@ -129,6 +129,23 @@
         font-weight: normal;
         font-size: 33px;
         margin-bottom: 14px;
+
+        &--aligned {
+            display: flex;
+            align-items: center;
+
+            svg {
+                margin-right: 6px;
+            }
+        }
+    }
+
+    .product-page {
+        margin-top: 90px;
+
+        .docs__heading-primary {
+            height: 70px;
+        }
     }
 
     &__text-primary {
@@ -205,11 +222,16 @@
         display: flex;
         align-items: center;
         margin-bottom: 24px;
+        
         svg {
             height: 40px;
             margin-right: 5px;
             width: 40px;
         }
+    }
+
+    &__card--heading-start {
+        align-items: flex-start;
     }
 
     &__button-tertiary {
@@ -260,6 +282,20 @@
         color: @black;
         margin-bottom: 12px;
         display: block;
+    }
+
+    &__m-bottom-50 {
+        margin-bottom: 50px;
+    }
+
+    &__argo-icon {
+        width: 55px;
+        height: 70px;
+    }
+
+    &__cloud-icon {
+        width: 55px;
+        height: 59px;
     }
 
     &__popular-list {
@@ -403,6 +439,10 @@
         margin-top: 5px;
     }
 
+    &__m-width-dekstop .card-item {
+        max-width: 500px;
+    }
+
     &__topic-item {
         font-size: 14px;
         line-height: 24px;
@@ -452,6 +492,36 @@
             margin-left: 18px;
             display: block;
             text-align: left;
+        }
+    }
+
+    &__section-nav-content {
+        overflow: auto;
+        margin-bottom: 50px;
+    }
+
+    &__section-nav {
+        display: flex;
+        border-bottom: 1px solid @grey-separator;
+        min-width: 600px;
+
+        li {
+            padding: 19px 0;
+            margin-right: 24px;
+            font-size: 19px;
+            letter-spacing: 0.15px;
+            color: @black;
+            cursor: pointer;
+            transition: color 200ms linear 0ms;
+
+            &:hover {
+                color: @blue;
+            }
+            
+            &.selected {
+                color: @blue;
+                border-bottom: 1px solid @blue;
+            }
         }
     }
 
@@ -521,6 +591,10 @@
         &__dropdown-container {
             order: 2;
             height: 54px;
+        }
+
+        .product-page {
+            margin-top: 110px;
         }
 
         &__container-doc {
@@ -605,6 +679,10 @@
                 margin: 0;
             }
         }
+
+        &__m-width-dekstop .card-item {
+            max-width: none;
+        }
     }
 
     @media (max-width: 750px) {
@@ -612,6 +690,10 @@
         &__nav {
             height: 50px;
             padding-top: 0;
+        }
+
+        .product-page {
+            margin-top: 70px;
         }
 
         &__dropdown-container {
@@ -636,6 +718,10 @@
 
         &__info--second {
             display: none;
+        }
+
+        &__section-nav li {
+            font-size: 15px;
         }
     }
 

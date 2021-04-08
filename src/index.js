@@ -14,6 +14,10 @@ import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
 import isAesPage from './utils/isAesPage';
+import Argo from './products/Argo';
+import Cloud from './products/Cloud';
+import EdgeStack from './products/EdgeStack';
+import Telepresence from './products/Telepresence';
 import './style.less';
 
 export default ({ data, location }) => {
@@ -27,6 +31,7 @@ export default ({ data, location }) => {
         ? {}
         : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
     const isProduct = initialProduct.slug !== products[0].slug;
+    const isProductHome = isProduct && !!!initialVersion.id;
     const canonicalUrl = isHome
         ? 'https://www.getambassador.io/docs/'
         : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
@@ -35,7 +40,7 @@ export default ({ data, location }) => {
 
     const [product, setProduct] = useState(initialProduct);
     const [version, setVersion] = useState(initialVersion);
-    const [showVersion, setShowVersion] = useState(!isHome && isProduct);
+    const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome);
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
 
@@ -88,7 +93,7 @@ export default ({ data, location }) => {
         const newVersion = selectedProduct.version.filter(v => v.id === "latest")[0] || selectedProduct.version[0];
         setVersion(newVersion);
         navigate(
-            `/docs/${selectedProduct.slug}/${newVersion.link}/`,
+            `/docs/${selectedProduct.slug}/`,
         );
     };
 
@@ -136,6 +141,49 @@ export default ({ data, location }) => {
             }, 500);
         }
     };
+
+    const getProductHome = (product) => {
+        switch (product) {
+            case products[1].slug:
+                return <EdgeStack />;
+            case products[2].slug:
+                return <Telepresence />;
+            case products[3].slug:
+                return <Cloud />;
+            case products[4].slug:
+                return <Argo />;
+            default:
+                return <EdgeStack />;
+        }
+    }
+
+    let content = isHome ? <DocsHome /> : isProductHome ?
+        getProductHome(initialProduct.slug)
+        : (
+            <div className="docs__container-doc">
+                <Sidebar
+                    onVersionChanged={handleVersionChange}
+                    version={version}
+                    versionList={versionList}
+                    topicList={menuLinks}
+                    slug={page.fields.slug}
+                />
+                <div className="docs__doc-body-container">
+                    <div className="docs__doc-body doc-body">
+                        <div className="doc-tags">
+                            {showAesPage && (
+                                <Link className="doc-tag aes" to="/editions">
+                                    Ambassador Edge Stack
+                                </Link>
+                            )}
+                        </div>
+                        <MDXRenderer slug={page.fields.slug}>
+                            {template(page.body, getVersions())}
+                        </MDXRenderer>
+                    </div>
+                </div>
+            </div>
+        )
 
     return (
         <Layout location={location}>
@@ -196,35 +244,9 @@ export default ({ data, location }) => {
                     </div>
                 </nav>
 
-                {!showVersion ? (
-                    <DocsHome />
-                ) : (
-                    <div className="docs__container-doc">
-                        <Sidebar
-                            onVersionChanged={handleVersionChange}
-                            version={version}
-                            versionList={versionList}
-                            topicList={menuLinks}
-                            slug={page.fields.slug}
-                        />
-                        <div className="docs__doc-body-container">
-                            <div className="docs__doc-body doc-body">
-                                <div className="doc-tags">
-                                    {showAesPage && (
-                                        <Link className="doc-tag aes" to="/editions">
-                                            Ambassador Edge Stack
-                                        </Link>
-                                    )}
-                                </div>
-                                <MDXRenderer slug={page.fields.slug}>
-                                    {template(page.body, getVersions())}
-                                </MDXRenderer>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                {content}
 
-                <div className={`${!isHome ? 'docs__doc-body-container' : ''}`}>
+                <div className={`${!isHome && !isProductHome ? 'docs__doc-body-container' : ''}`}>
 
                     <hr className="docs__separator docs__container" />
 

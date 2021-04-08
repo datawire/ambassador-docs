@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import Icon from '../../../src/components/Icon';
 import {
     goToGetAmbassador, goToTelepresenceDocs, goToTutorialsGettingStarted, goToTelepresenceHowTo,
-    goToTelepresenceEnv, goToTelepresenceOutbound, goToMappings, goToOauth, goToRateLimits, goToKubeSSO,
+    goToTelepresenceEnv, goToTelepresenceOutbound, goToMappings, goToOauth, goToKubeSSO,
 } from '../../../src/utils/routes';
 
 const DocsHome = () => (
