@@ -23,6 +23,11 @@ There a number of installation options for Ambassador. See the [getting started]
 
 ## Integrate Ambassador and Istio
 
+> **WARNING - Istio Regression:**
+> There is a regression in Istio 1.9 that causes Ambassador (and other non-Istio services) to be unable to ready Istio certificates. 
+>
+> Use Istio 1.8.2 or earlier until a version of Istio with a patch for this regression is released.
+
 Ambassador integrates with Istio in three ways:
 
 * Uses Istio [mutual TLS (mTLS)](#mutual-tls) certificates for end-to-end encryption
