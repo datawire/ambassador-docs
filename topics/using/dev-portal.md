@@ -140,6 +140,8 @@ spec:
     matchLabels:          ## optional; default is {}
       "string": "string"
   naming_scheme: "string" ## optional; supported values [ "namespace.name", "name.prefix" ]; default "namespace.name"
+  search:
+    enabled: bool         ## optional; default false
 ```
 
 where:
@@ -167,6 +169,9 @@ where:
   * "name.prefix" will display the docs with the name and prefix of the mapping.
   e.g. a Mapping named `quote` with a prefix `backend` will be displayed as `quote.backend`
   and its docs will have the relative path of `/quote/backend`
+* `search`: as of Edge Stack 1.13.0, the DevPortal content is now searchable
+  * `enabled`: toggles search functionality in the DevPortal. The default is `false`.
+    * When `enabled=false`, the DevPortal search endpoint (`/[DEVPORTAL_PATH/api/search`) will return an empty response
 
 Example:
 
