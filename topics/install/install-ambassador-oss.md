@@ -187,6 +187,10 @@ The Ambassador API Gateway is currently available out-of-the-box in some Kuberne
 See the [integrations with community projects](../ambassador-oss-community) to quickly install the
 Ambassador API Gateway.
 
+## Set up Service Catalog
+
+[Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
+
 ## Want More?
 
 For more features, check out the latest build of the [Ambassador Edge Stack](../).
