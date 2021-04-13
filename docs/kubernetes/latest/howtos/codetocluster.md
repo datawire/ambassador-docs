@@ -1,4 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
+import GSTabs from './gs-tabs.js'
 
 # Get code running on my cluster
 
@@ -20,14 +21,20 @@ This guide will walk you through going from code to building a Docker container 
 
 ## Prerequisites
 
-* [Kubectl](../howtos/howtos/devenv/#kubectl)
+* [Kubectl](../../quick-start/#1-kubectl)
 * a Kubernetes cluster <!--([minikube](../howtos/howtos/devenv/#minikube) would work if you don't have access to a real cluster)-->
 * [Docker](https://docs.docker.com/get-docker/) and a basic knowledge of running and building containers
 * A Docker Hub account ([sign up](https://hub.docker.com) if you don't have one]
 
 ## 1. Install ingress controller
 
-We'll need an ingress controller for your cluster to get traffic from the internet to your app.  We'll use the Ambassador Edge Stack for this. [Follow step one on this page](https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started/) to install Edge Stack.
+We'll need an ingress controller for your cluster to get traffic from the internet to your app.  We'll use the Ambassador Edge Stack for this. 
+
+**We recommend installing using Helm** but there are other options below to choose from.
+
+<GSTabs/>
+
+If needed, see the list of <a href="../../../../edge-stack/latest/topics/install/" target="_blank">more thorough installation options</a>.
 
 Now that your cluster is ready to go, let's check out the app we're going to use.
 
@@ -94,11 +101,11 @@ When it finishes go to [Docker Hub](https://hub.docker.com/) and you should see 
 
 ## 5. Create a Deployment, Service, and Mapping in Kubernetes
 
-Save this file as `nodebb.yaml`, replacing the values for Docker Hub username and your name.  This manifest file first creates a Deployment, which defines and runs the Pod.  Pods in Kubernetes are usually made up of a single container, in this case, the `nodebb` container you pushed to Docker Hub. [Learn more about the basics of Kubernetes](../concepts/basics)
+Save this file as `nodebb.yaml`, replacing the values for Docker Hub username and your name.  This manifest file first creates a Deployment, which defines and runs the Pod.  Pods in Kubernetes are usually made up of a single container, in this case, the `nodebb` container you pushed to Docker Hub. [Learn more about the basics of Kubernetes](../../concepts/basics).
 
 Next, it creates a Service, which handles getting the traffic on the specified port to the Pod.
 
-Finally, it creates a [Mapping](https://www.getambassador.io/docs/edge-stack/latest/topics/using/intro-mappings/#introduction-to-the-mapping-resource), which is used by Edge Stack to expose a Service to the internet at a specific URL prefix, `/` in this case (as in the root of your hostname or IP address, like `http://google.com/` or `http://1.2.3.4/`)
+Finally, it creates a [Mapping](../../../../edge-stack/latest/topics/using/intro-mappings/#introduction-to-the-mapping-resource), which is used by Edge Stack to expose a Service to the internet at a specific URL prefix, `/` in this case (as in the root of your hostname or IP address, like `http://google.com/` or `http://1.2.3.4/`)
 
 ```
 ---
@@ -168,6 +175,6 @@ Finally, go to `http://<load balancer IP>/` and you should see your app.
 
 ## <img class="os-logo" src="../../../../../images/logo.png"/> What's Next?
 
-YAML files used to deploy Kubernetes resources are generally kept under version control.  You can automate deploying and updating resources as changes are committed to your code repositories using a CI/CD system like Argo!  [Check out our guide on getting started with Argo](https://www.getambassador.io/docs/argo/latest/quick-start/).
+YAML files used to deploy Kubernetes resources are generally kept under version control.  You can automate deploying and updating resources as changes are committed to your code repositories using a CI/CD system like Argo!  [Check out our guide on getting started with Argo](../../../../argo/latest/quick-start/).
 
-Debugging services running on Kubernetes can be a frustrating process, make it easier and faster [using Telepresence](https://www.getambassador.io/docs/telepresence/latest/quick-start/)!
+Debugging services running on Kubernetes can be a frustrating process, [make it easier and faster using Telepresence](../../../../telepresence/latest/quick-start/)!
