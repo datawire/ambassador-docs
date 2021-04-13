@@ -5,7 +5,7 @@ export const products = [
         link: "/docs",
         version: []
     },
-        {
+    {
         slug: "kubernetes",
         name: "Kubernetes (K8s)",
         link: "/docs/kubernetes/latest/quick-start/",
@@ -46,7 +46,7 @@ export const products = [
     {
         slug: "argo",
         name: "Argo",
-        link: "/docs/argo/latest/quick-start/",
+        link: "/docs/argo/",
         version: [
             { id: "latest", name: "Latest", link: "latest" }
         ]
@@ -54,7 +54,7 @@ export const products = [
     {
         slug: "cloud",
         name: "Cloud",
-        link: "/docs/cloud/latest/service-catalog/quick-start/",
+        link: "/docs/cloud/",
         version: [
             { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start/" }
         ]
