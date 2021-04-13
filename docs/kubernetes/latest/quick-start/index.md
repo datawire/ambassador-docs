@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Kuberentes Quick Start
+# Kubernetes Quick Start
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
@@ -17,7 +17,7 @@ import Alert from '@material-ui/lab/Alert';
 
 ## Set up a powerful dev environment
 
-Kubernetes is a wide and deep system to use and learn.  One thing you can do to hlep yourself out it to set up an efficient and powerful development environment.  Common tasks can be made easier with the right tools.
+Kubernetes is a wide and deep system to use and learn.  One thing you can do to help yourself out it to set up an efficient and powerful development environment.  Common tasks can be made easier with the right tools.
 
 Except for kubectl, **none of these tools are required for working with Kubernetes**, but they will make your life a lot easier.
 
@@ -28,7 +28,7 @@ Except for kubectl, **none of these tools are required for working with Kubernet
 
   1. [Install kubectl from here.](https://kubernetes.io/docs/tasks/tools/)
 
-  Kubectl is the official Kuberentes command-line tool.  You will use it regularly to interact with your cluster, whether deploying applications, inspecting resources, or [diagnosing issues](../howtos/diagnose).
+  Kubectl is the official Kubernetes command-line tool.  You will use it regularly to interact with your cluster, whether deploying applications, inspecting resources, or [diagnosing issues](../howtos/diagnose).
 
   2. Get a kubeconfig file.
 
@@ -133,6 +133,6 @@ Except for kubectl, **none of these tools are required for working with Kubernet
 
 ## 6. Get started with your new tools
 
-  Follow [our guide](../howdoi/codetocluster) on getting code running on your cluster to test out your powerful new Kubernetes dev environment!
+  Follow [our guide](../howtos/codetocluster) on getting code running on your cluster to test out your powerful new Kubernetes dev environment!
 
   You can also read about [the basics of Kubernetes](../concepts/basics) to learn about the different cluster components and resources.
