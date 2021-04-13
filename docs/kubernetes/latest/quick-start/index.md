@@ -26,7 +26,7 @@ Except for kubectl, **none of these tools are required for working with Kubernet
   > **The problem it solves:**  
   > I need to interact with my cluster from the terminal.
 
-  1. [Install kubectl from here.](https://kubernetes.io/docs/tasks/tools/)
+  1. [Install kubectl.](https://kubernetes.io/docs/tasks/tools/)
 
   Kubectl is the official Kubernetes command-line tool.  You will use it regularly to interact with your cluster, whether deploying applications, inspecting resources, or [diagnosing issues](../howtos/diagnose).
 
@@ -55,7 +55,7 @@ Except for kubectl, **none of these tools are required for working with Kubernet
   > **The problem they solve:**  
   > It's annoying to switch between multiple contexts and namespaces.
 
-  1. [Install kubectx and kubens from here](https://github.com/ahmetb/kubectx#installation) (kubens is also installed when installing kubectx).
+  1. [Install kubectx and kubens](https://github.com/ahmetb/kubectx#installation) (kubens is also installed when installing kubectx).
 
   A kubeconfig file can have connections to multiple clusters, or even different users on the same clusters.  Each of these cluster/user combinations is called a _context_.  A common use case for contexts is working in multiple clusters for test, staging, and production.
 
@@ -93,7 +93,7 @@ Except for kubectl, **none of these tools are required for working with Kubernet
   >**The problem it solves:**  
   > I need to know at a glance what context and/or namespace I'm working in (a.k.a. I didn't know that I was working in production when I deleted that namespace 😑)
 
-  1. [Install kube-ps1 from here.](https://github.com/jonmosco/kube-ps1#installing)
+  1. [Install kube-ps1.](https://github.com/jonmosco/kube-ps1#installing)
 
   Changing contexts and namespaces is very handy, but still can lead to mistakes if you don't always remember which context and namespace you are working in.  Kube-ps1 adds the current context and namespace to your command prompt, giving a quick visual reminder of where you are at.
 
@@ -110,7 +110,7 @@ Except for kubectl, **none of these tools are required for working with Kubernet
   > **The problem it solves:**  
   > I need to make it harder to accidentally run destructive commands.
 
-  1. [Install kubectl-sudo from here.](https://github.com/postfinance/kubectl-sudo#installation)
+  1. [Install kubectl-sudo.](https://github.com/postfinance/kubectl-sudo#installation)
 
   This plugin for kubectl adds `sudo` functionality just like on a Linux or macOS terminal. The idea is that you would operate normally as a user with less permissions on the cluster, with certain more powerful commands requiring a `kubectl sudo` to execute as more powerful user.
 
