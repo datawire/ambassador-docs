@@ -5,9 +5,9 @@
 
 * [Cluster Status Checks](#cluster-status-checks)
 * [Basic Deployment and Pod Status Checks](#basic-deployment-and-pod-status-checks)
-* [Crashing Pods](craashing-pods)
-* [Checking Logs](checking-logs)
-* [Exec into Pods](exec-into-pods)
+* [Crashing Pods](#crashing-pods)
+* [Checking Logs](#checking-logs)
+* [Exec into Pods](#exec-into-pods)
 
 </div>
 
@@ -71,9 +71,9 @@ $ kubectl describe pod test-bdcfc6876-rs4nw
 
 Here we see the `ImagePullBackOff` again and, looking at the image name, and obvious reason why it's failing.
 
-## CrashLoopBackOff
+## Crashing Pods
 
-Another very common error you will see when a pod won't run is `CrashLoopBackOff`.  Kubernetes expects a pod to start and run continuously.  This is by design so that if the app running in a pod does crash or can't start for any reason, Kubernetes will pick up on the exit error and restart the pod (unless different behavior is specified with the [`restartPolicy` on the Pod `spec`](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)).  If this happens too many times in too short of a period, then Kubernetes assumes there is a problem with the pod, stops trying to restart it, and returns `CrashLoopBackOff`.
+Another very common error you will see when a pod won't run is `CrashLoopBackOff`.  Kubernetes expects a pod to start and run continuously.  This is by design so that if the app running in a pod does crash or can't start for any reason, Kubernetes will pick up on the exit error and restart the pod (unless different behavior is specified with [the `restartPolicy` on the Pod `spec`](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)).  If this happens too many times in too short of a period, then Kubernetes assumes there is a problem with the pod, stops trying to restart it, and returns `CrashLoopBackOff`.
 
 Start a pod with this command:
 
