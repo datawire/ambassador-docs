@@ -40,7 +40,7 @@ Check the status of your deployments:
 $ kubectl get deployments
   
   NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
-  test                    0/1     1            0           29h
+  test                    0/1     1            0           29s
 ```
 
 The `test` deployment seems to have a problem as its Pod is not ready.  Check the Pod's status next:
@@ -49,7 +49,7 @@ The `test` deployment seems to have a problem as its Pod is not ready.  Check th
 $ kubectl get pods
   
   NAME                                     READY   STATUS             RESTARTS   AGE
-  test-bdcfc6876-rs4nw                     0/1     ImagePullBackOff   0          29h
+  test-bdcfc6876-rs4nw                     0/1     ImagePullBackOff   0          29s
 ```
 
 The Pod has an `ImagePullBackOff` status.  This particular error means Kubernetes could not retrieve the container image for some reason: the name was misspelled, the specified tag doesn't exist, or the repository is private and Kubernetes doesn't have access.
@@ -57,7 +57,7 @@ The Pod has an `ImagePullBackOff` status.  This particular error means Kubernete
 We can see more detail by getting a description of the pod:
 
 ```
-$ kubectl describe test-bdcfc6876-rs4nw
+$ kubectl describe pod test-bdcfc6876-rs4nw
   
   Name:         test-bdcfc6876-rs4nw
   Namespace:    default
@@ -65,15 +65,15 @@ $ kubectl describe test-bdcfc6876-rs4nw
   Events:
   Type     Reason   Age                    From     Message
   ----     ------   ----                   ----     -------
-  Normal   BackOff  11m (x5761 over 21h)   kubelet  Back-off pulling image "docker.io/datawire/bad_image_name"
-  Warning  Failed   2m8s (x5804 over 21h)  kubelet  Error: ImagePullBackOff
+  Normal   BackOff  2s (x2 over 32s   kubelet  Back-off pulling image "docker.io/datawire/bad_image_name"
+  Warning  Failed   2s (x2 over 32s)  kubelet  Error: ImagePullBackOff
 ```
 
 Here we see the `ImagePullBackOff` again and, looking at the image name, and obvious reason why it's failing.
 
 ## CrashLoopBackOff
 
-Another very common error you will see when a pod won't run is `CrashLoopBackOff`.  Kuberentes expects a pod to start and run continuously.  This is by design so that if the app running in a pod does crash or can't start for any reason, Kubernetes will pick up on the exit error and restart the pod (unless different behavior is specified with the [`restartPolicy` on the Pod `spec`](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)).  If this happens too many times in too short of a period, then Kubernetes assumes there is a problem with the pod, stops trying to restart it, and returns `CrashLoopBackOff`.
+Another very common error you will see when a pod won't run is `CrashLoopBackOff`.  Kubernetes expects a pod to start and run continuously.  This is by design so that if the app running in a pod does crash or can't start for any reason, Kubernetes will pick up on the exit error and restart the pod (unless different behavior is specified with the [`restartPolicy` on the Pod `spec`](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)).  If this happens too many times in too short of a period, then Kubernetes assumes there is a problem with the pod, stops trying to restart it, and returns `CrashLoopBackOff`.
 
 Start a pod with this command:
 
@@ -93,7 +93,7 @@ $ kubectl get pods
   mysql                                    0/1     CrashLoopBackOff   2          40s
 ```
 
-What happened?  Describe the pod to get the events from Kuberentes' effort to start it:  
+What happened?  Describe the pod to get the events from Kubernetes' effort to start it:  
 
 ```
 $ kubectl describe pod mysql

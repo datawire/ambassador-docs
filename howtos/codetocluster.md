@@ -168,6 +168,6 @@ Finally, go to `http://<load balancer IP>/` and you should see your app.
 
 ## <img class="os-logo" src="../../../../../images/logo.png"/> What's Next?
 
-YAML files used to deploy Kuberentes resources are generally kept under version control.  You can automate deploying and updating resources as changes are committed to your code repositories using a CI/CD system like Argo!  [Check out our guide on getting started with Argo](https://www.getambassador.io/docs/argo/latest/quick-start/).
+YAML files used to deploy Kubernetes resources are generally kept under version control.  You can automate deploying and updating resources as changes are committed to your code repositories using a CI/CD system like Argo!  [Check out our guide on getting started with Argo](https://www.getambassador.io/docs/argo/latest/quick-start/).
 
 Debugging services running on Kubernetes can be a frustrating process, make it easier and faster [using Telepresence](https://www.getambassador.io/docs/telepresence/latest/quick-start/)!
