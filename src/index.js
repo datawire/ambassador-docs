@@ -144,13 +144,13 @@ export default ({ data, location }) => {
 
     const getProductHome = (product) => {
         switch (product) {
-            case products[1].slug:
+            case 'edge-stack':
                 return <EdgeStack />;
-            case products[2].slug:
+            case 'telepresence':
                 return <Telepresence />;
-            case products[3].slug:
+            case 'cloud':
                 return <Cloud />;
-            case products[4].slug:
+            case 'argo':
                 return <Argo />;
             default:
                 return <EdgeStack />;

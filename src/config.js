@@ -5,6 +5,14 @@ export const products = [
         link: "/docs",
         version: []
     },
+        {
+        slug: "kubernetes",
+        name: "Kubernetes (K8s)",
+        link: "/docs/kubernetes/latest/quick-start/",
+        version: [
+            { id: "latest", name: "Latest", link: "latest" }
+        ]
+    },
     {
         slug: "edge-stack",
         name: "Edge Stack",
@@ -36,19 +44,19 @@ export const products = [
         ]
     },
     {
-        slug: "cloud",
-        name: "Cloud",
-        link: "/docs/cloud/",
+        slug: "argo",
+        name: "Argo",
+        link: "/docs/argo/latest/quick-start/",
         version: [
-            { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start/" }
+            { id: "latest", name: "Latest", link: "latest" }
         ]
     },
     {
-        slug: "argo",
-        name: "Argo",
-        link: "/docs/argo/",
+        slug: "cloud",
+        name: "Cloud",
+        link: "/docs/cloud/latest/service-catalog/quick-start/",
         version: [
-            { id: "latest", name: "Latest", link: "latest" }
+            { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start/" }
         ]
     }
 ];
