@@ -142,6 +142,7 @@ spec:
   naming_scheme: "string" ## optional; supported values [ "namespace.name", "name.prefix" ]; default "namespace.name"
   search:
     enabled: bool         ## optional; default false
+    type: "string"        ## optional; supported values ["title-only", "all-content"]; default "title-only"
 ```
 
 where:
@@ -170,8 +171,11 @@ where:
   e.g. a Mapping named `quote` with a prefix `backend` will be displayed as `quote.backend`
   and its docs will have the relative path of `/quote/backend`
 * `search`: as of Edge Stack 1.13.0, the DevPortal content is now searchable
-  * `enabled`: toggles search functionality in the DevPortal. The default is `false`.
+  * `enabled`: default `false``; set to true to enable search functionality.
     * When `enabled=false`, the DevPortal search endpoint (`/[DEVPORTAL_PATH/api/search`) will return an empty response
+  * `type`: Configure the items fed into search
+    * `title-only` (default): only search over the names of DevPortal services and markdown pages
+    * `all-content`: Search over openapi spec content and markdown page content.
 
 Example:
 
