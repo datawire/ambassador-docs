@@ -4,6 +4,15 @@
 
 .docs {
     font-family: @InterFont;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    nav {
+      flex-grow: 0;
+    }
 
     &__nav {
         height: 70px;
@@ -13,10 +22,16 @@
         justify-content: space-between;
         padding: 0 25px;
         border-bottom: 1px solid @grey-separator;
-        position: fixed;
-        top: 62px;
+        position: relative;
         width: 100%;
         z-index: 9;
+    }
+
+    &__body {
+        height: 100%;
+        overflow: auto;
+        flex-shrink: 1;
+        flex-grow: 1;
     }
 
     &__links-content {
@@ -97,10 +112,6 @@
         margin: auto;
     }
 
-    &__started {
-        margin-top: 110px;
-    }
-
     &__info {
         margin-top: 40px;
         display: flex;
@@ -141,8 +152,6 @@
     }
 
     .product-page {
-        margin-top: 90px;
-
         .docs__heading-primary {
             height: 70px;
         }
@@ -362,14 +371,15 @@
 
     &__container-doc {
         display: flex;
-        margin-top: 70px;
+        height: 100%;
     }
 
     &__doc-sidebar {
+        overflow: hidden;
         width: 300px;
-        min-width: 300px;
+        flex-shrink: 0;
+        flex-grow: 0;
         border-right: 1px solid @grey-separator;
-        position: fixed;
         padding-bottom: 10px;
     }
 
@@ -528,13 +538,14 @@
     &__doc-body {
         padding: 32px 42px;
         max-width: @docs-max-width;
-        min-width: @docs-min-width;
+        width: 100%;
         margin: 0 auto;
     }
     
     &__doc-body-container {
-        margin-left: 300px;
-        width: calc(100% - 300px);
+        overflow: auto;
+        height: 100%;
+        width: 100%;
     }
 
     &__spinner {
@@ -579,26 +590,11 @@
         }
     }
 
-    @media (max-width: 1200px) {
-
-        &__nav, &__doc-sidebar {
-            position: absolute;
-        }
-    }
-
     @media (max-width: 999px) {
 
         &__dropdown-container {
             order: 2;
             height: 54px;
-        }
-
-        .product-page {
-            margin-top: 110px;
-        }
-
-        &__container-doc {
-            margin-top: 100px;
         }
 
         &__desktop {
@@ -692,20 +688,8 @@
             padding-top: 0;
         }
 
-        .product-page {
-            margin-top: 70px;
-        }
-
         &__dropdown-container {
             height: 50px;
-        }
-
-        &__container-doc {
-            margin-top: 50px;
-        }
-
-        &__started {
-            margin-top: 70px;
         }
 
         &__search-box {

@@ -157,9 +157,44 @@ export default ({ data, location }) => {
         }
     }
 
-    let content = isHome ? <DocsHome /> : isProductHome ?
-        getProductHome(initialProduct.slug)
-        : (
+    const footer =  (
+        <div>
+            <hr className="docs__separator docs__container" />
+            <section className="docs__contact docs__container">
+                <span className="docs__heading-secondary">Questions?</span>
+                <p>We’re here to help if you have questions.</p>
+                <ul className="docs__contact-list">
+                    <li>
+                        <a href={goToSlack} target="_blank">
+                            <Icon name="slack-icon"   className="docs__contact-list--icon" />
+                              Join our Slack
+                        </a>
+                    </li>
+                    <li>
+                        <Link to={goToContactUs}>
+                            <Icon name="mail-icon" className="docs__contact-list--icon" />
+                              Contact Us
+                        </Link>
+                    </li>
+                  </ul>
+              </section>
+              {!isHome && isProduct && (
+                  <DocsFooter page={page} product={product.slug} version= {getVersions().docsVersion} />)}
+        </div>);
+
+    const content = useMemo(() => {
+        if(isHome){
+          return <>
+            <DocsHome />
+            {footer}
+          </>
+        } else if(isProductHome) {
+          return <>
+            {getProductHome(initialProduct.slug)}
+            {footer}
+          </>
+        }
+        return (
             <div className="docs__container-doc">
                 <Sidebar
                     onVersionChanged={handleVersionChange}
@@ -181,9 +216,11 @@ export default ({ data, location }) => {
                             {template(page.body, getVersions())}
                         </MDXRenderer>
                     </div>
+                    {footer}
                 </div>
             </div>
-        )
+        );
+    },[isHome, isProductHome]);
 
     return (
         <Layout location={location}>
@@ -243,35 +280,8 @@ export default ({ data, location }) => {
                         </div>
                     </div>
                 </nav>
-
-                {content}
-
-                <div className={`${!isHome && !isProductHome ? 'docs__doc-body-container' : ''}`}>
-
-                    <hr className="docs__separator docs__container" />
-
-                    <section className="docs__contact docs__container">
-                        <span className="docs__heading-secondary">Questions?</span>
-                        <p>We’re here to help if you have questions.</p>
-                        <ul className="docs__contact-list">
-                            <li>
-                                <a href={goToSlack} target="_blank">
-                                    <Icon name="slack-icon" className="docs__contact-list--icon" />
-                                    Join our Slack
-                                </a>
-                            </li>
-                            <li>
-                                <Link to={goToContactUs}>
-                                    <Icon name="mail-icon" className="docs__contact-list--icon" />
-                                    Contact Us
-                                </Link>
-                            </li>
-                        </ul>
-                    </section>
-
-                    {!isHome && isProduct && (
-                        <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />
-                    )}
+                <div className="docs__body">
+                  {content}
                 </div>
 
             </div>
