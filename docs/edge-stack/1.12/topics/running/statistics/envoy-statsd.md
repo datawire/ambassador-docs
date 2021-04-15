@@ -250,5 +250,6 @@ DogStatsD agent that forwards the Ambassador statistics to your
 Datadog account.
 
 Additionally, Ambassador supports setting the `dd.internal.entity_id`
-statitics tag using the `DD_ENTITY_ID` environment value. If this value
-is set, statistics will be tagged, otherwise they will not (the default).
+statitics tag using the `DD_ENTITY_ID` environment variable. If this value
+is set, statistics will be tagged with the value of the environment variable.
+Otherwise, this statistics tag will be omitted (the default).
