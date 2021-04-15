@@ -6,8 +6,8 @@ import Alert from '@material-ui/lab/Alert';
 
 # Route to my services
 
-# TODO
-* make into more of a tutorial format
+# WIP
+<!--make into more of a tutorial format-->
 
 Edge Stack is designed around a [declarative, self-service management model](../../concepts/gitops-continuous-delivery). The core resource used to support application development teams who need to manage the edge with Edge Stack is the Mapping resource. At its core a Mapping resource maps a URL path (or prefix) to a service (either a Kubernetes service or a web service.
 
