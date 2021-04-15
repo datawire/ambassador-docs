@@ -47,7 +47,6 @@
             - title: Rate Limiting at the Edge
               link: /topics/concepts/rate-limiting-at-the-edge
         - title: How Do I...
-          link: /howtos
           items:
             - title: Route to my services
               link: /howtos/route
