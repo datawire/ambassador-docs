@@ -21,6 +21,7 @@ Use the following variables for the environment of your Ambassador container:
 | Core                              | `AMBASSADOR_ENVOY_BASE_ID`                                                               | `0`                                                 | Integer |
 | Core                              | `AMBASSADOR_LEGACY_MODE`                                                                 | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
 | Core                              | `AMBASSADOR_FAST_RECONFIGURE`                                                            | `false`                                             | EXPERIMENTAL -- Boolean; `true`=true, any other value=false |
+| Core                              | `AMBASSADOR_ENVOY_API_VERSION`                                                           | `V2`                                                | String Enum; `V3` or `V2` |
 | Core                              | `AMBASSADOR_UPDATE_MAPPING_STATUS`                                                       | `false`                                             | Boolean; `true`=true, any other value=false |
 | Core                              | `AMBASSADOR_DISABLE_SNAPSHOT_SERVER`                                                     | `false`                                             | Boolean; non-empty=true, empty=false |
 | Edge Stack                        | [`AES_LOG_LEVEL`](../aes-extensions/#aes_log_level)                                      | `warn`                                              | Log level |
@@ -74,6 +75,7 @@ Use the following variables for the environment of your Ambassador container:
 | Developer Portal                  | `POLL_EVERY_SECS`                                                                        | `60`                                                | Integer |
 | Envoy                             | `STATSD_ENABLED`                                                                         | `false`                                             | Boolean; Python `value.lower() == "true"` |
 | Envoy                             | `DOGSTATSD`                                                                              | `false`                                             | Boolean; Python `value.lower() == "true"` |
+| Envoy                             | `DD_ENTITY_ID`                                                                           | Empty                                               | String |
 | Envoy                             | `ENVOY_CONCURRENCY`                                                                      | Empty                                               | Integer
 
 Log level names are case-insensitive.  From least verbose to most

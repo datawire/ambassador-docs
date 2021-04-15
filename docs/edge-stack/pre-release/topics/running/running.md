@@ -221,6 +221,10 @@ Setting `AMBASSADOR_FAST_RECONFIGURE` to "true" enables incremental reconfigurat
 
 **`AMBASSADOR_FAST_RECONFIGURE` is not supported when `AMBASSADOR_LEGACY_MODE` is active.**
 
+## `AMBASSADOR_ENVOY_API_VERSION`
+
+By default, the Ambassador Edge Stack will configure Envoy using the v2 API. Setting `AMBASSADOR_ENVOY_API_VERSION` to `V3` tells Ambassador to use the Envoy v3 API. Since the v2 API is deprecated in the upstream Envoy project, it is encouraged to eventually use the v3 API. New features or enhancements in Ambassador Edge Stack _may_ begin to require the v3 API. It is therefore strongly recommended to try the v3 API sooner rather than later and, as always, provide feedback and bug reports in the Ambassador GitHub repo!
+
 ## Configuration from the Filesystem
 
 If desired, the Ambassador Edge Stack can be configured from YAML files in the directory `$AMBASSADOR_CONFIG_BASE_DIR/ambassador-config` (by default, `/ambassador/ambassador-config`, which is empty in the images built by Datawire). You could volume mount an external configuration directory here, for example, or use a custom Dockerfile to build configuration directly into a Docker image.
