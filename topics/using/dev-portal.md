@@ -281,15 +281,55 @@ where:
 
 #### Iterating on _Dev Portal_ styling and content
 
+**Local Development**
+
 Check out a local copy of your content repo and from within run the following docker image:
 
 ```
-docker run -it --rm --volume $PWD:/content --publish 8877:8877 \
-  docker.io/datawire/ambassador_pro:local-devportal-$aproVersion$
+docker run -it --rm --volume $PWD:/content --entrypoint local-devportal --publish 1080:1080
+  docker.io/datawire/aes:$version$ /content
 ```
 
-and open `http://localhost:8877` in your browser. Any changes made locally to
+and open `http://localhost:1080` in your browser. Any changes made locally to
 devportal content will be reflected immediately on page refresh.
+
+> Note:
+>
+> The docker command above will only work for AES versions 1.13.0+.
+
+**Remote Ambassador**
+
+After committing and pushing changes to your devportal content repo changes to git, set your DevPortal to fetch from your branch:
+
+```yaml
+---
+apiVersion: getambassador.io/v2
+kind:  DevPortal
+metadata:
+  name:  ambassador
+spec:
+  default: true
+  content:
+    url: $REPO_URL
+    branch: $DEVELOPMENT_BRANCH
+```
+
+Then you can force a reload of DevPortal content by hitting a refresh endpoint on your remote ambassador:
+
+```
+# first, get your ambassador service
+export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador \
+  -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
+
+# Then refresh the DevPortal content
+curl -X POST -Lk ${AMBASSADOR_LB_ENDPOINT}/docs/api/refreshContent
+```
+
+> Note:
+>
+> The DevPortal does not share a cache between replicas, so the content refresh endpoint
+> will only refresh the content on a single replica. It is suggested that you use this
+> endpoint in a single replica Edge Stack setup.
 
 #### Customizing documentation names and paths
 
