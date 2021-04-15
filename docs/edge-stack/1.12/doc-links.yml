@@ -49,7 +49,17 @@
         - title: How Do I...
           items:
             - title: Route to my services
-              link: /howtos/route
+              items:
+                - title: Get traffic from the edge
+                  link: /howtos/route
+                - title: Other protocols
+                  items:
+                    - title: TCP
+                      link: /topics/using/tcpmappings
+                    - title: gRPC
+                      link: /howtos/grpc
+                    - title: WebSockets
+                      link: /howtos/websockets
             - title: Protect my services
               items:
                 - title: Authentication
@@ -111,7 +121,7 @@
                       link: /topics/running/statistics/envoy-statsd
                     - title: The metrics endpoint
                       link: /topics/running/statistics/8877-metrics
-            - title: Integrate with other services
+            - title: Set up integrations
               items:
                 - title: Deploying to Kubernetes from GitHub
                   link: /tutorials/projects
@@ -125,15 +135,6 @@
                       link: /howtos/istio
                     - title: Linkerd 2
                       link: /howtos/linkerd2
-            - title: Configure connections using other protocols
-              items:
-                - title: TCP
-                  link: /topics/using/tcpmappings
-                - title: gRPC
-                  link: /howtos/grpc
-                - title: WebSockets
-                  link: /howtos/websockets
-
         - title: Technical Reference
           items: 
             - title: Using AES for Developers
