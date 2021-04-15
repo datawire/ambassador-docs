@@ -6,9 +6,6 @@ import Alert from '@material-ui/lab/Alert';
 
 # Route to my services
 
-# WIP
-<!--make into more of a tutorial format-->
-
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
@@ -43,9 +40,9 @@ spec:
 
 | Name | Type | Description |
 | :--- | :--- | :--- |
-| `metadata.name` | String | Indentifies the Mapping. |
+| `metadata.name` | String | Identifies the Mapping. |
 | `spec.prefix` | String | The URL prefix identifying your resource. [See below](#resources) on how Edge Stack handles resources. |
-| `spec.service` | String | The service handling the resource.  If a Kuberentes service, it must include the namespace (in the format `service.namespace`) if the service is in a different namespace than Edge Stack. [See below](#services) on service name formatting.|
+| `spec.service` | String | The service handling the resource.  If a Kubernetes service, it must include the namespace (in the format `service.namespace`) if the service is in a different namespace than Edge Stack. [See below](#services) on service name formatting.|
 
 Here's another example using a web service that maps requests to `/httpbin/` to `http://httpbin.org`:
 
