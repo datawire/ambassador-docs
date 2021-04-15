@@ -1,6 +1,6 @@
 # Kubernetes basics: Kubernetes for developers
 
-[Kubernetes](https://www.getambassador.io/docs/edge-stack/latest/topics/concepts/kubernetes-network-architecture/) (or K8s) is an open-source platform for managing containerized workloads and services. Containers hold the entire runtime environment, that is, an application and all of its dependencies, libraries and configuration files. This makes them portable and predictable across different computing environments. 
+[Kubernetes](../../../../edge-stack/latest/topics/concepts/kubernetes-network-architecture/) (or K8s) is an open-source platform for managing containerized workloads and services. Containers hold the entire runtime environment, that is, an application and all of its dependencies, libraries and configuration files. This makes them portable and predictable across different computing environments. 
 
 Experienced developers will at least be familiar with the concepts of cloud-native application development, containers and Kubernetes, but may not know a lot more than that if it hasn’t been part of their work. Cloud native and containerization form a different way of approaching software development, but developers have led the charge in adopting this approach because of its speed and flexibility. Kubernetes in particular has become the de facto standard for cloud-native application development and orchestration largely because of its speed and modularity. 
 
