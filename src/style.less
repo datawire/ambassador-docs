@@ -337,38 +337,6 @@
         padding: 0 42px 162px 42px;
     }
 
-    &__contact-list {
-        display: flex;
-        margin-top: 13px;
-
-        li {
-            border-right:  1px solid @grey-separator;
-            padding-right: 20px;
-            cursor: pointer;
-            transition: color 200ms linear 0ms;
-
-            a {
-                display: flex;
-                text-decoration: underline;
-                color: @blue;
-                &:hover {
-                    color: @blue-dark;
-                    text-decoration: none;
-                }
-            }
-
-            &:last-child {
-                border: none;
-                margin-left: 20px;
-            }
-
-        }
-
-        &--icon {
-            margin-right: 7px;
-        }
-    }
-
     &__container-doc {
         display: flex;
         height: 100%;
@@ -414,6 +382,8 @@
         &__chevron-icon {
             margin-left: 8px;
             fill: @grey-primary;
+            width: 20px;
+            height: 20px;
         }
 
         &--active {
@@ -710,15 +680,6 @@
     }
 
     @media (max-width: 380px) {
-
-        .docs__contact-list li {
-            padding-right: 8px;
-
-            &:last-child {
-                margin-left: 8px;
-            }
-        }
-
         &__dropdown {
             font-size: 12px;
         }
@@ -727,6 +688,10 @@
             .custom-dropdown:last-child {
                 width: 60%;
             }
+        }
+
+        &__contact {
+            margin-left: 0;
         }
     }
 }
