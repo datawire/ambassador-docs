@@ -32,7 +32,7 @@ spec:
   failure_mode_allow: false         # optional; default is false
 
   # proto: grpc only
-  protocol_version: oneOf[v2, v2alpha]      # optional; default is v2
+  protocol_version: oneOf[v2, v3]      # optional; default is v2
 
   # the following are used only if `proto: http`; they are ignored if `proto: grpc`
 
@@ -69,7 +69,7 @@ spec:
 
 The following fields are only used if `proto: grpc`; they are ignored if `proto: http`:
 
-- `protocol_version` (optional) gRPC service name used to communicate with the `AuthService`. Allowed values are `v2alpha` which will use the `envoy.service.auth.v2alpha.Authorization` service name, and `v2` which will use the `envoy.service.auth.v2.Authorization` service name. Default is `v2`.`
+- `protocol_version` (optional) gRPC service name used to communicate with the `AuthService`. Allowed values are `v2` which will use the `envoy.service.auth.v2.Authorization` service name, and `v3` which will use the `envoy.service.auth.v3.Authorization` service name. Default is `v2`, and note well that `v3` requires Ambassador to run in Envoy v3 mode by setting the AMBASSADOR_ENVOY_API_VERSION=V3 environment variable.
 
 The following fields are only used if `proto: http`; they are ignored if `proto: grpc`:
 
