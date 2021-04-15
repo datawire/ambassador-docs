@@ -9,19 +9,36 @@ import Alert from '@material-ui/lab/Alert';
 # WIP
 <!--make into more of a tutorial format-->
 
-Edge Stack is designed around a [declarative, self-service management model](../../concepts/gitops-continuous-delivery). The core resource used to support application development teams who need to manage the edge with Edge Stack is the Mapping resource. At its core a Mapping resource maps a URL path (or prefix) to a service (either a Kubernetes service or a web service.
+<div class="docs-article-toc">
+<h3>Contents</h3>
 
-##  Example
+* [Examples](#examples)
+* [Applying a Mapping Resource](#applying-a-mapping-resouce)
+* [Resources](#resources)
+* [Services](#services)
+* [Extending Mappings](#extending-mappings)
+* [Best Practices](#best-practices)
+* [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
+
+</div>
+
+The core Edge Stack resource used to manage cluster ingress is the Mapping resource. 
+
+**A Mapping resource routes a URL path (or prefix) to a service (either a Kubernetes service or other web service).**
+
+## Examples
+
+This Mapping would route requests to `https://<hostname>/webapp/` to the `webapp-svc` Service.
 
 ```yaml
 ---
 apiVersion: getambassador.io/v2
 kind:  Mapping
 metadata:
-  name:  myservice-mapping
+  name:  webapp-mapping
 spec:
-  prefix: /myservice/
-  service: myservice
+  prefix: /webapp/
+  service: webapp-svc
 ```
 
 | Name | Type | Description |
@@ -112,7 +129,7 @@ spec:
   service: putcqrs
 ```
 
-## Best Practices for Configuration
+## Best Practices
 
 Edge Stack's configuration is assembled from multiple YAML blocks which are managed by independent application teams. This implies that certain best practices should be followed.
 
@@ -130,6 +147,6 @@ If two different developers try to map `/myservice/` to something, this can lead
 
 #### Unless specified, mapping attributes cannot be applied to any other resource type.
 
-## <img class="os-logo" src="../../../images/logo.png"/> What's Next?
+## <img class="os-logo" src="../../../../../images/logo.png"/> What's Next?
 
-Mappings are a powerful resource and essential to managing edge traffic. Continue reading on [advanced mapping configurations](../mappings), or other specific features like [circuit breakers](../circuit-breakers/), [rate limiting](../rate-limits), and [redirects](../redirects).
+There are many options for [advanced mapping configurations](../../topics/using/mappings), with features like [automatic retries](../../topics/using/retries/), [timeouts](../../topics/using/timeouts/), [rate limiting](topics/using/rate-limits/), [redirects](../../topics/using/redirects/), and more.
