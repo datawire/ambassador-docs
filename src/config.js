@@ -8,7 +8,7 @@ export const products = [
     {
         slug: "kubernetes",
         name: "Kubernetes (K8s)",
-        link: "/docs/kubernetes/latest/quick-start/",
+        link: "/docs/kubernetes/",
         version: [
             { id: "latest", name: "Latest", link: "latest" }
         ]

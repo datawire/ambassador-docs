@@ -1,4 +1,4 @@
-import { goToEdgeStackQuickStart, goToMappings, goToHostCRD, goToLoadBalancer, goToCircuitBreakers, goToCanaryReleases, goToOauth, goToJWT, goToExtFilters, goToRateLimits, goToRateLimitsEdgeStack, goToAdvancedRateLimiting, goToGRPC, goToTlsTermination, GoToWebsockets, goToArgoQuickStart, goToArgoCICD, goToArgoCanary, goToCloudQuickStart, goToTelepresenceHowTo, goToTelepresenceContextProp, goToTelepresenceFAQs } from '../../../src/utils/routes';
+import { goToEdgeStackQuickStart, goToMappings, goToHostCRD, goToLoadBalancer, goToCircuitBreakers, goToCanaryReleases, goToOauth, goToJWT, goToExtFilters, goToRateLimits, goToRateLimitsEdgeStack, goToAdvancedRateLimiting, goToGRPC, goToTlsTermination, GoToWebsockets, goToArgoQuickStart, goToArgoCICD, goToArgoCanary, goToCloudQuickStart, goToTelepresenceHowTo, goToTelepresenceContextProp, goToTelepresenceFAQs, goToKubernetesConceptsBasics, goToKubernetesHowtosCodeCluster, goToKubernetesHowtosDiagnose } from '../../../src/utils/routes';
 
 export const EdgeStackCards = [
   {
@@ -188,3 +188,27 @@ export const TelepresenceCards = [
     icon: 'faqs'
   },
 ];
+
+export const KubernetesCards = [
+  {
+    title: 'Kubernetes Basics',
+    description: 'What is Kubernetes and how is it related to containers?',
+    link: goToKubernetesConceptsBasics,
+    linkText: 'Get started',
+    icon: 'diagnose'
+  },
+  {
+    title: 'Set up a powerful dev environment',
+    description: 'These tools can help supercharge your work in K8s on the terminal.',
+    link: goToKubernetesHowtosCodeCluster,
+    linkText: 'Learn How',
+    icon: 'learn-icon'
+  },
+  {
+    title: 'Diagnose my K8s deployment',
+    description: 'What do you do first when a Deployment won’t run?',
+    link: goToKubernetesHowtosDiagnose,
+    linkText: 'Learn How',
+    icon: 'tools-green'
+  }
+]

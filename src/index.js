@@ -16,6 +16,7 @@ import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import EdgeStack from './products/EdgeStack';
 import Telepresence from './products/Telepresence';
+import Kubernetes from './products/Kubernetes';
 import ContactBlock from '../../src/components/ContactBlock';
 import './style.less';
 
@@ -149,6 +150,8 @@ export default ({ data, location }) => {
                 return <Cloud />;
             case 'argo':
                 return <Argo />;
+            case 'kubernetes':
+                return <Kubernetes />;
             default:
                 return <EdgeStack />;
         }
