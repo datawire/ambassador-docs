@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 # Basic Authentication (for API Gateway)
 
 <Alert severity="info">
-  This guide applies to Ambassador API Gateway, use of this guide with Edge stack is not recommended.  Edge Stack does <a href="../ext=filters">authentication using the Filter resource</a> instead of the AuthService resource as described below.
+  This guide applies to Ambassador API Gateway, use of this guide with Edge stack is not recommended.  Edge Stack does <a href="../ext-filters">authentication using the Filter resource</a> instead of the AuthService resource as described below.
 </Alert>
 
 
