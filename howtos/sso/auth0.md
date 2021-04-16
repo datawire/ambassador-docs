@@ -1,4 +1,4 @@
-# Auth0
+# Single Sign-On with Auth0
 
 With Auth0 as your IdP, you will need to create an `Application` to handle authentication requests from Ambassador Edge Stack.
 
