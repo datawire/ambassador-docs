@@ -1,4 +1,4 @@
-# Cert-Manager and Ambassador Edge Stack
+# Using cert-manager
 
 The Ambassador Edge Stack has simple and easy built-in support for automatically using ACME to create and renew TLS
 certificates; configured by the [`Host` resource](../../topics/running/host-crd/).  However, it only supports ACME's
