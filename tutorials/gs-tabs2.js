@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import CodeBlock from '../../../../src/components/CodeBlock/CodeBlock'
+import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock'
 
 
 
@@ -23,7 +23,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -72,19 +72,19 @@ export default function SimpleTabs() {
       </AppBar>
       <TabPanel value={value} index={0}>
 
-{/*Helm 3 token install instructions*/}
+        {/*Helm 3 token install instructions*/}
 
-        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>. 
-        Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Helm</b>. 
-        The slideout contains instructions with a unique <code>cloud-connect-token</code> that is 
-        used to connect your cluster to your Ambassador Cloud account.<br/>
-       
+        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
+        Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Helm</b>.
+        The slideout contains instructions with a unique <code>cloud-connect-token</code> that is
+        used to connect your cluster to your Ambassador Cloud account.<br />
+
         Run the following command, replacing <code>$TOKEN</code>
         with your token:
 
          <CodeBlock>
           {
-            'helm upgrade ambassador --namespace ambassador datawire/ambassador \\' + 
+            'helm upgrade ambassador --namespace ambassador datawire/ambassador \\' +
             '\n' +
             '  --set agent.cloudConnectToken=$TOKEN && \\' +
             '\n' +
@@ -96,19 +96,19 @@ export default function SimpleTabs() {
 
       <TabPanel value={value} index={1}>
 
-{/*Helm 2 token install instructions*/}
+        {/*Helm 2 token install instructions*/}
 
-        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>. 
-        Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Helm</b>. 
-        The slideout contains instructions with a unique <code>cloud-connect-token</code> that is 
-        used to connect your cluster to your Ambassador Cloud account.<br/>
-       
+        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
+        Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Helm</b>.
+        The slideout contains instructions with a unique <code>cloud-connect-token</code> that is
+        used to connect your cluster to your Ambassador Cloud account.<br />
+
         Run the following command, replacing <code>$TOKEN</code>
         with your token:
 
          <CodeBlock>
           {
-            'helm upgrade --namespace ambassador ambassador datawire/ambassador \\' + 
+            'helm upgrade --namespace ambassador ambassador datawire/ambassador \\' +
             '\n' +
             '  --set crds.create=false --set agent.cloudConnectToken=$TOKEN && \\' +
             '\n' +
@@ -120,13 +120,13 @@ export default function SimpleTabs() {
 
       <TabPanel value={value} index={2}>
 
-{/*YAML token install instructions*/}
+        {/*YAML token install instructions*/}
 
-        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>. 
-        Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Kubernetes YAML</b>. 
-        The slideout contains instructions with a unique <code>cloud-connect-token</code> that is 
-        used to connect your cluster to your Ambassador Cloud account.<br/>
-       
+        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
+        Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Kubernetes YAML</b>.
+        The slideout contains instructions with a unique <code>cloud-connect-token</code> that is
+        used to connect your cluster to your Ambassador Cloud account.<br />
+
         Run the following command, replacing <code>$TOKEN</code>
         with your token:
          <CodeBlock>
@@ -136,22 +136,22 @@ export default function SimpleTabs() {
             '  --from-literal=CLOUD_CONNECT_TOKEN=$TOKEN'
           }
         </CodeBlock>
-        
 
 
-        </TabPanel>
+
+      </TabPanel>
 
       <TabPanel value={value} index={3}>
 
-{/*edgectl token install instructions*/}
+        {/*edgectl token install instructions*/}
 
-        Connecting Edge Stack that was installed via <code>edgectl</code> is identical to the Kubernetes YAML procedure.<br/>
+        Connecting Edge Stack that was installed via <code>edgectl</code> is identical to the Kubernetes YAML procedure.<br />
 
-        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>. 
-        Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Kubernetes YAML</b>. 
-        The slideout contains instructions with a unique <code>cloud-connect-token</code> that is 
-        used to connect your cluster to your Ambassador Cloud account.<br/>
-       
+        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
+        Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Kubernetes YAML</b>.
+        The slideout contains instructions with a unique <code>cloud-connect-token</code> that is
+        used to connect your cluster to your Ambassador Cloud account.<br />
+
         Run the following command, replacing <code>$TOKEN</code>
         with your token:
          <CodeBlock>
