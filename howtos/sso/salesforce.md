@@ -1,4 +1,4 @@
-# Salesforce Single Sign-On
+# Single Sign-On with Salesforce
 
 ## Set up Salesforce
 

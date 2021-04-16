@@ -1,4 +1,4 @@
-# Setting up Kubernetes Single Sign-On Authentication with OpenID Connect and Keycloak
+# Kubernetes SSO with OIDC and Keycloak
 
 Developers use `kubectl` to access Kubernetes clusters. By default `kubectl` uses a certificate to authenticate to the Kubernetes API. This means that when multiple developers need to access a cluster, the certificate needs to be shared. Sharing the credentials to access a Kubernetes cluster presents a significant security problem. Compromise of the certificate is very easy and the consequences can be catastrophic.
 

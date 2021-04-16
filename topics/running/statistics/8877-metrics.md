@@ -1,4 +1,4 @@
-# The `:8877/metrics` endpoint
+# The Metrics Endpoint
 
 > For an overview of other options for gathering statistics on
 > Ambassador, see the [Statistics and Monitoring](../) overview.
