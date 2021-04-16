@@ -1,4 +1,4 @@
-# Zipkin Tracing
+# Distributed Tracing with Zipkin
 
 In this tutorial, we'll configure Ambassador Edge Stack to initiate a trace on some sample requests, and use Zipkin to visualize them.
 
