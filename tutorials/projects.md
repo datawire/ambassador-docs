@@ -1,4 +1,4 @@
-# Getting started with the Project CRD
+# Deploying to Kubernetes from Github
 
 ## This feature is in BETA. Please [tell me](mailto:rhs@datawire.io?subject=Project%20CRD%20UX%20Feedback) (lead developer of the feature) about your experience.
 
