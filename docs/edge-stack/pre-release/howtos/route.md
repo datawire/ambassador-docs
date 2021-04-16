@@ -65,7 +65,7 @@ A Mapping resource can be managed using the same workflow as any other Kubernete
 kubectl apply -f httpbin-mapping.yaml
 ```
 
-<Alert severity="info">For production use, best practice is to store the file in a version control system and apply the changes with a continuous deployment pipeline. <a href="../../concepts/gitops-continuous-delivery">The Ambassador Operating Model</a> provides more detail.</Alert>
+<Alert severity="info">For production use, best practice is to store the file in a version control system and apply the changes with a continuous deployment pipeline. <a href="../../topics/concepts/gitops-continuous-delivery">The Ambassador Operating Model</a> provides more detail.</Alert>
 
 ## Resources
 
@@ -95,8 +95,8 @@ Edge Stack routes traffic to a service. A service is defined as `[scheme://]serv
 
 - `scheme` can be either `http` or `https`; if not present, the default is `http`.
 - `service` is the name of a service (typically the service name in Kubernetes or Consul); it is not allowed to contain the `.` character.
-- `namespace` is the namespace in which the service is running. Starting with Edge Stack 1.0.0, if not supplied, it defaults to the namespace in which the Mapping resource is defined. The default behavior can be configured using the [Module resource](../../running/ambassador). When using a Consul resolver, `namespace` is not allowed.
-- `port` is the port to which a request should be sent. If not specified, it defaults to `80` when the scheme is `http` or `443` when the scheme is `https`. Note that the [resolver](../../running/resolvers) may return a port in which case the `port` setting is ignored.
+- `namespace` is the namespace in which the service is running. Starting with Edge Stack 1.0.0, if not supplied, it defaults to the namespace in which the Mapping resource is defined. The default behavior can be configured using the [Module resource](../../topics/running/ambassador). When using a Consul resolver, `namespace` is not allowed.
+- `port` is the port to which a request should be sent. If not specified, it defaults to `80` when the scheme is `http` or `443` when the scheme is `https`. Note that the [resolver](../../topics/running/resolvers) may return a port in which case the `port` setting is ignored.
 
 <Alert severity="info">While using <code>service.namespace.svc.cluster.local</code> may work for Kubernetes resolvers, the preferred syntax is <code>service.namespace</code>.</Alert>
 
@@ -136,14 +136,14 @@ While you can always read back the Edge Stack's configuration from Kubernetes or
 
 #### Edge Stack tries to not start with a broken configuration, but it's not perfect.
 
-Gross errors will result in the Edge Stack refusing to start, in which case `kubectl logs` will be helpful. However, it's always possible to map a resource to the wrong service, or use the wrong `rewrite` rules. Edge Stack can't detect that on its own, although its [diagnostic service](../../running/diagnostics/) can help you figure it out.
+Gross errors will result in the Edge Stack refusing to start, in which case `kubectl logs` will be helpful. However, it's always possible to map a resource to the wrong service, or use the wrong `rewrite` rules. Edge Stack can't detect that on its own, although its [diagnostic service](../../topics/running/diagnostics/) can help you figure it out.
 
 #### Be careful of mapping collisions.
 
-If two different developers try to map `/myservice/` to something, this can lead to unexpected behavior. Edge Stack's [canary deployment](../../using/canary/) logic means that it's more likely that traffic will be split between them than that it will throw an error -- again, the diagnostic service can help you here.
+If two different developers try to map `/myservice/` to something, this can lead to unexpected behavior. Edge Stack's [canary deployment](../../topics/using/canary/) logic means that it's more likely that traffic will be split between them than that it will throw an error -- again, the diagnostic service can help you here.
 
 #### Unless specified, mapping attributes cannot be applied to any other resource type.
 
 ## <img class="os-logo" src="../../../../../images/logo.png"/> What's Next?
 
-There are many options for [advanced mapping configurations](../../topics/using/mappings), with features like [automatic retries](../../topics/using/retries/), [timeouts](../../topics/using/timeouts/), [rate limiting](topics/using/rate-limits/), [redirects](../../topics/using/redirects/), and more.
+There are many options for [advanced mapping configurations](../../topics/using/mappings), with features like [automatic retries](../../topics/using/retries/), [timeouts](../../topics/using/timeouts/), and [rate limiting](../../topics/using/rate-limits/), [redirects](../../topics/using/redirects/).
