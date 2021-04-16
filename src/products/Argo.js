@@ -8,9 +8,9 @@ import { goToArgoQuickStart } from '../../../src/utils/routes';
 
 const Argo = () => (
   <section className="docs__container product-page">
-    <h2 className="docs__heading-primary docs__heading-primary--aligned">
+    <h1 className="docs__heading-primary docs__heading-primary--aligned">
       <Icon name="argo" className="docs__argo-icon" /> Argo
-    </h2>
+    </h1>
     <p>Safely deploy code changes to production.</p>
     <Link to={goToArgoQuickStart} className="docs__button-secondary docs__m-bottom-50">
       Get Started <Icon name="right-arrow" className="docs__button-secondary--arrow" />

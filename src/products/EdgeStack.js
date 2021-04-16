@@ -20,9 +20,9 @@ const EdgeStack = () => {
 
   return (
     <section className="docs__started docs__container product-page">
-      <h2 className="docs__heading-primary docs__heading-primary--aligned">
+      <h1 className="docs__heading-primary docs__heading-primary--aligned">
         <Icon name="edge-stack-icon" /> Edge Stack
-    </h2>
+      </h1>
       <p>Route and secure traffic to your cluster with a Kubernetes-native API Gateway.</p>
       <Link to={goToEdgeStackQuickStart} className="docs__button-secondary docs__m-bottom-50">
         Get Started <Icon name="right-arrow" className="docs__button-secondary--arrow" />

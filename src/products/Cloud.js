@@ -8,9 +8,9 @@ import { goToCloudQuickStart } from '../../../src/utils/routes';
 
 const Cloud = () => (
   <section className="docs__started docs__container product-page">
-    <h2 className="docs__heading-primary docs__heading-primary--aligned">
+    <h1 className="docs__heading-primary docs__heading-primary--aligned">
       <Icon name="cloud" className="docs__cloud-icon" /> Cloud
-    </h2>
+    </h1>
     <p>Your central dashboard for all Ambassador tools.</p>
     <Link to={goToCloudQuickStart} className="docs__button-secondary docs__m-bottom-50">
       Get Started <Icon name="right-arrow" className="docs__button-secondary--arrow" />
