@@ -41,4 +41,4 @@ Application development teams use Ambassador to manage edge policies associated 
 * Service Preview and Edge Control
   * [Introduction to Edge Control](edgectl/edge-control)
   * [Edge Control in CI](edgectl/edge-control-in-ci)
-* [Developer Portal](../../../../cloud/latest/topics/using/dev-portal)
+* [Developer Portal](dev-portal)

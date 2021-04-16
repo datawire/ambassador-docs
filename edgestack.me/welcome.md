@@ -9,4 +9,4 @@ If you are in the process of installing Ambassador Edge Stack and need help, ple
 <Button color="orange" to="/user-guide/getting-started/">Ambassador Edge Stack Installation Documentation</Button>
 
 Need Additional Help? 
-Join our [Slack channel](http://d6e.co/slack), [request a demo](https://www.getambassador.io/demo), or [talk to an expert about best practices](https://www.getambassador.io/best-practices).
+Join our [Slack channel](http://a8r.io/Slack), [request a demo](https://www.getambassador.io/demo), or [talk to an expert about best practices](https://www.getambassador.io/best-practices).

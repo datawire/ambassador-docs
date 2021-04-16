@@ -36,6 +36,6 @@ If Ambassador Edge Stack isn't working at all, start by looking at the data from
 * `kubectl describe pod <ambassador-pod>` will give you a list of all events on the Ambassador Edge Stack pod
 * `kubectl logs <ambassador-pod> ambassador` will give you a log from Ambassador Edge Stack itself
 
-If you need additional help, feel free to join our [Slack channel](https://d6e.co/slack) with the above information (along with your Kubernetes manifest).
+If you need additional help, feel free to join our [Slack channel](https://a8r.io/Slack) with the above information (along with your Kubernetes manifest).
 
 You can also increase the debug of Envoy through the button in the diagnostics panel. Turn on debug logging, issue a request, and capture the log output from the Ambassador Edge Stack pod using `kubectl logs` as described above.
