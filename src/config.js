@@ -12,6 +12,7 @@ export const products = [
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release" },
             { id: "latest", name: "Latest", link: "latest" },
+            { id: "1.13", name: "1.13", link: "1.13" },
             { id: "1.12", name: "1.12", link: "1.12" },
             { id: "1.11", name: "1.11", link: "1.11" },
             { id: "1.10", name: "1.10", link: "1.10" },
