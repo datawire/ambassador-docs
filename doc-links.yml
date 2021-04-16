@@ -54,11 +54,11 @@
                   link: /howtos/route
                 - title: Other protocols
                   items:
-                    - title: TCP
+                    - title: TCP Connections
                       link: /topics/using/tcpmappings
-                    - title: gRPC
+                    - title: gRPC Connections
                       link: /howtos/grpc
-                    - title: WebSockets
+                    - title: WebSocket Connections
                       link: /howtos/websockets
             - title: Protect my services
               items:
@@ -68,6 +68,10 @@
                       link: /howtos/ext-filters
                     - title: Basic Authentication (for API Gateway)
                       link: /howtos/basic-auth
+                    - title: Using the OAuth2 filter for SSO
+                      link: /howtos/oauth-oidc-auth
+                    - title: Kubernetes SSO with OIDC and Keycloak
+                      link: /howtos/auth-kubectl-keycloak
                     - title: Single Sign-On with Google
                       link: /howtos/sso/google
                     - title: Single Sign-On with Keycloak
@@ -78,7 +82,7 @@
                       items:
                         - title: Single Sign-On with Auth0
                           link: /howtos/sso/auth0
-                        - title: Single Sign-On with Azure Active Directory
+                        - title: Single Sign-On with Azure Active Directory (AD)
                           link: /howtos/sso/azure
                         - title: Single Sign-On with OneLogin
                           link: /howtos/sso/onelogin
@@ -86,9 +90,7 @@
                           link: /howtos/sso/salesforce
                         - title: Single Sign-On with UAA
                           link: /howtos/sso/uaa
-                    - title: Using the OAuth2 filter
-                      link: /howtos/oauth-oidc-auth
-                    - title: Kubernetes Single Sign-On with OIDC and Keycloak
+                    - title: Kubernetes SSO with OIDC and Keycloak
                       link: /howtos/auth-kubectl-keycloak
                 - title: Rate limiting
                   items:
@@ -100,7 +102,7 @@
                       link: /howtos/token-ratelimit
                 - title: TLS
                   items:
-                    - title: TLS Termination
+                    - title: TLS Termination and Enabling HTTPS
                       link: /howtos/tls-termination
                     - title: Using cert-manager
                       link: /howtos/cert-manager
@@ -110,16 +112,16 @@
               items:
                 - title: Distributed Tracing with Datadog
                   link: /howtos/tracing-datadog
-                - title: Distributed Tracing Zipkin
+                - title: Distributed Tracing with Zipkin
                   link: /howtos/tracing-zipkin
                 - title: Monitoring with Prometheus and Grafana
                   link: /howtos/prometheus
                 - title: Statistics
                   link: /topics/running/statistics
                   items:
-                    - title: Envoy statistics with StatsD
+                    - title: Envoy Statistics with StatsD
                       link: /topics/running/statistics/envoy-statsd
-                    - title: The metrics endpoint
+                    - title: The Metrics Endpoint
                       link: /topics/running/statistics/8877-metrics
             - title: Set up integrations
               items:
@@ -129,11 +131,11 @@
                   link: /howtos/knative
                 - title: Service meshes
                   items:
-                    - title: Consul
+                    - title: Consul Integration
                       link: /howtos/consul
-                    - title: Istio
+                    - title: Istio Integration
                       link: /howtos/istio
-                    - title: Linkerd 2
+                    - title: Linkerd 2 Integration
                       link: /howtos/linkerd2
         - title: Technical Reference
           items: 
