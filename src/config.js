@@ -6,9 +6,17 @@ export const products = [
         version: []
     },
     {
+        slug: "kubernetes",
+        name: "Kubernetes (K8s)",
+        link: "/docs/kubernetes/latest/quick-start/",
+        version: [
+            { id: "latest", name: "Latest", link: "latest" }
+        ]
+    },
+    {
         slug: "edge-stack",
         name: "Edge Stack",
-        link: "/docs/edge-stack/latest/tutorials/getting-started/",
+        link: "/docs/edge-stack/",
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release" },
             { id: "latest", name: "Latest", link: "latest" },
@@ -27,7 +35,7 @@ export const products = [
     {
         slug: "telepresence",
         name: "Telepresence",
-        link: "/docs/telepresence/latest/quick-start/",
+        link: "/docs/telepresence/",
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/quick-start/" },
             { id: "latest", name: "Latest", link: "latest/quick-start/" },
@@ -36,19 +44,19 @@ export const products = [
         ]
     },
     {
-        slug: "cloud",
-        name: "Cloud",
-        link: "/docs/cloud/latest/service-catalog/quick-start/",
+        slug: "argo",
+        name: "Argo",
+        link: "/docs/argo/",
         version: [
-            { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start/" }
+            { id: "latest", name: "Latest", link: "latest" }
         ]
     },
     {
-        slug: "argo",
-        name: "Argo",
-        link: "/docs/argo/latest/",
+        slug: "cloud",
+        name: "Cloud",
+        link: "/docs/cloud/",
         version: [
-            { id: "latest", name: "Latest", link: "latest" }
+            { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start/" }
         ]
     }
 ];

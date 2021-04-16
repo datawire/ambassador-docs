@@ -126,7 +126,7 @@ with optional fraction and a unit suffix, such as "300ms", "-1.5h" or
 [Go `text/template` functions]: https://golang.org/pkg/text/template/#hdr-Functions
 [`http.Header`]: https://golang.org/pkg/net/http/#Header
 [`jwt.ValidationError`]: https://godoc.org/github.com/dgrijalva/jwt-go#ValidationError
-[Lua Scripts]: /docs/latest/topics/running/ambassador/#lua-scripts-lua_scripts
+[Lua Scripts]: /docs/edge-stack/latest/topics/running/ambassador/#lua-scripts-lua_scripts
 [Sprig `hasKey`]: https://masterminds.github.io/sprig/dicts.html#haskey
 
 ## `JWT` Path-Specific Arguments

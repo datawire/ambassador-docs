@@ -1,0 +1,24 @@
+- title: Home
+  link: /docs/
+
+- title: Products
+  collapsable: false
+  items:
+    - title: Kubernetes
+      items: 
+        - title: Quick Start
+          link: /quick-start
+        - title: Core Concepts
+          items:
+            - title: "Kubernetes basics: Kubernetes for developers"
+              link: /concepts/basics
+            - title: Using K8s for app development
+              link: /concepts/appdev
+            - title: How can Kubernetes help me code and ship faster?
+              link: /concepts/faster
+        - title: How Do I...
+          items:
+            - title: Get code running on my cluster
+              link: /howtos/codetocluster
+            - title: Diagnose my Kubernetes Deployments
+              link: /howtos/diagnose 

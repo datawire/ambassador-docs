@@ -4,16 +4,19 @@ import { Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import Layout from '../../src/components/Layout';
-import Icon from '../../src/components/Icon';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
 import { products, oldStructure } from './config';
 import DocsHome from './components/DocsHome';
-import { goToSlack, goToContactUs } from '../../src/utils/routes';
 import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
 import isAesPage from './utils/isAesPage';
+import Argo from './products/Argo';
+import Cloud from './products/Cloud';
+import EdgeStack from './products/EdgeStack';
+import Telepresence from './products/Telepresence';
+import ContactBlock from '../../src/components/ContactBlock';
 import './style.less';
 
 export default ({ data, location }) => {
@@ -27,6 +30,7 @@ export default ({ data, location }) => {
         ? {}
         : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
     const isProduct = initialProduct.slug !== products[0].slug;
+    const isProductHome = isProduct && !!!initialVersion.id;
     const canonicalUrl = isHome
         ? 'https://www.getambassador.io/docs/'
         : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
@@ -35,7 +39,7 @@ export default ({ data, location }) => {
 
     const [product, setProduct] = useState(initialProduct);
     const [version, setVersion] = useState(initialVersion);
-    const [showVersion, setShowVersion] = useState(!isHome && isProduct);
+    const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome);
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
 
@@ -87,9 +91,7 @@ export default ({ data, location }) => {
         setVersionList(selectedProduct.version);
         const newVersion = selectedProduct.version.filter(v => v.id === "latest")[0] || selectedProduct.version[0];
         setVersion(newVersion);
-        navigate(
-            `/docs/${selectedProduct.slug}/${newVersion.link}/`,
-        );
+        navigate(selectedProduct.link);
     };
 
     const handleVersionChange = async (e, value = null) => {
@@ -136,6 +138,73 @@ export default ({ data, location }) => {
             }, 500);
         }
     };
+
+    const getProductHome = (product) => {
+        switch (product) {
+            case 'edge-stack':
+                return <EdgeStack />;
+            case 'telepresence':
+                return <Telepresence />;
+            case 'cloud':
+                return <Cloud />;
+            case 'argo':
+                return <Argo />;
+            default:
+                return <EdgeStack />;
+        }
+    }
+
+    const footer = (
+        <div>
+            <hr className="docs__separator docs__container" />
+            <section className="docs__contact docs__container">
+                <ContactBlock />
+            </section>
+            {!isHome && isProduct && (
+                <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />)
+            }
+        </div>
+    );
+
+    const content = useMemo(() => {
+        if (isHome) {
+            return <>
+                <DocsHome />
+                {footer}
+            </>
+        } else if (isProductHome) {
+            return <>
+                {getProductHome(initialProduct.slug)}
+                {footer}
+            </>
+        }
+        return (
+            <div className="docs__container-doc">
+                <Sidebar
+                    onVersionChanged={handleVersionChange}
+                    version={version}
+                    versionList={versionList}
+                    topicList={menuLinks}
+                    slug={page.fields.slug}
+                />
+                <div className="docs__doc-body-container">
+                    <div className="docs__doc-body doc-body">
+                        <div className="doc-tags">
+                            {showAesPage && (
+                                <Link className="doc-tag aes" to="/editions">
+                                    Ambassador Edge Stack
+                                </Link>
+                            )}
+                        </div>
+                        <MDXRenderer slug={page.fields.slug}>
+                            {template(page.body, getVersions())}
+                        </MDXRenderer>
+                    </div>
+                    {footer}
+                </div>
+            </div>
+        );
+    }, [isHome, isProductHome]);
 
     return (
         <Layout location={location}>
@@ -195,61 +264,8 @@ export default ({ data, location }) => {
                         </div>
                     </div>
                 </nav>
-
-                {!showVersion ? (
-                    <DocsHome />
-                ) : (
-                    <div className="docs__container-doc">
-                        <Sidebar
-                            onVersionChanged={handleVersionChange}
-                            version={version}
-                            versionList={versionList}
-                            topicList={menuLinks}
-                            slug={page.fields.slug}
-                        />
-                        <div className="docs__doc-body-container">
-                            <div className="docs__doc-body doc-body">
-                                <div className="doc-tags">
-                                    {showAesPage && (
-                                        <Link className="doc-tag aes" to="/editions">
-                                            Ambassador Edge Stack
-                                        </Link>
-                                    )}
-                                </div>
-                                <MDXRenderer slug={page.fields.slug}>
-                                    {template(page.body, getVersions())}
-                                </MDXRenderer>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                <div className={`${!isHome ? 'docs__doc-body-container' : ''}`}>
-
-                    <hr className="docs__separator docs__container" />
-
-                    <section className="docs__contact docs__container">
-                        <span className="docs__heading-secondary">Questions?</span>
-                        <p>We’re here to help if you have questions.</p>
-                        <ul className="docs__contact-list">
-                            <li>
-                                <a href={goToSlack} target="_blank">
-                                    <Icon name="slack-icon" className="docs__contact-list--icon" />
-                                    Join our Slack
-                                </a>
-                            </li>
-                            <li>
-                                <Link to={goToContactUs}>
-                                    <Icon name="mail-icon" className="docs__contact-list--icon" />
-                                    Contact Us
-                                </Link>
-                            </li>
-                        </ul>
-                    </section>
-
-                    {!isHome && isProduct && (
-                        <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />
-                    )}
+                <div className="docs__body">
+                    {content}
                 </div>
 
             </div>

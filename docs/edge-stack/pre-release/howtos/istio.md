@@ -1,4 +1,4 @@
-# Ambassador and Istio
+# Istio Integration
 
 Ambassador Edge Stack and Istio: Edge Proxy and Service Mesh together in one. The Edge Stack is deployed at the edge of your network and routes incoming traffic to your internal services (aka "north-south" traffic). [Istio](https://istio.io/) is a service mesh for microservices, and is designed to add application-level Layer (L7) observability, routing, and resilience to service-to-service traffic (aka "east-west" traffic). Both Istio and the Ambassador Edge Stack are built using [Envoy](https://www.envoyproxy.io).
 
@@ -22,6 +22,14 @@ This guide will explain how to take advantage of both Ambassador and Istio to ha
 There a number of installation options for Ambassador. See the [getting started](../../tutorials/getting-started) for the full list of installation options and instructions.
 
 ## Integrate Ambassador and Istio
+
+> **WARNING - Istio Regression:**
+> There is a regression in Istio 1.9 that causes Ambassador (and other non-Istio services) to be unable to read Istio certificates. 
+>
+> A patch for this regression has been merged and is waiting for a release.
+> https://github.com/istio/istio/pull/31531
+>
+> Use Istio 1.8.2 or earlier until a version of Istio with a patch for this regression is released.
 
 Ambassador integrates with Istio in three ways:
 
