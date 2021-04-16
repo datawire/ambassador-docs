@@ -42,3 +42,4 @@ Application development teams use Ambassador to manage edge policies associated 
   * [Introduction to Edge Control](edgectl/edge-control)
   * [Edge Control in CI](edgectl/edge-control-in-ci)
 * [Developer Portal](dev-portal)
+* [Gateway API](gateway-api)
