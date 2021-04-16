@@ -1,4 +1,4 @@
-# Setting up Kubernetes Single Sign-On Authentication with OpenID Connect and Keycloak
+# Kubernetes SSO with OIDC and Keycloak
 
 Developers use `kubectl` to access Kubernetes clusters. By default `kubectl` uses a certificate to authenticate to the Kubernetes API. This means that when multiple developers need to access a cluster, the certificate needs to be shared. Sharing the credentials to access a Kubernetes cluster presents a significant security problem. Compromise of the certificate is very easy and the consequences can be catastrophic.
 
@@ -11,7 +11,7 @@ This tutorial relies on Ambassador Edge Stack to manage access to your Kubernete
 *Note* This guide was designed and validated using an Azure AKS Cluster.  It's possible that this procedure will work with other cloud providers, but there is a lot of variance in the Authentication mechanisms for the Kubernetes API.  See the troubleshooting note at the bottom for more info.
 
 * Azure AKS Cluster [here](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
-* Install Edge Stack [here](https://www.getambassador.io/docs/edge-stack/latest/topics/install/)
+* Install Edge Stack [here](/docs/edge-stack/latest/topics/install/)
 * Deploy Keycloak on Kubernetes [here](https://www.keycloak.org/getting-started/getting-started-kube)
 
 ## Cluster Setup

@@ -4,7 +4,7 @@ description: "Edge Stack uses the Mapping resource to map a resource, like a URL
 
 import Alert from '@material-ui/lab/Alert';
 
-# Route to my services
+# Get traffic from the edge
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
