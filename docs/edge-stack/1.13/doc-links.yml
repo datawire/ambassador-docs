@@ -11,24 +11,24 @@
         - title: Install Edge Stack
           link: /topics/install/
           items:
-            - title: Install with Helm
-              link: /topics/install/helm
-            - title: Upgrade to the Ambassador Edge Stack
-              link: /topics/install/upgrade-to-edge-stack
-            - title: Upgrade to a Newer Version
-              link: /topics/install/upgrading
-            - title: Install the Ambassador API Gateway
-              link: /topics/install/install-ambassador-oss
-            - title: Install with Docker
-              link: /topics/install/docker
-            - title: Install with Bare Metal
-              link: /topics/install/bare-metal
-            - title: Install Manually
-              link: /topics/install/yaml-install
-            - title: Ambassador Edge Stack Operator
-              link: /topics/install/aes-operator
-            - title: Install with Edgectl
-              link: /topics/install/help/
+          - title: Install with Helm
+            link: /topics/install/helm
+          - title: Upgrade to the Ambassador Edge Stack
+            link: /topics/install/upgrade-to-edge-stack
+          - title: Upgrade to a Newer Version
+            link: /topics/install/upgrading
+          - title: Install the Ambassador API Gateway
+            link: /topics/install/install-ambassador-oss
+          - title: Install with Docker
+            link: /topics/install/docker
+          - title: Install with Bare Metal
+            link: /topics/install/bare-metal
+          - title: Install Manually
+            link: /topics/install/yaml-install
+          - title: Ambassador Edge Stack Operator
+            link: /topics/install/aes-operator
+          - title: Install with Edgectl
+            link: /topics/install/help/
         - title: Core Concepts
           link: /topics/concepts/
           items:
@@ -46,77 +46,99 @@
               link: /topics/concepts/architecture
             - title: Rate Limiting at the Edge
               link: /topics/concepts/rate-limiting-at-the-edge
-        - title: How-to Guides
-          link: /howtos
+        - title: How Do I...
           items:
-            - title: Authentication
+            - title: Route to my services
               items:
-                - title: Basic Authentication
-                  link: /howtos/basic-auth
-                - title: Single Sign-On with Auth0
-                  link: /howtos/sso/auth0
-                - title: Single Sign-On with Azure Active Directory
-                  link: /howtos/sso/azure
-                - title: Single Sign-On with Google
-                  link: /howtos/sso/google
-                - title: Single Sign-On with Keycloak
-                  link: /howtos/sso/keycloak
-                - title: Single Sign-On with Okta
-                  link: /howtos/sso/okta
-                - title: Single Sign-On with OneLogin
-                  link: /howtos/sso/onelogin
-                - title: Single Sign-On with Salesforce
-                  link: /howtos/sso/salesforce
-                - title: Single Sign-On with UAA
-                  link: /howtos/sso/uaa
-                - title: Using the OAuth2 filter
-                  link: /howtos/oauth-oidc-auth
-            - title: Custom Filters
-              link: /howtos/ext-filters
-            - title: Deploying to Kubernetes from GitHub
-              link: /tutorials/projects
-            - title: Distributed Tracing
+                - title: Get traffic from the edge
+                  link: /howtos/route
+                - title: Other protocols
+                  items:
+                    - title: TCP Connections
+                      link: /topics/using/tcpmappings
+                    - title: gRPC Connections
+                      link: /howtos/grpc
+                    - title: WebSocket Connections
+                      link: /howtos/websockets
+            - title: Protect my services
               items:
-                - title: DataDog
+                - title: Authentication
+                  items:
+                    - title: Basic Authentication
+                      link: /howtos/ext-filters
+                    - title: Basic Authentication (for API Gateway)
+                      link: /howtos/basic-auth
+                    - title: Using the OAuth2 filter for SSO
+                      link: /howtos/oauth-oidc-auth
+                    - title: Kubernetes SSO with OIDC and Keycloak
+                      link: /howtos/auth-kubectl-keycloak
+                    - title: Single Sign-On with Google
+                      link: /howtos/sso/google
+                    - title: Single Sign-On with Keycloak
+                      link: /howtos/sso/keycloak
+                    - title: Single Sign-On with Okta
+                      link: /howtos/sso/okta
+                    - title: More SSO...
+                      items:
+                        - title: Single Sign-On with Auth0
+                          link: /howtos/sso/auth0
+                        - title: Single Sign-On with Azure Active Directory (AD)
+                          link: /howtos/sso/azure
+                        - title: Single Sign-On with OneLogin
+                          link: /howtos/sso/onelogin
+                        - title: Single Sign-On with Salesforce
+                          link: /howtos/sso/salesforce
+                        - title: Single Sign-On with UAA
+                          link: /howtos/sso/uaa
+                    - title: Kubernetes SSO with OIDC and Keycloak
+                      link: /howtos/auth-kubectl-keycloak
+                - title: Rate limiting
+                  items:
+                    - title: Basic Rate Limiting
+                      link: /howtos/rate-limiting-tutorial
+                    - title: Advanced Rate Limiting
+                      link: /howtos/advanced-rate-limiting
+                    - title: Rate Limiting on Token Claims
+                      link: /howtos/token-ratelimit
+                - title: TLS
+                  items:
+                    - title: TLS Termination and Enabling HTTPS
+                      link: /howtos/tls-termination
+                    - title: Using cert-manager
+                      link: /howtos/cert-manager
+                    - title: Client Certificate Validation
+                      link: /howtos/client-cert-validation
+            - title: Monitor my services
+              items:
+                - title: Distributed Tracing with Datadog
                   link: /howtos/tracing-datadog
-                - title: Zipkin
+                - title: Distributed Tracing with Zipkin
                   link: /howtos/tracing-zipkin
-            - title: Knative Serverless Framework
-              link: /howtos/knative
-            - title: Protocols
+                - title: Monitoring with Prometheus and Grafana
+                  link: /howtos/prometheus
+                - title: Statistics
+                  link: /topics/running/statistics
+                  items:
+                    - title: Envoy Statistics with StatsD
+                      link: /topics/running/statistics/envoy-statsd
+                    - title: The Metrics Endpoint
+                      link: /topics/running/statistics/8877-metrics
+            - title: Set up integrations
               items:
-                - title: gRPC
-                  link: /howtos/grpc
-                - title: WebSockets
-                  link: /howtos/websockets
-            - title: Prometheus monitoring
-              link: /howtos/prometheus
-            - title: Rate Limiting
-              items:
-                - title: Basic Rate Limiting
-                  link: /howtos/rate-limiting-tutorial
-                - title: Advanced Rate Limiting
-                  link: /howtos/advanced-rate-limiting
-                - title: Rate Limiting on Token Claims
-                  link: /howtos/token-ratelimit
-            - title: Service Mesh Integration
-              items:
-                - title: Consul
-                  link: /howtos/consul
-                - title: Istio
-                  link: /howtos/istio
-                - title: Linkerd 2
-                  link: /howtos/linkerd2
-            - title: TLS
-              items:
-                - title: TLS Termination
-                  link: /howtos/tls-termination
-                - title: Using cert-manager
-                  link: /howtos/cert-manager
-                - title: Client Certificate Validation
-                  link: /howtos/client-cert-validation
+                - title: Deploying to Kubernetes from GitHub
+                  link: /tutorials/projects
+                - title: Knative Serverless Framework
+                  link: /howtos/knative
+                - title: Service meshes
+                  items:
+                    - title: Consul Integration
+                      link: /howtos/consul
+                    - title: Istio Integration
+                      link: /howtos/istio
+                    - title: Linkerd 2 Integration
+                      link: /howtos/linkerd2
         - title: Technical Reference
-          items:
+          items: 
             - title: Using AES for Developers
               link: /topics/using/
               items:
@@ -154,14 +176,6 @@
                       link: /topics/using/method
                     - title: Prefix Regex
                       link: /topics/using/prefix_regex
-                    - title: Protocols
-                      items:
-                        - title: TCP
-                          link: /topics/using/tcpmappings
-                        - title: gRPC and gRPC-Web
-                          link: /howtos/grpc
-                        - title: WebSockets
-                          link: /howtos/websockets
                     - title: Query Parameter-Based Routing
                       link: /topics/using/query_parameters/
                     - title: Redirects
@@ -187,8 +201,8 @@
                 - title: Rate Limiting
                   link: /topics/using/rate-limits/
                   items:
-                    - title: AES RateLimit Reference
-                      link: /topics/using/rate-limits/rate-limits
+                  - title: AES RateLimit Reference
+                    link: /topics/using/rate-limits/rate-limits
                 - title: Edge Policy Console
                   items:
                     - title: Introduction to Edge Policy Console
@@ -242,13 +256,7 @@
                       link: /topics/running/load-balancer
                     - title: Service Discovery and Resolvers
                       link: /topics/running/resolvers
-                - title: Statistics and Monitoring
-                  link: /topics/running/statistics
-                  items:
-                    - title: Envoy statistics with StatsD
-                      link: /topics/running/statistics/envoy-statsd
-                    - title: The `:8877/metrics` endpoint
-                      link: /topics/running/statistics/8877-metrics
+
                 - title: Plug-in Services
                   items:
                     - title: Authentication Service
@@ -297,4 +305,6 @@
                 - title: Using Edge Control in CI
                   link: /topics/using/edgectl/edge-control-in-ci
             - title: Technical Reference
-              link: /topics/using/edgectl/service-preview-reference
+              link: /topics/using/edgectl/service-preview-reference    
+        - title: Developer Portal
+          link: /topics/using/dev-portal/
