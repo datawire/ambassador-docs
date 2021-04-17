@@ -93,8 +93,9 @@ Running this command will also stop the local daemon running.
 
 ** What identity providers are supported for authenticating to view a preview URL?**
 
- Currently GitHub and GitLab are used to authenticate a user of Telepresence (triggered via the `telepresence login` command) and any viewers of a preview URL.
-
+* GitHub
+* GitLab
+* Google
 
 More authentication mechanisms and identity provider support will be added soon. Please [let us know](../../../../feedback) which providers are the most important to you and your team in order for us to prioritize those.
 
@@ -104,4 +105,4 @@ More authentication mechanisms and identity provider support will be added soon.
 
 ** How do I share my feedback on Telepresence?**
 
- Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../feedback), or you can [join our Slack channel](http://d6e.co/slack) to share your thoughts. 
+ Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../feedback), or you can [join our Slack channel](https://a8r.io/Slack) to share your thoughts. 
