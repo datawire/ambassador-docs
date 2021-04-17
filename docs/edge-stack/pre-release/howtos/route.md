@@ -146,4 +146,4 @@ If two different developers try to map `/myservice/` to something, this can lead
 
 ## <img class="os-logo" src="../../../../../images/logo.png"/> What's Next?
 
-There are many options for [advanced mapping configurations](../../topics/using/mappings), with features like [automatic retries](../../topics/using/retries/), [timeouts](../../topics/using/timeouts/), and [rate limiting](../../topics/using/rate-limits/), [redirects](../../topics/using/redirects/).
+There are many options for [advanced mapping configurations](../../topics/using/mappings), with features like [automatic retries](../../topics/using/retries/), [timeouts](../../topics/using/timeouts/), [rate limiting](../../topics/using/rate-limits/), [redirects](../../topics/using/redirects/), and more.
