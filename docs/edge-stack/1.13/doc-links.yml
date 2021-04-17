@@ -216,6 +216,8 @@
                       link: /topics/using/project-authentication
                     - title: Customizing Deployment
                       link: /topics/using/project-customization
+                - title: Gateway API
+                  link: /topics/using/gateway-api
             - title: Running AES for SREs/Operations
               link: /topics/running/
               items:
@@ -307,6 +309,4 @@
             - title: Technical Reference
               link: /topics/using/edgectl/service-preview-reference    
         - title: Developer Portal
-          link: /topics/using/dev-portal/
-        - title: Gateway API
-          link: /topics/using/gateway-api
+          link: /topics/using/dev-portal
