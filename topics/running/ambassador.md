@@ -29,7 +29,8 @@ spec:
 | `cluster_request_timeout_ms` | Set the default end-to-end timeout for requests. Default is 3000ms.  | `cluster_request_timeout_ms: 3000` |
 | `default_label_domain  and default_labels` | Set a default domain and request labels to every request for use by rate limiting. For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups). | None |
 | `defaults` | The `defaults` element allows setting system-wide defaults that will be applied to various Ambassador resources. See [using defaults](../../using/defaults) for more information. | None |
-| `diagnostics.enabled` | Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  See below for more details. | None |
+| `diagnostics.allow_non_local` | Whether or not to allow connections to the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints from the entire cluster. See below for more details. | None |
+| `diagnostics.enabled` | Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints. See below for more details. | None |
 | `enable_grpc_http11_bridge` | Should we enable the gRPC-http11 bridge? | `enable_grpc_http11_bridge: false` |
 | `enable_grpc_web` | Should we enable the grpc-Web protocol? | `enable_grpc_web: false` |
 | `enable_http10` | Should we enable http/1.0 protocol? | `enable_http10: false` |
@@ -173,20 +174,30 @@ diagnostics:
   enabled: true
 ```
 
-Setting `diagnostics.enabled` to `false` will disable the routes for both services (they will remain accessible from inside the Ambassador pod on port 8877):
+Setting `diagnostics.enabled` to `false` will disable the routes for both services:
 
 ```
 diagnostics:
   enabled: false
 ```
 
-When configured this way, diagnostics are only available from inside the Ambassador pod(s) via `localhost` networking. You can use Kubernetes port forwarding to set up remote access temporarily:
+With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and are reachable from inside the Ambassador pod on localhost port 8877. You can use Kubernetes port forwarding to set up remote access temporarily:
 
 ```
 kubectl port-forward -n ambassador deploy/ambassador 8877
 ```
 
-If you want to expose the diagnostics page but control them via `Host` based routing, you can set `diagnostics.enabled` to false and create mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings).
+Alternately, you can expose the diagnostics page but control them via `Host` based routing: set `diagnostics.enabled` to false and create mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), using `localhost:8877` as the `service` of the `Mapping`.
+
+You can also allow connections from anywhere in your cluster on port 8877 with `diagnostics.allow_non_local`:
+
+```
+diagnostics:
+  enabled: false
+  allow_non_local: true
+```
+
+Note that this will bypass Ambassador's security checks, and _any_ pod in your cluster will be able to reach the diagnostics services.
 
 ### gRPC HTTP/1.1 bridge (`enable_grpc_http11_bridge`)
 
