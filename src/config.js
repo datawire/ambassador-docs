@@ -8,9 +8,9 @@ export const products = [
     {
         slug: "kubernetes",
         name: "Kubernetes (K8s)",
-        link: "/docs/kubernetes/latest/quick-start/",
+        link: "/docs/kubernetes",
         version: [
-            { id: "latest", name: "Latest", link: "latest" }
+            { id: "latest", name: "Latest", link: "latest/quick-start" }
         ]
     },
     {
@@ -35,28 +35,29 @@ export const products = [
     {
         slug: "telepresence",
         name: "Telepresence",
-        link: "/docs/telepresence/",
+        link: "/docs/telepresence",
         version: [
-            { id: "pre-release", name: "Pre-Release", link: "pre-release/quick-start/" },
-            { id: "latest", name: "Latest", link: "latest/quick-start/" },
-            { id: "2.1", name: "2.1", link: "2.1/quick-start/" },
-            { id: "2.0", name: "2.0", link: "2.0/quick-start/" }
+            { id: "pre-release", name: "Pre-Release", link: "pre-release/quick-start" },
+            { id: "latest", name: "Latest", link: "latest/quick-start" },
+            { id: "2.2", name: "2.2", link: "2.2/quick-start" },
+            { id: "2.1", name: "2.1", link: "2.1/quick-start" },
+            { id: "2.0", name: "2.0", link: "2.0/quick-start" }
         ]
     },
     {
         slug: "argo",
         name: "Argo",
-        link: "/docs/argo/",
+        link: "/docs/argo",
         version: [
-            { id: "latest", name: "Latest", link: "latest" }
+            { id: "latest", name: "Latest", link: "latest/quick-start" }
         ]
     },
     {
         slug: "cloud",
         name: "Cloud",
-        link: "/docs/cloud/",
+        link: "/docs/cloud",
         version: [
-            { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start/" }
+            { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start" }
         ]
     }
 ];

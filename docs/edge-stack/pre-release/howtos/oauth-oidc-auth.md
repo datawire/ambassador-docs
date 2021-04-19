@@ -1,4 +1,4 @@
-# Single Sign-On with OAuth & OIDC
+# Using the OAuth2 filter for SSO
 
 Ambassador Edge Stack adds native support for configuring single sign-on with OAuth and OIDC authentication schemes for single sign-on with an external identity provider (IdP). Ambassador Edge Stack has been tested with Keycloak, Auth0, Okta, and UAA although other OAuth/OIDC-compliant identity providers should work. Please contact us on [Slack](https://a8r.io/Slack) if you have questions about IdPs not listed below.
 

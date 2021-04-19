@@ -1,4 +1,4 @@
-# Using Knative and Ambassador
+# Knative Serverless Framework
 
 [Knative](https://knative.dev/) is a popular Kubernetes-based platform for managing serverless workloads with two main components:
 

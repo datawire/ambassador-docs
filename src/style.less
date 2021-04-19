@@ -4,6 +4,15 @@
 
 .docs {
     font-family: @InterFont;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    nav {
+      flex-grow: 0;
+    }
 
     &__nav {
         height: 70px;
@@ -13,10 +22,16 @@
         justify-content: space-between;
         padding: 0 25px;
         border-bottom: 1px solid @grey-separator;
-        position: fixed;
-        top: 62px;
+        position: relative;
         width: 100%;
         z-index: 9;
+    }
+
+    &__body {
+        height: 100%;
+        overflow: auto;
+        flex-shrink: 1;
+        flex-grow: 1;
     }
 
     &__links-content {
@@ -97,10 +112,6 @@
         margin: auto;
     }
 
-    &__started {
-        margin-top: 110px;
-    }
-
     &__info {
         margin-top: 40px;
         display: flex;
@@ -136,13 +147,15 @@
 
             svg {
                 margin-right: 6px;
+
+                &.docs__kubernetes-icon {
+                    margin-right: 10px;
+                }
             }
         }
     }
 
     .product-page {
-        margin-top: 90px;
-
         .docs__heading-primary {
             height: 70px;
         }
@@ -298,6 +311,11 @@
         height: 59px;
     }
 
+    &__kubernetes-icon {
+        width: 69px;
+        fill: @blue-2;
+    }
+
     &__popular-list {
         list-style: disc;
 
@@ -328,48 +346,17 @@
         padding: 0 42px 162px 42px;
     }
 
-    &__contact-list {
-        display: flex;
-        margin-top: 13px;
-
-        li {
-            border-right:  1px solid @grey-separator;
-            padding-right: 20px;
-            cursor: pointer;
-            transition: color 200ms linear 0ms;
-
-            a {
-                display: flex;
-                text-decoration: underline;
-                color: @blue;
-                &:hover {
-                    color: @blue-dark;
-                    text-decoration: none;
-                }
-            }
-
-            &:last-child {
-                border: none;
-                margin-left: 20px;
-            }
-
-        }
-
-        &--icon {
-            margin-right: 7px;
-        }
-    }
-
     &__container-doc {
         display: flex;
-        margin-top: 70px;
+        height: 100%;
     }
 
     &__doc-sidebar {
+        overflow: hidden;
         width: 300px;
-        min-width: 300px;
+        flex-shrink: 0;
+        flex-grow: 0;
         border-right: 1px solid @grey-separator;
-        position: fixed;
         padding-bottom: 10px;
     }
 
@@ -404,6 +391,8 @@
         &__chevron-icon {
             margin-left: 8px;
             fill: @grey-primary;
+            width: 20px;
+            height: 20px;
         }
 
         &--active {
@@ -528,13 +517,14 @@
     &__doc-body {
         padding: 32px 42px;
         max-width: @docs-max-width;
-        min-width: @docs-min-width;
+        width: 100%;
         margin: 0 auto;
     }
     
     &__doc-body-container {
-        margin-left: 300px;
-        width: calc(100% - 300px);
+        overflow: auto;
+        height: 100%;
+        width: 100%;
     }
 
     &__spinner {
@@ -579,26 +569,11 @@
         }
     }
 
-    @media (max-width: 1200px) {
-
-        &__nav, &__doc-sidebar {
-            position: absolute;
-        }
-    }
-
     @media (max-width: 999px) {
 
         &__dropdown-container {
             order: 2;
             height: 54px;
-        }
-
-        .product-page {
-            margin-top: 110px;
-        }
-
-        &__container-doc {
-            margin-top: 100px;
         }
 
         &__desktop {
@@ -692,20 +667,8 @@
             padding-top: 0;
         }
 
-        .product-page {
-            margin-top: 70px;
-        }
-
         &__dropdown-container {
             height: 50px;
-        }
-
-        &__container-doc {
-            margin-top: 50px;
-        }
-
-        &__started {
-            margin-top: 70px;
         }
 
         &__search-box {
@@ -726,15 +689,6 @@
     }
 
     @media (max-width: 380px) {
-
-        .docs__contact-list li {
-            padding-right: 8px;
-
-            &:last-child {
-                margin-left: 8px;
-            }
-        }
-
         &__dropdown {
             font-size: 12px;
         }
@@ -743,6 +697,10 @@
             .custom-dropdown:last-child {
                 width: 60%;
             }
+        }
+
+        &__contact {
+            margin-left: 0;
         }
     }
 }

@@ -1,4 +1,4 @@
-# Okta
+# Single Sign-On with Okta
 
 1. Create an OIDC application
 

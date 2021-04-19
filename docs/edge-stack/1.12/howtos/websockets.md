@@ -1,4 +1,4 @@
-# Using WebSockets and Ambassador
+# WebSocket Connections
 
 Ambassador makes it easy to access your services from outside your
 application, and this includes services that use WebSockets.  Only a
