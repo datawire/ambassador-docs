@@ -147,6 +147,8 @@
                 - title: Mapping Configuration
                   link: /topics/using/mappings
                   items:
+                    - title: AuthService Settings
+                      link: /topics/using/authservice
                     - title: Automatic Retries
                       link: /topics/using/retries
                     - title: Canary Releases
