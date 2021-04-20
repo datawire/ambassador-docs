@@ -6,7 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import { products, oldStructure } from './config';
+import { products, oldStructure, metaData } from './config';
 import DocsHome from './components/DocsHome';
 import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
@@ -72,11 +72,21 @@ export default ({ data, location }) => {
         return parseLinksByVersion(slug[3], linksJson);
     }, [data.linkentries, slug]);
 
-    const title =
-        page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
-    const metaDescription = page.frontmatter
-        ? page.frontmatter.description
-        : page.excerpt;
+    const getMetaData = () => {
+        let metaDescription;
+        let metaTitle;
+        if (isHome) {
+            metaTitle = metaData['home'].title;
+            metaDescription = metaData['home'].description;
+        } else if (isProductHome) {
+            metaTitle = metaData[initialProduct.slug].title;
+            metaDescription = metaData[initialProduct.slug].description;
+        } else {
+            metaTitle = (page.headings && page.headings[0] ? page.headings[0].value : 'Docs') + ' | Ambassador';
+            metaDescription = page.frontmatter && page.frontmatter.description ? page.frontmatter.description : page.excerpt;
+        }
+        return { metaDescription, metaTitle };
+    }
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
 
@@ -212,13 +222,11 @@ export default ({ data, location }) => {
     return (
         <Layout location={location}>
             <Helmet>
-                <title>{title} | Ambassador</title>
-                <meta name="og:title" content={`${title} | Ambassador`} />
+                <title>{getMetaData().metaTitle}</title>
+                <meta name="og:title" content={getMetaData().metaTitle} />
                 <meta name="og:type" content="article" />
                 <link rel="canonical" href={canonicalUrl} />
-                {metaDescription && (
-                    <meta name="description" content={metaDescription} />
-                )}
+                <meta name="description" content={getMetaData().metaDescription} />
             </Helmet>
             <div className="docs">
                 <nav>
