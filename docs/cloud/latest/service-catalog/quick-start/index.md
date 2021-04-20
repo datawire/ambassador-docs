@@ -83,17 +83,22 @@ Ambassador Cloud Service Catalog provides a centralized view with an easily navi
 
 ## Prerequisites
 
-Service Catalog requires **Edge Stack version 1.12 or greater** to be installed in your cluster.
+Service Catalog requires **Edge Stack version 1.12 or greater** or **API Gateway 1.13 or greater** to be installed in your cluster.
 
 **Install** Edge Stack <a href="../../../../edge-stack/latest/tutorials/getting-started/">from here</a> if needed.
 
-If you already have Edge Stack installed, **check your version** by running this command:
+If you already have Edge Stack or the API Gateway installed, **check your version** by running this command (adjust your namespace if necessary):
 
 ```
-kubectl get deploy -n ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
+kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
 
-Is the `image` at version 1.12 or greater?  Then you are ready to start using Service Catalog!
+If you are using Edge Stack (the image name will be datawire/aes), then check that the image version is 1.12.0 or greater.
+
+If using the API Gateway (the image name will be datawire/ambassador), then check that the image version is 1.13.0 or greater.
+
+If your Edge Stack or API Gateway installation is up to date,
+then you are ready to start using Service Catalog!
 
 If not, [follow this doc](../../../../edge-stack/latest/topics/install/upgrading/) to **upgrade** Edge Stack.
 

@@ -16,20 +16,21 @@ export const products = [
     {
         slug: "edge-stack",
         name: "Edge Stack",
-        link: "/docs/edge-stack/",
+        link: "/docs/edge-stack",
         version: [
-            { id: "pre-release", name: "Pre-Release", link: "pre-release" },
-            { id: "latest", name: "Latest", link: "latest" },
-            { id: "1.12", name: "1.12", link: "1.12" },
-            { id: "1.11", name: "1.11", link: "1.11" },
-            { id: "1.10", name: "1.10", link: "1.10" },
-            { id: "1.9", name: "1.9", link: "1.9" },
-            { id: "1.8", name: "1.8", link: "1.8" },
-            { id: "1.7", name: "1.7", link: "1.7" },
-            { id: "1.6", name: "1.6", link: "1.6" },
-            { id: "1.5", name: "1.5", link: "1.5" },
-            { id: "1.4", name: "1.4", link: "1.4" },
-            { id: "1.3", name: "1.3", link: "1.3" }
+            { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
+            { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
+            { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
+            { id: "1.12", name: "1.12", link: "1.12/tutorials/getting-started" },
+            { id: "1.11", name: "1.11", link: "1.11/tutorials/getting-started" },
+            { id: "1.10", name: "1.10", link: "1.10/tutorials/getting-started" },
+            { id: "1.9", name: "1.9", link: "1.9/tutorials/getting-started" },
+            { id: "1.8", name: "1.8", link: "1.8/tutorials/getting-started" },
+            { id: "1.7", name: "1.7", link: "1.7/tutorials/getting-started" },
+            { id: "1.6", name: "1.6", link: "1.6/tutorials/getting-started" },
+            { id: "1.5", name: "1.5", link: "1.5/tutorials/getting-started" },
+            { id: "1.4", name: "1.4", link: "1.4/tutorials/getting-started" },
+            { id: "1.3", name: "1.3", link: "1.3/tutorials/getting-started" }
         ]
     },
     {
