@@ -94,7 +94,7 @@ export default ({ data, location }) => {
         const value = name ? name : e.target.value;
         const selectedProduct = products.filter((p) => p.slug === value)[0];
         setProduct(selectedProduct);
-        setShowVersion(selectedProduct.version.length);
+        setShowVersion(false);
         if (selectedProduct.slug === 'home') {
             navigate(`/docs/`);
             return;
