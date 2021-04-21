@@ -136,7 +136,7 @@ In the [`ambassador-rbac-prometheus.yaml`][] example template there is
 a `ConfigMap` that should be updated.  Add your mapping to the
 `configuration` property.
 
-[`ambassador-rbac-prometheus.yaml`]: ../../../../../../yaml/ambassador/ambassador-rbac-prometheus.yaml
+[`ambassador-rbac-prometheus.yaml`]: ../../../../../../../yaml/ambassador/ambassador-rbac-prometheus.yaml
 
 ```yaml
 ---

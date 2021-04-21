@@ -1,6 +1,12 @@
-# Authentication
+import Alert from '@material-ui/lab/Alert';
 
-> **Important:** This guide applies to Ambassador API Gateway, use of this guide on the Ambassador Edge Stack is not fully supported.  Use the [External Filter](../ext-filters/) instead.
+# Basic Authentication (for API Gateway)
+
+<Alert severity="info">
+  This guide applies to Ambassador API Gateway, use of this guide with Edge stack is not recommended.  Edge Stack does <a href="../ext-filters">authentication using the Filter resource</a> instead of the AuthService resource as described below.
+</Alert>
+
+
 
 Ambassador can authenticate incoming requests before routing them to a backing 
 service. In this tutorial, we'll configure Ambassador to use an external third 

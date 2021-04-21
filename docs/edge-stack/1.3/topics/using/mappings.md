@@ -39,7 +39,7 @@ If multiple `Mapping`s have the same `precedence`, Ambassador Edge Stack's norma
 
 In most cases, you won't need the `tls` attribute: just use a `service` with an `https://` prefix. However, note that if the `tls` attribute is present and `true`, Ambassador Edge Stack will originate TLS even if the `service` does not have the `https://` prefix.
 
-If `tls` is present with a value that is not `true`, the value is assumed to be the name of a defined TLS context, which will determine the certificate presented to the upstream service. TLS context handling is a beta feature of Ambassador Edge Stack at present; please [contact us on Slack](https://d6e.co/slack) if you need to specify TLS origination certificates.
+If `tls` is present with a value that is not `true`, the value is assumed to be the name of a defined TLS context, which will determine the certificate presented to the upstream service. TLS context handling is a beta feature of Ambassador Edge Stack at present; please [contact us on Slack](https://a8r.io/Slack) if you need to specify TLS origination certificates.
 
 ## Namespaces and Mappings
 
@@ -52,4 +52,4 @@ If `AMBASSADOR_NAMESPACE` is correctly set, Ambassador Edge Stack can map to ser
 
 When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically, based on the `service` attribute in the `Mapping`. 
 
-If `add_linkerd_headers` is not specified for a given `Mapping`, the default is taken from the `ambassador`[Module](../running/ambassador). The overall default is `false`: you must explicitly enable `add_linkerd_headers` for Ambassador Edge Stack to add the header for you (although you can always add it yourself with `add_request_headers`, of course).
+If `add_linkerd_headers` is not specified for a given `Mapping`, the default is taken from the `ambassador`[Module](../../running/ambassador). The overall default is `false`: you must explicitly enable `add_linkerd_headers` for Ambassador Edge Stack to add the header for you (although you can always add it yourself with `add_request_headers`, of course).

@@ -6,7 +6,7 @@ If you need help deploying Ambassador at your organization, there are several di
 
 ### Ambassador Edge Stack Community Support
 
-If you are running the Ambassador API Gateway or the Ambassador Edge Stack with free, community licenses, [join our Slack channel](http://d6e.co/slack) to talk with other users in the community and get your questions answered.
+If you are running the Ambassador API Gateway or the Ambassador Edge Stack with free, community licenses, [join our Slack channel](https://a8r.io/Slack) to talk with other users in the community and get your questions answered.
 
 If you can’t find an answer there, [contact us](/contact) to learn more about the support options available with Ambassador Edge Stack Enterprise.
 

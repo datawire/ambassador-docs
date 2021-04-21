@@ -37,8 +37,10 @@ const Sidebar: React.FC<ISidebarProps> = ({
     const [height, setHeight] = useState<Number>(0);
 
     useEffect(() => {
-        const newHeight = versionList.length > 1 ? window.innerHeight - 202 : window.innerHeight - 152;
-        const updateHeight = () => setHeight(newHeight);
+        const updateHeight = () => {
+            const newHeight = versionList.length > 1 ? window.innerHeight - 202 : window.innerHeight - 152;
+            setHeight(newHeight);
+        }
 
         updateHeight();
         window.addEventListener("resize", updateHeight);

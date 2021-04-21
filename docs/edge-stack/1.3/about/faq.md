@@ -54,7 +54,7 @@ Istio, and Linkerd2.
 
 ### How do I get help for Edge Stack?
 
-We have an online [Slack community](https://d6e.co/slack) with thousands of
+We have an online [Slack community](https://a8r.io/Slack) with thousands of
 users. We try to help out as often as possible, although we can't promise a
 particular response time. If you need a guaranteed SLA, we also have commercial
 contracts. [Contact sales](/contact/) for more information.
