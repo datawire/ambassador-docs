@@ -21,4 +21,4 @@
             - title: Get code running on my cluster
               link: /howtos/codetocluster
             - title: Debug code on Kubernetes
-              link: /howtos/diagnose
+              link: /howtos/debug
