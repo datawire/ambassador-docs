@@ -205,9 +205,9 @@ export const KubernetesCards = [
     icon: 'learn-icon'
   },
   {
-    title: 'Diagnose my K8s deployment',
+    title: 'Debug code on Kubernetes',
     description: 'What do you do first when a Deployment won’t run?',
-    link: goToKubernetesHowtosDiagnose,
+    link: goToKubernetesHowtosDebug,
     linkText: 'Learn How',
     icon: 'tools-green'
   }
