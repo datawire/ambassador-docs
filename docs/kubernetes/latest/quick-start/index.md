@@ -28,7 +28,7 @@ Except for kubectl, **none of these tools are required for working with Kubernet
 
   1. [Install kubectl.](https://kubernetes.io/docs/tasks/tools/)
 
-  Kubectl is the official Kubernetes command-line tool.  You will use it regularly to interact with your cluster, whether deploying applications, inspecting resources, or [diagnosing issues](../howtos/diagnose).
+  Kubectl is the official Kubernetes command-line tool.  You will use it regularly to interact with your cluster, whether deploying applications, inspecting resources, or [debugging issues](../howtos/debug).
 
   2. Get a kubeconfig file.
 

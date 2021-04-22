@@ -1,4 +1,4 @@
-# Diagnose my Kubernetes Deployments
+# Debug code on Kubernetes
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
