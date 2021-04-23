@@ -281,7 +281,7 @@
                   link: /topics/running/gzip
                 - title: Rate Limiting
                   items:
-                    - title: Rate Limiting Basics
+                    - title: Basic Rate Limiting
                       link: /topics/using/rate-limits/
                     - title: Rate Limiting Reference
                       link: /topics/using/rate-limits/rate-limits
