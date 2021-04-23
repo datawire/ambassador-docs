@@ -138,15 +138,15 @@
                     - title: Linkerd 2 Integration
                       link: /howtos/linkerd2
         - title: Technical Reference
-          items: 
-            - title: Using AES for Developers
-              link: /topics/using/
+          items:
+            - title: Custom Resources
               items:
                 - title: The Mapping Resource
-                  link: /topics/using/intro-mappings
-                - title: Mapping Configuration
-                  link: /topics/using/mappings
                   items:
+                    - title: Mapping Basics
+                      link: /topics/using/intro-mappings
+                    - title: Advanced Mapping Configuration
+                      link: /topics/using/mappings
                     - title: AuthService Settings
                       link: /topics/using/authservice
                     - title: Automatic Retries
@@ -188,29 +188,26 @@
                       link: /topics/using/timeouts
                     - title: Traffic Shadowing
                       link: /topics/using/shadowing
-                - title: Filters and Authentication
+                - title: The Host Resource
+                  link: /topics/running/host-crd
                   items:
-                    - title: Filters and Filter Policies
-                      link: /topics/using/filters/
-                    - title: OAuth2 Filter
-                      link: /topics/using/filters/oauth2
-                    - title: JWT Filter
-                      link: /topics/using/filters/jwt
-                    - title: External Filter
-                      link: /topics/using/filters/external
-                    - title: Plugin Filter
-                      link: /topics/using/filters/plugin
-                - title: Rate Limiting
-                  link: /topics/using/rate-limits/
-                  items:
-                  - title: AES RateLimit Reference
-                    link: /topics/using/rate-limits/rate-limits
-                - title: Edge Policy Console
-                  items:
-                    - title: Introduction to Edge Policy Console
-                      link: /topics/using/edge-policy-console
-                    - title: Rate Limit Speedometers
-                      link: /topics/using/rate-limit-speedometers
+                    - title: TLS
+                      link: /topics/running/tls/
+                      items:
+                        - title: Simultaneously Routing HTTP and HTTPS
+                          link: /topics/running/tls/cleartext-redirection#cleartext-routing
+                        - title: HTTP -> HTTPS Redirection
+                          link: /topics/running/tls/cleartext-redirection#http---https-redirection
+                        - title: Mutual TLS (mTLS)
+                          link: /topics/running/tls/mtls
+                        - title: Server Name Indication (SNI)
+                          link: /topics/running/tls/sni
+                        - title: TLS Origination
+                          link: /topics/running/tls/origination
+
+
+                - title: The Module Resource
+                  link: /topics/running/ambassador
                 - title: The Project Resource
                   link: /topics/using/projects
                   items:
@@ -218,76 +215,78 @@
                       link: /topics/using/project-authentication
                     - title: Customizing Deployment
                       link: /topics/using/project-customization
+            - title: Deploying Ambassador
+              items:
+                - title: Deployment Architecture
+                  link: /topics/running/ambassador-deployment
+                - title: The Ambassador Container
+                  link: /topics/running/environment
+                - title: Ambassador Edge Stack and Redis
+                  link: /topics/running/aes-redis
+                - title: Ambassador with AWS
+                  link: /topics/running/ambassador-with-aws
+                - title: Ambassador with GKE
+                  link: /topics/running/ambassador-with-gke
+                - title: Advanced Deployment Configuration
+                  link: /topics/running/running
+                - title: Performance and Scaling Ambassador
+                  link: /topics/running/scaling
+            - title: Edge Policy Management
+              items:
+                - title: Edge Policy Console
+                  link: /topics/using/edge-policy-console
+                - title: Rate Limit Speedometers
+                  link: /topics/using/rate-limit-speedometers
                 - title: Gateway API
                   link: /topics/using/gateway-api
-            - title: Running AES for SREs/Operations
-              link: /topics/running/
+            - title: Filters and Authentication
               items:
-                - title: Ambassador Edge Stack Extensions
-                  link: /topics/running/aes-extensions/
-                  items:
-                    - title: Ambassador Edge Stack Authentication Extension
-                      link: /topics/running/aes-extensions/authentication
-                    - title: Ambassador Edge Stack Rate Limiting Extension
-                      link: /topics/running/aes-extensions/ratelimit
-                - title: The Ambassador Module
-                  link: /topics/running/ambassador
-                - title: Custom Error Responses
-                  link: /topics/running/custom-error-responses
-                - title: Deploying Ambassador
-                  items:
-                    - title: Deployment Architecture
-                      link: /topics/running/ambassador-deployment
-                    - title: The Ambassador Container
-                      link: /topics/running/environment
-                    - title: Ambassador Edge Stack and Redis
-                      link: /topics/running/aes-redis
-                    - title: Ambassador with AWS
-                      link: /topics/running/ambassador-with-aws
-                    - title: Ambassador with GKE
-                      link: /topics/running/ambassador-with-gke
-                    - title: Advanced Deployment Configuration
-                      link: /topics/running/running
-                - title: Gzip Compression
-                  link: /topics/running/gzip
-                - title: Host CRD, ACME Support, and External Load Balancer Configuration
-                  link: /topics/running/host-crd
+                - title: Authentication Extension
+                  link: /topics/running/aes-extensions/authentication
+                - title: Filters and Filter Policies
+                  link: /topics/using/filters/
+                - title: OAuth2 Filter
+                  link: /topics/using/filters/oauth2
+                - title: JWT Filter
+                  link: /topics/using/filters/jwt
+                - title: External Filter
+                  link: /topics/using/filters/external
+                - title: Plugin Filter
+                  link: /topics/using/filters/plugin
+            - title: Ingress and Load Balancing
+              items:
                 - title: Ingress Controller
                   link: /topics/running/ingress-controller
-                - title: Load Balancing and Service Discovery
+                - title: Load Balancing
+                  link: /topics/running/load-balancer
+                - title: Service Discovery and Resolvers
+                  link: /topics/running/resolvers
+            - title: Plug-in Services
+              items:
+                - title: Authentication Service
+                  link: /topics/running/services/auth-service
+                - title: ExtAuth Protocol
+                  link: /topics/running/services/ext_authz
+                - title: Log Service
+                  link: /topics/running/services/log-service
+                - title: Rate Limit Service
+                  link: /topics/running/services/rate-limit-service
+                - title: Tracing Service
+                  link: /topics/running/services/tracing-service
+            - title: Traffic Management
+              items:
+                - title: Custom Error Responses
+                  link: /topics/running/custom-error-responses
+                - title: Gzip Compression
+                  link: /topics/running/gzip
+                - title: Rate Limiting
                   items:
-                    - title: Load Balancing
-                      link: /topics/running/load-balancer
-                    - title: Service Discovery and Resolvers
-                      link: /topics/running/resolvers
-
-                - title: Plug-in Services
-                  items:
-                    - title: Authentication Service
-                      link: /topics/running/services/auth-service
-                    - title: ExtAuth Protocol
-                      link: /topics/running/services/ext_authz
-                    - title: Log Service
-                      link: /topics/running/services/log-service
-                    - title: Rate Limit Service
-                      link: /topics/running/services/rate-limit-service
-                    - title: Tracing Service
-                      link: /topics/running/services/tracing-service
-                - title: TLS
-                  link: /topics/running/tls/
-                  items:
-                    - title: Simultaneously Routing HTTP and HTTPS
-                      link: /topics/running/tls/cleartext-redirection#cleartext-routing
-                    - title: HTTP -> HTTPS Redirection
-                      link: /topics/running/tls/cleartext-redirection#http---https-redirection
-                    - title: Mutual TLS (mTLS)
-                      link: /topics/running/tls/mtls
-                    - title: Server Name Indication (SNI)
-                      link: /topics/running/tls/sni
-                    - title: TLS Origination
-                      link: /topics/running/tls/origination
-                - title: Scaling Ambassador
-                  link: /topics/running/scaling
+                    - title: Rate Limiting Basics
+                      link: /topics/using/rate-limits/
+                    - title: Rate Limiting Reference
+                      link: /topics/using/rate-limits/rate-limits
+                    - title: Rate Limiting Extension
+                      link: /topics/running/aes-extensions/ratelimit
         - title: FAQs
           link: /about/faq
         - title: Community
@@ -309,6 +308,6 @@
                 - title: Using Edge Control in CI
                   link: /topics/using/edgectl/edge-control-in-ci
             - title: Technical Reference
-              link: /topics/using/edgectl/service-preview-reference    
+              link: /topics/using/edgectl/service-preview-reference
         - title: Developer Portal
           link: /topics/using/dev-portal
