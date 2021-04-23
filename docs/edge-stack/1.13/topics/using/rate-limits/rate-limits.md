@@ -1,4 +1,4 @@
-# Rate Limiting in the Ambassador Edge Stack
+# Rate Limiting Reference
 
 Rate limiting in the Ambassador Edge Stack is composed of two parts:
 
@@ -11,7 +11,7 @@ Rate limiting in the Ambassador Edge Stack is composed of two parts:
 
 
 > This page covers using `RateLimit` resources to configure Ambassador Edge 
-  Stack to rate limit requests. See the [Rate Limiting](../) page for
+  Stack to rate limit requests. See the [Basic Rate Limiting article](../) for
   information on adding labels to requests.
 
 

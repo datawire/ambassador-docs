@@ -1,4 +1,4 @@
-# Scaling Ambassador
+# Performance and Scaling Ambassador
 
 Scaling any cloud native application is inherently domain specific, however the content here
 reflects common issues, tips, and tricks that come up frequently.
