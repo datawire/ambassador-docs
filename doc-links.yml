@@ -139,7 +139,7 @@
                       link: /howtos/linkerd2
         - title: Technical Reference
           items:
-            - title: Amabssador Custom Resources
+            - title: Custom Resources
               items:
                 - title: The Mapping Resource
                   items:
@@ -215,52 +215,6 @@
                       link: /topics/using/project-authentication
                     - title: Customizing Deployment
                       link: /topics/using/project-customization
-            - title: Traffic Management
-              items:
-                - title: Rate Limiting
-                  link: /topics/using/rate-limits/
-                  items:
-                  - title: AES RateLimit Reference
-                    link: /topics/using/rate-limits/rate-limits
-                - title: Custom Error Responses
-                  link: /topics/running/custom-error-responses
-            - title: Ingress and Load Balancing
-              items:
-                - title: Ingress Controller
-                  link: /topics/running/ingress-controller
-                - title: Load Balancing
-                  link: /topics/running/load-balancer
-                - title: Service Discovery and Resolvers
-                  link: /topics/running/resolvers
-            - title: Filters and Authentication
-              items:
-                - title: Filters and Filter Policies
-                  link: /topics/using/filters/
-                - title: OAuth2 Filter
-                  link: /topics/using/filters/oauth2
-                - title: JWT Filter
-                  link: /topics/using/filters/jwt
-                - title: External Filter
-                  link: /topics/using/filters/external
-                - title: Plugin Filter
-                  link: /topics/using/filters/plugin
-            - title: Edge Policy Management
-              items:
-                - title: Edge Policy Console
-                  link: /topics/using/edge-policy-console
-                - title: Rate Limit Speedometers
-                  link: /topics/using/rate-limit-speedometers
-                - title: Gateway API
-                  link: /topics/using/gateway-api
-
-            - title: Extensions
-              link: /topics/running/aes-extensions/
-              items:
-                - title: Authentication Extension
-                  link: /topics/running/aes-extensions/authentication
-                - title: Rate Limiting Extension
-                  link: /topics/running/aes-extensions/ratelimit
-
             - title: Deploying Ambassador
               items:
                 - title: Deployment Architecture
@@ -275,9 +229,38 @@
                   link: /topics/running/ambassador-with-gke
                 - title: Advanced Deployment Configuration
                   link: /topics/running/running
-            - title: Gzip Compression
-              link: /topics/running/gzip
-
+                - title: Performance and Scaling Ambassador
+                  link: /topics/running/scaling
+            - title: Edge Policy Management
+              items:
+                - title: Edge Policy Console
+                  link: /topics/using/edge-policy-console
+                - title: Rate Limit Speedometers
+                  link: /topics/using/rate-limit-speedometers
+                - title: Gateway API
+                  link: /topics/using/gateway-api
+            - title: Filters and Authentication
+              items:
+                - title: Authentication Extension
+                  link: /topics/running/aes-extensions/authentication
+                - title: Filters and Filter Policies
+                  link: /topics/using/filters/
+                - title: OAuth2 Filter
+                  link: /topics/using/filters/oauth2
+                - title: JWT Filter
+                  link: /topics/using/filters/jwt
+                - title: External Filter
+                  link: /topics/using/filters/external
+                - title: Plugin Filter
+                  link: /topics/using/filters/plugin
+            - title: Ingress and Load Balancing
+              items:
+                - title: Ingress Controller
+                  link: /topics/running/ingress-controller
+                - title: Load Balancing
+                  link: /topics/running/load-balancer
+                - title: Service Discovery and Resolvers
+                  link: /topics/running/resolvers
             - title: Plug-in Services
               items:
                 - title: Authentication Service
@@ -290,9 +273,20 @@
                   link: /topics/running/services/rate-limit-service
                 - title: Tracing Service
                   link: /topics/running/services/tracing-service
-
-            - title: Scaling Ambassador
-              link: /topics/running/scaling
+            - title: Traffic Management
+              items:
+                - title: Custom Error Responses
+                  link: /topics/running/custom-error-responses
+                - title: Gzip Compression
+                  link: /topics/running/gzip
+                - title: Rate Limiting
+                  items:
+                    - title: Rate Limiting Basics
+                      link: /topics/using/rate-limits/
+                    - title: Rate Limiting Reference
+                      link: /topics/using/rate-limits/rate-limits
+                    - title: Rate Limiting Extension
+                      link: /topics/running/aes-extensions/ratelimit
         - title: FAQs
           link: /about/faq
         - title: Community
