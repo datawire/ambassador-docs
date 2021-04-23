@@ -138,25 +138,25 @@ You should now be able to access the web service via `https://www.example.com`.
 Create and apply a BackendConfig resource with a [custom health check](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#direct_health) specified:
 
 ```yaml
-apiversion: cloud.google.com/v1
-kind: backendconfig
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
 metadata:
   name: ambassador-hc-config
   namespace: ambassador
 spec:
   # https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features
-  timeoutsec: 30
-  connectiondraining:
-    drainingtimeoutsec: 30
+  timeoutSec: 30
+  connectionDraining:
+    drainingTimeoutSec: 30
   logging:
     enable: true
-    samplerate: 1.0
-  healthcheck:
-    checkintervalsec: 10
-    timeoutsec: 10
+    sampleRate: 1.0
+  healthCheck:
+    checkIntervalSec: 10
+    timeoutSec: 10
     port: 8877
-    type: http
-    requestpath: /ambassador/v0/check_alive
+    type: HTTP
+    requestPath: /ambassador/v0/check_alive
 ```
 
 Then edit your previous `ambassador.yaml` file to add an annotation referencing the BackendConfig and apply the file:
