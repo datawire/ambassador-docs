@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Annotate a Service
+# Annotate a service
 
 [Service Catalog](https://app.getambassador.io/cloud/catalog) lists all the services in your cluster, including helpful information like the owner, a description of the service, links to documentation, and more.
 
