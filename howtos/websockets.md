@@ -13,7 +13,7 @@ allow_upgrade:
 
 ## Example WebSocket Service
 
-The example configuration below demonstrates the addition of the `use_websocket` attribute.
+The example configuration below demonstrates the addition of the `allow_upgrade:` attribute to support websockets. The use of `use_websocket` is now deprecated.
 
 ```yaml
 ---
