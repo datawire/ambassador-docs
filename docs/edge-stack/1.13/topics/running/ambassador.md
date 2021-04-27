@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Global Configuration
 
 <div class="docs-article-toc">
@@ -51,8 +53,16 @@ ambassador_id: "<ambassador_id>"
 
 ##### Defaults
 
-The `defaults` element is a dictionary of default values that will be applied to various Ambassador resources. See [using defaults](../../using/defaults) for more information.
+The `defaults` element is a dictionary of default values that will be applied to various Ambassador resources. 
 
+See [using defaults](../../using/defaults) for more information.
+
+```yaml
+error_response_overrides:
+ - on_status_code: 404
+   body:
+     text_format: "File not found"
+```
 ---
 
 ## Envoy
@@ -66,7 +76,9 @@ envoy_validation_timeout: 30
 
 ##### Error response overrides
 
-Defines error response overrides for 4XX and 5XX response codes with `error_response_overrides`. By default, Ambassador will pass through error responses without modification, and errors generated locally will use Envoy's default response body, if any. See [this page](../custom-error-responses) for usage details.
+Defines error response overrides for 4XX and 5XX response codes with `error_response_overrides`. By default, Ambassador will pass through error responses without modification, and errors generated locally will use Envoy's default response body, if any. 
+
+See [using error response overrides](../custom-error-responses) for usage details.
 
 ##### Server name
 
@@ -78,21 +90,27 @@ server_name: envoy
 
 ##### Suppress Envoy headers
 
-If true, Ambassador will not emit certain additional headers to HTTP requests and responses. For the exact set of headers covered by this config, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#config-http-filters-router-headers-set)
+If true, Ambassador will not emit certain additional headers to HTTP requests and responses. 
+
+For the exact set of headers covered by this config, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#config-http-filters-router-headers-set)
 
 ```yaml
 suppress_envoy_headers: true
 ```
 
 ##### Set current client cert details
-Specify how to handle the `X-Forwarded-Client-Cert` header. See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto.html?highlight=xfcc#envoy-api-enum-config-filter-network-http-connection-manager-v2-httpconnectionmanager-forwardclientcertdetails) for more information.
+Specify how to handle the `X-Forwarded-Client-Cert` header. 
+
+See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto.html?highlight=xfcc#envoy-api-enum-config-filter-network-http-connection-manager-v2-httpconnectionmanager-forwardclientcertdetails) for more information.
 
 ```yaml
 set_current_client_cert_details: SANITIZE
 ```
 
 ##### Forward client cert details
-Add the `X-Forwarded-Client-Cert` header on upstream requests, which contains information about the TLS client certificate verified by Ambassador. See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto#envoy-api-msg-config-filter-network-http-connection-manager-v2-httpconnectionmanager-setcurrentclientcertdetails) for more information.
+Add the `X-Forwarded-Client-Cert` header on upstream requests, which contains information about the TLS client certificate verified by Ambassador. 
+
+See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto#envoy-api-msg-config-filter-network-http-connection-manager-v2-httpconnectionmanager-setcurrentclientcertdetails) for more information.
 
 ```yaml
 forward_client_cert_details: true
@@ -104,9 +122,11 @@ forward_client_cert_details: true
 
 `envoy_log_type` defines the type of log envoy will use, currently only support json or text.
 
-`envoy_log_format` defines the envoy log line format. See [this page](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/access_log) for a complete list of operators. | See [this page](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#default-format-string) for the standard log format.
+`envoy_log_format` defines the envoy log line format. 
 
-These logs can be formatted using Envoy [operators](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#command-operators) to display specific information about an incoming request. The example below will show only the protocol and duration of a request:
+See [this page](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/access_log) for a complete list of operators and [this page](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#default-format-string) for the standard log format.
+
+These logs can be formatted using [Envoy operators](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#command-operators) to display specific information about an incoming request. The example below will show only the protocol and duration of a request:
 
 ```
 envoy_log_path: /dev/fd/1
@@ -124,7 +144,9 @@ envoy_log_format:
 
 ##### Max request headers size
 
-Sets the maximum allowed request header size in kilobytes. If not set, the default value from Envoy of 60 KB will be used. See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto) for more information.
+Sets the maximum allowed request header size in kilobytes. If not set, the default value from Envoy of 60 KB will be used. 
+
+See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto) for more information.
 
 ```yaml
 max_request_headers_kb: None
@@ -161,13 +183,13 @@ add_linkerd_headers: false
 
 #### Header case
 
-Should we enable upper casing for response headers? For more information, see [the Envoy docs](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-http1protocoloptions-headerkeyformat).
+Enables upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”. 
+
+Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-http1protocoloptions-headerkeyformat)
 
 ```yaml
 proper_case: false
 ```
-
-To enable upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”. Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-http1protocoloptions-headerkeyformat)
 
 #### Overriding header case
 
@@ -191,21 +213,18 @@ This configuration is helpful when dealing with clients that are sensitive to sp
 
 ##### Cross origin resource sharing (CORS)
 
-`cors` sets the default CORS configuration for all mappings in the cluster. See the [CORS syntax](../../using/cors).
+Sets the default CORS configuration for all mappings in the cluster. See the [CORS syntax](../../using/cors).
 
-```
+```yaml
 cors:
   origins: http://foo.example,http://bar.example
   methods: POST, GET, OPTIONS
   ...
 ```
-##### `ip_allow` and `ip_deny`
 
+##### IP allow and deny
 
-| `ip_allow`       | Defines HTTP source IP address ranges to allow; all others will be denied. `ip_allow` and `ip_deny` may not both be specified. See below for more details. | None |
-| `ip_deny`        | Defines HTTP source IP address ranges to deny; all others will be allowed. `ip_allow` and `ip_deny` may not both be specified. See below for more details. | None |
-
-`ip_allow` specifies IP source ranges from which HTTP requests will be allowed, with all others being denied. `ip_deny` specifies IP source ranges from which HTTP requests will be denied, with all others being allowed. If both are present, it is an error: `ip_allow` will be honored and `ip_deny` will be ignored.
+Defines HTTP source IP address ranges to allow or deny.  Traffic not matching a range set to allow will be denied and vice versa. A list of ranges to allow and a separate list to deny may not both be specified.
 
 Both take a list of IP address ranges with a keyword specifying how to interpret the address, for example:
 
@@ -221,27 +240,43 @@ The keyword `remote` specifies that the match should happen using the IP address
 
 You may specify as many ranges for each kind of keyword as desired.
 
-#### Trust downstream client IP (`use_remote_address`)
+#### Trust downstream client IP
 
+Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header.
 
-| `use_remote_address` | Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header. | `use_remote_address: true` |
+```yaml
+use_remote_address: true
+```
 
-In Ambassador 0.50 and later, the default value for `use_remote_address` is set to `true`. When set to `true`, Ambassador Edge Stack will append to the `X-Forwarded-For` header its IP address so upstream clients of Ambassador Edge Stack can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  See the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
+In Ambassador 0.50 and later, the default value for `use_remote_address` is set to `true`. When set to `true`, Ambassador Edge Stack will append to the `X-Forwarded-For` header its IP address so upstream clients of Ambassador Edge Stack can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  
 
-  **Note well** that if you need to use `x_forwarded_proto_redirect`, you **must** set `use_remote_address` to `false`. Otherwise, unexpected behaviour can occur.
+See the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
 
+<Alert severity="warning">
+  If you need to use `x_forwarded_proto_redirect`, you **must** set `use_remote_address` to `false`. Otherwise, unexpected behavior can occur.
+</Alert>
 
-| `x_forwarded_proto_redirect` | Ambassador lets through only the HTTP requests with `X-FORWARDED-PROTO: https` header set, and redirects all the other requests to HTTPS if this field is set to true. Note that `use_remote_address` must be set to false for this feature to work as expected. | `x_forwarded_proto_redirect: false` |
+##### `x_forwarded_proto` redirect
 
-#### `X-Forwarded-For` trusted hops (`xff_num_trusted_hops`)
+Ambassador lets through only the HTTP requests with `X-FORWARDED-PROTO: https` header set, and redirects all the other requests to HTTPS if this field is set to true. Note that `use_remote_address` must be set to false for this feature to work as expected.
 
+```yaml
+x_forwarded_proto_redirect: false
+```
 
-| `xff_num_trusted_hops` | Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of Ambassador, Envoy will set the trusted client IP to the address of that proxy. To preserve the orginal client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`. Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_conn_man/headers#x-forwarded-for) for more information. | `xff_num_trusted_hops: 0` |
+##### `X-Forwarded-For` trusted hops
 
+Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of Ambassador, Envoy will set the trusted client IP to the address of that proxy. To preserve the original client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`. 
+
+Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_conn_man/headers#x-forwarded-for) for more information.
+
+```yaml
+xff_num_trusted_hops: 1
+```
 
 The value of `xff_num_trusted_hops` indicates the number of trusted proxies in front of Ambassador Edge Stack. The default setting is 0 which tells Envoy to use the immediate downstream connection's IP address as the trusted client address. The trusted client address is used to populate the `remote_address` field used for rate limiting and can affect which IP address Envoy will set as `X-Envoy-External-Address`.
 
-`xff_num_trusted_hops` behavior is determined by the value of `use_remote_address` (which defaults to `true` in Ambassador Edge Stack).
+`xff_num_trusted_hops` behavior is determined by the value of `use_remote_address` (which is `true` by default).
 
 * If `use_remote_address` is `false` and `xff_num_trusted_hops` is set to a value N that is greater than zero, the trusted client address is the (N+1)th address from the right end of XFF. (If the XFF contains fewer than N+1 addresses, Envoy falls back to using the immediate downstream connection’s source address as a trusted client address.)
 
@@ -249,7 +284,9 @@ The value of `xff_num_trusted_hops` indicates the number of trusted proxies in f
 
 Refer to [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html#x-forwarded-for) for some detailed examples of this interaction.
 
-**NOTE:** This value is not dynamically configurable in Envoy. A restart is required changing the value of `xff_num_trusted_hops` for Envoy to respect the change.
+<Alert severity="info">
+  This value is not dynamically configurable in Envoy. A restart is required changing the value of `xff_num_trusted_hops` for Envoy to respect the change.
+</Alert>
 
 ---
 
@@ -257,85 +294,66 @@ Refer to [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/con
 
 ##### Circuit breaking
 
-`circuit_breakers` sets the global circuit breaking configuration that Ambassador will use for all mappings, unless overridden in a mapping. More information at the [circuit breaking reference](../../using/circuit-breakers).
+Sets the global circuit breaking configuration that Ambassador will use for all mappings, unless overridden in a mapping. 
 
-```
+More information at the [circuit breaking reference](../../using/circuit-breakers).
+
+```yaml
 circuit_breakers
   max_connections: 2048
   ...
 ```
 
-| `default_label_domain  and default_labels` | Set a default domain and request labels to every request for use by rate limiting. For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups). | None |
+##### Default label domain and labels
+
+Set a default domain and request labels to every request for use by rate limiting. 
+
+For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups).
 
 ##### Load balancer
 
-`load_balancer` sets the global load balancing type and policy that Ambassador will use for all mappings unless overridden in a mapping. Defaults to round-robin with Kubernetes. More information at the [load balancer reference](../load-balancer).
+Sets the global load balancing type and policy that Ambassador will use for all mappings unless overridden in a mapping. Defaults to round-robin with Kubernetes. 
 
-```
+More information at the [load balancer reference](../load-balancer).
+
+```yaml
 load_balancer:
-  policy: round_robin/least_request/ring_hash/maglev
-  ...
+  policy: round_robin
 ```
 
 ---
 
 ## gRPC
 
-#### gRPC HTTP/1.1 bridge (`enable_grpc_http11_bridge`)
+#### gRPC HTTP/1.1 bridge 
 
+Enable the gRPC-http11 bridge
 
-Should we enable the gRPC-http11 bridge? | `enable_grpc_http11_bridge: false` |
+```yaml
+enable_grpc_http11_bridge: true
+```
 
-Ambassador supports bridging HTTP/1.1 clients to backend gRPC servers. When an HTTP/1.1 connection is opened and the request content type is `application/grpc`, Ambassador will buffer the response and translate into gRPC requests. For more details on the translation process, see the [Envoy gRPC HTTP/1.1 bridge documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_filters/grpc_http1_bridge_filter.html). This setting can be enabled by setting `enable_grpc_http11_bridge: true`.
+Ambassador supports bridging HTTP/1.1 clients to backend gRPC servers. When an HTTP/1.1 connection is opened and the request content type is `application/grpc`, Ambassador will buffer the response and translate into gRPC requests. 
 
-#### gRPC-Web (`enable_grpc_web`)
+For more details on the translation process, see the [Envoy gRPC HTTP/1.1 bridge documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_filters/grpc_http1_bridge_filter.html). This setting can be enabled by setting `enable_grpc_http11_bridge: true`.
 
+#### gRPC-Web
 
-Should we enable the grpc-Web protocol? | `enable_grpc_web: false` |
+Enable the gRPC-Web protocol? 
+
+```yaml
+enable_grpc_web: true
+```
 
 gRPC is a binary HTTP/2-based protocol. While this allows high performance, it is problematic for any programs that cannot speak raw HTTP/2 (such as JavaScript in a browser). gRPC-Web is a JSON and HTTP-based protocol that wraps around the plain gRPC to alleviate this problem and extend benefits of gRPC to the browser, at the cost of performance.
 
-The gRPC-Web specification requires a server-side proxy to translate between gRPC-Web requests and gRPC backend services. Ambassador can serve as the service-side proxy for gRPC-Web when `enable_grpc_web: true` is set. Find more on the gRPC Web client [GitHub](https://github.com/grpc/grpc-web).
+The gRPC-Web specification requires a server-side proxy to translate between gRPC-Web requests and gRPC backend services. Ambassador can serve as the service-side proxy for gRPC-Web when `enable_grpc_web: true` is set. 
 
-#### gRPC statistics (`grpc_stats`)
+Find more on the gRPC Web client [GitHub](https://github.com/grpc/grpc-web).
 
+#### gRPC statistics
 
-| `grpc_stats` | Enables telemetry of gRPC calls using the "gRPC Statistics" Envoy filter. see below for more details. |  |
-
-
-Use the Envoy filter to enable telemetry of gRPC calls. [gRPC Statistics Filter](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_stats_filter)
-
-Supported parameters:
-* `all_methods`
-* `services`
-* `upstream_stats`
-
-Available metrics:
-* `envoy_cluster_grpc_<service>_<status_code>`
-* `envoy_cluster_grpc_<service>_request_message_count`
-* `envoy_cluster_grpc_<service>_response_message_count`
-* `envoy_cluster_grpc_<service>_success`
-* `envoy_cluster_grpc_<service>_total`
-* `envoy_cluster_grpc_upstream_<stats>` - **only when `upstream_stats: true`**
-
-Please note that `<service>` will only be present if `all_methods` is set or the service and the method are present under `services`.
-If `all_methods` is false or the method is not on the list, the available metrics will be in the format
-`envoy_cluster_grpc_<stats>`.
-
-###### all_methods
-If set to true, emit stats for all service/method names.
-If set to false, emit stats for all service/message types to the same stats without including the service/method in the name.
-**This option is only safe if all clients are trusted. If this option is enabled with untrusted clients, the clients could cause unbounded growth in the number
-of stats in Envoy, using unbounded memory and potentially slowing down stats pipelines.**
-
-###### services
-If set, specifies an allowlist of service/methods that will have individual stats emitted for them. Any call that does not match the allowlist will be
-counted in a stat with no method specifier (generic metric).
-
-**If both `all_methods` and `services` are present, `all_methods` will be ignored.**
-
-###### upstream_stats
-If true, the filter will gather a histogram for the request time of the upstream.
+Enables telemetry of gRPC calls using Envoy's [gRPC Statistics Filter](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_stats_filter).
 
 ```yaml
 ---
@@ -351,6 +369,38 @@ spec:
         - name: <package>.<service>
           method_names: [<method>]
 ```
+
+Use the Envoy filter to enable telemetry of gRPC calls. 
+
+Supported parameters:
+* `all_methods`
+* `services`
+* `upstream_stats`
+
+Available metrics:
+* `envoy_cluster_grpc_<service>_<status_code>`
+* `envoy_cluster_grpc_<service>_request_message_count`
+* `envoy_cluster_grpc_<service>_response_message_count`
+* `envoy_cluster_grpc_<service>_success`
+* `envoy_cluster_grpc_<service>_total`
+* `envoy_cluster_grpc_upstream_<stats>` - **only when `upstream_stats: true`**
+
+Please note that `<service>` will only be present if `all_methods` is set or the service and the method are present under `services`. If `all_methods` is false or the method is not on the list, the available metrics will be in the format `envoy_cluster_grpc_<stats>`.
+
+`all_methods`: If set to true, emit stats for all service/method names.
+If set to false, emit stats for all service/message types to the same stats without including the service/method in the name.
+**This option is only safe if all clients are trusted. If this option is enabled with untrusted clients, the clients could cause unbounded growth in the number
+of stats in Envoy, using unbounded memory and potentially slowing down stats pipelines.**
+
+`services`: If set, specifies an allow list of service/methods that will have individual stats emitted for them. Any call that does not match the allow list will be counted in a stat with no method specifier (generic metric).
+
+<Alert severity="warning">
+  If both <code>all_methods</code> and <code>services</code> are present, <code>all_methods</code> will be ignored.
+</Alert>
+
+`upstream_stats`: If true, the filter will gather a histogram for the request time of the upstream.
+
+
 
 ---
 
