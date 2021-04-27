@@ -8,13 +8,13 @@
       items:
         - title: Service Catalog
           items:
-            - title: Quick Start
+            - title: Quick start
               link: /service-catalog/quick-start/
-            - title: How Do I...
+            - title: How do I...
               items:
-                - title: Annotate a Service
+                - title: Annotate a service
                   link: /service-catalog/howtos/annotate/
-            - title: Technical Reference
+            - title: Technical reference
               items:
                 - title: Annotations
                   link: /service-catalog/reference/annotations/
