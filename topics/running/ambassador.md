@@ -169,7 +169,7 @@ If true, Ambassador will strip the port from host/authority headers before proce
 strip_matching_host_port: true
 ```
 
-#### Linkerd interoperability
+##### Linkerd interoperability
 
 When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically; see the [Mapping](../../using/mappings) documentation for more details.
 
@@ -177,7 +177,7 @@ When using Linkerd, requests going to an upstream service need to include the `l
 add_linkerd_headers: false
 ```
 
-#### Header case
+##### Header case
 
 Enables upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”. 
 
@@ -187,7 +187,7 @@ Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest
 proper_case: false
 ```
 
-#### Overriding header case
+##### Overriding header case
 
 Array of header names whose casing should be forced, both when proxied to upstream services and when returned downstream to clients. For every header that matches (case insensitively) to an element in this array, the resulting header name is forced to the provided casing in the array. Cannot be used together with 'proper_case'. This feature provides overrides for Envoy's normal [header casing rules](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/header_casing). | `header_case_overrides: []` |
 
@@ -236,7 +236,7 @@ The keyword `remote` specifies that the match should happen using the IP address
 
 You may specify as many ranges for each kind of keyword as desired.
 
-#### Trust downstream client IP
+##### Trust downstream client IP
 
 Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header.
 
@@ -321,7 +321,7 @@ load_balancer:
 
 ## gRPC
 
-#### gRPC HTTP/1.1 bridge 
+##### gRPC HTTP/1.1 bridge 
 
 Enable the gRPC-http11 bridge
 
@@ -333,7 +333,7 @@ Ambassador supports bridging HTTP/1.1 clients to backend gRPC servers. When an H
 
 For more details on the translation process, see the [Envoy gRPC HTTP/1.1 bridge documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_filters/grpc_http1_bridge_filter.html). This setting can be enabled by setting `enable_grpc_http11_bridge: true`.
 
-#### gRPC-Web
+##### gRPC-Web
 
 Enable the gRPC-Web protocol? 
 
@@ -347,7 +347,7 @@ The gRPC-Web specification requires a server-side proxy to translate between gRP
 
 Find more on the gRPC Web client [GitHub](https://github.com/grpc/grpc-web).
 
-#### gRPC statistics
+##### gRPC statistics
 
 Enables telemetry of gRPC calls using Envoy's [gRPC Statistics Filter](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/grpc_stats_filter).
 
@@ -404,58 +404,81 @@ of stats in Envoy, using unbounded memory and potentially slowing down stats pip
 
 ##### Keepalive
 
-`keepalive` sets the global keepalive settings. Ambassador will use for all mappings unless overridden in a mapping. No default value is provided by Ambassador. More information at https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/address.proto#envoy-api-msg-core-tcpkeepalive.
+Sets the global keepalive settings. Ambassador will use for all Mappings unless overridden on a Mapping's configuration. No default value is provided by Ambassador. 
 
-```
+More information at the [Envoy keepalive documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/address.proto#envoy-api-msg-core-tcpkeepalive).
+
+```yaml
 keepalive:
   time: 2
   interval: 2
   probes: 100
-...
 ```
 
-#### Upstream idle timeout (`cluster_idle_timeout_ms`)
+##### Upstream idle timeout
 
+Set the default upstream-connection idle timeout. Default is 1 hour.
 
-Set the default upstream-connection idle timeout. Default is 1 hour. | `cluster_idle_timeout_ms: 30000`
+```yaml
+cluster_idle_timeout_ms: 30000
+```
 
-If set, `cluster_idle_timeout_ms` specifies the timeout (in milliseconds) after which an idle connection upstream is closed. If `cluster_idle_timeout` is disabled by setting it to 0, you risk upstream connections never getting closed due to idling if you do not set [`idle_timeout_ms` on each `Mapping`](../../using/timeouts/).
+If set, this specifies the timeout (in milliseconds) after which an idle connection upstream is closed. If disabled by setting it to 0, you risk upstream connections never getting closed due to idling if you do not set [`idle_timeout_ms` on each `Mapping`](../../using/timeouts/).
 
-#### Upstream max lifetime (`cluster_max_connection_lifetime_ms`)
+##### Upstream max lifetime
 
+Set the default maximum upstream-connection lifetime. Default is 0 which means unlimited.
 
-Set the default maximum upstream-connection lifetime. Default is 0 which means unlimited. | `cluster_max_connection_lifetime_ms: 0` |
+```yaml
+cluster_max_connection_lifetime_ms: 10000ms
+```
 
-If set, `cluster_max_connection_lifetime_ms` specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
+If set, this specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
 
-If `cluster_max_connection_lifetime_ms` is not set (or set to zero), then upstream connections may remain open for arbitrarily long. This can be set on a per-Mapping basis by setting [`cluster_max_connection_lifetime_ms` on the `Mapping`](../../using/timeouts/).
+If not set (or set to zero), then upstream connections may remain open for arbitrarily long. This can be set on a per-Mapping basis by setting [`cluster_max_connection_lifetime_ms` on the `Mapping`](../../using/timeouts/).
 
-#### Request timeout (`cluster_request_timeout_ms`)
+##### Request timeout
 
+Set the default end-to-end timeout for requests. Default is 3000ms.
 
-Set the default end-to-end timeout for requests. Default is 3000ms.  | `cluster_request_timeout_ms: 3000`
+```yaml
+cluster_request_timeout_ms: 3000ms`
+```
 
-If set, `cluster_request_timeout_ms` specifies the default end-to-end timeout for the requests. This can be set on a per-Mapping basis by setting [`timeout_ms` on the `Mapping`](../../using/timeouts/).
+If set, this specifies the default end-to-end timeout for the requests. This can be set on a per-Mapping basis by setting [`timeout_ms` on the `Mapping`](../../using/timeouts/).
 
 ##### Retry policy
 
-`retry_policy` lets you add resilience to your services in case of request failures by performing automatic retries.
+This lets you add resilience to your services in case of request failures by performing automatic retries.
 
 ```
 retry_policy:
   retry_on: "5xx"
-  ...
 ```
-#### Listener idle timeout (`listener_idle_timeout_ms`)
+##### Listener idle timeout
 
+Controls how Envoy configures the tcp idle timeout on the http listener. Default is 1 hour.
 
-| `listener_idle_timeout_ms` | Controls how Envoy configures the tcp idle timeout on the http listener. Default is 1 hour. | `listener_idle_timeout_ms: 30000` |
+```yaml
+listener_idle_timeout_ms: 3600s
+```
 
-Controls how Envoy configures the tcp idle timeout on the http listener. Default is no timeout (TCP connection may remain idle indefinitely). This is useful if you have proxies and/or firewalls in front of Ambassador and need to control how Ambassador initiates closing an idle TCP connection. Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.12.2/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-httpprotocoloptions) for more information.
+Controls how Envoy configures the TCP idle timeout on the HTTP listener. Default is no timeout (TCP connection may remain idle indefinitely). This is useful if you have proxies and/or firewalls in front of Ambassador and need to control how Ambassador initiates closing an idle TCP connection. 
 
-#### Readiness and liveness probes (`readiness_probe` and `liveness_probe`)
+Please see the [Envoy documentation on HTTP protocol options](https://www.envoyproxy.io/docs/envoy/v1.12.2/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-httpprotocoloptions) for more information.
 
-The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself. If you'd like to, you can change these to route requests to some other service. For example, to have the readiness probe map to the quote application's health check, you could do
+##### Readiness and liveness probes
+
+The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself. 
+
+```yaml
+readiness_probe:
+  enabled: true
+liveness:
+  enabled: true
+```
+
+You can change these to route requests to some other service. For example, to have the readiness probe map to the `quote` application's health check:
 
 ```yaml
 readiness_probe:
@@ -470,50 +493,53 @@ The liveness and readiness probes both support `prefix`, `rewrite`, and Module, 
 
 ## Protocols
 
-#### HTTP/1.0 support (`enable_http10`)
+##### HTTP/1.0 support (`enable_http10`)
 
+Enable or disable the handling of incoming HTTP/1.0 and HTTP 0.9 requests.
 
-| `enable_http10` | Should we enable http/1.0 protocol? | `enable_http10: false` |
+```yaml
+enable_http10: true
+```
 
-Enable/disable the handling of incoming HTTP/1.0 and HTTP 0.9 requests.
+##### Enable IPv4 and IPv6
 
-#### `enable_ivp4` and `enable_ipv6`
+Should we do IPv4/IPv6 DNS lookups when contacting services? Defaults to true, but can be overridden in a [`Mapping`](../../using/mappings). 
 
-
-| `enable_ipv4`| Should we do IPv4 DNS lookups when contacting services? Defaults to true, but can be overridden in a [`Mapping`](../../using/mappings). | `enable_ipv4: true` |
-| `enable_ipv6` | Should we do IPv6 DNS lookups when contacting services? Defaults to false, but can be overridden in a [`Mapping`](../../using/mappings). | `enable_ipv6: false` |
+```yaml
+enable_ipv4: true
+enable_ipv6: false
+```
 
 If both IPv4 and IPv6 are enabled, Ambassador Edge Stack will prefer IPv6. This can have strange effects if Ambassador Edge Stack receives `AAAA` records from a DNS lookup, but the underlying network of the pod doesn't actually support IPv6 traffic. For this reason, the default is IPv4 only.
 
-A `Mapping` can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in a `Mapping`, the values here are used. Most Ambassador Edge Stack installations will probably be able to avoid overriding these settings in `Mapping`s.
+A Mapping can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in a Mapping, the values here are used. Most Ambassador Edge Stack installations will probably be able to avoid overriding these settings in Mappings.
 
-#### Allow proxy protocol (`use_proxy_proto`)
+##### Allow proxy protocol 
 
+Controls whether Envoy will honor the PROXY protocol on incoming requests.  Many load balancers can use the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to convey information about the connection they are proxying.
 
-| `use_proxy_proto` | Controls whether Envoy will honor the PROXY protocol on incoming requests. | `use_proxy_proto: false` |
+```yaml
+use_proxy_proto: false
+```
 
-Many load balancers can use the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to convey information about the connection they are proxying. In order to support this in Ambassador Edge Stack, you'll need to set `use_proxy_protocol` to `true`; this is not the default since the PROXY protocol is not compatible with HTTP.
+The default is `false` since the PROXY protocol is not compatible with HTTP.
 
 ---
 
 ## Observability
 
-| `statsd` | Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd). | None |
+##### StatsD
 
-#### Diagnostics (`diagnostics`)
+Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd). | None |
 
+##### Diagnostics
 
-Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  See below for more details. | None |
+Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  
 
 - Both the API Gateway and the Edge Stack provide low-level diagnostics at `/ambassador/v0/diag/`.
 - The Ambassador Edge Stack also provides the higher-level Edge Policy Console at `/edge_stack/admin/`.
 
-By default, both services are enabled:
-
-```
-diagnostics:
-  enabled: true
-```
+By default, both services are enabled.
 
 Setting `diagnostics.enabled` to `false` will disable the routes for both services:
 
@@ -522,27 +548,17 @@ diagnostics:
   enabled: false
 ```
 
-With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and are reachable from inside the Ambassador pod on localhost port 8877. You can use Kubernetes port forwarding to set up remote access temporarily:
+With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and are reachable from inside the Ambassador Pod at `https://localhost:8877`. You can use Kubernetes port forwarding to set up remote access temporarily:
 
 ```
 kubectl port-forward -n ambassador deploy/ambassador 8877
 ```
 
-Alternately, you can expose the diagnostics page but control them via `Host` based routing: set `diagnostics.enabled` to false and create mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), using `localhost:8877` as the `service` of the `Mapping`.
+Alternately, you can expose the diagnostics page but control them via `Host` based routing. Set `diagnostics.enabled` to false and create Mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), using `localhost:8877` as the `service` of the `Mapping`.
 
-You can also allow connections from anywhere in your cluster on port 8877 with `diagnostics.allow_non_local`:
+##### Diagnostics - allow non local
 
-```
-diagnostics:
-  enabled: false
-  allow_non_local: true
-```
-
-Note that this will bypass Ambassador's security checks, and _any_ pod in your cluster will be able to reach the diagnostics services.
-
-#### Diagnostics - allow non local
-
-Whether or not to allow connections to the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints from the entire cluster.
+Whether or not to allow connections to the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints from any Pod in the entire cluster.
 
 ```
 diagnostics:
@@ -555,12 +571,9 @@ diagnostics:
 
 ## Misc
 
-##### Lua scripts (`lua_scripts`)
+##### Lua scripts
 
-
-| `lua_scripts` | Run a custom lua script on every request. see below for more details. | None |
-
-Ambassador Edge Stack supports the ability to inline Lua scripts that get run on every request. This is useful for simple use cases that mutate requests or responses, e.g., add a custom header. Here is a sample:
+Run a custom Lua script on every request. This is useful for simple use cases that mutate requests or responses, for example to add a custom header.
 
 ```yaml
 lua_scripts: |
@@ -574,39 +587,36 @@ For more details on the Lua API, see the [Envoy Lua filter documentation](https:
 **Some caveats around the embedded scripts:**
 
 * They run in-process, so any bugs in your Lua script can break every request
-* They're inlined in the Ambassador Edge Stack YAML, so you likely won't want to write complex logic in here
+* They're inlined in the Ambassador Edge Stack YAML, so it is recommended to not write complex logic in here
 * They're run on every request/response to every URL
 
 If you need more flexible and configurable options, Ambassador Edge Stack supports a [pluggable Filter system](../../using/filters/).
 
+##### Use Ambassador namespace for service resolution
 
-#### `use_ambassador_namespace_for_service_resolution`
+Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them  For example, a Mapping in namespace `foo` will look for its service in namespace `foo`. If `true`, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace.
 
-Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them, e.g. a Mapping in namespace `foo` will look for its service in namespace `foo`. If `true`, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace. | `use_ambassador_namespace_for_service_resolution: false` |
+```yaml
+use_ambassador_namespace_for_service_resolution: false
+```
 
-#### Regular expressions (`regex_type`)
+##### Regular expressions
 
-| `regex_type` | (deprecated) Set which regular expression engine to use. See the "Regular Expressions" section below. | `regex_type: safe` |
-
-| `regex_max_size` | (deprecated) This field controls the RE2 "program size" which is a rough estimate of how complex a compiled regex is to evaluate. A regex that has a program size greater than the configured value will fail to compile.    | `regex_max_size: 200` |
+**These features are deprecated.**
 
 If `regex_type` is unset (the default), or is set to any value other than `unsafe`, Ambassador Edge Stack will use the [RE2](https://github.com/google/re2/wiki/Syntax) regular expression engine. This engine is designed to support most regular expressions, but keep bounds on execution time. **RE2 is the recommended regular expression engine.**
 
-If `regex_type` is set to `unsafe`, Ambassador Edge Stack will use the [modified ECMAScript](https://en.cppreference.com/w/cpp/regex/ecmascript) regular expression engine. **This feature is deprecated**. Please migrate your regular expressions to be compatible with RE2.
+If `regex_type` is set to `unsafe`, Ambassador Edge Stack will use the [modified ECMAScript](https://en.cppreference.com/w/cpp/regex/ecmascript) regular expression engine. Please migrate your regular expressions to be compatible with RE2.
 
-#### Overriding default ports (`service_port`)
+##### Overriding default ports
 
-| `service_port` | If present, service_port will be the port Ambassador listens on for microservice access. If not present, Ambassador will use 8443 if TLS is configured, 8080 otherwise. | `service_port: 8080` |
-
-By default, Ambassador Edge Stack listens for HTTP or HTTPS traffic on ports 8080 or 8443 respectively. This value can be overridden by setting the `service_port` in the Ambassador Module:
+If present, this sets the port Ambassador listens on for microservice access. If not present, Ambassador will use 8443 if TLS is enabled and 8080 if it is not.
 
 ```yaml
-service_port: 4567
+service_port: 1138
 ```
 
-This will configure Ambassador Edge Stack to listen for traffic on port 4567 instead of 8080.
-
-#### Envoy's admin port (`admin_port`)
+##### Envoy's admin port
 
 The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this.
 
