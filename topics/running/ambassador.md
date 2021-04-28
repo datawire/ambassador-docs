@@ -5,16 +5,17 @@ import Alert from '@material-ui/lab/Alert';
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [General](#general)
 * [Envoy](#envoy)
-* [Header behavior](#header-behavior)
-* [Security](#security)
-* [Traffic management](#traffic_management)
+* [General](#general)
 * [gRPC](#grpc)
-* [Service health / timeouts](#service-health--timeouts)
-* [Protocols](#protocols)
-* [Observability](#observability)
+* [Header behavior](#header-behavior)
 * [Misc](#misc)
+* [Observability](#observability)
+* [Protocols](#protocols)
+* [Security](#security)
+* [Service health / timeouts](#service-health--timeouts)
+* [Traffic management](#traffic_management)
+
 
 </div>
 
@@ -36,30 +37,6 @@ spec:
 ```
 
 There are many config field items that can be configured on the Module, they are listed below with examples and grouped by category.
-
-
-## General
-
-##### Ambassador ID (`ambassador_id`)
-Use only if you are using multiple ambassadors in the same cluster. See [this page](../running/#ambassador_id) for more information.
-
-```yaml
-ambassador_id: "<ambassador_id>"
-```
-
-##### Defaults
-
-The `defaults` element is a dictionary of default values that will be applied to various Ambassador resources. 
-
-See [using defaults](../../using/defaults) for more information.
-
-```yaml
-error_response_overrides:
- - on_status_code: 404
-   body:
-     text_format: "File not found"
-```
----
 
 ## Envoy
 
@@ -135,187 +112,28 @@ envoy_log_format:
 ```
 
 ---
+## General
 
-## Header behavior
-
-##### Max request headers size
-
-Sets the maximum allowed request header size in kilobytes. If not set, the default value from Envoy of 60 KB will be used. 
-
-See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto) for more information.
+##### Ambassador ID (`ambassador_id`)
+Use only if you are using multiple ambassadors in the same cluster. See [this page](../running/#ambassador_id) for more information.
 
 ```yaml
-max_request_headers_kb: None
+ambassador_id: "<ambassador_id>"
 ```
 
-##### Preserve external request ID
-Controls whether to override the `X-REQUEST-ID` header or keep it as it is coming from incoming request. The default value is false.
+##### Defaults
+
+The `defaults` element is a dictionary of default values that will be applied to various Ambassador resources. 
+
+See [using defaults](../../using/defaults) for more information.
 
 ```yaml
-preserve_external_request_id: true
+error_response_overrides:
+ - on_status_code: 404
+   body:
+     text_format: "File not found"
 ```
-
-##### Prune unreachable routes
-If true, routes with `:authority` matches will be removed from consideration for `Host`s that don't match the `:authority` header. The default is false.
-
-```yaml
-prune_unreachable_routes: false
-```
-
-##### Strip matching host port
-If true, Ambassador will strip the port from host/authority headers before processing and routing the request. This only applies if the port matches the underlying Envoy listener port.
-
-```yaml
-strip_matching_host_port: true
-```
-
-##### Linkerd interoperability
-
-When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically; see the [Mapping](../../using/mappings) documentation for more details.
-
-```yaml
-add_linkerd_headers: false
-```
-
-##### Header case
-
-Enables upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”. 
-
-Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-http1protocoloptions-headerkeyformat)
-
-```yaml
-proper_case: false
-```
-
-##### Overriding header case
-
-Array of header names whose casing should be forced, both when proxied to upstream services and when returned downstream to clients. For every header that matches (case insensitively) to an element in this array, the resulting header name is forced to the provided casing in the array. Cannot be used together with 'proper_case'. This feature provides overrides for Envoy's normal [header casing rules](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/header_casing). | `header_case_overrides: []` |
-
-Enables overriding the case of response headers returned by Ambassador. The `header_case_overrides` field is an array of header names. When Ambassador handles response headers that match any of these headers, matched case-insensitively, they will be rewritten to use their respective case-sensitive names. For example, the following configuration will force response headers that match `X-MY-Header` and `X-EXPERIMENTAL` to use that exact casing, regardless of the original case in the upstream response.
-
-```yaml
-header_case_overrides:
-- X-MY-Header
-- X-EXPERIMENTAL
-```
-
-If the upstream service responds with `x-my-header: 1`, Ambasasdor will return `X-MY-Header: 1` to the client. Similarly, if the upstream service responds with `X-Experimental: 1`, Ambasasdor will return `X-EXPERIMENTAL: 1` to the client. Finally, if the upstream service responds with a header for which there is no header case override, Ambassador will return the default, lowercase header.
-
-This configuration is helpful when dealing with clients that are sensitive to specific HTTP header casing. In general, this configuration should be avoided, if possible, in favor of updating clients to work correctly with HTTP headers in a case-insensitive way.
-
 ---
-
-## Security
-
-##### Cross origin resource sharing (CORS)
-
-Sets the default CORS configuration for all mappings in the cluster. See the [CORS syntax](../../using/cors).
-
-```yaml
-cors:
-  origins: http://foo.example,http://bar.example
-  methods: POST, GET, OPTIONS
-  ...
-```
-
-##### IP allow and deny
-
-Defines HTTP source IP address ranges to allow or deny.  Traffic not matching a range set to allow will be denied and vice versa. A list of ranges to allow and a separate list to deny may not both be specified.
-
-Both take a list of IP address ranges with a keyword specifying how to interpret the address, for example:
-
-```yaml
-ip_allow:
-- peer: 127.0.0.1
-- remote: 99.99.0.0/16
-```
-
-The keyword `peer` specifies that the match should happen using the IP address of the other end of the network connection carrying the request: `X-Forwarded-For` and the `PROXY` protocol are both ignored. Here, our example specifies that connections originating from the Ambassador pod itself should always be allowed.
-
-The keyword `remote` specifies that the match should happen using the IP address of the HTTP client, taking into account `X-Forwarded-For` and the `PROXY` protocol if they are allowed (if they are not allowed, or not present, the peer address will be used instead). This permits matches to behave correctly when, for example, Ambassador is behind a layer 7 load balancer. Here, our example specifies that HTTP clients from the IP address range `99.99.0.0` - `99.99.255.255` will be allowed.
-
-You may specify as many ranges for each kind of keyword as desired.
-
-##### Trust downstream client IP
-
-Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header.
-
-```yaml
-use_remote_address: true
-```
-
-In Ambassador 0.50 and later, the default value for `use_remote_address` is set to `true`. When set to `true`, Ambassador Edge Stack will append to the `X-Forwarded-For` header its IP address so upstream clients of Ambassador Edge Stack can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  
-
-See the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
-
-<Alert severity="warning">
-  If you need to use `x_forwarded_proto_redirect`, you **must** set `use_remote_address` to `false`. Otherwise, unexpected behavior can occur.
-</Alert>
-
-##### `x_forwarded_proto` redirect
-
-Ambassador lets through only the HTTP requests with `X-FORWARDED-PROTO: https` header set, and redirects all the other requests to HTTPS if this field is set to true. Note that `use_remote_address` must be set to false for this feature to work as expected.
-
-```yaml
-x_forwarded_proto_redirect: false
-```
-
-##### `X-Forwarded-For` trusted hops
-
-Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of Ambassador, Envoy will set the trusted client IP to the address of that proxy. To preserve the original client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`. 
-
-Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_conn_man/headers#x-forwarded-for) for more information.
-
-```yaml
-xff_num_trusted_hops: 1
-```
-
-The value of `xff_num_trusted_hops` indicates the number of trusted proxies in front of Ambassador Edge Stack. The default setting is 0 which tells Envoy to use the immediate downstream connection's IP address as the trusted client address. The trusted client address is used to populate the `remote_address` field used for rate limiting and can affect which IP address Envoy will set as `X-Envoy-External-Address`.
-
-`xff_num_trusted_hops` behavior is determined by the value of `use_remote_address` (which is `true` by default).
-
-* If `use_remote_address` is `false` and `xff_num_trusted_hops` is set to a value N that is greater than zero, the trusted client address is the (N+1)th address from the right end of XFF. (If the XFF contains fewer than N+1 addresses, Envoy falls back to using the immediate downstream connection’s source address as a trusted client address.)
-
-* If `use_remote_address` is `true` and `xff_num_trusted_hops` is set to a value N that is greater than zero, the trusted client address is the Nth address from the right end of XFF. (If the XFF contains fewer than N addresses, Envoy falls back to using the immediate downstream connection’s source address as a trusted client address.)
-
-Refer to [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html#x-forwarded-for) for some detailed examples of this interaction.
-
-<Alert severity="info">
-  This value is not dynamically configurable in Envoy. A restart is required changing the value of `xff_num_trusted_hops` for Envoy to respect the change.
-</Alert>
-
----
-
-## Traffic management
-
-##### Circuit breaking
-
-Sets the global circuit breaking configuration that Ambassador will use for all mappings, unless overridden in a mapping. 
-
-More information at the [circuit breaking reference](../../using/circuit-breakers).
-
-```yaml
-circuit_breakers
-  max_connections: 2048
-  ...
-```
-
-##### Default label domain and labels
-
-Set a default domain and request labels to every request for use by rate limiting. 
-
-For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups).
-
-##### Load balancer
-
-Sets the global load balancing type and policy that Ambassador will use for all mappings unless overridden in a mapping. Defaults to round-robin with Kubernetes. 
-
-More information at the [load balancer reference](../load-balancer).
-
-```yaml
-load_balancer:
-  policy: round_robin
-```
 
 ---
 
@@ -396,7 +214,286 @@ of stats in Envoy, using unbounded memory and potentially slowing down stats pip
 
 `upstream_stats`: If true, the filter will gather a histogram for the request time of the upstream.
 
+---
 
+## Header behavior
+
+##### Max request headers size
+
+Sets the maximum allowed request header size in kilobytes. If not set, the default value from Envoy of 60 KB will be used. 
+
+See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto) for more information.
+
+```yaml
+max_request_headers_kb: None
+```
+
+##### Preserve external request ID
+Controls whether to override the `X-REQUEST-ID` header or keep it as it is coming from incoming request. The default value is false.
+
+```yaml
+preserve_external_request_id: true
+```
+
+##### Prune unreachable routes
+If true, routes with `:authority` matches will be removed from consideration for `Host`s that don't match the `:authority` header. The default is false.
+
+```yaml
+prune_unreachable_routes: false
+```
+
+##### Strip matching host port
+If true, Ambassador will strip the port from host/authority headers before processing and routing the request. This only applies if the port matches the underlying Envoy listener port.
+
+```yaml
+strip_matching_host_port: true
+```
+
+##### Linkerd interoperability
+
+When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically; see the [Mapping](../../using/mappings) documentation for more details.
+
+```yaml
+add_linkerd_headers: false
+```
+
+##### Header case
+
+Enables upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”. 
+
+Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-http1protocoloptions-headerkeyformat)
+
+```yaml
+proper_case: false
+```
+
+##### Overriding header case
+
+Array of header names whose casing should be forced, both when proxied to upstream services and when returned downstream to clients. For every header that matches (case insensitively) to an element in this array, the resulting header name is forced to the provided casing in the array. Cannot be used together with 'proper_case'. This feature provides overrides for Envoy's normal [header casing rules](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/header_casing). | `header_case_overrides: []` |
+
+Enables overriding the case of response headers returned by Ambassador. The `header_case_overrides` field is an array of header names. When Ambassador handles response headers that match any of these headers, matched case-insensitively, they will be rewritten to use their respective case-sensitive names. For example, the following configuration will force response headers that match `X-MY-Header` and `X-EXPERIMENTAL` to use that exact casing, regardless of the original case in the upstream response.
+
+```yaml
+header_case_overrides:
+- X-MY-Header
+- X-EXPERIMENTAL
+```
+
+If the upstream service responds with `x-my-header: 1`, Ambasasdor will return `X-MY-Header: 1` to the client. Similarly, if the upstream service responds with `X-Experimental: 1`, Ambasasdor will return `X-EXPERIMENTAL: 1` to the client. Finally, if the upstream service responds with a header for which there is no header case override, Ambassador will return the default, lowercase header.
+
+This configuration is helpful when dealing with clients that are sensitive to specific HTTP header casing. In general, this configuration should be avoided, if possible, in favor of updating clients to work correctly with HTTP headers in a case-insensitive way.
+
+---
+
+## Misc
+
+##### Lua scripts
+
+Run a custom Lua script on every request. This is useful for simple use cases that mutate requests or responses, for example to add a custom header.
+
+```yaml
+lua_scripts: |
+  function envoy_on_response(response_handle)
+    response_handle:headers():add("Lua-Scripts-Enabled", "Processed")
+  end
+```
+
+For more details on the Lua API, see the [Envoy Lua filter documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/lua_filter.html).
+
+**Some caveats around the embedded scripts:**
+
+* They run in-process, so any bugs in your Lua script can break every request
+* They're inlined in the Ambassador Edge Stack YAML, so it is recommended to not write complex logic in here
+* They're run on every request/response to every URL
+
+If you need more flexible and configurable options, Ambassador Edge Stack supports a [pluggable Filter system](../../using/filters/).
+
+##### Use Ambassador namespace for service resolution
+
+Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them  For example, a Mapping in namespace `foo` will look for its service in namespace `foo`. If `true`, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace.
+
+```yaml
+use_ambassador_namespace_for_service_resolution: false
+```
+
+##### Regular expressions
+
+**These features are deprecated.**
+
+If `regex_type` is unset (the default), or is set to any value other than `unsafe`, Ambassador Edge Stack will use the [RE2](https://github.com/google/re2/wiki/Syntax) regular expression engine. This engine is designed to support most regular expressions, but keep bounds on execution time. **RE2 is the recommended regular expression engine.**
+
+If `regex_type` is set to `unsafe`, Ambassador Edge Stack will use the [modified ECMAScript](https://en.cppreference.com/w/cpp/regex/ecmascript) regular expression engine. Please migrate your regular expressions to be compatible with RE2.
+
+##### Overriding default ports
+
+If present, this sets the port Ambassador listens on for microservice access. If not present, Ambassador will use 8443 if TLS is enabled and 8080 if it is not.
+
+```yaml
+service_port: 1138
+```
+
+##### Envoy's admin port
+
+The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this.
+
+```yaml
+admin_port: 8001
+```
+---
+
+## Observability
+
+##### StatsD
+
+Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd). | None |
+
+##### Diagnostics
+
+Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  
+
+- Both the API Gateway and the Edge Stack provide low-level diagnostics at `/ambassador/v0/diag/`.
+- The Ambassador Edge Stack also provides the higher-level Edge Policy Console at `/edge_stack/admin/`.
+
+By default, both services are enabled.
+
+Setting `diagnostics.enabled` to `false` will disable the routes for both services:
+
+```
+diagnostics:
+  enabled: false
+```
+
+With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and are reachable from inside the Ambassador Pod at `https://localhost:8877`. You can use Kubernetes port forwarding to set up remote access temporarily:
+
+```
+kubectl port-forward -n ambassador deploy/ambassador 8877
+```
+
+Alternately, you can expose the diagnostics page but control them via `Host` based routing. Set `diagnostics.enabled` to false and create Mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), using `localhost:8877` as the `service` of the `Mapping`.
+
+##### Diagnostics - allow non local
+
+Whether or not to allow connections to the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints from any Pod in the entire cluster.
+
+```
+diagnostics:
+  allow_non_local: true
+```
+
+
+---
+## Protocols
+
+##### HTTP/1.0 support (`enable_http10`)
+
+Enable or disable the handling of incoming HTTP/1.0 and HTTP 0.9 requests.
+
+```yaml
+enable_http10: true
+```
+
+##### Enable IPv4 and IPv6
+
+Should we do IPv4/IPv6 DNS lookups when contacting services? Defaults to true, but can be overridden in a [`Mapping`](../../using/mappings). 
+
+```yaml
+enable_ipv4: true
+enable_ipv6: false
+```
+
+If both IPv4 and IPv6 are enabled, Ambassador Edge Stack will prefer IPv6. This can have strange effects if Ambassador Edge Stack receives `AAAA` records from a DNS lookup, but the underlying network of the pod doesn't actually support IPv6 traffic. For this reason, the default is IPv4 only.
+
+A Mapping can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in a Mapping, the values here are used. Most Ambassador Edge Stack installations will probably be able to avoid overriding these settings in Mappings.
+
+##### Allow proxy protocol 
+
+Controls whether Envoy will honor the PROXY protocol on incoming requests.  Many load balancers can use the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to convey information about the connection they are proxying.
+
+```yaml
+use_proxy_proto: false
+```
+
+The default is `false` since the PROXY protocol is not compatible with HTTP.
+
+---
+## Security
+
+##### Cross origin resource sharing (CORS)
+
+Sets the default CORS configuration for all mappings in the cluster. See the [CORS syntax](../../using/cors).
+
+```yaml
+cors:
+  origins: http://foo.example,http://bar.example
+  methods: POST, GET, OPTIONS
+  ...
+```
+
+##### IP allow and deny
+
+Defines HTTP source IP address ranges to allow or deny.  Traffic not matching a range set to allow will be denied and vice versa. A list of ranges to allow and a separate list to deny may not both be specified.
+
+Both take a list of IP address ranges with a keyword specifying how to interpret the address, for example:
+
+```yaml
+ip_allow:
+- peer: 127.0.0.1
+- remote: 99.99.0.0/16
+```
+
+The keyword `peer` specifies that the match should happen using the IP address of the other end of the network connection carrying the request: `X-Forwarded-For` and the `PROXY` protocol are both ignored. Here, our example specifies that connections originating from the Ambassador pod itself should always be allowed.
+
+The keyword `remote` specifies that the match should happen using the IP address of the HTTP client, taking into account `X-Forwarded-For` and the `PROXY` protocol if they are allowed (if they are not allowed, or not present, the peer address will be used instead). This permits matches to behave correctly when, for example, Ambassador is behind a layer 7 load balancer. Here, our example specifies that HTTP clients from the IP address range `99.99.0.0` - `99.99.255.255` will be allowed.
+
+You may specify as many ranges for each kind of keyword as desired.
+
+##### Trust downstream client IP
+
+Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header.
+
+```yaml
+use_remote_address: true
+```
+
+In Ambassador 0.50 and later, the default value for `use_remote_address` is set to `true`. When set to `true`, Ambassador Edge Stack will append to the `X-Forwarded-For` header its IP address so upstream clients of Ambassador Edge Stack can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  
+
+See the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
+
+<Alert severity="warning">
+  If you need to use `x_forwarded_proto_redirect`, you **must** set `use_remote_address` to `false`. Otherwise, unexpected behavior can occur.
+</Alert>
+
+##### `x_forwarded_proto` redirect
+
+Ambassador lets through only the HTTP requests with `X-FORWARDED-PROTO: https` header set, and redirects all the other requests to HTTPS if this field is set to true. Note that `use_remote_address` must be set to false for this feature to work as expected.
+
+```yaml
+x_forwarded_proto_redirect: false
+```
+
+##### `X-Forwarded-For` trusted hops
+
+Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of Ambassador, Envoy will set the trusted client IP to the address of that proxy. To preserve the original client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`. 
+
+Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_conn_man/headers#x-forwarded-for) for more information.
+
+```yaml
+xff_num_trusted_hops: 1
+```
+
+The value of `xff_num_trusted_hops` indicates the number of trusted proxies in front of Ambassador Edge Stack. The default setting is 0 which tells Envoy to use the immediate downstream connection's IP address as the trusted client address. The trusted client address is used to populate the `remote_address` field used for rate limiting and can affect which IP address Envoy will set as `X-Envoy-External-Address`.
+
+`xff_num_trusted_hops` behavior is determined by the value of `use_remote_address` (which is `true` by default).
+
+* If `use_remote_address` is `false` and `xff_num_trusted_hops` is set to a value N that is greater than zero, the trusted client address is the (N+1)th address from the right end of XFF. (If the XFF contains fewer than N+1 addresses, Envoy falls back to using the immediate downstream connection’s source address as a trusted client address.)
+
+* If `use_remote_address` is `true` and `xff_num_trusted_hops` is set to a value N that is greater than zero, the trusted client address is the Nth address from the right end of XFF. (If the XFF contains fewer than N addresses, Envoy falls back to using the immediate downstream connection’s source address as a trusted client address.)
+
+Refer to [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html#x-forwarded-for) for some detailed examples of this interaction.
+
+<Alert severity="info">
+  This value is not dynamically configurable in Envoy. A restart is required changing the value of `xff_num_trusted_hops` for Envoy to respect the change.
+</Alert>
 
 ---
 
@@ -491,135 +588,33 @@ The liveness and readiness probes both support `prefix`, `rewrite`, and Module, 
 
 ---
 
-## Protocols
+## Traffic management
 
-##### HTTP/1.0 support (`enable_http10`)
+##### Circuit breaking
 
-Enable or disable the handling of incoming HTTP/1.0 and HTTP 0.9 requests.
+Sets the global circuit breaking configuration that Ambassador will use for all mappings, unless overridden in a mapping. 
 
-```yaml
-enable_http10: true
-```
-
-##### Enable IPv4 and IPv6
-
-Should we do IPv4/IPv6 DNS lookups when contacting services? Defaults to true, but can be overridden in a [`Mapping`](../../using/mappings). 
+More information at the [circuit breaking reference](../../using/circuit-breakers).
 
 ```yaml
-enable_ipv4: true
-enable_ipv6: false
+circuit_breakers
+  max_connections: 2048
+  ...
 ```
 
-If both IPv4 and IPv6 are enabled, Ambassador Edge Stack will prefer IPv6. This can have strange effects if Ambassador Edge Stack receives `AAAA` records from a DNS lookup, but the underlying network of the pod doesn't actually support IPv6 traffic. For this reason, the default is IPv4 only.
+##### Default label domain and labels
 
-A Mapping can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in a Mapping, the values here are used. Most Ambassador Edge Stack installations will probably be able to avoid overriding these settings in Mappings.
+Set a default domain and request labels to every request for use by rate limiting. 
 
-##### Allow proxy protocol 
+For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups).
 
-Controls whether Envoy will honor the PROXY protocol on incoming requests.  Many load balancers can use the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to convey information about the connection they are proxying.
+##### Load balancer
+
+Sets the global load balancing type and policy that Ambassador will use for all mappings unless overridden in a mapping. Defaults to round-robin with Kubernetes. 
+
+More information at the [load balancer reference](../load-balancer).
 
 ```yaml
-use_proxy_proto: false
-```
-
-The default is `false` since the PROXY protocol is not compatible with HTTP.
-
----
-
-## Observability
-
-##### StatsD
-
-Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd). | None |
-
-##### Diagnostics
-
-Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  
-
-- Both the API Gateway and the Edge Stack provide low-level diagnostics at `/ambassador/v0/diag/`.
-- The Ambassador Edge Stack also provides the higher-level Edge Policy Console at `/edge_stack/admin/`.
-
-By default, both services are enabled.
-
-Setting `diagnostics.enabled` to `false` will disable the routes for both services:
-
-```
-diagnostics:
-  enabled: false
-```
-
-With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and are reachable from inside the Ambassador Pod at `https://localhost:8877`. You can use Kubernetes port forwarding to set up remote access temporarily:
-
-```
-kubectl port-forward -n ambassador deploy/ambassador 8877
-```
-
-Alternately, you can expose the diagnostics page but control them via `Host` based routing. Set `diagnostics.enabled` to false and create Mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), using `localhost:8877` as the `service` of the `Mapping`.
-
-##### Diagnostics - allow non local
-
-Whether or not to allow connections to the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints from any Pod in the entire cluster.
-
-```
-diagnostics:
-  allow_non_local: true
-```
-
-
-
----
-
-## Misc
-
-##### Lua scripts
-
-Run a custom Lua script on every request. This is useful for simple use cases that mutate requests or responses, for example to add a custom header.
-
-```yaml
-lua_scripts: |
-  function envoy_on_response(response_handle)
-    response_handle:headers():add("Lua-Scripts-Enabled", "Processed")
-  end
-```
-
-For more details on the Lua API, see the [Envoy Lua filter documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/lua_filter.html).
-
-**Some caveats around the embedded scripts:**
-
-* They run in-process, so any bugs in your Lua script can break every request
-* They're inlined in the Ambassador Edge Stack YAML, so it is recommended to not write complex logic in here
-* They're run on every request/response to every URL
-
-If you need more flexible and configurable options, Ambassador Edge Stack supports a [pluggable Filter system](../../using/filters/).
-
-##### Use Ambassador namespace for service resolution
-
-Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them  For example, a Mapping in namespace `foo` will look for its service in namespace `foo`. If `true`, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace.
-
-```yaml
-use_ambassador_namespace_for_service_resolution: false
-```
-
-##### Regular expressions
-
-**These features are deprecated.**
-
-If `regex_type` is unset (the default), or is set to any value other than `unsafe`, Ambassador Edge Stack will use the [RE2](https://github.com/google/re2/wiki/Syntax) regular expression engine. This engine is designed to support most regular expressions, but keep bounds on execution time. **RE2 is the recommended regular expression engine.**
-
-If `regex_type` is set to `unsafe`, Ambassador Edge Stack will use the [modified ECMAScript](https://en.cppreference.com/w/cpp/regex/ecmascript) regular expression engine. Please migrate your regular expressions to be compatible with RE2.
-
-##### Overriding default ports
-
-If present, this sets the port Ambassador listens on for microservice access. If not present, Ambassador will use 8443 if TLS is enabled and 8080 if it is not.
-
-```yaml
-service_port: 1138
-```
-
-##### Envoy's admin port
-
-The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this.
-
-```yaml
-admin_port: 8001
+load_balancer:
+  policy: round_robin
 ```
