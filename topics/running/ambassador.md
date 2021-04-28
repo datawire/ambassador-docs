@@ -240,7 +240,7 @@ Controls how Envoy configures the tcp idle timeout on the http listener. Default
 
 ### Readiness and Liveness probes (`readiness_probe` and `liveness_probe`)
 
-The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself. If you'd like to, you can change these to route requests to some other service. For example, to have the readiness probe map to the quote application's health check, you could do
+The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself. If you'd like to, you can change these to route requests to some other service. For example, to have the readiness probe map to the quote application's health check, you could do:
 
 ```yaml
 readiness_probe:
@@ -249,7 +249,21 @@ readiness_probe:
   rewrite: /backend/health
 ```
 
-The liveness and readiness probes both support `prefix`, `rewrite`, and `service`, with the same meanings as for [mappings](../../using/mappings). Additionally, the `enabled` boolean may be set to `false` to disable API support for the probe.  It will, however, remain accessible on port 8877.
+The liveness and readiness probes both support `prefix`, `rewrite`, and `service`, with the same meanings as for [mappings](../../using/mappings). 
+
+Use the following to disable public access to the endpoints:
+
+```yaml
+
+readiness_probe:
+  enabled: false
+liveness_probe:
+  enabled: false
+diagnostics:
+  enabled: false
+```
+
+The endpoints will return a 404 error, but they are still accessible from within the cluster at `http://ambassador-admin.ambassador:8877/ambassador/v0/check_alive` and `http://ambassador-admin.ambassador:8877/ambassador/v0/check_ready` (assuming Ambassador is installed in the `ambassador` namespace).
 
 ### Lua Scripts (`lua_scripts`)
 
