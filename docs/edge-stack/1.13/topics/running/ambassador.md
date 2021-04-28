@@ -1,11 +1,10 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Global Configuration
+# The Module Resource
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [The Ambassador Module](#the-ambassador-module)
 * [General](#general)
 * [Envoy](#envoy)
 * [Header behavior](#header-behavior)
@@ -17,10 +16,7 @@ import Alert from '@material-ui/lab/Alert';
 * [Observability](#observability)
 * [Misc](#misc)
 
-
 </div>
-
-## The Ambassador Module
 
 If present, the Module defines system-wide configuration. This module can be applied to any Kubernetes service (the `ambassador` service itself is a common choice). **You may very well not need this Module.** To apply the Module to an Ambassador Service, it MUST be named 'ambassador', otherwise it will be ignored.  To create multiple `ambassador` Modules in the same namespace, they should be put in the annotations of each separate Ambassador Service.
 
