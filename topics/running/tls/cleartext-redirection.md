@@ -152,7 +152,7 @@ to Ambassador. A couple of options are
    comes in over cleartext.
 
   <Alert severity="info">
-    <strong>If you are using a layer 7 load balancer, it is critical that the system be configured correctly.</strong>  The <code>xff_num_trusted_hops</code> element, although its name reflects <code>X-Forwarded-For</code>, is also used when determining trust for <code>X-Forwarded-For</code>, and it is therefore important to set it correctly. Its default of 0 should always be correct when Ambassador is behind only layer 4 load balancers. It should need to be changed only when layer 7 load balancers are involved.
+    <strong>If you are using a layer 7 load balancer, it is critical that the system be configured correctly.</strong>  The <code>xff_num_trusted_hops</code> element, although its name reflects <code>X-Forwarded-For</code>, is also used when determining trust for <code>X-Forwarded-For</code>, and it is therefore important to set it correctly. Its default of 0 should always be correct when Ambassador is behind only layer 4 load balancers. Note that in rare cases the load balancer may remove or impact these headers so checking that the defaults are in place is recommended.
   </Alert>
 
 ## tl;dr
