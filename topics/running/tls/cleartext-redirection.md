@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Cleartext Support
 
 While most modern web applications will choose to encrypt all traffic, there
@@ -83,12 +85,9 @@ With the above configuration, we are tell Ambassador to terminate TLS with the
 certificate in the `example-cert` `Secret` and route cleartext traffic that
 comes in over port `8080`.
 
-> The `additionalPort` element tells Ambassador to listen on the specified `insecure-port` and treat any request arriving on that port as insecure. **By default, `additionalPort` will be set to 8080 for any `Host` using TLS.** To disable this redirection entirely, set `additionalPort` explicitly to `-1`:
-```yaml
-requestPolicy:
-  insecure:
-    additionalPort: -1   # This is how to disable the default redirection from 8080.
-```
+<Alert severity="info">
+  The <code>additionalPort</code> element tells Ambassador to listen on the specified <code>insecure-port</code> and treat any request arriving on that port as insecure. <strong>By default, <code>additionalPort</code> will be set to 8080 for any Host using TLS.</strong> To disable this redirection entirely, set <code>additionalPort</code> explicitly to <code>-1</code>.
+</Alert>
 
 
 ## HTTP->HTTPS Redirection
@@ -151,6 +150,10 @@ to Ambassador. A couple of options are
    `X-Forwarded-Proto` is set by the load balancer or proxy and trusted by
    Envoy. Envoy will trust the value of `X-Forwarded-For` even if the request
    comes in over cleartext.
+
+  <Alert severity="info">
+    <strong>If you are using a layer 7 load balancer, it is critical that the system be configured correctly.</strong>  The <code>xff_num_trusted_hops</code> element, although its name reflects <code>X-Forwarded-For</code>, is also used when determining trust for <code>X-Forwarded-For</code>, and it is therefore important to set it correctly. Its default of 0 should always be correct when Ambassador is behind only layer 4 load balancers. Note that in rare cases the load balancer may remove or impact these headers so checking that the defaults are in place is recommended.
+  </Alert>
 
 ## tl;dr
 
