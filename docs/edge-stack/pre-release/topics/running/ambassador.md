@@ -291,13 +291,36 @@ strip_matching_host_port: true
 
 ##### Envoy's admin port
 
+
 The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this.
+
+The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself. If you'd like to, you can change these to route requests to some other service. For example, to have the readiness probe map to the quote application's health check, you could do:
+
 
 ```yaml
 admin_port: 8001
 ```
 
+
 ##### Lua scripts
+
+The liveness and readiness probes both support `prefix`, `rewrite`, and `service`, with the same meanings as for [mappings](../../using/mappings). 
+
+Use the following to disable public access to the endpoints:
+
+```yaml
+
+readiness_probe:
+  enabled: false
+liveness_probe:
+  enabled: false
+diagnostics:
+  enabled: false
+```
+
+The endpoints will return a 404 error, but they are still accessible from within the cluster at `http://ambassador-admin.ambassador:8877/ambassador/v0/check_alive` and `http://ambassador-admin.ambassador:8877/ambassador/v0/check_ready` (assuming Ambassador is installed in the `ambassador` namespace).
+
+### Lua Scripts (`lua_scripts`)
 
 Run a custom Lua script on every request. This is useful for simple use cases that mutate requests or responses, for example to add a custom header.
 

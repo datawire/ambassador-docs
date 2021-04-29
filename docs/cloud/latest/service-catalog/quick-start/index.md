@@ -1,23 +1,23 @@
 import Alert from '@material-ui/lab/Alert';
 import GSTabs2 from '../tutorials/gs-tabs2'
 
-# Service Catalog Quick Start
+# Quick start
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [The Power of Kubernetes Annotations](#the-power-of-kubernetes-annotations)
+* [The power of Kubernetes annotations](#the-power-of-kubernetes-annotations)
 * [Prerequisites](#prerequisites)
-* [1. Connect your Cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
-* [2. Claim Ownership of a Service](#2-claim-ownership-of-a-service)
-* [3. Add Additional Metadata via YAML](#3-add-additional-metadata-via-yaml)
-* [What's Next?](#img-classos-logo-srcimageslogopng-whats-next)
+* [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
+* [2. Claim ownership of a service](#2-claim-ownership-of-a-service)
+* [3. Add additional metadata via YAML](#3-add-additional-metadata-via-yaml)
+* [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
 
 </div>
 
 <Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty, you first need to complete with this quick start guide.</Alert>
 
-## The Power of Kubernetes Annotations 
+## The power of Kubernetes annotations 
 
 Have you ever been asked to troubleshoot a failing Kubernetes service and struggled to find basic information about the service such as the source repository and owner? Troubleshooting always begins with information gathering. 
 
@@ -102,7 +102,7 @@ then you are ready to start using Service Catalog!
 
 If not, [follow this doc](../../../../edge-stack/latest/topics/install/upgrading/) to **upgrade** Edge Stack.
 
-## 1. Connect your Cluster to Ambassador Cloud
+## 1. Connect your cluster to Ambassador Cloud
 
 <Alert severity="info">If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.</Alert>
 
@@ -140,7 +140,7 @@ Then refresh your Service Catalog page and you should see the `quote` service li
 
 <Alert severity="info">If you follow <a href="../../../../edge-stack/latest/topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps practices</b></a> please follow your organization's best practices to add the token to your configuration.</Alert>
 
-## 2. Claim Ownership of a Service
+## 2. Claim ownership of a service
 
 Click the `quote` service in the list. The service details page now opens that displays additional information about the service.
 
@@ -162,7 +162,7 @@ Modifying the annotations via `kubectl` is quick and easy, but the changes made 
 
 Let's set another annotation using YAML instead to ensure that a new deployment includes the annotations.
 
-## 3. Add Additional Metadata via YAML
+## 3. Add additional metadata via YAML
 
 Open the YAML config file of one of your services.  If you applied our `quote` service earlier, you can download the YAML [here](/yaml/quickstart/qotm.yaml).
 
@@ -201,6 +201,6 @@ Open the YAML config file of one of your services.  If you applied our `quote` s
 
 <Alert severity="success"><b>Fantastic!</b> You should see the Git repo metadata change for your service in the catalog! Now any of your teammates can quickly find the repo for the service.</Alert>
 
-## <img class="os-logo" src="../../images/logo.png"/> What's Next?
+## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
 You've updated the owner and repo URL, but **Service Catalog supports many more annotations!**  See the full list [here](../reference/annotations/).
