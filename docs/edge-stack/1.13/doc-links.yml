@@ -100,14 +100,6 @@
                       link: /howtos/advanced-rate-limiting
                     - title: Rate Limiting on Token Claims
                       link: /howtos/token-ratelimit
-                - title: TLS
-                  items:
-                    - title: TLS Termination and Enabling HTTPS
-                      link: /howtos/tls-termination
-                    - title: Using cert-manager
-                      link: /howtos/cert-manager
-                    - title: Client Certificate Validation
-                      link: /howtos/client-cert-validation
             - title: Monitor my services
               items:
                 - title: Distributed Tracing with Datadog
@@ -141,53 +133,6 @@
           items:
             - title: Custom Resources
               items:
-                - title: The Mapping Resource
-                  items:
-                    - title: Mapping Basics
-                      link: /topics/using/intro-mappings
-                    - title: Advanced Mapping Configuration
-                      link: /topics/using/mappings
-                    - title: AuthService Settings
-                      link: /topics/using/authservice
-                    - title: Automatic Retries
-                      link: /topics/using/retries
-                    - title: Canary Releases
-                      link: /topics/using/canary
-                    - title: Circuit Breakers
-                      link: /topics/using/circuit-breakers
-                    - title: Cross-Origin Resource Sharing
-                      link: /topics/using/cors
-                    - title: Headers
-                      link: /topics/using/headers/headers
-                      items:
-                        - title: Add Request Headers
-                          link: /topics/using/headers/add_request_headers
-                        - title: Remove Request Headers
-                          link: /topics/using/headers/remove_request_headers
-                        - title: Add Response Headers
-                          link: /topics/using/headers/add_response_headers
-                        - title: Remove Response Headers
-                          link: /topics/using/headers/remove_response_headers
-                        - title: Header-Based Routing
-                          link: /topics/using/headers/headers
-                        - title: Host Header
-                          link: /topics/using/headers/host
-                    - title: Keepalive
-                      link: /topics/using/keepalive
-                    - title: Method-Based Routing
-                      link: /topics/using/method
-                    - title: Prefix Regex
-                      link: /topics/using/prefix_regex
-                    - title: Query Parameter-Based Routing
-                      link: /topics/using/query_parameters/
-                    - title: Redirects
-                      link: /topics/using/redirects
-                    - title: Rewrites
-                      link: /topics/using/rewrites
-                    - title: Timeouts
-                      link: /topics/using/timeouts
-                    - title: Traffic Shadowing
-                      link: /topics/using/shadowing
                 - title: The Host Resource
                   link: /topics/running/host-crd
                   items:
@@ -204,8 +149,6 @@
                           link: /topics/running/tls/sni
                         - title: TLS Origination
                           link: /topics/running/tls/origination
-
-
                 - title: The Module Resource
                   link: /topics/running/ambassador
                 - title: The Project Resource
@@ -261,6 +204,53 @@
                   link: /topics/running/load-balancer
                 - title: Service Discovery and Resolvers
                   link: /topics/running/resolvers
+                - title: The Mapping Resource
+                  items:
+                    - title: Mapping Basics
+                      link: /topics/using/intro-mappings
+                    - title: Advanced Mapping Configuration
+                      link: /topics/using/mappings
+                    - title: AuthService Settings
+                      link: /topics/using/authservice
+                    - title: Automatic Retries
+                      link: /topics/using/retries
+                    - title: Canary Releases
+                      link: /topics/using/canary
+                    - title: Circuit Breakers
+                      link: /topics/using/circuit-breakers
+                    - title: Cross-Origin Resource Sharing
+                      link: /topics/using/cors
+                    - title: Headers
+                      link: /topics/using/headers/headers
+                      items:
+                        - title: Add Request Headers
+                          link: /topics/using/headers/add_request_headers
+                        - title: Remove Request Headers
+                          link: /topics/using/headers/remove_request_headers
+                        - title: Add Response Headers
+                          link: /topics/using/headers/add_response_headers
+                        - title: Remove Response Headers
+                          link: /topics/using/headers/remove_response_headers
+                        - title: Header-Based Routing
+                          link: /topics/using/headers/headers
+                        - title: Host Header
+                          link: /topics/using/headers/host
+                    - title: Keepalive
+                      link: /topics/using/keepalive
+                    - title: Method-Based Routing
+                      link: /topics/using/method
+                    - title: Prefix Regex
+                      link: /topics/using/prefix_regex
+                    - title: Query Parameter-Based Routing
+                      link: /topics/using/query_parameters/
+                    - title: Redirects
+                      link: /topics/using/redirects
+                    - title: Rewrites
+                      link: /topics/using/rewrites
+                    - title: Timeouts
+                      link: /topics/using/timeouts
+                    - title: Traffic Shadowing
+                      link: /topics/using/shadowing
             - title: Plug-in Services
               items:
                 - title: Authentication Service
@@ -287,6 +277,14 @@
                       link: /topics/using/rate-limits/rate-limits
                     - title: Rate Limiting Extension
                       link: /topics/running/aes-extensions/ratelimit
+                - title: TLS
+                  items:
+                    - title: TLS Termination and Enabling HTTPS
+                      link: /howtos/tls-termination
+                    - title: Using cert-manager
+                      link: /howtos/cert-manager
+                    - title: Client Certificate Validation
+                      link: /howtos/client-cert-validation
         - title: FAQs
           link: /about/faq
         - title: Community
