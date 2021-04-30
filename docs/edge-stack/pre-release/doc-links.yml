@@ -198,12 +198,6 @@
                   link: /topics/using/filters/plugin
             - title: Ingress and Load Balancing
               items:
-                - title: Ingress Controller
-                  link: /topics/running/ingress-controller
-                - title: Load Balancing
-                  link: /topics/running/load-balancer
-                - title: Service Discovery and Resolvers
-                  link: /topics/running/resolvers
                 - title: The Mapping Resource
                   items:
                     - title: Mapping Basics
@@ -251,6 +245,12 @@
                       link: /topics/using/timeouts
                     - title: Traffic Shadowing
                       link: /topics/using/shadowing
+                - title: Ingress Controller
+                  link: /topics/running/ingress-controller
+                - title: Load Balancing
+                  link: /topics/running/load-balancer
+                - title: Service Discovery and Resolvers
+                  link: /topics/running/resolvers
             - title: Plug-in Services
               items:
                 - title: Authentication Service
