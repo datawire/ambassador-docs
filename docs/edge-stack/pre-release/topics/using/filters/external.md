@@ -35,9 +35,10 @@ spec:
 
 The External spec is mostly identical to an [AuthService spec](../../../running/services/auth-service), with the following exceptions:
 
-* In an `AuthService`, the `tls` field may either be a Boolean, or a string referring to a `TLSContext`. In an `External` filter, it may only be a Boolean; referring to a TLS context is not supported.
-* In an `AuthService`, the `add_linkerd_headers` field defaults based on the [`ambassador` `Module`](../../../running/ambassador). In an `External` filter, it defaults to `false`. This may change in a future release.
+* In an AuthService, the `tls` field may either be a Boolean, or a string referring to a `TLSContext`. In an `External` filter, it may only be a Boolean; referring to a TLS context is not supported.
+* In an AuthService, the `add_linkerd_headers` field defaults based on the [`ambassador` `Module`](../../../running/ambassador). In an External filter, it defaults to `false`.
 
+## Fields
 
 `auth-service` is the only required field, all others are optional.
 
