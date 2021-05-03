@@ -1,14 +1,19 @@
+import Alert from '@material-ui/lab/Alert';
+
 # AuthService Plugin
 
-The Ambassador API Gateway provides a highly flexible mechanism for authentication, via the `AuthService` resource.  An `AuthService` configures Ambassador to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
+The Ambassador API Gateway provides a highly flexible mechanism for authentication, via the AuthService resource.  An AuthService configures Ambassador to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
 
-All requests are validated by the `AuthService` (unless the `Mapping` applied to the request sets `bypass_auth`).  It is not possible to combine multiple `AuthService`s.  While it is possible to create multiple `AuthService` resources, they will be load-balanced between each resource in a round-robin fashion. This is useful for canarying an `AuthService` change, but is not useful for deploying multiple distinct `AuthService`s.  In order to combine multiple external services (either having multiple services apply to the same request, or selecting between different services for the different requests), instead of using an `AuthService`, use [Ambassador Edge Stack `External Filter`](../../../using/filters/).
+All requests are validated by the AuthService (unless the Mapping applied to the request sets `bypass_auth`).  It is not possible to combine multiple AuthServices.  While it is possible to create multiple AuthService resources, they will be load-balanced between each resource in a round-robin fashion. This is useful for canarying an AuthService change, but is not useful for deploying multiple distinct AuthServices.  In order to combine multiple external services (either having multiple services apply to the same request, or selecting between different services for the different requests), instead of using an AuthService, use [Ambassador Edge Stack External Filter](../../../using/filters/).
 
-Because of the limitations described above, **the Ambassador Edge Stack does not support `AuthService` resources, and you should instead use an [`External` `Filter`](../../../using/filters/external),** which is mostly a drop-in replacement for an `AuthService`. The External Filter relies on the AES AuthService. Make sure the AES AuthService is deployed before configuring External filters.
+<Alert severity="info">
+Because of the limitations described above, <strong>the Ambassador Edge Stack does not support AuthService resources, and you should instead use an <a href="../../../using/filters/external">External Filter</a>,</strong> which is mostly a drop-in replacement for an AuthService. The External Filter relies on the AES AuthService. Make sure the AES AuthService is deployed before configuring External filters.
+</Alert>
+
+The currently supported version of the AuthService resource is `getambassador.io/v2`. Earlier versions are deprecated.
 
 ## Configure an External AuthService
-
-The currently supported version of the `AuthService` resource is `getambassador.io/v2`. Earlier versions are deprecated.
+s
 
 ```yaml
 ---
@@ -17,10 +22,9 @@ kind: AuthService
 metadata:
   name: authentication
 spec:
-  ambassador_id: string-or-string-list # optional; default is ["default"]
-
-  auth_service: "example-auth:3000" # required
-  tls: true                         # optional; default is true if `auth_service` starts with "https://" (case-insensitive), false otherwise
+  ambassador_id: <string-or-string-list> # optional; default is ["default"]
+  auth_service: "example-auth:3000" 
+  tls: true 
   proto: http                       # optional; default is "http"
   timeout_ms: 5000                  # optional; default is 5000
   #allow_request_body: true         # deprecated; use include_body instead
@@ -46,11 +50,11 @@ spec:
   add_linkerd_headers: bool        # optional; default is based on the ambassador Module
 ```
 
- - `auth_service` (required) is of the format `[scheme://]host[:port]`, and identifies the external auth service to talk to.  The scheme-part may be `http://` or `https://`, which influences the default value of `tls`, and of the port-part.  If no scheme-part is given, it behaves as if `http://` was given.
-
- - `tls` (optional) is whether to use TLS or cleartext when speaking to the external auth service.  The default is based on the scheme-part of the `auth_service`.  If the value of `tls` is not a Boolean, the value is taken to be the name of a defined [`TLSContext`](../../tls/), which will determine the certificate presented to the upstream service.
-
- - `proto` (optional) specifies which variant of the [`ext_authz` protocol][] to use when communicating with the external auth service.  Valid options are `http` (default) or `grpc`.
+| Attribute | Required? | Default value | Description |
+| --- | --- | --- | --- |
+|`auth_service`| Yes | n/a | Formatted like `[scheme://]host[:port]`, identifies the external auth service to talk to.  The scheme-part may be `http://` or `https://`, which influences the default value of `tls`, and of the port-part.  If no scheme-part is given, it behaves as if `http://` was given. |
+|`tls`| No | true if `auth_service` starts with "https://" | Whether to use TLS or cleartext when speaking to the external auth service.  The default is based on the scheme-part of the `auth_service`.  If the value of `tls` is not a Boolean, the value is taken to be the name of a defined [`TLSContext`](../../tls/), which will determine the certificate presented to the upstream service. |
+|`proto`| No | `http` | Specifies which variant of the [`ext_authz` protocol](../ext_authz/) to use when communicating with the external auth service.  Valid options are `http` or `grpc`. |
 
  - `timeout_ms` (optional) is the total maximum duration in milliseconds for the request to the external auth service, before triggering `status_on_error` or `failure_mode_allow`.
 
@@ -69,7 +73,7 @@ spec:
 
 The following fields are only used if `proto: grpc`; they are ignored if `proto: http`:
 
-- `protocol_version` (optional) gRPC service name used to communicate with the `AuthService`. Allowed values are `v2` which will use the `envoy.service.auth.v2.Authorization` service name, and `v3` which will use the `envoy.service.auth.v3.Authorization` service name. Default is `v2`, and note well that `v3` requires Ambassador to run in Envoy v3 mode by setting the AMBASSADOR_ENVOY_API_VERSION=V3 environment variable.
+- `protocol_version` (optional) gRPC service name used to communicate with the AuthService. Allowed values are `v2` which will use the `envoy.service.auth.v2.Authorization` service name, and `v3` which will use the `envoy.service.auth.v3.Authorization` service name. Default is `v2`, and note well that `v3` requires Ambassador to run in Envoy v3 mode by setting the AMBASSADOR_ENVOY_API_VERSION=V3 environment variable.
 
 The following fields are only used if `proto: http`; they are ignored if `proto: grpc`:
 
@@ -100,8 +104,8 @@ The following fields are only used if `proto: http`; they are ignored if `proto:
 
 ## Canarying Multiple AuthServices
 
-You may create multiple `AuthService` manifests to round-robin authentication requests among multiple services. **Note well that all services must use the same `path_prefix` and header definitions;** if you try to have different values, you'll see an error in the diagnostics service, telling you which value is being used.
+You may create multiple AuthService manifests to round-robin authentication requests among multiple services. **Note well that all services must use the same `path_prefix` and header definitions;** if you try to have different values, you'll see an error in the diagnostics service, telling you which value is being used.
 
 ## Configuring Public Mappings
 
-An `AuthService` can be disabled for a mapping by setting `bypass_auth` to `true`. This will tell Ambassador to allow all requests for that mapping through without interacting with the external auth service.
+An AuthService can be disabled for a mapping by setting `bypass_auth` to `true`. This will tell Ambassador to allow all requests for that mapping through without interacting with the external auth service.
