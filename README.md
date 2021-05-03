@@ -3,6 +3,10 @@
 
 The documentation in this repository is built with [Gatsby](https://www.gatsbyjs.com/), which gives us control and flexibility over the layout.
 
+## Contributing
+
+We welcome all contributions! See [LICENSE](LICENSE) for applicable terms and conditions.
+
 ## Authoring Documentation
 
 If you're authoring the documentation, just edit the Markdown files. You can use GitHub to preview the Markdown.
