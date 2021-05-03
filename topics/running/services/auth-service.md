@@ -47,6 +47,8 @@ spec:
   add_linkerd_headers: false
 ```
 
+## Fields
+
 `auth-service` is the only required field, all others are optional.
 
 | Attribute | Default value | Description |
