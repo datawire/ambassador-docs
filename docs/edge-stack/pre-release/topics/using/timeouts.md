@@ -32,7 +32,7 @@ Default: 3000ms.
 
 ## Listener Idle Timeout: `listener_idle_timeout_ms`
 
-`listener_idle_timeout_ms` configures the [`idle_timeout`](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-httpprotocoloptions)
+`listener_idle_timeout_ms` configures the [`idle_timeout`](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/upstreams/http/v3/http_protocol_options.proto.html#extensions-upstreams-http-v3-httpprotocoloptions)
 in the Envoy HTTP Connection Manager and controls how long a connection from the 
 downstream client to Ambassador will remain open if there are no active 
 requests. Only full requests will be counted towards this timeout so clients 
