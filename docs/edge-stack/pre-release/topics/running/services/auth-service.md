@@ -22,7 +22,7 @@ metadata:
   name: authentication
 spec:
   ambassador_id: ambassador-1
-  auth_service: "example-auth:3000" 
+  auth_service: "example-auth.authentication:3000" 
   tls: true 
   proto: http
   timeout_ms: 5000
@@ -54,7 +54,7 @@ spec:
 | Attribute | Default value | Description |
 | --- | --- | --- |
 |`ambassador_id`| `default` | Which [Ambassador ID](..\..\running/#ambassador_id) the AuthService should apply to. |
-|`auth_service` | n/a | Formatted like `[scheme://]host[:port]`, identifies the external auth service to talk to.  The scheme-part may be `http://` or `https://`, which influences the default value of `tls`, and of the port-part.  If no scheme-part is given, it behaves as if `http://` was given. |
+|`auth_service` | n/a | Formatted like `[scheme://]host[:port]`, identifies the external auth service to talk to.  The scheme-part may be `http://` or `https://`, which influences the default value of `tls`, and of the port-part.  If no scheme-part is given, it behaves as if `http://` was given. The `host` should be the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services) of the service you want to use for authentication. |
 |`tls` | `true` if `auth_service` starts with "https://" | Whether to use TLS or cleartext when speaking to the external auth service.  The default is based on the scheme-part of the `auth_service`.  If the value of `tls` is not a Boolean, the value is taken to be the name of a defined [`TLSContext`](../../tls/), which will determine the certificate presented to the upstream service. |
 |`proto` | `http` | Specifies which variant of the [`ext_authz` protocol](../ext_authz/) to use when communicating with the external auth service.  Valid options are `http` or `grpc`. |
 |`timeout_ms` | `5000` | The total maximum duration in milliseconds for the request to the external auth service, before triggering `status_on_error` or `failure_mode_allow`.|
