@@ -8,7 +8,7 @@ This information is all sourced from annotations set on the services.  Annotatio
 
 <Alert severity="info">The full list of supported annotations is available <a href="../../reference/annotations/">here</a>.</Alert>
 
-## Annotate via `kubectl`
+## Annotate via kubectl
 
 Find a service you would like to annotate in your Service Catalog list that does not have an owner yet listed.
 

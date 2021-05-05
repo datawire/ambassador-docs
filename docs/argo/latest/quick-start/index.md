@@ -2,7 +2,7 @@
 import Alert from '@material-ui/lab/Alert';
 import Tabs from './tabs'
 
-# Argo Quick Start
+# Argo quick start
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
