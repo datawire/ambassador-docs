@@ -1,6 +1,6 @@
 # Adding Authentication to your `Project`
 
-## This feature is in BETA. Please [tell me](mailto:rhs@datawire.io?subject=Project%20CRD%20UX%20Feedback) (lead developer of the feature) about your experience.
+## This feature is DEPRECATED. Consider the Argo Rollouts integration with Ambassador Edge Stack.
 
 Make sure you have configured at least one working [authentication Filter](../filters). The [HOWTO section](../../../howtos/basic-auth/) has numerous dentailed entries on integrating with specific IDPs.
 
