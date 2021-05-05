@@ -1,6 +1,6 @@
 # Deploying to Kubernetes from Github
 
-## This feature is in BETA. Please [tell me](mailto:rhs@datawire.io?subject=Project%20CRD%20UX%20Feedback) (lead developer of the feature) about your experience.
+## This feature is DEPRECATED. Consider the Argo Rollouts integration with Ambassador Edge Stack.
 
 In this guide, we'll walk you through using Ambassador Edge Stack's [Project CRD](../../topics/using/projects/). At the end of this you will have launched your own microservice in less time than it takes to microwave popcorn. Not only that, but this service will meet the most important standards of **production-readiness**. It will be:
 
