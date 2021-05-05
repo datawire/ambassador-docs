@@ -41,10 +41,10 @@ edgectl upgrade
 
 Make sure that you follow the steps in the given order - not doing that might crash your Ambassador installation or make it inconsistent.
 
-Check if you have an `AuthService` or `RateLimitService` installed. If you do,
-make sure that the `.spec.auth_service` and `.spec.service` (respectively) are
-set using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
-If they are not, the initial migration tests my fail.
+Check if you have an [`AuthService`](../../running/services/auth-service) or 
+[`RateLimitService`](../../running/services/rate-limit-service) installed. If 
+you do, make sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
+If they are not, the initial migration tests may fail.
 
 ## 1. Apply the Migration Manifest
 
