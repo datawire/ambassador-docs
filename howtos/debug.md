@@ -93,7 +93,7 @@ $ kubectl get pods
   mysql                                    0/1     CrashLoopBackOff   2          40s
 ```
 
-What happened?  Describe the Pod to get the events from Kubernetes' effort to start it:  
+What happened?  Describe the Pod to get it's startup events:  
 
 ```
 $ kubectl describe pod mysql
@@ -129,7 +129,7 @@ $ kubectl logs mysql
     - MYSQL_RANDOM_ROOT_PASSWORD
 ```
 
-Here we can see the error preventing MySQL from starting, it's expecting a password environment variable to be set upon initial startup.
+Here we can see the error preventing MySQL from starting: it's expecting a password environment variable to be set upon initial startup.
 
 For log streaming, [kail](https://github.com/boz/kail) is a handy tool for viewing logs in real time.  After installing, you can run `kail -p <pod_name>` to start a stream of that Pod's logs.
 
