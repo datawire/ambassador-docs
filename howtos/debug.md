@@ -3,10 +3,10 @@
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [Cluster Status Checks](#cluster-status-checks)
-* [Basic Deployment and Pod Status Checks](#basic-deployment-and-pod-status-checks)
+* [Cluster status checks](#cluster-status-checks)
+* [Basic Deployment and Pod status checks](#basic-deployment-and-pod-status-checks)
 * [Crashing Pods](#crashing-pods)
-* [Checking Logs](#checking-logs)
+* [Checking logs](#checking-logs)
 * [Exec into Pods](#exec-into-pods)
 
 </div>
@@ -17,9 +17,9 @@ If a YAML file applies without error then your app should work, right?  Not nece
 
 Let's look at some common errors and techniques to diagnose issues with your Pods.
 
-## Cluster Status Checks
+## Cluster status checks
 
-First, checking the status of your cluster components is helpful if your problems aren't isolated to a single Pod:
+First, checking the status of your cluster components is helpful if your problems aren't isolated to a single Pod or Deployment:
 
 ```
 $ kubectl get componentstatus
@@ -30,11 +30,11 @@ $ kubectl get componentstatus
   etcd-0               Healthy   {"health":"true"}
 ```
 
-A issue with any of those components can cause issues across your entire cluster.  Cluster components can fail for many reasons, the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/#a-general-overview-of-cluster-failure-modes) does a good job covering them.
+A issue with any of those components can cause issues across your entire cluster.  Cluster components can fail for many reasons, from a failed VM to network issues between nodes to corrupt [etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/) data.  The [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/#a-general-overview-of-cluster-failure-modes) does a good job covering these issues and possible mitigations.
 
-## Basic Deployment and Pod Status Checks
+## Basic Deployment and Pod status checks
 
-Check the status of your deployments:
+Check the status of your Deployments:
 
 ```
 $ kubectl get deployments
@@ -43,7 +43,7 @@ $ kubectl get deployments
   test                    0/1     1            0           29s
 ```
 
-The `test` deployment seems to have a problem as its Pod is not ready.  Check the Pod's status next:
+The `test` Deployment seems to have a problem as its Pod is not ready.  Check the Pod's status next:
 
 ```
 $ kubectl get pods
@@ -52,9 +52,9 @@ $ kubectl get pods
   test-bdcfc6876-rs4nw                     0/1     ImagePullBackOff   0          29s
 ```
 
-The Pod has an `ImagePullBackOff` status.  This particular error means Kubernetes could not retrieve the container image for some reason: the name was misspelled, the specified tag doesn't exist, or the repository is private and Kubernetes doesn't have access.
+The Pod has an `ImagePullBackOff` status.  This particular error means Kubernetes could not retrieve the container image for some reason: the name was misspelled, the specified tag doesn't exist, or the repository is private and [Kubernetes doesn't have access](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/).
 
-We can see more detail by getting a description of the pod:
+We can see more detail by getting a description of the Pod:
 
 ```
 $ kubectl describe pod test-bdcfc6876-rs4nw
@@ -69,13 +69,13 @@ $ kubectl describe pod test-bdcfc6876-rs4nw
   Warning  Failed   2s (x2 over 32s)  kubelet  Error: ImagePullBackOff
 ```
 
-Here we see the `ImagePullBackOff` again and, looking at the image name, and obvious reason why it's failing.
+Here we see the `ImagePullBackOff` again and, looking at the image name, the obvious reason why it's failing.
 
 ## Crashing Pods
 
-Another very common error you will see when a pod won't run is `CrashLoopBackOff`.  Kubernetes expects a pod to start and run continuously.  This is by design so that if the app running in a pod does crash or can't start for any reason, Kubernetes will pick up on the exit error and restart the pod (unless different behavior is specified with [the `restartPolicy` on the Pod `spec`](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)).  If this happens too many times in too short of a period, then Kubernetes assumes there is a problem with the pod, stops trying to restart it, and returns `CrashLoopBackOff`.
+Another very common error you will see when a Pod won't run is `CrashLoopBackOff`.  Kubernetes expects a Pod to start and run continuously.  This is by design so that if the app running in a Pod does crash or can't start for any reason, Kubernetes will pick up on the exit error and restart the Pod (unless different behavior is specified with [the `restartPolicy` on the Pod `spec`](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy)).  If this happens too many times within a set period then Kubernetes assumes there is a problem with the Pod, stops trying to restart it, and returns `CrashLoopBackOff`.
 
-Start a pod with this command:
+Start a Pod with this command:
 
 ```
 $ kubectl run mysql --image=mysql
@@ -93,7 +93,7 @@ $ kubectl get pods
   mysql                                    0/1     CrashLoopBackOff   2          40s
 ```
 
-What happened?  Describe the pod to get the events from Kubernetes' effort to start it:  
+What happened?  Describe the Pod to get the events from Kubernetes' effort to start it:  
 
 ```
 $ kubectl describe pod mysql
@@ -110,11 +110,11 @@ $ kubectl describe pod mysql
   Warning  BackOff    11s (x6 over 64s)  kubelet            Back-off restarting failed container
 ```
 
-This outputs a lot of information, but the events we need are at the bottom.  We can see Kubernetes pulled the image, started the container, then backed off after restarting the container multiple times.  But why?
+This outputs a lot of information, but the events we need are at the bottom.  Kubernetes pulled the image, started the container, then backed off after restarting the container multiple times.  But why?
 
-## Checking Logs
+## Checking logs
 
-Kubernetes keeps the logs from the container's runtime.  View them with `kubectl logs <pod_name>`:
+Kubernetes keeps the logs from the container's runtime environment.  View them with `kubectl logs <pod_name>`:
 
 ```
 $ kubectl logs mysql
@@ -129,11 +129,11 @@ $ kubectl logs mysql
     - MYSQL_RANDOM_ROOT_PASSWORD
 ```
 
-Here we can see the error preventing MySQL from starting.  
+Here we can see the error preventing MySQL from starting, it's expecting a password environment variable to be set upon initial startup.
 
 For log streaming, [kail](https://github.com/boz/kail) is a handy tool for viewing logs in real time.  After installing, you can run `kail -p <pod_name>` to start a stream of that Pod's logs.
 
-Delete the MySQL pod, start kail in a new terminal window, and then rerun MySQL, this time setting the root password environment variable:
+Delete the MySQL Pod, start kail in a new terminal window, and then rerun MySQL, this time setting the root password environment variable:
 
 ```
 kubectl delete pod mysql
@@ -143,11 +143,10 @@ kubectl run mysql --image=mysql --env="MYSQL_ROOT_PASSWORD=p@ssw0rd"
 
 You should see kail stream the MySQL logs as it starts up (successfully this time). 
 
-If a Pod has been running for a while and has accumulated a giant log, or you want to see the logs only from the time the Pod starts, you can restart a Deployment with `kubectl rollout restart deployment <deployment_name>`.  This will stay up new Pods before shutting down old ones, allowing for a restart without interrupting your service uptime.
-
+If a Pod has been running for a while and has accumulated a giant log, or you want to see the logs only from the time the Pod starts, you can restart a Deployment with `kubectl rollout restart deployment <deployment_name>`.  This will start up new Pods before shutting down old ones, allowing for a restart without interrupting your service uptime.
 
 ## Exec into Pods
 
-Sometimes a Pod will start OK, but not act right.  If logs aren't helpful, you can always connect to the Pod's shell by running `kubectl exec -it <pod_name> -- /bin/bash`.  This should give you a terminal on the Pod as whatever user it is running as.  From here you can curl other Pods by name, confirm your ConfigMaps mounted correctly, or any other diagnosing that is relevant to your service.
+Sometimes a Pod will start OK, but not behave as expected.  If logs aren't helpful, you can always connect to the Pod's shell by running `kubectl exec -it <pod_name> -- /bin/bash`.  This should give you a terminal on the Pod as whatever user it is running as.  From here you can curl other Pods by name, confirm your ConfigMaps mounted correctly, or any other diagnosing that is relevant to your app.
 
-Depending on the base image the container was built on, you might have to use a different shell such as `/bin/sh` or `/bin/ash.`  Also, given the lightweight nature of many base images, you might find many commands like `curl` or `vim` need to be installed after an `apt-get update`.
+Depending on the base image the container was built on, you might have to use a different shell such as `/bin/sh` or `/bin/ash.`  Also, given the lightweight nature of many Docker base images, you might find many commands like `curl` or `vim` need to be installed after an `apt-get update` or `yum update`.
