@@ -6,9 +6,9 @@
   items:
     - title: Argo
       items: 
-        - title: Quick Start
+        - title: Quick start
           link: /quick-start
-        - title: Core Concepts
+        - title: Core concepts
           collapsable: false
           items:
             - title: What is Argo?
@@ -17,11 +17,11 @@
               link: /concepts/cicd
             - title: Developer-centric GitOps-style deployment
               link: /concepts/gitops
-            - title: Canary Deployments
+            - title: Canary deployments
               link: /concepts/canary
             - title: How to monitor the canary deployment
               link: /concepts/metrics
-        - title: Technical Reference
+        - title: Technical reference
           items:
             - title: Rollout CRD
               link: /reference/rolloutcrd 
