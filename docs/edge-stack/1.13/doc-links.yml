@@ -117,8 +117,6 @@
                       link: /topics/running/statistics/8877-metrics
             - title: Set up integrations
               items:
-                - title: Deploying to Kubernetes from GitHub
-                  link: /tutorials/projects
                 - title: Knative Serverless Framework
                   link: /howtos/knative
                 - title: Service meshes
@@ -151,13 +149,6 @@
                           link: /topics/running/tls/origination
                 - title: The Module Resource
                   link: /topics/running/ambassador
-                - title: The Project Resource
-                  link: /topics/using/projects
-                  items:
-                    - title: Configuring Authentication
-                      link: /topics/using/project-authentication
-                    - title: Customizing Deployment
-                      link: /topics/using/project-customization
             - title: Deploying Ambassador
               items:
                 - title: Deployment Architecture
