@@ -1,6 +1,6 @@
 # Adding Authentication to your `Project`
 
-## This feature is DEPRECATED. Consider the [Argo Rollouts integration](../../../argo/latest/quick-start) with Ambassador Edge Stack.
+## This feature is DEPRECATED. Consider the [Argo Rollouts integration](/docs/argo/latest/quick-start) with Ambassador Edge Stack.
 
 Make sure you have configured at least one working [authentication Filter](../filters). The [HOWTO section](../../../howtos/basic-auth/) has numerous dentailed entries on integrating with specific IDPs.
 
