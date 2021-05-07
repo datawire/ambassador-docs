@@ -1,6 +1,6 @@
 # Deploying to Kubernetes from Github
 
-## This feature is DEPRECATED. Consider the [Argo Rollouts integration](../../../argo/latest/quick-start) with Ambassador Edge Stack.
+## This feature is DEPRECATED. Consider the [Argo Rollouts integration](/docs/argo/latest/quick-start) with Ambassador Edge Stack.
 
 In this guide, we'll walk you through using Ambassador Edge Stack's [Project CRD](../../topics/using/projects/). At the end of this you will have launched your own microservice in less time than it takes to microwave popcorn. Not only that, but this service will meet the most important standards of **production-readiness**. It will be:
 

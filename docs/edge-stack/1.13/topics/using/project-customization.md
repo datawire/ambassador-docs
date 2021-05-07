@@ -1,6 +1,6 @@
 # Customizing Project Deployment
 
-## This feature is DEPRECATED. Consider the [Argo Rollouts integration](../../../argo/latest/quick-start) with Ambassador Edge Stack.
+## This feature is DEPRECATED. Consider the [Argo Rollouts integration](/docs/argo/latest/quick-start) with Ambassador Edge Stack.
 
 The project controller deploys each project revision using a default set of resources that include:
 
