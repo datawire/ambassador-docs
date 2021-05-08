@@ -94,7 +94,7 @@ To illustrate the shortcomings of L4 load balancing that warrant investment in L
 
 In the previous scenario, _the backend selected to handle client A will be handling approximately 3,000x less load then the backend selected to handle client B_! 
 
-This is a large problem and generally defeats the purpose of load balancing in the first place. It’s also worth noting that this problem happens for any _multiplexing, kept-alive _protocol. (Multiplexing means sending concurrent application requests over a single L4 connection, and kept-alive means not closing the connection when there are no active requests.) 
+This is a large problem and generally defeats the purpose of load balancing in the first place. It’s also worth noting that this problem happens for any _multiplexing, kept-alive_ protocol. (Multiplexing means sending concurrent application requests over a single L4 connection, and kept-alive means not closing the connection when there are no active requests.) 
 
 All modern protocols are evolving to be both multiplexing and kept-alive for efficiency reasons (e.g., it is generally expensive to create connections—especially when the connections are encrypted using TLS). That being the case, the L4 load balancer impedance mismatch is becoming more pronounced over time. 
 
