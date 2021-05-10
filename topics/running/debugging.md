@@ -89,7 +89,7 @@ ACME, etc. Debug logging for this process will give more information on why you
 may see errors with these functions.
 
 You can adjust the AES log level by setting the 
-[`AES_LOG_LEVEL`](../aes-extensions/#aes_log_level) environment variable.
+[`AES_LOG_LEVEL` environment variable](../aes-extensions/#aes_log_level).
 
 ### Viewing Logs
 
