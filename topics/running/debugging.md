@@ -70,7 +70,28 @@ In both the Deployment Pod and the individual Pods, take the necessary action to
 
 The Ambassador logging can provide information on anything that might be abnormal or malfunctioning. While there may be a large amount of data to sort through, look for key errors such as the Ambassador process restarting unexpectedly, or a malformed Envoy configuration.
 
-You can turn on Debug mode in the [Edge Policy Console](../../using/edge-policy-console), which generates verbose logging data that can be useful when trying to find a subtle error or bug.
+### Log Levels
+
+The Ambassador Edge Stack has two switches that will control different log levels. 
+
+#### Envoy Debug Logs
+Envoy debug logging shows verbose information on the actions Envoy is taking on
+every request. It can be useful for understanding why connections are being
+closed or if Envoy or the upstream service is the source of the error.
+
+You can turn on Debug mode in the [Edge Policy Console](../../using/edge-policy-console)
+
+#### Ambassador Edge Stack Debug Logging
+
+The Ambassador Edge Stack is built on top of Emissary Ingress and runs an
+additional process for authentication, rate limiting, the developer portal,
+ACME, etc. Debug logging for this process will give more information on why you
+may see errors with these functions.
+
+You can adjust the AES log level by setting the 
+[`AES_LOG_LEVEL` environment variable](../aes-extensions/#aes_log_level).
+
+### Viewing Logs
 
 1. Use the following command to target an individual Ambassador Pod: `kubectl get pods -n ambassador`
 
