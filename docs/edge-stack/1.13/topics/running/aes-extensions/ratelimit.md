@@ -1,4 +1,4 @@
-# Ambassador Edge Stack Rate Limiting Extension
+# Rate Limiting Extension
 
 The Ambassador Edge Stack ships with a rate limiting service that is enabled
 to perform advanced rate limiting out of the box.

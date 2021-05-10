@@ -4,6 +4,7 @@
 
 To give you flexibility and independence from a hosting platform's uptime, you can pull the `ambassador` and `aes` images from any of the following registries:
 - `docker.io/datawire/`
+   * **Note**: In rare occasions, you may experience rate limits when using Docker Hub. See [this page](https://www.docker.com/increase-rate-limits) to learn how to deal with them.
 - `quay.io/datawire/`
 - `gcr.io/datawire/`
 

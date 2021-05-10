@@ -1,4 +1,4 @@
-import { goToEdgeStackQuickStart, goToMappings, goToHostCRD, goToLoadBalancer, goToCircuitBreakers, goToCanaryReleases, goToOauth, goToJWT, goToExtFilters, goToRateLimits, goToRateLimitsEdgeStack, goToAdvancedRateLimiting, goToGRPC, goToTlsTermination, GoToWebsockets, goToArgoQuickStart, goToArgoCICD, goToArgoCanary, goToCloudQuickStart, goToTelepresenceHowTo, goToTelepresenceContextProp, goToTelepresenceFAQs, goToKubernetesConceptsBasics, goToKubernetesHowtosCodeCluster, goToKubernetesHowtosDiagnose } from '../../../src/utils/routes';
+import { goToEdgeStackQuickStart, goToMappings, goToHostCRD, goToLoadBalancer, goToCircuitBreakers, goToCanaryReleases, goToOauth, goToJWT, goToExtFilters, goToRateLimits, goToRateLimitsEdgeStack, goToAdvancedRateLimiting, goToGRPC, goToTlsTermination, GoToWebsockets, goToArgoQuickStart, goToArgoCICD, goToArgoCanary, goToCloudQuickStart, goToTelepresenceHowTo, goToTelepresenceContextProp, goToTelepresenceFAQs, goToKubernetesConceptsBasics, goToKubernetesHowtosCodeCluster, goToKubernetesHowtosDebug } from '../../../src/utils/routes';
 
 export const EdgeStackCards = [
   {
@@ -205,9 +205,9 @@ export const KubernetesCards = [
     icon: 'learn-icon'
   },
   {
-    title: 'Diagnose my K8s deployment',
+    title: 'Debug code on Kubernetes',
     description: 'What do you do first when a Deployment won’t run?',
-    link: goToKubernetesHowtosDiagnose,
+    link: goToKubernetesHowtosDebug,
     linkText: 'Learn How',
     icon: 'tools-green'
   }

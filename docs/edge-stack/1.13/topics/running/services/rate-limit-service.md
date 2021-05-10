@@ -117,11 +117,11 @@ kind:  RateLimitService
 metadata:
   name:  ratelimit
 spec:
-  service: "example-rate-limit:5000"
+  service: "example-rate-limit.default:5000"
   protocol_version: oneOf[v2, v3]    # optional; default is v2
 ```
 
-- `service` gives the URL of the rate limit service.
+- `service` gives the URL of the rate limit service. If using a Kubernetes service, this should be the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services) of that service.
 - `protocol_version` (optional) gRPC service name used to communicate with the `RateLimitService`. Allowed values are `v2` which will use the `envoy.service.ratelimit.v2.RateLimitService`, and `v3` which will use the `envoy.service.ratelimit.v3.RateLimitService` service name. Note that `v3` requires Ambassador to run in Envoy v3 mode by setting the AMBASSADOR_ENVOY_API_VERSION=V3 environment variable.
 
 
