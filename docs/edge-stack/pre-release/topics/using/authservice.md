@@ -20,4 +20,4 @@ auth_context_extensions:
   baz: zing
 ```
 
-More information is available on [the Envoy documentation on external authentication](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/http/ext_authz/v2/ext_authz.proto#envoy-api-msg-config-filter-http-ext-authz-v2-checksettings).
+More information is available on [the Envoy documentation on external authentication](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/http/ext_authz/v3/ext_authz.proto.html#extensions-filters-http-ext-authz-v3-checksettings).
