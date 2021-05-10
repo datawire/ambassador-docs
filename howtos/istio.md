@@ -24,12 +24,11 @@ There a number of installation options for Ambassador. See the [getting started]
 ## Integrate Ambassador and Istio
 
 > **WARNING - Istio Regression:**
-> There is a regression in Istio 1.9 that causes Ambassador (and other non-Istio services) to be unable to read Istio certificates. 
+> There is a regression in Istio 1.9.0 to 1.9.4 that causes Ambassador (and other non-Istio services) to be unable to read Istio certificates. 
 >
-> A patch for this regression has been merged and is waiting for a release.
-> https://github.com/istio/istio/pull/31531
+> A patch for this regression has been released in Istio 1.9.4.
 >
-> Use Istio 1.8.2 or earlier until a version of Istio with a patch for this regression is released.
+> Use Istio 1.9.4 or a version before 1.9.0 to use this integration.
 
 Ambassador integrates with Istio in three ways:
 
