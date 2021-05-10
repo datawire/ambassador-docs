@@ -167,6 +167,8 @@ export default ({ data, location }) => {
         }
     }
 
+    const requireReadingTime = () => !(page.fields.slug.startsWith('/docs/telepresence/') && page.fields.slug.endsWith('/quick-start/'));
+
     const footer = (
         <div>
             <hr className="docs__separator docs__container" />
@@ -209,7 +211,8 @@ export default ({ data, location }) => {
                                 </Link>
                             )}
                         </div>
-                        <MDXRenderer slug={page.fields.slug}>
+                        {requireReadingTime() && <span className="docs__reading-time">{page.frontmatter.reading_time ? page.frontmatter.reading_time : page.fields.readingTime.text}</span>}
+                        <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.text}>
                             {template(page.body, getVersions())}
                         </MDXRenderer>
                     </div>
@@ -278,7 +281,6 @@ export default ({ data, location }) => {
                 <div className="docs__body">
                     {content}
                 </div>
-
             </div>
         </Layout>
     );
@@ -291,6 +293,9 @@ export const query = graphql`
       fields {
         slug
         linksslug
+        readingTime {
+            text
+        }
       }
       excerpt(pruneLength: 150, truncate: true)
       headings(depth: h1) {
@@ -298,6 +303,7 @@ export const query = graphql`
       }
       frontmatter {
         description
+        reading_time
       }
       parent {
         ... on File {
