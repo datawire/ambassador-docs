@@ -21,18 +21,18 @@ Giving the ExtAuth service the ability to control the response allows many diffe
 
 There are two variants of the ExtAuth: gRPC and plain HTTP.
 
-### The gRPC Protocol
+### The gRPC protocol
 
 When `proto: grpc` is set, the ExtAuth service must implement the `Authorization` gRPC interface, defined in [Envoy's `external_auth.proto`](https://github.com/datawire/ambassador/blob/master/api/envoy/service/auth/v2/external_auth.proto).
 
-### The HTTP Protocol
+### The HTTP protocol
 
 External services for `proto: http` are often easier to implement, but have several limitations, compared to `proto: grpc`.
  - The list of headers that the ExtAuth service is interested in reading must be known ahead of time, in order to set `allow_request_headers`.  Inspecting headers that are not known ahead of time requires instead using `proto: grpc`.
  - The list of headers that the ExtAuth service would like to set or modify must be known ahead of time, in order to set `allow_authorization_headers`.  Setting headers that are not known ahead of time requires instead using `proto: grpc`.
  - When returning a direct HTTP response, the HTTP status code cannot be 200 or in the 5XX range.  Intercepting with a 200 of 5XX response requires instead using `proto: grpc`.
 
-#### The Request From Edge Stack to the ExtAuth service
+#### The request From Edge Stack to the ExtAuth service
 
 For every incoming request, a similar request is made to the ExtAuth service that mimics the:
  - HTTP request method
@@ -68,7 +68,7 @@ Content-Type: application/json
 Content-Length: 0
 ```
 
-#### The Response Returned From the ExtAuth Service to Edge Stack
+#### The response returned from the ExtAuth service to Edge Stack
 
  - If the HTTP response returned from the ExtAuth service to Edge Stack has an HTTP status code of 200, then the request is allowed through to the upstream backend service.  **Only** 200 indicates this; other 2XX status codes will prevent the request from being allowed through.
 
