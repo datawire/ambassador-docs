@@ -17,7 +17,7 @@ We're happy to help!
 * The [FAQ](about/faq) has answers to many common questions
 * Join our open source [Slack channel](https://a8r.io/Slack)
 * Report bugs in [GitHub](https://github.com/datawire/ambassador)
-* Need commercial support? [Contact us](/contact/)
+* Need commercial support? [Contact us](/contact-us/)
 
 ## How the Documentation is Organized
 
