@@ -318,6 +318,14 @@ Some caveats around the embedded scripts:
 
 If you need more flexible and configurable options, Ambassador Edge Stack supports a [pluggable Filter system](../../using/filters/).
 
+##### Merge slashes
+
+If true, Ambassador will merge adjacent slashes for the purpose of route matching and request filtering. For example, a request for `//foo///bar` will be matched to a Mapping with prefix `/foo/bar`.
+
+```yaml
+merge_slashes: true
+```
+
 ##### Override default ports
 
 If present, this sets the port Ambassador listens on for microservice access. If not present, Ambassador will use 8443 if TLS is enabled and 8080 if it is not.
