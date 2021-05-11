@@ -24,7 +24,7 @@ The core Ambassador Edge Stack is open source under the Apache Software License 
 
 ### Can I use the add-on features for Ambassador Edge Stack for free?
 
-Yes! The core functionality of the Ambassador Edge Stack is free and has no limits whatsoever. If you wish to use one of our additional, proprietary features such as Single Sign-On, you can get a free community license for up to 5 requests per second. Please contact [sales](/contact-us-us/) if you need more than 5 RPS.
+Yes! The core functionality of the Ambassador Edge Stack is free and has no limits whatsoever. If you wish to use one of our additional, proprietary features such as Single Sign-On, you can get a free community license for up to 5 requests per second. Please contact [sales](/contact-us/) if you need more than 5 RPS.
 
 For more details on core unlimited features and premium features, see the [editions page](/editions).
 
@@ -118,7 +118,7 @@ learn more about Ambassador Module configurations, see [Ambassador Module](../..
 We have an online [Slack community](https://a8r.io/Slack) with thousands of
 users. We try to help out as often as possible, although we can't promise a
 particular response time. If you need a guaranteed SLA, we also have commercial
-contracts. [Contact sales](/contact-us-us/) for more information.
+contracts. [Contact sales](/contact-us/) for more information.
 
 ### What do I do when I get the error `no healthy upstream`?
 
