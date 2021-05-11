@@ -291,36 +291,13 @@ strip_matching_host_port: true
 
 ##### Envoy's admin port
 
-
 The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this.
-
-The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself. If you'd like to, you can change these to route requests to some other service. For example, to have the readiness probe map to the quote application's health check, you could do:
-
 
 ```yaml
 admin_port: 8001
 ```
 
-
 ##### Lua scripts
-
-The liveness and readiness probes both support `prefix`, `rewrite`, and `service`, with the same meanings as for [mappings](../../using/mappings). 
-
-Use the following to disable public access to the endpoints:
-
-```yaml
-
-readiness_probe:
-  enabled: false
-liveness_probe:
-  enabled: false
-diagnostics:
-  enabled: false
-```
-
-The endpoints will return a 404 error, but they are still accessible from within the cluster at `http://ambassador-admin.ambassador:8877/ambassador/v0/check_alive` and `http://ambassador-admin.ambassador:8877/ambassador/v0/check_ready` (assuming Ambassador is installed in the `ambassador` namespace).
-
-### Lua Scripts (`lua_scripts`)
 
 Run a custom Lua script on every request. This is useful for simple use cases that mutate requests or responses, for example to add a custom header.
 
@@ -340,6 +317,14 @@ Some caveats around the embedded scripts:
 * They're run on every request/response to every URL
 
 If you need more flexible and configurable options, Ambassador Edge Stack supports a [pluggable Filter system](../../using/filters/).
+
+##### Merge slashes
+
+If true, Ambassador will merge adjacent slashes for the purpose of route matching and request filtering. For example, a request for `//foo///bar` will be matched to a Mapping with prefix `/foo/bar`.
+
+```yaml
+merge_slashes: true
+```
 
 ##### Override default ports
 
@@ -477,7 +462,7 @@ You may specify as many ranges for each kind of keyword as desired.
 
 ##### Trust downstream client IP
 
-Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header.
+Sets whether Envoy will trust the remote address of incoming connections or rely exclusively on the `X-Forwarded-For` header.
 
 ```yaml
 use_remote_address: true
@@ -485,7 +470,7 @@ use_remote_address: true
 
 In Ambassador 0.50 and later, the default value for `use_remote_address` is set to true. When set to true, Ambassador Edge Stack will append to the `X-Forwarded-For` header its IP address so upstream clients of Ambassador Edge Stack can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  
 
-See the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
+See the [Envoy documentation on the `X-Forwarded-For header` ](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation on preserving the client source IP](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
 
 <Alert severity="warning">
   If you need to use <code>x_forwarded_proto_redirect</code>, you <strong>must</strong> set <code>use_remote_address</code> to false. Otherwise, unexpected behavior can occur.
