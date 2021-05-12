@@ -427,6 +427,8 @@ provider:
 
 `"duration"` strings are parsed as a sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".  See [Go `time.ParseDuration`](https://golang.org/pkg/time/#ParseDuration).
 
+> **Note:** Try to configure your Identity Provider to send the proper `Cache-Control` headers so that Ambassador can successfully cache responses since the default action is to not cache responses. This will prevent recieving 502 errors when requests to the IDP exceed the default auth timeout of 5 seconds in response to frequent requests to the IDP caused by large ammounts of traffic. If this is not possible, you can set `maxStale` in your `oauth2` filter to manually configure Ambassador to cache requests.  
+
 ## `OAuth2` Path-Specific Arguments
 
 ```yaml
