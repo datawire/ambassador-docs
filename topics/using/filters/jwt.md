@@ -121,6 +121,8 @@ with optional fraction and a unit suffix, such as "300ms", "-1.5h" or
 
 **Note**: If you are using a templating system for your YAML that also makes use of Go templating, then you will need to escape the template strings meant to be interpreted by the Ambassador Edge Stack.
 
+**Note:** Try to configure your Identity Provider to send the proper `Cache-Control` headers so that Ambassador can successfully cache responses since the default action is to not cache responses. This will prevent recieving 502 errors when requests to the IDP exceed the default auth timeout of 5 seconds in response to frequent requests to the IDP caused by large ammounts of traffic.
+
 [Go `time.ParseDuration`]: https://golang.org/pkg/time/#ParseDuration
 [Go `text/template`]: https://golang.org/pkg/text/template/
 [Go `text/template` functions]: https://golang.org/pkg/text/template/#hdr-Functions
