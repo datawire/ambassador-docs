@@ -12,7 +12,7 @@ import Alert from '@material-ui/lab/Alert';
 * [4. kubectl-sudo](#4-kubectl-sudo)
 * [5. Local cluster](#5-local-cluster)
 * [6. Lens dashboard](#6-lens-dashboard)
-* [7. Get started with your new tools](#6-get-started-with-your-new-tools)
+* [7. Get started with your new tools](#7-get-started-with-your-new-tools)
 
 </div>
 
