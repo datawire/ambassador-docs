@@ -166,8 +166,3 @@ Since we’ve marked this cluster with type `strict_dns`, we’ll rely on findin
 ```
 
 Same idea, just a different target: rather than redirecting to some other host, we always go to our service on the local host.
-
-## Up next
-So that’s the ten-thousand-foot view of Envoy, plus a bit of a dive down into Envoy’s background and configuration. 
-
-<!-- Next up, we’ll tackle actually deploying a simple application using Kubernetes, Postgres, Flask, and Envoy, and watch how things go as we scale it up and down. Stay tuned.
