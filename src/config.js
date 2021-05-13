@@ -64,7 +64,7 @@ export const products = [
     {
         slug: "envoy",
         name: "Envoy",
-        link: "/docs/envoy/latest/home",
+        link: "/docs/envoy/latest/concepts/cloudnative",
         version: [
             { id: "latest", name: "Latest", link: "latest" }
         ]

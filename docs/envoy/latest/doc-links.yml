@@ -6,8 +6,6 @@
   items:
     - title: Envoy
       items: 
-        - title: Home
-          link: /home
         - title: Core Concepts
           items:
             - title: Why is cloud-native development full lifecycle development?
