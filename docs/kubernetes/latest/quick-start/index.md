@@ -11,7 +11,8 @@ import Alert from '@material-ui/lab/Alert';
 * [3. kube-ps1](#3-kube-ps1)
 * [4. kubectl-sudo](#4-kubectl-sudo)
 * [5. Local cluster](#5-local-cluster)
-* [6. Get started with your new tools](#6-get-started-with-your-new-tools)
+* [6. Lens dashboard](#6-lens-dashboard)
+* [7. Get started with your new tools](#6-get-started-with-your-new-tools)
 
 </div>
 
@@ -131,7 +132,15 @@ Except for kubectl, **none of these tools are required for working with Kubernet
 
   K3s requires an [extra step to configure your kubeconfig](https://rancher.com/docs/k3s/latest/en/cluster-access/) after installation.
 
-## 6. Get started with your new tools
+## 6. Lens dashboard
+
+  > **The problem it solves:**  
+  > I need an easier way to see my cluster status.
+
+  While kubectl is great for quick commands, sometimes you might want greater visibility of your cluster and resources in a more visual format.  [Lens](https://k8slens.dev/) is a great tool for this, essentially acting as a Kubernetes IDE.  You can see all your Pods, check the contents of different ConfigMaps, get the status of your storage or any other resource with just a few clicks.  You can even configure multiple clusters and quickly switch between them.
+
+
+## 7. Get started with your new tools
 
   Follow [our guide](../howtos/codetocluster) on getting code running on your cluster to test out your powerful new Kubernetes dev environment!
 
