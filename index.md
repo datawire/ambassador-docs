@@ -13,7 +13,7 @@ New to Ambassador Edge Stack? Start here! We've worked hard to make installing a
 We're happy to help!
 
 * The [FAQ](about/faq) has answers to many common questions
-* Join our open source [Slack channel](https://d6e.co/slack)
+* Join our open source [Slack channel](https://a8r.io/Slack)
 * Report bugs in [GitHub](https://github.com/datawire/ambassador)
 * Need commercial support? [Contact us](/contact/)
 
