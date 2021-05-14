@@ -29,7 +29,8 @@ spec:
 | `cluster_request_timeout_ms` | Set the default end-to-end timeout for requests. Default is 3000ms.  | `cluster_request_timeout_ms: 3000` |
 | `default_label_domain  and default_labels` | Set a default domain and request labels to every request for use by rate limiting. For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups). | None |
 | `defaults` | The `defaults` element allows setting system-wide defaults that will be applied to various Ambassador resources. See [using defaults](../../using/defaults) for more information. | None |
-| `diagnostics.enabled` | Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  See below for more details. | None |
+| `diagnostics.allow_non_local` | Whether or not to allow connections to the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints from the entire cluster. See below for more details. | None |
+| `diagnostics.enabled` | Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints. See below for more details. | None |
 | `enable_grpc_http11_bridge` | Should we enable the gRPC-http11 bridge? | `enable_grpc_http11_bridge: false` |
 | `enable_grpc_web` | Should we enable the grpc-Web protocol? | `enable_grpc_web: false` |
 | `enable_http10` | Should we enable http/1.0 protocol? | `enable_http10: false` |
@@ -41,14 +42,17 @@ spec:
 | `envoy_validation_timeout` | Defines the timeout, in seconds, for validating a new Envoy configuration. The default is 60; a value of 0 disables Envoy configuration validation. Most installations will not need to use this setting. | `envoy_validation_timeout: 30` |
 | `error_response_overrides` | Defines error response overrides for 4XX and 5XX response codes. By default, Ambassador will pass through error responses without modification, and errors generated locally will use Envoy's default response body, if any. | See [this page](../custom-error-responses) for usage details.
 | `forward_client_cert_details` | Add the X-Forwarded-Client-Cert header on upstream requests, which contains information about the TLS client certificate verified by Ambassador. See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto#envoy-api-msg-config-filter-network-http-connection-manager-v2-httpconnectionmanager-setcurrentclientcertdetails) for more information. |  |
+| `grpc_stats` | Enables telemetry of gRPC calls using the "gRPC Statistics" Envoy filter. see below for more details. |  |
+| `header_case_overrides` | Array of header names whose casing should be forced, both when proxied to upstream services and when returned downstream to clients. For every header that matches (case insensitively) to an element in this array, the resulting header name is forced to the provided casing in the array. Cannot be used together with 'proper_case'. This feature provides overrides for Envoy's normal [header casing rules](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/header_casing). | `header_case_overrides: []` |
 | `ip_allow`       | Defines HTTP source IP address ranges to allow; all others will be denied. `ip_allow` and `ip_deny` may not both be specified. See below for more details. | None |
 | `ip_deny`        | Defines HTTP source IP address ranges to deny; all others will be allowed. `ip_allow` and `ip_deny` may not both be specified. See below for more details. | None |
 | `listener_idle_timeout_ms` | Controls how Envoy configures the tcp idle timeout on the http listener. Default is 1 hour. | `listener_idle_timeout_ms: 30000` |
 | `lua_scripts` | Run a custom lua script on every request. see below for more details. | None |
-| `grpc_stats` | Enables telemetry of gRPC calls using the "gRPC Statistics" Envoy filter. see below for more details. |  |
+| `max_request_headers_kb` | Controls maximum allowed request header size. If not set, the default value from Envoy will be used. See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto) for more information. | `max_request_headers_kb: None` |
 | `merge_slashes` | If true, Ambassador will merge adjacent slashes for the purpose of route matching and request filtering. For example, when `true`, a request for `//foo///bar` will be matched to a Mapping with prefix `/foo/bar`. | `merge_slashes: false` |
+| `preserve_external_request_id` | Controls whether to override the `X-REQUEST-ID` header or keep it as it is coming from incoming request. Note that `preserve_external_request_id` must be set to true for this feature to work. Default value will be false. | `preserve_external_request_id: false` |
 | `proper_case` | Should we enable upper casing for response headers? For more information, see [the Envoy docs](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-http1protocoloptions-headerkeyformat). | `proper_case: false` |
-| `header_case_overrides` | Array of header names whose casing should be forced, both when proxied to upstream services and when returned downstream to clients. For every header that matches (case insensitively) to an element in this array, the resulting header name is forced to the provided casing in the array. Cannot be used together with 'proper_case'. This feature provides overrides for Envoy's normal [header casing rules](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/header_casing). | `header_case_overrides: []` |
+| `prune_unreachable_routes` | If true, routes with `:authority` matches will be removed from consideration for `Host`s that don't match the `:authority` header. The default is currently false. | `prune_unreachable_routes: false` |
 | `regex_max_size` | (deprecated) This field controls the RE2 "program size" which is a rough estimate of how complex a compiled regex is to evaluate. A regex that has a program size greater than the configured value will fail to compile.    | `regex_max_size: 200` |
 | `regex_type` | (deprecated) Set which regular expression engine to use. See the "Regular Expressions" section below. | `regex_type: safe` |
 | `server_name` | By default Envoy sets server_name response header to `envoy`. Override it with this variable. | `server_name: envoy` |
@@ -57,13 +61,11 @@ spec:
 | `statsd` | Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd). | None |
 | `strip_matching_host_port` | If true, Ambassador will strip the port from host/authority headers before processing and routing the request. This only applies if the port matches the underlying Envoy listener port. | `strip_matching_host_port: false` |
 | `suppress_envoy_headers` | If true, Ambassador will not emit certain additional headers to HTTP requests and responses. For the exact set of headers covered by this config, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#config-http-filters-router-headers-set) | `suppress_envoy_headers: false` |
+| `use_ambassador_namespace_for_service_resolution` | Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them, e.g. a Mapping in namespace `foo` will look for its service in namespace `foo`. If `true`, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace. | `use_ambassador_namespace_for_service_resolution: false` |
 | `use_proxy_proto` | Controls whether Envoy will honor the PROXY protocol on incoming requests. | `use_proxy_proto: false` |
 | `use_remote_address` | Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header. | `use_remote_address: true` |
-| `use_ambassador_namespace_for_service_resolution` | Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them, e.g. a Mapping in namespace `foo` will look for its service in namespace `foo`. If `true`, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace. | `use_ambassador_namespace_for_service_resolution: false` |
 | `x_forwarded_proto_redirect` | Ambassador lets through only the HTTP requests with `X-FORWARDED-PROTO: https` header set, and redirects all the other requests to HTTPS if this field is set to true. Note that `use_remote_address` must be set to false for this feature to work as expected. | `x_forwarded_proto_redirect: false` |
 | `xff_num_trusted_hops` | Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of Ambassador, Envoy will set the trusted client IP to the address of that proxy. To preserve the orginal client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`. Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_conn_man/headers#x-forwarded-for) for more information. | `xff_num_trusted_hops: 0` |
-| `preserve_external_request_id` | Controls whether to override the `X-REQUEST-ID` header or keep it as it is coming from incomming request. Note that `preserve_external_request_id` must be set to true for this feature to work. Default value will be false. | `preserve_external_request_id: false` |
-| `max_request_headers_kb` | Controls maximum allowed request header size. If not set, the default value from Envoy will be used. See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/filter/network/http_connection_manager/v2/http_connection_manager.proto) for more information. | `max_request_headers_kb: None` |
 
 ### Additional `config` Field Examples
 
@@ -173,20 +175,30 @@ diagnostics:
   enabled: true
 ```
 
-Setting `diagnostics.enabled` to `false` will disable the routes for both services (they will remain accessible from inside the Ambassador pod on port 8877):
+Setting `diagnostics.enabled` to `false` will disable the routes for both services:
 
 ```
 diagnostics:
   enabled: false
 ```
 
-When configured this way, diagnostics are only available from inside the Ambassador pod(s) via `localhost` networking. You can use Kubernetes port forwarding to set up remote access temporarily:
+With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and are reachable from inside the Ambassador pod on localhost port 8877. You can use Kubernetes port forwarding to set up remote access temporarily:
 
 ```
 kubectl port-forward -n ambassador deploy/ambassador 8877
 ```
 
-If you want to expose the diagnostics page but control them via `Host` based routing, you can set `diagnostics.enabled` to false and create mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings).
+Alternately, you can expose the diagnostics page but control them via `Host` based routing: set `diagnostics.enabled` to false and create mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), using `localhost:8877` as the `service` of the `Mapping`.
+
+You can also allow connections from anywhere in your cluster on port 8877 with `diagnostics.allow_non_local`:
+
+```
+diagnostics:
+  enabled: false
+  allow_non_local: true
+```
+
+Note that this will bypass Ambassador's security checks, and _any_ pod in your cluster will be able to reach the diagnostics services.
 
 ### gRPC HTTP/1.1 bridge (`enable_grpc_http11_bridge`)
 

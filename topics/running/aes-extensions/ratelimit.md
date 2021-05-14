@@ -5,13 +5,13 @@ to perform advanced rate limiting out of the box.
 
 Configuration of the `Mapping` and `RateLimit` resources that control **how**
 to rate limit requests can be found in the
-[Rate Limiting](../../using/rate-limits) section of the documentation.
+[Rate Limiting](../../../using/rate-limits) section of the documentation.
 
 This document focuses on how to deploy and manage the rate limiting extension.
 
 ## Ambassador Configuration
 
-Ambassador uses the [`RateLimitService` plugin](../services/rate-limit-service) 
+Ambassador uses the [`RateLimitService` plugin](../../services/rate-limit-service) 
 to connect to the rate limiting extension in the Ambassador Edge Stack.
 
 The default `RateLimitService` is named `ambassador-edge-stack-ratelimit` and is 
@@ -36,7 +36,7 @@ request labels.
 
 Certain use cases may require some tuning of the rate limiting extension. 
 Configuration of this extension is managed via environment variables.
-[The Ambassador Container](../environment) has a full list of environment
+[The Ambassador Container](../../environment) has a full list of environment
 variables available for configuration. This document highlights the ones used
 by the rate limiting extension.
 
@@ -48,7 +48,7 @@ counters for the different `RateLimit` patterns.
 The Ambassador Edge Stack shares the same Redis pool for all features that use
 Redis.
 
-See the [Redis documentation](../aes-redis) for information on Redis tuning.
+See the [Redis documentation](../../aes-redis) for information on Redis tuning.
 
 ### REDIS_PERSECOND
 

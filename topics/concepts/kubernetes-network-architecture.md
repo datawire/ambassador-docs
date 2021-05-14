@@ -10,7 +10,7 @@ While there are a number of techniques for routing traffic to a Kubernetes clust
 
 <div class="docs-diagram-wrapper">
 
-![Kubernetes Network Architecture](../../../../../images/documentation/kubernetes-network.inline.svg)
+![Kubernetes Network Architecture](../../../../../../images/documentation/kubernetes-network.inline.svg)
 
 </div>
 
