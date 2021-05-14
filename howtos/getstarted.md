@@ -1,8 +1,25 @@
 # Get started with Envoy Proxy
 
+<div class="docs-article-toc">
+<h3>Contents</h3>
+
+* [Why use Envoy?](#why-use-envoy)
+* [Envoy and the network stack](#envoy-and-the-network-stack)
+* [The Envoy mesh](#the-envoy-mesh)
+* [Envoy configuration overview](#envoy-configuration-overview)
+* [Filters](#filters)
+* [Virtual hosts configuration](#virtual-hosts-configuration)
+* [Virtual hosts example](#virtual-hosts-example)
+* [Clusters configuration](#clusters-configuration)
+* [Clusters example](#clusters-example)
+
+</div>
+
 Using microservices to solve real-world problems always involves more than simply writing the code. You need to test your services. You need to figure out how to do continuous deployment. You need to work out clean, elegant, resilient ways for them to talk to each other.
 
 A really interesting tool that can help with the “talk to each other” bit is the [Envoy Proxy](https://www.envoyproxy.io/) from Lyft.
+
+## Why use Envoy?
 
 Envoy Proxy is a modern, high performance, small footprint edge and service proxy. Envoy adds resilience and observability to your services, and it does so in a way that’s transparent to your service implementation. 
 
@@ -20,7 +37,7 @@ Being able to proxy any TCP protocol is a pretty big deal. Want to proxy Websock
 
 Overall, Envoy can support many of your needs with just a single piece of software, rather than needing to mix and match things. One final note: Envoy Proxy is an official, graduated CNCF project, with a huge community. So unlike HAProxy and NGINX, which are controlled by a vendor, Envoy has vendor-neutral governance which is an [important consideration for many projects](https://blog.getambassador.io/envoy-vs-nginx-vs-haproxy-why-the-open-source-ambassador-api-gateway-chose-envoy-23826aed79ef).
 
-## Envoy and the Network Stack
+## Envoy and the network stack
 
 Let’s say you want to write an HTTP network proxy. There are two obvious ways to approach this: work at the level of HTTP, or work at the level of TCP.
 
@@ -36,7 +53,7 @@ Envoy deals with the fact that both of these approaches have real limitations by
 
 The challenge is to keep simple things simple while allowing complex things to be possible, and Envoy does a good job of that for things like HTTP proxying.
 
-## The Envoy Mesh
+## The Envoy mesh
 
 The next bit that’s a little surprising about Envoy is that most applications involve two layers of Envoys, not one:
 
@@ -49,7 +66,7 @@ Note that you could, of course, only use the edge Envoy, and dispense with the s
 
 All the Envoys in the mesh run the same code, but they are of course configured differently.  This brings us to the Envoy configuration file.
 
-## Envoy Configuration Overview
+## Envoy configuration overview
 
 Envoy’s configuration starts out looking simple: it consists primarily of listeners and clusters.
 
@@ -58,7 +75,11 @@ A *listener* tells Envoy a TCP port on which it should listen, and a set of *fil
 * Filters can – and usually must – have their own configuration, which is often more complex than the listener’s configuration!
 * Clusters get tangled up with load balancing and with external things like DNS.
 
+## Filters
+
 Since we’ve been talking about HTTP proxying, let’s continue with a look at the `http_connection_manager` filter. This filter operates at layer 3/4, so it has access to information from IP and TCP (like the host and port numbers for both ends of the connection), but it also understands the HTTP protocol well enough to have access to the HTTP URL, headers, etc., both for HTTP/1.1 and HTTP/2. Whenever a new connection arrives, the `http_connection_manager` uses all this information to decide which Envoy cluster is best suited to handle the connection. The Envoy cluster then uses its load balancing algorithm to pick a single member to handle the HTTP connection.
+
+## Virtual hosts configuration
 
 The filter configuration for `http_connection_manager` is a dictionary with quite a few options, but the most critical one for our purposes at the moment is the `virtual_hosts` array, which defines how exactly the filter will make routing decisions. Each element in the array is a dictionary containing the following attributes:
 
@@ -74,7 +95,9 @@ Each route dictionary needs to include, at minimum:
 
 All of this means that the simplest case of HTTP proxying — listening on a specified port for HTTP, then routing to different hosts depending on the URL — is actually pretty simple to configure in Envoy.
 
-An example: to proxy URLs starting with `/service1` to a cluster named `service1`, and URLs starting with `/service2` to a cluster named `service2`, you could use:
+## Virtual hosts example
+
+To proxy URLs starting with `/service1` to a cluster named `service1`, and URLs starting with `/service2` to a cluster named `service2`, you could use:
 
 ```
 “virtual_hosts”: [
@@ -99,6 +122,8 @@ An example: to proxy URLs starting with `/service1` to a cluster named `service1
 
 That’s it. Note that we use `domains [“*”]` to indicate that we don’t much care which host is being requested, and also note that we can add more routes as needed. Finally, this listener configuration is basically the same between the edge Envoy and service Envoy(s): the main difference is that a service Envoy will likely have only one route, and it will proxy only to the service on localhost rather than a cluster containing multiple hosts.
 
+## Clusters configuration
+
 Of course, we would still need to define the `service1` and `service2` clusters referenced in the `virtual_hosts` section above. We do this is in the `cluster_manager` configuration section, which is also a dictionary and also has one critical component, called `clusters`. Its value is, again, an array of dictionaries:
 
 * `name`: a human-readable name for the cluster
@@ -120,6 +145,9 @@ And the possible values for `lb_type` are:
 * `random`: pick a random host
 
 One interesting note about load balancing: a cluster can also define a *panic threshold*. If the number of healthy hosts in the cluster falls below the panic threshold, the cluster will decide that the health-check algorithm is broken and assume all the hosts in the cluster are healthy. This could lead to surprises, so it’s good to be aware of it!
+
+
+## Clusters example
 
 A simple case for an edge Envoy might be something like:
 
