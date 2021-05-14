@@ -60,6 +60,14 @@ export const products = [
         version: [
             { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start" }
         ]
+    },
+    {
+        slug: "envoy",
+        name: "Envoy",
+        link: "/docs/envoy/latest/concepts/cloudnative",
+        version: [
+            { id: "latest", name: "Latest", link: "latest" }
+        ]
     }
 ];
 
