@@ -1,4 +1,4 @@
-# Rate Limiting
+# Basic Rate Limiting
 
 IMPORTANT: This guide applies to Ambassador API Gateway, use of this guide on the Ambassador Edge Stack is not fully supported.  Use the existing [RateLimitService](../../topics/using/rate-limits/) instead.
 
