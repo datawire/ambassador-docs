@@ -4,4 +4,4 @@ The installer received an error from `kubectl` when applying the Kubernetes mani
 
 ## What's next?
 
-Please get in touch on [Slack](http://d6e.co/slack).
+Please get in touch on [Slack](https://a8r.io/Slack).
