@@ -25,9 +25,12 @@ Need a sample app to try with preview URLs?  Check out the <a href="../../quick-
 ## Creating a Preview URL
 
 1. List the services that you can intercept with `telepresence list` and make sure the one you want is listed. 
-If it isn't:
-* Only Deployments with labels matching a Service are listed.
-* If the service is in a different namespace specify the name space with the `--namespace` flag.
+
+    If it isn't:
+
+    * Only Deployments, ReplicaSets, or StatefulSets are supported, and each of those requires a label matching a Service
+
+    * If the service is in a different namespace, specify it with the `--namespace` flag
 
 2. Login to Ambassador Cloud where you can manage and share preview URLs:  
 `telepresence login`
@@ -82,14 +85,14 @@ If it isn't:
        
      Using deployment example-service
      intercepted
-         Intercept name   : example-service
-         State            : ACTIVE
-         Destination      : 127.0.0.1:8080
-         Service Port Name: http
-         Intercepting     : HTTP requests that match all of:
+         Intercept name         : example-service
+         State                  : ACTIVE
+         Destination            : 127.0.0.1:8080
+         Service Port Identifier: http
+         Intercepting           : HTTP requests that match all of:
            header("x-telepresence-intercept-id") ~= regexp("<intercept-id>:example-service")
-         Preview URL      : https://<random-domain-name>.preview.edgestack.me
-         Layer 5 Hostname : dev-environment.edgestack.me
+         Preview URL            : https://<random-domain-name>.preview.edgestack.me
+         Layer 5 Hostname       : dev-environment.edgestack.me
    ```
 
 4. Start your local environment using the environment variables retrieved in the previous step.

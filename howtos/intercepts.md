@@ -187,7 +187,7 @@ be routed to your cluster as usual.
    4. **Ingress layer 5 hostname**: If your ingress controller routes traffic based on a domain name (often using the `Host` HTTP header), this is the value you would need to enter here.
    
     <Alert severity="info">
-        Telepresence supports any ingress controller, not just <a href="../../../tutorials/getting-started/">Ambassador Edge Stack</a>.
+        Telepresence supports any ingress controller, not just <a href="../../../../edge-stack/latest/tutorials/getting-started/">Ambassador Edge Stack</a>.
     </Alert>
 
    For the example below, you will create a preview URL that will send traffic to the `ambassador` service in the `ambassador` namespace on port `443` using TLS encryption and setting the `Host` HTTP header to `dev-environment.edgestack.me`:
@@ -219,15 +219,15 @@ be routed to your cluster as usual.
        
      Using Deployment example-service
      intercepted
-         Intercept name   : example-service
-         State            : ACTIVE
-         Workload kind    : Deployment
-         Destination      : 127.0.0.1:8080
-         Service Port Name: http
-         Intercepting     : HTTP requests that match all of:
+         Intercept name         : example-service
+         State                  : ACTIVE
+         Workload kind          : Deployment
+         Destination            : 127.0.0.1:8080
+         Service Port Identifier: http
+         Intercepting           : HTTP requests that match all of:
            header("x-telepresence-intercept-id") ~= regexp("<intercept id>:example-service")
-         Preview URL      : https://<random domain name>.preview.edgestack.me
-         Layer 5 Hostname : dev-environment.edgestack.me
+         Preview URL            : https://<random domain name>.preview.edgestack.me
+         Layer 5 Hostname       : dev-environment.edgestack.me
    ```
 
 4. Start your local service as <a href="#start-local-instance">in the previous step</a>.
@@ -252,6 +252,6 @@ You can now:
 - Set breakpoints in your IDE to investigate bugs.
 
 ...and all of this <strong>without impacting your teammates!</strong>
-## <img class="os-logo" src="../../../images/logo.png"/> What's Next?
+## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
 <QSCards/>
