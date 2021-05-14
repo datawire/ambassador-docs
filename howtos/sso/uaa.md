@@ -1,4 +1,4 @@
-# User Account and Authentication Service (UAA)
+# Single Sign-On with User Account and Authentication Service (UAA)
 
 **IMPORTANT:** Ambassador Edge Stack requires the IdP to return a JWT signed by the RS256 algorithm (asymmetric key). Cloud Foundry's UAA defaults to symmetric key encryption which Ambassador Edge Stack cannot read.
 

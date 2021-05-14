@@ -7,13 +7,13 @@ enforce authentication as your application needs.
 
 Configuration of the `Filter` and `FilterPolicy`  resources that control **how**
 to do authentication can be found in the 
-[Filters and Authentication](../../using/filters) section of the documentation.
+[Filters and Authentication](../../../using/filters) section of the documentation.
 
 This document focuses on how to deploy and manage the authentication extension.
 
 ## Ambassador Configuration
 
-Ambassador uses the [`AuthService` plugin](../services/auth-service) 
+Ambassador uses the [`AuthService` plugin](../../services/auth-service) 
 to connect to the authentication extension in the Ambassador Edge Stack.
 
 The default `AuthService` is named `ambassador-edge-stack-auth` and is defined 
@@ -41,13 +41,13 @@ request.
 This default `AuthService` works for most use cases. If you find the need to
 tune how Ambassador connects to the authentication extension (like changing the
 default timeout), you can find the full configuration options in the 
-[`AuthService` plugin](../services/auth-service) documentation.
+[`AuthService` plugin](../../services/auth-service) documentation.
 
 ## Authentication Extension Configuration
 
 Certain use cases may require some tuning of the authentication extension. 
 Configuration of this extension is managed via environment variables.
-[The Ambassador Container](../environment) has a full list of environment
+[The Ambassador Container](../../environment) has a full list of environment
 variables available for configuration. This document highlights the ones used
 by the authentication extension.
 
@@ -59,7 +59,7 @@ The authentication extensions uses Redis for caching the response from the
 The Ambassador Edge Stack shares the same Redis pool for all features that use
 Redis.
 
-See the [Redis documentation](../aes-redis) for information on Redis tuning.
+See the [Redis documentation](../../aes-redis) for information on Redis tuning.
 
 #### `AES_AUTH_TIMEOUT`
 
