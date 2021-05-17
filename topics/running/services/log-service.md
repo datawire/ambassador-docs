@@ -1,4 +1,4 @@
-# LogService Plugin
+# Log service
 
 By default, Ambassador Edge Stack puts the access logs on stdout; such
 that the can be read using `kubectl logs`.  The format of those logs,

@@ -1,4 +1,4 @@
-# Method-based Routing
+# Method-based routing
 
 Ambassador Edge Stack supports routing based on the HTTP method and regular expression.
 
