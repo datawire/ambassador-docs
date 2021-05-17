@@ -59,9 +59,9 @@ env:
 
 With `AMBASSADOR_CONFIG_BASE_DIR` set as above, Ambassador will create and use the directory `/tmp/ambassador-config` for its generated data. (Note that, while the directory will be created if it does not exist, attempts to turn an existing file into a directory will fail.)
 
-## Running as daemonset
+## Running as DaemonSet
 
-Ambassador can be deployed as `daemonset` to have one pod per node in a Kubernetes cluster. This setup is especially helpful when you have a Kubernetes cluster running on a private cloud.
+Ambassador can be deployed as a DaemonSet to have one pod per node in a Kubernetes cluster. This setup is especially helpful when you have a Kubernetes cluster running on a private cloud.
 
 * In an ideal example scenario, you are running containers on Kubernetes alongside with your non-containerized applications running exposed via VIP using BIG-IP or similar products. In such cases, east-west traffic is routed based on iRules to certain a set of application pools consisting of application or web servers. In this setup, alongside traditional application servers, two or more Ambassador pods can also be part of the application pools. In case of failure there is at least one Ambassador pod available to BIG-IP that can take care of routing traffic to the Kubernetes cluster.
 
