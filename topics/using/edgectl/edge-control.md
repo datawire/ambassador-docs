@@ -1,6 +1,6 @@
 > **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](../../../../../../telepresence/latest/faqs) or [go to the quick start guide](../../../../../../telepresence/latest/quick-start/).**
 
-# Edge Control Reference
+# Edge Control reference
 
 Edge Control is the command-line tool for installing and managing the Ambassador Edge Stack. And Edge Control's outbound and intercept features allow developers to preview changes to their services while sharing a single development cluster.
 
@@ -159,6 +159,6 @@ Connected
   Intercepts:    0 total, 0 local
 ```
 
-## What's Next?
+## What's next?
 
 See how [Edge Control commands can be used in action](../service-preview-tutorial) to establish outbound connectivity with a remote Kubernetes cluster and intercept inbound requests.
