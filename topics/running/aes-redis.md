@@ -1,4 +1,4 @@
-# The Ambassador Edge Stack and Redis
+# Edge Stack and Redis
 
 The Ambassador Edge Stack make use of Redis for several purposes.  By default,
 all components of the Ambassador Edge Stack share a Redis connection pool.
@@ -156,7 +156,7 @@ There is no way to change the username with this implementation.
 
   This setting has no effect if `SURGE_POOL_SIZE` is 0.
 
-## Redis Type
+## Redis type
 
 Redis currently support three different deployment methods. Ambassador Edge
 Stack can now support using a Redis deployed in any of these ways for rate
