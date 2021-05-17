@@ -1,12 +1,12 @@
 > **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](../../../../../../telepresence/latest/faqs) or [go to the quick start guide](../../../../../../telepresence/latest/quick-start/).**
 
-# Service Preview Tutorial
+# Service Preview tutorial
 
 When Service Preview is used, incoming requests get routed by Ambassador to a Traffic Agent, which then routes traffic to the microservice. When a request meets a specific criteria (e.g., it has a specific HTTP header value), the Traffic Agent will route that request to the microservice running locally. The following video shows Service Preview in more detail:
 
 <iframe style="display: block; margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/LDiyKOa1V_A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Quick Start
+## Quick start
 
 Service Preview creates a connection between your local environment and the cluster. These connections are managed through the Traffic Manager, which is deployed in your cluster, and the `edgectl` daemon, which runs in your local environment.
 
@@ -14,7 +14,7 @@ To get started with Service Preview, you'll need to [download and install the `e
 
 Service Preview should already by installed in your cluster before starting this quick start. See the [installation instructions](../service-preview-install) for information on how to install Service Preview.
 
-### Intercepting Traffic
+### Intercepting traffic
 
 One of the main use cases of Service Preview is to intercept certain requests to services in your Kubernetes cluster and route them to your laptop instead.
 
@@ -111,7 +111,7 @@ One of the main use cases of Service Preview is to intercept certain requests to
 
    Requests are no longer intercepted.
 
-#### Intercept with a Preview URL
+#### Intercept with a preview URL
 
 Now let's set up an intercept with a preview URL.
 
@@ -207,7 +207,7 @@ Now let's set up an intercept with a preview URL.
   
   Requests are no longer intercepted.
 
-### Outbound Services
+### Outbound services
 
 Service Preview bridges your local and cluster DNS. This allows for the use case of using Service Preview as a debug tool for interacting with services in your cluster.
 
@@ -252,6 +252,6 @@ You are now able to connect to services directly from your laptop, as demonstrat
    Not connected
    ```
 
-## What's Next?
+## What's next?
 
 Multiple intercepts of the same deployment can run at the same time too. You can direct them to the same machine, allowing you to “or” together intercept conditions. Also, multiple developers can intercept the same deployment simultaneously. As long as their match patterns don’t collide, they don’t need to worry about disrupting one another.
