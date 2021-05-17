@@ -46,7 +46,7 @@
               link: /topics/concepts/architecture
             - title: Rate limiting at the edge
               link: /topics/concepts/rate-limiting-at-the-edge
-        - title: How Do I...
+        - title: How do I...
           items:
             - title: Route to my services
               items:
