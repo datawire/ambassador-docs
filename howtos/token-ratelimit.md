@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Rate Limiting on Token Claims
+# Rate limiting on token claims
 
 <Alert severity="info">This guide applies to Ambassador Edge Stack, use of this guide on the Ambassador API Gateway is not recommended.</Alert>
 
