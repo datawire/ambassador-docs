@@ -1,4 +1,4 @@
-# Rate Limiting Reference
+# Rate limiting reference
 
 Rate limiting in the Ambassador Edge Stack is composed of two parts:
 
@@ -279,7 +279,7 @@ spec:
     envoy_log_format: 'ratelimit %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.name)% took action %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.action)'
 ```
 
-## RateLimit Examples
+## RateLimit examples
 
 ### An example service-level rate limit
 

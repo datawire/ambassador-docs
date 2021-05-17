@@ -1,10 +1,10 @@
-# Filters and Authentication
+# Filters and authentication
 
 Filters are used to extend the Ambassador Edge Stack to modify or intercept a request before sending to your backend service. The most common use case for Filters is authentication, and Edge Stack includes a number of built-in filters for this purpose. Edge Stack also supports developing custom filters.
 
 Filters are managed using a `FilterPolicy` resource. The `FilterPolicy` resource specifies a particular host or URL to match, along with a set of filters to run when an request matches the host/URL.
 
-## Filter Types
+## Filter types
 
 Edge Stack supports the following filter types:
 
@@ -17,7 +17,7 @@ Edge Stack supports the following filter types:
 
 Filters are created with the `Filter` resource type, which contains global arguments to that filter.  Which Filter(s) to use for which HTTP requests is then configured in `FilterPolicy` resources, which may contain path-specific arguments to the filter.
 
-### `Filter` Definition
+### Filter definition
 
 Filters are created as `Filter` resources.  The body of the resource spec depends on the filter type:
 
@@ -36,7 +36,7 @@ spec:
     GLOBAL_FILTER_ARGUMENTS
 ```
 
-### `FilterPolicy` Definition
+### FilterPolicy definition
 
 `FilterPolicy` resources specify which filters (if any) to apply to
 which HTTP requests.
@@ -108,7 +108,7 @@ When multiple `Filter`s are specified in a rule:
      listed; or if at the end of the list, forward it to the upstream service.
  * Modifications to the request are cumulative; later filters have access to _all_ headers inserted by earlier filters.
 
-#### `FilterPolicy` Example
+#### FilterPolicy example
 
 In the example below, the `param-filter` Filter Plugin is loaded, and configured to run on requests to `/httpbin/`.
 
@@ -149,7 +149,7 @@ spec:
 
 **Note:** The Ambassador Edge Stack will choose the first `FilterPolicy` rule that matches the incoming request. As in the above example, you must list your rules in the order of least to most generic.
 
-#### Multiple Domains
+#### Multiple domains
 
 In this example, the `foo-keycloak` filter is used for requests to `foo.bar.com`, while the `example-auth0` filter is used for requests to `example.com`. This configuration is useful if you are hosting multiple domains in the same cluster.
 
