@@ -1,8 +1,8 @@
-# TLS Origination
+# TLS origination
 
 Sometimes you may want traffic from Ambassador Edge Stack to your services to be encrypted. For the cases where terminating TLS at the ingress is not enough, Ambassador Edge Stack can be configured to originate TLS connections to your upstream services.
 
-## Basic Configuration
+## Basic configuration
 
 Telling Ambassador Edge Stack to talk to your services over HTTPS is easily configured in the `Mapping` definition by setting `https://` in the `service` field.
 
@@ -17,7 +17,7 @@ spec:
   service: https://example-service
 ```
 
-## Advanced Configuration Using a `TLSContext`
+## Advanced configuration using a `TLSContext`
 
 If your upstream services require more than basic HTTPS support (e.g. minimum TLS version support or SNI support) you can create a `TLSContext` for Ambassador Edge Stack to use when originating TLS.
 
