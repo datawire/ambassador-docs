@@ -1,7 +1,7 @@
 ---
     description: In this guide, we'll walk through the process of deploying Ambassador Edge Stack in Kubernetes for ingress routing.
 ---
-# Manual Installation Guide
+# Install manually
 
 In this guide, we'll walk you through installing, configuring, and customizing
 the Ambassador Edge Stack in your Kubernetes cluster.
@@ -10,7 +10,7 @@ The manual install process does require more user configuration than the [quick
 start method](../../../tutorials/getting-started/), but it does allow you to control the
 aspects of your base Edge Stack installation.
 
-## Before You Begin
+## Before you begin
 
 The Ambassador Edge Stack is designed to run in Kubernetes for production. The most essential requirements are:
 
@@ -70,7 +70,7 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
   * `edgectl login -n <namespace> <AES_host>` or
   * `https://{{AES_URL}}/edge_stack/admin`
 
-## Configure TLS Termination and Automatic HTTPS
+## Configure TLS termination and automatic HTTPS
 
 **The Ambassador Edge Stack enables TLS termination by default using a self-signed certificate. See the [Host CRD](../../../topics/running/host-crd) for more information about disabling TLS.** If you have the ability to update your DNS, Ambassador can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create a Mapping."
 
@@ -165,11 +165,11 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
    }
    ```
 
-## View your Service Metadata using Service Catalog
+## View your Service metadata using Service Catalog
 
 [Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
-## A Single Source of Configuration
+## A single source of configuration
 
 In the Ambassador Edge Stack, Kubernetes serves as the single source of
 configuration. Changes made on the command line (via `kubectl`) are reflected in
@@ -189,7 +189,7 @@ just created on the command line.
    aes.ri.k36.net     aes.ri.k36.net     Ready                                    158m
    ```
 
-## Developer Onboarding
+## Developer onboarding
 
 The Quote service we just deployed publishes its API as a Swagger document. This API is automatically detected by the Ambassador Edge Stack and published.
 
@@ -200,6 +200,6 @@ The Quote service we just deployed publishes its API as a Swagger document. This
    `/`). This is a fully customizable portal that you can share with third
    parties who need information about your APIs.
 
-## What’s Next?
+## What’s next?
 
 The Ambassador Edge Stack has a comprehensive range of [features](/features/) to support the requirements of any edge microservice.
