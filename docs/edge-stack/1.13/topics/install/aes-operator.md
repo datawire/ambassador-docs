@@ -1,6 +1,6 @@
-# The Ambassador Edge Stack Operator
+# The Edge Stack Operator
 
-The Ambassador Edge Stack Operator is a Kubernetes Operator that controls the
+The  Edge Stack Operator is a Kubernetes Operator that controls the
 complete lifecycle of Ambassador in your cluster. It also
 automates many of the repeatable tasks you have to perform for the Ambassador
 Edge Stack. Once installed, the AES Operator will automatically complete rapid
@@ -56,7 +56,7 @@ delay the update until the Update Window allows the update to proceed. It will u
 determining if any new release is acceptable. When a new release is available and acceptable, the Operator
 will upgrade Ambassador.
 
-### Version Syntax and Update Window
+### Version syntax and update window
 
 To specify version numbers, use SemVer for the version number for any level of
 precision. This can optionally end in `*`.  For example:
@@ -180,6 +180,6 @@ EOF
 
 After applying an `AmbassadorInstallation` customer resource like this in a new cluster, the Operator will install a new instance of Ambassador 1.2.0 in the `ambassador` namespace, immediately. Removing this `AmbassadorInstallation` will uninstall Ambassador from this namespace.
 
-## Verify Configuration
+## Verify configuration
 
 **To verify that everything was installed and configured correctly,** you can visually confirm the set up in the Edge Policy Console on the “Debugging” tab. Alternatively, you can check the Operator pod in your cluster to check its health and run status.

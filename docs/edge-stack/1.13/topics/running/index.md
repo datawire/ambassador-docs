@@ -1,4 +1,4 @@
-# Running Ambassador in Production
+# Running Ambassador in production
 
 This section of the documentation is designed for operators and site reliability engineers who are managing the deployment of Ambassador. Learn more below:
 

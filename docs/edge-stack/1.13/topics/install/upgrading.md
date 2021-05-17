@@ -27,7 +27,7 @@ NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 ambassador         1/1     1            1           ...
 ```
 
-## Installed via YAML Manifests?
+## Installed via YAML manifests?
 
 Finally, if you installed using YAML manifests, simply run the commands in the following section. To verify whether manifests were used to install Ambassador Edge Stack, run the following command to see if it returns resources:
 ```
@@ -39,7 +39,7 @@ ambassador         1/1     1            1           ...
 If none of the commands above return resources, you probably have an old installation and you should follow
 the instructions for [upgrading to Ambassador Edge Stack](../upgrade-to-edge-stack/).
 
-### Upgrading an Installation with YAML Manifests
+### Upgrading an installation with YAML manifests
 
 If you previously installed Edge Stack using YAML manifests, you can upgrade with
 these commands:
