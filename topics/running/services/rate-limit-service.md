@@ -127,7 +127,7 @@ spec:
 
 You may only use a single `RateLimitService` manifest.
 
-## Rate Limit service and TLS
+## Rate limit service and TLS
 
 You can tell the Ambassador API Gateway to use TLS to talk to your service by
 using a `RateLimitService` with an `https://` prefix.  However, you may also
