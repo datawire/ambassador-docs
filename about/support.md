@@ -1,10 +1,10 @@
-# Need Help?
+# Need help?
 
 If you need help deploying Ambassador at your organization, there are several different options available to you.
 
-## Support Tiers
+## Support tiers
 
-### Ambassador Edge Stack Community Support
+### Ambassador Edge Stack community support
 
 If you are running the Ambassador API Gateway or the Ambassador Edge Stack with free, community licenses, [join our Slack channel](https://a8r.io/Slack) to talk with other users in the community and get your questions answered.
 

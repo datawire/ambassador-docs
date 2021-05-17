@@ -16,7 +16,7 @@ changes and reload certificates upon renewal.
 > was removed in cert-manager v0.15, see their [upgrading](https://cert-manager.io/docs/installation/upgrading/)
 > document for more info.
 
-## Install Cert-Manager
+## Install cert-manager
 
 There are many different ways to [install cert-manager](https://docs.cert-manager.io/en/latest/getting-started/install.html). For simplicity, we will use Helm v3.
 
@@ -37,7 +37,7 @@ There are many different ways to [install cert-manager](https://docs.cert-manage
     helm install cert-manager --namespace cert-manager jetstack/cert-manager
     ```
 
-## Issuing Certificates
+## Issuing certificates
 
 cert-manager issues certificates from a CA such as [Let's Encrypt](https://letsencrypt.org/). It does this using the ACME protocol which supports various challenge mechanisms for verifying ownership of the domain.
 
@@ -55,7 +55,7 @@ By duplicating issuers, certificates, and secrets one can support multiple domai
 
 cert-manager supports two kinds of ACME challenges that verify domain ownership in different ways: HTTP-01 and DNS-01.
 
-### DNS-01 Challenge
+### DNS-01 challenge
 
 The DNS-01 challenge verifies domain ownership by proving you have control over its DNS records. Issuer configuration will depend on your [DNS provider](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/index.html#supported-dns01-providers). This example uses [AWS Route53](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/route53.html).
 
@@ -120,7 +120,7 @@ The DNS-01 challenge verifies domain ownership by proving you have control over 
     ambassador-certs         kubernetes.io/tls                     2         1h
     ```
 
-### HTTP-01 Challenge
+### HTTP-01 challenge
 
 The HTTP-01 challenge verifies ownership of the domain by sending a request for a specific file on that domain. cert-manager accomplishes this by sending a request to a temporary pod with the prefix `/.well-known/acme-challenge/`. To perform this challenge:
 
