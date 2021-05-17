@@ -1,4 +1,4 @@
-# The Ambassador API Gateway
+# Install the Ambassador API Gateway
 
 **The Ambassador Edge Stack is now available and includes additional functionality beyond the current Ambassador API Gateway.**
 These features include automatic HTTPS, the Edge Policy Console UI, OAuth/OpenID Connect authentication support, integrated rate
@@ -191,6 +191,6 @@ Ambassador API Gateway.
 
 [Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
-## Want More?
+## Want more?
 
 For more features, check out the latest build of the [Ambassador Edge Stack](../).
