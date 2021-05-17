@@ -1,4 +1,4 @@
-# Adding Authentication to your `Project`
+# Adding authentication to your `Project`
 
 ## This feature is DEPRECATED. Consider the [Argo Rollouts integration](/docs/argo/latest/quick-start) with Ambassador Edge Stack.
 

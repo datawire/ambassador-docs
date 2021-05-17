@@ -1,4 +1,4 @@
-# Prefix Regex
+# Prefix regex
 
 ## Using `prefix` and `prefix_regex`
 

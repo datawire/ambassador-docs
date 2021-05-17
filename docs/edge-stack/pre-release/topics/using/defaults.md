@@ -1,6 +1,6 @@
-# Using Ambassador Module Defaults
+# Using Ambassador Module defaults
 
-## The `defaults` element
+## The defaults element
 
 If present, the `ambassador Module` can define a set of defaults that will automatically be applied to certain resources:
 
@@ -22,7 +22,7 @@ spec:
       top_key2: value2  # toplevel defaults dictionary for it.
 ```
 
-### `Mapping`
+### Mapping
 
 Currently, only the `Mapping` resource uses the `defaults` mechanism. `Mapping` looks first for defaultable resources in the `httpmapping` class, including:
 
