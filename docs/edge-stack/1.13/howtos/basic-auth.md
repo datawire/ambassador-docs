@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Basic Authentication (for API Gateway)
+# Basic authentication (for API Gateway)
 
 <Alert severity="info">
   This guide applies to Ambassador API Gateway, use of this guide with Edge stack is not recommended.  Edge Stack does <a href="../ext-filters">authentication using the Filter resource</a> instead of the AuthService resource as described below.
@@ -14,13 +14,13 @@ party authentication service. We're assuming also that you are running the
 quote application in your cluster as described in the 
 [Ambassador tutorial](../../tutorials/quickstart-demo/).
 
-## Before You Get Started
+## Before you get started
 
 This tutorial assumes you have already followed the Ambassador API Gateway [Installation](../../topics/install/install-ambassador-oss) guide. If you haven't done that already, you should do so now.
 
 Once complete, you'll have a Kubernetes cluster running Ambassador. Let's walk through adding authentication to this setup.
 
-## 1. Deploy the Authentication Service
+## 1. Deploy the authentication service
 
 Ambassador delegates the actual authentication logic to a third party authentication service. We've written a [simple authentication service](https://github.com/datawire/ambassador-auth-service) that:
 
@@ -97,7 +97,7 @@ example-auth-6c5855b98d-24clp   1/1       Running   0          4m
 ```
 Note that the `READY` field says `1/1` which means the pod is up and running.
 
-## 2. Configure Ambassador Authentication
+## 2. Configure Ambassador authentication
 
 Once the auth service is running, we need to tell Ambassador about it. The easiest way to do that is to map the `example-auth` service with the following:
 
@@ -130,7 +130,7 @@ or, again, apply it from a local file if you prefer.
 
 Note that the cluster does not yet contain any Ambassador AuthService definition.
 
-## 3. Test Authentication
+## 3. Test authentication
 
 If we `curl` to a protected URL:
 

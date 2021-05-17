@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Basic Authentication
+# Basic authentication
 
 <Alert severity="info">
   This guide applies to Ambassador Edge Stack, use of this guide on the Ambassador API Gateway is not recommended.  API Gateway does <a href="../basic-auth">authentication using the AuthService resource</a> instead of the Filter resource as described below.
@@ -12,7 +12,7 @@ party authentication service. We're assuming also that you are running the
 quote application in your cluster as described in the 
 [Ambassador tutorial](../../tutorials/quickstart-demo/).
 
-## 1. Deploy the Authentication Service
+## 1. Deploy the authentication service
 
 Ambassador delegates the actual authentication logic to a third party authentication service. We've written a [simple authentication service](https://github.com/datawire/ambassador-auth-service) that:
 
@@ -89,7 +89,7 @@ example-auth-6c5855b98d-24clp   1/1       Running   0          4m
 ```
 Note that the `READY` field says `1/1` which means the pod is up and running.
 
-## 2. Configure Ambassador Authentication
+## 2. Configure Ambassador authentication
 
 Once the auth service is running, we need to tell Ambassador about it. The easiest way to do that is to first map the `example-auth` service with the following `Filter`:
 
@@ -145,7 +145,7 @@ spec:
 
 If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillatoolkit.org) which enforces strict slashes as HTTP path separators, it is possible to end up with an infinite redirect where the filter's framework redirects any request with non-conformant slashing. This would arise if the above example had ```path_prefix: "/extauth/"```, the filter would see a request for ```/extauth//backend/get-quote/``` which would then be redirected to ```/extauth/backend/get-quote/``` rather than actually be handled by the authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to ```path_prefix``` regardless of non-conformant slashing.
 
-## 3. Test Authentication
+## 3. Test authentication
 
 If we `curl` to a protected URL:
 
@@ -201,7 +201,7 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
 }
 ```
 
-## <img class="os-logo" src="../../images/logo.png"/> What's Next?
+## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
 * Get started with authentication by [installing Edge Stack](../../tutorials/getting-started/).
 
