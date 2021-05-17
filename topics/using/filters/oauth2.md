@@ -7,7 +7,7 @@ The `OAuth2` filter type performs OAuth2 authorization against an identity provi
 
 This is different from most OAuth implementations where the Authorization Server and the Resource Server are in the same security domain. With the Ambassador Edge Stack, the Client and the Resource Server are in the same security domain, and there is an independent Authorization Server.
 
-## The Ambassador Authentication Flow
+## The Ambassador authentication flow
 
 This is what the authentication process looks like at a high level when using Ambassador Edge Stack with an external identity provider. The use case is an end-user accessing a secured app service.
 
@@ -25,7 +25,7 @@ For those unfamiliar with authentication, here is a basic set of definitions.
 
 If you look back at the authentication process diagram, the function of the entities involved should now be much clearer.
 
-### Using an Identity Hub
+### Using an identity hub
 
 Using an identity hub or broker allows you to support many IdPs without having to code individual integrations with them. For example, [Auth0](https://auth0.com/docs/identityproviders) and [Keycloak](https://www.keycloak.org/docs/latest/server_admin/index.html#social-identity-providers) both offer support for using Google and GitHub as an IdP.
 
@@ -34,7 +34,7 @@ An identity hub sits between your application and the IdP that authenticates you
 The Auth0 docs provide a guide for adding social IdP "[connections](https://auth0.com/docs/identityproviders)" to your Auth0 account, and the Keycloak docs provide a guide for adding social identity "[brokers](https://www.keycloak.org/docs/latest/server_admin/index.html#social-identity-providers)".
 
 
-## `OAuth2` Global Arguments
+## OAuth2 global arguments
 
 ```yaml
 ---
@@ -136,7 +136,7 @@ spec:
 
  - `authorizationURL`: Identifies where to look for the `/.well-known/openid-configuration` descriptor to figure out how to talk to the OAuth2 provider
 
-### OAuth Client settings
+### OAuth client settings
 
 These settings configure the OAuth Client part of the filter.
 
@@ -354,7 +354,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
          not support the `\C` escape sequence.
        + (it is invalid to have both `value` and `valueRegex` set)
 
-### OAuth Resource Server settings
+### OAuth resource server settings
 
  - `allowMalformedAccessToken`: Allow any access token, even if they are not RFC 6750-compliant.
  - `injectRequestHeaders` injects HTTP header fields in to the request before sending it to the upstream service; where the header value can be set based on the JWT value.
@@ -427,9 +427,7 @@ provider:
 
 `"duration"` strings are parsed as a sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".  See [Go `time.ParseDuration`](https://golang.org/pkg/time/#ParseDuration).
 
-> **Note:** Try to configure your Identity Provider to send the proper `Cache-Control` headers so that Ambassador can successfully cache responses since the default action is to not cache responses. This will prevent recieving 502 errors when requests to the IDP exceed the default auth timeout of 5 seconds in response to frequent requests to the IDP caused by large ammounts of traffic. If this is not possible, you can set `maxStale` in your `oauth2` filter to manually configure Ambassador to cache requests.  
-
-## `OAuth2` Path-Specific Arguments
+## OAuth2 path-specific arguments
 
 ```yaml
 ---

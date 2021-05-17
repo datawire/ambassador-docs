@@ -1,4 +1,4 @@
-# Host Headers
+# Host headers
 
 Ambassador Edge Stack supports several different methods for managing the HTTP `Host` header.
 
