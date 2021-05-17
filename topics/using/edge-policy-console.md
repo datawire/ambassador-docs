@@ -6,7 +6,7 @@ After you [install the Ambassador Edge Stack](../../install), you can log in to 
 
 Note: You can force all Edge Policy Console sessions to sign out using the **Log Out** button on the [Debugging](#debugging) page.
 
-## Available Pages
+## Available pages
 
 The EPC makes it easy to configure what you need for a successful deployment. However, you'll also be able to use the command line to complete any of your configurations.
 
@@ -58,7 +58,7 @@ Filters allow you to configure middleware for your requests. On this page, you c
 
 See [Filters](../filters) for detailed information.
 
-### Rate Limits
+### Rate limits
 
 Rate limits allow you to control traffic for different request classes.
 
@@ -96,7 +96,7 @@ See [Debugging](../../running/debugging) for more information.
 
 The **Sign Out of All Sessions** box gives you the ability to terminate all Edge Policy Console sessions associated with this installation of Ambassador Edge Stack.
 
-### YAML Download
+### YAML download
 
 The YAML Download page stores all of the configuration changes you make across the EPC in one place for you to conveniently download. If you need to push files to Git, these contain the most up-to-date information.
 

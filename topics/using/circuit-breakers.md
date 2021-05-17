@@ -1,8 +1,8 @@
-# Circuit Breakers
+# Circuit breakers
 
 Circuit breakers are a powerful technique to improve resilience. By preventing additional connections or requests to an overloaded service, circuit breakers limit the ["blast radius"](https://www.ibm.com/garage/method/practices/manage/practice_limited_blast_radius/) of an overloaded service. By design, Ambassador Edge Stack circuit breakers are distributed, i.e., different Ambassador Edge Stack instances do not coordinate circuit breaker information.
 
-## Circuit Breaker Configuration
+## Circuit breaker configuration
 
 Circuit breaking configuration can be set for all Ambassador Edge Stack mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings#configuring-mappings).
 
@@ -77,7 +77,7 @@ spec:
   service: quote
 ```
 
-## Circuit Breakers and Automatic Retries
+## Circuit breakers and automatic retries
 
 Circuit breakers are best used in conjunction with [automatic retries](../retries). Here are some examples:
 
@@ -86,7 +86,7 @@ Circuit breakers are best used in conjunction with [automatic retries](../retrie
 
 Note that setting circuit breaker thresholds requires careful monitoring and experimentation. We recommend you start with conservative values for circuit breakers and adjust them over time.
 
-## More About Circuit Breakers
+## More About circuit breakers
 
 Responses from a broken circuit contain the `x-envoy-overloaded` header.
 
