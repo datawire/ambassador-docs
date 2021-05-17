@@ -1,8 +1,8 @@
-# Add Response Headers
+# Add response headers
 
 Ambassador Edge Stack can add a dictionary of HTTP headers that can be added to each response that is returned to the client.
 
-## The `add_response_headers` Attribute
+## The `add_response_headers` attribute
 
 The `add_response_headers` attribute is a dictionary of `header`: `value` pairs. The `value` can be a `string`, `bool` or `object`. When it is an `object`, the object should have a `value` property, which is the actual header value, and the remaining attributes are additional envoy properties.
 
@@ -10,7 +10,7 @@ Envoy dynamic values `%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%` and `%PROTOCOL%`
 
 `add_response_headers` can be set either in a `Mapping` or using [`ambassador Module defaults`](../../defaults).
 
-### Mapping Example
+### Mapping example
 
 ```yaml
 ---
@@ -32,7 +32,7 @@ spec:
 
 will add the protocol, client IP, and a static header to the response returned to the client.
 
-### Defaults Example
+### Defaults example
 
 ```yaml
 apiVersion: getambassador.io/v2

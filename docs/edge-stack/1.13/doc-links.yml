@@ -6,43 +6,45 @@
   items:
     - title: Edge Stack
       items:
-        - title: Quick Start
+        - title: Quick start
           link: /tutorials/getting-started
         - title: Install Edge Stack
           link: /topics/install/
           items:
           - title: Install with Helm
             link: /topics/install/helm
+          - title: Upgrading Ambassador Edge Stack
+            link: /topics/install/upgrading
           - title: Upgrade to the Ambassador Edge Stack
             link: /topics/install/upgrade-to-edge-stack
-          - title: Upgrade to a Newer Version
-            link: /topics/install/upgrading
           - title: Install the Ambassador API Gateway
             link: /topics/install/install-ambassador-oss
           - title: Install with Docker
             link: /topics/install/docker
-          - title: Install with Bare Metal
+          - title: Install with bare metal
             link: /topics/install/bare-metal
-          - title: Install Manually
+          - title: Install manually
             link: /topics/install/yaml-install
-          - title: Ambassador Edge Stack Operator
+          - title: The Edge Stack Operator
             link: /topics/install/aes-operator
-          - title: Install with Edgectl
+          - title: Install with edgectl
             link: /topics/install/help/
-        - title: Core Concepts
+        - title: Core concepts
           link: /topics/concepts/
           items:
-            - title: Kubernetes Network Architecture
+            - title: Introduction to modern network load balancing and proxying
+              link: /topics/concepts/modern-lb-and-proxying
+            - title: Kubernetes network architecture
               link: /topics/concepts/kubernetes-network-architecture
-            - title: "The Ambassador Operating Model: GitOps and Continuous Delivery"
+            - title: "The Ambassador operating model: GitOps and continuous delivery"
               link: /topics/concepts/gitops-continuous-delivery
-            - title: Progressive Delivery
+            - title: Progressive delivery
               link: /topics/concepts/progressive-delivery
-            - title: Microservices API Gateways
+            - title: Microservices API gateways
               link: /topics/concepts/microservices-api-gateways
-            - title: Edge Stack Architecture
+            - title: Edge Stack architecture
               link: /topics/concepts/architecture
-            - title: Rate Limiting at the Edge
+            - title: Rate limiting at the edge
               link: /topics/concepts/rate-limiting-at-the-edge
         - title: How Do I...
           items:
@@ -52,19 +54,19 @@
                   link: /howtos/route
                 - title: Other protocols
                   items:
-                    - title: TCP Connections
+                    - title: TCP connections
                       link: /topics/using/tcpmappings
-                    - title: gRPC Connections
+                    - title: gRPC connections
                       link: /howtos/grpc
-                    - title: WebSocket Connections
+                    - title: WebSocket connections
                       link: /howtos/websockets
             - title: Protect my services
               items:
                 - title: Authentication
                   items:
-                    - title: Basic Authentication
+                    - title: Basic authentication
                       link: /howtos/ext-filters
-                    - title: Basic Authentication (for API Gateway)
+                    - title: Basic authentication (for API Gateway)
                       link: /howtos/basic-auth
                     - title: Using the OAuth2 filter for SSO
                       link: /howtos/oauth-oidc-auth
@@ -92,26 +94,26 @@
                       link: /howtos/auth-kubectl-keycloak
                 - title: Rate limiting
                   items:
-                    - title: Basic Rate Limiting
+                    - title: Basic rate limiting
                       link: /howtos/rate-limiting-tutorial
-                    - title: Advanced Rate Limiting
+                    - title: Advanced rate limiting
                       link: /howtos/advanced-rate-limiting
-                    - title: Rate Limiting on Token Claims
+                    - title: Rate limiting on token claims
                       link: /howtos/token-ratelimit
             - title: Monitor my services
               items:
-                - title: Distributed Tracing with Datadog
+                - title: Distributed tracing with Datadog
                   link: /howtos/tracing-datadog
-                - title: Distributed Tracing with Zipkin
+                - title: Distributed tracing with Zipkin
                   link: /howtos/tracing-zipkin
                 - title: Monitoring with Prometheus and Grafana
                   link: /howtos/prometheus
                 - title: Statistics
                   link: /topics/running/statistics
                   items:
-                    - title: Envoy Statistics with StatsD
+                    - title: Envoy statistics with StatsD
                       link: /topics/running/statistics/envoy-statsd
-                    - title: The Metrics Endpoint
+                    - title: The metrics endpoint
                       link: /topics/running/statistics/8877-metrics
             - title: Set up integrations
               items:
@@ -119,63 +121,61 @@
                   link: /howtos/knative
                 - title: Service meshes
                   items:
-                    - title: Consul Integration
+                    - title: Consul integration
                       link: /howtos/consul
-                    - title: Istio Integration
+                    - title: Istio integration
                       link: /howtos/istio
-                    - title: Linkerd 2 Integration
+                    - title: Linkerd 2 integration
                       link: /howtos/linkerd2
-        - title: Technical Reference
+        - title: Technical reference
           items:
-            - title: Custom Resources
+            - title: Custom resources
               items:
-                - title: The Host Resource
+                - title: The Host resource
                   link: /topics/running/host-crd
                   items:
                     - title: TLS
                       link: /topics/running/tls/
                       items:
-                        - title: Simultaneously Routing HTTP and HTTPS
-                          link: /topics/running/tls/cleartext-redirection#cleartext-routing
-                        - title: HTTP -> HTTPS Redirection
-                          link: /topics/running/tls/cleartext-redirection#http---https-redirection
+                        - title: Clertext support
+                          link: /topics/running/tls/cleartext-redirection
                         - title: Mutual TLS (mTLS)
                           link: /topics/running/tls/mtls
                         - title: Server Name Indication (SNI)
                           link: /topics/running/tls/sni
-                        - title: TLS Origination
+                        - title: TLS origination
                           link: /topics/running/tls/origination
-                - title: The Module Resource
+                - title: The Module resource
                   link: /topics/running/ambassador
             - title: Deploying Ambassador
               items:
-                - title: Deployment Architecture
+                - title: Deployment architecture
                   link: /topics/running/ambassador-deployment
-                - title: The Ambassador Container
+                - title: The Ambassador container
                   link: /topics/running/environment
-                - title: Ambassador Edge Stack and Redis
+                - title: Edge Stack and Redis
                   link: /topics/running/aes-redis
-                - title: Ambassador with AWS
+                - title: Edge Stack with AWS
                   link: /topics/running/ambassador-with-aws
-                - title: Ambassador with GKE
+                - title: Edge Stack with GKE
                   link: /topics/running/ambassador-with-gke
-                - title: Advanced Deployment Configuration
+                - title: Advanced deployment configuration
                   link: /topics/running/running
-                - title: Performance and Scaling Ambassador
+                - title: Performance and scaling Ambassador
                   link: /topics/running/scaling
-            - title: Edge Policy Management
+            - title: Edge policy management
               items:
-                - title: Edge Policy Console
+                - title: Edge policy console
                   link: /topics/using/edge-policy-console
-                - title: Rate Limit Speedometers
+                - title: Rate limit speedometers
                   link: /topics/using/rate-limit-speedometers
                 - title: Gateway API
                   link: /topics/using/gateway-api
-            - title: Filters and Authentication
+            - title: Filters and authentication
               items:
-                - title: Authentication Extension
+                - title: Authentication extension
                   link: /topics/running/aes-extensions/authentication
-                - title: Filters and Filter Policies
+                - title: Filters and Filter policies
                   link: /topics/using/filters/
                 - title: OAuth2 Filter
                   link: /topics/using/filters/oauth2
@@ -185,46 +185,46 @@
                   link: /topics/using/filters/external
                 - title: Plugin Filter
                   link: /topics/using/filters/plugin
-            - title: Ingress and Load Balancing
+            - title: Ingress and load balancing
               items:
-                - title: The Mapping Resource
+                - title: The Mapping resource
                   items:
-                    - title: Mapping Basics
+                    - title: Mapping basics
                       link: /topics/using/intro-mappings
-                    - title: Advanced Mapping Configuration
+                    - title: Advanced Mapping configuration
                       link: /topics/using/mappings
-                    - title: AuthService Settings
+                    - title: AuthService settings
                       link: /topics/using/authservice
-                    - title: Automatic Retries
+                    - title: Automatic retries
                       link: /topics/using/retries
-                    - title: Canary Releases
+                    - title: Canary releases
                       link: /topics/using/canary
                     - title: Circuit Breakers
                       link: /topics/using/circuit-breakers
-                    - title: Cross-Origin Resource Sharing
+                    - title: Cross-Origin Resource Sharing (CORS)
                       link: /topics/using/cors
                     - title: Headers
                       link: /topics/using/headers/headers
                       items:
-                        - title: Add Request Headers
+                        - title: Add request headers
                           link: /topics/using/headers/add_request_headers
-                        - title: Remove Request Headers
+                        - title: Remove request headers
                           link: /topics/using/headers/remove_request_headers
-                        - title: Add Response Headers
+                        - title: Add response headers
                           link: /topics/using/headers/add_response_headers
-                        - title: Remove Response Headers
+                        - title: Remove response headers
                           link: /topics/using/headers/remove_response_headers
-                        - title: Header-Based Routing
+                        - title: Header-based routing
                           link: /topics/using/headers/headers
-                        - title: Host Header
+                        - title: Host header
                           link: /topics/using/headers/host
                     - title: Keepalive
                       link: /topics/using/keepalive
-                    - title: Method-Based Routing
+                    - title: Method-based routing
                       link: /topics/using/method
-                    - title: Prefix Regex
+                    - title: Prefix regex
                       link: /topics/using/prefix_regex
-                    - title: Query Parameter-Based Routing
+                    - title: Query parameter-based routing
                       link: /topics/using/query_parameters/
                     - title: Redirects
                       link: /topics/using/redirects
@@ -232,47 +232,47 @@
                       link: /topics/using/rewrites
                     - title: Timeouts
                       link: /topics/using/timeouts
-                    - title: Traffic Shadowing
+                    - title: Traffic shadowing
                       link: /topics/using/shadowing
-                - title: Ingress Controller
+                - title: Ingress controller
                   link: /topics/running/ingress-controller
-                - title: Load Balancing
+                - title: Load balancing
                   link: /topics/running/load-balancer
-                - title: Service Discovery and Resolvers
+                - title: Service discovery and resolvers
                   link: /topics/running/resolvers
-            - title: Plug-in Services
+            - title: Plug-in services
               items:
-                - title: Authentication Service
+                - title: Authentication service
                   link: /topics/running/services/auth-service
-                - title: ExtAuth Protocol
+                - title: ExtAuth protocol
                   link: /topics/running/services/ext_authz
-                - title: Log Service
+                - title: Log service
                   link: /topics/running/services/log-service
-                - title: Rate Limit Service
+                - title: Rate limit service
                   link: /topics/running/services/rate-limit-service
-                - title: Tracing Service
+                - title: Tracing service
                   link: /topics/running/services/tracing-service
-            - title: Traffic Management
+            - title: Traffic management
               items:
-                - title: Custom Error Responses
+                - title: Custom error responses
                   link: /topics/running/custom-error-responses
-                - title: Gzip Compression
+                - title: Gzip compression
                   link: /topics/running/gzip
-                - title: Rate Limiting
+                - title: Rate limiting
                   items:
-                    - title: Basic Rate Limiting
+                    - title: Basic rate limiting
                       link: /topics/using/rate-limits/
-                    - title: Rate Limiting Reference
+                    - title: Rate limiting reference
                       link: /topics/using/rate-limits/rate-limits
-                    - title: Rate Limiting Extension
+                    - title: Rate limiting extension
                       link: /topics/running/aes-extensions/ratelimit
                 - title: TLS
                   items:
-                    - title: TLS Termination and Enabling HTTPS
+                    - title: TLS termination and enabling HTTPS
                       link: /howtos/tls-termination
                     - title: Using cert-manager
                       link: /howtos/cert-manager
-                    - title: Client Certificate Validation
+                    - title: Client certificate validation
                       link: /howtos/client-cert-validation
         - title: FAQs
           link: /about/faq
@@ -282,19 +282,19 @@
           link: /topics/running/debugging
         - title: Service Preview
           items:
-            - title: Quick Start
+            - title: Quick start
               link: /topics/using/edgectl/service-preview-install
             - title: Tutorial
               link: /topics/using/edgectl/service-preview-tutorial
-            - title: How-to Guides
+            - title: How-to guides
               items:
-                - title: Service Mesh and Service Preview
+                - title: Service mesh and Service Preview
                   link: /topics/using/edgectl/service-mesh-sp
-                - title: Edge Control Reference
+                - title: Edge Control reference
                   link: /topics/using/edgectl/edge-control
                 - title: Using Edge Control in CI
                   link: /topics/using/edgectl/edge-control-in-ci
-            - title: Technical Reference
+            - title: Technical reference
               link: /topics/using/edgectl/service-preview-reference
         - title: Developer Portal
           link: /topics/using/dev-portal
