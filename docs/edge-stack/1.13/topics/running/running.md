@@ -1,4 +1,4 @@
-# Running and Deployment
+# Running and deployment
 
 This section is intended for operators running the Ambassador Edge Stack, and covers various aspects of deploying and configuring the Ambassador Edge Stack in production.
 
@@ -6,11 +6,11 @@ This section is intended for operators running the Ambassador Edge Stack, and co
 
 The Ambassador Edge Stack relies on Kubernetes for reliability, availability, and scalability. This means that features such as Kubernetes readiness and liveness probes, rolling updates, and the Horizontal Pod Autoscaling should be utilized to manage the Ambassador Edge Stack.
 
-## Default Configuration
+## Default configuration
 
 The default configuration of the Ambassador Edge Stack includes default [resource limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#resource-requests-and-limits-of-pod-and-container), as well as [readiness and liveness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/). These values should be adjusted for your specific environment.
 
-## Running as Non-root
+## Running as non-root
 
 Starting with Ambassador 0.35, we support running the Ambassador Edge Stack as non-root. This is the recommended configuration, and will be the default configuration in future releases. We recommend you configure the Ambassador Edge Stack to run as non-root as follows:
 
@@ -47,7 +47,7 @@ spec:
 
 * If you are using `redirect_cleartext_from`, change the value of this field to point to your cleartext port (e.g., 8080) and set `service_port` to be your TLS port (e.g., 8443).
 
-## Changing the Configuration Directory
+## Changing the configuration directory
 
 While running, Ambassador needs to use a directory within its container for generated configuration data. Normally this is `/ambassador`, but in some situations - especially if running as non-root - it may be necessary to change to a different directory. To do so, set the environment variable `AMBASSADOR_CONFIG_BASE_DIR` to the full pathname of the directory to use, as shown below in this abbreviated example:
 
@@ -59,7 +59,7 @@ env:
 
 With `AMBASSADOR_CONFIG_BASE_DIR` set as above, Ambassador will create and use the directory `/tmp/ambassador-config` for its generated data. (Note that, while the directory will be created if it does not exist, attempts to turn an existing file into a directory will fail.)
 
-## Running as `daemonset`
+## Running as daemonset
 
 Ambassador can be deployed as `daemonset` to have one pod per node in a Kubernetes cluster. This setup is especially helpful when you have a Kubernetes cluster running on a private cloud.
 
@@ -225,7 +225,7 @@ Setting `AMBASSADOR_FAST_RECONFIGURE` to "true" enables incremental reconfigurat
 
 By default, the Ambassador Edge Stack will configure Envoy using the v2 API. Setting `AMBASSADOR_ENVOY_API_VERSION` to `V3` tells Ambassador to use the Envoy v3 API. Since the v2 API is deprecated in the upstream Envoy project, it is encouraged to eventually use the v3 API. New features or enhancements in Ambassador Edge Stack _may_ begin to require the v3 API. It is therefore strongly recommended to try the v3 API sooner rather than later and, as always, provide feedback and bug reports in the Ambassador GitHub repo!
 
-## Configuration from the Filesystem
+## Configuration from the filesystem
 
 If desired, the Ambassador Edge Stack can be configured from YAML files in the directory `$AMBASSADOR_CONFIG_BASE_DIR/ambassador-config` (by default, `/ambassador/ambassador-config`, which is empty in the images built by Datawire). You could volume mount an external configuration directory here, for example, or use a custom Dockerfile to build configuration directly into a Docker image.
 
@@ -233,17 +233,17 @@ Note well that while the Ambassador Edge Stack will read its initial configurati
 
 Also note that the YAML files in the configuration directory must contain the Ambassador Edge Stack resources, not Kubernetes resources with annotations.
 
-## Log Levels and Debugging
+## Log levels and debugging
 
 The Ambassador API Gateway and the Ambassador Edge Stack support more verbose debugging levels. If using the Ambassador API Gateway, the [diagnostics](../diagnostics) service has a button to enable debug logging. Be aware that if you're running Ambassador on multiple pods, the debug log levels are not enabled for all pods -- they are configured on a per-pod basis.
 
 If using the Ambassador Edge Stack, you can adjust the log level by setting the `AES_LOG_LEVEL` environment variable; from least verbose to most verbose, the valid values are `error`, `warn`/`warning`, `info`, `debug`, and `trace`; the default is `info`.
 
-## Port Assignments
+## Port assignments
 
 The Ambassador Edge Stack uses some TCP ports in the range 8000-8499 internally, as well as port 8877. Third-party software integrating with the Ambassador Edge Stack should not use ports in this range on the Ambassador pod.
 
-## The Ambassador Edge Stack Update Checks (Scout)
+## The Ambassador Edge Stack update checks (Scout)
 
 The Ambassador Edge Stack integrates Scout, a service that periodically checks with Datawire servers to advise of available updates. Scout also sends anonymized usage data and the Ambassador Edge Stack version. This information is important to us as we prioritize test coverage, bug fixes, and feature development. Note that the Ambassador Edge Stack will run regardless of the status of Scout (i.e., our uptime has zero impact on your uptime.)
 

@@ -1,4 +1,4 @@
-# Microservices API Gateways vs. Traditional Enterprise API Gateways
+# Microservices API gateways
 
 A microservices API gateway is an API gateway designed to accelerate the development workflow of independent services teams. A microservices API gateway provides all the functionality for a team to independently publish, monitor, and update a microservice.
 
@@ -6,7 +6,7 @@ This focus on accelerating the development workflow is distinct from the purpose
 
 In this article, we'll discuss how the difference in business objective (productivity vs management) results in a very different API gateway.
 
-## Microservices Organization
+## Microservices organization
 
 In a microservices organization, small teams of developers work independently from each other to rapidly deliver functionality to the customer. In order for each service team to work independently, with a productive workflow, a services team needs to be able to:
 
@@ -22,7 +22,7 @@ Understanding the end-user experience of a service is crucial to improving the s
 
 A microservices API gateway also supports dynamically routing user requests to different service versions for canary testing. By routing a small fraction of end-user requests to a new version of a service, service teams can safely test the impact of new updates to a small subset of users.
 
-## Microservices API Gateways vs. Enterprise API Gateways
+## Microservices API Gateways vs. enterprise API Gateways
 
 At first glance, the use case described above may be fulfilled with an enterprise-focused API gateway. While this may be true, the actual emphasis of enterprise API gateways and microservices API gateways are somewhat different:
 
@@ -35,19 +35,19 @@ At first glance, the use case described above may be fulfilled with an enterpris
 | Testing | Operate multiple environments for QA, Staging, and Production. Automated integration testing, and gated API deployment. Use client-driven API versioning for compatibility and stability (e.g. semver) | Facilitate canary routing for dynamic testing (taking care with data mutation side effects). Use developer-driven service versioning for upgrade management |
 | Local Development | Deploy gateway locally (via installation script, Vagrant or Docker), and attempt to mitigate infrastructure differences with production. Use language-specific gateway mocking and stubbing frameworks | Deploy gateway locally via service orchestration platform (e.g. Kubernetes) |
 
-## Self-Service Publishing
+## Self-service publishing
 
 A team needs to be able to publish a new service to customers without requiring an operations or API management team. This ability to self-service for deployment and publication enables the team to keep the feature release velocity high. While a traditional enterprise API gateway may provide a simple mechanism (e.g., REST API) for publishing a new service, in practice, the usage is often limited to the use of a dedicated team that is responsible for the gateway. The primary reason for limiting publication to a single team is to provide an additional (human) safety mechanism: an errant API call could have potentially disastrous effects on production.
 
 Microservices API gateways utilize mechanisms that enable service teams to easily *and* safely publish new services, with the inherent understanding that the producing team are responsible for their service, and will fix an issue if one occurs. A microservices gateway provides configurable monitoring for issue detection, and provides hooks for debugging, such as inspecting traffic or traffic shifting/duplication.
 
-## Monitoring & Rate Limiting
+## Monitoring and rate limiting
 
 A common business model for APIs is metering, where a consumer is charged different fees depending on API usage. Traditional enterprise API gateways excel in this use case: they provide functionality for monitoring per-client usage of an API, and the ability to limit usage when the client exceeds their quota.
 
 A microservice gateway also requires monitoring and rate limiting, but for different reasons. Monitoring user-visible metrics such as throughput, latency, and availability, are important to ensure that new updates don't impact the end-user. Robust end-user metrics are critical to allowing rapid, incremental updates. Rate limiting is used to improve the overall resilience of a service. When a service is not responding as expected, an API gateway can throttle incoming requests to allow a service to recover and prevent a cascade failure.
 
-## Testing and Updates
+## Testing and updates
 
 A microservices application has multiple services, each of which is being independently updated. Automated pre-production testing of a moving target is necessary but not sufficient for microservices. Canary testing, where a small percentage of production traffic is routed to a new service version, is an important tool to help test an update. By limiting a new service version to a small percentage of users, the impact of a service failure is limited.
 

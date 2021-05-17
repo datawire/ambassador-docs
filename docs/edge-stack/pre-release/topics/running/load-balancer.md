@@ -1,4 +1,4 @@
-# Load Balancing in Ambassador Edge Stack
+# Load balancing in Ambassador Edge Stack
 
 Load balancing configuration can be set for all Ambassador Edge Stack mappings in the [`ambassador Module`](../ambassador), or set per [`Mapping`](../../using/mappings#configuring-mappings). If nothing is set, simple round robin balancing is used via Kubernetes services.
 
@@ -18,7 +18,7 @@ Supported load balancer policies:
 
 For more information on the different policies and the implications, see [load balancing strategies in Kubernetes](https://blog.getambassador.io/load-balancing-strategies-in-kubernetes-l4-round-robin-l7-round-robin-ring-hash-and-more-6a5b81595d6c).
 
-## Round Robin
+## Round robin
 When `policy` is set to `round_robin`, Ambassador Edge Stack discovers healthy endpoints for the given mapping, and load balances the incoming L7 requests with round robin scheduling. To specify this:
 
 ```yaml
@@ -51,7 +51,7 @@ spec:
 
 Note that load balancing may not appear to be "even" due to Envoy's threading model. For more details, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/faq/load_balancing/concurrency_lb).
 
-## Least Request
+## Least request
 
 When `policy` is set to `least_request`, Ambassador Edge Stack discovers healthy endpoints for the given mapping, and load balances the incoming L7 requests to the endpoint with the fewest active requests. To specify this:
 
@@ -83,7 +83,7 @@ spec:
     policy: least_request
 ```
 
-## Sticky Sessions / Session Affinity
+## Sticky sessions / session affinity
 
 Configuring sticky sessions makes Ambassador Edge Stack route requests to a specific pod providing your service in a given session. One pod serves all requests from a given session, eliminating the need for session data to be transferred between pods. Ambassador Edge Stack lets you configure session affinity based on the following parameters in an incoming request:
 

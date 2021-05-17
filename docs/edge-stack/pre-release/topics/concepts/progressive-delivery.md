@@ -1,4 +1,4 @@
-# Progressive Delivery and Ambassador
+# Progressive delivery
 
 Today's cloud-native applications may consist of hundreds of services, each of which are being updated at any time. Thus, many cloud-native organizations augment regression test strategies with testing in production using progressive delivery techniques.
 
@@ -8,7 +8,7 @@ Progressive Delivery is an approach for releasing software to production users. 
 
 Modern cloud applications are continuously deployed, as different teams rapidly update their respective services. Deploying and testing updates in a pre-production staging environment introduces a bottleneck to the speed of iteration. More importantly, staging environments are not representative of what will be running in production when the deployment actually occurs given the velocity of service updates and changes in production. Testing in production addresses both of these challenges: developers evaluate their changes in the real-world environment, enabling rapid iteration.
 
-## Progressive Delivery strategies
+## Progressive delivery strategies
 
 There are a number of different strategies for progressive delivery. These include:
 
@@ -20,7 +20,7 @@ Observability is a critical requirement for testing in production. Regardless of
 
 Ambassador supports a variety of strategies for progressive delivery. These strategies are discussed in further detail below.
 
-### Canary Releases
+### Canary releases
 
 Canary releases shifts a small amount of real user traffic from production to the service under test.
 
@@ -34,7 +34,7 @@ Canary tests can be automated, and are typically run after testing in a pre-prod
 
 Canary releases are not a panacea. In particular, many services may not receive sufficient traffic in order for canary releases to provide useful information in an actionable timeframe.
 
-### Traffic Shadowing
+### Traffic shadowing
 
 This approach “shadows” or mirrors a small amount of real user traffic from production to the service under test.
 
