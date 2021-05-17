@@ -1,4 +1,4 @@
-# Ambassador Edge Stack Authentication Extension
+# Authentication extension
 
 The Ambassador Edge Stack ships with an authentication service that is enabled
 to perform OAuth, JWT validation, and custom authentication schemes. It can
@@ -11,7 +11,7 @@ to do authentication can be found in the
 
 This document focuses on how to deploy and manage the authentication extension.
 
-## Ambassador Configuration
+## Ambassador configuration
 
 Ambassador uses the [`AuthService` plugin](../../services/auth-service) 
 to connect to the authentication extension in the Ambassador Edge Stack.
@@ -43,7 +43,7 @@ tune how Ambassador connects to the authentication extension (like changing the
 default timeout), you can find the full configuration options in the 
 [`AuthService` plugin](../../services/auth-service) documentation.
 
-## Authentication Extension Configuration
+## Authentication extension configuration
 
 Certain use cases may require some tuning of the authentication extension. 
 Configuration of this extension is managed via environment variables.

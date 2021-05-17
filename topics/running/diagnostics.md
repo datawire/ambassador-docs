@@ -11,7 +11,7 @@ If Ambassador Edge Stack is not routing your services as you'd expect, your firs
 
 Some of the most important information (your Ambassador Edge Stack version, how recently Ambassador Edge Stack's configuration was updated, and how recently Envoy last reported status to Ambassador Edge Stack) is right at the top. See [Debugging](../debugging) for more information.
 
-## Health Status
+## Health status
 
 Ambassador Edge Stack displays the health of your services on the Dashboard of your Edge Policy Console. Health is computed as successful requests / total requests and expressed as a percentage. The "total requests" comes from Envoy `upstream_rq_pending_total` stat. "Successful requests" is calculated by substracting `upstream_rq_4xx` and `upstream_rq_5xx` from the total.
 

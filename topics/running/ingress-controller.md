@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Ingress Controller
+# Ingress controller
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
