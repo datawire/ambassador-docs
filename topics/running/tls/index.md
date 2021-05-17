@@ -9,7 +9,7 @@ for different TLS use cases including:
 - [Server Name Indication (SNI)](sni)
 - [TLS Origination](origination)
 
-## `Host`
+## Host
 
 As explained in the [Host](../host-crd) reference, a `Host` represents a domain
 in Ambassador and defines how TLS is managed on that domain. In the Ambassador 
@@ -35,7 +35,7 @@ self-signed certificate and redirect cleartext traffic to HTTPS.
 
 ### Automatic TLS with ACME
 
-With the Ambassador Edge Stack, the `Host` can be configured to completely 
+With the Ambassador Edge Stack, the Host can be configured to completely 
 manage TLS by requesting a certificate from a Certificate Authority using the
 [ACME HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/).
 
@@ -85,9 +85,9 @@ spec:
 
 Ambassador will now use the certificate in `host-secret` to terminate TLS.
 
-### `Host` and `TLSContext`
+### Host and TLSContext
 
-The `Host` will configure basic TLS termination settings in Ambassador. If you 
+The Host will configure basic TLS termination settings in Ambassador. If you 
 need more advanced TLS options on a domain, such as setting the minimum TLS 
 version, you can do it in one of the following ways.
 
@@ -291,13 +291,13 @@ spec:
   # cacert_chain_file: None
 ```
 
-### `alpn_protocols`
+### ALPN protocols
 
 The `alpn_protocols` setting configures the TLS ALPN protocol. To use gRPC over
 TLS, set `alpn_protocols: h2`. If you need to support HTTP/2 upgrade from 
 HTTP/1, set `alpn_protocols: h2,http/1.1` in the configuration.
 
-#### HTTP/2 Support
+#### HTTP/2 support
 
 The `alpn_protocols` setting is also required for HTTP/2 support.
 
@@ -316,7 +316,7 @@ negotiation and will have to be explicitly requested by the client.
 
 If you leave off http/1.1, only HTTP2 connections will be supported.
 
-### TLS Parameters
+### TLS parameters
 
 The `min_tls_version` setting configures the minimum TLS protocol version that 
 Ambassador Edge Stack will use to establish a secure connection. When a client 
