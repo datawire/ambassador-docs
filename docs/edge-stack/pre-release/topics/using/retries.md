@@ -1,10 +1,10 @@
-# Automatic Retries
+# Automatic retries
 
 Sometimes requests fail. When these requests fail for transient issues, Ambassador Edge Stack can automatically retry the request.
 
 Retry policy can be set for all Ambassador Edge Stack mappings in the [`ambassador Module`](../../running/ambassador), or set per [`Mapping`](../mappings#configuring-mappings). Generally speaking, you should set `retry policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
 
-## Configuring Retries
+## Configuring retries
 
 The `retry_policy` attribute configures automatic retries. The following fields are supported:
 
