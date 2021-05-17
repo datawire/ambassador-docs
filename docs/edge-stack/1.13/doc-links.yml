@@ -32,8 +32,6 @@
         - title: Core concepts
           link: /topics/concepts/
           items:
-            - title: Introduction to modern network load balancing and proxying
-              link: /topics/concepts/modern-lb-and-proxying
             - title: Kubernetes network architecture
               link: /topics/concepts/kubernetes-network-architecture
             - title: "The Ambassador operating model: GitOps and continuous delivery"
@@ -137,7 +135,7 @@
                     - title: TLS
                       link: /topics/running/tls/
                       items:
-                        - title: Clertext support
+                        - title: Cleartext support
                           link: /topics/running/tls/cleartext-redirection
                         - title: Mutual TLS (mTLS)
                           link: /topics/running/tls/mtls
