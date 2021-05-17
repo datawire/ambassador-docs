@@ -1,7 +1,7 @@
 ---
     description: In this guide, we'll walk through the process of deploying Ambassador Edge Stack in Kubernetes for ingress routing.
 ---
-# Install Manually
+# Install manually
 
 In this guide, we'll walk you through installing, configuring, and customizing
 the Ambassador Edge Stack in your Kubernetes cluster.
@@ -70,7 +70,7 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
   * `edgectl login -n <namespace> <AES_host>` or
   * `https://{{AES_URL}}/edge_stack/admin`
 
-## Configure TLS Termination and Automatic HTTPS
+## Configure TLS termination and automatic HTTPS
 
 **The Ambassador Edge Stack enables TLS termination by default using a self-signed certificate. See the [Host CRD](../../../topics/running/host-crd) for more information about disabling TLS.** If you have the ability to update your DNS, Ambassador can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create a Mapping."
 
