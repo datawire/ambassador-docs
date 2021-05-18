@@ -175,9 +175,9 @@ export default ({ data, location }) => {
             <section className="docs__contact docs__container">
                 <ContactBlock />
             </section>
-            {!isHome && isProduct && (
-                <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />)
-            }
+            {!isHome && !isProductHome && isProduct && (
+                <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />
+            )}
         </div>
     );
 
