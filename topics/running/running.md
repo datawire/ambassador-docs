@@ -215,7 +215,7 @@ increase configuration latency for Ambassador installations with many resources)
 - Ambassador will use the shell boot sequence that was the default up through 1.9.1, rather than the Golang boot sequence that became the default in 1.10.0.
 - `AMBASSADOR_FAST_RECONFIGURE` (see below) is not supported in legacy mode.
 
-## **EARLY ACCESS**: `AMBASSADOR_FAST_RECONFIGURE`
+## `AMBASSADOR_FAST_RECONFIGURE`
 
 Setting `AMBASSADOR_FAST_RECONFIGURE` to "true" enables incremental reconfiguration. When enabled, Ambassador will track deltas from one configuration to the next and recalculate only what is necessary to follow the change. When disabled (the default), Ambassador will recompute the entire configuration at every change.
 
