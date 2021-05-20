@@ -1,3 +1,7 @@
+---
+  hide_reading_time = true
+---
+
 # Kubernetes Nuts and Bolts
 
 <iframe width="889" height="500" src="https://www.youtube.com/embed/dePoqgOT1ZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
