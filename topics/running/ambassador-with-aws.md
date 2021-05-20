@@ -1,10 +1,11 @@
-# Ambassador Edge Stack on AWS
+# Edge Stack with AWS
 
 The Ambassador Edge Stack is a platform agnostic Kubernetes API gateway. It will run in any distribution of Kubernetes whether it is managed by a cloud provider or on homegrown bare-metal servers.
 
 This document serves as a reference for different configuration options available when running Kubernetes in AWS. See [Installing Ambassador Edge Stack](../../install) for the various installation methods available.
 
-## tl;dr Recommended Configuration:
+## Recommended configuration
+
 There are lot of configuration options available to you when running Ambassador in AWS. While you should read this entire document to understand what is best for you, the following is the recommended configuration when running Ambassador in AWS:
 
 It is recommended to terminate TLS at Ambassador so you can take advantage of all the TLS configuration options available in Ambassador including setting the allowed TLS versions, setting `alpn_protocol` options, enforcing HTTP -> HTTPS redirection, and [automatic certificate management](../host-crd) in the Ambassador Edge Stack.
@@ -50,11 +51,11 @@ spec:
 
    Ambassador will now expect traffic from the load balancer to be wrapped with the proxy protocol so it can read the client IP address.
 
-## AWS Load Balancer Notes
+## AWS load balancer notes
 
 AWS provides three types of load balancers:
 
-### "Classic" Load Balancer (ELB)
+### "Classic" Elastic Load Balancer (ELB)
 
 The ELB is the first generation AWS Elastic Load Balancer. It is the default type of load balancer ensured by a `type: LoadBalancer` `Service` and routes directly to individual EC2 instances. It can be configured to run at layer 4 or layer 7 of the OSI model. See [What is a Classic Load Balancer](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/introduction.html) for more details.
 
@@ -116,7 +117,7 @@ The ALB is a second generation AWS Elastic Load Balancer. It cannot be ensured b
 - None of the [load balancer annotations](#load-balancer-annotations) are respected by the ALB. You will need to manually configure all options.
 - The ALB will properly set the `X-Forward-Proto` header if terminating TLS. See (see [TLS termination](#tls-termination) notes below).
 
-## Load Balancer Annotations
+## Load balancer annotations
 
 Kubernetes on AWS exposes a mechanism to request certain load balancer configurations by annotating the `type: LoadBalancer` `Service`. The most complete set and explanations of these annotations can be found in this [Kubernetes document](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer). This document will go over the subset that is most relevant when deploying Ambassador Edge Stack.
 
@@ -156,7 +157,7 @@ Kubernetes on AWS exposes a mechanism to request certain load balancer configura
 
     **Note:** This annotation will not be recognized if `aws-load-balancer-type: "nlb"` is configured. Proxy protocol must be manually enabled for NLBs.
 
-## TLS Termination
+## TLS termination
 
 TLS termination is an important part of any modern web app. Ambassador exposes a lot of TLS termination configuration options that make it a powerful tool for managing encryption between your clients and microservices. Refer to the [TLS Termination](../tls) documentation for more information on how to configure TLS termination at Ambassador.
 
@@ -166,7 +167,7 @@ This means that, when running Ambassador in AWS, you have the choice between ter
 
 The following documentation will cover the different options available to you and how to configure Ambassador and the load balancer to get the most of each.
 
-### TLS Termination at Ambassador
+### TLS termination at Ambassador
 
 Terminating TLS at Ambassador will guarantee you to be able to use all of the TLS termination options that Ambassador exposes including enforcing the minimum TLS version, setting the `alpn_protocols`, and redirecting cleartext to HTTPS. 
 
@@ -185,13 +186,13 @@ spec:
 
 While terminating TLS at Ambassador makes it easier to expose more advanced TLS configuration options, it does have the drawback of not being able to use the ACM to manage certificates. You will have to manage your TLS certificates yourself or use the [automatic certificate management](../host-crd) available in the Ambassador Edge Stack to have Ambassador do it for you.
 
-### TLS Termination at the Load Balancer
+### TLS termination at the load balancer
 
 If you choose to terminate TLS at your Amazon load balancer you will be able to use the ACM to manage TLS certificates. This option does add some complexity to your Ambassador configuration, depending on which load balancer you are using.
 
 Terminating TLS at the load balancer means that Ambassador will be receiving all traffic as un-encrypted cleartext traffic. Since Ambassador expects to be serving both encrypted and cleartext traffic by default, you will need to make the following configuration changes to Ambassador to support this:
 
-#### L4 Load Balancer (Default ELB or NLB)
+#### L4 load balancer (default ELB or NLB)
 
 * **Load Balancer Service Configuration:**
    The following `Service` will deploy a L4 ELB with TLS termination configured at the load balancer:
@@ -244,7 +245,7 @@ Terminating TLS at the load balancer means that Ambassador will be receiving all
 
 Because L4 load balancers do not set `X-Forwarded` headers, Ambassador will not be able to distinguish between traffic that came in to the load balancer as encrypted or cleartext. Because of this, **HTTP -> HTTPS redirection is not possible when terminating TLS at a L4 load balancer**.
 
-#### L7 Load Balancer (ELB or ALB)
+#### L7 load balancer (ELB or ALB)
 
 * **Load Balancer Service Configuration (L7 ELB):**
 
@@ -315,7 +316,7 @@ Because L4 load balancers do not set `X-Forwarded` headers, Ambassador will not 
 
 Ambassador uses the value of `X-Forwarded-Proto` to know if the request originated as encrypted or cleartext. Unlike L4 load balancers, L7 load balancers will set this header so HTTP -> HTTPS redirection is possible when terminating TLS at a L7 load balancer.
 
-## Preserving the Client IP Address
+## Preserving the client IP address
 
 Many applications will want to know the IP address of the connecting client. In Kubernetes, this IP address is often obscured by the IP address of the `Node` that is forwarding the request to Ambassador so extra configuration must be done if you need to preserve the client IP address.
 

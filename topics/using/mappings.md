@@ -1,22 +1,22 @@
-# Advanced Mapping Configuration
+# Advanced Mapping configuration
 
 Ambassador Edge Stack is designed so that the author of a given Kubernetes service can easily and flexibly configure how traffic gets routed to the service. The core abstraction used to support service authors is a mapping, which maps a target backend service to a given host or prefix. For Layer 7 protocols such as HTTP, gRPC, or WebSockets, the `Mapping` resource is used. For TCP, the `TCPMapping` resource is used.
 
 Ambassador Edge Stack _must_ have one or more mappings defined to provide access to any services at all. The name of the mapping must be unique.
 
-## System-Wide Defaults for Mappings
+## System-wide defaults for Mappings
 
 Certain aspects of mappings can be set system-wide using the `defaults` element of the `ambassador Module`:
 see [using defaults](../../using/defaults) for more information. The `Mapping` element will look first in
 the `httpmapping` default class.
 
-## Mapping Evaluation Order
+## Mapping evaluation order
 
 Ambassador Edge Stack sorts mappings such that those that are more highly constrained are evaluated before those less highly constrained. The prefix length, the request method, constraint headers, and query parameters are all taken into account.
 
 If absolutely necessary, you can manually set a `precedence` on the mapping (see below). In general, you should not need to use this feature unless you're using the `regex_headers` or `host_regex` matching features. If there's any question about how Ambassador Edge Stack is ordering rules, the diagnostic service is a good first place to look: the order in which mappings appear in the diagnostic service is the order in which they are evaluated.
 
-## Optional Fallback Mapping
+## Optional fallback Mapping
 
 Ambassador Edge Stack will respond with a `404 Not Found` to any request for which no mapping exists. If desired, you can define a fallback "catch-all" mapping so all unmatched requests will be sent to an upstream service.
 
@@ -45,7 +45,7 @@ If multiple `Mapping`s have the same `precedence`, Ambassador Edge Stack's norma
 
 In most cases, you won't need the `tls` attribute: just use a `service` with an `https://` prefix. However, note that if the `tls` attribute is present and `true`, Ambassador Edge Stack will originate TLS even if the `service` does not have the `https://` prefix.
 
-If `tls` is present with a value that is not `true`, the value is assumed to be the name of a defined TLS context, which will determine the certificate presented to the upstream service. TLS context handling is a beta feature of Ambassador Edge Stack at present; please [contact us on Slack](https://d6e.co/slack) if you need to specify TLS origination certificates.
+If `tls` is present with a value that is not `true`, the value is assumed to be the name of a defined TLS context, which will determine the certificate presented to the upstream service. TLS context handling is a beta feature of Ambassador Edge Stack at present; please [contact us on Slack](https://a8r.io/Slack) if you need to specify TLS origination certificates.
 
 ### Using `cluster_tag`
 
@@ -59,7 +59,7 @@ If `AMBASSADOR_NAMESPACE` is correctly set, Ambassador Edge Stack can map to ser
 - `service: servicename` will route to a service in the same namespace as the Ambassador Edge Stack, and
 - `service: servicename.namespace` will route to a service in a different namespace.
 
-### Linkerd Interoperability (`add_linkerd_headers`)
+### Linkerd interoperability (`add_linkerd_headers`)
 
 When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically, based on the `service` attribute in the `Mapping`. 
 

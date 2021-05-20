@@ -4,7 +4,7 @@ If you’re experiencing issues with the Ambassador Edge Stack and cannot diagno
 
 We assume that you already have a running Ambassador installation in the following sections.
 
-## Check Ambassador Status
+## Check Ambassador status
 
 First, check to see if the Edge Policy Console is reachable. If it is successful, try to diagnose your original issue with the Console.
 
@@ -66,9 +66,32 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
 
 In both the Deployment Pod and the individual Pods, take the necessary action to address any discovered issues.
 
-## Review Ambassador Logs
+## Review Ambassador logs
 
 The Ambassador logging can provide information on anything that might be abnormal or malfunctioning. While there may be a large amount of data to sort through, look for key errors such as the Ambassador process restarting unexpectedly, or a malformed Envoy configuration.
+
+### Log levels
+
+The Ambassador Edge Stack has two switches that will control different log levels. 
+
+#### Envoy debug logs
+Envoy debug logging shows verbose information on the actions Envoy is taking on
+every request. It can be useful for understanding why connections are being
+closed or if Envoy or the upstream service is the source of the error.
+
+You can turn on Debug mode in the [Edge Policy Console](../../using/edge-policy-console)
+
+#### Ambassador Edge Stack debug logging
+
+The Ambassador Edge Stack is built on top of Emissary Ingress and runs an
+additional process for authentication, rate limiting, the developer portal,
+ACME, etc. Debug logging for this process will give more information on why you
+may see errors with these functions.
+
+You can adjust the AES log level by setting the 
+[`AES_LOG_LEVEL` environment variable](../aes-extensions/#aes_log_level).
+
+### Viewing logs
 
 You can turn on Debug mode in the [Edge Policy Console](../../using/edge-policy-console), which generates verbose logging data that can be useful when trying to find a subtle error or bug.
 
@@ -102,7 +125,7 @@ The terminal will print something similar to the following:
     [2018-10-10 12:27:01.977][21][info][main] source/server/drain_manager_impl.cc:63] shutting down parent after drain
     ```
 
-## Examine Pod and Container Contents
+## Examine Pod and container contents
 
 You can examine the contents of the Ambassador Pod for issues, such as if volume mounts are correct and TLS certificates are present in the required directory, to determine if the Pod has the latest Ambassador configuration, or if the generated Envoy configuration is correct or as expected. In these instructions, we will look for problems related to the Envoy configuration.
 

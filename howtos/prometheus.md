@@ -1,4 +1,4 @@
-# Monitoring Ingress with Prometheus and Grafana
+# Monitoring with Prometheus and Grafana
 
 Prometheus is an open-source monitoring and alerting system.  When used
 along with Grafana, you can create a dynamic dashboard for monitoring
@@ -53,7 +53,7 @@ spec:
 itself, the `service` field can just reference the admin port on
 localhost.
 
-### Using the `cluster_tag` Setting
+### Using the `cluster_tag` setting
 
 The metrics that Prometheus scrapes from Ambassador are keyed using
 the name of the Envoy
@@ -66,7 +66,7 @@ You can set the `cluster_tag` attribute within a
 [`Mapping`](../../topics/using/mappings) to specify a prefix for the
 generated `cluster` name, to help manage metrics.
 
-### Prometheus Operator with Standard YAML
+### Prometheus Operator with standard YAML
 
 In this section, we will deploy the Prometheus Operator using the
 standard YAML files.  Alternatively, you can install it with
@@ -409,7 +409,7 @@ In the dashboard we just added, you should now be able to view graphs in the
 `Ambassador Metrics Endpoint` tab.
 
 
-## Viewing Stats/Metrics
+## Viewing stats/metrics
 
 Above, you have created an environment where Ambassador is handling
 ingress traffic, Prometheus is scraping and collecting statistics from
@@ -443,9 +443,9 @@ full reference on how to work with this data model.
 
 ----
 
-## Additional Install Options
+## Additional install options
 
-### StatsD Exporter: Output Statistics to Ambassador Edge Stack
+### StatsD Exporter: Output statistics to Ambassador Edge Stack
 
 If running a pre-`0.71.0` version of Ambassador, you will need to
 configure Envoy to output stats to a separate collector before being

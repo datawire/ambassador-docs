@@ -1,14 +1,14 @@
-# DataDog APM Tracing
+# Distributed Tracing with Datadog
 
 In this tutorial, we'll configure Ambassador Edge Stack to initiate a trace on some sample requests, and use DataDog APM to visualize them.
 
-## Before You Get Started
+## Before you get started
 
 This tutorial assumes you have already followed the Ambassador Edge Stack [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
 
 After completing the Getting Started guide you will have a Kubernetes cluster running Ambassador Edge Stack and the Quote of the Moment service. Let's walk through adding tracing to this setup.
 
-## 1. Configure the DataDog Agent
+## 1. Configure the DataDog agent
 
 You will need to configure the DataDog agent so that it uses a host-port and accepts non-local APM traffic, you can follow the DataDog [documentation](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing) on how to do this.
 

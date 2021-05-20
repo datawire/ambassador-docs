@@ -9,7 +9,7 @@ Ambassador which `Host` the route should be created for.
 
 The example below configures two `Host`s and assigns routes to them.
 
-## Configuring a `Host`
+## Configuring a Host
 
 The `Host` resources lets you separate configuration for each distinct domain 
 and subdomain you plan on serving behind Ambassador.
@@ -49,7 +49,7 @@ spec:
 
 We now have two `Host`s with two different certificates.
 
-## Configuring Routes
+## Configuring routes
 
 Now that we have two domains behind Ambassador, we can create routes for either
 or both of them.

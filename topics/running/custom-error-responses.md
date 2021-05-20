@@ -1,4 +1,4 @@
-# Custom Error Responses
+# Custom error responses
 
 Custom error responses set overrides for HTTP response statuses generated either
 by Ambassador or upstream services.
@@ -29,7 +29,7 @@ Only one of `text_format`, `json_format`, or `text_format_source` may be provide
 Custom response bodies are subject to Envoy's AccessLog substitution syntax
 and variables, see [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#config-access-log-format-strings) for more information.
 
-## Simple Response Bodies
+## Simple response bodies
 
 Simple responses can be be added quickly for convenience. They are inserted into
 the manifest as either text or JSON:
@@ -53,7 +53,7 @@ spec:
             status: "%RESPONSE_CODE%"
             cluster: "%UPSTREAM_CLUSTER%"
 ```
-## File Response Bodies
+## File response bodies
 
 For more complex response bodies a file can be returned as the response.
 This could be used for a customer friendly HTML document for example.  Use
@@ -116,7 +116,7 @@ spec:
             name: ambassador-errorpages
 ```
 
-## Known Limitations
+## Known limitations
 
 - `text_format`and `text_format_source` perform no string
 escaping on expanded variables. This may break the structural integrity of your
@@ -128,7 +128,7 @@ or response headers.
 consider using `text_format_source` with a JSON file and `content_type` set to
 `application/json`.
 
-## Rule Precedence
+## Rule precedence
 
 If rules are set on both the `Module` and on a `Mapping`, the rule set on
 the `Mapping` will take precedence, ignoring any `Module` rules. This is true
@@ -167,7 +167,7 @@ The `Mapping` rule will prevent an override on the 404 rule defined on the
 the `Module` to be ignored, regardless of the status codes specified. A seperate
 `Mapping` with no override rules defined will follow the 404 rule on the `Module`.
 
-## Disabling Response Overrides
+## Disabling response overrides
 
 If error response overrides are set on the `Module`, they can be disabled on
 individual mappings by setting

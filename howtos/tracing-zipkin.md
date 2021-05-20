@@ -1,8 +1,8 @@
-# Zipkin Tracing
+# Distributed tracing with Zipkin
 
 In this tutorial, we'll configure Ambassador Edge Stack to initiate a trace on some sample requests, and use Zipkin to visualize them.
 
-## Before You Get Started
+## Before you get started
 
 This tutorial assumes you have already followed the Ambassador Edge Stack [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
 
@@ -70,7 +70,7 @@ $ kubectl apply -f zipkin.yaml
 
 **Important:** the Ambassador Edge Stack will need to be restarted to configure itself to add the tracing header. Delete all Ambassador Edge Stack pods and let Kubernetes restart them.
 
-## 2. Generate Some Requests
+## 2. Generate some requests
 
 Use `curl` to generate a few requests to an existing Ambassador Edge Stack mapping. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
 
@@ -78,7 +78,7 @@ Use `curl` to generate a few requests to an existing Ambassador Edge Stack mappi
 $ curl -L $AMBASSADOR_IP/httpbin/ip
 ```
 
-## 3. Test Traces
+## 3. Test traces
 
 To test things out, we'll need to access the Zipkin UI. If you're on Kubernetes, get the name of the Zipkin pod:
 
@@ -115,6 +115,6 @@ Open your web browser to the Zipkin dashboard `http://192.168.99.107:31043/zipki
 
 In the Zipkin UI, click on the "Find Traces" button to get a listing instrumented traces. Each of the traces that are displayed can be clicked on, which provides further information about each span and associated metadata.
 
-## Learn More
+## Learn more
 
 For more details about configuring the external tracing service, read the documentation on [external tracing](../../topics/running/services/tracing-service).

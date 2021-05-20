@@ -1,16 +1,16 @@
-# Rate Limiting
+# Basic rate limiting
 
 IMPORTANT: This guide applies to Ambassador API Gateway, use of this guide on the Ambassador Edge Stack is not fully supported.  Use the existing [RateLimitService](../../topics/using/rate-limits/) instead.
 
 Ambassador can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure the Ambassador API Gateway to use a simple third party rate limit service. If you don't want to implement your own rate limiting service, the Ambassador Edge Stack integrates a [powerful, flexible rate limiting service](../../topics/using/rate-limits/).
 
-## Before You Get Started
+## Before you get started
 
 This tutorial assumes you have already followed the Ambassador API Gateway [Installation](../../topics/install/install-ambassador-oss) and [Quickstart Tutorial](../../tutorials/quickstart-demo) guides. If you haven't done that already, you should do so now.
 
 Once completed, you'll have a Kubernetes cluster running Ambassador and the Quote of the Moment service. Let's walk through adding rate limiting to this setup.
 
-## 1. Deploy the Rate Limit Service
+## 1. Deploy the rate limit service
 
 Ambassador delegates the actual rate limit logic to a third party service. We've written a [simple rate limit service](https://github.com/datawire/ambassador/tree/master/docker/test-ratelimit) that:
 
@@ -162,7 +162,7 @@ Note that both `descriptor` and `headers` are optional. However, if `headers` ar
 
 Ambassador would also perform multiple requests to `example-rate-limit:5000` if we had defined multiple `rate_limits` rules on the mapping.
 
-## 3. Test Rate Limiting
+## 3. Test rate limiting
 
 If we `curl` to a rate-limited URL:
 

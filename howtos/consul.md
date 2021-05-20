@@ -1,3 +1,4 @@
+
 import Alert from '@material-ui/lab/Alert';
 
 # Consul Integration
@@ -6,20 +7,21 @@ import Alert from '@material-ui/lab/Alert';
 <h3>Contents</h3>
 
 - [Consul Integration](#consul-integration)
-  - [Architecture Overview](#architecture-overview)
+  - [Architecture overview](#architecture-overview)
   - [Installing Consul](#installing-consul)
+  - [Getting started](#getting-started)
   - [Configuring Ambassador](#configuring-ambassador)
-  - [Routing to Consul Services](#routing-to-consul-services)
+  - [Routing to Consul services](#routing-to-consul-services)
   - [Consul Connector and Encrypted TLS](#consul-connector-and-encrypted-tls)
-  - [Environment Variables](#environment-variables)
-  - [More Information](#more-information)
+  - [Environment variables](#environment-variables)
+  - [More information](#more-information)
 
 </div>
 
 
 [Consul](https://www.consul.io) is a widely used service mesh. You can use Consul with Ambassador Edge Stack, as it natively supports Consul for service discovery and end-to-end TLS (including mTLS between services). This capability is particularly useful when deploying Ambassador Edge Stack in so-called hybrid clouds, where applications are deployed on VMs and Kubernetes. In this environment, Ambassador Edge Stack can securely route over TLS to any application regardless of where it is deployed.
 
-## Architecture Overview
+## Architecture overview
 
 In this architecture, Consul serves as the source of truth for your entire data center, tracking available endpoints, service configuration, and secrets for TLS encryption. New applications and services automatically register themselves with Consul using the Consul agent or API. When a request is sent through Ambassador Edge Stack, Ambassador Edge Stack sends the request to an endpoint based on the data in Consul.
 
@@ -35,7 +37,9 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
    - [Amazon Elastic Kubernetes Service (EKS)](https://learn.hashicorp.com/tutorials/consul/kubernetes-eks-aws?utm_source=consul.io&utm_medium=docs)
    - [Google Kubernetes Engine (GKE)](https://learn.hashicorp.com/tutorials/consul/kubernetes-gke-google?utm_source=consul.io&utm_medium=docs)
      
-   <Alert severity="info">If you did not find your Kubernetes platform above, check the <a href="https://www.consul.io/docs/k8s">Consul documentation here</a>to see if there are specific setup instructions for your platform.</Alert>
+  <Alert severity="info">
+    If you did not find your Kubernetes platform above, check the <a href="https://www.consul.io/docs/k8s">Consul documentation here</a> to see if there are specific setup instructions for your platform.
+  </Alert>
 
 2. Add the Hashicorp repository for installing Consul with Helm. If you do not have Helm installed, you can find an [installation guide here](https://helm.sh/docs/intro/install/).
 
@@ -66,15 +70,20 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 
    > Note: you are free to change the value of the `datacenter` field in the install values. This will be the name of your Consul Datacenter.
 
-   <Alert severity="info"><b>WARNING:</b> In Ambassador Edge Stack versions 1.10.0 through 1.11.1, changing the value of the `datacenter` will not work unless you enable the `AMBASSADOR_LEGACY_MODE` environment variable. It is recommended to upgrade to Edge Stack Version 1.12.1. if you are still using the versions mentioned above.</Alert>
+  <Alert severity="info">
+    <strong>WARNING:</strong> In Ambassador Edge Stack versions 1.10.0 through 1.11.1, changing the value of the <code>datacenter</code> will not work unless you enable the <code>AMBASSADOR_LEGACY_MODE</code> environment variable. It is recommended to upgrade to the latest Edge Stack version. if you are still using the versions mentioned above.
+  </Alert>
 
 4. Install Consul with Helm using the `consul-values.yaml` values file we just created.
 
    ```
    helm install -f consul-values.yaml hashicorp hashicorp/consul
    ```
+## Getting started
 
-   <Alert severity="info">Note: The third value in the install command we just used (`hashicorp`) is the name of your consul install. You can change this if you have a specific reason to, and you will see that the names of your Consul pods and services will change to include this value instead of `hashicorp`</Alert>
+  <Alert severity="info">
+    <strong>Note:</strong> The third value in the install command we just used (<code>hashicorp</code>) is the name of your consul install. You can change this if you have a specific reason to, and you will see that the names of your Consul pods and services will change to include this value instead of <code>hashicorp</code>
+  </Alert>
 
 ## Configuring Ambassador
 
@@ -114,7 +123,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 
    For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
 
-## Routing to Consul Services
+## Routing to Consul services
 
 You'll now register a demo application with Consul, and show how Ambassador Edge Stack can route to this application using endpoint data from Consul. To simplify this tutorial, you'll deploy the application in Kubernetes, although in practice this application can be deployed anywhere in your data center (e.g., on VMs).
 
@@ -182,7 +191,9 @@ You'll now register a demo application with Consul, and show how Ambassador Edge
    ```
    kubectl port-forward service/hashicorp-consul-ui 8500:80
    ```
-   <Alert severity="info"> Port forwarding not working for you? Make sure the service name matches your consul UI service with `kubectl get svc -A`</Alert>
+  <Alert severity="info"> 
+    Port forwarding not working for you? Make sure the service name matches your consul UI service by checking <code>kubectl get svc -A</code>
+  </Alert>
 
    Go to `http://localhost:8500/` from a web browser and you should see a service named `quote-consul`.
 
@@ -221,9 +232,13 @@ Save the above YAML to a file named `quote-mapping.yaml`, and use `kubectl apply
    }
    ```
 
-<Alert severity="info"><b>Note:</b> Don't forget to pass the -k flag to curl if you are still using a self-signed certificate</Alert>
+<Alert severity="info">
+  <strong>Note:</strong> Don't forget to pass the -k flag to curl if you are still using a self-signed certificate
+</Alert>
 
-<Alert severity="success"><b>Congratulations!</b> You're successfully routing traffic to the Quote application, the location of which is registered in Consul.</Alert>
+<Alert severity="success">
+  <strong>Congratulations!</strong> You're successfully routing traffic to the Quote application, the location of which is registered in Consul.
+</Alert>
 
 
 ## Consul Connector and Encrypted TLS
@@ -242,9 +257,9 @@ This will install into your cluster:
    - The Consul connector service.
    - A `TLSContext` named `ambassador-consul` to load the `ambassador-consul-connect` secret into Ambassador Edge Stack.
 
-<Alert severity="info"><b>Note:</b> If you have previously installed the consul connector in the `default` namespace in your cluster, you'll want to clean up the old (and now unused) resources in the `default` namespace.
-
-If you are installing the consul connector in your cluster for the first time, you can ignore this and move on to step two.</Alert>
+<Alert severity="info">
+  <strong>Note:</strong> If you have previously installed the consul connector in the <code>default</code> namespace in your cluster, you'll want to clean up the old (and now unused) resources in the <code>default</code> namespace. If you are installing the consul connector in your cluster for the first time, you can ignore this and move on to step two.
+</Alert>
 
 Having duplicates of the Consul connector resources in the `ambassador` and `default` namespaces should not impact the functionality of the Consul connector, but it's good practice to clean up unused resources.
 
@@ -356,9 +371,11 @@ you should sub in that secret name value for `ambassador-consul-connect` in the 
     "time": "2021-03-24T23:31:58.47597266Z"
    }
    ```
-<Alert severity="success"><b>Congratulations!</b> You successfully configured the service to work with the Consul Connect sidecar proxy.</Alert>
+<Alert severity="success">
+  <strong>Congratulations!</strong> You successfully configured the service to work with the Consul Connect sidecar proxy.
+</Alert>
 
-## Environment Variables
+## Environment variables
 
 The Consul Connector can be configured with the following environment variables. The defaults will be best for most use-cases.
 
@@ -370,6 +387,6 @@ The Consul Connector can be configured with the following environment variables.
 | \_AMBASSADOR\_TLS\_SECRET\_NAME      | Set the name of the Kubernetes `v1.Secret` created by this program that contains the Consul-generated TLS certificate.                                                                     | `$AMBASSADOR_ID-consul-connect`                      |
 | \_AMBASSADOR\_TLS\_SECRET\_NAMESPACE | Set the namespace of the Kubernetes `v1.Secret` created by this program.                                                                                                                   | (same Namespace as the Pod running this integration) |
 
-## More Information
+## More information
 
 For more about Ambassador Edge Stack's integration with Consul, read the [service discovery configuration](../../topics/running/resolvers) documentation.

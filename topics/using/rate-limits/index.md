@@ -1,4 +1,4 @@
-# Rate Limiting in Ambassador
+# Basic rate limiting
 
 Rate limiting in Ambassador is composed of two parts:
 

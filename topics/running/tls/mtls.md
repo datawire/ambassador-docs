@@ -58,7 +58,7 @@ Now, when Ambassador proxies a request to `upstream-service`, it will provide
 the certificates in the `upstream-certs` secret for authentication when 
 encrypting traffic.
 
-## Service Mesh
+## Service mesh
 
 As you can imagine, when you have many services in your cluster all 
 authenticating with each other, managing all of those certificates can become a
