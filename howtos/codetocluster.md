@@ -13,6 +13,7 @@ import GSTabs from './gs-tabs.js'
 * [4. Push to Docker Hub](#4-push-to-docker-hub)
 * [5. Create a Deployment, Service, and Mapping in Kubernetes](#5-create-a-deployment-service-and-mapping-in-kubernetes)
 * [6. Deploy app and test](#6-deploy-app-and-test)
+* [7. Setup a Host and SSL (optional)](#7-setup-a-host-and-ssl-optional)
 * [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
 
 </div>
@@ -28,13 +29,13 @@ This guide will walk you through going from code to building a Docker container 
 
 ## 1. Install ingress controller
 
-We'll need an ingress controller for your cluster to get traffic from the internet to your app.  We'll use the Ambassador Edge Stack for this. 
+We'll need an ingress controller for your cluster to get traffic from the internet to your app.  We'll use [Ambassador's Edge Stack](../../../../../products/edge-stack/) for this. 
 
 **We recommend installing using Helm** but there are other options below to choose from.
 
 <GSTabs/>
 
-If needed, see the list of <a href="../../../../edge-stack/latest/topics/install/" target="_blank">more thorough installation options</a>.
+If needed, see the list of <a href="../../../../edge-stack/latest/topics/install/" target="_blank">other installation options</a>.
 
 Now that your cluster is ready to go, let's check out the app we're going to use.
 
@@ -58,7 +59,7 @@ Open and inspect the Dockerfile. It follows these basic steps:
 
 ## 3. Build container and test
 
-Next, we'll build the container and start running it locally, to make sure everything works and see what the app looks like.  Run the commands to build and run the container, substituting in your Docker Hub username:
+Next, we'll build the container and start running it locally, to make sure everything works and see what the app looks like.  Run the commands to build and run the container, **substituting in your Docker Hub username**:
 
 ```
 docker build . -t <your docker hub username>/nodebb:1.0
@@ -101,7 +102,9 @@ When it finishes go to [Docker Hub](https://hub.docker.com/) and you should see 
 
 ## 5. Create a Deployment, Service, and Mapping in Kubernetes
 
-Save this file as `nodebb.yaml`, replacing the values for Docker Hub username and your name.  This manifest file first creates a Deployment, which defines and runs the Pod.  Pods in Kubernetes are usually made up of a single container, in this case, the `nodebb` container you pushed to Docker Hub. [Learn more about the basics of Kubernetes](../../concepts/basics).
+Save this file as `nodebb.yaml`, **replacing the value for your Docker Hub username**.  
+
+This manifest file first creates a Deployment, which defines and runs the Pod.  Pods in Kubernetes are usually made up of a single container, in this case, the `nodebb` container you pushed to Docker Hub. [Learn more about the basics of Kubernetes](../../concepts/basics).
 
 Next, it creates a Service, which handles getting the traffic on the specified port to the Pod.
 
@@ -160,7 +163,7 @@ Also, notice how certain values match across the different resources?  For examp
 
 Deploy the YAML file with `kubectl apply -f nodebb.yaml`.
 
-Get IP of the your ingress controller that you installed at the beginning of this guide:
+Get IP address of Edge Stack (the ingress controller that you installed at the beginning of this guide):
 
 ```
 kubectl -n ambassador get svc ambassador \
@@ -169,11 +172,40 @@ kubectl -n ambassador get svc ambassador \
 
 Finally, go to `http://<load balancer IP>/` and you should see your app.
 
+<Alert severity="info">
+  If you get an error in your browser about the certificate being invalid, just hit *Proceed*. Edge Stack forwarded you to an HTTPS version of the site by default and is using a self-signed certificate, which is ok for this guide.  In a production deployment you can use Edge Stack to generate a valid cert automatically.
+</Alert>
+
 <Alert severity="success">
 <strong>Victory!</strong> You went from code to a web app running in Kubernetes!
 </Alert>
 
-## <img class="os-logo" src="../../../../../images/logo.png"/> What's Next?
+## 7. Setup a Host and SSL (optional)
+
+If you have a registered domain name then you can take this one step further by setting up a [Host resource to provision an SSL certificate](../../../../edge-stack/latest/topics/running/host-crd/).
+
+You'll first need to create an A record at your DNS provider.  We suggest a subdomain like `test.yourdomain.com`.  For the A record's IP address use the load balancer IP from the previous step.
+
+Once the record is created and you give it a few minutes to propagate across the internet, save the following as `host.yaml`, filling in your domain name and email address.
+
+```yaml
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: nodebb-host
+spec:
+  hostname: <your domain name>
+  acmeProvider:
+    email: <your email address>
+```
+
+This tells Edge Stack to use your domain name to generate and install an SSL certificate via Let's Encrypt.  Apply the file with `kubectl apply -f host.yaml` then wait a moment for the certificate to generate.  
+
+You can check the certificate's status with `kubectl describe host nodebb-host`.  When complete you should see an event saying `Host with ACME-provisioned TLS certificate marked Ready`.
+
+Finally, go to your domain in the browser and you should see the app with a valid SSL certificate installed.
+
+## <img class="os-logo" src="../../../../../images/logo.png"/> What's next?
 
 YAML files used to deploy Kubernetes resources are generally kept under version control.  You can automate deploying and updating resources as changes are committed to your code repositories using a CI/CD system like Argo!  [Check out our guide on getting started with Argo](../../../../argo/latest/quick-start/).
 
