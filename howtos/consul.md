@@ -7,11 +7,11 @@ import Alert from '@material-ui/lab/Alert';
 <h3>Contents</h3>
 
 - [Consul Integration](#consul-integration)
-  - [Architecture overview](#architecture-overview)
+  - [Architecture Overview](#architecture-overview)
   - [Installing Consul](#installing-consul)
   - [Getting started](#getting-started)
   - [Configuring Ambassador](#configuring-ambassador)
-  - [Routing to Consul services](#routing-to-consul-services)
+  - [Routing to Consul Services](#routing-to-consul-services)
   - [Consul Connector and Encrypted TLS](#consul-connector-and-encrypted-tls)
   - [Environment variables](#environment-variables)
   - [More information](#more-information)
@@ -21,7 +21,7 @@ import Alert from '@material-ui/lab/Alert';
 
 [Consul](https://www.consul.io) is a widely used service mesh. You can use Consul with Ambassador Edge Stack, as it natively supports Consul for service discovery and end-to-end TLS (including mTLS between services). This capability is particularly useful when deploying Ambassador Edge Stack in so-called hybrid clouds, where applications are deployed on VMs and Kubernetes. In this environment, Ambassador Edge Stack can securely route over TLS to any application regardless of where it is deployed.
 
-## Architecture overview
+## Architecture Overview
 
 In this architecture, Consul serves as the source of truth for your entire data center, tracking available endpoints, service configuration, and secrets for TLS encryption. New applications and services automatically register themselves with Consul using the Consul agent or API. When a request is sent through Ambassador Edge Stack, Ambassador Edge Stack sends the request to an endpoint based on the data in Consul.
 
@@ -115,7 +115,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 
 
 
-   This will tell Ambassador Edge Stack that Consul is a service discovery endpoint. Save the configuration to a file (e.g., `consul-resolver.yaml`, and apply this configuration with `kubectl apply -f consul-resolver.yaml`.
+   This will tell Ambassador Edge Stack that Consul is a service discovery endpoint. Save the configuration to a file (e.g., `consul-resolver.yaml`, and apply this configuration with `kubectl apply -f consul-resolver.yaml`. For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
     
 
     
@@ -123,7 +123,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 
    For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
 
-## Routing to Consul services
+## Routing to Consul Services
 
 You'll now register a demo application with Consul, and show how Ambassador Edge Stack can route to this application using endpoint data from Consul. To simplify this tutorial, you'll deploy the application in Kubernetes, although in practice this application can be deployed anywhere in your data center (e.g., on VMs).
 
