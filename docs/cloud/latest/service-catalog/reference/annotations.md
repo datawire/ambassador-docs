@@ -5,19 +5,19 @@ import Alert from '@material-ui/lab/Alert';
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [About Annotations](#about-annotations)  
-* [Supported Annotations](#supported-annotations)  
+* [About annotations](#about-annotations)  
+* [Supported annotations](#supported-annotations)  
 * [Annotate via `kubectl`](#annotate-via-kubectl)  
 * [Annotate via YAML](#annotate-via-yaml)  
 * [Example YAML](#annotate-via-kubectl)
 
 </div>
 
-## About Annotations
+## About annotations
 
 [Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) are used to attach metadata to your Kubernetes objects.  Typically they are used to provide contextual information around the object for teammates or information used by third-party tools.  Service Catalog combines these uses to build a readily available catalog of your services, accessible by your teammates via [Ambassador Cloud](https://app.getambassador.io/cloud/catalog).
 
-## Supported Annotations
+## Supported annotations
 
 [Service Catalog's](https://app.getambassador.io/cloud/catalog) supported annotation keys all start with [`a8r.io`](http://a8r.io) followed by the specific field. These are the metadata keys that Service Catalog supports:
 
@@ -30,7 +30,7 @@ import Alert from '@material-ui/lab/Alert';
 | `a8r.io/logs` | Link to external log viewer | `https://kibana.getambassador.io` |
 | `a8r.io/documentation` | Link to external project documentation | `https://www.getambassador.io/docs/edge-stack/latest/` |
 | `a8r.io/repository` | Link to external VCS repository | `https://github.com/datawire/ambassador` |
-| `a8r.io/support` | Link to external support center | `https://d6e.co/slack` |
+| `a8r.io/support` | Link to external support center | `https://a8r.io/Slack` |
 | `a8r.io/runbook` | Link to external project runbook | `https://www.getambassador.io/docs/edge-stack/latest/topics/running/debugging/` |
 | `a8r.io/incidents`  | Link to external incident dashboard | `https://incidents.getambassador.io` |
 | `a8r.io/uptime` | Link to external uptime dashboard | `https://uptime.getambassador.io` |

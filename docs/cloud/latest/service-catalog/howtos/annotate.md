@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Annotate a Service
+# Annotate a service
 
 [Service Catalog](https://app.getambassador.io/cloud/catalog) lists all the services in your cluster, including helpful information like the owner, a description of the service, links to documentation, and more.
 
@@ -8,7 +8,7 @@ This information is all sourced from annotations set on the services.  Annotatio
 
 <Alert severity="info">The full list of supported annotations is available <a href="../../reference/annotations/">here</a>.</Alert>
 
-## Annotate via `kubectl`
+## Annotate via kubectl
 
 Find a service you would like to annotate in your Service Catalog list that does not have an owner yet listed.
 

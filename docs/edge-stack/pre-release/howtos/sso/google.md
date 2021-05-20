@@ -1,4 +1,4 @@
-# Google Single Sign-On
+# Single Sign-On with Google
 
 ## Create an OAuth client in the Google API Console
 
