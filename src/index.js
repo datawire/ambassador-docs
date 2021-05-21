@@ -167,7 +167,7 @@ export default ({ data, location }) => {
         }
     }
 
-    const requireReadingTime = () => !(page.fields.slug.startsWith('/docs/telepresence/') && page.fields.slug.endsWith('/quick-start/'));
+    const requireReadingTime = () => !(page.fields.slug.startsWith('/docs/telepresence/') && page.fields.slug.endsWith('/quick-start/')) && !page.frontmatter.hide_reading_time;
 
     const footer = (
         <div>
@@ -304,6 +304,7 @@ export const query = graphql`
       frontmatter {
         description
         reading_time
+        hide_reading_time
       }
       parent {
         ... on File {
