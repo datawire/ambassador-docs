@@ -25,3 +25,5 @@
           items:
             - title: Rollout CRD
               link: /reference/rolloutcrd 
+        - title: Release Notes
+          link: /release-notes
