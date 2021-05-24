@@ -1,5 +1,5 @@
 ---
-  hide_reading_time = true
+  hide_reading_time: true
 ---
 
 # Kubernetes Nuts and Bolts
