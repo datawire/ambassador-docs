@@ -16,7 +16,7 @@
               link: /concepts/appdev
             - title: How can Kubernetes help me code and ship faster?
               link: /concepts/faster
-            - title: Kubernetes nuts and bolts (video)
+            - title: Kubernetes nuts and bolts - video
               link: /concepts/nutsandbolts
         - title: How Do I...
           items:
