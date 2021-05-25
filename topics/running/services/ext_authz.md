@@ -27,10 +27,10 @@ When `proto: grpc` is set, the ExtAuth service must implement the `Authorization
 
 ### The HTTP protocol
 
-External services for `proto: http` are often easier to implement, but have several limitations, compared to `proto: grpc`.
+External services for `proto: http` are often easier to implement, but have several limitations compared to `proto: grpc`.
  - The list of headers that the ExtAuth service is interested in reading must be known ahead of time, in order to set `allow_request_headers`.  Inspecting headers that are not known ahead of time requires instead using `proto: grpc`.
  - The list of headers that the ExtAuth service would like to set or modify must be known ahead of time, in order to set `allow_authorization_headers`.  Setting headers that are not known ahead of time requires instead using `proto: grpc`.
- - When returning a direct HTTP response, the HTTP status code cannot be 200 or in the 5XX range.  Intercepting with a 200 of 5XX response requires instead using `proto: grpc`.
+ - When returning a direct HTTP response, the HTTP status code cannot be 200 or in the 5XX range.  Intercepting with a 200 or 5XX response requires instead using `proto: grpc`.
 
 #### The request From Edge Stack to the ExtAuth service
 
