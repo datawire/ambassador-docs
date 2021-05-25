@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Kubernetes Quick Start
+# Kubernetes quick start
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
