@@ -7,7 +7,7 @@ import './nutsandbolts.less'
 
 # Kubernetes nuts and bolts - video
 
-  
+<div style="margin: 10px 0 10px 0;"></div>
 
 <div class="video-container">
     <iframe class="video" src="https://www.youtube.com/embed/dePoqgOT1ZQ" allowfullscreen></iframe>
