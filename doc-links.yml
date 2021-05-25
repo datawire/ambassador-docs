@@ -6,9 +6,9 @@
   items:
     - title: Kubernetes
       items: 
-        - title: Quick Start
+        - title: Quick start
           link: /quick-start
-        - title: Core Concepts
+        - title: Core concepts
           items:
             - title: "Kubernetes basics: Kubernetes for developers"
               link: /concepts/basics
@@ -18,7 +18,7 @@
               link: /concepts/faster
             - title: Kubernetes nuts and bolts - video
               link: /concepts/nutsandbolts
-        - title: How Do I...
+        - title: How do I...
           items:
             - title: Get code running on my cluster
               link: /howtos/codetocluster
