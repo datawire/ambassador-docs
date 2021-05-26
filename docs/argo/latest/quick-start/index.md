@@ -59,7 +59,7 @@ Run the following commands to create the namespaces required for Argo and instal
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl create namespace argo-rollouts
-kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/datawire/argo-rollouts/ambassador/release/manifests/install.yaml
+kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml
 ```
 
 Next, you will need to install the Argo CD CLI (for building pipelines) and the Argo Rollouts plugin (for managing and visualizing rollouts) on your laptop:
@@ -127,12 +127,14 @@ First set up port forwarding to access the Argo API:
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-In a new terminal window, retrieve the default password (it is name of the Argo API server Pod):
+In a new terminal window, retrieve the default password; it is auto-generated and stored in a Kubernetes Secret:
+
 ```
-kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut -d'/' -f 2
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
 Authenticate against the API using the default username `admin` and password (answer `y` about the certificate error):
+
 ```
 argocd login localhost:8080
 ```
