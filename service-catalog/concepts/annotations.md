@@ -1,4 +1,4 @@
-## The power of Kubernetes annotations 
+# The power of Kubernetes annotations 
 
 Have you ever been asked to troubleshoot a failing Kubernetes service and struggled to find basic information about the service such as the source repository and owner? Troubleshooting always begins with information gathering. 
 
@@ -66,6 +66,6 @@ Ambassador Cloud Service Catalog provides a centralized view with an easily navi
   Before proceeding, you can remove the <code>ghost-service</code> with <code>kubectl delete svc ghost-service</code>.
 </Alert>
 
-### What's next?
+## What's next?
 
 [Set up Service Catalog](../quick-start/) for a single source of truth for your team to see all your service annotations.
