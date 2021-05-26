@@ -4,7 +4,7 @@ Have you ever been asked to troubleshoot a failing Kubernetes service and strugg
 
 Kubernetes annotations are designed to solve exactly this problem. They are designed to add metadata to Kubernetes objects. 
 
-Using `kubectl`, let's create a basic service named `ghost-service` with the `a8r.io/description` annotation set to "An annotated ghost service that points to nowhere in particular".
+Using kubectl, let's create a basic service named `ghost-service` with the `a8r.io/description` annotation set to "An annotated ghost service that points to nowhere in particular".
 
 Copy and paste this into your terminal:
 
@@ -23,7 +23,7 @@ spec:
 EOF
 ```
 
-You can easily view all of the annotations on your new service using `kubectl`:
+You can easily view all of the annotations on your new service using kubectl:
 
 ```
 $ kubectl describe svc ghost-service
@@ -68,4 +68,4 @@ Ambassador Cloud Service Catalog provides a centralized view with an easily navi
 
 ## What's next?
 
-[Set up Service Catalog](../quick-start/) for a single source of truth for your team to see all your service annotations.
+[Set up Service Catalog](../../quick-start/) for a single source of truth for your team to see all your service annotations.
