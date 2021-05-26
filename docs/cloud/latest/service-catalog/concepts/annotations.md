@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # The power of Kubernetes annotations 
 
 Have you ever been asked to troubleshoot a failing Kubernetes service and struggled to find basic information about the service such as the source repository and owner? Troubleshooting always begins with information gathering. 
@@ -35,7 +37,9 @@ $ kubectl describe svc ghost-service
   ...
 ```
 
-<Alert severity="success"><b>Success!</b> You can easily add important metadata using Kubernetes annotations to your services. This information is invaluable when trying to resolve issues and understand your system.</Alert>
+<Alert severity="success">
+  <b>Success!</b> You can easily add important metadata using Kubernetes annotations to your services. This information is invaluable when trying to resolve issues and understand your system.
+</Alert>
 
 You can also add annotations using the `kubectl annotate` command:
 
