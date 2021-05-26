@@ -55,7 +55,7 @@ Proper use of load balancing in a distributed system provides several benefits:
 
 ### Load balancer vs. proxy
 
-When talking about network load balancers, the terms _load balancer_ and _proxy _are used roughly interchangeably within the industry. This post will also treat the terms as generally equivalent. (Pedantically, not all proxies are load balancers. But the vast majority of proxies perform load balancing as a primary function.)
+When talking about network load balancers, the terms _load balancer_ and _proxy_ are used roughly interchangeably within the industry. This post will also treat the terms as generally equivalent. (Pedantically, not all proxies are load balancers. But the vast majority of proxies perform load balancing as a primary function.)
 
 Some might argue that—when load balancing is done as part of an embedded client library—the load balancer is not really a proxy. However, that distinction adds needless complexity to an already confusing topic. 
 
@@ -94,7 +94,7 @@ To illustrate the shortcomings of L4 load balancing that warrant investment in L
 
 In the previous scenario, _the backend selected to handle client A will be handling approximately 3,000x less load then the backend selected to handle client B_! 
 
-This is a large problem and generally defeats the purpose of load balancing in the first place. It’s also worth noting that this problem happens for any _multiplexing, kept-alive _protocol. (Multiplexing means sending concurrent application requests over a single L4 connection, and kept-alive means not closing the connection when there are no active requests.) 
+This is a large problem and generally defeats the purpose of load balancing in the first place. It’s also worth noting that this problem happens for any _multiplexing, kept-alive_ protocol. (Multiplexing means sending concurrent application requests over a single L4 connection, and kept-alive means not closing the connection when there are no active requests.)
 
 All modern protocols are evolving to be both multiplexing and kept-alive for efficiency reasons (e.g., it is generally expensive to create connections—especially when the connections are encrypted using TLS). That being the case, the L4 load balancer impedance mismatch is becoming more pronounced over time. 
 
