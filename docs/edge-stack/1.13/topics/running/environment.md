@@ -1,6 +1,4 @@
-# The Ambassador Container
-
-## Container Images
+# The Ambassador container
 
 To give you flexibility and independence from a hosting platform's uptime, you can pull the `ambassador` and `aes` images from any of the following registries:
 - `docker.io/datawire/`
@@ -10,7 +8,7 @@ To give you flexibility and independence from a hosting platform's uptime, you c
 
 For an even more robust installation, consider using a [local registry as a pull through cache](https://docs.docker.com/registry/recipes/mirror/) or configure a [publicly accessible mirror](https://cloud.google.com/container-registry/docs/using-dockerhub-mirroring).
 
-## Environment Variables
+## Environment variables
 
 Use the following variables for the environment of your Ambassador container:
 
@@ -83,7 +81,7 @@ Log level names are case-insensitive.  From least verbose to most
 verbose, valid log levels are `error`, `warn`/`warning`, `info`,
 `debug`, and `trace`.
 
-## Port Assignments
+## Port assignments
 
 The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traffic automatically via TCP:
 

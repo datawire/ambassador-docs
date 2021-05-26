@@ -1,6 +1,6 @@
 # Introduction to the `Project` resource
 
-## This feature is in BETA. Please [tell me](mailto:rhs@datawire.io?subject=Project%20CRD%20UX%20Feedback) (lead developer of the feature) about your experience.
+## This feature is DEPRECATED. Consider the [Argo Rollouts integration](/docs/argo/latest/quick-start) with Ambassador Edge Stack.
 
 Please note that the Project functionality is disabled by default. See [The Project Quickstart](../../../tutorials/projects/) for instructions on enabling the Project Controller and setting up your first `Project`.
 

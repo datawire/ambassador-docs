@@ -1,4 +1,4 @@
-# Rate Limit Speedometers
+# Rate limit speedometers
 
 The Edge Policy Console (EPC) Dashboard tab shows two gauges to help users monitor their throughput rates for Rate Limited and for Authenticated traffic with AES.
 

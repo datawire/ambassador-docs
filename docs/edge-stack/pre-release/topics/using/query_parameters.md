@@ -1,14 +1,14 @@
-# Query Parameter based Routing
+# Query parameter-based routing
 
 Ambassador Edge Stack can route to target services based on HTTP query parameters with the `query_parameters` and `regex_query_parameters` specifications. Multiple mappings with different annotations can be applied to construct more complex routing rules.
 
-## The `query_parameters` Annotation
+## The `query_parameters` annotation
 
 The `query_parameters` attribute is a dictionary of `query_parameter`: `value` pairs. Ambassador Edge Stack will only allow requests that match the specified `query_parameter`: `value` pairs to reach the target service.
 
 You can also set the `value` of a query parameter to `true` to test for the existence of a query parameter.
 
-### A Basic Example
+### A basic example
 
 ```yaml
 ---
@@ -26,7 +26,7 @@ spec:
 
 This will allow requests to /backend/ to succeed only if the `quote-mode` query parameter has the value `backend` and the `random-query-parameter` has the value `datawire`.
 
-### A Conditional Example
+### A conditional example
 
 ```yaml
 ---

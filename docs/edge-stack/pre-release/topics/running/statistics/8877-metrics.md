@@ -1,4 +1,4 @@
-# The Metrics Endpoint
+# The metrics endpoint
 
 > For an overview of other options for gathering statistics on
 > Ambassador, see the [Statistics and Monitoring](../) overview.

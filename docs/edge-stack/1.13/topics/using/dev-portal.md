@@ -1,6 +1,6 @@
 # Developer Portal
 
-## Rendering API Documentation
+## Rendering API documentation
 
 The _Dev Portal_ uses the `Mapping` resource to automatically discover services known by
 the Ambassador Edge Stack.
@@ -391,7 +391,7 @@ Will be displayed in the _Dev Portal_ as `Cat Service`, and the documentation wi
 accessed at `$AMBASSADOR_URL/docs/doc/Cat%20Service`.
 
 
-## <a href="#global-config"></a>Default Configuration
+## <a href="#global-config"></a>Default configuration
 
 The _Dev Portal_ supports some default configuration in some environment variables
 (for backwards compatibility).

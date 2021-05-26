@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Authentication Service
+# Authentication service
 
 The Ambassador API Gateway provides a highly flexible mechanism for authentication, via the AuthService resource.  An AuthService configures Ambassador to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
 
@@ -53,7 +53,7 @@ spec:
 
 | Attribute | Default value | Description |
 | --- | --- | --- |
-|`ambassador_id`| `default` | Which [Ambassador ID](..\..\running/#ambassador_id) the AuthService should apply to. |
+|`ambassador_id`| `default` | Which [Ambassador ID](../../running/#ambassador_id) the AuthService should apply to. |
 |`auth_service` | n/a | Formatted like `[scheme://]host[:port]`, identifies the external auth service to talk to.  The scheme-part may be `http://` or `https://`, which influences the default value of `tls`, and of the port-part.  If no scheme-part is given, it behaves as if `http://` was given. The `host` should be the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services) of the service you want to use for authentication. |
 |`tls` | `true` if `auth_service` starts with "https://" | Whether to use TLS or cleartext when speaking to the external auth service.  The default is based on the scheme-part of the `auth_service`.  If the value of `tls` is not a Boolean, the value is taken to be the name of a defined [`TLSContext`](../../tls/), which will determine the certificate presented to the upstream service. |
 |`proto` | `http` | Specifies which variant of the [`ext_authz` protocol](../ext_authz/) to use when communicating with the external auth service.  Valid options are `http` or `grpc`. |

@@ -1,7 +1,7 @@
 ---
 description: "A guide to using Linkerd 2 Auto-Inject to mesh a service and using Edge Stack to dynamically route requests to that service."
 ---
-# Linkerd 2 Integration
+# Linkerd 2 integration
 
 [Linkerd 2](https://www.linkerd.io) is a zero-config and ultra-lightweight service mesh. Edge Stack natively supports Linkerd 2 for service discovery, end-to-end TLS (including mTLS between services), and (with Linkerd 2.8) multicluster operation.
 
@@ -69,7 +69,7 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
 
     This will tell Edge Stack to add additional headers to each request forwarded to Linkerd 2 with information about where to route this request to. This is a general setting. You can also set `add_linkerd_headers` per [Mapping](../../topics/using/mappings#mapping-configuration).
 
-## Routing to Linkerd 2 Services
+## Routing to Linkerd 2 services
 
 You'll now register a demo application with Linkerd 2, and show how Edge Stack can route to this application using endpoint data from Linkerd 2.
 
@@ -188,11 +188,11 @@ Congratulations! You're successfully routing traffic to the QOTM application, th
 
 If you now [configure TLS termination](../../topics/running/tls) in Edge Stack, you have an end-to-end secured connection.
 
-## Multicluster Operation
+## Multicluster operation
 
 Linkerd 2.8 can support [multicluster operation](https://linkerd.io/2/features/multicluster/), where the Linkerd mesh transparently bridges from one cluster to another, allowing seamless access between the two. This works using the Linkerd "[service mirror controller](https://linkerd.io/2020/02/25/multicluster-kubernetes-with-service-mirroring/#step-1-service-discovery)" to discover services in the target cluster, and expose (mirror) them in the source cluster. Requests to mirrored services in the source cluster are transparently proxied via the Edge Stack in the target cluster to the appropriate target service, using Linkerd's [automatic mTLS](https://linkerd.io/2/features/automatic-mtls/) to protect the requests in flight between clusters. By configuring Linkerd to use the existing Edge Stack as the ingress gateway between clusters, you eliminate the need to deploy and manage an additional ingress gateway.
 
-### Initial Multicluster Setup
+### Initial multicluster setup
 
 1. Install Edge Stack and the [Linkerd multicluster control plane](https://linkerd.io/2/tasks/installing-multicluster/). Make sure you've also linked the clusters.
 
@@ -212,7 +212,7 @@ Linkerd 2.8 can support [multicluster operation](https://linkerd.io/2/features/m
 
 At this point, your Edge Stack installation should work fine with multicluster Linkerd as a source cluster: you can configure Linkerd to bridge to a target cluster, and all should be well.
 
-### Using the Cluster as a Target Cluster
+### Using the cluster as a target cluster
 
 Allowing the Edge Stack installation to serve as a target cluster requires explicitly giving permission for Linkerd to mirror services from the cluster, and explicitly telling Linkerd to use the Edge Stack as the target gateway.
 

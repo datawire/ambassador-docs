@@ -1,4 +1,4 @@
-# The `Host` CRD, ACME Support, and External Load Balancer Configuration
+# The Host CRD, ACME support, and external load balancer configuration
 
 The custom `Host` resource defines how the Ambassador Edge Stack will be
 visible to the outside world. It collects all the following information in a
@@ -30,7 +30,7 @@ cleartext will be automatically redirected to use HTTPS, and Ambassador will
 not search for any specific further configuration resources related to this
 Host.
 
-## ACME and TLS Settings
+## ACME and TLS settings
 
 The `Host` is responsible for high-level TLS configuration in Ambassador.
 
@@ -42,7 +42,7 @@ The are two settings in the `Host` that are responsible for TLS configuration:
 In combination, these settings tell Ambassador how it should manage TLS
 certificates.
 
-### ACME Support
+### ACME support
 
 The Ambassador Edge Stack comes with built in support for automatic certificate
 management using the [ACME protocol](https://tools.ietf.org/html/rfc8555).
@@ -86,7 +86,7 @@ set using the `tlsSecret` element:
    `POST` to an endpoint in Ambassador.
    - Wildcard domains are not supported.
 
-### TLS Configuration
+### TLS configuration
 
 Regardless of if you are using the built in ACME support in the Ambassador Edge
 Stack, the `Host` is responsible for reading TLS certificates from Kubernetes
@@ -115,7 +115,7 @@ spec:
     name: tls-cert
 ```
 
-## Secure and Insecure Requests
+## Secure and insecure requests
 
 A **secure** request arrives via HTTPS; an **insecure** request does not. By default, secure requests will be routed and insecure requests will be redirected (using an HTTP 301 response) to HTTPS. The behavior of insecure requests can be overridden using the `requestPolicy` element of a Host:
 
@@ -153,7 +153,7 @@ Some special cases to be aware of here:
 * ACME challenges with prefix `/.well-known/acme-challenge/` are always forced to be considered insecure, since they are not supposed to arrive over HTTPS.
 * Ambassador Edge Stack provides native handling of ACME challenges. If you are using this support, Ambassador will automatically arrange for insecure ACME challenges to be handled correctly. If you are handling ACME yourself - as you must when running Ambassador Open Source - you will need to supply appropriate Host resources and Mappings to correctly direct ACME challenges to your ACME challenge handler.
 
-## Load Balancers, the `Host` Resource, and `X-Forwarded-Proto`
+## Load balancers, the Host resource, and `X-Forwarded-Proto`
 
 In a typical installation, Ambassador runs behind a load balancer. The
 configuration of the load balancer can affect how Ambassador sees requests
@@ -171,7 +171,7 @@ considers the request secure or insecure. As such:
 
 It's important to realize that Envoy manages the `X-Forwarded-Proto` header such that it **always** reflects the most trustworthy information Envoy has about whether the request arrived encrypted or unencrypted. If no `X-Forwarded-Proto` is received from downstream, **or if it is considered untrustworthy**, Envoy will supply an `X-Forwarded-Proto` that reflects the protocol used for the connection to Envoy itself. The `xff_num_trusted_hops` element, although its name reflects `X-Forwarded-For`, is also used when determining trust for `X-Forwarded-For`, and it is therefore important to set it correctly. Its default of 0 should always be correct when Ambassador is behind only layer 4 load balancers; it should need to be changed **only** when layer 7 load balancers are involved.
 
-## Use Cases and Examples
+## Use cases and examples
 
 In the definitions below, "L4 LB" refers to a layer 4 load balancer, while "L7
 LB" refers to a layer 7 load balancer.
@@ -365,12 +365,12 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 See [Service Preview](../../using/edgectl/service-preview-reference#ambassador-edge-stack) for more information.
 
-## `Host` Specification
+## Host specification
 
 The Ambassador Edge Stack automates the creation of TLS certificates via the [Edge Policy Console](../../using/edge-policy-console), which provides HTTPS for your hosts. Note that **in order to have TLS and automatic HTTPS, your host must be an FQDN.**
 
 The Host CRD defines how Ambassador will be visible to the outside world. A minimal Host defines a hostname by which the Ambassador will be reachable, but a Host can also tell an Ambassador how to manage TLS, and which resources to examine for further configuration.
 
-### CRD Specification
+### CRD specification
 
 The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/datawire/ambassador/blob/master/api/getambassador.io/v2/Host.proto).

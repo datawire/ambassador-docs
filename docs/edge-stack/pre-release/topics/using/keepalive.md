@@ -2,7 +2,7 @@
 
 Keepalive option indicates whether `SO_KEEPALIVE` on the socket should be enabled.
 
-## Keepalive Configuration
+## Keepalive configuration
 
 Keepalive configuration can be set for all Ambassador Edge Stack mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings#configuring-mappings).
 

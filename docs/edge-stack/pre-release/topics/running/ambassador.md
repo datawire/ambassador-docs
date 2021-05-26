@@ -291,36 +291,13 @@ strip_matching_host_port: true
 
 ##### Envoy's admin port
 
-
 The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this.
-
-The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself. If you'd like to, you can change these to route requests to some other service. For example, to have the readiness probe map to the quote application's health check, you could do:
-
 
 ```yaml
 admin_port: 8001
 ```
 
-
 ##### Lua scripts
-
-The liveness and readiness probes both support `prefix`, `rewrite`, and `service`, with the same meanings as for [mappings](../../using/mappings). 
-
-Use the following to disable public access to the endpoints:
-
-```yaml
-
-readiness_probe:
-  enabled: false
-liveness_probe:
-  enabled: false
-diagnostics:
-  enabled: false
-```
-
-The endpoints will return a 404 error, but they are still accessible from within the cluster at `http://ambassador-admin.ambassador:8877/ambassador/v0/check_alive` and `http://ambassador-admin.ambassador:8877/ambassador/v0/check_ready` (assuming Ambassador is installed in the `ambassador` namespace).
-
-### Lua Scripts (`lua_scripts`)
 
 Run a custom Lua script on every request. This is useful for simple use cases that mutate requests or responses, for example to add a custom header.
 
@@ -340,6 +317,14 @@ Some caveats around the embedded scripts:
 * They're run on every request/response to every URL
 
 If you need more flexible and configurable options, Ambassador Edge Stack supports a [pluggable Filter system](../../using/filters/).
+
+##### Merge slashes
+
+If true, Ambassador will merge adjacent slashes for the purpose of route matching and request filtering. For example, a request for `//foo///bar` will be matched to a Mapping with prefix `/foo/bar`.
+
+```yaml
+merge_slashes: true
+```
 
 ##### Override default ports
 
@@ -477,7 +462,7 @@ You may specify as many ranges for each kind of keyword as desired.
 
 ##### Trust downstream client IP
 
-Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded-For header.
+Sets whether Envoy will trust the remote address of incoming connections or rely exclusively on the `X-Forwarded-For` header.
 
 ```yaml
 use_remote_address: true
@@ -485,7 +470,7 @@ use_remote_address: true
 
 In Ambassador 0.50 and later, the default value for `use_remote_address` is set to true. When set to true, Ambassador Edge Stack will append to the `X-Forwarded-For` header its IP address so upstream clients of Ambassador Edge Stack can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  
 
-See the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
+See the [Envoy documentation on the `X-Forwarded-For header` ](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation on preserving the client source IP](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
 
 <Alert severity="warning">
   If you need to use <code>x_forwarded_proto_redirect</code>, you <strong>must</strong> set <code>use_remote_address</code> to false. Otherwise, unexpected behavior can occur.
@@ -522,6 +507,49 @@ Refer to [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/con
 <Alert severity="info">
   This value is not dynamically configurable in Envoy. A restart is required changing the value of <code>xff_num_trusted_hops</code> for Envoy to respect the change.
 </Alert>
+
+##### Rejecting Client Requests With Escaped Slashes
+
+Ambassador can be configured to reject client requests that contain escaped slashes using the following configuration on the Ambassador Module:
+
+```yaml
+reject_requests_with_escaped_slashes: true
+```
+
+When set to true, Ambassador will reject client requests that contain escaped slashes by returning HTTP 400. These requests are
+defined by containing `%2F`, `%2f`, `%5C` or `%5c` sequences in their URI path. By default, Ambassador will forward these requests unmodified.
+
+###### Envoy and Ambassador Edge Stack behavior
+
+Internally, Envoy treats escaped and unescaped slashes distinctly for matching purposes. This means that an Ambassador mapping
+for path `/httpbin/status` will not be matched by a request for `/httpbin%2fstatus`.
+
+On the other hand, when using Ambassador Edge Stack, escaped slashes will be treated like unescaped slashes when applying FilterPolicies. For example, a request to `/httpbin%2fstatus/200` will be matched against a FilterPolicy for `/httpbin/status/*`.
+
+###### Security Concern Example
+
+With Ambassador Edge Stack, this can become a security concern when combined with `bypass_auth` in the following scenario:
+* Use a Mapping for path `/prefix` with `bypass_auth` set to true. The intention here is to apply no FilterPolicies under this prefix, by default.
+* Use a Mapping for path `/prefix/secure/` without setting bypass_auth to true. The intention here is to selectively apply a FilterPolicy to this longer prefix.
+* Have an upstream service that receives both `/prefix` and `/prefix/secure/` traffic (from the Mappings above), but the upstream service treats escaped and unescaped slashes equivalently.
+
+In this scenario, when a client makes a request to `/prefix%2fsecure/secret.txt`, the underlying Envoy configuration will _not_ match the routing rule for `/prefix/secure/`, but will instead
+match the routing rule for `/prefix` which has `bypass_auth` set to true. The Ambassador Edge Stack FilterPolicies will _not_ be enforced in this case, and the upstream service will receive
+a request that it treats equivalently to `/prefix/secure/secret.txt`, potentially leaking information that was assumed protected by an Ambassador Edge Stack FilterPolicy.
+
+One way to avoid this particular scenario is to avoid using bypass_auth and instead use a FilterPolicy that applies no filters when no authorization behavior is desired.
+
+The other way to avoid this scenario is to reject client requests with escaped slashes altogether to eliminate this class of path confusion security concerns. This is recommended when there is no known, legitimate reason to accept client requests that contain escaped slashes. This is especially true if it is not known whether upstream services will treat escaped and unescaped slashes equivalently.
+
+This document is not intended to provide an exhaustive set of scenarios where path confusion can lead to security concerns. As part of good security practice it is recommended to audit end-to-end request flow and the behavior of each component’s escaped path handling to determine the best configuration for your use case.
+
+###### Summary
+
+Envoy treats escaped and unescaped slashes _distinctly_ for matching purposes. Matching is the underlying behavior used by Ambassador Mappings.
+
+Ambassador Edge Stack treats escaped and unescaped slashes _equivalently_ when selecting FilterPolicies. FilterPolicies are applied by Ambassador Edge Stack after Envoy has performed route matching.
+
+Finally, whether upstream services treat escaped and unescaped slashes equivalently is entirely dependent on the upstream service, and therefore dependent on your use case. Configuration intended to implement security policies will require audit with respect to escaped slashes. By setting reject_requests_with_escaped_slashes, this class of security concern can largely be eliminated.
 
 ---
 

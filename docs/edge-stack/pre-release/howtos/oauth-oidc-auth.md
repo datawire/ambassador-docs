@@ -2,7 +2,7 @@
 
 Ambassador Edge Stack adds native support for configuring single sign-on with OAuth and OIDC authentication schemes for single sign-on with an external identity provider (IdP). Ambassador Edge Stack has been tested with Keycloak, Auth0, Okta, and UAA although other OAuth/OIDC-compliant identity providers should work. Please contact us on [Slack](https://a8r.io/Slack) if you have questions about IdPs not listed below.
 
-## 1. Configure an OAuth2 Filter
+## 1. Configure an OAuth2 filter
 
 First, configure an OAuth2 filter for your identity provider. For information on how to configure your IdP, see the IdP configuration section below.
 
@@ -41,7 +41,7 @@ all subdomains of `domain2` included:
 
 Save the configuration to a file and apply it to the cluster: `kubectl apply -f oauth-filter.yaml`.
 
-## 2. Create a Filter Policy
+## 2. Create a FilterPolicy
 
 Once we have a properly configured OAuth2 filter, create a FilterPolicy that applies the filter.
 
@@ -66,7 +66,7 @@ spec:
 
 Save the configuration to a file and apply it to the cluster: `kubectl apply -f httpbin-filter-policy.yaml`. For more information about filters and filter policies, consult the [filter reference](../../topics/using/filters/).
 
-## IdP Configuration
+## IdP configuration
 
 You will need to configure your IdP to handle authentication requests. The way to do this varies by IdP.
 
@@ -79,7 +79,7 @@ You will need to configure your IdP to handle authentication requests. The way t
 - [Salesforce](../sso/salesforce)
 - [UAA](../sso/uaa)
 
-## Configure Authentication Across Multiple Domains (Optional)
+## Configure authentication across multiple domains (optional)
 
 Ambassador Edge Stack supports authentication for multiple domains where each domain is issued its own access token. For example, imagine you're hosting both `domain1.example.com` and `domain2.example.com` on the same cluster. With multi-domain support, users will receive separate authentication tokens for `domain1` and `domain2`.
 

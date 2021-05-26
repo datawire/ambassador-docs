@@ -1,8 +1,8 @@
-# Introduction to the `Mapping` resource
+# Introduction to the Mapping resource
 
 Ambassador is designed around a [declarative, self-service management model](../../concepts/gitops-continuous-delivery). The core resource used to support application development teams who need to manage the edge with Ambassador is the `Mapping` resource.
 
-## Quick Example
+## Quick example
 
 At its core a `Mapping` resource maps a `resource` to a `service`:
 
@@ -25,7 +25,7 @@ spec:
   service: http://httpbin.org
 ```
 
-## Applying a `Mapping` resource
+## Applying a Mapping resource
 
 A `Mapping` resource can be managed using the same workflow as any other Kubernetes resources (e.g., `service`, `deployment`). For example, if the above `Mapping` is saved into a file called `httpbin-mapping.yaml`, the following command will apply the configuration directly to Ambassador:
 
@@ -120,7 +120,7 @@ Where everything except for the `service` is optional.
 
 Note that while using `service.namespace.svc.cluster.local` may work for Kubernetes resolvers, the preferred syntax is `service.namespace`.
 
-## Best Practices for Configuration
+## Best practices for configuration
 
 Ambassador's configuration is assembled from multiple YAML blocks which are managed by independent application teams. This implies:
 

@@ -14,6 +14,8 @@
               link: /install/
             - title: Upgrade
               link: /install/upgrade/
+            - title: Migrate from legacy Telepresence
+              link: /install/migrate-from-legacy/
         - title: Core concepts
           items:
             - title: The changing development workflow
@@ -54,6 +56,8 @@
               link: /reference/dns
             - title: RBAC
               link: /reference/rbac
+            - title: Using Telepresence with Linkerd
+              link: /reference/linkerd
         - title: FAQs
           link: /faqs
         - title: Troubleshooting

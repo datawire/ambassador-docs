@@ -1,10 +1,10 @@
-# Filter Type: `JWT`
+# JWT Filter
 
 The `JWT` filter type performs JWT validation on a [Bearer token] present in the HTTP header.  If the Bearer token JWT doesn't validate, or has insufficient scope, an RFC 6750-complaint error response with a `WWW-Authenticate` header is returned.  The list of acceptable signing keys is loaded from a JWK Set that is loaded over HTTP, as specified in `jwksURI`.  Only RSA and `none` algorithms are supported.
 
 [Bearer token]: https://tools.ietf.org/html/rfc6750
 
-## `JWT` Global Arguments
+## JWT global arguments
 
 ```yaml
 ---
@@ -129,7 +129,7 @@ with optional fraction and a unit suffix, such as "300ms", "-1.5h" or
 [Lua Scripts]: /docs/edge-stack/latest/topics/running/ambassador/#lua-scripts-lua_scripts
 [Sprig `hasKey`]: https://masterminds.github.io/sprig/dicts.html#haskey
 
-## `JWT` Path-Specific Arguments
+## JWT path-specific arguments
 
 ```yaml
 ---
@@ -154,7 +154,7 @@ spec:
 
 [`scope` claim]: https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-19#section-4.2
 
-## Example `JWT` `Filter`
+## Example JWT Filter
 
 ```yaml
 # Example results are for the JWT:

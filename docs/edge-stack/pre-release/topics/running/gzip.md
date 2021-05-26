@@ -1,8 +1,8 @@
-# Gzip Compression
+# Gzip compression
 
 Gzip enables Ambassador Edge Stack to compress upstream data upon client request. Compression is useful in situations where large payloads need to be transmitted without compromising the response time. Compression can also save on bandwidth costs at the expense of increased computing costs.
 
-## How Does it Work?
+## How does it work?
 
 When the gzip filter is enabled, request and response headers are inspected to determine whether or not the content should be compressed. If so, and the request and response headers allow, the content is compressed and then sent to the client with the appropriate headers. It also uses the zlib module, which provides `Deflate` compression and decompression code.
 

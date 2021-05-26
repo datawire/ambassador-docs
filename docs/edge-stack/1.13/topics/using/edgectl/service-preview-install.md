@@ -1,6 +1,6 @@
 > **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](../../../../../../telepresence/latest/faqs) or [go to the quick start guide](../../../../../../telepresence/latest/quick-start/).**
 
-# Service Preview Quick Start
+# Service Preview quick start
 
 Service Preview is installed as an addon to the Ambassador Edge Stack.
 
@@ -31,7 +31,7 @@ Helm is a popular Kubernetes package manager. The Ambassador helm chart allows y
 
 If you are a new user, or you are looking to start using Ambassador Edge Stack with Service Preview on a fresh installation, the `edgectl install` command will get you up and running in no time with a pre-configured Traffic Manager and Traffic Agent supported by automatic sidecar injection.
 
-### 1. Install the Traffic Manager and Ambassador Injector Alongside the Ambassador Edge Stack 
+### 1. Install the Traffic Manager and Ambassador Injector alongside the Ambassador Edge Stack 
 
 The Traffic Manager is what is responsible for managing communications between your Kubernetes cluster and your local machine.
 
@@ -43,7 +43,7 @@ Run the following command to let `edgectl` bootstrap your cluster with Ambassado
 $ edgectl install
 ```
 
-### 2. Connect to your Cluster
+### 2. Connect to your cluster
 
 Now that you installed the Traffic Manager, you can connect to your cluster using `edgectl`.
 
@@ -82,7 +82,7 @@ Connected
   Intercepts:    0 total, 0 local
 ```
 
-### 3. Inject the Traffic Agent Sidecar
+### 3. Inject the Traffic Agent sidecar
 
 The Traffic Agent sidecar is required in order to intercept requests to a service and route them to your local machine.
 
@@ -188,7 +188,7 @@ Take a look at the [Traffic Agent reference](../service-preview-reference#traffi
 
 Service Preview is now installed in your cluster and ready to intercept traffic sent to the `Hello` service! 
 
-### Next Steps
+### Next steps
 
 Now that you have Service Preview installed, let's see how you can use it to intercept traffic sent to services in your Kubernetes cluster!
 
@@ -230,7 +230,7 @@ See the [Traffic Manager reference](../service-preview-reference#traffic-manager
 
 The traffic manager is now installed in the Ambassador namespace in your cluster and is ready to connect your cluster to your local machine.
 
-### 3. Connect to your Cluster
+### 3. Connect to your cluster
 
 Now that you installed the Traffic Manager, you can connect to your cluster using `edgectl`.
 
@@ -269,7 +269,7 @@ Connected
   Intercepts:    0 total, 0 local
 ```
 
-### 5. Inject the Traffic Agent Sidecar
+### 5. Inject the Traffic Agent sidecar
 
 The Traffic Agent sidecar is required in order to intercept requests to a service and route them to your local machine.
 
@@ -418,7 +418,7 @@ $ helm upgrade --install ambassador -n ambassador datawire/ambassador -f values.
 ```
 
 
-### 2. Connect to your Cluster
+### 2. Connect to your cluster
 
 Now that you installed the Traffic Manager, you can connect to your cluster using `edgectl`.
 
@@ -457,7 +457,7 @@ Connected
   Intercepts:    0 total, 0 local
 ```
 
-### 3. Inject the Traffic Agent Sidecar
+### 3. Inject the Traffic Agent sidecar
 
 The Traffic Agent sidecar is required in order to intercept requests to a service and route them to your local machine.
 
@@ -563,7 +563,7 @@ Take a look at the [Traffic Agent reference](../service-preview-reference#traffi
 
 Service Preview is now installed in your cluster and ready to intercept traffic sent to the `Hello` service! 
 
-## Next Steps
+## Next steps
 
 Now that you have Service Preview installed, let's see how you can use it to intercept traffic sent to services in your Kubernetes cluster!
 

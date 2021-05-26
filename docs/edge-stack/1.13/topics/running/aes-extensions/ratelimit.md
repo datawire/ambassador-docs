@@ -1,4 +1,4 @@
-# Rate Limiting Extension
+# Rate limiting extension
 
 The Ambassador Edge Stack ships with a rate limiting service that is enabled
 to perform advanced rate limiting out of the box.
@@ -9,7 +9,7 @@ to rate limit requests can be found in the
 
 This document focuses on how to deploy and manage the rate limiting extension.
 
-## Ambassador Configuration
+## Ambassador configuration
 
 Ambassador uses the [`RateLimitService` plugin](../../services/rate-limit-service) 
 to connect to the rate limiting extension in the Ambassador Edge Stack.
@@ -32,7 +32,7 @@ extension process running on port 8500. The rate limiting extension will then
 use that request to count against any `RateLimit` whose pattern matches the
 request labels.
 
-## Authentication Extension Configuration
+## Authentication extension configuration
 
 Certain use cases may require some tuning of the rate limiting extension. 
 Configuration of this extension is managed via environment variables.

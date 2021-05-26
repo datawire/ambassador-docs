@@ -1,4 +1,4 @@
-# Istio Integration
+# Istio integration
 
 Ambassador Edge Stack and Istio: Edge Proxy and Service Mesh together in one. The Edge Stack is deployed at the edge of your network and routes incoming traffic to your internal services (aka "north-south" traffic). [Istio](https://istio.io/) is a service mesh for microservices, and is designed to add application-level Layer (L7) observability, routing, and resilience to service-to-service traffic (aka "east-west" traffic). Both Istio and the Ambassador Edge Stack are built using [Envoy](https://www.envoyproxy.io).
 
@@ -24,12 +24,11 @@ There a number of installation options for Ambassador. See the [getting started]
 ## Integrate Ambassador and Istio
 
 > **WARNING - Istio Regression:**
-> There is a regression in Istio 1.9 that causes Ambassador (and other non-Istio services) to be unable to read Istio certificates. 
+> There is a regression in Istio 1.9.0 to 1.9.4 that causes Ambassador (and other non-Istio services) to be unable to read Istio certificates. 
 >
-> A patch for this regression has been merged and is waiting for a release.
-> https://github.com/istio/istio/pull/31531
+> A patch for this regression has been released in Istio 1.9.4.
 >
-> Use Istio 1.8.2 or earlier until a version of Istio with a patch for this regression is released.
+> Use Istio 1.9.4 or a version before 1.9.0 to use this integration.
 
 Ambassador integrates with Istio in three ways:
 
@@ -46,7 +45,7 @@ The process of collecting mTLS certificates is different depending on your Istio
 - [Istio 1.5 and above](#integrating-ambassador-with-istio-15-and-above)
 - [Istio 1.4 and below](#integrating-ambassador-with-istio-14-and-below)
 
-#### Integrating Ambassador with Istio 1.5 and Above
+#### Integrating Ambassador with Istio 1.5 and above
 
 Istio 1.5 introduced [istiod](https://istio.io/docs/ops/deployment/architecture/#istiod) which moved Istio towards a single control plane process.
 
@@ -286,7 +285,7 @@ EOF
 
 Ambassador is now integrated with Istio for end-to-end encryption.
 
-#### Integrating Ambassador with Istio 1.4 and Below
+#### Integrating Ambassador with Istio 1.4 and below
 
 With Istio 1.4 and below, Istio stores it's mTLS certificates as a Kubernetes `Secret` in each namespace.
 
@@ -309,7 +308,7 @@ EOF
 
 Ambassador is now integrated with Istio for end-to-end encryption.
 
-### Integrating Prometheus Metrics Collection
+### Integrating Prometheus metrics collection
 
 Istio installs by default with a Prometheus deployment for collecting metrics from different resources in your cluster. 
 
@@ -397,7 +396,7 @@ Istio's Prometheus deployment is configured using a `ConfigMap`. To add Ambassad
 
    You can now access the UI at http://localhost:9090/
 
-### Integrating Distributed Tracing
+### Integrating distributed tracing
 
 Enabling the [tracing component](https://istio.io/docs/tasks/observability/distributed-tracing/overview/) in Istio gives you the power to observe how a request behaves at each point in your application.
 
@@ -429,7 +428,7 @@ kubectl delete po -n ambassador {{AMBASSADOR_POD_NAME}}
 
 You can now access the tracing service UI to see Ambassador is now one of the services.
 
-## Routing to Services
+## Routing to services
 
 Above, we integrated Ambassador with Istio to take advantage of end-to-end encryption and observability offered by Istio while leveraging the feature-rich edge routing capabilities of Ambassador.
 
@@ -505,7 +504,7 @@ Now we will show how you can use Ambassador to route to services in the Istio se
 
    While the majority of the work being done is transparent to the user, you have successfully sent a request to Ambassador which routed it to the quote service in the default namespace. It was then intercepted by the `istio-proxy` which authenticated the request from Ambassador and exported various metrics and finally forwarded it on to the  quote service.
 
-## Enforcing Authentication Between Containers
+## Enforcing authentication between containers
 
 Istio defaults to PERMISSIVE mTLS that does not require authentication between containers in the cluster. Configuring STRICT mTLS will require all connections within the cluster be encrypted.
 
@@ -621,7 +620,7 @@ Now let's save the changes:
 
 ## FAQ
 
-### How to Test Istio Certificate Rotation
+### How to test Istio certificate rotation
 
 Istio mTLS certificates, by default, will be valid for a max of 90 days but will be rotated every day.
 

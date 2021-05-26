@@ -1,6 +1,6 @@
 > **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](../../../../../../telepresence/latest/faqs) or [go to the quick start guide](../../../../../../telepresence/latest/quick-start/).**
 
-# Service Preview Reference
+# Service Preview reference
 
 The following is a reference for the various components of Service Preview. 
 
@@ -114,7 +114,7 @@ The Traffic Manager needs to be able to watch resources in the cluster so it is 
 
 It also requires the ability to read your Ambassador Edge Stack license key from the `ambassador-edge-stack` `Secret`.
 
-#### Traffic Manager Options
+#### Traffic Manager options
 
 - __Remove permission to read `Secret`s__
 
@@ -304,7 +304,7 @@ subjects:
 
 If you want to include the Traffic Agent with multiple services, they can all use the same `ServiceAccount` name, as long as it exists in every namespace.
 
-##### RBAC Options
+##### RBAC options
 
 - __Run with namespace scope__
 
@@ -384,7 +384,7 @@ If you want to include the Traffic Agent with multiple services, they can all us
        apiGroup: rbac.authorization.k8s.io
    ``` 
 
-#### Automatic Traffic Agent Sidecar Injection with Ambassador Injector
+#### Automatic Traffic Agent sidecar injection with Ambassador Injector
 
 The Ambassador Injector automatically injects the Traffic Agent sidecar into services that you want to use Service Preview with.
 
@@ -508,7 +508,7 @@ webhooks:
         resources: ["pods"]
 ```
 
-#### Manual Traffic Agent Sidecar Configuration
+#### Manual Traffic Agent sidecar configuration
 
 Each service that you want to work with Service Preview requires the Traffic Agent sidecar. This is typically managed by the Ambassador Injector.
 
@@ -647,13 +647,13 @@ Key points include:
 - **Note 9**: The `AMBASSADOR_SINGLE_NAMESPACE` environment variable tells the Traffic Agent to watch resources only in its current namespace. This allows the `traffic-agent` `ServiceAccount` to only have `Role` permissions instead of a cluster-wide `ClusterRole`.
 - **Note 10**: The `AGENT_LISTEN_PORT` environment variable tells the Traffic Agent the port on which to listen for incoming connections. The `Service` must point to this port (see Note 1). If not present, it defaults to port 9900.
 
-#### gRPC Support
+#### gRPC support
 
 The Traffic-Agent can inspect and intercept gRPC traffic for deployments exposing gRPC endpoints instead of plain HTTP:
 - Set the `getambassador.io/inject-traffic-agent-grpc: "true"` pod annotation, or the `AGENT_ENABLE_GRPC: "true"` environment variable if injecting the sidecar manually.
 - The Traffic Agent will instruct Envoy to use HTTP/2 on its listen port (named `grpc` instead of `http`; 9900 by default)
 
-#### TLS Support
+#### TLS support
 
 If other microservices in the cluster expect to speak TLS to this microservice, tell the Traffic Agent to terminate TLS:
 - Set the `getambassador.io/inject-terminating-tls-secret` pod annotation, or the `AGENT_TLS_TERM_SECRET` environment variable if injecting the sidecar manually, to the name of a Kubernetes Secret that contains a TLS certificate
@@ -685,6 +685,6 @@ spec:
 
 **Note**: If you already had an active Edge Control Daemon connection to the cluster, you must reconnect to the cluster for the Edge Control Daemon to detect the change to the Host resource. This limitation will be removed in the future.
 
-## What's Next?
+## What's next?
 
 See how [Edge Control commands can be used in action](../service-preview-tutorial) to establish outbound connectivity with a remote Kubernetes cluster and intercept inbound requests.

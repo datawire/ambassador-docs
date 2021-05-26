@@ -1,4 +1,4 @@
-# Traffic Shadowing
+# Traffic shadowing
 
 Traffic shadowing is a deployment pattern where production traffic is asynchronously copied to a non-production service for testing. Shadowing is a close cousin to two other commonly known deployment patterns, [canary releases](../canary) and blue/green deployments. Shadowing traffic has several important benefits over blue/green and canary testing:
 
@@ -55,7 +55,7 @@ spec:
 
 The `prefix` is set to be the same as the first mapping, which tells Ambassador Edge Stack which production traffic to shadow. The destination service, where the shadow traffic is routed, is a *different* Kubernetes service, `myservice-shadow`. Finally, the `shadow: true` attribute actually enables shadowing.
 
-### Shadow Traffic Weighting
+### Shadow traffic weighting
 
 It is possible to shadow a portion of the traffic by specifying the `weight` in the mapping. For example:
 

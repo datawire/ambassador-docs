@@ -57,7 +57,7 @@ spec:
   service: http://httpbin.org
 ```
 
-## Applying a Mapping Resource
+## Applying a Mapping resource
 
 A Mapping resource can be managed using the same workflow as any other Kubernetes resources (like a Service or Deployment). For example, if the above Mapping is saved into a file called `httpbin-mapping.yaml`, the following command will apply the configuration directly to Edge Stack:
 
@@ -144,6 +144,6 @@ If two different developers try to map `/myservice/` to something, this can lead
 
 #### Unless specified, mapping attributes cannot be applied to any other resource type.
 
-## <img class="os-logo" src="../../../../../images/logo.png"/> What's Next?
+## <img class="os-logo" src="../../../../../images/logo.png"/> What's next?
 
 There are many options for [advanced mapping configurations](../../topics/using/mappings), with features like [automatic retries](../../topics/using/retries/), [timeouts](../../topics/using/timeouts/), [rate limiting](../../topics/using/rate-limits/), [redirects](../../topics/using/redirects/), and more.

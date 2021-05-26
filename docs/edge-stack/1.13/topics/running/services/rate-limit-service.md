@@ -1,4 +1,4 @@
-# RateLimitService Plugin
+# Rate limit service
 
 Rate limiting is a powerful technique to improve the [availability and
 resilience of your
@@ -11,7 +11,7 @@ then rate limit requests based on the request labels.
 and not the Ambassador Edge Stack, as the Ambassador Edge Stack includes a
 built-in rate limit service.**
 
-## Request Labels
+## Request labels
 
 See [Attaching labels to
 requests](../../../using/rate-limits/rate-limits/#attaching-labels-to-requests)
@@ -28,7 +28,7 @@ See [Attaching labels to
 requests](../../../using/rate-limits/rate-limits/#attaching-labels-to-requests)
 for how to labels under different domains.
 
-## External Rate Limit Service
+## External rate limit service
 
 In order for the Ambassador API Gateway to rate limit, you need to implement a
 gRPC `RateLimitService`, as defined in [Envoy's `v1/rls.proto`][`v1/rls.proto`]
@@ -105,7 +105,7 @@ The headers injected by the [AuthService](../auth-service) can also be passed to
 the rate limit service since the `AuthService` is invoked before the
 `RateLimitService`.
 
-## Configuring the Rate Limit Service
+## Configuring the rate limit service
 
 A `RateLimitService` manifest configures the Ambassador API Gateway to use an
 external service to check and enforce rate limits for incoming requests:
@@ -127,7 +127,7 @@ spec:
 
 You may only use a single `RateLimitService` manifest.
 
-## Rate Limit Service and TLS
+## Rate limit service and TLS
 
 You can tell the Ambassador API Gateway to use TLS to talk to your service by
 using a `RateLimitService` with an `https://` prefix.  However, you may also
@@ -145,7 +145,7 @@ example.  For a more advanced example, read the [advanced rate limiting
 tutorial](../../../../howtos/advanced-rate-limiting), which uses the rate limit
 service that is integrated with the Ambassador Edge Stack.
 
-## Further Reading
+## Further reading
 
 * [Rate limiting: a useful tool with distributed systems](https://blog.getambassador.io/rate-limiting-a-useful-tool-with-distributed-systems-6be2b1a4f5f4)
 * [Rate limiting for API Gateways](https://blog.getambassador.io/rate-limiting-for-api-gateways-892310a2da02)
