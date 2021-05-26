@@ -12,7 +12,8 @@
               link: /service-catalog/quick-start/
             - title: Core concepts
               items:
-                title: The power of Kubernetes annotations
+                - title: The power of Kubernetes annotations
+                  link: /service-catalog/concepts/annotations/
             - title: How do I...
               items:
                 - title: Annotate a service
