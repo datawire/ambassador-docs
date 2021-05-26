@@ -6,6 +6,7 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
+* [Kubernetes annotations](#kubernetes-annotations)
 * [Prerequisites](#prerequisites)
 * [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
 * [2. Claim ownership of a service](#2-claim-ownership-of-a-service)
@@ -14,7 +15,11 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 
 </div>
 
-<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty, you first need to complete with this quick start guide.</Alert>
+<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty. Follow this guide to configure your cluster.</Alert>
+
+## Kubernetes annotations
+
+Service Catalog aggregates the Kubernetes annotations on your services into a single portal for your developers to reference. Learn more about [adding metadata to services using Kubernetes annotations](../concepts/annotations/).
 
 ## Prerequisites
 
@@ -36,10 +41,6 @@ If your Edge Stack or API Gateway installation is up to date,
 then you are ready to start using Service Catalog!
 
 If not, [follow this doc](../../../../edge-stack/latest/topics/install/upgrading/) to **upgrade** Edge Stack.
-
-## 0. Kubernetes annotations
-
-Learn more first about [adding metadata to services using Kubernetes annotations](../concepts/annotations/).
 
 ## 1. Connect your cluster to Ambassador Cloud
 
