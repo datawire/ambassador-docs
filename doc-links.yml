@@ -5,7 +5,7 @@
   collapsable: false
   items:
     - title: Argo
-      items: 
+      items:
         - title: Quick start
           link: /quick-start
         - title: Core concepts
@@ -24,4 +24,6 @@
         - title: Technical reference
           items:
             - title: Rollout CRD
-              link: /reference/rolloutcrd 
+              link: /reference/rolloutcrd
+        # - title: Release Notes
+        #  link: /release-notes
