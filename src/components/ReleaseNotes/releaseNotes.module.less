@@ -1,0 +1,87 @@
+@import '../../../../src/less/_colors.less';
+
+.note {
+  margin: 5px 0;
+
+  &__body {
+    padding: 8px 0;
+  }
+
+  &__description {
+    padding: 0;
+  }
+
+  &__more {
+    margin: 8px 0 0 28px;
+  }
+
+  &__image {
+    display: none;
+    padding: 0 0 0 10px;
+
+    img {
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+
+  &__image_xs {
+    display: block;
+    width: 100%;
+  }
+
+  &__typeIcon {
+    height: 28px;
+    vertical-align: top;
+    width: 28px;
+  }
+
+  &__title {
+    display: grid;
+    grid-template-columns: 20px auto;
+    span {
+      padding: 0 0 0 10px;
+    }
+  }
+}
+
+.release {
+  &:not(:last-child) {
+    border-bottom: 1px solid @color-white-1;
+  }
+
+  &__date {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .note {
+    display: grid;
+    grid-template-columns: 65% 35%;
+
+    &__body {
+      padding: 8px 0 8px 28px;
+    }
+    &__description {
+      padding: 0 10px 0 0;
+    }
+    &__image {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__image_xs {
+      display: none;
+    }
+
+    &__title {
+      span {
+        display: inline-block;
+        padding-top: 5px;
+        vertical-align: top;
+      }
+    }
+  }
+}

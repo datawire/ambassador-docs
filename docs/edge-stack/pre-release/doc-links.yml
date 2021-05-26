@@ -11,30 +11,30 @@
         - title: Install Edge Stack
           link: /topics/install/
           items:
-          - title: Install with Helm
-            link: /topics/install/helm
-          - title: Upgrading Ambassador Edge Stack
-            link: /topics/install/upgrading
-          - title: Upgrade to the Ambassador Edge Stack
-            link: /topics/install/upgrade-to-edge-stack
-          - title: Install the Ambassador API Gateway
-            link: /topics/install/install-ambassador-oss
-          - title: Install with Docker
-            link: /topics/install/docker
-          - title: Install with bare metal
-            link: /topics/install/bare-metal
-          - title: Install manually
-            link: /topics/install/yaml-install
-          - title: The Edge Stack Operator
-            link: /topics/install/aes-operator
-          - title: Install with edgectl
-            link: /topics/install/help/
+            - title: Install with Helm
+              link: /topics/install/helm
+            - title: Upgrading Ambassador Edge Stack
+              link: /topics/install/upgrading
+            - title: Upgrade to the Ambassador Edge Stack
+              link: /topics/install/upgrade-to-edge-stack
+            - title: Install the Ambassador API Gateway
+              link: /topics/install/install-ambassador-oss
+            - title: Install with Docker
+              link: /topics/install/docker
+            - title: Install with bare metal
+              link: /topics/install/bare-metal
+            - title: Install manually
+              link: /topics/install/yaml-install
+            - title: The Edge Stack Operator
+              link: /topics/install/aes-operator
+            - title: Install with edgectl
+              link: /topics/install/help/
         - title: Core concepts
           link: /topics/concepts/
           items:
             - title: Kubernetes network architecture
               link: /topics/concepts/kubernetes-network-architecture
-            - title: "The Ambassador operating model: GitOps and continuous delivery"
+            - title: 'The Ambassador operating model: GitOps and continuous delivery'
               link: /topics/concepts/gitops-continuous-delivery
             - title: Progressive delivery
               link: /topics/concepts/progressive-delivery
@@ -296,3 +296,5 @@
               link: /topics/using/edgectl/service-preview-reference
         - title: Developer Portal
           link: /topics/using/dev-portal
+        - title: Release Notes
+          link: /release-notes
