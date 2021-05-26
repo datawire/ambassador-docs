@@ -19,7 +19,7 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 
 ## Kubernetes annotations
 
-Service Catalog aggregates the Kubernetes annotations on your services into a single portal for your developers to reference. Learn more about [adding metadata to services using Kubernetes annotations](../concepts/annotations/).
+Service Catalog aggregates the Kubernetes annotations on your services into a single portal for your developers to reference, such as the owner, version control repository, and associated Slack channel. Learn more about [adding metadata to services using Kubernetes annotations](../concepts/annotations/).
 
 ## Prerequisites
 
@@ -32,27 +32,13 @@ If you already have Edge Stack or the API Gateway installed, **check your versio
 ```
 kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
-
-If you are using Edge Stack (the image name will be datawire/aes), then check that the image version is 1.12.0 or greater.
-
-If using the API Gateway (the image name will be datawire/ambassador), then check that the image version is 1.13.0 or greater.
-
-If your Edge Stack or API Gateway installation is up to date,
-then you are ready to start using Service Catalog!
-
-If not, [follow this doc](../../../../edge-stack/latest/topics/install/upgrading/) to **upgrade** Edge Stack.
+[Upgrade Edge Stack to the latest version](../../../../edge-stack/latest/topics/install/upgrading/) if needed.
 
 ## 1. Connect your cluster to Ambassador Cloud
 
-<Alert severity="info">If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.</Alert>
-
-The Service Catalog is a web-based interface that lists all of your cluster's Services. You can view, add, and update metadata associated with each Service, such as the owner, version control repository, and associated Slack channel.
-
-<!--
-Follow the instructions that match your Edge Stack installation method below to connect your cluster and start using Service Catalog.
-
-<GSTabs2/>
--->
+<Alert severity="info">
+  If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.
+</Alert>
 
 1. Sign in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your GitHub account.
 
@@ -92,7 +78,7 @@ The metadata for each service is determined by annotations included within your 
   kubectl annotate --overwrite svc quote -n ambassador a8r.io/owner="<your name>"
   ```
 
-2. Refresh your Service Catalog page anl dook at the `quote` service to see the change with your name.
+2. Refresh your Service Catalog page and look at the `quote` service to see the change with your name.
 
 <Alert severity="info">It may take up to 30 seconds for Service Catalog to sync with your cluster and your annotation to appear.</Alert>
 
