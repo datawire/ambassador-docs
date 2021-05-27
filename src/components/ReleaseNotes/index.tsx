@@ -5,7 +5,7 @@ import Release from './Release';
 const getChangeLogUrl = (product) => {
   switch (product) {
     case 'edge-stack':
-      return 'https://github.com/telepresenceio/telepresence/blob/release/v2/CHANGELOG.md';
+      return 'https://github.com/datawire/ambassador/blob/master/CHANGELOG.md';
     case 'telepresence':
       return 'https://github.com/telepresenceio/telepresence/blob/release/v2/CHANGELOG.md';
     case 'argo':
