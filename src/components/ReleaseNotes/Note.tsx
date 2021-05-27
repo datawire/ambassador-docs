@@ -66,7 +66,10 @@ const Note = ({ note, images }) => {
           )}
           <span>{title}</span>
         </h3>
-        <div className={styles.note__body}>{note.body}</div>
+        <div
+          className={styles.note__body}
+          dangerouslySetInnerHTML={{ __html: note.body }}
+        ></div>
         <div className={styles.note__image_xs}>
           {image && <ClickableImage src={image} alt={title} />}
         </div>
