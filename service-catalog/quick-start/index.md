@@ -72,7 +72,7 @@ Click the `quote` service in the list. The service details page now opens that d
 
 The metadata for each service is determined by annotations included within your Kubernetes YAML config files. You can annotate the config of the `ambassador` service that you have just installed to display your name.
 
-1. Change the name of the owner of the `quote` service by replacing `<your name>` in the command below and running it:
+1. Change the name of the owner of the `quote` service by replacing `<your name>` in the command below and running it.  The value could be a GitHub username, an email address, or your actual name.
 
   ```
   kubectl annotate --overwrite svc quote -n ambassador a8r.io/owner="<your name>"
