@@ -22,5 +22,5 @@
           items:
             - title: Get code running on my cluster
               link: /howtos/codetocluster
-            - title: Debug code on Kubernetes
+            - title: Debug issues in Kubernetes
               link: /howtos/debug

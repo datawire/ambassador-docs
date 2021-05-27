@@ -1,4 +1,4 @@
-# Debug code on Kubernetes
+# Debug issues in Kubernetes
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
