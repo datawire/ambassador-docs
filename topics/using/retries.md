@@ -36,7 +36,7 @@ retry_policy:
 
 ### `per_try_timeout`
 
-(Default: global request timeout) Specify the timeout for each retry, e.g., `1s`, `1500ms`.
+(Default: global request timeout) Specify the timeout for each retry. Must be in seconds or nanoseconds, e.g., `1s`, `1500ns`.
 
 ## Examples
 
