@@ -1,6 +1,8 @@
+import Alert from '@material-ui/lab/Alert';
+
 # The OAuth2 Filter
 
-The `OAuth2` filter type performs OAuth2 authorization against an identity provider implementing [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html). The filter is both:
+The OAuth2 filter type performs OAuth2 authorization against an identity provider implementing [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html). The filter is both:
 
 * An OAuth Client, which fetches resources from the Resource Server on the user's behalf.
 * Half of a Resource Server, validating the Access Token before allowing the request through to the upstream service, which implements the other half of the Resource Server.
@@ -516,15 +518,12 @@ The `ambassador_xsrf.NAME.NAMESPACE` cookie is an opaque string that should be u
  1. When generating an HTML form, the server should read the cookie, and include a `<input type="hidden" name="_xsrf" value="COOKIE_VALUE" />` element in the form.
  2. When handling submitted form data should verify that the form value and the cookie value match.  If they do not match, it should refuse to handle the request, and return an HTTP 4XX response.
 
-Applications using request submission formats other than HTML forms should perform analogous steps of ensuring that the value is present in the request duplicated in the cookie and also in either the request body or secure header field.  A secure header field is one that is not `Cookie`, is not "[simple][simple-header]", and is not explicitly allowed by the CORS policy.
+Applications using request submission formats other than HTML forms should perform analogous steps of ensuring that the value is present in the request duplicated in the cookie and also in either the request body or secure header field.  A secure header field is one that is not `Cookie`, is not "[simple](https://www.w3.org/TR/cors/#simple-header)", and is not explicitly allowed by the CORS policy.
 
-[simple-header]: https://www.w3.org/TR/cors/#simple-header
 
-**Note**: Prior versions of the Ambassador Edge Stack did not have an
-`ambassador_xsrf.NAME.NAMESPACE` cookie, and instead required you to
-use the `ambassador_session.NAME.NAMESPACE` cookie.  The
-`ambassador_session.NAME.NAMESPACE` cookie should no longer be used
-for XSRF-protection purposes
+<Alert severity="info">
+  Prior versions of the Ambassador Edge Stack did not have an <code>ambassador_xsrf.NAME.NAMESPACE</code> cookie, and instead required you to use the <code>ambassador_session.NAME.NAMESPACE</code> cookie.  The <code>ambassador_session.NAME.NAMESPACE</code> cookie should no longer be used for XSRF-protection purposes.
+</Alert>
 
 ## RP-initiated logout
 
@@ -536,14 +535,13 @@ re-authorize the user; it would be like the logout never even
 happened.
 
 To solve this, the Ambassador Edge Stack can use [OpenID Connect Session
-Management][oidc-session] to perform an "RP-Initiated Logout", where the
-Ambassador Edge Stack (the OpenID Connect "Relying Party" or "RP")
+Management](https://openid.net/specs/openid-connect-session-1_0.html)
+to perform an "RP-Initiated Logout", where Edge Stack
+(the OpenID Connect "Relying Party" or "RP")
 communicates directly with Identity Providers that support OpenID
 Connect Session Management, to properly log out the user.
 Unfortunately, many Identity Providers do not support OpenID Connect
 Session Management.
-
-[oidc-session]: https://openid.net/specs/openid-connect-session-1_0.html
 
 This is done by having your application direct the web browser `POST`
 *and navigate* to `/.ambassador/oauth2/logout`.  There are 2
@@ -554,7 +552,7 @@ form-encoded values that you need to include:
  2. `_xsrf`: The value of the `ambassador_xsrf.{{realm}}` cookie
     (where `{{realm}}` is as described above).  This must be set in the POST body, the URL query part will not be checked.
 
-For example:
+### Example configurations
 
 ```html
 <form method="POST" action="/.ambassador/oauth2/logout" target="_blank">
@@ -564,7 +562,6 @@ For example:
 </form>
 ```
 
-or
 
 ```html
 <form method="POST" action="/.ambassador/oauth2/logout?realm=myfilter.mynamespace" target="_blank">
@@ -573,7 +570,7 @@ or
 </form>
 ```
 
-or from JavaScript
+Using JavaScript:
 
 ```js
 function getCookie(name) {
