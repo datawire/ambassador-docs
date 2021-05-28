@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
 import ContactBlock from '../../src/components/ContactBlock';
+import template from '../../src/utils/template';
 import './style.less';
 
 export default ({ data, location, pageContext }) => {
@@ -143,6 +144,14 @@ export default ({ data, location, pageContext }) => {
     }
   };
 
+  const handleViewMore = ({ docs }) => {
+    if (docs.indexOf('http://') === 0 || docs.indexOf('https://') === 0) {
+      window.location = docs;
+    } else {
+      navigate(`/docs/${product.slug}/${version.id}/${docs}`);
+    }
+  };
+
   const loadJS = () => {
     if (window.docsearch) {
       window.docsearch({
@@ -169,6 +178,8 @@ export default ({ data, location, pageContext }) => {
   );
 
   const content = useMemo(() => {
+    const changelogUrl = data.releaseNotes.changelog ? template(data.releaseNotes.changelog, getVersions()) : '';
+
     return (
       <div className="docs__container-doc">
         <Sidebar
@@ -181,16 +192,18 @@ export default ({ data, location, pageContext }) => {
         <div className="docs__doc-body-container">
           <div className="docs__doc-body doc-body">
             <ReleaseNotes
+              changelog={changelogUrl}
               releases={data.releaseNotes?.versions}
               images={data.images?.nodes}
               product={slug[2]}
+              handleViewMore={handleViewMore}
             />
           </div>
           {footer}
         </div>
       </div>
     );
-  }, []);
+  }, [data.releaseNotes]);
 
   return (
     <Layout location={location}>
@@ -268,6 +281,7 @@ export const query = graphql`
     }
     releaseNotes: releases(slug: { eq: $releaseNotesSlug }) {
       id
+      changelog
       versions {
         version
         date
