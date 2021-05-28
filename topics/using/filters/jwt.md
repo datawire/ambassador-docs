@@ -1,8 +1,8 @@
+import Alert from '@material-ui/lab/Alert';
+
 # JWT Filter
 
-The `JWT` filter type performs JWT validation on a [Bearer token] present in the HTTP header.  If the Bearer token JWT doesn't validate, or has insufficient scope, an RFC 6750-complaint error response with a `WWW-Authenticate` header is returned.  The list of acceptable signing keys is loaded from a JWK Set that is loaded over HTTP, as specified in `jwksURI`.  Only RSA and `none` algorithms are supported.
-
-[Bearer token]: https://tools.ietf.org/html/rfc6750
+The JWT filter type performs JWT validation on a [bearer token](https://tools.ietf.org/html/rfc6750) present in the HTTP header.  If the bearer token JWT doesn't validate, or has insufficient scope, an RFC 6750-complaint error response with a `WWW-Authenticate` header is returned.  The list of acceptable signing keys is loaded from a JWK Set that is loaded over HTTP, as specified in `jwksURI`.  Only RSA and `none` algorithms are supported.
 
 ## JWT global arguments
 
@@ -119,7 +119,9 @@ with optional fraction and a unit suffix, such as "300ms", "-1.5h" or
 "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m",
 "h".  See [Go `time.ParseDuration`][].
 
-**Note**: If you are using a templating system for your YAML that also makes use of Go templating, then you will need to escape the template strings meant to be interpreted by the Ambassador Edge Stack.
+<Alert severity="info">
+  If you are using a templating system for your YAML that also makes use of Go templating, then you will need to escape the template strings meant to be interpreted by Edge Stack.
+</Alert>
 
 [Go `time.ParseDuration`]: https://golang.org/pkg/time/#ParseDuration
 [Go `text/template`]: https://golang.org/pkg/text/template/
@@ -150,11 +152,9 @@ spec:
         - "scope-value-2"
 ```
 
- - `scope`: A list of OAuth scope values that Ambassador will require to be listed in the [`scope` claim][].  In addition to the normal of the `scope` claim (a JSON string containing a space-separated list of values), the JWT Filter also accepts a JSON array of values.
+`scope` is a list of OAuth scope values that Edge Stack will require to be listed in the [`scope` claim](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-19#section-4.2).  In addition to the normal values of the `scope` claim (a JSON string containing a space-separated list of values), the JWT Filter also accepts a JSON array of values.
 
-[`scope` claim]: https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-19#section-4.2
-
-## Example JWT Filter
+## Example configuration
 
 ```yaml
 # Example results are for the JWT:
