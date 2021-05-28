@@ -18,7 +18,7 @@ const typeIcon = {
   security: 'security',
 };
 
-const Note = ({ note, images }) => {
+const Note = ({ note, images, onViewMore }) => {
   const title = useMemo(() => {
     if (titlePrefix[note.type]) {
       return `${titlePrefix[note.type]}: ${note.title}`;
@@ -42,18 +42,6 @@ const Note = ({ note, images }) => {
     return null;
   }, [images, note]);
 
-  const linkPath = useMemo(() => {
-    if (note.docs) {
-      if (
-        note.docs.indexOf('http://') !== -1 ||
-        note.docs.indexOf('https://') !== -1
-      ) {
-        return note.docs;
-      }
-    }
-    return `../${note.docs}`;
-  }, [note.docs]);
-
   return (
     <div className={styles.note}>
       <div className={styles.note__description}>
@@ -75,7 +63,7 @@ const Note = ({ note, images }) => {
         </div>
         {note.docs && (
           <Button
-            to={linkPath}
+            onClick={onViewMore}
             size="sm"
             color="blue-outline"
             className={styles.note__more}
