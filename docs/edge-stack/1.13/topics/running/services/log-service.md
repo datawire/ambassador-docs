@@ -44,7 +44,7 @@ spec:
  - `service` is where to route the access log gRPC requests to
 
  - `driver` identifies which type of accesses to log; HTTP requests (`"http"`) or
-   TLS connections (`"tcp"`).
+   TCP connections (`"tcp"`).
 
  - `driver_config` stores the configuration that is specific to the `driver`:
 
