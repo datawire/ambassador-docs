@@ -145,10 +145,12 @@ export default ({ data, location, pageContext }) => {
   };
 
   const handleViewMore = ({ docs }) => {
-    if (docs.indexOf('http://') === 0 || docs.indexOf('https://') === 0) {
-      window.location = docs;
-    } else {
-      navigate(`/docs/${product.slug}/${version.id}/${docs}`);
+    if (docs) {
+      if (docs.indexOf('http://') === 0 || docs.indexOf('https://') === 0) {
+        window.location = docs;
+      } else {
+        navigate(`/docs/${product.slug}/${version.id}/${docs}`);
+      }
     }
   };
 
@@ -178,7 +180,9 @@ export default ({ data, location, pageContext }) => {
   );
 
   const content = useMemo(() => {
-    const changelogUrl = data.releaseNotes.changelog ? template(data.releaseNotes.changelog, getVersions()) : '';
+    const changelogUrl = data.releaseNotes.changelog
+      ? template(data.releaseNotes.changelog, getVersions())
+      : '';
 
     return (
       <div className="docs__container-doc">
