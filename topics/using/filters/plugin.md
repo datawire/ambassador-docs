@@ -1,7 +1,7 @@
 # Plugin Filter
 
 
-The Plugin filter type allows you to plug in your own custom code. This code is compiled to a `.so` file, which you load into the Edge Stack container at `/etc/ambassador-plugins/${NAME}.so`. The [Filter Development Guide](../../../howtos/filter-dev-guide) contains a tutorial on developing filters.
+The Plugin filter type allows you to plug in your own custom code. This code is compiled to a `.so` file, which you load into the Edge Stack container at `/etc/ambassador-plugins/${NAME}.so`. The [Filter Development Guide](../../../../howtos/filter-dev-guide) contains a tutorial on developing filters.
 
 ## The Plugin interface
 
