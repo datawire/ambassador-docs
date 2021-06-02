@@ -89,7 +89,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 
 The Service Catalog is a web-based interface that lists all of your cluster's Services. You can view, add, and update metadata associated with each Service, such as the owner, version control repository, and associated Slack channel.
 
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your GitHub account.
+1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your preferred identity provider.
 
 2. At the top, hover over **All Clusters** then click **Add a Cluster**.
 
