@@ -25,7 +25,7 @@ const ReleaseNotes = ({
   }, [product]);
 
   const changelog = useMemo(() => {
-    const commonText = `For a detailed list of all the changes in these releases, please consult the`;
+    const commonText = `For a detailed list of all the changes in past releases, please consult the`;
     
     if (changelogURL) {
       return (
