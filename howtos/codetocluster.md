@@ -69,11 +69,11 @@ docker run -d -p 80:8080 --name nodebb <your Docker Hub username>/nodebb:1.0
 Let's look at the flags on the `docker run` command:
 
 * `-d` runs in detached mode, runs in the background after starting 
-* `-p` sets a `localhost` port to map to a container port, in this case `http://localhost` (implying port 80) will map to 8080 on the container
+* `-p` sets a localhost port to map to a container port, in this case http://localhost (implying port 80) will map to 8080 on the container
 * `--name` sets the name of the running container
 * `<your Docker Hub username>/nodebb:1.0` is the built image that the container will run
 
-Go to `http://localhost` to see the web app in action.
+Go to [http://localhost](http://localhost) to see the web app in action.
 
 <Alert severity="success">
 <strong>Success!</strong> The container is built and running locally!
@@ -106,7 +106,7 @@ Save this file as `nodebb.yaml`, **replacing the value for your Docker Hub usern
 
 This manifest file first creates a Deployment, which defines and runs the Pod.  Pods in Kubernetes are usually made up of a single container, in this case, the `nodebb` container you pushed to Docker Hub. 
 
-<Alert serverity="info">
+<Alert severity="info">
   <a href="../../concepts/basics">Learn more about the basics of Kubernetes.</a>
 </Alert>
 
