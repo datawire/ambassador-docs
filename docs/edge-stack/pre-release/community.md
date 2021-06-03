@@ -1,12 +1,12 @@
 # Community
 
 ## Contributor's guide
-Please review our [contributor's guide](https://github.com/datawire/ambassador/blob/master/DEVELOPING.md)
-on GitHub to learn how you can help make Ambassador better.
+Please review our [contributor's guide](https://github.com/emissary-ingress/emissary/blob/master/DEVELOPING.md)
+on GitHub to learn how you can help make Emissary Ingress better.
 
 ## Changelog
-Our [changelog](https://github.com/datawire/ambassador/blob/$branch$/CHANGELOG.md)
-describes new features, bug fixes, and updates to each version of Ambassador.
+Our [changelog](https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md)
+describes new features, bug fixes, and updates to each version of Emissary Ingress.
 
 ## Meetings
-Check out our community [meeting schedule](https://github.com/emissary-ingress/community/blob/main/MEETING_SCHEDULE.md) for opportunities to interact with Ambassador developers.
+Check out our community [meeting schedule](https://github.com/emissary-ingress/community/blob/main/MEETING_SCHEDULE.md) for opportunities to interact with Emissary Ingress developers.
