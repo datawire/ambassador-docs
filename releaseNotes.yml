@@ -15,8 +15,26 @@
 #         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
 #
 
-changelog: https://github.com/datawire/ambassador/blob/$branch$/CHANGELOG.md
+changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 1.13.7
+    date: '2021-06-03'
+    notes:
+      - title: Ambassador JSON logging support
+        body: "An <code>AMBASSADOR_JSON_LOGGING</code> environment variable has been added. When set to <code>true</code> JSON format will be used for most of the control plane logs. Some (but few) logs from <code>gunicorn</code> and the Kubernetes <code>client-go</code> package will still be in text only format."
+        image: ./edge-stack-1.13.7-json-logging.png
+        docs: topics/running/running/#log-format
+        type: feature
+      - title: Consul resolver bugfix with TCPMappings
+        body: "The TCPMapping has the ability to specify a resolver, however the <code>ConsulResolver</code> did not work properly with it. It now utilizes the Consul Connect service discovery instead of falling back to attempting to register an arbitrary endpoint."
+        image: ./edge-stack-1.13.7-tcpmapping-consul.png
+        docs: topics/running/resolvers/#the-consul-resolver
+        type: bugfix
+      - title: Memory usage calculation improvements
+        body: "The internal memory usage calculation that Emissary Ingress and Ambassador Edge Stack perform has been updated to exclude cache memory. This now matches how the kernel OOMKiller calculates memory and should avoid situations where Envoy updates are throttled unnecessarily."
+        image: ./edge-stack-1.13.7-memory.png
+        docs: topics/running/scaling/#inspecting-ambassador-performance
+        type: change
   - version: 1.13.4
     date: '2021-05-13'
     notes:
