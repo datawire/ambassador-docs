@@ -182,8 +182,8 @@ export const EmissaryCards = [
     section: 'emissaryAuthentication'
   },
   {
-    title: 'JWT Validation (Edge Stack Only)',
-    description: 'Validate users via bearer tokens.',
+    title: 'JWT Validation',
+    description: 'Validate users via bearer tokens with Ambassador Edge Stack.',
     link: goToJWT,
     linkText: 'Learn How',
     section: 'emissaryAuthentication'
@@ -203,8 +203,8 @@ export const EmissaryCards = [
     section: 'emissaryRateLimiting'
   },
   {
-    title: 'Using Rate Limits (Edge Stack Only)',
-    description: 'Create policies to control sustained traffic loads.',
+    title: 'Using Rate Limits',
+    description: 'Create policies to control sustained traffic loads with Ambassador Edge Stack.',
     link: goToRateLimitsEdgeStack,
     linkText: 'Learn How',
     section: 'emissaryRateLimiting'
