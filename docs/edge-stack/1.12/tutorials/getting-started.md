@@ -91,7 +91,7 @@ The Service Catalog is a web-based interface that lists all of your cluster's Se
 
 1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your GitHub account.
 
-2. At the top, hover over **All Clusters** then click **Add a Cluster**.
+2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
 
 3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 
