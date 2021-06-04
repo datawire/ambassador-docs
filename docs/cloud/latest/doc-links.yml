@@ -18,6 +18,8 @@
               items:
                 - title: Annotate a service
                   link: /service-catalog/howtos/annotate/
+                - title: Rollout a service
+                  link: /service-catalog/howtos/rollout/
             - title: Technical reference
               items:
                 - title: Annotations
