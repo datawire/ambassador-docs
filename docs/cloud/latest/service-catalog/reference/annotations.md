@@ -36,6 +36,14 @@ import Alert from '@material-ui/lab/Alert';
 | `a8r.io/uptime` | Link to external uptime dashboard | `https://uptime.getambassador.io` |
 | `a8r.io/performance` | Link to external performance dashboard | `https://performance.getambassador.io` |
 | `a8r.io/dependencies` | Unstructured text description of the service dependencies for humans | `Redis` |
+| `a8r.io/rollouts.scm.path` | Path to the directory containing manifests for this service | `path/to/directory` |
+| `a8r.io/rollouts.scm.branch` | Branch to target for rollout pull requests | `main` |
+| `a8r.io/rollouts.image-repo.type` | Image repository type for rollouts; currently, only `dockerhub` is supported | `dockerhub` |
+| `a8r.io/rollouts.image-repo.name` | Base image name that should be updated by rollouts | `docker.io/datawire/demo-image` |
+| `a8r.io/rollouts.deployment` | Name of the Kubernetes Deployment or Rollout object to update for rollouts | `demo-app` |
+| `a8r.io/rollouts.mappings` | Coma separated list of Mapping objects that should control rollout traffic | `demo-app-mapping,other-mapping` |
+
+To learn more about the `a8r.io/rollouts.*` annotations, see the [progressive delivery reference](../../progressive-delivery/configuration/).
 
 ## Annotate via `kubectl`
 

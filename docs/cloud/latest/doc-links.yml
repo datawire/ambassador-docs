@@ -22,6 +22,8 @@
               items:
                 - title: Annotations
                   link: /service-catalog/reference/annotations/
+                - title: Rollouts
+                  link: /service-catalog/reference/rollouts/
             - title: FAQs
               link: /service-catalog/faqs/
             # - title: Release Notes
