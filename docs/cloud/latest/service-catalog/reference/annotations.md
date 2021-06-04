@@ -15,11 +15,11 @@ import Alert from '@material-ui/lab/Alert';
 
 ## About annotations
 
-[Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) are used to attach metadata to your Kubernetes objects.  Typically they are used to provide contextual information around the object for teammates or information used by third-party tools.  Service Catalog combines these uses to build a readily available catalog of your services, accessible by your teammates via [Ambassador Cloud](https://app.getambassador.io/cloud/catalog).
+[Annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) are used to attach metadata to your Kubernetes objects.  Typically they are used to provide contextual information around the object for teammates or information used by third-party tools.  Service Catalog combines these uses to build a readily available catalog of your services, accessible by your teammates via [Ambassador Cloud](https://app.getambassador.io/cloud/).
 
 ## Supported annotations
 
-[Service Catalog's](https://app.getambassador.io/cloud/catalog) supported annotation keys all start with [`a8r.io`](http://a8r.io) followed by the specific field. These are the metadata keys that Service Catalog supports:
+[Service Catalog's](https://app.getambassador.io/cloud/) supported annotation keys all start with [`a8r.io`](http://a8r.io) followed by the specific field. These are the metadata keys that Service Catalog supports:
 
 | Key | Description | Example |
 | --- | --- | --- |
