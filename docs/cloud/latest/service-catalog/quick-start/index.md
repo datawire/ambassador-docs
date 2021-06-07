@@ -40,9 +40,9 @@ kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.templat
   If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.
 </Alert>
 
-1. Sign in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your GitHub account.
+1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
 
-2. At the top, hover over **All Clusters** then click **Add a Cluster**.
+2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
 
 3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 
