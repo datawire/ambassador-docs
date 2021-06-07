@@ -276,7 +276,7 @@ metadata:
   name: ambassador
 spec:
   config:
-    envoy_log_format: 'ratelimit %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.name)% took action %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.action)'
+    envoy_log_format: 'ratelimit %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.name)% took action %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.action)%'
 ```
 
 ## RateLimit examples
