@@ -1,10 +1,12 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Distributed tracing with Zipkin
 
 In this tutorial, we'll configure Ambassador Edge Stack to initiate a trace on some sample requests, and use Zipkin to visualize them.
 
-## Before you get started
+## Prerequisites
 
-This tutorial assumes you have already followed the Ambassador Edge Stack [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
+This tutorial assumes you have already followed the Ambassador Edge Stack [Getting Started](../../tutorials/getting-started) guide.
 
 After completing the Getting Started guide you will have a Kubernetes cluster running Ambassador Edge Stack and the Quote of the Moment service. Let's walk through adding tracing to this setup.
 
@@ -68,7 +70,11 @@ You can deploy this configuration into your Kubernetes cluster like so:
 $ kubectl apply -f zipkin.yaml
 ```
 
-**Important:** the Ambassador Edge Stack will need to be restarted to configure itself to add the tracing header. Delete all Ambassador Edge Stack pods and let Kubernetes restart them.
+<Alert severity="info">
+  Edge Stack will need to be restarted to configure itself to add the tracing header. This command will restart all the Pods (assuming Edge Stack is installed in the <code>ambassador</code> namespace):
+  
+  <code>kubectl -n ambassador rollout restart deploy</code>
+</Alert>
 
 ## 2. Generate some requests
 
