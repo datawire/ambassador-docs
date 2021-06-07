@@ -239,6 +239,16 @@ The Ambassador API Gateway and the Ambassador Edge Stack support more verbose de
 
 If using the Ambassador Edge Stack, you can adjust the log level by setting the `AES_LOG_LEVEL` environment variable; from least verbose to most verbose, the valid values are `error`, `warn`/`warning`, `info`, `debug`, and `trace`; the default is `info`.
 
+## Log format
+
+By default, Ambassador writes its own logs in a plain text format. To produce logs as JSON instead, set the `AMBASSADOR_JSON_LOGGING` environment variable:
+
+```yaml
+env:
+- name: AMBASSADOR_JSON_LOGGING
+  value: "true"
+```
+
 ## Port assignments
 
 The Ambassador Edge Stack uses some TCP ports in the range 8000-8499 internally, as well as port 8877. Third-party software integrating with the Ambassador Edge Stack should not use ports in this range on the Ambassador pod.

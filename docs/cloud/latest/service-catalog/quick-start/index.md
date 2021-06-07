@@ -19,7 +19,7 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 
 ## Kubernetes annotations
 
-Service Catalog aggregates the Kubernetes annotations on your services into a single portal for your developers to reference, such as the owner, version control repository, and associated Slack channel. Learn more about [adding metadata to services using Kubernetes annotations](../concepts/annotations/).
+Service Catalog aggregates the Kubernetes annotations on your services into a single portal for your developers to reference, such as the owner, version control repository, and associated Slack channel. Learn more about [adding metadata to services using Kubernetes annotations](../concepts/annotating/).
 
 ## Prerequisites
 

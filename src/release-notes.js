@@ -29,10 +29,12 @@ export default ({ data, location, pageContext }) => {
   const [product, setProduct] = useState(initialProduct);
   const [version, setVersion] = useState(initialVersion);
   const [versionList, setVersionList] = useState(initialProduct.version);
-
+  const isMobile = useMemo(() => {
+    return typeof window !== 'undefined' ? window.innerWidth <= 800 : true;
+  }, []);
   useEffect(() => {
     loadJS();
-  }, []);
+  }, [isMobile]);
 
   const parseLinksByVersion = (vers, links) => {
     if (oldStructure.includes(vers)) {
@@ -155,17 +157,19 @@ export default ({ data, location, pageContext }) => {
   };
 
   const loadJS = () => {
-    if (window.docsearch) {
-      window.docsearch({
-        apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-        indexName: 'getambassador',
-        inputSelector: '#doc-search',
-        debug: true,
-      });
-    } else {
-      setTimeout(() => {
-        loadJS();
-      }, 500);
+    if (!isMobile) {
+      if (window.docsearch) {
+        window.docsearch({
+          apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
+          indexName: 'getambassador',
+          inputSelector: '#doc-search',
+          debug: true,
+        });
+      } else {
+        setTimeout(() => {
+          loadJS();
+        }, 500);
+      }
     }
   };
 
@@ -217,6 +221,20 @@ export default ({ data, location, pageContext }) => {
         <meta name="og:type" content="article" />
         <link rel="canonical" href={canonicalUrl} />
         <meta name="description" content={getMetaData().metaDescription} />
+        {!isMobile && (
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css"
+            type="text/css"
+            media="all"
+          />
+        )}
+        {!isMobile && (
+          <script
+            defer
+            src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"
+          ></script>
+        )}
       </Helmet>
       <div className="docs">
         <nav>

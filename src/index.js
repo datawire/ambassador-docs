@@ -21,6 +21,7 @@ import ContactBlock from '../../src/components/ContactBlock';
 import './style.less';
 
 export default ({ data, location }) => {
+
     const page = data.mdx || {};
     const slug = page.fields.slug.split('/');
     const isHome = page.fields.slug === '/docs/';
@@ -44,10 +45,14 @@ export default ({ data, location }) => {
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
 
+    const isMobile = useMemo(() => {
+      return typeof window !== 'undefined' ? window.innerWidth <= 800  : true
+    },[]);
+
     useEffect(() => {
         loadJS();
         isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
-    }, []);
+    }, [isMobile]);
 
     const parseLinksByVersion = (vers, links) => {
         if (oldStructure.includes(vers)) {
@@ -136,6 +141,7 @@ export default ({ data, location }) => {
     };
 
     const loadJS = () => {
+      if(!isMobile){
         if (window.docsearch) {
             window.docsearch({
                 apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
@@ -148,6 +154,7 @@ export default ({ data, location }) => {
                 loadJS();
             }, 500);
         }
+}
     };
 
     const getProductHome = (product) => {
@@ -230,6 +237,13 @@ export default ({ data, location }) => {
                 <meta name="og:type" content="article" />
                 <link rel="canonical" href={canonicalUrl} />
                 <meta name="description" content={getMetaData().metaDescription} />
+        
+                {!isMobile && 
+                  <link
+                    rel="stylesheet"
+                    href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
+              />}
+              {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
             </Helmet>
             <div className="docs">
                 <nav>
