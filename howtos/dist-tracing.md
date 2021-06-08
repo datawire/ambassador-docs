@@ -34,8 +34,7 @@ Simply by visiting this URL on our installation, we are able to visualize the ge
 
 The [OpenTelemetry project](https://opentelemetry.io/) was created with the intent of stopping the proliferation of API standards and libraries one might need to support for all their observability needs, effectively replacing the Zipkin-API, OpenCensus, OpenTracing and more competing implementations.
 
-> OpenTelemetry provides a single set of APIs, libraries, agents, and collector services to capture distributed traces and metrics from your application. You can analyze them using Prometheus, Jaeger, and other observability tools.
-
+> OpenTelemetry provides a single set of APIs, libraries, agents, and collector services to capture distributed traces and metrics from your application. You can analyze them using Prometheus, Jaeger, and other observability tools.<br/>
 -[https://opentelemetry.io/](https://opentelemetry.io/)
 
 It’s at this point in the conversation that someone inevitably mentions that XKCD...
