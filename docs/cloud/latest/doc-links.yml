@@ -14,19 +14,67 @@
               items:
                 - title: Annotating Kubernetes Services for humans
                   link: /service-catalog/concepts/annotating/
+                - title: Environments
+                  link: /service-catalog/concepts/environments/
             - title: How do I...
               items:
                 - title: Annotate a service
                   link: /service-catalog/howtos/annotate/
-                - title: Rollout a service
-                  link: /service-catalog/howtos/rollout/
+                - title: Manage my environments
+                  link: /service-catalog/howtos/environments/
+                - title: Filter my service view
+                  link: /service-catalog/howtos/favorites/
             - title: Technical reference
               items:
                 - title: Annotations
                   link: /service-catalog/reference/annotations/
-                - title: Rollouts
-                  link: /service-catalog/reference/rollouts/
             - title: FAQs
               link: /service-catalog/faqs/
-            # - title: Release Notes
-            #  link: /release-notes
+        - title: Intercepts
+          items:
+            - title: Quick start
+              link: /intercepts/quick-start/
+            - title: Core concepts
+              items:
+                - title: Sharing intercepted services
+                  link: /intercepts/concepts/preview-urls/
+            - title: How do I...
+              items:
+                - title: Create an Intercept
+                  link: /intercepts/howtos/create/
+                - title: Manage an Intercept's Preview URL
+                  link: /intercepts/howtos/preview-urls/
+                - title: Send requests to an intercepted service
+                  link: /intercepts/howtos/request/
+            - title: FAQs
+              link: /intercepts/faqs/
+        - title: Rollouts
+          items:
+            - title: Quick start
+              link: /rollouts/quick-start/
+            - title: Core concepts
+              items:
+                - title: What is Argo?
+                  link: /rollouts/concepts/argo/
+                - title: CI/CD and progressive delivery - Safely shipping code
+                  link: /rollouts/concepts/cicd/
+                - title: Developer-centric GitOps-style deployment
+                  link: /rollouts/concepts/gitops/
+                - title: Canary deployments
+                  link: /rollouts/concepts/canary/
+            - title: How do I...
+              items:
+                - title: Create a rollout
+                  link: /rollouts/howtos/rollout/
+                - title: Transform a deployment to a rollout
+                  link: /rollouts/howtos/deployment-to-rollout/
+                - title: Observe a canary deployment
+                  link: /rollouts/howtos/observability/
+            - title: Technical reference
+              items:
+                - title: Rollouts
+                  link: /rollouts/reference/rollouts/
+            - title: FAQs
+              link: /rollouts/faqs/
+        - title: Release Notes
+          link: /release-notes/

@@ -2,9 +2,9 @@
 
 The DCP allows you to progressively rollout new versions of your services listed in the Service Catalog.
 
-This feature leverages [Argo CD](/docs/argo/latest/concepts/argo/) to automatically monitor changes to a Git repository 
-and apply them to your Kubernetes cluster, following a [GitOps](/docs/argo/latest/concepts/gitops/) approach. At this
-point, [Argo Rollouts](/docs/argo/latest/concepts/argo/) comes in to control how traffic coming from Edge Stack gets
+This feature leverages [Argo CD](../../concepts/argo/) to automatically monitor changes to a Git repository 
+and apply them to your Kubernetes cluster, following a [GitOps](../../concepts/gitops/) approach. At this
+point, [Argo Rollouts](../../concepts/argo/) comes in to control how traffic coming from Edge Stack gets
 sent to the new version of your service.
 
 ## Prerequisites
@@ -29,7 +29,7 @@ the [repository](#a8riorepository) and update them as follows:
 If no `Rollout` object is found matching the [deployment manifest name](#a8riorolloutsdeployment) (which should only
 happen the first time a rollout is created), then the DCP will look for a `Deployment` object matching that same name.
 If found, a new `Rollout` manifest will be created referring to that deployment object and configured with the 
-[mappings](a8riorolloutsmappings). A new [canary](../core-concepts/canary/) service based on the current service specs 
+[mappings](a8riorolloutsmappings). A new [canary](../../core-concepts/canary/) service based on the current service specs 
 will also be created to allow Argo Rollouts to control the flow between the two versions.
 
 The rollout steps will then be resolved based on the provided rollout duration and weight increment along with the
