@@ -5,9 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import CodeBlock from '../../../../src/components/CodeBlock';
-import LinuxIcon from '../../../../src/assets/icons/linux.inline.svg';
-import AppleIcon from '../../../../src/assets/icons/apple.inline.svg';
+import CodeBlock from '../../../../../src/components/CodeBlock';
+import LinuxIcon from '../../../../../src/assets/icons/linux.inline.svg';
+import AppleIcon from '../../../../../src/assets/icons/apple.inline.svg';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,7 +84,7 @@ export default function SimpleTabs() {
           'curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.14/argocd-linux-amd64' +
           '\n' +
           'chmod +x /usr/local/bin/argocd' +
-          '\n' +
+          '\n \n' +
           '# Arco Rollouts plugin' +
           '\n' +
           'sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts' +
