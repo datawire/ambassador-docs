@@ -1,4 +1,4 @@
-# Statistics and Monitoring
+# Statistics and monitoring
 
 Ambassador collects many statistics internally, and makes it easy to
 direct this information to a statistics and monitoring tool of your

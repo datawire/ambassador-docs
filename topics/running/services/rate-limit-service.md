@@ -1,4 +1,4 @@
-# RateLimitService Plugin
+# Rate limit service
 
 Rate limiting is a powerful technique to improve the [availability and
 resilience of your
@@ -11,7 +11,7 @@ then rate limit requests based on the request labels.
 and not the Ambassador Edge Stack, as the Ambassador Edge Stack includes a
 built-in rate limit service.**
 
-## Request Labels
+## Request labels
 
 See [Attaching labels to
 requests](../../../using/rate-limits/rate-limits/#attaching-labels-to-requests)
@@ -28,7 +28,7 @@ See [Attaching labels to
 requests](../../../using/rate-limits/rate-limits/#attaching-labels-to-requests)
 for how to labels under different domains.
 
-## External Rate Limit Service
+## External rate limit service
 
 In order for the Ambassador API Gateway to rate limit, you need to implement a
 gRPC `RateLimitService`, as defined in [Envoy's `v1/rls.proto`][`v1/rls.proto`]
@@ -105,7 +105,7 @@ The headers injected by the [AuthService](../auth-service) can also be passed to
 the rate limit service since the `AuthService` is invoked before the
 `RateLimitService`.
 
-## Configuring the Rate Limit Service
+## Configuring the rate limit service
 
 A `RateLimitService` manifest configures the Ambassador API Gateway to use an
 external service to check and enforce rate limits for incoming requests:
@@ -117,17 +117,17 @@ kind:  RateLimitService
 metadata:
   name:  ratelimit
 spec:
-  service: "example-rate-limit:5000"
+  service: "example-rate-limit.default:5000"
   protocol_version: oneOf[v2, v3]    # optional; default is v2
 ```
 
-- `service` gives the URL of the rate limit service.
+- `service` gives the URL of the rate limit service. If using a Kubernetes service, this should be the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services) of that service.
 - `protocol_version` (optional) gRPC service name used to communicate with the `RateLimitService`. Allowed values are `v2` which will use the `envoy.service.ratelimit.v2.RateLimitService`, and `v3` which will use the `envoy.service.ratelimit.v3.RateLimitService` service name. Note that `v3` requires Ambassador to run in Envoy v3 mode by setting the AMBASSADOR_ENVOY_API_VERSION=V3 environment variable.
 
 
 You may only use a single `RateLimitService` manifest.
 
-## Rate Limit Service and TLS
+## Rate limit service and TLS
 
 You can tell the Ambassador API Gateway to use TLS to talk to your service by
 using a `RateLimitService` with an `https://` prefix.  However, you may also
@@ -145,7 +145,7 @@ example.  For a more advanced example, read the [advanced rate limiting
 tutorial](../../../../howtos/advanced-rate-limiting), which uses the rate limit
 service that is integrated with the Ambassador Edge Stack.
 
-## Further Reading
+## Further reading
 
 * [Rate limiting: a useful tool with distributed systems](https://blog.getambassador.io/rate-limiting-a-useful-tool-with-distributed-systems-6be2b1a4f5f4)
 * [Rate limiting for API Gateways](https://blog.getambassador.io/rate-limiting-for-api-gateways-892310a2da02)

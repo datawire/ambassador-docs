@@ -1,4 +1,4 @@
-# Dev Portal Tutorial
+# Dev Portal tutorial
 
 In this tutorial, you will access and explore some of the key features of the Dev Portal.
 
@@ -74,7 +74,7 @@ endpoint again via `curl` with the updated prefix.
 1. Change the prefix back to `/backend/` so that you can later use the `Mapping` 
 with other tutorials.
 
-## Developer API Documentation
+## Developer API documentation
 
 The `quote` service you just deployed publishes its API as an 
 [OpenAPI (formally Swagger)](https://swagger.io/solutions/getting-started-with-oas/)

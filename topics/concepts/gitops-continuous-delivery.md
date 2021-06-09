@@ -1,10 +1,8 @@
-# The Ambassador Operating Model: Continuous Delivery, GitOps, and Declarative Configuration
-
-## Microservices, Containers, and Kubernetes
+# The Ambassador operating model: GitOps and continuous delivery
 
 Containerized applications deployed in Kubernetes generally follow the microservices design pattern, where an application composed of dozens or even hundreds of services communicate with each other. Independent application development teams are responsible for the full lifecycle of a service, including coding, testing, deployment, release, and operations. By giving these teams independence, microservices enable organizations to scale their development without sacrificing agility.
 
-## Policies, Declarative Configuration, and Custom Resource Definitions
+## Policies, declarative configuration, and Custom Resource Definitions
 
 Ambassador configuration is built on the concept of _policies_. A policy is a statement of intent and codified in a declarative configuration file. Ambassador takes advantage of Kubernetes Custom Resource Definitions (CRDs) to provide a declarative configuration workflow that is idiomatic with Kubernetes.
 
@@ -12,7 +10,7 @@ Both operators and application developers can write policies. Typically, operato
 
 Because many different teams may need to write policies, Ambassador supports a decentralized configuration model. Individual policies are written in different files. Ambassador aggregates all policies into one master policy configuration for the edge.
 
-## Continuous Delivery and GitOps
+## Continuous delivery and GitOps
 
 Code cannot provide value to end-users until it is running in production. [Continuous Delivery](https://continuousdelivery.com/) is the ability to get changes of all types -- including new features, configuration changes, bug fixes, and experiments -- into production, and in front of customers safely and quickly in a sustainable way.
 
@@ -41,7 +39,7 @@ Contrast this a **traditional, manual workflow:**
 
 The self-service, continuous delivery model is critical for ensuring that edge operations can scale.
 
-## Continuous Delivery, Gitops, and Ambassador
+## Continuous delivery, GitOps, and Ambassador
 
 Adopting a continuous delivery workflow with Ambassador via GitOps provides several advantages:
 

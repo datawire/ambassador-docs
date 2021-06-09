@@ -1,4 +1,4 @@
-# Kubernetes Network Architecture
+# Kubernetes Network architecture
 
 ## Kubernetes has its own isolated network
 
@@ -10,7 +10,7 @@ While there are a number of techniques for routing traffic to a Kubernetes clust
 
 <div class="docs-diagram-wrapper">
 
-![Kubernetes Network Architecture](../../../../../images/documentation/kubernetes-network.inline.svg)
+![Kubernetes Network Architecture](../../../../../../images/documentation/kubernetes-network.inline.svg)
 
 </div>
 
@@ -26,7 +26,7 @@ If the Kubernetes cluster is deployed in a private data center, an external load
 
 In both the private data center and cloud infrastructure case, the external load balancer should be configured to point to the edge proxy.
 
-### Edge Proxy / Ingress Controller
+### Edge Proxy / ingress controller
 
 The Edge Proxy is typically a Layer 7 proxy that is deployed directly in the cluster. The core function of the edge proxy is to accept incoming traffic from the external load balancer and route the traffic to Kubernetes services. The edge proxy should be configured using Kubernetes manifests. This enables a common management workflow for both the edge proxy and Kubernetes services.
 
@@ -36,7 +36,7 @@ The ingress resource is a Kubernetes standard. As such, it is a lowest common de
 
 The Ambassador Edge Stack can function as an ingress controller (i.e., it reads ingress resources), although it also includes many other capabilities that are beyond the scope of the ingress specification. Most Ambassador Edge Stack users find that the various additional capabilities of Ambassador are essential, and end up using Ambassador's extensions to the ingress resource, instead of using ingress resources themselves.
 
-### Kubernetes services and pods
+### Kubernetes services and Pods
 
 Each instance of your application is deployed in a Kubernetes pod. As the workload on your application increases or decreases, Kubernetes can automatically add or remove pods. A Kubernetes _service_ represents a group of pods that comprise the same version of a given application. Traffic can be routed to the pods via a Kubernetes service, or it can be routed directly to the pods.
 

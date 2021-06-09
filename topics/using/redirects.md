@@ -16,7 +16,7 @@ Ambassador Edge Stack can perform 3xx redirects on `Mapping`s to a different hos
 
 ## Examples
 
-### Basic Redirect
+### Basic redirect
 
 To effect any type of HTTP `Redirect`, the `Mapping` *must* set `host_redirect` to `true`, with `service` set to the host to which the client should be redirected:
 
@@ -36,7 +36,7 @@ Using this `Mapping`, a request to `http://$AMBASSADOR_URL/redirect/` will be re
 > As always with Ambassador Edge Stack, the trailing `/` on any URL with a
 `Mapping` is required!
 
-### Path Redirect
+### Path redirect
 
 The `Mapping` may optionally also set additional properties to customize the behavior of the HTTP redirect response.
 
@@ -56,7 +56,7 @@ spec:
 
 Here, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `http://httpbin.org/ip/`. 
 
-### Prefix Redirect
+### Prefix redirect
 
 To change only a prefix of the path portion of the URL, set `prefix_redirect`:
 
@@ -74,7 +74,7 @@ spec:
 
 Now, a request to `http://$AMBASSADOR_URL/redirect/path/` will  be redirected to `http://httpbin.org/ip/`. The prefix `/redirect/path/` was matched and replaced with `/ip/`.
 
-### Regex Redirect
+### Regex redirect
 
 `regex_redirect` matches a regular expression to replace instead of a fixed prefix.
 [See more information about using regex with Edge Stack](../rewrites/#regex_rewrite).
@@ -95,7 +95,7 @@ spec:
 A request to `http://$AMBASSADOR_URL/foo/12345/list` will be redirected to 
 `http://$AMBASSADOR_URL/bar/12345`.
 
-### Redirect Response Code
+### Redirect response code
 
 To change the HTTP response code return by the Edge Stack, set `redirect_reponse_code`. If this is not set, 301 is returned by default. Valid values include 301, 302, 303, 307, and 308.  This
 can be used with any type of redirect.
@@ -114,7 +114,7 @@ spec:
 
 A request to `http://$AMBASSADOR_URL/ip/` will result in an HTTP 302 redirect to `http://httpbin.org/ip`.
 
-### X-FORWARDED-PROTO Redirect
+### X-FORWARDED-PROTO redirect
 
 In cases when TLS is being terminated at an external layer 7 load balancer, then you would want to redirect only the originating HTTP requests to HTTPS, and let the originating HTTPS requests pass through.
 
