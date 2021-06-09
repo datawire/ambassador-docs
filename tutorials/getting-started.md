@@ -6,7 +6,7 @@ import Alert from '@material-ui/lab/Alert';
 import GSTabs from './gs-tabs'
 import GSTabs2 from './gs-tabs2'
 
-# Edge Stack Quick Start
+# Edge Stack quick start
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
@@ -28,7 +28,7 @@ We'll start by installing Edge Stack into your cluster.
 
 <Alert severity="success"><b>Success!</b> You have installed Edge Stack, now let's get some traffic flowing to your services.</Alert>
 
-## 2. Routing Traffic from the Edge
+## 2. Routing traffic from the edge
 
 Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define Edge Stack’s desired state. The workflow you are going to build uses a simple demo app and the **Mapping CRD**, which is the core resource that you will use with Edge Stack. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
 
@@ -85,11 +85,11 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 
 <Alert severity="success"><b>Victory!</b> You have created your first Edge Stack Mapping, routing a request from your cluster's edge to a service!</Alert>
 
-## 3. Connect your Cluster to Ambassador Cloud
+## 3. Connect your cluster to Ambassador Cloud
 
 The Service Catalog is a web-based interface that lists all of your cluster's Services. You can view, add, and update metadata associated with each Service, such as the owner, version control repository, and associated Slack channel.
 
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your GitHub account.
+1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your preferred identity provider.
 
 2. At the top, hover over **All Clusters** then click **Add a Cluster**.
 
@@ -101,7 +101,7 @@ The Service Catalog is a web-based interface that lists all of your cluster's Se
 
 <Alert severity="success"><b>Fantastic!</b> You can now see all your Services in your Ambassador Cloud account! Metadata on your Services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="../../../../cloud/latest/service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your Services.</Alert>
 
-## <img class="os-logo" src="../../images/logo.png"/> What's Next?
+## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
 Explore some of the popular tutorials on Edge Stack:
 

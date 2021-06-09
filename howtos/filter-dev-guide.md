@@ -1,4 +1,4 @@
-# Developing Custom Filters for Routing
+# Developing custom filters for routing
 
 Sometimes you may want Ambassador Edge Stack to manipulate an incoming request. Some example use cases:
 
@@ -21,7 +21,7 @@ The `Plugin` `Filter` is built by `make` which uses Docker to create a stable bu
 
 See the [README](https://github.com/datawire/apro-example-plugin) for more information on how the `Plugin` works.
 
-## Creating and Deploying Filters
+## Creating and deploying filters
 
 We've created an example filter that you can customize for your particular use case.
 
@@ -53,7 +53,7 @@ We've created an example filter that you can customize for your particular use c
               httpGet:
    ```
 
-## Rapid Development of a Custom Filter
+## Rapid development of a custom filter
 
 During development, you may want to sidestep the deployment process for a faster development loop. The `aes-plugin-runner` helps you rapidly develop Ambassador Edge Stack filters locally.
 
@@ -92,6 +92,6 @@ Now, you can quickly test and develop your filter.
 
 Note in the example above the `X-Dc` header is added. This lets you inspect the changes the filter is making to your HTTP header.
 
-## Further Reading
+## Further reading
 
 For more details about configuring filters and the `plugin` interface, see the [filter reference](../../topics/using/filters/).

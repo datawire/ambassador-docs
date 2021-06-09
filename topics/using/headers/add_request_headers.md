@@ -1,4 +1,4 @@
-# Add Request Headers
+# Add request headers
 
 Ambassador Edge Stack can add a dictionary of HTTP headers that can be added to each request that is passed to a service.
 
@@ -10,7 +10,7 @@ Envoy dynamic values `%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%` and `%PROTOCOL%`
 
 `add_request_headers` can be set either in a `Mapping` or using [`ambassador Module defaults`](../../defaults).
 
-### Mapping Example
+### Mapping example
 
 ```yaml
 apiVersion: getambassador.io/v2
@@ -33,7 +33,7 @@ spec:
 
 will add the protocol, client IP, and a static header to `/backend/`.
 
-### Defaults Example
+### Defaults example
 
 ```yaml
 apiVersion: getambassador.io/v2

@@ -1,4 +1,4 @@
-# Advanced Rate Limiting
+# Advanced rate limiting
 
 The Ambassador Edge Stack integrates a flexible, high-performance Rate Limit Service (RLS). Similar to Ambassador, the RLS features a decentralized configuration model so that individual teams can manage their own rate limits. For example:
 
@@ -12,7 +12,7 @@ Like Ambassador, the Ambassador RLS is designed so that many different teams, wi
 
 In the Ambassador Edge Stack, each request can have multiple *labels*. Labels are arbitrary key/value pairs that contain any metadata about a given request, e.g., its IP, a hard-coded value, the path of the request, and so forth. The Rate Limit Service processes these labels and enforces any limits that are set on a label. Labels can be assigned to *domains*, which are separate namespaces. Typically, different teams would be responsible for different domains.
 
-## Configuring Rate Limiting: The 50,000 Foot View
+## Configuring rate limiting: The 50,000 foot view
 
 Logically, configuring rate limiting is straightforward.
 
@@ -21,7 +21,7 @@ Logically, configuring rate limiting is straightforward.
 
 In the examples below, we'll use the backend service of the quote sample application.
 
-## Example 1: Global Rate Limiting for Availability
+## Example 1: Global rate limiting for availability
 
 Imagine the backend service is a Rust-y application that can only handle 3 requests per minute before crashing. While the engineering team really wants to rewrite the backend service in Golang (because Rust isn't fast enough), they haven't had a chance to do so. We want to rate limit all requests for this service to 3 requests per minute. (ProTip: Using requests per minute simplifies testing.)
 
@@ -97,7 +97,7 @@ spec:
 
 Note for this to work, you need to make sure you've properly configured Ambassador to [propagate your original client IP address](../../topics/running/ambassador#use_remote_address).
 
-## Example 3: Load Shedding GET Requests
+## Example 3: Load shedding GET requests
 
 You've dramatically improved availability of the quote backend service, thanks to the per-user rate limiting. However, you've realized that on occasion the queries (e.g., the 'GET' requests) cause so much volume that updates to the backend (e.g., the 'POST' requests) don't get processed. So we're going to add a more sophisticated load shedding strategy:
 
@@ -136,7 +136,7 @@ spec:
      unit: minute
 ```
 
-## Example 4: Global Rate Limiting
+## Example 4: Global rate limiting
 
 Suppose, like [Example 2](#example-2-per-user-rate-limiting), you want to ensure a single user cannot overload your server with too many requests to any service. You need to add a request label to every request so you can rate limit off every request a calling IP makes. This can be configured with a [global rate limit](../../topics/using/rate-limits) that add the `remote_address` special value to every request:
 
@@ -171,7 +171,7 @@ spec:
      unit: minute
 ```
 
-### Bypassing a Global Rate Limit
+### Bypassing a global rate limit
 
 Sometimes, you may have an API that cannot handle as much load as others in your cluster. In this case, a global rate limit may not be enough to ensure this API is not overloaded with requests from a user. To protect this API, you will need to create a label that tells Ambassador Edge Stack to apply a stricter limit on requests. With the above global rate limit configuration rate limiting based on `remote_address`, you will need to add a request label to the services `Mapping`.
 
@@ -206,7 +206,7 @@ spec:
 
 Now, requests to `/backend/` will be rate limited after only 3 requests.
 
-## Rate limiting Matching Rules
+## Rate limiting matching rules
 
 The following rules apply to the rate limit patterns:
 

@@ -1,4 +1,4 @@
-# Ambassador Edge Stack Extensions
+# Ambassador Edge Stack extensions
 
 The Ambassador Edge Stack contains a number of pre-built extensions that make
 running, deploying, and exposing your applications in Kubernetes easier. 
@@ -19,7 +19,7 @@ Redis.
 The [Redis documentation](../aes-redis) contains detailed information on tuning
 how AES talks to Redis.
 
-## The Extension Process
+## The Extension process
 
 The various extensions of the Ambassador Edge Stack run as a separate process
 from the Ambassador control plane and Envoy data plane.

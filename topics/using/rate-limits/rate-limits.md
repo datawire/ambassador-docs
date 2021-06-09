@@ -1,4 +1,4 @@
-# Rate Limiting in the Ambassador Edge Stack
+# Rate limiting reference
 
 Rate limiting in the Ambassador Edge Stack is composed of two parts:
 
@@ -11,7 +11,7 @@ Rate limiting in the Ambassador Edge Stack is composed of two parts:
 
 
 > This page covers using `RateLimit` resources to configure Ambassador Edge 
-  Stack to rate limit requests. See the [Rate Limiting](../) page for
+  Stack to rate limit requests. See the [Basic Rate Limiting article](../) for
   information on adding labels to requests.
 
 
@@ -137,7 +137,51 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
    ```
 
    would allow 5 requests per minute, and any requests in excess of
-   that would result in HTTP 429 errors.
+   that would result in HTTP 429 errors. Note that the limit is
+   tracked in terms of wall clock minutes and not a sliding
+   window. For example if 5 requests happen 59 seconds into the
+   current wall clock minute, then clients only need to wait a second
+   in order to make another 5 requests.
+
+ - `burstFactor`: The optional `burstFactor` field changes enforcement
+   of ratelimits in two ways:
+
+   * A `burstFactor` of `N` will allow unused requests from a window
+     of `N` time units to be rolled over and included in the current
+     request limit. This will effectively result in two separate
+     ratelimits being applied depending on the dynamic behavior of
+     clients. Clients that only make occasional bursts will end up
+     with an effective ratelimit of `burstFactor`*`rate`, whereas
+     clients that make requests continually will be limited to just
+     `rate`. For example:
+
+     ```yaml
+     rate: 5
+     unit: minute
+     burstFactor: 5
+     ```
+
+     would allow bursts of up to 25 request per minute, but only
+     permit continual usage of 5 requests per minute.
+
+   * A `burstFactor` of `1` is logically very similar to no
+     `burstFactor` with one key difference. When `burstFactor` is
+     specified, requests are tracked with a sliding window rather than
+     in terms of wall clock minutes. For example:
+
+     ```yaml
+     rate: 5
+     unit: minute
+     burstFactor: 1
+     ```
+
+     With*out* the `burstFactor` of 1, the above limit would permit up
+     to 5 requests within any wall clock minute. *With* the
+     `burstFactor` of 1 it means that no more than 5 requests are
+     permitted within any 1 minute sliding window.
+
+   Note that the `burstFactor` field only works when the
+   `AES_RATELIMIT_PREVIEW` environment variable is set to `true`.
 
  - `injectRequestHeaders`, `injectResponseHeaders`: If this limit's
    pattern matches the request, then `injectRequestHeaders` injects
@@ -232,10 +276,10 @@ metadata:
   name: ambassador
 spec:
   config:
-    envoy_log_format: 'ratelimit %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.name)% took action %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.action)'
+    envoy_log_format: 'ratelimit %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.name)% took action %DYNAMIC_METADATA(envoy.filters.http.ratelimit:aes.ratelimit.action)%'
 ```
 
-## RateLimit Examples
+## RateLimit examples
 
 ### An example service-level rate limit
 

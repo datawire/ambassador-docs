@@ -1,4 +1,4 @@
-# TLS Termination and Enabling HTTPS
+# TLS termination and enabling HTTPS
 
 TLS encryption is one of the basic requirements of having a secure system.
 Ambassador Edge Stack [automatically enables TLS termination/HTTPs
@@ -28,7 +28,7 @@ This guide requires you have the following installed:
 
 [Install Ambassador Edge Stack in Kubernetes](../../topics/install).
 
-## Create a Self-Signed Certificate
+## Create a self-signed certificate
 
 OpenSSL is a tool that allows us to create self-signed certificates for opening
 a TLS encrypted connection. The `openssl` command below will create a 
@@ -52,7 +52,7 @@ termination.
    cert.pem	key.pem
    ```
 
-## Store the Certificate and Key in a Kubernetes Secret
+## Store the certificate and key in a Kubernetes Secret
 
 Ambassador Edge Stack dynamically loads TLS certificates by reading them from
 Kubernetes secrets. Use `kubectl` to create a `tls` secret to hold the pem 
@@ -62,7 +62,7 @@ files we created above.
 kubectl create secret tls tls-cert --cert=cert.pem --key=key.pem
 ```
 
-## Tell Ambassador Edge Stack to Use this Secret for TLS Termination
+## Tell Ambassador Edge Stack to use this secret for TLS termination
 
 Now that we have stored our certificate and private key in a Kubernetes secret
 named `tls-cert`, we need to tell Ambassador Edge Stack to use this certificate
@@ -100,7 +100,7 @@ kubectl apply -f wildcard-host.yaml
 Ambassador is now configured to listen for TLS traffic on port `8443` and
 terminate TLS using the self-signed certificate we created.
 
-## Send a Request Over HTTPS
+## Send a request Over HTTPS
 
 We can now send encrypted traffic over HTTPS.
 
@@ -145,12 +145,12 @@ curl -Lk https://{{AMBASSADOR_IP}}/backend/
 **Note:** Since we are using a self-signed certificate, you must set the `-k`
 flag in curl to disable hostname validation.
 
-## Next Steps
+## Next steps
 
 This guide walked you through how to enable basic TLS termination in Ambassador
 Edge Stack using a self-signed certificate for simplicity.
 
-### Get a Valid Certificate from a Certificate Authority
+### Get a valid certificate from a certificate authority
 
 While a self-signed certificate is a simple and quick way to get Ambassador Edge Stack to terminate TLS, it should not be used by production systems. In order to serve HTTPS traffic without being returned a security warning, you will need to get a certificate from an official Certificate Authority like Let's Encrypt.
 
@@ -163,7 +163,7 @@ way to manage certificates from Let's Encrypt. See our documentation for more
 information on how to [use `cert-manager` with Ambassador Edge Stack
 ](../cert-manager).
 
-### Enable Advanced TLS options
+### Enable advanced TLS options
 
 Ambassador Edge Stack exposes configuration for many more advanced options
 around TLS termination, origination, client certificate validation, and SNI

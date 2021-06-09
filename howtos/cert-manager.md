@@ -1,14 +1,22 @@
-# Cert-Manager and Ambassador Edge Stack
+# Using cert-manager
 
-**Note:** This document assumes cert-manager  v0.15 or greater.   This document has been updated to use CRD standards specified in v0.15.  [Legacy CRD support](https://cert-manager.io/docs/installation/upgrading/upgrading-0.14-0.15/) was removed in cert-manager v0.15, see their [upgrading](https://cert-manager.io/docs/installation/upgrading/) document for more info.
+The Ambassador Edge Stack has simple and easy built-in support for automatically using ACME to create and renew TLS
+certificates; configured by the [`Host` resource](../../topics/running/host-crd/).  However, it only supports ACME's
+`http-01` challenge; if you require more flexible certificate management (such as using ACME's `dns-01` challenge, or
+using a non-ACME certificate source), the Ambassador Edge stack also supports using external certificate management
+tools.
 
----
+One such tool is Jetstack's [cert-manager](https://github.com/jetstack/cert-manager), which is a general-purpose tool
+for managing certificates in Kubernetes.  Cert-manager will automatically create and renew TLS certificates and store
+them as Kubernetes secrets for easy use in a cluster.  The Ambassador Edge Stack will automatically watch for secret
+changes and reload certificates upon renewal.
 
-Creating and managing certificates in Kubernetes is made simple with Jetstack's [cert-manager](https://github.com/jetstack/cert-manager). Cert-manager will automatically create and renew TLS certificates and store them in Kubernetes secrets for easy use in a cluster. Ambassador will automatically watch for secret changes and reload certificates upon renewal.
+> **Note:** This document assumes cert-manager v0.15 or greater.  This document has been updated to use CRD standards
+> specified in v0.15.  [Legacy CRD support](https://cert-manager.io/docs/installation/upgrading/upgrading-0.14-0.15/)
+> was removed in cert-manager v0.15, see their [upgrading](https://cert-manager.io/docs/installation/upgrading/)
+> document for more info.
 
-**Note:** Ambassador Edge Stack will automatically create and renew TLS certificates with the HTTP-01 challenge. You should use cert-manager if you need support for the DNS-01 challenge and/or wildcard certificates.
-
-## Install Cert-Manager
+## Install cert-manager
 
 There are many different ways to [install cert-manager](https://docs.cert-manager.io/en/latest/getting-started/install.html). For simplicity, we will use Helm v3.
 
@@ -29,7 +37,7 @@ There are many different ways to [install cert-manager](https://docs.cert-manage
     helm install cert-manager --namespace cert-manager jetstack/cert-manager
     ```
 
-## Issuing Certificates
+## Issuing certificates
 
 cert-manager issues certificates from a CA such as [Let's Encrypt](https://letsencrypt.org/). It does this using the ACME protocol which supports various challenge mechanisms for verifying ownership of the domain.
 
@@ -47,7 +55,7 @@ By duplicating issuers, certificates, and secrets one can support multiple domai
 
 cert-manager supports two kinds of ACME challenges that verify domain ownership in different ways: HTTP-01 and DNS-01.
 
-### DNS-01 Challenge
+### DNS-01 challenge
 
 The DNS-01 challenge verifies domain ownership by proving you have control over its DNS records. Issuer configuration will depend on your [DNS provider](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/index.html#supported-dns01-providers). This example uses [AWS Route53](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/route53.html).
 
@@ -112,7 +120,7 @@ The DNS-01 challenge verifies domain ownership by proving you have control over 
     ambassador-certs         kubernetes.io/tls                     2         1h
     ```
 
-### HTTP-01 Challenge
+### HTTP-01 challenge
 
 The HTTP-01 challenge verifies ownership of the domain by sending a request for a specific file on that domain. cert-manager accomplishes this by sending a request to a temporary pod with the prefix `/.well-known/acme-challenge/`. To perform this challenge:
 

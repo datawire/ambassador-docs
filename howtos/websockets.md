@@ -1,4 +1,4 @@
-# Using WebSockets and Ambassador
+# WebSocket connections
 
 Ambassador makes it easy to access your services from outside your
 application, and this includes services that use WebSockets.  Only a
@@ -11,9 +11,9 @@ allow_upgrade:
 - websocket
 ```
 
-## Example WebSocket Service
+## Example WebSocket service
 
-The example configuration below demonstrates the addition of the `use_websocket` attribute.
+The example configuration below demonstrates the addition of the `allow_upgrade:` attribute to support websockets. The use of `use_websocket` is now deprecated.
 
 ```yaml
 ---

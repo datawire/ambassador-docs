@@ -1,9 +1,9 @@
-# Scaling Ambassador
+# Performance and scaling Ambassador
 
 Scaling any cloud native application is inherently domain specific, however the content here
 reflects common issues, tips, and tricks that come up frequently.
 
-## Performance Dimensions
+## Performance dimensions
 
 The performance of Ambassador Edge Stack's control plane can be characterized along a number of
 different dimensions:
@@ -16,7 +16,7 @@ different dimensions:
 If your application involves a larger than average number of any of the above resources, you may
 find yourself in need of some of the content in this section.
 
-## Mysterious Pod Restarts (aka Pushing the Edge of the Envelope)
+## Mysterious pod restarts (aka pushing the edge of the envelope)
 
 Whether your application is growing organically or whether you are deliberately scale testing, it's
 helpful to recognize how Ambassador Edge Stack behaves as it reaches the edge of its performance
@@ -30,7 +30,7 @@ memory limits or failed liveness/readiness probes. See the [Memory Limits](#memo
 [Liveness Probes](#liveness-probes), and [Readiness Probes](#readiness-probes)
 sections for more on how to cope with these situations.
 
-## Memory Limits
+## Memory limits
 
 Ambassador Edge Stack can grow in memory usage and be killed by Kubernetes if it exceeds the limits
 defined in its pod spec. When this happens it is confusing and difficult to catch because the only
@@ -65,7 +65,7 @@ Ambassador Edge Stack's exact memory usage depends on (among other things) how m
 `Mapping` resources are defined in your cluster. If this number has grown over time, you may need to
 increase the memory limit defined in your deployment.
 
-## Liveness Probes
+## Liveness probes
 
 Ambassador defines the `/ambassador/v0/check_alive` endpoint on port `8877` for use with Kubernetes
 liveness probes. See the Kubernetes documentation for more details on [HTTP liveness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-http-request).
@@ -85,7 +85,7 @@ determines how tolerant Kubernetes is with its probes. If you observe pod restar
 Note that whatever changes you make to Ambassador's liveness probes should most likely be made to
 its readiness probes also.
 
-## Readiness Probes
+## Readiness probes
 
 Ambassador defines the `/ambassador/v0/check_ready` endpoint on port `8877` for use with Kubernetes
 readiness probes. See the Kubernetes documentation for more details on [readiness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes).
@@ -100,7 +100,7 @@ bootstrap period it behaves identically to the `check_alive` endpoint.
 Generally Ambassador's readiness probe should be configured with the same settings as its liveness
 probes.
 
-## `AMBASSADOR_FAST_RECONFIGURE` and `AMBASSADOR_LEGACY_MODE` Flags
+## `AMBASSADOR_FAST_RECONFIGURE` and `AMBASSADOR_LEGACY_MODE` flags
 
 `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of
 the code Ambassador uses to validate and generate envoy configuration. It will eventually be enabled
@@ -116,7 +116,7 @@ clients when reconfiguration happen. Its unit is seconds and it defaults to 600 
 can impact memory usage because Ambassador needs to keep around old versions of its configuration
 for the duration of the drain time.
 
-## Unconstrained Mappings with Many Hosts
+## Unconstrained Mappings with many hosts
 
 When working with a large number of `Host` resources, it's important to understand the impact of
 unconstrained `Mapping`s. An unconstrained `Mapping` is one that is not restricted to a specific
@@ -124,7 +124,7 @@ unconstrained `Mapping`s. An unconstrained `Mapping` is one that is not restrict
 it is the appropriate thing to do, however if you do not intend to do this, then you can end up with
 many more routes than you had intended and this can adversely impact performance.
 
-## Inspecting Ambassador Performance
+## Inspecting Ambassador performance
 
 Ambassador internally tracks a number of key performance indicators. You can inspect these via the
 debug endpoint at `localhost:8877/debug`. Note that the `AMBASSADOR_FAST_RECONFIGURE` flag needs to
