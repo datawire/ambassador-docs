@@ -6,7 +6,7 @@ The documentation in this repository is built with [Gatsby](https://www.gatsbyjs
 
 We welcome all contributions! See [LICENSE](LICENSE) for applicable terms and conditions.
 
-## Authoring Documentation
+## Authoring Documentation.
 
 If you're authoring the documentation, just edit the Markdown files. You can use GitHub to preview the Markdown.
 
