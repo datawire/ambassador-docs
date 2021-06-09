@@ -14,4 +14,4 @@ edgectl install
 
 Don't worry: it is safe to run the installer repeatedly on a Kubernetes cluster.
 
-If this failure persists, please get in touch on [Slack](http://d6e.co/slack).
+If this failure persists, please get in touch on [Slack](https://a8r.io/Slack).

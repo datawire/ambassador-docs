@@ -39,7 +39,7 @@ spec:
 | `envoy_validation_timeout` | Defines the timeout, in seconds, for validating a new Envoy configuration. The default is 60; a value of 0 disables Envoy configuration validation. Most installations will not need to use this setting. | `envoy_validation_timeout: 30` |
 | `listener_idle_timeout_ms` | Controls how Envoy configures the tcp idle timeout on the http listener. Default is 1 hour. | `listener_idle_timeout_ms: 30000` |
 | `lua_scripts` | Run a custom lua script on every request. see below for more details. | None |
-| `proper_case` | Should we enable upper casing for response headers? For more information, see [the Envoy docs](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-http1protocoloptions-headerkeyformat). | `proper_case: false` |
+| `proper_case` | Should we enable upper casing for response headers? For more information, see [the Envoy docs](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/protocol.proto.html#config-core-v3-http1protocoloptions-headerkeyformat). | `proper_case: false` |
 | `regex_max_size` | This field controls the RE2 "program size" which is a rough estimate of how complex a compiled regex is to evaluate. A regex that has a program size greater than the configured value will fail to compile.    | `regex_max_size: 200` |
 | `regex_type` | Set which regular expression engine to use. See the "Regular Expressions" section below. | `regex_type: safe` |
 | `server_name` | By default Envoy sets server_name response header to `envoy`. Override it with this variable. | `server_name: envoy` |
@@ -79,7 +79,7 @@ cors:
 
 #### Keepalive
 
-`keepalive` sets the global keepalive settings. Ambassador will use for all mappings unless overridden in a mapping. No default value is provided by Ambassador. More information at https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/address.proto#envoy-api-msg-core-tcpkeepalive.
+`keepalive` sets the global keepalive settings. Ambassador will use for all mappings unless overridden in a mapping. No default value is provided by Ambassador. More information at https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/address.proto.html#config-core-v3-tcpkeepalive.
 
 ```
 keepalive:
@@ -222,7 +222,7 @@ If you need more flexible and configurable options, Ambassador Edge Stack suppor
 
 ### Header Case (`proper_case`)
 
-To enable upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”. Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-http1protocoloptions-headerkeyformat)
+To enable upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”. Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/protocol.proto.html#config-core-v3-http1protocoloptions-headerkeyformat)
 
 ### Regular Expressions (`regex_type`)
 
