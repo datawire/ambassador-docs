@@ -1,3 +1,8 @@
+---
+  reading_time: 10
+  reading_time_text: tutorial
+---
+
 import Alert from '@material-ui/lab/Alert';
 import GSTabs from './gs-tabs.js'
 
