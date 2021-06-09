@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Annotate a Service
+# Annotate a service
 
 [Service Catalog](https://app.getambassador.io/cloud/catalog) lists all the services in your cluster, including helpful information like the owner, a description of the service, links to documentation, and more.
 
@@ -8,7 +8,7 @@ This information is all sourced from annotations set on the services.  Annotatio
 
 <Alert severity="info">The full list of supported annotations is available <a href="../../reference/annotations/">here</a>.</Alert>
 
-## Annotate via `kubectl`
+## Annotate via kubectl
 
 Find a service you would like to annotate in your Service Catalog list that does not have an owner yet listed.
 
@@ -34,7 +34,7 @@ If your service is in a namespace other than `default`, you must specify it with
 kubectl annotate svc <service name> --namespace <namespace> a8r.io/owner="<your name>"
 ```
 
-While this is a quick and effective way to set a single annotation on a service, it doesn't scale well to setting multiple annotations.  It also doesn't follow <a href="../../../../topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps best practices</b></a> as normally such resource updates should be stored in version control and applied via a deployment pipeline.
+While this is a quick and effective way to set a single annotation on a service, it doesn't scale well to setting multiple annotations.  It also doesn't follow <a href="../../../../../edge-stack/latest/topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps best practices</b></a> as normally such resource updates should be stored in version control and applied via a deployment pipeline.
 
 To accomplish this, you can annotate instead using YAML.
 
