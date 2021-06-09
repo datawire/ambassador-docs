@@ -89,7 +89,7 @@ diagnostics:
 `keepalive` sets the global keepalive settings.
 Ambassador will use for all mappings unless overridden in a
 mapping. No default value is provided by Ambassador.
-More information at https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/address.proto#envoy-api-msg-core-tcpkeepalive
+More information at https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/address.proto.html#config-core-v3-tcpkeepalive
 
 ```
 keepalive:
