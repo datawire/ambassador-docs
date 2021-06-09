@@ -40,8 +40,6 @@
                   link: /intercepts/concepts/preview-urls/
             - title: How do I...
               items:
-                - title: Create an Intercept
-                  link: /intercepts/howtos/create/
                 - title: Manage an Intercept's Preview URL
                   link: /intercepts/howtos/preview-urls/
                 - title: Send requests to an intercepted service
