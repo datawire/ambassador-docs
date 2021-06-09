@@ -185,7 +185,7 @@ export const ArgoCards = [
 
 export const CloudCards = [
   {
-    title: 'Service Catalog',
+    title: 'Service Catalog Quick Start',
     description: 'Eliminate tribal knowledge, speed incident response, and improve developer productivity.',
     link: goToCloudQuickStart,
     linkText: 'Get Started',
