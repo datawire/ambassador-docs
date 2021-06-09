@@ -8,7 +8,7 @@ When you first generate an API key for a cluster, you are offered the choice to 
 
 ## Associate a Cluster Namespace to an environment
 
-To organize your services differently in Service Catalog,
+To organize your services differently in the Service Catalog,
 
 1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
 
@@ -19,4 +19,3 @@ To organize your services differently in Service Catalog,
 4. Click on the `cluster: namespace`'s **"..."** button to open the pop-up menu.
 
 5. Select the new environment location of this `cluster: namespace` under **Move to...**.
-
