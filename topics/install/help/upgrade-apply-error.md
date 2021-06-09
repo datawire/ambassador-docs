@@ -5,4 +5,4 @@ manifests used to upgrade Ambassador Edge Stack to your Kubernetes cluster.
 
 ## What's next?
 
-Please get in touch on [Slack](http://d6e.co/slack).
+Please get in touch on [Slack](https://a8r.io/Slack).
