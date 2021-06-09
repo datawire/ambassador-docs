@@ -73,8 +73,8 @@ spec:
 
  - `grpc` must be `true`.
 
-[buffer_flush_interval]: https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/accesslog/v2/als.proto#envoy-api-field-config-accesslog-v2-commongrpcaccesslogconfig-buffer-flush-interval
-[buffer_size_bytes]: https://www.envoyproxy.io/docs/envoy/latest/api-v2/config/accesslog/v2/als.proto#envoy-api-field-config-accesslog-v2-commongrpcaccesslogconfig-buffer-size-bytes
+[buffer_flush_interval]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/access_loggers/grpc/v3/als.proto.html#extensions-access-loggers-grpc-v3-commongrpcaccesslogconfig
+[buffer_size_bytes]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/access_loggers/grpc/v3/als.proto.html#extensions-access-loggers-grpc-v3-commongrpcaccesslogconfig
 
 ## Example
 
