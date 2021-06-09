@@ -6,7 +6,7 @@ The documentation in this repository is built with [Gatsby](https://www.gatsbyjs
 
 We welcome all contributions! See [LICENSE](LICENSE) for applicable terms and conditions.
 
-## Authoring Documentation.
+## Authoring Documentation
 
 If you're authoring the documentation, just edit the Markdown files. You can use GitHub to preview the Markdown.
 
@@ -40,7 +40,7 @@ ready to publicize it, simply do a `git subtree push`.
 [getambassador.io.git]: https://github.com/datawire/getambassador.io
 [https://www.getambassador.io/]: https://www.getambassador.io/
 
-## Adding Release Notes.
+## Adding Release Notes
 
 To add a Release Notes page for a product version, you should:
 
