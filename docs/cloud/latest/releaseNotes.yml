@@ -1,0 +1,46 @@
+# This file should be placed in the folder for the version of the product that's meant to be documented. A `/release-notes` page will be automatically generated and populated at build time.
+# Note that an entry needs to be added to the `doc-links.yml` file in order to surface the release notes in the table of contents.
+#
+# The YAML in this file should contain:
+#
+# changelog: An (optional) URL to the CHANGELOG for the product.
+# items: An array of releases with the following attributes:
+#     - version: The (optional) version number of the release, if applicable.
+#     - date: The date of the release in the format YYYY-MM-DD.
+#     - notes: An array of noteworthy changes included in the release, each having the following attributes:
+#         - title: A short title of the noteworthy change.
+#         - body: Two or three sentences describing the change and why it is noteworthy. This is in rich text format and may contain HTML elements.
+#         - image: The URL of an image that visually represents the noteworthy change. This can be an absolute path or the name of the image file placed under the `ambassador-docs/public` folder starting with `./` (e.g., `./ambassador-example.png`).
+#         - docs: The path to the documentation page where additional information can be found.
+#         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
+#
+
+changelog: ''
+items:
+  - date: '2021-06-14'
+    notes:
+      - title: Updated views for Service Catalog
+        body: "The Service Catalog will match and group services in multiple environments, allowing you to visualize the flow of services through the different stages. As versions get rolled out, the Service Catalog will guide you through the promotion pipeline from development to production."
+        image: ./cloud-new-catalog-view.png
+        docs: service-catalog/concepts/environments/
+        type: feature
+      - title: Organize clusters and namespaces in Environments
+        body: "Ambassador Cloud offers you the ability to organize and move your cluster namespaces into different Environments to better represent the stages of each namespace."
+        image: ./cloud-organize-environments.png
+        docs: service-catalog/howtos/environments/
+        type: feature
+      - title: Build a custom view of namespaces and services
+        body: "Customize your view by displaying only favorited cluster namespaces and services. This can be easily achieved by toggling the filters on the page's top bar."
+        image: ./cloud-favorites.png
+        docs: service-catalog/howtos/favorites/
+        type: feature
+      - title: View all intercepts details
+        body: "Logged-in Telepresence users will now report all of their Intercepts to Ambassador Cloud, allowing users to visualize their team's intercepted services in the Service Catalog."
+        image: ./cloud-intercept-details.png
+        docs: intercepts/quick-start/
+        type: feature
+      - title: Rollouts in Beta
+        body: "Rollouts is now a Beta feature of Ambassador Cloud. With rollouts, Ambassador Cloud and Argo will guide you through GitOps operations for deploying canary releases of services."
+        image: ./cloud-rollouts-beta.png
+        docs: rollouts/quick-start/
+        type: feature
