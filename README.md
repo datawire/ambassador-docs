@@ -1,4 +1,3 @@
-
 # Ambassador Documentation
 
 The documentation in this repository is built with [Gatsby](https://www.gatsbyjs.com/), which gives us control and flexibility over the layout.
@@ -20,7 +19,7 @@ The `aes-pages.yml` file identifies which pages should be marked as "Ambassador 
 ## Documentation Infrastructure Notes
 
 The docs in this repository can be "vendored" into other repositories using `git subtree`.
-Repositories that do this are encouraged to include some kind of convenience tooling to make syncing the docs easier.  For example, the
+Repositories that do this are encouraged to include some kind of convenience tooling to make syncing the docs easier. For example, the
 following Makefile snippet:
 
 ```Makefile
@@ -34,9 +33,53 @@ push-docs: ## Publish ./docs to https://github.com/datawire/ambassador-docs
 The (private) [getambassador.io.git][] repository contains the Gatsby-based toolchain that compiles the docs into website at [https://www.getambassador.io/][].
 
 Other repositories that include the docs as a subtree should get in the habit of doing a `git subtree pull` from their `master` branch
-periodically.  Documentation for code changes can then be committed right along-side the code changes.  When a release is cut, and you are
+periodically. Documentation for code changes can then be committed right along-side the code changes. When a release is cut, and you are
 ready to publicize it, simply do a `git subtree push`.
 
 [ambassador-docs.git]: https://github.com/datawire/ambassador-docs
 [getambassador.io.git]: https://github.com/datawire/getambassador.io
 [https://www.getambassador.io/]: https://www.getambassador.io/
+
+## Adding Release Notes
+
+To add a Release Notes page for a product version, you should:
+
+1. Add a `releaseNotes.yml` file to the folder for that version of the product under `ambassador-docs/docs`. A template for this file can be found here:
+
+```yaml
+# This file should be placed in the folder for the version of the product that's meant to be documented. A `/release-notes` page will be automatically generated and populated at build time.
+# Note that an entry needs to be added to the `doc-links.yml` file in order to surface the release notes in the table of contents.
+#
+# The YAML in this file should contain:
+#
+# changelog: An (optional) URL to the CHANGELOG for the product.
+# items: An array of releases with the following attributes:
+#     - version: The (optional) version number of the release, if applicable.
+#     - date: The date of the release in the format YYYY-MM-DD.
+#     - notes: An array of noteworthy changes included in the release, each having the following attributes:
+#         - title: A short title of the noteworthy change.
+#         - body: Two or three sentences describing the change and why it is noteworthy. This is in rich text format and may contain HTML elements.
+#         - image: The URL of an image that visually represents the noteworthy change. This can be an absolute path or the name of the image file placed under the `ambassador-docs/public` folder starting with `./` (e.g., `./ambassador-example.png`).
+#         - docs: The path to the documentation page where additional information can be found.
+#         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
+#
+
+items:
+  - version: 1.13.4
+    date: '2021-05-13'
+    notes:
+      - title: Envoy 1.15.5
+        body: Emissary Ingress 1.13.4 and Edge Stack 1.13.4 have been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). Edge Stack and Emissary Ingress can now be configured to reject client requests that contain escaped slashes.
+        image: ./edge-stack-1.13.4.png
+        docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
+        type: security
+```
+
+2. Add an entry to the `doc-links.yml` file to surface the release notes in the table of contents:
+
+```yaml
+- title: Release Notes
+  link: /release-notes
+```
+
+3. If images need to be added, the images should be included in the `ambassador-docs/public` folder.

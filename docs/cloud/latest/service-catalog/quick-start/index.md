@@ -6,7 +6,7 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [The power of Kubernetes annotations](#the-power-of-kubernetes-annotations)
+* [Kubernetes annotations](#kubernetes-annotations)
 * [Prerequisites](#prerequisites)
 * [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
 * [2. Claim ownership of a service](#2-claim-ownership-of-a-service)
@@ -15,71 +15,11 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 
 </div>
 
-<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty, you first need to complete with this quick start guide.</Alert>
+<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty. Follow this guide to configure your cluster.</Alert>
 
-## The power of Kubernetes annotations 
+## Kubernetes annotations
 
-Have you ever been asked to troubleshoot a failing Kubernetes service and struggled to find basic information about the service such as the source repository and owner? Troubleshooting always begins with information gathering. 
-
-Kubernetes annotations are designed to solve exactly this problem. They are designed to add metadata to Kubernetes objects. 
-
-Using `kubectl`, let's create a basic service named `ghost-service` with the `a8r.io/description` annotation set to "An annotated ghost service that points to nowhere in particular".
-
-Copy and paste this into your terminal:
-
-```
-cat <<EOF | kubectl create -f -
-apiVersion: v1
-kind: Service
-metadata:
-  name: ghost-service
-  annotations:
-    a8r.io/description: "An annotated ghost service that points to nowhere in particular"
-spec:
-  ports:
-    - protocol: TCP
-      port: 80
-EOF
-```
-
-You can easily view all of the annotations on your new service using `kubectl`:
-
-```
-$ kubectl describe svc ghost-service
-  
-  Name:              ghost-service
-  Namespace:         default
-  Labels:            <none>
-  Annotations:       a8r.io/description: An annotated ghost service that points to nowhere in particular
-  ...
-```
-
-<Alert severity="success"><b>Success!</b> You can easily add important metadata using Kubernetes annotations to your services. This information is invaluable when trying to resolve issues and understand your system.</Alert>
-
-You can also add annotations using the `kubectl annotate` command:
-
-```
-$ kubectl annotate svc ghost-service a8r.io/owner=Casper
-  
-  service/ghost-service annotated
-  
-$ kubectl describe svc ghost-service 
-  
-  Name:              ghost-service
-  Namespace:         default
-  Labels:            <none>
-  Annotations:       a8r.io/owner: Casper
-                     a8r.io/description: An annotated ghost service that points to nowhere in particular
-  ...
-```
-
-<Alert severity="success"><b>Congratulations!</b> You can easily add Kubernetes annotations to service via <code>kubectl annotate</code> and view the information via <code>kubectl describe</code>.</Alert>
-
-As your number of services grows it can be challenging to view all of the annotation information via `kubectl describe`. 
-
-Ambassador Cloud Service Catalog provides a centralized view with an easily navigable web-based UI of your services running in all of your clusters. Let’s configure this now!
-
-<Alert severity="info">Before proceeding, you can remove the <code>ghost-service</code> with <code>kubectl delete svc ghost-service</code>.</Alert>
+Service Catalog aggregates the Kubernetes annotations on your services into a single portal for your developers to reference, such as the owner, version control repository, and associated Slack channel. Learn more about [adding metadata to services using Kubernetes annotations](../concepts/annotations/).
 
 ## Prerequisites
 
@@ -92,27 +32,13 @@ If you already have Edge Stack or the API Gateway installed, **check your versio
 ```
 kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
-
-If you are using Edge Stack (the image name will be datawire/aes), then check that the image version is 1.12.0 or greater.
-
-If using the API Gateway (the image name will be datawire/ambassador), then check that the image version is 1.13.0 or greater.
-
-If your Edge Stack or API Gateway installation is up to date,
-then you are ready to start using Service Catalog!
-
-If not, [follow this doc](../../../../edge-stack/latest/topics/install/upgrading/) to **upgrade** Edge Stack.
+[Upgrade Edge Stack to the latest version](../../../../edge-stack/latest/topics/install/upgrading/) if needed.
 
 ## 1. Connect your cluster to Ambassador Cloud
 
-<Alert severity="info">If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.</Alert>
-
-The Service Catalog is a web-based interface that lists all of your cluster's Services. You can view, add, and update metadata associated with each Service, such as the owner, version control repository, and associated Slack channel.
-
-<!--
-Follow the instructions that match your Edge Stack installation method below to connect your cluster and start using Service Catalog.
-
-<GSTabs2/>
--->
+<Alert severity="info">
+  If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.
+</Alert>
 
 1. Sign in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your GitHub account.
 
@@ -146,13 +72,13 @@ Click the `quote` service in the list. The service details page now opens that d
 
 The metadata for each service is determined by annotations included within your Kubernetes YAML config files. You can annotate the config of the `ambassador` service that you have just installed to display your name.
 
-1. Change the name of the owner of the `quote` service by replacing `<your name>` in the command below and running it:
+1. Change the name of the owner of the `quote` service by replacing `<your name>` in the command below and running it.  The value could be a GitHub username, an email address, or your actual name.
 
   ```
   kubectl annotate --overwrite svc quote -n ambassador a8r.io/owner="<your name>"
   ```
 
-2. Refresh your Service Catalog page anl dook at the `quote` service to see the change with your name.
+2. Refresh your Service Catalog page and look at the `quote` service to see the change with your name.
 
 <Alert severity="info">It may take up to 30 seconds for Service Catalog to sync with your cluster and your annotation to appear.</Alert>
 
