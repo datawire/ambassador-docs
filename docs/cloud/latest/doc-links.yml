@@ -30,22 +30,6 @@
                   link: /service-catalog/reference/annotations/
             - title: FAQs
               link: /service-catalog/faqs/
-        - title: Intercepts
-          items:
-            - title: Quick start
-              link: /intercepts/quick-start/
-            - title: Core concepts
-              items:
-                - title: Sharing intercepted services
-                  link: /intercepts/concepts/preview-urls/
-            - title: How do I...
-              items:
-                - title: Manage an Intercept's Preview URL
-                  link: /intercepts/howtos/preview-urls/
-                - title: Send requests to an intercepted service
-                  link: /intercepts/howtos/request/
-            - title: FAQs
-              link: /intercepts/faqs/
         - title: Rollouts
           items:
             - title: Quick start

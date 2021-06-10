@@ -5,5 +5,4 @@ Not every Kubernetes cluster and namespace run the same type of workload. Engine
 - Staging
 - Production
 
-The Service Catalog will match and group services in multiple environments, allowing you to visualize the flow of services through the different stages. As versions get rolled out, the Service Catalog will guide you through the promotion pipeline from development to production.
-
+The Service Catalog will match and group services in multiple environments, allowing you to develop and manage your services through its entire cloud-native lifecycle. Easily visualize the flow of services through the different stages, as versions get rolled out. The Service Catalog will guide you through the promotion pipeline from development to production.

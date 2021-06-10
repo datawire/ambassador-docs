@@ -20,27 +20,17 @@ items:
   - date: '2021-06-14'
     notes:
       - title: Updated views for Service Catalog
-        body: "The Service Catalog will match and group services in multiple environments, allowing you to visualize the flow of services through the different stages. As versions get rolled out, the Service Catalog will guide you through the promotion pipeline from development to production."
+        body: "Develop and manage your services through its entire cloud-native lifecycle. As services span multiple environments, you can now visualize the flow of services through the different stages. As versions get rolled out, the Service Catalog will guide you through the promotion pipeline from development to production."
         image: ./cloud-new-catalog-view.png
-        docs: service-catalog/concepts/environments/
-        type: feature
-      - title: Organize clusters and namespaces in Environments
-        body: "Ambassador Cloud offers you the ability to organize and move your cluster namespaces into different Environments to better represent the stages of each namespace."
-        image: ./cloud-organize-environments.png
-        docs: service-catalog/howtos/environments/
-        type: feature
-      - title: Build a custom view of namespaces and services
-        body: "Customize your view by displaying only favorited cluster namespaces and services. This can be easily achieved by toggling the filters on the page's top bar."
-        image: ./cloud-favorites.png
-        docs: service-catalog/howtos/favorites/
+        docs: service-catalog/quick-start/
         type: feature
       - title: View all intercepts details
-        body: "Logged-in Telepresence users will now report all of their Intercepts to Ambassador Cloud, allowing users to visualize their team's intercepted services in the Service Catalog."
+        body: "The Service Catalog shows all Telepresence intercepts, allowing you to quickly visualize all of your team's intercepted services."
         image: ./cloud-intercept-details.png
-        docs: intercepts/quick-start/
+        docs: ../../telepresence/latest/quick-start/
         type: feature
       - title: Rollouts in Beta
-        body: "Rollouts is now a Beta feature of Ambassador Cloud. With rollouts, Ambassador Cloud and Argo will guide you through GitOps operations for deploying canary releases of services."
+        body: "Rollouts is a beta feature of Ambassador Cloud. With rollouts, Ambassador Cloud and Argo will guide you through the GitOps operations for deploying your services using the canary release pattern."
         image: ./cloud-rollouts-beta.png
-        docs: rollouts/quick-start/
+        docs: ../../argo/latest/quick-start/
         type: feature
