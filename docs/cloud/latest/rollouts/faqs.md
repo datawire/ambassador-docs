@@ -27,7 +27,7 @@ The Rollout feature requires:
 
 Yes. The Rollouts feature is available in all Ambassador 1.13.8+ releases: AES and Emissary
 
-**Can I provide my manifests as a Helm charts or as a Kustomize project?**
+**Can I provide my manifests as a Helm Chart or as a Kustomize project?**
 
 Currently, the Rollouts feature requires standard kubernetes manifests. You can generate standard Kubernetes manifests from Helm Charts or Kustomize projects and provide those files in a git repo so it can be consumed by Ambassador Cloud.
 
