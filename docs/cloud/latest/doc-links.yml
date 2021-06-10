@@ -30,33 +30,5 @@
                   link: /service-catalog/reference/annotations/
             - title: FAQs
               link: /service-catalog/faqs/
-        - title: Rollouts
-          items:
-            - title: Quick start
-              link: /rollouts/quick-start/
-            - title: Core concepts
-              items:
-                - title: What is Argo?
-                  link: /rollouts/concepts/argo/
-                - title: CI/CD and progressive delivery - Safely shipping code
-                  link: /rollouts/concepts/cicd/
-                - title: Developer-centric GitOps-style deployment
-                  link: /rollouts/concepts/gitops/
-                - title: Canary deployments
-                  link: /rollouts/concepts/canary/
-            - title: How do I...
-              items:
-                - title: Create a rollout
-                  link: /rollouts/howtos/rollout/
-                - title: Transform a deployment to a rollout
-                  link: /rollouts/howtos/deployment-to-rollout/
-                - title: Observe a canary deployment
-                  link: /rollouts/howtos/observability/
-            - title: Technical reference
-              items:
-                - title: Rollouts
-                  link: /rollouts/reference/rollouts/
-            - title: FAQs
-              link: /rollouts/faqs/
         - title: Release Notes
           link: /release-notes/

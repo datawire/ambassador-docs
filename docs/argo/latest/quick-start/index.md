@@ -1,260 +1,208 @@
-
 import Alert from '@material-ui/lab/Alert';
-import Tabs from './tabs'
 
-# Argo quick start
+# Canary Rollout Quick Start
+
+In this guide we'll give you everything you need to perform a canary rollout of a new Kubernetes service using GitOps best practices, but without needing to write lots of YAML!
+
+  <Alert severity="info">
+    Although you won't be writing lots of YAML, all of the Argo CD and Rollouts configuration you will generate from the cloud user interface will be visible in the GitHub pull request that is automatically created. You can inspect this YAML before merging the pull request to start the GitOps flow that will rollout your updated service.
+  </Alert>
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
 * [Prerequisites](#prerequisites)
-* [1. Install and configure Edge Stack](#1-install-and-configure-edge-stack)
-* [2. Install Argo](#2-install-argo)
-* [3. Set up Argo](#3setup-argo)
-* [4. Deploy the sample app](#4-deploy-the-sample-app)
-* [5. Create the canary deployment](#5-create-the-canary-deployment)
-* [6. Rollout a new version](#6-rollout-a-new-version)
+    * [Own Environment](#own-environment)
+    * [Demo Cluster](#demo-cluster)
+* [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
+* [2. Install Argo CD & Argo Rollouts](#2-install-argo-cd--argo-rollouts)
+* [3. Fork the rollouts-demo repo](#3-fork-the-rollouts-demo-repo)
+* [4. Update the service manifests with the proper git repo and branch](#4-update-the-service-manifests-with-the-proper-git-repo-and-branch)
+* [5. Apply the manifests in your cluster and see the service being reported in the service catalog](#5-apply-the-manifests-in-your-cluster-and-see-the-service-being-reported-in-the-service-catalog)
+* [6. Configure GitHub & DockerHub integration](#6-configure-github--dockerhub-integration)
+* [7. Configure Argo CD](#7-configure-argo-cd)
+* [8. Create a Rollout](#8-create-a-rollout)
+* [9. Review & merge PR](#9-review--merge-pr)
+* [10. Watch progress](#10-watch-progress)
 
 </div>
 
-Argo is an open source suite of projects that helps developers safely deploy code to production.
+## Prerequisites
 
-Within a GitOps context, Argo makes application deployment and lifecycle management easier, particularly as the line between developers and operators disappears, because it automates deployment, makes rollbacks easier and can be audited for easier troubleshooting.
+### Own Environment
 
-For this guide, we will build a CD pipeline to deploy an app from a repo into a Kubernetes cluster, then perform a [canary release](../concepts/canary) on that app to test incrementally rolling out a new version.
+If you want to get started with canary rollouts on your own environment, you will need to have **Edge Stack version 1.12 or greater** or **API Gateway 1.13 or greater** installed in your cluster.
 
-Argo can use Kubernetes projects formatted using different templating systems (Helm, Kustomize, etc.) but for this app we're just going to deploy a folder of static YAML files.
+**Install** Edge Stack <a href="/docs/edge-stack/latest/tutorials/getting-started/">from here</a> if needed.
 
-# Prerequisites
-
-* [Kubectl](https://kubernetes.io/docs/tasks/tools/) installed and configured to use a cluster
-* a GitHub account
-
-## 1. Install and configure Edge Stack
-
-You'll first need to install Edge Stack in your cluster. Follow the [Edge Stack installation](../../../edge-stack/latest/tutorials/getting-started) to install via Kubernetes YAML, Helm, or the command-line installer in your cluster.
-
-By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use [endpoint routing](../../../edge-stack/latest/topics/running/resolvers/). Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
-
-```yaml
-apiVersion: getambassador.io/v2
-kind: KubernetesEndpointResolver
-metadata:
-  name: endpoint
-```
-
-Apply this configuration to your cluster:
-`kubectl apply -f resolver.yaml`
-
-## 2. Install Argo
-
-First, if you're using Google Kubernetes Engine, grant your account the ability to create new Cluster Roles:
+If you already have Edge Stack or the API Gateway installed, **check your version** by running this command (adjust your namespace if necessary):
 
 ```
-kubectl create clusterrolebinding YOURNAME-cluster-admin-binding --clusterrole=cluster-admin --user=YOUREMAIL@gmail.com
+kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
+[Upgrade Edge Stack to the latest version](/docs/edge-stack/latest/topics/install/upgrading/) if needed.
 
-Run the following commands to create the namespaces required for Argo and install the components:
+### Demo Cluster
+
+You can also use one of our free demo clusters that comes bundled with a supported version of Edge Stack.
+
+1. <a href="https://app.getambassador.io/cloud/demo-cluster-download-popup" onClick={(e) => {window.open('https://app.getambassador.io/cloud/demo-cluster-download-popup', 'ambassador-cloud-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }} target="_blank">Sign in to Ambassador Cloud to download your demo cluster archive.</a>  The archive contains all the tools and configurations you need to complete this guide.
+
+2.  Extract the archive file, open the `ambassador-demo-cluster` folder, and run the installer script (the commands below might vary based on where your browser saves downloaded files).
+
+  <Alert severity="info">
+    This step will also install some dependency packages onto your laptop using npm, you can see those packages at <code>ambassador-demo-cluster/edgey-corp-nodejs/DataProcessingService/package.json</code>.
+  </Alert>
+
+  ```
+  cd ~/Downloads
+  unzip ambassador-demo-cluster.zip -d ambassador-demo-cluster
+  cd ambassador-demo-cluster
+  ./install.sh
+  ```
+
+3. The demo cluster we provided already has Edge Stack installed. List the services in the `ambassador` namespace:
+
+  ```
+   $ kubectl get services -n ambassador
+    
+    NAME               TYPE           CLUSTER-IP    EXTERNAL-IP       PORT(S)                      AGE
+    ambassador-redis   ClusterIP      10.43.7.10    <none>            6379/TCP                     45h
+    ambassador-admin   ClusterIP      10.43.97.79   <none>            8877/TCP,8005/TCP            45h
+    ambassador         LoadBalancer   10.43.63.9    173.255.117.234   80:32132/TCP,443:31845/TCP   45h
+  ```
+
+## 1. Connect your cluster to Ambassador Cloud
+
+<Alert severity="info">
+  If you are using a demo cluster or followed the <a href="/docs/edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you can skip this step.
+</Alert>
+
+
+1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
+
+2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
+
+3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
+
+4. Follow the prompts to install the cloud token into your cluster.
+
+5. When the token installation completes, refresh the Service Catalog page.
+
+<Alert severity="success"><b>Victory!</b> All the Services running in your cluster are now listed in Service Catalog! When you complete the next steps of this quickstart this will provide visibility into the current rollout status of each service.</Alert>
+
+## 2. Install Argo CD & Argo Rollouts
+
+In order to install Argo CD and Argo Rollouts in your cluster run the commands bellow:
+
 ```
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
 kubectl create namespace argo-rollouts
-kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/download/v1.0.1/install.yaml
 ```
 
-Next, you will need to install the Argo CD CLI (for building pipelines) and the Argo Rollouts plugin (for managing and visualizing rollouts) on your laptop:
+## 3. Fork the rollouts-demo repo
 
-<AppStateContext>
-{state => {
-  return (<CodeBlockMultiLang type="terminal" state={state}  data={
-    {
-      tabs: [
-          {
-            id: "macOS",
-            display: "macOS",
-            os:"macos",
-            prompt: "",
-            commands: [
-              {
-                input: "brew install argocd"
-              },
-              {
-                input: "brew install argoproj/tap/kubectl-argo-rollouts",
-                outputs: [
-                  "# Need brew? https://brew.sh/"
-                ]
-              }
-            ]
-          },
-          {
-            id: "linux",
-            display: "Linux",
-            os:"linux",
-            prompt: "",
-            commands: [
-              {
-                 comments:[
-                    "# Argo CD CLI"
-                 ],
-                input: "curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.14/argocd-linux-amd64"
-              },
-              {
-                comments:[],
-                input: "chmod +x /usr/local/bin/argocd"
-              },
-              {
-                 comments:[
-                    "# Argo Rollouts plugin"
-                 ],
-                input: "sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts"
-              },
-              {
-                comments:[],
-                input: "sudo chmod a+x /usr/local/bin/kubectl-argo-rollouts"
-              },
-            ]
-          }
-        ]
-    }} />)
-}
-}
-</AppStateContext>
+Fork the <a href="https://github.com/datawire/rollouts-demo" target="_blank">rollouts demo repository</a> and clone your fork into your local environment.
+This repo contains a series of Kubernetes services that you will add to the service catalog and use to perform a rollout.
 
-## 3. Set up Argo
+## 4. Update the service manifests with the proper git repo and branch
 
-First set up port forwarding to access the Argo API:
-```
-kubectl port-forward svc/argocd-server -n argocd 8080:443
+In the cloned repository directory, edit the `manifests/service.yaml` file and replace the `a8r.io/repository` with the URL of your forked repository.
+
+The annotations section of your `service.yaml` file should look something like the following excerpt, with `MY_GITHUB_ACCOUNT` replaced with the GitHub account in which you forked the rollouts-demo repository.
+```diff
+metadata:
+  labels:
+    app: rollout-demo
+  name: rollout-demo
+  annotations:
+    a8r.io/description: Demo service to try the rollout feature
+    a8r.io/owner: Ambassador Labs
+    a8r.io/documentation: https://www.getambassador.io/docs/cloud/latest/service-catalog/howtos/rollout/
+-   a8r.io/repository: git@github.com:datawire/rollouts-demo.git
++   a8r.io/repository: git@github.com:MY_GITHUB_ACCOUNT/rollouts-demo.git
+    a8r.io/support: https://a8r.io/Slack
 ```
 
-In a new terminal window, retrieve the default password; it is auto-generated and stored in a Kubernetes Secret:
+Commit and push your changes to your fork:
 
 ```
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+git add manifests/service.yaml && git commit -m "Update service repo url" && git push
 ```
 
-Authenticate against the API using the default username `admin` and password (answer `y` about the certificate error):
+## 5. Apply the manifests in your cluster and see the service being reported in the service catalog
+
+From your root of your locally forked rollouts-demo repository, apply the Kubernetes manifests to your cluster:
 
 ```
-argocd login localhost:8080
+kubectl apply -f ./manifests
 ```
 
-Finally, set a new admin password:
-```
-argocd account update-password
-```
+<Alert severity="info">Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> and you should now see the `rollout-demo` service reported in Ambassador Cloud!</Alert>
 
-## 4. Deploy the sample app
+## 6. Configure GitHub & DockerHub integration
 
-Argo can quickly create pipelines and deploy apps using the CLI tool.  
+In Ambassador Cloud, go to the <a href="https://app.getambassador.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
 
-To start with, we'll deploy an app from the `echo` directory in [this repo](https://github.com/datawire/argo-qs.git). Later on in this guide however you will need to edit a part of the repo to perform a canary release, so [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) this repo now into your own GitHub account.  **On the commands that reference the repo from here to the end of the guide you will need to edit the GitHub URL to include your own username.**
+### GitHub
 
-Now build the pipeline that deploys our app. The following command points Argo to the repo and specific path to the YAML files we want to deploy and sets the destination to the local cluster. Finally, it syncs the app, which is the action that actually deploys the manifests to the cluster.
+Click the "Enable" button in the GitHub section.
+You will be taken to github.com and asked in which account you want to install Ambassador DCP.
+Select the account in which you forked the rollouts-demo repo.
+On the new page that opens scroll down to the "Repository access" section, and click on "Only select repositories".
+Then click on the dropdown menu directly below this option and select your forked rollouts-demo repo.
+Click "Save" and you will be taken back to the Ambassador Cloud integrations page.
 
-```
-argocd app create --name echo --repo https://github.com/<your Github username>/argo-qs.git --path echo --dest-server https://kubernetes.default.svc --dest-namespace default && argocd app sync echo
-```
+### DockerHub
 
-To access your deployed app, first get your load balancer IP:
-```
-export LOAD_BALANCER_IP=$(kubectl -n ambassador get svc ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
-```
+Click the "Enable" button in the DockerHub section and enter your DockerHub username and an access token so that Ambassador Cloud can query for available image tags.
+You can <a href="https://hub.docker.com/settings/security" target="_blank">generate a DockerHub access token</a> via your hub.docker.com account security settings.
 
-Now curl the service:
+## 7. Configure Argo CD
 
-```
-curl -Lk http://$LOAD_BALANCER_IP/echo/
-```
+From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, click the "Rollout" button for the "rollout-demo" service and select "Configure Argo for your service" and follow the instructions. This will:
+1. generate a deployment key in your forked repository;
+1. configure Argo CD with that deployment key to monitor your repository;
+1. install an Argo CD Application that represents the "rollout-demo" service
 
-You should get a reply saying `Successful Argo deployment!`
+## 8. Create a Rollout
 
-<Alert severity="success">
-    <strong>Victory!</strong> You've deployed your first app using Argo!
-</Alert>
+Remaining on the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, click the "Rollout" button for the "rollout-demo" service, this should show the instructions to create a rollout.
 
-## 5. Create the canary deployment
+Fill in the form with the following information:
+- Image Tag: `hashicorp/http-echo 0.2.3`
+- Rollout Duration: 2 minutes
+- Weight increment: 10%
+- Number of pods: 3
 
-Next we'll start by removing the previously created app. This deletes all the Kubernetes resources from the cluster that Argo created.
+Click "Start Rollout".
 
-```
-argocd app delete echo
-```
+<Alert severity="success">Congrats! From the UI you have automatically generated a GitHub pull request that contains all of the necessary Kubernetes rollout YAML configuration.</Alert>
 
-Now we'll deploy a slightly different version of the app from [here](https://github.com/datawire/argo-qs/tree/main/canary).  There is a new [Rollout file](https://github.com/datawire/argo-qs/blob/main/canary/rollout.yaml).  This is similar to a Deployment, but it adds a rollout strategy section that defines how the rollout will incrementally happen once started. In this case, it will route 30% of traffic to the new service for 30 seconds, followed by 60% of the traffic for another 30 seconds, then 100% of the traffic.
+## 9. Review & merge PR
 
-Deploy the app to your cluster (note the different value for `--path`):
+After clicking Start Rollout the slideout will close and you will be shown the service rollouts page where one "Pending" rollout is shown.
+Click the "Pull Request" button.
+A new browser tab will be opened and you will be taken to github.com where you can review and merge the PR on GitHub.
+Click on the "Files changed" tab in the pull request and explore all of the rollouts code that has been generated for you.
+Next, click back to the "Conversation" tab, click "Merge Pull Request", and click "Confirm merge".
+Now quickly navigate back to your browser tab with the Ambassador Cloud service catalog to watch the progress.
 
-```
-argocd app create --name echo --repo https://github.com/<your Github username>/argo-qs.git --path canary --dest-server https://kubernetes.default.svc --dest-namespace default && argocd app sync echo
-```
+## 10. Watch the Rollout progress from Ambassador Cloud
 
-Curl again to test the app:
-```
-curl -Lk http://$LOAD_BALANCER_IP/echo/
-```
+From the service rollouts page you can watch the rollout progress of your new version.
+Note how the "Current Canary Weight" progress bar increases in steps in the amount you specified above in the "weights increment".
 
-You should get a response of `Canary v1`.
 
-<Alert severity="success">
-    <strong>Congratulations</strong>, you've deployed your first Rollout service successfully!
-</Alert>
+<Alert severity="success">Victory! You have successfully performed a GitOps style canary rollout of a new service without having to write lots of YAML.</Alert>
 
-## 6. Rollout a new version
+## What's next?
 
-It's time to rollout a new version of the service. Edit the `rollout.yaml` file in your fork here: `https://github.com/<your GitHub username>/argo-qs/edit/main/canary/rollout.yaml` and change line 17 from `Canary v1` to `Canary v2`.  Then click **Commit changes** at the bottom.
+Explore some of the popular content on canary rollouts:
 
-Apply the rollout to the cluster.  Argo will 1) look at the repo for anything that's changed since the app was created 2) apply those changes (in this case, our update to the Rollout) and 3) begin rolling out a version 2 of the service based on the Rollout strategy.
-
-```
-argocd app sync echo
-```
-
-Verify that the canary is progressing appropriately by sending curl requests in a loop:
-
-```
-while true; do curl -k https://$LOAD_BALANCER_IP/echo/ ; sleep 0.2; done
-```
-
-This will display a running list of responses from the service that will gradually transition from `Canary v1` strings to `Canary v2` strings.
-
-In a new terminal window, you can monitor the status of your rollout at the command line:
-
-```
-kubectl argo rollouts get rollout echo-rollout --watch
-```
-
-Will display an output similar to the following:
-
-```
-Name:            echo-rollout
-Namespace:       default
-Status:          ॥ Paused
-Message:         CanaryPauseStep
-Strategy:        Canary
-  Step:          1/6
-  SetWeight:     30
-  ActualWeight:  30
-Images:          hashicorp/http-echo (canary, stable)
-Replicas:
-  Desired:       1
-  Current:       2
-  Updated:       1
-  Ready:         2
-  Available:     2
-
-NAME                                      KIND        STATUS        AGE    INFO
-⟳ echo-rollout                            Rollout     ॥ Paused      2d21h
-├──# revision:3
-│  └──⧉ echo-rollout-64fb847897           ReplicaSet  ✔ Healthy     2s     canary
-│     └──□ echo-rollout-64fb847897-49sg6  Pod         ✔ Running     2s     ready:1/1
-├──# revision:2
-│  └──⧉ echo-rollout-578bfdb4b8           ReplicaSet  ✔ Healthy     3h5m   stable
-│     └──□ echo-rollout-578bfdb4b8-86z6n  Pod         ✔ Running     3h5m   ready:1/1
-└──# revision:1
-   └──⧉ echo-rollout-948d9c9f9            ReplicaSet  • ScaledDown  2d21h
-```
-
-<Alert severity="success">
-    <strong>Victory!</strong> You've successfully integrated Argo Rollouts with Edge Stack!
-</Alert>
+* [Canary concepts](../concepts/canary/): Learn more about canary rollouts and Argo
+* [Canary rollouts and observability](../howtos/observability/): Explore how observability is a prerequisite of effective canary releases.
+* [Ambassador Cloud Rollouts reference](../reference/ambassador-cloud-rollouts/): Dive into the details of Argo configurations and Ambassador Cloud rollouts annotations.
