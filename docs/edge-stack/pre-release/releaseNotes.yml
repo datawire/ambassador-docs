@@ -23,9 +23,7 @@ items:
       - title: The `Listener` Resource
         body: TODO NEEDS WORK The `Listener` CRD allows explicit definition of ports to listen on, and the protocols and security model for each port
         type: feature
-        #docs: TODO
-        #image: TODO
-      - title: Fix `Host` CRD insecure request actions
+      - title: "Fix Host CRD insecure request actions"
         body: "`requestPolicy.insecure.action` field now works independently across multiple `Host` CRDs"
         docs: topics/running/host-crd/#secure-and-insecure-requests
         image: ./edge-stack-2.0.0-insecure_action_hosts.png
@@ -45,7 +43,7 @@ items:
         image: ./edge-stack-2.0.0-envoy.png
         type: change
         docs: https://www.envoyproxy.io/docs/envoy/latest/api-v3/api
-      - title: `Host` now required for TLS termination
+      - title: Host now required for TLS termination
         body: The `Host` CRD is now required when terminating TLS.
         docs: topics/running/host-crd
         type: change
@@ -55,13 +53,13 @@ items:
         docs: https://www.getambassador.io/docs/telepresence
         image: ./edge-stack-2.0.0-telepresence.png
         type: change
-      - title: Deprecate `redirect_cleartext_from` field in `TLSContext`
-        body: `redirect_cleartext_from` in a `TLSContext` is no longer supported -- use an extra 'Listener' instead!
+      - title: Deprecate redirect_cleartext_from field in TLSContext
+        body: The field `redirect_cleartext_from` in a `TLSContext` is no longer supported -- use an extra 'Listener' instead!
         type: change
         #image: TODO
         #docs: TODO
       - title: Memory usage improvements for installations with many `Host`s
-        body: `prune_unreachable_routes` now defaults to true, which should reduce Envoy memory requirements for installations with many `Host`s
+        body: Ambassador Module `prune_unreachable_routes` now defaults to true, which should reduce Envoy memory requirements for installations with many `Host`s
         docs: topics/running/ambassador/#prune-unreachable-routes
         image: ./edge-stack-2.0.0-prune_routes.png
         type: feature
@@ -71,7 +69,7 @@ items:
         docs: "topics/install/helm/"
         image: ./edge-stack-2.0.0-helm.png
       - title: Higher performance while generating envoy configuration now enabled by default
-        body: `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of the code Ambassador uses to validate and generate envoy configuration, and is now enabled by default.
+        body: The environment variable `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of the code Ambassador uses to validate and generate envoy configuration, and is now enabled by default.
         image: ./edge-stack-2.0.0-fast.png
         docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
         type: change
