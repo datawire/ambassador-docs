@@ -24,7 +24,7 @@
               link: /howtos/traffic-management/
             - title: Observe a canary deployment
               link: /howtos/observability/
-            - title: Transform a deployment to a rollout
+            - title: Transform a Deployment to a Rollout
               link: /howtos/deployment-to-rollout/
         - title: Technical reference
           items:
