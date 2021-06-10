@@ -1,4 +1,32 @@
-import { goToEdgeStackQuickStart, goToMappings, goToHostCRD, goToLoadBalancer, goToCircuitBreakers, goToCanaryReleases, goToOauth, goToJWT, goToExtFilters, goToRateLimits, goToRateLimitsEdgeStack, goToAdvancedRateLimiting, goToGRPC, goToTlsTermination, GoToWebsockets, goToArgoQuickStart, goToArgoCICD, goToArgoCanary, goToCloudQuickStart, goToTelepresenceHowTo, goToTelepresenceContextProp, goToTelepresenceFAQs, goToKubernetesConceptsBasics, goToKubernetesHowtosCodeCluster, goToKubernetesHowtosDebug } from '../../../src/utils/routes';
+import {
+  goToEdgeStackQuickStart,
+  goToMappings,
+  goToHostCRD,
+  goToLoadBalancer,
+  goToCircuitBreakers,
+  goToCanaryReleases,
+  goToOauth,
+  goToJWT,
+  goToExtFilters,
+  goToRateLimits,
+  goToRateLimitsEdgeStack,
+  goToAdvancedRateLimiting,
+  goToGRPC,
+  goToTlsTermination,
+  GoToWebsockets,
+  goToArgoQuickStart,
+  goToArgoCICD,
+  goToArgoCanary,
+  goToCloudQuickStart,
+  goToCloudInterceptsQuickStart,
+  goToCloudRolloutsQuickStart,
+  goToTelepresenceHowTo,
+  goToTelepresenceContextProp,
+  goToTelepresenceFAQs,
+  goToKubernetesConceptsBasics,
+  goToKubernetesHowtosCodeCluster,
+  goToKubernetesHowtosDebug,
+} from '../../../src/utils/routes';
 
 export const EdgeStackCards = [
   {
@@ -162,6 +190,20 @@ export const CloudCards = [
     link: goToCloudQuickStart,
     linkText: 'Get Started',
     icon: 'service-catalog'
+  },
+  {
+    title: 'Intercepts Quick Start',
+    description: 'Collaborate with your dev team in a shared dev environment using Intercepts and Preview URLs.',
+    link: goToCloudInterceptsQuickStart,
+    linkText: 'Get Started',
+    icon: 'high-five'
+  },
+  {
+    title: 'Rollouts Quick Start',
+    description: 'Create and deploy canary releases using Argo Rollouts directly from the Cloud.',
+    link: goToCloudRolloutsQuickStart,
+    linkText: 'Get Started',
+    icon: 'rollouts'
   }
 ];
 
