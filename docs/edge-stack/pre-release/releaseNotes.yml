@@ -21,7 +21,7 @@ items:
     date: '2021-06-14'
     notes:
       - title: The Listener Resource
-        body: "The new <code>Listener</code> CRD defines where and how to listen for requests from the network, and which <code>Host</code> definitions should be used to process those requests."
+        body: The new <a href="topics/running/listener"><code>Listener</code></a> CRD defines where and how to listen for requests from the network, and which <code>Host</code> definitions should be used to process those requests.
         type: feature
         docs: topics/running/listener
         image: ./edge-stack-2.0.0-listener.png
@@ -33,9 +33,9 @@ items:
         type: bugfix
 
       - title: Envoy V3 APIs
-        body: "Envoy V3 API is the new default for Emissary"
+        body: By default, $productName$ will configure Envoy using the V3 Envoy API.
         type: change
-        docs: https://www.envoyproxy.io/docs/envoy/latest/api-v3/api
+        docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
       - title: Correctly set Ingress resource status in all cases
         body: "Fixed a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses."
@@ -45,13 +45,13 @@ items:
 
       - title: Module-based TLS no longer supported
         body: "The <code>tls</code> module and the <code>tls</code> field in the Ambassador module are no longer supported. Please use <code>TLSContext</code> resources instead."
-        docs: topics/running/tls/#tlscontext
+        docs: about/changes-2.0.0/#tls-the-ambassador-module-and-the-tls-module
         image: ./edge-stack-2.0.0-tlscontext.png
         type: change
 
       - title: Host now required for TLS termination
         body: The <code>Host</code> CRD is now required when terminating TLS.
-        docs: howtos/configure-communications
+        docs: about/changes-2.0.0/#host-tlscontext-and-tls-termination
         type: change
         image: ./edge-stack-2.0.0-host_crd.png
 
@@ -63,7 +63,7 @@ items:
       - title: Port configuration no longer supported outside of Listener
         body: The <code>TLSContext</code> <code>redirect_cleartext_from</code> and <code>Host</code> <code>requestPolicy.insecure.additionalPort</code> are no longer supported; use an extra 'Listener' instead!
         type: change
-        docs: howtos/configure-communications
+        docs: about/changes-2.0.0/#tlscontext-redirect_cleartext_from-and-host-insecureadditionalport
 
       - title: Memory usage improvements for installations with many Hosts
         body: The behavior of the Ambassador module <code>prune_unreachable_routes</code> field is now automatic, which should reduce Envoy memory requirements for installations with many <code>Host</code>s

@@ -125,7 +125,6 @@ A **secure** request arrives via HTTPS; an **insecure** request does not. By def
 requestPolicy:
   insecure:
     action: insecure-action
-    additionalPort: insecure-port
 ```
 
 The `insecure-action` can be one of:
@@ -133,14 +132,6 @@ The `insecure-action` can be one of:
 * `Redirect` (the default): redirect to HTTPS
 * `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
 * `Reject`: reject the request with a 400 response
-
-The `additionalPort` element tells Ambassador to listen on the specified `insecure-port` and treat any request arriving on that port as insecure. **By default, `additionalPort` will be set to 8080 for any `Host` using TLS.** To disable this redirection entirely, set `additionalPort` explicitly to `-1`:
-
-```yaml
-requestPolicy:
-  insecure:
-    additionalPort: -1   # This is how to disable the default redirection from 8080.
-```
 
 Some special cases to be aware of here:
 
@@ -264,7 +255,7 @@ LB" refers to a layer 7 load balancer.
 
   With the configuration above, the system will look for a TLS secret in `manual-secret-for-foo`, but it will not run ACME for it.
 
-### HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080
+### HTTPS-only, TLS terminated at Ambassador
 
 This example is the same for an L4 LB, or without a load balancer at all.
 
@@ -279,12 +270,9 @@ This example is the same for an L4 LB, or without a load balancer at all.
     requestPolicy:
       insecure:
         action: Redirect
-        additionalPort: 8080
   ```
 
   The default for `insecure.action` is `Redirect`, so that line could be removed.
-
-  If you do not set `insecure.additionalPort`, Ambassador won't listen on port 8080 at all. However, with the `Redirect` action still in place, Ambassador will still redirect requests that arrive on port 8443 with an `X-Forwarded-Proto` of `http`.
 
 ### HTTP-only
 

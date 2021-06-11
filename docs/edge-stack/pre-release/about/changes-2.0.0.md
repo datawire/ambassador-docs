@@ -45,7 +45,7 @@ Note also that there is no limit on how many `Listener`s may be created, and as 
 
 ### `Host` and `Mapping` Association
 
-The [`Host` CRD](../../topics/running/host-crd) continues to define information about hostnames, TLS certificates, and how to handle requests that are "secure" (using HTTPS) or "insecure" (using HTTP). The [`Mapping` CRD](../../topics/using/intro-mappings) continues to define how to map the URL space to upstream services.
+The [`Host` CRD](../topics/running/host-crd) continues to define information about hostnames, TLS certificates, and how to handle requests that are "secure" (using HTTPS) or "insecure" (using HTTP). The [`Mapping` CRD](../topics/using/intro-mappings) continues to define how to map the URL space to upstream services.
 
 However, in $productName$ 2.0.0, a `Mapping` will not be associated with a `Host` unless at least one of the following is true:
 
@@ -61,7 +61,7 @@ Each `Host` can specify its `requestPolicy.insecure.action` independently of any
 
 ### `Host`, `TLSContext`, and TLS Termination
 
-In $productName$ 2.0.0, **`Host`s are required for TLS termination**. It is no longer sufficient to create a `TLSContext` by itself; the [`Host`](../../topics/running/host-crd) is required.
+In $productName$ 2.0.0, **`Host`s are required for TLS termination**. It is no longer sufficient to create a [`TLSContext`](../topics/running/tls/#tlscontext) by itself; the [`Host`](../topics/running/host-crd) is required.
 
 The minimal setup for TLS termination is therefore a Kubernetes `Secret` of type `kubernetes.io/tls`, and a `Host` that uses it:
 
@@ -84,17 +84,18 @@ spec:
     name: minimal-secret
 ```
 
-It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`.
+It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName to Communicate](../howtos/configure-communications).
+ 
 
 ### `Host`s and ACME
 
-In $productName$ 2.0.0, ACME will be disabled if a `Host` does not set `acmeProvider` at all (prior to 2.0.0, not mentioning `acmeProvider` would result in the ACME client attempting, and failing, to start). If `acmeProvider` is set, but `acmeProvider.authority` is not set, the ACME client will continue to default to Let's Encrypt, in order to preserve compatibility with $productName$ prior to 2.0.0.
+In $productName$ 2.0.0, ACME will be disabled if a `Host` does not set `acmeProvider` at all (prior to 2.0.0, not mentioning `acmeProvider` would result in the ACME client attempting, and failing, to start). If `acmeProvider` is set, but `acmeProvider.authority` is not set, the ACME client will continue to default to Let's Encrypt, in order to preserve compatibility with $productName$ prior to 2.0.0. For further examples, see [Configuring $productName to Communicate](../howtos/configure-communications).
 
 ## 3. Other Changes
 
 ### Envoy V3 API by Default
 
-By default, $productName$ will configure Envoy using the V3 Envoy API. In 2.0.0, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION` environment variable to "V2"; a future version will remove V2 support.
+By default, $productName$ will configure Envoy using the [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api). In 2.0.0, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION` environment variable to "V2"; a future version will remove V2 support.
 
 ### More Performant Reconfiguration by Default
 
@@ -106,7 +107,7 @@ It is no longer possible to configure TLS using the `tls` element of the `ambass
 
 ### `TLSContext` `redirect_cleartext_from` and `Host` `insecure.additionalPort`
 
-`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s.
+`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName to Communicate](../howtos/configure-communications).
 
 ### Service Preview No Longer Supported
 
