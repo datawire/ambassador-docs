@@ -16,23 +16,6 @@ in Ambassador and defines how TLS is managed on that domain. In the Ambassador
 Edge Stack, the simplest configuration of a `Host` will enable TLS with a 
 self-signed certificate and redirect cleartext traffic to HTTPS. 
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
-> 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
-> 
-> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
-> 
-> The `insecure-action` can be one of:
->
-> * `Redirect` (the default): redirect to HTTPS
-> * `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
-> * `Reject`: reject the request with a 400 response
->
-> The example below does not define a `requestPolicy`; however, this is something to keep in mind as you begin using the `Host` `CRD` in Ambassador.
->
-> For more information, please refer to the [`Host` documentation](../host-crd#secure-and-insecure-requests).
-
-
 ### Automatic TLS with ACME
 
 With the Ambassador Edge Stack, the Host can be configured to completely 

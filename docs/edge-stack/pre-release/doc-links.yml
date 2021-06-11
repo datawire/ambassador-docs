@@ -48,6 +48,8 @@
           items:
             - title: Route to my services
               items:
+                - title: Configure listeners and hosts
+                  link: /howtos/configure-communications
                 - title: Get traffic from the edge
                   link: /howtos/route
                 - title: Other protocols
@@ -145,6 +147,8 @@
                           link: /topics/running/tls/sni
                         - title: TLS origination
                           link: /topics/running/tls/origination
+                - title: The Listener resource
+                  link: /topics/running/listener
                 - title: The Module resource
                   link: /topics/running/ambassador
             - title: Deploying Ambassador
@@ -274,6 +278,8 @@
                       link: /howtos/cert-manager
                     - title: Client certificate validation
                       link: /howtos/client-cert-validation
+        - title: Changes in 2.0.0
+          link: /about/changes-2.0.0
         - title: FAQs
           link: /about/faq
         - title: Community

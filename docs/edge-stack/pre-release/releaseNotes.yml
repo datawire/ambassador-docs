@@ -20,58 +20,71 @@ items:
   - version: 2.0.0-ea
     date: '2021-06-14'
     notes:
-      - title: The <code>Listener</code> Resource
-        body: TODO NEEDS WORK The <code>Listener</code> CRD allows explicit definition of ports to listen on, and the protocols and security model for each port
+      - title: The `Listener` Resource
+        body: "The new `Listener` CRD defines where and how to listen for requests from the network, and which `Host` definitions should be used to process those requests."
         type: feature
-      - title: "Fix Host CRD insecure request actions"
-        body: "<code>requestPolicy.insecure.action</code> field now works independently across multiple <code>Host</code> CRDs"
+        docs: topics/running/listener.md
+        image: ./edge-stack-2.0.0-listener.png
+
+      - title: "Independent <code>Host</code> actions supported"
+        body: "Each `Host` can specify its `requestPolicy.insecure.action` independently of any other `Host`, allowing for HTTP routing as flexible as HTTPS routing."
         docs: topics/running/host-crd/#secure-and-insecure-requests
         image: ./edge-stack-2.0.0-insecure_action_hosts.png
         type: bugfix
+
+      - title: Envoy V3 APIs
+        body: "Envoy V3 API is the new default for Emissary"
+        type: change
+        docs: https://www.envoyproxy.io/docs/envoy/latest/api-v3/api
+
       - title: Correctly set Ingress resource status in all cases
         body: "Fixed a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses."
         docs: topics/running/ingress-controller
         type: bugfix
         image: ./edge-stack-2.0.0-ingressstatus.png
-      - title: Deprecate <code>tls</code> field on the Ambassador module
-        body: "The <code>tls</code> field on the Ambassador module is now deprecated. Please use <code>TLSContext</code> resources instead."
+
+      - title: Module-based TLS no longer supported
+        body: "The <code>tls</code> module and the <code>tls</code> field in the Ambassador module are no longer supported. Please use <code>TLSContext</code> resources instead."
         docs: topics/running/tls/#tlscontext
         image: ./edge-stack-2.0.0-tlscontext.png
         type: change
-      - title: Envoy V3 APIs
-        body: "Envoy V3 API is the new default for Emissary"
-        type: change
-        docs: https://www.envoyproxy.io/docs/envoy/latest/api-v3/api
+
       - title: Host now required for TLS termination
         body: The <code>Host</code> CRD is now required when terminating TLS.
-        docs: topics/running/host-crd
+        docs: howtos/configure-communications
         type: change
         image: ./edge-stack-2.0.0-host_crd.png
-      - title: Service Preview is deprecated
-        body: Service Preview has been deprecated in Emissary. Please use Telepresence instead.
+
+      - title: Service Preview no longer supported
+        body: Service Preview is no longer supported in Emissary. Please use Telepresence instead.
         docs: https://www.getambassador.io/docs/telepresence
         type: change
-      - title: Deprecate redirect_cleartext_from field in TLSContext
-        body: The field <code>redirect_cleartext_from</code> in a <code>TLSContext</code> is no longer supported -- use an extra 'Listener' instead!
+
+      - title: Port configuration no longer supported outside of Listener
+        body: The <code>TLSContext</code> <code>redirect_cleartext_from</code> and <code>Host</code> <code>requestPolicy.insecure.additionalPort</code> are no longer supported; use an extra 'Listener' instead!
         type: change
-        #image: TODO
-        #docs: TODO
+        docs: howtos/configure-communications
+
       - title: Memory usage improvements for installations with many <code>Host</code>s
-        body: Ambassador Module <code>prune_unreachable_routes</code> now defaults to true, which should reduce Envoy memory requirements for installations with many <code>Host</code>s
+        body: The behavior of the Ambassador module <code>prune_unreachable_routes</code> field is now automatic, which should reduce Envoy memory requirements for installations with many <code>Host</code>s
         docs: topics/running/ambassador/#prune-unreachable-routes
         image: ./edge-stack-2.0.0-prune_routes.png
         type: feature
+
       - title: Deprecation and Removal of <code>edgectl</code>
         body: "Deprecated and removed edgectl binary, as this was effectively a wrapper over helm. Please use the <code>emissary-ingress</code> helm chart to install emissary instead."
         type: change
         docs: "topics/install/helm/"
+
       - title: Higher performance while generating envoy configuration now enabled by default
         body: The environment variable <code>AMBASSADOR_FAST_RECONFIGURE</code> is a feature flag that enables a higher performance implementation of the code Ambassador uses to validate and generate envoy configuration, and is now enabled by default.
         docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
         type: change
+
       - title: Edge Policy Console has been removed
         body: Edge Stack's Edge Policy Console has now been removed.
         type: change
+
       - title: Removed Ambassador <code>Project</code> functionality
         body: We have removed support for <code>Project</code>s in Emissary
         type: change

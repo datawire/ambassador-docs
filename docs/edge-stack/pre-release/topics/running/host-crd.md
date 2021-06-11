@@ -7,7 +7,7 @@ single configuration resource:
 * The hostname by which Ambassador will be reachable
 * How Ambassador should handle TLS certificates
 * How Ambassador should handle secure and insecure requests
-* Which resources to examine for further configuration
+* How to find `Mapping`s to associate with this `Host`
 * How Ambassador should handle [Service Preview URLs](../../using/edgectl/service-preview-reference#ambassador-edge-stack)
 
 A minimal Host resource, using Let’s Encrypt to handle TLS, would be:
@@ -62,6 +62,8 @@ acmeProvider:
 ```
 
 **Notes on ACME Support:**
+
+* If the `acmeProvider` element is not present at all, the ACME client is disabled.
 
 * If the authority is not supplied, the Let’s Encrypt production environment is assumed.
 
@@ -126,12 +128,6 @@ requestPolicy:
     additionalPort: insecure-port
 ```
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
-> 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
-> 
-> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
-
 The `insecure-action` can be one of:
 
 * `Redirect` (the default): redirect to HTTPS
@@ -152,6 +148,17 @@ Some special cases to be aware of here:
 * The `X-Forwarded-Proto` header is honored when determining whether a request is secure or insecure. For more information, see "Load Balancers, the `Host` Resource, and `X-Forwarded-Proto`" below.
 * ACME challenges with prefix `/.well-known/acme-challenge/` are always forced to be considered insecure, since they are not supposed to arrive over HTTPS.
 * Ambassador Edge Stack provides native handling of ACME challenges. If you are using this support, Ambassador will automatically arrange for insecure ACME challenges to be handled correctly. If you are handling ACME yourself - as you must when running Ambassador Open Source - you will need to supply appropriate Host resources and Mappings to correctly direct ACME challenges to your ACME challenge handler.
+
+## Associating `Mapping`s with `Host`s
+
+A `Mapping` will only be associated with a `Host` if at least one of the following is true:
+
+- The `Mapping` specifies a `host` attribute that matches the `Host` in question.
+- The `Host` specifies a `selector` that matches the `Mapping`'s Kubernetes `label`s.
+   - Only label selectors are supported.
+   - Prior to 2.0.0, a `Host` in which no `selector` was specified would have a default `selector`; this is no longer the case.
+
+If neither of the above is true, the `Mapping` will not be associated with the `Host` in question. This is intended to help manage memory consumption with large numbers of `Host`s and large numbers of `Mapping`s.
 
 ## Load balancers, the Host resource, and `X-Forwarded-Proto`
 
