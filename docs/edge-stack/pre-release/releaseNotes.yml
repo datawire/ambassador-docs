@@ -20,14 +20,14 @@ items:
   - version: 2.0.0-ea
     date: '2021-06-14'
     notes:
-      - title: The `Listener` Resource
-        body: "The new `Listener` CRD defines where and how to listen for requests from the network, and which `Host` definitions should be used to process those requests."
+      - title: The Listener Resource
+        body: "The new <code>Listener</code> CRD defines where and how to listen for requests from the network, and which <code>Host</code> definitions should be used to process those requests."
         type: feature
         docs: topics/running/listener.md
         image: ./edge-stack-2.0.0-listener.png
 
-      - title: "Independent <code>Host</code> actions supported"
-        body: "Each `Host` can specify its `requestPolicy.insecure.action` independently of any other `Host`, allowing for HTTP routing as flexible as HTTPS routing."
+      - title: "Independent Host actions supported"
+        body: "Each <code>Host</code> can specify its <code>requestPolicy.insecure.action</code> independently of any other <code>Host</code>, allowing for HTTP routing as flexible as HTTPS routing."
         docs: topics/running/host-crd/#secure-and-insecure-requests
         image: ./edge-stack-2.0.0-insecure_action_hosts.png
         type: bugfix
@@ -55,8 +55,8 @@ items:
         type: change
         image: ./edge-stack-2.0.0-host_crd.png
 
-      - title: Service Preview no longer supported
-        body: Service Preview is no longer supported in Emissary. Please use Telepresence instead.
+      - title: Service Preview removed
+        body: Service Preview is no longer supported in Emissary, and has been removed. Please use Telepresence instead.
         docs: https://www.getambassador.io/docs/telepresence
         type: change
 
@@ -65,14 +65,14 @@ items:
         type: change
         docs: howtos/configure-communications
 
-      - title: Memory usage improvements for installations with many <code>Host</code>s
+      - title: Memory usage improvements for installations with many Hosts
         body: The behavior of the Ambassador module <code>prune_unreachable_routes</code> field is now automatic, which should reduce Envoy memory requirements for installations with many <code>Host</code>s
         docs: topics/running/ambassador/#prune-unreachable-routes
         image: ./edge-stack-2.0.0-prune_routes.png
         type: feature
 
-      - title: Deprecation and Removal of <code>edgectl</code>
-        body: "Deprecated and removed edgectl binary, as this was effectively a wrapper over helm. Please use the <code>emissary-ingress</code> helm chart to install emissary instead."
+      - title: Edgectl Removed
+        body: "Removed the <code>edgectl</code> binary, as this was effectively a wrapper over helm. Please use the <code>emissary-ingress</code> helm chart to install emissary instead."
         type: change
         docs: "topics/install/helm/"
 
@@ -81,11 +81,11 @@ items:
         docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
         type: change
 
-      - title: Edge Policy Console has been removed
+      - title: Edge Policy Console removed
         body: Edge Stack's Edge Policy Console has now been removed.
         type: change
 
-      - title: Removed Ambassador <code>Project</code> functionality
+      - title: Removed Ambassador Projects
         body: We have removed support for <code>Project</code>s in Emissary
         type: change
         docs: topics/using/projects
