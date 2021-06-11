@@ -84,12 +84,12 @@ spec:
     name: minimal-secret
 ```
 
-It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName to Communicate](../howtos/configure-communications).
+It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName$ to Communicate](../howtos/configure-communications).
  
 
 ### `Host`s and ACME
 
-In $productName$ 2.0.0, ACME will be disabled if a `Host` does not set `acmeProvider` at all (prior to 2.0.0, not mentioning `acmeProvider` would result in the ACME client attempting, and failing, to start). If `acmeProvider` is set, but `acmeProvider.authority` is not set, the ACME client will continue to default to Let's Encrypt, in order to preserve compatibility with $productName$ prior to 2.0.0. For further examples, see [Configuring $productName to Communicate](../howtos/configure-communications).
+In $productName$ 2.0.0, ACME will be disabled if a `Host` does not set `acmeProvider` at all (prior to 2.0.0, not mentioning `acmeProvider` would result in the ACME client attempting, and failing, to start). If `acmeProvider` is set, but `acmeProvider.authority` is not set, the ACME client will continue to default to Let's Encrypt, in order to preserve compatibility with $productName$ prior to 2.0.0. For further examples, see [Configuring $productName$ to Communicate](../howtos/configure-communications).
 
 ## 3. Other Changes
 
@@ -107,7 +107,7 @@ It is no longer possible to configure TLS using the `tls` element of the `ambass
 
 ### `TLSContext` `redirect_cleartext_from` and `Host` `insecure.additionalPort`
 
-`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName to Communicate](../howtos/configure-communications).
+`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName$ to Communicate](../howtos/configure-communications).
 
 ### Service Preview No Longer Supported
 
