@@ -3,18 +3,18 @@ import Alert from '@material-ui/lab/Alert';
 # Basic authentication
 
 <Alert severity="info">
-  This guide applies to Ambassador Edge Stack, use of this guide on the Ambassador API Gateway is not recommended.  API Gateway does <a href="../basic-auth">authentication using the AuthService resource</a> instead of the Filter resource as described below.
+  This guide applies to $AESproductName$, use of this guide on the $OSSproductName$ is not recommended.  API Gateway does <a href="../basic-auth">authentication using the AuthService resource</a> instead of the Filter resource as described below.
 </Alert>
 
-Ambassador can authenticate incoming requests before routing them to a backing 
-service. In this tutorial, we'll configure Ambassador to use an external third 
+$AESproductName$ can authenticate incoming requests before routing them to a backing 
+service. In this tutorial, we'll configure $AESproductName$ to use an external third 
 party authentication service. We're assuming also that you are running the
 quote application in your cluster as described in the 
-[Ambassador tutorial](../../tutorials/quickstart-demo/).
+[$AESproductName$ tutorial](../../tutorials/quickstart-demo/).
 
 ## 1. Deploy the authentication service
 
-Ambassador delegates the actual authentication logic to a third party authentication service. We've written a [simple authentication service](https://github.com/datawire/ambassador-auth-service) that:
+$AESproductName$ delegates the actual authentication logic to a third party authentication service. We've written a [simple authentication service](https://github.com/datawire/ambassador-auth-service) that:
 
 - listens for requests on port 3000;
 - expects all URLs to begin with `/extauth/`;
@@ -22,7 +22,7 @@ Ambassador delegates the actual authentication logic to a third party authentica
 - accepts only user `username`, password `password`; and
 - makes sure that the `x-qotm-session` header is present, generating a new one if needed.
 
-Ambassador routes _all_ requests through the authentication service: it relies on the auth service to distinguish between requests that need authentication and those that do not. If Ambassador cannot contact the auth service, it will return a 503 for the request; as such, **it is very important to have the auth service running before configuring Ambassador to use it.**
+$AESproductName$ routes _all_ requests through the authentication service: it relies on the auth service to distinguish between requests that need authentication and those that do not. If $AESproductName$ cannot contact the auth service, it will return a 503 for the request; as such, **it is very important to have the auth service running before configuring $AESproductName$ to use it.**
 
 Here's the YAML we'll start with:
 
@@ -70,7 +70,7 @@ spec:
             memory: 100Mi
 ```
 
-Note that the cluster does not yet contain any Ambassador AuthService definition. This is intentional: we want the service running before we tell Ambassador about it.
+Note that the cluster does not yet contain any $AESproductName$ AuthService definition. This is intentional: we want the service running before we tell $AESproductName$ about it.
 
 The YAML above is published at getambassador.io, so if you like, you can just do
 
@@ -89,9 +89,9 @@ example-auth-6c5855b98d-24clp   1/1       Running   0          4m
 ```
 Note that the `READY` field says `1/1` which means the pod is up and running.
 
-## 2. Configure Ambassador authentication
+## 2. Configure $AESproductName$ authentication
 
-Once the auth service is running, we need to tell Ambassador about it. The easiest way to do that is to first map the `example-auth` service with the following `Filter`:
+Once the auth service is running, we need to tell $AESproductName$ about it. The easiest way to do that is to first map the `example-auth` service with the following `Filter`:
 
 ```yaml
 ---
@@ -109,7 +109,7 @@ spec:
     - "x-qotm-session"
 ```
 
-This configuration tells Ambassador about the `Filter`, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_headers` are optional. 
+This configuration tells $AESproductName$ about the `Filter`, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_headers` are optional. 
 
 Next you must apply the `Filter` to your desired hosts and paths using a `FilterPolicy`. The following would enable your `Filter` on requests to all hosts and paths (just remember that our authentication service is only configured to perform authentication on requests to `/backend/get-quote/`, see the [auth service's repo](https://github.com/datawire/ambassador-auth-service) for more information).
 
@@ -203,6 +203,6 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
-* Get started with authentication by [installing Edge Stack](../../tutorials/getting-started/).
+* Get started with authentication by [installing $AESproductName$](../../tutorials/getting-started/).
 
 * For more details see the [`External` filter](../../topics/using/filters) documentation.

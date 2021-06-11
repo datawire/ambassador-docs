@@ -1,9 +1,9 @@
 # Custom error responses
 
 Custom error responses set overrides for HTTP response statuses generated either
-by Ambassador or upstream services.
+by $productName$ or upstream services.
 
-They can be configured either on the Ambassador
+They can be configured either on the $productName$
 [`Module`](../ambassador)
 or on a [`Mapping`](../../using/intro-mappings/), the schema is identical. See
 below for more information on [rule precedence](#rule-precedence).
@@ -20,8 +20,8 @@ below for more information on [rule precedence](#rule-precedence).
     serialized as JSON and used as the new response body.
   + `text_format_source`: Describes a file to be used as the
     response. If used, `filename` must be set and the file must exist
-    on the Ambassador pod.
-    * `filename`: A file path on the Ambassador pod that will be used
+    on the $productName$ pod.
+    * `filename`: A file path on the $productName$ pod that will be used
       as the new response body.
 
 Only one of `text_format`, `json_format`, or `text_format_source` may be provided.
@@ -57,10 +57,10 @@ spec:
 
 For more complex response bodies a file can be returned as the response.
 This could be used for a customer friendly HTML document for example.  Use
-`text_format_source` with a `filename` set as a path on the Ambassador pod.
+`text_format_source` with a `filename` set as a path on the $productName$ pod.
 `content_type` should be used set the specific file type, such as `text/html`.
 
-First configure the Ambassador module:
+First configure the $productName$ module:
 
 ```yaml
 apiVersion: getambassador.io/v2
@@ -96,7 +96,7 @@ data:
     </html>
 ```
 
-Finally, mount the configmap to the Ambassador pod:
+Finally, mount the configmap to the $productName$ pod:
 
 > **NOTE:** The following YAML is in [patch format](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/update-api-object-kubectl-patch/)
 and does not represent the entire deployment spec.

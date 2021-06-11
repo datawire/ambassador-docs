@@ -1,6 +1,6 @@
 # Transport Layer Security (TLS)
 
-The Ambassador Edge Stack's robust TLS support exposes configuration options 
+$productName$'s robust TLS support exposes configuration options 
 for different TLS use cases including:
 
 - [Simultaneously Routing HTTP and HTTPS](cleartext-redirection#cleartext-routing)
@@ -12,13 +12,12 @@ for different TLS use cases including:
 ## Host
 
 As explained in the [Host](../host-crd) reference, a `Host` represents a domain
-in Ambassador and defines how TLS is managed on that domain. In the Ambassador 
-Edge Stack, the simplest configuration of a `Host` will enable TLS with a 
+in $productName$ and defines how TLS is managed on that domain. In $AESproductName$, the simplest configuration of a `Host` will enable TLS with a 
 self-signed certificate and redirect cleartext traffic to HTTPS. 
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
+> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
 > 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
+> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
 > 
 > Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
 > 
@@ -28,18 +27,18 @@ self-signed certificate and redirect cleartext traffic to HTTPS.
 > * `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
 > * `Reject`: reject the request with a 400 response
 >
-> The example below does not define a `requestPolicy`; however, this is something to keep in mind as you begin using the `Host` `CRD` in Ambassador.
+> The example below does not define a `requestPolicy`; however, this is something to keep in mind as you begin using the `Host` `CRD` in $productName$.
 >
 > For more information, please refer to the [`Host` documentation](../host-crd#secure-and-insecure-requests).
 
 
 ### Automatic TLS with ACME
 
-With the Ambassador Edge Stack, the Host can be configured to completely 
+With $productName$, the Host can be configured to completely 
 manage TLS by requesting a certificate from a Certificate Authority using the
 [ACME HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/).
 
-After creating a DNS record, configuring the Ambassador Edge Stack to get a 
+After creating a DNS record, configuring $productName$ to get a 
 certificate from the default CA [Let's Encrypt](https://letsencrypt.org) is as
 simple as providing a hostname and your email for the certificate:
 
@@ -56,16 +55,16 @@ spec:
     email: julian@example.com
 ```
 
-Ambassador will now request a certificate from the CA and store it in a secret 
+$productName$ will now request a certificate from the CA and store it in a secret 
 in the same namespace as the `Host`.
 
 ### Bring your own certificate
 
-For both the Ambassador Edge Stack and API Gateway, the `Host` can read a 
+For both $AESproductName$ and $OSSproductName$, the `Host` can read a 
 certificate from a Kubernetes secret and use that certificate to terminate TLS 
 on a domain.
 
-The following will configure Ambassador to grab a certificate from a secret 
+The following will configure $productName$ to grab a certificate from a secret 
 named `host-secret` and use that secret for terminating TLS on the 
 `host.example.com` domain:
 
@@ -83,11 +82,11 @@ spec:
     name: host-secret
 ```
 
-Ambassador will now use the certificate in `host-secret` to terminate TLS.
+$productName$ will now use the certificate in `host-secret` to terminate TLS.
 
 ### Host and TLSContext
 
-The Host will configure basic TLS termination settings in Ambassador. If you 
+The Host will configure basic TLS termination settings in $productName$. If you 
 need more advanced TLS options on a domain, such as setting the minimum TLS 
 version, you can do it in one of the following ways.
 
@@ -212,7 +211,7 @@ See [`TLSContext`](#tlscontext) below to read more on the description of these f
 
 ## TLSContext
 
-The `TLSContext` is used to configure advanced TLS options in Ambassador. 
+The `TLSContext` is used to configure advanced TLS options in $productName$. 
 Remember, a `TLSContext` should always be paired with a `Host`. 
 
 A full schema of the `TLSContext` can be found below with descriptions of the 
@@ -238,7 +237,7 @@ spec:
   # sni: None
 
   # 'secret' defines a Kubernetes Secret that contains the TLS certificate we
-  # use for origination or termination. If not specified, Ambassador will look
+  # use for origination or termination. If not specified, $productName$ will look
   # at the value of cert_chain_file and private_key_file.
   # type: string
   #
@@ -250,7 +249,7 @@ spec:
   #
   # ca_secret: None
 
-  # Tells Ambassador whether to interpret a "." in the secret name as a "." or 
+  # Tells $productName$ whether to interpret a "." in the secret name as a "." or 
   # a namespace identifier.
   # type: boolean
   #
@@ -258,7 +257,7 @@ spec:
 
   # If you set 'redirect_cleartext_from' to a port number, HTTP traffic
   # to that port will be redirected to HTTPS traffic. Make sure that the
-  # port number you specify matches the port on which Ambassador is
+  # port number you specify matches the port on which $productName$ is
   # listening!
   # redirect_cleartext_from: 8080
 
@@ -283,7 +282,7 @@ spec:
   # v1.2, or v1.3. It defaults to v1.3.
   # max_tls_version: v1.3
 
-  # Tells Ambassador to load TLS certificates from a file in its container.
+  # Tells $productName$ to load TLS certificates from a file in its container.
   # type: string
   #
   # cert_chain_file: None
@@ -319,12 +318,12 @@ If you leave off http/1.1, only HTTP2 connections will be supported.
 ### TLS parameters
 
 The `min_tls_version` setting configures the minimum TLS protocol version that 
-Ambassador Edge Stack will use to establish a secure connection. When a client 
+$productName$ will use to establish a secure connection. When a client 
 using a lower version attempts to connect to the server, the handshake will 
 result in the following error: `tls: protocol version not supported`.
 
 The `max_tls_version` setting configures the maximum TLS protocol version that 
-Ambassador Edge Stack will use to establish a secure connection. When a client 
+$productName$ will use to establish a secure connection. When a client 
 using a higher version attempts to connect to the server, the handshake will 
 result in the following error: 
 `tls: server selected unsupported protocol version`.
@@ -382,9 +381,9 @@ spec:
 
 ## TLS `Module` (*Deprecated*)
 
-The TLS `Module` is deprecated. `TLSContext` should be used when using Ambassador version 0.50.0 and above.
+The TLS `Module` is deprecated. `TLSContext` should be used when using $productName$ version 0.50.0 and above.
 
-For users of the Ambassador Edge Stack, see the [Host CRD](../host-crd) reference for more information.
+For users of $productName$, see the [Host CRD](../host-crd) reference for more information.
 
 ```yaml
 ---
@@ -402,7 +401,7 @@ spec:
 
       # If you set 'redirect_cleartext_from' to a port number, HTTP traffic
       # to that port will be redirected to HTTPS traffic. Make sure that the
-      # port number you specify matches the port on which Ambassador is
+      # port number you specify matches the port on which $productName$ is
       # listening!
       # redirect_cleartext_from: 8080
 

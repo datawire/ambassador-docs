@@ -1,22 +1,22 @@
 # Need help?
 
-If you need help deploying Ambassador at your organization, there are several different options available to you.
+If you need help deploying $productName$ at your organization, there are several different options available to you.
 
 ## Support tiers
 
-### Ambassador Edge Stack community support
+### $productName$ community support
 
-If you are running the Ambassador API Gateway or the Ambassador Edge Stack with free, community licenses, [join our Slack channel](https://a8r.io/Slack) to talk with other users in the community and get your questions answered.
+If you are running the $OSSproductName$ or the $AESproductName$ with free, community licenses, [join our Slack channel](https://a8r.io/Slack) to talk with other users in the community and get your questions answered.
 
-If you can’t find an answer there, [contact us](/contact-us) to learn more about the support options available with Ambassador Edge Stack Enterprise.
+If you can’t find an answer there, [contact us](/contact-us) to learn more about the support options available with $AESproductName$ Enterprise.
 
-### Ambassador Edge Stack Enterprise
+### $AESproductName$ Enterprise
 
-With Ambassador Edge Stack Enterprise, you have access to deployment and production support. To learn more, [contact sales](/contact-us).
+With $AESproductName$ Enterprise, you have access to deployment and production support. To learn more, [contact sales](/contact-us).
 
-**Deployment and Update Support**: The Ambassador Edge Stack can accelerate your migration to Kubernetes, or your upgrade between versions of Ambassador. Deployment support helps you with the Ambassador Edge Stack and Kubernetes migration, before you move to production.
+**Deployment and Update Support**: $AESproductName$ can accelerate your migration to Kubernetes, or your upgrade between versions of $AESproductName$. Deployment support helps you with the $AESproductName$ and Kubernetes migration, before you move to production.
 
-**Production Support**: We offer two types of production support contracts for users deploying the Ambassador Edge Stack in production. We offer both business hour (8am - 5pm EST, M-F) and 24x7 Sev 1 support for the Ambassador Edge Stack. 24x7 Sev 1 support includes custom hotfix support for production outages if necessary.
+**Production Support**: We offer two types of production support contracts for users deploying the $AESproductName$ in production. We offer both business hour (8am - 5pm EST, M-F) and 24x7 Sev 1 support for the $AESproductName$. 24x7 Sev 1 support includes custom hotfix support for production outages if necessary.
 
 ## File a Github Issue
 

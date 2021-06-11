@@ -1,6 +1,6 @@
 # Remove request headers
 
-Ambassador Edge Stack can remove a list of HTTP headers that would be sent to the upstream from the request.
+$productName$ can remove a list of HTTP headers that would be sent to the upstream from the request.
 
 ## The `remove_request_headers` attribute
 

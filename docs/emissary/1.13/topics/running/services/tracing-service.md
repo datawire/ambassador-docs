@@ -2,9 +2,9 @@
 
 Applications that consist of multiple services can be difficult to debug, as a single request can span multiple services. Distributed tracing tells the story of your request as it is processed through your system. Distributed tracing is a powerful tool to debug and analyze your system in addition to request logging and metrics.
 
-When enabled, the `TracingService` will instruct Ambassador Edge Stack to initiate a trace on requests by generating and populating an `x-request-id` HTTP header. Services can make use of this `x-request-id` header in logging and forward it in downstream requests for tracing. Ambassador Edge Stack also integrates with external trace visualization services, including [LightStep](https://lightstep.com/) and Zipkin-compatible APIs such as [Zipkin](https://zipkin.io/) and [Jaeger](https://github.com/jaegertracing/) to allow you to store and visualize traces. You can read further on [Envoy's Tracing capabilities](https://www.envoyproxy.io/docs/envoy/v1.10.0/intro/arch_overview/tracing).
+When enabled, the `TracingService` will instruct $productName$ to initiate a trace on requests by generating and populating an `x-request-id` HTTP header. Services can make use of this `x-request-id` header in logging and forward it in downstream requests for tracing. $productName$ also integrates with external trace visualization services, including [LightStep](https://lightstep.com/) and Zipkin-compatible APIs such as [Zipkin](https://zipkin.io/) and [Jaeger](https://github.com/jaegertracing/) to allow you to store and visualize traces. You can read further on [Envoy's Tracing capabilities](https://www.envoyproxy.io/docs/envoy/v1.10.0/intro/arch_overview/tracing).
 
-A `TracingService` manifest configures Ambassador Edge Stack to use an external trace visualization service:
+A `TracingService` manifest configures $productName$ to use an external trace visualization service:
 
 ```yaml
 ---
@@ -57,7 +57,7 @@ Please note that you must use the HTTP/2 pseudo-header names. For example:
 
 - `service_name` the name of the service which is attached to the traces. The default value is `ambassador`.
 
-You may only use a single `TracingService` manifest per Ambassador deployment. Ensure [ambassador_id](../../running#ambassador_id) is set correctly in the `TracingService` manifest.
+You may only use a single `TracingService` manifest per $productName$ deployment. Ensure [ambassador_id](../../running#ambassador_id) is set correctly in the `TracingService` manifest.
 
 ## Example
 

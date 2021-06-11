@@ -1,14 +1,14 @@
 # Using cert-manager
 
-The Ambassador Edge Stack has simple and easy built-in support for automatically using ACME to create and renew TLS
+$productName$ has simple and easy built-in support for automatically using ACME to create and renew TLS
 certificates; configured by the [`Host` resource](../../topics/running/host-crd/).  However, it only supports ACME's
 `http-01` challenge; if you require more flexible certificate management (such as using ACME's `dns-01` challenge, or
-using a non-ACME certificate source), the Ambassador Edge stack also supports using external certificate management
+using a non-ACME certificate source), $productName$ also supports using external certificate management
 tools.
 
 One such tool is Jetstack's [cert-manager](https://github.com/jetstack/cert-manager), which is a general-purpose tool
 for managing certificates in Kubernetes.  Cert-manager will automatically create and renew TLS certificates and store
-them as Kubernetes secrets for easy use in a cluster.  The Ambassador Edge Stack will automatically watch for secret
+them as Kubernetes secrets for easy use in a cluster.  $productName$ will automatically watch for secret
 changes and reload certificates upon renewal.
 
 > **Note:** This document assumes cert-manager v0.15 or greater.  This document has been updated to use CRD standards

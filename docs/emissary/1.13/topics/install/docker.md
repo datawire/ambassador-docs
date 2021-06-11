@@ -1,23 +1,23 @@
 # Install with Docker
 
-In this Docker quickstart guide, we'll get Ambassador Edge Stack running locally
+In this Docker quickstart guide, we'll get $productName$ running locally
 with a demo configuration. In the next section, we'll then walk through how to
-deploy Ambassador Edge Stack in Kubernetes with a custom configuration.
+deploy $productName$ in Kubernetes with a custom configuration.
 
 **Note**: the Edge Policy Console is not supported on the Docker quickstart and
 cannot be accessed.
 
 ## 1. Running the demo configuration
 
-By default, Ambassador Edge Stack uses a demo configuration to show some of its basic features. Get it running with Docker, and expose Ambassador Edge Stack on port 8080:
+By default, $productName$ uses a demo configuration to show some of its basic features. Get it running with Docker, and expose $productName$ on port 8080:
 
 ```
 docker run -it -p 8080:8080 --name=ambassador --rm docker.io/datawire/aes:$version$ --demo
 ```
 
-## 2. Ambassador Edge Stack's diagnostics
+## 2. $productName$'s diagnostics
 
-Ambassador Edge Stack provides live diagnostics viewable with a web browser. While this would normally not be exposed to the public network, the Docker demo publishes the diagnostics service at the following URL:
+$productName$ provides live diagnostics viewable with a web browser. While this would normally not be exposed to the public network, the Docker demo publishes the diagnostics service at the following URL:
 
 `http://localhost:8080/ambassador/v0/diag/`
 
@@ -27,11 +27,11 @@ We'll talk more about authentication shortly.
 
 To access the Diagnostics page with authentication, use `curl http://localhost:8080/ambassador/v0/diag/ -u admin:admin`
 
-Some of the most important information - your Ambassador Edge Stack version, how recently Ambassador Edge Stack's configuration was updated, and how recently Envoy last reported status to Ambassador Edge Stack - is right at the top. The diagnostics overview can show you what it sees in your configuration map, and which Envoy objects were created based on your configuration.
+Some of the most important information - your $productName$ version, how recently $productName$'s configuration was updated, and how recently Envoy last reported status to $productName$ - is right at the top. The diagnostics overview can show you what it sees in your configuration map, and which Envoy objects were created based on your configuration.
 
 ## 3. The Quote of the Moment service
 
-Since Ambassador Edge Stack is a comprehensive, self-service edge stack, its primary purpose is to provide access and control to microservices for the teams that manage them. The demo is preconfigured with a mapping that connects the `/qotm/` resource to the "Quote of the Moment" service -- a demo service that supplies quotations. You can try it out by opening
+Since $productName$ is a comprehensive, self-service edge stack, its primary purpose is to provide access and control to microservices for the teams that manage them. The demo is preconfigured with a mapping that connects the `/qotm/` resource to the "Quote of the Moment" service -- a demo service that supplies quotations. You can try it out by opening
 
 `http://localhost:8080/qotm/`
 
@@ -47,7 +47,7 @@ You can see details of the mapping by clicking the blue `http://localhost:8080/q
 
 ## 4. Authentication
 
-On the diagnostic overview, you can also see that Ambassador Edge Stack is configured to do authentication -- in the middle of the overview page, you'll see the `Ambassador Services In Use` section, and you can click the `tcp://127.0.0.1:5050` link for details on the `AuthService` configuration. This demo auth service is running inside the Docker container with Ambassador Edge Stack and the Quote of the Moment service, and Ambassador Edge Stack uses it to mediate access to everything behind the Ambassador Edge Stack.
+On the diagnostic overview, you can also see that $productName$ is configured to do authentication -- in the middle of the overview page, you'll see the `Ambassador Services In Use` section, and you can click the `tcp://127.0.0.1:5050` link for details on the `AuthService` configuration. This demo auth service is running inside the Docker container with $productName$ and the Quote of the Moment service, and $productName$ uses it to mediate access to everything behind $productName$.
 
 You saw above that access to the diagnostic overview required you to authenticate as an administrator. Getting a random Quote of the Moment does not require authentication, but to get a specific quote, you'll have to authenticate as a demo user. To see this in action, open
 
@@ -67,8 +67,8 @@ curl -Lv -u username:password 'http://localhost:8080/qotm/quote/5?json=true'
 
 will succeed. (Note that that's literally "username" and "password" -- the demo auth service is deliberately not very secure!)
 
-Note that it's up to the auth service to decide what needs authentication -- teaming Ambassador Edge Stack with an authentication service can be as flexible or strict as you need it to be.
+Note that it's up to the auth service to decide what needs authentication -- teaming $productName$ with an authentication service can be as flexible or strict as you need it to be.
 
 ## Next steps
 
-We've just walked through some of the core features of Ambassador Edge Stack in a local configuration. To see Ambassador Edge Stack in action on Kubernetes, check out the [Installation Guide](../).
+We've just walked through some of the core features of $productName$ in a local configuration. To see $productName$ in action on Kubernetes, check out the [Installation Guide](../).

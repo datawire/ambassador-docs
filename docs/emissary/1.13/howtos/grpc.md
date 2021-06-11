@@ -1,12 +1,12 @@
 # gRPC Connections
 
-Ambassador Edge Stack makes it easy to access your services from outside your application. This includes gRPC services, although a little bit of additional configuration is required: by default, Envoy connects to upstream services using HTTP/1.x and then upgrades to HTTP/2 whenever possible. However, gRPC is built on HTTP/2 and most gRPC servers do not speak HTTP/1.x at all. Ambassador Edge Stack must tell its underlying Envoy that your gRPC service only wants to speak to that HTTP/2, using the `grpc` attribute of a `Mapping`.
+$productName$ makes it easy to access your services from outside your application. This includes gRPC services, although a little bit of additional configuration is required: by default, Envoy connects to upstream services using HTTP/1.x and then upgrades to HTTP/2 whenever possible. However, gRPC is built on HTTP/2 and most gRPC servers do not speak HTTP/1.x at all. $productName$ must tell its underlying Envoy that your gRPC service only wants to speak to that HTTP/2, using the `grpc` attribute of a `Mapping`.
 
-## Writing a gRPC service for Ambassador Edge Stack
+## Writing a gRPC service for $productName$
 
 There are many examples and walkthroughs on how to write gRPC applications so that is not what this article will aim to accomplish. If you do not yet have a service written you can find examples of gRPC services in all supported languages here: [gRPC Quickstart](https://grpc.io/docs/quickstart/)
 
-This document will use the [gRPC python helloworld example](https://github.com/grpc/grpc/tree/master/examples/python/helloworld) to demonstrate how to configure a gRPC service with Ambassador Edge Stack.
+This document will use the [gRPC python helloworld example](https://github.com/grpc/grpc/tree/master/examples/python/helloworld) to demonstrate how to configure a gRPC service with $productName$.
 
 Follow the example up through [Run a gRPC application](https://grpc.io/docs/languages/python/quickstart/#run-a-grpc-application) to get started.
 
@@ -61,7 +61,7 @@ $ docker push <docker_reg>/grpc_example
 
 ### Mapping gRPC services
 
-Ambassador Edge Stack `Mapping`s are based on URL prefixes; for gRPC, the URL prefix is the full-service name, including the package path (`package.service`). These are defined in the `.proto` definition file. In the example [proto definition file](https://github.com/grpc/grpc/blob/master/examples/protos/helloworld.proto) we see:
+$productName$ `Mapping`s are based on URL prefixes; for gRPC, the URL prefix is the full-service name, including the package path (`package.service`). These are defined in the `.proto` definition file. In the example [proto definition file](https://github.com/grpc/grpc/blob/master/examples/protos/helloworld.proto) we see:
 
 ```
 package helloworld;
@@ -153,11 +153,11 @@ spec:
       restartPolicy: Always
 ```
 
-The Host is declared here because we are using gRPC without TLS.  Since Ambassador terminates TLS by default, in the Host we add a `requestPolicy` which allows insecure connections. After adding the Ambassador Edge Stack mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
+The Host is declared here because we are using gRPC without TLS.  Since $productName$ terminates TLS by default, in the Host we add a `requestPolicy` which allows insecure connections. After adding the $productName$ mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
+> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
 > 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
+> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
 > 
 > Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
 > The `insecure-action` can be one of:
@@ -177,7 +177,7 @@ $ kubectl apply -f grpc_example.yaml
 
 ### Testing the Deployment
 
-Make sure to test your Kubernetes deployment before making more advanced changes (like adding TLS). To test any service with Ambassador Edge Stack, we will need the hostname of the running Ambassador Edge Stack service which you can get with:
+Make sure to test your Kubernetes deployment before making more advanced changes (like adding TLS). To test any service with $productName$, we will need the hostname of the running $productName$ service which you can get with:
 
 ```
 $ kubectl get service ambassador -o wide
@@ -209,11 +209,11 @@ Greeter client received: Hello, you!
 
 ### gRPC and TLS
 
-There is some extra configuration required to connect to a gRPC service through Ambassador Edge Stack over an encrypted channel. Currently, the gRPC call is being sent over cleartext to Ambassador Edge Stack which proxies it to the gRPC application.
+There is some extra configuration required to connect to a gRPC service through $productName$ over an encrypted channel. Currently, the gRPC call is being sent over cleartext to $productName$ which proxies it to the gRPC application.
 
 ![](../../images/grpc-tls.png)
 
-If you want to add TLS encryption to your gRPC calls, first you need to tell Ambassador Edge Stack to add [ALPN protocols](../../topics/running/tls) which are required by HTTP/2 to do TLS.
+If you want to add TLS encryption to your gRPC calls, first you need to tell $productName$ to add [ALPN protocols](../../topics/running/tls) which are required by HTTP/2 to do TLS.
 
 For example:
 
@@ -230,7 +230,7 @@ spec:
   alpn_protocols: h2
 ```
 
-Next, you need to change the client code slightly and tell it to open a secure RPC channel with Ambassador Edge Stack.
+Next, you need to change the client code slightly and tell it to open a secure RPC channel with $productName$.
 
 ```diff
 - with grpc.insecure_channel(‘$AMBASSADORHOST:$PORT’) as channel:
@@ -240,9 +240,9 @@ Next, you need to change the client code slightly and tell it to open a secure R
     print("Greeter client received: " + response.message)
 ```
 
-`grpc.ssl_channel_credentials(root_certificates=None, private_key=None, certificate_chain=None)`returns the root certificate that will be used to validate the certificate and public key sent by Ambassador Edge Stack. The default values of `None` tells the gRPC runtime to grab the root certificate from the default location packaged with gRPC and ignore the private key and certificate chain fields. Generally, passing no arguments to the method that requests credentials gives the same behavior. Refer to the languages [API Reference](https://grpc.io/docs/) if this is not the case.  
+`grpc.ssl_channel_credentials(root_certificates=None, private_key=None, certificate_chain=None)`returns the root certificate that will be used to validate the certificate and public key sent by $productName$. The default values of `None` tells the gRPC runtime to grab the root certificate from the default location packaged with gRPC and ignore the private key and certificate chain fields. Generally, passing no arguments to the method that requests credentials gives the same behavior. Refer to the languages [API Reference](https://grpc.io/docs/) if this is not the case.  
 
-Ambassador Edge Stack is now terminating TLS from the gRPC client and proxying the call to the application over cleartext.
+$productName$ is now terminating TLS from the gRPC client and proxying the call to the application over cleartext.
 
 ![](../../images/gRPC-TLS-Ambassador.png)
 
@@ -252,7 +252,7 @@ If you want to configure authentication in another language, [gRPC provides exam
 
 ![](../../images/gRPC-TLS-Originate.png)
 
-Ambassador Edge Stack can originate TLS with your gRPC service so the entire RPC channel is encrypted. To configure this, first get some TLS certificates and configure the server to open a secure channel with them. Using self-signed certs this can be done with OpenSSL and adding a couple of lines to the server code.
+$productName$ can originate TLS with your gRPC service so the entire RPC channel is encrypted. To configure this, first get some TLS certificates and configure the server to open a secure channel with them. Using self-signed certs this can be done with OpenSSL and adding a couple of lines to the server code.
 
 ```diff
 def serve():
@@ -278,7 +278,7 @@ Rebuild your docker container **making sure the certificates are included** and 
     print("Greeter client received: " + response.message)
 ```
 
-Once deployed we will need to tell Ambassador Edge Stack to originate TLS to the application.
+Once deployed we will need to tell $productName$ to originate TLS to the application.
 
 ```yaml
 ---
@@ -321,7 +321,7 @@ spec:
   secret: ambassador-cert
 ```
 
-We need to tell Ambassador Edge Stack to route to the `service:` over https and have the service listen on `443`. We also need to tell Ambassador Edge Stack to use ALPN protocols when originating TLS with the application, the same way we did with TLS termination. This is done by setting `alpn_protocols: ["h2"]` in a `TLSContext` telling the service to use that tls-context in the mapping by setting `tls: upstream`.
+We need to tell $productName$ to route to the `service:` over https and have the service listen on `443`. We also need to tell $productName$ to use ALPN protocols when originating TLS with the application, the same way we did with TLS termination. This is done by setting `alpn_protocols: ["h2"]` in a `TLSContext` telling the service to use that tls-context in the mapping by setting `tls: upstream`.
 
 Refer to the [TLS document](../../topics/running/tls/origination#advanced-configuration-using-a-tlscontext) for more information on TLS origination.
 
@@ -338,9 +338,9 @@ headers:
 
 ### Ingress controllers
 
-Some [Kubernetes ingress controllers](https://kubernetes.io/docs/concepts/services-networking/ingress/) do not support HTTP/2 fully. As a result, if you are running Ambassador with an ingress controller in front, you may find that gRPC requests fail even with correct Ambassador Edge Stack configuration.
+Some [Kubernetes ingress controllers](https://kubernetes.io/docs/concepts/services-networking/ingress/) do not support HTTP/2 fully. As a result, if you are running $productName$ with an ingress controller in front, you may find that gRPC requests fail even with correct $productName$ configuration.
 
-A simple way around this is to use Ambassador Edge Stack with a `LoadBalancer` service, rather than an Ingress controller. You can also consider using [Ambassador Edge Stack as your Ingress Controller](../../topics/running/ingress-controller).
+A simple way around this is to use $productName$ with a `LoadBalancer` service, rather than an Ingress controller. You can also consider using [$productName$ as your Ingress Controller](../../topics/running/ingress-controller).
 
 ### Mappings with hosts
 
@@ -359,9 +359,9 @@ spec:
   host: api.example.com
 ```
 
-Some gRPC client libraries produce requests where the `host` or `:authority` header includes the port number. For example, a request to the above service might include `host: api.example.com:443` instead of just `host: api.example.com`. Ambassador returns a 404 (not found) response to these requests due to the mismatched host.
+Some gRPC client libraries produce requests where the `host` or `:authority` header includes the port number. For example, a request to the above service might include `host: api.example.com:443` instead of just `host: api.example.com`. $productName$ returns a 404 (not found) response to these requests due to the mismatched host.
 
-A future version of Ambassador may be able to strip away the port number. In the meantime, the easiest solution is to make sure your gRPC client does not include the port in the `host` header. Here is an example using gRPC/Go.
+A future version of $productName$ may be able to strip away the port number. In the meantime, the easiest solution is to make sure your gRPC client does not include the port in the `host` header. Here is an example using gRPC/Go.
 
 ```go
 hostname := "api.example.com"
@@ -378,4 +378,4 @@ conn, err := grpc.Dial(hostname+":"+port, opts...)
 
 ## gRPC-Web
 
-Ambassador Edge Stack also supports the [gRPC-Web](../../topics/running/ambassador#grpc-web-enable_grpc_web) protocol for browser-based gRPC applications.
+$productName$ also supports the [gRPC-Web](../../topics/running/ambassador#grpc-web-enable_grpc_web) protocol for browser-based gRPC applications.

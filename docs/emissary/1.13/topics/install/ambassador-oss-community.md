@@ -1,12 +1,12 @@
 # Integration in community projects
 
-**The Ambassador Edge Stack is now available and includes additional functionality beyond the current Ambassador API Gateway.**
+**$AESproductName$ is now available and includes additional functionality beyond the current $OSSproductName$.**
 These features include automatic HTTPS, the Edge Policy Console UI, OAuth/OpenID Connect authentication support, integrated rate
 limiting, a developer portal, and [more](/edge-stack-faq/).
 
-## Ambassador API Gateway integrations
+## $OSSproductName$ integrations
 
-If you still want to use just the Ambassador API Gateway, don't worry! The Ambassador API Gateway
+If you still want to use just $OSSproductName$, don't worry! $OSSproductName$
 is currently available out-of-the-box in some Kubernetes installers and local environments.
 
 <table style="width:100%">

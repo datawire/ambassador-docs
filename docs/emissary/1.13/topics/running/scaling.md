@@ -1,11 +1,11 @@
-# Performance and scaling Ambassador
+# Performance and scaling $productName$
 
 Scaling any cloud native application is inherently domain specific, however the content here
 reflects common issues, tips, and tricks that come up frequently.
 
 ## Performance dimensions
 
-The performance of Ambassador Edge Stack's control plane can be characterized along a number of
+The performance of $productName$'s control plane can be characterized along a number of
 different dimensions:
 
  - The number of `TLSContext` resources.
@@ -19,30 +19,30 @@ find yourself in need of some of the content in this section.
 ## Mysterious pod restarts (aka pushing the edge of the envelope)
 
 Whether your application is growing organically or whether you are deliberately scale testing, it's
-helpful to recognize how Ambassador Edge Stack behaves as it reaches the edge of its performance
+helpful to recognize how $productName$ behaves as it reaches the edge of its performance
 envelope along any of these dimensions.
 
-As Ambassador Edge Stack approaches the edge if its performance envelope, it will often manifest as
+As $productName$ approaches the edge if its performance envelope, it will often manifest as
 mysterious pod restarts triggered by Kubernetes. This does not always mean there is a problem, it
 could just mean you need to tune some of the resource limits set in your deployment. When it comes
-to scaling, Kubernetes will generally kill an Ambassador pod for one of two reasons: exceeding
+to scaling, Kubernetes will generally kill an $productName$ pod for one of two reasons: exceeding
 memory limits or failed liveness/readiness probes. See the [Memory Limits](#memory-limits),
 [Liveness Probes](#liveness-probes), and [Readiness Probes](#readiness-probes)
 sections for more on how to cope with these situations.
 
 ## Memory limits
 
-Ambassador Edge Stack can grow in memory usage and be killed by Kubernetes if it exceeds the limits
+$productName$ can grow in memory usage and be killed by Kubernetes if it exceeds the limits
 defined in its pod spec. When this happens it is confusing and difficult to catch because the only
 indication that this has occurred is the pod transitioning momentarily into the `OOMKilled`
 state. The only way to actually observe this is if you are lucky enough to be running the following
-command (or have similar monitoring configured) when Ambassador gets `OOMKilled`:
+command (or have similar monitoring configured) when $productName$ gets `OOMKilled`:
 
 ```
     kubectl get pods -n ambassador -w
 ```
 
-In order to take the luck out of the equation, Ambassador Edge Stack will periodically log its
+In order to take the luck out of the equation, $productName$ will periodically log its
 memory usage so you can see in the logs if memory limits might be a problem and require adjustment:
 
 ```
@@ -54,56 +54,56 @@ memory usage so you can see in the logs if memory limits might be a problem and 
     PID 48, 0.08Gi: envoy -c /ambassador/bootstrap-ads.json --base-id 0 --drain-time-s 600 -l error 
 ```
 
-In general you should try to keep Ambassador's memory usage below 50% of the pod's limit. This may
-seem like a generous safety margin, but when reconfiguration occurs, Ambassador requires additional
-memory to avoid disrupting active connections. At each reconfiguration, Ambassador keeps around the
+In general you should try to keep $productName$'s memory usage below 50% of the pod's limit. This may
+seem like a generous safety margin, but when reconfiguration occurs, $productName$ requires additional
+memory to avoid disrupting active connections. At each reconfiguration, $productName$ keeps around the
 old version for the duration of the configured drain time. See
 [AMBASSADOR_DRAIN_TIME](#ambassador_drain_time) for more details on how to tune this
 behavior.
 
-Ambassador Edge Stack's exact memory usage depends on (among other things) how many `Host` and
+$productName$'s exact memory usage depends on (among other things) how many `Host` and
 `Mapping` resources are defined in your cluster. If this number has grown over time, you may need to
 increase the memory limit defined in your deployment.
 
 ## Liveness probes
 
-Ambassador defines the `/ambassador/v0/check_alive` endpoint on port `8877` for use with Kubernetes
+$productName$ defines the `/ambassador/v0/check_alive` endpoint on port `8877` for use with Kubernetes
 liveness probes. See the Kubernetes documentation for more details on [HTTP liveness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-liveness-http-request).
 
-Kubernetes will restart the Ambassador pod if it fails to get a 200 result from the endpoint. If
+Kubernetes will restart the $productName$ pod if it fails to get a 200 result from the endpoint. If
 this happens it won't necessarily show up in an easily recognizable way in the pod logs. You can
 look for Kubernetes events to see if this is happening. Use `kubectl describe pod -n ambassador` or
 `kubectl get events -n ambassador` or equivalent.
 
-The purpose of liveness probes is to rescue an Ambassador instance that is wedged, however if
-liveness probes are too sensitive they can take out Ambassador instances that are functioning
-normally. This is more prone to happen as the number of Ambassador inputs increase. The
-`timeoutSeconds` and `failureThreshold` fields of the Ambassador deployment's liveness Probe
+The purpose of liveness probes is to rescue an $productName$ instance that is wedged, however if
+liveness probes are too sensitive they can take out $productName$ instances that are functioning
+normally. This is more prone to happen as the number of $productName$ inputs increase. The
+`timeoutSeconds` and `failureThreshold` fields of the $productName$ deployment's liveness Probe
 determines how tolerant Kubernetes is with its probes. If you observe pod restarts along with
 `Unhealthy` events, try tuning these fields upwards from their default values. See the Kubernetes documentation for more details on [tuning probes](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#probe-v1-core).
 
-Note that whatever changes you make to Ambassador's liveness probes should most likely be made to
+Note that whatever changes you make to $productName$'s liveness probes should most likely be made to
 its readiness probes also.
 
 ## Readiness probes
 
-Ambassador defines the `/ambassador/v0/check_ready` endpoint on port `8877` for use with Kubernetes
+$productName$ defines the `/ambassador/v0/check_ready` endpoint on port `8877` for use with Kubernetes
 readiness probes. See the Kubernetes documentation for more details on [readiness probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes).
 
 Kubernetes uses readiness checks to prevent traffic from going to pods that are not ready to handle
-requests. The only time Ambassador cannot usefully handle requests is during initial startup when it
+requests. The only time $productName$ cannot usefully handle requests is during initial startup when it
 has not yet loaded all the routing information from Kubernetes and/or consul. During this bootstrap
-period there is no guarantee Ambassador would know where to send a given request. The `check_ready`
+period there is no guarantee $productName$ would know where to send a given request. The `check_ready`
 endpoint will only return 200 when all routing information has been loaded. After the initial
 bootstrap period it behaves identically to the `check_alive` endpoint.
 
-Generally Ambassador's readiness probe should be configured with the same settings as its liveness
+Generally $productName$'s readiness probe should be configured with the same settings as its liveness
 probes.
 
 ## `AMBASSADOR_FAST_RECONFIGURE` and `AMBASSADOR_LEGACY_MODE` flags
 
 `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of
-the code Ambassador uses to validate and generate envoy configuration. It will eventually be enabled
+the code $productName$ uses to validate and generate envoy configuration. It will eventually be enabled
 by default, but if you are experiencing performance problems you should try setting 
 `AMBASSADOR_FAST_RECONFIGURE` to `true` to see if this helps.
 
@@ -111,9 +111,9 @@ by default, but if you are experiencing performance problems you should try sett
 
 ## `AMBASSADOR_DRAIN_TIME`
 
-The `AMBASSADOR_DRAIN_TIME` variable controls how much of a grace period Ambassador provides active
+The `AMBASSADOR_DRAIN_TIME` variable controls how much of a grace period $productName$ provides active
 clients when reconfiguration happen. Its unit is seconds and it defaults to 600 (10 minutes). This
-can impact memory usage because Ambassador needs to keep around old versions of its configuration
+can impact memory usage because $productName$ needs to keep around old versions of its configuration
 for the duration of the drain time.
 
 ## Unconstrained Mappings with many hosts
@@ -124,9 +124,9 @@ unconstrained `Mapping`s. An unconstrained `Mapping` is one that is not restrict
 it is the appropriate thing to do, however if you do not intend to do this, then you can end up with
 many more routes than you had intended and this can adversely impact performance.
 
-## Inspecting Ambassador performance
+## Inspecting $productName$ performance
 
-Ambassador internally tracks a number of key performance indicators. You can inspect these via the
+$productName$ internally tracks a number of key performance indicators. You can inspect these via the
 debug endpoint at `localhost:8877/debug`. Note that the `AMBASSADOR_FAST_RECONFIGURE` flag needs to
 be set to `"true"` for this endpoint to be present:
 
@@ -154,7 +154,7 @@ $ kubectl exec -n ambassador -it ${POD} curl localhost:8877/debug
     # This timer tells us how long we spend reconciling changes to consul inputs.
     "reconcileConsul": "2, 50.104µs/55.499µs/60.894µs",
 
-    # This timer tells us how long we spend reconciling secrets related changes to ambassador
+    # This timer tells us how long we spend reconciling secrets related changes to $productName$
     # inputs.
     "reconcileSecrets": "2, 18.704µs/20.786µs/22.868µs"
   },

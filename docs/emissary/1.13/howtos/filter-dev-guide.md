@@ -1,18 +1,18 @@
 # Developing custom filters for routing
 
-Sometimes you may want Ambassador Edge Stack to manipulate an incoming request. Some example use cases:
+Sometimes you may want $AESproductName$ to manipulate an incoming request. Some example use cases:
 
 * Inspect an incoming request, and add a custom header that can then be used for routing
 * Add custom Authorization headers
 * Validate an incoming request fits an OpenAPI specification before passing the request to a target service
 
-Ambassador Edge Stack supports these use cases by allowing you to execute custom logic in `Filters`. Filters are written in Golang, and managed by Ambassador Edge Stack. If you want to write a filter in a language other than Golang, Ambassador also has an HTTP/gRPC interface for Filters called `External`.
+$AESproductName$ supports these use cases by allowing you to execute custom logic in `Filters`. Filters are written in Golang, and managed by $AESproductName$. If you want to write a filter in a language other than Golang, $AESproductName$ also has an HTTP/gRPC interface for Filters called `External`.
 
 ## Prerequisites
 
-`Plugin` `Filter`s are built as [Go plugins](https://golang.org/pkg/plugin/) and loaded directly into the Ambassador Edge Stack container so they can run in-process with the rest of Ambassador Edge Stack.
+`Plugin` `Filter`s are built as [Go plugins](https://golang.org/pkg/plugin/) and loaded directly into the $AESproductName$ container so they can run in-process with the rest of $AESproductName$.
 
-To build a `Plugin` `Filter` into the Ambassador Edge Stack container you will need
+To build a `Plugin` `Filter` into the $AESproductName$ container you will need
 - Linux or MacOS host (Windows Subsystem for Linux is ok)
 - [Docker](https://docs.docker.com/install/) 
 - [rsync](https://rsync.samba.org/)
@@ -36,10 +36,10 @@ We've created an example filter that you can customize for your particular use c
 
 4. Push the image to your Docker registry: `docker push $DOCKER_REGISTRY/amb-sidecar-plugin:VERSION`.
 
-5. Configure Ambassador Edge Stack to use the plugin by creating a `Filter`
+5. Configure $AESproductName$ to use the plugin by creating a `Filter`
    and `FilterPolicy` CRD, as per the [filter reference](../../topics/using/filters).
 
-6. Update the standard Ambassador Edge Stack manifest to use your Docker
+6. Update the standard $AESproductName$ manifest to use your Docker
    image instead of the standard sidecar.
 
    ```patch
@@ -55,14 +55,14 @@ We've created an example filter that you can customize for your particular use c
 
 ## Rapid development of a custom filter
 
-During development, you may want to sidestep the deployment process for a faster development loop. The `aes-plugin-runner` helps you rapidly develop Ambassador Edge Stack filters locally.
+During development, you may want to sidestep the deployment process for a faster development loop. The `aes-plugin-runner` helps you rapidly develop $AESproductName$ filters locally.
 
 To install the runner, download the latest version:
 
 <a class="pro-runner-dl" href="https://s3.amazonaws.com/datawire-static-files/aes-plugin-runner/$version$/darwin/amd64/aes-plugin-runner">Mac 64-bit</a> |
 <a class="pro-runner-linux-dl" href="https://s3.amazonaws.com/datawire-static-files/aes-plugin-runner/$version$/linux/amd64/aes-plugin-runner">Linux 64-bit</a>
 
-Note that the plugin runner must match the version of Ambassador Edge Stack that you are running. Place the binary somewhere in your `$PATH`.
+Note that the plugin runner must match the version of $AESproductName$ that you are running. Place the binary somewhere in your `$PATH`.
 
 Information about open-source code used in `aes-plugin-runner` can be found by running `aes-plugin-runner --version`.
 

@@ -1,25 +1,25 @@
 ---
-    description: In this guide, we'll walk through the process of deploying Ambassador Edge Stack in Kubernetes for ingress routing.
+    description: In this guide, we'll walk through the process of deploying $productName$ in Kubernetes for ingress routing.
 ---
 # Install manually
 
 In this guide, we'll walk you through installing, configuring, and customizing
-the Ambassador Edge Stack in your Kubernetes cluster.
+$productName$ in your Kubernetes cluster.
 
 The manual install process does require more user configuration than the [quick
 start method](../../../tutorials/getting-started/), but it does allow you to control the
-aspects of your base Edge Stack installation.
+aspects of your base $productName$ installation.
 
 ## Before you begin
 
-The Ambassador Edge Stack is designed to run in Kubernetes for production. The most essential requirements are:
+$productName$ is designed to run in Kubernetes for production. The most essential requirements are:
 
 * Kubernetes 1.11 or later
 * The `kubectl` command-line tool
 
-## Install the Ambassador Edge Stack
+## Install $productName$
 
-The Ambassador Edge Stack is typically deployed to Kubernetes from the command line. If you don't have Kubernetes, you should use our [Docker](../docker) image to deploy the Ambassador Edge Stack locally.
+$productName$ is typically deployed to Kubernetes from the command line. If you don't have Kubernetes, you should use our [Docker](../docker) image to deploy $productName$ locally.
 
 1. In your terminal, run the following command:
 
@@ -54,9 +54,9 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
     |-------------|------------------|--------------------------------|
     ```
 
-    Use any of the URLs listed next to `ambassador` to access the Ambassador Edge Stack.
+    Use any of the URLs listed next to `ambassador` to access $productName$.
 
-3. Navigate to `http://<your-IP-address>` and click through the certificate warning for access to the Edge Policy Console interface. The certificate warning appears because, by default, the Ambassador Edge Stack uses a self-signed certificate for HTTPS.
+3. Navigate to `http://<your-IP-address>` and click through the certificate warning for access to the Edge Policy Console interface. The certificate warning appears because, by default, $productName$ uses a self-signed certificate for HTTPS.
     * Chrome users should click **Advanced > Proceed to website**.
     * Safari users should click **Show details > visit the website** and provide your password.
 
@@ -72,7 +72,7 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
 
 ## Configure TLS termination and automatic HTTPS
 
-**The Ambassador Edge Stack enables TLS termination by default using a self-signed certificate. See the [Host CRD](../../../topics/running/host-crd) for more information about disabling TLS.** If you have the ability to update your DNS, Ambassador can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create a Mapping."
+**$AESproductName$ enables TLS termination by default using a self-signed certificate. See the [Host CRD](../../../topics/running/host-crd) for more information about disabling TLS.** If you have the ability to update your DNS, $AESproductName$ can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create a Mapping."
 
 1. Update your DNS so that your domain points to the IP address for your cluster.
 
@@ -87,12 +87,11 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
   You'll see the newly created `Host` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [Host CRD](../../../topics/running/host-crd).
 
 3. Once the Host is ready, navigate to `https://<hostname>` in your browser.
-   Note that the certificate warning has gone away. Additionally, the Ambassador
-   Edge Stack automatically will redirect HTTP connections to HTTPS.
+   Note that the certificate warning has gone away. Additionally, the $AESproductName$ automatically will redirect HTTP connections to HTTPS.
 
 ## Create a Mapping
 
-In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of Ambassador Edge Stack. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
+In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of $productName$. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
 
 1. We'll start by deploying the `quote` service. Save the below configuration into a file named `quote.yaml`. This is a basic configuration that tells Kubernetes to deploy the `quote` container and create a Kubernetes `service` that points to the `quote` container.
 
@@ -138,7 +137,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 
 2. Deploy the `quote` service to the cluster by typing the command `kubectl apply -f quote.yaml`.
 
-3. Now, create a `Mapping` configuration that tells Ambassador to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
+3. Now, create a `Mapping` configuration that tells $productName$ to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
 
    ```yaml
    ---
@@ -171,7 +170,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 
 ## A single source of configuration
 
-In the Ambassador Edge Stack, Kubernetes serves as the single source of
+In $productName$, Kubernetes serves as the single source of
 configuration. Changes made on the command line (via `kubectl`) are reflected in
 the UI, and vice versa. This enables a consistent configuration workflow.
 
@@ -191,7 +190,7 @@ just created on the command line.
 
 ## Developer onboarding
 
-The Quote service we just deployed publishes its API as a Swagger document. This API is automatically detected by the Ambassador Edge Stack and published.
+The Quote service we just deployed publishes its API as a Swagger document. This API is automatically detected by $productName$ and published.
 
 1. In the Edge Policy Console, navigate to the **APIs** tab. You'll see the documentation there for internal use.
 
@@ -202,4 +201,4 @@ The Quote service we just deployed publishes its API as a Swagger document. This
 
 ## What’s next?
 
-The Ambassador Edge Stack has a comprehensive range of [features](/features/) to support the requirements of any edge microservice.
+$productName$ has a comprehensive range of [features](/features/) to support the requirements of any edge microservice.

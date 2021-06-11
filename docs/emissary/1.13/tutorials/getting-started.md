@@ -1,12 +1,12 @@
 ---
-description: "A simple three step guide to installing Edge Stack and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
+description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
 ---
 
 import Alert from '@material-ui/lab/Alert';
 import GSTabs from './gs-tabs'
 import GSTabs2 from './gs-tabs2'
 
-# Edge Stack quick start
+# $productName$ quick start
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
@@ -20,17 +20,17 @@ import GSTabs2 from './gs-tabs2'
 
 ## 1. Installation
 
-We'll start by installing Edge Stack into your cluster.
+We'll start by installing $productName$ into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
 <GSTabs/>
 
-<Alert severity="success"><b>Success!</b> You have installed Edge Stack, now let's get some traffic flowing to your services.</Alert>
+<Alert severity="success"><b>Success!</b> You have installed $productName$, now let's get some traffic flowing to your services.</Alert>
 
 ## 2. Routing traffic from the edge
 
-Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define Edge Stack’s desired state. The workflow you are going to build uses a simple demo app and the **Mapping CRD**, which is the core resource that you will use with Edge Stack. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
+Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define $productName$’s desired state. The workflow you are going to build uses a simple demo app and the **Mapping CRD**, which is the core resource that you will use with $productName$. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
 
 1. First, apply the YAML for the “Quote of the Moment" service.
 
@@ -38,9 +38,9 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
   kubectl apply -f https://www.getambassador.io/yaml/quickstart/qotm.yaml
   ```  
 
-  <Alert severity="info">The Service and Deployment are created in the Ambassador namespace.  You can use <code>kubectl get services,deployments quote --namespace ambassador</code> to see their status.</Alert>
+  <Alert severity="info">The Service and Deployment are created in the $productName$ namespace.  You can use <code>kubectl get services,deployments quote --namespace ambassador</code> to see their status.</Alert>
 
-2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells Edge Stack to route all traffic inbound to the `/backend/` path to the `quote` Service.  
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.  
 
   ```yaml
   ---
@@ -62,14 +62,14 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 
   With our Mapping created, now we need to access it!
 
-4. Store the Edge Stack load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
+4. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
 
   ```
   export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador \
     -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
   ```
 
-5. Test the configuration by accessing the service through the Ambassador load balancer:
+5. Test the configuration by accessing the service through the $productName$ load balancer:
 
   `curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/`  
 
@@ -83,7 +83,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
     }
   ```  
 
-<Alert severity="success"><b>Victory!</b> You have created your first Edge Stack Mapping, routing a request from your cluster's edge to a service!</Alert>
+<Alert severity="success"><b>Victory!</b> You have created your first $productName$ Mapping, routing a request from your cluster's edge to a service!</Alert>
 
 ## 3. Connect your cluster to Ambassador Cloud
 
@@ -103,14 +103,14 @@ The Service Catalog is a web-based interface that lists all of your cluster's Se
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
-Explore some of the popular tutorials on Edge Stack:
+Explore some of the popular tutorials on $productName$:
 
 * [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from 
 the edge of your cluster to a Kubernetes service
 * [Host resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
 * [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads
 
-The Ambassador Edge Stack has a comprehensive range of [features](/features/) to
+$productName$ has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice.
 
-To learn more about how Edge Stack works, read the [Ambassador Story](../../about/why-ambassador).
+To learn more about how $productName$ works, read the [$productName$ Story](../../about/why-ambassador).

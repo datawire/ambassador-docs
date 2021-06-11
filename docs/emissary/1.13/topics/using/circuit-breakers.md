@@ -1,10 +1,10 @@
 # Circuit breakers
 
-Circuit breakers are a powerful technique to improve resilience. By preventing additional connections or requests to an overloaded service, circuit breakers limit the ["blast radius"](https://www.ibm.com/garage/method/practices/manage/practice_limited_blast_radius/) of an overloaded service. By design, Ambassador Edge Stack circuit breakers are distributed, i.e., different Ambassador Edge Stack instances do not coordinate circuit breaker information.
+Circuit breakers are a powerful technique to improve resilience. By preventing additional connections or requests to an overloaded service, circuit breakers limit the ["blast radius"](https://www.ibm.com/garage/method/practices/manage/practice_limited_blast_radius/) of an overloaded service. By design, $productName$ circuit breakers are distributed, i.e., different $productName$ instances do not coordinate circuit breaker information.
 
 ## Circuit breaker configuration
 
-Circuit breaking configuration can be set for all Ambassador Edge Stack mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings#configuring-mappings).
+Circuit breaking configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings#configuring-mappings).
 
 The `circuit_breakers` attribute configures circuit breaking. The following fields are supported:
 
@@ -20,7 +20,7 @@ circuit_breakers:
 |Key|Default value|Description|
 |---|---|---|
 |`priority`|`default`|Specifies the priority to which the circuit breaker settings apply to; it can be set to either `default` or `high`.|
-|`max_connections`|`1024`|Specifies the maximum number of connections that Ambassador Edge Stack will make to the services. In practice, this is more applicable to HTTP/1.1 than HTTP/2.|
+|`max_connections`|`1024`|Specifies the maximum number of connections that $productName$ will make to the services. In practice, this is more applicable to HTTP/1.1 than HTTP/2.|
 |`max_pending_requests`|`1024`|Specifies the maximum number of requests that will be queued while waiting for a connection. In practice, this is more applicable to HTTP/1.1 than HTTP/2.|
 |`max_requests`|`1024`|Specifies the maximum number of parallel outstanding requests to an upstream service. In practice, this is more applicable to HTTP/2 than HTTP/1.1.|
 |`max_retries`|`3`|Specifies the maximum number of parallel retries allowed to an upstream service.|

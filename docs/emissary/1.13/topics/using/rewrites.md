@@ -1,10 +1,10 @@
 # Rewrites
 
-Once Ambassador Edge Stack uses a prefix to identify the service to which a given request should be passed, it can rewrite the URL before handing it off to the service. 
+Once $productName$ uses a prefix to identify the service to which a given request should be passed, it can rewrite the URL before handing it off to the service. 
 
 There are two approaches for rewriting: `rewrite` for simpler scenarios and `regex_rewrite` for more advanced rewriting.
 
-**Please note that** only one of these two can be configured for a mapping **at the same time**. As a result Ambassador Edge Stack ignores `rewrite` when `regex_rewrite` is provided.
+**Please note that** only one of these two can be configured for a mapping **at the same time**. As a result $productName$ ignores `rewrite` when `regex_rewrite` is provided.
 
 ## `rewrite`
 
@@ -53,7 +53,7 @@ would be "rewritten" as:
 http://service1<span style="color:red">/backend-api/</span><span style="color:green">foo/bar</span>
 </code>
 
-To prevent Ambassador rewrite the matched prefix to `/` by default, it can be configured to not change the prefix as it forwards a request to the upstream service. To do that, specify an empty `rewrite` directive:
+To prevent $productName$ rewrite the matched prefix to `/` by default, it can be configured to not change the prefix as it forwards a request to the upstream service. To do that, specify an empty `rewrite` directive:
 
 - `rewrite: ""`
 

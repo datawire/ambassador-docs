@@ -2,12 +2,12 @@ import Alert from '@material-ui/lab/Alert';
 
 # Authentication service
 
-The Ambassador API Gateway provides a highly flexible mechanism for authentication, via the AuthService resource.  An AuthService configures Ambassador to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
+$productName$ provides a highly flexible mechanism for authentication, via the AuthService resource.  An AuthService configures $productName$ to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
 
-All requests are validated by the AuthService (unless the Mapping applied to the request sets `bypass_auth`).  It is not possible to combine multiple AuthServices.  While it is possible to create multiple AuthService resources, they will be load-balanced between each resource in a round-robin fashion. This is useful for canarying an AuthService change, but is not useful for deploying multiple distinct AuthServices.  In order to combine multiple external services (either having multiple services apply to the same request, or selecting between different services for the different requests), instead of using an AuthService, use an [Edge Stack External Filter](../../../using/filters/).
+All requests are validated by the AuthService (unless the Mapping applied to the request sets `bypass_auth`).  It is not possible to combine multiple AuthServices.  While it is possible to create multiple AuthService resources, they will be load-balanced between each resource in a round-robin fashion. This is useful for canarying an AuthService change, but is not useful for deploying multiple distinct AuthServices.  In order to combine multiple external services (either having multiple services apply to the same request, or selecting between different services for the different requests), instead of using an AuthService, use an [$AESproductName$ External Filter](../../../using/filters/).
 
 <Alert severity="info">
-Because of the limitations described above, <strong>the Ambassador Edge Stack does not support AuthService resources, and you should instead use an <a href="../../../using/filters/external">External Filter</a>,</strong> which is mostly a drop-in replacement for an AuthService. The External Filter relies on the AES AuthService. Make sure the AES AuthService is deployed before configuring External filters.
+Because of the limitations described above, <strong>$AESproductName$ does not support AuthService resources, and you should instead use an <a href="../../../using/filters/external">External Filter</a>,</strong> which is mostly a drop-in replacement for an AuthService. The External Filter relies on the $AESproductName$ AuthService. Make sure the $AESproductName$ AuthService is deployed before configuring External filters.
 </Alert>
 
 The currently supported version of the AuthService resource is `getambassador.io/v2`. Earlier versions are deprecated.
@@ -66,7 +66,7 @@ The following field is only used if `proto` is set to `grpc`. It is ignored if `
 
 | Attribute | Default value | Description |
 | --- | --- | --- |
-|`protocol_version` | `v2` | gRPC service name used to communicate with the AuthService. Allowed values are `v2` which will use the `envoy.service.auth.v2.Authorization` service name, and `v3` which will use the `envoy.service.auth.v3.Authorization` service name. `v3` requires Ambassador to run in Envoy v3 mode by setting the [AMBASSADOR_ENVOY_API_VERSION=V3 environment variable](../../running/#ambassador_envoy_api_version).|
+|`protocol_version` | `v2` | gRPC service name used to communicate with the AuthService. Allowed values are `v2` which will use the `envoy.service.auth.v2.Authorization` service name, and `v3` which will use the `envoy.service.auth.v3.Authorization` service name. `v3` requires $productName$ to run in Envoy v3 mode by setting the [AMBASSADOR_ENVOY_API_VERSION=V3 environment variable](../../running/#ambassador_envoy_api_version).|
 
 
 The following fields are only used if `proto` is set to `http`. They are ignored if `proto` is `grpc`.
@@ -85,4 +85,4 @@ You may create multiple AuthService manifests to round-robin authentication requ
 
 ## Configuring public Mappings
 
-An AuthService can be disabled for a Mapping by setting `bypass_auth` to `true`. This will tell Ambassador to allow all requests for that Mapping through without interacting with the external auth service.
+An AuthService can be disabled for a Mapping by setting `bypass_auth` to `true`. This will tell $productName$ to allow all requests for that Mapping through without interacting with the external auth service.

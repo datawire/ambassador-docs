@@ -145,7 +145,7 @@ export default function SimpleTabs() {
 
         {/*edgectl token install instructions*/}
 
-        Connecting Edge Stack that was installed via <code>edgectl</code> is identical to the Kubernetes YAML procedure.<br />
+        Connecting $productName$ that was installed via <code>edgectl</code> is identical to the Kubernetes YAML procedure.<br />
 
         Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
         Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Kubernetes YAML</b>.

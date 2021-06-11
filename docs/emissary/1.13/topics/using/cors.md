@@ -2,13 +2,13 @@
 
 Cross-Origin resource sharing lets users request resources (e.g., images, fonts, videos) from domains outside the original domain.
 
-CORS configuration can be set for all Ambassador Edge Stack mappings in the [`ambassador Module`](../../running/ambassador), or set per [`Mapping`](../mappings#configuring-mappings).
+CORS configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`Mapping`](../mappings#configuring-mappings).
 
-When the CORS attribute is set at either the `Mapping` or `Module` level, Ambassador Edge Stack will intercept the pre-flight `OPTIONS` request and respond with the appropriate CORS headers. This means you will not need to implement any logic in your upstreams to handle these CORS `OPTIONS` requests.
+When the CORS attribute is set at either the `Mapping` or `Module` level, $productName$ will intercept the pre-flight `OPTIONS` request and respond with the appropriate CORS headers. This means you will not need to implement any logic in your upstreams to handle these CORS `OPTIONS` requests.
 
 The flow of the request will look similar to the following:
 ```
-Client      Ambassador Edge Stack     Upstream
+Client      $productName$     Upstream
   |      OPTIONS       |               |
   | —————————————————> |               |
   |     CORS_RESP      |               |
@@ -133,12 +133,12 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 }
 ```
 
-This is okay since CORS is being handled by Ambassador Edge Stack after authentication.
+This is okay since CORS is being handled by $productName$ after authentication.
 
 The flow of this request will look similar to the following:
 
 ```
-Client     Ambassador Edge Stack       Auth          Upstream
+Client     $productName$       Auth          Upstream
   |      OPTIONS       |               |               |
   | —————————————————> | ————————————> |               |
   |                    | CORS_ACCEPT_* |               |

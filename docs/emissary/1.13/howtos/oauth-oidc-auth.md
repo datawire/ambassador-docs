@@ -1,6 +1,6 @@
 # Using the OAuth2 filter for SSO
 
-Ambassador Edge Stack adds native support for configuring single sign-on with OAuth and OIDC authentication schemes for single sign-on with an external identity provider (IdP). Ambassador Edge Stack has been tested with Keycloak, Auth0, Okta, and UAA although other OAuth/OIDC-compliant identity providers should work. Please contact us on [Slack](https://a8r.io/Slack) if you have questions about IdPs not listed below.
+$AESproductName$ adds native support for configuring single sign-on with OAuth and OIDC authentication schemes for single sign-on with an external identity provider (IdP). $AESproductName$ has been tested with Keycloak, Auth0, Okta, and UAA although other OAuth/OIDC-compliant identity providers should work. Please contact us on [Slack](https://a8r.io/Slack) if you have questions about IdPs not listed below.
 
 ## 1. Configure an OAuth2 filter
 
@@ -15,7 +15,7 @@ metadata:
   namespace: default
 spec:
   OAuth2:
-    authorizationURL: PROVIDER_URL ## URL where Ambassador Edge Stack can find OAuth2 descriptor
+    authorizationURL: PROVIDER_URL ## URL where $AESproductName$ can find OAuth2 descriptor
     extraAuthorizationParameters:
       audience: AUDIENCE ## OIDC Audience
     clientID: CLIENT_ID ## OAuth2 client from your IdP
@@ -28,7 +28,7 @@ If you have multiple domains that should all share the same single-sign-on authe
 you can list more than one `protectedOrigin` -- just make sure that the first one listed
 is the one your IdP is configured to redirect back to.
 
-You can also tell Ambassador that subdomains of an origin are OK too. For example, to have
+You can also tell $AESproductName$ that subdomains of an origin are OK too. For example, to have
 `domain1.example.com` shares authentication information with `domain2.example.com`, with
 all subdomains of `domain2` included:
 
@@ -81,7 +81,7 @@ You will need to configure your IdP to handle authentication requests. The way t
 
 ## Configure authentication across multiple domains (optional)
 
-Ambassador Edge Stack supports authentication for multiple domains where each domain is issued its own access token. For example, imagine you're hosting both `domain1.example.com` and `domain2.example.com` on the same cluster. With multi-domain support, users will receive separate authentication tokens for `domain1` and `domain2`.
+$AESproductName$ supports authentication for multiple domains where each domain is issued its own access token. For example, imagine you're hosting both `domain1.example.com` and `domain2.example.com` on the same cluster. With multi-domain support, users will receive separate authentication tokens for `domain1` and `domain2`.
 
 To configure multi-domain access, you will need to create another authentication endpoint with your IdP and create another `Filter` for the new domain.
 

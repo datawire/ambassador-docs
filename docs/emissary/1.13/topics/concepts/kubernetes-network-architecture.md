@@ -34,7 +34,7 @@ The most popular approach to configuring edge proxies is with the Kubernetes ing
 
 The ingress resource is a Kubernetes standard. As such, it is a lowest common denominator resource. In practice, users find that the ingress resource is insufficient in scope to address the requirements for edge routing. Semantics such as TLS termination, redirecting to TLS, timeouts, rate limiting, and authentication are all beyond the scope of the ingress resource.
 
-The Ambassador Edge Stack can function as an ingress controller (i.e., it reads ingress resources), although it also includes many other capabilities that are beyond the scope of the ingress specification. Most Ambassador Edge Stack users find that the various additional capabilities of Ambassador are essential, and end up using Ambassador's extensions to the ingress resource, instead of using ingress resources themselves.
+$productName$ can function as an ingress controller (i.e., it reads ingress resources), although it also includes many other capabilities that are beyond the scope of the ingress specification. Most $productName$ users find that the various additional capabilities of $productName$ are essential, and end up using $productName$'s extensions to the ingress resource, instead of using ingress resources themselves.
 
 ### Kubernetes services and Pods
 
@@ -44,7 +44,7 @@ When traffic is routed to the pods via a Kubernetes service, Kubernetes uses a b
 
 Traffic can also be routed directly to pods, bypassing the Kubernetes service. Since pods are much more ephemeral than Kubernetes services, this approach requires an edge proxy that is optimized for this use case. In particular, the edge proxy needs to support real-time discovery of pods, and be able to dynamically update pod locations without downtime.
 
-The Ambassador Edge Stack supports routing both to Kubernetes services and directly to pods.
+$productName$ supports routing both to Kubernetes services and directly to pods.
 
 ## Further reading
 

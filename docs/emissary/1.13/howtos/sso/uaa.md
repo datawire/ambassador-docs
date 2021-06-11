@@ -1,6 +1,6 @@
 # Single Sign-On with User Account and Authentication Service (UAA)
 
-**IMPORTANT:** Ambassador Edge Stack requires the IdP to return a JWT signed by the RS256 algorithm (asymmetric key). Cloud Foundry's UAA defaults to symmetric key encryption which Ambassador Edge Stack cannot read.
+**IMPORTANT:** $AESproductName$ requires the IdP to return a JWT signed by the RS256 algorithm (asymmetric key). Cloud Foundry's UAA defaults to symmetric key encryption which $AESproductName$ cannot read.
 
 1. When configuring UAA, you will need to provide your own asymmetric key in a file called `uaa.yml`. For example:
 
@@ -22,7 +22,7 @@
    uaac client add ambassador --name ambassador-client --scope openid --authorized_grant_types authorization_code,refresh_token --redirect_uri {AMBASSADOR_URL}/.ambassador/oauth2/redirection-endpoint --secret CLIENT_SECRET
    ```
 
-   **Note:** Change the value of `{AMBASSADOR_URL}` with the IP or DNS of your Ambassador load balancer.
+   **Note:** Change the value of `{AMBASSADOR_URL}` with the IP or DNS of your $AESproductName$ load balancer.
 
 ## Configure Filter and FilterPolicy
 

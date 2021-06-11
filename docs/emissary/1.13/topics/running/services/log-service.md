@@ -1,12 +1,12 @@
 # Log service
 
-By default, Ambassador Edge Stack puts the access logs on stdout; such
+By default, $productName$ puts the access logs on stdout; such
 that the can be read using `kubectl logs`.  The format of those logs,
 and the local destination of them, can be configured using the
 [`envoy_log_` settings in the `ambassador
 Module`](../../ambassador).  However, the
-options there only allow for logging local to Ambassador's Pod.  By
-configuring a `LogService`, you can configure Ambassador Edge Stack to
+options there only allow for logging local to $productName$'s Pod.  By
+configuring a `LogService`, you can configure $productName$ to
 report its access logs to a remote service, in addition to the usual
 `ambassador Module` configured logging.
 
@@ -22,7 +22,7 @@ kind: LogService
 metadata:
   name: example-log-service
 spec:
-  # Common to all Ambassador resources
+  # Common to all $productName$ resources
   ambassador_id:           # optional; default is ["default"]
   - "string"
   ambassador_id: "string"  # no need for a list if there's only one value

@@ -1,12 +1,12 @@
 # Single Sign-On with OneLogin
 
-OneLogin is an application that manages authentication for your users on your network, and can provide backend access to Ambassador.
+OneLogin is an application that manages authentication for your users on your network, and can provide backend access to $AESproductName$.
 
-To use OneLogin with Ambassador:
+To use OneLogin with $AESproductName$:
 
 1. Create an App Connector
 2. Gather OneLogin Credentials
-3. Configure Ambassador
+3. Configure $AESproductName$
 
 ## Create an App Connector
 
@@ -25,11 +25,11 @@ To use OneLogin as your IdP, you will first need to create an OIDC custom connec
 9. Select the connector you just created.
 10. Click the **Save** button.
 
-You will see a success banner, which also brings you back to the main portal page. OneLogin is now configured to function as an OIDC backend for authentication with Ambassador.
+You will see a success banner, which also brings you back to the main portal page. OneLogin is now configured to function as an OIDC backend for authentication with $AESproductName$.
 
 ## Gather OneLogin Credentials
 
-Next, configure Ambassador to require authentication with OneLogin, so you must collect the client information credentials from the application you just created.
+Next, configure $AESproductName$ to require authentication with OneLogin, so you must collect the client information credentials from the application you just created.
 
 **To do so:**
 
@@ -39,9 +39,9 @@ Next, configure Ambassador to require authentication with OneLogin, so you must 
 4. Copy the value of Client ID for later use.
 5. Click the **Show Client Secret** link and copy the value for later use.
 
-## Configure Ambassador
+## Configure $AESproductName$
 
-Now you must configure your Ambassador instance to use OneLogin.
+Now you must configure your $AESproductName$ instance to use OneLogin.
 
 1. First, create an [OAuth Filter](../../../topics/using/filters/oauth2) with the credentials you copied earlier.
 
@@ -58,7 +58,7 @@ Here is an example YAML:
         authorizationURL: https://{{subdomain}}.onelogin.com/oidc
         clientID: {{Client ID}}
         secret: {{Client Secret}}
-        # The protectedOrigin is the scheme and Host of your Ambassador endpoint
+        # The protectedOrigin is the scheme and Host of your $AESproductName$ endpoint
         protectedOrigins:
         - origin: httpi(s)://{{AMBASSADOR_URL}}
 ```
@@ -76,7 +76,7 @@ spec:
   rules:
       # Requires authentication on requests from any hostname
     - host: "*"
-    # Tells Ambassador to apply the Filter only on request to the /backend/get-quote/ endpoint from the quote application
+    # Tells $AESproductName$ to apply the Filter only on request to the /backend/get-quote/ endpoint from the quote application
     path: /backend/get-quote/
     # Identifies which Filter to use for the path and host above
     filters:

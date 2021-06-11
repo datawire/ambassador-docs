@@ -8,7 +8,7 @@ To use Azure as your IdP, you will first need to register an OAuth application w
 
 2. After you have registered your application, click on `App Registrations` in the navigation panel on the left and select the application you just created.
 
-3. Make a note of both the client and tenant IDs as these will be used later when configuring Ambassador Edge Stack.
+3. Make a note of both the client and tenant IDs as these will be used later when configuring $AESproductName$.
 
 4. Click on `Authentication` in the left sidebar.
 
@@ -18,11 +18,11 @@ To use Azure as your IdP, you will first need to register an OAuth application w
       - Under `Advanced settings`, make sure the application is issuing `Access tokens` by checking next to the box that says `Access tokens`
       - Under `Supported account types` select whichever option fits your use case
 
-5. Click on `Certificates & secrets` in the left sidebar. Click `+ New client secret` and set the expiration date you wish. Copy the value of this secret somewhere. You will need it when configuring Ambassador Edge Stack.
+5. Click on `Certificates & secrets` in the left sidebar. Click `+ New client secret` and set the expiration date you wish. Copy the value of this secret somewhere. You will need it when configuring $AESproductName$.
 
-## Set Up the Ambassador Edge Stack
+## Set Up $AESproductName$
 
-After configuring an OAuth application in Azure AD, configuring Ambassador Edge Stack to make use of it for authentication is simple.
+After configuring an OAuth application in Azure AD, configuring $AESproductName$ to make use of it for authentication is simple.
 
 1. Create an [OAuth Filter](../../../topics/using/filters/oauth2) with the credentials from above:
 
@@ -39,7 +39,7 @@ After configuring an OAuth application in Azure AD, configuring Ambassador Edge 
         clientID: CLIENT_ID
         # Secret created in step 5 above
         secret: CLIENT_SECRET
-        # The protectedOrigin is the scheme and Host of your Ambassador endpoint
+        # The protectedOrigin is the scheme and Host of your $AESproductName$ endpoint
         protectedOrigins:
         - origin: https://{{AMBASSADOR_URL}}
     ```
@@ -55,7 +55,7 @@ After configuring an OAuth application in Azure AD, configuring Ambassador Edge 
       rules:
           # Requires authentication on requests from any hostname
         - host: "*"
-          # Tells Ambassador Edge Stack to apply the Filter only on request to the quote /backend/get-quote/ endpoint
+          # Tells $AESproductName$ to apply the Filter only on request to the quote /backend/get-quote/ endpoint
           path: /backend/get-quote/
           # Identifies which Filter to use for the path and host above
           filters:

@@ -6,19 +6,19 @@ In this tutorial, we walk through how to set up your Kubernetes cluster to add S
 
 ## Prerequisites
 
-This tutorial relies on Ambassador Edge Stack to manage access to your Kubernetes cluster, and uses Keycloak as your identity provider. To get started:
+This tutorial relies on $AESproductName$ to manage access to your Kubernetes cluster, and uses Keycloak as your identity provider. To get started:
 
 *Note* This guide was designed and validated using an Azure AKS Cluster.  It's possible that this procedure will work with other cloud providers, but there is a lot of variance in the Authentication mechanisms for the Kubernetes API.  See the troubleshooting note at the bottom for more info.
 
 * Azure AKS Cluster [here](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
-* Install Edge Stack [here](/docs/edge-stack/latest/topics/install/)
+* Install $AESproductName$ [here](/docs/edge-stack/latest/topics/install/)
 * Deploy Keycloak on Kubernetes [here](https://www.keycloak.org/getting-started/getting-started-kube)
 
 ## Cluster Setup
 
 In this section, we'll configure your Kubernetes cluster for single-sign on.
 
-### 1. Authenticate Ambassador with Kubernetes API
+### 1. Authenticate $AESproductName$ with Kubernetes API
 
 1. Delete the openapi mapping from the Ambassador namespace `kubectl delete -n ambassador ambassador-devportal-api`. (this mapping can conflict with `kubectl` commands)
 
@@ -282,12 +282,12 @@ Now, we need to set up the client. Each user who needs to access the Kubernetes 
 2. What if I want to use RBAC Groups?
   User impersonation allows you to specify a Group using the `Impersonate-Group` header.  As such, if you wanted to use any kind of custom claims for the ID token, they can be mapped to the `Impersonate-Group` header.  Note that you always have to use an `Impersonate-Name` header, even if you're relying solely on the Group for Authorization.
 3. I keep getting a 401 `Failure`, `Unauthorized` message, even for `https://<ambassador-domain>/api`.
-  This likely means that there is either something wrong with the Certificate that was issued, or there's something wrong with your `TLSContext` or `Mapping` config.  Ambassador must present the correct certificate to the Kubernetes API and the RBAC usernames and the CN of the certificate have to be consistent with one another.
+  This likely means that there is either something wrong with the Certificate that was issued, or there's something wrong with your `TLSContext` or `Mapping` config.  $AESproductName$ must present the correct certificate to the Kubernetes API and the RBAC usernames and the CN of the certificate have to be consistent with one another.
 4. Do I have to use `kubelogin`?
   Technically no.  Any method of obtaining an ID or Access token from an Identity Provider will work.  You can then pass the token using `--token <jwt-token>` when running `kubectl`.  `kubelogin` simply automates the process of getting the ID token and attaching it to a `kubectl` request.
 
 ## Under the Hood
 
-In this tutorial, we set up Ambassador Edge Stack to [impersonate a user](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation) to access the Kubernetes API. Requests get sent to Edge Stack, which functions as an Authenticating Proxy. Edge Stack uses its integrated authentication mechanism to authenticate the external request's identity and sets the User and Group based on Claims recieved by the `Filter`.
+In this tutorial, we set up $AESproductName$ to [impersonate a user](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation) to access the Kubernetes API. Requests get sent to $AESproductName$, which functions as an Authenticating Proxy. $AESproductName$ uses its integrated authentication mechanism to authenticate the external request's identity and sets the User and Group based on Claims recieved by the `Filter`.
 
-The general flow of the `kubectl` command is as follows: On making an unauthenticated kubectl command, `kubelogin` does a browser open/redirect in order to do OIDC token negotiation.  `kubelogin` obtains an OIDC Identity Token (notice this is not an access token) and sends it to Ambassador in an Authorization header.  Ambassador validates the Identity Token and parses Claims from it to put into `Impersonate-XXX` headers.  Ambassador then scrubs the Authorization header and replaces it with the Admin token we set up in step 1.  Ambassador then forwards this request with the new Authorization and Impersonate headers to the KubeAPI to first Authenticate, and then Authorize based on Kubernetes RBAC.
+The general flow of the `kubectl` command is as follows: On making an unauthenticated kubectl command, `kubelogin` does a browser open/redirect in order to do OIDC token negotiation.  `kubelogin` obtains an OIDC Identity Token (notice this is not an access token) and sends it to $AESproductName$ in an Authorization header.  $AESproductName$ validates the Identity Token and parses Claims from it to put into `Impersonate-XXX` headers.  $AESproductName$ then scrubs the Authorization header and replaces it with the Admin token we set up in step 1.  $AESproductName$ then forwards this request with the new Authorization and Impersonate headers to the KubeAPI to first Authenticate, and then Authorize based on Kubernetes RBAC.

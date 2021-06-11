@@ -13,11 +13,11 @@ To use Google as an IdP for Single Sign-On, you will first need to create an OAu
    http(s)://{{AMBASSADOR_URL}}/.ambassador/oauth2/redirection-endpoint
    ```
 5. Click `Create`
-6. Record the `client ID` and `client secret` in the pop-up window. You will need these when configuring Ambassador Edge Stack
+6. Record the `client ID` and `client secret` in the pop-up window. You will need these when configuring $AESproductName$
 
-## Set up Ambassador Edge Stack
+## Set up $AESproductName$
 
-After creating an OAuth client in Google, configuring Ambassador Edge Stack to make use of it for authentication is simple.
+After creating an OAuth client in Google, configuring $AESproductName$ to make use of it for authentication is simple.
 
 1. Create an [OAuth Filter](../../../topics/using/filters/oauth2) with the credentials from above:
 
@@ -34,7 +34,7 @@ After creating an OAuth client in Google, configuring Ambassador Edge Stack to m
         clientID: CLIENT_ID
         # Secret created in step 6 above
         secret: CLIENT_SECRET
-        # The protectedOrigin is the scheme and Host of your Ambassador endpoint
+        # The protectedOrigin is the scheme and Host of your $AESproductName$ endpoint
         protectedOrigins:
         - origin: http(s)://{{AMBASSADOR_URL}}
     ```
@@ -49,7 +49,7 @@ After creating an OAuth client in Google, configuring Ambassador Edge Stack to m
       rules:
           # Requires authentication on requests from any hostname
         - host: "*"
-          # Tells Ambassador Edge Stack to apply the Filter only on request to the quote /backend/get-quote/ endpoint
+          # Tells $AESproductName$ to apply the Filter only on request to the quote /backend/get-quote/ endpoint
           path: /backend/get-quote/
           # Identifies which Filter to use for the path and host above
           filters:

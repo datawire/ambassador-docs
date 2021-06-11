@@ -17,11 +17,11 @@ import Alert from '@material-ui/lab/Alert';
 
 </div>
 
-An Ingress resource is a popular way to expose Kubernetes services to the Internet. In order to use Ingress resources, you need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/). The Ambassador Edge Stack can function as a fully-fledged Ingress controller, making it easy to work with other Ingress-oriented tools within the Kubernetes ecosystem.
+An Ingress resource is a popular way to expose Kubernetes services to the Internet. In order to use Ingress resources, you need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/). $productName$ can function as a fully-fledged Ingress controller, making it easy to work with other Ingress-oriented tools within the Kubernetes ecosystem.
 
 ## When and how to use the Ingress resource
 
-If you're new to Edge Stack and to Kubernetes, we'd recommend you start with our [quickstart](../../../tutorials/getting-started/) instead of this Ingress guide. If you're a power user and need to integrate with other software that leverages the Ingress resource, read on. The Ingress specification is very basic and does not support many of the features of Edge Stack, so you'll be using both the Ingress resource and Edge Stack's Mapping resource to manage your Kubernetes services.
+If you're new to $productName$ and to Kubernetes, we'd recommend you start with our [quickstart](../../../tutorials/getting-started/) instead of this Ingress guide. If you're a power user and need to integrate with other software that leverages the Ingress resource, read on. The Ingress specification is very basic and does not support many of the features of $productName$, so you'll be using both the Ingress resource and $productName$'s Mapping resource to manage your Kubernetes services.
 
 ### What is required to use the Ingress resource?
 
@@ -42,10 +42,10 @@ If you're new to Edge Stack and to Kubernetes, we'd recommend you start with our
   Kubernetes) or the `networking.k8s.io` `apiGroup` (introduced in
   Kubernetes 1.14).
 
-- Edge Stack will need RBAC permissions to get, list, watch, and update Ingress resources.
+- $productName$ will need RBAC permissions to get, list, watch, and update Ingress resources.
 
   You can see this in the [`aes-crds.yaml`](/yaml/aes.yaml)
-  file, but this is the critical rule to add to Edge Stack's `Role` or `ClusterRole`:
+  file, but this is the critical rule to add to $productName$'s `Role` or `ClusterRole`:
 
   ```yaml
   - apiGroups: [ "extensions", "networking.k8s.io" ]
@@ -57,12 +57,12 @@ If you're new to Edge Stack and to Kubernetes, we'd recommend you start with our
   ```
 
   <Alert severity="info">
-    This is included by default in all Edge Stack installations.
+    This is included by default in all $productName$ installations.
   </Alert>
 
 - You must create your Ingress resource with the correct `ingress.class`.
 
-  Edge Stack will automatically read Ingress resources with the annotation
+  $productName$ will automatically read Ingress resources with the annotation
   `kubernetes.io/ingress.class: ambassador`.
 
 - You may need to set your Ingress resource's `ambassador-id`.
@@ -72,7 +72,7 @@ If you're new to Edge Stack and to Kubernetes, we'd recommend you start with our
 
 - You must create a Service resource with the correct `app.kubernetes.io/component` label.
 
-  Edge Stack will automatically load balance Ingress resources using the endpoint exposed 
+  $productName$ will automatically load balance Ingress resources using the endpoint exposed 
   from the Service with the annotation `app.kubernetes.io/component: ambassador-service`.
   
   ```yaml
@@ -99,17 +99,17 @@ If you're new to Edge Stack and to Kubernetes, we'd recommend you start with our
 
 ### When to use an Ingress instead of annotations or CRDs
 
-We recommend that Edge Stack be configured using CRDs. The Ingress resource is available to users who need it for integration with other ecosystem tools, or who feel that it more closely matches their workflows. However, it is important to recognize that the Ingress resource is rather more limited than the Edge Stack Mapping is (for example, the Ingress spec has no support for rewriting or for TLS origination). **When in doubt, use CRDs.**
+We recommend that $productName$ be configured using CRDs. The Ingress resource is available to users who need it for integration with other ecosystem tools, or who feel that it more closely matches their workflows. However, it is important to recognize that the Ingress resource is rather more limited than the $productName$ Mapping is (for example, the Ingress spec has no support for rewriting or for TLS origination). **When in doubt, use CRDs.**
 
 ## Ingress support
 
-Edge Stack supports basic core functionality of the Ingress resource, as defined by the [Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/) itself:
+$productName$ supports basic core functionality of the Ingress resource, as defined by the [Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/) itself:
 
-* Basic routing is supported, including the `route` specification and the default backend functionality. It's particularly easy to use a minimal Ingress to the Edge Stack diagnostic UI.
+* Basic routing is supported, including the `route` specification and the default backend functionality. It's particularly easy to use a minimal Ingress to the $productName$ diagnostic UI.
 * [TLS termination](../tls/) is supported. You can use multiple Ingress resources for SNI.
-* Using the Ingress resource in concert with Edge Stack CRDs or annotations is supported. This includes Edge Stack annotations on the Ingress resource itself.
+* Using the Ingress resource in concert with $productName$ CRDs or annotations is supported. This includes $productName$ annotations on the Ingress resource itself.
 
-Edge Stack does **not** extend the basic Ingress specification with the following exceptions:
+$productName$ does **not** extend the basic Ingress specification with the following exceptions:
 
 * The `getambassador.io/ambassador-id` annotation allows you to set [the Ambassador ID](../running/#ambassador_id) for the Ingress itself.
 
@@ -121,7 +121,7 @@ Note that if you need to set `getambassador.io/ambassador-id` on the Ingress, yo
 
 ### Ingress routes and Mappings
 
-Edge Stack actually creates Mapping objects from the Ingress route rules. These Mapping objects interact with Mappings defined in CRDs **exactly** as they would if the Ingress route rules had been specified with CRDs originally.
+$productName$ actually creates Mapping objects from the Ingress route rules. These Mapping objects interact with Mappings defined in CRDs **exactly** as they would if the Ingress route rules had been specified with CRDs originally.
 
 For example, this Ingress resource routes traffic to `/foo/` to `service1`:
 
@@ -156,7 +156,7 @@ spec:
   service: service1:80
 ```
 
-This YAML will set up Edge Stack to do canary routing where 50% of the traffic will go to `service1` and 50% will go to `service2`.
+This YAML will set up $productName$ to do canary routing where 50% of the traffic will go to `service1` and 50% will go to `service2`.
 
 ```yaml
 ---
