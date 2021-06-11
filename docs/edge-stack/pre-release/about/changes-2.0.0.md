@@ -98,7 +98,7 @@ By default, $productName$ will configure Envoy using the V3 Envoy API. In 2.0.0,
 
 ### More Performant Reconfiguration by Default
 
-The environment variable `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of the code Ambassador uses to validate and generate envoy configuration. It is enabled by default in 2.0.0.
+The environment variable `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of the code $productName$ uses to validate and generate envoy configuration. It is enabled by default in 2.0.0.
 
 ### TLS, the `ambassador` `Module`, and the `tls` `Module`
 

@@ -116,11 +116,11 @@ spec:
 - This will result in a cleartext-only $productName$ configuration, with only port 8080 active.
    - See the "Cleartext Only" section below for why this is important.
 
-### TLS using ACME (Edge Stack only)
+### TLS using ACME ($AESProductName$ only)
 
 This scenario uses ACME to get certificates for `foo.example.com` and `bar.example.com`. HTTPS traffic to either host is routed; HTTP traffic to `foo.example.com` will be redirected to HTTPS, but HTTP traffic to `bar.example.com` will be rejected outright.
 
-Since this example uses ACME, it is only supported in Edge Stack.
+Since this example uses ACME, it is only supported in $AESProductName$.
 
 ```yaml
 ---
@@ -148,7 +148,7 @@ spec:
 
 (`Mapping`s are not shown.)
 
-- Since no `Listener`s are defined, Edge Stack will create default `Listener`s on ports 8080 and 8443.
+- Since no `Listener`s are defined, $AESProductName$ will create default `Listener`s on ports 8080 and 8443.
    - Both will accept HTTPS and HTTP, and the protocol will dictate whether the requests are secure (HTTPS) or insecure (HTTP).
 - `foo-host` defaults to ACME with Let's Encrypt, since `acmeProvider.authority` is not provided.
 - `foo-host` defaults to redirecting insecure requests, since the default for `requestPolicy.insecure.action` is `Redirect`.
@@ -158,7 +158,7 @@ spec:
 
 This scenario uses TLS, but no ACME: instead, the certificate is in a Kubernetes `Secret`. HTTPS traffic to either `foo.example.com` or `bar.example.com` is routed, but this time `foo.example.com` will redirect HTTP requests, while `bar.example.com` will route them.
 
-Since this example does not use ACME, it is supported in $productName$ as well as Edge Stack.
+Since this example does not use ACME, it is supported in $productName$ as well as $AESProductName$.
 
 ```yaml
 ---
@@ -247,9 +247,9 @@ spec:
       action: Route
 ```
 
-### ACME With a TLSContext (Edge Stack Only)
+### ACME With a TLSContext ($AESProductName$ Only)
 
-In Edge Stack, you can use a `TLSContext` with ACME as well. This example is the same as "TLS using ACME", but we use a `TLSContext` to set `ALPN` information. Again, ACME is only supported in Edge Stack.
+In $AESProductName$, you can use a `TLSContext` with ACME as well. This example is the same as "TLS using ACME", but we use a `TLSContext` to set `ALPN` information. Again, ACME is only supported in $AESProductName$.
 
 ```yaml
 ---
@@ -308,7 +308,7 @@ spec:
 
 - Since we provide a `Listener`, no default `Listener`s are created.
    - This is important in this scenario! If the default `Listener`s are created, they are created to _allow_ TLS.
-      - In Edge Stack, this will result in TLS being accepted using the fallback certificate.
+      - In $AESProductName$, this will result in TLS being accepted using the fallback certificate.
       - In $productName$, since there is no fallback certficate, it will result in strange TLS errors.
 - Using an insecure action of `Route` is necessary! otherwise requests will be redirected and nothing will catch them.
 
@@ -447,7 +447,7 @@ spec:
 - We can use `X-Forwarded-Proto` for all our `Listener`s: the HTTP-only `Listener`s will set it correctly.
 - Each `Listener` can specify only one port, but there's no hardcoded limit on the number of `Listener`s you can have.
 
-### Restricting `Host`s and `Listener`s
+### Using Labels to Associate `Host`s and `Listener`s
 
 In the examples above, every `Host` is associated with every `Listener`. You can use Kubernetes labels to restrict this association.
 
@@ -594,18 +594,6 @@ spec:
 
 - We're relying on the default `Listener`s here.
 - The three `Host`s apply different insecure routing actions depending on the hostname.
-- v0: **You must use the `host` attribute of the `Mapping` to get globbing** -- a header match on `:authority` is not treated as a glob.
 - You could also do this with `host_regex`, but using `host` with globs will give better performance.
    - Being able to _not_ associate a given `Mapping` with a given `Host` when the `Mapping`'s `host` doesn't match helps a lot when you have many `Host`s.
    - Reliably determining if a regex (for the `Mapping`) matches a glob (for the `Host`) isn't really possible, so we can't prune `host_regex` `Mapping`s at all.
-
-
-`Mapping` Details
------------------
-
-The only changes to the `Mapping` are:
-
-- As described above, `host` is a glob now.
-   - This isn't a breaking change because using `*` in a `host` would never have actually matched anything before -- `*` isn't a legal character in a DNS name.
-- We reserve matches on the `X-Forwarded-Proto` header for Ambassador's use.
-   - This has actually been the case for quite awhile, we're just saying it out loud now.
