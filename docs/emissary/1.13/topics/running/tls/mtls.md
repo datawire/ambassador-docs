@@ -11,15 +11,15 @@ provide a certificate and key that the other trusts before establishing a
 connection. This action of both the client and server providing and validating
 certificates is referred to as mutual TLS. 
 
-## mTLS with Ambassador
+## mTLS with $productName$
 
-Since Ambassador is a reverse proxy acting as the entry point to your cluster,
-Ambassador is acting as the client as it proxies requests to services upstream.
+Since $productName$ is a reverse proxy acting as the entry point to your cluster,
+$productName$ is acting as the client as it proxies requests to services upstream.
 
-It is trivial to configure Ambassador to simply originate TLS connections as 
+It is trivial to configure $productName$ to simply originate TLS connections as 
 the client to upstream services by setting 
 `service: https://{{UPSTREAM_SERVICE}}` in the `Mapping` configuration. 
-However, in order to do mTLS with services upstream, Ambassador must also 
+However, in order to do mTLS with services upstream, $productName$ must also 
 have certificates to authenticate itself with the service. 
 
 To do this, we can use the `TLSContext` object to get certificates from a 
@@ -40,7 +40,7 @@ We give it `host: []` since we do not want to use this to terminate TLS
 connections from the client. We are just using this to load certificates for
 requests upstream.
 
-After loading the certificates, we can tell Ambassador when to use them by
+After loading the certificates, we can tell $productName$ when to use them by
 setting the `tls` parameter in a `Mapping`:
 
 ```yaml
@@ -54,7 +54,7 @@ spec:
   tls: upstream-context
 ```
 
-Now, when Ambassador proxies a request to `upstream-service`, it will provide
+Now, when $productName$ proxies a request to `upstream-service`, it will provide
 the certificates in the `upstream-certs` secret for authentication when 
 encrypting traffic.
 
@@ -67,9 +67,9 @@ very big challenge.
 For this reason, many organizations rely on a service mesh for their
 service-to-service authentication and encryption. 
 
-Ambassador integrates with multiple service meshes and makes it easy to
+$productName$ integrates with multiple service meshes and makes it easy to
 configure mTLS to upstream services for all of them. Click the links below to 
-see how to configure Ambassador to do mTLS with any of these service meshes:
+see how to configure $productName$ to do mTLS with any of these service meshes:
 
 - [Consul Connect](../../../../howtos/consul/#encrypted-tls)
 

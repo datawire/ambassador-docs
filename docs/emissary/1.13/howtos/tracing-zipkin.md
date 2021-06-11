@@ -1,18 +1,18 @@
 # Distributed tracing with Zipkin
 
-In this tutorial, we'll configure Ambassador Edge Stack to initiate a trace on some sample requests, and use Zipkin to visualize them.
+In this tutorial, we'll configure $productName$ to initiate a trace on some sample requests, and use Zipkin to visualize them.
 
 ## Before you get started
 
-This tutorial assumes you have already followed the Ambassador Edge Stack [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
+This tutorial assumes you have already followed $productName$ [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
 
-After completing the Getting Started guide you will have a Kubernetes cluster running Ambassador Edge Stack and the Quote of the Moment service. Let's walk through adding tracing to this setup.
+After completing the Getting Started guide you will have a Kubernetes cluster running $productName$ and the Quote of the Moment service. Let's walk through adding tracing to this setup.
 
 ## 1. Deploy Zipkin
 
-In this tutorial, you will use a simple deployment of the open-source [Zipkin](https://github.com/openzipkin/zipkin/wiki) distributed tracing system to store and visualize the Ambassador Edge Stack-generated traces. The trace data will be stored in memory within the Zipkin container, and you will be able to explore the traces via the Zipkin web UI.
+In this tutorial, you will use a simple deployment of the open-source [Zipkin](https://github.com/openzipkin/zipkin/wiki) distributed tracing system to store and visualize the $productName$-generated traces. The trace data will be stored in memory within the Zipkin container, and you will be able to explore the traces via the Zipkin web UI.
 
-First, add the following YAML to a file named `zipkin.yaml`. This configuration will create a Zipkin Deployment that uses the [openzipkin/zipkin](https://hub.docker.com/r/openzipkin/zipkin/) container image and also an associated Service. We will also include a `TracingService` that configures Ambassador Edge Stack to use the Zipkin service (running on the default port of 9411) to provide tracing support.
+First, add the following YAML to a file named `zipkin.yaml`. This configuration will create a Zipkin Deployment that uses the [openzipkin/zipkin](https://hub.docker.com/r/openzipkin/zipkin/) container image and also an associated Service. We will also include a `TracingService` that configures $productName$ to use the Zipkin service (running on the default port of 9411) to provide tracing support.
 
 ```yaml
 ---
@@ -68,11 +68,11 @@ You can deploy this configuration into your Kubernetes cluster like so:
 $ kubectl apply -f zipkin.yaml
 ```
 
-**Important:** the Ambassador Edge Stack will need to be restarted to configure itself to add the tracing header. Delete all Ambassador Edge Stack pods and let Kubernetes restart them.
+**Important:** $productName$ will need to be restarted to configure itself to add the tracing header. Delete all $productName$ pods and let Kubernetes restart them.
 
 ## 2. Generate some requests
 
-Use `curl` to generate a few requests to an existing Ambassador Edge Stack mapping. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
+Use `curl` to generate a few requests to an existing $productName$ mapping. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
 
 ```
 $ curl -L $AMBASSADOR_IP/httpbin/ip

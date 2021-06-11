@@ -1,6 +1,6 @@
-# Using Ambassador
+# Using $productName$
 
-Application development teams use Ambassador to manage edge policies associated with a specific service. This section of the documentation covers core Ambassador elements that are typically used by the application development team.
+Application development teams use $productName$ to manage edge policies associated with a specific service. This section of the documentation covers core $productName$ elements that are typically used by the application development team.
 
 * [The Project Resource](projects) The `Project` resource is the easiest way to develop a cloud-native service.
   * [Configuring Authentication](project-authentication)

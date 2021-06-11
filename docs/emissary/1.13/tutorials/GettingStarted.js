@@ -49,7 +49,7 @@ class GettingStarted extends Component {
           <ul id="QS-asideBullets">
             <div id="QS-showMacAside1" data-os="mac" className="QS-asideText">
 
-              <li>New user? Get Edgectl, the Ambassador CLI</li>
+              <li>New user? Get Edgectl, the $productName$ CLI</li>
               <div className="styles-module--CodeBlock--1UB4s">
                 <div className="QS-codeblockInstall">
                   <span className="QS-copyButton"><CopyButton content="sudo curl -fL https://metriton.datawire.io/downloads/darwin/edgectl -o /usr/local/bin/edgectl && sudo chmod a+x /usr/local/bin/edgectl">Copy</CopyButton></span>
@@ -74,7 +74,7 @@ class GettingStarted extends Component {
 
             <div id="QS-showLinuxAside1" data-os="linux" className="	
         QS-asideText">
-              <li>New user? Get Edgectl, the Ambassador CLI</li>
+              <li>New user? Get Edgectl, the $productName$ CLI</li>
               <div className="styles-module--CodeBlock--1UB4s">
                 <div className="QS-codeblockInstall">
                   <span className="QS-copyButton"><CopyButton content="sudo curl -fL https://metriton.datawire.io/downloads/linux/edgectl -o /usr/local/bin/edgectl && sudo chmod a+x /usr/local/bin/edgectl">Copy</CopyButton></span>
@@ -98,7 +98,7 @@ class GettingStarted extends Component {
             </div>
 
             <div id="QS-showWindowsAside1" data-os="windows" className="QS-asideText">
-              <li>New user? Get Edgectl, the Ambassador CLI</li>
+              <li>New user? Get Edgectl, the $productName$ CLI</li>
               <div className="styles-module--CodeBlock--1UB4s">
                 <div className="QS-codeblockInstall">
                   <button><a className="windowsDownloadButton" href="https://metriton.datawire.io/downloads/windows/edgectl.exe" rel="nofollow noopener noreferrer">Download edgectl.exe</a></button><span>&nbsp;</span>
@@ -111,7 +111,7 @@ class GettingStarted extends Component {
 
 
             <div className="QS-asideText">
-              <li className="QS-asideNoBullets">Install Ambassador Edge Stack</li>
+              <li className="QS-asideNoBullets">Install $productName$</li>
               <div className="styles-module--CodeBlock--1UB4s">
                 <div className="QS-codeblockInstall">
                   <div className="QS-copyButton"><CopyButton content="edgectl install">Copy</CopyButton></div>
@@ -280,7 +280,7 @@ class GettingStarted extends Component {
                 </div>
               </div>
 
-              <li className="QS-asideNoBullets">Install the Ambassador Edge Stack chart</li>
+              <li className="QS-asideNoBullets">Install the $productName$ chart</li>
               <div id="helmVersionWrapper">
 
                 <div id="helm2Block">
@@ -360,7 +360,7 @@ class GettingStarted extends Component {
                 </div>
               </div>
 
-              <li className="QS-asideNoBullets">Install Ambassador Edge Stack</li>
+              <li className="QS-asideNoBullets">Install $productName$</li>
               <div className="styles-module--CodeBlock--1UB4s">
                 <div className="QS-codeblockInstall">
                   <div className="QS-copyButton"><CopyButton content="edgectl install">Copy</CopyButton></div>
@@ -382,20 +382,20 @@ class GettingStarted extends Component {
         </div>
 
         <div className="QS-blackbird-image">
-          <img alt="Ambassador's OpenSource Blackbird" src="/images/features-page-bird.svg" />
+          <img alt="$productName$'s OpenSource Blackbird" src="/images/features-page-bird.svg" />
         </div>
 
         <div className="QS-Spin">
           <div className="QS-asideText">
             Take it for a spin!<br />
-            <span className="QS-spinText">➞ <a href="../../tutorials/quickstart-demo/">See how Ambassador works with a service</a></span><br />
+            <span className="QS-spinText">➞ <a href="../../tutorials/quickstart-demo/">See how $productName$ works with a service</a></span><br />
             <span id="QS-customLink" className="QS-spinText">➞ <a href="../../topics/using/">Check out custom options and integrations</a></span><br />
           </div>
         </div>
 
         <div className="QS-main">
 
-          <h2>Ambassador Edge Stack gives you</h2>
+          <h2>$productName$ gives you</h2>
           <div id="QS-mainTextSmall">
             <ul>
               <li className="QS-mainBullet" id="QS-bullet1">First-in-class Kubernetes ingress support with CRD- based configuration</li>

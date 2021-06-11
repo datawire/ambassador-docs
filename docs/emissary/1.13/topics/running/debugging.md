@@ -1,14 +1,14 @@
 # Debugging
 
-If you’re experiencing issues with the Ambassador Edge Stack and cannot diagnose the issue through the "Diagnostics" tab from the [Edge Policy Console](../../using/edge-policy-console), this document covers various approaches and advanced use cases for debugging Ambassador issues.
+If you’re experiencing issues with the $productName$ and cannot diagnose the issue through the "Diagnostics" tab from the [Edge Policy Console](../../using/edge-policy-console), this document covers various approaches and advanced use cases for debugging $productName$ issues.
 
-We assume that you already have a running Ambassador installation in the following sections.
+We assume that you already have a running $productName$ installation in the following sections.
 
-## Check Ambassador status
+## Check $productName$ status
 
 First, check to see if the Edge Policy Console is reachable. If it is successful, try to diagnose your original issue with the Console.
 
-**If it is not successful, complete the following to see if Ambassador is running:**
+**If it is not successful, complete the following to see if $productName$ is running:**
 
 1. Get a list of Pods in the `ambassador` namespace with `kubectl get pods -n ambassador`.
 
@@ -22,7 +22,7 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
     ambassador-85c4cf67b-vg6p5   1/1       Running   0          1m
     ```
 
-2. Then, check the Ambassador Deployment with the following: `kubectl get -n ambassador deployments`
+2. Then, check the $productName$ Deployment with the following: `kubectl get -n ambassador deployments`
 
     After a brief period, the terminal will print something similar to the following:
 
@@ -66,13 +66,13 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
 
 In both the Deployment Pod and the individual Pods, take the necessary action to address any discovered issues.
 
-## Review Ambassador logs
+## Review $productName$ logs
 
-The Ambassador logging can provide information on anything that might be abnormal or malfunctioning. While there may be a large amount of data to sort through, look for key errors such as the Ambassador process restarting unexpectedly, or a malformed Envoy configuration.
+$productName$ logging can provide information on anything that might be abnormal or malfunctioning. While there may be a large amount of data to sort through, look for key errors such as the $productName$ process restarting unexpectedly, or a malformed Envoy configuration.
 
 ### Log levels
 
-The Ambassador Edge Stack has two switches that will control different log levels. 
+$productName$ has two switches that will control different log levels. 
 
 #### Envoy debug logs
 Envoy debug logging shows verbose information on the actions Envoy is taking on
@@ -81,21 +81,21 @@ closed or if Envoy or the upstream service is the source of the error.
 
 You can turn on Debug mode in the [Edge Policy Console](../../using/edge-policy-console)
 
-#### Ambassador Edge Stack debug logging
+#### $productName$ debug logging
 
-The Ambassador Edge Stack is built on top of Emissary Ingress and runs an
+$AESproductName$ is built on top of $OSSproductName$ and runs an
 additional process for authentication, rate limiting, the developer portal,
 ACME, etc. Debug logging for this process will give more information on why you
 may see errors with these functions.
 
-You can adjust the AES log level by setting the 
+You can adjust the $AESproductName$ log level by setting the 
 [`AES_LOG_LEVEL` environment variable](../aes-extensions/#aes_log_level).
 
 ### Viewing logs
 
 You can turn on Debug mode in the [Edge Policy Console](../../using/edge-policy-console), which generates verbose logging data that can be useful when trying to find a subtle error or bug.
 
-1. Use the following command to target an individual Ambassador Pod: `kubectl get pods -n ambassador`
+1. Use the following command to target an individual $productName$ Pod: `kubectl get pods -n ambassador`
 
     The terminal will print something similar to the following:
 
@@ -127,16 +127,16 @@ The terminal will print something similar to the following:
 
 ## Examine Pod and container contents
 
-You can examine the contents of the Ambassador Pod for issues, such as if volume mounts are correct and TLS certificates are present in the required directory, to determine if the Pod has the latest Ambassador configuration, or if the generated Envoy configuration is correct or as expected. In these instructions, we will look for problems related to the Envoy configuration.
+You can examine the contents of the $productName$ Pod for issues, such as if volume mounts are correct and TLS certificates are present in the required directory, to determine if the Pod has the latest $productName$ configuration, or if the generated Envoy configuration is correct or as expected. In these instructions, we will look for problems related to the Envoy configuration.
 
-1. To look into an Ambassador Pod, use the container shell with the `kube-exec` and the `/bin/sh` commands. For example, `kubectl exec -it -n ambassador <ambassador-pod-name> -- /bin/sh`
-2. Determine the latest configuration. If you haven't overridden the configuration directory, the latest configuration will be in `/ambassador/snapshots`. If you have overridden it, Ambassador saves configurations in `$AMBASSADOR_CONFIG_BASE_DIR/snapshots`.
+1. To look into an $productName$ Pod, use the container shell with the `kube-exec` and the `/bin/sh` commands. For example, `kubectl exec -it -n ambassador <ambassador-pod-name> -- /bin/sh`
+2. Determine the latest configuration. If you haven't overridden the configuration directory, the latest configuration will be in `/ambassador/snapshots`. If you have overridden it, $productName$ saves configurations in `$AMBASSADOR_CONFIG_BASE_DIR/snapshots`.
 
     In the snapshots directory:
 
-    * `snapshot.yaml` contains the full input configuration that Ambassador has found;
-    * `aconf.json` contains the Ambassador configuration extracted from the snapshot;
-    * `ir.json` contains the IR constructed from the Ambassador configuration; and
+    * `snapshot.yaml` contains the full input configuration that $productName$ has found;
+    * `aconf.json` contains the $productName$ configuration extracted from the snapshot;
+    * `ir.json` contains the IR constructed from the $productName$ configuration; and
     * `econf.json`contains the Envoy configuration generated from the IR.
 
     The Envoy configuration is then split into `$AMBASSADOR_CONFIG_BASE_DIR/bootstrap-ads.json` and `$AMBASSADOR_CONFIG_BASE_DIR/envoy/envoy.json`, which are the actual input files handed to Envoy.
@@ -146,7 +146,7 @@ You can examine the contents of the Ambassador Pod for issues, such as if volume
 5. If something is wrong with `snapshot` or `aconf`, there is an issue with your configuration. If something is wrong with `ir` or `econf`, you should [open an issue on Github](https://github.com/datawire/ambassador/issues/new/choose).
 6. To find the main configuration for Envoy, run: `$AMBASSADOR_CONFIG_BASE_DIR/envoy/envoy.json`.
 7. For the bootstrap configuration, which has details about Envoy statistics, logging, and auth, run: `$AMBASSADOR_CONFIG_BASE_DIR/bootstrap-ads.json`.
-8. For further details, you can print the Envoy configuration that is generated during the Ambassador configuration. The file will be titled `envoy-N.json` where N matches the number of the `ambassador-config-N` directory number. Run the following command: `# cat envoy-2.json`
+8. For further details, you can print the Envoy configuration that is generated during the $productName$ configuration. The file will be titled `envoy-N.json` where N matches the number of the `ambassador-config-N` directory number. Run the following command: `# cat envoy-2.json`
 
     The terminal will print something similar to the following:
 

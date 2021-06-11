@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
   - [Architecture overview](#architecture-overview)
   - [Installing consul](#installing-consul)
   - [Getting started](#getting-started)
-  - [Configuring ambassador](#configuring-ambassador)
+  - [Configuring $productName$](#configuring-ambassador)
   - [Routing to consul services](#routing-to-consul-services)
   - [Consul connector and encrypted TLS](#consul-connector-and-encrypted-tls)
   - [Environment variables](#environment-variables)
@@ -19,17 +19,17 @@ import Alert from '@material-ui/lab/Alert';
 </div>
 
 
-[Consul](https://www.consul.io) is a widely used service mesh. You can use Consul with Ambassador Edge Stack, as it natively supports Consul for service discovery and end-to-end TLS (including mTLS between services). This capability is particularly useful when deploying Ambassador Edge Stack in so-called hybrid clouds, where applications are deployed on VMs and Kubernetes. In this environment, Ambassador Edge Stack can securely route over TLS to any application regardless of where it is deployed.
+[Consul](https://www.consul.io) is a widely used service mesh. You can use Consul with $productName$, as it natively supports Consul for service discovery and end-to-end TLS (including mTLS between services). This capability is particularly useful when deploying $productName$ in so-called hybrid clouds, where applications are deployed on VMs and Kubernetes. In this environment, $productName$ can securely route over TLS to any application regardless of where it is deployed.
 
 ## Architecture overview
 
-In this architecture, Consul serves as the source of truth for your entire data center, tracking available endpoints, service configuration, and secrets for TLS encryption. New applications and services automatically register themselves with Consul using the Consul agent or API. When a request is sent through Ambassador Edge Stack, Ambassador Edge Stack sends the request to an endpoint based on the data in Consul.
+In this architecture, Consul serves as the source of truth for your entire data center, tracking available endpoints, service configuration, and secrets for TLS encryption. New applications and services automatically register themselves with Consul using the Consul agent or API. When a request is sent through $productName$, $productName$ sends the request to an endpoint based on the data in Consul.
 
 ![ambassador-consul](../../images/consul-ambassador.png)
 
 ## Installing consul
 
-In this guide, you will register a service with Consul and use Ambassador Edge Stack to dynamically route requests to that service based on Consul's service discovery data. If you already have Ambassador Edge Stack installed, you will just need to configure the ConsulResolver in the [Configuring Ambassador section](#configuring-ambassador).
+In this guide, you will register a service with Consul and use $productName$ to dynamically route requests to that service based on Consul's service discovery data. If you already have $productName$ installed, you will just need to configure the ConsulResolver in the [Configuring $productName$ section](#configuring-ambassador).
 
 1. First, install and configure Consul. We will provide the Consul installation values and commands below for all platforms. Make sure to check the Consul documentation for any setup steps specific to your platform before installing. Consul can be deployed anywhere in your data center. Below you can find setup guides for some of the more popular Kubernetes platforms.
 
@@ -71,7 +71,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
    > Note: you are free to change the value of the `datacenter` field in the install values. This will be the name of your Consul Datacenter.
 
   <Alert severity="warning">
-    <strong>WARNING:</strong> In Ambassador Edge Stack versions 1.10.0 through 1.11.1, changing the value of the <code>datacenter</code> will not work unless you enable the <code>AMBASSADOR_LEGACY_MODE</code> environment variable. It is recommended to upgrade to the latest Edge Stack version. if you are still using the versions mentioned above.
+    <strong>WARNING:</strong> In $productName$ versions 1.10.0 through 1.11.1, changing the value of the <code>datacenter</code> will not work unless you enable the <code>AMBASSADOR_LEGACY_MODE</code> environment variable. It is recommended to upgrade to the latest $productName$ version. if you are still using the versions mentioned above.
   </Alert>
 
 4. Install Consul with Helm using the `consul-values.yaml` values file we just created.
@@ -85,17 +85,17 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
     <strong>Note:</strong> The third value in the install command we just used (<code>hashicorp</code>) is the name of your consul install. You can change this if you have a specific reason to, and you will see that the names of your Consul pods and services will change to include this value instead of <code>hashicorp</code>
   </Alert>
 
-## Configuring ambassador
+## Configuring $productName$
 
-1. Deploy Ambassador Edge Stack. Note: If this is your first time deploying Ambassador Edge Stack, reviewing the [quick start guide](../../tutorials/getting-started) is strongly recommended.
+1. Deploy $productName$. Note: If this is your first time deploying $productName$, reviewing the [quick start guide](../../tutorials/getting-started) is strongly recommended.
 
    ```
    kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
    ```
 
-   If you're on GKE, or haven't previously created the Ambassador Edge Stack service, please see the [quick start guide](../../tutorials/getting-started).
+   If you're on GKE, or haven't previously created the $productName$ service, please see the [quick start guide](../../tutorials/getting-started).
 
-2. Configure Ambassador Edge Stack to look for services registered to Consul by creating the ConsulResolver:
+2. Configure $productName$ to look for services registered to Consul by creating the ConsulResolver:
 
     ```yaml
     ---
@@ -115,7 +115,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 
 
 
-   This will tell Ambassador Edge Stack that Consul is a service discovery endpoint. Save the configuration to a file (e.g., `consul-resolver.yaml`, and apply this configuration with `kubectl apply -f consul-resolver.yaml`. For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
+   This will tell $productName$ that Consul is a service discovery endpoint. Save the configuration to a file (e.g., `consul-resolver.yaml`, and apply this configuration with `kubectl apply -f consul-resolver.yaml`. For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
     
 
     
@@ -125,7 +125,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 
 ## Routing to consul services
 
-You'll now register a demo application with Consul, and show how Ambassador Edge Stack can route to this application using endpoint data from Consul. To simplify this tutorial, you'll deploy the application in Kubernetes, although in practice this application can be deployed anywhere in your data center (e.g., on VMs).
+You'll now register a demo application with Consul, and show how $productName$ can route to this application using endpoint data from Consul. To simplify this tutorial, you'll deploy the application in Kubernetes, although in practice this application can be deployed anywhere in your data center (e.g., on VMs).
 
 
 1. Deploy the Quote demo application. The Quote application contains code to automatically register itself with Consul, using the CONSUL_IP and POD_IP environment variables specified within the Quote container spec.
@@ -217,7 +217,7 @@ Save the above YAML to a file named `quote-mapping.yaml`, and use `kubectl apply
 
    - `service` the service name you specified in the quote deployment
    - `resolver` must be set to the ConsulResolver that you created in the previous step
-   - `load_balancer` must be set to configure Ambassador Edge Stack to route directly to the Quote application endpoint(s) that are retrieved from Consul.
+   - `load_balancer` must be set to configure $productName$ to route directly to the Quote application endpoint(s) that are retrieved from Consul.
 
 
 1. Send a request to the `quote-consul` API.
@@ -243,9 +243,9 @@ Save the above YAML to a file named `quote-mapping.yaml`, and use `kubectl apply
 
 ## Consul connector and encrypted TLS
 
-Ambassador Edge Stack can also use certificates stored in Consul to originate encrypted TLS connections from Ambassador Edge Stack to the Consul service mesh. This requires the use of the Ambassador Edge Stack Consul connector. The following steps assume you've already set up Consul for service discovery, as detailed above.
+$productName$ can also use certificates stored in Consul to originate encrypted TLS connections from $productName$ to the Consul service mesh. This requires the use of the $productName$ Consul connector. The following steps assume you've already set up Consul for service discovery, as detailed above.
 
-1. The Ambassador Consul connector retrieves the TLS certificate issued by the Consul CA and stores it in a Kubernetes secret for Ambassador Edge Stack to use. Deploy the Ambassador Edge Stack Consul Connector with `kubectl`:
+1. The $productName$ Consul connector retrieves the TLS certificate issued by the Consul CA and stores it in a Kubernetes secret for $productName$ to use. Deploy $productName$ Consul Connector with `kubectl`:
 
    ```
    kubectl apply -f https://www.getambassador.io/yaml/consul/ambassador-consul-connector.yaml
@@ -255,7 +255,7 @@ This will install into your cluster:
 
    - RBAC resources.
    - The Consul connector service.
-   - A TLSContext named `ambassador-consul` to load the `ambassador-consul-connect` secret into Ambassador Edge Stack.
+   - A TLSContext named `ambassador-consul` to load the `ambassador-consul-connect` secret into $productName$.
 
 <Alert severity="info">
   <strong>Note:</strong> If you have previously installed the consul connector in the <code>default</code> namespace in your cluster, you'll want to clean up the old (and now unused) resources in the <code>default</code> namespace. If you are installing the consul connector in your cluster for the first time, you can ignore this and move on to step two.
@@ -353,9 +353,9 @@ you should sub in that secret name value for `ambassador-consul-connect` in the 
         policy: round_robin
     ```
     - `service` must be set to the name of the Consul sidecar service. You can view this with `kubectl get svc -A` it should follow the format of `{container name}-sidecar-proxy`.
-    - `resolver` must be set to the ConsulResolver created when configuring Ambassador Edge Stack
+    - `resolver` must be set to the ConsulResolver created when configuring $productName$
     - `tls` must be set to the TLSContext storing the Consul mTLS certificates (e.g. `ambassador-consul`)
-    - `load_balancer` must be set to configure Ambassador Edge Stack to route directly to the application endpoint(s) that are retrieved from Consul
+    - `load_balancer` must be set to configure $productName$ to route directly to the application endpoint(s) that are retrieved from Consul
   
 
     Copy this YAML to a file named `quote-connect-mapping.yaml` and apply it to your cluster with `kubectl apply -f quote-connect-mapping.yaml`.
@@ -381,7 +381,7 @@ The Consul Connector can be configured with the following environment variables.
 
 | Environment Variable | Description | Default |
 | -------------------- | ----------- | ------- |
-| _AMBASSADOR_ID | Set the Ambassador ID so multiple instances of this integration can run per-Cluster when there are multiple Ambassadors (Required if `AMBASSADOR_ID` is set in your Ambassador deployment) | `""` |
+| _AMBASSADOR_ID | Set the Ambassador ID so multiple instances of this integration can run per-Cluster when there are multiple $productNamePlural$ (Required if `AMBASSADOR_ID` is set in your $productName$ deployment) | `""` |
 | _CONSUL_HOST | Set the IP or DNS name of the target Consul HTTP API server | `127.0.0.1` |
 | _CONSUL_PORT | Set the port number of the target Consul HTTP API server | `8500` |
 | _AMBASSADOR_TLS_SECRET_NAME | Set the name of the Kubernetes `v1.Secret` created by this program that contains the Consul-generated TLS certificate. | `$AMBASSADOR_ID-consul-connect` |
@@ -389,4 +389,4 @@ The Consul Connector can be configured with the following environment variables.
 
 ## More information
 
-For more about Ambassador Edge Stack's integration with Consul, read the [service discovery configuration](../../topics/running/resolvers) documentation.
+For more about $productName$'s integration with Consul, read the [service discovery configuration](../../topics/running/resolvers) documentation.

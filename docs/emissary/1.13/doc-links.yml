@@ -4,18 +4,18 @@
 - title: Products
   collapsable: false
   items:
-    - title: Edge Stack
+    - title: $productName$
       items:
         - title: Quick start
           link: /tutorials/getting-started
-        - title: Install Edge Stack
+        - title: Install $productName$
           link: /topics/install/
           items:
             - title: Install with Helm
               link: /topics/install/helm
-            - title: Upgrade to the Ambassador Edge Stack
+            - title: Upgrade to the $AESproductName$
               link: /topics/install/upgrade-to-edge-stack
-            - title: Install the Ambassador API Gateway
+            - title: Install the $OSSproductName$
               link: /topics/install/install-ambassador-oss
             - title: Install with Docker
               link: /topics/install/docker
@@ -23,20 +23,20 @@
               link: /topics/install/bare-metal
             - title: Install manually
               link: /topics/install/yaml-install
-            - title: The Edge Stack Operator
+            - title: The $AESproductName$ Operator
               link: /topics/install/aes-operator
         - title: Core concepts
           link: /topics/concepts/
           items:
             - title: Kubernetes network architecture
               link: /topics/concepts/kubernetes-network-architecture
-            - title: 'The Ambassador operating model: GitOps and continuous delivery'
+            - title: 'The $productName$ operating model: GitOps and continuous delivery'
               link: /topics/concepts/gitops-continuous-delivery
             - title: Progressive delivery
               link: /topics/concepts/progressive-delivery
             - title: Microservices API gateways
               link: /topics/concepts/microservices-api-gateways
-            - title: Edge Stack architecture
+            - title: $productName$ architecture
               link: /topics/concepts/architecture
             - title: Rate limiting at the edge
               link: /topics/concepts/rate-limiting-at-the-edge
@@ -141,19 +141,19 @@
                           link: /topics/running/tls/origination
                 - title: The Module resource
                   link: /topics/running/ambassador
-            - title: Deploying Ambassador
+            - title: Deploying $productName$
               items:
                 - title: Deployment architecture
                   link: /topics/running/ambassador-deployment
-                - title: The Ambassador container
+                - title: The $productName$ container
                   link: /topics/running/environment
-                - title: Edge Stack with AWS
+                - title: $productName$ with AWS
                   link: /topics/running/ambassador-with-aws
-                - title: Edge Stack with GKE
+                - title: $productName$ with GKE
                   link: /topics/running/ambassador-with-gke
                 - title: Advanced deployment configuration
                   link: /topics/running/running
-                - title: Performance and scaling Ambassador
+                - title: Performance and scaling $productName$
                   link: /topics/running/scaling
             - title: Edge policy management
               items:

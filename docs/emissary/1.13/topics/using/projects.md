@@ -1,10 +1,10 @@
 # Introduction to the `Project` resource
 
-## This feature is DEPRECATED. Consider the [Argo Rollouts integration](/docs/argo/latest/quick-start) with Ambassador Edge Stack.
+## This feature is DEPRECATED. Consider the [Argo Rollouts integration](/docs/argo/latest/quick-start) with $productName$.
 
 Please note that the Project functionality is disabled by default. See [The Project Quickstart](../../../tutorials/projects/) for instructions on enabling the Project Controller and setting up your first `Project`.
 
-Ambassador is designed around a [declarative, self-service management model](../../concepts/gitops-continuous-delivery). The `Project` resource takes self-service, declarative configuration, and gitops to the next level by enabling developers to stage and deploy code with nothing more than a github repository. 
+$productName$ is designed around a [declarative, self-service management model](../../concepts/gitops-continuous-delivery). The `Project` resource takes self-service, declarative configuration, and gitops to the next level by enabling developers to stage and deploy code with nothing more than a github repository. 
 
 ## The `Project` Resource
 

@@ -1,8 +1,8 @@
 # Automatic retries
 
-Sometimes requests fail. When these requests fail for transient issues, Ambassador Edge Stack can automatically retry the request.
+Sometimes requests fail. When these requests fail for transient issues, $productName$ can automatically retry the request.
 
-Retry policy can be set for all Ambassador Edge Stack mappings in the [`ambassador Module`](../../running/ambassador), or set per [`Mapping`](../mappings#configuring-mappings). Generally speaking, you should set `retry policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
+Retry policy can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`Mapping`](../mappings#configuring-mappings). Generally speaking, you should set `retry policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
 
 ## Configuring retries
 
@@ -17,7 +17,7 @@ retry_policy:
 
 ### `retry_on`
 
-(Required) Specifies the condition under which Ambassador Edge Stack retries a failed request.
+(Required) Specifies the condition under which $productName$ retries a failed request.
 
 | Value | Description |
 | --- | --- |
@@ -26,7 +26,7 @@ retry_policy:
 |`connect-failure`| Retries on a connection failure to the upstream service (included in `5xx`)
 |`retriable-4xx`| Retries on a retriable 4xx response (currently only 409)
 |`refused-stream`| Retires if the upstream service sends a REFUSED_STREAM error (included in `5xx`)
-|`retriable-status-codes`| Retries based on status codes set in the `x-envoy-retriable-status-codes` header. If that header isn't set, Ambassador will not retry the request.
+|`retriable-status-codes`| Retries based on status codes set in the `x-envoy-retriable-status-codes` header. If that header isn't set, $productName$ will not retry the request.
 
  For more details on each of these values, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.9.0/configuration/http_filters/router_filter#x-envoy-retry-on).
 

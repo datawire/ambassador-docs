@@ -18,7 +18,7 @@ There are a number of different strategies for progressive delivery. These inclu
 
 Observability is a critical requirement for testing in production. Regardless of progressive delivery strategy, collecting key metrics around latency, traffic, errors, and saturation (the [“Four Golden Signals of Monitoring”](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/#xref_monitoring_golden-signals)) provides valuable insight into the stability and performance of a new version of the service. Moreover, application developers can compare the metrics (e.g., latency) between the production version and an updated version. If the metrics are similar, then updates can proceed with much greater confidence.
 
-Ambassador supports a variety of strategies for progressive delivery. These strategies are discussed in further detail below.
+$productName$ supports a variety of strategies for progressive delivery. These strategies are discussed in further detail below.
 
 ### Canary releases
 

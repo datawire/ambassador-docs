@@ -1,10 +1,10 @@
 # TLS origination
 
-Sometimes you may want traffic from Ambassador Edge Stack to your services to be encrypted. For the cases where terminating TLS at the ingress is not enough, Ambassador Edge Stack can be configured to originate TLS connections to your upstream services.
+Sometimes you may want traffic from $productName$ to your services to be encrypted. For the cases where terminating TLS at the ingress is not enough, $productName$ can be configured to originate TLS connections to your upstream services.
 
 ## Basic configuration
 
-Telling Ambassador Edge Stack to talk to your services over HTTPS is easily configured in the `Mapping` definition by setting `https://` in the `service` field.
+Telling $productName$ to talk to your services over HTTPS is easily configured in the `Mapping` definition by setting `https://` in the `service` field.
 
 ```yaml
 ---
@@ -19,7 +19,7 @@ spec:
 
 ## Advanced configuration using a `TLSContext`
 
-If your upstream services require more than basic HTTPS support (e.g. minimum TLS version support or SNI support) you can create a `TLSContext` for Ambassador Edge Stack to use when originating TLS.
+If your upstream services require more than basic HTTPS support (e.g. minimum TLS version support or SNI support) you can create a `TLSContext` for $productName$ to use when originating TLS.
 
 ```yaml
 ---
@@ -33,7 +33,7 @@ spec:
   sni: some-sni-hostname
 ```
 
-Configure Ambassador Edge Stack to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`
+Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`
 
 ```yaml
 ---
@@ -47,7 +47,7 @@ spec:
   tls: tls-context
 ```
 
-The `example-service` service must now support TLS v1.3 for Ambassador Edge Stack to connect.
+The `example-service` service must now support TLS v1.3 for $productName$ to connect.
 
 **Note**:
 

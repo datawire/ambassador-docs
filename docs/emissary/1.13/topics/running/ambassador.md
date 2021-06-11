@@ -29,7 +29,7 @@ kind:  Module
 metadata:
   name:  ambassador
 spec:
-# Use ambassador_id only if you are using multiple instances of Edge Stack in the same cluster.
+# Use ambassador_id only if you are using multiple instances of $productName$ in the same cluster.
 # See below for more information.
   ambassador_id: "<ambassador_id>"
   config:
@@ -62,7 +62,7 @@ envoy_log_format:
 
 ##### Error response overrides
 
-Defines error response overrides for 4XX and 5XX response codes with `error_response_overrides`. By default, Ambassador will pass through error responses without modification, and errors generated locally will use Envoy's default response body, if any. 
+Defines error response overrides for 4XX and 5XX response codes with `error_response_overrides`. By default, $productName$ will pass through error responses without modification, and errors generated locally will use Envoy's default response body, if any. 
 
 See [using error response overrides](../custom-error-responses) for usage details.
 
@@ -74,7 +74,7 @@ error_response_overrides:
 ```
 
 ##### Forward client cert details
-Add the `X-Forwarded-Client-Cert` header on upstream requests, which contains information about the TLS client certificate verified by Ambassador. 
+Add the `X-Forwarded-Client-Cert` header on upstream requests, which contains information about the TLS client certificate verified by $productName$. 
 
 See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto.html#extensions-filters-network-http-connection-manager-v3-httpconnectionmanager-setcurrentclientcertdetails) for more information.
 
@@ -101,7 +101,7 @@ set_current_client_cert_details: SANITIZE
 
 ##### Suppress Envoy headers
 
-If true, Ambassador will not emit certain additional headers to HTTP requests and responses. 
+If true, $productName$ will not emit certain additional headers to HTTP requests and responses. 
 
 For the exact set of headers covered by this config, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#config-http-filters-router-headers-set)
 
@@ -121,7 +121,7 @@ envoy_validation_timeout: 30
 
 ##### Ambassador ID
 
-Use only if you are using multiple instances of Ambassador in the same cluster. See [this page](../running/#ambassador_id) for more information.
+Use only if you are using multiple instances of $productName$ in the same cluster. See [this page](../running/#ambassador_id) for more information.
 
 ```yaml
 ambassador_id: "<ambassador_id>"
@@ -129,7 +129,7 @@ ambassador_id: "<ambassador_id>"
 
 ##### Defaults
 
-The `defaults` element is a dictionary of default values that will be applied to various Ambassador resources. 
+The `defaults` element is a dictionary of default values that will be applied to various $productName$ resources. 
 
 See [using defaults](../../using/defaults) for more information.
 
@@ -146,7 +146,7 @@ Enable the gRPC-http11 bridge
 enable_grpc_http11_bridge: true
 ```
 
-Ambassador supports bridging HTTP/1.1 clients to backend gRPC servers. When an HTTP/1.1 connection is opened and the request content type is `application/grpc`, Ambassador will buffer the response and translate into gRPC requests. 
+$productName$ supports bridging HTTP/1.1 clients to backend gRPC servers. When an HTTP/1.1 connection is opened and the request content type is `application/grpc`, $productName$ will buffer the response and translate into gRPC requests. 
 
 For more details on the translation process, see the [Envoy gRPC HTTP/1.1 bridge documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_filters/grpc_http1_bridge_filter.html). This setting can be enabled by setting `enable_grpc_http11_bridge: true`.
 
@@ -160,7 +160,7 @@ enable_grpc_web: true
 
 gRPC is a binary HTTP/2-based protocol. While this allows high performance, it is problematic for any programs that cannot speak raw HTTP/2 (such as JavaScript in a browser). gRPC-Web is a JSON and HTTP-based protocol that wraps around the plain gRPC to alleviate this problem and extend benefits of gRPC to the browser, at the cost of performance.
 
-The gRPC-Web specification requires a server-side proxy to translate between gRPC-Web requests and gRPC backend services. Ambassador can serve as the service-side proxy for gRPC-Web when `enable_grpc_web: true` is set. 
+The gRPC-Web specification requires a server-side proxy to translate between gRPC-Web requests and gRPC backend services. $productName$ can serve as the service-side proxy for gRPC-Web when `enable_grpc_web: true` is set. 
 
 Find more on the [gRPC Web client GitHub repo](https://github.com/grpc/grpc-web).
 
@@ -249,7 +249,7 @@ max_request_headers_kb: None
 
 Array of header names whose casing should be forced, both when proxied to upstream services and when returned downstream to clients. For every header that matches (case insensitively) to an element in this array, the resulting header name is forced to the provided casing in the array. Cannot be used together with 'proper_case'. This feature provides overrides for Envoy's normal [header casing rules](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/header_casing).
 
-Enables overriding the case of response headers returned by Ambassador. The `header_case_overrides` field is an array of header names. When Ambassador handles response headers that match any of these headers, matched case-insensitively, they will be rewritten to use their respective case-sensitive names. For example, the following configuration will force response headers that match `X-MY-Header` and `X-EXPERIMENTAL` to use that exact casing, regardless of the original case in the upstream response.
+Enables overriding the case of response headers returned by $productName$. The `header_case_overrides` field is an array of header names. When $productName$ handles response headers that match any of these headers, matched case-insensitively, they will be rewritten to use their respective case-sensitive names. For example, the following configuration will force response headers that match `X-MY-Header` and `X-EXPERIMENTAL` to use that exact casing, regardless of the original case in the upstream response.
 
 ```yaml
 header_case_overrides:
@@ -257,7 +257,7 @@ header_case_overrides:
 - X-EXPERIMENTAL
 ```
 
-If the upstream service responds with `x-my-header: 1`, Ambasasdor will return `X-MY-Header: 1` to the client. Similarly, if the upstream service responds with `X-Experimental: 1`, Ambasasdor will return `X-EXPERIMENTAL: 1` to the client. Finally, if the upstream service responds with a header for which there is no header case override, Ambassador will return the default, lowercase header.
+If the upstream service responds with `x-my-header: 1`, Ambasasdor will return `X-MY-Header: 1` to the client. Similarly, if the upstream service responds with `X-Experimental: 1`, Ambasasdor will return `X-EXPERIMENTAL: 1` to the client. Finally, if the upstream service responds with a header for which there is no header case override, $productName$ will return the default, lowercase header.
 
 This configuration is helpful when dealing with clients that are sensitive to specific HTTP header casing. In general, this configuration should be avoided, if possible, in favor of updating clients to work correctly with HTTP headers in a case-insensitive way.
 
@@ -276,7 +276,7 @@ prune_unreachable_routes: false
 ```
 
 ##### Strip matching host port
-If true, Ambassador will strip the port from host/authority headers before processing and routing the request. This only applies if the port matches the underlying Envoy listener port.
+If true, $productName$ will strip the port from host/authority headers before processing and routing the request. This only applies if the port matches the underlying Envoy listener port.
 
 ```yaml
 strip_matching_host_port: true
@@ -291,7 +291,7 @@ strip_matching_host_port: true
 
 ##### Envoy's admin port
 
-The port where Ambassador's Envoy will listen for low-level admin requests. You should almost never need to change this.
+The port where $productName$'s Envoy will listen for low-level admin requests. You should almost never need to change this.
 
 ```yaml
 admin_port: 8001
@@ -313,14 +313,14 @@ For more details on the Lua API, see the [Envoy Lua filter documentation](https:
 Some caveats around the embedded scripts:
 
 * They run in-process, so any bugs in your Lua script can break every request
-* They're inlined in the Ambassador Edge Stack YAML, so it is recommended to not write complex logic in here
+* They're inlined in the $productName$ YAML, so it is recommended to not write complex logic in here
 * They're run on every request/response to every URL
 
-If you need more flexible and configurable options, Ambassador Edge Stack supports a [pluggable Filter system](../../using/filters/).
+If you need more flexible and configurable options, $productName$ supports a [pluggable Filter system](../../using/filters/).
 
 ##### Merge slashes
 
-If true, Ambassador will merge adjacent slashes for the purpose of route matching and request filtering. For example, a request for `//foo///bar` will be matched to a Mapping with prefix `/foo/bar`.
+If true, $productName$ will merge adjacent slashes for the purpose of route matching and request filtering. For example, a request for `//foo///bar` will be matched to a Mapping with prefix `/foo/bar`.
 
 ```yaml
 merge_slashes: true
@@ -328,7 +328,7 @@ merge_slashes: true
 
 ##### Override default ports
 
-If present, this sets the port Ambassador listens on for microservice access. If not present, Ambassador will use 8443 if TLS is enabled and 8080 if it is not.
+If present, this sets the port $productName$ listens on for microservice access. If not present, $productName$ will use 8443 if TLS is enabled and 8080 if it is not.
 
 ```yaml
 service_port: 1138
@@ -338,13 +338,13 @@ service_port: 1138
 
 **These features are deprecated.**
 
-If `regex_type` is unset (the default), or is set to any value other than `unsafe`, Ambassador Edge Stack will use the [RE2](https://github.com/google/re2/wiki/Syntax) regular expression engine. This engine is designed to support most regular expressions, but keep bounds on execution time. **RE2 is the recommended regular expression engine.**
+If `regex_type` is unset (the default), or is set to any value other than `unsafe`, $productName$ will use the [RE2](https://github.com/google/re2/wiki/Syntax) regular expression engine. This engine is designed to support most regular expressions, but keep bounds on execution time. **RE2 is the recommended regular expression engine.**
 
-If `regex_type` is set to `unsafe`, Ambassador Edge Stack will use the [modified ECMAScript](https://en.cppreference.com/w/cpp/regex/ecmascript) regular expression engine. Please migrate your regular expressions to be compatible with RE2.
+If `regex_type` is set to `unsafe`, $productName$ will use the [modified ECMAScript](https://en.cppreference.com/w/cpp/regex/ecmascript) regular expression engine. Please migrate your regular expressions to be compatible with RE2.
 
-##### Use Ambassador namespace for service resolution
+##### Use $productName$ namespace for service resolution
 
-Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them  For example, a Mapping in namespace `foo` will look for its service in namespace `foo`. If true, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace.
+Controls whether $productName$ will resolve upstream services assuming they are in the same namespace as the element referring to them  For example, a Mapping in namespace `foo` will look for its service in namespace `foo`. If true, $productName$ will resolve the upstream services assuming they are in the same namespace as $productName$, unless the service explicitly mentions a different namespace.
 
 ```yaml
 use_ambassador_namespace_for_service_resolution: false
@@ -358,8 +358,8 @@ use_ambassador_namespace_for_service_resolution: false
 
 Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  
 
-- Both the API Gateway and the Edge Stack provide low-level diagnostics at `/ambassador/v0/diag/`.
-- The Ambassador Edge Stack also provides the higher-level Edge Policy Console at `/edge_stack/admin/`.
+- Both $OSSproductName$ and $AESproductName$ provide low-level diagnostics at `/ambassador/v0/diag/`.
+- $AESproductName$ also provides the higher-level Edge Policy Console at `/edge_stack/admin/`.
 
 By default, both services are enabled.
 
@@ -370,7 +370,7 @@ diagnostics:
   enabled: false
 ```
 
-With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and `/ambassador/v0/diag/` is reachable from inside the Ambassador Pod at `https://localhost:8877`. You can use Kubernetes port forwarding to set up remote access to the diagnostics page temporarily:
+With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and `/ambassador/v0/diag/` is reachable from inside the $productName$ Pod at `https://localhost:8877`. You can use Kubernetes port forwarding to set up remote access to the diagnostics page temporarily:
 
 ```
 kubectl port-forward -n ambassador deploy/ambassador 8877
@@ -389,7 +389,7 @@ diagnostics:
 
 ##### StatsD
 
-Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. 
+Configures $productName$ statistics. These values can be set in the $productName$ module or in an environment variable. 
 
 For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd).
 
@@ -409,16 +409,16 @@ The default is false since the PROXY protocol is not compatible with HTTP.
 
 ##### Enable IPv4 and IPv6
 
-Sets whether Edge Stack should do IPv4 and/or IPv6 DNS lookups when contacting services. IPv4 defaults to true and IPv6 defaults to false. Either can be overridden in a [`Mapping`](../../using/mappings). 
+Sets whether $productName$ should do IPv4 and/or IPv6 DNS lookups when contacting services. IPv4 defaults to true and IPv6 defaults to false. Either can be overridden in a [`Mapping`](../../using/mappings). 
 
 ```yaml
 enable_ipv4: true
 enable_ipv6: false
 ```
 
-If both IPv4 and IPv6 are enabled, Ambassador Edge Stack will prefer IPv6. This can have strange effects if Ambassador Edge Stack receives `AAAA` records from a DNS lookup, but the underlying network of the pod doesn't actually support IPv6 traffic. For this reason, the default is IPv4 only.
+If both IPv4 and IPv6 are enabled, $productName$ will prefer IPv6. This can have strange effects if $productName$ receives `AAAA` records from a DNS lookup, but the underlying network of the pod doesn't actually support IPv6 traffic. For this reason, the default is IPv4 only.
 
-A Mapping can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in a Mapping, the values here are used. Most Ambassador Edge Stack installations will probably be able to avoid overriding these settings in Mappings.
+A Mapping can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in a Mapping, the values here are used. Most $productName$ installations will probably be able to avoid overriding these settings in Mappings.
 
 ##### HTTP/1.0 support
 
@@ -454,9 +454,9 @@ ip_allow:
 - remote: 99.99.0.0/16
 ```
 
-The keyword `peer` specifies that the match should happen using the IP address of the other end of the network connection carrying the request: `X-Forwarded-For` and the `PROXY` protocol are both ignored. Here, our example specifies that connections originating from the Ambassador pod itself should always be allowed.
+The keyword `peer` specifies that the match should happen using the IP address of the other end of the network connection carrying the request: `X-Forwarded-For` and the `PROXY` protocol are both ignored. Here, our example specifies that connections originating from the $productName$ pod itself should always be allowed.
 
-The keyword `remote` specifies that the match should happen using the IP address of the HTTP client, taking into account `X-Forwarded-For` and the `PROXY` protocol if they are allowed (if they are not allowed, or not present, the peer address will be used instead). This permits matches to behave correctly when, for example, Ambassador is behind a layer 7 load balancer. Here, our example specifies that HTTP clients from the IP address range `99.99.0.0` - `99.99.255.255` will be allowed.
+The keyword `remote` specifies that the match should happen using the IP address of the HTTP client, taking into account `X-Forwarded-For` and the `PROXY` protocol if they are allowed (if they are not allowed, or not present, the peer address will be used instead). This permits matches to behave correctly when, for example, $productName$ is behind a layer 7 load balancer. Here, our example specifies that HTTP clients from the IP address range `99.99.0.0` - `99.99.255.255` will be allowed.
 
 You may specify as many ranges for each kind of keyword as desired.
 
@@ -468,7 +468,7 @@ Sets whether Envoy will trust the remote address of incoming connections or rely
 use_remote_address: true
 ```
 
-In Ambassador 0.50 and later, the default value for `use_remote_address` is set to true. When set to true, Ambassador Edge Stack will append to the `X-Forwarded-For` header its IP address so upstream clients of Ambassador Edge Stack can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  
+In $productName$ 0.50 and later, the default value for `use_remote_address` is set to true. When set to true, $productName$ will append to the `X-Forwarded-For` header its IP address so upstream clients of $productName$ can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  
 
 See the [Envoy documentation on the `X-Forwarded-For header` ](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation on preserving the client source IP](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
 
@@ -478,7 +478,7 @@ See the [Envoy documentation on the `X-Forwarded-For header` ](https://www.envoy
 
 ##### `X_Forwarded_Proto` redirect
 
-Ambassador lets through only the HTTP requests with `X-FORWARDED-PROTO: https` header set, and redirects all the other requests to HTTPS if this field is set to true. Note that `use_remote_address` must be set to false for this feature to work as expected.
+$productName$ lets through only the HTTP requests with `X-FORWARDED-PROTO: https` header set, and redirects all the other requests to HTTPS if this field is set to true. Note that `use_remote_address` must be set to false for this feature to work as expected.
 
 ```yaml
 x_forwarded_proto_redirect: false
@@ -486,7 +486,7 @@ x_forwarded_proto_redirect: false
 
 ##### `X-Forwarded-For` trusted hops
 
-Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of Ambassador, Envoy will set the trusted client IP to the address of that proxy. To preserve the original client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`. 
+Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of $productName$, Envoy will set the trusted client IP to the address of that proxy. To preserve the original client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`. 
 
 Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_conn_man/headers#x-forwarded-for) for more information.
 
@@ -494,7 +494,7 @@ Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.11.
 xff_num_trusted_hops: 1
 ```
 
-The value of `xff_num_trusted_hops` indicates the number of trusted proxies in front of Ambassador Edge Stack. The default setting is 0 which tells Envoy to use the immediate downstream connection's IP address as the trusted client address. The trusted client address is used to populate the `remote_address` field used for rate limiting and can affect which IP address Envoy will set as `X-Envoy-External-Address`.
+The value of `xff_num_trusted_hops` indicates the number of trusted proxies in front of $productName$. The default setting is 0 which tells Envoy to use the immediate downstream connection's IP address as the trusted client address. The trusted client address is used to populate the `remote_address` field used for rate limiting and can affect which IP address Envoy will set as `X-Envoy-External-Address`.
 
 `xff_num_trusted_hops` behavior is determined by the value of `use_remote_address` (which is true true by default).
 
@@ -510,32 +510,32 @@ Refer to [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/con
 
 ##### Rejecting Client Requests With Escaped Slashes
 
-Ambassador can be configured to reject client requests that contain escaped slashes using the following configuration on the Ambassador Module:
+$productName$ can be configured to reject client requests that contain escaped slashes using the following configuration on the Ambassador Module:
 
 ```yaml
 reject_requests_with_escaped_slashes: true
 ```
 
-When set to true, Ambassador will reject client requests that contain escaped slashes by returning HTTP 400. These requests are
-defined by containing `%2F`, `%2f`, `%5C` or `%5c` sequences in their URI path. By default, Ambassador will forward these requests unmodified.
+When set to true, $productName$ will reject client requests that contain escaped slashes by returning HTTP 400. These requests are
+defined by containing `%2F`, `%2f`, `%5C` or `%5c` sequences in their URI path. By default, $productName$ will forward these requests unmodified.
 
-###### Envoy and Ambassador Edge Stack behavior
+###### Envoy and $productName$ behavior
 
-Internally, Envoy treats escaped and unescaped slashes distinctly for matching purposes. This means that an Ambassador mapping
+Internally, Envoy treats escaped and unescaped slashes distinctly for matching purposes. This means that an $productName$ mapping
 for path `/httpbin/status` will not be matched by a request for `/httpbin%2fstatus`.
 
-On the other hand, when using Ambassador Edge Stack, escaped slashes will be treated like unescaped slashes when applying FilterPolicies. For example, a request to `/httpbin%2fstatus/200` will be matched against a FilterPolicy for `/httpbin/status/*`.
+On the other hand, when using $productName$, escaped slashes will be treated like unescaped slashes when applying FilterPolicies. For example, a request to `/httpbin%2fstatus/200` will be matched against a FilterPolicy for `/httpbin/status/*`.
 
 ###### Security Concern Example
 
-With Ambassador Edge Stack, this can become a security concern when combined with `bypass_auth` in the following scenario:
+With $productName$, this can become a security concern when combined with `bypass_auth` in the following scenario:
 * Use a Mapping for path `/prefix` with `bypass_auth` set to true. The intention here is to apply no FilterPolicies under this prefix, by default.
 * Use a Mapping for path `/prefix/secure/` without setting bypass_auth to true. The intention here is to selectively apply a FilterPolicy to this longer prefix.
 * Have an upstream service that receives both `/prefix` and `/prefix/secure/` traffic (from the Mappings above), but the upstream service treats escaped and unescaped slashes equivalently.
 
 In this scenario, when a client makes a request to `/prefix%2fsecure/secret.txt`, the underlying Envoy configuration will _not_ match the routing rule for `/prefix/secure/`, but will instead
-match the routing rule for `/prefix` which has `bypass_auth` set to true. The Ambassador Edge Stack FilterPolicies will _not_ be enforced in this case, and the upstream service will receive
-a request that it treats equivalently to `/prefix/secure/secret.txt`, potentially leaking information that was assumed protected by an Ambassador Edge Stack FilterPolicy.
+match the routing rule for `/prefix` which has `bypass_auth` set to true. $productName$ FilterPolicies will _not_ be enforced in this case, and the upstream service will receive
+a request that it treats equivalently to `/prefix/secure/secret.txt`, potentially leaking information that was assumed protected by an $productName$ FilterPolicy.
 
 One way to avoid this particular scenario is to avoid using bypass_auth and instead use a FilterPolicy that applies no filters when no authorization behavior is desired.
 
@@ -545,9 +545,9 @@ This document is not intended to provide an exhaustive set of scenarios where pa
 
 ###### Summary
 
-Envoy treats escaped and unescaped slashes _distinctly_ for matching purposes. Matching is the underlying behavior used by Ambassador Mappings.
+Envoy treats escaped and unescaped slashes _distinctly_ for matching purposes. Matching is the underlying behavior used by $productName$ Mappings.
 
-Ambassador Edge Stack treats escaped and unescaped slashes _equivalently_ when selecting FilterPolicies. FilterPolicies are applied by Ambassador Edge Stack after Envoy has performed route matching.
+$productName$ treats escaped and unescaped slashes _equivalently_ when selecting FilterPolicies. FilterPolicies are applied by $productName$ after Envoy has performed route matching.
 
 Finally, whether upstream services treat escaped and unescaped slashes equivalently is entirely dependent on the upstream service, and therefore dependent on your use case. Configuration intended to implement security policies will require audit with respect to escaped slashes. By setting reject_requests_with_escaped_slashes, this class of security concern can largely be eliminated.
 
@@ -557,7 +557,7 @@ Finally, whether upstream services treat escaped and unescaped slashes equivalen
 
 ##### Keepalive
 
-Sets the global keepalive settings. Ambassador will use for all Mappings unless overridden on a Mapping's configuration. No default value is provided by Ambassador. 
+Sets the global keepalive settings. $productName$ will use for all Mappings unless overridden on a Mapping's configuration. No default value is provided by $productName$. 
 
 More information at the [Envoy keepalive documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/address.proto.html#config-core-v3-tcpkeepalive).
 
@@ -616,7 +616,7 @@ Controls how Envoy configures the tcp idle timeout on the http listener. Default
 listener_idle_timeout_ms: 3600s
 ```
 
-Controls how Envoy configures the TCP idle timeout on the HTTP listener. Default is no timeout (TCP connection may remain idle indefinitely). This is useful if you have proxies and/or firewalls in front of Ambassador and need to control how Ambassador initiates closing an idle TCP connection. 
+Controls how Envoy configures the TCP idle timeout on the HTTP listener. Default is no timeout (TCP connection may remain idle indefinitely). This is useful if you have proxies and/or firewalls in front of $productName$ and need to control how $productName$ initiates closing an idle TCP connection. 
 
 Please see the [Envoy documentation on HTTP protocol options](https://www.envoyproxy.io/docs/envoy/v1.12.2/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-httpprotocoloptions) for more information.
 
@@ -648,7 +648,7 @@ The liveness and readiness probes both support `prefix`, `rewrite`, and Module, 
 
 ##### Circuit breaking
 
-Sets the global circuit breaking configuration that Ambassador will use for all Mappings, unless overridden in a Mapping. 
+Sets the global circuit breaking configuration that $productName$ will use for all Mappings, unless overridden in a Mapping. 
 
 More information at the [circuit breaking reference](../../using/circuit-breakers).
 
@@ -666,7 +666,7 @@ For more on how to use these, see the [Rate Limit reference](../../using/rate-li
 
 ##### Load balancer
 
-Sets the global load balancing type and policy that Ambassador will use for all mappings unless overridden in a mapping. Defaults to round robin with Kubernetes. 
+Sets the global load balancing type and policy that $productName$ will use for all mappings unless overridden in a mapping. Defaults to round robin with Kubernetes. 
 
 More information at the [load balancer reference](../load-balancer).
 

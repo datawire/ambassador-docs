@@ -1,6 +1,6 @@
 import './index.less'
 
-# Installing the Ambassador Edge Stack
+# Installing $productName$
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
@@ -11,7 +11,7 @@ import './index.less'
 * [Install via Kubernetes YAML](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
 * [Install via Helm](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
 * [Install Locally on Docker](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
-* [Install via the Ambassador Operator](#install-via-the-ambassador-operator)
+* [Install via the $productName$ Operator](#install-via-the-ambassador-operator)
 * [Install on Bare Metal](#install-on-bare-metal)
 * [Upgrade Options](#upgrade-options)
 * [Container Images](#container-images)
@@ -36,7 +36,7 @@ import './index.less'
 
 3. The installer will provision a load balancer, configure TLS, 	
 and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 	
-allows the Ambassador Edge Stack to automatically provision TLS and HTTPS	
+allows $AESproductName$ to automatically provision TLS and HTTPS	
 for a domain name, so you can get started right away.	
 
 4. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
@@ -54,7 +54,7 @@ for a domain name, so you can get started right away.
 
 3. The installer will provision a load balancer, configure TLS, 	
 and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 	
-allows the Ambassador Edge Stack to automatically provision TLS and HTTPS	
+allows $AESproductName$ to automatically provision TLS and HTTPS	
 for a domain name, so you can get started right away.	
 
 4. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
@@ -65,47 +65,47 @@ for a domain name, so you can get started right away.
 2. Run the installer with `edgectl install`	
 3. The installer will provision a load balancer, configure TLS, 	
 and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 	
-allows the Ambassador Edge Stack to automatically provision TLS and HTTPS	
+allows $AESproductName$ to automatically provision TLS and HTTPS	
 for a domain name, so you can get started right away.	
 
 4. [Set up Service Catalog](../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
 ## <img class="os-logo" src="../../images/kubernetes.png"/> Install via Kubernetes YAML 
-Kubernetes via YAML is the most common approach to install Ambassador Edge Stack,
+Kubernetes via YAML is the most common approach to install $productName$,
 especially in production environments, with our default, customizable manifest.
 So if you want complete configuration control over specific parameters of your
 installation, use the [manual YAML installation method](yaml-install).
 
 ## <img class="os-logo" src="../../images/helm-navy.png"/> Install via Helm 
 Helm, the package manager for Kubernetes, is another popular way to install
-Ambassador Edge Stack through the pre-packaged Helm chart. Full details, including
+$productName$ through the pre-packaged Helm chart. Full details, including
 the differences for Helm 2 and Helm3, are in the [Helm instructions.](helm/)
 
 ## <img class="os-logo" src="../../images/docker.png"/> Install Locally on Docker 
-The Docker install will let you try the Ambassador Edge Stack locally in seconds, 
-but is not supported for production workloads. [Try Ambassador on Docker.](docker/)
+The Docker install will let you try the $productName$ locally in seconds, 
+but is not supported for production workloads. [Try $productName$ on Docker.](docker/)
 
-## Install via the Ambassador Operator
-The Ambassador Edge Stack Operator automates installs (day 1 operations) and
-updates (day 2 operations), among other actions. To use the powerful Ambassador
-Operator, [follow the Ambassador Edge Stack Operator instructions](aes-operator).
+## Install via the $productName$ Operator
+The $productName$ Operator automates installs (day 1 operations) and
+updates (day 2 operations), among other actions. To use the powerful $productName$
+Operator, [follow the $productName$ Operator instructions](aes-operator).
 
 ## Install on Bare Metal
 If you don't have a load balancer in front of your Kubernetes, the Bare Metal 
-installation mechanism can still be used to expose the Ambassador Edge Stack. 
+installation mechanism can still be used to expose $productName$. 
 We've got [instructions for bare metal installations](bare-metal) including exposing 
-the Ambassador Edge Stack via a NodePort or the host network.
+$productName$ via a NodePort or the host network.
 
 ## Upgrade Options
-If you already have an existing installation of the Ambassador Edge Stack or
-Ambassador API Gateway, you can upgrade your instance:
+If you already have an existing installation of $AESproductName$ or
+$OSSproductName$, you can upgrade your instance:
 
-1. [Upgrade to the Ambassador Edge Stack from the API Gateway](upgrade-to-edge-stack/).
-2. [Upgrade your Ambassador Edge Stack instance](upgrading/) to the latest version.
+1. [Upgrade to $AESproductName$ from $OSSproductName$](upgrade-to-edge-stack/).
+2. [Upgrade your $productName$ instance](upgrading/) to the latest version.
 
 ## Container Images
 Although our installation guides will favor using the `docker.io` container registry,
-we publish the Ambassador Edge Stack and Ambassador API Gateway releases to multiple registries.
+we publish $AESproductName$ and $OSSproductName$ releases to multiple registries.
 
 Starting with version 1.0.0, you can pull the `ambassador` and `aes` images from any of the following registries:
 - `docker.io/datawire/`
@@ -113,12 +113,11 @@ Starting with version 1.0.0, you can pull the `ambassador` and `aes` images from
 - `gcr.io/datawire/`
 
 We want to give you flexibility and independence from a hosting platform's uptime to support
-your production needs for Ambassador Edge Stack or Ambassador API Gateway. Read more about 
-[Running Ambassador in Production](../running).
+your production needs for $AESproductName$ or $OSSproductName$. Read more about 
+[Running $productName$ in Production](../running).
 
 # What’s Next?
-The Ambassador Edge Stack has a comprehensive range of [features](/features/) to
-support the requirements of any edge microservice. To learn more about how the
-Ambassador Edge Stack works, along with use cases, best practices, and more,
-check out the [Welcome page](../../) or read the [Ambassador
+$productName$ has a comprehensive range of [features](/features/) to
+support the requirements of any edge microservice. To learn more about how $productName$ works, along with use cases, best practices, and more,
+check out the [Welcome page](../../) or read the [$productName$
 Story](../../about/why-ambassador).

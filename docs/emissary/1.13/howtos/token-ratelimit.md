@@ -2,17 +2,17 @@ import Alert from '@material-ui/lab/Alert';
 
 # Rate limiting on token claims
 
-<Alert severity="info">This guide applies to Ambassador Edge Stack, use of this guide on the Ambassador API Gateway is not recommended.</Alert>
+<Alert severity="info">This guide applies to $AESproductName$, use of this guide on the $OSSproductName$ is not recommended.</Alert>
 
-Ambassador Edge Stack is able to perform Rate Limiting based on JWT Token claims from either a JWT or OAuth2 Filter implementation.  This is because Edge Stack deliberately calls the `ext_authz` filter in Envoy as the first step when processing incoming requests.  In Edge Stack, the `ext_authz` filter is implemented as a [Filter resource](../../topics/using/filters/).  This explicitly means that Ambassador Filters are ALWAYS processed prior to RateLimit implementations.  As a result, you can use the `injectRequestHeader` field in either a JWT Filter or an OAuth Filter and pass that header along to be used for RateLimiting purposes.
+$AESproductName$ is able to perform Rate Limiting based on JWT Token claims from either a JWT or OAuth2 Filter implementation.  This is because $AESproductName$ deliberately calls the `ext_authz` filter in Envoy as the first step when processing incoming requests.  In $AESproductName$, the `ext_authz` filter is implemented as a [Filter resource](../../topics/using/filters/).  This explicitly means that $AESproductName$ Filters are ALWAYS processed prior to RateLimit implementations.  As a result, you can use the `injectRequestHeader` field in either a JWT Filter or an OAuth Filter and pass that header along to be used for RateLimiting purposes.
 
 ## Prerequisites
 
-- Ambassador Edge Stack
+- $AESproductName$
 - A working Keycloak instance and Keycloak Filter
 - A service exposed with a Mapping and protected by a FilterPolicy
 
-<Alert severity="info">We'll uses Keycloak to generate tokens with unique claims.  It will work in a similar manner for any claims present on a JWT token issued by any other provider.  See <a href="../sso/keycloak/">our guide here</a> on using Keycloak with Edge Stack.</Alert>
+<Alert severity="info">We'll uses Keycloak to generate tokens with unique claims.  It will work in a similar manner for any claims present on a JWT token issued by any other provider.  See <a href="../sso/keycloak/">our guide here</a> on using Keycloak with $AESproductName$.</Alert>
 
 Here is a YAML example that describes the setup:
 
@@ -78,9 +78,9 @@ spec:
 
 ## 2. Add Labels to our Mapping
 
-Now that the header is properly added, we need to add a label to the Mapping of the service that we want to rate limit.  This will determine if the route established by the Mapping will use a label when Ambassador is processing where to send the request.  If so, it will add the labels as metadata to be attached when sent to the `RateLimitService` to determine whether or not the request should be rate-limited.
+Now that the header is properly added, we need to add a label to the Mapping of the service that we want to rate limit.  This will determine if the route established by the Mapping will use a label when $AESproductName$ is processing where to send the request.  If so, it will add the labels as metadata to be attached when sent to the `RateLimitService` to determine whether or not the request should be rate-limited.
 
-<Alert severity="info">Use `ambassador` as the label domain, unless you have already set up Ambassador Edge Stack to use something else.</Alert>
+<Alert severity="info">Use `ambassador` as the label domain, unless you have already set up $AESproductName$ to use something else.</Alert>
 
 ```yaml
 apiVersion: getambassador.io/v2
@@ -147,4 +147,4 @@ spec:
     unit: "minute" # Per-minute tracking is useful for debugging
 ```
 
-This tutorial only scratches the surface of the rate limiting capabilities of Edge Stack.  Please see our documentation [here](../../topics/using/rate-limits/) and [here](../../topics/using/rate-limits/rate-limits/) to learn more about how you can use rate limiting.
+This tutorial only scratches the surface of the rate limiting capabilities of $AESproductName$.  Please see our documentation [here](../../topics/using/rate-limits/) and [here](../../topics/using/rate-limits/rate-limits/) to learn more about how you can use rate limiting.

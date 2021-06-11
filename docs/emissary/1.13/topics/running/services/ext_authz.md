@@ -11,7 +11,7 @@ For each request, the ExtAuth service may either:
  1. return a direct HTTP *response*, intended to be sent back to the requesting HTTP client (normally *denying* the request from being forwarded to the upstream backend service) or
  2. return a modification to make to the HTTP *request* before sending it to the upstream backend service (normally *allowing* the request to be forwarded to the upstream backend service with modifications).
 
-The ExtAuth service receives information about every request through Edge Stack and must indicate whether the request is to be allowed or not.  If not, the ExtAuth service provides the HTTP response which is to be handed back to the client.  A potential control flow for Authentication is shown in the image below.
+The ExtAuth service receives information about every request through $productName$ and must indicate whether the request is to be allowed or not.  If not, the ExtAuth service provides the HTTP response which is to be handed back to the client.  A potential control flow for Authentication is shown in the image below.
 
 Giving the ExtAuth service the ability to control the response allows many different types of auth mechanisms, for example:
 
@@ -32,7 +32,7 @@ External services for `proto: http` are often easier to implement, but have seve
  - The list of headers that the ExtAuth service would like to set or modify must be known ahead of time, in order to set `allow_authorization_headers`.  Setting headers that are not known ahead of time requires instead using `proto: grpc`.
  - When returning a direct HTTP response, the HTTP status code cannot be 200 or in the 5XX range.  Intercepting with a 200 or 5XX response requires instead using `proto: grpc`.
 
-#### The request From Edge Stack to the ExtAuth service
+#### The request From $productName$ to the ExtAuth service
 
 For every incoming request, a similar request is made to the ExtAuth service that mimics the:
  - HTTP request method
@@ -57,7 +57,7 @@ Content-Length: 27
 { "greeting": "hello world!", "spiders": "OMG no" }
 ```
 
-The request Edge Stack will make of the auth service is:
+The request $productName$ will make of the auth service is:
 
 ```
 PUT /path/to/service HTTP/1.1
@@ -68,16 +68,16 @@ Content-Type: application/json
 Content-Length: 0
 ```
 
-#### The response returned from the ExtAuth service to Edge Stack
+#### The response returned from the ExtAuth service to $productName$
 
- - If the HTTP response returned from the ExtAuth service to Edge Stack has an HTTP status code of 200, then the request is allowed through to the upstream backend service.  **Only** 200 indicates this; other 2XX status codes will prevent the request from being allowed through.
+ - If the HTTP response returned from the ExtAuth service to $productName$ has an HTTP status code of 200, then the request is allowed through to the upstream backend service.  **Only** 200 indicates this; other 2XX status codes will prevent the request from being allowed through.
 
    The 200 response should not contain anything in the body, but may contain arbitrary headers.  Any header present in the ExtAuth service' response that is also either listed in the `allow_authorization_headers` attribute of the AuthService resource or in the fixed list of headers that are always included will be copied from the ExtAuth service's response into the request going to the upstream backend service.  This allows the ExtAuth service to inject tokens or other information into the request, or to modify headers coming from the client.
 
    The big limitation here is that the list of headers to be set must be known ahead of time, in order to set `allow_request_headers`.  Setting headers that are not known ahead of time requires instead using `proto: grpc`.
 
- - If Edge Stack cannot reach the ExtAuth service at all, if the ExtAuth service does not return a valid HTTP response, or if the HTTP response has an HTTP status code in the 5XX range, then the communication with the ExtAuth service is considered to have failed, and the `status_on_error` or `failure_mode_allow` behavior is triggered.
+ - If $productName$ cannot reach the ExtAuth service at all, if the ExtAuth service does not return a valid HTTP response, or if the HTTP response has an HTTP status code in the 5XX range, then the communication with the ExtAuth service is considered to have failed, and the `status_on_error` or `failure_mode_allow` behavior is triggered.
 
- - Any HTTP status code other than 200 or 5XX from the ExtAuth service tells Edge Stack to **not** allow the request to continue to the upstream backend service, but that the ExtAuth service is instead intercepting the request.  The entire HTTP response from the ExtAuth service--including the status code, the headers, and the body--is handed back to the client verbatim. This gives the ExtAuth service **complete** control over the entire response presented to the client.
+ - Any HTTP status code other than 200 or 5XX from the ExtAuth service tells $productName$ to **not** allow the request to continue to the upstream backend service, but that the ExtAuth service is instead intercepting the request.  The entire HTTP response from the ExtAuth service--including the status code, the headers, and the body--is handed back to the client verbatim. This gives the ExtAuth service **complete** control over the entire response presented to the client.
 
    The big limitation here is that you cannot directly return a 200 or 5XX response.  Intercepting with a 200 of 5XX response requires instead using `proto: grpc`.

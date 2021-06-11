@@ -1,6 +1,6 @@
 # Method-based routing
 
-Ambassador Edge Stack supports routing based on the HTTP method and regular expression.
+$productName$ supports routing based on the HTTP method and regular expression.
 
 ## Using `method`
 

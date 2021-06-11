@@ -12,7 +12,7 @@
             }
         ]
     },
-    "description": "Ambassador Edge Stack dashboard for Prometheus",
+    "description": "$productName$ dashboard for Prometheus",
     "editable": true,
     "gnetId": 4698,
     "graphTooltip": 0,
@@ -31,7 +31,7 @@
             },
             "id": 34,
             "panels": [],
-            "title": "Ambassador - Control Plane",
+            "title": "$productName$ - Control Plane",
             "type": "row"
         },
         {
@@ -314,7 +314,7 @@
                     }
                 }
             ],
-            "title": "Ambassador Edge Stack",
+            "title": "$productName$",
             "type": "row"
         },
         {
@@ -329,7 +329,7 @@
             "id": 22,
             "panels": [],
             "repeat": null,
-            "title": "Ambassador - Envoy Data Plane",
+            "title": "$productName$ - Envoy Data Plane",
             "type": "row"
         },
         {
@@ -405,7 +405,7 @@
             "timeFrom": null,
             "timeRegions": [],
             "timeShift": null,
-            "title": "Ambassador Response Codes",
+            "title": "$productName$ Response Codes",
             "tooltip": {
                 "shared": true,
                 "sort": 0,
@@ -937,7 +937,7 @@
         ]
     },
     "timezone": "",
-    "title": "Ambassador Edge Stack",
+    "title": "$productName$",
     "uid": "AJieHz4Mz",
     "version": 16
 }

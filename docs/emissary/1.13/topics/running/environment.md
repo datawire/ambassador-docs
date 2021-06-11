@@ -1,4 +1,4 @@
-# The Ambassador container
+# The $productName$ container
 
 To give you flexibility and independence from a hosting platform's uptime, you can pull the `ambassador` and `aes` images from any of the following registries:
 - `docker.io/datawire/`
@@ -10,7 +10,7 @@ For an even more robust installation, consider using a [local registry as a pull
 
 ## Environment variables
 
-Use the following variables for the environment of your Ambassador container:
+Use the following variables for the environment of your $productName$ container:
 
 | Purpose                           | Variable                                                                                 | Default value                                       | Value type |
 |-----------------------------------|----------------------------------------------------------------------------------------- |-----------------------------------------------------|-------------------------------------------------------------------------------|
@@ -24,9 +24,9 @@ Use the following variables for the environment of your Ambassador container:
 | Core                              | `AMBASSADOR_UPDATE_MAPPING_STATUS`                                                       | `false`                                             | Boolean; `true`=true, any other value=false |
 | Core                              | `AMBASSADOR_DISABLE_SNAPSHOT_SERVER`                                                     | `false`                                             | Boolean; non-empty=true, empty=false |
 | Core                              | `AMBASSADOR_JSON_LOGGING`                                                                | `false`                                             | Boolean; non-empty=true, empty=false |
-| Edge Stack                        | [`AES_LOG_LEVEL`](../aes-extensions/#aes_log_level)                                      | `warn`                                              | Log level |
-| Edge Stack                        | [`AES_RATELIMIT_PREVIEW`](../aes-extensions/ratelimit#aes-ratelimit_preview)         | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
-| Edge Stack                        | [`AES_AUTH_TIMEOUT`](../aes-extensions/authentication/#timeout-variables)                  | `4s`                                                | Duration; [Go `time.ParseDuration`][]
+| $AESproductName$                        | [`AES_LOG_LEVEL`](../aes-extensions/#aes_log_level)                                      | `warn`                                              | Log level |
+| $AESproductName$                        | [`AES_RATELIMIT_PREVIEW`](../aes-extensions/ratelimit#aes-ratelimit_preview)         | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
+| $AESproductName$                        | [`AES_AUTH_TIMEOUT`](../aes-extensions/authentication/#timeout-variables)                  | `4s`                                                | Duration; [Go `time.ParseDuration`][]
 | Primary Redis (L4)                | [`REDIS_SOCKET_TYPE`](../aes-redis#socket_type)                                          | `tcp`                                               | Go network such as `tcp` or `unix`; see [Go `net.Dial`][] |
 | Primary Redis (L4)                | [`REDIS_URL`](../aes-redis#url)                                                          | None, must be set explicitly                        | Go network address; for TCP this is a `host:port` pair; see [Go `net.Dial`][] |
 | Primary Redis (L4)                | [`REDIS_TLS_ENABLED`](../aes-redis#tls_enabled)                                          | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
@@ -84,7 +84,7 @@ verbose, valid log levels are `error`, `warn`/`warning`, `info`,
 
 ## Port assignments
 
-The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traffic automatically via TCP:
+$productName$ uses the following ports to listen for HTTP/HTTPS traffic automatically via TCP:
 
 | Port | Process  | Function                                                |
 |------|----------|---------------------------------------------------------|
@@ -92,7 +92,7 @@ The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traf
 | 8002 | watt     | Internal watt snapshot access; not exposed outside pod  |
 | 8003 | ambex    | Internal ambex snapshot access; not exposed outside pod |
 | 8004 | diagd    | Internal `diagd` access when `AMBASSADOR_FAST_RECONFIGURE` is set; not exposed outside pod |
-| 8005 | snapshot | Exposes a scrubbed ambassador snapshot outside of the pod |
+| 8005 | snapshot | Exposes a scrubbed $productName$ snapshot outside of the pod |
 | 8080 | envoy    | Default HTTP service port                               |
 | 8443 | envoy    | Default HTTPS service port                              |
 | 8877 | diagd    | Direct access to diagnostics UI; provided by `busyambassador entrypoint` when `AMBASSADOR_FAST_RECONFIGURE` is set |

@@ -1,28 +1,28 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Basic authentication (for API Gateway)
+# Basic authentication (for $productName$)
 
 <Alert severity="info">
-  This guide applies to Ambassador API Gateway, use of this guide with Edge stack is not recommended.  Edge Stack does <a href="../ext-filters">authentication using the Filter resource</a> instead of the AuthService resource as described below.
+  This guide applies to $OSSproductName$, use of this guide with $AESproductName$ is not recommended.  $AESproductName$ does <a href="../ext-filters">authentication using the Filter resource</a> instead of the AuthService resource as described below.
 </Alert>
 
 
 
-Ambassador can authenticate incoming requests before routing them to a backing 
-service. In this tutorial, we'll configure Ambassador to use an external third 
+$productName$ can authenticate incoming requests before routing them to a backing 
+service. In this tutorial, we'll configure $productName$ to use an external third 
 party authentication service. We're assuming also that you are running the
 quote application in your cluster as described in the 
-[Ambassador tutorial](../../tutorials/quickstart-demo/).
+[$productName$ tutorial](../../tutorials/quickstart-demo/).
 
 ## Before you get started
 
-This tutorial assumes you have already followed the Ambassador API Gateway [Installation](../../topics/install/install-ambassador-oss) guide. If you haven't done that already, you should do so now.
+This tutorial assumes you have already followed the $productName$ [Installation](../../topics/install/install-ambassador-oss) guide. If you haven't done that already, you should do so now.
 
-Once complete, you'll have a Kubernetes cluster running Ambassador. Let's walk through adding authentication to this setup.
+Once complete, you'll have a Kubernetes cluster running $productName$. Let's walk through adding authentication to this setup.
 
 ## 1. Deploy the authentication service
 
-Ambassador delegates the actual authentication logic to a third party authentication service. We've written a [simple authentication service](https://github.com/datawire/ambassador-auth-service) that:
+$productName$ delegates the actual authentication logic to a third party authentication service. We've written a [simple authentication service](https://github.com/datawire/ambassador-auth-service) that:
 
 - listens for requests on port 3000;
 - expects all URLs to begin with `/extauth/`;
@@ -30,7 +30,7 @@ Ambassador delegates the actual authentication logic to a third party authentica
 - accepts only user `username`, password `password`; and
 - makes sure that the `x-qotm-session` header is present, generating a new one if needed.
 
-Ambassador routes _all_ requests through the authentication service: it relies on the auth service to distinguish between requests that need authentication and those that do not. If Ambassador cannot contact the auth service, it will return a 503 for the request; as such, **it is very important to have the auth service running before configuring Ambassador to use it.**
+$productName$ routes _all_ requests through the authentication service: it relies on the auth service to distinguish between requests that need authentication and those that do not. If $productName$ cannot contact the auth service, it will return a 503 for the request; as such, **it is very important to have the auth service running before configuring $productName$ to use it.**
 
 Here's the YAML we'll start with:
 
@@ -78,7 +78,7 @@ spec:
             memory: 100Mi
 ```
 
-Note that the cluster does not yet contain any Ambassador AuthService definition. This is intentional: we want the service running before we tell Ambassador about it.
+Note that the cluster does not yet contain any $productName$ AuthService definition. This is intentional: we want the service running before we tell $productName$ about it.
 
 The YAML above is published at getambassador.io, so if you like, you can just do
 
@@ -97,9 +97,9 @@ example-auth-6c5855b98d-24clp   1/1       Running   0          4m
 ```
 Note that the `READY` field says `1/1` which means the pod is up and running.
 
-## 2. Configure Ambassador authentication
+## 2. Configure $productName$ authentication
 
-Once the auth service is running, we need to tell Ambassador about it. The easiest way to do that is to map the `example-auth` service with the following:
+Once the auth service is running, we need to tell $productName$ about it. The easiest way to do that is to map the `example-auth` service with the following:
 
 ```yaml
 ---
@@ -116,7 +116,7 @@ spec:
   - "x-qotm-session"
 ```
 
-This configuration tells Ambassador about the auth service, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_headers` are optional.
+This configuration tells $productName$ about the auth service, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_headers` are optional.
 
 If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillatoolkit.org) which enforces strict slashes as HTTP path separators, it is possible to end up with an infinite redirect where the auth service's framework redirects any request with non-conformant slashing. This would arise if the above example had ```path_prefix: "/extauth/"```, the auth service would see a request for ```/extauth//backend/get-quote/``` which would then be redirected to ```/extauth/backend/get-quote/``` rather than actually be handled by the authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to ```path_prefix``` regardless of non-conformant slashing.
 
@@ -128,7 +128,7 @@ kubectl apply -f https://www.getambassador.io/yaml/demo/demo-auth-enable.yaml
 
 or, again, apply it from a local file if you prefer.
 
-Note that the cluster does not yet contain any Ambassador AuthService definition.
+Note that the cluster does not yet contain any $productName$ AuthService definition.
 
 ## 3. Test authentication
 
@@ -188,7 +188,7 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
 
 ## Legacy v0 API
 
-If using Ambassador v0.40.2 or earlier, use the deprecated v0 `AuthService` API
+If using $productName$ v0.40.2 or earlier, use the deprecated v0 `AuthService` API
 
 ```yaml
 ---

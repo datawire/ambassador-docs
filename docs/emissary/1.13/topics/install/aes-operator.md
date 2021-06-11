@@ -1,10 +1,9 @@
-# The Edge Stack Operator
+# The $productName$ Operator
 
-The  Edge Stack Operator is a Kubernetes Operator that controls the
-complete lifecycle of Ambassador in your cluster. It also
-automates many of the repeatable tasks you have to perform for the Ambassador
-Edge Stack. Once installed, the AES Operator will automatically complete rapid
-installations and seamless upgrades to new versions of Ambassador.  [Read
+The  $productName$ Operator is a Kubernetes Operator that controls the
+complete lifecycle of $productName$ in your cluster. It also
+automates many of the repeatable tasks you have to perform for $productName$. Once installed, the $productName$ Operator will automatically complete rapid
+installations and seamless upgrades to new versions of $productName$.  [Read
 more](https://github.com/datawire/ambassador-operator/blob/master/README.md#version-syntax)
 about the benefits of the Operator.
 
@@ -27,9 +26,9 @@ Start by installing the operator:
 
 1. Create the Operator Custom Resource schema with the following command:
    `kubectl apply -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator-crds.yaml`
-2. Install the actual CRD for the Ambassador Operator in the `ambassador` namespace with the following command:
+2. Install the actual CRD for the $productName$ Operator in the `ambassador` namespace with the following command:
    `kubectl apply -n ambassador -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator.yaml`
-3. To install the Ambassador Operator CRD in a different namespace, you can specify it in `NS` and
+3. To install the $productName$ Operator CRD in a different namespace, you can specify it in `NS` and
    then run the following command:
 
     ```
@@ -39,22 +38,22 @@ Start by installing the operator:
         kubectl apply -n $NS -f -
     ```
 
-Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the AES Operator.
+Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the $productName$ Operator.
 
 1. To create the `AmbassadorInstallation` Custom Resource schema, use
    [the following YAML](https://github.com/datawire/ambassador-operator#the-operator-custom-resource-cr)
    as your guideline.
 2. Save that file as `amb-install.yaml`
 3. Edit the `amb-install.yaml` and optionally complete configurations such as Version constraint or UpdateWindow:
-4. Finally, apply your `AmbassadorInstallation` CRD to the AES Operator schema
+4. Finally, apply your `AmbassadorInstallation` CRD to the $productName$ Operator schema
    with the following command: `kubectl apply -n ambassador -f amb-install.yaml`
 
-### Configuration for the Ambassador Edge Stack
+### Configuration for $productName$
 
-After the initial installation of Ambassador, the Operator will check for updates every 24 hours and
+After the initial installation of $productName$, the Operator will check for updates every 24 hours and
 delay the update until the Update Window allows the update to proceed. It will use the Version Syntax for
 determining if any new release is acceptable. When a new release is available and acceptable, the Operator
-will upgrade Ambassador.
+will upgrade $productName$.
 
 ### Version syntax and update window
 
@@ -94,13 +93,13 @@ examples of `updateWindow` are:
 The Operator cannot guarantee minute time granularity, so specifying a minute in the crontab
 expression can lead to some updates happening sooner/later than expected.
 
-`installOSS` in an optional field which, if set to `true`, installs Ambassador API Gateway instead of
-Ambassador Edge Stack.
+`installOSS` in an optional field which, if set to `true`, installs $OSSproductName$ instead of
+$AESproductName$.
 Default: `false`.
 
 ## Customizing the installation with some Helm values
 
-`helmValues` is an optional map of configurable parameters of the Ambassador chart
+`helmValues` is an optional map of configurable parameters of the $productName$ chart
 with some overriden values. Take a look at the [current list of values](https://github.com/datawire/ambassador/tree/master/charts/ambassador#configuration)
 and their default values.
 
@@ -127,12 +126,12 @@ spec:
 ```
 
 * Note that the `spec.installOSS` parameter should be used instead of `spec.helmValues.enableAES` to control whether 
-  OSS or AES is installed. A configuration where both `installOSS` and `enableAES` are set to the same value will 
+  $OSSproductName$ or $AESproductName$ is installed. A configuration where both `installOSS` and `enableAES` are set to the same value will 
   introduce a conflict and result in an error.
 
 ## Install via Helm Chart
 
-You can also install the AES Operator from a Helm Chart. The following Helm values are supported:
+You can also install the $productName$ Operator from a Helm Chart. The following Helm values are supported:
 
 * `image.name`: Operator image name
 * `image.pullPolicy`: Operator image pull policy
@@ -158,11 +157,11 @@ You can also install the AES Operator from a Helm Chart. The following Helm valu
 ## Updates by the Operator
 
 After the `AmbassadorInstallation` is created for the first time, the Operator
-will then use the list of releases available for the Ambassador Helm Chart for
+will then use the list of releases available for the $productName$ Helm Chart for
 determining the most recent version that can be installed, using the optional
 Version Syntax for filtering the releases that are acceptable.
 
-It will then install Ambassador, using any extra arguments provided in the `AmbassadorInstallation`,
+It will then install $productName$, using any extra arguments provided in the `AmbassadorInstallation`,
 like the `baseImage`, the `logLevel` or any of the `helmValues`.
 
 For example:
@@ -178,7 +177,7 @@ spec:
 EOF
 ```
 
-After applying an `AmbassadorInstallation` customer resource like this in a new cluster, the Operator will install a new instance of Ambassador 1.2.0 in the `ambassador` namespace, immediately. Removing this `AmbassadorInstallation` will uninstall Ambassador from this namespace.
+After applying an `AmbassadorInstallation` customer resource like this in a new cluster, the Operator will install a new instance of $productName$ 1.2.0 in the `ambassador` namespace, immediately. Removing this `AmbassadorInstallation` will uninstall $productName$ from this namespace.
 
 ## Verify configuration
 

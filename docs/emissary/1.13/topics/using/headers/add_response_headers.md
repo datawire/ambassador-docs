@@ -1,6 +1,6 @@
 # Add response headers
 
-Ambassador Edge Stack can add a dictionary of HTTP headers that can be added to each response that is returned to the client.
+$productName$ can add a dictionary of HTTP headers that can be added to each response that is returned to the client.
 
 ## The `add_response_headers` attribute
 

@@ -1,20 +1,19 @@
-# Ambassador Tutorial
+# $productName$ Tutorial
 
-In this article, you will explore some of the key features of the Ambassador
-Edge Stack by walking through an example workflow and exploring the 
+In this article, you will explore some of the key features of $productName$ by walking through an example workflow and exploring the 
 Edge Policy Console.
 
 ## Prerequisites
 
-You must have [Ambassador Edge Stack installed](../getting-started/) in your 
+You must have [$productName$ installed](../getting-started/) in your 
 Kubernetes cluster.
 
 ## Routing Traffic from the Edge
 
 Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
-declaratively define Ambassador’s desired state. The workflow you are going to 
+declaratively define $productName$’s desired state. The workflow you are going to 
 build uses a sample deployment and the `Mapping` CRD, which is the core resource
-that you will use with Ambassador to manage your edge. It enables you to route 
+that you will use with $productName$ to manage your edge. It enables you to route 
 requests by host and URL path from the edge of your cluster to Kubernetes services.
 
 1. Copy the configuration below and save it to a file named `quote.yaml` so that
@@ -64,8 +63,7 @@ the `quote` deployment and a service to expose that deployment on port 80.
 1. Apply the configuration to the cluster with the command `kubectl apply -f quote.yaml`.
 
 1. Copy the configuration below and save it to a file called `quote-backend.yaml` 
-so that you can create a `Mapping` on your cluster. This `Mapping` tells Edge 
-Stack to route all traffic inbound to the `/backend/` path to the `quote` service. 
+so that you can create a `Mapping` on your cluster. This `Mapping` tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` service. 
 
   ```yaml
   ---
@@ -82,14 +80,14 @@ Stack to route all traffic inbound to the `/backend/` path to the `quote` servic
 1. Apply the configuration to the cluster with the command 
 `kubectl apply -f quote-backend.yaml`
 
-1. Store the Ambassador `LoadBalancer` address to a local environment variable.
+1. Store the $productName$ `LoadBalancer` address to a local environment variable.
 You will use this variable to test accessing your pod.
 
   ```
   export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
   ```
 
-1. Test the configuration by accessing the service through the Ambassador load 
+1. Test the configuration by accessing the service through the $productName$ load 
 balancer.
 
   ```
@@ -101,14 +99,14 @@ balancer.
   }
   ```
 
-Success, you have created your first Ambassador `Mapping`, routing a
+Success, you have created your first $productName$ `Mapping`, routing a
 request from your cluster's edge to a service!
 
 ## Edge Policy Console
 
 Next, you are going to log in to the Edge Policy Console to explore some of its
 features. The console is a web-based interface that can be used to configure and
-monitor Ambassador. 
+monitor $productName$. 
 
 1. Initially the console is accessed from the load balancer's hostname or public
 address (depending on your Kubernetes environment). You stored this endpoint
@@ -126,7 +124,7 @@ to use your own registered domain name instead of the load balancer endpoint to
 access the console and your `Mapping` endpoints.
 
 1. The next page will prompt you to log in to the console using `edgectl`, the 
-Ambassador CLI. The page provides instructions on how to install `edgectl` for 
+$productName$ CLI. The page provides instructions on how to install `edgectl` for 
 all OSes and log in.
 
 1. Once logged in, click on the **Mappings** tab in the Edge Policy Console. 
@@ -134,8 +132,8 @@ Scroll down to find an entry for the `quote-backend` `Mapping` that you created
 in your terminal with `kubectl`.
 
 As you can see, the console lists the `Mapping` that you created earlier. This
-information came from Ambassador polling the Kubernetes API. In 
-Ambassador, Kubernetes serves as the single source of truth 
+information came from $productName$ polling the Kubernetes API. In 
+$productName$, Kubernetes serves as the single source of truth 
 around cluster configuration. Changes made via `kubectl` are reflected in the 
 Edge Policy Console and vice versa.  Try the following to see this in action.
 
@@ -169,7 +167,7 @@ with other tutorials.
 
 The `quote` service you just deployed publishes its API as an 
 [OpenAPI (formally Swagger)](https://swagger.io/solutions/getting-started-with-oas/)
-document. Ambassador automatically detects and publishes this documentation. 
+document. $productName$ automatically detects and publishes this documentation. 
 This can help with internal and external developer onboarding by serving as a 
 single point of reference for of all your microservice APIs.
 
@@ -188,23 +186,23 @@ Further explore some of the concepts you learned about in this article:
 * [`Mapping` resource](../../topics/using/intro-mappings/): routes traffic from 
 the edge of your cluster to a Kubernetes service
 * [`Host` resource](../../topics/running/host-crd/): sets the hostname by which
-Ambassador will be accessed and secured with TLS certificates
+$productName$ will be accessed and secured with TLS certificates
 * [Edge Policy Console](../../topics/using/edge-policy-console/): a web-based 
-interface used to configure and monitor Edge Stack
+interface used to configure and monitor $productName$
 * [Developer Portal](../../topics/using/dev-portal/): 
 publishes an API catalog and OpenAPI documentation
 
-The Ambassador Edge Stack has a comprehensive range of [features](/features/) to
+$productName$ has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice.
 
-Learn more about [how developers use Edge Stack](../../topics/using/) to manage 
+Learn more about [how developers use $productName$](../../topics/using/) to manage 
 edge policies.
 
-Learn more about [how site reliability engineers and operators run Edge Stack](../../topics/running/) 
+Learn more about [how site reliability engineers and operators run $productName$](../../topics/running/) 
 in production environments.
 
-To learn how Edge Stack works, use cases, best practices, and more, check out 
-the [docs home](../../) or read the [Ambassador Story](../../about/why-ambassador).
+To learn how $productName$ works, use cases, best practices, and more, check out 
+the [docs home](../../) or read the [$productName$ Story](../../about/why-ambassador).
 
-For a custom configuration, you can install Edge Stack 
+For a custom configuration, you can install $productName$ 
 [manually](../../topics/install/yaml-install).
