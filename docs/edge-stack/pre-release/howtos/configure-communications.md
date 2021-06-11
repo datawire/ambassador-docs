@@ -14,9 +14,9 @@ References
 
 It is a very good idea to be familiar with the CRDs in play here:
 
-- [`Listener`](../../topics/running/listener.md)
-- [`Host`](../../topics/running/host-crd.md)
-- [`TLSContext`](../../topics/running/tls/#tlscontext)
+- [`Listener`](../topics/running/listener)
+- [`Host`](../topics/running/host-crd)
+- [`TLSContext`](../topics/running/tls/#tlscontext)
 
 Examples / Cookbook
 -------------------

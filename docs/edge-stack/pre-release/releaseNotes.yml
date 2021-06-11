@@ -23,7 +23,7 @@ items:
       - title: The Listener Resource
         body: "The new <code>Listener</code> CRD defines where and how to listen for requests from the network, and which <code>Host</code> definitions should be used to process those requests."
         type: feature
-        docs: topics/running/listener.md
+        docs: topics/running/listener
         image: ./edge-stack-2.0.0-listener.png
 
       - title: "Independent Host actions supported"

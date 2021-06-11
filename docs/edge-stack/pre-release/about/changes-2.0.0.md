@@ -15,7 +15,7 @@ $productName$ 2.0.0 introduces the new `Listener` CRD, and changes certain seman
 
 ### The `Listener` CRD
 
-The new [`Listener` CRD](../../topics/running/listener) defines where and how $productName$ should listen for requests from the network, and which `Host` definitions should be used to process those requests.
+The new [`Listener` CRD](../topics/running/listener) defines where and how $productName$ should listen for requests from the network, and which `Host` definitions should be used to process those requests.
 
 Specifically, a `Listener` defines 
 
