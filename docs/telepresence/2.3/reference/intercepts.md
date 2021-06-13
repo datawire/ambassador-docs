@@ -1,6 +1,6 @@
 # Intercepts 
 
-## Intercept behvaior when logged into Ambassador Cloud
+## Intercept behavior when logged into Ambassador Cloud
 
 After logging into Ambassador Cloud (with `telepresence login`), Telepresence will default to `--preview-url=true`, which will use Ambassador Cloud to create a sharable preview URL for this intercept. (Creating an intercept without logging in will default to `--preview-url=false`).
 
@@ -38,7 +38,7 @@ This will intercept a workload named `hello` and name the intercept `myhello`.
 
 Telepresence can import the environment variables from the pod that is being intercepted, see [this doc](../environment/) for more details.
 
-## Creating an intercept Without a preview URL
+## Creating an intercept without a preview URL
 
 If you *are not* logged into Ambassador Cloud, the following command will intercept all traffic bound to the service and proxy it to your laptop. This includes traffic coming through your ingress controller, so use this option carefully as to not disrupt production environments.
 
@@ -107,7 +107,7 @@ When intercepting a service that has multiple ports, the name of the service por
 
 If you want to change which port has been intercepted, you can create a new intercept the same way you did above and it will change which service port is being intercepted.
 
-## Creating an intercept When multiple services match your workload
+## Creating an intercept when multiple services match your workload
 
 Oftentimes, there's a 1-to-1 relationship between a service and a workload, so telepresence is able to auto-detect which service it should intercept based on the workload you are trying to intercept.  But if you use something like [Argo](../../../../argo/latest/), it uses two services (that use the same labels) to manage traffic between a canary and a stable service.
 
