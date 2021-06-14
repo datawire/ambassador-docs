@@ -71,16 +71,16 @@ items:
         image: ./edge-stack-2.0.0-prune_routes.png
         type: feature
 
-      # This set of release notes is for Edge Stack. edgectl is still a thing for Edge Stack (in the form of edgectl license).
-      - title: edgectl install no longer supported
-        body: The <code>edgectl install</code> command has been removed. Please use the <code>ambassador</code> Helm chart to install Ambassador Edge Stack instead.
-        type: change
-        docs: topics/install/helm/
-
       - title: Higher performance while generating envoy configuration now enabled by default
         body: The environment variable <code>AMBASSADOR_FAST_RECONFIGURE</code> is now set by default, enabling the higher-performance implementation of the code Ambassador uses to generate and validate Envoy configurations.
         docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
         type: change
+
+      # This set of release notes is for Edge Stack. edgectl is still a thing for Edge Stack (in the form of edgectl license).
+      - title: edgectl install no longer supported
+        body: The <code>edgectl install</code> command has been removed. Please use the <code>edge-stack</code> Helm chart to install Ambassador Edge Stack instead.
+        type: change
+        docs: topics/install/helm/
 
       - title: Service Preview no longer supported
         body: Service Preview is no longer supported in Emissary, and has been removed. Please use <a href="https://www.getambassador.io/docs/telepresence">Telepresence</a> instead.
