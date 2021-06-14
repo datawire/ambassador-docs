@@ -134,7 +134,7 @@ The versatile HTTPS configuration of Ambassador lets it support various HTTPS us
 In the following instructions, we'll install the open-source Ambassador API
 Gateway with Helm. 
 
-Although the [Helm chart](https://github.com/datawire/ambassador/tree/master/charts/ambassador) installs
+Although the [Helm chart](https://github.com/emissary-ingress/emissary/tree/release/v1.13/charts/ambassador) installs
 the Ambassador Edge Stack by default, the Ambassador API Gateway is still
 available for installation for both Helm 2 and Helm 3.
 
