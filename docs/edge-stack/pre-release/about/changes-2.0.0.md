@@ -85,7 +85,10 @@ spec:
 ```
 
 It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName$ to Communicate](../howtos/configure-communications).
- 
+
+### `PROXY` Protocol Configuration
+
+Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0.0, so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer supported. Note that the `Listener` resource can configure `PROXY` resource per-`Listener`, rather than having a single global setting. For further information, see the [`Listener` documentation](../topics/running/listener).
 
 ### `Host`s and ACME
 

@@ -21,49 +21,60 @@ items:
     date: '2021-06-14'
     notes:
       - title: The Listener Resource
-        body: The new <a href="topics/running/listener"><code>Listener</code></a> CRD defines where and how to listen for requests from the network, and which <code>Host</code> definitions should be used to process those requests.
+        body: The new <code>Listener</code> CRD defines where and how to listen for requests from the network, and which <code>Host</code> definitions should be used to process those requests. Note that the <code>Listener</code> CRD consolidates <i>all</i> port configuration; see the <a href><code>Listener</code> documentation</a> for more details.
         type: feature
         docs: topics/running/listener
         image: ./edge-stack-2.0.0-listener.png
 
-      - title: "Independent Host actions supported"
-        body: "Each <code>Host</code> can specify its <code>requestPolicy.insecure.action</code> independently of any other <code>Host</code>, allowing for HTTP routing as flexible as HTTPS routing."
+      - title: Independent Host actions supported
+        body: Each <code>Host</code> can specify its <code>requestPolicy.insecure.action</code> independently of any other <code>Host</code>, allowing for HTTP routing as flexible as HTTPS routing.
         docs: topics/running/host-crd/#secure-and-insecure-requests
         image: ./edge-stack-2.0.0-insecure_action_hosts.png
         type: bugfix
 
+      - title: Port configuration outside Listener has been moved to Listener
+        body: The <code>TLSContext</code> <code>redirect_cleartext_from</code> and <code>Host</code> <code>requestPolicy.insecure.additionalPort</code> elements are no longer supported. Use a <code>Listener</code> for this functionality instead.
+        type: change
+        docs: about/changes-2.0.0/#tlscontext-redirect_cleartext_from-and-host-insecureadditionalport
+
+      - title: PROXY protocol configuration has been moved to Listener
+        body: The <code>use_proxy_protocol</code> element of the Ambassador <code>Module</code> is no longer supported, as it is now part of the <code>Listener</code> resource (and can be set per-<code>Listener</code> rather than globally).
+        type: change
+        docs: about/changes-2.0.0/#tlscontext-redirect_cleartext_from-and-host-insecureadditionalport
+
+      - title: Independent Host actions supported
+        body: Each <code>Host</code> can specify its <code>requestPolicy.insecure.action</code> independently of any other <code>Host</code>, allowing for HTTP routing as flexible as HTTPS routing.
+        docs: topics/running/host-crd/#secure-and-insecure-requests
+        image: ./edge-stack-2.0.0-insecure_action_hosts.png
+        type: bugfix
+
+      - title: Host or Ingress now required for TLS termination
+        body: A <code>Host</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>Host</code> CRD documentation.</a>
+        docs: about/changes-2.0.0/#host-tlscontext-and-tls-termination
+        type: change
+        image: ./edge-stack-2.0.0-host_crd.png
+
       - title: Envoy V3 APIs
-        body: By default, $productName$ will configure Envoy using the V3 Envoy API.
+        body: By default, Edge Stack will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or e.g. Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
         type: change
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
       - title: Correctly set Ingress resource status in all cases
-        body: "Fixed a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses."
+        body: Edge Stack 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses.
         docs: topics/running/ingress-controller
         type: bugfix
         image: ./edge-stack-2.0.0-ingressstatus.png
 
       - title: Module-based TLS no longer supported
-        body: "The <code>tls</code> module and the <code>tls</code> field in the Ambassador module are no longer supported. Please use <code>TLSContext</code> resources instead."
+        body: The <code>tls</code> module and the <code>tls</code> field in the Ambassador module are no longer supported. Please use <code>TLSContext</code> resources instead.
         docs: about/changes-2.0.0/#tls-the-ambassador-module-and-the-tls-module
         image: ./edge-stack-2.0.0-tlscontext.png
         type: change
 
-      - title: Host now required for TLS termination
-        body: The <code>Host</code> CRD is now required when terminating TLS.
-        docs: about/changes-2.0.0/#host-tlscontext-and-tls-termination
-        type: change
-        image: ./edge-stack-2.0.0-host_crd.png
-
-      - title: Service Preview removed
-        body: Service Preview is no longer supported in Emissary, and has been removed. Please use Telepresence instead.
+      - title: Service Preview no longer supported
+        body: Service Preview is no longer supported in Emissary, and has been removed. Please use <a href="https://www.getambassador.io/docs/telepresence">Telepresence</a> instead.
         docs: https://www.getambassador.io/docs/telepresence
         type: change
-
-      - title: Port configuration no longer supported outside of Listener
-        body: The <code>TLSContext</code> <code>redirect_cleartext_from</code> and <code>Host</code> <code>requestPolicy.insecure.additionalPort</code> are no longer supported; use an extra 'Listener' instead!
-        type: change
-        docs: about/changes-2.0.0/#tlscontext-redirect_cleartext_from-and-host-insecureadditionalport
 
       - title: Memory usage improvements for installations with many Hosts
         body: The behavior of the Ambassador module <code>prune_unreachable_routes</code> field is now automatic, which should reduce Envoy memory requirements for installations with many <code>Host</code>s
@@ -71,24 +82,26 @@ items:
         image: ./edge-stack-2.0.0-prune_routes.png
         type: feature
 
-      - title: Edgectl Removed
-        body: "Removed the <code>edgectl</code> binary, as this was effectively a wrapper over helm. Please use the <code>emissary-ingress</code> helm chart to install emissary instead."
+      # This set of release notes is for Edge Stack. edgectl is still a thing for Edge Stack (in the form of edgectl license).
+      - title: edgectl install no longer supported
+        body: The <code>edgectl install</code> command has been removed. Please use the <code>ambassador</code> Helm chart to install Ambassador Edge Stack instead.
         type: change
-        docs: "topics/install/helm/"
+        docs: topics/install/helm/
 
       - title: Higher performance while generating envoy configuration now enabled by default
-        body: The environment variable <code>AMBASSADOR_FAST_RECONFIGURE</code> is a feature flag that enables a higher performance implementation of the code Ambassador uses to validate and generate envoy configuration, and is now enabled by default.
+        body: The environment variable <code>AMBASSADOR_FAST_RECONFIGURE</code> is now set by default, enabling the higher-performance implementation of the code Ambassador uses to generate and validate Envoy configurations.
         docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
         type: change
 
       - title: Edge Policy Console removed
-        body: Edge Stack's Edge Policy Console has now been removed.
+        body: The Edge Policy Console has been removed as part of the move to Ambassador Cloud. If needed, you can also access the diagnostics UI.
         type: change
+        docs: https://app.getambassador.io/
 
       - title: Removed Ambassador Projects
-        body: We have removed support for <code>Project</code>s in Emissary
+        body: We have removed support for <code>Project</code>s in Emissary, in favor of ArgoCD.
         type: change
-        docs: topics/using/projects
+        docs: https://www.getambassador.io/docs/argo/latest/quick-start/#argo-quick-start
 
   - version: 1.13.8
     date: '2021-06-08'
