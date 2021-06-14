@@ -26,12 +26,6 @@ items:
         docs: topics/running/listener
         image: ./edge-stack-2.0.0-listener.png
 
-      - title: Independent Host actions supported
-        body: Each <code>Host</code> can specify its <code>requestPolicy.insecure.action</code> independently of any other <code>Host</code>, allowing for HTTP routing as flexible as HTTPS routing.
-        docs: topics/running/host-crd/#secure-and-insecure-requests
-        image: ./edge-stack-2.0.0-insecure_action_hosts.png
-        type: bugfix
-
       - title: Port configuration outside Listener has been moved to Listener
         body: The <code>TLSContext</code> <code>redirect_cleartext_from</code> and <code>Host</code> <code>requestPolicy.insecure.additionalPort</code> elements are no longer supported. Use a <code>Listener</code> for this functionality instead.
         type: change
@@ -71,11 +65,6 @@ items:
         image: ./edge-stack-2.0.0-tlscontext.png
         type: change
 
-      - title: Service Preview no longer supported
-        body: Service Preview is no longer supported in Emissary, and has been removed. Please use <a href="https://www.getambassador.io/docs/telepresence">Telepresence</a> instead.
-        docs: https://www.getambassador.io/docs/telepresence
-        type: change
-
       - title: Memory usage improvements for installations with many Hosts
         body: The behavior of the Ambassador module <code>prune_unreachable_routes</code> field is now automatic, which should reduce Envoy memory requirements for installations with many <code>Host</code>s
         docs: topics/running/ambassador/#prune-unreachable-routes
@@ -93,12 +82,17 @@ items:
         docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
         type: change
 
+      - title: Service Preview no longer supported
+        body: Service Preview is no longer supported in Emissary, and has been removed. Please use <a href="https://www.getambassador.io/docs/telepresence">Telepresence</a> instead.
+        docs: https://www.getambassador.io/docs/telepresence
+        type: change
+
       - title: Edge Policy Console removed
         body: The Edge Policy Console has been removed as part of the move to Ambassador Cloud. If needed, you can also access the diagnostics UI.
         type: change
         docs: https://app.getambassador.io/
 
-      - title: Removed Ambassador Projects
+      - title: Ambassador Project removed
         body: We have removed support for <code>Project</code>s in Emissary, in favor of ArgoCD.
         type: change
         docs: https://www.getambassador.io/docs/argo/latest/quick-start/#argo-quick-start
