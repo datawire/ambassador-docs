@@ -41,7 +41,6 @@ const ReleaseNotes = ({
   return (
     <>
       <h1>{title}</h1>
-      <p>{changelog}</p>
       <div>
         {releases.map((release) => (
           <Release
@@ -52,6 +51,7 @@ const ReleaseNotes = ({
           />
         ))}
       </div>
+      <p>{changelog}</p>
     </>
   );
 };

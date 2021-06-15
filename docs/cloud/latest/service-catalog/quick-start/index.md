@@ -55,7 +55,7 @@ kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.templat
 If you installed Edge Stack into an empty cluster you won't see any services in your catalog (except for the Edge Stack services which start with `ambassador`).  Apply this sample app to quickly see an example of a service in the catalog:
 
 ```
-kubectl apply -f http://getambassador.io/yaml/quickstart/qotm.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
 ```
 
 Then refresh your Service Catalog page and you should see the `quote` service listed.

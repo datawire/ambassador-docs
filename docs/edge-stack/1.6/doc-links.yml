@@ -271,6 +271,6 @@
 - title: Community
   items:
     - title: Contributor's Guide
-      link: https://github.com/datawire/ambassador/blob/release/v1.6/DEVELOPING.md
+      link: https://github.com/emissary-ingress/emissary/blob/release/v1.6/DEVELOPING.md
     - title: CHANGELOG
-      link: https://github.com/datawire/ambassador/blob/release/v1.6/CHANGELOG.md
+      link: https://github.com/emissary-ingress/emissary/blob/release/v1.6/CHANGELOG.md

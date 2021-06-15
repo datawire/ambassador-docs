@@ -12,10 +12,14 @@
               link: /service-catalog/quick-start/
             - title: Core concepts
               items:
+                - title: Using a service catalog
+                  link: /service-catalog/concepts/using
                 - title: Annotating Kubernetes Services for humans
                   link: /service-catalog/concepts/annotating/
                 - title: Environments
                   link: /service-catalog/concepts/environments/
+                - title: Incident response in the cloud-native world
+                  link: /service-catalog/concepts/ir
             - title: How do I...
               items:
                 - title: Annotate a service
