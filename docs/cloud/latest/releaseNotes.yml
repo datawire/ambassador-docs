@@ -29,8 +29,8 @@ items:
         image: ./cloud-intercept-details.png
         docs: ../../telepresence/latest/quick-start/
         type: feature
-      - title: Rollouts in Beta
-        body: "Rollouts is a beta feature of Ambassador Cloud. With rollouts, Ambassador Cloud and Argo will guide you through the GitOps operations for deploying your services using the canary release pattern."
+      - title: Rollouts in developer preview
+        body: "Rollouts is a feature of Ambassador Cloud currently in developer preview. With rollouts, Ambassador Cloud and Argo will guide you through the GitOps operations for deploying your services using the canary release pattern."
         image: ./cloud-rollouts-beta.png
         docs: ../../argo/latest/quick-start/
         type: feature
