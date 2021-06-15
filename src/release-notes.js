@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, navigate } from 'gatsby';
 import Layout from '../../src/components/Layout';
@@ -43,13 +43,13 @@ export default ({ data, location, pageContext }) => {
     return links[1].items[0].items;
   };
 
-  const getVersions = () => {
+  const getVersions = useCallback(() => {
     if (!data.versions?.content) {
       return {};
     }
     const versions = data.versions?.content;
     return JSON.parse(versions);
-  };
+  }, [data.versions?.content]);
 
   const menuLinks = useMemo(() => {
     if (!data.linkentries?.content) {

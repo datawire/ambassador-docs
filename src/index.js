@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -55,26 +55,28 @@ export default ({ data, location }) => {
         isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
     }, [isMobile]);
 
-    const parseLinksByVersion = (vers, links) => {
+    const parseLinksByVersion = useCallback((vers, links) => {
         if (oldStructure.includes(vers)) {
             return links;
         }
-        return links[1].items[0].items;
-    }
 
-    const getVersions = () => {
+console.log("parseLinksByVersion", links[1].items[0]);
+        return links[1].items[0].items;
+    }, [oldStructure]);
+
+    const getVersions = useCallback(() => {
         if (!data.versions?.content) {
             return {};
         }
         const versions = data.versions?.content;
         return JSON.parse(versions);
-    }
+    }, [data.versions.conent]);
 
     const menuLinks = useMemo(() => {
         if (!data.linkentries?.content) {
             return [];
         }
-        const linksJson = JSON.parse(data.linkentries?.content || []);
+        const linksJson = JSON.parse(template(data.linkentries?.content, getVersions()) || []);
         return parseLinksByVersion(slug[3], linksJson);
     }, [data.linkentries, slug]);
 
@@ -91,7 +93,9 @@ export default ({ data, location }) => {
             metaTitle = (page.headings && page.headings[0] ? page.headings[0].value : 'Docs') + ' | Ambassador';
             metaDescription = page.frontmatter && page.frontmatter.description ? page.frontmatter.description : page.excerpt;
         }
-        return { metaDescription, metaTitle };
+        return {
+          metaDescription: template(metaDescription, getVersions()), metaTitle: template(metaTitle, getVersions())
+        };
     }
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
