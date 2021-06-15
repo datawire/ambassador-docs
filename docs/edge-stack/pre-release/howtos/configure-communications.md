@@ -116,11 +116,11 @@ spec:
 - This will result in a cleartext-only $productName$ configuration, with only port 8080 active.
    - See the "Cleartext Only" section below for why this is important.
 
-### TLS using ACME ($AESProductName$ only)
+### TLS using ACME ($AESproductName$ only)
 
 This scenario uses ACME to get certificates for `foo.example.com` and `bar.example.com`. HTTPS traffic to either host is routed; HTTP traffic to `foo.example.com` will be redirected to HTTPS, but HTTP traffic to `bar.example.com` will be rejected outright.
 
-Since this example uses ACME, it is only supported in $AESProductName$.
+Since this example uses ACME, it is only supported in $AESproductName$.
 
 ```yaml
 ---
@@ -148,7 +148,7 @@ spec:
 
 (`Mapping`s are not shown.)
 
-- Since no `Listener`s are defined, $AESProductName$ will create default `Listener`s on ports 8080 and 8443.
+- Since no `Listener`s are defined, $AESproductName$ will create default `Listener`s on ports 8080 and 8443.
    - Both will accept HTTPS and HTTP, and the protocol will dictate whether the requests are secure (HTTPS) or insecure (HTTP).
 - `foo-host` defaults to ACME with Let's Encrypt, since `acmeProvider.authority` is not provided.
 - `foo-host` defaults to redirecting insecure requests, since the default for `requestPolicy.insecure.action` is `Redirect`.
@@ -158,7 +158,7 @@ spec:
 
 This scenario uses TLS, but no ACME: instead, the certificate is in a Kubernetes `Secret`. HTTPS traffic to either `foo.example.com` or `bar.example.com` is routed, but this time `foo.example.com` will redirect HTTP requests, while `bar.example.com` will route them.
 
-Since this example does not use ACME, it is supported in $productName$ as well as $AESProductName$.
+Since this example does not use ACME, it is supported in $productName$ as well as $AESproductName$.
 
 ```yaml
 ---
@@ -247,9 +247,9 @@ spec:
       action: Route
 ```
 
-### ACME With a TLSContext ($AESProductName$ Only)
+### ACME With a TLSContext ($AESproductName$ Only)
 
-In $AESProductName$, you can use a `TLSContext` with ACME as well. This example is the same as "TLS using ACME", but we use a `TLSContext` to set `ALPN` information. Again, ACME is only supported in $AESProductName$.
+In $AESproductName$, you can use a `TLSContext` with ACME as well. This example is the same as "TLS using ACME", but we use a `TLSContext` to set `ALPN` information. Again, ACME is only supported in $AESproductName$.
 
 ```yaml
 ---
@@ -308,7 +308,7 @@ spec:
 
 - Since we provide a `Listener`, no default `Listener`s are created.
    - This is important in this scenario! If the default `Listener`s are created, they are created to _allow_ TLS.
-      - In $AESProductName$, this will result in TLS being accepted using the fallback certificate.
+      - In $AESproductName$, this will result in TLS being accepted using the fallback certificate.
       - In $productName$, since there is no fallback certficate, it will result in strange TLS errors.
 - Using an insecure action of `Route` is necessary! otherwise requests will be redirected and nothing will catch them.
 
