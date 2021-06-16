@@ -1,4 +1,4 @@
-import { goToEdgeStackQuickStart, goToMappings, goToHostCRD, goToLoadBalancer, goToCircuitBreakers, goToCanaryReleases, goToOauth, goToJWT, goToExtFilters, goToRateLimits, goToRateLimitsEdgeStack, goToAdvancedRateLimiting, goToGRPC, goToTlsTermination, GoToWebsockets, goToArgoQuickStart, goToArgoCICD, goToArgoCanary, goToCloudQuickStart, goToTelepresenceHowTo, goToTelepresenceContextProp, goToTelepresenceFAQs, goToKubernetesConceptsBasics, goToKubernetesHowtosCodeCluster, goToKubernetesHowtosDebug } from '../../../src/utils/routes';
+import { goToEdgeStackQuickStart, goToMappings, goToHostCRD, goToLoadBalancer, goToCircuitBreakers, goToCanaryReleases, goToOauth, goToJWT, goToExtFilters, goToRateLimits, goToRateLimitsEdgeStack, goToAdvancedRateLimiting, goToGRPC, goToTlsTermination, goToWebsockets, goToArgoQuickStart, goToArgoCICD, goToArgoCanary, goToCloudQuickStart, goToTelepresenceHowTo, goToTelepresenceContextProp, goToTelepresenceFAQs, goToKubernetesConceptsBasics, goToKubernetesHowtosCodeCluster, goToKubernetesHowtosDebug, goToEmissaryQuickStart, goToEmissaryMappings, goToEmissaryHostCRD, goToEmissaryLoadBalancer, goToEmissaryCircuitBreakers, goToEmissaryCanaryReleases, goToEmissaryOauth, goToEmissaryExtFilters, goToEmissaryRateLimits, goToEmissaryAdvancedRateLimiting, goToEmissaryTlsTermination, goToEmissaryWebsockets, goToEmissaryGRPC } from '../../../src/utils/routes';
 
 export const EdgeStackCards = [
   {
@@ -95,7 +95,7 @@ export const EdgeStackCards = [
   {
     title: 'Websockets',
     description: 'Add support for the WebSocket protocol',
-    link: GoToWebsockets,
+    link: goToWebsockets,
     linkText: 'Learn How',
     section: 'ingress'
   },
@@ -128,6 +128,137 @@ export const EdgeStackSections = [
   {
     name: 'Ingress',
     id: 'ingress'
+  }
+];
+
+export const EmissaryCards = [
+  {
+    title: 'Emissary Ingress',
+    description: 'Route and secure traffic to your cluster with an Open Source Kubernetes-native API Gateway.',
+    link: goToEmissaryQuickStart,
+    linkText: 'Get Started',
+    section: 'emissaryBasics'
+  },
+  {
+    title: 'Mappings',
+    description: 'Use a declarative configuration to map requests to services.',
+    link: goToEmissaryMappings,
+    linkText: 'Learn How',
+    section: 'emissaryBasics'
+  },
+  {
+    title: 'Host',
+    description: 'Configure a hostname and TLS options for your ingress.',
+    link: goToEmissaryHostCRD,
+    linkText: 'Learn How',
+    section: 'emissaryBasics'
+  },
+  {
+    title: 'Load Balancing',
+    description: 'Maximize the scalability and availability of your application.',
+    link: goToEmissaryLoadBalancer,
+    linkText: 'Learn How',
+    section: 'emissaryTrafficManagement'
+  },
+  {
+    title: 'Circuit Breaking',
+    description: 'Limit the blast radius of an overloaded service by preventing additional connections.',
+    link: goToEmissaryCircuitBreakers,
+    linkText: 'Learn How',
+    section: 'emissaryTrafficManagement'
+  },
+  {
+    title: 'Canary Releases',
+    description: 'Manipulate production traffic for testing features before release',
+    link: goToEmissaryCanaryReleases,
+    linkText: 'Learn How',
+    section: 'emissaryTrafficManagement'
+  },
+  {
+    title: 'Single Sign-On',
+    description: 'Secure access to your services and integrate with popular identity providers.',
+    link: goToEmissaryOauth,
+    linkText: 'Learn How',
+    section: 'emissaryAuthentication'
+  },
+  {
+    title: 'JWT Validation',
+    description: 'Validate users via bearer tokens with Ambassador Edge Stack.',
+    link: goToJWT,
+    linkText: 'Learn How',
+    section: 'emissaryAuthentication'
+  },
+  {
+    title: 'External Filters',
+    description: 'Authenticate users via an external auth service.',
+    link: goToEmissaryExtFilters,
+    linkText: 'Learn How',
+    section: 'emissaryAuthentication'
+  },
+  {
+    title: 'Rate Limiting Concepts',
+    description: 'Ensure your services remain available, even when under heavy load.',
+    link: goToEmissaryRateLimits,
+    linkText: 'Learn How',
+    section: 'emissaryRateLimiting'
+  },
+  {
+    title: 'Using Rate Limits',
+    description: 'Create policies to control sustained traffic loads with Ambassador Edge Stack.',
+    link: goToRateLimitsEdgeStack,
+    linkText: 'Learn How',
+    section: 'emissaryRateLimiting'
+  },
+  {
+    title: 'Advanced Rate Limiting',
+    description: 'Regulate traffic with greater granularity.',
+    link: goToEmissaryAdvancedRateLimiting,
+    linkText: 'Learn How',
+    section: 'emissaryRateLimiting'
+  },
+  {
+    title: 'TLS Termination',
+    description: 'Automatically secure your traffic with TLS.',
+    link: goToEmissaryTlsTermination,
+    linkText: 'Learn How',
+    section: 'emissaryIngress'
+  },
+  {
+    title: 'Websockets',
+    description: 'Add support for the WebSocket protocol',
+    link: goToEmissaryWebsockets,
+    linkText: 'Learn How',
+    section: 'emissaryIngress'
+  },
+  {
+    title: 'gRPC',
+    description: 'Configure access to gRPC services.',
+    link: goToEmissaryGRPC,
+    linkText: 'Learn How',
+    section: 'emissaryIngress'
+  }
+];
+
+export const EmissarySections = [
+  {
+    name: 'Basics',
+    id: 'emissaryBasics'
+  },
+  {
+    name: 'Traffic Management',
+    id: 'emissaryTrafficManagement'
+  },
+  {
+    name: 'Authentication',
+    id: 'emissaryAuthentication'
+  },
+  {
+    name: 'Rate Limiting',
+    id: 'emissaryRateLimiting'
+  },
+  {
+    name: 'Ingress',
+    id: 'emissaryIngress'
   }
 ];
 

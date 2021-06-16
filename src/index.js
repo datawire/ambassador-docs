@@ -15,6 +15,7 @@ import isAesPage from './utils/isAesPage';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import EdgeStack from './products/EdgeStack';
+import Emissary from './products/Emissary';
 import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
 import ContactBlock from '../../src/components/ContactBlock';
@@ -161,6 +162,8 @@ export default ({ data, location }) => {
         switch (product) {
             case 'edge-stack':
                 return <EdgeStack />;
+            case 'emissary':
+                return <Emissary />;
             case 'telepresence':
                 return <Telepresence />;
             case 'cloud':
