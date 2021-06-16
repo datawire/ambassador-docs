@@ -40,7 +40,7 @@ Use the following variables for the environment of your Ambassador container:
 
 [^1]: This may change in a future release to reflect the Pods's
     namespace if deployed to a namespace other than `default`.
-    https://github.com/datawire/ambassador/issues/1583
+    https://github.com/emissary-ingress/emissary/issues/1583
 
 [Go `net.Dial`]: https://golang.org/pkg/net/#Dial
 [Go `strconv.ParseBool`]: https://golang.org/pkg/strconv/#ParseBool
