@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -157,7 +157,7 @@ export default ({ data, location }) => {
                 loadJS();
             }, 500);
         }
-}
+      }
     };
 
     const getProductHome = (product) => {
@@ -340,4 +340,4 @@ export const query = graphql`
       content
     }
   }
-`;parseLinksByVersion
+`;

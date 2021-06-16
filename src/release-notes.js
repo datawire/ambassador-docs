@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link, navigate } from 'gatsby';
 import Layout from '../../src/components/Layout';
@@ -36,20 +36,20 @@ export default ({ data, location, pageContext }) => {
     loadJS();
   }, [isMobile]);
 
-  const parseLinksByVersion = (vers, links) => {
+  const parseLinksByVersion = useCallback((vers, links) => {
     if (oldStructure.includes(vers)) {
       return links;
     }
     return links[1].items[0].items;
-  };
+  }, [oldStructure]);
 
-  const getVersions = () => {
+  const versions = useMemo(() => {
     if (!data.versions?.content) {
       return {};
     }
     const versions = data.versions?.content;
     return JSON.parse(versions);
-  };
+  }, [data.versions?.content]);
 
   const menuLinks = useMemo(() => {
     if (!data.linkentries?.content) {
@@ -60,17 +60,9 @@ export default ({ data, location, pageContext }) => {
   }, [data.linkentries, slug]);
 
   const getProductName = () => {
-    switch (slug[2]) {
-      case 'edge-stack':
-        return 'Edge Stack';
-      case 'telepresence':
-        return 'Telepresence';
-      case 'argo':
-        return 'Argo';
-      case 'cloud':
-        return 'Cloud';
-    }
-    return '';
+  
+    console.log(versions, versions.productName);
+    return versions.productName;
   };
 
   const getMetaDescription = () => {
@@ -179,13 +171,13 @@ export default ({ data, location, pageContext }) => {
       <section className="docs__contact docs__container">
         <ContactBlock />
       </section>
-      <DocsFooter product={product.slug} version={getVersions().docsVersion} />
+      <DocsFooter product={product.slug} version={versions.docsVersion} />
     </div>
   );
 
   const content = useMemo(() => {
     const changelogUrl = data.releaseNotes.changelog
-      ? template(data.releaseNotes.changelog, getVersions())
+      ? template(data.releaseNotes.changelog, versions)
       : '';
 
     return (
