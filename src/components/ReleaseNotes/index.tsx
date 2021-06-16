@@ -16,7 +16,7 @@ const ReleaseNotes = ({
 
   const changelog = useMemo(() => {
     const commonText = `For a detailed list of all the changes in past releases, please consult the`;
-    
+
     if (changelogURL) {
       return (
         <>
@@ -39,6 +39,7 @@ const ReleaseNotes = ({
             release={release}
             images={images}
             handleViewMore={handleViewMore}
+            versions={versions}
           />
         ))}
       </div>

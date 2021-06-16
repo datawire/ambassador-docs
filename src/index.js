@@ -62,7 +62,7 @@ export default ({ data, location }) => {
         return links[1].items[0].items;
     }, [oldStructure]);
 
-    const getVersions = useCallback(() => {
+    const versions = useMemo(() => {
         if (!data.versions?.content) {
             return {};
         }
@@ -74,11 +74,11 @@ export default ({ data, location }) => {
         if (!data.linkentries?.content) {
             return [];
         }
-        const linksJson = JSON.parse(template(data.linkentries?.content, getVersions()) || []);
+        const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
         return parseLinksByVersion(slug[3], linksJson);
-    }, [data.linkentries, slug]);
+    }, [data.linkentries, slug, versions]);
 
-    const getMetaData = () => {
+    const metadata = useMemo(() => {
         let metaDescription;
         let metaTitle;
         if (isHome) {
@@ -92,9 +92,9 @@ export default ({ data, location }) => {
             metaDescription = page.frontmatter && page.frontmatter.description ? page.frontmatter.description : page.excerpt;
         }
         return {
-          metaDescription: template(metaDescription, getVersions()), metaTitle: template(metaTitle, getVersions())
+          metaDescription: template(metaDescription, versions), metaTitle: template(metaTitle, versions)
         };
-    }
+    },[versions, page, isHome, metaData]);
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
 
@@ -188,7 +188,7 @@ export default ({ data, location }) => {
                 <ContactBlock />
             </section>
             {!isHome && !isProductHome && isProduct && (
-                <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />
+                <DocsFooter page={page} product={product.slug} version={versions.docsVersion} />
             )}
         </div>
     );
@@ -225,7 +225,7 @@ export default ({ data, location }) => {
                         </div>
                         {requireReadingTime() && <span className="docs__reading-time">{page.frontmatter.reading_time ? page.frontmatter.reading_time : page.fields.readingTime.text}</span>}
                         <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.text}>
-                            {template(page.body, getVersions())}
+                            {template(page.body, versions)}
                         </MDXRenderer>
                     </div>
                     {footer}
@@ -237,11 +237,11 @@ export default ({ data, location }) => {
     return (
         <Layout location={location}>
             <Helmet>
-                <title>{getMetaData().metaTitle}</title>
-                <meta name="og:title" content={getMetaData().metaTitle} />
+                <title>{metadata.metaTitle}</title>
+                <meta name="og:title" content={metadata.metaTitle} />
                 <meta name="og:type" content="article" />
                 <link rel="canonical" href={canonicalUrl} />
-                <meta name="description" content={getMetaData().metaDescription} />
+                <meta name="description" content={metadata.metaDescription} />
         
                 {!isMobile && 
                   <link

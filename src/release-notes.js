@@ -55,7 +55,7 @@ export default ({ data, location, pageContext }) => {
     if (!data.linkentries?.content) {
       return [];
     }
-    const linksJson = JSON.parse(data.linkentries?.content || []);
+    const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
     return parseLinksByVersion(slug[3], linksJson);
   }, [data.linkentries, slug]);
 
