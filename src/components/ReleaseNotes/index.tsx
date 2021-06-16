@@ -11,8 +11,23 @@ const ReleaseNotes = ({
   versions,
 }) => {
   const title = useMemo(() => {
-    return `${versions.productName} Release Notes`;
-  }, [versions]);
+    if (versions.productName) {
+      return `${versions.productName} Release Notes`;
+    }
+
+    switch (product) {
+      case 'edge-stack':
+        return 'Edge Stack Release Notes';
+      case 'telepresence':
+        return 'Telepresence Release Notes';
+      case 'argo':
+        return 'Argo Release Notes';
+      case 'cloud':
+        return 'Cloud Release Notes';
+      default:
+        return 'Release Notes';
+    }
+  }, [product]);
 
   const changelog = useMemo(() => {
     const commonText = `For a detailed list of all the changes in past releases, please consult the`;
