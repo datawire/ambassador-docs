@@ -59,12 +59,6 @@ export default ({ data, location, pageContext }) => {
     return parseLinksByVersion(slug[3], linksJson);
   }, [data.linkentries, slug]);
 
-  const getProductName = () => {
-  
-    console.log(versions, versions.productName);
-    return versions.productName;
-  };
-
   const getMetaDescription = () => {
     switch (slug[2]) {
       case 'edge-stack':
@@ -81,7 +75,7 @@ export default ({ data, location, pageContext }) => {
   };
 
   const getMetaData = () => {
-    const metaTitle = `${getProductName()} Release Notes | Ambassador`;
+    const metaTitle = `${versions.productName} Release Notes | Ambassador`;
     const metaDescription = getMetaDescription();
     return { metaDescription, metaTitle };
   };
@@ -194,6 +188,7 @@ export default ({ data, location, pageContext }) => {
             <ReleaseNotes
               changelog={changelogUrl}
               releases={data.releaseNotes?.versions}
+              versions={versions}
               images={data.images?.nodes}
               product={slug[2]}
               handleViewMore={handleViewMore}
