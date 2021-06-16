@@ -1,6 +1,6 @@
-# Ambassador Edge Stack extensions
+# $productName$ extensions
 
-The Ambassador Edge Stack contains a number of pre-built extensions that make
+The $productName$ contains a number of pre-built extensions that make
 running, deploying, and exposing your applications in Kubernetes easier. 
 
 Use of AES extensions is implemented via Kubernetes Custom Resources.
@@ -13,7 +13,7 @@ is concerned with how to operate and tune deployment of these extensions in AES.
 Sine AES does not use a database, Redis is uses for caching state information
 when an extension requires it.
 
-The Ambassador Edge Stack shares the same Redis pool for all features that use
+The $productName$ shares the same Redis pool for all features that use
 Redis.
 
 The [Redis documentation](../aes-redis) contains detailed information on tuning
@@ -21,8 +21,8 @@ how AES talks to Redis.
 
 ## The Extension process
 
-The various extensions of the Ambassador Edge Stack run as a separate process
-from the Ambassador control plane and Envoy data plane.
+The various extensions of the $productName$ run as a separate process
+from the $productName$ control plane and Envoy data plane.
 
 ### `AES_LOG_LEVEL`
 

@@ -1,14 +1,14 @@
-# Upgrading Ambassador Edge Stack
+# Upgrading $productName$
 
-Since Ambassador Edge Stack's configuration is entirely stored in Kubernetes resources, no special process
-is necessary to upgrade Ambassador Edge Stack.
+Since $productName$'s configuration is entirely stored in Kubernetes resources, no special process
+is necessary to upgrade $productName$.
 
-The steps to upgrade depend on the method that was used to install Ambassador Edge Stack, as indicated below.
+The steps to upgrade depend on the method that was used to install $productName$, as indicated below.
 
 ## Installed via the Operator?
 
 If you installed using the Operator, then you'll need to [use the Operator to perform the upgrade](../aes-operator/#updates-by-the-operator).
-To verify whether the Operator was used to install Ambassador Edge Stack, run the following command
+To verify whether the Operator was used to install $productName$, run the following command
 to see if it returns resources:
 ```
 $ kubectl get deployment -n ambassador -l 'app.kubernetes.io/name=ambassador,app.kubernetes.io/managed-by in (amb-oper,amb-oper-manifest,amb-oper-helm,amb-oper-azure)' 
@@ -29,7 +29,7 @@ ambassador         1/1     1            1           ...
 
 ## Installed via YAML manifests?
 
-Finally, if you installed using YAML manifests, simply run the commands in the following section. To verify whether manifests were used to install Ambassador Edge Stack, run the following command to see if it returns resources:
+Finally, if you installed using YAML manifests, simply run the commands in the following section. To verify whether manifests were used to install $productName$, run the following command to see if it returns resources:
 ```
 $ kubectl get deployment -n ambassador -l 'product=aes'
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
@@ -37,11 +37,11 @@ ambassador         1/1     1            1           ...
 ```
 
 If none of the commands above return resources, you probably have an old installation and you should follow
-the instructions for [upgrading to Ambassador Edge Stack](../upgrade-to-edge-stack/).
+the instructions for [upgrading to $productName$](../upgrade-to-edge-stack/).
 
 ### Upgrading an installation with YAML manifests
 
-If you previously installed Edge Stack using YAML manifests, you can upgrade with
+If you previously installed $productName$ using YAML manifests, you can upgrade with
 these commands:
 
 ```
@@ -49,10 +49,10 @@ kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
 kubectl apply -f https://www.getambassador.io/yaml/aes.yaml
 ```
 
-This will trigger a rolling upgrade of Ambassador Edge Stack.
+This will trigger a rolling upgrade of $productName$.
 
 If you're using your own YAML, check our YAML to be sure of other changes.  At a minimum
-you'll need to change the pulled `image` for the Ambassador Edge Stack container and redeploy.
+you'll need to change the pulled `image` for the $productName$ container and redeploy.
 
 ### Set Up Service Catalog
 

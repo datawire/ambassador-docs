@@ -1,6 +1,6 @@
 # Edgectl Install: Failed to Log In to AES
 
-The installer attempted to open the Ambassador Edge Stack (AES) Policy Console for you, but was unable to connect to the AES service in your Kubernetes cluster.
+The installer attempted to open the $productName$ (AES) Policy Console for you, but was unable to connect to the AES service in your Kubernetes cluster.
 
 ## What's next?
 

@@ -2,7 +2,7 @@
 
 # Service Preview quick start
 
-Service Preview is installed as an addon to the Ambassador Edge Stack.
+Service Preview is installed as an addon to the $productName$.
 
 ## Prerequisites
 
@@ -15,23 +15,23 @@ There are three method for installing Service Preview.
 
 ### <img class="os-logo" src="../../../../images/logo.png"/> [Install with Edgectl](#img-classos-logo-srcimageslogopng-install-with-edgectl-1)
 
-If you are installing Service Preview and Ambassador Edge Stack for the first time, `edgectl` will automatically bootstrap and integrate both tools in your cluster.
+If you are installing Service Preview and $productName$ for the first time, `edgectl` will automatically bootstrap and integrate both tools in your cluster.
 
 ### <img class="os-logo" src="../../../../images/kubernetes.png"/> [Install with YAML](#img-classos-logo-srcimageskubernetespng-install-with-yaml-1)
 
-The YAML installation method will walk you through a step-by-step deployment of all the resources necessary for installing Service Preview alongside the Ambassador Edge Stack. The YAML installation method is the most common approach to install Ambassador Edge Stack, especially in production environments, with our default, customizable manifest.
+The YAML installation method will walk you through a step-by-step deployment of all the resources necessary for installing Service Preview alongside the $productName$. The YAML installation method is the most common approach to install $productName$, especially in production environments, with our default, customizable manifest.
 
 ### <img class="os-logo" src="../../../../images/helm.png"/> [Install with Helm](#img-classos-logo-srcimageshelmpng-install-with-helm-1)
 
-Helm is a popular Kubernetes package manager. The Ambassador helm chart allows you to install Service Preview alongside the Ambassador Edge Stack.
+Helm is a popular Kubernetes package manager. The $productName$ helm chart allows you to install Service Preview alongside the $productName$.
 
 ---
 
 ## <img class="os-logo" src="../../../../images/logo.png"/> Install with Edgectl
 
-If you are a new user, or you are looking to start using Ambassador Edge Stack with Service Preview on a fresh installation, the `edgectl install` command will get you up and running in no time with a pre-configured Traffic Manager and Traffic Agent supported by automatic sidecar injection.
+If you are a new user, or you are looking to start using $productName$ with Service Preview on a fresh installation, the `edgectl install` command will get you up and running in no time with a pre-configured Traffic Manager and Traffic Agent supported by automatic sidecar injection.
 
-### 1. Install the Traffic Manager and Ambassador Injector alongside the Ambassador Edge Stack 
+### 1. Install the Traffic Manager and Ambassador Injector alongside the $productName$ 
 
 The Traffic Manager is what is responsible for managing communications between your Kubernetes cluster and your local machine.
 
@@ -200,11 +200,11 @@ Take a look at the [Service Preview Tutorial](../service-preview-tutorial) to ge
 
 Downloading and installing our published Kubernetes YAML gives you full control over the installation of Service Preview. This is the most popular approach for running Service Preview in production and in CI.
 
-### 1. Install the Ambassador Edge Stack
+### 1. Install the $productName$
 
-Service Preview runs alongside the Ambassador Edge Stack.
+Service Preview runs alongside the $productName$.
 
-[Install Ambassador Edge Stack](../../../install/yaml-install/) if you do not already have it running.
+[Install $productName$](../../../install/yaml-install/) if you do not already have it running.
 
 
 ### 2. Install the Traffic Manager and Ambassador Injector
@@ -384,13 +384,13 @@ Take a look at the [Service Preview Tutorial](../service-preview-tutorial) to ge
 
 ## <img class="os-logo" src="../../../../images/helm.png"/> Install with Helm
 
-Helm is a popular package manager for Kubernetes software. The Ambassador helm chart contains a lot of configuration options that make it easy to deploy and upgrade a custom configuration of Ambassador Edge Stack.
+Helm is a popular package manager for Kubernetes software. The Ambassador helm chart contains a lot of configuration options that make it easy to deploy and upgrade a custom configuration of $productName$.
 
-The Ambassador chart also contains configurations for installing Service Preview alongside Ambassador Edge Stack.
+The Ambassador chart also contains configurations for installing Service Preview alongside $productName$.
 
 Downloading and installing our published Kubernetes YAML gives you full control over the installation of Service Preview. This is the most popular approach for running Service Preview in production and in CI.
 
-### 1. Install the Traffic Manager and Ambassador Injector Alongside the Ambassador Edge Stack 
+### 1. Install the Traffic Manager and Ambassador Injector Alongside the $productName$ 
 
 The Traffic Manager is what is responsible for managing communications between your Kubernetes cluster and your local machine.
 
@@ -398,7 +398,7 @@ Services in your cluster opt-in to using Service Preview by injecting the Traffi
 
 These services are available to be deployed in the helm chart. 
 
-Install Service Preview alongside the Ambassador Edge Stack with the following `values.yaml` options:
+Install Service Preview alongside the $productName$ with the following `values.yaml` options:
 
 ```yaml
 servicePreview:
@@ -411,7 +411,7 @@ Create the Ambassador namespace if it is not already created:
 $ kubectl create namespace ambassador
 ```
 
-Upgrade or install your release of the Ambassador Edge Stack with the Traffic Manager and Ambassador Injector
+Upgrade or install your release of the $productName$ with the Traffic Manager and Ambassador Injector
 
 ```
 $ helm upgrade --install ambassador -n ambassador datawire/ambassador -f values.yaml

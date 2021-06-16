@@ -1,17 +1,17 @@
 # Rate limiting reference
 
-Rate limiting in the Ambassador Edge Stack is composed of two parts:
+Rate limiting in the $productName$ is composed of two parts:
 
 * Labels that get attached to requests; a label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
   the request.
-* `RateLimit`s configure the Ambassador Edge Stack's built-in
+* `RateLimit`s configure the $productName$'s built-in
   `RateLimitService`, and set limits based on the labels on the
   request.
 
 
-> This page covers using `RateLimit` resources to configure Ambassador Edge 
-  Stack to rate limit requests. See the [Basic Rate Limiting article](../) for
+> This page covers using `RateLimit` resources to configure $productName$
+  to rate limit requests. See the [Basic Rate Limiting article](../) for
   information on adding labels to requests.
 
 
@@ -122,7 +122,7 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
    the longest list of items wins.
 
    If a request has multiple label groups, then multiple limits may apply
-   to that request; if *any* of the limits are being hit, then Ambassador
+   to that request; if *any* of the limits are being hit, then $productName$
    will reject the request as an HTTP 429.
 
  - `rate`, `unit`: The limit itself is specified as an integer number
@@ -339,7 +339,7 @@ spec:
   service: catalog
   labels:
     ambassador:                     # the label domain
-    - string_request_label:           # the label group name -- useful for humans, ignored by Ambassador
+    - string_request_label:           # the label group name -- useful for humans, ignored by $productName$
       - catalog                         # annotate the request with `generic_key=catalog`
     - header_request_label:           # another label group name
       - headerkey:                      # The name of the label

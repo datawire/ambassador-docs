@@ -4,18 +4,20 @@
 - title: Products
   collapsable: false
   items:
-    - title: Emissary Ingress
+    - title: $productName$
       items:
         - title: Quick start
           link: /tutorials/getting-started
-        - title: Install Emissary Ingress
+        - title: Install $productName$
           link: /topics/install/
           items:
             - title: Install with Helm
               link: /topics/install/helm
-            - title: Upgrade to the Ambassador Edge Stack
+            - title: Upgrade to a newer version
+              link: /topics/install/upgrading
+            - title: Upgrade to the $AESProductName$
               link: /topics/install/upgrade-to-edge-stack
-            - title: Install Emissary Ingress
+            - title: Install $productName$
               link: /topics/install/install-ambassador-oss
             - title: Install with Docker
               link: /topics/install/docker
@@ -23,20 +25,20 @@
               link: /topics/install/bare-metal
             - title: Install manually
               link: /topics/install/yaml-install
-            - title: The Ambassador Operator
+            - title: The $productName$ Operator
               link: /topics/install/aes-operator
         - title: Core concepts
           link: /topics/concepts/
           items:
             - title: Kubernetes network architecture
               link: /topics/concepts/kubernetes-network-architecture
-            - title: 'The Emissary Ingress operating model: GitOps and continuous delivery'
+            - title: 'The $productName$ operating model: GitOps and continuous delivery'
               link: /topics/concepts/gitops-continuous-delivery
             - title: Progressive delivery
               link: /topics/concepts/progressive-delivery
             - title: Microservices API gateways
               link: /topics/concepts/microservices-api-gateways
-            - title: Emissary Ingress architecture
+            - title: $productName$ architecture
               link: /topics/concepts/architecture
             - title: Rate limiting at the edge
               link: /topics/concepts/rate-limiting-at-the-edge
@@ -58,42 +60,12 @@
               items:
                 - title: Authentication
                   items:
-                    - title: Basic authentication
-                      link: /howtos/ext-filters
-                    - title: Basic authentication (for API Gateway)
+                    - title: Basic authentication with $productName$
                       link: /howtos/basic-auth
-                    - title: Using the OAuth2 filter for SSO
-                      link: /howtos/oauth-oidc-auth
-                    - title: Kubernetes SSO with OIDC and Keycloak
-                      link: /howtos/auth-kubectl-keycloak
-                    - title: Single Sign-On with Google
-                      link: /howtos/sso/google
-                    - title: Single Sign-On with Keycloak
-                      link: /howtos/sso/keycloak
-                    - title: Single Sign-On with Okta
-                      link: /howtos/sso/okta
-                    - title: More SSO...
-                      items:
-                        - title: Single Sign-On with Auth0
-                          link: /howtos/sso/auth0
-                        - title: Single Sign-On with Azure Active Directory (AD)
-                          link: /howtos/sso/azure
-                        - title: Single Sign-On with OneLogin
-                          link: /howtos/sso/onelogin
-                        - title: Single Sign-On with Salesforce
-                          link: /howtos/sso/salesforce
-                        - title: Single Sign-On with UAA
-                          link: /howtos/sso/uaa
-                    - title: Kubernetes SSO with OIDC and Keycloak
-                      link: /howtos/auth-kubectl-keycloak
                 - title: Rate limiting
                   items:
-                    - title: Basic rate limiting
+                    - title: Basic rate limiting with $productName$
                       link: /howtos/rate-limiting-tutorial
-                    - title: Advanced rate limiting
-                      link: /howtos/advanced-rate-limiting
-                    - title: Rate limiting on token claims
-                      link: /howtos/token-ratelimit
             - title: Monitor my services
               items:
                 - title: Distributed tracing with Datadog
@@ -145,11 +117,11 @@
               items:
                 - title: Deployment architecture
                   link: /topics/running/ambassador-deployment
-                - title: The Emissary Ingress container
+                - title: The $productName$ container environment
                   link: /topics/running/environment
-                - title: Emissary Ingress with AWS
+                - title: $productName$ with AWS
                   link: /topics/running/ambassador-with-aws
-                - title: Emissary Ingress with GKE
+                - title: $productName$ with GKE
                   link: /topics/running/ambassador-with-gke
                 - title: Advanced deployment configuration
                   link: /topics/running/running
