@@ -20,7 +20,7 @@ With Ambassador Edge Stack Enterprise, you have access to deployment and product
 
 ## File a Github Issue
 
-If you see a bug you want to fix, see room for documentation improvements, or have something else you want to change, you can [file an issue on github](https://github.com/datawire/ambassador/issues/new).
+If you see a bug you want to fix, see room for documentation improvements, or have something else you want to change, you can [file an issue on github](https://github.com/emissary-ingress/emissary/issues/new).
 
 ## Pricing
 

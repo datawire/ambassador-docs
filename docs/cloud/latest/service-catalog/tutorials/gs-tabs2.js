@@ -73,7 +73,7 @@ export default function SimpleTabs() {
 
         {/*Helm 3 token install instructions*/}
 
-        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
+        Log in to <a href="https://app.getambassador.io/cloud/">Ambassador Cloud</a>.
         Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Helm</b>.
         The slideout contains instructions with a unique <code>cloud-connect-token</code> that is
         used to connect your cluster to your Ambassador Cloud account.<br />
@@ -97,7 +97,7 @@ export default function SimpleTabs() {
 
         {/*Helm 2 token install instructions*/}
 
-        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
+        Log in to <a href="https://app.getambassador.io/cloud/">Ambassador Cloud</a>.
         Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Helm</b>.
         The slideout contains instructions with a unique <code>cloud-connect-token</code> that is
         used to connect your cluster to your Ambassador Cloud account.<br />
@@ -121,7 +121,7 @@ export default function SimpleTabs() {
 
         {/*YAML token install instructions*/}
 
-        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
+        Log in to <a href="https://app.getambassador.io/cloud/">Ambassador Cloud</a>.
         Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Kubernetes YAML</b>.
         The slideout contains instructions with a unique <code>cloud-connect-token</code> that is
         used to connect your cluster to your Ambassador Cloud account.<br />
@@ -146,7 +146,7 @@ export default function SimpleTabs() {
 
         Connecting Edge Stack that was installed via <code>edgectl</code> is identical to the Kubernetes YAML procedure.<br />
 
-        Log in to <a href="https://app.getambassador.io/cloud/catalog">Ambassador Cloud</a>.
+        Log in to <a href="https://app.getambassador.io/cloud/">Ambassador Cloud</a>.
         Click <b>Connect my cluster to Ambassador Cloud</b>, then <b>Connect via Kubernetes YAML</b>.
         The slideout contains instructions with a unique <code>cloud-connect-token</code> that is
         used to connect your cluster to your Ambassador Cloud account.<br />

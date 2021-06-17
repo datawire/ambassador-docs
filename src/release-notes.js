@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
-import { Link, navigate } from 'gatsby';
+import { graphql, Link, navigate } from 'gatsby';
 import Layout from '../../src/components/Layout';
 import Search from './images/search.inline.svg';
 import { products, oldStructure } from './config';

@@ -4,7 +4,7 @@
 
 To use Azure as your IdP, you will first need to register an OAuth application with your Azure tenant.
 
-1. Follow the steps in the Azure documentation [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-protocols-openid-connect-code#register-your-application-with-your-ad-tenant) to register your application. Make sure to select "web application" (not native application) when creating your OAuth application.
+1. Follow the steps in the Azure documentation [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) to register your application. Make sure to select "web application" (not native application) when creating your OAuth application.
 
 2. After you have registered your application, click on `App Registrations` in the navigation panel on the left and select the application you just created.
 

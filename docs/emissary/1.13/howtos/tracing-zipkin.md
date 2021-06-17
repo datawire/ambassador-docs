@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Distributed tracing with Zipkin
 
 In this tutorial, we'll configure $productName$ to initiate a trace on some sample requests, and use Zipkin to visualize them.
@@ -62,20 +64,24 @@ spec:
     app: zipkin
 ```
 
-You can deploy this configuration into your Kubernetes cluster like so:
+Next, deploy this configuration into your cluster:
 
 ```
 $ kubectl apply -f zipkin.yaml
 ```
 
-**Important:** $productName$ will need to be restarted to configure itself to add the tracing header. Delete all $productName$ pods and let Kubernetes restart them.
+<Alert severity="info">
+  $productName$ will need to be restarted to configure itself to add the tracing header. This command will restart all the Pods (assuming Edge Stack is installed in the <code>ambassador</code> namespace):
+  <br/>
+  <code>kubectl -n ambassador rollout restart deploy</code>
+</Alert>
 
 ## 2. Generate some requests
 
-Use `curl` to generate a few requests to an existing $productName$ mapping. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
+Use `curl` to generate a few requests to an existing $productName$ `Mapping`. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
 
 ```
-$ curl -L $AMBASSADOR_IP/httpbin/ip
+$ curl -L $AMBASSADOR_IP/backend/
 ```
 
 ## 3. Test traces

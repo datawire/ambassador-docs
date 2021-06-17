@@ -61,16 +61,16 @@ limiting service.
 >
 > ```diff
 >  import (
->  	envoy_ratelimit_v1 "github.com/datawire/ambassador/pkg/api/pb/lyft/ratelimit"
-> +	envoy_ratelimit_v2 "github.com/datawire/ambassador/pkg/api/envoy/service/ratelimit/v2"
+>  	envoy_ratelimit_v1 "github.com/emissary-ingress/emissary/pkg/api/pb/lyft/ratelimit"
+> +	envoy_ratelimit_v2 "github.com/emissary-ingress/emissary/pkg/api/envoy/service/ratelimit/v2"
 >  )
 > ...
 >  	envoy_ratelimit_v1.RegisterRateLimitServiceServer(myGRPCServer, myRateLimitImplementation)
 > +	envoy_ratelimit_v2.RegisterRateLimitServiceServer(myGRPCServer, myRateLimitImplementation)
 > ```
 
-[`v1/rls.proto`]: https://github.com/datawire/ambassador/tree/$branch$/api/pb/lyft/ratelimit/rls.proto
-[`v2/rls.proto`]: https://github.com/datawire/ambassador/tree/$branch$/api/envoy/service/ratelimit/v2/rls.proto
+[`v1/rls.proto`]: https://github.com/emissary-ingress/emissary/tree/$branch$/api/pb/lyft/ratelimit/rls.proto
+[`v2/rls.proto`]: https://github.com/emissary-ingress/emissary/tree/$branch$/api/envoy/service/ratelimit/v2/rls.proto
 
 $productName$ generates a gRPC request to the external rate limit
 service and provides a list of labels on which the rate limit service can base

@@ -128,7 +128,7 @@ See the [TLS HOWTO](../../../howtos/tls-termination) to quickly enable HTTPS sup
 
 In the following instructions, we'll install the open-source $OSSproductName$ with Helm.
 
-Although the [Helm chart](https://github.com/datawire/ambassador/tree/master/charts/ambassador) installs
+Although the [Helm chart](https://github.com/emissary-ingress/emissary/tree/$branch$/charts/ambassador) installs
 $AESproductName$ by default, $OSSproductName$ is still
 available for installation for both Helm 2 and Helm 3.
 

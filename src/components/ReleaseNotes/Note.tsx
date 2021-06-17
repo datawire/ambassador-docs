@@ -43,9 +43,9 @@ const Note = ({ note, images, onViewMore, versions }) => {
   }, [images, note]);
 
   return (
-    <div className={styles.note} onClick={onViewMore}>
+    <div className={styles.note}>
       <div className={styles.note__description}>
-        <h3 className={styles.note__title}>
+        <h3 className={styles.note__title} onClick={onViewMore}>
           {typeIcon[note.type] && (
             <Icon
               name={typeIcon[note.type]}

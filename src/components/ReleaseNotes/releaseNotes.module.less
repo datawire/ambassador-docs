@@ -1,7 +1,7 @@
 @import '../../../../src/less/_colors.less';
 
 .note {
-  margin: 5px 0;
+  margin: 2px 0;
 
   &__body {
     padding: 8px 0;
@@ -9,6 +9,7 @@
 
   &__description {
     padding: 0;
+    margin-top: -15px;
   }
 
   &__image {
@@ -39,19 +40,13 @@
   &__title {
     display: grid;
     grid-template-columns: 20px auto;
-    text-decoration: underline;
+    text-decoration: none;
+
     span {
       padding: 0 0 0 10px;
     }
-  }
-  &:hover {
-    .note__title {
-      text-decoration: none;
-      color: @color-blue-dark;
-    }
-  }
-  &:hover {
-    .note__description {
+    &:hover {
+      text-decoration: underline;
       color: @color-blue-dark;
     }
   }
@@ -59,9 +54,7 @@
 
 .release {
   padding-bottom: 16px;
-  &:not(:last-child) {
-    border-bottom: 1px solid @color-white-1;
-  }
+  border-bottom: 1px solid @color-white-1;
 
   &__date {
     font-size: 16px;
@@ -71,10 +64,9 @@
 @media screen and (min-width: 500px) {
   .note {
     display: flex;
-    cursor: pointer;
 
     &__body {
-      padding: 8px 0 8px 28px;
+      padding: 8px 0 4px 28px;
     }
     &__description {
       padding: 0 10px 0 0;
@@ -92,6 +84,7 @@
     }
 
     &__title {
+      cursor: pointer;
       span {
         display: inline-block;
         padding-top: 5px;
