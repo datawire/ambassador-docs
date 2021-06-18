@@ -23,6 +23,7 @@ There are two ways of setting labels on a request:
    metadata:
      name: foo-app
    spec:
+     hostname: "*"
      prefix: /foo/
      service: foo
      labels:

@@ -106,6 +106,7 @@ kind: AmbassadorMapping
 metadata:
   name: apiserver
 spec:
+  hostname: "*"
   service: https://kubernetes.default
   prefix: /
   allow_upgrade:

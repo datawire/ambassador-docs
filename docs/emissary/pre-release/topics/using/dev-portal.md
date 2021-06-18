@@ -82,6 +82,7 @@ kind: AmbassadorMapping
 metadata:
   name: regular-httpbin
 spec:
+  hostname: "*"
   host_rewrite: httpbin.org
   prefix: /httpbin/
   service: httpbin.org

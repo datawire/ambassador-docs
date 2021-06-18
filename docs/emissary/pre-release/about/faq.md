@@ -66,6 +66,7 @@ kind: AmbassadorMapping
 metadata:
   name: "404-fallback"
 spec:
+  hostname: "*"
   prefix: "/"
   rewrite: "/404/" # This must not map to any existing prefix!
   service: localhost:8500

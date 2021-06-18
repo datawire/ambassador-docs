@@ -166,6 +166,7 @@ You'll now register a demo application with Linkerd 2, and show how $productName
    metadata:
      name: linkerd2-qotm
    spec:
+     hostname: "*"
      prefix: /qotm-linkerd2/
      service: qotm-linkerd2
    ```
@@ -245,6 +246,7 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
       name: public-health-check
       namespace: ambassador
     spec:
+      hostname: "*"
       prefix: /-/ambassador/ready
       rewrite: /ambassador/v0/check_ready
       service: localhost:8877

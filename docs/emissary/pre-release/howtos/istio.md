@@ -469,6 +469,7 @@ Now we will show how you can use $productName$ to route to services in the Istio
    metadata:
      name: quote-backend
    spec:
+     hostname: "*"
      prefix: /backend/
      service: quote
    ```
@@ -484,6 +485,7 @@ Now we will show how you can use $productName$ to route to services in the Istio
    metadata:
      name: quote-backend
    spec:
+     hostname: "*"
      prefix: /backend/
      service: quote
      tls: istio-upstream
@@ -535,6 +537,7 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
    metadata:
      name: quote-backend
    spec:
+     hostname: "*"
      prefix: /backend/
      service: quote
    EOF
@@ -559,6 +562,7 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
    metadata:
      name: quote-backend
    spec:
+     hostname: "*"
      prefix: /backend/
      service: quote
      tls: istio-upstream

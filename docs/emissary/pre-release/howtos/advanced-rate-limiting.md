@@ -33,6 +33,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
+  hostname: "*"
   prefix: /backend/
   service: quote
   labels:
@@ -72,6 +73,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
+  hostname: "*"
   prefix: /backend/
   service: quote
   labels:
@@ -110,6 +112,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
+  hostname: "*"
   prefix: /backend/
   service: quote
   labels:
@@ -181,6 +184,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
+  hostname: "*"
   prefix: /backend/
   service: quote
   labels:

@@ -104,6 +104,7 @@ kind: AmbassadorMapping
 metadata:
   name: service-backend
 spec:
+  hostname: "*"
   prefix: /backend/
   service: quote
   labels:
@@ -140,6 +141,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
+  hostname: "*"
   prefix: /
   service: quote:5000
 ---
@@ -148,6 +150,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
+  hostname: "*"
   prefix: /backend/
   service: quote
   rate_limits:

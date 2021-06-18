@@ -43,6 +43,7 @@ kind: AmbassadorMapping
 metadata:
   name: metrics
 spec:
+  hostname: "*"
   prefix: /metrics
   rewrite: ""
   service: localhost:8877
@@ -381,6 +382,7 @@ kind: AmbassadorMapping
 metadata:
   name: grafana
 spec:
+  hostname: "*"
   prefix: /grafana/
   service: grafana.{{GRAFANA_NAMESPACE}}
 ```

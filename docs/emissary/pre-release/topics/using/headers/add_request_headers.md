@@ -18,6 +18,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
+  hostname: "*"
   prefix: /backend/
   add_request_headers:
     x-test-proto: "%PROTOCOL%"
@@ -59,6 +60,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend1
 spec:
+  hostname: "*"
   prefix: /backend1/
   service: quote
 ---
@@ -67,6 +69,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend2
 spec:
+  hostname: "*"
   prefix: /backend2/
   service: quote
 ```

@@ -195,6 +195,7 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
     metadata:
       name: acme-challenge-mapping
     spec:
+      hostname: "*"
       prefix: /.well-known/acme-challenge/
       rewrite: ""
       service: acme-challenge-service

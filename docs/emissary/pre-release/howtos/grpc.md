@@ -78,6 +78,7 @@ kind: AmbassadorMapping
 metadata:
   name: grpc-py
 spec:
+  hostname: "*"
   grpc: True
   prefix: /helloworld.Greeter/
   rewrite: /helloworld.Greeter/
@@ -109,6 +110,7 @@ kind: AmbassadorMapping
 metadata:
   name: grpc-py
 spec:
+  hostname: "*"
   grpc: True
   prefix: /helloworld.Greeter/
   rewrite: /helloworld.Greeter/
@@ -276,6 +278,7 @@ kind: AmbassadorMapping
 metadata:
   name: grpc-py-tls
 spec:
+  hostname: "*"
   grpc: True
   tls: upstream
   prefix: /hello.Greeter/
@@ -341,6 +344,7 @@ kind: AmbassadorMapping
 metadata:
   name: grpc-py
 spec:
+  hostname: "*"
   grpc: true
   prefix: /helloworld.Greeter/
   rewrite: /helloworld.Greeter/

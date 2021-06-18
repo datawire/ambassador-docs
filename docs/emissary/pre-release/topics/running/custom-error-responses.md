@@ -154,13 +154,13 @@ metadata:
   name: ambassador
   namespace: ambassador
 spec:
-  config:
-    prefix: /api/
-    service: quote
-    error_response_overrides:
-      - on_status_code: 429
-        body:
-           text_format: "Per-mapping 429"
+  hostname: "*"
+  prefix: /api/
+  service: quote
+  error_response_overrides:
+    - on_status_code: 429
+      body:
+         text_format: "Per-mapping 429"
 ```
 The `AmbassadorMapping` rule will prevent an override on the 404 rule defined on the
 `Module` for this `AmbassadorMapping`. The rule on the `AmbassadorMapping` will cause all rules on
@@ -181,6 +181,7 @@ metadata:
   name: quote-backend
   namespace: ambassador
 spec:
+  hostname: "*"
   prefix: /api/
   service: quote
   bypass_error_response_overrides: true

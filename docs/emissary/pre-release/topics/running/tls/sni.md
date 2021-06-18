@@ -90,6 +90,7 @@ kind: AmbassadorMapping
 metadata:
   name: frontend
 spec:
+  hostname: "*"
   prefix: /bar/
   service: bar-endpoint
 ```

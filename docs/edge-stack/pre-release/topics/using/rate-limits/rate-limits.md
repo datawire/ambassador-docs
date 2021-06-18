@@ -294,6 +294,7 @@ kind: AmbassadorMapping
 metadata:
   name: foo-app
 spec:
+  hostname: "*"
   prefix: /foo/
   service: foo
   labels:
@@ -335,6 +336,7 @@ kind: AmbassadorMapping
 metadata:
   name: catalog
 spec:
+  hostname: "*"
   prefix: /catalog/
   service: catalog
   labels:
@@ -407,6 +409,7 @@ kind: AmbassadorMapping
 metadata:
   name: foo-app
 spec:
+  hostname: "*"
   prefix: /foo/
   service: foo
   labels:
@@ -421,6 +424,7 @@ kind: AmbassadorMapping
 metadata:
   name: bar-app
 spec:
+  hostname: "*"
   prefix: /bar/
   service: bar
   labels:

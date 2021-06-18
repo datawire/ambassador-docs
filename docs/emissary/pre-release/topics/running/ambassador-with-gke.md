@@ -91,6 +91,7 @@ metadata:
   name: web
   namespace: default
 spec:
+  hostname: "*"
   prefix: /
   service: web:8080
 ```

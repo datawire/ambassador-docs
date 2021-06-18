@@ -147,6 +147,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
      name: quote-backend
      namespace: ambassador
    spec:
+     hostname: "*"
      prefix: /backend/
      service: quote
    ```
@@ -178,7 +179,7 @@ You can see this in action by navigating to the **Mappings** tab, or
 the **Hosts** tab. You'll see an entry for the `quote-backend` AmbassadorMapping that was
 just created on the command line.
 
-1. To see your mappings via the command line, run `kubectl get mappings`
+1. To see your `AmbassadorMappings` via the command line, run `kubectl get ambassadormappings`
 
 2. If you configured TLS, you can type `kubectl get ambassadorhosts` to see the `AmbassadorHost` resource that was created:
 

@@ -56,6 +56,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend1
 spec:
+  hostname: "*"
   prefix: /backend1/
   service: quote
 ---
@@ -64,6 +65,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend2
 spec:
+  hostname: "*"
   prefix: /backend2/
   service: quote
 ```

@@ -13,6 +13,7 @@ kind: AmbassadorMapping
 metadata:
   name: basic-tls
 spec:
+  hostname: "*"
   prefix: /
   service: https://example-service
 ```
@@ -42,6 +43,7 @@ kind: AmbassadorMapping
 metadata:
   name: mapping-with-tls-context
 spec:
+  hostname: "*"
   prefix: /
   service: https://example-service
   tls: tls-context

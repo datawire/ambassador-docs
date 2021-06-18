@@ -152,6 +152,7 @@ kind: AmbassadorMapping
 metadata:
   name: test-ingress-0-0
 spec:
+  hostname: "*"
   prefix: /foo/
   service: service1:80
 ```
@@ -180,6 +181,7 @@ kind: AmbassadorMapping
 metadata:
   name: my-mapping
 spec:
+  hostname: "*"
   prefix: /foo/
   service: service2
 ```
@@ -211,6 +213,7 @@ kind: AmbassadorMapping
 metadata:
   name: test-ingress
 spec:
+  hostname: "*"
   prefix: /
   service: exampleservice:8080
 ```

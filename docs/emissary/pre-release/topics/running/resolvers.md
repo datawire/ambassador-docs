@@ -104,6 +104,7 @@ kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
+  hostname: "*"
   prefix: /backend/
   service: quote
   resolver: endpoint
@@ -115,6 +116,7 @@ kind: AmbassadorMapping
 metadata:
   name: bar
 spec:
+  hostname: "*"
   prefix: /bar/
   service: https://bar:9000
   tls: client-context

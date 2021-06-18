@@ -15,6 +15,7 @@ kind: AmbassadorMapping
 metadata:
   name: get
 spec:
+  hostname: "*"
   prefix: /backend/get_only/
   method: GET
   service: quote

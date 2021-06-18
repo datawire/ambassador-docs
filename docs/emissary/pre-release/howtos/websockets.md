@@ -22,6 +22,7 @@ kind: AmbassadorMapping
 metadata:
   name: my-service-mapping
 spec:
+  hostname: "*"
   prefix: /my-service/
   service: my-service
   allow_upgrade:

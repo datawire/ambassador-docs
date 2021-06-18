@@ -49,6 +49,7 @@ kind: AmbassadorMapping
 metadata:
   name: upstream-mapping
 spec:
+  hostname: "*"
   prefix: /upstream/
   service: upstream-service
   tls: upstream-context

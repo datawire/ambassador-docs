@@ -89,6 +89,7 @@ In this section, we'll configure your Kubernetes cluster for single-sign on.
       name: aes-kubeapi-mapping
       namespace: ambassador
     spec:
+  hostname: "*"
       prefix: /
       allow_upgrade:
       - spdy/3.1
