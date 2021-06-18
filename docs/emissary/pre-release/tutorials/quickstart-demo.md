@@ -63,7 +63,7 @@ the `quote` deployment and a service to expose that deployment on port 80.
 1. Apply the configuration to the cluster with the command `kubectl apply -f quote.yaml`.
 
 1. Copy the configuration below and save it to a file called `quote-backend.yaml` 
-so that you can create an `AmbassadorMapping` on your cluster. This `AmbassadorMapping` tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` service. 
+so that you can create an `AmbassadorMapping` on your cluster. This `AmbassadorMapping` tells $productName$ to route all traffic inbound to the `/backend/` path, on any host that can be used to reach $productName$, to the `quote` service. 
 
   ```yaml
   ---
@@ -73,6 +73,7 @@ so that you can create an `AmbassadorMapping` on your cluster. This `AmbassadorM
     name: quote-backend
     namespace: ambassador
   spec:
+    hostname: "*"
     prefix: /backend/
     service: quote
   ```
@@ -102,53 +103,22 @@ balancer.
 Success, you have created your first $productName$ `AmbassadorMapping`, routing a
 request from your cluster's edge to a service!
 
-## Edge Policy Console
+Since the `AmbassadorMapping` you just created controls how requests are routed, 
+changing the `AmbassadorMapping` will immediately change the routing.  To see this
+in action, use `kubectl` to edit the `AmbassadorMapping`:
 
-Next, you are going to log in to the Edge Policy Console to explore some of its
-features. The console is a web-based interface that can be used to configure and
-monitor $productName$. 
+1. Run `kubectl edit ambassadormapping quote-backend`.
 
-1. Initially the console is accessed from the load balancer's hostname or public
-address (depending on your Kubernetes environment). You stored this endpoint
-earlier as a variable, echo that variable now to your terminal and make a note of it.
+1. Change `prefix: /backend/` to `prefix: /quoteme/`.
 
-  ```
-  echo $AMBASSADOR_LB_ENDPOINT
-  ```
+1. Save the file and let `kubectl` update your `AmbassadorMapping`.
 
-1. In your browser, navigate to `http://<load-balancer-endpoint>` and follow the
-prompts to bypass the TLS warning. 
-
-  > [An `AmbassadorHost` resource is created in production](../../topics/running/host)
-to use your own registered domain name instead of the load balancer endpoint to 
-access the console and your `AmbassadorMapping` endpoints.
-
-1. The next page will prompt you to log in to the console using `edgectl`, the 
-$productName$ CLI. The page provides instructions on how to install `edgectl` for 
-all OSes and log in.
-
-1. Once logged in, click on the **Mappings** tab in the Edge Policy Console. 
-Scroll down to find an entry for the `quote-backend` `AmbassadorMapping` that you created 
-in your terminal with `kubectl`.
-
-As you can see, the console lists the `AmbassadorMapping` that you created earlier. This
-information came from $productName$ polling the Kubernetes API. In 
-$productName$, Kubernetes serves as the single source of truth 
-around cluster configuration. Changes made via `kubectl` are reflected in the 
-Edge Policy Console and vice versa.  Try the following to see this in action.
-
-1. Click **Edit** next to the `quote-backend` entry.
-
-1. Change the **Prefix URL** from `/backend/` to `/quoteme/`.
-
-1. Click **Save**.
-
-1. Run `kubectl get mappings --namespace ambassador`. You will see the 
+1. Run `kubectl get ambassadormappings --namespace ambassador`. You will see the 
 `quote-backend` `AmbassadorMapping` has the updated prefix listed. Try to access the 
 endpoint again via `curl` with the updated prefix.
 
   ```
-  $ kubectl get mappings --namespace ambassador
+  $ kubectl get ambassadormappings --namespace ambassador
   NAME            PREFIX      SERVICE   STATE   REASON
   quote-backend   /quoteme/   quote
    
@@ -187,8 +157,6 @@ Further explore some of the concepts you learned about in this article:
 the edge of your cluster to a Kubernetes service
 * [`AmbassadorHost` resource](../../topics/running/host/): sets the hostname by which
 $productName$ will be accessed and secured with TLS certificates
-* [Edge Policy Console](../../topics/using/edge-policy-console/): a web-based 
-interface used to configure and monitor $productName$
 * [Developer Portal](../../topics/using/dev-portal/): 
 publishes an API catalog and OpenAPI documentation
 

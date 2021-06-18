@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function GettingStartedEmissaryTabs() {
+export default function GettingStartedEdgeStackTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -83,7 +83,7 @@ export default function GettingStartedEmissaryTabs() {
             '\n' +
             'kubectl create namespace ambassador && \\' +
             '\n' +
-            'helm install emissary --namespace ambassador datawire/emissary && \\' +
+            'helm install edge-stack --namespace ambassador datawire/edge-stack && \\' +
             '\n' +
             'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes'
           }
@@ -97,13 +97,13 @@ export default function GettingStartedEmissaryTabs() {
 
         <CodeBlock>
           {
-            'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-crds.yaml && \\' +
+            'kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/aes-crds.yaml && \\' +
             '\n' +
-            'kubectl wait --for condition=established --timeout=90s crd -lapp.kubernetes.io/instance=emissary-ingress && \\' +
+            'kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \\' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-ingress.yaml && \\' +
+            'kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/aes-ingress.yaml && \\' +
             '\n' +
-            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress' +
+            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes' +
             '\n'
           }
         </CodeBlock>
