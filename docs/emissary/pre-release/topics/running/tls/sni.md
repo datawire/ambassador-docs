@@ -31,7 +31,7 @@ spec:
     name: host-cert
 ```
 
-Now lets, create a second `AmbassadorHost` for a different domain we want to serve behind
+Now let's create a second `AmbassadorHost` for a different domain we want to serve behind
 $productName$. This second `AmbassadorHost` we can use $AESproductName$'s automatic TLS
 to get a certificate from Let's Encrypt.
 

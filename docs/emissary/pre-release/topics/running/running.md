@@ -93,7 +93,7 @@ env:
   value: "true"
 ```
 
-With $productName$, if you set `AMBASSADOR_NAMESPACE` or `AMBASSADOR_SINGLE_NAMESPACE`, set it in deployment container.
+With $productName$, if you set `AMBASSADOR_NAMESPACE` or `AMBASSADOR_SINGLE_NAMESPACE`, set it in the deployment container.
 
 If you want to set a certificate for your `TLScontext` from another namespace, you can use the following:
 

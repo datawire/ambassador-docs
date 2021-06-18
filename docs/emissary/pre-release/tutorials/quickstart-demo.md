@@ -166,7 +166,7 @@ with other tutorials.
 ## Developer API Documentation
 
 The `quote` service you just deployed publishes its API as an 
-[OpenAPI (formally Swagger)](https://swagger.io/solutions/getting-started-with-oas/)
+[OpenAPI (formerly Swagger)](https://swagger.io/solutions/getting-started-with-oas/)
 document. $productName$ automatically detects and publishes this documentation. 
 This can help with internal and external developer onboarding by serving as a 
 single point of reference for of all your microservice APIs.
