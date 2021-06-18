@@ -4,3 +4,4 @@ qotmVersion: 1.7
 quoteVersion: 0.4.1
 branch: release/v1.8
 docsVersion: "1.8"
+productName: "Ambassador Edge Stack"

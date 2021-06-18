@@ -8,8 +8,13 @@ const ReleaseNotes = ({
   product,
   handleViewMore,
   changelog: changelogURL,
+  versions,
 }) => {
   const title = useMemo(() => {
+    if (versions.productName) {
+      return `${versions.productName} Release Notes`;
+    }
+
     switch (product) {
       case 'edge-stack':
         return 'Edge Stack Release Notes';
@@ -26,7 +31,7 @@ const ReleaseNotes = ({
 
   const changelog = useMemo(() => {
     const commonText = `For a detailed list of all the changes in past releases, please consult the`;
-    
+
     if (changelogURL) {
       return (
         <>
@@ -41,7 +46,6 @@ const ReleaseNotes = ({
   return (
     <>
       <h1>{title}</h1>
-      <p>{changelog}</p>
       <div>
         {releases.map((release) => (
           <Release
@@ -49,9 +53,11 @@ const ReleaseNotes = ({
             release={release}
             images={images}
             handleViewMore={handleViewMore}
+            versions={versions}
           />
         ))}
       </div>
+      <p>{changelog}</p>
     </>
   );
 };

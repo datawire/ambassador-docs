@@ -6,7 +6,7 @@ In this tutorial, we'll configure $productName$ to initiate a trace on some samp
 
 ## Before you get started
 
-This tutorial assumes you have already followed the $productName$ [Getting Started](../../tutorials/getting-started) guide.
+This tutorial assumes you have already followed $productName$ [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
 
 After completing the Getting Started guide you will have a Kubernetes cluster running $productName$ and the Quote of the Moment service. Let's walk through adding tracing to this setup.
 
@@ -78,7 +78,7 @@ $ kubectl apply -f zipkin.yaml
 
 ## 2. Generate some requests
 
-Use `curl` to generate a few requests to an existing $productName$ mapping. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
+Use `curl` to generate a few requests to an existing $productName$ `Mapping`. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
 
 ```
 $ curl -L $AMBASSADOR_IP/backend/
@@ -96,21 +96,30 @@ prometheus-prometheus-0                2/2       Running   0          113d
 zipkin-868b97667c-58v4r                1/1       Running   0          2h
 ```
 
-And then use port forwarding to access the pod:
+And then use `kubectl port-forward` to access the pod:
 
 ```
 $ kubectl port-forward zipkin-868b97667c-58v4r 9411
 ```
 
-Open your web browser to [http://localhost:9411](http://localhost:9411) for the Zipkin UI.
+Open your web browser to `http://localhost:9411` for the Zipkin UI.
 
-Click the **Run Query** button to get a listing of all instrumented traces. Clicking the **Show** button each each trace will show additional information about each span and associated metadata.
+If you're on `minikube` you can access the `NodePort` directly, and this ports number can be obtained via the `minikube services list` command. If you are using `Docker for Mac/Windows`, you can use the `kubectl get svc` command to get the same information.
 
-You should see metadata for the `ambassador-ambassador` service referencing the `quote` service.  This is your traffic moving through the cluster, from the $productName$ ingress to the Quote of the Moment service.
+```
+$ minikube service list
+|-------------|----------------------|-----------------------------|
+|  NAMESPACE  |         NAME         |             URL             |
+|-------------|----------------------|-----------------------------|
+| default     | ambassador-admin     | http://192.168.99.107:30319 |
+| default     | ambassador           | http://192.168.99.107:31893 |
+| default     | zipkin               | http://192.168.99.107:31043 |
+|-------------|----------------------|-----------------------------|
+```
 
-### Minikube
+Open your web browser to the Zipkin dashboard `http://192.168.99.107:31043/zipkin/`.
 
-If you're on `minikube` you can access the `NodePort` directly. The IP and port number can be obtained via the `minikube services list` command.
+In the Zipkin UI, click on the "Find Traces" button to get a listing instrumented traces. Each of the traces that are displayed can be clicked on, which provides further information about each span and associated metadata.
 
 ## Learn more
 

@@ -1,4 +1,4 @@
-# How to monitor the canary deployment 
+# Observe a canary deployment 
 
 ## What key metrics should I monitor in the canary deployment?
 

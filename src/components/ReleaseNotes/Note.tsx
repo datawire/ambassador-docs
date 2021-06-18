@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import Button from '../../../../src/components/Button/Button';
 import Icon from '../../../../src/components/Icon/Icon';
+import template from '../../../../src/utils/template';
 import styles from './releaseNotes.module.less';
 
 const titlePrefix = {
@@ -17,7 +18,7 @@ const typeIcon = {
   security: 'security',
 };
 
-const Note = ({ note, images, onViewMore }) => {
+const Note = ({ note, images, onViewMore, versions }) => {
   const title = useMemo(() => {
     if (titlePrefix[note.type]) {
       return `${titlePrefix[note.type]}: ${note.title}`;
@@ -55,7 +56,7 @@ const Note = ({ note, images, onViewMore }) => {
         </h3>
         <div
           className={styles.note__body}
-          dangerouslySetInnerHTML={{ __html: note.body }}
+          dangerouslySetInnerHTML={{ __html: template(note.body, versions) }}
         />
         {image && (
           <div className={styles.note__image_xs}>

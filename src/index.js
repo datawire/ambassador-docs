@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -55,30 +55,30 @@ export default ({ data, location }) => {
         isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
     }, [isMobile]);
 
-    const parseLinksByVersion = (vers, links) => {
+    const parseLinksByVersion = useCallback((vers, links) => {
         if (oldStructure.includes(vers)) {
             return links;
         }
         return links[1].items[0].items;
-    }
+    }, [oldStructure]);
 
-    const getVersions = () => {
+    const versions = useMemo(() => {
         if (!data.versions?.content) {
             return {};
         }
         const versions = data.versions?.content;
         return JSON.parse(versions);
-    }
+    },[data.versions?.content]);
 
     const menuLinks = useMemo(() => {
         if (!data.linkentries?.content) {
             return [];
         }
-        const linksJson = JSON.parse(data.linkentries?.content || []);
+        const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
         return parseLinksByVersion(slug[3], linksJson);
-    }, [data.linkentries, slug]);
+    }, [data.linkentries, slug, versions]);
 
-    const getMetaData = () => {
+    const metadata = useMemo(() => {
         let metaDescription;
         let metaTitle;
         if (isHome) {
@@ -91,8 +91,10 @@ export default ({ data, location }) => {
             metaTitle = (page.headings && page.headings[0] ? page.headings[0].value : 'Docs') + ' | Ambassador';
             metaDescription = page.frontmatter && page.frontmatter.description ? page.frontmatter.description : page.excerpt;
         }
-        return { metaDescription, metaTitle };
-    }
+        return {
+          metaDescription: template(metaDescription, versions), metaTitle: template(metaTitle, versions)
+        };
+    },[versions, page, isHome, metaData]);
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
 
@@ -155,7 +157,7 @@ export default ({ data, location }) => {
                 loadJS();
             }, 500);
         }
-}
+      }
     };
 
     const getProductHome = (product) => {
@@ -186,7 +188,7 @@ export default ({ data, location }) => {
                 <ContactBlock />
             </section>
             {!isHome && !isProductHome && isProduct && (
-                <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />
+                <DocsFooter page={page} product={product.slug} version={versions.docsVersion} />
             )}
         </div>
     );
@@ -223,7 +225,7 @@ export default ({ data, location }) => {
                         </div>
                         {requireReadingTime() && <span className="docs__reading-time">{page.frontmatter.reading_time ? page.frontmatter.reading_time : page.fields.readingTime.text}</span>}
                         <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.text}>
-                            {template(page.body, getVersions())}
+                            {template(page.body, versions)}
                         </MDXRenderer>
                     </div>
                     {footer}
@@ -235,11 +237,11 @@ export default ({ data, location }) => {
     return (
         <Layout location={location}>
             <Helmet>
-                <title>{getMetaData().metaTitle}</title>
-                <meta name="og:title" content={getMetaData().metaTitle} />
+                <title>{metadata.metaTitle}</title>
+                <meta name="og:title" content={metadata.metaTitle} />
                 <meta name="og:type" content="article" />
                 <link rel="canonical" href={canonicalUrl} />
-                <meta name="description" content={getMetaData().metaDescription} />
+                <meta name="description" content={metadata.metaDescription} />
         
                 {!isMobile && 
                   <link
