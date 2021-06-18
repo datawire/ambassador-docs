@@ -21,7 +21,7 @@
               link: /topics/install/bare-metal
             - title: Install manually
               link: /topics/install/yaml-install
-            - title: The $productName$ Operator
+            - title: The Ambassador Operator
               link: /topics/install/aes-operator
             - title: Install with edgectl
               link: /topics/install/help/

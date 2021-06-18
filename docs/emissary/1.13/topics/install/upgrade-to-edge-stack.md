@@ -7,7 +7,7 @@ If you currently have the open source version of $OSSproductName$, you can upgra
 `edgectl` can automate the upgrade from installations that match the following criteria:
 
 * $OSSproductName$ has been installed (and is still managed by) the
-  [$OSSproductName$ Operator](../../install/aes-operator/).
+  [Ambassador Operator](../../install/aes-operator/).
 * the `AmbassadorInstallation` has:
   * the `ambassador` name and `ambassador` namespace
   * `installOSS: true`

@@ -11,7 +11,7 @@ import './index.less'
 * [Install via Kubernetes YAML](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
 * [Install via Helm](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
 * [Install Locally on Docker](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
-* [Install via the $productName$ Operator](#install-via-the-ambassador-operator)
+* [Install via the Ambassador Operator](#install-via-the-ambassador-operator)
 * [Install on Bare Metal](#install-on-bare-metal)
 * [Upgrade Options](#upgrade-options)
 * [Container Images](#container-images)
@@ -85,10 +85,10 @@ the differences for Helm 2 and Helm3, are in the [Helm instructions.](helm/)
 The Docker install will let you try the $productName$ locally in seconds, 
 but is not supported for production workloads. [Try $productName$ on Docker.](docker/)
 
-## Install via the $productName$ Operator
-The $productName$ Operator automates installs (day 1 operations) and
+## Install via the Ambassador Operator
+The Ambassador Operator automates installs (day 1 operations) and
 updates (day 2 operations), among other actions. To use the powerful $productName$
-Operator, [follow the $productName$ Operator instructions](aes-operator).
+Operator, [follow the Ambassador Operator instructions](aes-operator).
 
 ## Install on Bare Metal
 If you don't have a load balancer in front of your Kubernetes, the Bare Metal 

@@ -25,7 +25,7 @@
               link: /topics/install/bare-metal
             - title: Install manually
               link: /topics/install/yaml-install
-            - title: The Edge Stack Operator
+            - title: The Ambassador Operator
               link: /topics/install/aes-operator
         - title: Core concepts
           link: /topics/concepts/

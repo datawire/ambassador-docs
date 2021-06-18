@@ -1,8 +1,8 @@
-# The $productName$ Operator
+# The Ambassador Operator
 
-The  $productName$ Operator is a Kubernetes Operator that controls the
+The Ambassador Operator is a Kubernetes Operator that controls the
 complete lifecycle of $productName$ in your cluster. It also
-automates many of the repeatable tasks you have to perform for $productName$. Once installed, the $productName$ Operator will automatically complete rapid
+automates many of the repeatable tasks you have to perform for $productName$. Once installed, the Ambassador Operator will automatically complete rapid
 installations and seamless upgrades to new versions of $productName$.  [Read
 more](https://github.com/datawire/ambassador-operator/blob/master/README.md#version-syntax)
 about the benefits of the Operator.
@@ -26,9 +26,9 @@ Start by installing the operator:
 
 1. Create the Operator Custom Resource schema with the following command:
    `kubectl apply -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator-crds.yaml`
-2. Install the actual CRD for the $productName$ Operator in the `ambassador` namespace with the following command:
+2. Install the actual CRD for the Ambassador Operator in the `ambassador` namespace with the following command:
    `kubectl apply -n ambassador -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator.yaml`
-3. To install the $productName$ Operator CRD in a different namespace, you can specify it in `NS` and
+3. To install the Ambassador Operator CRD in a different namespace, you can specify it in `NS` and
    then run the following command:
 
     ```
@@ -38,14 +38,14 @@ Start by installing the operator:
         kubectl apply -n $NS -f -
     ```
 
-Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the $productName$ Operator.
+Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the Ambassador Operator.
 
 1. To create the `AmbassadorInstallation` Custom Resource schema, use
    [the following YAML](https://github.com/datawire/ambassador-operator#the-operator-custom-resource-cr)
    as your guideline.
 2. Save that file as `amb-install.yaml`
 3. Edit the `amb-install.yaml` and optionally complete configurations such as Version constraint or UpdateWindow:
-4. Finally, apply your `AmbassadorInstallation` CRD to the $productName$ Operator schema
+4. Finally, apply your `AmbassadorInstallation` CRD to the Ambassador Operator schema
    with the following command: `kubectl apply -n ambassador -f amb-install.yaml`
 
 ### Configuration for $productName$
@@ -131,7 +131,7 @@ spec:
 
 ## Install via Helm Chart
 
-You can also install the $productName$ Operator from a Helm Chart. The following Helm values are supported:
+You can also install the Ambassador Operator from a Helm Chart. The following Helm values are supported:
 
 * `image.name`: Operator image name
 * `image.pullPolicy`: Operator image pull policy

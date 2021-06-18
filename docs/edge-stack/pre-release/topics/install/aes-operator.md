@@ -1,6 +1,6 @@
-# The Edge Stack Operator
+# The Ambassador Operator
 
-The  Edge Stack Operator is a Kubernetes Operator that controls the
+The Ambassador Operator is a Kubernetes Operator that controls the
 complete lifecycle of Ambassador in your cluster. It also
 automates many of the repeatable tasks you have to perform for the Ambassador
 Edge Stack. Once installed, the AES Operator will automatically complete rapid

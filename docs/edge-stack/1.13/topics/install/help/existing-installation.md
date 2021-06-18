@@ -2,7 +2,7 @@
 
 The installer detected that an existing version of $productName$ is already installed in your Kubernetes cluster. To avoid causing damage to your current setup, the installer has stopped. 
 
-The Edgectl Installer is designed for easy first-time installs, but not for upgrading or downgrading an existing installation. We recommend that you use the [$productName$ Operator](../../aes-operator/) to automatically manage those Day 2 operations (upgrades, etc).
+The Edgectl Installer is designed for easy first-time installs, but not for upgrading or downgrading an existing installation. We recommend that you use the [Ambassador Operator](../../aes-operator/) to automatically manage those Day 2 operations (upgrades, etc).
 
 ## What's next?
 
