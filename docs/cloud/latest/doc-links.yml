@@ -16,17 +16,23 @@
                   link: /service-catalog/concepts/using
                 - title: Annotating Kubernetes Services for humans
                   link: /service-catalog/concepts/annotating/
+                - title: Environments
+                  link: /service-catalog/concepts/environments/
                 - title: Incident response in the cloud-native world
                   link: /service-catalog/concepts/ir
             - title: How do I...
               items:
                 - title: Annotate a service
                   link: /service-catalog/howtos/annotate/
+                - title: Manage my environments
+                  link: /service-catalog/howtos/environments/
+                - title: Filter my service view
+                  link: /service-catalog/howtos/favorites/
             - title: Technical reference
               items:
                 - title: Annotations
                   link: /service-catalog/reference/annotations/
             - title: FAQs
               link: /service-catalog/faqs/
-            # - title: Release Notes
-            #  link: /release-notes
+        - title: Release Notes
+          link: /release-notes/

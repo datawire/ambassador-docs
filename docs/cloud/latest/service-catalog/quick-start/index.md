@@ -15,7 +15,7 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 
 </div>
 
-<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/catalog">Click here!</a> If you haven't configured your cluster yet the catalog will be empty. Follow this guide to configure your cluster.</Alert>
+<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/">Click here!</a> If you haven't configured your cluster yet the catalog will be empty. Follow this guide to configure your cluster.</Alert>
 
 ## Kubernetes annotations
 
@@ -40,9 +40,9 @@ kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.templat
   If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.
 </Alert>
 
-1. Sign in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) with your GitHub account.
+1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
 
-2. At the top, hover over **All Clusters** then click **Add a Cluster**.
+2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
 
 3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 

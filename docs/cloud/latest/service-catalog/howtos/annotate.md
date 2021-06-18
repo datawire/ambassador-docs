@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # Annotate a service
 
-[Service Catalog](https://app.getambassador.io/cloud/catalog) lists all the services in your cluster, including helpful information like the owner, a description of the service, links to documentation, and more.
+[Service Catalog](https://app.getambassador.io/cloud/) lists all the services in your cluster, including helpful information like the owner, a description of the service, links to documentation, and more.
 
 This information is all sourced from annotations set on the services.  Annotations can be set either via `kubectl` or via Kubernetes YAML files.
 

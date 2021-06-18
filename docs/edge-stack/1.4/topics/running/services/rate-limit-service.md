@@ -55,7 +55,7 @@ spec:
 
 In order for Ambassador Edge Stack to rate limit, you need to implement a gRPC `RateLimitService`, as defined in [Envoy's `rls.proto`][rls.proto] interface. If you do not have the time or resources to implement your own rate limit service, Ambassador Edge Stack integrates a high performance, rate limiting service.
 
-[rls.proto]: https://github.com/datawire/ambassador/tree/master/api/envoy/service/ratelimit/v2/rls.proto
+[rls.proto]: https://github.com/emissary-ingress/emissary/tree/master/api/envoy/service/ratelimit/v2/rls.proto
 
 Ambassador Edge Stack generates a gRPC request to the external rate limit service and provides a list of labels on which the rate limit service can base its decision to accept or reject the request:
 
