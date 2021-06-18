@@ -31,45 +31,11 @@ for how to labels under different domains.
 ## External rate limit service
 
 In order for $productName$ to rate limit, you need to implement a
-gRPC `RateLimitService`, as defined in [Envoy's `v1/rls.proto`][`v1/rls.proto`]
+gRPC `RateLimitService`, as defined in [Envoy's `v2/rls.proto`][`v2/rls.proto`]
 interface.  If you do not have the time or resources to implement your own rate
 limit service, $AESproductName$ integrates a high-performance rate
 limiting service.
 
-> Note: *In a future version of $productName$*, $productName$ will
-> change the version of the gRPC service name used to communicate
-> `RateLimitService`s from the one defined in [`v1/rls.proto`][]
-> (`pb.lyft.ratelimit.RateLimitService`) to the one defined in
-> [`v2/rls.proto`][] (`envoy.service.ratelimit.v2.RateLimitService`):
->
-> - In some future version of $productName$, there will be a setting to control
->   which name is used; with the default being the current name; it will be
->   opt-in to the new name.
->
-> - In some future version of $productName$ after that, *no sooner than $productName$
->   1.7.0*, the default value of that setting will change; making it opt-out
->   from the new name.
->
-> - In some future version of $productName$ after that, *no sooner than $productName$
->   1.8.0*, the setting will go away, and $productName$ will always use the new
->   name.
->
-> In the meantime, implementations of `RateLimitService` are encouraged to
-> respond to both names--they are simply aliases of eachother, registering the
-> service under both names is usually a simple 1-or-2-line addition.  For
-> example, in Go the change to support both names is:
->
-> ```diff
->  import (
->  	envoy_ratelimit_v1 "github.com/emissary-ingress/emissary/pkg/api/pb/lyft/ratelimit"
-> +	envoy_ratelimit_v2 "github.com/emissary-ingress/emissary/pkg/api/envoy/service/ratelimit/v2"
->  )
-> ...
->  	envoy_ratelimit_v1.RegisterRateLimitServiceServer(myGRPCServer, myRateLimitImplementation)
-> +	envoy_ratelimit_v2.RegisterRateLimitServiceServer(myGRPCServer, myRateLimitImplementation)
-> ```
-
-[`v1/rls.proto`]: https://github.com/emissary-ingress/emissary/tree/$branch$/api/pb/lyft/ratelimit/rls.proto
 [`v2/rls.proto`]: https://github.com/emissary-ingress/emissary/tree/$branch$/api/envoy/service/ratelimit/v2/rls.proto
 
 $productName$ generates a gRPC request to the external rate limit
