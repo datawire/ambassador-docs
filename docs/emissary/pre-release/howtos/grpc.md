@@ -153,20 +153,9 @@ spec:
       restartPolicy: Always
 ```
 
-The Aost is declared here because we are using gRPC without TLS.  Since $productName$ terminates TLS by default, in the AmbassadorHost we add a `requestPolicy` which allows insecure connections. After adding the $productName$ mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
+The AmbassadorHost is declared here because we are using gRPC without TLS.  Since $productName$ terminates TLS by default, in the AmbassadorHost we add a `requestPolicy` which allows insecure connections. After adding the $productName$ mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
 
-> * AmbassadorHost Configuration:** The `requestPolicy` property of the `AmbassadorHost` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `AmbassadorHost` when multiple `AmbassadorHost`s are configured. Different `requestPolicy` behaviors cannot be applied to different `AmbassadorHost`s. It is recommended to apply an identical `requestPolicy` to all `AmbassadorHost`s instead of assuming the behavior, to create a more human readable config. 
-> 
-> ItPolicy is not defined for an `AmbassadorHost`, it's assumed to be `Redirect`, so even if an `AmbassadorHost` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `AmbassadorHost`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all AmbassadorHost resources. 
-> 
-> Ubehavior can occur when multiple `AmbassadorHost` resources are not using the same value for `requestPolicy`. 
-> The `insecure-action` can be one of:
->
-> * `Redirect` (the default): redirect to HTTPS
-> * `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
-> * `Reject`: reject the request with a 400 response
->
-> Fformation, please refer to the [`AmbassadorHost` documentation](../../topics/running/ambassadorhost#secure-and-insecure-requests).
+> For more information on insecure routing, please refer to the [`AmbassadorHost` documentation](../../topics/running/host#secure-and-insecure-requests).
 
 
 Once you have the YAML file and the correct Docker registry, deploy it to your cluster with `kubectl`.
