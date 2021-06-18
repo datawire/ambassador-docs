@@ -104,7 +104,7 @@ There are 5 types of label specifiers in $productName$:
 | 5             | `{ "generic_key": "my_val" }`          | Sets the label "`generic_key`=«`my_val`»"                                                                                               | `{ "generic_key": { "descriptor_value": "my_val" } }`                          |
 | 5 (shorthand) | `"my_val"`                             | Shorthand for `{ "generic_key": "my_val" }`                                                                                             |                                                                                |
 
-[`envoy.api.v2.route.RateLimit.Action`]: https://github.com/emissary-ingress/emissary/blob/$branch$/api/envoy/api/v2/route/route_components.proto#L1328-L1439
+[`envoy.api.v2.route.RateLimit.Action`]: https://github.com/datawire/ambassador/blob/$branch$/api/envoy/api/v2/route/route_components.proto#L1328-L1439
 
 1. The Envoy source cluster name is the name of the Envoy listener
    cluster that the request name in on.

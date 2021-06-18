@@ -15,6 +15,10 @@
               link: /topics/install/helm
             - title: Upgrade to a newer version
               link: /topics/install/upgrading
+            - title: Upgrade to the $AESProductName$
+              link: /topics/install/upgrade-to-edge-stack
+            - title: Install $productName$
+              link: /topics/install/install-ambassador-oss
             - title: Install with Docker
               link: /topics/install/docker
             - title: Install with bare metal
@@ -58,40 +62,12 @@
               items:
                 - title: Authentication
                   items:
-                    - title: Basic authentication
-                      link: /howtos/ext-filters
-                    - title: Using the OAuth2 filter for SSO
-                      link: /howtos/oauth-oidc-auth
-                    - title: Kubernetes SSO with OIDC and Keycloak
-                      link: /howtos/auth-kubectl-keycloak
-                    - title: Single Sign-On with Google
-                      link: /howtos/sso/google
-                    - title: Single Sign-On with Keycloak
-                      link: /howtos/sso/keycloak
-                    - title: Single Sign-On with Okta
-                      link: /howtos/sso/okta
-                    - title: More SSO...
-                      items:
-                        - title: Single Sign-On with Auth0
-                          link: /howtos/sso/auth0
-                        - title: Single Sign-On with Azure Active Directory (AD)
-                          link: /howtos/sso/azure
-                        - title: Single Sign-On with OneLogin
-                          link: /howtos/sso/onelogin
-                        - title: Single Sign-On with Salesforce
-                          link: /howtos/sso/salesforce
-                        - title: Single Sign-On with UAA
-                          link: /howtos/sso/uaa
-                    - title: Kubernetes SSO with OIDC and Keycloak
-                      link: /howtos/auth-kubectl-keycloak
+                    - title: Basic authentication with $productName$
+                      link: /howtos/basic-auth
                 - title: Rate limiting
                   items:
-                    - title: Basic rate limiting
+                    - title: Basic rate limiting with $productName$
                       link: /howtos/rate-limiting-tutorial
-                    - title: Advanced rate limiting
-                      link: /howtos/advanced-rate-limiting
-                    - title: Rate limiting on token claims
-                      link: /howtos/token-ratelimit
             - title: Monitor my services
               items:
                 - title: Explore distributed tracing and Kubernetes monitoring
@@ -149,8 +125,6 @@
                   link: /topics/running/ambassador-deployment
                 - title: The $productName$ container environment
                   link: /topics/running/environment
-                - title: $productName$ and Redis
-                  link: /topics/running/aes-redis
                 - title: $productName$ with AWS
                   link: /topics/running/ambassador-with-aws
                 - title: $productName$ with GKE
@@ -163,20 +137,6 @@
               items:
                 - title: Gateway API
                   link: /topics/using/gateway-api
-            - title: Filters and authentication
-              items:
-                - title: Authentication extension
-                  link: /topics/running/aes-extensions/authentication
-                - title: Filters and Filter policies
-                  link: /topics/using/filters/
-                - title: OAuth2 Filter
-                  link: /topics/using/filters/oauth2
-                - title: JWT Filter
-                  link: /topics/using/filters/jwt
-                - title: External Filter
-                  link: /topics/using/filters/external
-                - title: Plugin Filter
-                  link: /topics/using/filters/plugin
             - title: Ingress and load balancing
               items:
                 - title: The Mapping resource
@@ -254,10 +214,6 @@
                   items:
                     - title: Basic rate limiting
                       link: /topics/using/rate-limits/
-                    - title: Rate limiting reference
-                      link: /topics/using/rate-limits/rate-limits
-                    - title: Rate limiting extension
-                      link: /topics/running/aes-extensions/ratelimit
                 - title: TLS
                   items:
                     - title: TLS termination and enabling HTTPS
