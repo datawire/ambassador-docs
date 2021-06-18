@@ -15,8 +15,6 @@
               link: /topics/install/helm
             - title: Upgrade to a newer version
               link: /topics/install/upgrading
-            - title: Install $OSSProductName$
-              link: /topics/install/install-ambassador-oss
             - title: Install with Docker
               link: /topics/install/docker
             - title: Install with bare metal
@@ -25,6 +23,8 @@
               link: /topics/install/yaml-install
             - title: The $productName$ Operator
               link: /topics/install/aes-operator
+            - title: Install with edgectl
+              link: /topics/install/help/
         - title: Core concepts
           link: /topics/concepts/
           items:
@@ -60,8 +60,6 @@
                   items:
                     - title: Basic authentication with $productName$
                       link: /howtos/ext-filters
-                    - title: Basic authentication with $OSSProductName$
-                      link: /howtos/basic-auth
                     - title: Using the OAuth2 filter for SSO
                       link: /howtos/oauth-oidc-auth
                     - title: Kubernetes SSO with OIDC and Keycloak
@@ -88,8 +86,6 @@
                       link: /howtos/auth-kubectl-keycloak
                 - title: Rate limiting
                   items:
-                    - title: Basic rate limiting with $productName$
-                      link: /howtos/rate-limiting-tutorial
                     - title: Advanced rate limiting
                       link: /howtos/advanced-rate-limiting
                     - title: Rate limiting on token claims
@@ -161,6 +157,10 @@
                   link: /topics/running/scaling
             - title: Edge policy management
               items:
+                - title: Edge policy console
+                  link: /topics/using/edge-policy-console
+                - title: Rate limit speedometers
+                  link: /topics/using/rate-limit-speedometers
                 - title: Gateway API
                   link: /topics/using/gateway-api
             - title: Filters and authentication
@@ -272,5 +272,23 @@
           link: /community
         - title: Troubleshooting
           link: /topics/running/debugging
+        - title: Service Preview
+          items:
+            - title: Quick start
+              link: /topics/using/edgectl/service-preview-install
+            - title: Tutorial
+              link: /topics/using/edgectl/service-preview-tutorial
+            - title: How-to guides
+              items:
+                - title: Service mesh and Service Preview
+                  link: /topics/using/edgectl/service-mesh-sp
+                - title: Edge Control reference
+                  link: /topics/using/edgectl/edge-control
+                - title: Using Edge Control in CI
+                  link: /topics/using/edgectl/edge-control-in-ci
+            - title: Technical reference
+              link: /topics/using/edgectl/service-preview-reference
+        - title: Developer Portal
+          link: /topics/using/dev-portal
         - title: Release Notes
           link: /release-notes
