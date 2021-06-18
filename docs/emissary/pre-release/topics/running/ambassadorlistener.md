@@ -40,8 +40,8 @@ Valid `protocol` values are:
 | `HTTPS` | Either HTTPS or HTTP -- Envoy's TLS support can tell whether or not TLS is in use, and set `X-Forwarded-Protocol` correctly. |
 | `HTTPPROXY` | Cleartext-only HTTP, using the HAProxy `PROXY` protocol. |
 | `HTTPSPROXY` | Either HTTPS or HTTP, using the HAProxy `PROXY` protocol. |
-| `TCP` | TCP sessions without HTTP at all. You will need to use `TCPMapping`s to route requests for this `AmbassadorListener`. |
-| `TLS` | TLS sessions without HTTP at all. You will need to use `TCPMapping`s to route requests for this `AmbassadorListener`. |
+| `TCP` | TCP sessions without HTTP at all. You will need to use `AmbassadorTCPMapping`s to route requests for this `AmbassadorListener`. |
+| `TLS` | TLS sessions without HTTP at all. You will need to use `AmbassadorTCPMapping`s to route requests for this `AmbassadorListener`. |
 
 ### `securityModel` and `l7Depth`
 
