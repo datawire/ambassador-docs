@@ -20,6 +20,11 @@ items:
   - version: 2.0.0-ea
     date: '2021-06-18'
     notes:
+      - title: Developer Preview!
+        body: "Ambassador Edge Stack 2.0.0 is a developer preview: while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback!! Join us on [Slack](https://a8r.io/slack) and let us know what you think."
+        type: change
+        docs: about/changes-2.0.0
+
       - title: Configuration API v3alpha1
         body: Ambassador Edge Stack 2.0.0 introduces API version <code>x.getambassador.io/v3alpha1</code> for configuration changes that are not backwards compatible with the 1.X family. API versions <code>getambassador.io/v0</code> and <code>getambassador.io/v1</code> are deprecated. Further details are available in the <a href="about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0 Changes</a> document.
         type: feature
@@ -65,7 +70,7 @@ items:
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
       - title: Correctly set Ingress resource status in all cases
-        body: Edge Stack 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses.
+        body: Edge Stack 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses -- thanks, [Noah Fontes](https://github.com/impl)!
         docs: topics/running/ingress-controller
         type: bugfix
         image: ./edge-stack-2.0.0-ingressstatus.png

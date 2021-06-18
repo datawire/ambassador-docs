@@ -1,17 +1,28 @@
 Major Changes in $productName$ 2.0.0
 ====================================
 
-While $productName$ 2.0.0 is largely compatible with $productName$ 1.13, it introduces some significant changes that may require changes to existing configurations.
+## 0. 2.0.0 is a Developer Preview!
+
+$productName$ 2.0.0 is a **developer preview**: while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback!! Join us on [Slack](https://a8r.io/slack) and let us know what you think.
+
+Additionally, while $productName$ 2.0.0 is largely compatible with $productName$ 1.13, it introduces some significant changes that may require changes to existing configurations.
 
 ## 1. Configuration API Version `x.getambassador.io/v3alpha1`
 
-$productName$ configuration resource API versions `getambassador.io/v0`, `getambassador.io/v1`, and `getambassador.io/v2` are **deprecated** as of $productName$ 2.0.0 in favor of API version `x.getambassador.io/v3alpha1`. 
+$productName$ 2.0.0 introduces API version `x.getambassador.io/v3alpha1` for configuration changes that are not backwards compatible with the 1.X family, notably the `AmbassadorListener`, `AmbassadorHost`, and `AmbassadorMapping` resources (see below). Obviously, `v3alpha1` is an early version that may change as we receive feedback.
 
-Obviously, `v3alpha1` is an early version that may change as we receive feedback. `v2` will still be supported, although certain semantics must change for $productName$ 2.0.0 (as described below). 
+Additionally, configuration resource API versions `getambassador.io/v0` and `getambassador.io/v1` are no longer supported.
 
 ## 2. `AmbassadorListener`s, `AmbassadorHost`s, and `AmbassadorMapping`s
 
-$productName$ 2.0.0 introduces the new `AmbassadorListener` CRD, and changes certain semantics of the relationship between `AmbassadorListener`s, `AmbassadorHost`s, and `AmbassadorMapping`s.
+$productName$ 2.0.0 introduces the new `AmbassadorListener` CRD, and brings new names for the `AmbassadorHost` and `AmbassadorMapping` resources. 
+
+**NOTE WELL:** `Host` and `Mapping` are **not supported** in $productName$ 2.0.0.
+
+The motivation behind the change is that certain semantics around `AmbassadorListener`s, `AmbassadorHost`s, and `AmbassadorMapping`s change:
+
+   1. The semantics of which `AmbassadorMappings` associate with wihch `AmbassadorHost` are different from how `Mapping`s and `Host`s worked.
+   2. `Mapping` gains a `hostname` element. `host` is an exact match or a regex, as determined by `host_regex`, but `hostname` is always a DNS glob.
 
 ### The `AmbassadorListener` CRD
 
