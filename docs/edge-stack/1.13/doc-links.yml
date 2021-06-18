@@ -30,7 +30,7 @@
           items:
             - title: Kubernetes network architecture
               link: /topics/concepts/kubernetes-network-architecture
-            - title: 'The $productName$ operating model: GitOps and continuous delivery'
+            - title: "The Ambassador operating model: GitOps and continuous delivery"
               link: /topics/concepts/gitops-continuous-delivery
             - title: Progressive delivery
               link: /topics/concepts/progressive-delivery
