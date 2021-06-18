@@ -31,7 +31,7 @@ find that endpoint.
 1. In your browser, navigate to `http://<load-balancer-endpoint>` and follow the
 prompts to bypass the TLS warning. 
 
-  > [An `AmbassadorHost` resource is created in production](../../topics/running/ambassadorhost)
+  > [An `AmbassadorHost` resource is created in production](../../topics/running/host)
 to use your own registered domain name instead of the load balancer endpoint to 
 access the console and your `AmbassadorMapping` endpoints.
 

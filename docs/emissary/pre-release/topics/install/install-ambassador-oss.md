@@ -14,7 +14,7 @@ If you still want to use just $OSSproductName$, don't worry! You can follow the 
 
 ## Kubernetes YAML
 
-In this tutorial, we'll walk through the process of deploying $OSSproductName$ in Kubernetes for ingress routing. $OSSproductName$ provides all the functionality of a traditional ingress controller (i.e., path-based routing) while exposing many additional capabilities such as authentication, URL rewriting, CORS, rate limiting, and automatic metrics collection (the [mappings reference](../../using/intro-ambassadormappings) contains a full list of supported options). Note that $AESproductName$ can be used as an [Ingress Controller](../../running/ingress-controller).
+In this tutorial, we'll walk through the process of deploying $OSSproductName$ in Kubernetes for ingress routing. $OSSproductName$ provides all the functionality of a traditional ingress controller (i.e., path-based routing) while exposing many additional capabilities such as authentication, URL rewriting, CORS, rate limiting, and automatic metrics collection (the [mappings reference](../../using/intro-mappings) contains a full list of supported options). Note that $AESproductName$ can be used as an [Ingress Controller](../../running/ingress-controller).
 
 For more background on Kubernetes ingress, [read this blog post](https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d).
 
@@ -122,7 +122,7 @@ The versatile HTTPS configuration of $OSSproductName$ lets it support various HT
 
 See the [TLS HOWTO](../../../howtos/tls-termination) to quickly enable HTTPS support for your applications.
 
-**Note that $AESproductName$ automatically enables HTTPS.** Read more about its configuration on the [`AmbassadorHost` CRD](../../running/ambassadorhost) page.
+**Note that $AESproductName$ automatically enables HTTPS.** Read more about its configuration on the [`AmbassadorHost` CRD](../../running/host) page.
 
 ## Helm
 

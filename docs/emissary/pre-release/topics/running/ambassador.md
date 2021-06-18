@@ -219,7 +219,7 @@ of stats in Envoy, using unbounded memory and potentially slowing down stats pip
 
 ##### Linkerd interoperability
 
-When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically.  See the [AmbassadorMapping](../../using/ambassadormappings#linkerd-interoperability-add_linkerd_headers) documentation for more details.
+When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically.  See the [AmbassadorMapping](../../using/mappings#linkerd-interoperability-add_linkerd_headers) documentation for more details.
 
 ```yaml
 add_linkerd_headers: false
@@ -409,7 +409,7 @@ The default is false since the PROXY protocol is not compatible with HTTP.
 
 ##### Enable IPv4 and IPv6
 
-Sets whether $productName$ should do IPv4 and/or IPv6 DNS lookups when contacting services. IPv4 defaults to true and IPv6 defaults to false. Either can be overridden in a [`AmbassadorMapping`](../../using/ambassadormappings). 
+Sets whether $productName$ should do IPv4 and/or IPv6 DNS lookups when contacting services. IPv4 defaults to true and IPv6 defaults to false. Either can be overridden in a [`AmbassadorMapping`](../../using/mappings). 
 
 ```yaml
 enable_ipv4: true
@@ -640,7 +640,7 @@ readiness_probe:
   rewrite: /backend/health
 ```
 
-The liveness and readiness probes both support `prefix`, `rewrite`, and Module, with the same meanings as for [Mappings](../../using/ambassadormappings). Additionally, the `enabled` boolean may be set to false to disable API support for the probe.  It will, however, remain accessible on port 8877.
+The liveness and readiness probes both support `prefix`, `rewrite`, and Module, with the same meanings as for [Mappings](../../using/mappings). Additionally, the `enabled` boolean may be set to false to disable API support for the probe.  It will, however, remain accessible on port 8877.
 
 ---
 

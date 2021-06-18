@@ -459,7 +459,7 @@ Now we will show how you can use $productName$ to route to services in the Istio
 
 3. Route to the service
 
-   Traffic routing in $productName$ is configured with the [`AmbassadorMapping`](../../topics/using/intro-ambassadormappings) resource. This is a powerful configuration object that lets you configure different routing rules for different services. 
+   Traffic routing in $productName$ is configured with the [`AmbassadorMapping`](../../topics/using/intro-mappings) resource. This is a powerful configuration object that lets you configure different routing rules for different services. 
 
    The above `kubectl apply` installed the following basic `AmbassadorMapping` which has configured $productName$ to route traffic with URL prefix `/backend/` to the `quote` service.
 

@@ -106,11 +106,11 @@ sum of all similar metrics from different services.  In this case, it
 is common to differentiate the metrics for an individual service with
 a `label`.  This can be done by configuring a Prometheus StatsD
 Exporter "mapping" (not to be confused with an [$productName$
-"AmbassadorMapping"][mappings]).  See [Metric AmbassadorMapping and Configuration][] in
+`AmbassadorMapping`][AmbassadorMappings]).  See [Metric AmbassadorMapping and Configuration][] in
 the Prometheus StatsD Exporter documentation to learn how to modify
 its mappings.
 
-[mappings]: ../../../using/ambassadormappings
+[AmbassadorMappings]: ../../../using/mappings
 [Metric AmbassadorMapping and Configuration]: https://github.com/prometheus/statsd_exporter/tree/v0.6.0#metric-mapping-and-configuration
 
 #### Configuring Prometheus StatsD Exporter with Helm

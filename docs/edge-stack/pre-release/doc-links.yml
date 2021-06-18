@@ -126,7 +126,7 @@
             - title: Custom resources
               items:
                 - title: The AmbassadorHost resource
-                  link: /topics/running/ambassadorhost
+                  link: /topics/running/host
                   items:
                     - title: TLS
                       link: /topics/running/tls/
@@ -182,9 +182,9 @@
                 - title: The AmbassadorMapping resource
                   items:
                     - title: AmbassadorMapping basics
-                      link: /topics/using/intro-ambassadormappings
+                      link: /topics/using/intro-mappings
                     - title: Advanced AmbassadorMapping configuration
-                      link: /topics/using/ambassadormappings
+                      link: /topics/using/mappings
                     - title: AuthService settings
                       link: /topics/using/authservice
                     - title: Automatic retries
