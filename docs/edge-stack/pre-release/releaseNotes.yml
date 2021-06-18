@@ -21,12 +21,12 @@ items:
     date: '2021-06-18'
     notes:
       - title: Developer Preview!
-        body: "Ambassador Edge Stack 2.0.0 is a developer preview: while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback!! Join us on [Slack](https://a8r.io/slack) and let us know what you think."
+        body: $productName$ 2.0.0 is a Developer Preview; while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think!
         type: change
         docs: about/changes-2.0.0
 
       - title: Configuration API v3alpha1
-        body: Ambassador Edge Stack 2.0.0 introduces API version <code>x.getambassador.io/v3alpha1</code> for configuration changes that are not backwards compatible with the 1.X family. API versions <code>getambassador.io/v0</code> and <code>getambassador.io/v1</code> are deprecated. Further details are available in the <a href="about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0 Changes</a> document.
+        body: $productName$ 2.0.0 introduces API version <code>x.getambassador.io/v3alpha1</code> for configuration changes that are not backwards compatible with the 1.X family. API versions <code>getambassador.io/v0</code> and <code>getambassador.io/v1</code> are deprecated. Further details are available in the <a href="about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0 Changes</a> document.
         type: feature
         docs: about/changes-2.0.0/#1-configuration-api-version-getambassadoriov3alpha1
         image: ./edge-stack-2.0.0-v3alpha1.png
@@ -54,7 +54,7 @@ items:
         type: bugfix
 
       - title: Stricter rules for AmbassadorHost/AmbassadorMapping association
-        body: A <code>AmbassadorMapping</code> will only be matched with a <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve Edge Stack's memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
+        body: A <code>AmbassadorMapping</code> will only be matched with a <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
         docs: about/changes-2.0.0/#host-and-mapping-association
         type: change
 
@@ -65,12 +65,12 @@ items:
         image: ./edge-stack-2.0.0-host_crd.png
 
       - title: Envoy V3 APIs
-        body: By default, Edge Stack will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or e.g. Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
+        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or e.g. Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
         type: change
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
       - title: Correctly set Ingress resource status in all cases
-        body: Edge Stack 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses -- thanks, [Noah Fontes](https://github.com/impl)!
+        body: $productName$ 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses -- thanks, [Noah Fontes](https://github.com/impl)!
         docs: topics/running/ingress-controller
         type: bugfix
         image: ./edge-stack-2.0.0-ingressstatus.png
@@ -88,18 +88,18 @@ items:
         type: feature
 
       - title: Higher performance while generating envoy configuration now enabled by default
-        body: The environment variable <code>AMBASSADOR_FAST_RECONFIGURE</code> is now set by default, enabling the higher-performance implementation of the code that Edge Stack uses to generate and validate Envoy configurations.
+        body: The environment variable <code>AMBASSADOR_FAST_RECONFIGURE</code> is now set by default, enabling the higher-performance implementation of the code that $productName$ uses to generate and validate Envoy configurations.
         docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
         type: change
 
       # This set of release notes is for Edge Stack. edgectl is still a thing for Edge Stack (in the form of edgectl license).
       - title: edgectl install no longer supported
-        body: The <code>edgectl install</code> command has been removed. Please use the <code>edge-stack</code> Helm chart to install Ambassador Edge Stack instead.
+        body: The <code>edgectl install</code> command has been removed. Please use the <code>edge-stack</code> Helm chart to install $productName$ instead.
         type: change
         docs: topics/install/helm/
 
       - title: Service Preview no longer supported
-        body: Service Preview is no longer supported in Ambassador Edge Stack, and has been removed. Please use <a href="https://www.getambassador.io/docs/telepresence">Telepresence</a> instead.
+        body: Service Preview is no longer supported in $productName$, and has been removed. Please use <a href="https://www.getambassador.io/docs/telepresence">Telepresence</a> instead.
         docs: https://www.getambassador.io/docs/telepresence
         type: change
 
@@ -109,7 +109,7 @@ items:
         docs: https://app.getambassador.io/
 
       - title: Project CRD removed
-        body: We have removed support for the <code>Project</code> CRD in Ambassador Edge Stack, in favor of ArgoCD.
+        body: We have removed support for the <code>Project</code> CRD in $productName$, in favor of ArgoCD.
         type: change
         docs: https://www.getambassador.io/docs/argo/latest/quick-start/#argo-quick-start
 
@@ -129,7 +129,7 @@ items:
   - version: 1.13.7
     date: '2021-06-03'
     notes:
-      - title: Ambassador JSON logging support
+      - title: JSON logging support
         body: "An <code>AMBASSADOR_JSON_LOGGING</code> environment variable has been added. When set to <code>true</code> JSON format will be used for most of the control plane logs. Some (but few) logs from <code>gunicorn</code> and the Kubernetes <code>client-go</code> package will still be in text only format."
         image: ./edge-stack-1.13.7-json-logging.png
         docs: topics/running/running/#log-format
@@ -140,7 +140,7 @@ items:
         docs: topics/running/resolvers/#the-consul-resolver
         type: bugfix
       - title: Memory usage calculation improvements
-        body: "The internal memory usage calculation that Emissary Ingress and Ambassador Edge Stack perform has been updated to exclude cache memory. This now matches how the kernel OOMKiller calculates memory and should avoid situations where Envoy updates are throttled unnecessarily."
+        body: "The internal memory usage calculation that $productName$ performs has been updated to exclude cache memory. This now matches how the kernel OOMKiller calculates memory and should avoid situations where Envoy updates are throttled unnecessarily."
         image: ./edge-stack-1.13.7-memory.png
         docs: topics/running/scaling/#inspecting-ambassador-performance
         type: change
@@ -148,7 +148,7 @@ items:
     date: '2021-05-13'
     notes:
       - title: Envoy 1.15.5
-        body: Emissary Ingress 1.13.4 and Edge Stack 1.13.4 have been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). Edge Stack and Emissary Ingress can now be configured to reject client requests that contain escaped slashes.
+        body: $productName$ bas been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). $productName$ can now be configured to reject client requests that contain escaped slashes.
         image: ./edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
         type: security
