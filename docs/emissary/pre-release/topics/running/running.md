@@ -121,7 +121,7 @@ kind:  Module
 metadata:
   name:  ambassador
 spec:
-  ambassador_id: ambassador-1
+  ambassador_id: [ "ambassador-1" ]
   config:
     ...
 ```
@@ -145,7 +145,7 @@ kind:  AmbassadorMapping
 metadata:
   name:  mapping-used
 spec:
-  ambassador_id: ambassador-1
+  ambassador_id: [ "ambassador-1" ]
   prefix: /demo1/
   service: demo1
 ---
@@ -171,14 +171,14 @@ kind:  AmbassadorMapping
 metadata:
   name:  mapping-skipped-2
 spec:
-  ambassador_id: ambassador-2
+  ambassador_id: [ "ambassador-2" ]
   prefix: /demo4/
   service: demo4
 ```
 
-The list syntax (shown in `mapping-used-2` above) permits including a given object in the configuration for multiple $productName$ instances. In this case, `mapping-used-2` will be included in the configuration for `ambassador-1` and also for `ambassador-2`.
+`ambassador_id` is always a list, and may (as shown in `mapping-used-2` above) include multiple IDs to allow a given object in the configuration for multiple $productName$ instances. In this case, `mapping-used-2` will be included in the configuration for `ambassador-1` and also for `ambassador-2`.
 
-**Note well that _any_ object can and should have an `ambassador_id` included** so, for example, it is _fully supported_ to use `ambassador_id` to qualify the `ambassador Module`, `TLS`, and `AuthService` objects. You will need to set Ambassador_id in all resources you want to use for $productName$.
+**Note well that _any_ $productName$ configuration resource can have an `ambassador_id` included** so, for example, it is _fully supported_ to use `ambassador_id` to qualify the `ambassador Module`, `TLSContext`, and `AuthService` objects. You will need to set `ambassador_id` in all resources you want to use for $productName$.
 
 If no `AMBASSADOR_ID` is assigned to an $productName$, it will use the ID `default`. If no `ambassador_id` is present in a YAML object, it will also use the ID `default`.
 

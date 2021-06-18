@@ -23,9 +23,7 @@ metadata:
   name: example-log-service
 spec:
   # Common to all $productName$ resources
-  ambassador_id:           # optional; default is ["default"]
-  - "string"
-  ambassador_id: "string"  # no need for a list if there's only one value
+  ambassador_id: []string           # optional; default is ["default"]
 
   # LogService specific
   service: "string"                 # required

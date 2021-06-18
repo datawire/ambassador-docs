@@ -89,7 +89,18 @@ spec:
       hostname: wildcard-host
 ```
 
-**Note:** If running multiple instances of $productName$ in one cluster remember to include ambassador_id property in the spec, must be an array of id(s).
+**Note:** If running multiple instances of $productName$ in one cluster remember to include the `ambassador_id` property in the `spec`, e.g.:
+
+```yaml
+---
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorHost
+metadata:
+  name: wildcard-host
+spec:
+  ambassador_id: [ "my_id" ]
+  ...
+```
 
 Apply the `AmbassadorHost` configured above with `kubectl`:
 

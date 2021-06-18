@@ -14,7 +14,7 @@ Use the following variables for the environment of your $productName$ container:
 
 | Purpose                           | Variable                                                                                 | Default value                                       | Value type |
 |-----------------------------------|----------------------------------------------------------------------------------------- |-----------------------------------------------------|-------------------------------------------------------------------------------|
-| Core                              | `AMBASSADOR_ID`                                                                          | `default`                                           | Plain string |
+| Core                              | `AMBASSADOR_ID`                                                                          | `[ "default" ]`                                     | List of strings |
 | Core                              | `AMBASSADOR_NAMESPACE`                                                                   | `default` ([^1])                                    | Kubernetes namespace |
 | Core                              | `AMBASSADOR_SINGLE_NAMESPACE`                                                            | Empty                                               | Boolean; non-empty=true, empty=false |
 | Core                              | `AMBASSADOR_ENVOY_BASE_ID`                                                               | `0`                                                 | Integer |

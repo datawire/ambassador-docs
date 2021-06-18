@@ -31,7 +31,7 @@ metadata:
 spec:
 # Use ambassador_id only if you are using multiple instances of $productName$ in the same cluster.
 # See below for more information.
-  ambassador_id: "<ambassador_id>"
+  ambassador_id: [ "<ambassador_id>" ]
   config:
   # Use the items below for config fields
 ```
@@ -124,7 +124,7 @@ envoy_validation_timeout: 30
 Use only if you are using multiple instances of $productName$ in the same cluster. See [this page](../running/#ambassador_id) for more information.
 
 ```yaml
-ambassador_id: "<ambassador_id>"
+ambassador_id: [ "<ambassador_id>" ]
 ```
 
 ##### Defaults
