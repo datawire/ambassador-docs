@@ -223,7 +223,7 @@ Setting `AMBASSADOR_FAST_RECONFIGURE` to "true" enables incremental reconfigurat
 
 ## `AMBASSADOR_ENVOY_API_VERSION`
 
-By default, $productName$ will configure Envoy using the v2 API. Setting `AMBASSADOR_ENVOY_API_VERSION` to `V3` tells Ambassador to use the Envoy v3 API. Since the v2 API is deprecated in the upstream Envoy project, it is encouraged to eventually use the v3 API. New features or enhancements in $productName$ _may_ begin to require the v3 API. It is therefore strongly recommended to try the v3 API sooner rather than later and, as always, provide feedback and bug reports in the $productName$ GitHub repo!
+By default, $productName$ will configure Envoy using the Envoy V3 API. Setting `AMBASSADOR_ENVOY_API_VERSION` to `V2` tells Ambassador to use the Envoy V2 API instead. Since the Envoy V2 API is deprecated in the upstream Envoy project, we strongly recommend using V3 and, as always, providing feedback and bug reports in the $productName$ GitHub repo!
 
 ## Configuration from the filesystem
 
