@@ -95,12 +95,12 @@ labels:
           omit_if_not_present: true
 ```
 
-so the Mapping definition will now look like this:
+so the AmbassadorMapping definition will now look like this:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: service-backend
 spec:
@@ -135,16 +135,16 @@ spec:
   selector:
     app: backend
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
   prefix: /
   service: quote:5000
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:

@@ -13,13 +13,13 @@ Rate limiting in $productName$ is composed of two parts:
 
 There are two ways of setting labels on a request:
 
-1. On an individual [Mapping](../mappings#configuring-mappings).  Labels set
-   here will only apply to requests that use that Mapping.
+1. On an individual [AmbassadorMapping](../ambassadormappings#configuring-ambassadormappings).  Labels set
+   here will only apply to requests that use that AmbassadorMapping.
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
-   kind: Mapping
+   apiVersion: x.getambassador.io/v3alpha1
+   kind: AmbassadorMapping
    metadata:
      name: foo-app
    spec:
@@ -40,9 +40,9 @@ There are two ways of setting labels on a request:
 2. Globally, in the [`ambassador`
    Module](../../running/ambassador).  Labels set here are
    applied to every single request that goes through $productName$.  This
-   includes requests go through a Mapping that sets more labels; for
+   includes requests go through an AmbassadorMapping that sets more labels; for
    those requests, the global labels are prepended to each of the
-   Mapping's label groups for the matching domain; otherwise the
+   AmbassadorMapping's label groups for the matching domain; otherwise the
    global labels are put in to a new label group named "default" for
    that domain.
 
@@ -109,7 +109,7 @@ There are 5 types of label specifiers in $productName$:
 1. The Envoy source cluster name is the name of the Envoy listener
    cluster that the request name in on.
 2. The Envoy destination cluster is the name of the Envoy cluster that
-   the Mapping routes the request to.  Typically, there is a 1:1
+   the AmbassadorMapping routes the request to.  Typically, there is a 1:1
    correspondence between upstream services (pointed to by Mappings)
    and clusters.  You can get the name for a cluster from the
    diagnostics service or Edge Policy Console.
@@ -121,7 +121,7 @@ There are 5 types of label specifiers in $productName$:
    address from `X-Forwarded-For` if $productName$ is configured to trust
    the `X-Fowarded-For` header.
 5. `generic_key` allows you to apply a simple string label to requests
-   flowing through that Mapping.
+   flowing through that AmbassadorMapping.
 
 ## Rate limiting requests based on their labels
 

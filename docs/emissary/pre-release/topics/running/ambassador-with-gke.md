@@ -82,11 +82,11 @@ spec:
     servicePort: 8080
 ```
 
-Now let's connect the other service from the tutorial to `ambassador` by specifying a Mapping:
+Now let's connect the other service from the tutorial to `ambassador` by specifying an AmbassadorMapping:
 
 ```yaml
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: web
   namespace: default
@@ -183,4 +183,4 @@ Configure $productName$ to [redirect traffic from HTTP to HTTPS](../tls/cleartex
 
 The result should be that `http://www.example.com` will redirect to `https://www.example.com`. 
 
-You can now add more services by specifying the hostname in the Mapping.
+You can now add more services by specifying the hostname in the AmbassadorMapping.

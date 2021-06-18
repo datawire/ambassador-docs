@@ -14,11 +14,11 @@ $productName$ lets you easily shadow traffic to a given endpoint. In $productNam
 
 ![Shadowing](../../../images/shadowing.png)
 
-## The `shadow` Mapping
+## The `shadow` AmbassadorMapping
 
-In $productName$, you can enable shadowing for a given mapping by setting `shadow: true` in your `Mapping`. One copy proceeds as if the shadowing `Mapping` was not present: the request is handed onward per the `service`(s) defined by the non-shadow `Mapping`s, and the reply from whichever `service` is picked is handed back to the client.
+In $productName$, you can enable shadowing for a given mapping by setting `shadow: true` in your `AmbassadorMapping`. One copy proceeds as if the shadowing `AmbassadorMapping` was not present: the request is handed onward per the `service`(s) defined by the non-shadow `AmbassadorMapping`s, and the reply from whichever `service` is picked is handed back to the client.
 
-The second copy is handed to the `service` defined by the `Mapping` with `shadow` set. Any reply from this `service` is ignored, rather than being handed back to the client. Only a single `shadow` per resource can be specified (i.e., you can't shadow the same resource to more than 1 additional destination). In this situation, $productName$ will indicate an error in the diagnostic service, and only one `shadow` will be used. If you need to implement this type of use case, you should shadow traffic to a multicast proxy (or equivalent).
+The second copy is handed to the `service` defined by the `AmbassadorMapping` with `shadow` set. Any reply from this `service` is ignored, rather than being handed back to the client. Only a single `shadow` per resource can be specified (i.e., you can't shadow the same resource to more than 1 additional destination). In this situation, $productName$ will indicate an error in the diagnostic service, and only one `shadow` will be used. If you need to implement this type of use case, you should shadow traffic to a multicast proxy (or equivalent).
 
 You can shadow multiple different services.
 
@@ -31,7 +31,7 @@ The following example may help illustrate how shadowing can be used. This first 
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  myservice
 spec:
@@ -44,7 +44,7 @@ What if we want to shadow the traffic to `myservice`, and send that exact same t
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  myservice-shadow
 spec:
@@ -62,7 +62,7 @@ It is possible to shadow a portion of the traffic by specifying the `weight` in 
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  myservice-shaddow
 spec:

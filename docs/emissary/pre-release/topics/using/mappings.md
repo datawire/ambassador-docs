@@ -1,22 +1,22 @@
-# Advanced Mapping configuration
+# Advanced AmbassadorMapping configuration
 
-$productName$ is designed so that the author of a given Kubernetes service can easily and flexibly configure how traffic gets routed to the service. The core abstraction used to support service authors is a mapping, which maps a target backend service to a given host or prefix. For Layer 7 protocols such as HTTP, gRPC, or WebSockets, the `Mapping` resource is used. For TCP, the `TCPMapping` resource is used.
+$productName$ is designed so that the author of a given Kubernetes service can easily and flexibly configure how traffic gets routed to the service. The core abstraction used to support service authors is a mapping, which maps a target backend service to a given host or prefix. For Layer 7 protocols such as HTTP, gRPC, or WebSockets, the `AmbassadorMapping` resource is used. For TCP, the `TCPMapping` resource is used.
 
 $productName$ _must_ have one or more mappings defined to provide access to any services at all. The name of the mapping must be unique.
 
 ## System-wide defaults for Mappings
 
 Certain aspects of mappings can be set system-wide using the `defaults` element of the `ambassador Module`:
-see [using defaults](../../using/defaults) for more information. The `Mapping` element will look first in
+see [using defaults](../../using/defaults) for more information. The `AmbassadorMapping` element will look first in
 the `httpmapping` default class.
 
-## Mapping evaluation order
+## AmbassadorMapping evaluation order
 
 $productName$ sorts mappings such that those that are more highly constrained are evaluated before those less highly constrained. The prefix length, the request method, constraint headers, and query parameters are all taken into account.
 
 If absolutely necessary, you can manually set a `precedence` on the mapping (see below). In general, you should not need to use this feature unless you're using the `regex_headers` or `host_regex` matching features. If there's any question about how $productName$ is ordering rules, the diagnostic service is a good first place to look: the order in which mappings appear in the diagnostic service is the order in which they are evaluated.
 
-## Optional fallback Mapping
+## Optional fallback AmbassadorMapping
 
 $productName$ will respond with a `404 Not Found` to any request for which no mapping exists. If desired, you can define a fallback "catch-all" mapping so all unmatched requests will be sent to an upstream service.
 
@@ -25,7 +25,7 @@ For example, defining a mapping with only a `/` prefix will catch all requests p
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  catch-all
 spec:
@@ -37,9 +37,9 @@ spec:
 
 $productName$ sorts mappings such that those that are more highly constrained are evaluated before those less highly constrained. The prefix length, the request method, and the constraint headers are all taken into account. These mechanisms, however, may not be sufficient to guarantee the correct ordering when regular expressions or highly complex constraints are in play.
 
-For those situations, a `Mapping` can explicitly specify the `precedence`. A `Mapping` with no `precedence` is assumed to have a `precedence` of 0; the higher the `precedence` value, the earlier the `Mapping` is attempted.
+For those situations, an `AmbassadorMapping` can explicitly specify the `precedence`. An `AmbassadorMapping` with no `precedence` is assumed to have a `precedence` of 0; the higher the `precedence` value, the earlier the `AmbassadorMapping` is attempted.
 
-If multiple `Mapping`s have the same `precedence`, $productName$'s normal sorting determines the ordering within the `precedence`; however, there is no way that $productName$ can ever sort a `Mapping` with a lower `precedence` ahead of one at a higher `precedence`.
+If multiple `AmbassadorMapping`s have the same `precedence`, $productName$'s normal sorting determines the ordering within the `precedence`; however, there is no way that $productName$ can ever sort an `AmbassadorMapping` with a lower `precedence` ahead of one at a higher `precedence`.
 
 ### Using `tls`
 
@@ -50,7 +50,7 @@ If `tls` is present with a value that is not `true`, the value is assumed to be 
 ### Using `cluster_tag`
 
 If the `cluster_tag` attribute is present, its value will be prepended to cluster names generated from
-the `Mapping`. This provides a simple mechanism for customizing the `cluster` name when working with metrics.
+the `AmbassadorMapping`. This provides a simple mechanism for customizing the `cluster` name when working with metrics.
 
 ## Namespaces and Mappings
 
@@ -61,9 +61,9 @@ If `AMBASSADOR_NAMESPACE` is correctly set, $productName$ can map to services in
 
 ### Linkerd interoperability (`add_linkerd_headers`)
 
-When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically, based on the `service` attribute in the `Mapping`. 
+When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically, based on the `service` attribute in the `AmbassadorMapping`. 
 
-If `add_linkerd_headers` is not specified for a given `Mapping`, the default is taken from the `ambassador`[Module](../../running/ambassador). The overall default is `false`: you must explicitly enable `add_linkerd_headers` for $productName$ to add the header for you (although you can always add it yourself with `add_request_headers`, of course).
+If `add_linkerd_headers` is not specified for a given `AmbassadorMapping`, the default is taken from the `ambassador`[Module](../../running/ambassador). The overall default is `false`: you must explicitly enable `add_linkerd_headers` for $productName$ to add the header for you (although you can always add it yourself with `add_request_headers`, of course).
 
 ### "Upgrading" to non-HTTP protocols (`allow_upgrade`)
 
@@ -85,7 +85,7 @@ This "upgrade" mechanism is a useful way of adding HTTP-based
 authentication and access control to another protocol that might not
 support authentication; for this reason the designers of the WebSocket
 protocol made this "upgrade" mechanism the *only* way of initiating a
-WebSocket connection.  In a Mapping for an upstream service that
+WebSocket connection.  In an AmbassadorMapping for an upstream service that
 supports WebSockets, you would write
 
 ```yaml
@@ -101,8 +101,8 @@ write
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: apiserver
 spec:

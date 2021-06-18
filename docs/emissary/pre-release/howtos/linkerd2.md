@@ -67,7 +67,7 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
         add_linkerd_headers: true
     ```
 
-    This will tell $productName$ to add additional headers to each request forwarded to Linkerd 2 with information about where to route this request to. This is a general setting. You can also set `add_linkerd_headers` per [Mapping](../../topics/using/mappings#mapping-configuration).
+    This will tell $productName$ to add additional headers to each request forwarded to Linkerd 2 with information about where to route this request to. This is a general setting. You can also set `add_linkerd_headers` per [AmbassadorMapping](../../topics/using/ambassadormappings#mapping-configuration).
 
 ## Routing to Linkerd 2 services
 
@@ -157,12 +157,12 @@ You'll now register a demo application with Linkerd 2, and show how $productName
 
    Your browser should automatically open the correct URL. Otherwise, note the output from the above command and open that in a browser of your choice.
 
-4. Create a `Mapping` for the `qotm-Linkerd2` service.
+4. Create an `AmbassadorMapping` for the `qotm-Linkerd2` service.
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
-   kind: Mapping
+   apiVersion: x.getambassador.io/v3alpha1
+   kind: AmbassadorMapping
    metadata:
      name: linkerd2-qotm
    spec:
@@ -218,11 +218,11 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
 
 1. Configure the target cluster $productName$ to allow insecure routing.
 
-    When $productName$ is running in a Linkerd mesh, Linkerd provides transport security, so connections coming in from the Linkerd in the source cluster will always be HTTP when they reach $productName$. Therefore, the `Host` CRDs corresponding to services that you'll be accessing from the source cluster *must* be configured to `Route` insecure requests. More information on this topic is available in the [`Host` documentation](../../topics/running/host-crd); an example might be
+    When $productName$ is running in a Linkerd mesh, Linkerd provides transport security, so connections coming in from the Linkerd in the source cluster will always be HTTP when they reach $productName$. Therefore, the `AmbassadorHost` CRDs corresponding to services that you'll be accessing from the source cluster *must* be configured to `Route` insecure requests. More information on this topic is available in the [`AmbassadorHost` documentation](../../topics/running/ambassadorhost); an example might be
 
     ```yaml
-    apiVersion: getambassador.io/v2
-    kind: Host
+    apiVersion: x.getambassador.io/v3alpha1
+    kind: AmbassadorHost
     metadata:
       name: linkerd-host
     spec:
@@ -236,11 +236,11 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
 
 2. Configure the target cluster $productName$ to support Linkerd health checks.
 
-    Multicluster Linkerd does its own health checks beyond what Kubernetes does, so a `Mapping` is needed to allow Linkerd's health checks to succeed:
+    Multicluster Linkerd does its own health checks beyond what Kubernetes does, so an `AmbassadorMapping` is needed to allow Linkerd's health checks to succeed:
     
     ```yaml
-    apiVersion: getambassador.io/v2
-    kind: Mapping
+    apiVersion: x.getambassador.io/v3alpha1
+    kind: AmbassadorMapping
     metadata:
       name: public-health-check
       namespace: ambassador
@@ -251,9 +251,9 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
       bypass_auth: true
     ```
     
-    When configuring $productName$, Kubernetes is usually configured to run health checks directly against port 8877 -- however, that port is not meant to be exposed outside the cluster. The `Mapping` permits accessing the health check endpoint without directly exposing the port.
+    When configuring $productName$, Kubernetes is usually configured to run health checks directly against port 8877 -- however, that port is not meant to be exposed outside the cluster. The `AmbassadorMapping` permits accessing the health check endpoint without directly exposing the port.
     
-    (The actual prefix in the `Mapping` is not terribly important, but it needs to match the metadata supplied to the service mirror controller, below.)
+    (The actual prefix in the `AmbassadorMapping` is not terribly important, but it needs to match the metadata supplied to the service mirror controller, below.)
 
 3. Configure the target cluster $productName$ for the service mirror controller.
 
@@ -296,7 +296,7 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
     '
     ```
     
-    (Here, the value of `mirror.linkerd.io/probe-path` must match the `prefix` using for the probe `Mapping` above.)
+    (Here, the value of `mirror.linkerd.io/probe-path` must match the `prefix` using for the probe `AmbassadorMapping` above.)
 
 4. Configure individual exported services. Adding the following annotations to a service will tell the service to use $productName$ as the gateway:
 

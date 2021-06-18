@@ -9,32 +9,20 @@ for different TLS use cases including:
 - [Server Name Indication (SNI)](sni)
 - [TLS Origination](origination)
 
-## Host
+## `AmbassadorHost`
 
-As explained in the [Host](../host-crd) reference, a `Host` represents a domain
-in $productName$ and defines how TLS is managed on that domain. In $AESproductName$, the simplest configuration of a `Host` will enable TLS with a 
+As explained in the [`AmbassadorHost`](../host-crd) reference, an `AmbassadorHost` represents a domain
+in $productName$ and defines how TLS is managed on that domain. In $AESproductName$, the simplest configuration of an `AmbassadorHost` will enable TLS with a 
 self-signed certificate and redirect cleartext traffic to HTTPS. 
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
-> 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
-> 
-> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
-> 
-> The `insecure-action` can be one of:
+> The example below does not define a `requestPolicy`; however, this is something to keep in mind as you begin using the `AmbassadorHost` `CRD` in $productName$.
 >
-> * `Redirect` (the default): redirect to HTTPS
-> * `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
-> * `Reject`: reject the request with a 400 response
->
-> The example below does not define a `requestPolicy`; however, this is something to keep in mind as you begin using the `Host` `CRD` in $productName$.
->
-> For more information, please refer to the [`Host` documentation](../host-crd#secure-and-insecure-requests).
+> For more information, please refer to the [`AmbassadorHost` documentation](../host-crd#secure-and-insecure-requests).
 
 
 ### Automatic TLS with ACME
 
-With $productName$, the Host can be configured to completely 
+With $productName$, the `AmbassadorHost` can be configured to completely 
 manage TLS by requesting a certificate from a Certificate Authority using the
 [ACME HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/).
 
@@ -44,8 +32,8 @@ simple as providing a hostname and your email for the certificate:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Host
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorHost
 metadata:
   name: example-host
 spec:
@@ -56,11 +44,11 @@ spec:
 ```
 
 $productName$ will now request a certificate from the CA and store it in a secret 
-in the same namespace as the `Host`.
+in the same namespace as the `AmbassadorHost`.
 
 ### Bring your own certificate
 
-For both $AESproductName$ and $OSSproductName$, the `Host` can read a 
+For both $AESproductName$ and $OSSproductName$, the `AmbassadorHost` can read a 
 certificate from a Kubernetes secret and use that certificate to terminate TLS 
 on a domain.
 
@@ -70,8 +58,8 @@ named `host-secret` and use that secret for terminating TLS on the
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Host
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorHost
 metadata:
   name: example-host
 spec:
@@ -84,33 +72,33 @@ spec:
 
 $productName$ will now use the certificate in `host-secret` to terminate TLS.
 
-### Host and TLSContext
+### `AmbassadorHost` and `TLSContext`
 
-The Host will configure basic TLS termination settings in $productName$. If you 
+The `AmbassadorHost` will configure basic TLS termination settings in $productName$. If you 
 need more advanced TLS options on a domain, such as setting the minimum TLS 
 version, you can do it in one of the following ways.
 
 - [Transport Layer Security (TLS)](#transport-layer-security-tls)
-  - [`Host`](#host)
+  - [`AmbassadorHost`](#host)
     - [Automatic TLS with ACME](#automatic-tls-with-acme)
     - [Bring your own certificate](#bring-your-own-certificate)
-    - [`Host` and `TLSContext`](#host-and-tlscontext)
-      - [Create a `TLSContext` with the name `{{HOST}}-context`](#create-a-tlscontext-with-the-name-host-context)
-      - [Link a `TLSContext` to the Host](#link-a-tlscontext-to-the-host)
-      - [Specify TLS configuration in the Host](#specify-tls-configuration-in-the-host)
+    - [`AmbassadorHost` and `TLSContext`](#ambassadorhost-and-tlscontext)
+      - [Create a `TLSContext` with the name `{{AMBASSADORHOST}}-context`](#create-a-tlscontext-with-the-name-ambassadorhost-context)
+      - [Link a `TLSContext` to the `AmbassadorHost`](#link-a-tlscontext-to-the-ambassadorhost)
+      - [Specify TLS configuration in the `AmbassadorHost`](#specify-tls-configuration-in-the-ambassadorhost)
   - [TLSContext](#tlscontext)
     - [`alpn_protocols`](#alpn_protocols)
       - [HTTP/2 Support](#http2-support)
     - [TLS Parameters](#tls-parameters)
   - [TLS `Module` (*Deprecated*)](#tls-module-deprecated)
 
-#### Create a `TLSContext` with the name `{{HOST}}-context`
+#### Create a `TLSContext` with the name `{{AMBASSADORHOST}}-context`
 
 You can create a [`TLSContext`](#tlscontext) with the name
-`{{NAME_OF_HOST}}-context`, `hosts` set to the same `hostname`, and `secret` 
+`{{NAME_OF_AMBASSADORHOST}}-context`, `hosts` set to the same `hostname`, and `secret` 
 set to the same `tlsSecret`.
 
-For example, to enforce a minimum TLS version on the `Host` above, create a 
+For example, to enforce a minimum TLS version on the `AmbassadorHost` above, create a 
 `TLSContext` named `example-host-context` with the following configuration:
 
 ```yaml
@@ -128,12 +116,12 @@ spec:
 
 Full reference for all options available to the `TLSContext` can be found [below](#tlscontext).
 
-#### Link a `TLSContext` to the Host
+#### Link a `TLSContext` to the `AmbassadorHost`
 
 You can create a new [`TLSContext`](#tlscontext) with the desired configuration
-and link it to the Host via the `tlsContext` field.
+and link it to the `AmbassadorHost` via the `tlsContext` field.
 
-For example, to enforce a minimum TLS version on the `Host` above, create a
+For example, to enforce a minimum TLS version on the `AmbassadorHost` above, create a
 `TLSContext` with any name with the following configuration:
 
 ```yaml
@@ -147,12 +135,12 @@ spec:
   min_tls_version: v1.2
 ```
 
-and link it to the Host via the `tlsContext` field as shown:
+and link it to the `AmbassadorHost` via the `tlsContext` field as shown:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Host
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorHost
 metadata:
   name: example-host
 spec:
@@ -165,19 +153,19 @@ spec:
     name: min-tls-context
 ```
 
-**Note**: Any `hosts` or `secret` in the `TLSContext` must be the compatible with the `Host` to which it is
+**Note**: Any `hosts` or `secret` in the `TLSContext` must be the compatible with the `AmbassadorHost` to which it is
 being linked.
 
-#### Specify TLS configuration in the Host
+#### Specify TLS configuration in the `AmbassadorHost`
 
-You can specify TLS configuration directly in the Host via the `tls` field.
+You can specify TLS configuration directly in the `AmbassadorHost` via the `tls` field.
 
-For example, to enforce a minimum TLS version on the `Host`, the configuration will look like this:
+For example, to enforce a minimum TLS version on the `AmbassadorHost`, the configuration will look like this:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Host
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorHost
 metadata:
   name: example-host
 spec:
@@ -212,7 +200,7 @@ See [`TLSContext`](#tlscontext) below to read more on the description of these f
 ## TLSContext
 
 The `TLSContext` is used to configure advanced TLS options in $productName$. 
-Remember, a `TLSContext` should always be paired with a `Host`. 
+Remember, a `TLSContext` should always be paired with an `AmbassadorHost`. 
 
 A full schema of the `TLSContext` can be found below with descriptions of the 
 different configuration options.
@@ -383,7 +371,7 @@ spec:
 
 The TLS `Module` is deprecated. `TLSContext` should be used when using $productName$ version 0.50.0 and above.
 
-For users of $productName$, see the [Host CRD](../host-crd) reference for more information.
+For users of $productName$, see the [`AmbassadorHost` CRD](../host-crd) reference for more information.
 
 ```yaml
 ---

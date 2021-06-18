@@ -12,7 +12,7 @@ Kubernetes cluster.
 
 Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 declaratively define $productName$’s desired state. The workflow you are going to 
-build uses a sample deployment and the `Mapping` CRD, which is the core resource
+build uses a sample deployment and the `AmbassadorMapping` CRD, which is the core resource
 that you will use with $productName$ to manage your edge. It enables you to route 
 requests by host and URL path from the edge of your cluster to Kubernetes services.
 
@@ -63,12 +63,12 @@ the `quote` deployment and a service to expose that deployment on port 80.
 1. Apply the configuration to the cluster with the command `kubectl apply -f quote.yaml`.
 
 1. Copy the configuration below and save it to a file called `quote-backend.yaml` 
-so that you can create a `Mapping` on your cluster. This `Mapping` tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` service. 
+so that you can create an `AmbassadorMapping` on your cluster. This `AmbassadorMapping` tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` service. 
 
   ```yaml
   ---
-  apiVersion: getambassador.io/v2
-  kind: Mapping
+  apiVersion: x.getambassador.io/v3alpha1
+  kind: AmbassadorMapping
   metadata:
     name: quote-backend
     namespace: ambassador
@@ -99,7 +99,7 @@ balancer.
   }
   ```
 
-Success, you have created your first $productName$ `Mapping`, routing a
+Success, you have created your first $productName$ `AmbassadorMapping`, routing a
 request from your cluster's edge to a service!
 
 ## Edge Policy Console
@@ -119,19 +119,19 @@ earlier as a variable, echo that variable now to your terminal and make a note o
 1. In your browser, navigate to `http://<load-balancer-endpoint>` and follow the
 prompts to bypass the TLS warning. 
 
-  > [A `Host` resource is created in production](../../topics/running/host-crd)
+  > [An `AmbassadorHost` resource is created in production](../../topics/running/ambassadorhost)
 to use your own registered domain name instead of the load balancer endpoint to 
-access the console and your `Mapping` endpoints.
+access the console and your `AmbassadorMapping` endpoints.
 
 1. The next page will prompt you to log in to the console using `edgectl`, the 
 $productName$ CLI. The page provides instructions on how to install `edgectl` for 
 all OSes and log in.
 
 1. Once logged in, click on the **Mappings** tab in the Edge Policy Console. 
-Scroll down to find an entry for the `quote-backend` `Mapping` that you created 
+Scroll down to find an entry for the `quote-backend` `AmbassadorMapping` that you created 
 in your terminal with `kubectl`.
 
-As you can see, the console lists the `Mapping` that you created earlier. This
+As you can see, the console lists the `AmbassadorMapping` that you created earlier. This
 information came from $productName$ polling the Kubernetes API. In 
 $productName$, Kubernetes serves as the single source of truth 
 around cluster configuration. Changes made via `kubectl` are reflected in the 
@@ -144,7 +144,7 @@ Edge Policy Console and vice versa.  Try the following to see this in action.
 1. Click **Save**.
 
 1. Run `kubectl get mappings --namespace ambassador`. You will see the 
-`quote-backend` `Mapping` has the updated prefix listed. Try to access the 
+`quote-backend` `AmbassadorMapping` has the updated prefix listed. Try to access the 
 endpoint again via `curl` with the updated prefix.
 
   ```
@@ -160,7 +160,7 @@ endpoint again via `curl` with the updated prefix.
   }
   ```
 
-1. Change the prefix back to `/backend/` so that you can later use the `Mapping` 
+1. Change the prefix back to `/backend/` so that you can later use the `AmbassadorMapping` 
 with other tutorials.
 
 ## Developer API Documentation
@@ -183,9 +183,9 @@ need information about your APIs.
 ## Next Steps
 
 Further explore some of the concepts you learned about in this article: 
-* [`Mapping` resource](../../topics/using/intro-mappings/): routes traffic from 
+* [`AmbassadorMapping` resource](../../topics/using/intro-ambassadormappings/): routes traffic from 
 the edge of your cluster to a Kubernetes service
-* [`Host` resource](../../topics/running/host-crd/): sets the hostname by which
+* [`AmbassadorHost` resource](../../topics/running/ambassadorhost/): sets the hostname by which
 $productName$ will be accessed and secured with TLS certificates
 * [Edge Policy Console](../../topics/using/edge-policy-console/): a web-based 
 interface used to configure and monitor $productName$

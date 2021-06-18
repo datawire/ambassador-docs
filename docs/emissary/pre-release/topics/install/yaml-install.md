@@ -72,11 +72,11 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 
 ## Configure TLS termination and automatic HTTPS
 
-**$AESproductName$ enables TLS termination by default using a self-signed certificate. See the [Host CRD](../../../topics/running/host-crd) for more information about disabling TLS.** If you have the ability to update your DNS, $AESproductName$ can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create a Mapping."
+**$AESproductName$ enables TLS termination by default using a self-signed certificate. See the [`AmbassadorHost` CRD](../../../topics/running/ambassadorhost) for more information about disabling TLS.** If you have the ability to update your DNS, $AESproductName$ can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create an AmbassadorMapping."
 
 1. Update your DNS so that your domain points to the IP address for your cluster.
 
-2. In the Edge Policy Console, create a `Host` resource:
+2. In the Edge Policy Console, create an `AmbassadorHost` resource:
    * On the "Hosts" tab, click the **Add** button on the right.
    * Enter your hostname (domain) in the hostname field.
    * Check the "Use ACME to manage TLS" box.
@@ -84,14 +84,14 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
    * Enter the email address to be associated with your TLS certificate.
    * Click the **Save** button.
   
-  You'll see the newly created `Host` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [Host CRD](../../../topics/running/host-crd).
+  You'll see the newly created `AmbassadorHost` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [`AmbassadorHost` CRD](../../../topics/running/ambassadorhost).
 
-3. Once the Host is ready, navigate to `https://<hostname>` in your browser.
+3. Once the `AmbassadorHost` is ready, navigate to `https://<hostname>` in your browser.
    Note that the certificate warning has gone away. Additionally, the $AESproductName$ automatically will redirect HTTP connections to HTTPS.
 
-## Create a Mapping
+## Create an AmbassadorMapping
 
-In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of $productName$. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
+In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of $productName$. In this example, we'll deploy a sample service and create an `AmbassadorMapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
 
 1. We'll start by deploying the `quote` service. Save the below configuration into a file named `quote.yaml`. This is a basic configuration that tells Kubernetes to deploy the `quote` container and create a Kubernetes `service` that points to the `quote` container.
 
@@ -137,12 +137,12 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 
 2. Deploy the `quote` service to the cluster by typing the command `kubectl apply -f quote.yaml`.
 
-3. Now, create a `Mapping` configuration that tells $productName$ to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
+3. Now, create an `AmbassadorMapping` configuration that tells $productName$ to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
-   kind: Mapping
+   apiVersion: x.getambassador.io/v3alpha1
+   kind: AmbassadorMapping
    metadata:
      name: quote-backend
      namespace: ambassador
@@ -175,12 +175,12 @@ configuration. Changes made on the command line (via `kubectl`) are reflected in
 the UI, and vice versa. This enables a consistent configuration workflow.
 
 You can see this in action by navigating to the **Mappings** tab, or
-the **Hosts** tab. You'll see an entry for the `quote-backend` Mapping that was
+the **Hosts** tab. You'll see an entry for the `quote-backend` AmbassadorMapping that was
 just created on the command line.
 
 1. To see your mappings via the command line, run `kubectl get mappings`
 
-2. If you configured TLS, you can type `kubectl get hosts` to see the `Host` resource that was created:
+2. If you configured TLS, you can type `kubectl get ambassadorhosts` to see the `AmbassadorHost` resource that was created:
 
    ```
    (⎈ |rdl-1:default)$ kubectl get hosts

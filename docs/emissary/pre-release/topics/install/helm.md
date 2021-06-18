@@ -92,7 +92,7 @@ If you have an existing $OSSproductName$ installation but are not yet running $A
 
 1. Upgrade CRDs for $productName$.
 
-   To take full advantage of $productName$, you'll need the new `Host` CRD, and you'll need the new `getambassador.io/v2` version of earlier CRDs. To upgrade all the CRDs, run
+   To take full advantage of $productName$, you'll need the new `AmbassadorHost` CRD, and you'll need the new `x.getambassador.io/v3alpha1` version of earlier CRDs. To upgrade all the CRDs, run
 
    ```
    kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml

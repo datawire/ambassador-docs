@@ -10,8 +10,8 @@ For example:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: get
 spec:

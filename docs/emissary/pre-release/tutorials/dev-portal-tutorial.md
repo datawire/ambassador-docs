@@ -6,7 +6,7 @@ In this tutorial, you will access and explore some of the key features of the De
 
 You must have [$productName$ installed](../getting-started/) in your 
 Kubernetes cluster. This tutorial assumes you have deployed the `quote` app and
-`Mapping` from the [$productName$ tutorial](../getting-started/).
+`AmbassadorMapping` from the [$productName$ tutorial](../getting-started/).
 
 
   ```
@@ -31,18 +31,18 @@ find that endpoint.
 1. In your browser, navigate to `http://<load-balancer-endpoint>` and follow the
 prompts to bypass the TLS warning. 
 
-  > [A `Host` resource is created in production](../../topics/running/host-crd)
+  > [An `AmbassadorHost` resource is created in production](../../topics/running/ambassadorhost)
 to use your own registered domain name instead of the load balancer endpoint to 
-access the console and your `Mapping` endpoints.
+access the console and your `AmbassadorMapping` endpoints.
 
 1. The next page will prompt you to log in to the console using `edgectl`, the 
 $productName$ CLI. The page provides instructions on how to install `edgectl` for 
 all OSes and log in.
 
 1. Once logged in, click on the **Mappings** tab in the Edge Policy Console. 
-Scroll down to find an entry for the `quote-backend` `Mapping`.
+Scroll down to find an entry for the `quote-backend` `AmbassadorMapping`.
 
-As you can see, the console lists the `Mapping` that you created in the $productName$ tutorial. This
+As you can see, the console lists the `AmbassadorMapping` that you created in the $productName$ tutorial. This
 information came from $productName$ polling the Kubernetes API. In 
 $productName$, Kubernetes serves as the single source of truth 
 around cluster configuration. Changes made via `kubectl` are reflected in the 
@@ -55,7 +55,7 @@ Edge Policy Console and vice versa.  Try the following to see this in action.
 1. Click **Save**.
 
 1. Run `kubectl get mappings --namespace ambassador`. You will see the 
-`quote-backend` `Mapping` has the updated prefix listed. Try to access the 
+`quote-backend` `AmbassadorMapping` has the updated prefix listed. Try to access the 
 endpoint again via `curl` with the updated prefix.
 
   ```
@@ -71,7 +71,7 @@ endpoint again via `curl` with the updated prefix.
   }
   ```
 
-1. Change the prefix back to `/backend/` so that you can later use the `Mapping` 
+1. Change the prefix back to `/backend/` so that you can later use the `AmbassadorMapping` 
 with other tutorials.
 
 ## Developer API documentation

@@ -24,7 +24,7 @@
 - /reference/headers
 - /reference/host
 - /reference/host-crd
-- /reference/mappings
+- /reference/ambassadormappings
 - /reference/modules
 - /reference/prefix_regex
 - /reference/rate-limits

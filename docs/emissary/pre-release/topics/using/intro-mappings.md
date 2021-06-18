@@ -1,14 +1,14 @@
-# Introduction to the Mapping resource
+# Introduction to the AmbassadorMapping resource
 
-$productName$ is designed around a [declarative, self-service management model](../../concepts/gitops-continuous-delivery). The core resource used to support application development teams who need to manage the edge with $productName$ is the `Mapping` resource.
+$productName$ is designed around a [declarative, self-service management model](../../concepts/gitops-continuous-delivery). The core resource used to support application development teams who need to manage the edge with $productName$ is the `AmbassadorMapping` resource.
 
 ## Quick example
 
-At its core a `Mapping` resource maps a `resource` to a `service`:
+At its core an `AmbassadorMapping` resource maps a `resource` to a `service`:
 
 | Required attribute        | Description               |
 | :------------------------ | :------------------------ |
-| `name`                    | is a string identifying the `Mapping` (e.g. in diagnostics) |
+| `name`                    | is a string identifying the `AmbassadorMapping` (e.g. in diagnostics) |
 | [`prefix`](#resources)    | is the URL prefix identifying your [resource](#resources) |
 | [`service`](#services)    | is the name of the [service](#services) handling the resource; must include the namespace (e.g. `myservice.othernamespace`) if the service is in a different namespace than $productName$ |
 
@@ -17,7 +17,7 @@ These resources are defined as Kubernetes Custom Resource Definitions. Here's a 
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  httpbin-mapping
 spec:
@@ -25,9 +25,9 @@ spec:
   service: http://httpbin.org
 ```
 
-## Applying a Mapping resource
+## Applying an AmbassadorMapping resource
 
-A `Mapping` resource can be managed using the same workflow as any other Kubernetes resources (e.g., `service`, `deployment`). For example, if the above `Mapping` is saved into a file called `httpbin-mapping.yaml`, the following command will apply the configuration directly to $productName$:
+An `AmbassadorMapping` resource can be managed using the same workflow as any other Kubernetes resources (e.g., `service`, `deployment`). For example, if the above `AmbassadorMapping` is saved into a file called `httpbin-mapping.yaml`, the following command will apply the configuration directly to $productName$:
 
 ```
 kubectl apply -f httpbin-mapping.yaml
@@ -37,12 +37,12 @@ For production use, the general recommended best practice is to store the file i
 
 ## Extending Mappings
 
-`Mapping` resources support a rich set of annotations to customize the specific routing behavior.  Here's an example service for implementing the CQRS pattern (using HTTP):
+`AmbassadorMapping` resources support a rich set of annotations to customize the specific routing behavior.  Here's an example service for implementing the CQRS pattern (using HTTP):
 
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  cqrs-get
 spec:
@@ -51,7 +51,7 @@ spec:
   service: getcqrs
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  cqrs-put
 spec:
@@ -115,7 +115,7 @@ Where everything except for the `service` is optional.
 
 - `scheme` can be either `http` or `https`; if not present, the default is `http`.
 - `service` is the name of a service (typically the service name in Kubernetes or Consul); it is not allowed to contain the `.` character.
-- `namespace` is the namespace in which the service is running. Starting with $productName$ 1.0.0, if not supplied, it defaults to the namespace in which the Mapping resource is defined. The default behavior can be configured using the [`ambassador` Module](../../running/ambassador). When using a Consul resolver, `namespace` is not allowed.
+- `namespace` is the namespace in which the service is running. Starting with $productName$ 1.0.0, if not supplied, it defaults to the namespace in which the AmbassadorMapping resource is defined. The default behavior can be configured using the [`ambassador` Module](../../running/ambassador). When using a Consul resolver, `namespace` is not allowed.
 - `port` is the port to which a request should be sent. If not specified, it defaults to `80` when the scheme is `http` or `443` when the scheme is `https`. Note that the [resolver](../../running/resolvers) may return a port in which case the `port` setting is ignored.
 
 Note that while using `service.namespace.svc.cluster.local` may work for Kubernetes resolvers, the preferred syntax is `service.namespace`.

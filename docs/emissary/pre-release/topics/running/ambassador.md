@@ -219,7 +219,7 @@ of stats in Envoy, using unbounded memory and potentially slowing down stats pip
 
 ##### Linkerd interoperability
 
-When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically.  See the [Mapping](../../using/mappings#linkerd-interoperability-add_linkerd_headers) documentation for more details.
+When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically.  See the [AmbassadorMapping](../../using/ambassadormappings#linkerd-interoperability-add_linkerd_headers) documentation for more details.
 
 ```yaml
 add_linkerd_headers: false
@@ -320,7 +320,7 @@ If you need more flexible and configurable options, $productName$ supports a [pl
 
 ##### Merge slashes
 
-If true, $productName$ will merge adjacent slashes for the purpose of route matching and request filtering. For example, a request for `//foo///bar` will be matched to a Mapping with prefix `/foo/bar`.
+If true, $productName$ will merge adjacent slashes for the purpose of route matching and request filtering. For example, a request for `//foo///bar` will be matched to an AmbassadorMapping with prefix `/foo/bar`.
 
 ```yaml
 merge_slashes: true
@@ -344,7 +344,7 @@ If `regex_type` is set to `unsafe`, $productName$ will use the [modified ECMAScr
 
 ##### Use $productName$ namespace for service resolution
 
-Controls whether $productName$ will resolve upstream services assuming they are in the same namespace as the element referring to them  For example, a Mapping in namespace `foo` will look for its service in namespace `foo`. If true, $productName$ will resolve the upstream services assuming they are in the same namespace as $productName$, unless the service explicitly mentions a different namespace.
+Controls whether $productName$ will resolve upstream services assuming they are in the same namespace as the element referring to them  For example, an AmbassadorMapping in namespace `foo` will look for its service in namespace `foo`. If true, $productName$ will resolve the upstream services assuming they are in the same namespace as $productName$, unless the service explicitly mentions a different namespace.
 
 ```yaml
 use_ambassador_namespace_for_service_resolution: false
@@ -376,7 +376,7 @@ With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will re
 kubectl port-forward -n ambassador deploy/ambassador 8877
 ```
 
-Alternately, you can expose the diagnostics page and Edge Policy Console but control them via `Host` based routing. Set `diagnostics.enabled` to false and create Mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), and if exposing the diagnostics page, use `localhost:8877` as the `service` on the Mapping.
+Alternately, you can expose the diagnostics page and Edge Policy Console but control them via `Host` based routing. Set `diagnostics.enabled` to false and create Mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), and if exposing the diagnostics page, use `localhost:8877` as the `service` on the AmbassadorMapping.
 
 ##### Diagnostics - allow non local
 
@@ -409,7 +409,7 @@ The default is false since the PROXY protocol is not compatible with HTTP.
 
 ##### Enable IPv4 and IPv6
 
-Sets whether $productName$ should do IPv4 and/or IPv6 DNS lookups when contacting services. IPv4 defaults to true and IPv6 defaults to false. Either can be overridden in a [`Mapping`](../../using/mappings). 
+Sets whether $productName$ should do IPv4 and/or IPv6 DNS lookups when contacting services. IPv4 defaults to true and IPv6 defaults to false. Either can be overridden in a [`AmbassadorMapping`](../../using/ambassadormappings). 
 
 ```yaml
 enable_ipv4: true
@@ -418,7 +418,7 @@ enable_ipv6: false
 
 If both IPv4 and IPv6 are enabled, $productName$ will prefer IPv6. This can have strange effects if $productName$ receives `AAAA` records from a DNS lookup, but the underlying network of the pod doesn't actually support IPv6 traffic. For this reason, the default is IPv4 only.
 
-A Mapping can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in a Mapping, the values here are used. Most $productName$ installations will probably be able to avoid overriding these settings in Mappings.
+An AmbassadorMapping can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in an AmbassadorMapping, the values here are used. Most $productName$ installations will probably be able to avoid overriding these settings in Mappings.
 
 ##### HTTP/1.0 support
 
@@ -529,8 +529,8 @@ On the other hand, when using $productName$, escaped slashes will be treated lik
 ###### Security Concern Example
 
 With $productName$, this can become a security concern when combined with `bypass_auth` in the following scenario:
-* Use a Mapping for path `/prefix` with `bypass_auth` set to true. The intention here is to apply no FilterPolicies under this prefix, by default.
-* Use a Mapping for path `/prefix/secure/` without setting bypass_auth to true. The intention here is to selectively apply a FilterPolicy to this longer prefix.
+* Use an AmbassadorMapping for path `/prefix` with `bypass_auth` set to true. The intention here is to apply no FilterPolicies under this prefix, by default.
+* Use an AmbassadorMapping for path `/prefix/secure/` without setting bypass_auth to true. The intention here is to selectively apply a FilterPolicy to this longer prefix.
 * Have an upstream service that receives both `/prefix` and `/prefix/secure/` traffic (from the Mappings above), but the upstream service treats escaped and unescaped slashes equivalently.
 
 In this scenario, when a client makes a request to `/prefix%2fsecure/secret.txt`, the underlying Envoy configuration will _not_ match the routing rule for `/prefix/secure/`, but will instead
@@ -557,7 +557,7 @@ Finally, whether upstream services treat escaped and unescaped slashes equivalen
 
 ##### Keepalive
 
-Sets the global keepalive settings. $productName$ will use for all Mappings unless overridden on a Mapping's configuration. No default value is provided by $productName$. 
+Sets the global keepalive settings. $productName$ will use for all Mappings unless overridden on an AmbassadorMapping's configuration. No default value is provided by $productName$. 
 
 More information at the [Envoy keepalive documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/address.proto.html#config-core-v3-tcpkeepalive).
 
@@ -576,7 +576,7 @@ Set the default upstream-connection idle timeout. Default is 1 hour.
 cluster_idle_timeout_ms: 30000
 ```
 
-If set, this specifies the timeout (in milliseconds) after which an idle connection upstream is closed. If disabled by setting it to 0, you risk upstream connections never getting closed due to idling if you do not set [`idle_timeout_ms` on each Mapping](../../using/timeouts/).
+If set, this specifies the timeout (in milliseconds) after which an idle connection upstream is closed. If disabled by setting it to 0, you risk upstream connections never getting closed due to idling if you do not set [`idle_timeout_ms` on each AmbassadorMapping](../../using/timeouts/).
 
 ##### Upstream max lifetime
 
@@ -588,7 +588,7 @@ cluster_max_connection_lifetime_ms: 10000ms
 
 If set, this specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
 
-If not set (or set to zero), then upstream connections may remain open for arbitrarily long. This can be set on a per-Mapping basis by setting [`cluster_max_connection_lifetime_ms` on the Mapping](../../using/timeouts/).
+If not set (or set to zero), then upstream connections may remain open for arbitrarily long. This can be set on a per-AmbassadorMapping basis by setting [`cluster_max_connection_lifetime_ms` on the AmbassadorMapping](../../using/timeouts/).
 
 ##### Request timeout
 
@@ -598,7 +598,7 @@ Set the default end-to-end timeout for requests. Default is 3000ms.
 cluster_request_timeout_ms: 3000ms`
 ```
 
-If set, this specifies the default end-to-end timeout for the requests. This can be set on a per-Mapping basis by setting [`timeout_ms` on the Mapping](../../using/timeouts/).
+If set, this specifies the default end-to-end timeout for the requests. This can be set on a per-AmbassadorMapping basis by setting [`timeout_ms` on the AmbassadorMapping](../../using/timeouts/).
 
 ##### Retry policy
 
@@ -608,7 +608,7 @@ This lets you add resilience to your services in case of request failures by per
 retry_policy:
   retry_on: "5xx"
 ```
-##### Listener idle timeout
+##### AmbassadorListener idle timeout
 
 Controls how Envoy configures the tcp idle timeout on the http listener. Default is 1 hour.
 
@@ -640,7 +640,7 @@ readiness_probe:
   rewrite: /backend/health
 ```
 
-The liveness and readiness probes both support `prefix`, `rewrite`, and Module, with the same meanings as for [Mappings](../../using/mappings). Additionally, the `enabled` boolean may be set to false to disable API support for the probe.  It will, however, remain accessible on port 8877.
+The liveness and readiness probes both support `prefix`, `rewrite`, and Module, with the same meanings as for [Mappings](../../using/ambassadormappings). Additionally, the `enabled` boolean may be set to false to disable API support for the probe.  It will, however, remain accessible on port 8877.
 
 ---
 
@@ -648,7 +648,7 @@ The liveness and readiness probes both support `prefix`, `rewrite`, and Module, 
 
 ##### Circuit breaking
 
-Sets the global circuit breaking configuration that $productName$ will use for all Mappings, unless overridden in a Mapping. 
+Sets the global circuit breaking configuration that $productName$ will use for all Mappings, unless overridden in an AmbassadorMapping. 
 
 More information at the [circuit breaking reference](../../using/circuit-breakers).
 

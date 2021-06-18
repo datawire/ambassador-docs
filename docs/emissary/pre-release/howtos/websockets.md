@@ -3,7 +3,7 @@
 $productName$ makes it easy to access your services from outside your
 application, and this includes services that use WebSockets.  Only a
 small amount of additional configuration is required, which is as
-simple as telling the Mapping to allow "upgrading" from the HTTP protocol to
+simple as telling the AmbassadorMapping to allow "upgrading" from the HTTP protocol to
 the "websocket" protocol:
 
 ```yaml
@@ -17,8 +17,8 @@ The example configuration below demonstrates the addition of the `allow_upgrade:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: my-service-mapping
 spec:

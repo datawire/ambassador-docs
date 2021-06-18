@@ -30,7 +30,7 @@ We'll start by installing $productName$ into your cluster.
 
 ## 2. Routing traffic from the edge
 
-Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define $productName$’s desired state. The workflow you are going to build uses a simple demo app and the **Mapping CRD**, which is the core resource that you will use with $productName$. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
+Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define $productName$’s desired state. The workflow you are going to build uses a simple demo app and the **AmbassadorMapping CRD**, which is the core resource that you will use with $productName$. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
 
 1. First, apply the YAML for the “Quote of the Moment" service.
 
@@ -40,12 +40,12 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 
   <Alert severity="info">The Service and Deployment are created in the $productName$ namespace.  You can use <code>kubectl get services,deployments quote --namespace ambassador</code> to see their status.</Alert>
 
-2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.  
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create an AmbassadorMapping on your cluster. This AmbassadorMapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.  
 
   ```yaml
   ---
-  apiVersion: getambassador.io/v2
-  kind: Mapping
+  apiVersion: x.getambassador.io/v3alpha1
+  kind: AmbassadorMapping
   metadata:
     name: quote-backend
     namespace: ambassador
@@ -60,7 +60,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
   kubectl apply -f quote-backend.yaml
   ```  
 
-  With our Mapping created, now we need to access it!
+  With our AmbassadorMapping created, now we need to access it!
 
 4. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
 
@@ -83,7 +83,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
     }
   ```  
 
-<Alert severity="success"><b>Victory!</b> You have created your first $productName$ Mapping, routing a request from your cluster's edge to a service!</Alert>
+<Alert severity="success"><b>Victory!</b> You have created your first $productName$ AmbassadorMapping, routing a request from your cluster's edge to a service!</Alert>
 
 ## 3. Connect your cluster to Ambassador Cloud
 
@@ -105,9 +105,9 @@ The Service Catalog is a web-based interface that lists all of your cluster's Se
 
 Explore some of the popular tutorials on $productName$:
 
-* [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from 
+* [Intro to Mappings](../../topics/using/intro-ambassadormappings/): declaratively routes traffic from 
 the edge of your cluster to a Kubernetes service
-* [Host resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
+* [AmbassadorHost resource](../../topics/running/ambassadorhost/): configure a hostname and TLS options for your ingress.
 * [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads
 
 $productName$ has a comprehensive range of [features](/features/) to

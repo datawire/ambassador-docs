@@ -1,6 +1,6 @@
 # Load balancing
 
-Load balancing configuration can be set for all $productName$ mappings in the [`ambassador Module`](../ambassador), or set per [`Mapping`](../../using/mappings#configuring-mappings). If nothing is set, simple round robin balancing is used via Kubernetes services.
+Load balancing configuration can be set for all $productName$ mappings in the [`ambassador Module`](../ambassador), or set per [`AmbassadorMapping`](../../using/ambassadormappings#configuring-ambassadormappings). If nothing is set, simple round robin balancing is used via Kubernetes services.
 
 To use advanced load balancing, you must first configure a [resolver](../resolvers) that supports advanced load balancing (e.g., the Kubernetes Endpoint Resolver or Consul Resolver). Once a resolver is configured, you can use the `load_balancer` attribute. The following fields are supported:
 
@@ -38,7 +38,7 @@ or, per mapping:
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
@@ -72,7 +72,7 @@ or, per mapping:
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  quote-backend/
 spec:
@@ -108,7 +108,7 @@ If the cookie you wish to set affinity on is already present in incoming request
 
 ```yaml
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
@@ -136,7 +136,7 @@ Example:
 
 ```yaml
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
@@ -160,7 +160,7 @@ $productName$ allows session affinity based on the source IP of incoming request
 
 ```yaml
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
@@ -190,7 +190,7 @@ spec:
 
 ```yaml
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:

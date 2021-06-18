@@ -9,9 +9,9 @@ The performance of $productName$'s control plane can be characterized along a nu
 different dimensions:
 
  - The number of `TLSContext` resources.
- - The number of `Host` resources.
- - The number of `Mapping` resources per `Host` resource.
- - The number of unconstrained `Mapping` resources (these will apply to all `Host` resources).
+ - The number of `AmbassadorHost` resources.
+ - The number of `AmbassadorMapping` resources per `AmbassadorHost` resource.
+ - The number of `AmbassadorMapping` resources that will span all `AmbassadorHost` resources (either because they're using `host_regex`, or because they're using `hostname: "*"`).
 
 If your application involves a larger than average number of any of the above resources, you may
 find yourself in need of some of the content in this section.
@@ -61,8 +61,8 @@ old version for the duration of the configured drain time. See
 [AMBASSADOR_DRAIN_TIME](#ambassador_drain_time) for more details on how to tune this
 behavior.
 
-$productName$'s exact memory usage depends on (among other things) how many `Host` and
-`Mapping` resources are defined in your cluster. If this number has grown over time, you may need to
+$productName$'s exact memory usage depends on (among other things) how many `AmbassadorHost` and
+`AmbassadorMapping` resources are defined in your cluster. If this number has grown over time, you may need to
 increase the memory limit defined in your deployment.
 
 ## Liveness probes
@@ -118,9 +118,9 @@ for the duration of the drain time.
 
 ## Unconstrained Mappings with many hosts
 
-When working with a large number of `Host` resources, it's important to understand the impact of
-unconstrained `Mapping`s. An unconstrained `Mapping` is one that is not restricted to a specific
-`Host`. Such a `Mapping` will create a route for all of your `Host`s. If this is what you want then
+When working with a large number of `AmbassadorHost` resources, it's important to understand the impact of
+unconstrained `AmbassadorMapping`s. An unconstrained `AmbassadorMapping` is one that is not restricted to a specific
+`AmbassadorHost`. Such an `AmbassadorMapping` will create a route for all of your `AmbassadorHost`s. If this is what you want then
 it is the appropriate thing to do, however if you do not intend to do this, then you can end up with
 many more routes than you had intended and this can adversely impact performance.
 

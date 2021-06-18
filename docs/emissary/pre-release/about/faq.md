@@ -55,14 +55,14 @@ Istio, and Linkerd2.
 ### How do I disable the 404 landing page?
 
 Established users will want to better control 404 behavior both for usability and 
-security.  You can leverage the Mapping resource to implement this functionality to 
+security.  You can leverage the AmbassadorMapping resource to implement this functionality to 
 your cluster.  $productName$ users can use a 'catch-all' mapping using the '/' 
 prefix in a mapping configuration.  The simplest mapping, described below, returns only 404 text.  
 To use a custom 404 landing page, simply insert your service and remove the rewrite value.
 
 ```yaml
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: "404-fallback"
 spec:
@@ -71,7 +71,7 @@ spec:
   service: localhost:8500
 ```
 
-For more information on the Mapping resource, see [Advanced Mapping Configuration](../../topics/using/mappings).
+For more information on the AmbassadorMapping resource, see [Advanced AmbassadorMapping Configuration](../../topics/using/ambassadormappings).
 
 ### How do I disable the default Admin mappings?
 
@@ -96,8 +96,8 @@ We cannot, however, exclude actual administrators from this endpoint, so to crea
 endpoint for them to use, create a mapping to expose the endpoint.
 
 ```yaml
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: admin-mapping
 spec:
@@ -107,7 +107,7 @@ spec:
   service: localhost:8500
 ```
 
-Now, administrators can connect to the admin console via hostname.  Additional [Mapping](../../topics/using/intro-mappings) and 
+Now, administrators can connect to the admin console via hostname.  Additional [AmbassadorMapping](../../topics/using/intro-ambassadormappings) and 
 [Filter](../../topics/using/filters) settings can be appropriately configured to better control access to admin services.  To 
 learn more about Ambassador Module configurations, see [Ambassador Module](../../topics/running/ambassador)
 

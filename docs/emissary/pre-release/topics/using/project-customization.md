@@ -6,7 +6,7 @@ The project controller deploys each project revision using a default set of reso
 
  - a Deployment
  - a Service
- - a Mapping
+ - an AmbassadorMapping
 
 If you want to customize how these resources are defined or even deploy your application using a different set of resources, then you can define a `project-revision.yaml.tmpl` file in your repo.
 
@@ -28,8 +28,8 @@ The default resources are defined as follows:
 
 ```
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: '{{.Revision.Name}}'
 spec:

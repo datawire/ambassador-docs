@@ -11,7 +11,7 @@ If the version is a path parameter and the resources are served by different ser
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  qotm
 spec:

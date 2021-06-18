@@ -79,7 +79,7 @@ env:
       fieldPath: metadata.namespace
 ```
 
-Given that `AMBASSADOR_NAMESPACE` is set, $productName$ [mappings](../../using/mappings) can operate within the same namespace, or across namespaces. **Note well** that mappings will have to explicitly include the namespace with the service to cross namespaces; see the [mapping](../../using/mappings) documentation for more information.
+Given that `AMBASSADOR_NAMESPACE` is set, $productName$ [mappings](../../using/ambassadormappings) can operate within the same namespace, or across namespaces. **Note well** that mappings will have to explicitly include the namespace with the service to cross namespaces; see the [mapping](../../using/ambassadormappings) documentation for more information.
 
 If you want $productName$ to only work within a single namespace, set `AMBASSADOR_SINGLE_NAMESPACE` as an environment variable.
 
@@ -141,7 +141,7 @@ $productName$ will then only use YAML objects that include an appropriate `ambas
 ```yaml
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  mapping-used
 spec:
@@ -150,7 +150,7 @@ spec:
   service: demo1
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  mapping-used-2
 spec:
@@ -159,7 +159,7 @@ spec:
   service: demo2
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  mapping-skipped
 spec:
@@ -167,7 +167,7 @@ spec:
   service: demo3
 ---
 apiVersion: getambassador.io/v2
-kind:  Mapping
+kind:  AmbassadorMapping
 metadata:
   name:  mapping-skipped-2
 spec:
@@ -200,7 +200,7 @@ By default, $productName$ will verify the TLS certificates provided by the Kuber
 
 ## `AMBASSADOR_UPDATE_MAPPING_STATUS`
 
-If `AMBASSADOR_UPDATE_MAPPING_STATUS` is set to the string `true`, $productName$ will update the `status` of every `Mapping` CRD that it accepts for its configuration. This has no effect on the proper functioning of $productName$ itself, and can be a performance burden on installations with many `Mapping`s. It has no effect for `Mapping`s stored as annotations.
+If `AMBASSADOR_UPDATE_MAPPING_STATUS` is set to the string `true`, $productName$ will update the `status` of every `AmbassadorMapping` CRD that it accepts for its configuration. This has no effect on the proper functioning of $productName$ itself, and can be a performance burden on installations with many `AmbassadorMapping`s. It has no effect for `AmbassadorMapping`s stored as annotations.
 
 The default is `false`. We recommend leaving `AMBASSADOR_UPDATE_MAPPING_STATUS` turned off unless required for external systems.
 
@@ -290,12 +290,12 @@ Unless disabled, $productName$ will also report the following anonymized informa
 | `extauth_allow_body` | bool | will $productName$ send the body to extauth? |
 | `extauth_host_count` | int | count of extauth hosts in use |
 | `extauth_proto` | str | extauth protocol in use ('http', 'grpc', or `null` if not active) |
-| `group_canary_count` | int | count of Mapping groups that include more than one Mapping |
-| `group_count` | int | total count of Mapping groups in use (length of the route table) |
+| `group_canary_count` | int | count of AmbassadorMapping groups that include more than one AmbassadorMapping |
+| `group_count` | int | total count of AmbassadorMapping groups in use (length of the route table) |
 | `group_header_match_count` | int | count of groups using header matching (including `host` and `method`) |
 | `group_host_redirect_count` | int | count of groups using host_redirect |
 | `group_host_rewrite_count` | int | count of groups using host_rewrite |
-| `group_http_count` | int | count of HTTP Mapping groups |
+| `group_http_count` | int | count of HTTP AmbassadorMapping groups |
 | `group_precedence_count` | int | count of groups that explicitly set the precedence of the group |
 | `group_regex_header_count` | int | count of groups using regex header matching |
 | `group_regex_prefix_count` | int | count of groups using regex prefix matching |
@@ -304,14 +304,14 @@ Unless disabled, $productName$ will also report the following anonymized informa
 | `group_resolver_kube_service` | int | count of groups using the Kubernetes service resolver |
 | `group_shadow_count` | int | count of groups using shadows |
 | `group_shadow_weighted_count` | int | count of groups using shadows but not shadowing all traffic |
-| `group_tcp_count` | int | count of TCP Mapping groups |
-| `host_count` | int | count of Host resources in use |
+| `group_tcp_count` | int | count of TCP AmbassadorMapping groups |
+| `host_count` | int | count of AmbassadorHost resources in use |
 | `k8s_ingress_class_count` | int | count of IngressClass resources in use |
 | `k8s_ingress_count` | int | count of Ingress resources in use |
 | `listener_count` | int | count of active listeners (1 unless `redirect_cleartext_from` or TCP Mappings are in use) |
 | `liveness_probe` | bool | are liveness probes enabled? |
 | `managed_by` | string | tool that manages the $productName$ deployment, if any (e.g. helm, edgectl, etc.) |
-| `mapping_count` | int | count of Mapping resources in use  |
+| `mapping_count` | int | count of AmbassadorMapping resources in use  |
 | `ratelimit` | bool | is rate limiting in use? |
 | `ratelimit_custom_domain` | bool | has the rate limiting domain been changed from 'ambassador'? |
 | `ratelimit_data_plane_proto` | bool | is rate limiting using the data plane proto? |

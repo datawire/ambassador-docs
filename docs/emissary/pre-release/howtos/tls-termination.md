@@ -2,7 +2,7 @@
 
 TLS encryption is one of the basic requirements of having a secure system.
 $AESproductName$ [automatically enables TLS termination/HTTPs
-](../../topics/running/host-crd#acme-and-tls-settings), making TLS encryption
+](../../topics/running/ambassadorhost#acme-and-tls-settings), making TLS encryption
 easy and centralizing TLS termination for all of your services in Kubernetes.
 
 While this automatic certificate management in $AESproductName$ helps
@@ -66,16 +66,16 @@ kubectl create secret tls tls-cert --cert=cert.pem --key=key.pem
 
 Now that we have stored our certificate and private key in a Kubernetes secret
 named `tls-cert`, we need to tell $productName$ to use this certificate
-for terminating TLS on a domain. A `Host` is used to tell $productName$ which
+for terminating TLS on a domain. An `AmbassadorHost` is used to tell $productName$ which
 certificate to use for TLS termination on a domain.
 
-Create the following `Host` to have $productName$ use the `Secret` we created
+Create the following `AmbassadorHost` to have $productName$ use the `Secret` we created
 above for terminating TLS on all domains.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Host
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorHost
 metadata:
   name: wildcard-host
 spec:
@@ -91,7 +91,7 @@ spec:
 
 **Note:** If running multiple instances of $productName$ in one cluster remember to include ambassador_id property in the spec, must be an array of id(s).
 
-Apply the `Host` configured above with `kubectl`:
+Apply the `AmbassadorHost` configured above with `kubectl`:
 
 ```
 kubectl apply -f wildcard-host.yaml
@@ -155,7 +155,7 @@ While a self-signed certificate is a simple and quick way to get $productName$ t
 
 With $productName$, this can be simply done by requesting a
 certificate using the built in [ACME support
-](../../topics/running/host-crd#acme-support)
+](../../topics/running/ambassadorhost#acme-support)
 
 For the Open-Source API Gateway, Jetstack's `cert-manager` provides a simple
 way to manage certificates from Let's Encrypt. See our documentation for more

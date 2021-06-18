@@ -97,4 +97,4 @@ http://service1<span style="color:brown">/bar/</span><span style="color:DarkSlat
 
 More than one group can be captured in the `pattern` to be referenced by `\2`, `\3` and `\n` in the `substitution` section.
 
-For more information on how `Mapping` can be configured, see [Mappings](../mappings).
+For more information on how `AmbassadorMapping` can be configured, see [Mappings](../ambassadormappings).

@@ -12,8 +12,8 @@ $productName$ supports a number of attributes to configure and customize mapping
 
 | Attribute                 | Description               |
 | :------------------------ | :------------------------ |
-| `address`         | (optional) the IP address on which $productName$ should listen for connections for this Mapping -- if not present, $productName$ will listen on all addresses )
-| `port`            | (required) the TCP port on which $productName$ should listen for connections for this Mapping |
+| `address`         | (optional) the IP address on which $productName$ should listen for connections for this AmbassadorMapping -- if not present, $productName$ will listen on all addresses )
+| `port`            | (required) the TCP port on which $productName$ should listen for connections for this AmbassadorMapping |
 | `idle_timeout_ms` | (optional) the timeout, in milliseconds, after which the connection will be terminated if no traffic is seen -- if not present, no timeout is applied |
 | `enable_ipv4` | (optional) if true, enables IPv4 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](../../running/ambassador)) |
 | `enable_ipv6` | (optional) if true, enables IPv6 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](../../running/ambassador)) |
@@ -80,7 +80,7 @@ In this case, $productName$ will terminate the TLS connection, require that the 
 
 This can be useful for doing host-based TLS proxying of arbitrary protocols, allowing the upstream to not have to care about TLS.
 
-Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
+Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `AmbassadorMapping`.)
 
 Example:
 
@@ -123,7 +123,7 @@ In this case, $productName$ will terminate the incoming TLS connection, require 
 
 This is useful for doing host routing while maintaining end-to-end encryption.
 
-Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
+Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `AmbassadorMapping`.)
 
 Example:
 
@@ -212,7 +212,7 @@ The example above will accept **any** connection to port 2222 and relay it over 
 
 #### Required attributes for `TCPMapping`s
 
-- `name` is a string identifying the `Mapping` (e.g. in diagnostics)
+- `name` is a string identifying the `AmbassadorMapping` (e.g. in diagnostics)
 - `port` is an integer specifying which port to listen on for connections
 - `service` is the name of the service handling the resource; must include the namespace (e.g. `myservice.othernamespace`) if the service is in a different namespace than $productName$
 

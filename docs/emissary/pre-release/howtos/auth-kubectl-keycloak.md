@@ -69,7 +69,7 @@ In this section, we'll configure your Kubernetes cluster for single-sign on.
 
 8. Create a TLS `Secret` using our private key and public certificate.  `kubectl create secret tls -n ambassador aes-kubeapi --cert ./aes-cert.pem --key ./aes-key.pem`
 
-9. Create a `Mapping` and `TLSContext` for the Kube API.
+9. Create an `AmbassadorMapping` and `TLSContext` for the Kube API.
 
     ```yaml
     ---
@@ -83,8 +83,8 @@ In this section, we'll configure your Kubernetes cluster for single-sign on.
       - "*"
       secret: aes-kubeapi
     ---
-    apiVersion: getambassador.io/v2
-    kind: Mapping
+    apiVersion: x.getambassador.io/v3alpha1
+    kind: AmbassadorMapping
     metadata:
       name: aes-kubeapi-mapping
       namespace: ambassador
@@ -282,7 +282,7 @@ Now, we need to set up the client. Each user who needs to access the Kubernetes 
 2. What if I want to use RBAC Groups?
   User impersonation allows you to specify a Group using the `Impersonate-Group` header.  As such, if you wanted to use any kind of custom claims for the ID token, they can be mapped to the `Impersonate-Group` header.  Note that you always have to use an `Impersonate-Name` header, even if you're relying solely on the Group for Authorization.
 3. I keep getting a 401 `Failure`, `Unauthorized` message, even for `https://<ambassador-domain>/api`.
-  This likely means that there is either something wrong with the Certificate that was issued, or there's something wrong with your `TLSContext` or `Mapping` config.  $AESproductName$ must present the correct certificate to the Kubernetes API and the RBAC usernames and the CN of the certificate have to be consistent with one another.
+  This likely means that there is either something wrong with the Certificate that was issued, or there's something wrong with your `TLSContext` or `AmbassadorMapping` config.  $AESproductName$ must present the correct certificate to the Kubernetes API and the RBAC usernames and the CN of the certificate have to be consistent with one another.
 4. Do I have to use `kubelogin`?
   Technically no.  Any method of obtaining an ID or Access token from an Identity Provider will work.  You can then pass the token using `--token <jwt-token>` when running `kubectl`.  `kubelogin` simply automates the process of getting the ID token and attaching it to a `kubectl` request.
 

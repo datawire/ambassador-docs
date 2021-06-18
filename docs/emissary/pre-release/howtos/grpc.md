@@ -1,6 +1,6 @@
 # gRPC Connections
 
-$productName$ makes it easy to access your services from outside your application. This includes gRPC services, although a little bit of additional configuration is required: by default, Envoy connects to upstream services using HTTP/1.x and then upgrades to HTTP/2 whenever possible. However, gRPC is built on HTTP/2 and most gRPC servers do not speak HTTP/1.x at all. $productName$ must tell its underlying Envoy that your gRPC service only wants to speak to that HTTP/2, using the `grpc` attribute of a `Mapping`.
+$productName$ makes it easy to access your services from outside your application. This includes gRPC services, although a little bit of additional configuration is required: by default, Envoy connects to upstream services using HTTP/1.x and then upgrades to HTTP/2 whenever possible. However, gRPC is built on HTTP/2 and most gRPC servers do not speak HTTP/1.x at all. $productName$ must tell its underlying Envoy that your gRPC service only wants to speak to that HTTP/2, using the `grpc` attribute of an `AmbassadorMapping`.
 
 ## Writing a gRPC service for $productName$
 
@@ -59,9 +59,9 @@ Once you verify the container works, push it to your Docker registry:
 $ docker push <docker_reg>/grpc_example
 ```
 
-### Mapping gRPC services
+### AmbassadorMapping gRPC services
 
-$productName$ `Mapping`s are based on URL prefixes; for gRPC, the URL prefix is the full-service name, including the package path (`package.service`). These are defined in the `.proto` definition file. In the example [proto definition file](https://github.com/grpc/grpc/blob/master/examples/protos/helloworld.proto) we see:
+$productName$ `AmbassadorMapping`s are based on URL prefixes; for gRPC, the URL prefix is the full-service name, including the package path (`package.service`). These are defined in the `.proto` definition file. In the example [proto definition file](https://github.com/grpc/grpc/blob/master/examples/protos/helloworld.proto) we see:
 
 ```
 package helloworld;
@@ -73,8 +73,8 @@ service Greeter { ... }
 so the URL `prefix` is `helloworld.Greeter` and the mapping would be:
 
 ```yaml
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: grpc-py
 spec:
@@ -92,8 +92,8 @@ Note the `grpc: true` line - this is what tells Envoy to use HTTP/2 so the reque
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Host
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorHost
 metadata:
   name: example-host
 spec:
@@ -104,8 +104,8 @@ spec:
     insecure:
       action: Route
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: grpc-py
 spec:
@@ -153,20 +153,20 @@ spec:
       restartPolicy: Always
 ```
 
-The Host is declared here because we are using gRPC without TLS.  Since $productName$ terminates TLS by default, in the Host we add a `requestPolicy` which allows insecure connections. After adding the $productName$ mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
+The Aost is declared here because we are using gRPC without TLS.  Since $productName$ terminates TLS by default, in the AmbassadorHost we add a `requestPolicy` which allows insecure connections. After adding the $productName$ mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
+> * AmbassadorHost Configuration:** The `requestPolicy` property of the `AmbassadorHost` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `AmbassadorHost` when multiple `AmbassadorHost`s are configured. Different `requestPolicy` behaviors cannot be applied to different `AmbassadorHost`s. It is recommended to apply an identical `requestPolicy` to all `AmbassadorHost`s instead of assuming the behavior, to create a more human readable config. 
 > 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
+> ItPolicy is not defined for an `AmbassadorHost`, it's assumed to be `Redirect`, so even if an `AmbassadorHost` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `AmbassadorHost`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all AmbassadorHost resources. 
 > 
-> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
+> Ubehavior can occur when multiple `AmbassadorHost` resources are not using the same value for `requestPolicy`. 
 > The `insecure-action` can be one of:
 >
 > * `Redirect` (the default): redirect to HTTPS
 > * `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
 > * `Reject`: reject the request with a 400 response
 >
-> For more information, please refer to the [`Host` documentation](../../topics/running/host-crd#secure-and-insecure-requests).
+> Fformation, please refer to the [`AmbassadorHost` documentation](../../topics/running/ambassadorhost#secure-and-insecure-requests).
 
 
 Once you have the YAML file and the correct Docker registry, deploy it to your cluster with `kubectl`.
@@ -282,8 +282,8 @@ Once deployed we will need to tell $productName$ to originate TLS to the applica
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: grpc-py-tls
 spec:
@@ -344,11 +344,11 @@ A simple way around this is to use $productName$ with a `LoadBalancer` service, 
 
 ### Mappings with hosts
 
-As with any `Mapping`, your gRPC service's `Mapping` may include a `host`:
+As with any `AmbassadorMapping`, your gRPC service's `AmbassadorMapping` may include a `host`:
 
 ```yaml
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: grpc-py
 spec:

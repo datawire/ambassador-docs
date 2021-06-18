@@ -12,7 +12,7 @@ $productName$ supports different mechanisms for service discovery. These mechani
 
 ### Kubernetes service-level discovery
 
-By default, $productName$ uses Kubernetes DNS and service-level discovery. In a `Mapping` resource, specifying `service: foo` will prompt $productName$ to look up the DNS address of the `foo` Kubernetes service. Traffic will be routed to the `foo` service. Kubernetes will then load balance that traffic between multiple pods. For more details on Kubernetes networking and how this works, see our blog post on [Session affinity, load balancing controls, gRPC-Web, and $productName$](https://blog.getambassador.io/session-affinity-load-balancing-controls-grpc-web-and-ambassador-0-52-2b916b396d0c).
+By default, $productName$ uses Kubernetes DNS and service-level discovery. In an `AmbassadorMapping` resource, specifying `service: foo` will prompt $productName$ to look up the DNS address of the `foo` Kubernetes service. Traffic will be routed to the `foo` service. Kubernetes will then load balance that traffic between multiple pods. For more details on Kubernetes networking and how this works, see our blog post on [Session affinity, load balancing controls, gRPC-Web, and $productName$](https://blog.getambassador.io/session-affinity-load-balancing-controls-grpc-web-and-ambassador-0-52-2b916b396d0c).
 
 ### Kubernetes endpoint-level discovery
 
@@ -28,7 +28,7 @@ The `Resolver` resource is used to configure the discovery service strategy for 
 
 ### The Kubernetes service resolver
 
-The Kubernetes Service Resolver configures $productName$ to use Kubernetes services. If no resolver is specified, this behavior is the default. When this resolver is used, the `service.namespace` value from a `Mapping` is handed to the Kubernetes cluster's DNS resolver to determine where requests are sent. 
+The Kubernetes Service Resolver configures $productName$ to use Kubernetes services. If no resolver is specified, this behavior is the default. When this resolver is used, the `service.namespace` value from an `AmbassadorMapping` is handed to the Kubernetes cluster's DNS resolver to determine where requests are sent. 
 
 ```yaml
 ---
@@ -40,7 +40,7 @@ metadata:
 
 ### The Kubernetes endpoint resolver
 
-The Kubernetes Endpoint Resolver configures $productName$ to resolve Kubernetes endpoints. This enables the use of more a [advanced load balancing configuration](../load-balancer). When this resolver is used, the endpoints for the `service` defined in a `Mapping` are resolved and used to determine where requests are sent.
+The Kubernetes Endpoint Resolver configures $productName$ to resolve Kubernetes endpoints. This enables the use of more a [advanced load balancing configuration](../load-balancer). When this resolver is used, the endpoints for the `service` defined in an `AmbassadorMapping` are resolved and used to determine where requests are sent.
 
 ```yaml
 ---
@@ -52,7 +52,7 @@ metadata:
 
 ### The Consul resolver
 
-The Consul Resolver configures $productName$ to use Consul for service discovery. When this resolver is used, the `service` defined in a `Mapping` is passed to Consul, along with the datacenter specified, to determine where requests are sent.
+The Consul Resolver configures $productName$ to use Consul for service discovery. When this resolver is used, the `service` defined in an `AmbassadorMapping` is passed to Consul, along with the datacenter specified, to determine where requests are sent.
 
 ```yaml
 ---
@@ -95,12 +95,12 @@ containers:
 
 ## Using resolvers
 
-Once a resolver is defined, you can use them in a given `Mapping`:
+Once a resolver is defined, you can use them in a given `AmbassadorMapping`:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
@@ -110,8 +110,8 @@ spec:
   load_balancer:
     policy: round_robin
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: bar
 spec:

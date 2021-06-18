@@ -283,14 +283,14 @@ spec:
 
 ### An example service-level rate limit
 
-The following `Mapping` resource will add a
+The following `AmbassadorMapping` resource will add a
 `my_default_generic_key_label` `generic_key` label to every request to
 the `foo-app` service:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: foo-app
 spec:
@@ -330,8 +330,8 @@ Mappings can have multiple `labels` which annotate a given request.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: catalog
 spec:
@@ -398,12 +398,12 @@ imagine the following scenario:
    sent to a set of endpoints
 2. On a specific service, stricter limits are desirable
 
-The following `Mapping` resources could be configured:
+The following `AmbassadorMapping` resources could be configured:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: foo-app
 spec:
@@ -416,8 +416,8 @@ spec:
       - total_requests_group:
         - remote_address
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: bar-app
 spec:

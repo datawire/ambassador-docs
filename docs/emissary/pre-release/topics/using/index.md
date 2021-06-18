@@ -5,8 +5,8 @@ Application development teams use $productName$ to manage edge policies associat
 * [The Project Resource](projects) The `Project` resource is the easiest way to develop a cloud-native service.
   * [Configuring Authentication](project-authentication)
   * [Customizing Deployment](project-customization)
-* [Introduction to Mappings](intro-mappings) The `Mapping` resource is the core resource used by every application development team.
-* Mapping Configuration:
+* [Introduction to Mappings](intro-mappings) The `AmbassadorMapping` resource is the core resource used by every application development team.
+* AmbassadorMapping Configuration:
   * [Automatic Retries](retries)
   * [Canary Releases](canary)
   * [Circuit Breakers](circuit-breakers)
@@ -28,7 +28,7 @@ Application development teams use $productName$ to manage edge policies associat
   * [Rewrites](rewrites)
   * [Timeouts](timeouts)
   * [Traffic Shadowing](shadowing)
-* [Advanced Mapping Configuration](mappings)
+* [Advanced AmbassadorMapping Configuration](mappings)
 * Rate Limiting
   * [Introduction to Rate Limits](rate-limits/)
   * [Rate Limiting Configuration](rate-limits/rate-limits)

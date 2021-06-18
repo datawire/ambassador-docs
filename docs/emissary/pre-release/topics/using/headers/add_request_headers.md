@@ -8,13 +8,13 @@ The `add_request_headers` attribute is a dictionary of `header`: `value` pairs. 
 
 Envoy dynamic values `%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%` and `%PROTOCOL%` are supported, in addition to static values.
 
-`add_request_headers` can be set either in a `Mapping` or using [`ambassador Module defaults`](../../defaults).
+`add_request_headers` can be set either in an `AmbassadorMapping` or using [`ambassador Module defaults`](../../defaults).
 
-### Mapping example
+### AmbassadorMapping example
 
 ```yaml
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: quote-backend
 spec:
@@ -54,16 +54,16 @@ spec:
             value: This the value
             append: False                  #True by default
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: quote-backend1
 spec:
   prefix: /backend1/
   service: quote
 ---
-apiVersion: getambassador.io/v2
-kind: Mapping
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorMapping
 metadata:
   name: quote-backend2
 spec:

@@ -112,7 +112,7 @@ foo-3d88e5...     foo       refs/pull/12/head   3d88e5...   Deployed       4h
 foo-5664e9...     foo       refs/pull/11/head   5664e9...   Deploying      65s
 ```
 
-Each `ProjectRevision` will create a `Job` to perform the build, and a `Deployment` + `Service` + [`Mapping`](#mapping) to publish the commit:
+Each `ProjectRevision` will create a `Job` to perform the build, and a `Deployment` + `Service` + [`AmbassadorMapping`](#mapping) to publish the commit:
 
 ```
 Project
@@ -128,7 +128,7 @@ Project
    |       +-----> Service
    |       |           /|\
    |       |            |
-   |       +--------> Mapping (publishes the image at /.preview/... or /<prefix>)
+   |       +--------> AmbassadorMapping (publishes the image at /.preview/... or /<prefix>)
    |
    +...
    |
