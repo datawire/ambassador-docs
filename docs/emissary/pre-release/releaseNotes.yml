@@ -21,7 +21,7 @@ items:
     date: '2021-06-18'
     notes:
       - title: Developer Preview!
-        body: "$productName$ 2.0.0 is a developer preview: while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think."
+        body: $productName$ 2.0.0 is a Developer Preview; while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think!
         type: change
         docs: about/changes-2.0.0
 
