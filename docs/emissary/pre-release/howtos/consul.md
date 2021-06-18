@@ -79,21 +79,16 @@ In this guide, you will register a service with Consul and use $productName$ to 
    ```
    helm install -f consul-values.yaml hashicorp hashicorp/consul
    ```
-## Getting started
 
   <Alert severity="info">
     <strong>Note:</strong> The third value in the install command we just used (<code>hashicorp</code>) is the name of your consul install. You can change this if you have a specific reason to, and you will see that the names of your Consul pods and services will change to include this value instead of <code>hashicorp</code>
   </Alert>
 
-## Configuring $productName$
+## Deploying and Configuring $productName$
 
-1. Deploy $productName$. Note: If this is your first time deploying $productName$, reviewing the [quick start guide](../../tutorials/getting-started) is strongly recommended.
+1. Deploy $productName$. This howto assumes you have already followed the $productName$ [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
 
-   ```
-   kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
-   ```
-
-   If you're on GKE, or haven't previously created the $productName$ service, please see the [quick start guide](../../tutorials/getting-started).
+    After completing the Getting Started guide you will have a Kubernetes cluster running $productName$ and the Quote of the Moment service.
 
 2. Configure $productName$ to look for services registered to Consul by creating the ConsulResolver:
 
@@ -206,6 +201,7 @@ You'll now register a demo application with Consul, and show how $productName$ c
    metadata:
      name: consul-quote-mapping
    spec:
+     hostname: "*"
      prefix: /quote-consul/
      service: quote-consul
      resolver: consul-dc1
@@ -345,6 +341,7 @@ you should sub in that secret name value for `ambassador-consul-connect` in the 
     metadata:
       name: quote-connect-mapping
     spec:
+      hostname: "*"
       prefix: /quote-connect/
       service: quote-sidecar-proxy
       resolver: consul-dc1
