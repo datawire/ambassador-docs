@@ -35,8 +35,5 @@ Application development teams use $productName$ to manage edge policies associat
   * [JWT Filter](filters/jwt)
   * [External Filter](filters/external)
   * [Plugin Filter](filters/plugin)
-* Service Preview and Edge Control
-  * [Introduction to Edge Control](edgectl/edge-control)
-  * [Edge Control in CI](edgectl/edge-control-in-ci)
 * [Developer Portal](dev-portal)
 * [Gateway API](gateway-api)
