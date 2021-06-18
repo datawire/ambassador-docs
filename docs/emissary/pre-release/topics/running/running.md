@@ -79,7 +79,7 @@ env:
       fieldPath: metadata.namespace
 ```
 
-Given that `AMBASSADOR_NAMESPACE` is set, $productName$ [mappings](../../using/ambassadormappings) can operate within the same namespace, or across namespaces. **Note well** that mappings will have to explicitly include the namespace with the service to cross namespaces; see the [mapping](../../using/ambassadormappings) documentation for more information.
+Given that `AMBASSADOR_NAMESPACE` is set, $productName$ [`AmbassadorMappings`](../../using/mappings) can operate within the same namespace, or across namespaces. **Note well** that `AmbassadorMappings` will have to explicitly include the namespace with the service to cross namespaces; see the [`AmbassadorMapping`](../../using/mappings) documentation for more information.
 
 If you want $productName$ to only work within a single namespace, set `AMBASSADOR_SINGLE_NAMESPACE` as an environment variable.
 
@@ -93,7 +93,7 @@ env:
   value: "true"
 ```
 
-With $productName$, if you set `AMBASSADOR_NAMESPACE` or `AMBASSADOR_SINGLE_NAMESPACE`, set it in deployment container.
+With $productName$, if you set `AMBASSADOR_NAMESPACE` or `AMBASSADOR_SINGLE_NAMESPACE`, set it in the deployment container.
 
 If you want to set a certificate for your `TLScontext` from another namespace, you can use the following:
 
@@ -121,7 +121,7 @@ kind:  Module
 metadata:
   name:  ambassador
 spec:
-  ambassador_id: ambassador-1
+  ambassador_id: [ "ambassador-1" ]
   config:
     ...
 ```
@@ -145,7 +145,7 @@ kind:  AmbassadorMapping
 metadata:
   name:  mapping-used
 spec:
-  ambassador_id: ambassador-1
+  ambassador_id: [ "ambassador-1" ]
   prefix: /demo1/
   service: demo1
 ---
@@ -171,14 +171,14 @@ kind:  AmbassadorMapping
 metadata:
   name:  mapping-skipped-2
 spec:
-  ambassador_id: ambassador-2
+  ambassador_id: [ "ambassador-2" ]
   prefix: /demo4/
   service: demo4
 ```
 
-The list syntax (shown in `mapping-used-2` above) permits including a given object in the configuration for multiple $productName$ instances. In this case, `mapping-used-2` will be included in the configuration for `ambassador-1` and also for `ambassador-2`.
+`ambassador_id` is always a list, and may (as shown in `mapping-used-2` above) include multiple IDs to allow a given object in the configuration for multiple $productName$ instances. In this case, `mapping-used-2` will be included in the configuration for `ambassador-1` and also for `ambassador-2`.
 
-**Note well that _any_ object can and should have an `ambassador_id` included** so, for example, it is _fully supported_ to use `ambassador_id` to qualify the `ambassador Module`, `TLS`, and `AuthService` objects. You will need to set Ambassador_id in all resources you want to use for $productName$.
+**Note well that _any_ $productName$ configuration resource can have an `ambassador_id` included** so, for example, it is _fully supported_ to use `ambassador_id` to qualify the `ambassador Module`, `TLSContext`, and `AuthService` objects. You will need to set `ambassador_id` in all resources you want to use for $productName$.
 
 If no `AMBASSADOR_ID` is assigned to an $productName$, it will use the ID `default`. If no `ambassador_id` is present in a YAML object, it will also use the ID `default`.
 
@@ -223,7 +223,7 @@ Setting `AMBASSADOR_FAST_RECONFIGURE` to "true" enables incremental reconfigurat
 
 ## `AMBASSADOR_ENVOY_API_VERSION`
 
-By default, $productName$ will configure Envoy using the v2 API. Setting `AMBASSADOR_ENVOY_API_VERSION` to `V3` tells Ambassador to use the Envoy v3 API. Since the v2 API is deprecated in the upstream Envoy project, it is encouraged to eventually use the v3 API. New features or enhancements in $productName$ _may_ begin to require the v3 API. It is therefore strongly recommended to try the v3 API sooner rather than later and, as always, provide feedback and bug reports in the $productName$ GitHub repo!
+By default, $productName$ will configure Envoy using the Envoy V3 API. Setting `AMBASSADOR_ENVOY_API_VERSION` to `V2` tells Ambassador to use the Envoy V2 API instead. Since the Envoy V2 API is deprecated in the upstream Envoy project, we strongly recommend using V3 and, as always, providing feedback and bug reports in the $productName$ GitHub repo!
 
 ## Configuration from the filesystem
 

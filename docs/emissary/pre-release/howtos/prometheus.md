@@ -62,7 +62,7 @@ that is handling traffic for a given `AmbassadorMapping`.  The name of a given
 terribly readable.
 
 You can set the `cluster_tag` attribute within a
-[`AmbassadorMapping`](../../topics/using/ambassadormappings) to specify a prefix for the
+[`AmbassadorMapping`](../../topics/using/mappings) to specify a prefix for the
 generated `cluster` name, to help manage metrics.
 
 ### Prometheus Operator with standard YAML

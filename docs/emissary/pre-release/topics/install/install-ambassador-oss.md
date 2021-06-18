@@ -14,7 +14,7 @@ If you still want to use just $OSSproductName$, don't worry! You can follow the 
 
 ## Kubernetes YAML
 
-In this tutorial, we'll walk through the process of deploying $OSSproductName$ in Kubernetes for ingress routing. $OSSproductName$ provides all the functionality of a traditional ingress controller (i.e., path-based routing) while exposing many additional capabilities such as authentication, URL rewriting, CORS, rate limiting, and automatic metrics collection (the [mappings reference](../../using/intro-ambassadormappings) contains a full list of supported options). Note that $AESproductName$ can be used as an [Ingress Controller](../../running/ingress-controller).
+In this tutorial, we'll walk through the process of deploying $OSSproductName$ in Kubernetes for ingress routing. $OSSproductName$ provides all the functionality of a traditional ingress controller (i.e., path-based routing) while exposing many additional capabilities such as authentication, URL rewriting, CORS, rate limiting, and automatic metrics collection (the [mappings reference](../../using/intro-mappings) contains a full list of supported options). Note that $AESproductName$ can be used as an [Ingress Controller](../../running/ingress-controller).
 
 For more background on Kubernetes ingress, [read this blog post](https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d).
 
@@ -122,25 +122,18 @@ The versatile HTTPS configuration of $OSSproductName$ lets it support various HT
 
 See the [TLS HOWTO](../../../howtos/tls-termination) to quickly enable HTTPS support for your applications.
 
-**Note that $AESproductName$ automatically enables HTTPS.** Read more about its configuration on the [`AmbassadorHost` CRD](../../running/ambassadorhost) page.
+**Note that $AESproductName$ automatically enables HTTPS.** Read more about its configuration on the [`AmbassadorHost` CRD](../../running/host) page.
 
 ## Helm
 
 In the following instructions, we'll install the open-source $OSSproductName$ with Helm.
 
-Although the [Helm chart](https://github.com/emissary-ingress/emissary/tree/$branch$/charts/ambassador) installs
-$AESproductName$ by default, $OSSproductName$ is still
-available for installation for both Helm 2 and Helm 3.
-
-With Helm 2, you must enable CRD creation with the `crd-install` hook that is
-included in the CRD manifests. When installing with Helm 3, the following
-message will be output to `stderr`:
+Only Helm 3 is supported, but the `crd-install` hook is currently still present, as a holder from Helm 2.
+Therefore, the following message output to `stderr` **IS NOT AN ERROR AND CAN BE SAFELY IGNORED**:
 
 ```
 manifest_sorter.go:175: info: skipping unknown hook: "crd-install"
 ```
-
-Because this hook is required for Helm 2 support, it **IS NOT AN ERROR AND CAN BE SAFELY IGNORED**.
 
 **To get started on Helm:**
 1. Add the Datawire repo to your Helm repositories

@@ -5,7 +5,7 @@ by $productName$ or upstream services.
 
 They can be configured either on the $productName$
 [`Module`](../ambassador)
-or on a [`AmbassadorMapping`](../../using/intro-ambassadormappings/), the schema is identical. See
+or on an [`AmbassadorMapping`](../../using/intro-mappings/), the schema is identical. See
 below for more information on [rule precedence](#rule-precedence).
 
 - `on_status_code`: HTTP status code to match for this rewrite

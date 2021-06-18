@@ -78,8 +78,8 @@ installation, use the [manual YAML installation method](yaml-install).
 
 ## <img class="os-logo" src="../../images/helm-navy.png"/> Install via Helm 
 Helm, the package manager for Kubernetes, is another popular way to install
-$productName$ through the pre-packaged Helm chart. Full details, including
-the differences for Helm 2 and Helm3, are in the [Helm instructions.](helm/)
+$productName$ through the pre-packaged Helm chart. Full details are in the
+[Helm instructions.](helm/)
 
 ## <img class="os-logo" src="../../images/docker.png"/> Install Locally on Docker 
 The Docker install will let you try the $productName$ locally in seconds, 

@@ -31,7 +31,7 @@ find that endpoint.
 1. In your browser, navigate to `http://<load-balancer-endpoint>` and follow the
 prompts to bypass the TLS warning. 
 
-  > [An `AmbassadorHost` resource is created in production](../../topics/running/ambassadorhost)
+  > [An `AmbassadorHost` resource is created in production](../../topics/running/host)
 to use your own registered domain name instead of the load balancer endpoint to 
 access the console and your `AmbassadorMapping` endpoints.
 
@@ -77,7 +77,7 @@ with other tutorials.
 ## Developer API documentation
 
 The `quote` service you just deployed publishes its API as an 
-[OpenAPI (formally Swagger)](https://swagger.io/solutions/getting-started-with-oas/)
+[OpenAPI (formerly Swagger)](https://swagger.io/solutions/getting-started-with-oas/)
 document. $productName$ automatically detects and publishes this documentation. 
 This can help with internal and external developer onboarding by serving as a 
 single point of reference for of all your microservice APIs.

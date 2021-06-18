@@ -7,7 +7,7 @@ For $productName$ to do its job of managing network communications for your serv
 - `AmbassadorHost`s can be associated with one or more `AmbassadorListener`s. They define which hostnames $productName$ should care about, and how to handle different kinds of requests for those hosts.
 - `TLSContext`s can be associated with one or more `AmbassadorHost`s. They define whether, and how, $productName$ will manage TLS certificates and options.
 
-Once the basic communications setup is in place, $productName$ `AmbassadorMapping`s and `TCPMapping`s can be associated with `AmbassadorHost`s to actually do routing.
+Once the basic communications setup is in place, $productName$ `AmbassadorMapping`s and `AmbassadorTCPMapping`s can be associated with `AmbassadorHost`s to actually do routing.
 
 References 
 ----------
@@ -15,7 +15,7 @@ References
 It is a very good idea to be familiar with the CRDs in play here:
 
 - [`AmbassadorListener`](../topics/running/ambassadorlistener)
-- [`AmbassadorHost`](../topics/running/ambassadorhost)
+- [`AmbassadorHost`](../topics/running/host)
 - [`TLSContext`](../topics/running/tls/#tlscontext)
 
 Examples / Cookbook

@@ -14,13 +14,13 @@ Use the following variables for the environment of your $productName$ container:
 
 | Purpose                           | Variable                                                                                 | Default value                                       | Value type |
 |-----------------------------------|----------------------------------------------------------------------------------------- |-----------------------------------------------------|-------------------------------------------------------------------------------|
-| Core                              | `AMBASSADOR_ID`                                                                          | `default`                                           | Plain string |
+| Core                              | `AMBASSADOR_ID`                                                                          | `[ "default" ]`                                     | List of strings |
 | Core                              | `AMBASSADOR_NAMESPACE`                                                                   | `default` ([^1])                                    | Kubernetes namespace |
 | Core                              | `AMBASSADOR_SINGLE_NAMESPACE`                                                            | Empty                                               | Boolean; non-empty=true, empty=false |
 | Core                              | `AMBASSADOR_ENVOY_BASE_ID`                                                               | `0`                                                 | Integer |
 | Core                              | `AMBASSADOR_LEGACY_MODE`                                                                 | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
 | Core                              | `AMBASSADOR_FAST_RECONFIGURE`                                                            | `false`                                             | EXPERIMENTAL -- Boolean; `true`=true, any other value=false |
-| Core                              | `AMBASSADOR_ENVOY_API_VERSION`                                                           | `V2`                                                | String Enum; `V3` or `V2` |
+| Core                              | `AMBASSADOR_ENVOY_API_VERSION`                                                           | `V3`                                                | String Enum; `V3` or `V2` |
 | Core                              | `AMBASSADOR_UPDATE_MAPPING_STATUS`                                                       | `false`                                             | Boolean; `true`=true, any other value=false |
 | Core                              | `AMBASSADOR_DISABLE_SNAPSHOT_SERVER`                                                     | `false`                                             | Boolean; non-empty=true, empty=false |
 | Core                              | `AMBASSADOR_JSON_LOGGING`                                                                | `false`                                             | Boolean; non-empty=true, empty=false |

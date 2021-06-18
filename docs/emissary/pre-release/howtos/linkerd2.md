@@ -67,7 +67,7 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
         add_linkerd_headers: true
     ```
 
-    This will tell $productName$ to add additional headers to each request forwarded to Linkerd 2 with information about where to route this request to. This is a general setting. You can also set `add_linkerd_headers` per [AmbassadorMapping](../../topics/using/ambassadormappings#mapping-configuration).
+    This will tell $productName$ to add additional headers to each request forwarded to Linkerd 2 with information about where to route this request to. This is a general setting. You can also set `add_linkerd_headers` per [AmbassadorMapping](../../topics/using/mappings#mapping-configuration).
 
 ## Routing to Linkerd 2 services
 
@@ -218,7 +218,7 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
 
 1. Configure the target cluster $productName$ to allow insecure routing.
 
-    When $productName$ is running in a Linkerd mesh, Linkerd provides transport security, so connections coming in from the Linkerd in the source cluster will always be HTTP when they reach $productName$. Therefore, the `AmbassadorHost` CRDs corresponding to services that you'll be accessing from the source cluster *must* be configured to `Route` insecure requests. More information on this topic is available in the [`AmbassadorHost` documentation](../../topics/running/ambassadorhost); an example might be
+    When $productName$ is running in a Linkerd mesh, Linkerd provides transport security, so connections coming in from the Linkerd in the source cluster will always be HTTP when they reach $productName$. Therefore, the `AmbassadorHost` CRDs corresponding to services that you'll be accessing from the source cluster *must* be configured to `Route` insecure requests. More information on this topic is available in the [`AmbassadorHost` documentation](../../topics/running/host); an example might be
 
     ```yaml
     apiVersion: x.getambassador.io/v3alpha1

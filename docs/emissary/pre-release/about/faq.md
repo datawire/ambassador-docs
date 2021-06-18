@@ -71,7 +71,7 @@ spec:
   service: localhost:8500
 ```
 
-For more information on the AmbassadorMapping resource, see [Advanced AmbassadorMapping Configuration](../../topics/using/ambassadormappings).
+For more information on the AmbassadorMapping resource, see [Advanced AmbassadorMapping Configuration](../../topics/using/mappings).
 
 ### How do I disable the default Admin mappings?
 
@@ -107,7 +107,7 @@ spec:
   service: localhost:8500
 ```
 
-Now, administrators can connect to the admin console via hostname.  Additional [AmbassadorMapping](../../topics/using/intro-ambassadormappings) and 
+Now, administrators can connect to the admin console via hostname.  Additional [AmbassadorMapping](../../topics/using/intro-mappings) and 
 [Filter](../../topics/using/filters) settings can be appropriately configured to better control access to admin services.  To 
 learn more about Ambassador Module configurations, see [Ambassador Module](../../topics/running/ambassador)
 

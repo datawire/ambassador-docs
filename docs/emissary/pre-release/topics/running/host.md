@@ -8,7 +8,6 @@ single configuration resource:
 * How $productName$ should handle TLS certificates
 * How $productName$ should handle secure and insecure requests
 * Which resources to examine for further configuration
-* How $productName$ should handle [Service Preview URLs](../../using/edgectl/service-preview-reference#ambassador-edge-stack)
 
 A minimal `AmbassadorHost` resource, using Let’s Encrypt to handle TLS, would be:
 
@@ -185,7 +184,6 @@ LB" refers to a layer 7 load balancer.
     - [L4 split LB, TLS terminated at $productName$](#l4-split-lb-tls-terminated-at-ambassador)
     - [L4 split LB, TLS terminated at LB](#l4-split-lb-tls-terminated-at-lb)
     - [L7 LB](#l7-lb)
-  - [Service Preview URLs](#service-preview-urls)
   - [`AmbassadorHost` Specification](#host-specification)
     - [CRD Specification](#crd-specification)
 
@@ -351,10 +349,6 @@ This example is the same for an L4 LB, or without a load balancer at all.
   However, as long as the L7 LB is properly supplying `X-Forwarded-Proto` and `xff_num_trusted_hops` is set correctly, it should be possible to configure $productName$ to handle TLS and redirection of cleartext, by configuring $productName$ as if the L7 LB was not present (cases 1 - 3 above).
 
   **Again, it is critical that the load balancer correctly supplies `X-Forwarded-Proto`, and that `xff_num_trusted_hops` is set correctly.**
-
-## Service Preview URLs
-
-See [Service Preview](../../using/edgectl/service-preview-reference#ambassador-edge-stack) for more information.
 
 ## `AmbassadorHost` specification
 

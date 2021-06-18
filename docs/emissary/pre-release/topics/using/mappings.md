@@ -1,6 +1,6 @@
 # Advanced AmbassadorMapping configuration
 
-$productName$ is designed so that the author of a given Kubernetes service can easily and flexibly configure how traffic gets routed to the service. The core abstraction used to support service authors is a mapping, which maps a target backend service to a given host or prefix. For Layer 7 protocols such as HTTP, gRPC, or WebSockets, the `AmbassadorMapping` resource is used. For TCP, the `TCPMapping` resource is used.
+$productName$ is designed so that the author of a given Kubernetes service can easily and flexibly configure how traffic gets routed to the service. The core abstraction used to support service authors is a mapping, which maps a target backend service to a given host or prefix. For Layer 7 protocols such as HTTP, gRPC, or WebSockets, the `AmbassadorMapping` resource is used. For TCP, the `AmbassadorTCPMapping` resource is used.
 
 $productName$ _must_ have one or more mappings defined to provide access to any services at all. The name of the mapping must be unique.
 
@@ -77,7 +77,7 @@ protocol directly with your upstream service.  You can do this by
 setting the `allow_upgrade` field to a case-insensitive list of
 protocol names $productName$ will allow switching to from HTTP.  After
 the upgrade, $productName$ does not interpret the traffic, and behaves
-similarly to how it does for TCPMappings.
+similarly to how it does for `AmbassadorTCPMapping`s.
 
 [upgrade-mechanism]: https://tools.ietf.org/html/rfc7230#section-6.7
 

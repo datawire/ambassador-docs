@@ -253,7 +253,7 @@ kind: AmbassadorMapping
 metadata:
   name: host-foo-mapping
 spec:
-  ambassador_id: externalid
+  ambassador_id: [ "externalid" ]
   prefix: /
   host: foo.bar.com
   service: service1
@@ -263,7 +263,7 @@ kind: AmbassadorMapping
 metadata:
   name: host-bar-mapping
 spec:
-  ambassador_id: externalid
+  ambassador_id: [ "externalid" ]
   prefix: /
   host: bar.foo.com
   service: service2

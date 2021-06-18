@@ -119,7 +119,7 @@ earlier as a variable, echo that variable now to your terminal and make a note o
 1. In your browser, navigate to `http://<load-balancer-endpoint>` and follow the
 prompts to bypass the TLS warning. 
 
-  > [An `AmbassadorHost` resource is created in production](../../topics/running/ambassadorhost)
+  > [An `AmbassadorHost` resource is created in production](../../topics/running/host)
 to use your own registered domain name instead of the load balancer endpoint to 
 access the console and your `AmbassadorMapping` endpoints.
 
@@ -166,7 +166,7 @@ with other tutorials.
 ## Developer API Documentation
 
 The `quote` service you just deployed publishes its API as an 
-[OpenAPI (formally Swagger)](https://swagger.io/solutions/getting-started-with-oas/)
+[OpenAPI (formerly Swagger)](https://swagger.io/solutions/getting-started-with-oas/)
 document. $productName$ automatically detects and publishes this documentation. 
 This can help with internal and external developer onboarding by serving as a 
 single point of reference for of all your microservice APIs.
@@ -183,9 +183,9 @@ need information about your APIs.
 ## Next Steps
 
 Further explore some of the concepts you learned about in this article: 
-* [`AmbassadorMapping` resource](../../topics/using/intro-ambassadormappings/): routes traffic from 
+* [`AmbassadorMapping` resource](../../topics/using/intro-mappings/): routes traffic from 
 the edge of your cluster to a Kubernetes service
-* [`AmbassadorHost` resource](../../topics/running/ambassadorhost/): sets the hostname by which
+* [`AmbassadorHost` resource](../../topics/running/host/): sets the hostname by which
 $productName$ will be accessed and secured with TLS certificates
 * [Edge Policy Console](../../topics/using/edge-policy-console/): a web-based 
 interface used to configure and monitor $productName$
