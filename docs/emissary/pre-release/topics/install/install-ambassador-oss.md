@@ -128,19 +128,12 @@ See the [TLS HOWTO](../../../howtos/tls-termination) to quickly enable HTTPS sup
 
 In the following instructions, we'll install the open-source $OSSproductName$ with Helm.
 
-Although the [Helm chart](https://github.com/emissary-ingress/emissary/tree/$branch$/charts/ambassador) installs
-$AESproductName$ by default, $OSSproductName$ is still
-available for installation for both Helm 2 and Helm 3.
-
-With Helm 2, you must enable CRD creation with the `crd-install` hook that is
-included in the CRD manifests. When installing with Helm 3, the following
-message will be output to `stderr`:
+Only Helm 3 is supported, but the `crd-install` hook is currently still present, as a holder from Helm 2.
+Therefore, the following message output to `stderr` **IS NOT AN ERROR AND CAN BE SAFELY IGNORED**:
 
 ```
 manifest_sorter.go:175: info: skipping unknown hook: "crd-install"
 ```
-
-Because this hook is required for Helm 2 support, it **IS NOT AN ERROR AND CAN BE SAFELY IGNORED**.
 
 **To get started on Helm:**
 1. Add the Datawire repo to your Helm repositories

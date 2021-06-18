@@ -18,7 +18,7 @@ changes and reload certificates upon renewal.
 
 ## Install cert-manager
 
-There are many different ways to [install cert-manager](https://docs.cert-manager.io/en/latest/getting-started/install.html). For simplicity, we will use Helm v3.
+There are many different ways to [install cert-manager](https://docs.cert-manager.io/en/latest/getting-started/install.html). For simplicity, we will use Helm.
 
 1. Create the cert-manager CRDs.
     ```
