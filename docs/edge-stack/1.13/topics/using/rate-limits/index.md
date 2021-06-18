@@ -133,5 +133,5 @@ configured by a `RateLimit` custom resource.
 See the [AES RateLimit Reference](./rate-limits) for information on how 
 to configure `RateLimit`s in $productName$.
 
-See the [Basic Rate Limiting with $OSSProductName$](../../../howtos/rate-limiting-tutorial) for an 
-example `RateLimitService` implementation for $OSSProductName$.
+See the [Basic Rate Limiting with $OSSproductName$](../../../howtos/rate-limiting-tutorial) for an 
+example `RateLimitService` implementation for $OSSproductName$.

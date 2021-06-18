@@ -15,7 +15,7 @@
               link: /topics/install/helm
             - title: Upgrade to a newer version
               link: /topics/install/upgrading
-            - title: Upgrade to the $AESProductName$
+            - title: Upgrade to the $AESproductName$
               link: /topics/install/upgrade-to-edge-stack
             - title: Install $productName$
               link: /topics/install/install-ambassador-oss
@@ -230,7 +230,5 @@
           link: /community
         - title: Troubleshooting
           link: /topics/running/debugging
-        - title: Developer Portal
-          link: /topics/using/dev-portal
         - title: Release Notes
           link: /release-notes

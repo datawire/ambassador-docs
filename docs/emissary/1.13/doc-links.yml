@@ -15,7 +15,7 @@
               link: /topics/install/helm
             - title: Upgrade to a newer version
               link: /topics/install/upgrading
-            - title: Upgrade to the $AESProductName$
+            - title: Upgrade to the $AESproductName$
               link: /topics/install/upgrade-to-edge-stack
             - title: Install $productName$
               link: /topics/install/install-ambassador-oss
@@ -27,8 +27,6 @@
               link: /topics/install/yaml-install
             - title: The Ambassador Operator
               link: /topics/install/aes-operator
-            - title: Install with edgectl
-              link: /topics/install/help/
         - title: Core concepts
           link: /topics/concepts/
           items:
@@ -226,23 +224,5 @@
           link: /community
         - title: Troubleshooting
           link: /topics/running/debugging
-        - title: Service Preview
-          items:
-            - title: Quick start
-              link: /topics/using/edgectl/service-preview-install
-            - title: Tutorial
-              link: /topics/using/edgectl/service-preview-tutorial
-            - title: How-to guides
-              items:
-                - title: Service mesh and Service Preview
-                  link: /topics/using/edgectl/service-mesh-sp
-                - title: Edge Control reference
-                  link: /topics/using/edgectl/edge-control
-                - title: Using Edge Control in CI
-                  link: /topics/using/edgectl/edge-control-in-ci
-            - title: Technical reference
-              link: /topics/using/edgectl/service-preview-reference
-        - title: Developer Portal
-          link: /topics/using/dev-portal
         - title: Release Notes
           link: /release-notes

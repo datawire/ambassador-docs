@@ -38,6 +38,7 @@ export const products = [
         name: "Emissary Ingress",
         link: "/docs/emissary",
         version: [
+            { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
             { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
         ]

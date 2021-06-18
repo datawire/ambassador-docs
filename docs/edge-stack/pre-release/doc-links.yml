@@ -266,6 +266,8 @@
                       link: /howtos/cert-manager
                     - title: Client certificate validation
                       link: /howtos/client-cert-validation
+        - title: Developer Portal
+          link: /topics/using/dev-portal
         - title: Changes in 2.0.0
           link: /about/changes-2.0.0
         - title: FAQs
@@ -274,7 +276,5 @@
           link: /community
         - title: Troubleshooting
           link: /topics/running/debugging
-        - title: Developer Portal
-          link: /topics/using/dev-portal
         - title: Release Notes
           link: /release-notes
