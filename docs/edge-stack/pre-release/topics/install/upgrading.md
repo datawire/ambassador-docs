@@ -18,8 +18,8 @@ ambassador         1/1     1            1           ...
 
 ## Installed via Helm?
 
-If you installed using the Helm chart or `edgectl install`, then you should
-[upgrade with the help of Helm](../helm/#upgrading-an-existing-ambassador-edge-stack-installation).
+If you installed using the Helm chart, then you should
+[upgrade with the help of Helm](../helm/#upgrading-an-existing-installation).
 To verify this, run the following command to see if it returns resources:
 ```
 $ kubectl get deployment -n ambassador -l 'app.kubernetes.io/name=ambassador'
@@ -45,8 +45,8 @@ If you previously installed $productName$ using YAML manifests, you can upgrade 
 these commands:
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
-kubectl apply -f https://www.getambassador.io/yaml/aes.yaml
+kubectl apply -f https://www.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
+kubectl apply -f https://www.getambassador.io/yaml/edge-stack/$version$/aes.yaml
 ```
 
 This will trigger a rolling upgrade of $productName$.

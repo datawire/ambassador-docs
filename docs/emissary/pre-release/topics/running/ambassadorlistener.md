@@ -1,6 +1,6 @@
 # The `AmbassadorListener` CRD
 
-The `AmbassadorListener` CRD defines where, and how, $productName$ should listen for requests from the network, and which `AmbassadorHost` definitions should be used to process those requests. For further examples of how to use `AmbassadorListener`, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+The `AmbassadorListener` CRD defines where, and how, $productName$ should listen for requests from the network, and which `AmbassadorHost` definitions should be used to process those requests. For further examples of how to use `AmbassadorListener`, see [Configuring $productName$ to Communicate](../../../howtos/configure-communications).
 
 ```yaml
 ---

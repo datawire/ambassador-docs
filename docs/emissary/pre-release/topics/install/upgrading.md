@@ -7,7 +7,7 @@ The steps to upgrade depend on the method that was used to install $productName$
 
 ## Installed via the Operator?
 
-If you installed using the Operator, then you'll need to [use the Operator to perform the upgrade](../aes-operator/#updates-by-the-operator).
+If you installed using the Ambassador Operator, then you'll need to [use the Operator to perform the upgrade](../aes-operator/#updates-by-the-operator).
 To verify whether the Operator was used to install $productName$, run the following command
 to see if it returns resources:
 ```
@@ -18,8 +18,8 @@ ambassador         1/1     1            1           ...
 
 ## Installed via Helm?
 
-If you installed using the Helm chart or `edgectl install`, then you should
-[upgrade with the help of Helm](../helm/#upgrading-an-existing-ambassador-edge-stack-installation).
+If you installed using the Helm chart, then you should
+[upgrade with the help of Helm](../helm/#upgrading-an-existing-installation).
 To verify this, run the following command to see if it returns resources:
 ```
 $ kubectl get deployment -n ambassador -l 'app.kubernetes.io/name=ambassador'
@@ -45,8 +45,8 @@ If you previously installed $productName$ using YAML manifests, you can upgrade 
 these commands:
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
-kubectl apply -f https://www.getambassador.io/yaml/aes.yaml
+kubectl apply -f https://www.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
+kubectl apply -f https://www.getambassador.io/yaml/emissary/$version$/emissary-ingress.yaml
 ```
 
 This will trigger a rolling upgrade of $productName$.

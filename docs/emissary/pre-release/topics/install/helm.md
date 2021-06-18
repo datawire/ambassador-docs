@@ -31,12 +31,11 @@ manifest_sorter.go:175: info: skipping unknown hook: "crd-install"
    helm install emissary --namespace ambassador datawire/emissary
    ```
 
-
   This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for $productName$ to route traffic. Details on how to configure $productName$ using the Helm chart can be found in the Helm chart [README](https://github.com/emissary-ingress/emissary/tree/$branch$/charts/emissary-ingress).
 
 6. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
 
-## Upgrading an existing $productName$ installation
+## Upgrading an existing installation
 
 **Note: Do not use these instructions** to migrate from $OSSproductName$ to $AESproductName$. See [Migrating to $AESproductName$](#migrating-to-the-ambassador-edge-stack) instead.
 
