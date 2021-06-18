@@ -1,9 +1,9 @@
 # Basic rate limiting
 
-Rate limiting in Ambassador is composed of two parts:
+Rate limiting in $productName$ is composed of two parts:
 
-* `RateLimitService` that tells Ambassador what service to use for rate 
-  limiting. (The Ambassador Edge Stack provides a `RateLimitService` 
+* `RateLimitService` that tells $productName$ what service to use for rate 
+  limiting. (The $productName$ provides a `RateLimitService` 
   implementation for you).
 * Labels that get attached to requests; a label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
@@ -39,7 +39,7 @@ There are two ways of setting labels on a request:
 
 2. Globally, in the [`ambassador`
    Module](../../running/ambassador).  Labels set here are
-   applied to every single request that goes through Ambassador.  This
+   applied to every single request that goes through $productName$.  This
    includes requests go through a Mapping that sets more labels; for
    those requests, the global labels are prepended to each of the
    Mapping's label groups for the matching domain; otherwise the
@@ -71,13 +71,13 @@ There are two ways of setting labels on a request:
 - it is possible to have multiple labels with the same key
 - the order of labels matters
 
-Your Module and Mappings contain *label specifiers* that tell
-Ambassador what labels to set on the request.
+Your `Module` and `Mappings` contain *label specifiers* that tell
+$productName$ what labels to set on the request.
 
 > Note: The terminology used by the Envoy documentation differs from
-> the terminology used by Ambassador:
+> the terminology used by $productName$:
 >
-> | Ambassador      | Envoy             |
+> | $productName$   | Envoy             |
 > |-----------------|-------------------|
 > | label group     | descriptor        |
 > | label           | descriptor entry  |
@@ -85,14 +85,14 @@ Ambassador what labels to set on the request.
 
 The Mappings' listing of the groups of specifiers have names for the
 groups; the group names are useful for humans dealing with the YAML,
-but are ignored by Ambassador, all Ambassador cares about are the
+but are ignored by $productName$, all $productName$ cares about are the
 *contents* of the groupings of label specifiers.
 
-There are 5 types of label specifiers in Ambassador:
+There are 5 types of label specifiers in $productName$:
 
 <!-- This table is ordered the same way as the protobuf fields in
   `route_components.proto`.  There's also a 6th action:
-  "header_value_match" (since Envoy 1.2), but Ambassador doesn't
+  "header_value_match" (since Envoy 1.2), but $productName$ doesn't
   support it?  -->
 
 | #             | Label Specifier                        | Action, in human terms                                                                                                                  | Action, in [Envoy gRPC terms][`envoy.api.v2.route.RateLimit.Action`]           |
@@ -117,8 +117,8 @@ There are 5 types of label specifiers in Ambassador:
    that header is not set in the request, then the entire label group
    is skipped.
 4. The IP address of the HTTP client could be the actual IP of the
-   client talking directly to Ambassador, or it could be the IP
-   address from `X-Forwarded-For` if Ambassador is configured to trust
+   client talking directly to $productName, or it could be the IP
+   address from `X-Forwarded-For` if $productName is configured to trust
    the `X-Fowarded-For` header.
 5. `generic_key` allows you to apply a simple string label to requests
    flowing through that Mapping.
@@ -127,11 +127,11 @@ There are 5 types of label specifiers in Ambassador:
 
 This is determined by your `RateLimitService` implementation. 
 
-The Ambassador Edge Stack provides a `RateLimitService` implementation that is 
+The $productName$ provides a `RateLimitService` implementation that is 
 configured by a `RateLimit` custom resource.
 
 See the [AES RateLimit Reference](./rate-limits) for information on how 
-to configure `RateLimit`s in Ambassador Edge Stack.
+to configure `RateLimit`s in $productName$.
 
-See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an 
-example `RateLimitService` implementation for Ambassador OSS.
+See the [Basic Rate Limiting with $OSSProductName$](../../../howtos/rate-limiting-tutorial) for an 
+example `RateLimitService` implementation for $OSSProductName$.

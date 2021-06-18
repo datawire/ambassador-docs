@@ -34,6 +34,15 @@ export const products = [
         ]
     },
     {
+        slug: "emissary",
+        name: "Emissary Ingress",
+        link: "/docs/emissary",
+        version: [
+            { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
+            { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
+        ]
+    },
+    {
         slug: "telepresence",
         name: "Telepresence",
         link: "/docs/telepresence",
@@ -85,6 +94,10 @@ export const metaData = {
     },
     'edge-stack': {
         title: 'Edge Stack Docs | Ambassador Labs',
+        description: 'Route and secure traffic to your cluster with a Kubernetes-native API Gateway built on the Envoy Proxy.'
+    },
+    'emissary': {
+        title: 'Emissary Ingress Docs | Ambassador Labs',
         description: 'Route and secure traffic to your cluster with a Kubernetes-native API Gateway built on the Envoy Proxy.'
     },
     'telepresence': {

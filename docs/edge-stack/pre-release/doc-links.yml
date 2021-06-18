@@ -4,43 +4,37 @@
 - title: Products
   collapsable: false
   items:
-    - title: Edge Stack
+    - title: $productName$
       items:
         - title: Quick start
           link: /tutorials/getting-started
-        - title: Install Edge Stack
+        - title: Install $productName$
           link: /topics/install/
           items:
             - title: Install with Helm
               link: /topics/install/helm
-            - title: Upgrading Ambassador Edge Stack
+            - title: Upgrade to a newer version
               link: /topics/install/upgrading
-            - title: Upgrade to the Ambassador Edge Stack
-              link: /topics/install/upgrade-to-edge-stack
-            - title: Install the Ambassador API Gateway
-              link: /topics/install/install-ambassador-oss
             - title: Install with Docker
               link: /topics/install/docker
             - title: Install with bare metal
               link: /topics/install/bare-metal
             - title: Install manually
               link: /topics/install/yaml-install
-            - title: The Edge Stack Operator
+            - title: The Ambassador Operator
               link: /topics/install/aes-operator
-            - title: Install with edgectl
-              link: /topics/install/help/
         - title: Core concepts
           link: /topics/concepts/
           items:
             - title: Kubernetes network architecture
               link: /topics/concepts/kubernetes-network-architecture
-            - title: 'The Ambassador operating model: GitOps and continuous delivery'
+            - title: "The Ambassador operating model: GitOps and continuous delivery"
               link: /topics/concepts/gitops-continuous-delivery
             - title: Progressive delivery
               link: /topics/concepts/progressive-delivery
             - title: Microservices API gateways
               link: /topics/concepts/microservices-api-gateways
-            - title: Edge Stack architecture
+            - title: $productName$ architecture
               link: /topics/concepts/architecture
             - title: Rate limiting at the edge
               link: /topics/concepts/rate-limiting-at-the-edge
@@ -66,8 +60,6 @@
                   items:
                     - title: Basic authentication
                       link: /howtos/ext-filters
-                    - title: Basic authentication (for API Gateway)
-                      link: /howtos/basic-auth
                     - title: Using the OAuth2 filter for SSO
                       link: /howtos/oauth-oidc-auth
                     - title: Kubernetes SSO with OIDC and Keycloak
@@ -133,8 +125,8 @@
           items:
             - title: Custom resources
               items:
-                - title: The Host resource
-                  link: /topics/running/host-crd
+                - title: The AmbassadorHost resource
+                  link: /topics/running/ambassadorhost
                   items:
                     - title: TLS
                       link: /topics/running/tls/
@@ -147,32 +139,28 @@
                           link: /topics/running/tls/sni
                         - title: TLS origination
                           link: /topics/running/tls/origination
-                - title: The Listener resource
-                  link: /topics/running/listener
+                - title: The AmbassadorListener resource
+                  link: /topics/running/ambassadorlistener
                 - title: The Module resource
                   link: /topics/running/ambassador
-            - title: Deploying Ambassador
+            - title: Deploying $productName$
               items:
                 - title: Deployment architecture
                   link: /topics/running/ambassador-deployment
-                - title: The Ambassador container
+                - title: The $productName$ container environment
                   link: /topics/running/environment
-                - title: Edge Stack and Redis
+                - title: $productName$ and Redis
                   link: /topics/running/aes-redis
-                - title: Edge Stack with AWS
+                - title: $productName$ with AWS
                   link: /topics/running/ambassador-with-aws
-                - title: Edge Stack with GKE
+                - title: $productName$ with GKE
                   link: /topics/running/ambassador-with-gke
                 - title: Advanced deployment configuration
                   link: /topics/running/running
-                - title: Performance and scaling Ambassador
+                - title: Performance and scaling $productName$
                   link: /topics/running/scaling
             - title: Edge policy management
               items:
-                - title: Edge policy console
-                  link: /topics/using/edge-policy-console
-                - title: Rate limit speedometers
-                  link: /topics/using/rate-limit-speedometers
                 - title: Gateway API
                   link: /topics/using/gateway-api
             - title: Filters and authentication
@@ -191,12 +179,12 @@
                   link: /topics/using/filters/plugin
             - title: Ingress and load balancing
               items:
-                - title: The Mapping resource
+                - title: The AmbassadorMapping resource
                   items:
-                    - title: Mapping basics
-                      link: /topics/using/intro-mappings
-                    - title: Advanced Mapping configuration
-                      link: /topics/using/mappings
+                    - title: AmbassadorMapping basics
+                      link: /topics/using/intro-ambassadormappings
+                    - title: Advanced AmbassadorMapping configuration
+                      link: /topics/using/ambassadormappings
                     - title: AuthService settings
                       link: /topics/using/authservice
                     - title: Automatic retries
@@ -286,22 +274,6 @@
           link: /community
         - title: Troubleshooting
           link: /topics/running/debugging
-        - title: Service Preview
-          items:
-            - title: Quick start
-              link: /topics/using/edgectl/service-preview-install
-            - title: Tutorial
-              link: /topics/using/edgectl/service-preview-tutorial
-            - title: How-to guides
-              items:
-                - title: Service mesh and Service Preview
-                  link: /topics/using/edgectl/service-mesh-sp
-                - title: Edge Control reference
-                  link: /topics/using/edgectl/edge-control
-                - title: Using Edge Control in CI
-                  link: /topics/using/edgectl/edge-control-in-ci
-            - title: Technical reference
-              link: /topics/using/edgectl/service-preview-reference
         - title: Developer Portal
           link: /topics/using/dev-portal
         - title: Release Notes

@@ -2,17 +2,17 @@ import Alert from '@material-ui/lab/Alert';
 
 # Filters and authentication
 
-Filters are used to extend the Ambassador Edge Stack to modify or intercept a request before sending to your backend service. The most common use case for Filters is authentication, and Edge Stack includes a number of built-in filters for this purpose. Edge Stack also supports developing custom filters.
+Filters are used to extend the $productName$ to modify or intercept a request before sending to your backend service. The most common use case for Filters is authentication, and $productName$ includes a number of built-in filters for this purpose. $productName$ also supports developing custom filters.
 
 Filters are managed using a FilterPolicy resource. The FilterPolicy resource specifies a particular host or URL to match, along with a set of filters to run when an request matches the host/URL.
 
 ## Filter types
 
-Edge Stack supports the following filter types:
+$productName$ supports the following filter types:
 
 * [JWT](jwt) - validates JSON Web Tokens
 * [OAuth2](oauth2) - performs OAuth2 authorization against an identity provider implementing [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html).
-* [Plugin](plugin) - allows users to write custom Filters in Go that run as part of the Edge Stack container
+* [Plugin](plugin) - allows users to write custom Filters in Go that run as part of the $productName$ container
 * [External](external) - allows users to call out to other services for request processing. This can include both custom services (in any language) or third party services.
 
 ## Managing Filters
@@ -149,7 +149,7 @@ spec:
 ```
 
 <Alert severity="info"> 
-  Edge Stack will choose the first FilterPolicy rule that matches the incoming request. As in the above example, you must list your rules in the order of least to most generic.
+  $productName$ will choose the first FilterPolicy rule that matches the incoming request. As in the above example, you must list your rules in the order of least to most generic.
 </Alert>
 
 #### Multiple domains
@@ -177,7 +177,7 @@ spec:
 
 The JWT and OAuth2 filters speak to other services over HTTP or HTTPS.  If those services are configured to speak HTTPS using a self-signed certificate, attempting to talk to them will result in an error mentioning `ERR x509: certificate signed by unknown authority`. You can fix this by installing that self-signed certificate into the AES container by copying the certificate to `/usr/local/share/ca-certificates/` and then running `update-ca-certificates`.  Note that the `aes` image sets `USER 1000` but `update-ca-certificates` needs to be run as root.
 
-The following Dockerfile will accomplish this procedure for you. When deploying Edge Stack, refer to that custom Docker image rather than to `docker.io/datawire/aes:$version$`
+The following Dockerfile will accomplish this procedure for you. When deploying $productName$, refer to that custom Docker image rather than to `docker.io/datawire/aes:$version$`
 
 ```Dockerfile
 FROM docker.io/datawire/aes:$version$

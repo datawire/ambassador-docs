@@ -1,7 +1,7 @@
-# Edge Stack and Redis
+# $productName$ and Redis
 
-The Ambassador Edge Stack make use of Redis for several purposes.  By default,
-all components of the Ambassador Edge Stack share a Redis connection pool.
+$productName$ makes use of Redis for several purposes.  By default,
+all components of the $productName$ share a Redis connection pool.
 
 ## Rate Limit Service
 
@@ -38,7 +38,7 @@ This will be either a hostname:port pair or a comma separated list of
 hostname:port pairs depending on the [`TYPE`](#redis-type) you are using.
   
 For `REDIS_URL` (but not `REDIS_PERSECOND_URL`), not setting a value disables
-Ambassador Edge Stack features that require Redis.
+$productName$ features that require Redis.
 
 #### `TLS_ENABLED`  
 
@@ -50,7 +50,7 @@ Specifies whether to skip certificate verification when
 using TLS to talk to Redis.  
 
 Consider [installing the self-signed certificate for your Redis in to the 
-Ambassador Edge Stack container](../../using/filters/#installing-self-signed-certificates) 
+$productName$ container](../../using/filters/#installing-self-signed-certificates) 
 in order to leave certificate verification on.
 
 ## Redis authentication (auth)
@@ -95,10 +95,10 @@ There is no way to change the username with this implementation.
 
 #### `PING_INTERVAL` 
 
-  The rate at which Ambassador will ping the idle connections in the normal pool
+  The rate at which $productName$ will ping the idle connections in the normal pool
   (not extra connections created for a load surge). 
 
-  Ambassador will `PING` one of them every `PING_INTERVAL÷POOL_SIZE` so
+  $productName$ will `PING` one of them every `PING_INTERVAL÷POOL_SIZE` so
   that each connection will on average be `PING`ed every `PING_INTERVAL`.
   
 
@@ -116,14 +116,14 @@ There is no way to change the username with this implementation.
 
 #### `SURGE_LIMIT_INTERVAL`  
 
-  During a load surge, if the pool is depleted, then Ambassador may create new
+  During a load surge, if the pool is depleted, then $productName$ may create new
   connections to Redis in order to fulfill demand, at a maximum rate of one new
   connection per `SURGE_LIMIT_INTERVAL`.  
 
   A value of "0" (the default) means "allow new connections to be created as
   fast as necessary.
 
-  The total number of connections that Ambassador can surge to is unbounded.
+  The total number of connections that $productName$ can surge to is unbounded.
 
 #### `SURGE_LIMIT_AFTER` 
 
@@ -158,8 +158,8 @@ There is no way to change the username with this implementation.
 
 ## Redis type
 
-Redis currently support three different deployment methods. Ambassador Edge
-Stack can now support using a Redis deployed in any of these ways for rate
+Redis currently support three different deployment methods. $productName$
+can now support using a Redis deployed in any of these ways for rate
 limiting when `AES_RATELIMIT_PREVIEW=true`.
 
 #### `TYPE` 

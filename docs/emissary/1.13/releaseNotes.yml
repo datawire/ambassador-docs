@@ -1,0 +1,45 @@
+# This file should be placed in the folder for the version of the product that's meant to be documented. A `/release-notes` page will be automatically generated and populated at build time.
+# Note that an entry needs to be added to the `doc-links.yml` file in order to surface the release notes in the table of contents.
+#
+# The YAML in this file should contain:
+#
+# changelog: An (optional) URL to the CHANGELOG for the product.
+# items: An array of releases with the following attributes:
+#     - version: The (optional) version number of the release, if applicable.
+#     - date: The date of the release in the format YYYY-MM-DD.
+#     - notes: An array of noteworthy changes included in the release, each having the following attributes:
+#         - title: A short title of the noteworthy change.
+#         - body: Two or three sentences describing the change and why it is noteworthy. This is in rich text format and may contain HTML elements.
+#         - image: The URL of an image that visually represents the noteworthy change. This can be an absolute path or the name of the image file placed under the `ambassador-docs/public` folder starting with `./` (e.g., `./ambassador-example.png`).
+#         - docs: The path to the documentation page where additional information can be found.
+#         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
+#
+
+changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
+items:
+  - version: 1.13.7
+    date: '2021-06-03'
+    notes:
+      - title: Ambassador JSON logging support
+        body: "An <code>AMBASSADOR_JSON_LOGGING</code> environment variable has been added. When set to <code>true</code> JSON format will be used for most of the control plane logs. Some (but few) logs from <code>gunicorn</code> and the Kubernetes <code>client-go</code> package will still be in text only format."
+        image: ./edge-stack-1.13.7-json-logging.png
+        docs: topics/running/running/#log-format
+        type: feature
+      - title: Consul resolver bugfix with TCPMappings
+        body: "The TCPMapping has the ability to specify a resolver, however the <code>ConsulResolver</code> did not work properly with it. It now utilizes the Consul Connect service discovery instead of falling back to attempting to register an arbitrary endpoint."
+        image: ./edge-stack-1.13.7-tcpmapping-consul.png
+        docs: topics/running/resolvers/#the-consul-resolver
+        type: bugfix
+      - title: Memory usage calculation improvements
+        body: "The internal memory usage calculation that Emissary Ingress and Ambassador Edge Stack perform has been updated to exclude cache memory. This now matches how the kernel OOMKiller calculates memory and should avoid situations where Envoy updates are throttled unnecessarily."
+        image: ./edge-stack-1.13.7-memory.png
+        docs: topics/running/scaling/#inspecting-ambassador-performance
+        type: change
+  - version: 1.13.4
+    date: '2021-05-13'
+    notes:
+      - title: Envoy 1.15.5
+        body: $productName$ 1.13.4 and Edge Stack 1.13.4 have been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). Edge Stack and Emissary Ingress can now be configured to reject client requests that contain escaped slashes.
+        image: ./edge-stack-1.13.4.png
+        docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
+        type: security

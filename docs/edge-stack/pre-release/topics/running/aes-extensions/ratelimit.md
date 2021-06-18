@@ -3,7 +3,7 @@
 The Ambassador Edge Stack ships with a rate limiting service that is enabled
 to perform advanced rate limiting out of the box.
 
-Configuration of the `Mapping` and `RateLimit` resources that control **how**
+Configuration of the `AmbassadorMapping` and `RateLimit` resources that control **how**
 to rate limit requests can be found in the
 [Rate Limiting](../../../using/rate-limits) section of the documentation.
 

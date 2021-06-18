@@ -1,4 +1,4 @@
-# Edgectl Upgrade: no Ambassador API Gateway installation found
+# Edgectl Upgrade: no $productName$ installation found
 
 The upgrader has not been able to find an existing API Gateway installation.
 
