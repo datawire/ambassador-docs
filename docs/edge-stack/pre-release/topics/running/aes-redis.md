@@ -6,6 +6,17 @@ import Alert from '@material-ui/lab/Alert';
 The Ambassador Edge Stack make use of Redis for several purposes.  By default,
 all components of the Ambassador Edge Stack share a Redis connection pool.
 
+## Rate Limit Service
+
+The rate limiting service, can be configured to use different connection pools 
+for handling per-second rate limits or connecting to Redis clusters.
+
+### AES_RATELIMIT_PREVIEW
+
+Set `AES_RATELIMIT_PREVIEW` to `true` to access support for redis clustering, 
+local caching, and an upgraded redis client with improved scalability in 
+preview mode.
+
 ### REDIS_PERSECOND
 
 If `REDIS_PERSECOND` is true, a second Redis connection pool is created (to a
@@ -18,7 +29,7 @@ variables rather than the usual `REDIS_*` variables.
  
 #### `SOCKET_TYPE` 
 
-The Go network to use to talk to Redis. see [Go `net.Dial`][]
+The Go network to use to talk to Redis. see [Go net.Dial](https://golang.org/src/net/dial.go)
 
 Most users will leave this as the default of `tcp`.
 
@@ -27,7 +38,7 @@ Most users will leave this as the default of `tcp`.
 The URL to dial to talk to Redis 
 
 This will be either a hostname:port pair or a comma separated list of 
-hostname:port pairs depending on the [`TYPE`](#redis-type) you are using.
+hostname:port pairs depending on the [TYPE](#redis-type) you are using.
   
 For `REDIS_URL` (but not `REDIS_PERSECOND_URL`), not setting a value disables
 Ambassador Edge Stack features that require Redis.
@@ -45,17 +56,6 @@ Consider [installing the self-signed certificate for your Redis in to the
 Ambassador Edge Stack container](../../using/filters/#installing-self-signed-certificates) 
 in order to leave certificate verification on.
 
-## Rate Limit Service
-
-The rate limiting service, can be configured to use different connection pools 
-for handling per-second rate limits or connecting to Redis clusters.
-
-### AES_RATELIMIT_PREVIEW
-
-Set `AES_RATELIMIT_PREVIEW` to `true` to access support for redis clustering, 
-local caching, and an upgraded redis client with improved scalability in 
-preview mode.
-
 
 ## Redis authentication (auth)
 
@@ -65,13 +65,13 @@ Configure authentication to a redis pool using the default implementation.
 
 #### `PASSWORD`
 
-If set, it is used to `AUTH` to Redis immediately after the connection is
+If set, it is used to [AUTH](https://redis.io/commands/auth) to Redis immediately after the connection is
 established.
 
 #### `USERNAME`
 
 If set, then that username is used with the password to log in as that user in 
-the [Redis 6 ACL][].  It is invalid to set a username without setting a 
+the [Redis 6 ACL](https://redis.io/topics/acl).  It is invalid to set a username without setting a 
 password.  It is invalid to set a username with Redis 5 or lower.
 
 
@@ -79,9 +79,9 @@ The following YAML snippet is an example of configuring Redis authentication in 
 
 ```yaml
 env:
-- name:  REDIS_USERNAME:
+- name: REDIS_USERNAME:
   value: "default"
-- name:  REDIS_PASSWORD:
+- name: REDIS_PASSWORD:
   valueFrom:
     secretKeyRef:
       key: password
@@ -99,21 +99,24 @@ implementation
 
 #### `AUTH` 
 
-If set, the value will be used as the password to authenticate to redis with 
-username `default`. This is only required for using rate limit preview. 
-If you have `AUTH` configured, then you still need to configure `USERNAME` and
-`PASSWORD`. The `USERNAME` must be `default` and `PASSWORD` must be the same value as
-`AUTH`.
+Required for authentication with Rate Limit Preview. You must also configure `REDIS_USERNAME` 
+and `REDIS_PASSWORD` for .  
 
-There is no way to change the username from `default` with this implementation.
+If you configure `REDIS_AUTH`, then `REDIS_USERNAME` cannot be changed from the value `default`, and
+`REDIS_PASSWORD` should contain the same value as `REDIS_AUTH`.
 
-Adding `AUTH` to the above example for authentication while using rate limit preview would look like the following snippet.
+`REDIS_USERNAME` and `REDIS_PASSWORD` handle all Redis authentication that is separate from Rate Limit Preview so
+failing to set them when using `REDIS_AUTH` will result in Ambassador not being able to authenticate with Redis for
+all of its other functionality.
+
+
+Adding `AUTH` to the example above for rate limit preview would look like the following snippet.
 
 ```yaml
 env:
-- name:  REDIS_USERNAME:
+- name: REDIS_USERNAME:
   value: "default"
-- name:  REDIS_PASSWORD:
+- name: REDIS_PASSWORD:
   valueFrom:
     secretKeyRef:
       key: password
