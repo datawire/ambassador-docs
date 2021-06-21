@@ -1,4 +1,11 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Upgrading $productName$
+
+<Alert severity="info">
+  To migrate from $productName$ 1.X to $productName$ 2.X, see the <a href="migrate-to-version-2">$productName$ 2.X Migration Guide</a>.
+  This guide <b>will not work</b> for that, due to changes to the configuration resources used for $productName$ 2.X. 
+</Alert>
 
 Since $productName$'s configuration is entirely stored in Kubernetes resources, no special process
 is necessary to upgrade $productName$.
