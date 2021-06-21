@@ -100,7 +100,7 @@ implementation
 #### `AUTH` 
 
 Required for authentication with Rate Limit Preview. You must also configure `REDIS_USERNAME` 
-and `REDIS_PASSWORD` for .  
+and `REDIS_PASSWORD` for the rest of Ambassador's Redis usage.  
 
 If you configure `REDIS_AUTH`, then `REDIS_USERNAME` cannot be changed from the value `default`, and
 `REDIS_PASSWORD` should contain the same value as `REDIS_AUTH`.
