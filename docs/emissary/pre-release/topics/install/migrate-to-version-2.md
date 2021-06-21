@@ -7,7 +7,7 @@ import Alert from '@material-ui/lab/Alert';
   <a href="upgrading">Upgrading $productName$ Guide</a>.
 </Alert>
 
-We're pleased to share $productName$ $version$ as a Developer Preview. In keeping with [SemVer](https://semver.org),
+We're pleased to share $productName$ 2.0.0-ea as a Developer Preview. In keeping with [SemVer](https://semver.org),
 $productName$ 2.X introduces some changes that aren't backward-compatible with 1.X. These changes are detailed in
 [Major Changes in $productName$ 2.0.0](../../about/changes-2.0.0), and they require configuration updates when
 migrating.
@@ -43,7 +43,11 @@ The minimum steps to migrate:
     `ambassador_id: "foo"` must become `ambassador_id: [ "foo" ]`. This applies to all $productName$
     resources, and is supported by all versions since at least Ambassador 1.0.0.
 
-- **Define an [`AmbassadorListener`](../running/ambassadorlistener) for each port on which your installation should listen.**
+- **Define an `AmbassadorListener` for each port on which your installation should listen.**
+
+    <Alert severity="info">
+      <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+    </Alert>
 
     `AmbassadorListener` will be required by most if not all installations. It's worth thinking about the
     `hostBinding`s to use for each `AmbassadorListener`, too, though you can start migrating with
@@ -54,7 +58,11 @@ The minimum steps to migrate:
         from: ALL
     ```
 
-- **Copy `Host` resources to [`AmbassadorHost`](../running/host) resources.**
+- **Copy `Host` resources to `AmbassadorHost` resources.**
+
+    <Alert severity="info">
+      <a href="../running/host">Learn more about <code>AmbassadorHost</code></a>
+    </Alert>
 
     For each existing `Host` resource that 2.X should honor, create an `AmbassadorHost` resource:
 
@@ -64,7 +72,11 @@ The minimum steps to migrate:
       the `AmbassadorHost` should associate; and
     - set `spec.selector` if desired, to control which `AmbassadorMappings` will be associated with this `AmbassadorHost`.
 
-- **Copy `Mapping` resources to [`AmbassadorMapping`](../using/intro-mappings) resources.**
+- **Copy `Mapping` resources to `AmbassadorMapping` resources.**
+
+    <Alert severity="info">
+      <a href="../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
+    </Alert>
 
     For each existing `Mapping` resource that 2.X should honor, create an `AmbassadorMapping` resource:
 
@@ -88,7 +100,11 @@ The minimum steps to migrate:
     if `spec.hostname` matches the hostname of the `AmbassadorHost`. If the `AmbassadorHost`'s `selector` is also set, 
     both the `selector` and the hostname must line up.
 
-- **Copy `TCPMapping` resources to [`AmbassadorTCPMapping`](../using/tcpmappings) resources.**
+- **Copy `TCPMapping` resources to `AmbassadorTCPMapping` resources.**
+
+    <Alert severity="info">
+      <a href="../using/tcpmappings">Learn more about <code>AmbassadorTCPMapping</code></a>
+    </Alert>
 
     For each existing `TCPMapping` resource that 2.X should honor, create an `AmbassadorTCPMapping` resource:
 
@@ -102,9 +118,13 @@ The minimum steps to migrate:
 
 When migrating to $productName$ 2.X, there are several things to keep in mind:
 
-### `AmbassadorListener` is (mostly) required
+### `AmbassadorListener` is usually required
 
-The new [`AmbassadorListener`](../running/ambassadorlistener.md) resource (in `x.getambassador.io/v3alpha1`) defines the
+<Alert severity="info">
+  <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+</Alert>
+
+The new [`AmbassadorListener` resource](../running/ambassadorlistener.md) (in `x.getambassador.io/v3alpha1`) defines the
 specific ports on which $productName$ will listen, and which protocols and security model will be used per port. Although
 2.0.0 will synthesize `AmbassadorListeners` as a transition aid, **we strongly recommended defining your own
 `AmbassadorListener`(s) to match your situation**.
@@ -114,6 +134,11 @@ exactly which `AmbassadorHost` resources are matched with them. This can permit 
 work considerably more efficiently than relying on the defaults.
 
 ### `AmbassadorListener` has explicit control to choose `AmbassadorHost`s
+
+<Alert severity="info">
+  <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br />
+  <a href="../running/host">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
 
 `AmbassadorListener.spec.hostBinding` controls whether a given `AmbassadorHost` will be associated with 
 that `AmbassadorListener`, as discussed in the [`AmbassadorListener`](../running/ambassadorlistener.md) documentation.
@@ -132,6 +157,11 @@ can also result in larger Envoy configurations that slow reconfiguration. Instea
 
 #### `AmbassadorHost` and `AmbassadorMapping` will not automatically associate with each other
 
+<Alert severity="info">
+  <a href="../running/host">Learn more about <code>AmbassadorHost</code></a><br />
+  <a href="../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
+</Alert>
+
 In $productName$ 1.X, `Mapping`s were nearly always associated with every `Host`. Since this also tends to 
 result in larger Envoy configurations that slow reconfiguration, $productName$ 2.X inverts this behavior:
 **`AmbassadorHost` and `AmbassadorMapping` will not associate without explicit selection**.
@@ -148,6 +178,11 @@ As a migration aid, an `AmbassadorMapping` with a `hostname` of `"*"` will assoc
 has no `selector`, as will an `AmbassadorMapping` that uses `host_regex`.
 
 ### `AmbassadorHost` is required to terminate TLS.
+
+<Alert severity="info">
+  <a href="../running/host">Learn more about <code>AmbassadorHost</code></a><br />
+  <a href="../running/tls#tlscontext">Learn more about <code>TLSContext</code></a>
+</Alert>
 
 In $productName$ 1.X, simply creating a `TLSContext` is sufficient to terminate TLS, but in 2.X you _must_ have an
 `AmbassadorHost`. The minimal setup to terminate TLS is now something like this:
