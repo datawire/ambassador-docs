@@ -15,6 +15,8 @@
               link: /topics/install/helm
             - title: Upgrade to a newer version
               link: /topics/install/upgrading
+            - title: Migrate to $productName$ 2.X
+              link: /topics/install/migrate-to-version-2
             - title: Upgrade to the $AESproductName$
               link: /topics/install/upgrade-to-edge-stack
             - title: Install $productName$
