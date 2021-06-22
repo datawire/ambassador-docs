@@ -9,7 +9,7 @@ single configuration resource:
 * How $productName$ should handle secure and insecure requests
 * Which `AmbassadorMappings` should be associated with this `AmbassadorHost`
 
-A minimal `AmbassadorHost` resource, assuming no TLS configuration, would be:
+A minimal `AmbassadorHost` resource, using Let’s Encrypt to handle TLS, would be:
 
 ```yaml
 apiVersion: x.getambassador.io/v3alpha1
@@ -18,11 +18,16 @@ metadata:
   name: minimal-host
 spec:
   hostname: host.example.com
+  acmeProvider:
+    email: julian@example.com
 ```
 
 This `AmbassadorHost` tells $productName$ to expect to be reached at `host.example.com`,
-with no TLS termination, and only associating with `AmbassadorMapping`s that also set a
-`hostname` that matches `host.example.com`.
+and to manage TLS certificates using Let’s Encrypt, registering as
+`julian@example.com`. Since it doesn’t specify otherwise, requests using
+cleartext will be automatically redirected to use HTTPS, and $productName$ will
+not search for any specific further configuration resources related to this
+`AmbassadorHost`.
 
 ## Setting the `hostname`
 
@@ -132,10 +137,54 @@ Some special cases to be aware of here:
 The `AmbassadorHost` is responsible for high-level TLS configuration in $productName$. There are
 several settings covering TLS:
 
+### ACME support
+
+$AESproductName$ comes with built in support for automatic certificate
+management using the [ACME protocol](https://tools.ietf.org/html/rfc8555).
+
+It does this by using the `hostname` of an `AmbassadorHost` to request a certificate from
+the `acmeProvider.authority` using the `HTTP-01` challenge. After requesting a
+certificate, $AESproductName$ will then manage the renewal process automatically.
+
+The `acmeProvider` element of the `AmbassadorHost` configures the Certificate Authority
+$AESproductName$ will request the certificate from and the email address that the CA
+will use to notify about any lifecycle events of the certificate.
+
+```yaml
+acmeProvider:
+  authority: url-to-provider
+  email: email-of-registrant
+```
+
+**Notes on ACME Support:**
+
+* If the authority is not supplied, the Let’s Encrypt production environment is assumed.
+
+* In general, `email-of-registrant` is mandatory when using ACME: it should be
+a valid email address that will reach someone responsible for certificate 
+management.
+
+* ACME stores certificates in Kubernetes secrets. The name of the secret can be
+set using the `tlsSecret` element:
+   ```yaml
+   acmeProvider:
+     email: user@example.com
+   tlsSecret:
+     name: tls-cert
+   ```
+   if not supplied, a name will be automatically generated from the `hostname` and `email`.
+
+* $AESproductName$ uses the [`HTTP-01` challenge
+](https://letsencrypt.org/docs/challenge-types/) for ACME support:
+   - Does not require permission to edit DNS records
+   - The `hostname` must be reachable from the internet so the CA can check
+   `POST` to an endpoint in $AESproductName$.
+   - Wildcard domains are not supported.
+
 ### `tlsSecret` enables TLS termination
 
-`tlsSecret` specifies a Kubernetes `Secret` is **required** for any TLS termination to occur. No matter what other TLS
-configuration is present, TLS termination will not occur if `tlsSecret` is not specified.
+`tlsSecret` specifies a Kubernetes `Secret` is **required** for any TLS termination to occur. If ACME is enabled,
+it will set `tlsSecret`: in all other cases, TLS termination will not occur if `tlsSecret` is not specified.
 
 The following `AmbassadorHost` will configure $productName$ to read a `Secret` named 
 `tls-cert` for a certificate to use when terminating TLS.

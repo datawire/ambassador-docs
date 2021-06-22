@@ -12,8 +12,8 @@ for different TLS use cases including:
 ## `AmbassadorHost`
 
 As explained in the [`AmbassadorHost`](../host-crd) reference, an `AmbassadorHost` represents a domain
-in $productName$ and defines how TLS is managed on that domain. In $AESproductName$, the simplest configuration of an `AmbassadorHost` will enable TLS with a 
-self-signed certificate and redirect cleartext traffic to HTTPS. 
+in $productName$ and defines how TLS is managed on that domain. In $AESproductName$, the simplest configuration
+of an `AmbassadorHost` will enable TLS with a self-signed certificate and redirect cleartext traffic to HTTPS. 
 
 > The example below does not define a `requestPolicy`; however, this is something to keep in mind as you begin using the `AmbassadorHost` `CRD` in $productName$.
 >
@@ -22,11 +22,11 @@ self-signed certificate and redirect cleartext traffic to HTTPS.
 
 ### Automatic TLS with ACME
 
-With $productName$, the `AmbassadorHost` can be configured to completely 
+With $AESproductName$, the `AmbassadorHost` can be configured to completely 
 manage TLS by requesting a certificate from a Certificate Authority using the
 [ACME HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/).
 
-After creating a DNS record, configuring $productName$ to get a 
+After creating a DNS record, configuring $AESproductName$ to get a 
 certificate from the default CA [Let's Encrypt](https://letsencrypt.org) is as
 simple as providing a hostname and your email for the certificate:
 
@@ -43,7 +43,7 @@ spec:
     email: julian@example.com
 ```
 
-$productName$ will now request a certificate from the CA and store it in a secret 
+$AESproductName$ will now request a certificate from the CA and store it in a secret 
 in the same namespace as the `AmbassadorHost`.
 
 ### Bring your own certificate

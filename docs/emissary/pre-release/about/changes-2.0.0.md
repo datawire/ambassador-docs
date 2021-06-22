@@ -60,7 +60,7 @@ The [`AmbassadorHost` CRD](../../topics/running/host-crd) continues to define in
 
 However, in $productName$ 2.0.0, an `AmbassadorMapping` will not be associated with an `AmbassadorHost` unless at least one of the following is true:
 
-- The `AmbassadorMapping` specifies a `host` attribute that matches the `AmbassadorHost` in question.
+- The `AmbassadorMapping` specifies a `hostname` attribute that matches the `AmbassadorHost` in question.
 - The `AmbassadorHost` specifies a `selector` that matches the `AmbassadorMapping`'s Kubernetes `label`s.
    - Prior to 2.0.0, an `AmbassadorHost` in which no `selector` was specified would have a default `selector`; this is no longer the case.
 
