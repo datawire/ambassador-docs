@@ -75,6 +75,10 @@ items:
         type: bugfix
         image: ./edge-stack-2.0.0-ingressstatus.png
 
+      - title: Stricter mTLS enforcement
+        body: $productName$ 2.0.0 fixes a bug where mTLS could use the wrong configuration when SNI and the <code>:authority</code> header didn't match
+        type: bugfix
+
       - title: Module-based TLS no longer supported
         body: The <code>tls</code> module and the <code>tls</code> field in the Ambassador module are no longer supported. Please use <code>TLSContext</code> resources instead.
         docs: about/changes-2.0.0/#tls-the-ambassador-module-and-the-tls-module

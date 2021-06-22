@@ -64,8 +64,6 @@ metadata:
   name: example-host
 spec:
   hostname: host.example.com
-  acmeProvider:
-    authority: none
   tlsSecret:
     name: host-secret
 ```
