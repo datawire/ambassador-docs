@@ -24,6 +24,9 @@ This `AmbassadorHost` tells $productName$ to expect to be reached at `host.examp
 with no TLS termination, and only associating with `AmbassadorMapping`s that also set a
 `hostname` that matches `host.example.com`.
 
+Many examples of setting up `AmbassadorHost` and `AmbassadorListener` are available in the
+[Configuring $productName$ to Communicate](../../../howtos/configure-communications) document.
+
 ## Setting the `hostname`
 
 The `hostname` element tells $productName$ which hostnames to expect. `hostname` is a DNS glob,

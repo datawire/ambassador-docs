@@ -29,6 +29,9 @@ cleartext will be automatically redirected to use HTTPS, and $productName$ will
 not search for any specific further configuration resources related to this
 `AmbassadorHost`.
 
+Many examples of setting up `AmbassadorHost` and `AmbassadorListener` are available in the
+[Configuring $productName$ to Communicate](../../../howtos/configure-communications) document.
+
 ## Setting the `hostname`
 
 The `hostname` element tells $productName$ which hostnames to expect. `hostname` is a DNS glob,
