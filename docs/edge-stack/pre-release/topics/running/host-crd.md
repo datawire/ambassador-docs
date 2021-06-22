@@ -82,7 +82,7 @@ the second:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  use-this-mapping
@@ -92,7 +92,7 @@ spec:
   prefix: /httpbin/
   service: http://httpbin.org
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  skip-this-mapping

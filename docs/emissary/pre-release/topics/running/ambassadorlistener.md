@@ -159,7 +159,7 @@ In this scenario, a layer 7 load balancer ahead of Emissary will terminate TLS, 
 
 ```yaml
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: lb-listener
@@ -187,7 +187,7 @@ Here, we assume that Emissary is behind a load balancer setup that handles TLS a
 
 ```yaml
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: split-lb-one-listener
@@ -196,7 +196,7 @@ spec:
   port: 8080
   securityModel: INSECURE
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: split-lb-two-listener

@@ -27,7 +27,7 @@ If $productName$ has been configured such that it's possible to terminate TLS, b
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: default-http
@@ -40,7 +40,7 @@ spec:
     namespace:
       from: SELF 
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: default-https
@@ -87,7 +87,7 @@ If the system cannot terminate TLS, the defaults are a bit simpler:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: default-http
@@ -283,7 +283,7 @@ This scenario doesn't do TLS at all, but will accept cleartext HTTP to any `exam
 
 ```yaml
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: cleartext-listener
@@ -318,7 +318,7 @@ In this scenario, a layer 7 load balancer ahead of $productName$ will terminate 
 
 ```yaml
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: lb-listener
@@ -348,7 +348,7 @@ We're going to route HTTPS for both `foo.example.com` and `bar.example.com`, red
 
 ```yaml
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: split-lb-one-listener
@@ -360,7 +360,7 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: split-lb-two-listener
@@ -398,7 +398,7 @@ There's no reason you need to use ports 8080 and 8443, or that you're limited to
 
 ```yaml
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: listener-9001
@@ -410,7 +410,7 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: listener-9002
@@ -422,7 +422,7 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: listener-4001
@@ -455,7 +455,7 @@ Here, we'll listen for HTTP to `foo.example.com` on port 8888, and for either HT
 
 ```yaml
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: listener-8888
@@ -468,7 +468,7 @@ spec:
       matchLabels:
         tenant: foo
 ---
-apiversion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorListener
 metadata:
   name: listener-9999
