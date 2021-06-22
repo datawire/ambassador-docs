@@ -18,10 +18,10 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.0.0-ea
-    date: '2021-06-18'
+    date: "2021-06-23"
     notes:
       - title: Developer Preview!
-        body: $productName$ 2.0.0 is a Developer Preview; while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think!
+        body: We're pleased to introduce $productName$ 2.0.0 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         type: change
         docs: about/changes-2.0.0
 
@@ -65,12 +65,12 @@ items:
         image: ./edge-stack-2.0.0-host_crd.png
 
       - title: Envoy V3 APIs
-        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or e.g. Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
+        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
         type: change
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
       - title: Correctly set Ingress resource status in all cases
-        body: $productName$ 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses -- thanks, [Noah Fontes](https://github.com/impl)!
+        body: $productName$ 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses -- thanks, <a href="https://github.com/impl">Noah Fontes</a>!
         docs: topics/running/ingress-controller
         type: bugfix
         image: ./edge-stack-2.0.0-ingressstatus.png
@@ -91,7 +91,7 @@ items:
         image: ./edge-stack-2.0.0-prune_routes.png
         type: feature
 
-      - title: Higher performance while generating envoy configuration now enabled by default
+      - title: Higher performance while generating Envoy configuration now enabled by default
         body: The environment variable <code>AMBASSADOR_FAST_RECONFIGURE</code> is now set by default, enabling the higher-performance implementation of the code that $productName$ uses to generate and validate Envoy configurations.
         docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
         type: change
@@ -152,7 +152,7 @@ items:
     date: '2021-05-13'
     notes:
       - title: Envoy 1.15.5
-        body: $productName$ bas been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). $productName$ can now be configured to reject client requests that contain escaped slashes.
+        body: $productName$ has been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). $productName$ can now be configured to reject client requests that contain escaped slashes.
         image: ./edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
         type: security

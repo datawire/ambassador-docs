@@ -18,10 +18,10 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.0.0-ea
-    date: '2021-06-18'
+    date: "2021-06-23"
     notes:
       - title: Developer Preview!
-        body: $productName$ 2.0.0 is a Developer Preview; while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think!
+        body: We're pleased to introduce $productName$ 2.0.0 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         type: change
         docs: about/changes-2.0.0
 
@@ -54,7 +54,7 @@ items:
         type: bugfix
 
       - title: Stricter rules for AmbassadorHost/AmbassadorMapping association
-        body: A <code>AmbassadorMapping</code> will only be matched with a <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve Emissary's memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
+        body: A <code>AmbassadorMapping</code> will only be matched with a <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
         docs: about/changes-2.0.0/#host-and-mapping-association
         type: change
 
@@ -70,7 +70,7 @@ items:
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
       - title: Correctly set Ingress resource status in all cases
-        body: $productName$ 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses -- thanks, [Noah Fontes](https://github.com/impl)!
+        body: $productName$ 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses -- thanks, <a href="https://github.com/impl">Noah Fontes</a>!
         docs: topics/running/ingress-controller
         type: bugfix
         image: ./edge-stack-2.0.0-ingressstatus.png
@@ -85,7 +85,7 @@ items:
         image: ./edge-stack-2.0.0-tlscontext.png
         type: change
 
-      - title: Memory usage improvements for installations with many Hosts
+      - title: Memory usage improvements for installations with many AmbassadorHosts
         body: The behavior of the Ambassador module <code>prune_unreachable_routes</code> field is now automatic, which should reduce Envoy memory requirements for installations with many <code>AmbassadorHost</code>s
         docs: topics/running/ambassador/#prune-unreachable-routes
         image: ./edge-stack-2.0.0-prune_routes.png

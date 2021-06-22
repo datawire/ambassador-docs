@@ -3,9 +3,14 @@ Major Changes in $productName$ 2.0.0
 
 ## 0. 2.0.0 is a Developer Preview!
 
-$productName$ 2.0.0 is a **developer preview**: while we believe that it's stable enough for testing and feedback, some things may change, and it may not be as stable as our usual GA releases. We welcome feedback!! Join us on [Slack](https://a8r.io/slack) and let us know what you think.
+We're pleased to introduce $productName$ 2.0.0 as a **developer preview**. The 2.X family introduces
+a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global
+configuration to better handle multitenant or multiorganizational installations, reduce memory footprint,
+and improve performance. We welcome feedback!! Join us on [Slack](https://a8r.io/slack) and let us know
+what you think.
 
-Additionally, while $productName$ 2.0.0 is largely compatible with $productName$ 1.13, it introduces some significant changes that may require changes to existing configurations.
+While $productName$ 2.0.0 is functionally compatible with $productName$ 1.13, some resources have moved 
+into a different APIgroup with different names. Upgrading will require editing your configuration.
 
 ## 1. Configuration API Version `x.getambassador.io/v3alpha1`
 
