@@ -4,7 +4,7 @@ $productName$ is designed so that the author of a given Kubernetes service can e
 
 $productName$ _must_ have one or more mappings defined to provide access to any services at all. The name of the mapping must be unique.
 
-## System-wide defaults for Mappings
+## System-wide defaults for AmbassadorMappings
 
 Certain aspects of mappings can be set system-wide using the `defaults` element of the `ambassador Module`:
 see [using defaults](../../using/defaults) for more information. The `AmbassadorMapping` element will look first in

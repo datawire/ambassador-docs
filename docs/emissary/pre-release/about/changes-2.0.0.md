@@ -56,7 +56,7 @@ Note also that there is no limit on how many `AmbassadorListener`s may be create
 
 ### `AmbassadorHost` and `AmbassadorMapping` Association
 
-The [`AmbassadorHost` CRD](../../topics/running/host) continues to define information about hostnames, TLS certificates, and how to handle requests that are "secure" (using HTTPS) or "insecure" (using HTTP). The [`AmbassadorMapping` CRD](../../topics/using/intro-mappings) continues to define how to map the URL space to upstream services.
+The [`AmbassadorHost` CRD](../../topics/running/host-crd) continues to define information about hostnames, TLS certificates, and how to handle requests that are "secure" (using HTTPS) or "insecure" (using HTTP). The [`AmbassadorMapping` CRD](../../topics/using/intro-mappings) continues to define how to map the URL space to upstream services.
 
 However, in $productName$ 2.0.0, an `AmbassadorMapping` will not be associated with an `AmbassadorHost` unless at least one of the following is true:
 
@@ -72,7 +72,7 @@ Each `AmbassadorHost` can specify its `requestPolicy.insecure.action` independen
 
 ### `AmbassadorHost`, `TLSContext`, and TLS Termination
 
-In $productName$ 2.0.0, **`AmbassadorHost`s are required for TLS termination**. It is no longer sufficient to create a [`TLSContext`](../../topics/running/tls/#tlscontext) by itself; the [`AmbassadorHost`](../../topics/running/host) is required.
+In $productName$ 2.0.0, **`AmbassadorHost`s are required for TLS termination**. It is no longer sufficient to create a [`TLSContext`](../../topics/running/tls/#tlscontext) by itself; the [`AmbassadorHost`](../../topics/running/host-crd) is required.
 
 The minimal setup for TLS termination is therefore a Kubernetes `Secret` of type `kubernetes.io/tls`, and an `AmbassadorHost` that uses it:
 

@@ -2,7 +2,7 @@
 
 TLS encryption is one of the basic requirements of having a secure system.
 $AESproductName$ [automatically enables TLS termination/HTTPs
-](../../topics/running/host#acme-and-tls-settings), making TLS encryption
+](../../topics/running/host-crd#acme-and-tls-settings), making TLS encryption
 easy and centralizing TLS termination for all of your services in Kubernetes.
 
 While this automatic certificate management in $AESproductName$ helps
@@ -166,7 +166,7 @@ While a self-signed certificate is a simple and quick way to get $productName$ t
 
 With $productName$, this can be simply done by requesting a
 certificate using the built in [ACME support
-](../../topics/running/host#acme-support)
+](../../topics/running/host-crd#acme-support)
 
 For the Open-Source API Gateway, Jetstack's `cert-manager` provides a simple
 way to manage certificates from Let's Encrypt. See our documentation for more

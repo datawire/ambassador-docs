@@ -219,7 +219,7 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
 
 1. Configure the target cluster $productName$ to allow insecure routing.
 
-    When $productName$ is running in a Linkerd mesh, Linkerd provides transport security, so connections coming in from the Linkerd in the source cluster will always be HTTP when they reach $productName$. Therefore, the `AmbassadorHost` CRDs corresponding to services that you'll be accessing from the source cluster *must* be configured to `Route` insecure requests. More information on this topic is available in the [`AmbassadorHost` documentation](../../topics/running/host); an example might be
+    When $productName$ is running in a Linkerd mesh, Linkerd provides transport security, so connections coming in from the Linkerd in the source cluster will always be HTTP when they reach $productName$. Therefore, the `AmbassadorHost` CRDs corresponding to services that you'll be accessing from the source cluster *must* be configured to `Route` insecure requests. More information on this topic is available in the [`AmbassadorHost` documentation](../../topics/running/host-crd); an example might be
 
     ```yaml
     apiVersion: x.getambassador.io/v3alpha1

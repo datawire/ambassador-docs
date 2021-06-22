@@ -49,7 +49,7 @@ items:
 
       - title: Independent Host actions supported
         body: Each <code>AmbassadorHost</code> can specify its <code>requestPolicy.insecure.action</code> independently of any other <code>AmbassadorHost</code>, allowing for HTTP routing as flexible as HTTPS routing.
-        docs: topics/running/host/#secure-and-insecure-requests
+        docs: topics/running/host-crd/#secure-and-insecure-requests
         image: ./edge-stack-2.0.0-insecure_action_hosts.png
         type: bugfix
 

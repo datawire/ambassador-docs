@@ -157,7 +157,7 @@ spec:
 
 The AmbassadorHost is declared here because we are using gRPC without TLS.  Since $productName$ terminates TLS by default, in the AmbassadorHost we add a `requestPolicy` which allows insecure connections. After adding the $productName$ mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
 
-> For more information on insecure routing, please refer to the [`AmbassadorHost` documentation](../../topics/running/host#secure-and-insecure-requests).
+> For more information on insecure routing, please refer to the [`AmbassadorHost` documentation](../../topics/running/host-crd#secure-and-insecure-requests).
 
 
 Once you have the YAML file and the correct Docker registry, deploy it to your cluster with `kubectl`.

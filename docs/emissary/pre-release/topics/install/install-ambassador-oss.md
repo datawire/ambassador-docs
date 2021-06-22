@@ -122,7 +122,7 @@ The versatile HTTPS configuration of $OSSproductName$ lets it support various HT
 
 See the [TLS HOWTO](../../../howtos/tls-termination) to quickly enable HTTPS support for your applications.
 
-**Note that $AESproductName$ automatically enables HTTPS.** Read more about its configuration on the [`AmbassadorHost` CRD](../../running/host) page.
+**Note that $AESproductName$ automatically enables HTTPS.** Read more about its configuration on the [`AmbassadorHost` CRD](../../running/host-crd) page.
 
 ## Helm
 

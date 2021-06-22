@@ -107,7 +107,7 @@ Explore some of the popular tutorials on $productName$:
 
 * [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from 
 the edge of your cluster to a Kubernetes service
-* [AmbassadorHost resource](../../topics/running/host/): configure a hostname and TLS options for your ingress.
+* [AmbassadorHost resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
 * [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads
 
 $productName$ has a comprehensive range of [features](/features/) to

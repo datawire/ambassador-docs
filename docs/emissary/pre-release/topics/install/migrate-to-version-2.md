@@ -61,7 +61,7 @@ The minimum steps to migrate:
 - **Copy `Host` resources to `AmbassadorHost` resources.**
 
     <Alert severity="info">
-      <a href="../running/host">Learn more about <code>AmbassadorHost</code></a>
+      <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
     </Alert>
 
     For each existing `Host` resource that 2.X should honor, create an `AmbassadorHost` resource:
@@ -137,7 +137,7 @@ work considerably more efficiently than relying on the defaults.
 
 <Alert severity="info">
   <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br />
-  <a href="../running/host">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
 </Alert>
 
 `AmbassadorListener.spec.hostBinding` controls whether a given `AmbassadorHost` will be associated with 
@@ -158,7 +158,7 @@ can also result in larger Envoy configurations that slow reconfiguration. Instea
 #### `AmbassadorHost` and `AmbassadorMapping` will not automatically associate with each other
 
 <Alert severity="info">
-  <a href="../running/host">Learn more about <code>AmbassadorHost</code></a><br />
+  <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a><br />
   <a href="../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
 </Alert>
 
@@ -180,7 +180,7 @@ has no `selector`, as will an `AmbassadorMapping` that uses `host_regex`.
 ### `AmbassadorHost` is required to terminate TLS.
 
 <Alert severity="info">
-  <a href="../running/host">Learn more about <code>AmbassadorHost</code></a><br />
+  <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a><br />
   <a href="../running/tls#tlscontext">Learn more about <code>TLSContext</code></a>
 </Alert>
 

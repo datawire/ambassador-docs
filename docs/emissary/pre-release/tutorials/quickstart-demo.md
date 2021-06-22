@@ -155,7 +155,7 @@ need information about your APIs.
 Further explore some of the concepts you learned about in this article: 
 * [`AmbassadorMapping` resource](../../topics/using/intro-mappings/): routes traffic from 
 the edge of your cluster to a Kubernetes service
-* [`AmbassadorHost` resource](../../topics/running/host/): sets the hostname by which
+* [`AmbassadorHost` resource](../../topics/running/host-crd/): sets the hostname by which
 $productName$ will be accessed and secured with TLS certificates
 * [Developer Portal](../../topics/using/dev-portal/): 
 publishes an API catalog and OpenAPI documentation

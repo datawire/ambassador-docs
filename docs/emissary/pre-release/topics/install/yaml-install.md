@@ -72,7 +72,7 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 
 ## Configure TLS termination and automatic HTTPS
 
-**$AESproductName$ enables TLS termination by default using a self-signed certificate. See the [`AmbassadorHost` CRD](../../../topics/running/host) for more information about disabling TLS.** If you have the ability to update your DNS, $AESproductName$ can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create an AmbassadorMapping."
+**$AESproductName$ enables TLS termination by default using a self-signed certificate. See the [`AmbassadorHost` CRD](../../../topics/running/host-crd) for more information about disabling TLS.** If you have the ability to update your DNS, $AESproductName$ can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create an AmbassadorMapping."
 
 1. Update your DNS so that your domain points to the IP address for your cluster.
 
@@ -84,7 +84,7 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
    * Enter the email address to be associated with your TLS certificate.
    * Click the **Save** button.
   
-  You'll see the newly created `AmbassadorHost` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [`AmbassadorHost` CRD](../../../topics/running/host).
+  You'll see the newly created `AmbassadorHost` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [`AmbassadorHost` CRD](../../../topics/running/host-crd).
 
 3. Once the `AmbassadorHost` is ready, navigate to `https://<hostname>` in your browser.
    Note that the certificate warning has gone away. Additionally, the $AESproductName$ automatically will redirect HTTP connections to HTTPS.

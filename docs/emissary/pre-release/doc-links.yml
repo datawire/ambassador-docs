@@ -104,7 +104,7 @@
             - title: Custom resources
               items:
                 - title: The AmbassadorHost resource
-                  link: /topics/running/host
+                  link: /topics/running/host-crd
                   items:
                     - title: TLS
                       link: /topics/running/tls/
