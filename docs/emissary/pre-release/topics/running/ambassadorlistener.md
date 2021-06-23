@@ -2,6 +2,10 @@
 
 The `AmbassadorListener` CRD defines where, and how, $productName$ should listen for requests from the network, and which `AmbassadorHost` definitions should be used to process those requests. For further examples of how to use `AmbassadorListener`, see [Configuring $productName$ to Communicate](../../../howtos/configure-communications).
 
+**Note that `AmbassadorListener`s are never created by $productName$, and must be defined by the user.** If you do not
+define any `AmbassadorListener`s, $productName$ will not listen anywhere for connections, and therefore won't do 
+anything useful. It will log a `WARNING` to this effect.
+
 ```yaml
 ---
 apiVersion: x.getambassador.io/v3alpha1
@@ -92,118 +96,6 @@ The possible stack elements are:
 | [ `TLS`, `HTTP`, `TCP` ] | HTTPS or HTTP, exactly equivalent to `protocol: HTTPS`. |
 | [ `PROXY`, `TLS`, `TCP` ] | The `PROXY` protocol, wrapping `TLS` _afterward_, wrapping raw TCP. This isn't equivalent to any `protocol` setting, and may be nonsensical. |
 
-## Default `Listeners` 
-
-### With TLS
-
-If no `AmbassadorListener`s are present in the system at all, but the system is otherwise configured in a way that permits TLS termination, two `AmbassadorListener`s are created by default:
-
-```yaml
----
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
-metadata:
-  name: default-http
-spec:
-  port: 8080
-  securityModel: XFP
-  protocol: HTTPS
-  l7Depth: 0
-  hostBinding:
-    namespace:
-      from: SELF 
----
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
-metadata:
-  name: default-https
-spec:
-  port: 8443
-  securityModel: XFP
-  protocol: HTTPS
-  l7Depth: 0
-  hostBinding:
-    namespace:
-      from: SELF
-```
-
-This allows either HTTP or HTTPS on either port 8080 or port 8443, using `X-Forwarded-Proto` to determine whether a given request is secure or insecure.
-
-### Without TLS
-
-If no `AmbassadorListener`s are present in the system at all, and the system is not configured in a way that permits TLS termination, only one `AmbassadorListener` is created by default:
-
-```yaml
----
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
-metadata:
-  name: default-http
-spec:
-  port: 8080
-  securityModel: INSECURE
-  protocol: HTTP
-  l7Depth: 0
-  hostBinding:
-    namespace:
-      from: SELF 
-```
-
-This allows cleartext HTTP only, on port 8080.
-
 ## Examples
 
-### Using an L7 Load Balancer to Terminate TLS
-
-In this scenario, a layer 7 load balancer ahead of Emissary will terminate TLS, so Emissary will always see HTTP with a known good `X-Forwarded-Protocol`, thus:
-
-```yaml
----
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
-metadata:
-  name: lb-listener
-spec:
-  port: 8443
-  protocol: HTTP
-  securityModel: XFP  
-  l7Depth: 1
-  hostBinding: ...
-```
-
-- We specifically set this `AmbassadorListener` to HTTP-only, but we stick with port 8443 just because we expect people setting up TLS at all to expect to use port 8443. (There's nothing special about the port number, pick whatever you like.)
-- We set `securityModel` to XFP, because the L7 load balancer's `X-Forwarded-Proto` is valid, and `AmbassadorHost`s should be able to use it to make decisions about how to route.
-- We set `l7Depth` to 1 to indicate that there's a single trusted L7 load balancer ahead of us.
-- `hostBinding` isn't shown here, but it must be set correctly to find the `AmbassadorHost`s that should be associated with this `AmbassadorListener`.
-
-### Using a Split L4 Load Balancer to Terminate TLS
-
-Here, we assume that Emissary is behind a load balancer setup that handles TLS at layer 4:
-
-- Incoming cleartext traffic is forwarded to Emissary on port 8080.
-- Incoming TLS traffic is terminated at the load balancer, then forwarded to Emissary *as cleartext* on port 8443.
-- This might involve multiple L4 load balancers, but the actual number doesn't matter.
-- The actual port numbers we use don't matter either, as long as Emissary and the load balancer(s) agree on which port is for which traffic.
-
-```yaml
----
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
-metadata:
-  name: split-lb-one-listener
-spec:
-  protocol: HTTP
-  port: 8080
-  securityModel: INSECURE
----
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
-metadata:
-  name: split-lb-two-listener
-spec:
-  protocol: HTTP
-  port: 8443
-  securityModel: SECURE
-```
-
-- Since L4 load balancers cannot set `X-Forwarded-Protocol`, we don't use it at all here: instead, we dictate that 8080 and 8443 both speak cleartext HTTP, but everything arriving at port 8080 is insecure and everything at port 8443 is secure.
+For further examples of how to use `AmbassadorListener`, see [Configuring $productName$ to Communicate](../../../howtos/configure-communications).
