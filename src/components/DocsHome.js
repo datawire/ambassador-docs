@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-
+import AmbassadorCloud from '../../../src/assets/images/ambassador-cloud.svg'
 import Icon from '../../../src/components/Icon';
 import {
     goToGetAmbassador, goToTelepresenceDocs, goToTutorialsGettingStarted, goToTelepresenceHowTo,
@@ -21,7 +21,7 @@ const DocsHome = () => (
                     </Link>
                 </div>
                 <div className="docs__info--second">
-                    <Icon name="ambassador-cloud" className="docs__ambassador-cloud-image" />
+                    <img src={AmbassadorCloud} alt="" width="280" height="153" className="docs__ambassador-cloud-image" alt="Ambassador Cloud"/>
                 </div>
             </div>
         </section>

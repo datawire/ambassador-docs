@@ -203,7 +203,7 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
 [`JWT` Filter]: ../../filters/jwt
 [Go `text/template`]: https://golang.org/pkg/text/template/
 [Go `text/template` functions]: https://golang.org/pkg/text/template/#hdr-Functions
-[`v2.RateLimitResponse_DescriptorStatus`]: https://godoc.org/github.com/datawire/ambassador/pkg/api/envoy/service/ratelimit/v2#RateLimitResponse_DescriptorStatus
+[`v2.RateLimitResponse_DescriptorStatus`]: https://godoc.org/github.com/emissary-ingress/emissary/pkg/api/envoy/service/ratelimit/v2#RateLimitResponse_DescriptorStatus
 [Sprig `hasKey`]: https://masterminds.github.io/sprig/dicts.html#haskey
 
 ## Logging RateLimits

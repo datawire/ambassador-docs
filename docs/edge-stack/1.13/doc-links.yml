@@ -100,6 +100,8 @@
                       link: /howtos/token-ratelimit
             - title: Monitor my services
               items:
+                - title: Explore distributed tracing and Kubernetes monitoring
+                  link: /howtos/dist-tracing
                 - title: Distributed tracing with Datadog
                   link: /howtos/tracing-datadog
                 - title: Distributed tracing with Zipkin
@@ -296,3 +298,5 @@
               link: /topics/using/edgectl/service-preview-reference
         - title: Developer Portal
           link: /topics/using/dev-portal
+        - title: Release Notes
+          link: /release-notes

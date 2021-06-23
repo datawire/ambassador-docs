@@ -1,12 +1,13 @@
 # Plugin Filter
 
-The Plugin filter type allows you to plug in your own custom code. This code is compiled to a `.so` file, which you load into the Ambassador Edge Stack container at `/etc/ambassador-plugins/${NAME}.so`. For a tutorial on developing filters, see the [Filter Development Guide](../../../../howtos/filter-dev-guide).
 
-## The plugin interface
+The Plugin filter type allows you to plug in your own custom code. This code is compiled to a `.so` file, which you load into the Edge Stack container at `/etc/ambassador-plugins/${NAME}.so`. The [Filter Development Guide](../../../../howtos/filter-dev-guide) contains a tutorial on developing filters.
 
-This code is written in the Go programming language (Golang), and must be compiled with the exact same compiler settings as the Ambassador Edge Stack; and any overlapping libraries used must have their versions match exactly. This information is documented in the `/ambassador/aes-abi.txt` file in the AES docker image.
+## The Plugin interface
 
-Plugins are compiled with `go build -buildmode=plugin -trimpath`, and must have a `main.PluginMain` function with the signature `PluginMain(w http.ResponseWriter, r *http.Request)`:
+This code is written in the Go programming language and must be compiled with the exact same compiler settings as Edge Stack (any overlapping libraries used must have their versions match exactly). This information is documented in the `/ambassador/aes-abi.txt` file in the AES docker image.
+
+Plugins are compiled with `go build -buildmode=plugin -trimpath` and must have a `main.PluginMain` function with the signature `PluginMain(w http.ResponseWriter, r *http.Request)`:
 
 ```go
 package main

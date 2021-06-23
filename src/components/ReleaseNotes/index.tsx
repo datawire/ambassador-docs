@@ -25,7 +25,7 @@ const ReleaseNotes = ({
   }, [product]);
 
   const changelog = useMemo(() => {
-    const commonText = `For a detailed list of all the changes in these releases, please consult the`;
+    const commonText = `For a detailed list of all the changes in past releases, please consult the`;
     
     if (changelogURL) {
       return (
@@ -41,7 +41,6 @@ const ReleaseNotes = ({
   return (
     <>
       <h1>{title}</h1>
-      <p>{changelog}</p>
       <div>
         {releases.map((release) => (
           <Release
@@ -52,6 +51,7 @@ const ReleaseNotes = ({
           />
         ))}
       </div>
+      <p>{changelog}</p>
     </>
   );
 };

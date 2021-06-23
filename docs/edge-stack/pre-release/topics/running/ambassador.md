@@ -370,13 +370,13 @@ diagnostics:
   enabled: false
 ```
 
-With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and are reachable from inside the Ambassador Pod at `https://localhost:8877`. You can use Kubernetes port forwarding to set up remote access temporarily:
+With the routes disabled, `/ambassador/v0/diag` and `/edge_stack/admin/` will respond with 404 -- however, the services themselves are still running, and `/ambassador/v0/diag/` is reachable from inside the Ambassador Pod at `https://localhost:8877`. You can use Kubernetes port forwarding to set up remote access to the diagnostics page temporarily:
 
 ```
 kubectl port-forward -n ambassador deploy/ambassador 8877
 ```
 
-Alternately, you can expose the diagnostics page but control them via `Host` based routing. Set `diagnostics.enabled` to false and create Mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), using `localhost:8877` as the `service` on the Mapping.
+Alternately, you can expose the diagnostics page and Edge Policy Console but control them via `Host` based routing. Set `diagnostics.enabled` to false and create Mappings as specified in the [FAQ](../../../about/faq#how-do-i-disable-the-default-admin-mappings), and if exposing the diagnostics page, use `localhost:8877` as the `service` on the Mapping.
 
 ##### Diagnostics - allow non local
 

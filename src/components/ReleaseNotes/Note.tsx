@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import Button from '../../../../src/components/Button/Button';
-import ClickableImage from '../../../../src/components/ClickableImage';
 import Icon from '../../../../src/components/Icon/Icon';
 import styles from './releaseNotes.module.less';
 
@@ -45,7 +44,7 @@ const Note = ({ note, images, onViewMore }) => {
   return (
     <div className={styles.note}>
       <div className={styles.note__description}>
-        <h3 className={styles.note__title}>
+        <h3 className={styles.note__title} onClick={onViewMore}>
           {typeIcon[note.type] && (
             <Icon
               name={typeIcon[note.type]}
@@ -57,26 +56,18 @@ const Note = ({ note, images, onViewMore }) => {
         <div
           className={styles.note__body}
           dangerouslySetInnerHTML={{ __html: note.body }}
-        ></div>
-        <div className={styles.note__image_xs}>
-          {image && <ClickableImage src={image} alt={title} />}
-        </div>
-        {note.docs && (
-          <Button
-            onClick={onViewMore}
-            size="sm"
-            color="blue-outline"
-            className={styles.note__more}
-          >
-            More Information <Icon name="arrow" />
-          </Button>
-        )}
-      </div>
-      <div className={styles.note__image}>
+        />
         {image && (
-          <ClickableImage src={image} alt={title} height="172" width="207" />
+          <div className={styles.note__image_xs}>
+            <img src={image} alt={title} height="172" width="207" />
+          </div>
         )}
       </div>
+      {image && (
+        <div className={styles.note__image}>
+          <img src={image} alt={title} height="172" width="207" />
+        </div>
+      )}
     </div>
   );
 };

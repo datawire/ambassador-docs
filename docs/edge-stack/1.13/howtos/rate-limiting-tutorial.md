@@ -12,7 +12,7 @@ Once completed, you'll have a Kubernetes cluster running Ambassador and the Quot
 
 ## 1. Deploy the rate limit service
 
-Ambassador delegates the actual rate limit logic to a third party service. We've written a [simple rate limit service](https://github.com/datawire/ambassador/tree/master/docker/test-ratelimit) that:
+Ambassador delegates the actual rate limit logic to a third party service. We've written a [simple rate limit service](https://github.com/emissary-ingress/emissary/tree/master/docker/test-ratelimit) that:
 
 - listens for requests on port 5000;
 - handles gRPC `shouldRateLimit` requests;

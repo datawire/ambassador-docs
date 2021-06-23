@@ -23,9 +23,10 @@ Use the following variables for the environment of your Ambassador container:
 | Core                              | `AMBASSADOR_ENVOY_API_VERSION`                                                           | `V2`                                                | String Enum; `V3` or `V2` |
 | Core                              | `AMBASSADOR_UPDATE_MAPPING_STATUS`                                                       | `false`                                             | Boolean; `true`=true, any other value=false |
 | Core                              | `AMBASSADOR_DISABLE_SNAPSHOT_SERVER`                                                     | `false`                                             | Boolean; non-empty=true, empty=false |
+| Core                              | `AMBASSADOR_JSON_LOGGING`                                                                | `false`                                             | Boolean; non-empty=true, empty=false |
 | Edge Stack                        | [`AES_LOG_LEVEL`](../aes-extensions/#aes_log_level)                                      | `warn`                                              | Log level |
 | Edge Stack                        | [`AES_RATELIMIT_PREVIEW`](../aes-extensions/ratelimit#aes-ratelimit_preview)         | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
-| Edge Stack                        | [`AES_AUTH_TIMEOUT`](../aes-extensions/authentication#aes_auth_timeout)                  | `4s`                                                | Duration; [Go `time.ParseDuration`][]
+| Edge Stack                        | [`AES_AUTH_TIMEOUT`](../aes-extensions/authentication/#timeout-variables)                  | `4s`                                                | Duration; [Go `time.ParseDuration`][]
 | Primary Redis (L4)                | [`REDIS_SOCKET_TYPE`](../aes-redis#socket_type)                                          | `tcp`                                               | Go network such as `tcp` or `unix`; see [Go `net.Dial`][] |
 | Primary Redis (L4)                | [`REDIS_URL`](../aes-redis#url)                                                          | None, must be set explicitly                        | Go network address; for TCP this is a `host:port` pair; see [Go `net.Dial`][] |
 | Primary Redis (L4)                | [`REDIS_TLS_ENABLED`](../aes-redis#tls_enabled)                                          | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
@@ -98,7 +99,7 @@ The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traf
 
 [^1]: This may change in a future release to reflect the Pods's
       namespace if deployed to a namespace other than `default`.
-      https://github.com/datawire/ambassador/issues/1583
+      https://github.com/emissary-ingress/emissary/issues/1583
 
 [Go `net.Dial`]: https://golang.org/pkg/net/#Dial
 [Go `strconv.ParseBool`]: https://golang.org/pkg/strconv/#ParseBool
