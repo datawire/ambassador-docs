@@ -14,120 +14,115 @@ migrating.
 
 ## 1. Migration Process
 
-The minimum steps to migrate:
+### Install $productName$ 2.0.0 next to your running instance.
 
-- **Apply the 2.0.0 CRDs, and apply RBAC permitting the `x.getambassador.io` APIgroup.**
+By far the easiest way to do this is with Helm:
 
-    The `x.getambassador.io` APIgroup allows for greater isolation of $productName$ 1.X and $productName$ 2.X 
-    during side-by-side testing. As its `v3alpha1` version implies, we are actively seeking feedback on it,
-    and it may change before its promotion to `getambassador.io/v3`.
+```sh
+# Add the Repo:
+helm repo add datawire https://app.getambassador.io
 
-    The necessary RBAC is included in $productName$'s published Helm charts and YAML manifests:
+# Create Namespace and Install:
+kubectl create namespace $productNamespace$ && \
+helm install $productHelmName$ --devel --namespace $productNamespace$ datawire/$productHelmName$ && \
+kubectl -n $productNamespace$ wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=$productHelmName$
+```
 
-    ```yaml
-    - apiGroups: [ "x.getambassador.io", "getambassador.io" ]
-      resources: [ "*" ]
-      verbs: ["get", "list", "watch", "update", "patch", "create", "delete" ]
-  
-    - apiGroups: [ "getambassador.io" ]
-      resources: [ "mappings/status" ]
-      verbs: ["update"]
-  
-    - apiGroups: [ "x.getambassador.io" ]
-      resources: [ "ambassadormappings/status" ]
-      verbs: ["update"]
-    ```
+This will install the name `x.getambassador.io` APIgroup, and start $productName$ running in its the
+$productNamespace$ namespace. The `x.getambassador.io` APIgroup allows for greater isolation of
+$productName$ 1.X and $productName$ 2.X during side-by-side testing. As its `v3alpha1` version implies,
+we are actively seeking feedback on it, and it may change before its promotion to `getambassador.io/v3`.
 
-- **Make sure all `ambassador_id`s are arrays, not simple strings.**
+### Make sure all `ambassador_id`s are arrays, not simple strings.
 
-    `ambassador_id: "foo"` must become `ambassador_id: [ "foo" ]`. This applies to all $productName$
-    resources, and is supported by all versions since at least Ambassador 1.0.0.
+In any resource that you want your 2.X instance to honor, any `ambassador_id: "foo"` must become
+`ambassador_id: [ "foo" ]`. This applies to all $productName$ resources, and is supported by all versions
+since at least Ambassador 1.0.0.
 
-- **Define an `AmbassadorListener` for each port on which your installation should listen.**
+### Define an `AmbassadorListener` for each port on which your installation should listen.
 
-    <Alert severity="info">
-      <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
-    </Alert>
+<Alert severity="info">
+  <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+</Alert>
 
-    `AmbassadorListener` will be required by most if not all installations. It's worth thinking about the
-    `hostBinding`s to use for each `AmbassadorListener`, too, though you can start migrating with
+`AmbassadorListener` is **mandatory**. It's worth thinking about the `hostBinding`s to use for 
+each `AmbassadorListener`, too, though you can start migrating with
 
-    ```yaml
-    hostBinding:
-      namespace:
-        from: ALL
-    ```
+```yaml
+hostBinding:
+  namespace:
+    from: ALL
+```
 
-- **Copy `Host` resources to `AmbassadorHost` resources.**
+### Copy `Host` resources to `AmbassadorHost` resources.
 
-    <Alert severity="info">
-      <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
-    </Alert>
+<Alert severity="info">
+  <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
 
-    For each existing `Host` resource that 2.X should honor, create an `AmbassadorHost` resource:
+For each existing `Host` resource that 2.X should honor, create an `AmbassadorHost` resource:
 
-    - change the `apiVersion` to `x.getambassador.io/v3alpha1`;
-    - change the `kind` to `AmbassadorHost`;
-    - add `metadata.labels` as needed to match the `hostBinding` for the `AmbassadorListener`s with which 
-      the `AmbassadorHost` should associate; and
-    - set `spec.selector` if desired, to control which `AmbassadorMappings` will be associated with this `AmbassadorHost`.
+- change the `apiVersion` to `x.getambassador.io/v3alpha1`;
+- change the `kind` to `AmbassadorHost`;
+- add `metadata.labels` as needed to match the `hostBinding` for the `AmbassadorListener`s with which 
+  the `AmbassadorHost` should associate; and
+- set `spec.selector` if desired, to control which `AmbassadorMappings` will be associated with this `AmbassadorHost`.
 
-- **Copy `Mapping` resources to `AmbassadorMapping` resources.**
+### Copy `Mapping` resources to `AmbassadorMapping` resources.
 
-    <Alert severity="info">
-      <a href="../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
-    </Alert>
+<Alert severity="info">
+  <a href="../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
+</Alert>
 
-    For each existing `Mapping` resource that 2.X should honor, create an `AmbassadorMapping` resource:
+For each existing `Mapping` resource that 2.X should honor, create an `AmbassadorMapping` resource:
 
-    - change the `apiVersion` to `x.getambassador.io/v3alpha1`;
-    - change the `kind` to `AmbassadorMapping`;
-    - change `spec.host` to `spec.hostname` if possible (see below);
-    - add `metadata.labels` as needed to match the `selector` for the `AmbassadorHost`s with which 
-      the `AmbassadorMapping` should associate; and
-    - make sure `spec.hostname` matches up with the `AmbassadorHost`s with which the `AmbassadorMapping` should associate.
+- change the `apiVersion` to `x.getambassador.io/v3alpha1`;
+- change the `kind` to `AmbassadorMapping`;
+- change `spec.host` to `spec.hostname` if possible (see below);
+- add `metadata.labels` as needed to match the `selector` for the `AmbassadorHost`s with which 
+  the `AmbassadorMapping` should associate; and
+- make sure `spec.hostname` matches up with the `AmbassadorHost`s with which the `AmbassadorMapping` should associate.
 
-    Where `spec.host` could be an exact match or (with `host_regex`) a regular expression, `spec.hostname` is always a DNS 
-    glob. `spec.hostname` is **strongly** preferred, unless a regex is absolutely required: using globs is **much** more
-    performant. Therefore, we recommend using `spec.hostname` wherever possible:
+Where `spec.host` could be an exact match or (with `host_regex`) a regular expression, `spec.hostname` is always a DNS 
+glob. `spec.hostname` is **strongly** preferred, unless a regex is absolutely required: using globs is **much** more
+performant. Therefore, we recommend using `spec.hostname` wherever possible:
 
-    - if `spec.host` is being used for an exact match, simply rename it to `spec.hostname`.
-    - if `spec.host` is being used for a regex that effects a prefix or suffix match, rename it
-      to `spec.hostname` and rewrite the regex into a DNS glob, e.g. `host: .*\.example\.com` would become
-      `hostname: *.example.com`.
+- if `spec.host` is being used for an exact match, simply rename it to `spec.hostname`.
+- if `spec.host` is being used for a regex that effects a prefix or suffix match, rename it
+  to `spec.hostname` and rewrite the regex into a DNS glob, e.g. `host: .*\.example\.com` would become
+  `hostname: *.example.com`.
 
-    Additionally, when `spec.hostname` is used, the `AmbassadorMapping` will be associated with an `AmbassadorHost` only
-    if `spec.hostname` matches the hostname of the `AmbassadorHost`. If the `AmbassadorHost`'s `selector` is also set, 
-    both the `selector` and the hostname must line up.
+Additionally, when `spec.hostname` is used, the `AmbassadorMapping` will be associated with an `AmbassadorHost` only
+if `spec.hostname` matches the hostname of the `AmbassadorHost`. If the `AmbassadorHost`'s `selector` is also set, 
+both the `selector` and the hostname must line up.
 
-- **Copy `TCPMapping` resources to `AmbassadorTCPMapping` resources.**
+### Copy `TCPMapping` resources to `AmbassadorTCPMapping` resources.
 
-    <Alert severity="info">
-      <a href="../using/tcpmappings">Learn more about <code>AmbassadorTCPMapping</code></a>
-    </Alert>
+<Alert severity="info">
+  <a href="../using/tcpmappings">Learn more about <code>AmbassadorTCPMapping</code></a>
+</Alert>
 
-    For each existing `TCPMapping` resource that 2.X should honor, create an `AmbassadorTCPMapping` resource:
+For each existing `TCPMapping` resource that 2.X should honor, create an `AmbassadorTCPMapping` resource:
 
-    - change the `apiVersion` to `x.getambassador.io/v3alpha1`; and
-    - change the `kind` to `AmbassadorTCPMapping`.
+- change the `apiVersion` to `x.getambassador.io/v3alpha1`; and
+- change the `kind` to `AmbassadorTCPMapping`.
 
-    There are no further changes needed; the association between an `AmbassadorTCPMapping` is still determined by 
-    the port and `spec.host`, which must be an exact match.
+There are no further changes needed; the association between an `AmbassadorTCPMapping` is still determined by 
+the port and `spec.host`, which must be an exact match.
 
 ## 2. Additional Notes
 
 When migrating to $productName$ 2.X, there are several things to keep in mind:
 
-### `AmbassadorListener` is usually required
+### `AmbassadorListener` is mandatory
 
 <Alert severity="info">
   <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
 </Alert>
 
 The new [`AmbassadorListener` resource](../running/ambassadorlistener.md) (in `x.getambassador.io/v3alpha1`) defines the
-specific ports on which $productName$ will listen, and which protocols and security model will be used per port. Although
-2.0.0 will synthesize `AmbassadorListeners` as a transition aid, **we strongly recommended defining your own
-`AmbassadorListener`(s) to match your situation**.
+specific ports on which $productName$ will listen, and which protocols and security model will be used per port. **The
+`AmbassadorListener` resource is mandatory.**
 
 Defining your own `AmbassadorListener`(s) allows you to carefully tailor the set of ports you actually need to use, and
 exactly which `AmbassadorHost` resources are matched with them. This can permit a system with many `AmbassadorHosts` to
