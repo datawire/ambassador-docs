@@ -14,9 +14,9 @@ References
 
 It is a very good idea to be familiar with the CRDs in play here:
 
-- [`AmbassadorListener`](../topics/running/ambassadorlistener)
-- [`AmbassadorHost`](../topics/running/host-crd)
-- [`TLSContext`](../topics/running/tls/#tlscontext)
+- [`AmbassadorListener`](../../topics/running/ambassadorlistener)
+- [`AmbassadorHost`](../../topics/running/host-crd)
+- [`TLSContext`](../../topics/running/tls/#tlscontext)
 
 Examples / Cookbook
 -------------------
