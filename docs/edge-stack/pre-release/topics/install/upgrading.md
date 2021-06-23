@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   To migrate from $productName$ 1.X to $productName$ 2.X, see the <a href="../migrate-to-version-2">$productName$ 2.X Migration Guide</a>.
-  This guide <b>will not work</b> for that, due to changes to the configuration resources used for $productName$ 2.X. 
+  This guide <b>will not work</b> for that, due to changes to the configuration resources used for $productName$ 2.X.
 </Alert>
 
 Since $productName$'s configuration is entirely stored in Kubernetes resources, no special process
@@ -49,7 +49,3 @@ This will trigger a rolling upgrade of $productName$.
 
 If you're using your own YAML, check our YAML to be sure of other changes.  At a minimum
 you'll need to change the pulled `image` for the $productName$ container and redeploy.
-
-### Set Up Service Catalog
-
-Upgrading to version 1.12 or higher adds support for Service Catalog. [Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.

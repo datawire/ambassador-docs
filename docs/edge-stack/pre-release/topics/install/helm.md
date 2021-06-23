@@ -34,8 +34,6 @@ manifest_sorter.go:175: info: skipping unknown hook: "crd-install"
 
   This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for $productName$ to route traffic. Details on how to configure $productName$ using the Helm chart can be found in the Helm chart [README](https://github.com/emissary-ingress/emissary/tree/$branch$/charts/emissary-ingress).
 
-6. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
-
 ## Upgrading an existing $productName$ installation
 
 **Note: Do not use these instructions** to migrate from $OSSproductName$ to $AESproductName$. See [Migrating to $AESproductName$](/docs/emissary/$version/topics/install/helm#migrating-to-the-ambassador-edge-stack) instead.
@@ -55,5 +53,3 @@ Upgrading an existing installation of $productName$ is a two-step process:
    ```
 
   This will upgrade the image and deploy and other necessary resources for $productName$.
-
-3. [Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.

@@ -47,7 +47,7 @@ To learn more about the `a8r.io/rollouts.*` annotations, see the [progressive de
 
 ## Annotate via `kubectl`
 
-<Alert severity="info">Annotations made via <code>kubectl</code> will not be retained if the service is redeployed via a CI/CD pipeline or other means. <a href="../../../../../edge-stack/latest/topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops">GitOps best practice</a> is to modify and track annotations via YAML under version control.</Alert>
+<Alert severity="info">Annotations made via <code>kubectl</code> will not be retained if the service is redeployed via a CI/CD pipeline or other means. <a href="../../../../../edge-stack/1.13/topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops">GitOps best practice</a> is to modify and track annotations via YAML under version control.</Alert>
 
 ```
 kubectl annotate svc <service name> a8r.io/owner="<your name>"

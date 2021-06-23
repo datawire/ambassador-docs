@@ -31,16 +31,18 @@ In this guide we'll give you everything you need to perform a canary rollout of 
 
 ### Own Environment
 
-If you want to get started with canary rollouts on your own environment, you will need to have **Edge Stack version 1.12 or greater** or **API Gateway 1.13 or greater** installed in your cluster.
+If you want to get started with canary rollouts on your own environment, you will need to have **Edge Stack version 1.12 or greater** or **Emissary Ingress 1.13 or greater** installed in your cluster.
 
-**Install** Edge Stack <a href="/docs/edge-stack/latest/tutorials/getting-started/">from here</a> if needed.
+**Install** Edge Stack <a href="/docs/edge-stack/1.13/tutorials/getting-started/">from here</a> if needed.
 
-If you already have Edge Stack or the API Gateway installed, **check your version** by running this command (adjust your namespace if necessary):
+<Alert severity="info">Canary Rollouts Coming Soon for Edge Stack and Emissary Ingress 2.0 and greater!</Alert>
+
+If you already have Edge Stack or Emissary Ingress installed, **check your version** by running this command (adjust your namespace if necessary):
 
 ```
 kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
-[Upgrade Edge Stack to the latest version](/docs/edge-stack/latest/topics/install/upgrading/) if needed.
+[Upgrade Edge Stack to the latest version](/docs/edge-stack/1.13/topics/install/upgrading/) if needed.
 
 ### Demo Cluster
 
@@ -65,7 +67,7 @@ You can also use one of our free demo clusters that comes bundled with a support
 
   ```
    $ kubectl get services -n ambassador
-    
+
     NAME               TYPE           CLUSTER-IP    EXTERNAL-IP       PORT(S)                      AGE
     ambassador-redis   ClusterIP      10.43.7.10    <none>            6379/TCP                     45h
     ambassador-admin   ClusterIP      10.43.97.79   <none>            8877/TCP,8005/TCP            45h
@@ -75,7 +77,7 @@ You can also use one of our free demo clusters that comes bundled with a support
 ## 1. Connect your cluster to Ambassador Cloud
 
 <Alert severity="info">
-  If you are using a demo cluster or followed the <a href="/docs/edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you can skip this step.
+  If you are using a demo cluster or followed the <a href="/docs/edge-stack/1.13/tutorials/getting-started/">Edge Stack quick start</a>, you can skip this step.
 </Alert>
 
 
