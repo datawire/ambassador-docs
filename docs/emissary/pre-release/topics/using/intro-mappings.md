@@ -1,6 +1,15 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Introduction to the AmbassadorMapping resource
 
 $productName$ is designed around a [declarative, self-service management model](../../concepts/gitops-continuous-delivery). The core resource used to support application development teams who need to manage the edge with $productName$ is the `AmbassadorMapping` resource.
+
+<Alert severity="warning">
+  Remember that <code>AmbassadorListener</code> and <code>AmbassadorHost</code> resources are
+  &nbsp;<b>required</b>&nbsp;for a functioning $productName$ installation that can route traffic!<br/>
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+</Alert>
 
 ## Quick example
 

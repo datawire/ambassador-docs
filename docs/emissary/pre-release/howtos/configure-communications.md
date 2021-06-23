@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 Configuring $productName$ to Communicate
 ========================================
 
@@ -14,9 +16,9 @@ References
 
 It is a very good idea to be familiar with the CRDs in play here:
 
-- [`AmbassadorListener`](../../topics/running/ambassadorlistener)
-- [`AmbassadorHost`](../../topics/running/host-crd)
-- [`TLSContext`](../../topics/running/tls/#tlscontext)
+- [Learn more about `AmbassadorListener`](../../topics/running/ambassadorlistener)
+- [Learn more about `AmbassadorHost`](../../topics/running/host-crd)
+- [Learn more about `TLSContext`](../../topics/running/tls/#tlscontext)
 
 Examples / Cookbook
 -------------------
@@ -68,6 +70,10 @@ spec:
 - Note that the `AmbassadorListener`s do not specify anything about TLS certificates. The `AmbassadorHost`
   handles that; see below.
 
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+</Alert>
+
 #### `AmbassadorHost`
 
 This example will assume that we expect to be reachable as `foo.example.com`, and that the `foo.example.com`
@@ -96,6 +102,10 @@ spec:
   an `AmbassadorHost` or an `Ingress`.
 - Note that if no `AmbassadorHost` is present, but a TLS secret named `fallback-secret` is available, the system will
   currently define an `AmbassadorHost` using `fallback-secret`. **This behavior is subject to change.**
+
+<Alert severity="info">
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
 
 ### HTTP-Only
 
@@ -130,6 +140,12 @@ spec:
 - Here, we listen only on port 8080, and only for HTTP. HTTPS will be rejected.
 - Since requests are only allowed using HTTP, we declare all requests `INSECURE` by definition.
 - The `AmbassadorHost` specifies routing HTTP, rather than redirecting it.
+
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
 
 ### TLS using ACME ($AESproductName$ only)
 
@@ -184,6 +200,12 @@ spec:
 - `foo-host` defaults to ACME with Let's Encrypt, since `acmeProvider.authority` is not provided.
 - `foo-host` defaults to redirecting insecure requests, since the default for `requestPolicy.insecure.action` is `Redirect`.
 - `bar-host` uses Let's Encrypt as well, but it will reject insecure requests.
+
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
 
 ### Multiple TLS Certificates
 
@@ -255,6 +277,12 @@ spec:
 - `foo-host` relies on the default insecure routing action of `Redirect`.
 - `bar-host` must explicitly specify routing HTTP.
 
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
+
 ### Using a `TLSContext`
 
 If you need to share other TLS settings between two `AmbassadorHost`s, you can reference a `TLSContext` as well as 
@@ -320,6 +348,12 @@ spec:
 
 - Note that specifying the `tlsSecret` is still necessary, even when `tlsContext` is specified.
 
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
+
 ### ACME With a TLSContext ($AESproductName$ Only)
 
 In $AESproductName$, you can use a `TLSContext` with ACME as well. This example is the same as "TLS using ACME",
@@ -350,6 +384,12 @@ spec:
 ```
 
 - Note that we don't provide the `Secret`: the ACME client will create it for us.
+
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
 
 ### Using an L7 Load Balancer to Terminate TLS
 
@@ -386,6 +426,12 @@ spec:
 - Our `AmbassadorHost` does not specify a `tlsSecret`, so $productName$ will not try to terminate TLS.
 - Since the `AmbassadorListener` still pays attention to `X-Forwarded-Proto`, both secure and insecure requests
   are possible, and we use the `AmbassadorHost` to route HTTPS and redirect HTTP.
+
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
 
 ### Using a Split L4 Load Balancer to Terminate TLS
 
@@ -444,6 +490,12 @@ spec:
 
 - Since L4 load balancers cannot set `X-Forwarded-Protocol`, we don't use it at all here: instead, we dictate that 8080 and 8443 both speak cleartext HTTP, but everything arriving at port 8080 is insecure and everything at port 8443 is secure.
 
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
+
 ### Listening on Multiple Ports
 
 There's no reason you need to use ports 8080 and 8443, or that you're limited to two ports. Here we'll use ports 9001 and 9002 for HTTP, and port 4001 for HTTPS. We'll route traffic irrespective of protocol.
@@ -498,6 +550,12 @@ spec:
 
 - We can use `X-Forwarded-Proto` for all our `AmbassadorListener`s: the HTTP-only `AmbassadorListener`s will set it correctly.
 - Each `AmbassadorListener` can specify only one port, but there's no hardcoded limit on the number of `AmbassadorListener`s you can have.
+
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
 
 ### Using Labels to Associate `AmbassadorHost`s and `AmbassadorListener`s
 
@@ -587,6 +645,12 @@ spec:
 - Note the `labels` on each `AmbassadorHost`, which the `hostBinding` on the `AmbassadorListener` can reference.
    - Note also that only label selectors are supported at the moment.
 
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>
+
 ### Wildcard `AmbassadorHost`s and `AmbassadorMapping`s
 
 In an `AmbassadorMapping`, the `host` is now treated as a glob rather than an exact match, with the goal of vastly reducing the need for `host_regex`. (The `hostname` in an `AmbassadorHost` has always been treated as a glob).
@@ -662,5 +726,11 @@ spec:
 - We'll listen for HTTP or HTTPS on port 8443.
 - The three `AmbassadorHost`s apply different insecure routing actions depending on the hostname.
 - You could also do this with `host_regex`, but using `host` with globs will give better performance.
-   - Being able to _not_ associate a given `AmbassadorMapping` with a given `AmbassadorHost` when the `AmbassadorMapping`'s `host` doesn't match helps a lot when you have many `AmbassadorHost`s.
+   - Being able to _not_ associate a given `AmbassadorMapping` with a given `AmbassadorHost` when the `AmbassadorMapping`'s
+     `host` doesn't match helps a lot when you have many `AmbassadorHost`s.
    - Reliably determining if a regex (for the `AmbassadorMapping`) matches a glob (for the `AmbassadorHost`) isn't really possible, so we can't prune `host_regex` `AmbassadorMapping`s at all.
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+</Alert>

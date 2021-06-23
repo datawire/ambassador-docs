@@ -19,13 +19,21 @@ import Alert from '@material-ui/lab/Alert';
 
 </div>
 
-The core $productName$ resource used to manage cluster ingress is the AmbassadorMapping resource. 
+The core $productName$ resource used to manage cluster ingress is the `AmbassadorMapping` resource. 
 
-**An AmbassadorMapping resource routes a URL path (or prefix) to a service (either a Kubernetes service or other web service).**
+**An `AmbassadorMapping` resource routes a URL path (or prefix) to a service (either a Kubernetes service or other web service).**
+
+<Alert severity="warning">
+  Remember that <code>AmbassadorListener</code> and <code>AmbassadorHost</code> resources are&nbsp;
+  <b>required</b>&nbsp;for a functioning $productName$ installation that can route traffic!<br/>
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+</Alert>
 
 ## Examples
 
-This AmbassadorMapping would route requests to `https://<hostname>/webapp/` to the `webapp-svc` Service.
+This `AmbassadorMapping` would route requests to `https://<hostname>/webapp/` to the `webapp-svc` Service. **This is not a
+complete example on its own; see below.**
 
 ```yaml
 ---
@@ -44,7 +52,8 @@ spec:
 | `spec.prefix` | String | The URL prefix identifying your resource. [See below](#resources) on how $productName$ handles resources. |
 | `spec.service` | String | The service handling the resource.  If a Kubernetes service, it must include the namespace (in the format `service.namespace`) if the service is in a different namespace than $productName$. [See below](#services) on service name formatting.|
 
-Here's another example using a web service that maps requests to `/httpbin/` to `http://httpbin.org`:
+Here's another example using a web service that maps requests to `/httpbin/` to `http://httpbin.org` (again, **this is not a
+complete example on its own; see below**):
 
 ```yaml
 ---
@@ -56,6 +65,84 @@ spec:
   prefix: /httpbin/
   service: http://httpbin.org
 ```
+
+### Complete example configuration
+
+For demonstration purposes, here's a possible way of combining an `AmbassadorListener`, an `AmbassadorHost`, and both `AmbassadorMapping`s above that is complete and functional: 
+
+- it will accept HTTP or HTTPS on port 8443;
+- $productName$ is terminating TLS;
+- HTTPS to `foo.example.com` will be routed as above;
+- HTTP to `foo.example.com` will be redirected to HTTPS;
+- HTTP or HTTPS to other hostnames will be rejected; and
+- the associations between the `AmbassadorListener`, the `AmbassadorHost`, and the `AmbassadorMappings` use Kubernetes `label`s.
+
+```yaml
+---
+apiversion: v1
+kind: Secret
+type: kubernetes.io/tls
+metadata:
+  name: foo-example-secret
+data:
+  tls.crt: -certificate PEM-
+  tls.key: -secret key PEM-
+---
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorListener
+metadata:
+  name: listener-8443
+spec:
+  port: 8443
+  protocol: HTTPS
+  securityModel: XFP
+  hostBinding:
+    selector:
+      matchLabels:
+        exampleName: basic-https
+---
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorHost
+metadata:
+  name: foo-host
+  labels:
+    exampleName: basic-https
+spec:
+  hostname: "foo.example.com"
+  tlsSecret:
+    name: foo-example-secret
+  selector:
+    matchLabels:
+      exampleName: basic-https
+---
+apiVersion: getambassador.io/v2
+kind:  AmbassadorMapping
+metadata:
+  name:  webapp-mapping
+  labels:
+    exampleName: basic-https
+spec:
+  prefix: /webapp/
+  service: webapp-svc
+---
+apiVersion: getambassador.io/v2
+kind:  AmbassadorMapping
+metadata:
+  name:  httpbin-mapping
+  labels:
+    exampleName: basic-https
+spec:
+  prefix: /httpbin/
+  service: http://httpbin.org
+
+```
+
+Note the addition of `label`s and `selector`s to explicitly specify which resources should associate in this example.
+
+<Alert severity="info">
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+</Alert>
 
 ## Applying an AmbassadorMapping resource
 

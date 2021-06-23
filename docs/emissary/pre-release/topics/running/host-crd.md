@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # The `AmbassadorHost` CRD
 
 The custom `AmbassadorHost` resource defines how $productName$ will be
@@ -8,6 +10,12 @@ single configuration resource:
 * How $productName$ should handle TLS certificates
 * How $productName$ should handle secure and insecure requests
 * Which `AmbassadorMappings` should be associated with this `AmbassadorHost`
+
+<Alert severity="warning">
+  Remember that <code>AmbassadorListener</code> resources are&nbsp;<b>required</b>&nbsp;for a functioning 
+  $productName$ installation!<br/>
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.
+</Alert>
 
 A minimal `AmbassadorHost` resource, assuming no TLS configuration, would be:
 
@@ -24,8 +32,10 @@ This `AmbassadorHost` tells $productName$ to expect to be reached at `host.examp
 with no TLS termination, and only associating with `AmbassadorMapping`s that also set a
 `hostname` that matches `host.example.com`.
 
-Many examples of setting up `AmbassadorHost` and `AmbassadorListener` are available in the
-[Configuring $productName$ to Communicate](../../../howtos/configure-communications) document.
+Remember that an <code>AmbassadorListener</code> will also be required for this example to
+be functional. Many examples of setting up `AmbassadorHost` and `AmbassadorListener` are available
+in the [Configuring $productName$ to Communicate](../../../howtos/configure-communications)
+document.
 
 ## Setting the `hostname`
 
