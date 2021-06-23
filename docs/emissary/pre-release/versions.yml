@@ -6,6 +6,13 @@ branch: master
 docsVersion: "pre-release"
 productName: "Emissary Ingress"
 productNamePlural: "Emissary Ingresses"
+productYAMLPath: emissary
+productCRDName: emissary-crds.yaml
+productYAMLFile: emissary-ingress.yaml
+productNamespace: emissary
+productDeploymentName: emissary-ingress
+productHelmName: emissary-ingress
+productDockerImage: emissary
 OSSproductName: "Emissary Ingress"
 OSSproductNamePlural: "Emissary Ingresses"
 AESproductName: "Ambassador Edge Stack"

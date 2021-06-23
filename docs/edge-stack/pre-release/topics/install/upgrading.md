@@ -12,40 +12,16 @@ is necessary to upgrade $productName$.
 
 The steps to upgrade depend on the method that was used to install $productName$, as indicated below.
 
-## Installed via Helm?
+## Which upgrade method should I use?
 
-If you installed using the Helm chart, then you should
+To check if you installed $productName$ with Helm, run the following command to see if it returns resources:
+```
+$ helm list -n emissary
+NAME            	NAMESPACE	REVISION	UPDATED     ...
+$productDeploymentName$	$productNamespace$ 	1           ...
+```
+
+If Helm reports a release of $productName$ in your cluster, you should
 [upgrade with the help of Helm](../helm/#upgrading-an-existing-installation).
-To verify this, run the following command to see if it returns resources:
-```
-$ kubectl get deployment -n ambassador -l 'app.kubernetes.io/name=ambassador'
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-ambassador         1/1     1            1           ...
-```
 
-## Installed via YAML manifests?
-
-Finally, if you installed using YAML manifests, simply run the commands in the following section. To verify whether manifests were used to install $productName$, run the following command to see if it returns resources:
-```
-$ kubectl get deployment -n ambassador -l 'product=aes'
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-ambassador         1/1     1            1           ...
-```
-
-If none of the commands above return resources, you probably have an old installation and you should follow
-the instructions for [upgrading to $productName$](../upgrade-to-edge-stack/).
-
-### Upgrading an installation with YAML manifests
-
-If you previously installed $productName$ using YAML manifests, you can upgrade with
-these commands:
-
-```
-kubectl apply -f https://www.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
-kubectl apply -f https://www.getambassador.io/yaml/edge-stack/$version$/aes.yaml
-```
-
-This will trigger a rolling upgrade of $productName$.
-
-If you're using your own YAML, check our YAML to be sure of other changes.  At a minimum
-you'll need to change the pulled `image` for the $productName$ container and redeploy.
+Otherwise, you should follow [the YAML upgrade guide](../yaml-install/#install-or-upgrade-with-yaml)

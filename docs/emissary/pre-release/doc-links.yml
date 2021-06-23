@@ -19,12 +19,8 @@
               link: /topics/install/migrate-to-version-2
             - title: Upgrade to the $AESproductName$
               link: /topics/install/upgrade-to-edge-stack
-            - title: Install $productName$
-              link: /topics/install/install-ambassador-oss
             - title: Install with Docker
               link: /topics/install/docker
-            - title: Install with bare metal
-              link: /topics/install/bare-metal
             - title: Install manually
               link: /topics/install/yaml-install
         - title: Core concepts

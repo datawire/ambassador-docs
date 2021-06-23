@@ -1,6 +1,6 @@
 # Debugging
 
-If you’re experiencing issues with the $productName$ and cannot diagnose the issue through the "Diagnostics" tab from the [Edge Policy Console](../../using/edge-policy-console), this document covers various approaches and advanced use cases for debugging $productName$ issues.
+If you’re experiencing issues with the $productName$ and cannot diagnose the issue through the `/ambassador/v0/diag/` diagnostics endpoint, this document covers various approaches and advanced use cases for debugging $productName$ issues.
 
 We assume that you already have a running $productName$ installation in the following sections.
 
@@ -35,7 +35,7 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
 3. Check that the “desired” number of Pods equals the “current” and “available” number of Pods. If they are **not** equal, check the status of the associated Pods with the following command: `kubectl get pods -n ambassador`.
 4. Use the following command for details about the history of the Deployment: `kubectl describe -n ambassador deployment ambassador`
 
-    * Look for data in the “Replicas” field near the top of the output. For example: 
+    * Look for data in the “Replicas” field near the top of the output. For example:
         `Replicas: 3 desired | 3 updated | 3 total | 3 available | 0 unavailable`
 
     * Look for data in the “Events” log field near the bottom of the output, which often displays data such as a fail image pull, RBAC issues, or a lack of cluster resources. For example:
@@ -72,7 +72,7 @@ $productName$ logging can provide information on anything that might be abnormal
 
 ### Log levels
 
-$productName$ has two switches that will control different log levels. 
+$productName$ has two switches that will control different log levels.
 
 #### Envoy debug logs
 Envoy debug logging shows verbose information on the actions Envoy is taking on
@@ -88,12 +88,12 @@ additional process for authentication, rate limiting, the developer portal,
 ACME, etc. Debug logging for this process will give more information on why you
 may see errors with these functions.
 
-You can adjust the $AESproductName$ log level by setting the 
+You can adjust the $AESproductName$ log level by setting the
 [`AES_LOG_LEVEL` environment variable](../aes-extensions/#aes_log_level).
 
 ### Viewing logs
 
-You can turn on Debug mode in the [Edge Policy Console](../../using/edge-policy-console), which generates verbose logging data that can be useful when trying to find a subtle error or bug.
+You can turn on Debug mode by setting AES_LOG_LEVEL=debug in your deployment, which generates verbose logging data that can be useful when trying to find a subtle error or bug.
 
 1. Use the following command to target an individual $productName$ Pod: `kubectl get pods -n ambassador`
 

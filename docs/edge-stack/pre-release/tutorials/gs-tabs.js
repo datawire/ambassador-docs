@@ -83,7 +83,7 @@ export default function GettingStartedEdgeStackTabs() {
             '\n' +
             'kubectl create namespace ambassador && \\' +
             '\n' +
-            'helm install edge-stack --namespace ambassador datawire/edge-stack && \\' +
+            'helm install --devel edge-stack --namespace ambassador datawire/edge-stack && \\' +
             '\n' +
             'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes'
           }
@@ -97,11 +97,11 @@ export default function GettingStartedEdgeStackTabs() {
 
         <CodeBlock>
           {
-            'kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/aes-crds.yaml && \\' +
+            'kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml && \\' +
             '\n' +
             'kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \\' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/aes-ingress.yaml && \\' +
+            'kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes.yaml && \\' +
             '\n' +
             'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes' +
             '\n'

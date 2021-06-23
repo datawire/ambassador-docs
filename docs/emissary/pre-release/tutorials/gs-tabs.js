@@ -81,11 +81,12 @@ export default function GettingStartedEmissaryTabs() {
             '\n \n' +
             '# Create Namespace and Install:' +
             '\n' +
-            'kubectl create namespace ambassador && \\' +
+            'kubectl create namespace emissary && \\' +
             '\n' +
-            'helm install emissary --namespace ambassador datawire/emissary && \\' +
+            'helm install emissary-ingress --devel --namespace emissary datawire/emissary-ingress && \\' +
             '\n' +
-            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes'
+            'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress' +
+            '\n'
           }
         </CodeBlock>
 
@@ -97,13 +98,15 @@ export default function GettingStartedEmissaryTabs() {
 
         <CodeBlock>
           {
+            'kubectl create namespace emissary && \\' +
+            '\n' +
             'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-crds.yaml && \\' +
             '\n' +
-            'kubectl wait --for condition=established --timeout=90s crd -lapp.kubernetes.io/instance=emissary-ingress && \\' +
+            'kubectl wait --for condition=established --timeout=90s crd -lapp.kubernetes.io/name=ambassador && \\' +
             '\n' +
             'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-ingress.yaml && \\' +
             '\n' +
-            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress' +
+            'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lproduct=aes' +
             '\n'
           }
         </CodeBlock>

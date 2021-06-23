@@ -6,7 +6,7 @@ $OSSproductName$ can validate incoming requests before routing them to a backing
 
 ## Before you get started
 
-This tutorial assumes you have already followed the $OSSproductName$ [Installation](../../topics/install/install-ambassador-oss) and [Quickstart Tutorial](../../tutorials/quickstart-demo) guides. If you haven't done that already, you should do so now.
+This tutorial assumes you have already followed the $OSSproductName$ [Installation](../../topics/install/) and [Quickstart Tutorial](../../tutorials/quickstart-demo) guides. If you haven't done that already, you should do so now.
 
 Once completed, you'll have a Kubernetes cluster running $OSSproductName$ and the Quote of the Moment service. Let's walk through adding rate limiting to this setup.
 
@@ -108,9 +108,9 @@ spec:
   prefix: /backend/
   service: quote
   labels:
-    ambassador:    
-      - request_label_group:      
-        - x-ambassador-test-allow:        
+    ambassador:
+      - request_label_group:
+        - x-ambassador-test-allow:
           header: "x-ambassador-test-allow"
           omit_if_not_present: true
 ```
@@ -199,7 +199,7 @@ TCP_NODELAY set
 < content-length: 172
 < x-envoy-upstream-service-time: 0
 < server: envoy
-< 
+<
 {
     "server": "humble-blueberry-o2v493st",
     "quote": "Nihilism gambles with lives, happiness, and even destiny itself!",

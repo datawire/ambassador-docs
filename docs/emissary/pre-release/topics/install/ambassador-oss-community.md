@@ -1,7 +1,7 @@
 # Integration in community projects
 
 **$AESproductName$ is now available and includes additional functionality beyond the current $OSSproductName$.**
-These features include automatic HTTPS, the Edge Policy Console UI, OAuth/OpenID Connect authentication support, integrated rate
+These features include automatic HTTPS, OAuth/OpenID Connect authentication support, integrated rate
 limiting, a developer portal, and [more](/edge-stack-faq/).
 
 ## $OSSproductName$ integrations

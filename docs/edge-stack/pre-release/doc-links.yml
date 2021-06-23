@@ -19,8 +19,6 @@
               link: /topics/install/migrate-to-version-2
             - title: Install with Docker
               link: /topics/install/docker
-            - title: Install with bare metal
-              link: /topics/install/bare-metal
             - title: Install manually
               link: /topics/install/yaml-install
         - title: Core concepts

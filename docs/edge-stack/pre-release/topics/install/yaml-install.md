@@ -25,8 +25,8 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 
     ```
     kubectl create namespace $productNamespace$ || true
-    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml && \
-    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-ingress.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes.yaml && \
     kubectl -n $productNamespace$ wait --for condition=available --timeout=90s deploy $productDeploymentName$
     ```
 

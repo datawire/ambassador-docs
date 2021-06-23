@@ -10,46 +10,46 @@ Start by adding this repo to your helm client with the following command:
 
 ```
 helm repo add datawire https://app.getambassador.io
-```
-
-Only Helm 3 is supported. At present, the `crd-install` hook is still included in the CRD manifests as a holdover from Helm 2, so the following message on `stderr` **IS NOT AN ERROR AND CAN BE SAFELY IGNORED**:
-```
-manifest_sorter.go:175: info: skipping unknown hook: "crd-install"
+helm repo update
 ```
 
 ## Install with Helm
 
-1. If you are installing $productName$ **for the first time on your cluster**, create the `ambassador` namespace for $productName$:
+When you run the Helm chart, it installs $productName$.
+
+
+Install the $productName$ Chart with the following command:
 
    ```
-   kubectl create namespace ambassador
+	helm install -n $productNamespace$ --create-namespace \
+		$productHelmName$ --devel \
+		datawire/$productHelmName$ && \
+	kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
    ```
 
-2. Install the $productName$ Chart with the following command:
+For more advanced configuration and details about helm values,
+[please see the helm chart.](https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/README.md)
 
-   ```
-   helm install edge-stack --namespace ambassador datawire/edge-stack
-   ```
+## Upgrading an existing installation
 
-
-  This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for $productName$ to route traffic. Details on how to configure $productName$ using the Helm chart can be found in the Helm chart [README](https://github.com/emissary-ingress/emissary/tree/$branch$/charts/emissary-ingress).
-
-## Upgrading an existing $productName$ installation
-
-**Note: Do not use these instructions** to migrate from $OSSproductName$ to $AESproductName$. See [Migrating to $AESproductName$](/docs/emissary/$version/topics/install/helm#migrating-to-the-ambassador-edge-stack) instead.
+**Note: Do not use these instructions** to migrate from $OSSproductName$ to $AESproductName$. See [Migrating to $AESproductName$](../upgrade-to-edge-stack/) instead.
 
 Upgrading an existing installation of $productName$ is a two-step process:
 
 1. First, apply any CRD updates:
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
+    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml
    ```
 
 2. Next, upgrade $productName$ itself:
 
    ```
-   helm upgrade edge-stack datawire/edge-stack
+    helm repo update
+    helm upgrade -n $productNamespace$ \
+        $productHelmName$ --devel \
+        datawire/$productHelmName$ && \
+    kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
    ```
 
   This will upgrade the image and deploy and other necessary resources for $productName$.
