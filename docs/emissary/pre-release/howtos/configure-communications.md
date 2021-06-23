@@ -20,6 +20,12 @@ It is a very good idea to be familiar with the CRDs in play here:
 - [Learn more about `AmbassadorHost`](../../topics/running/host-crd)
 - [Learn more about `TLSContext`](../../topics/running/tls/#tlscontext)
 
+<Alert severity="warning">
+  Remember than $productName$ does not make sure that a wildcard <code>AmbassadorHost</code> exists! If the 
+  wildcard behavior is needed, an <code>AmbassadorHost</code> with a <code>hostname</code> of <code>"*"</code>
+  must be defined by the user.
+</Alert>
+
 Examples / Cookbook
 -------------------
 

@@ -17,6 +17,12 @@ single configuration resource:
   <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.
 </Alert>
 
+<Alert severity="warning">
+  Remember than $productName$ does not make sure that a wildcard <code>AmbassadorHost</code> exists! If the 
+  wildcard behavior is needed, an <code>AmbassadorHost</code> with a <code>hostname</code> of <code>"*"</code>
+  must be defined by the user.
+</Alert>
+
 A minimal `AmbassadorHost` resource, assuming no TLS configuration, would be:
 
 ```yaml

@@ -28,8 +28,12 @@ $productName$ 2.0.0 introduces the new **mandatory** `AmbassadorListener` CRD, a
 The motivation behind the change is that certain semantics around `AmbassadorListener`s, `AmbassadorHost`s, and `AmbassadorMapping`s change:
 
    1. `AmbassadorListener`s are never created by $productName$: they **must** be defined by the user.
-   2. The semantics of which `AmbassadorMappings` associate with wihch `AmbassadorHost` are different from how `Mapping`s and `Host`s worked.
-   3. `Mapping` gains a `hostname` element. `host` is an exact match or a regex, as determined by `host_regex`, but `hostname` is always a DNS glob.
+   2. $productName$ does not make sure that a wildcard `AmbassadorHost` exists: if the wildcard behavior is 
+      needed, an `AmbassadorHost` with a `hostname` of `"*"` must be defined by the user.
+   3. The semantics of which `AmbassadorMappings` associate with which `AmbassadorHost` are different from how `Mapping`s 
+      and `Host`s worked.
+   4. `Mapping` gains a `hostname` element. `host` is an exact match or a regex, as determined by `host_regex`, but
+      `hostname` is always a DNS glob.
 
 ### The `AmbassadorListener` CRD
 
@@ -64,6 +68,21 @@ spec:
 ```
 
 Note also that there is no limit on how many `AmbassadorListener`s may be created, and as such no limit on the number of ports to which an `AmbassadorHost` may be associated.
+
+### Wildcard `AmbassadorHost`s
+
+In $productName$ 1.X, $productName$ would make sure that a wildcard `Host`, with a `hostname` of `"*"`, was always present. 
+$productName$ 2.X does **not** force a wildcard `AmbassadorHost`: if you need the wildcard behavior, you will need to create
+an `AmbassadorHost` with a hostname of `"*"`.
+
+Of particular note is that $productName$ **will not** respond to queries to an IP address unless a wildcard 
+`AmbassadorHost` is present. If `foo.example.com` resolves to `10.11.12.13`, and the only `AmbassadorHost` has a
+`hostname` of `foo.example.com`, then:
+
+- requests to `http://foo.example.com/` will work, but
+- requests to `http://10.11.12.13/` will **not** work.
+
+Adding an `AmbassadorHost` with a `hostname` of `"*"` will allow the second query to work.
 
 ### `AmbassadorHost` and `AmbassadorMapping` Association
 
