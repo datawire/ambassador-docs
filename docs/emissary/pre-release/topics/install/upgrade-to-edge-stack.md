@@ -2,27 +2,6 @@
 
 If you currently have the open source version of $OSSproductName$, you can upgrade to $AESproductName$ with a few simple commands. When you upgrade to $AESproductName$, you'll be able to access additional capabilities such as **automatic HTTPS/TLS termination, Swagger/OpenAPI support, API catalog, Single Sign-On, the Edge Policy Console UI, and more.** For more about the differences between $AESproductName$ and $OSSproductName$, see the [Editions page](/editions).
 
-## Upgrading on supported Kubernetes environments
-
-`edgectl` can automate the upgrade from installations that match the following criteria:
-
-* $OSSproductName$ has been installed (and is still managed by) the
-  [Ambassador Operator](../../install/aes-operator/).
-* the `AmbassadorInstallation` has:
-  * the `ambassador` name and `ambassador` namespace
-  * `installOSS: true`
-
-First, install `edgectl` by following the instructions
-[here](../../using/edgectl/edge-control/#installing-edge-control).
-
-Then, use the following command to upgrade the $OSSproductName$ installation to $AESproductName$:
-
-```
-edgectl upgrade
-```
-
-## Upgrading from other installations
-
 **Prerequisites**:
 
 * You must have properly installed $OSSproductName$ previously following [these](../install-ambassador-oss) instructions.

@@ -12,17 +12,6 @@ is necessary to upgrade $productName$.
 
 The steps to upgrade depend on the method that was used to install $productName$, as indicated below.
 
-## Installed via the Operator?
-
-If you installed using the Ambassador Operator, then you'll need to [use the Operator to perform the upgrade](../aes-operator/#updates-by-the-operator).
-To verify whether the Operator was used to install $productName$, run the following command
-to see if it returns resources:
-```
-$ kubectl get deployment -n ambassador -l 'app.kubernetes.io/name=ambassador,app.kubernetes.io/managed-by in (amb-oper,amb-oper-manifest,amb-oper-helm,amb-oper-azure)' 
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-ambassador         1/1     1            1           ...
-```
-
 ## Installed via Helm?
 
 If you installed using the Helm chart, then you should

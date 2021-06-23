@@ -1,4 +1,11 @@
+import Alert from '@material-ui/lab/Alert';
+
 # The Ambassador Operator
+
+<Alert severity="warning">
+  The Ambassador Operator has not yet been updated to work with $productName$ 2.0. We recommend
+  using <a href="../helm">Helm</a> instead until the Ambassador Operator is updated.
+</Alert>
 
 The Ambassador Operator is a Kubernetes Operator that controls the
 complete lifecycle of $productName$ in your cluster. It also
