@@ -11,19 +11,27 @@ For $productName$ to do its job of managing network communications for your serv
 
 Once the basic communications setup is in place, $productName$ `AmbassadorMapping`s and `AmbassadorTCPMapping`s can be associated with `AmbassadorHost`s to actually do routing.
 
-References 
-----------
-
-It is a very good idea to be familiar with the CRDs in play here:
-
-- [Learn more about `AmbassadorListener`](../../topics/running/ambassadorlistener)
-- [Learn more about `AmbassadorHost`](../../topics/running/host-crd)
-- [Learn more about `TLSContext`](../../topics/running/tls/#tlscontext)
+<Alert severity="warning">
+  Remember that <code>AmbassadorListener</code> and <code>AmbassadorHost</code> resources are&nbsp;
+  <b>required</b>&nbsp;for a functioning $productName$ installation that can route traffic!<br/>
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+</Alert>
 
 <Alert severity="warning">
   Remember than $productName$ does not make sure that a wildcard <code>AmbassadorHost</code> exists! If the 
   wildcard behavior is needed, an <code>AmbassadorHost</code> with a <code>hostname</code> of <code>"*"</code>
   must be defined by the user.
+</Alert>
+
+<Alert severity="info">
+  Several different resources work together to configure communications. A working knowledge of all of them
+  can be very useful:<br/>
+  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.<br/>
+  <a href="../../topics/using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>.<br/>
+  <a href="../../topics/using/tcpmappings">Learn more about <code>AmbassadorTCPMapping</code></a>.<br/>
+  <a href="../../topics/running/tls/#tlscontext">Learn more about <code>TLSContext</code></a>.
 </Alert>
 
 Examples / Cookbook
