@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 # $productName$ 2.X Migration Guide
 
 <Alert severity="info">
-  This guide covers migrating form $productName$ 1.X to $productName$ 2.X. To upgrade within major versions, see the
+  This guide covers migrating from $productName$ 1.X to $productName$ 2.X. To upgrade within major versions, see the
   <a href="upgrading">Upgrading $productName$ Guide</a>.
 </Alert>
 
