@@ -20,7 +20,7 @@ Here's an example, which might appear during a canary deployment:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
@@ -28,7 +28,7 @@ spec:
   prefix: /backend/
   service: quote
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend2

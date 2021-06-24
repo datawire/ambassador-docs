@@ -30,11 +30,12 @@ The following example may help illustrate how shadowing can be used. This first 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  myservice
 spec:
+  hostname: '*'
   prefix: /myservice/
   service: myservice.default
 ```
@@ -43,11 +44,12 @@ What if we want to shadow the traffic to `myservice`, and send that exact same t
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  myservice-shadow
 spec:
+  hostname: '*'
   prefix: /myservice/
   service: myservice-shadow.default
   shadow: true
@@ -61,11 +63,12 @@ It is possible to shadow a portion of the traffic by specifying the `weight` in 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  myservice-shaddow
 spec:
+  hostname: '*'
   prefix: /myservice/
   service: myservice-shadow.default
   shadow: true

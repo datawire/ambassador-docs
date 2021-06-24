@@ -19,7 +19,7 @@ import Alert from '@material-ui/lab/Alert';
 
 </div>
 
-The core $productName$ resource used to manage cluster ingress is the `AmbassadorMapping` resource. 
+The core $productName$ resource used to manage cluster ingress is the `AmbassadorMapping` resource.
 
 **An `AmbassadorMapping` resource routes a URL path (or prefix) to a service (either a Kubernetes service or other web service).**
 
@@ -37,7 +37,7 @@ complete example on its own; see below.**
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  webapp-mapping
@@ -57,18 +57,19 @@ complete example on its own; see below**):
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  httpbin-mapping
 spec:
   prefix: /httpbin/
   service: http://httpbin.org
+  hostname: '*'
 ```
 
 ### Complete example configuration
 
-For demonstration purposes, here's a possible way of combining an `AmbassadorListener`, an `AmbassadorHost`, and both `AmbassadorMapping`s above that is complete and functional: 
+For demonstration purposes, here's a possible way of combining an `AmbassadorListener`, an `AmbassadorHost`, and both `AmbassadorMapping`s above that is complete and functional:
 
 - it will accept HTTP or HTTPS on port 8443;
 - $productName$ is terminating TLS;
@@ -115,7 +116,7 @@ spec:
     matchLabels:
       exampleName: basic-https
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  webapp-mapping
@@ -124,8 +125,9 @@ metadata:
 spec:
   prefix: /webapp/
   service: webapp-svc
+  hostname: 'foo.example.com'
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  httpbin-mapping
@@ -134,6 +136,7 @@ metadata:
 spec:
   prefix: /httpbin/
   service: http://httpbin.org
+  hostname: 'foo.example.com'
 
 ```
 
@@ -194,7 +197,7 @@ AmbassadorMapping resources support a rich set of annotations to customize the s
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  cqrs-get
@@ -202,8 +205,9 @@ spec:
   prefix: /cqrs/
   method: GET
   service: getcqrs
+  hostname: '*'
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  cqrs-put
@@ -211,6 +215,7 @@ spec:
   prefix: /cqrs/
   method: PUT
   service: putcqrs
+  hostname: '*'
 ```
 
 ## Best Practices

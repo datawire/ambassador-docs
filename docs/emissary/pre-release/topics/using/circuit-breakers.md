@@ -31,7 +31,7 @@ Circuit breakers defined on a single mapping:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
@@ -56,7 +56,7 @@ spec:
     - max_connections: 2048
       max_pending_requests: 2048
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend

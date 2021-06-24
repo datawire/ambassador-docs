@@ -12,13 +12,13 @@ single configuration resource:
 * Which `AmbassadorMappings` should be associated with this `AmbassadorHost`
 
 <Alert severity="warning">
-  Remember that <code>AmbassadorListener</code> resources are&nbsp;<b>required</b>&nbsp;for a functioning 
+  Remember that <code>AmbassadorListener</code> resources are&nbsp;<b>required</b>&nbsp;for a functioning
   $productName$ installation!<br/>
   <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.
 </Alert>
 
 <Alert severity="warning">
-  Remember than $productName$ does not make sure that a wildcard <code>AmbassadorHost</code> exists! If the 
+  Remember than $productName$ does not make sure that a wildcard <code>AmbassadorHost</code> exists! If the
   wildcard behavior is needed, an <code>AmbassadorHost</code> with a <code>hostname</code> of <code>"*"</code>
   must be defined by the user.
 </Alert>
@@ -67,7 +67,7 @@ An `AmbassadorMapping` will not be associated with an `AmbassadorHost` unless at
 - The `AmbassadorMapping` specifies a `hostname` attribute that matches the `AmbassadorHost` in question.
 - The `AmbassadorHost` specifies a `selector` that matches the `AmbassadorMapping`'s Kubernetes `label`s.
 
-If neither of the above is true, the `AmbassadorMapping` will not be associated with the `AmbassadorHost` in 
+If neither of the above is true, the `AmbassadorMapping` will not be associated with the `AmbassadorHost` in
 question. This is intended to help manage memory consumption with large numbers of `AmbassadorHost`s and large
 numbers of `AmbassadorMapping`s.
 
@@ -93,7 +93,7 @@ the second:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  use-this-mapping
@@ -103,7 +103,7 @@ spec:
   prefix: /httpbin/
   service: http://httpbin.org
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  skip-this-mapping
@@ -156,7 +156,7 @@ several settings covering TLS:
 `tlsSecret` specifies a Kubernetes `Secret` is **required** for any TLS termination to occur. No matter what other TLS
 configuration is present, TLS termination will not occur if `tlsSecret` is not specified.
 
-The following `AmbassadorHost` will configure $productName$ to read a `Secret` named 
+The following `AmbassadorHost` will configure $productName$ to read a `Secret` named
 `tls-cert` for a certificate to use when terminating TLS.
 
 ```yaml
@@ -174,14 +174,14 @@ spec:
 
 ### `tlsContext` links to a `TLSContext` for additional configuration
 
-`tlsContext` specifies a [`TLSContext`](#) to use for additional TLS information. Note that you **must** still 
+`tlsContext` specifies a [`TLSContext`](#) to use for additional TLS information. Note that you **must** still
 define `tlsSecret` for TLS termination to happen. It is an error to supply both `tlsContext` and `tls`.
 
 See the [TLS discussion](../tls) for more details.
 
 ### `tls` allows manually providing additional configuration
 
-`tls` allows specifying most of the things a `TLSContext` can, inline in the `AmbassadorHost`. Note that you **must** still 
+`tls` allows specifying most of the things a `TLSContext` can, inline in the `AmbassadorHost`. Note that you **must** still
 define `tlsSecret` for TLS termination to happen. It is an error to supply both `tlsContext` and `tls`.
 
 See the [TLS discussion](../tls) for more details.

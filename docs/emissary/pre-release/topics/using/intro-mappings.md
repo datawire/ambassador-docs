@@ -25,7 +25,7 @@ These resources are defined as Kubernetes Custom Resource Definitions. Here's a 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  httpbin-mapping
@@ -50,7 +50,7 @@ For production use, the general recommended best practice is to store the file i
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  cqrs-get
@@ -59,7 +59,7 @@ spec:
   method: GET
   service: getcqrs
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  cqrs-put

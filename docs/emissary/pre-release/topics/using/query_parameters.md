@@ -12,7 +12,7 @@ You can also set the `value` of a query parameter to `true` to test for the exis
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
@@ -30,7 +30,7 @@ This will allow requests to /backend/ to succeed only if the `quote-mode` query 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-mode
@@ -41,7 +41,7 @@ spec:
     quote-mode: true
 
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-regular
@@ -58,7 +58,7 @@ The following mapping will route requests with the `quote-mode` header that cont
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend

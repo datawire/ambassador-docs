@@ -37,7 +37,7 @@ or, per mapping:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
@@ -45,6 +45,7 @@ spec:
   prefix: /backend/
   service: quote
   resolver: my-resolver
+  hostname: '*'
   load_balancer:
     policy: round_robin
 ```
@@ -71,11 +72,12 @@ or, per mapping:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend/
 spec:
+  hostname: '*'
   prefix: /backend/
   service: quote
   resolver: my-resolver
@@ -107,19 +109,20 @@ load_balancer:
 If the cookie you wish to set affinity on is already present in incoming requests, then you only need the `cookie.name` field. However, if you want $productName$ to generate and set a cookie in response to the first request, then you need to specify a value for the `cookie.ttl` field which generates a cookie with the given expiration time.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
   prefix: /backend/
-service: quote
-resolver: my-resolver
-load_balancer:
-  policy: ring_hash
-  cookie:
-    name: sticky-cookie
-    ttl: 60s
+  hostname: '*'
+  service: quote
+  resolver: my-resolver
+  load_balancer:
+    policy: ring_hash
+    cookie:
+      name: sticky-cookie
+      ttl: 60s
 ```
 
 ### Header
@@ -135,11 +138,12 @@ $productName$ allows header based session affinity if the given header is presen
 Example:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
+  hostname: '*'
   prefix: /backend/
   service: quote
   resolver: my-resolver
@@ -159,11 +163,12 @@ load_balancer:
 $productName$ allows session affinity based on the source IP of incoming requests.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
+  hostname: '*'
   prefix: /backend/
   service: quote
   resolver: my-resolver
@@ -189,11 +194,12 @@ spec:
 ```
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
+  hostname: '*'
   prefix: /backend/
   service: quote
   resolver: my-resolver

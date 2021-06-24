@@ -21,7 +21,7 @@ $productName$ can perform 3xx redirects on `AmbassadorMapping`s to a different h
 To effect any type of HTTP `Redirect`, the `AmbassadorMapping` *must* set `host_redirect` to `true`, with `service` set to the host to which the client should be redirected:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  redirect
@@ -29,6 +29,7 @@ spec:
   prefix: /redirect/
   service: httpbin.org
   host_redirect: true
+  hostname: '*'
 ```
 
 Using this `AmbassadorMapping`, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `http://httpbin.org/redirect/`.
@@ -43,29 +44,31 @@ The `AmbassadorMapping` may optionally also set additional properties to customi
 To also change the path portion of the URL during the redirect, set `path_redirect`:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  redirect
 spec:
+  hostname: '*'
   prefix: /redirect/
   service: httpbin.org
   host_redirect: true
   path_redirect: /ip
 ```
 
-Here, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `http://httpbin.org/ip/`. 
+Here, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `http://httpbin.org/ip/`.
 
 ### Prefix redirect
 
 To change only a prefix of the path portion of the URL, set `prefix_redirect`:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  redirect
 spec:
+  hostname: '*'
   prefix: /redirect/path/
   service: httpbin.org
   host_redirect: true
@@ -80,7 +83,7 @@ Now, a request to `http://$AMBASSADOR_URL/redirect/path/` will  be redirected to
 [See more information about using regex with $productName$](../rewrites/#regex_rewrite).
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  redirect
@@ -92,7 +95,7 @@ spec:
     pattern: '/foo/([0-9]*)/list'
     substitution: '/bar/\1'
 ```
-A request to `http://$AMBASSADOR_URL/foo/12345/list` will be redirected to 
+A request to `http://$AMBASSADOR_URL/foo/12345/list` will be redirected to
 `http://$AMBASSADOR_URL/bar/12345`.
 
 ### Redirect response code
@@ -101,7 +104,7 @@ To change the HTTP response code return by $productName$, set `redirect_reponse_
 can be used with any type of redirect.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  redirect

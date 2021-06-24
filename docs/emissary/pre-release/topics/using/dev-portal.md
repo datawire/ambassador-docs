@@ -58,7 +58,7 @@ external URL. `service-b` would have no documentation.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  service-a
@@ -69,7 +69,7 @@ spec:
   docs:
     path: /openapi/            ## docs will be obtained from `/srv/openapi/`
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  service-b
@@ -355,7 +355,7 @@ With the above configuration, a mapping for `service-a`:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  service-a
@@ -376,7 +376,7 @@ A mapping for `service-b` with `display_name` set:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  service-b
