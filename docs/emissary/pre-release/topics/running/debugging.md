@@ -10,30 +10,30 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
 
 **If it is not successful, complete the following to see if $productName$ is running:**
 
-1. Get a list of Pods in the `ambassador` namespace with `kubectl get pods -n ambassador`.
+1. Get a list of Pods in the `$productNamespace$` namespace with `kubectl get pods -n $productNamespace$`.
 
     The terminal should print something similar to the following:
 
     ```
-    $ kubectl get pods -n ambassador
+    $ kubectl get pods -n $productNamespace$
     NAME                         READY     STATUS    RESTARTS   AGE
-    ambassador-85c4cf67b-4pfj2   1/1       Running   0          1m
-    ambassador-85c4cf67b-fqp9g   1/1       Running   0          1m
-    ambassador-85c4cf67b-vg6p5   1/1       Running   0          1m
+    $productDeploymentName$-85c4cf67b-4pfj2   1/1       Running   0          1m
+    $productDeploymentName$-85c4cf67b-fqp9g   1/1       Running   0          1m
+    $productDeploymentName$-85c4cf67b-vg6p5   1/1       Running   0          1m
     ```
 
-2. Then, check the $productName$ Deployment with the following: `kubectl get -n ambassador deployments`
+2. Then, check the $productName$ Deployment with the following: `kubectl get -n $productNamespace$ deployments`
 
     After a brief period, the terminal will print something similar to the following:
 
     ```
-    $ kubectl get -n ambassador deployments
+    $ kubectl get -n $productNamespace$ deployments
     NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    ambassador   3         3         3            3           1m
+    $productDeploymentName$   3         3         3            3           1m
     ```
 
-3. Check that the “desired” number of Pods equals the “current” and “available” number of Pods. If they are **not** equal, check the status of the associated Pods with the following command: `kubectl get pods -n ambassador`.
-4. Use the following command for details about the history of the Deployment: `kubectl describe -n ambassador deployment ambassador`
+3. Check that the “desired” number of Pods equals the “current” and “available” number of Pods. If they are **not** equal, check the status of the associated Pods with the following command: `kubectl get pods -n $productNamespace$`.
+4. Use the following command for details about the history of the Deployment: `kubectl describe -n $productNamespace$ deployment $productDeploymentName$`
 
     * Look for data in the “Replicas” field near the top of the output. For example:
         `Replicas: 3 desired | 3 updated | 3 total | 3 available | 0 unavailable`
@@ -44,10 +44,10 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
         Events:
         Type    Reason              Age     From                      Message
         ----    ------              ----    ----                      -------
-        Normal  ScalingReplicaSet    2m     deployment-controller      Scaled up replica set ambassador-85c4cf67b to 3
+        Normal  ScalingReplicaSet    2m     deployment-controller      Scaled up replica set $productDeploymentName$-85c4cf67b to 3
         ```
 
-5. Additionally, use the following command to “describe” the individual Pods: `kubectl describe pods -n ambassador <ambassador-pod-name>`
+5. Additionally, use the following command to “describe” the individual Pods: `kubectl describe pods -n $productNamespace$ <$productDeploymentName$-pod-name>`
 
     * Look for data in the “Status” field near the top of the output. For example, `Status: Running`
 
@@ -56,12 +56,12 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
         Events:
         Type    Reason                 Age   From                                                     Message
         ----    ------                 ----  ----                                                     -------
-        Normal  Scheduled              4m    default-scheduler                                        Successfully assigned ambassador-85c4cf67b-4pfj2 to gke-ambassador-demo-default-pool-912378e5-dkxc
-        Normal  SuccessfulMountVolume  4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  MountVolume.SetUp succeeded for volume "ambassador-token-tmk94"
+        Normal  Scheduled              4m    default-scheduler                                        Successfully assigned $productDeploymentName$-85c4cf67b-4pfj2 to gke-ambassador-demo-default-pool-912378e5-dkxc
+        Normal  SuccessfulMountVolume  4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  MountVolume.SetUp succeeded for volume "$productDeploymentName$-token-tmk94"
         Normal  Pulling                4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  pulling image "docker.io/datawire/ambassador:0.40.0"
-        Normal  Pulled                 4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  Successfully pulled image "docker.io/datawire/ambassador:0.40.0"
-        Normal  Created                4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  Created container
-        Normal  Started                4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  Started container
+        Normal  Pulled                 4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Successfully pulled image "docker.io/datawire/ambassador:0.40.0"
+        Normal  Created                4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Created container
+        Normal  Started                4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Started container
         ```
 
 In both the Deployment Pod and the individual Pods, take the necessary action to address any discovered issues.
@@ -95,22 +95,22 @@ You can adjust the $AESproductName$ log level by setting the
 
 You can turn on Debug mode by setting AES_LOG_LEVEL=debug in your deployment, which generates verbose logging data that can be useful when trying to find a subtle error or bug.
 
-1. Use the following command to target an individual $productName$ Pod: `kubectl get pods -n ambassador`
+1. Use the following command to target an individual $productName$ Pod: `kubectl get pods -n $productNamespace$`
 
     The terminal will print something similar to the following:
 
     ```
-    $ kubectl get pods -n ambassador
+    $ kubectl get pods -n $productNamespace$
     NAME                         READY     STATUS    RESTARTS   AGE
-    ambassador-85c4cf67b-4pfj2   1/1       Running   0          3m
+    $productDeploymentName$-85c4cf67b-4pfj2   1/1       Running   0          3m
     ```
 
-2. Then, run the following: `kubectl logs -n ambassador <ambassador-pod-name>`
+2. Then, run the following: `kubectl logs -n $productNamespace$ <$productDeploymentName$-pod-name>`
 
 The terminal will print something similar to the following:
 
     ```
-    $ kubectl logs -n ambassador ambassador-85c4cf67b-4pfj2
+    $ kubectl logs -n $productNamespace$ $productDeploymentName$-85c4cf67b-4pfj2
     2018-10-10 12:26:50 kubewatch 0.40.0 INFO: generating config with gencount 1 (0 changes)
     /usr/lib/python3.6/site-packages/pkg_resources/__init__.py:1235: UserWarning: /ambassador is writable by group/others and vulnerable to attack when used with get_resource_filename. Consider a more secure location (set with .set_extraction_path or the PYTHON_EGG_CACHE environment variable).
     warnings.warn(msg, UserWarning)
@@ -129,7 +129,7 @@ The terminal will print something similar to the following:
 
 You can examine the contents of the $productName$ Pod for issues, such as if volume mounts are correct and TLS certificates are present in the required directory, to determine if the Pod has the latest $productName$ configuration, or if the generated Envoy configuration is correct or as expected. In these instructions, we will look for problems related to the Envoy configuration.
 
-1. To look into an $productName$ Pod, use the container shell with the `kube-exec` and the `/bin/sh` commands. For example, `kubectl exec -it -n ambassador <ambassador-pod-name> -- /bin/sh`
+1. To look into an $productName$ Pod, use the container shell with the `kube-exec` and the `/bin/sh` commands. For example, `kubectl exec -it -n $productNamespace$ <$productDeploymentName$-pod-name> -- /bin/sh`
 2. Determine the latest configuration. If you haven't overridden the configuration directory, the latest configuration will be in `/ambassador/snapshots`. If you have overridden it, $productName$ saves configurations in `$AMBASSADOR_CONFIG_BASE_DIR/snapshots`.
 
     In the snapshots directory:
@@ -146,7 +146,7 @@ You can examine the contents of the $productName$ Pod for issues, such as if vol
 5. If something is wrong with `snapshot` or `aconf`, there is an issue with your configuration. If something is wrong with `ir` or `econf`, you should [open an issue on Github](https://github.com/emissary-ingress/emissary/issues/new/choose).
 6. To find the main configuration for Envoy, run: `$AMBASSADOR_CONFIG_BASE_DIR/envoy/envoy.json`.
 7. For the bootstrap configuration, which has details about Envoy statistics, logging, and auth, run: `$AMBASSADOR_CONFIG_BASE_DIR/bootstrap-ads.json`.
-8. For further details, you can print the Envoy configuration that is generated during the $productName$ configuration. The file will be titled `envoy-N.json` where N matches the number of the `ambassador-config-N` directory number. Run the following command: `# cat envoy-2.json`
+8. For further details, you can print the Envoy configuration that is generated during the $productName$ configuration. The file will be titled `envoy-N.json` where N matches the number of the `$productDeploymentName$-config-N` directory number. Run the following command: `# cat envoy-2.json`
 
     The terminal will print something similar to the following:
 
