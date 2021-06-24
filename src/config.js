@@ -20,6 +20,7 @@ export const products = [
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
+            { id: "2.0", name: "2.0", link: "2.0/tutorials/getting-started" },
             { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
             { id: "1.12", name: "1.12", link: "1.12/tutorials/getting-started" },
             { id: "1.11", name: "1.11", link: "1.11/tutorials/getting-started" },
@@ -40,6 +41,7 @@ export const products = [
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
+            { id: "2.0", name: "2.0", link: "2.0/tutorials/getting-started" },
             { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
         ]
     },

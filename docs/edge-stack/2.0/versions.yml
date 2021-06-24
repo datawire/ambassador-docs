@@ -1,0 +1,19 @@
+version: 2.0.0-ea
+aproVersion: 0.11.0
+qotmVersion: 1.7
+quoteVersion: 0.5.0
+branch: release/v2.0
+docsVersion: "2.0"
+productName: "Ambassador Edge Stack"
+productNamePlural: "Ambassador Edge Stacks"
+productYAMLPath: edge-stack
+productCRDName: aes-crds.yaml
+productYAMLFile: aes.yaml
+productNamespace: ambassador
+productDeploymentName: edge-stack
+productHelmName: edge-stack
+productDockerImage: aes
+OSSproductName: "Emissary Ingress"
+OSSproductNamePlural: "Emissary Ingresses"
+AESproductName: "Ambassador Edge Stack"
+AESproductNamePlural: "Ambassador Edge Stacks"
