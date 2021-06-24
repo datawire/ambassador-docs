@@ -1,3 +1,6 @@
+
+import Alert from '@material-ui/lab/Alert';
+
 # Edge Stack and Redis
 
 The Ambassador Edge Stack make use of Redis for several purposes.  By default,
@@ -26,7 +29,7 @@ variables rather than the usual `REDIS_*` variables.
  
 #### `SOCKET_TYPE` 
 
-The Go network to use to talk to Redis. see [Go `net.Dial`][]
+The Go network to use to talk to Redis. see [Go net.Dial](https://golang.org/src/net/dial.go)
 
 Most users will leave this as the default of `tcp`.
 
@@ -35,7 +38,7 @@ Most users will leave this as the default of `tcp`.
 The URL to dial to talk to Redis 
 
 This will be either a hostname:port pair or a comma separated list of 
-hostname:port pairs depending on the [`TYPE`](#redis-type) you are using.
+hostname:port pairs depending on the [TYPE](#redis-type) you are using.
   
 For `REDIS_URL` (but not `REDIS_PERSECOND_URL`), not setting a value disables
 Ambassador Edge Stack features that require Redis.
@@ -53,6 +56,7 @@ Consider [installing the self-signed certificate for your Redis in to the
 Ambassador Edge Stack container](../../using/filters/#installing-self-signed-certificates) 
 in order to leave certificate verification on.
 
+
 ## Redis authentication (auth)
 
 **Default** 
@@ -61,14 +65,32 @@ Configure authentication to a redis pool using the default implementation.
 
 #### `PASSWORD`
 
-If set, it is used to `AUTH` to Redis immediately after the connection is
+If set, it is used to [AUTH](https://redis.io/commands/auth) to Redis immediately after the connection is
 established.
 
 #### `USERNAME`
 
 If set, then that username is used with the password to log in as that user in 
-the [Redis 6 ACL][].  It is invalid to set a username without setting a 
+the [Redis 6 ACL](https://redis.io/topics/acl).  It is invalid to set a username without setting a 
 password.  It is invalid to set a username with Redis 5 or lower.
+
+
+The following YAML snippet is an example of configuring Redis authentication in the Ambassador deployment's environment variables.
+
+```yaml
+env:
+- name: REDIS_USERNAME:
+  value: "default"
+- name: REDIS_PASSWORD:
+  valueFrom:
+    secretKeyRef:
+      key: password
+      name: ambassador-redis-password
+```
+  <Alert severity="info">
+    This example demonstrates getting the redis password from a secret called <code>ambassador-redis-password</code> instead
+    of providing the value directly. 
+  </Alert>
 
 **Rate Limit Preview** 
 
@@ -77,10 +99,39 @@ implementation
 
 #### `AUTH` 
 
-If set, the value will be used as the password to authenticate to redis with 
-username `default`. 
+Required for authentication with Rate Limit Preview. You must also configure `REDIS_USERNAME` 
+and `REDIS_PASSWORD` for the rest of Ambassador's Redis usage.  
 
-There is no way to change the username with this implementation.
+If you configure `REDIS_AUTH`, then `REDIS_USERNAME` cannot be changed from the value `default`, and
+`REDIS_PASSWORD` should contain the same value as `REDIS_AUTH`.
+
+`REDIS_USERNAME` and `REDIS_PASSWORD` handle all Redis authentication that is separate from Rate Limit Preview so
+failing to set them when using `REDIS_AUTH` will result in Ambassador not being able to authenticate with Redis for
+all of its other functionality.
+
+
+Adding `AUTH` to the example above for rate limit preview would look like the following snippet.
+
+```yaml
+env:
+- name: REDIS_USERNAME:
+  value: "default"
+- name: REDIS_PASSWORD:
+  valueFrom:
+    secretKeyRef:
+      key: password
+      name: ambassador-redis-password
+- name: REDIS_AUTH
+  valueFrom:
+    secretKeyRef:
+      key: password
+      name: ambassador-redis-password
+```
+
+<Alert severity="warning">
+  Setting <code>AUTH</code> without <code>USERNAME</code> and <code>PASSWORD</code> can result in various problems since <code>AUTH</code> does not 
+  overwrite the basic Redis authentication behavior for systems outside of rate limit preview.
+</Alert>
 
 
 ## Redis performance tuning (tune)
