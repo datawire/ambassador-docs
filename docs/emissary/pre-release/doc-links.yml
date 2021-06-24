@@ -220,6 +220,8 @@
                       link: /howtos/client-cert-validation
         - title: Changes in 2.0.0
           link: /about/changes-2.0.0
+        - title: Known issues in 2.0.0
+          link: /about/known-issues
         - title: FAQs
           link: /about/faq
         - title: Community
