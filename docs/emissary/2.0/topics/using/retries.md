@@ -21,7 +21,7 @@ retry_policy:
 
 | Value | Description |
 | --- | --- |
-|`5xx`| Retries if the upstream service responds with any 5xx code or does not respond at all 
+|`5xx`| Retries if the upstream service responds with any 5xx code or does not respond at all
 |`gateway-error`| Similar to a `5xx` but only applies to a 502, 503, or 504 response
 |`connect-failure`| Retries on a connection failure to the upstream service (included in `5xx`)
 |`retriable-4xx`| Retries on a retriable 4xx response (currently only 409)
@@ -44,11 +44,12 @@ A per mapping retry policy:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
+  hostname: '*'
   prefix: /backend/
   service: quote
   retry_policy:
@@ -70,11 +71,12 @@ spec:
       retry_on: "retriable-4xx"
       num_retries: 4
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
 spec:
-prefix: /backend/
-service: quote
+  prefix: /backend/
+  service: quote
+  hostname: '*'
 ```

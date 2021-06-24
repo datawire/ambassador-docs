@@ -140,7 +140,7 @@ $productName$ will then only use YAML objects that include an appropriate `ambas
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  mapping-used
@@ -149,7 +149,7 @@ spec:
   prefix: /demo1/
   service: demo1
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  mapping-used-2
@@ -158,7 +158,7 @@ spec:
   prefix: /demo2/
   service: demo2
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  mapping-skipped
@@ -166,7 +166,7 @@ spec:
   prefix: /demo3/
   service: demo3
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  mapping-skipped-2

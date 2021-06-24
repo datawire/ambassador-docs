@@ -12,7 +12,7 @@ The `remove_request_headers` attribute takes a list of keys used to match to the
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
@@ -37,7 +37,7 @@ spec:
         remove_request_headers:
         - authorization
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend1
@@ -45,7 +45,7 @@ spec:
   prefix: /backend1/
   service: quote
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend2

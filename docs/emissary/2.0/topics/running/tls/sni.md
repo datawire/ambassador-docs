@@ -1,20 +1,20 @@
 # Server Name Indication (SNI)
 
 $productName$ supports serving multiple `AmbassadorHost`s behind a single IP address, each
-with their own certificate. 
+with their own certificate.
 
-This is as easy to do as creating an `AmbassadorHost` for each domain or subdomain you 
-want $productName$ to serve, getting a certificate for each, and telling 
+This is as easy to do as creating an `AmbassadorHost` for each domain or subdomain you
+want $productName$ to serve, getting a certificate for each, and telling
 $productName$ which `AmbassadorHost` the route should be created for.
 
 The example below configures two `AmbassadorHost`s and assigns routes to them.
 
 ## Configuring an `AmbassadorHost`
 
-The `AmbassadorHost` resources lets you separate configuration for each distinct domain 
+The `AmbassadorHost` resources lets you separate configuration for each distinct domain
 and subdomain you plan on serving behind $productName$.
 
-Let's start by creating a simple `AmbassadorHost` and providing our own certificate in 
+Let's start by creating a simple `AmbassadorHost` and providing our own certificate in
 the `host-cert` secret.
 
 ```yaml
@@ -55,11 +55,11 @@ Now that we have two domains behind $productName$, we can create routes for eith
 or both of them.
 
 We do this by setting the `host` attribute of an `AmbassadorMapping` to the domain the
-`AmbassadorMapping` should be created for. 
+`AmbassadorMapping` should be created for.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  httpbin
@@ -72,7 +72,7 @@ spec:
 Will create a `/httpbin/` endpoint for `host.example.com`
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  mockbin

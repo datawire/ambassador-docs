@@ -10,7 +10,7 @@ You may have multiple mappings listing the same resource but different `host` at
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend
@@ -18,7 +18,7 @@ spec:
   prefix: /backend/
   service: quote1
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend-2
@@ -27,7 +27,7 @@ spec:
   host: quote.datawire.io
   service: quote2
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  quote-backend-3
@@ -54,7 +54,7 @@ An example: the default $productName$ configuration includes the following mappi
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: x.getambassador.io/v3alpha1
 kind:  AmbassadorMapping
 metadata:
   name:  httpbin
