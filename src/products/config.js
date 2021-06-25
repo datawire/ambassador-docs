@@ -174,7 +174,7 @@ export const EdgeStackSections = [
 
 export const EmissaryCards = [
   {
-    title: 'Emissary Ingress',
+    title: 'Emissary-ingress',
     description: 'Route and secure traffic to your cluster with an Open Source Kubernetes-native API Gateway.',
     link: goToEmissaryQuickStart,
     linkText: 'Get Started',

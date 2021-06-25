@@ -31,13 +31,13 @@ In this guide we'll give you everything you need to perform a canary rollout of 
 
 ### Own Environment
 
-If you want to get started with canary rollouts on your own environment, you will need to have **Edge Stack version 1.12 or greater** or **Emissary Ingress 1.13 or greater** installed in your cluster.
+If you want to get started with canary rollouts on your own environment, you will need to have **Edge Stack version 1.12 or greater** or **Emissary-ingress 1.13 or greater** installed in your cluster.
 
 **Install** Edge Stack <a href="/docs/edge-stack/1.13/tutorials/getting-started/">from here</a> if needed.
 
-<Alert severity="info">Canary Rollouts Coming Soon for Edge Stack and Emissary Ingress 2.0 and greater!</Alert>
+<Alert severity="info">Canary Rollouts Coming Soon for Edge Stack and Emissary-ingress 2.0 and greater!</Alert>
 
-If you already have Edge Stack or Emissary Ingress installed, **check your version** by running this command (adjust your namespace if necessary):
+If you already have Edge Stack or Emissary-ingress installed, **check your version** by running this command (adjust your namespace if necessary):
 
 ```
 kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'

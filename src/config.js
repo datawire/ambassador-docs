@@ -36,7 +36,7 @@ export const products = [
     },
     {
         slug: "emissary",
-        name: "Emissary Ingress",
+        name: "Emissary-ingress",
         link: "/docs/emissary",
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
@@ -100,7 +100,7 @@ export const metaData = {
         description: 'Route and secure traffic to your cluster with a Kubernetes-native API Gateway built on the Envoy Proxy.'
     },
     'emissary': {
-        title: 'Emissary Ingress Docs | Ambassador Labs',
+        title: 'Emissary-ingress Docs | Ambassador Labs',
         description: 'Route and secure traffic to your cluster with a Kubernetes-native API Gateway built on the Envoy Proxy.'
     },
     'telepresence': {

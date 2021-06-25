@@ -69,7 +69,7 @@ items:
     date: '2021-05-13'
     notes:
       - title: Envoy 1.15.5
-        body: Emissary Ingress 1.13.4 and Edge Stack 1.13.4 have been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). Edge Stack and Emissary Ingress can now be configured to reject client requests that contain escaped slashes.
+        body: Emissary-ingress 1.13.4 and Edge Stack 1.13.4 have been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). Edge Stack and Emissary-ingress can now be configured to reject client requests that contain escaped slashes.
         image: ./edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
         type: security

@@ -21,7 +21,7 @@ const Emissary = () => {
   return (
     <section className="docs__started docs__container product-page">
       <h1 className="docs__heading-primary docs__heading-primary--aligned">
-        <Icon name="emissary-icon" className="docs__emissary-icon" />Emissary Ingress
+        <Icon name="emissary-icon" className="docs__emissary-icon" />Emissary-ingress
       </h1>
       <p>Route and secure traffic to your cluster with an open source ingress controller and API Gateway for Kubernetes.</p>
       <Link to={goToEmissaryQuickStart} className="docs__button-secondary docs__m-bottom-50">
