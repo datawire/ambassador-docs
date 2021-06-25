@@ -2,6 +2,7 @@
 
 Ambassador Edge Stack enables you to control timeouts in several different ways.
 
+
 ## Request Timeout: `timeout_ms`
 
 `timeout_ms` is the end-to-end timeout for an entire user-level transaction. It begins after the full incoming request is received up until the full response stream is returned to the client. This timeout includes all retries. By default, this is 3000ms.  It can be disabled by setting the value to 0.
