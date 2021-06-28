@@ -20,7 +20,7 @@ Default: `3000`
 
 `cluster_idle_timeout_ms` controls how long a connection stream will remain open if there are no active requests. This timeout operates based on outgoing requests to upstream services. It can be disabled by setting the value to `0`.
 
-Default `3600000` (or 1 hour).
+Default `3600000` (1 hour).
 
 ## Connect timeout: `connect_timeout_ms`
 
