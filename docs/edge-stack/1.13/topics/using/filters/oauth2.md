@@ -7,13 +7,13 @@ The OAuth2 filter type performs OAuth2 authorization against an identity provide
 * An OAuth Client, which fetches resources from the Resource Server on the user's behalf.
 * Half of a Resource Server, validating the Access Token before allowing the request through to the upstream service, which implements the other half of the Resource Server.
 
-This is different from most OAuth implementations where the Authorization Server and the Resource Server are in the same security domain. With the Ambassador Edge Stack, the Client and the Resource Server are in the same security domain, and there is an independent Authorization Server.
+This is different from most OAuth implementations where the Authorization Server and the Resource Server are in the same security domain. With the $productName$, the Client and the Resource Server are in the same security domain, and there is an independent Authorization Server.
 
-## The Ambassador authentication flow
+## The $productName$ authentication flow
 
-This is what the authentication process looks like at a high level when using Ambassador Edge Stack with an external identity provider. The use case is an end-user accessing a secured app service.
+This is what the authentication process looks like at a high level when using $productName$ with an external identity provider. The use case is an end-user accessing a secured app service.
 
-![Ambassador Authentication OAuth/OIDC](../../../../images/ambassador_oidc_flow.jpg)
+![$productName$ Authentication OAuth/OIDC](../../../../images/ambassador_oidc_flow.jpg)
 
 ### Some basic authentication terms
 
@@ -31,7 +31,7 @@ If you look back at the authentication process diagram, the function of the enti
 
 Using an identity hub or broker allows you to support many IdPs without having to code individual integrations with them. For example, [Auth0](https://auth0.com/docs/identityproviders) and [Keycloak](https://www.keycloak.org/docs/latest/server_admin/index.html#social-identity-providers) both offer support for using Google and GitHub as an IdP.
 
-An identity hub sits between your application and the IdP that authenticates your users, which not only adds a level of abstraction so that your application (and Ambassador Edge Stack) is isolated from any changes to each provider's implementation, but it also allows your users to chose which provider they use to authenticate (and you can set a default, or restrict these options).
+An identity hub sits between your application and the IdP that authenticates your users, which not only adds a level of abstraction so that your application (and $productName$) is isolated from any changes to each provider's implementation, but it also allows your users to chose which provider they use to authenticate (and you can set a default, or restrict these options).
 
 The Auth0 docs provide a guide for adding social IdP "[connections](https://auth0.com/docs/identityproviders)" to your Auth0 account, and the Keycloak docs provide a guide for adding social identity "[brokers](https://www.keycloak.org/docs/latest/server_admin/index.html#social-identity-providers)".
 
@@ -59,7 +59,7 @@ spec:
     # are "AuthorizationCode", "Password", and "ClientCredentials".
     grantType:              "enum"     # optional; default is "AuthorizationCode"
 
-    # How should Ambassador authenticate itself to the identity provider?
+    # How should $productName$ authenticate itself to the identity provider?
     clientAuthentication:              # optional
       method: "enum"                     # optional; default is "HeaderPassword"
       jwtAssertion:                      # optional if method method=="JWTAssertion"; forbidden otherwise
@@ -147,7 +147,7 @@ These settings configure the OAuth Client part of the filter.
 
    * `"ClientCredentials"`: Authenticate by requiring that the
      incoming HTTP request include as headers the credentials for
-     Ambassador to use to authenticate to the identity provider.
+     $productName$ to use to authenticate to the identity provider.
 
      The type of credentials needing to be submitted depends on the
      `clientAuthentication.method` (below):
@@ -171,10 +171,10 @@ These settings configure the OAuth Client part of the filter.
    insufficient leeway to account for clock skew and
    network/application latency.
 
- - `clientAuthentication`: Configures how Ambassador uses the
+ - `clientAuthentication`: Configures how $productName$ uses the
    `clientID` and `secret` to authenticate itself to the identity
    provider:
-   * `method`: Which method Ambassador should use to authenticate
+   * `method`: Which method $productName$ should use to authenticate
      itself to the identity provider.  Currently supported are:
      + `"HeaderPassword"`: Treat the client secret (below) as a
        password, and pack that in to an HTTP header for HTTP Basic
@@ -267,21 +267,21 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
    logins, use separate `Filter`s.
 
    + `internalOrigin`: This sub-field of `protectedOrigins[i]` allows
-     you to tell Ambassador that there is another gateway in front of
-     Ambassador that rewrites the `Host` header, so that on the
-     internal network between that gateway and Ambassador, the origin
+     you to tell $productName$ that there is another gateway in front of
+     $productName that rewrites the `Host` header, so that on the
+     internal network between that gateway and $productName$, the origin
      appears to be `internalOrigin` instead of `origin`.  As a
      special-case the scheme and/or authority of the `internalOrigin`
      may be `*`, which matches any scheme or any domain respectively.
      The `*` is most useful in configurations with exactly one
-     protected origin; in such a configuration, Ambassador doesn't
+     protected origin; in such a configuration, $productName$ doesn't
      need to know what the origin looks like on the internal network,
-     just that a gateway in front of Ambassador is rewriting it.  It
+     just that a gateway in front of $productName$ is rewriting it.  It
      is invalid to use `*` with `includeSubdomains: true`.
 
-     For example, if you have a gateway in front of Ambassador
+     For example, if you have a gateway in front of $productName$
      handling traffic for `myservice.example.com`, terminating TLS
-     and routing that traffic to Ambassador with the name
+     and routing that traffic to $productName$ with the name
      `ambassador.internal`, you might write:
 
          ```yaml
@@ -310,7 +310,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
 
  - `extraAuthorizationParameters`: Extra (non-standard or extension) OAuth authorization parameters to use.  It is not valid to specify a parameter used by OAuth itself ("response_type", "client_id", "redirect_uri", "scope", or "state").
 
- - By default, any cookies set by the Ambassador Edge Stack will be
+ - By default, any cookies set by the $productName$ will be
    set to expire when the session expires naturally.  The
    `useSessionCookies` setting may be used to cause session cookies to
    be used instead.
@@ -325,7 +325,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
       user-perceived behavior, depending on the behavior of the
       identity provider.
     * Any cookies persisting longer will not affect behavior of the
-      system; the Ambassador Edge Stack validates whether the session
+      system; the $productName$ validates whether the session
       is expired when considering the cookie.
 
    If `useSessionCookies` is non-`null`, then:
@@ -405,7 +405,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
          `stripInheritedScope` mimics this when passing the required
          scope to the JWT Filter.  It is meaningless to set
          `stripInheritedScope` if `inheritScopeArgument` is not set.
-   * `"userinfo"`: Validates the access token by polling the OIDC UserInfo Endpoint. This means that the Ambassador Edge Stack must initiate an HTTP request to the identity provider for each authorized request to a protected resource.  This performs poorly, but functions properly with a wider range of identity providers.  It is not valid to set `accessTokenJWTFilter` if `accessTokenValidation: userinfo`.
+   * `"userinfo"`: Validates the access token by polling the OIDC UserInfo Endpoint. This means that the $productName$ must initiate an HTTP request to the identity provider for each authorized request to a protected resource.  This performs poorly, but functions properly with a wider range of identity providers.  It is not valid to set `accessTokenJWTFilter` if `accessTokenValidation: userinfo`.
    * `"auto"` attempts to do `"jwt"` validation if any of these
      conditions are true:
 
@@ -489,10 +489,10 @@ spec:
  - `insteadOfRedirect`: An action to perform instead of redirecting
    the User-Agent to the identity provider, when using `grantType: "AuthorizationCode"`.
    By default, if the User-Agent does not have a currently-authenticated session,
-   then the Ambassador Edge Stack will redirect the User-Agent to the
+   then the $productName$ will redirect the User-Agent to the
    identity provider. Setting `insteadOfRedirect` allows you to modify
    this behavior. `insteadOfRedirect` does nothing when `grantType:
-   "ClientCredentials"`, because the Ambassador Edge Stack will never
+   "ClientCredentials"`, because the $productName$ will never
    redirect the User-Agent to the identity provider for the client
    credentials grant type.
     * If `insteadOfRedirect` is non-`null`, then by default it will
@@ -513,7 +513,7 @@ spec:
 
 ## XSRF protection
 
-The `ambassador_xsrf.NAME.NAMESPACE` cookie is an opaque string that should be used as an XSRF token.  Applications wishing to leverage the Ambassador Edge Stack in their XSRF attack protection should take two extra steps:
+The `ambassador_xsrf.NAME.NAMESPACE` cookie is an opaque string that should be used as an XSRF token.  Applications wishing to leverage the $productName$ in their XSRF attack protection should take two extra steps:
 
  1. When generating an HTML form, the server should read the cookie, and include a `<input type="hidden" name="_xsrf" value="COOKIE_VALUE" />` element in the form.
  2. When handling submitted form data should verify that the form value and the cookie value match.  If they do not match, it should refuse to handle the request, and return an HTTP 4XX response.
@@ -522,21 +522,21 @@ Applications using request submission formats other than HTML forms should perfo
 
 
 <Alert severity="info">
-  Prior versions of the Ambassador Edge Stack did not have an <code>ambassador_xsrf.NAME.NAMESPACE</code> cookie, and instead required you to use the <code>ambassador_session.NAME.NAMESPACE</code> cookie.  The <code>ambassador_session.NAME.NAMESPACE</code> cookie should no longer be used for XSRF-protection purposes.
+  Prior versions of the $productName$ did not have an <code>ambassador_xsrf.NAME.NAMESPACE</code> cookie, and instead required you to use the <code>ambassador_session.NAME.NAMESPACE</code> cookie.  The <code>ambassador_session.NAME.NAMESPACE</code> cookie should no longer be used for XSRF-protection purposes.
 </Alert>
 
 ## RP-initiated logout
 
-When a logout occurs, it is often not enough to delete the Ambassador
-Edge Stack's session cookie or session data; after this happens, and the web
+When a logout occurs, it is often not enough to delete the $productName$'s
+session cookie or session data; after this happens, and the web
 browser is redirected to the Identity Provider to re-log-in, the
 Identity Provider may remember the previous login, and immediately
 re-authorize the user; it would be like the logout never even
 happened.
 
-To solve this, the Ambassador Edge Stack can use [OpenID Connect Session
+To solve this, the $productName$ can use [OpenID Connect Session
 Management](https://openid.net/specs/openid-connect-session-1_0.html)
-to perform an "RP-Initiated Logout", where Edge Stack
+to perform an "RP-Initiated Logout", where $productName$
 (the OpenID Connect "Relying Party" or "RP")
 communicates directly with Identity Providers that support OpenID
 Connect Session Management, to properly log out the user.
@@ -604,10 +604,10 @@ function logout(realm) {
 
 ## Redis
 
-The Ambassador Edge Stack relies on Redis to store short-lived authentication credentials and rate limiting information. If the Redis data store is lost, users will need to log back in and all existing rate-limits would be reset.
+The $productName$ relies on Redis to store short-lived authentication credentials and rate limiting information. If the Redis data store is lost, users will need to log back in and all existing rate-limits would be reset.
 
 ## Further reading
 
-In this architecture, Ambassador Edge Stack is functioning as an Identity Aware Proxy in a Zero Trust Network. For more about this security architecture, read the [BeyondCorp security architecture whitepaper](https://ai.google/research/pubs/pub43231) by Google.
+In this architecture, $productName$ is functioning as an Identity Aware Proxy in a Zero Trust Network. For more about this security architecture, read the [BeyondCorp security architecture whitepaper](https://ai.google/research/pubs/pub43231) by Google.
 
-The ["How-to" section](../../../../howtos/) has detailed tutorials on integrating Ambassador with a number of Identity Providers.
+The ["How-to" section](../../../../howtos/) has detailed tutorials on integrating $productName$ with a number of Identity Providers.

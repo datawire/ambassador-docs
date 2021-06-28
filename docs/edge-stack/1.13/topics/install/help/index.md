@@ -1,7 +1,7 @@
 # Install with Edgectl
-We recommend edgectl for [installing Ambassador Edge Stack](../../../tutorials/getting-started). Edgectl is very helpful and quite robust, but there are certain situations where it is unable to successfully complete the installation. In those cases, edgectl directs you to the following appropriate “more help” detailed instructions pages. *(If you’re not using `edgectl install`, these pages won’t be that relevant, but they are here for you to read if you want.)*
+We recommend edgectl for [installing $productName$](../../../tutorials/getting-started). Edgectl is very helpful and quite robust, but there are certain situations where it is unable to successfully complete the installation. In those cases, edgectl directs you to the following appropriate “more help” detailed instructions pages. *(If you’re not using `edgectl install`, these pages won’t be that relevant, but they are here for you to read if you want.)*
  
-- [Ambassador Edge Stack failed to respond to the ACME challenge](aes-acme-challenge)
+- [$productName$ failed to respond to the ACME challenge](aes-acme-challenge)
 - [Could not find a Kubernetes cluster](no-cluster)
 - [Email request interrupted](email-request)
 - [Failed to create a Host resource in your cluster](host-resource-creation)
@@ -12,8 +12,8 @@ We recommend edgectl for [installing Ambassador Edge Stack](../../../tutorials/g
 - [Failed to parse AES manifests](manifest-parsing)
 - [Failed to register DNS name for the current installation](dns-name-body)
 - [Failed to retrieve the Host resource from your cluster](host-retrieval)
-- [Found existing AES CRD but no Ambassador Edge Stack installation](existing-crds)
-- [Found existing Ambassador Edge Stack installation](existing-installation)
+- [Found existing AES CRD but no $productName$ installation](existing-crds)
+- [Found existing $productName$ installation](existing-installation)
 - [Found incompatible AES CRD versions](incompatible-crd-versions)
 - [kubectl not found in $PATH](no-kubectl)
 - [Timeout while waiting for AES manifests to be deployed](wait-for-aes)
