@@ -79,8 +79,6 @@ Envoy debug logging shows verbose information on the actions Envoy is taking on
 every request. It can be useful for understanding why connections are being
 closed or if Envoy or the upstream service is the source of the error.
 
-You can turn on Debug mode in the [Edge Policy Console](../../using/edge-policy-console)
-
 #### $productName$ debug logging
 
 $AESproductName$ is built on top of $OSSproductName$ and runs an
@@ -89,7 +87,7 @@ ACME, etc. Debug logging for this process will give more information on why you
 may see errors with these functions.
 
 You can adjust the $AESproductName$ log level by setting the
-[`AES_LOG_LEVEL` environment variable](../aes-extensions/#aes_log_level).
+[`AES_LOG_LEVEL` environment variable](../running/#log-levels-and-debugging).
 
 ### Viewing logs
 

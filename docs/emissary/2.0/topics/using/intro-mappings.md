@@ -7,8 +7,8 @@ $productName$ is designed around a [declarative, self-service management model](
 <Alert severity="warning">
   Remember that <code>AmbassadorListener</code> and <code>AmbassadorHost</code> resources are
   &nbsp;<b>required</b>&nbsp;for a functioning $productName$ installation that can route traffic!<br/>
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+  <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
+  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
 </Alert>
 
 ## Quick example

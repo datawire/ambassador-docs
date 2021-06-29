@@ -1,10 +1,10 @@
 # Ambassador Docs Home
 
-Explore guides and examples to safely and securely build Kubernetes applications with Ambassador. 
+Explore guides and examples to safely and securely build Kubernetes applications with Ambassador.
 
 ## For You
 
-### Efficient Local Development for Kubernetes 
+### Efficient Local Development for Kubernetes
 
 Develop locally on Kubernetes services without worrying about resource constraints on your local machine.
 
@@ -16,9 +16,9 @@ Develop locally on Kubernetes services without worrying about resource constrain
 
 <Button color="orange" to="tutorials/getting-started/">Get Started</Button>
 
-### Authentication for Cloud Native and Legacy Applications 
+### Authentication for Cloud Native and Legacy Applications
 
-<Button color="orange" to="howtos/ext-filters/">Get Started</Button>
+<Button color="orange" to="howtos/basic-auth/">Get Started</Button>
 
 ## New to Kubernetes?
 

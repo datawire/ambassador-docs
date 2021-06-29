@@ -4,7 +4,7 @@ Keepalive option indicates whether `SO_KEEPALIVE` on the socket should be enable
 
 ## Keepalive configuration
 
-Keepalive configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`AmbassadorMapping`](../ambassadormappings#configuring-ambassadormappings).
+Keepalive configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`AmbassadorMapping`](../mappings#configuring-ambassadormappings).
 
 The `keepalive` attribute configures keepalive. The following fields are supported:
 

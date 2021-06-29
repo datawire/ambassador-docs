@@ -14,7 +14,7 @@ single configuration resource:
 <Alert severity="warning">
   Remember that <code>AmbassadorListener</code> resources are&nbsp;<b>required</b>&nbsp;for a functioning
   $productName$ installation!<br/>
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.
+  <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.
 </Alert>
 
 <Alert severity="warning">

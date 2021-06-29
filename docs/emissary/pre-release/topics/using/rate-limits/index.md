@@ -2,8 +2,8 @@
 
 Rate limiting in $productName$ is composed of two parts:
 
-* `RateLimitService` that tells $productName$ what service to use for rate 
-  limiting. ($productName$ provides a `RateLimitService` 
+* `RateLimitService` that tells $productName$ what service to use for rate
+  limiting. ($productName$ provides a `RateLimitService`
   implementation for you).
 * Labels that get attached to requests; a label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
@@ -13,7 +13,7 @@ Rate limiting in $productName$ is composed of two parts:
 
 There are two ways of setting labels on a request:
 
-1. On an individual [AmbassadorMapping](../ambassadormappings#configuring-ambassadormappings).  Labels set
+1. On an individual [AmbassadorMapping](../mappings#configuring-ambassadormappings).  Labels set
    here will only apply to requests that use that AmbassadorMapping.
 
    ```yaml
@@ -126,13 +126,13 @@ There are 5 types of label specifiers in $productName$:
 
 ## Rate limiting requests based on their labels
 
-This is determined by your `RateLimitService` implementation. 
+This is determined by your `RateLimitService` implementation.
 
-$AESproductName$ provides a `RateLimitService` implementation that is 
+$AESproductName$ provides a `RateLimitService` implementation that is
 configured by a `RateLimit` custom resource.
 
-See the [$AESproductName$ RateLimit Reference](./rate-limits) for information on how 
+See the [$AESproductName$ RateLimit Reference](/docs/edge-stack/latest/topics/using/rate-limits/rate-limits//) for information on how
 to configure `RateLimit`s in $AESproductName$.
 
-See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an 
+See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an
 example `RateLimitService` implementation for $OSSproductName$.

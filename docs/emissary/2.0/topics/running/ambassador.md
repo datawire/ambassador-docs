@@ -316,7 +316,7 @@ Some caveats around the embedded scripts:
 * They're inlined in the $productName$ YAML, so it is recommended to not write complex logic in here
 * They're run on every request/response to every URL
 
-If you need more flexible and configurable options, $productName$ supports a [pluggable Filter system](../../using/filters/).
+If you need more flexible and configurable options, $AESproductName$ supports a [pluggable Filter system](/docs/edge-stack/latest/topics/using/filters/).
 
 ##### Merge slashes
 
@@ -661,7 +661,7 @@ circuit_breakers
 
 Set a default domain and request labels to every request for use by rate limiting.
 
-For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups).
+For more on how to use these, see the [Rate Limit reference](../../using/rate-limits##an-example-with-global-labels-and-groups).
 
 ##### Load balancer
 

@@ -1,6 +1,6 @@
 # ExtAuth protocol
 
-By design, the ExtAuth protocol used by [the AuthService](../auth-service) and by [External Filters](../../../using/filters/) is highly flexible. The authentication service is the first external service invoked on an incoming request (e.g., it runs before the rate limit filter). Because the logic of authentication is encapsulated in an external service, you can use this to support a wide variety of use cases. For example:
+By design, the ExtAuth protocol used by [the AuthService](../auth-service) and by [External Filters](/docs/edge-stack/latest/topics/using/filters/external) is highly flexible. The authentication service is the first external service invoked on an incoming request (e.g., it runs before the rate limit filter). Because the logic of authentication is encapsulated in an external service, you can use this to support a wide variety of use cases. For example:
 
 * Supporting traditional SSO authentication protocols, e.g., OAuth, OpenID Connect, etc.
 * Supporting HTTP basic authentication ([see a sample implementation](https://github.com/datawire/ambassador-auth-httpbasic)).
@@ -53,7 +53,7 @@ User-Agent: curl/7.54.0
 Accept: */*
 Content-Type: application/json
 Content-Length: 27
-  
+
 { "greeting": "hello world!", "spiders": "OMG no" }
 ```
 

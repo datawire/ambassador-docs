@@ -54,10 +54,10 @@ Istio, and Linkerd2.
 
 ### How do I disable the 404 landing page?
 
-Established users will want to better control 404 behavior both for usability and 
-security.  You can leverage the AmbassadorMapping resource to implement this functionality to 
-your cluster.  $productName$ users can use a 'catch-all' mapping using the '/' 
-prefix in a mapping configuration.  The simplest mapping, described below, returns only 404 text.  
+Established users will want to better control 404 behavior both for usability and
+security.  You can leverage the AmbassadorMapping resource to implement this functionality to
+your cluster.  $productName$ users can use a 'catch-all' mapping using the '/'
+prefix in a mapping configuration.  The simplest mapping, described below, returns only 404 text.
 To use a custom 404 landing page, simply insert your service and remove the rewrite value.
 
 ```yaml
@@ -76,9 +76,9 @@ For more information on the AmbassadorMapping resource, see [Advanced Ambassador
 
 ### How do I disable the default Admin mappings?
 
-In a production environment, public access to the console and admin endpoints is not an 
-ideal situation.  To solve this, we will be using an Ambassador Module to remove the default 
-mappings and create a new, host-based mapping to expose the Admin endpoint more securely.  The 
+In a production environment, public access to the console and admin endpoints is not an
+ideal situation.  To solve this, we will be using an Ambassador Module to remove the default
+mappings and create a new, host-based mapping to expose the Admin endpoint more securely.  The
 Ambassador module applies system-wide configuration settings for $productName$ to follow.
 
 ```yaml
@@ -92,8 +92,8 @@ spec:
       enabled: false
 ```
 
-After applying this module, the admin endpoint is no longer accessible from the outside world.  
-We cannot, however, exclude actual administrators from this endpoint, so to create a more managed 
+After applying this module, the admin endpoint is no longer accessible from the outside world.
+We cannot, however, exclude actual administrators from this endpoint, so to create a more managed
 endpoint for them to use, create a mapping to expose the endpoint.
 
 ```yaml
@@ -108,8 +108,8 @@ spec:
   service: localhost:8500
 ```
 
-Now, administrators can connect to the admin console via hostname.  Additional [AmbassadorMapping](../../topics/using/intro-mappings) and 
-[Filter](../../topics/using/filters) settings can be appropriately configured to better control access to admin services.  To 
+Now, administrators can connect to the admin console via hostname.  Additional [AmbassadorMapping](../../topics/using/intro-mappings)
+settings can be appropriately configured to better control access to admin services.  To
 learn more about Ambassador Module configurations, see [Ambassador Module](../../topics/running/ambassador)
 
 ## Troubleshooting

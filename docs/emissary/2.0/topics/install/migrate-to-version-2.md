@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 1.X to $productName$ 2.X. To upgrade within major versions, see the
-  <a href="upgrading">Upgrading $productName$ Guide</a>.
+  [ Upgrading $productName$ Guide](../upgrading).
 </Alert>
 
 We're pleased to share $productName$ 2.0.0-ea as a Developer Preview. In keeping with [SemVer](https://semver.org),
@@ -42,10 +42,10 @@ since at least Ambassador 1.0.0.
 ### Define an `AmbassadorListener` for each port on which your installation should listen.
 
 <Alert severity="info">
-  <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+  <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
 </Alert>
 
-`AmbassadorListener` is **mandatory**. It's worth thinking about the `hostBinding`s to use for 
+`AmbassadorListener` is **mandatory**. It's worth thinking about the `hostBinding`s to use for
 each `AmbassadorListener`, too, though you can start migrating with
 
 ```yaml
@@ -57,14 +57,14 @@ hostBinding:
 ### Copy `Host` resources to `AmbassadorHost` resources.
 
 <Alert severity="info">
-  <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
 </Alert>
 
 For each existing `Host` resource that 2.X should honor, create an `AmbassadorHost` resource:
 
 - change the `apiVersion` to `x.getambassador.io/v3alpha1`;
 - change the `kind` to `AmbassadorHost`;
-- add `metadata.labels` as needed to match the `hostBinding` for the `AmbassadorListener`s with which 
+- add `metadata.labels` as needed to match the `hostBinding` for the `AmbassadorListener`s with which
   the `AmbassadorHost` should associate; and
 - set `spec.selector` if desired, to control which `AmbassadorMappings` will be associated with this `AmbassadorHost`.
 
@@ -79,11 +79,11 @@ For each existing `Mapping` resource that 2.X should honor, create an `Ambassado
 - change the `apiVersion` to `x.getambassador.io/v3alpha1`;
 - change the `kind` to `AmbassadorMapping`;
 - change `spec.host` to `spec.hostname` if possible (see below);
-- add `metadata.labels` as needed to match the `selector` for the `AmbassadorHost`s with which 
+- add `metadata.labels` as needed to match the `selector` for the `AmbassadorHost`s with which
   the `AmbassadorMapping` should associate; and
 - make sure `spec.hostname` matches up with the `AmbassadorHost`s with which the `AmbassadorMapping` should associate.
 
-Where `spec.host` could be an exact match or (with `host_regex`) a regular expression, `spec.hostname` is always a DNS 
+Where `spec.host` could be an exact match or (with `host_regex`) a regular expression, `spec.hostname` is always a DNS
 glob. `spec.hostname` is **strongly** preferred, unless a regex is absolutely required: using globs is **much** more
 performant. Therefore, we recommend using `spec.hostname` wherever possible:
 
@@ -93,7 +93,7 @@ performant. Therefore, we recommend using `spec.hostname` wherever possible:
   `hostname: *.example.com`.
 
 Additionally, when `spec.hostname` is used, the `AmbassadorMapping` will be associated with an `AmbassadorHost` only
-if `spec.hostname` matches the hostname of the `AmbassadorHost`. If the `AmbassadorHost`'s `selector` is also set, 
+if `spec.hostname` matches the hostname of the `AmbassadorHost`. If the `AmbassadorHost`'s `selector` is also set,
 both the `selector` and the hostname must line up.
 
 ### Copy `TCPMapping` resources to `AmbassadorTCPMapping` resources.
@@ -107,7 +107,7 @@ For each existing `TCPMapping` resource that 2.X should honor, create an `Ambass
 - change the `apiVersion` to `x.getambassador.io/v3alpha1`; and
 - change the `kind` to `AmbassadorTCPMapping`.
 
-There are no further changes needed; the association between an `AmbassadorTCPMapping` is still determined by 
+There are no further changes needed; the association between an `AmbassadorTCPMapping` is still determined by
 the port and `spec.host`, which must be an exact match.
 
 ## 2. Additional Notes
@@ -117,10 +117,10 @@ When migrating to $productName$ 2.X, there are several things to keep in mind:
 ### `AmbassadorListener` is mandatory
 
 <Alert severity="info">
-  <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+  <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
 </Alert>
 
-The new [`AmbassadorListener` resource](../running/ambassadorlistener.md) (in `x.getambassador.io/v3alpha1`) defines the
+The new [`AmbassadorListener` resource](../../running/ambassadorlistener) (in `x.getambassador.io/v3alpha1`) defines the
 specific ports on which $productName$ will listen, and which protocols and security model will be used per port. **The
 `AmbassadorListener` resource is mandatory.**
 
@@ -131,12 +131,12 @@ work considerably more efficiently than relying on the defaults.
 ### `AmbassadorListener` has explicit control to choose `AmbassadorHost`s
 
 <Alert severity="info">
-  <a href="../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br />
-  <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br />
+  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
 </Alert>
 
-`AmbassadorListener.spec.hostBinding` controls whether a given `AmbassadorHost` will be associated with 
-that `AmbassadorListener`, as discussed in the [`AmbassadorListener`](../running/ambassadorlistener.md) documentation.
+`AmbassadorListener.spec.hostBinding` controls whether a given `AmbassadorHost` will be associated with
+that `AmbassadorListener`, as discussed in the [`AmbassadorListener`](../../running/ambassadorlistener) documentation.
 As a migration aid, you can tell an `AmbassadorListener` to snap up all `AmbassadorHost`s with
 
 ```yaml
@@ -145,19 +145,19 @@ hostBinding:
     from: ALL
 ```
 
-but **we recommend avoiding this practice in production**. Allowing every `AmbassadorHost` to associate with 
-every `AmbassadorListener` can result in confusing behavior with large numbers of `AmbassadorHost`s, and it 
-can also result in larger Envoy configurations that slow reconfiguration. Instead, we recommend using 
+but **we recommend avoiding this practice in production**. Allowing every `AmbassadorHost` to associate with
+every `AmbassadorListener` can result in confusing behavior with large numbers of `AmbassadorHost`s, and it
+can also result in larger Envoy configurations that slow reconfiguration. Instead, we recommend using
 `hostBinding.selector` to choose `AmbassadorHost`s more carefully.
 
 #### `AmbassadorHost` and `AmbassadorMapping` will not automatically associate with each other
 
 <Alert severity="info">
-  <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a><br />
-  <a href="../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
+  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a><br />
+  <a href="../../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
 </Alert>
 
-In $productName$ 1.X, `Mapping`s were nearly always associated with every `Host`. Since this also tends to 
+In $productName$ 1.X, `Mapping`s were nearly always associated with every `Host`. Since this also tends to
 result in larger Envoy configurations that slow reconfiguration, $productName$ 2.X inverts this behavior:
 **`AmbassadorHost` and `AmbassadorMapping` will not associate without explicit selection**.
 
@@ -175,8 +175,8 @@ has no `selector`, as will an `AmbassadorMapping` that uses `host_regex`.
 ### `AmbassadorHost` is required to terminate TLS.
 
 <Alert severity="info">
-  <a href="../running/host-crd">Learn more about <code>AmbassadorHost</code></a><br />
-  <a href="../running/tls#tlscontext">Learn more about <code>TLSContext</code></a>
+  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a><br />
+  <a href="../../running/tls#tlscontext">Learn more about <code>TLSContext</code></a>
 </Alert>
 
 In $productName$ 1.X, simply creating a `TLSContext` is sufficient to terminate TLS, but in 2.X you _must_ have an
@@ -202,6 +202,6 @@ spec:
   tlsSecret: my-secret
 ```
 
-which will terminate TLS for `host.example.com`. A `TLSContext` is still right way to share data about TLS 
+which will terminate TLS for `host.example.com`. A `TLSContext` is still right way to share data about TLS
 configuration across `Host`s: set both `tlsSecret` and `tlsContext` in the `AmbassadorHost`.
 

@@ -4,7 +4,7 @@ If you currently have the open source version of $OSSproductName$, you can upgra
 
 **Prerequisites**:
 
-* You must have properly installed $OSSproductName$ previously following [these](../install-ambassador-oss) instructions.
+* You must have properly installed $OSSproductName$ previously following [these](/docs/emissary/$docsVersion$/topics/install) instructions.
 * You must have TLS configured and working properly on your $OSSproductName$ instance
 
 **To upgrade your instance of $OSSproductName$**:
