@@ -13,10 +13,13 @@ In this guide we'll give you everything you need to perform a canary rollout of 
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [1. Setup](#1-setup)
-* [2. Create a Rollout](#2-create-a-rollout)
-* [3. Review & merge PR](#3-review--merge-pr)
-* [4. Watch progress](#4-watch-progress)
+* [Prerequisites](#prerequisites)
+* [Overview](#overview)
+* [1. Configure Github Access](#1-configure-github-access)
+* [2. Environment Setup](#2-environment-setup)
+* [3. Create a Rollout](#3-create-a-rollout)
+* [4. Review & merge PR](#3-review--merge-pr)
+* [5. Watch progress](#4-watch-progress)
 
 </div>
 
@@ -32,26 +35,36 @@ The Rollout feature uses:
 
 In the steps bellow we provide you all you need to have the full rollout experience in Ambassador Cloud.
 
-## 1. Setup
+## 1. Configure Github Access
+
+Ambassador Cloud needs access to your github account in order to:
+- create a dedicated repository to run rollouts.
+- create PRs for new rollouts in the created repository.
+- configure ArgoCD access to your repo so manifests can be retrieved and applied in the cluster.
+
+In order to enable Github App execute the following steps:
+1. In Ambassador Cloud, go to the <a href="https://app.getambassador.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
+1. Click the "Enable" button in the GitHub section.
+1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
+1. Select your personal account. The personal account is the one that has the same name as your github username.
+1. Click "Install" and you will be taken back to the Ambassador Cloud.
+
+## 2. Environment Setup
 
 In this step we will:
 - Create and configure a demo kubernetes cluster so you can do canary releases using the Emojivoto app.
-- Create a github repo in your github account with all the files necessary to execute a canary release.
+- Create a github repo in your github account with all the necessary files to execute a canary release.
 
-Click the following link to claim a demo cluster to be used for this rollout demo.
+In order to do so just click the link bellow:
 
-- link
-
-## 2. Configure Github
-
-Ambassador Cloud needs access to the newly created repo so it can create Pull Requests. 
+- <a href="" target="_blank">link</a>
 
 ## 3. Create a Rollout
 
-Remaining on the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, click the "Rollout" button for the "rollout-demo" service, this should show the instructions to create a rollout.
+Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page and click the "Rollout" button for the "emojivoto-web-app" service, this should show the instructions to create a rollout.
 
 Fill in the form with the following information:
-- Image Tag: `hashicorp/http-echo 0.2.3`
+- Image Tag: `datawire/emojivoto-web-app v1`
 - Rollout Duration: 2 minutes
 - Weight increment: 10%
 - Number of pods: 3
