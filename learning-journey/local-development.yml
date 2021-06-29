@@ -1,0 +1,30 @@
+- title: Learning Journey
+  description: Building a productive local development environment
+  readingTime: 49 minutes • 10 lessons
+  topics:
+  - title: 'Setup your productive dev environment'
+    items:
+      - title: 'Kubernetes basics: Kubernetes for developers'
+        link: kubernetes/latest/concepts/basics/
+      - title: 'How can Kubernetes help me code and ship faster?'
+        link: kubernetes/latest/concepts/faster/
+      - title: 'Kubernetes quick start: Set up a powerful dev environment'
+        link: kubernetes/latest/quick-start/
+  - title: 'Go from code to app'
+    items:
+      - title: 'Using Kubernetes for app development'
+        link: kubernetes/latest/concepts/appdev/
+      - title: 'Kubernetes nuts and bolts'
+        link: kubernetes/latest/concepts/nutsandbolts/
+      - title: 'Get code running on my cluster'
+        link: kubernetes/latest/howtos/codetocluster/
+  - title: 'Collaborative remote testing using Telepresence'
+    items:
+      - title: The changing development workflow
+        link: telepresence/latest/concepts/devworkflow/
+      - title: The developer experience and the inner dev loop
+        link: telepresence/latest/concepts/devloop/
+      - title: 'Making the remote local: Faster feedback, collaboration and debugging'
+        link: telepresence/latest/concepts/faster/
+      - title: Telepresence quick start
+        link: telepresence/latest/quick-start/
