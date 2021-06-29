@@ -4,13 +4,13 @@ $productName$ enables you to control timeouts in several different ways.
 
 ## Request timeout: `timeout_ms`
 
-`timeout_ms` is the end-to-end timeout for an entire user-level transaction. It begins after the full incoming request is received up until the full response stream is returned to the client. This timeout includes all retries. It can be disabled by setting the value to 0.
+`timeout_ms` is the end-to-end timeout for an entire user-level transaction in milliseconds. It begins after the full incoming request is received up until the full response stream is returned to the client. This timeout includes all retries. It can be disabled by setting the value to `0`.
 
-Default: 3000ms.
+Default: `3000`
 
 ## Idle timeout: `idle_timeout_ms`
 
-`idle_timeout_ms` controls how long a connection should remain open when no traffic is being sent through the connection. `idle_timeout_ms` is distinct from `timeout_ms`, as the idle timeout applies on either down or upstream request events and is reset every time an encode/decode event occurrs or data is processed for the stream. `idle_timeout_ms` operates on a per-route basis and will overwrite behavior of the `cluster_idle_timeout_ms`.  If not set, $productName$ will default to the value set by `cluster_idle_timeout_ms`. It can be disabled by setting the value to 0.
+`idle_timeout_ms` controls how long a connection should remain open when no traffic is being sent through the connection. `idle_timeout_ms` is distinct from `timeout_ms`, as the idle timeout applies on either down or upstream request events and is reset every time an encode/decode event occurrs or data is processed for the stream. `idle_timeout_ms` operates on a per-route basis and will overwrite behavior of the `cluster_idle_timeout_ms`.  If not set, $productName$ will default to the value set by `cluster_idle_timeout_ms`. It can be disabled by setting the value to `0`.
 
 ## Cluster max connection lifetime: `cluster_max_connection_lifetime_ms`
 
@@ -18,15 +18,15 @@ Default: 3000ms.
 
 ## Cluster idle timeout: `cluster_idle_timeout_ms`
 
-`cluster_idle_timeout_ms` controls how long a connection stream will remain open if there are no active requests. This timeout operates based on outgoing requests to upstream services. It can be disabled by setting the value to 0.
+`cluster_idle_timeout_ms` controls how long a connection stream will remain open if there are no active requests. This timeout operates based on outgoing requests to upstream services. It can be disabled by setting the value to `0`.
 
-Default 3600000ms (or 1 hour).
+Default `3600000` (1 hour).
 
 ## Connect timeout: `connect_timeout_ms`
 
 `connect_timeout_ms` sets the connection-level timeout for $productName$ to an upstream service at the network layer.  This timeout runs until $productName$ can verify that a TCP connection has been established, including the TLS handshake.  This timeout cannot be disabled.
 
-Default: 3000ms.
+Default: `3000`
 
 ## Module only
 
@@ -37,10 +37,10 @@ in the Envoy HTTP Connection Manager and controls how long a connection from the
 downstream client to $productName$ will remain open if there are no active
 requests. Only full requests will be counted towards this timeout so clients
 sending TCP keepalives will not guarantee a connection remains open. This
-timeout  It can be disabled by setting the value to 0.
+timeout  It can be disabled by setting the value to `0`.
 
 
-Default: 3600000 (1 hour)
+Default: `3600000` (1 hour)
 
 
 **Caution** Disabling this timeout increases the likelihood of stream leaks due
