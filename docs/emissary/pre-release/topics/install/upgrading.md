@@ -7,6 +7,16 @@ import Alert from '@material-ui/lab/Alert';
   This guide <b>will not work</b> for that, due to changes to the configuration resources used for $productName$ 2.X.
 </Alert>
 
+<Alert severity="info">
+  We're pleased to introduce $productName$ 2.0 as a <b>developer preview</b>; our latest
+  general-availability release is <a href="../../../1.13">1.13</a>.<br/>
+  <br/>
+  The 2.X family introduces a number of changes to allow $productName$ to more gracefully
+  handle larger installations (including multitenant or multiorganizational installations),
+  reduce memory footprint, and improve performance. For more information on 2.X, please
+  check the <a href="../../release-notes">release notes</a>.
+</Alert>
+
 Since $productName$'s configuration is entirely stored in Kubernetes resources, no special process
 is necessary to upgrade $productName$.
 

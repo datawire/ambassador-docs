@@ -7,10 +7,15 @@ import Alert from '@material-ui/lab/Alert';
   [ Upgrading $productName$ Guide](../upgrading).
 </Alert>
 
-We're pleased to share $productName$ 2.0.0-ea as a Developer Preview. In keeping with [SemVer](https://semver.org),
-$productName$ 2.X introduces some changes that aren't backward-compatible with 1.X. These changes are detailed in
-[Major Changes in $productName$ 2.0.0](../../about/changes-2.0.0), and they require configuration updates when
-migrating.
+We're pleased to introduce $productName$ 2.0 as a <b>developer preview</b>; our latest
+general-availability release is <a href="../../../1.13">1.13</a>.<br/>
+
+The 2.X family introduces a number of changes to allow $productName$ to more gracefully
+handle larger installations (including multitenant or multiorganizational installations),
+reduce memory footprint, and improve performance. In keeping with [SemVer](https://semver.org),
+$productName$ 2.X introduces some changes that aren't backward-compatible with 1.X. These
+changes are detailed in [Major Changes in $productName$ 2.0.0](../../about/changes-2.0.0),
+and they require configuration updates when migrating.
 
 ## 1. Migration Process
 
