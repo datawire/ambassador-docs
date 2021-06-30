@@ -17,6 +17,25 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 1.13.9
+    date: '2021-06-30'
+    notes:
+      - title: Fix for TCPMappings
+        body: "Fixed a bug which caused $productName$ to generate invalid Envoy configuration when two TCPMappings were deployed with the same port, but different host."
+        type: bugfix
+        docs: topics/using/tcpmappings/
+  - version: 1.13.8
+    date: '2021-06-08'
+    notes:
+      - title: Fix Ambassador Cloud Service Details
+        body: "Fixed a bug that occasionally caused missing version information for a service in the Ambassador Service Catalog, especially in clusters with high pod churn."
+        type: bugfix
+        docs: tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
+        image: ./edge-stack-1.13.8-cloud-bugfix.png
+      - title: Improved Argo Rollouts Experience with Ambassador Cloud
+        body: "Ambassador Agent now reports the state of ArgoCD configurations and Deployments in order to provide proper configurations to the users while setting up the Argo Rollouts feature."
+        type: feature
+        docs: https://www.getambassador.io/docs/argo
   - version: 1.13.7
     date: '2021-06-03'
     notes:
