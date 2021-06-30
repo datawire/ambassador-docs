@@ -71,6 +71,8 @@ EOF
     hostname: "*"
     prefix: /backend/
     service: quote
+    docs:
+      path: "/.ambassador-internal/openapi-docs"
   ```
 
 4. Apply the configuration to the cluster:
