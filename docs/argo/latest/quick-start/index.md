@@ -31,9 +31,9 @@ All you need to run this quickstart is a Github account
 
 The Rollout feature uses:
 - A kubernetes cluster: This is where applications are deployed to.
-- A git repo: This is used as an interface to allow users to reviewing the deployment (as Pull Requests) before it gets applied in Kubernetes. This practice is called GitOps as once the PR is approved and merged, it will be applied in the cluster.
+- A git repo: This is used as an interface to allow users to review the deployment (as Pull Requests) before it gets applied in Kubernetes.
 
-In the steps bellow we provide you all you need to have the full rollout experience in Ambassador Cloud.
+In the steps bellow we provide you all you need to have the full Rollout experience in Ambassador Cloud.
 
 ## 1. Configure Github Access
 

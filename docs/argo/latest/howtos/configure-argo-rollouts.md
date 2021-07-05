@@ -1,8 +1,8 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Canary Rollout Quick Start
+# Configure Canary Rollout in you Cluster
 
-In this guide we'll give you everything you need to perform a canary rollout of a new Kubernetes service using GitOps best practices, but without needing to write lots of YAML!
+In this guide we'll give you everything you need to perform a canary rollout in your own cluster using GitOps best practices, but without needing to write lots of YAML!
 
   <Alert severity="info">
     Although you won't be writing lots of YAML, all of the Argo CD and Rollouts configuration you will generate from the cloud user interface will be visible in the GitHub pull request that is automatically created. You can inspect this YAML before merging the pull request to start the GitOps flow that will rollout your updated service.
