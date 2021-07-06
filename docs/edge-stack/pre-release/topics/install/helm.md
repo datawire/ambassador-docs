@@ -41,7 +41,7 @@ Install the $productName$ Chart with the following command:
    ```
 
 For more advanced configuration and details about helm values,
-[please see the helm chart.](https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/README.md)
+[please see the helm chart.](https://github.com/datawire/edge-stack/tree/main/charts/edge-stack/README.md)
 
 ## Upgrading an existing installation
 
