@@ -4,28 +4,24 @@
 - title: Products
   collapsable: false
   items:
-    - title: Edge Stack
+    - title: $productName$
       items:
         - title: Quick start
           link: /tutorials/getting-started
-        - title: Install Edge Stack
+        - title: Install $productName$
           link: /topics/install/
           items:
             - title: Install with Helm
               link: /topics/install/helm
-            - title: Upgrading Ambassador Edge Stack
+            - title: Upgrade to a newer version
               link: /topics/install/upgrading
-            - title: Upgrade to the Ambassador Edge Stack
-              link: /topics/install/upgrade-to-edge-stack
-            - title: Install the Ambassador API Gateway
-              link: /topics/install/install-ambassador-oss
             - title: Install with Docker
               link: /topics/install/docker
             - title: Install with bare metal
               link: /topics/install/bare-metal
             - title: Install manually
               link: /topics/install/yaml-install
-            - title: The Edge Stack Operator
+            - title: The Ambassador Operator
               link: /topics/install/aes-operator
             - title: Install with edgectl
               link: /topics/install/help/
@@ -34,13 +30,13 @@
           items:
             - title: Kubernetes network architecture
               link: /topics/concepts/kubernetes-network-architecture
-            - title: 'The Ambassador operating model: GitOps and continuous delivery'
+            - title: "The Ambassador operating model: GitOps and continuous delivery"
               link: /topics/concepts/gitops-continuous-delivery
             - title: Progressive delivery
               link: /topics/concepts/progressive-delivery
             - title: Microservices API gateways
               link: /topics/concepts/microservices-api-gateways
-            - title: Edge Stack architecture
+            - title: $productName$ architecture
               link: /topics/concepts/architecture
             - title: Rate limiting at the edge
               link: /topics/concepts/rate-limiting-at-the-edge
@@ -62,10 +58,8 @@
               items:
                 - title: Authentication
                   items:
-                    - title: Basic authentication
+                    - title: Basic authentication with $productName$
                       link: /howtos/ext-filters
-                    - title: Basic authentication (for API Gateway)
-                      link: /howtos/basic-auth
                     - title: Using the OAuth2 filter for SSO
                       link: /howtos/oauth-oidc-auth
                     - title: Kubernetes SSO with OIDC and Keycloak
@@ -92,8 +86,6 @@
                       link: /howtos/auth-kubectl-keycloak
                 - title: Rate limiting
                   items:
-                    - title: Basic rate limiting
-                      link: /howtos/rate-limiting-tutorial
                     - title: Advanced rate limiting
                       link: /howtos/advanced-rate-limiting
                     - title: Rate limiting on token claims
@@ -147,21 +139,21 @@
                           link: /topics/running/tls/origination
                 - title: The Module resource
                   link: /topics/running/ambassador
-            - title: Deploying Ambassador
+            - title: Deploying $productName$
               items:
                 - title: Deployment architecture
                   link: /topics/running/ambassador-deployment
-                - title: The Ambassador container
+                - title: The $productName$ container environment
                   link: /topics/running/environment
-                - title: Edge Stack and Redis
+                - title: $productName$ and Redis
                   link: /topics/running/aes-redis
-                - title: Edge Stack with AWS
+                - title: $productName$ with AWS
                   link: /topics/running/ambassador-with-aws
-                - title: Edge Stack with GKE
+                - title: $productName$ with GKE
                   link: /topics/running/ambassador-with-gke
                 - title: Advanced deployment configuration
                   link: /topics/running/running
-                - title: Performance and scaling Ambassador
+                - title: Performance and scaling $productName$
                   link: /topics/running/scaling
             - title: Edge policy management
               items:
@@ -274,12 +266,6 @@
                       link: /howtos/cert-manager
                     - title: Client certificate validation
                       link: /howtos/client-cert-validation
-        - title: FAQs
-          link: /about/faq
-        - title: Community
-          link: /community
-        - title: Troubleshooting
-          link: /topics/running/debugging
         - title: Service Preview
           items:
             - title: Quick start
@@ -298,5 +284,11 @@
               link: /topics/using/edgectl/service-preview-reference
         - title: Developer Portal
           link: /topics/using/dev-portal
+        - title: FAQs
+          link: /about/faq
+        - title: Community
+          link: /community
+        - title: Troubleshooting
+          link: /topics/running/debugging
         - title: Release Notes
           link: /release-notes

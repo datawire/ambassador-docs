@@ -2,7 +2,7 @@
 
 # Edge Control reference
 
-Edge Control is the command-line tool for installing and managing the Ambassador Edge Stack. And Edge Control's outbound and intercept features allow developers to preview changes to their services while sharing a single development cluster.
+Edge Control is the command-line tool for installing and managing the $productName$. And Edge Control's outbound and intercept features allow developers to preview changes to their services while sharing a single development cluster.
 
 If you are a developer working on a service that depends on other in-cluster services, use `edgectl connect` to set up connectivity from your laptop to the cluster. This allows software on your laptop, such as your work-in-progress service running in your debugger, to connect to other services in the cluster.
 

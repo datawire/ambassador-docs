@@ -37,7 +37,7 @@ The terminology around CI/CD and progressive delivery starts to get murky when d
 
 ## What is progressive delivery?
 
-**[Progressive delivery](/docs/edge-stack/latest/topics/concepts/progressive-delivery/)** is a practice that builds on CI/CD principles but adds processes and techniques for gradually rolling out new features with good observability and tight feedback loops. Progressive delivery provides a [fast-moving but risk-sensitive way](/continuous-deployment-pyramid/proactive-mitigation) to exert more fine-grained control over delivery. Progressive delivery makes the rollout of new features and testing them in a production environment possible without introducing significant disruption. 
+**[Progressive delivery](/docs/edge-stack/1.13/topics/concepts/progressive-delivery/)** is a practice that builds on CI/CD principles but adds processes and techniques for gradually rolling out new features with good observability and tight feedback loops. Progressive delivery provides a [fast-moving but risk-sensitive way](/continuous-deployment-pyramid/proactive-mitigation) to exert more fine-grained control over delivery. Progressive delivery makes the rollout of new features and testing them in a production environment possible without introducing significant disruption. 
 
 ## How can rollouts make shipping code safer?
 

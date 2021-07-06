@@ -17,7 +17,7 @@ const month = [
   'December',
 ];
 
-const Release = ({ release, images, handleViewMore }) => {
+const Release = ({ release, images, handleViewMore, versions }) => {
   const formattedDate = useMemo(() => {
     if (release.date) {
       const [yyyy, mm, dd] = release.date.split('-');
@@ -48,6 +48,7 @@ const Release = ({ release, images, handleViewMore }) => {
             key={index}
             images={images}
             onViewMore={() => handleViewMore(note)}
+            versions={versions}
           />
         ))}
       </div>

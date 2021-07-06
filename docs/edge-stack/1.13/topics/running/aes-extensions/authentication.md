@@ -2,16 +2,16 @@ import Alert from '@material-ui/lab/Alert';
 
 # Authentication extension
 
-Edge Stack ships with an authentication service that is enabled
+$productName$ ships with an authentication service that is enabled
 to perform OAuth, JWT validation, and custom authentication schemes. It can
 perform different authentication schemes on different requests allowing you to
 enforce authentication as your application needs.
 
 The Filter and FilterPolicy resources are used to [configure how to do authentication](../../../using/filters).  This doc focuses on how to deploy and manage the authentication extension.
 
-## Edge Stack configuration
+## $productName$ configuration
 
-Edge Stack uses the [AuthService plugin](../../services/auth-service) 
+$productName$ uses the [AuthService plugin](../../services/auth-service) 
 to connect to the authentication extension.
 
 The default AuthService is named `ambassador-edge-stack-auth` and is defined 
@@ -37,7 +37,7 @@ code of 503 is usually overwritten by the Filter that is authenticating the
 request.
 
 This default AuthService works for most use cases. If you need to
-tune how Edge Stack connects to the authentication extension (like changing the
+tune how $productName$ connects to the authentication extension (like changing the
 default timeout), you can find the full configuration options in the 
 [AuthService plugin docs](../../services/auth-service).
 
@@ -45,7 +45,7 @@ default timeout), you can find the full configuration options in the
 
 Certain use cases may require some tuning of the authentication extension. 
 Configuration of this extension is managed via environment variables.
-[The Ambassador container](../../environment) has a full list of environment
+[The $productName$ container environment](../../environment) has a full list of environment
 variables available for configuration, including the variables used by the 
 authentication extension.
 
@@ -54,7 +54,7 @@ authentication extension.
 The authentication extension uses Redis for caching the response from the 
 `token endpoint` when performing OAuth.
 
-Edge Stack shares the same Redis pool for all features that use Redis.  More information is available for [tuning Redis](../../aes-redis) if needed.
+$productName$ shares the same Redis pool for all features that use Redis.  More information is available for [tuning Redis](../../aes-redis) if needed.
 
 #### Timeout variables
 

@@ -17,4 +17,4 @@ The RIGHT Speedometer
 - Authenticated usage is separate from the Rate Limited usage shown in the left hand speedometer.
 - A user's authenticated traffic limit is determined by their license, which is visualized by the green zone on the speedometer arc.
 
-Authenticated traffic volumes are a key factor in determining capacity needs and we want to help you select the Ambassador license optimal for your purposes.
+Authenticated traffic volumes are a key factor in determining capacity needs and we want to help you select the $productName$ license optimal for your purposes.
