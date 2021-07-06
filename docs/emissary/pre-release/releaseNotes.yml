@@ -1,0 +1,137 @@
+# This file should be placed in the folder for the version of the product that's meant to be documented. A `/release-notes` page will be automatically generated and populated at build time.
+# Note that an entry needs to be added to the `doc-links.yml` file in order to surface the release notes in the table of contents.
+#
+# The YAML in this file should contain:
+#
+# changelog: An (optional) URL to the CHANGELOG for the product.
+# items: An array of releases with the following attributes:
+#     - version: The (optional) version number of the release, if applicable.
+#     - date: The date of the release in the format YYYY-MM-DD.
+#     - notes: An array of noteworthy changes included in the release, each having the following attributes:
+#         - title: A short title of the noteworthy change.
+#         - body: Two or three sentences describing the change and why it is noteworthy. This is in rich text format and may contain HTML elements.
+#         - image: The URL of an image that visually represents the noteworthy change. This can be an absolute path or the name of the image file placed under the `ambassador-docs/public` folder starting with `./` (e.g., `./ambassador-example.png`).
+#         - docs: The path to the documentation page where additional information can be found.
+#         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
+#
+
+changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
+items:
+  - version: 2.0.0-ea
+    date: "2021-06-24"
+    notes:
+      - title: Developer Preview!
+        body: We're pleased to introduce $productName$ 2.0.0 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+        type: change
+        docs: about/changes-2.0.0
+
+      - title: Configuration API v3alpha1
+        body: $productName$ 2.0.0 introduces API version <code>x.getambassador.io/v3alpha1</code> for configuration changes that are not backwards compatible with the 1.X family. API versions <code>getambassador.io/v0</code> and <code>getambassador.io/v1</code> are deprecated. Further details are available in the <a href="about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0 Changes</a> document.
+        type: feature
+        docs: about/changes-2.0.0/#1-configuration-api-version-getambassadoriov3alpha1
+        image: ./edge-stack-2.0.0-v3alpha1.png
+
+      - title: The AmbassadorListener Resource
+        body: The new <code>AmbassadorListener</code> CRD defines where and how to listen for requests from the network, and which <code>AmbassadorHost</code> definitions should be used to process those requests. Note that the <code>AmbassadorListener</code> CRD is <b>mandatory</b> and consolidates <i>all</i> port configuration; see the <a href="topics/running/ambassadorlistener"><code>AmbassadorListener</code> documentation</a> for more details.
+        type: feature
+        docs: topics/running/ambassadorlistener
+        image: ./edge-stack-2.0.0-listener.png
+
+      - title: Port configuration outside AmbassadorListener has been moved to AmbassadorListener
+        body: The <code>TLSContext</code> <code>redirect_cleartext_from</code> and <code>AmbassadorHost</code> <code>requestPolicy.insecure.additionalPort</code> elements are no longer supported. Use a <code>AmbassadorListener</code> for this functionality instead.
+        type: change
+        docs: about/changes-2.0.0/#tlscontext-redirect_cleartext_from-and-host-insecureadditionalport
+
+      - title: PROXY protocol configuration has been moved to AmbassadorListener
+        body: The <code>use_proxy_protocol</code> element of the Ambassador <code>Module</code> is no longer supported, as it is now part of the <code>AmbassadorListener</code> resource (and can be set per-<code>AmbassadorListener</code> rather than globally).
+        type: change
+        docs: about/changes-2.0.0/#proxy-protocol-configuration
+
+      - title: Independent Host actions supported
+        body: Each <code>AmbassadorHost</code> can specify its <code>requestPolicy.insecure.action</code> independently of any other <code>AmbassadorHost</code>, allowing for HTTP routing as flexible as HTTPS routing.
+        docs: topics/running/host-crd/#secure-and-insecure-requests
+        image: ./edge-stack-2.0.0-insecure_action_hosts.png
+        type: bugfix
+
+      - title: Stricter rules for AmbassadorHost/AmbassadorMapping association
+        body: A <code>AmbassadorMapping</code> will only be matched with a <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
+        docs: about/changes-2.0.0/#host-and-mapping-association
+        type: change
+
+      - title: AmbassadorHost or Ingress now required for TLS termination
+        body: A <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
+        docs: about/changes-2.0.0/#host-tlscontext-and-tls-termination
+        type: change
+        image: ./edge-stack-2.0.0-host_crd.png
+
+      - title: Envoy V3 APIs
+        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
+        type: change
+        docs: about/changes-2.0.0/#envoy-v3-api-by-default
+
+      - title: Correctly set Ingress resource status in all cases
+        body: $productName$ 2.0.0 fixes a regression in detecting the Ambassador Kubernetes service that could cause the wrong IP or hostname to be used in Ingress statuses -- thanks, <a href="https://github.com/impl">Noah Fontes</a>!
+        docs: topics/running/ingress-controller
+        type: bugfix
+        image: ./edge-stack-2.0.0-ingressstatus.png
+
+      - title: Stricter mTLS enforcement
+        body: $productName$ 2.0.0 fixes a bug where mTLS could use the wrong configuration when SNI and the <code>:authority</code> header didn't match
+        type: bugfix
+
+      - title: Module-based TLS no longer supported
+        body: The <code>tls</code> module and the <code>tls</code> field in the Ambassador module are no longer supported. Please use <code>TLSContext</code> resources instead.
+        docs: about/changes-2.0.0/#tls-the-ambassador-module-and-the-tls-module
+        image: ./edge-stack-2.0.0-tlscontext.png
+        type: change
+
+      - title: Memory usage improvements for installations with many AmbassadorHosts
+        body: The behavior of the Ambassador module <code>prune_unreachable_routes</code> field is now automatic, which should reduce Envoy memory requirements for installations with many <code>AmbassadorHost</code>s
+        docs: topics/running/ambassador/#prune-unreachable-routes
+        image: ./edge-stack-2.0.0-prune_routes.png
+        type: feature
+
+      - title: Higher performance while generating Envoy configuration now enabled by default
+        body: The environment variable <code>AMBASSADOR_FAST_RECONFIGURE</code> is now set by default, enabling the higher-performance implementation of the code that $productName$ uses to generate and validate Envoy configurations.
+        docs: topics/running/scaling/#ambassador_fast_reconfigure-and-ambassador_legacy_mode-flags
+        type: change
+
+  - version: 1.13.8
+    date: '2021-06-08'
+    notes:
+      - title: Fix Ambassador Cloud Service Details
+        body: "Fixed a bug that occasionally caused missing version information for a service in the Ambassador Service Catalog, especially in clusters with high pod churn."
+        type: bugfix
+        docs: tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
+        image: ./edge-stack-1.13.8-cloud-bugfix.png
+      - title: Improved Argo Rollouts Experience with Ambassador Cloud
+        body: "Ambassador Agent now reports the state of ArgoCD configurations and Deployments in order to provide proper configurations to the users while setting up the Argo Rollouts feature."
+        type: feature
+        docs: https://www.getambassador.io/docs/argo
+
+  - version: 1.13.7
+    date: '2021-06-03'
+    notes:
+      - title: JSON logging support
+        body: "An <code>AMBASSADOR_JSON_LOGGING</code> environment variable has been added. When set to <code>true</code> JSON format will be used for most of the control plane logs. Some (but few) logs from <code>gunicorn</code> and the Kubernetes <code>client-go</code> package will still be in text only format."
+        image: ./edge-stack-1.13.7-json-logging.png
+        docs: topics/running/running/#log-format
+        type: feature
+      - title: Consul resolver bugfix with TCPMappings
+        body: "The TCPMapping has the ability to specify a resolver, however the <code>ConsulResolver</code> did not work properly with it. It now utilizes the Consul Connect service discovery instead of falling back to attempting to register an arbitrary endpoint."
+        image: ./edge-stack-1.13.7-tcpmapping-consul.png
+        docs: topics/running/resolvers/#the-consul-resolver
+        type: bugfix
+      - title: Memory usage calculation improvements
+        body: "The internal memory usage calculation that $productName$ performs has been updated to exclude cache memory. This now matches how the kernel OOMKiller calculates memory and should avoid situations where Envoy updates are throttled unnecessarily."
+        image: ./edge-stack-1.13.7-memory.png
+        docs: topics/running/scaling/#inspecting-ambassador-performance
+        type: change
+  - version: 1.13.4
+    date: '2021-05-13'
+    notes:
+      - title: Envoy 1.15.5
+        body: $productName$ has been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). $productName$ can now be configured to reject client requests that contain escaped slashes.
+        image: ./edge-stack-1.13.4.png
+        docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
+        type: security

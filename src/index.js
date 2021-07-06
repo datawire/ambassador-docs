@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -8,16 +8,21 @@ import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
 import { products, oldStructure, metaData } from './config';
 import DocsHome from './components/DocsHome';
-import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
 import isAesPage from './utils/isAesPage';
+import getPrevNext from './utils/getPrevNext';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import EdgeStack from './products/EdgeStack';
+import Emissary from './products/Emissary';
 import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
 import ContactBlock from '../../src/components/ContactBlock';
+import ReadingTime from '../../src/components/ReadingTime';
+import Icon from '../../src/components/Icon';
+import LearningJourneyImg from './images/learning-journe-prev-next.svg';
+import SidebarContent from './components/SidebarContent';
 import './style.less';
 
 export default ({ data, location }) => {
@@ -38,6 +43,10 @@ export default ({ data, location }) => {
         : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
             .slice(4)
             .join('/')}`;
+    const { title: learningTitle, description: learningDescription, readingTime: learningReadingTime, topics: learningTopics } = JSON.parse(data.allLearningjourney.nodes[0].content)[0];
+    const learningPath = '?learning-journey=local-development';
+    const { previous: prevLearning, next: nextLearning, isInTopics } = getPrevNext(learningTopics, page.fields.slug);
+    const isLearning = new URLSearchParams(location.search).get('learning-journey') === 'local-development' && isInTopics;
 
     const [product, setProduct] = useState(initialProduct);
     const [version, setVersion] = useState(initialVersion);
@@ -46,38 +55,57 @@ export default ({ data, location }) => {
     const [showAesPage, setShowAesPage] = useState(false);
 
     const isMobile = useMemo(() => {
-      return typeof window !== 'undefined' ? window.innerWidth <= 800  : true
-    },[]);
+        return typeof window !== 'undefined' ? window.innerWidth <= 800 : true
+    }, []);
 
     useEffect(() => {
         loadJS();
         isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
     }, [isMobile]);
 
-    const parseLinksByVersion = (vers, links) => {
+    const parseLinksByVersion = useCallback((vers, links) => {
         if (oldStructure.includes(vers)) {
             return links;
         }
         return links[1].items[0].items;
-    }
+    }, [oldStructure]);
 
-    const getVersions = () => {
+    const learningParseTopics = learningTopics.map(topic => {
+        const items = topic.items.map(item => {
+            const readingTimeTopic = data.allMdx.edges.filter(i => i.node.fields.slug === `/docs/${item.link}`);
+            return {
+                ...item,
+                slug: readingTimeTopic[0].node.fields.slug,
+                readingTimeMinutes: Math.ceil(readingTimeTopic[0].node.fields.readingTime.minutes),
+                readingTimeText: readingTimeTopic[0].node.frontmatter.reading_time_text,
+                hideReadingTime: readingTimeTopic[0].node.frontmatter.hide_reading_time,
+                readingTimeFront: readingTimeTopic[0].node.frontmatter.reading_time
+            }
+        });
+
+        return {
+            ...topic,
+            items
+        }
+    });
+
+    const versions = useMemo(() => {
         if (!data.versions?.content) {
             return {};
         }
         const versions = data.versions?.content;
         return JSON.parse(versions);
-    }
+    }, [data.versions?.content]);
 
     const menuLinks = useMemo(() => {
         if (!data.linkentries?.content) {
             return [];
         }
-        const linksJson = JSON.parse(data.linkentries?.content || []);
+        const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
         return parseLinksByVersion(slug[3], linksJson);
-    }, [data.linkentries, slug]);
+    }, [data.linkentries, slug, versions]);
 
-    const getMetaData = () => {
+    const metadata = useMemo(() => {
         let metaDescription;
         let metaTitle;
         if (isHome) {
@@ -90,8 +118,10 @@ export default ({ data, location }) => {
             metaTitle = (page.headings && page.headings[0] ? page.headings[0].value : 'Docs') + ' | Ambassador';
             metaDescription = page.frontmatter && page.frontmatter.description ? page.frontmatter.description : page.excerpt;
         }
-        return { metaDescription, metaTitle };
-    }
+        return {
+            metaDescription: template(metaDescription, versions), metaTitle: template(metaTitle, versions)
+        };
+    }, [versions, page, isHome, metaData]);
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
 
@@ -141,26 +171,28 @@ export default ({ data, location }) => {
     };
 
     const loadJS = () => {
-      if(!isMobile){
-        if (window.docsearch) {
-            window.docsearch({
-                apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-                indexName: 'getambassador',
-                inputSelector: '#doc-search',
-                debug: true,
-            });
-        } else {
-            setTimeout(() => {
-                loadJS();
-            }, 500);
+        if (!isMobile) {
+            if (window.docsearch) {
+                window.docsearch({
+                    apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
+                    indexName: 'getambassador',
+                    inputSelector: '#doc-search',
+                    debug: true,
+                });
+            } else {
+                setTimeout(() => {
+                    loadJS();
+                }, 500);
+            }
         }
-}
     };
 
     const getProductHome = (product) => {
         switch (product) {
             case 'edge-stack':
                 return <EdgeStack />;
+            case 'emissary':
+                return <Emissary />;
             case 'telepresence':
                 return <Telepresence />;
             case 'cloud':
@@ -174,8 +206,6 @@ export default ({ data, location }) => {
         }
     }
 
-    const requireReadingTime = () => !(page.fields.slug.startsWith('/docs/telepresence/') && page.fields.slug.endsWith('/quick-start/')) && !page.frontmatter.hide_reading_time;
-
     const footer = (
         <div>
             <hr className="docs__separator docs__container" />
@@ -183,7 +213,7 @@ export default ({ data, location }) => {
                 <ContactBlock />
             </section>
             {!isHome && !isProductHome && isProduct && (
-                <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />
+                <DocsFooter page={page} product={product.slug} version={versions.docsVersion} />
             )}
         </div>
     );
@@ -202,12 +232,20 @@ export default ({ data, location }) => {
         }
         return (
             <div className="docs__container-doc">
-                <Sidebar
+                <SidebarContent
+                    title={learningTitle}
+                    description={learningDescription}
+                    readingTime={learningReadingTime}
+                    sidebarTopicList={learningParseTopics}
+                    path={learningPath}
                     onVersionChanged={handleVersionChange}
                     version={version}
                     versionList={versionList}
                     topicList={menuLinks}
                     slug={page.fields.slug}
+                    location={location}
+                    isInTopics={isInTopics}
+                    isLearning={isLearning}
                 />
                 <div className="docs__doc-body-container">
                     <div className="docs__doc-body doc-body">
@@ -218,10 +256,43 @@ export default ({ data, location }) => {
                                 </Link>
                             )}
                         </div>
-                        {requireReadingTime() && <span className="docs__reading-time">{page.frontmatter.reading_time ? page.frontmatter.reading_time : page.fields.readingTime.text}</span>}
-                        <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.text}>
-                            {template(page.body, getVersions())}
+                        <ReadingTime
+                            slug={page.fields.slug}
+                            hideReadingTime={page.frontmatter.hide_reading_time}
+                            readingTimeMinutes={page.fields.readingTime.minutes}
+                            readingTimeFront={page.frontmatter.reading_time}
+                            readingTimeText={page.frontmatter.reading_time_text}
+                            itemClassName="docs__reading-time"
+                        />
+                        <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.minutes}>
+                            {template(page.body, versions)}
                         </MDXRenderer>
+                        {isLearning && (
+                            <div className="docs__next-previous">
+                                <span className="docs__next-previous__title">Continue your learning journey</span>
+                                <div className="docs__next-previous__content">
+                                    <div className="docs__next-previous__previous">
+                                        {prevLearning &&
+                                            <>
+                                                <Link to={`/docs/${prevLearning.link}${learningPath}`} className="docs__next-previous__button"><Icon name="right-arrow" /> Previous</Link>
+                                                <span className="docs__next-previous__text">{prevLearning.title}</span>
+                                            </>
+                                        }
+                                    </div>
+                                    <div className="docs__next-previous__learning-journey">
+                                        <img src={LearningJourneyImg} alt="Learning Journey" />
+                                    </div>
+                                    <div className="docs__next-previous__next">
+                                        {nextLearning &&
+                                            <>
+                                                <Link to={`/docs/${nextLearning.link}${learningPath}`} className="docs__next-previous__button">Next <Icon name="right-arrow" /></Link>
+                                                <span className="docs__next-previous__text">{nextLearning.title}</span>
+                                            </>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     {footer}
                 </div>
@@ -232,18 +303,17 @@ export default ({ data, location }) => {
     return (
         <Layout location={location}>
             <Helmet>
-                <title>{getMetaData().metaTitle}</title>
-                <meta name="og:title" content={getMetaData().metaTitle} />
+                <title>{metadata.metaTitle}</title>
+                <meta name="og:title" content={metadata.metaTitle} />
                 <meta name="og:type" content="article" />
                 <link rel="canonical" href={canonicalUrl} />
-                <meta name="description" content={getMetaData().metaDescription} />
-        
-                {!isMobile && 
-                  <link
-                    rel="stylesheet"
-                    href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
-              />}
-              {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
+                <meta name="description" content={metadata.metaDescription} />
+                {!isMobile &&
+                    <link
+                        rel="stylesheet"
+                        href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
+                    />}
+                {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
             </Helmet>
             <div className="docs">
                 <nav>
@@ -296,19 +366,19 @@ export default ({ data, location }) => {
                     {content}
                 </div>
             </div>
-        </Layout>
+        </Layout >
     );
 };
 
 export const query = graphql`
-  query($linksslug: String, $slug: String!) {
+  query($linksslug: String, $slug: String!, $learningSlugs: [String]) {
     mdx(fields: { slug: { eq: $slug } }) {
       body
       fields {
         slug
         linksslug
         readingTime {
-            text
+            minutes
         }
       }
       excerpt(pruneLength: 150, truncate: true)
@@ -319,6 +389,7 @@ export const query = graphql`
         description
         reading_time
         hide_reading_time
+        reading_time_text
       }
       parent {
         ... on File {
@@ -333,6 +404,29 @@ export const query = graphql`
     versions(slug: { eq: $linksslug }) {
       id
       content
+    }
+    allLearningjourney {
+        nodes {
+          content
+          slug
+        }
+    }
+    allMdx ( filter: { fields: { slug: { in:  $learningSlugs } } }) {
+        edges {
+          node {
+            fields {
+              slug,
+              readingTime {
+                minutes
+              }
+            }
+            frontmatter {
+              reading_time
+              hide_reading_time
+              reading_time_text
+            }
+          }
+        }
     }
   }
 `;

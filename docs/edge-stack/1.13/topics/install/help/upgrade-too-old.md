@@ -1,4 +1,4 @@
-# Edgectl Upgrade: must update the Ambassador API Gateway
+# Edgectl Upgrade: must update $productName$
 
 The upgrader has failed to upgrade the cluster.
 
