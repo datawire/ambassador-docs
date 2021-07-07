@@ -103,3 +103,5 @@ export const metaData = {
         description: 'Ambassador Cloud is your central dashboard for all Ambassador tools. Get started with Service Catalog.'
     }
 };
+
+export const learningJourneys = ['local-development', 'investigating-and-debugging-microservices'];

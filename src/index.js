@@ -6,7 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import { products, oldStructure, metaData } from './config';
+import { products, oldStructure, metaData, learningJourneys } from './config';
 import DocsHome from './components/DocsHome';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
@@ -26,7 +26,6 @@ import SidebarContent from './components/SidebarContent';
 import './style.less';
 
 export default ({ data, location }) => {
-
     const page = data.mdx || {};
     const slug = page.fields.slug.split('/');
     const isHome = page.fields.slug === '/docs/';
@@ -43,17 +42,41 @@ export default ({ data, location }) => {
         : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
             .slice(4)
             .join('/')}`;
-    const { title: learningTitle, description: learningDescription, readingTime: learningReadingTime, topics: learningTopics } = JSON.parse(data.allLearningjourney.nodes[0].content)[0];
-    const learningPath = '?learning-journey=local-development';
-    const { previous: prevLearning, next: nextLearning, isInTopics } = getPrevNext(learningTopics, page.fields.slug);
-    const isLearning = new URLSearchParams(location.search).get('learning-journey') === 'local-development' && isInTopics;
+
+    const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
+    const learningPath = learningJourneyName ? `?learning-journey=${learningJourneyName}` : '';
+    const isInLearnings = learningJourneys.includes(learningJourneyName);
+    const learningJourneyData = isInLearnings ? data.allLearningjourney.nodes.filter(node => node.slug.match(/(?<=\/).+?(?=\.)/g)[0] === learningJourneyName) : [];
+    const { title: learningTitle, description: learningDescription, readingTime: learningReadingTime, topics } = isInLearnings ? JSON.parse(learningJourneyData[0].content)[0] : {};
+    const { previous: prevLearning, next: nextLearning, isInTopics } = isInLearnings ? getPrevNext(topics, page.fields.slug) : {};
+    const isLearning = isInLearnings && isInTopics;
+    const learningParseTopics = isLearning ? topics.map(topic => {
+        const items = topic.items.map(item => {
+            data.allMdx.edges.map(i => console.log(i.node.fields.slug))
+            const readingTimeTopic = data.allMdx.edges.filter(i => i.node.fields.slug === `/docs/${item.link}`);
+            const { slug, readingTime } = readingTimeTopic[0] ? readingTimeTopic[0].node.fields : {};
+            const { reading_time_text, hide_reading_time, reading_time } = readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
+            return {
+                ...item,
+                slug,
+                readingTimeMinutes: Math.ceil(readingTime ? readingTime.minutes : 0),
+                readingTimeText: reading_time_text,
+                hideReadingTime: hide_reading_time,
+                readingTimeFront: reading_time
+            }
+        });
+
+        return {
+            ...topic,
+            items
+        }
+    }) : [];
 
     const [product, setProduct] = useState(initialProduct);
     const [version, setVersion] = useState(initialVersion);
     const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome);
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
-
     const isMobile = useMemo(() => {
         return typeof window !== 'undefined' ? window.innerWidth <= 800 : true
     }, []);
@@ -69,25 +92,6 @@ export default ({ data, location }) => {
         }
         return links[1].items[0].items;
     }, [oldStructure]);
-
-    const learningParseTopics = learningTopics.map(topic => {
-        const items = topic.items.map(item => {
-            const readingTimeTopic = data.allMdx.edges.filter(i => i.node.fields.slug === `/docs/${item.link}`);
-            return {
-                ...item,
-                slug: readingTimeTopic[0].node.fields.slug,
-                readingTimeMinutes: Math.ceil(readingTimeTopic[0].node.fields.readingTime.minutes),
-                readingTimeText: readingTimeTopic[0].node.frontmatter.reading_time_text,
-                hideReadingTime: readingTimeTopic[0].node.frontmatter.hide_reading_time,
-                readingTimeFront: readingTimeTopic[0].node.frontmatter.reading_time
-            }
-        });
-
-        return {
-            ...topic,
-            items
-        }
-    });
 
     const versions = useMemo(() => {
         if (!data.versions?.content) {
