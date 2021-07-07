@@ -21,7 +21,7 @@ Since this hook is required for Helm 2 support it **IS NOT AN ERROR AND CAN BE S
 ## Install with Helm
 
 When you run the Helm chart, it installs $productName$. You can
-deploy it with either version of the tool. 
+deploy it with either version of the tool.
 
 1. If you are installing $productName$ **for the first time on your cluster**, create the `ambassador` namespace for $productName$:
 
@@ -51,14 +51,14 @@ deploy it with either version of the tool.
      -> Existing $productName$ installation detected.
      -> Automatically configuring TLS.
      Please enter an email address. We’ll use this email address to notify you prior to domain and certification expiration [None]: john@example.com.
-     -> Obtaining a TLS certificate from Let’s Encrypt.  
+     -> Obtaining a TLS certificate from Let’s Encrypt.
 
      Congratulations, you’ve successfully installed $productName$ in your Kubernetes cluster. Visit https://random-word.edgestack.me to access your $productName$ installation and for additional configuration.
-  ```  
+  ```
 
-  \* [Edge Control](../../using/edgectl/edge-control) (`edgectl`) automatically configures TLS for your instance and provisions a domain name for your $productName$.  This is not necessary if you already have a domain name and certificates.  
+  \* [Edge Control](../../using/edgectl/edge-control) (`edgectl`) automatically configures TLS for your instance and provisions a domain name for your $productName$.  This is not necessary if you already have a domain name and certificates.
 
-  This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for $productName$ to route traffic. Details on how to configure $productName$ using the Helm chart can be found in the Helm chart [README](https://github.com/datawire/ambassador/tree/master/charts/ambassador).
+  This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for $productName$ to route traffic. Details on how to configure $productName$ using the Helm chart can be found in the Helm chart [README](https://github.com/datawire/ambassador/tree/$branch$/charts/ambassador).
 
 6. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
 

@@ -14,7 +14,7 @@ The 2.X family introduces a number of changes to allow $productName$ to more gra
 handle larger installations (including multitenant or multiorganizational installations),
 reduce memory footprint, and improve performance. In keeping with [SemVer](https://semver.org),
 $productName$ 2.X introduces some changes that aren't backward-compatible with 1.X. These
-changes are detailed in [Major Changes in $productName$ 2.0.0](../../about/changes-2.0.0),
+changes are detailed in [Major Changes in $productName$ 2.0.0](../../../about/changes-2.0.0),
 and they require configuration updates when migrating.
 
 ## 1. Migration Process
@@ -76,7 +76,7 @@ For each existing `Host` resource that 2.X should honor, create an `AmbassadorHo
 ### Copy `Mapping` resources to `AmbassadorMapping` resources.
 
 <Alert severity="info">
-  <a href="../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
+  <a href="../../using/intro-mappings/">Learn more about <code>AmbassadorMapping</code></a>
 </Alert>
 
 For each existing `Mapping` resource that 2.X should honor, create an `AmbassadorMapping` resource:
@@ -104,7 +104,7 @@ both the `selector` and the hostname must line up.
 ### Copy `TCPMapping` resources to `AmbassadorTCPMapping` resources.
 
 <Alert severity="info">
-  <a href="../using/tcpmappings">Learn more about <code>AmbassadorTCPMapping</code></a>
+  <a href="../../using/tcpmappings/">Learn more about <code>AmbassadorTCPMapping</code></a>
 </Alert>
 
 For each existing `TCPMapping` resource that 2.X should honor, create an `AmbassadorTCPMapping` resource:

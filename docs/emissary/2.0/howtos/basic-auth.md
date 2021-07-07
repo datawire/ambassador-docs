@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 # Basic authentication (for $productName$)
 
 <Alert severity="info">
-  This guide applies to $OSSproductName$, use of this guide with $AESproductName$ is not recommended.  $AESproductName$ does <a href="../ext-filters">authentication using the Filter resource</a> instead of the AuthService resource as described below.
+  This guide applies to $OSSproductName$, use of this guide with $AESproductName$ is not recommended.  $AESproductName$ does <a href="/docs/edge-stack/latest/topics/using/filters/external/">authentication using the Filter resource</a> instead of the AuthService resource as described below.
 </Alert>
 
 
@@ -218,4 +218,4 @@ spec:
 
 ## More
 
-For more details about configuring authentication, see the [`External` filter](../../topics/using/filters) documentation.
+For more details about configuring authentication, see the [`External` filter](/docs/edge-stack/latest/topics/using/filters/) documentation.
