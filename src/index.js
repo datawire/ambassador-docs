@@ -46,13 +46,12 @@ export default ({ data, location }) => {
     const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
     const learningPath = learningJourneyName ? `?learning-journey=${learningJourneyName}` : '';
     const isInLearnings = learningJourneys.includes(learningJourneyName);
-    const learningJourneyData = isInLearnings ? data.allLearningjourney.nodes.filter(node => node.slug.match(/(?<=\/).+?(?=\.)/g)[0] === learningJourneyName) : [];
+    const learningJourneyData = isInLearnings ? data.allLearningjourney.nodes.filter(node => node.slug.indexOf('/') > -1 && node.slug.indexOf('.') > -1 && node.slug.split('/')[1].split('.')[0] === learningJourneyName) : [];
     const { title: learningTitle, description: learningDescription, readingTime: learningReadingTime, topics } = isInLearnings ? JSON.parse(learningJourneyData[0].content)[0] : {};
     const { previous: prevLearning, next: nextLearning, isInTopics } = isInLearnings ? getPrevNext(topics, page.fields.slug) : {};
     const isLearning = isInLearnings && isInTopics;
     const learningParseTopics = isLearning ? topics.map(topic => {
         const items = topic.items.map(item => {
-            data.allMdx.edges.map(i => console.log(i.node.fields.slug))
             const readingTimeTopic = data.allMdx.edges.filter(i => i.node.fields.slug === `/docs/${item.link}`);
             const { slug, readingTime } = readingTimeTopic[0] ? readingTimeTopic[0].node.fields : {};
             const { reading_time_text, hide_reading_time, reading_time } = readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
