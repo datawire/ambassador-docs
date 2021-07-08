@@ -104,4 +104,4 @@ export const metaData = {
     }
 };
 
-export const learningJourneys = ['local-development', 'investigating-and-debugging-microservices'];
+export const learningJourneys = ['local-development', 'investigating-and-debugging-microservices', 'continuous-delivery-within-kubernetes'];

@@ -12,6 +12,8 @@
           items:
             - title: What is Argo?
               link: /concepts/argo/
+            - title: Taking on "ship" responsibilities
+              link:  /concepts/responsibilities/
             - title: CI/CD and progressive delivery - Safely shipping code
               link: /concepts/cicd/
             - title: Developer-centric GitOps-style deployment
