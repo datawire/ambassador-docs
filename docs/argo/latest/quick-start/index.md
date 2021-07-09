@@ -57,7 +57,7 @@ In this step we will:
 
 In order to do so just click the link bellow:
 
-- <a href="" target="_blank">link</a>
+- <a href="https://app.getambassador.io/cloud/demo-cluster-rollouts" target="_blank" onClick={(e) => {window.open('https://app.getambassador.io/cloud/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>link</a>
 
 ## 3. Create a Rollout
 
