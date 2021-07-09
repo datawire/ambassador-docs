@@ -186,7 +186,7 @@ Click "Start Rollout".
 
 ## 9. Review & merge PR
 
-After clicking Start Rollout the slideout will close and you will be shown the service rollouts page where one "Pending" rollout is shown.
+After clicking Start Rollout the slideout will close and you will be shown the service rollouts page where one "Not Merged" rollout is shown.
 Click the "Pull Request" button.
 A new browser tab will be opened and you will be taken to github.com where you can review and merge the PR on GitHub.
 Click on the "Files changed" tab in the pull request and explore all of the rollouts code that has been generated for you.
