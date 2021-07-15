@@ -61,10 +61,10 @@ In order to do so just click the link bellow:
 
 ## 3. Create a Rollout
 
-Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page and click the "Rollout" button for the "emojivoto-web-app" service, this should show the instructions to create a rollout.
+Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page and click the "Rollout" button for the "web-app" service, this should show the instructions to create a rollout.
 
 Fill in the form with the following information:
-- Image Tag: `datawire/emojivoto-web-app v1`
+- Image Tag: `datawire/emojivoto-web-app v12`
 - Rollout Duration: 2 minutes
 - Weight increment: 10%
 - Number of pods: 3
