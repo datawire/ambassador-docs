@@ -44,7 +44,7 @@ Ambassador Cloud needs access to your github account in order to:
 
 In order to enable Github App execute the following steps:
 1. In Ambassador Cloud, go to the <a href="https://app.getambassador.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
-1. Click the "Enable" button in the GitHub section.
+1. Click the "Configure" button in the GitHub section.
 1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
 1. Select your personal account. The personal account is the one that has the same name as your github username.
 1. Click "Install" and you will be taken back to the Ambassador Cloud.
