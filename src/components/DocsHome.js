@@ -44,7 +44,6 @@ const DocsHome = () => {
           <div className="docs__info--second">
             <img
               src={AmbassadorCloud}
-              alt=""
               width="280"
               height="153"
               className="docs__ambassador-cloud-image"
