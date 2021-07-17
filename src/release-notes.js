@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { graphql, Link, navigate } from 'gatsby';
 import Layout from '../../src/components/Layout';
 import Search from './images/search.inline.svg';
-import { products, oldStructure } from './config';
+import { products } from './config';
 import ReleaseNotes from './components/ReleaseNotes';
 import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
@@ -11,13 +11,6 @@ import DocsFooter from './components/DocsFooter';
 import ContactBlock from '../../src/components/ContactBlock';
 import template from '../../src/utils/template';
 import './style.less';
-
-function parseLinksByVersion(vers, links) {
-  if (oldStructure.includes(vers)) {
-    return links;
-  }
-  return links[1].items[0].items;
-}
 
 export default ({ data, location, pageContext }) => {
   const slug = pageContext.slug.split('/');
@@ -71,9 +64,8 @@ export default ({ data, location, pageContext }) => {
     if (!data.linkentries?.content) {
       return [];
     }
-    const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
-    return parseLinksByVersion(slug[3], linksJson);
-  }, [data.linkentries, slug, versions]);
+    return JSON.parse(template(data.linkentries?.content, versions));
+  }, [data.linkentries, versions]);
 
   const getMetaDescription = () => {
     switch (slug[2]) {
@@ -120,14 +112,7 @@ export default ({ data, location, pageContext }) => {
     setVersion(newVersion);
     const slugPath = slug.slice(4).join('/') || '';
 
-    const newVersionLinks = await import(
-      `../docs/${product.slug}/${newVersion.id}/doc-links.yml`
-    );
-
-    const newVersionLinksContent = parseLinksByVersion(
-      newVersion.id,
-      newVersionLinks.default,
-    );
+    const newVersionLinksContent = (await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`)).default;
     const links = [];
 
     function createArrayLinks(el) {

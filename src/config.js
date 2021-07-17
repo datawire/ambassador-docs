@@ -84,8 +84,6 @@ export const products = [
     }
 ];
 
-export const oldStructure = ["1.9", "1.8", "1.7", "1.6", "1.5", "1.4", "1.3"];
-
 export const metaData = {
     'home': {
         title: 'Docs Home | Ambassador Labs',

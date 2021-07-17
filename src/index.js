@@ -6,7 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import { products, oldStructure, metaData, learningJourneys, archivedVersionsLink, siteUrl } from './config';
+import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl } from './config';
 import DocsHome from './components/DocsHome';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
@@ -25,13 +25,6 @@ import Icon from '../../src/components/Icon';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import SidebarContent from './components/SidebarContent';
 import './style.less';
-
-function parseLinksByVersion(vers, links) {
-  if (oldStructure.includes(vers)) {
-    return links;
-  }
-  return links[1].items[0].items;
-}
 
 export default ({ data, location }) => {
 
@@ -123,9 +116,8 @@ export default ({ data, location }) => {
         if (!data.linkentries?.content) {
             return [];
         }
-        const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
-        return parseLinksByVersion(slug[3], linksJson);
-    }, [data.linkentries, slug, versions]);
+        return JSON.parse(template(data.linkentries?.content, versions));
+    }, [data.linkentries, versions]);
 
     const metadata = useMemo(() => {
         let metaDescription;
@@ -174,9 +166,7 @@ export default ({ data, location }) => {
         setVersion(newVersion);
         const slugPath = slug.slice(4).join('/') || '';
 
-        const newVersionLinks = await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`);
-
-        const newVersionLinksContent = parseLinksByVersion(newVersion.id, newVersionLinks.default);
+        const newVersionLinksContent = (await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`)).default;
         const links = [];
 
         function createArrayLinks(el) {
