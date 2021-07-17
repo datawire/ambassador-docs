@@ -188,7 +188,6 @@ export default ({ data, location, pageContext }) => {
               changelog={changelogUrl}
               releases={data.releaseNotes?.versions}
               versions={versions}
-              images={data.images?.nodes}
               product={slug[2]}
               handleViewMore={handleViewMore}
             />
@@ -197,7 +196,7 @@ export default ({ data, location, pageContext }) => {
         </div>
       </div>
     );
-  }, [data.images, data.releaseNotes, footer, handleVersionChange, handleViewMore, menuLinks, pageContext.slug, slug, version, versionList, versions]);
+  }, [data.releaseNotes, footer, handleVersionChange, handleViewMore, menuLinks, pageContext.slug, slug, version, versionList, versions]);
 
   return (
     <Layout location={location}>
@@ -302,14 +301,6 @@ export const query = graphql`
         }
       }
       slug
-    }
-    images: allFile(filter: { relativeDirectory: { eq: "public" } }) {
-      nodes {
-        publicURL
-        name
-        relativeDirectory
-        relativePath
-      }
     }
   }
 `;

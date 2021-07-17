@@ -4,7 +4,6 @@ import Release from './Release';
 
 const ReleaseNotes = ({
   releases,
-  images,
   product,
   handleViewMore,
   changelog: changelogURL,
@@ -51,7 +50,6 @@ const ReleaseNotes = ({
           <Release
             key={release.version}
             release={release}
-            images={images}
             handleViewMore={handleViewMore}
             versions={versions}
           />

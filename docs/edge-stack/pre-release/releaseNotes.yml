@@ -21,10 +21,10 @@
 #             allow line-wrapping.
 #         - image: >-
 #             The URL of an image that visually represents the
-#             noteworthy change. This can be an absolute path or the
-#             name of the image file placed under the
-#             `ambassador-docs/public` folder starting with `./`
-#             (e.g., `./ambassador-example.png`).
+#             noteworthy change.  This path is relative to the
+#             `release-notes` directory; if this file is
+#             `FOO/releaseNotes.yml`, then the image paths are
+#             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
