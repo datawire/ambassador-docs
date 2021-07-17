@@ -12,11 +12,18 @@ import ContactBlock from '../../src/components/ContactBlock';
 import template from '../../src/utils/template';
 import './style.less';
 
+function parseLinksByVersion(vers, links) {
+  if (oldStructure.includes(vers)) {
+    return links;
+  }
+  return links[1].items[0].items;
+}
+
 export default ({ data, location, pageContext }) => {
   const slug = pageContext.slug.split('/');
   const initialProduct = useMemo(
     () => products.find((p) => p.slug === slug[2]) || products[0],
-    [slug, products],
+    [slug],
   );
 
   const initialVersion = useMemo(
@@ -33,15 +40,24 @@ export default ({ data, location, pageContext }) => {
     return typeof window !== 'undefined' ? window.innerWidth <= 800 : true;
   }, []);
   useEffect(() => {
+    const loadJS = () => {
+      if (!isMobile) {
+        if (window.docsearch) {
+          window.docsearch({
+            apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
+            indexName: 'getambassador',
+            inputSelector: '#doc-search',
+            debug: true,
+          });
+        } else {
+          setTimeout(() => {
+            loadJS();
+          }, 500);
+        }
+      }
+    };
     loadJS();
   }, [isMobile]);
-
-  const parseLinksByVersion = useCallback((vers, links) => {
-    if (oldStructure.includes(vers)) {
-      return links;
-    }
-    return links[1].items[0].items;
-  }, [oldStructure]);
 
   const versions = useMemo(() => {
     if (!data.versions?.content) {
@@ -49,7 +65,7 @@ export default ({ data, location, pageContext }) => {
     }
     const versions = data.versions?.content;
     return JSON.parse(versions);
-  }, [data.versions?.content]);
+  }, [data.versions]);
 
   const menuLinks = useMemo(() => {
     if (!data.linkentries?.content) {
@@ -57,7 +73,7 @@ export default ({ data, location, pageContext }) => {
     }
     const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
     return parseLinksByVersion(slug[3], linksJson);
-  }, [data.linkentries, slug]);
+  }, [data.linkentries, slug, versions]);
 
   const getMetaDescription = () => {
     switch (slug[2]) {
@@ -98,7 +114,7 @@ export default ({ data, location, pageContext }) => {
     navigate(selectedProduct.link);
   };
 
-  const handleVersionChange = async (e, value = null) => {
+  const handleVersionChange = useCallback(async (e, value = null) => {
     const newValue = value ? value : e.target.value;
     const newVersion = versionList.filter((v) => v.id === newValue)[0];
     setVersion(newVersion);
@@ -130,9 +146,9 @@ export default ({ data, location, pageContext }) => {
     } else {
       navigate(`/docs/${product.slug}/${newVersion.link}/`);
     }
-  };
+  }, [product.slug, slug, versionList]);
 
-  const handleViewMore = ({ docs }) => {
+  const handleViewMore = useCallback(({ docs }) => {
     if (docs) {
       if (docs.indexOf('http://') === 0 || docs.indexOf('https://') === 0) {
         window.location = docs;
@@ -140,24 +156,7 @@ export default ({ data, location, pageContext }) => {
         navigate(`/docs/${product.slug}/${version.id}/${docs}`);
       }
     }
-  };
-
-  const loadJS = () => {
-    if (!isMobile) {
-      if (window.docsearch) {
-        window.docsearch({
-          apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-          indexName: 'getambassador',
-          inputSelector: '#doc-search',
-          debug: true,
-        });
-      } else {
-        setTimeout(() => {
-          loadJS();
-        }, 500);
-      }
-    }
-  };
+  }, [product.slug, version.id]);
 
   const footer = (
     <div>
@@ -198,7 +197,7 @@ export default ({ data, location, pageContext }) => {
         </div>
       </div>
     );
-  }, [data.releaseNotes]);
+  }, [data.images, data.releaseNotes, footer, handleVersionChange, handleViewMore, menuLinks, pageContext.slug, slug, version, versionList, versions]);
 
   return (
     <Layout location={location}>

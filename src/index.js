@@ -25,6 +25,13 @@ import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import SidebarContent from './components/SidebarContent';
 import './style.less';
 
+function parseLinksByVersion(vers, links) {
+  if (oldStructure.includes(vers)) {
+    return links;
+  }
+  return links[1].items[0].items;
+}
+
 export default ({ data, location }) => {
     const page = data.mdx || {};
     const slug = page.fields.slug.split('/');
@@ -81,16 +88,25 @@ export default ({ data, location }) => {
     }, []);
 
     useEffect(() => {
-        loadJS();
-        isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
-    }, [isMobile]);
-
-    const parseLinksByVersion = useCallback((vers, links) => {
-        if (oldStructure.includes(vers)) {
-            return links;
+      const loadJS = () => {
+        if (!isMobile) {
+          if (window.docsearch) {
+            window.docsearch({
+              apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
+              indexName: 'getambassador',
+              inputSelector: '#doc-search',
+              debug: true,
+            });
+          } else {
+            setTimeout(() => {
+              loadJS();
+            }, 500);
+          }
         }
-        return links[1].items[0].items;
-    }, [oldStructure]);
+      };
+      loadJS();
+      isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
+    }, [initialProduct.slug, initialVersion.id, isMobile, slug]);
 
     const versions = useMemo(() => {
         if (!data.versions?.content) {
@@ -98,7 +114,7 @@ export default ({ data, location }) => {
         }
         const versions = data.versions?.content;
         return JSON.parse(versions);
-    }, [data.versions?.content]);
+    }, [data.versions]);
 
     const menuLinks = useMemo(() => {
         if (!data.linkentries?.content) {
@@ -124,7 +140,7 @@ export default ({ data, location }) => {
         return {
             metaDescription: template(metaDescription, versions), metaTitle: template(metaTitle, versions)
         };
-    }, [versions, page, isHome, metaData]);
+    }, [isHome, isProductHome, versions, initialProduct.slug, page.headings, page.frontmatter, page.excerpt]);
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
 
@@ -143,7 +159,7 @@ export default ({ data, location }) => {
         navigate(selectedProduct.link);
     };
 
-    const handleVersionChange = async (e, value = null) => {
+    const handleVersionChange = useCallback(async (e, value = null) => {
         const newValue = value ? value : e.target.value;
         const newVersion = versionList.filter((v) => v.id === newValue)[0];
         setVersion(newVersion);
@@ -170,25 +186,8 @@ export default ({ data, location }) => {
         } else {
             navigate(`/docs/${product.slug}/${newVersion.link}/`);
         }
+    }, [product.slug, slug, versionList]);
 
-    };
-
-    const loadJS = () => {
-        if (!isMobile) {
-            if (window.docsearch) {
-                window.docsearch({
-                    apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-                    indexName: 'getambassador',
-                    inputSelector: '#doc-search',
-                    debug: true,
-                });
-            } else {
-                setTimeout(() => {
-                    loadJS();
-                }, 500);
-            }
-        }
-    };
 
     const getProductHome = (product) => {
         switch (product) {
@@ -301,7 +300,7 @@ export default ({ data, location }) => {
                 </div>
             </div>
         );
-    }, [isHome, isProductHome]);
+    }, [footer, handleVersionChange, initialProduct.slug, isHome, isInTopics, isLearning, isProductHome, learningDescription, learningParseTopics, learningPath, learningReadingTime, learningTitle, location, menuLinks, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, version, versionList, versions]);
 
     return (
         <Layout location={location}>
