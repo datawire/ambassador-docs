@@ -1,7 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Link } from 'gatsby';
+import url from 'url';
 
+import Link from '../../../src/components/Link';
 import Icon from '../../../src/components/Icon';
+
 import { ITopicItem } from './Sidebar';
 
 interface IItemProp {
@@ -93,15 +95,25 @@ const Item: React.FC<IItemProp> = ({ item, slug, version, scrollView, refs, pare
 
     const getLink = (link: string, linkContent: JSX.Element): JSX.Element => {
         if (link) {
-            const linkSlash = link.charAt(link.length - 1) === "/" ? link : link + "/";
-            return link.startsWith('https://') ? (
-                <a href={link} target="_blank">
-                    {linkContent}
-                </a>
-            ) : (
-                <Link to={`/${slugs[1]}/${slugs[2]}/${version}${linkSlash}`} onClick={(e) => handleClickLink(e, link)}>
-                    {linkContent}
-                </Link>
+            let cleanlink = link;
+
+            // HACK: For backward-compatibility with existing docs,
+            // ignore the leading slash, and treat it as relative
+            if (cleanlink.startsWith('/')) {
+                cleanlink = cleanlink.slice(1);
+            }
+
+            // Relative links are relative to `/docs/${product}/${version}/`,
+            // rather than being relative to the current page.
+            cleanlink = url.resolve(`/${slugs[1]}/${slugs[2]}/${version}/`, cleanlink);
+
+            // We want an onClick handler for internal links only.
+            const onClick = cleanlink.startsWith('https://') ?
+                null :
+                ((e) => handleClickLink(e, link));
+
+            return (
+                <Link to={cleanlink} onClick={onClick}>{linkContent}</Link>
             );
         }
         return linkContent;
