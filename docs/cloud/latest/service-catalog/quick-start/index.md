@@ -1,5 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
-import GSTabs2 from '../tutorials/gs-tabs2'
+import GSTabs2 from '../tutorials/gs-tabs2';
+import { ServiceCatalogAlert, ServiceCatalogText } from '../../../../../../src/components/Docs/Cloud';
 
 # Quick start
 
@@ -15,7 +16,7 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 
 </div>
 
-<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/">Click here!</a> If you haven't configured your cluster yet the catalog will be empty. Follow this guide to configure your cluster.</Alert>
+<ServiceCatalogAlert />
 
 ## Kubernetes annotations
 
@@ -40,7 +41,7 @@ kubectl get deploy -A -l product=aes -o jsonpath='{.items[].spec.template.spec.c
   If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.
 </Alert>
 
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
+1. <ServiceCatalogText />
 
 2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
 
