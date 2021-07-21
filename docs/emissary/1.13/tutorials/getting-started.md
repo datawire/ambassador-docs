@@ -5,6 +5,7 @@ description: "A simple three step guide to installing $productName$ and quickly 
 import Alert from '@material-ui/lab/Alert';
 import GSTabs from './gs-tabs'
 import GSTabs2 from './gs-tabs2'
+import { GettingStarted } from '../../../../../src/components/Docs/EmissaryIngress';
 
 # $productName$ quick start
 
@@ -89,7 +90,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 
 The Service Catalog is a web-based interface that lists all of your cluster's Services. You can view, add, and update metadata associated with each Service, such as the owner, version control repository, and associated Slack channel.
 
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
+1. <GettingStarted />
 
 2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
 

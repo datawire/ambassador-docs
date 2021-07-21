@@ -1,5 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
-import GSTabs2 from '../tutorials/gs-tabs2'
+import GSTabs2 from '../tutorials/gs-tabs2';
+import { ServiceCatalogAlert, ServiceCatalogText } from '../../../../../../src/components/Docs/Cloud';
 
 # Quick start
 
@@ -15,7 +16,7 @@ import GSTabs2 from '../tutorials/gs-tabs2'
 
 </div>
 
-<Alert severity="info">Looking for the link to sign in to Service Catalog? <a href="https://app.getambassador.io/cloud/">Click here!</a> If you haven't configured your cluster yet the catalog will be empty. Follow this guide to configure your cluster.</Alert>
+<ServiceCatalogAlert />
 
 ## Kubernetes annotations
 
@@ -25,24 +26,22 @@ Service Catalog aggregates the Kubernetes annotations on your services into a si
 
 Service Catalog requires **Edge Stack version 1.12 or greater** or **Emissary-ingress 1.13 or greater** to be installed in your cluster.
 
-**Install** Edge Stack <a href="../../../../edge-stack/1.13/tutorials/getting-started/">from here</a> if needed.
-
-<Alert severity="info">Service Catalog Coming Soon for Edge Stack and Emissary-ingress 2.0 and greater!</Alert>
+**Install** Edge Stack <a href="../../../../edge-stack/latest/tutorials/getting-started/">from here</a> if needed.
 
 If you already have Edge Stack or Emissary-ingress installed, **check your version** by running this command (adjust your namespace if necessary):
 
 ```
-kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
+kubectl get deploy -A -l product=aes -o jsonpath='{.items[].spec.template.spec.containers[0].image}'
 ```
-[Upgrade Edge Stack to the latest version](../../../../edge-stack/1.13/topics/install/upgrading/) if needed.
+[Upgrade Edge Stack to the latest version](../../../../edge-stack/latest/topics/install/upgrading/) if needed.
 
 ## 1. Connect your cluster to Ambassador Cloud
 
 <Alert severity="info">
-  If you followed the <a href="../../../../edge-stack/1.13/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.
+  If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.
 </Alert>
 
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
+1. <ServiceCatalogText />
 
 2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
 
@@ -66,7 +65,7 @@ Then refresh your Service Catalog page and you should see the `quote` service li
 
 
 
-<Alert severity="info">If you follow <a href="../../../../edge-stack/1.13/topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps practices</b></a> please follow your organization's best practices to add the token to your configuration.</Alert>
+<Alert severity="info">If you follow <a href="../../../../edge-stack/latest/topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps practices</b></a> please follow your organization's best practices to add the token to your configuration.</Alert>
 
 ## 2. Claim ownership of a service
 

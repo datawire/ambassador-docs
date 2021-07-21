@@ -1,5 +1,6 @@
 ---
-  hide_reading_time: true
+  reading_time: 3
+  reading_time_text: video
 ---
 
 

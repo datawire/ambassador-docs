@@ -1,4 +1,6 @@
-# Intercepts 
+import Alert from '@material-ui/lab/Alert';
+
+# Intercepts
 
 ## Intercept behavior when logged into Ambassador Cloud
 
@@ -109,7 +111,7 @@ If you want to change which port has been intercepted, you can create a new inte
 
 ## Creating an intercept When multiple services match your workload
 
-Oftentimes, there's a 1-to-1 relationship between a service and a workload, so telepresence is able to auto-detect which service it should intercept based on the workload you are trying to intercept.  But if you use something like [Argo](../../../../argo/latest/), it uses two services (that use the same labels) to manage traffic between a canary and a stable service.
+Oftentimes, there's a 1-to-1 relationship between a service and a workload, so telepresence is able to auto-detect which service it should intercept based on the workload you are trying to intercept.  But if you use something like [Argo](/docs/argo/latest/), it uses two services (that use the same labels) to manage traffic between a canary and a stable service.
 
 Fortunately, if you know which service you want to use when intercepting a workload, you can use the --service flag.  So in the aforementioned demo, if you wanted to use the `echo-stable` service when intercepting your workload, your command would look like this:
 ```
@@ -123,3 +125,25 @@ intercepted
     Volume Mount Point: /var/folders/cp/2r22shfd50d9ymgrw14fd23r0000gp/T/telfs-921196036
     Intercepting      : all TCP connections
 ```
+
+## Port-forwarding an intercepted container's sidecars
+
+Sidecars are containers that sit in the same pod as an application container; they usually provide auxiliary functionality to an application, and can usually be reached at `localhost:${SIDECAR_PORT}`.
+For example, a common use case for a sidecar is to proxy requests to a database -- your application would connect to `localhost:${SIDECAR_PORT}`, and the sidecar would then connect to the database, perhaps augmenting the connection with TLS or authentication.
+
+When intercepting a container that uses sidecars, you might want those sidecars' ports to be available to your local application at `localhost:${SIDECAR_PORT}`, exactly as they would be if running in-cluster.
+Telepresence's `--to-pod ${PORT}` flag implements this behavior, adding port-forwards for the port given.
+
+```
+$ telepresence intercept <base name of intercept> --port=<local TCP port>:<servicePortIdentifier> --to-pod=<sidecarPort>
+Using Deployment <name of deployment>
+intercepted
+    Intercept name         : <full name of intercept>
+    State                  : ACTIVE
+    Workload kind          : Deployment
+    Destination            : 127.0.0.1:<local TCP port>
+    Service Port Identifier: <servicePortIdentifier>
+    Intercepting           : all TCP connections
+```
+
+If there are multiple ports that you need forwarded, simply repeat the flag (`--to-pod=<sidecarPort0> --to-pod=<sidecarPort1>`).
