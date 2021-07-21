@@ -44,7 +44,7 @@ There are many config field items that can be configured on the Module, they are
 
 * `envoy_log_path` defines the path of log Envoy will use. By default this is standard output.
 * `envoy_log_type` defines the type of log envoy will use, currently only support json or text.
-* `envoy_log_format` defines the envoy log line format. 
+* `envoy_log_format` defines the envoy log line format.
 
 See the Envoy docs for a [complete list of operators](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/access_log) and [the standard log format](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#default-format-string).
 
@@ -62,7 +62,7 @@ envoy_log_format:
 
 ##### Error response overrides
 
-Defines error response overrides for 4XX and 5XX response codes with `error_response_overrides`. By default, $productName$ will pass through error responses without modification, and errors generated locally will use Envoy's default response body, if any. 
+Defines error response overrides for 4XX and 5XX response codes with `error_response_overrides`. By default, $productName$ will pass through error responses without modification, and errors generated locally will use Envoy's default response body, if any.
 
 See [using error response overrides](../custom-error-responses) for usage details.
 
@@ -74,7 +74,7 @@ error_response_overrides:
 ```
 
 ##### Forward client cert details
-Add the `X-Forwarded-Client-Cert` header on upstream requests, which contains information about the TLS client certificate verified by $productName$. 
+Add the `X-Forwarded-Client-Cert` header on upstream requests, which contains information about the TLS client certificate verified by $productName$.
 
 See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto.html#extensions-filters-network-http-connection-manager-v3-httpconnectionmanager-setcurrentclientcertdetails) for more information.
 
@@ -91,7 +91,7 @@ server_name: envoy
 ```
 
 ##### Set current client cert details
-Specify how to handle the `X-Forwarded-Client-Cert` header. 
+Specify how to handle the `X-Forwarded-Client-Cert` header.
 
 See the Envoy documentation on [X-Forwarded-Client-Cert](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html?highlight=xfcc#x-forwarded-client-cert) and [SetCurrentClientCertDetails](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto.html#enum-extensions-filters-network-http-connection-manager-v3-httpconnectionmanager-forwardclientcertdetails) for more information.
 
@@ -101,7 +101,7 @@ set_current_client_cert_details: SANITIZE
 
 ##### Suppress Envoy headers
 
-If true, $productName$ will not emit certain additional headers to HTTP requests and responses. 
+If true, $productName$ will not emit certain additional headers to HTTP requests and responses.
 
 For the exact set of headers covered by this config, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#config-http-filters-router-headers-set)
 
@@ -129,7 +129,7 @@ ambassador_id: "<ambassador_id>"
 
 ##### Defaults
 
-The `defaults` element is a dictionary of default values that will be applied to various $productName$ resources. 
+The `defaults` element is a dictionary of default values that will be applied to various $productName$ resources.
 
 See [using defaults](../../using/defaults) for more information.
 
@@ -138,7 +138,7 @@ See [using defaults](../../using/defaults) for more information.
 
 ## gRPC
 
-##### gRPC HTTP/1.1 bridge 
+##### gRPC HTTP/1.1 bridge
 
 Enable the gRPC-http11 bridge
 
@@ -146,13 +146,13 @@ Enable the gRPC-http11 bridge
 enable_grpc_http11_bridge: true
 ```
 
-$productName$ supports bridging HTTP/1.1 clients to backend gRPC servers. When an HTTP/1.1 connection is opened and the request content type is `application/grpc`, $productName$ will buffer the response and translate into gRPC requests. 
+$productName$ supports bridging HTTP/1.1 clients to backend gRPC servers. When an HTTP/1.1 connection is opened and the request content type is `application/grpc`, $productName$ will buffer the response and translate into gRPC requests.
 
 For more details on the translation process, see the [Envoy gRPC HTTP/1.1 bridge documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_filters/grpc_http1_bridge_filter.html). This setting can be enabled by setting `enable_grpc_http11_bridge: true`.
 
 ##### gRPC-Web
 
-Enable the gRPC-Web protocol? 
+Enable the gRPC-Web protocol?
 
 ```yaml
 enable_grpc_web: true
@@ -160,7 +160,7 @@ enable_grpc_web: true
 
 gRPC is a binary HTTP/2-based protocol. While this allows high performance, it is problematic for any programs that cannot speak raw HTTP/2 (such as JavaScript in a browser). gRPC-Web is a JSON and HTTP-based protocol that wraps around the plain gRPC to alleviate this problem and extend benefits of gRPC to the browser, at the cost of performance.
 
-The gRPC-Web specification requires a server-side proxy to translate between gRPC-Web requests and gRPC backend services. $productName$ can serve as the service-side proxy for gRPC-Web when `enable_grpc_web: true` is set. 
+The gRPC-Web specification requires a server-side proxy to translate between gRPC-Web requests and gRPC backend services. $productName$ can serve as the service-side proxy for gRPC-Web when `enable_grpc_web: true` is set.
 
 Find more on the [gRPC Web client GitHub repo](https://github.com/grpc/grpc-web).
 
@@ -183,7 +183,7 @@ spec:
           method_names: [<method>]
 ```
 
-Use the Envoy filter to enable telemetry of gRPC calls. 
+Use the Envoy filter to enable telemetry of gRPC calls.
 
 Supported parameters:
 * `all_methods`
@@ -227,7 +227,7 @@ add_linkerd_headers: false
 
 ##### Header case
 
-Enables upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”. 
+Enables upper casing of response headers by proper casing words: the first character and any character following a special character will be capitalized if it’s an alpha character. For example, “content-type” becomes “Content-Type”.
 
 Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/protocol.proto.html#config-core-v3-http1protocoloptions-headerkeyformat)
 
@@ -237,7 +237,7 @@ proper_case: false
 
 ##### Max request headers size
 
-Sets the maximum allowed request header size in kilobytes. If not set, the default value from Envoy of 60 KB will be used. 
+Sets the maximum allowed request header size in kilobytes. If not set, the default value from Envoy of 60 KB will be used.
 
 See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/filters/network/http_connection_manager/v3/http_connection_manager.proto.html) for more information.
 
@@ -316,7 +316,7 @@ Some caveats around the embedded scripts:
 * They're inlined in the $productName$ YAML, so it is recommended to not write complex logic in here
 * They're run on every request/response to every URL
 
-If you need more flexible and configurable options, $productName$ supports a [pluggable Filter system](../../using/filters/).
+If you need more flexible and configurable options, $productName$ supports a [pluggable Filter system](/docs/edge-stack/latest/topics/using/filters/).
 
 ##### Merge slashes
 
@@ -356,7 +356,7 @@ use_ambassador_namespace_for_service_resolution: false
 
 ##### Diagnostics
 
-Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  
+Enable or disable the [Edge Policy Console](/docs/edge-stack/latest/topics/using/edge-policy-console/) and `/ambassador/v0/diag/` endpoints.
 
 - Both $OSSproductName$ and $AESproductName$ provide low-level diagnostics at `/ambassador/v0/diag/`.
 - $AESproductName$ also provides the higher-level Edge Policy Console at `/edge_stack/admin/`.
@@ -380,7 +380,7 @@ Alternately, you can expose the diagnostics page and Edge Policy Console but con
 
 ##### Diagnostics - allow non local
 
-Whether or not to allow connections to the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints from any Pod in the entire cluster.
+Whether or not to allow connections to the [Edge Policy Console](/docs/edge-stack/latest/topics/using/edge-policy-console/) and `/ambassador/v0/diag/` endpoints from any Pod in the entire cluster.
 
 ```yaml
 diagnostics:
@@ -389,7 +389,7 @@ diagnostics:
 
 ##### StatsD
 
-Configures $productName$ statistics. These values can be set in the $productName$ module or in an environment variable. 
+Configures $productName$ statistics. These values can be set in the $productName$ module or in an environment variable.
 
 For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd).
 
@@ -397,7 +397,7 @@ For more information, see the [Statistics reference](../statistics#exposing-stat
 ---
 ## Protocols
 
-##### Allow proxy protocol 
+##### Allow proxy protocol
 
 Controls whether Envoy will honor the PROXY protocol on incoming requests.  Many load balancers can use the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to convey information about the connection they are proxying.
 
@@ -409,7 +409,7 @@ The default is false since the PROXY protocol is not compatible with HTTP.
 
 ##### Enable IPv4 and IPv6
 
-Sets whether $productName$ should do IPv4 and/or IPv6 DNS lookups when contacting services. IPv4 defaults to true and IPv6 defaults to false. Either can be overridden in a [`Mapping`](../../using/mappings). 
+Sets whether $productName$ should do IPv4 and/or IPv6 DNS lookups when contacting services. IPv4 defaults to true and IPv6 defaults to false. Either can be overridden in a [`Mapping`](../../using/mappings).
 
 ```yaml
 enable_ipv4: true
@@ -468,7 +468,7 @@ Sets whether Envoy will trust the remote address of incoming connections or rely
 use_remote_address: true
 ```
 
-In $productName$ 0.50 and later, the default value for `use_remote_address` is set to true. When set to true, $productName$ will append to the `X-Forwarded-For` header its IP address so upstream clients of $productName$ can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  
+In $productName$ 0.50 and later, the default value for `use_remote_address` is set to true. When set to true, $productName$ will append to the `X-Forwarded-For` header its IP address so upstream clients of $productName$ can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.
 
 See the [Envoy documentation on the `X-Forwarded-For header` ](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation on preserving the client source IP](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
 
@@ -486,7 +486,7 @@ x_forwarded_proto_redirect: false
 
 ##### `X-Forwarded-For` trusted hops
 
-Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of $productName$, Envoy will set the trusted client IP to the address of that proxy. To preserve the original client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`. 
+Controls the how Envoy sets the trusted client IP address of a request. If you have a proxy in front of $productName$, Envoy will set the trusted client IP to the address of that proxy. To preserve the original client IP address, setting `x_num_trusted_hops: 1` will tell Envoy to use the client IP address in `X-Forwarded-For`.
 
 Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_conn_man/headers#x-forwarded-for) for more information.
 
@@ -557,7 +557,7 @@ Finally, whether upstream services treat escaped and unescaped slashes equivalen
 
 ##### Keepalive
 
-Sets the global keepalive settings. $productName$ will use for all Mappings unless overridden on a Mapping's configuration. No default value is provided by $productName$. 
+Sets the global keepalive settings. $productName$ will use for all Mappings unless overridden on a Mapping's configuration. No default value is provided by $productName$.
 
 More information at the [Envoy keepalive documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/address.proto.html#config-core-v3-tcpkeepalive).
 
@@ -616,13 +616,13 @@ Controls how Envoy configures the tcp idle timeout on the http listener. Default
 listener_idle_timeout_ms: 3600000
 ```
 
-Controls how Envoy configures the TCP idle timeout on the HTTP listener. Default is no timeout (TCP connection may remain idle indefinitely). This is useful if you have proxies and/or firewalls in front of $productName$ and need to control how $productName$ initiates closing an idle TCP connection. 
+Controls how Envoy configures the TCP idle timeout on the HTTP listener. Default is no timeout (TCP connection may remain idle indefinitely). This is useful if you have proxies and/or firewalls in front of $productName$ and need to control how $productName$ initiates closing an idle TCP connection.
 
 Please see the [Envoy documentation on HTTP protocol options](https://www.envoyproxy.io/docs/envoy/v1.12.2/api-v2/api/v2/core/protocol.proto#envoy-api-msg-core-httpprotocoloptions) for more information.
 
 ##### Readiness and liveness probes
 
-The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself. 
+The default liveness and readiness probes map `/ambassador/v0/check_alive` and `ambassador/v0/check_ready` internally to check Envoy itself.
 
 ```yaml
 readiness_probe:
@@ -648,7 +648,7 @@ The liveness and readiness probes both support `prefix`, `rewrite`, and Module, 
 
 ##### Circuit breaking
 
-Sets the global circuit breaking configuration that $productName$ will use for all Mappings, unless overridden in a Mapping. 
+Sets the global circuit breaking configuration that $productName$ will use for all Mappings, unless overridden in a Mapping.
 
 More information at the [circuit breaking reference](../../using/circuit-breakers).
 
@@ -660,13 +660,13 @@ circuit_breakers
 
 ##### Default label domain and labels
 
-Set a default domain and request labels to every request for use by rate limiting. 
+Set a default domain and request labels to every request for use by rate limiting.
 
-For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups).
+For more on how to use these, see the [Rate Limit reference](../../using/rate-limits##an-example-with-global-labels-and-groups).
 
 ##### Load balancer
 
-Sets the global load balancing type and policy that $productName$ will use for all mappings unless overridden in a mapping. Defaults to round robin with Kubernetes. 
+Sets the global load balancing type and policy that $productName$ will use for all mappings unless overridden in a mapping. Defaults to round robin with Kubernetes.
 
 More information at the [load balancer reference](../load-balancer).
 
@@ -674,4 +674,4 @@ More information at the [load balancer reference](../load-balancer).
 load_balancer:
   policy: round_robin
 ```
-  
+

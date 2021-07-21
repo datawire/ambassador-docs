@@ -56,7 +56,7 @@ deploy it with either version of the tool.
      Congratulations, you’ve successfully installed $productName$ in your Kubernetes cluster. Visit https://random-word.edgestack.me to access your $productName$ installation and for additional configuration.
   ```
 
-  \* [Edge Control](../../using/edgectl/edge-control) (`edgectl`) automatically configures TLS for your instance and provisions a domain name for your $productName$.  This is not necessary if you already have a domain name and certificates.
+  \* [Edge Control](/docs/edge-stack/latest/topics/using/edgectl/edge-control/) (`edgectl`) automatically configures TLS for your instance and provisions a domain name for your $productName$.  This is not necessary if you already have a domain name and certificates.
 
   This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for $productName$ to route traffic. Details on how to configure $productName$ using the Helm chart can be found in the Helm chart [README](https://github.com/datawire/ambassador/tree/$branch$/charts/ambassador).
 

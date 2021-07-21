@@ -176,7 +176,7 @@ We are going to update our project by creating a pull-request on Github. The Pro
 
 ## What’s Next?
 
-Read more about [using Projects](../../topics/using/projects/), including how to use $productName$'s powerful [Authentication](../../topics/using/filters/) and [Rate Limiting](../../topics/using/rate-limits/) features to secure your service.
+Read more about [using Projects](../../topics/using/projects/), including how to use $productName$'s powerful [Authentication](../../howtos/basic-auth/) and [Rate Limiting](../../topics/using/rate-limits/) features to secure your service.
 
 $productName$ has a comprehensive range of [features](/features/) to support the requirements of any edge microservice.
 

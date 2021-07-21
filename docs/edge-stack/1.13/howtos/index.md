@@ -10,8 +10,17 @@ These guides are designed to help users quickly accomplish common tasks. The gui
   * [Datadog](tracing-datadog)
   * [Zipkin](tracing-zipkin)
 * Identity providers. $AESproductName$ integrates with a number of OAuth Identity Providers via OpenID Connect.
+  * [Auth0](sso/auth0)
+  * [Azure Active Directory](sso/azure)
+  * [Google Identity](sso/google)
+  * [Keycloak](sso/keycloak)
+  * [Okta](sso/okta)
+  * [Onelogin](sso/onelogin)
+  * [Salesforce](sso/salesforce)
+  * [UAA](sso/uaa)
 * Monitoring. $productName$ integrates with a number of different monitoring/metrics providers.
   * [Prometheus](prometheus)
+* [Developing Custom Filters](filter-dev-guide)
 * Frameworks and Protocols. $productName$ supports a wide range of protocols and cloud-native frameworks.
   * [gRPC](grpc)
   * [Knative Serverless Framework](knative)
@@ -23,3 +32,4 @@ These guides are designed to help users quickly accomplish common tasks. The gui
   * [Basic Authentication](basic-auth) is a tutorial on how to use the external authentication API to code your own authentication service.
   * [Basic Rate Limiting](rate-limiting-tutorial)
   * [Advanced Rate Limiting](advanced-rate-limiting)
+  * [Single Sign-On with OAuth and OpenID Connect](oauth-oidc-auth)

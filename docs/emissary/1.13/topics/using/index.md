@@ -31,7 +31,6 @@ Application development teams use $productName$ to manage edge policies associat
 * [Advanced Mapping Configuration](mappings)
 * Rate Limiting
   * [Introduction to Rate Limits](rate-limits/)
-  * [Rate Limiting Configuration](rate-limits/rate-limits)
 * Filters and Authentication
   * [Introduction to Filters and Authentication](filters/)
   * [OAuth2 Filter](filters/oauth2)
