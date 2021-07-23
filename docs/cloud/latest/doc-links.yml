@@ -38,7 +38,5 @@
           items:
             - title: Quick Start
               link: /visualize-api/quick-start
-            - title: Visualizing APIs in your existing cluster
-              link: /visualize-api/browse-api
         - title: Release Notes
           link: /release-notes/
