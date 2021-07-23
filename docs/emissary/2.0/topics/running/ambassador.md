@@ -316,7 +316,7 @@ Some caveats around the embedded scripts:
 * They're inlined in the $productName$ YAML, so it is recommended to not write complex logic in here
 * They're run on every request/response to every URL
 
-If you need more flexible and configurable options, $productName$ supports a [pluggable Filter system](../../using/filters/).
+If you need more flexible and configurable options, $AESproductName$ supports a [pluggable Filter system](/docs/edge-stack/latest/topics/using/filters/).
 
 ##### Merge slashes
 
@@ -572,7 +572,7 @@ keepalive:
 Set the default upstream-connection idle timeout. Default is 1 hour.
 
 ```yaml
-cluster_idle_timeout_ms: 30000
+cluster_idle_timeout_ms: 3600000
 ```
 
 If set, this specifies the timeout (in milliseconds) after which an idle connection upstream is closed. If disabled by setting it to 0, you risk upstream connections never getting closed due to idling if you do not set [`idle_timeout_ms` on each AmbassadorMapping](../../using/timeouts/).
@@ -582,19 +582,19 @@ If set, this specifies the timeout (in milliseconds) after which an idle connect
 Set the default maximum upstream-connection lifetime. Default is 0 which means unlimited.
 
 ```yaml
-cluster_max_connection_lifetime_ms: 10000ms
+cluster_max_connection_lifetime_ms: 10000
 ```
 
-If set, this specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
+If set, this specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000 ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
 
 If not set (or set to zero), then upstream connections may remain open for arbitrarily long. This can be set on a per-AmbassadorMapping basis by setting [`cluster_max_connection_lifetime_ms` on the AmbassadorMapping](../../using/timeouts/).
 
 ##### Request timeout
 
-Set the default end-to-end timeout for requests. Default is 3000ms.
+Set the default end-to-end timeout for requests. Default is 3000 ms.
 
 ```yaml
-cluster_request_timeout_ms: 3000ms`
+cluster_request_timeout_ms: 3000
 ```
 
 If set, this specifies the default end-to-end timeout for the requests. This can be set on a per-AmbassadorMapping basis by setting [`timeout_ms` on the AmbassadorMapping](../../using/timeouts/).
@@ -612,7 +612,7 @@ retry_policy:
 Controls how Envoy configures the tcp idle timeout on the http listener. Default is 1 hour.
 
 ```yaml
-listener_idle_timeout_ms: 3600s
+listener_idle_timeout_ms: 3600000
 ```
 
 Controls how Envoy configures the TCP idle timeout on the HTTP listener. Default is no timeout (TCP connection may remain idle indefinitely). This is useful if you have proxies and/or firewalls in front of $productName$ and need to control how $productName$ initiates closing an idle TCP connection.
@@ -661,7 +661,7 @@ circuit_breakers
 
 Set a default domain and request labels to every request for use by rate limiting.
 
-For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups).
+For more on how to use these, see the [Rate Limit reference](../../using/rate-limits##an-example-with-global-labels-and-groups).
 
 ##### Load balancer
 

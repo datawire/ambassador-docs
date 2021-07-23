@@ -1,6 +1,6 @@
 # Rewrites
 
-Once $productName$ uses a prefix to identify the service to which a given request should be passed, it can rewrite the URL before handing it off to the service. 
+Once $productName$ uses a prefix to identify the service to which a given request should be passed, it can rewrite the URL before handing it off to the service.
 
 There are two approaches for rewriting: `rewrite` for simpler scenarios and `regex_rewrite` for more advanced rewriting.
 
@@ -35,7 +35,7 @@ You can change the rewriting: for example, if you choose to rewrite the prefix a
 http://service1<span style="color:red">/v1/</span><span style="color:green">foo/bar</span>
 </code>
 
-* ```prefix```: was <span style="color:red">/backend-api/</span> 
+* ```prefix```: was <span style="color:red">/backend-api/</span>
 * ```rewrite```: <span style="color:red">/v1/</span>
 
 And, of course, you can choose to rewrite the prefix to the prefix itself, so that
@@ -97,4 +97,4 @@ http://service1<span style="color:brown">/bar/</span><span style="color:DarkSlat
 
 More than one group can be captured in the `pattern` to be referenced by `\2`, `\3` and `\n` in the `substitution` section.
 
-For more information on how `AmbassadorMapping` can be configured, see [Mappings](../ambassadormappings).
+For more information on how `AmbassadorMapping` can be configured, see [Mappings](../mappings).

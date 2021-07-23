@@ -64,7 +64,7 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 
   The Edge Policy Console must authenticate your session using a Kubernetes Secret in your cluster. Edge Control accesses that secret using `kubectl`, then sends a URL to your browser that contains the corresponding session key. This extra step ensures that access to the Edge Policy Console is just as secure as access to your Kubernetes cluster.
 
-  For more information, see [Edge Control](../../../topics/using/edgectl/edge-control).
+  For more information, see [Edge Control](/docs/edge-stack/latest/topics/using/edgectl/edge-control/).
 
 5. To access the Edge Policy Console going forward, you can access it using one of the following options:
   * `edgectl login -n <namespace> <AES_host>` or
@@ -83,7 +83,7 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
    * Review the Terms of Service and check the box that you agree to the Terms of Service.
    * Enter the email address to be associated with your TLS certificate.
    * Click the **Save** button.
-  
+
   You'll see the newly created `Host` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [Host CRD](../../../topics/running/host-crd).
 
 3. Once the Host is ready, navigate to `https://<hostname>` in your browser.

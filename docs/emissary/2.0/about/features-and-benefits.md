@@ -28,7 +28,7 @@ $productName$ integrates with the [Istio](https://istio.io) service mesh as the 
 
 ## Authentication
 
-$productName$ supports authenticating incoming requests with a custom authentication service, OAuth/OpenID Connect, or JWT. When configured, the $productName$ will check with a third party authentication service prior to routing an incoming request. For more information, see the [authentication guide](../../topics/using/filters/).
+$productName$ supports authenticating incoming requests with a custom authentication service, OAuth/OpenID Connect, or JWT. When configured, the $productName$ will check with a third party authentication service prior to routing an incoming request. For more information, see the [authentication guide](/docs/edge-stack/latest/topics/using/filters/).
 
 ## Rate limiting
 

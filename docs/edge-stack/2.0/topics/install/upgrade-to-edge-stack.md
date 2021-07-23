@@ -1,10 +1,23 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Upgrade to $AESproductName$
+
+<Alert severity="info">
+  We're pleased to introduce $productName$ 2.0 as a <b>developer preview</b>; our latest
+  general-availability release is <a href="../../../1.13">1.13</a>.<br/>
+  <br/>
+  The 2.X family introduces a number of changes to allow $productName$ to more gracefully
+  handle larger installations (including multitenant or multiorganizational installations),
+  reduce memory footprint, and improve performance. However, <b>some configuration has
+  changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b> read the&nbsp;
+  <a href="migrate-to-version-2">migration guide</a> before trying to install 2.0.
+</Alert>
 
 If you currently have the open source version of $OSSproductName$, you can upgrade to $AESproductName$ with a few simple commands. When you upgrade to $AESproductName$, you'll be able to access additional capabilities such as **automatic HTTPS/TLS termination, Swagger/OpenAPI support, API catalog, Single Sign-On, and more.** For more about the differences between $AESproductName$ and $OSSproductName$, see the [Editions page](/editions).
 
 **Prerequisites**:
 
-* You must have properly installed $OSSproductName$ previously following [these](../install-ambassador-oss) instructions.
+* You must have properly installed $OSSproductName$ previously following [these](/docs/emissary/$docsVersion$/topics/install) instructions.
 * You must have TLS configured and working properly on your $OSSproductName$ instance
 
 **To upgrade your instance of $OSSproductName$**:

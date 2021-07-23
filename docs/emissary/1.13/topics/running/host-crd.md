@@ -8,7 +8,7 @@ single configuration resource:
 * How $productName$ should handle TLS certificates
 * How $productName$ should handle secure and insecure requests
 * Which resources to examine for further configuration
-* How $productName$ should handle [Service Preview URLs](../../using/edgectl/service-preview-reference#ambassador-edge-stack)
+* How $productName$ should handle [Service Preview URLs](/docs/edge-stack/latest/topics/using/edgectl/service-preview-reference#ambassador-edge-stack)
 
 A minimal Host resource, using Let’s Encrypt to handle TLS, would be:
 
@@ -362,11 +362,11 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 ## Service Preview URLs
 
-See [Service Preview](../../using/edgectl/service-preview-reference#ambassador-edge-stack) for more information.
+See [Service Preview](/docs/edge-stack/latest/topics/using/edgectl/service-preview-reference#ambassador-edge-stack) for more information.
 
 ## Host specification
 
-$AESproductName$ automates the creation of TLS certificates via the [Edge Policy Console](../../using/edge-policy-console), which provides HTTPS for your hosts. Note that **in order to have TLS and automatic HTTPS, your host must be an FQDN.**
+$AESproductName$ automates the creation of TLS certificates via the [Edge Policy Console](/docs/edge-stack/latest/topics/using/edge-policy-console), which provides HTTPS for your hosts. Note that **in order to have TLS and automatic HTTPS, your host must be an FQDN.**
 
 The Host CRD defines how $productName$ will be visible to the outside world. A minimal Host defines a hostname by which $productName$ will be reachable, but a Host can also tell $productName$ how to manage TLS, and which resources to examine for further configuration.
 

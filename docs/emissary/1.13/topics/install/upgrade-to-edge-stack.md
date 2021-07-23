@@ -13,7 +13,7 @@ If you currently have the open source version of $OSSproductName$, you can upgra
   * `installOSS: true`
 
 First, install `edgectl` by following the instructions
-[here](../../using/edgectl/edge-control/#installing-edge-control).
+[here](/docs/edge-stack/latest/topics/using/edgectl/edge-control/#installing-edge-control).
 
 Then, use the following command to upgrade the $OSSproductName$ installation to $AESproductName$:
 
@@ -42,8 +42,8 @@ edgectl upgrade
 
 Make sure that you follow the steps in the given order - not doing that might crash your $OSSproductName$ installation or make it inconsistent.
 
-Check if you have an [`AuthService`](../../running/services/auth-service) or 
-[`RateLimitService`](../../running/services/rate-limit-service) installed. If 
+Check if you have an [`AuthService`](../../running/services/auth-service) or
+[`RateLimitService`](../../running/services/rate-limit-service) installed. If
 you do, make sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
 If they are not, the initial migration tests may fail.
 

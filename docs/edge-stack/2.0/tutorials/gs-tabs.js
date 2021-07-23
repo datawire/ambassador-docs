@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function GettingStartedEdgeStackTabs() {
+export default function GettingStartedEdgeStack20Tabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 

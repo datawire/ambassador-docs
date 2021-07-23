@@ -1,0 +1,30 @@
+- title: Learning Journey
+  description: Debug issues across your cluster and multi-service applications.
+  readingTime: 40 minutes • 10 lessons
+  topics:
+  - title: 'Service insight with a service catalog'
+    items:
+      - title: 'Incident response in the cloud-native world'
+        link: cloud/latest/service-catalog/concepts/ir/
+      - title: 'Annotating Kubernetes Services for humans'
+        link: cloud/latest/service-catalog/concepts/annotating/
+      - title: 'Using a service catalog'
+        link: cloud/latest/service-catalog/concepts/using/
+      - title: 'Service Catalog quick quick-start'
+        link: cloud/latest/service-catalog/quick-start/
+  - title: 'Correlate requests with distributed tracing'
+    items:
+      - title: 'Context propagation'
+        link: telepresence/latest/concepts/context-prop/
+      - title: 'Distributed tracing with Zipkin'
+        link: edge-stack/latest/howtos/tracing-zipkin/
+      - title: 'Explore distributed tracing and Kubernetes monitoring'
+        link: edge-stack/latest/howtos/dist-tracing/
+  - title: 'Debugging K8s and microservices'
+    items:
+      - title: 'Debugging issues in Kubernetes'
+        link: kubernetes/latest/howtos/debug/
+      - title: 'Making the remote local: Faster feedback, collaboration and debugging'
+        link: telepresence/latest/concepts/devloop/
+      - title: Telepresence quick start
+        link: telepresence/latest/quick-start/

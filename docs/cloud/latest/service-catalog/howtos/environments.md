@@ -1,4 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
+import { Environments } from '../../../../../../src/components/Docs/Cloud';
 
 # Manage my environments
 
@@ -10,7 +11,7 @@ When you first generate an API key for a cluster, you are offered the choice to 
 
 To organize your services differently in the Service Catalog,
 
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
+1. <Environments />
 
 2. On the left-hand side navigation, click **Environments**.
 

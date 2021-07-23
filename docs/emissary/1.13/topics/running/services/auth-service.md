@@ -4,10 +4,10 @@ import Alert from '@material-ui/lab/Alert';
 
 $productName$ provides a highly flexible mechanism for authentication, via the AuthService resource.  An AuthService configures $productName$ to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
 
-All requests are validated by the AuthService (unless the Mapping applied to the request sets `bypass_auth`).  It is not possible to combine multiple AuthServices.  While it is possible to create multiple AuthService resources, they will be load-balanced between each resource in a round-robin fashion. This is useful for canarying an AuthService change, but is not useful for deploying multiple distinct AuthServices.  In order to combine multiple external services (either having multiple services apply to the same request, or selecting between different services for the different requests), instead of using an AuthService, use an [$AESproductName$ External Filter](../../../using/filters/).
+All requests are validated by the AuthService (unless the Mapping applied to the request sets `bypass_auth`).  It is not possible to combine multiple AuthServices.  While it is possible to create multiple AuthService resources, they will be load-balanced between each resource in a round-robin fashion. This is useful for canarying an AuthService change, but is not useful for deploying multiple distinct AuthServices.  In order to combine multiple external services (either having multiple services apply to the same request, or selecting between different services for the different requests), instead of using an AuthService, use an [$AESproductName$ External Filter](/docs/edge-stack/latest/topics/using/filters/).
 
 <Alert severity="info">
-Because of the limitations described above, <strong>$AESproductName$ does not support AuthService resources, and you should instead use an <a href="../../../using/filters/external">External Filter</a>,</strong> which is mostly a drop-in replacement for an AuthService. The External Filter relies on the $AESproductName$ AuthService. Make sure the $AESproductName$ AuthService is deployed before configuring External filters.
+Because of the limitations described above, <strong>$AESproductName$ does not support AuthService resources, and you should instead use an <a href="/docs/edge-stack/latest/topics/using/filters/external">External Filter</a>,</strong> which is mostly a drop-in replacement for an AuthService. The External Filter relies on the $AESproductName$ AuthService. Make sure the $AESproductName$ AuthService is deployed before configuring External filters.
 </Alert>
 
 The currently supported version of the AuthService resource is `getambassador.io/v2`. Earlier versions are deprecated.
@@ -22,8 +22,8 @@ metadata:
   name: authentication
 spec:
   ambassador_id: ambassador-1
-  auth_service: "example-auth.authentication:3000" 
-  tls: true 
+  auth_service: "example-auth.authentication:3000"
+  tls: true
   proto: http
   timeout_ms: 5000
   include_body:
@@ -32,10 +32,10 @@ spec:
   status_on_error:
     code: 403
   failure_mode_allow: false
-  
+
   # proto: grpc only
   protocol_version: v2
-  
+
   # proto: http only
   path_prefix: "/path"
   allowed_request_headers:

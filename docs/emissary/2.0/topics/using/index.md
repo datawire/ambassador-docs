@@ -28,12 +28,5 @@ Application development teams use $productName$ to manage edge policies associat
 * [Advanced AmbassadorMapping Configuration](mappings)
 * Rate Limiting
   * [Introduction to Rate Limits](rate-limits/)
-  * [Rate Limiting Configuration](rate-limits/rate-limits)
-* Filters and Authentication
-  * [Introduction to Filters and Authentication](filters/)
-  * [OAuth2 Filter](filters/oauth2)
-  * [JWT Filter](filters/jwt)
-  * [External Filter](filters/external)
-  * [Plugin Filter](filters/plugin)
 * [Developer Portal](dev-portal)
 * [Gateway API](gateway-api)

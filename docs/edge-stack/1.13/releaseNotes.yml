@@ -17,6 +17,13 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 1.13.9
+    date: '2021-06-30'
+    notes:
+      - title: Fix for TCPMappings
+        body: "Fixed a bug which caused $productName$ to generate invalid Envoy configuration when two TCPMappings were configured with the same port, but different hosts."
+        type: bugfix
+        docs: topics/using/tcpmappings/
   - version: 1.13.8
     date: '2021-06-08'
     notes:

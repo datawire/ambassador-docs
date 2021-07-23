@@ -6,12 +6,12 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import { products, oldStructure, metaData } from './config';
+import { products, oldStructure, metaData, learningJourneys } from './config';
 import DocsHome from './components/DocsHome';
-import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
 import isAesPage from './utils/isAesPage';
+import getPrevNext from './utils/getPrevNext';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import EdgeStack from './products/EdgeStack';
@@ -19,10 +19,13 @@ import Emissary from './products/Emissary';
 import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
 import ContactBlock from '../../src/components/ContactBlock';
+import ReadingTime from '../../src/components/ReadingTime';
+import Icon from '../../src/components/Icon';
+import LearningJourneyImg from './images/learning-journe-prev-next.svg';
+import SidebarContent from './components/SidebarContent';
 import './style.less';
 
 export default ({ data, location }) => {
-
     const page = data.mdx || {};
     const slug = page.fields.slug.split('/');
     const isHome = page.fields.slug === '/docs/';
@@ -40,15 +43,42 @@ export default ({ data, location }) => {
             .slice(4)
             .join('/')}`;
 
+    const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
+    const learningPath = learningJourneyName ? `?learning-journey=${learningJourneyName}` : '';
+    const isInLearnings = learningJourneys.includes(learningJourneyName);
+    const learningJourneyData = isInLearnings ? data.allLearningjourney.nodes.filter(node => node.slug.indexOf('/') > -1 && node.slug.indexOf('.') > -1 && node.slug.split('/')[1].split('.')[0] === learningJourneyName) : [];
+    const { title: learningTitle, description: learningDescription, readingTime: learningReadingTime, topics } = isInLearnings ? JSON.parse(learningJourneyData[0].content)[0] : {};
+    const { previous: prevLearning, next: nextLearning, isInTopics } = isInLearnings ? getPrevNext(topics, page.fields.slug) : {};
+    const isLearning = isInLearnings && isInTopics;
+    const learningParseTopics = isLearning ? topics.map(topic => {
+        const items = topic.items.map(item => {
+            const readingTimeTopic = data.allMdx.edges.filter(i => i.node.fields.slug === `/docs/${item.link}`);
+            const { slug, readingTime } = readingTimeTopic[0] ? readingTimeTopic[0].node.fields : {};
+            const { reading_time_text, hide_reading_time, reading_time } = readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
+            return {
+                ...item,
+                slug,
+                readingTimeMinutes: Math.ceil(readingTime ? readingTime.minutes : 0),
+                readingTimeText: reading_time_text,
+                hideReadingTime: hide_reading_time,
+                readingTimeFront: reading_time
+            }
+        });
+
+        return {
+            ...topic,
+            items
+        }
+    }) : [];
+
     const [product, setProduct] = useState(initialProduct);
     const [version, setVersion] = useState(initialVersion);
     const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome);
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
-
     const isMobile = useMemo(() => {
-      return typeof window !== 'undefined' ? window.innerWidth <= 800  : true
-    },[]);
+        return typeof window !== 'undefined' ? window.innerWidth <= 800 : true
+    }, []);
 
     useEffect(() => {
         loadJS();
@@ -68,7 +98,7 @@ export default ({ data, location }) => {
         }
         const versions = data.versions?.content;
         return JSON.parse(versions);
-    },[data.versions?.content]);
+    }, [data.versions?.content]);
 
     const menuLinks = useMemo(() => {
         if (!data.linkentries?.content) {
@@ -92,9 +122,9 @@ export default ({ data, location }) => {
             metaDescription = page.frontmatter && page.frontmatter.description ? page.frontmatter.description : page.excerpt;
         }
         return {
-          metaDescription: template(metaDescription, versions), metaTitle: template(metaTitle, versions)
+            metaDescription: template(metaDescription, versions), metaTitle: template(metaTitle, versions)
         };
-    },[versions, page, isHome, metaData]);
+    }, [versions, page, isHome, metaData]);
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
 
@@ -144,20 +174,20 @@ export default ({ data, location }) => {
     };
 
     const loadJS = () => {
-      if(!isMobile){
-        if (window.docsearch) {
-            window.docsearch({
-                apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-                indexName: 'getambassador',
-                inputSelector: '#doc-search',
-                debug: true,
-            });
-        } else {
-            setTimeout(() => {
-                loadJS();
-            }, 500);
+        if (!isMobile) {
+            if (window.docsearch) {
+                window.docsearch({
+                    apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
+                    indexName: 'getambassador',
+                    inputSelector: '#doc-search',
+                    debug: true,
+                });
+            } else {
+                setTimeout(() => {
+                    loadJS();
+                }, 500);
+            }
         }
-      }
     };
 
     const getProductHome = (product) => {
@@ -178,8 +208,6 @@ export default ({ data, location }) => {
                 return <EdgeStack />;
         }
     }
-
-    const requireReadingTime = () => !(page.fields.slug.startsWith('/docs/telepresence/') && page.fields.slug.endsWith('/quick-start/')) && !page.frontmatter.hide_reading_time;
 
     const footer = (
         <div>
@@ -207,12 +235,20 @@ export default ({ data, location }) => {
         }
         return (
             <div className="docs__container-doc">
-                <Sidebar
+                <SidebarContent
+                    title={learningTitle}
+                    description={learningDescription}
+                    readingTime={learningReadingTime}
+                    sidebarTopicList={learningParseTopics}
+                    path={learningPath}
                     onVersionChanged={handleVersionChange}
                     version={version}
                     versionList={versionList}
                     topicList={menuLinks}
                     slug={page.fields.slug}
+                    location={location}
+                    isInTopics={isInTopics}
+                    isLearning={isLearning}
                 />
                 <div className="docs__doc-body-container">
                     <div className="docs__doc-body doc-body">
@@ -223,10 +259,43 @@ export default ({ data, location }) => {
                                 </Link>
                             )}
                         </div>
-                        {requireReadingTime() && <span className="docs__reading-time">{page.frontmatter.reading_time ? page.frontmatter.reading_time : page.fields.readingTime.text}</span>}
-                        <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.text}>
+                        <ReadingTime
+                            slug={page.fields.slug}
+                            hideReadingTime={page.frontmatter.hide_reading_time}
+                            readingTimeMinutes={page.fields.readingTime.minutes}
+                            readingTimeFront={page.frontmatter.reading_time}
+                            readingTimeText={page.frontmatter.reading_time_text}
+                            itemClassName="docs__reading-time"
+                        />
+                        <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.minutes}>
                             {template(page.body, versions)}
                         </MDXRenderer>
+                        {isLearning && (
+                            <div className="docs__next-previous">
+                                <span className="docs__next-previous__title">Continue your learning journey</span>
+                                <div className="docs__next-previous__content">
+                                    <div className="docs__next-previous__previous">
+                                        {prevLearning &&
+                                            <>
+                                                <Link to={`/docs/${prevLearning.link}${learningPath}`} className="docs__next-previous__button"><Icon name="right-arrow" /> Previous</Link>
+                                                <span className="docs__next-previous__text">{prevLearning.title}</span>
+                                            </>
+                                        }
+                                    </div>
+                                    <div className="docs__next-previous__learning-journey">
+                                        <img src={LearningJourneyImg} alt="Learning Journey" />
+                                    </div>
+                                    <div className="docs__next-previous__next">
+                                        {nextLearning &&
+                                            <>
+                                                <Link to={`/docs/${nextLearning.link}${learningPath}`} className="docs__next-previous__button">Next <Icon name="right-arrow" /></Link>
+                                                <span className="docs__next-previous__text">{nextLearning.title}</span>
+                                            </>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     {footer}
                 </div>
@@ -242,13 +311,12 @@ export default ({ data, location }) => {
                 <meta name="og:type" content="article" />
                 <link rel="canonical" href={canonicalUrl} />
                 <meta name="description" content={metadata.metaDescription} />
-        
-                {!isMobile && 
-                  <link
-                    rel="stylesheet"
-                    href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
-              />}
-              {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
+                {!isMobile &&
+                    <link
+                        rel="stylesheet"
+                        href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
+                    />}
+                {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
             </Helmet>
             <div className="docs">
                 <nav>
@@ -301,19 +369,19 @@ export default ({ data, location }) => {
                     {content}
                 </div>
             </div>
-        </Layout>
+        </Layout >
     );
 };
 
 export const query = graphql`
-  query($linksslug: String, $slug: String!) {
+  query($linksslug: String, $slug: String!, $learningSlugs: [String]) {
     mdx(fields: { slug: { eq: $slug } }) {
       body
       fields {
         slug
         linksslug
         readingTime {
-            text
+            minutes
         }
       }
       excerpt(pruneLength: 150, truncate: true)
@@ -324,6 +392,7 @@ export const query = graphql`
         description
         reading_time
         hide_reading_time
+        reading_time_text
       }
       parent {
         ... on File {
@@ -338,6 +407,29 @@ export const query = graphql`
     versions(slug: { eq: $linksslug }) {
       id
       content
+    }
+    allLearningjourney {
+        nodes {
+          content
+          slug
+        }
+    }
+    allMdx ( filter: { fields: { slug: { in:  $learningSlugs } } }) {
+        edges {
+          node {
+            fields {
+              slug,
+              readingTime {
+                minutes
+              }
+            }
+            frontmatter {
+              reading_time
+              hide_reading_time
+              reading_time_text
+            }
+          }
+        }
     }
   }
 `;

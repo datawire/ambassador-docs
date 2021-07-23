@@ -2,7 +2,7 @@
 
 Sometimes requests fail. When these requests fail for transient issues, $productName$ can automatically retry the request.
 
-Retry policy can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`AmbassadorMapping`](../ambassadormappings#configuring-ambassadormappings). Generally speaking, you should set `retry policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
+Retry policy can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`AmbassadorMapping`](../mappings#configuring-ambassadormappings). Generally speaking, you should set `retry policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
 
 ## Configuring retries
 

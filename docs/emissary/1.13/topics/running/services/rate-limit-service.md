@@ -14,7 +14,7 @@ built-in rate limit service.**
 ## Request labels
 
 See [Attaching labels to
-requests](../../../using/rate-limits/rate-limits/#attaching-labels-to-requests)
+requests](../../../using/rate-limits/#attaching-labels-to-requests)
 for how to configure the labels that are attached to a request.
 
 ## Domains
@@ -25,7 +25,7 @@ team can assign their own labels to a given request, and independently set the
 rate limits based on their own labels.
 
 See [Attaching labels to
-requests](../../../using/rate-limits/rate-limits/#attaching-labels-to-requests)
+requests](../../../using/rate-limits/#attaching-labels-to-requests)
 for how to labels under different domains.
 
 ## External rate limit service

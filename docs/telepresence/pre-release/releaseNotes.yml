@@ -1,5 +1,9 @@
-# This file should be placed in the folder for the version of the product that's meant to be documented. A `/release-notes` page will be automatically generated and populated at build time.
-# Note that an entry needs to be added to the `doc-links.yml` file in order to surface the release notes in the table of contents.
+# This file should be placed in the folder for the version of the
+# product that's meant to be documented. A `/release-notes` page will
+# be automatically generated and populated at build time.
+#
+# Note that an entry needs to be added to the `doc-links.yml` file in
+# order to surface the release notes in the table of contents.
 #
 # The YAML in this file should contain:
 #
@@ -10,13 +14,187 @@
 #     - notes: An array of noteworthy changes included in the release, each having the following attributes:
 #         - title: A short title of the noteworthy change.
 #         - body: Two or three sentences describing the change and why it is noteworthy. This is in rich text format and may contain HTML elements.
-#         - image: The URL of an image that visually represents the noteworthy change. This can be an absolute path or the name of the image file placed under the `ambassador-docs/public` folder starting with `./` (e.g., `./ambassador-example.png`).
+#         - image: The URL of an image that visually represents the noteworthy change.
 #         - docs: The path to the documentation page where additional information can be found.
 #         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
 #
 
+docTitle: Telepresence Release Notes
+docDescription: >-
+  Release notes for Telepresence by Ambassador Labs, a CNCF project
+  that enables developers to iterate rapidly on Kubernetes
+  microservices by arming them with infinite-scale development
+  environments, access to instantaneous feedback loops, and highly
+  customizable development environments.
+
 changelog: https://github.com/telepresenceio/telepresence/blob/$branch$/CHANGELOG.md
+
 items:
+
+  - version: 2.3.6
+    date: '2021-07-20'
+    notes:
+
+      - type: bugfix
+        title: Fix preview URLs
+        body: >-
+          Fixed a regression introduced in 2.3.5 that caused preview
+          URLs to not work.
+
+      - type: bugfix
+        title: Fix subnet discovery
+        body: >-
+          Fixed a regression introduced in 2.3.5 where the Traffic
+          Manager's <code>RoleBinding</code> did not correctly appoint
+          the <code>traffic-manager</code> <code>Role</code>, causing
+          subnet discovery to not be able to work correctly.
+        docs: reference/rbac/
+
+      - type: bugfix
+        title: Fix root-user configuration loading
+        body: >-
+          Fixed a regression introduced in 2.3.5 where the root daemon
+          did not correctly read the configuration file; ignoring the
+          user's configured log levels and timeouts.
+        docs: reference/config/
+
+      - type: bugfix
+        title: Fix a user daemon crash
+        body: >-
+          Fixed an issue that could cause the user daemon to crash
+          during shutdown, as during shutdown it unconditionally
+          attempted to close a channel even though the channel might
+          already be closed.
+
+  - version: 2.3.5
+    date: '2021-07-15'
+    notes:
+      - type: feature
+        title: traffic-manager in multiple namespaces
+        body: >-
+          We now support installing multiple traffic managers in the same cluster.
+          This will allow operators to install deployments of telepresence that are
+          limited to certain namespaces.
+        image: ./telepresence-2.3.5-traffic-manager-namespaces.png
+        docs: install/helm
+      - type: feature
+        title: No more dependence on kubectl
+        body: >-
+          Telepresence no longer depends on having an external
+          <code>kubectl</code> binary, which might not be present for
+          OpenShift users (who have <code>oc</code> instead of
+          <code>kubectl</code>).
+      - type: feature
+        title: Agent image now configurable
+        body: >-
+          We now support configuring which agent image + registry to use in the
+          config. This enables users whose laptop is an air-gapped environment to
+          create selective intercepts without requiring a login. It also makes it easier
+          for those who are developing on Telepresence to specify which agent image should
+          be used. Env vars TELEPRESENCE_AGENT_IMAGE and TELEPRESENCE_REGISTRY are no longer
+          used.
+        image: ./telepresence-2.3.5-agent-config.png
+        docs: reference/config/#images
+      - type: feature
+        title: Max gRPC receive size now configurable
+        body: >-
+          The default max size of messages received through gRPC (4 MB) is sometimes insufficient. It can now be configured.
+        image: ./telepresence-2.3.5-grpc-max-receive-size.png
+        docs: reference/config/#grpc
+      - type: feature
+        title: CLI can be used in air-gapped environments
+        body: >-
+          While Telepresence will auto-detect if your cluster is in an air-gapped environment,
+          we've added an option users can add to their config.yml to ensure the cli acts like it
+          is in an air-gapped environment. Air-gapped environments require a manually installed
+          licence.
+        docs: reference/cluster-config/#air-gapped-cluster
+        image: ./telepresence-2.3.5-skipLogin.png
+  - version: 2.3.4
+    date: '2021-07-09'
+    notes:
+      - type: bugfix
+        title: Improved IP log statements
+        body: >-
+          Some log statements were printing incorrect characters, when they should have been IP addresses.
+          This has been resolved to include more accurate and useful logging.
+        docs: reference/config/#log-levels
+        image: ./telepresence-2.3.4-ip-error.png
+      - type: bugfix
+        title: Improved messaging when multiple services match a workload
+        body: >-
+          If multiple services matched a workload when performing an intercept, Telepresence would crash.
+          It now gives the correct error message, instructing the user on how to specify which
+          service the intercept should use.
+        image: ./telepresence-2.3.4-improved-error.png
+        docs: reference/intercepts
+      - type: bugfix
+        title: Traffic-manger creates services in its own namespace to determine subnet
+        body: >-
+          Telepresence will now determine the service subnet by creating a dummy-service in its own
+          namespace, instead of the default namespace, which was causing RBAC permissions issues in
+          some clusters.
+        docs: reference/routing/#subnets
+      - type: bugfix
+        title: Telepresence connect respects pre-existing clusterrole
+        body: >-
+          When Telepresence connects, if the <code>traffic-manager</code>'s desired <code>clusterrole</code> already exists in the
+          cluster, Telepresence will no longer try to update the clusterrole.
+        docs: reference/rbac
+      - type: bugfix
+        title: Helm Chart fixed for clientRbac.namespaced
+        body: >-
+          The Telepresence Helm chart no longer fails when installing with <code>--set clientRbac.namespaced=true</code>.
+        docs: install/helm
+  - version: 2.3.3
+    date: '2021-07-07'
+    notes:
+      - type: feature
+        title: Traffic Manager Helm Chart
+        body: >-
+          Telepresence now supports installing the Traffic Manager via Helm.
+          This will make it easy for operators to install and configure the
+          server-side components of Telepresence separately from the CLI (which
+          in turn allows for better separation of permissions).
+        image: ./telepresence-2.3.3-helm.png
+        docs: install/helm/
+      - type: feature
+        title: Traffic-manager in custom namespace
+        body: >-
+          As the <code>traffic-manager</code> can now be installed in any
+          namespace via Helm, Telepresence can now be configured to look for the
+          Traffic Manager in a namespace other than <code>ambassador</code>.
+          This can be configured on a per-cluster basis.
+        image: ./telepresence-2.3.3-namespace-config.png
+        docs: reference/config
+      - type: feature
+        title: Intercept --to-pod
+        body: >-
+          <code>telepresence intercept</code> now supports a
+          <code>--to-pod</code> flag that can be used to port-forward sidecars'
+          ports from an intercepted pod.
+        image: ./telepresence-2.3.3-to-pod.png
+        docs: reference/intercepts
+      - type: change
+        title: Change in migration from edgectl
+        body: >-
+          Telepresence no longer automatically shuts down the old
+          <code>api_version=1</code> <code>edgectl</code> daemon.  If migrating
+          from such an old version of <code>edgectl</code> you must now manually
+          shut down the <code>edgectl</code> daemon before running Telepresence.
+          This was already the case when migrating from the newer
+          <code>api_version=2</code> <code>edgectl</code>.
+      - type: bugfix
+        title: Fixed error during shutdown
+        body: >-
+          The root daemon no longer terminates when the user daemon disconnects
+          from its gRPC streams, and instead waits to be terminated by the CLI.
+          This could cause problems with things not being cleaned up correctly.
+      - type: bugfix
+        title: Intercepts will survive deletion of intercepted pod
+        body: >-
+          An intercept will survive deletion of the intercepted pod provided
+          that another pod is created (or already exists) that can take over.
   - version: 2.3.2
     date: '2021-06-18'
     notes:
@@ -53,9 +231,9 @@ items:
 
       # RBAC changes
       - type: change
-        title: Traffic-manager needs new RBAC permissions
+        title: Traffic Manager needs new RBAC permissions
         body: >-
-          The traffic-manager requires <a href="reference/rbac">RBAC
+          The Traffic Manager requires <a href="reference/rbac">RBAC
           permissions</a> to list Nodes, Pods, and to create a dummy
           Service in the manager's namespace.
         docs: reference/routing/#subnets
@@ -65,7 +243,7 @@ items:
           The on-laptop client no longer requires <a
           href="reference/rbac">RBAC permissions</a> to list the Nodes
           in the cluster or to create Services, as that functionality
-          has been moved to the traffic-manager.
+          has been moved to the Traffic Manager.
 
       # Bugfixes
       - type: bugfix
@@ -120,7 +298,6 @@ items:
           Now it can be counted on that by the time the command has
           returned that all of the side-effects on the laptop have
           been cleaned up.
-
   - version: 2.3.1
     date: '2021-06-14'
     notes:
@@ -152,7 +329,7 @@ items:
       - title: Brew Formula Changed
         body: "Now that the Telepresence rewrite is the main version of Telepresence, you can install it via Brew like so: <code>brew install datawire/blackbird/telepresence</code>."
         image: ./telepresence-2.3.1-brew.png
-        docs: install/index/
+        docs: install/
         type: change
   - version: 2.3.0
     date: '2021-06-01'
@@ -160,7 +337,7 @@ items:
       - title: Brew install Telepresence
         body: "Telepresence can now be installed via brew on macOS, which makes it easier for users to stay up-to-date with the latest telepresence version. To install via brew, you can use the following command: <code>brew install datawire/blackbird/telepresence2</code>."
         image: ./telepresence-2.3.0-homebrew.png
-        docs: install/index/
+        docs: install/
         type: feature
       - title: TCP and UDP routing via Virtual Network Interface
         body: "Telepresence will now perform routing of outbound TCP and UDP traffic via a Virtual Network Interface (VIF). The VIF is a layer 3 TUN-device that exists while Telepresence is connected. It makes the subnets in the cluster available to the workstation and will also route DNS requests to the cluster and forward them to intercepted pods. This means that pods with custom DNS configuration will work as expected. Prior versions of Telepresence would use firewall rules and were only capable of routing TCP."
