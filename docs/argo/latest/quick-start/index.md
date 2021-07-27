@@ -55,9 +55,7 @@ In this step we will:
 - Create and configure a demo kubernetes cluster so you can do canary releases using the Emojivoto app.
 - Create a github repo in your github account with all the necessary files to execute a canary release.
 
-In order to do so just click the link bellow:
-
-- <a href="https://app.getambassador.io/cloud/demo-cluster-rollouts" target="_blank" onClick={(e) => {window.open('https://app.getambassador.io/cloud/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>link</a>
+In order to do so <a href="https://app.getambassador.io/cloud/demo-cluster-rollouts" target="_blank" onClick={(e) => {window.open('https://app.getambassador.io/cloud/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
 
 ## 3. Create a Rollout
 
