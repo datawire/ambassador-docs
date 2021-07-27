@@ -38,9 +38,9 @@ In the steps bellow we provide you all you need to have the full Rollout experie
 ## 1. Configure Github Access
 
 Ambassador Cloud needs access to your github account in order to:
-- create a dedicated repository to run rollouts.
-- create PRs for new rollouts in the created repository.
-- configure ArgoCD access to your repo so manifests can be retrieved and applied in the cluster.
+- Create a dedicated repository to run rollouts.
+- Create PRs for new rollouts in the created repository.
+- Configure ArgoCD access to your repo so manifests can be retrieved and applied in the cluster.
 
 In order to enable Github App execute the following steps:
 1. In Ambassador Cloud, go to the <a href="https://app.getambassador.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
