@@ -21,17 +21,22 @@ items:
     date: '2021-07-27'
     notes:
       - title: New Envoy-configuration snapshots for debugging
-        body: Envoy-configuration snapshots get saved (as ambex-#.json) in /ambassador/snapshots. The number of snapshots is controlled by the `AMBASSADOR_AMBEX_SNAPSHOT_COUNT` environment variable; set it to 0 to disable. The default is 30.
+        body: "Envoy-configuration snapshots get saved (as ambex-#.json) in /ambassador/snapshots. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
         type: feature
         docs: running/environment/
       - title: Optionally remove ratelimiting for Envoy reconfiguration
-        body: Set `AMBASSADOR_AMBEX_NO_RATELIMIT` to `true` to completely disable ratelimiting Envoy reconfiguration under memory pressure. This can help performance with the endpoint or Consul resolvers, but could make OOMkills more likely with large configurations.
+        body: "Set <code>AMBASSADOR_AMBEX_NO_RATELIMIT</code> to <code>true</code> to completely disable ratelimiting Envoy reconfiguration under memory pressure. This can help performance with the endpoint or Consul resolvers, but could make OOMkills more likely with large configurations."
         type: feature
         docs: running/environment/
       - title: Fix for CORS origins configuration on the Mapping resource
         type: bugfix
-        body: Fixed a regression when specifying a comma separated string for `cors.origins` on the `Mapping` resource
+        body: "Fixed a regression when specifying a comma separated string for <code>cors.origins</code> on the <code>Mapping</code> resource"
         docs: topics/using/cors
+      - title: More logging around Consul certificate rotation
+        body: "Consul certificate-rotation logging now includes the fingerprints and validity timestamps of certificates being rotated."
+        type: feature
+        docs: howtos/consul/
+
   - version: 1.13.9
     date: '2021-06-30'
     notes:
