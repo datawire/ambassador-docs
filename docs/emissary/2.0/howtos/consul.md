@@ -313,6 +313,29 @@ you should sub in that secret name value for `ambassador-consul-connect` in the 
               limits:
                 cpu: "0.1"
                 memory: 100Mi
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: quote-connect
+      annotations:
+      	a8r.io/description: "Quote of the moment service"
+       	a8r.io/owner: "No owner"
+       	a8r.io/chat: "#ambassador"
+       	a8r.io/bugs: "https://github.com/datawire/qotm/issues"
+       	a8r.io/documentation: "https://github.com/datawire/qotm/blob/master/README.md"
+       	a8r.io/repository: "https://github.com/datawire/qotm"
+       	a8r.io/support: "http://a8r.io/Slack"
+       	a8r.io/runbook: "https://github.com/datawire/qotm/blob/master/README.md"
+       	a8r.io/incidents: "https://github.com/datawire/qotm/issues"
+       	a8r.io/dependencies: "None"
+    spec:
+      ports:
+ 	- name: http
+	  port: 80
+    	  targetPort: 8080
+  	selector:
+    	  app: quote-connect
     ```
 
    Copy this YAML in a file called `quote-connect.yaml` and apply it to your cluster with `kubectl apply -f quote-connect.yaml`.
