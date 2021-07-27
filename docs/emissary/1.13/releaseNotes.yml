@@ -24,6 +24,7 @@ items:
         type: bugfix
         body: "Fixed a regression when specifying a comma separated string for <code>cors.origins</code> on the <code>Mapping</code> resource"
         docs: topics/using/cors
+        image: ./emissary-1.13.10-cors-origin.png
       - title: New Envoy-configuration snapshots for debugging
         body: "Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
         type: change
