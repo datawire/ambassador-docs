@@ -22,7 +22,7 @@ items:
       - title: "Visualize your APIs"
         body: "Visualize and explore your Kubernetes service’s OpenAPI documentation (formally known as Swagger Specifications) in the cloud, allowing you to interact and query with your REST APIs directly from the Developer Control Plane."
         image: ./cloud-apis-swagger.png
-        docs: ../../edge-stack/latest/tutorials/dev-portal-tutorial/
+        docs: visualize-api/quick-start/
         type: feature
       - title: "Manage your clusters"
         body: "View connected Edge Stack and Emissary-ingress 2.0 clusters in the cloud. Glimpse at usage metrics and register your installation using a free community licence to unlock Edge Stack traffic management features."
