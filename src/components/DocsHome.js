@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { useAuthState } from '../../../src/context';
+import { useAppState } from '../../../src/context';
 import AmbassadorCloud from '../../../src/assets/images/ambassador-cloud.svg';
 import Icon from '../../../src/components/Icon';
 import {
@@ -16,7 +16,7 @@ import {
 } from '../../../src/utils/routes';
 
 const DocsHome = () => {
-  const { userInfo } = useAuthState();
+  const { userInfo } = useAppState();
   const linkText = userInfo ? 'Go to Cloud ' : 'Get Started ';
 
   return (
