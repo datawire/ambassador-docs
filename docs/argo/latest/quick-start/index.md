@@ -1,5 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 import { LogInText } from '../../../../../src/components/Docs/LogInText';
+import Link from '../../../../../src/components/Link';
 import { DownloadDemo } from '../../../../../src/components/Docs/DownloadDemo';
 import { getBaseUIUrl } from '../../../../../src/utils/getBaseUrl';
 
@@ -44,7 +45,7 @@ Ambassador Cloud needs access to your github account in order to:
 - Configure ArgoCD access to your repo so manifests can be retrieved and applied in the cluster.
 
 In order to enable Github App execute the following steps:
-1. In Ambassador Cloud, go to the <a href="https://app.getambassador.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
+1. In Ambassador Cloud, go to the <Link to={getBaseUIUrl() + '/settings/teams'} target="_blank">Teams Settings page</Link> and click the "Integrations" button for your current team.
 1. Click the "Configure" button in the GitHub section.
 1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
 1. Select your personal account. The personal account is the one that has the same name as your github username.
@@ -60,7 +61,7 @@ In order to do so <a href="https://app.getambassador.io/cloud/demo-cluster-rollo
 
 ## 3. Create a Rollout
 
-Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page and click the "Rollout" button for the "web-app" service, this should show the instructions to create a rollout.
+Go to the <Link to={getBaseUIUrl() + '/services'} target="_blank">Service Catalog</Link> page and click the "Rollout" button for the "web-app" service, this should show the instructions to create a rollout.
 
 Fill in the form with the following information:
 - Image Tag: `datawire/emojivoto-web-app v12`
