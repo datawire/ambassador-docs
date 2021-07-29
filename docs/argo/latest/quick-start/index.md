@@ -1,5 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
-import { LoginText } from '../../../../../src/components/LoginText';
+import { LogInText } from '../../../../../src/components/Docs/LogInText';
+import { DownloadDemo } from '../../../../../src/components/Docs/DownloadDemo';
 
 # Canary Rollout Quick Start
 
@@ -49,7 +50,7 @@ kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.templat
 
 You can also use one of our free demo clusters that comes bundled with a supported version of Edge Stack.
 
-1. <a href="https://app.getambassador.io/cloud/demo-cluster-download-popup" onClick={(e) => {window.open('https://app.getambassador.io/cloud/demo-cluster-download-popup', 'ambassador-cloud-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }} target="_blank"><LoginText /></a>  The archive contains all the tools and configurations you need to complete this guide.
+1. <DownloadDemo />
 
 2.  Extract the archive file, open the `ambassador-demo-cluster` folder, and run the installer script (the commands below might vary based on where your browser saves downloaded files).
 
@@ -82,7 +83,7 @@ You can also use one of our free demo clusters that comes bundled with a support
 </Alert>
 
 
-1. <ConnectClusterText />
+1. <LogInText />
 
 2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
 

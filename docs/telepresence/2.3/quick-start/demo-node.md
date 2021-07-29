@@ -5,7 +5,7 @@ description: "Install Telepresence and learn to use it to intercept services run
 import Alert from '@material-ui/lab/Alert';
 import QSTabs from './qs-tabs';
 import QSCards from './qs-cards';
-import { LoginText } from '../../../../../src/components/LoginText';
+import { DownloadDemo } from '../../../../../src/components/Docs/DownloadDemo';
 import { UserInterceptCommand } from '../../../../../src/components/Docs/Telepresence';
 
 # Telepresence Quick Start
@@ -36,7 +36,7 @@ In this guide we'll give you **everything you need in a preconfigured demo clust
 
 ## 1. Download the demo cluster archive
 
-1. <a href="https://app.getambassador.io/cloud/demo-cluster-download-popup" onClick={(e) => {window.open('https://app.getambassador.io/cloud/demo-cluster-download-popup', 'ambassador-cloud-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }} target="_blank"><LoginText /></a>  The archive contains all the tools and configurations you need to complete this guide.
+1. <DownloadDemo />
 
 2.  Extract the archive file, open the `ambassador-demo-cluster` folder, and run the installer script (the commands below might vary based on where your browser saves downloaded files).
 
@@ -222,17 +222,20 @@ Create preview URLs to do selective intercepts, meaning only traffic coming from
 1. Clean up your previous intercept by removing it:
 `telepresence leave dataprocessingservice`
 
-2. Login to Ambassador Cloud, a web interface for managing and sharing preview URLs:
-`telepresence login`
+2. Log in to Ambassador Cloud, a web interface for managing and
+   sharing preview URLs:
 
-  This opens your browser; login with your preferred identity provider and choose your org.
+   ```console
+   $ telepresence login
+   Launching browser authentication flow...
+   <web browser opens, log in and choose your organization>
+   Login successful.
+   ```
 
-  ```
-  $ telepresence login
-    Launching browser authentication flow...
-    <browser opens, login>
-    Login successful.
-  ```
+   If you are in an environment where Telepresence cannot launch a
+   local browser for you to interact with, you will need to pass the
+   [`--apikey` flag to `telepresence
+   login`](../../reference/client/login/).
 
 3. Start the intercept again:
 `telepresence intercept dataprocessingservice --port 3000`

@@ -1,6 +1,7 @@
 import Alert from '@material-ui/lab/Alert';
 import GSTabs2 from '../tutorials/gs-tabs2';
-import { ServiceCatalogAlert, ServiceCatalogText } from '../../../../../../src/components/Docs/Cloud';
+import { LogInText } from '../../../../../../src/components/Docs/LogInText';
+import { QuickStartServiceCatalogAlert } from '../../../../../../src/components/Docs/Cloud';
 
 # Quick start
 
@@ -16,7 +17,7 @@ import { ServiceCatalogAlert, ServiceCatalogText } from '../../../../../../src/c
 
 </div>
 
-<ServiceCatalogAlert />
+<QuickStartServiceCatalogAlert />
 
 ## Kubernetes annotations
 
@@ -41,7 +42,7 @@ kubectl get deploy -A -l product=aes -o jsonpath='{.items[].spec.template.spec.c
   If you followed the <a href="../../../../edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you should have already completed this step.
 </Alert>
 
-1. <ServiceCatalogText />
+1. <LogInText />
 
 2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
 
