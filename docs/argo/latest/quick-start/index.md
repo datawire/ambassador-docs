@@ -55,7 +55,8 @@ In order to enable Github App execute the following steps:
 1. Click the "Configure" button in the GitHub section.
 1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
 1. Select your personal account. The personal account is the one that has the same name as your github username.
-1. Select the "All repositories" option to ensure that you can run rollouts in the Emojivoto app's repository.
+1. Select the "All repositories" option. Full access is required in order to fork a repo on your behalf for the demo application.
+
 
 1. Click "Install" and you will be taken back to the Ambassador Cloud.
 
