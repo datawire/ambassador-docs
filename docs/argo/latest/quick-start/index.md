@@ -50,8 +50,7 @@ Ambassador Cloud needs access to your github account in order to:
 - Configure ArgoCD access to your repo so manifests can be retrieved and applied in the cluster.
 
 In order to enable Github App execute the following steps:
-1. In Ambassador Cloud, go to the <Link to={getBaseUIUrl() + '/settings/teams'} target="\_blank">Teams Settings page</Link> and click the "Integrations" button for your current team.
-
+1. In Ambassador Cloud, go to the <a href="https://beta-app.datawire.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
 1. Click the "Configure" button in the GitHub section.
 1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
 1. Select your personal account. The personal account is the one that has the same name as your github username.
@@ -67,12 +66,10 @@ In this step we will:
 - Create and configure a demo kubernetes cluster so you can do canary releases using the Emojivoto app.
 - Create a github repo in your github account with all the necessary files to execute a canary release.
 
-In order to do so <a href="https://app.getambassador.io/cloud/demo-cluster-rollouts" target="\_blank" onClick={(e) => {window.open(getBaseUIUrl() + '/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
-
+In order to do so <a href="https://beta-app.datawire.io/cloud/demo-cluster-rollouts" target="_blank" onClick={(e) => {window.open(getBaseUIUrl() + '/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
 
 ## 3. Create a Rollout
-
-Go to the <Link to={getBaseUIUrl() + '/services'} target="\_blank">Service Catalog</Link> page and follow these steps:
+Go to the <a href="https://beta-app.datawire.io/cloud/services" target="_blank">Service Catalog</a> page and follow these steps:
 
 1. Look for the "web-app" service and hover over it to see the "expand" button, which will appear at the left side with a plus (+) icon.
 1. Click on the "Rollout" button for the "web-app" service to show the instructions to create a rollout.
