@@ -1,10 +1,10 @@
-import { FaqsSigIn, FaqsGoToCloud } from '../../../../../src/components/Docs/Cloud';
+import { ServiceCatalogText, LoginText } from '../../../../../src/components/Docs/Cloud';
 
 # Service Catalog FAQs
 
 **Where do I sign in to Service Catalog?**
 
-<FaqsSigIn />
+<ServiceCatalogText />
 
 **How can I see Service Catalog in action?**
 
@@ -73,7 +73,7 @@ Annotations added to a Kubernetes Service via YAML (or associated config templat
 
 Please check the following:
 
-<FaqsGoToCloud />
+<LoginText />
 
 **Why have my cluster/services disappeared from Service Catalog?**
 
