@@ -1,5 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
-import { Environments } from '../../../../../../src/components/Docs/Cloud';
+import { LogInText } from '../../../../../../src/components/Docs/LogInText';
 
 # Manage my environments
 
@@ -11,7 +11,7 @@ When you first generate an API key for a cluster, you are offered the choice to 
 
 To organize your services differently in the Service Catalog,
 
-1. <Environments />
+1. <LogInText />
 
 2. On the left-hand side navigation, click **Environments**.
 
