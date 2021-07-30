@@ -32,7 +32,7 @@ import {
   goToEmissaryLoadBalancer,
   goToEmissaryCircuitBreakers,
   goToEmissaryCanaryReleases,
-  goToEmissaryOauth,
+  goToEmissaryAuth,
   goToEmissaryExtFilters,
   goToEmissaryRateLimits,
   goToEmissaryAdvancedRateLimiting,
@@ -216,23 +216,9 @@ export const EmissaryCards = [
     section: 'emissaryTrafficManagement'
   },
   {
-    title: 'Single Sign-On',
-    description: 'Secure access to your services and integrate with popular identity providers.',
-    link: goToEmissaryOauth,
-    linkText: 'Learn How',
-    section: 'emissaryAuthentication'
-  },
-  {
-    title: 'JWT Validation',
-    description: 'Validate users via bearer tokens with Ambassador Edge Stack.',
-    link: goToJWT,
-    linkText: 'Learn How',
-    section: 'emissaryAuthentication'
-  },
-  {
-    title: 'External Filters',
-    description: 'Authenticate users via an external auth service.',
-    link: goToEmissaryExtFilters,
+    title: 'Authenticate requests',
+    description: 'Secure access to your services by authenticating requests before routing to backing services.',
+    link: goToEmissaryAuth,
     linkText: 'Learn How',
     section: 'emissaryAuthentication'
   },
