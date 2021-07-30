@@ -17,23 +17,6 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
-  - version: 1.13.10
-    date: '2021-07-27'
-    notes:
-      - title: Fix for CORS origins configuration on the Mapping resource
-        type: bugfix
-        body: "Fixed a regression when specifying a comma separated string for <code>cors.origins</code> on the <code>Mapping</code> resource"
-        docs: topics/using/cors
-        image: ./emissary-1.13.10-cors-origin.png
-      - title: New Envoy-configuration snapshots for debugging
-        body: "Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
-        type: change
-        docs: topics/running/environment/
-      - title: Optionally remove ratelimiting for Envoy reconfiguration
-        body: "Set <code>AMBASSADOR_AMBEX_NO_RATELIMIT</code> to <code>true</code> to completely disable ratelimiting Envoy reconfiguration under memory pressure. This can help performance with the endpoint or Consul resolvers, but could make OOMkills more likely with large configurations."
-        type: change
-        docs: topics/running/environment/
-
   - version: 1.13.9
     date: '2021-06-30'
     notes:

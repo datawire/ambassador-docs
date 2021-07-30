@@ -3,6 +3,7 @@
 Application development teams use $productName$ to manage edge policies associated with a specific service. This section of the documentation covers core $productName$ elements that are typically used by the application development team.
 
 * [The Project Resource](projects) The `Project` resource is the easiest way to develop a cloud-native service.
+  * [Configuring Authentication](project-authentication)
   * [Customizing Deployment](project-customization)
 * [Introduction to Mappings](intro-mappings) The `Mapping` resource is the core resource used by every application development team.
 * Mapping Configuration:
@@ -30,4 +31,14 @@ Application development teams use $productName$ to manage edge policies associat
 * [Advanced Mapping Configuration](mappings)
 * Rate Limiting
   * [Introduction to Rate Limits](rate-limits/)
+* Filters and Authentication
+  * [Introduction to Filters and Authentication](filters/)
+  * [OAuth2 Filter](filters/oauth2)
+  * [JWT Filter](filters/jwt)
+  * [External Filter](filters/external)
+  * [Plugin Filter](filters/plugin)
+* Service Preview and Edge Control
+  * [Introduction to Edge Control](edgectl/edge-control)
+  * [Edge Control in CI](edgectl/edge-control-in-ci)
+* [Developer Portal](dev-portal)
 * [Gateway API](gateway-api)

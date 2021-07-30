@@ -17,7 +17,6 @@ This documentation endpoint is defined by the optional `docs` attribute in the `
     path: "string"          # optional; default is ""
     url: "string"           # optional; default is ""
     ignored: bool           # optional; default is false
-    timeout_ms: integer     # optional; default is 5000
     display_name: "string"  # optional; default is ""
 ```
 
@@ -32,8 +31,6 @@ your microservice to return a Swagger or OAPI document at this URL.
 * `ignored`: ignore this `Mapping` for documenting services. Note that the service
 will appear in the _Dev Portal_ anyway if another, non-ignored `Mapping` exists
 for the same service.
-* `timeout_ms`: number of milliseconds that the devportal HTTP client will wait for a service 
-to respond on their docs endpoint
 * `display_name`: custom name to show for this service in the devportal.
 
 > Note:
@@ -59,8 +56,7 @@ Example:
 
 With the `Mapping`s below, the _Dev Portal_ would fetch OpenAPI documentation
 from `service-a:5000` at the path `/srv/openapi/` and from `httpbin` from an
-external URL. `service-b` would have no documentation. The httpbin service must 
-respond in 4000 seconds or else the request will time out.
+external URL. `service-b` would have no documentation.
 
 ```yaml
 ---
@@ -92,7 +88,6 @@ spec:
   prefix: /httpbin/
   service: httpbin.org
   docs:
-    timeout_ms:4000
     url: https://httpbin.org/spec.json
 ```
 
