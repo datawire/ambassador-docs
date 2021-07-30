@@ -24,7 +24,7 @@ You can visualize and explore your service’s OpenAPI specification (formerly k
      prefix: /backend/
      service: quote
      docs:
-       path: '/.ambassador-internal/openapi-docs'
+       path: "/.ambassador-internal/openapi-docs"
    ' | kubectl apply -f -
    ```
 
