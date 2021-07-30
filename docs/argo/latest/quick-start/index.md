@@ -77,7 +77,8 @@ Go to the <Link to={getBaseUIUrl() + '/services'} target="\_blank">Service Catal
 1. Click on the "Rollout" button for the "web-app" service to show the instructions to create a rollout.
 
 <Alert severity="info">
-  You can find the "web-app" faster by clicking on the "Services" favorites button.
+You can find the "web-app" service faster by clicking on the "Services" favorites button.
+
 </Alert>
 
 
