@@ -16,7 +16,7 @@ To use Azure as your IdP, you will first need to register an OAuth application w
 
         **Note:** Azure AD requires the redirect endpoint to handle TLS
       - Make sure your application is issuing `access tokens` by clicking on the `Access tokens (used for implicit flows)` checkbox under the `Implicit grant and hybrid flows` section
-      - Finally, click on **Configure** to save your changes
+      - Finally, click on `Configure` to save your changes
 
 5. Click on `Certificates & secrets` in the left sidebar. Click `+ New client secret` and set the expiration date you wish. Copy the value of this secret somewhere. You will need it when configuring $AESproductName$.
 
