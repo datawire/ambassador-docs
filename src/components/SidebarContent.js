@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import SidebarTopics from '../../../src/components/SidebarTopics';
 import Sidebar from '../components/Sidebar';
+import { archivedVersionsLink } from '../config';
 
 class SidebarContent extends Component {
 
@@ -10,6 +11,10 @@ class SidebarContent extends Component {
   componentDidMount() {
     this.setState({ isClient: true });
   }
+
+  hasArchivedVersions = this.props.versionList.some(v => v.archived);
+  newVersions = this.props.versionList.filter(v => !v.archived);
+  versionsToShow = this.hasArchivedVersions ? this.newVersions.concat(archivedVersionsLink) : this.newVersions;
 
   render() {
     return <React.Fragment key={this.state.isClient}>
@@ -28,8 +33,9 @@ class SidebarContent extends Component {
         <Sidebar
           onVersionChanged={this.props.onVersionChanged}
           version={this.props.version}
-          versionList={this.props.versionList}
+          versionList={this.versionsToShow}
           topicList={this.props.topicList}
+          archivedVersionsLink={archivedVersionsLink}
           slug={this.props.slug}
         />
       )}
