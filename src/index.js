@@ -6,7 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import { products, oldStructure, metaData, learningJourneys } from './config';
+import { products, oldStructure, metaData, learningJourneys, archivedVersionsLink, siteUrl } from './config';
 import DocsHome from './components/DocsHome';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
@@ -18,6 +18,7 @@ import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
 import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
+import AllVersions from './components/AllVersions';
 import ContactBlock from '../../src/components/ContactBlock';
 import ReadingTime from '../../src/components/ReadingTime';
 import Icon from '../../src/components/Icon';
@@ -33,17 +34,19 @@ function parseLinksByVersion(vers, links) {
 }
 
 export default ({ data, location }) => {
+
     const page = data.mdx || {};
     const slug = page.fields.slug.split('/');
     const isHome = page.fields.slug === '/docs/';
     const initialProduct = isHome
         ? products[0]
         : products.filter((p) => p.slug === slug[2])[0] || products[0];
-    const initialVersion = isHome
+    const isArchivedVersions = slug[3] === archivedVersionsLink.link;
+    const initialVersion = isHome || isArchivedVersions
         ? {}
         : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
     const isProduct = initialProduct.slug !== products[0].slug;
-    const isProductHome = isProduct && !!!initialVersion.id;
+    const isProductHome = isProduct && !isArchivedVersions && !!!initialVersion.id;
     const canonicalUrl = isHome
         ? 'https://www.getambassador.io/docs/'
         : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
@@ -80,7 +83,7 @@ export default ({ data, location }) => {
 
     const [product, setProduct] = useState(initialProduct);
     const [version, setVersion] = useState(initialVersion);
-    const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome);
+    const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome && !isArchivedVersions);
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
     const isMobile = useMemo(() => {
@@ -160,6 +163,12 @@ export default ({ data, location }) => {
     };
 
     const handleVersionChange = useCallback(async (e, value = null) => {
+        const path = version.archived ? siteUrl : '';
+        if (value === archivedVersionsLink.id) {
+            navigate(`${path}/docs/${product.slug}/${archivedVersionsLink.link}`);
+            return;
+        }
+
         const newValue = value ? value : e.target.value;
         const newVersion = versionList.filter((v) => v.id === newValue)[0];
         setVersion(newVersion);
@@ -182,11 +191,11 @@ export default ({ data, location }) => {
         claenStorage();
 
         if (links.includes(slugPath.replace(/\//g, ''))) {
-            navigate(`/docs/${product.slug}/${newVersion.id}/${slugPath}`);
+            navigate(`${path}/docs/${product.slug}/${newVersion.id}/${slugPath}`);
         } else {
-            navigate(`/docs/${product.slug}/${newVersion.link}/`);
+            navigate(`${path}/docs/${product.slug}/${newVersion.link}/`);
         }
-    }, [product.slug, slug, versionList]);
+    }, [product.slug, slug, version.archived, versionList]);
 
 
     const getProductHome = (product) => {
@@ -231,6 +240,8 @@ export default ({ data, location }) => {
                 {getProductHome(initialProduct.slug)}
                 {footer}
             </>
+        } else if (isArchivedVersions) {
+            return <AllVersions product={initialProduct} />
         }
         return (
             <div className="docs__container-doc">
@@ -266,7 +277,10 @@ export default ({ data, location }) => {
                             readingTimeText={page.frontmatter.reading_time_text}
                             itemClassName="docs__reading-time"
                         />
-                        <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.minutes}>
+                        <MDXRenderer
+                            slug={page.fields.slug}
+                            readingTime={page.fields.readingTime.minutes}
+                        >
                             {template(page.body, versions)}
                         </MDXRenderer>
                         {isLearning && (
@@ -300,7 +314,7 @@ export default ({ data, location }) => {
                 </div>
             </div>
         );
-    }, [footer, handleVersionChange, initialProduct.slug, isHome, isInTopics, isLearning, isProductHome, learningDescription, learningParseTopics, learningPath, learningReadingTime, learningTitle, location, menuLinks, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, version, versionList, versions]);
+    }, [footer, handleVersionChange, initialProduct, isArchivedVersions, isHome, isInTopics, isLearning, isProductHome, learningDescription, learningParseTopics, learningPath, learningReadingTime, learningTitle, location, menuLinks, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, version, versionList, versions]);
 
     return (
         <Layout location={location}>
@@ -322,16 +336,19 @@ export default ({ data, location }) => {
                     <div className="docs__nav">
                         <div className="docs__links-content docs__dekstop">
                             <ul className="docs__products-list">
-                                {products.map((item) => (
-                                    <li
-                                        className={`${product.slug === item.slug ? 'docs__selected' : ''
-                                            }`}
-                                        key={item.name}
-                                        onClick={claenStorage}
-                                    >
-                                        <Link to={item.link}>{item.name}</Link>
-                                    </li>
-                                ))}
+                                {products.map((item) => {
+                                    const linkContent = version.archived ? <a href={`${siteUrl}${item.link}`}>{item.name}</a> : <Link to={item.link}>{item.name}</Link>;
+                                    return (
+                                        <li
+                                            className={`${product.slug === item.slug ? 'docs__selected' : ''
+                                                }`}
+                                            key={item.name}
+                                            onClick={claenStorage}
+                                        >
+                                            {linkContent}
+                                        </li>
+                                    )
+                                })}
                             </ul>
                         </div>
                         <div
@@ -349,7 +366,7 @@ export default ({ data, location }) => {
                                     label={`Version: ${version.name}`}
                                     handleOnChange={handleVersionChange}
                                     value={version.id}
-                                    options={versionList}
+                                    options={versionList.filter(v => !v.archived)}
                                 />
                             )}
                         </div>
