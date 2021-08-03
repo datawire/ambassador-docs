@@ -22,6 +22,16 @@ export const products = [
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
             { id: "2.0", name: "2.0", link: "2.0/tutorials/getting-started" },
             { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
+            { id: "1.12", name: "1.12", link: "1.12/tutorials/getting-started", archived: true },
+            { id: "1.11", name: "1.11", link: "1.11/tutorials/getting-started", archived: true },
+            { id: "1.10", name: "1.10", link: "1.10/tutorials/getting-started", archived: true },
+            { id: "1.9", name: "1.9", link: "1.9/tutorials/getting-started", archived: true },
+            { id: "1.8", name: "1.8", link: "1.8/tutorials/getting-started", archived: true },
+            { id: "1.7", name: "1.7", link: "1.7/tutorials/getting-started", archived: true },
+            { id: "1.6", name: "1.6", link: "1.6/tutorials/getting-started", archived: true },
+            { id: "1.5", name: "1.5", link: "1.5/tutorials/getting-started", archived: true },
+            { id: "1.4", name: "1.4", link: "1.4/tutorials/getting-started", archived: true },
+            { id: "1.3", name: "1.3", link: "1.3/tutorials/getting-started", archived: true }
         ]
     },
     {
@@ -43,6 +53,9 @@ export const products = [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/quick-start" },
             { id: "latest", name: "Latest", link: "latest/quick-start" },
             { id: "2.3", name: "2.3", link: "2.3/quick-start" },
+            { id: "2.2", name: "2.2", link: "2.2/quick-start", archived: true },
+            { id: "2.1", name: "2.1", link: "2.1/quick-start", archived: true },
+            { id: "2.0", name: "2.0", link: "2.0/quick-start", archived: true }
         ]
     },
     {
@@ -105,3 +118,9 @@ export const metaData = {
 };
 
 export const learningJourneys = ['local-development', 'investigating-and-debugging-microservices', 'continuous-delivery-within-kubernetes'];
+
+export const archivedVersionsLink = { id: "archived", name: "Older Versions", link: "versions" };
+
+export const siteUrl = 'https://www.getambassador.io';
+
+export const archivedDocsUrl = 'https://archive.getambassador.io';
