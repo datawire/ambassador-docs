@@ -70,6 +70,7 @@ export const products = [
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/quick-start" },
             { id: "latest", name: "Latest", link: "latest/quick-start" },
+            { id: "2.4", name: "2.4", link: "2.4/quick-start" },
             { id: "2.3", name: "2.3", link: "2.3/quick-start" },
             { id: "2.2", name: "2.2", link: "2.2/quick-start", archived: true },
             { id: "2.1", name: "2.1", link: "2.1/quick-start", archived: true },
