@@ -51,7 +51,8 @@ Ambassador Cloud needs access to your GitHub account in order to:
 
 Follow the steps below to grant us access to your GitHub:
 <Alert severity="warning">
-  Make sure to sign in to Ambassador cloud <strong>with your GitHub username</strong> to enable integrations.
+Make sure to sign in to Ambassador Cloud <strong>with your GitHub username</strong> to enable integrations.
+
 </Alert>
 
 1. In Ambassador Cloud, go to the <a href="https://beta-app.datawire.io/cloud/demo-cluster-rollouts?step=integration" target="_blank">Teams Settings page</a> and click the **Integrations** button for your current team.
