@@ -66,12 +66,11 @@ This will also fork a repository called **emojivoto**.
 ## 3. Create a Rollout
 Go to the <a href="https://beta-app.datawire.io/cloud/services" target="_blank">Service Catalog</a> page and follow these steps:
 
-1. Look for the "web-app" service and hover over it to see the "expand" button, which will appear at the left side with a plus (+) icon.
-1. Click on the "Rollout" button for the "web-app" service to show the instructions to create a rollout.
+1. Look for the **web-app** service and hover over it to see the "expand" button, which will appear at the left side with a plus (+) icon.
+1. Click on the "Rollout" button for the **web-app** service to show the instructions to create a rollout.
 
 <Alert severity="info">
-You can find the "web-app" service faster by clicking on the "Services" favorites button.
-
+ You can find the <b>web-app</b> service faster by clicking on the "Services" favorites button.
 </Alert>
 
 
