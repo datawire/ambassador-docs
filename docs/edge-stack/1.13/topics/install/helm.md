@@ -62,6 +62,62 @@ deploy it with either version of the tool.
 
 6. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
 
+## Create a Mapping
+
+In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of $productName$. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
+
+1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
+
+  ```
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
+  ```
+
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
+
+  ```yaml
+  ---
+  apiVersion: getambassador.io/v2
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    prefix: /backend/
+    service: quote
+
+3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
+
+4. Grab the IP of your $productName$
+   
+   ```shell
+   export AMBASSADOR_LB_ENDPOINT=$(kubectl get svc ambassador -n ambassador \
+  -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
+   ```
+
+5. Test the configuration by typing `curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/` or `curl -Lk https://<hostname>/backend/`. You should see something similar to the following:
+
+   ```
+   $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/
+   {
+    "server": "idle-cranberry-8tbb6iks",
+    "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
+    "time": "2019-12-11T20:10:16.525471212Z"
+   }
+
+## A single source of configuration
+
+In $productName$, Kubernetes serves as the single source of
+configuration. This enables a consistent configuration workflow.
+
+1. To see your mappings via the command line, run `kubectl get mappings`
+
+2. If you created `Mappings` or other resources in another namespace, you can view them by adding `-n <namespace>` to the `kubectl get` command or add `-A` to view resources from every namespace. Without these flags, you will only see resources in the default namespace.
+
+   ```
+   $ kubectl get mappings
+     NAME            SOURCE HOST   SOURCE PREFIX   DEST SERVICE   STATE   REASON
+     quote-backend                 /backend/       quote 
+   ```
+
 ## Upgrading an Existing Ambassador Edge Stack Installation
 
 **Note:** If your existing installation is running the Ambassador API Gateway, **do not use these instructions**. See [Migrating to the Ambassador Edge Stack](#migrating-to-the-ambassador-edge-stack) instead.

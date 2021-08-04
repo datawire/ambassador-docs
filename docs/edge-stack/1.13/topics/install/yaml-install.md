@@ -92,78 +92,45 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
 
 ## Create a Mapping
 
-In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of Ambassador Edge Stack. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
+In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of $productName$. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
 
-1. We'll start by deploying the `quote` service. Save the below configuration into a file named `quote.yaml`. This is a basic configuration that tells Kubernetes to deploy the `quote` container and create a Kubernetes `service` that points to the `quote` container.
+1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
-   ```yaml
-   ---
-   apiVersion: v1
-   kind: Service
-   metadata:
-     name: quote
-     namespace: ambassador
-   spec:
-     ports:
-     - name: http
-       port: 80
-       targetPort: 8080
-     selector:
-       app: quote
-   ---
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-     name: quote
-     namespace: ambassador
-   spec:
-     replicas: 1
-     selector:
-       matchLabels:
-         app: quote
-     strategy:
-       type: RollingUpdate
-     template:
-       metadata:
-         labels:
-           app: quote
-       spec:
-         containers:
-         - name: backend
-           image: docker.io/datawire/quote:0.2.7
-           ports:
-           - name: http
-             containerPort: 8080
+  ```
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
+  ```
+
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
+
+  ```yaml
+  ---
+  apiVersion: getambassador.io/v2
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    prefix: /backend/
+    service: quote
+
+3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
+
+4. Grab the IP of your $productName$
+   
+   ```shell
+   export AMBASSADOR_LB_ENDPOINT=$(kubectl get svc ambassador -n ambassador \
+  -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
    ```
 
-2. Deploy the `quote` service to the cluster by typing the command `kubectl apply -f quote.yaml`.
-
-3. Now, create a `Mapping` configuration that tells Ambassador to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
-
-   ```yaml
-   ---
-   apiVersion: getambassador.io/v2
-   kind: Mapping
-   metadata:
-     name: quote-backend
-     namespace: ambassador
-   spec:
-     prefix: /backend/
-     service: quote
-   ```
-
-4. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
-
-5. Test the configuration by typing `curl -Lk https://<hostname>/backend/` or `curl -Lk https://<IP address>/backend/`. You should see something similar to the following:
+5. Test the configuration by typing `curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/` or `curl -Lk https://<hostname>/backend/`. You should see something similar to the following:
 
    ```
-   (⎈ |rdl-1:default)$ curl -Lk https://aes.ri.k36.net/backend/
+   $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/
    {
     "server": "idle-cranberry-8tbb6iks",
     "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
     "time": "2019-12-11T20:10:16.525471212Z"
    }
-   ```
+
 
 ## View your Service Metadata using Service Catalog
 

@@ -68,7 +68,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
   -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
    ```
 
-5. Test the configuration by typing `curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/` or `curl -Lk https://<hostname>/backend/`. You should see something similar to the following:
+5. Test the configuration by typing `curl -Lk https://$EMISSARY_LB_ENDPOINT/backend/` or `curl -Lk https://<hostname>/backend/`. You should see something similar to the following:
 
    ```
    $ curl -Lk http://$EMISSARY_LB_ENDPOINT/backend/
