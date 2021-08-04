@@ -40,7 +40,6 @@ edgectl upgrade
 6. [Access the Edge Policy Console](#6-access-the-edge-policy-console)
 7. [What's next?](#6-whats-next)
 
-
 ## Before you begin
 
 Make sure that you follow the steps in the given order - not doing that might crash your $OSSproductName$ installation or make it inconsistent.

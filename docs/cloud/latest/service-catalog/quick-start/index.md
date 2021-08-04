@@ -9,7 +9,7 @@ import { QuickStartServiceCatalogAlert } from '../../../../../../src/components/
 <h3>Contents</h3>
 
 * [Kubernetes annotations](#kubernetes-annotations)
-*  [Prerequisites](#prerequisites)
+* [Prerequisites](#prerequisites)
 * [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
 * [2. Claim ownership of a service](#2-claim-ownership-of-a-service)
 * [3. Add additional metadata via YAML](#3-add-additional-metadata-via-yaml)
