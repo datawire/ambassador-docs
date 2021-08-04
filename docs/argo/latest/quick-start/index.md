@@ -50,7 +50,11 @@ Ambassador Cloud needs access to your GitHub account in order to:
 - Configure ArgoCD access to your repo so manifests can be retrieved and applied in the cluster.
 
 Follow the steps below to grant us access to your GitHub:
-1. In Ambassador Cloud, go to the <a href="https://beta-app.datawire.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
+<Alert severity="warning">
+  Make sure to sign in to Ambassador cloud <strong>with your GitHub username</strong> to enable integrations.
+</Alert>
+
+1. In Ambassador Cloud, go to the <a href="https://beta-app.datawire.io/cloud/settings/teams?quickstart=true" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
 1. Click the "Configure" button in the GitHub section.
 1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
 1. Select your personal account. The personal account is the one that has the same name as your GitHub username.
