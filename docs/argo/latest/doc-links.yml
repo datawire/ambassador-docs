@@ -28,7 +28,7 @@
               link: /howtos/observability/
             - title: Transform a Deployment to a Rollout
               link: /howtos/deployment-to-rollout/
-            - title: Configure Rollout in your own Cluster
+            - title: Configure Canary Rollout in your own Cluster
               link: /howtos/configure-argo-rollouts/
         - title: Technical reference
           items:
