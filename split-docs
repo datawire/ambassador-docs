@@ -4,7 +4,7 @@
 # migration to per-product/version subtrees.  It isn't something that
 # is meant to be run during normal work.  If you would like to run
 # this script, and therefore would like to be involved in that
-# migration, then you should probably have a chat invovling Luke about
+# migration, then you should probably have a chat involving Luke about
 # the migration plan.
 
 set -euEx

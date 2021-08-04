@@ -34,7 +34,12 @@ import QSCards from './qs-cards'
 </div>
 
 ## Prerequisites
-You’ll need [`kubectl` installed](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [setup](https://kubernetes.io/docs/tasks/tools/install-kubectl/#verifying-kubectl-configuration) to use a Kubernetes cluster, preferably an empty test cluster.
+You’ll need [`kubectl` installed](https://kubernetes.io/docs/tasks/tools/#kubectl)
+and set up
+([Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#verify-kubectl-configuration) /
+ [macOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#verify-kubectl-configuration) /
+ [Windows](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#verify-kubectl-configuration))
+to use a Kubernetes cluster, preferably an empty test cluster.
 
 <Alert severity="info">
     <strong>Need a cluster?</strong> We provide free demo clusters to use with this quick start, <a href="../../howtos/democluster/">quickly set one up!</a>.
@@ -232,7 +237,7 @@ We’ve now set up a local development environment for the DataProcessingService
 
 <Alert severity="success">
   We’ve just shown how we can edit code locally, and <strong>immediately</strong> see these changes in the cluster.
-  <br / >
+  <br />
   Normally, this process would require a container build, push to registry, and deploy.
   <br />
   With Telepresence, these changes happen instantly.
