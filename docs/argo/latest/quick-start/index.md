@@ -17,7 +17,7 @@ In this guide we'll give you everything you need to perform a canary rollout of 
 
 - [Prerequisites](#prerequisites)
 - [Overview](#overview)
-- [1. Configure Github Access](#1-configure-github-access)
+- [1. Configure GitHub Access](#1-configure-github-access)
 - [2. Environment Setup](#2-environment-setup)
 - [3. Create a Rollout](#3-create-a-rollout)
 - [4. Review & merge PR](#3-review--merge-pr)
@@ -29,7 +29,7 @@ In this guide we'll give you everything you need to perform a canary rollout of 
 ## Prerequisites
 
 
-All you need to run this quickstart is a Github account.
+All you need to run this quickstart is a GitHub account.
 
 
 ## Overview
@@ -39,32 +39,29 @@ The Rollout feature uses:
 - A kubernetes cluster: This is where applications are deployed to.
 - A git repo: This is used as an interface to allow users to review the deployment (as Pull Requests) before it gets applied in Kubernetes.
 
-In the steps bellow we provide you all you need to have the full Rollout experience in Ambassador Cloud.
+In the steps below we provide you all you need to have the full Rollout experience in Ambassador Cloud.
 
-## 1. Configure Github Access
+## 1. Configure GitHub Access
 
-Ambassador Cloud needs access to your github account in order to:
+Ambassador Cloud needs access to your GitHub account in order to:
 
 - Create a dedicated repository to run rollouts.
 - Create PRs for new rollouts in the created repository.
 - Configure ArgoCD access to your repo so manifests can be retrieved and applied in the cluster.
 
-In order to enable Github App execute the following steps:
+Follow the steps below to grant us access to your GitHub:
 1. In Ambassador Cloud, go to the <a href="https://beta-app.datawire.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
 1. Click the "Configure" button in the GitHub section.
 1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
-1. Select your personal account. The personal account is the one that has the same name as your github username.
+1. Select your personal account. The personal account is the one that has the same name as your GitHub username.
 1. Select the "All repositories" option. Full access is required in order to fork a repo on your behalf for the demo application.
 1. Click "Install" and you will be taken back to the Ambassador Cloud.
 
 ## 2. Environment Setup
 
-In this step we will:
+The rollout feature requires/uses a Kubernetes cluster and GitHub repository, please <a href="https://beta-app.datawire.io/cloud/demo-cluster-rollouts" target="_blank" onClick={(e) => {window.open(getBaseUIUrl() + '/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
 
-- Create and configure a demo kubernetes cluster so you can do canary releases using the Emojivoto app.
-- Create a github repo in your github account with all the necessary files to execute a canary release.
-
-In order to do so <a href="https://beta-app.datawire.io/cloud/demo-cluster-rollouts" target="_blank" onClick={(e) => {window.open(getBaseUIUrl() + '/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
+This will also fork a repository called **emojivoto**.
 
 ## 3. Create a Rollout
 Go to the <a href="https://beta-app.datawire.io/cloud/services" target="_blank">Service Catalog</a> page and follow these steps:
