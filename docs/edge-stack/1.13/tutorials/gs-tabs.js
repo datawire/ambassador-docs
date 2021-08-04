@@ -68,6 +68,7 @@ export default function SimpleTabs() {
           <Tab icon={<HelmIcon />} label="Helm 3" {...a11yProps(0)} style={{ minWidth: "10%", textTransform: 'none' }} />
           <Tab icon={<HelmIcon />} label="Helm 2" {...a11yProps(1)} style={{ minWidth: "10%", textTransform: 'none' }} />
           <Tab icon={<KubernetesIcon />} label="Kubernetes YAML" {...a11yProps(2)} style={{ minWidth: "10%", textTransform: 'none' }} />
+          <Tab icon={<TerminalIcon />} label="Quick CLI Install" {...a11yProps(3)} style={{ minWidth: "10%", textTransform: 'none' }} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -80,9 +81,13 @@ export default function SimpleTabs() {
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
             '\n \n' +
-            'helm install ambassador datawire/ambassador --set enableAES=false && \\' +
+            '# Create Namespace and Install:' +
             '\n' +
-            'kubectl wait --for condition=available --timeout=90s deploy -lproduct=aes'
+            'kubectl create namespace ambassador && \\' +
+            '\n' +
+            'helm install ambassador --namespace ambassador datawire/ambassador && \\' +
+            '\n' +
+            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes'
           }
         </CodeBlock>
 
@@ -98,9 +103,13 @@ export default function SimpleTabs() {
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
             '\n \n' +
-            'helm install --name ambassador datawire/ambassador --set enableAES=false && \\' +
+            '# Create Namespace and Install:' +
             '\n' +
-            'kubectl wait --for condition=available --timeout=90s deploy -lproduct=aes'
+            'kubectl create namespace ambassador && \\' +
+            '\n' +
+            'helm install --name ambassador --namespace ambassador datawire/ambassador && \\' +
+            '\n' +
+            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes'
           }
         </CodeBlock>
 
@@ -112,25 +121,48 @@ export default function SimpleTabs() {
 
         <CodeBlock>
           {
-            'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \\' +
+            'kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \\' +
             '\n' +
-            'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \\' +
+            'kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \\' +
             '\n' +
-            'kubectl apply -f - <<EOF' + '\n' +
-            '---' + '\n' + 
-            'apiVersion: v1' + '\n' + 
-            'kind: Service' + '\n' + 
-            'metadata:' + '\n' + 
-            '  name: ambassador' + '\n' + 
-            'spec:' + '\n' + 
-            '  type: LoadBalancer' + '\n' + 
-            '  externalTrafficPolicy: Local' + '\n' + 
-            '  ports:' + '\n' + 
-            '  - port: 80' + '\n' + 
-            '    targetPort: 8080' + '\n' + 
-            '  selector:' + '\n' + 
-            '    service: ambassador' + '\n' + 
-            'EOF'
+            'kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && \\' +
+            '\n' +
+            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes' +
+            '\n'
+          }
+        </CodeBlock>
+
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
+
+        {/*Edgectl install instructions*/}
+        <CodeBlock>
+          {
+            '# macOS:' +
+            '\n' +
+            'sudo curl -fL https://metriton.datawire.io/downloads/darwin/edgectl \\' +
+            '\n' +
+            '   -o /usr/local/bin/edgectl &&' +
+            '\n' +
+            'sudo chmod a+x /usr/local/bin/edgectl &&' +
+            '\n' +
+            'edgectl install' +
+            '\n \n' +
+            '# Linux:' +
+            '\n' +
+            'sudo curl -fL https://metriton.datawire.io/downloads/linux/edgectl \\' +
+            '\n' +
+            '   -o /usr/local/bin/edgectl &&' +
+            '\n' +
+            'sudo chmod a+x /usr/local/bin/edgectl &&' +
+            '\n' +
+            'edgectl install' +
+            '\n \n' +
+            '# Windows:' +
+            '\n' +
+            '# Download here - https://metriton.datawire.io/downloads/windows/edgectl.exe'
+
           }
         </CodeBlock>
 

@@ -3,18 +3,19 @@ description: "A simple three step guide to installing Edge Stack and quickly get
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import GSTabs from './gs-tabs'
-import GSTabs2 from './gs-tabs2'
+import EdgeGSTabs from './gs-tabs'
+import EdgeGSTabs2 from './gs-tabs2'
 
 # Edge Stack Quick Start
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [1. Installation](#1-installation)
-* [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
-* [3. Connect your Cluster to Ambassador Cloud](#3-connect-your-cluster-to-ambassador-cloud)
-* [What's Next?](#img-classos-logo-srcimageslogopng-whats-next)
+- [Edge Stack Quick Start](#edge-stack-quick-start)
+  - [1. Installation](#1-installation)
+  - [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
+  - [3. Connect your Cluster to Ambassador Cloud](#3-connect-your-cluster-to-ambassador-cloud)
+  - [<img class="os-logo" src="../../images/logo.png"/> What's Next?](#-whats-next)
 
 </div>
 
@@ -24,7 +25,7 @@ We'll start by installing Edge Stack into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GSTabs/>
+<EdgeGSTabs/>
 
 <Alert severity="success"><b>Success!</b> You have installed Edge Stack, now let's get some traffic flowing to your services.</Alert>
 
@@ -32,7 +33,7 @@ We'll start by installing Edge Stack into your cluster.
 
 Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define Edge Stack’s desired state. The workflow you are going to build uses a simple demo app and the **Mapping CRD**, which is the core resource that you will use with Edge Stack. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
 
-1. First, apply the YAML for the “Quote of the Moment" service.
+1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
   ```
   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml

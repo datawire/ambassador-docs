@@ -81,14 +81,14 @@ so that you can create a `Mapping` on your cluster. This `Mapping` tells $produc
 You will use this variable to test accessing your pod.
 
   ```
-  export EMISSARY_LB_ENDPOINT=$(kubectl get svc ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
+  export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
   ```
 
 1. Test the configuration by accessing the service through the $productName$ load
 balancer.
 
   ```
-  $ curl -Lk "http://$EMISSARY_LB_ENDPOINT/backend/"
+  $ curl -Lk "https://$AMBASSADOR_LB_ENDPOINT/backend/"
   {
    "server": "idle-cranberry-8tbb6iks",
    "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
@@ -99,19 +99,83 @@ balancer.
 Success, you have created your first $productName$ `Mapping`, routing a
 request from your cluster's edge to a service!
 
-## 2. $productName$'s diagnostics
+## Edge Policy Console
 
-$productName$ provides live diagnostics viewable with a web browser. While this would normally not be exposed to the public network, the Docker demo publishes the diagnostics service at the following URL:
+Next, you are going to log in to the Edge Policy Console to explore some of its
+features. The console is a web-based interface that can be used to configure and
+monitor $productName$.
 
-`http://localhost:8080/ambassador/v0/diag/`
+1. Initially the console is accessed from the load balancer's hostname or public
+address (depending on your Kubernetes environment). You stored this endpoint
+earlier as a variable, echo that variable now to your terminal and make a note of it.
 
-You'll have to authenticate to view this page: use the username `admin`,
-password `admin` (obviously this would be a poor choice in the real world!).
-We'll talk more about authentication shortly.
+  ```
+  echo $AMBASSADOR_LB_ENDPOINT
+  ```
 
-To access the Diagnostics page with authentication, use `curl http://localhost:8080/ambassador/v0/diag/ -u admin:admin`
+1. In your browser, navigate to `http://<load-balancer-endpoint>` and follow the
+prompts to bypass the TLS warning.
 
-Some of the most important information - your $productName$ version, how recently $productName$'s configuration was updated, and how recently Envoy last reported status to $productName$ - is right at the top. The diagnostics overview can show you what it sees in your configuration map, and which Envoy objects were created based on your configuration.
+  > [A `Host` resource is created in production](../../topics/running/host-crd)
+to use your own registered domain name instead of the load balancer endpoint to
+access the console and your `Mapping` endpoints.
+
+1. The next page will prompt you to log in to the console using `edgectl`, the
+$productName$ CLI. The page provides instructions on how to install `edgectl` for
+all OSes and log in.
+
+1. Once logged in, click on the **Mappings** tab in the Edge Policy Console.
+Scroll down to find an entry for the `quote-backend` `Mapping` that you created
+in your terminal with `kubectl`.
+
+As you can see, the console lists the `Mapping` that you created earlier. This
+information came from $productName$ polling the Kubernetes API. In
+$productName$, Kubernetes serves as the single source of truth
+around cluster configuration. Changes made via `kubectl` are reflected in the
+Edge Policy Console and vice versa.  Try the following to see this in action.
+
+1. Click **Edit** next to the `quote-backend` entry.
+
+1. Change the **Prefix URL** from `/backend/` to `/quoteme/`.
+
+1. Click **Save**.
+
+1. Run `kubectl get mappings --namespace ambassador`. You will see the
+`quote-backend` `Mapping` has the updated prefix listed. Try to access the
+endpoint again via `curl` with the updated prefix.
+
+  ```
+  $ kubectl get mappings --namespace ambassador
+  NAME            PREFIX      SERVICE   STATE   REASON
+  quote-backend   /quoteme/   quote
+
+  $ curl -Lk "https://${AMBASSADOR_LB_ENDPOINT}/quoteme/"
+  {
+      "server": "snippy-apple-ci10n7qe",
+      "quote": "A principal idea is omnipresent, much like candy.",
+      "time": "2020-11-18T17:15:42.095153306Z"
+  }
+  ```
+
+1. Change the prefix back to `/backend/` so that you can later use the `Mapping`
+with other tutorials.
+
+## Developer API Documentation
+
+The `quote` service you just deployed publishes its API as an
+[OpenAPI (formally Swagger)](https://swagger.io/solutions/getting-started-with-oas/)
+document. $productName$ automatically detects and publishes this documentation.
+This can help with internal and external developer onboarding by serving as a
+single point of reference for of all your microservice APIs.
+
+1. In the Edge Policy Console, navigate to the **APIs** tab. You'll see the
+OpenAPI documentation there for the "Quote Service API." Click **GET** to
+expand out the documentation.
+
+1. Navigate to `https://<load-balancer-endpoint>/docs/` to see the
+publicly visible Developer Portal. Make sure you include the trailing `/`.
+This is a fully customizable portal that you can share with third parties who
+need information about your APIs.
 
 ## Next Steps
 

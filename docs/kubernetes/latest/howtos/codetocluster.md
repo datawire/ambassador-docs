@@ -4,22 +4,23 @@
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import GSTabs from './gs-tabs.js'
+import KubeGSTabs from './gs-tabs.js'
 
 # Get code running on my cluster
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [Prerequisites](#prerequisites)
-* [1. Install ingress controller](#1-install-ingress-controller)
-* [2. Bulletin board web app](#2-bulletin-board-web-app)
-* [3. Build container and test](#3-build-container-and-test)
-* [4. Push to Docker Hub](#4-push-to-docker-hub)
-* [5. Create a Deployment, Service, and Mapping in Kubernetes](#5-create-a-deployment-service-and-mapping-in-kubernetes)
-* [6. Deploy app and test](#6-deploy-app-and-test)
-* [7. Setup a Host and SSL (optional)](#7-setup-a-host-and-ssl-optional)
-* [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
+- [Get code running on my cluster](#get-code-running-on-my-cluster)
+  - [Prerequisites](#prerequisites)
+  - [1. Install ingress controller](#1-install-ingress-controller)
+  - [2. Bulletin board web app](#2-bulletin-board-web-app)
+  - [3. Build container and test](#3-build-container-and-test)
+  - [4. Push to Docker Hub](#4-push-to-docker-hub)
+  - [5. Create a Deployment, Service, and Mapping in Kubernetes](#5-create-a-deployment-service-and-mapping-in-kubernetes)
+  - [6. Deploy app and test](#6-deploy-app-and-test)
+  - [7. Setup a Host and SSL (optional)](#7-setup-a-host-and-ssl-optional)
+  - [<img class="os-logo" src="../../../../../images/logo.png"/> What's next?](#-whats-next)
 
 </div>
 
@@ -38,7 +39,7 @@ We'll need an ingress controller for your cluster to get traffic from the intern
 
 **We recommend installing using Helm** but there are other options below to choose from.
 
-<GSTabs/>
+<KubeGSTabs/>
 
 If needed, see the list of <a href="../../../../edge-stack/latest/topics/install/" target="_blank">other installation options</a>.
 

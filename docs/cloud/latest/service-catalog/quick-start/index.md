@@ -1,5 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
-import GSTabs2 from '../tutorials/gs-tabs2';
+import CloudGSTabs2 from '../tutorials/gs-tabs2';
 import { LogInText } from '../../../../../../src/components/Docs/LogInText';
 import { QuickStartServiceCatalogAlert } from '../../../../../../src/components/Docs/Cloud';
 
@@ -8,12 +8,13 @@ import { QuickStartServiceCatalogAlert } from '../../../../../../src/components/
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [Kubernetes annotations](#kubernetes-annotations)
-* [Prerequisites](#prerequisites)
-* [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
-* [2. Claim ownership of a service](#2-claim-ownership-of-a-service)
-* [3. Add additional metadata via YAML](#3-add-additional-metadata-via-yaml)
-* [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
+- [Quick start](#quick-start)
+  - [Kubernetes annotations](#kubernetes-annotations)
+  - [Prerequisites](#prerequisites)
+  - [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
+  - [2. Claim ownership of a service](#2-claim-ownership-of-a-service)
+  - [3. Add additional metadata via YAML](#3-add-additional-metadata-via-yaml)
+  - [<img class="os-logo" src="../../images/logo.png"/> What's next?](#-whats-next)
 
 </div>
 

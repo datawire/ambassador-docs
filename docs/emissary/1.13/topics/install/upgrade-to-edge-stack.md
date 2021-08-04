@@ -12,6 +12,8 @@ If you currently have the open source version of $OSSproductName$, you can upgra
   * the `ambassador` name and `ambassador` namespace
   * `installOSS: true`
 
+> **Note:** It is always advised to migrate your install of $OSSproductName$ to the `ambassador` namespace before upgrading to $AESproductName$ with any method.
+
 First, install `edgectl` by following the instructions
 [here](/docs/edge-stack/latest/topics/using/edgectl/edge-control/#installing-edge-control).
 
@@ -30,13 +32,17 @@ edgectl upgrade
 
 **To upgrade your instance of $OSSproductName$**:
 
-1. [Apply the migration manifest](#1-apply-the-migration-manifest)
-2. [Test the new Deployment](#2-test-the-new-deployment)
-3. [Redirect traffic](#3-redirect-traffic)
-4. [Delete the old Deployment](#4-delete-the-old-deployment)
-5. [Update and restart](#5-update-and-restart)
-6. [Access the Edge Policy Console](#6-access-the-edge-policy-console)
-7. [What's next?](#6-whats-next)
+- [Upgrade to $AESproductName$](#upgrade-to-aesproductname)
+  - [Upgrading on supported Kubernetes environments](#upgrading-on-supported-kubernetes-environments)
+  - [Upgrading from other installations](#upgrading-from-other-installations)
+  - [Before you begin](#before-you-begin)
+  - [1. Apply the migration manifest](#1-apply-the-migration-manifest)
+  - [2. Test the new Deployment](#2-test-the-new-deployment)
+  - [3. Redirect traffic](#3-redirect-traffic)
+  - [4. Delete the old Deployment](#4-delete-the-old-deployment)
+  - [5. Update and restart](#5-update-and-restart)
+  - [6. Access the Edge Policy Console](#6-access-the-edge-policy-console)
+  - [7. What's next?](#7-whats-next)
 
 ## Before you begin
 

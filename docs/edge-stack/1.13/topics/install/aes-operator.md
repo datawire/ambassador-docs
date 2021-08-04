@@ -1,9 +1,10 @@
-# The Ambassador Operator
+# The Ambassador Edge Stack Operator
 
-The Ambassador Operator is a Kubernetes Operator that controls the
-complete lifecycle of $productName$ in your cluster. It also
-automates many of the repeatable tasks you have to perform for $productName$. Once installed, the Ambassador Operator will automatically complete rapid
-installations and seamless upgrades to new versions of $productName$.  [Read
+The Ambassador Edge Stack Operator is a Kubernetes Operator that controls the
+complete lifecycle of Ambassador in your cluster. It also
+automates many of the repeatable tasks you have to perform for the Ambassador
+Edge Stack. Once installed, the AES Operator will automatically complete rapid
+installations and seamless upgrades to new versions of Ambassador.  [Read
 more](https://github.com/datawire/ambassador-operator/blob/master/README.md#version-syntax)
 about the benefits of the Operator.
 
@@ -26,44 +27,36 @@ Start by installing the operator:
 
 1. Create the Operator Custom Resource schema with the following command:
    `kubectl apply -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator-crds.yaml`
-2. To install the Ambassador Operator CRD. To change the namespace for the isntall, you can specify it in `NS` and then run the following command. We recommend using the `default` namespace if you are installing $productName$ and the `ambassador` namespace if you are installing $AESproductName$:
+2. Install the actual CRD for the Ambassador Operator in the `ambassador` namespace with the following command:
+   `kubectl apply -n ambassador -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator.yaml`
+3. To install the Ambassador Operator CRD in a different namespace, you can specify it in `NS` and
+   then run the following command:
 
     ```
-    $ NS="default"
+    $ NS="custom-namespace"
     $ curl -L https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator.yaml | \
         sed -e "s/namespace: ambassador/namespace: $NS/g" | \
         kubectl apply -n $NS -f -
     ```
 
-Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the Ambassador Operator.
+Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the AES Operator.
 
 1. To create the `AmbassadorInstallation` Custom Resource schema, use
-   the following YAML as your guideline or view the [Operator README](https://github.com/datawire/ambassador-operator#the-operator-custom-resource-cr) for more information on configuration.
-
-    ```
-    apiVersion: getambassador.io/v2
-    kind: AmbassadorInstallation 
-    metadata:
-      name: ambassador 
-    spec:
-      installOSS: true 
-   ```
-
+   [the following YAML](https://github.com/datawire/ambassador-operator#the-operator-custom-resource-cr)
+   as your guideline.
 2. Save that file as `amb-install.yaml`
 3. Edit the `amb-install.yaml` and optionally complete configurations such as Version constraint or UpdateWindow:
-4. Finally, apply your `AmbassadorInstallation` CRD to the Ambassador Operator schema
+4. Finally, apply your `AmbassadorInstallation` CRD to the AES Operator schema
    with the following command: `kubectl apply -n ambassador -f amb-install.yaml`
 
-> **Note:** If you do not place the `AmbassadorInstallation` in the same namespace that you insatalled the Operator, it will not install anything.
+### Configuration for the Ambassador Edge Stack
 
-### Configuration for $productName$
-
-After the initial installation of $productName$, the Operator will check for updates every 24 hours and
+After the initial installation of Ambassador, the Operator will check for updates every 24 hours and
 delay the update until the Update Window allows the update to proceed. It will use the Version Syntax for
 determining if any new release is acceptable. When a new release is available and acceptable, the Operator
-will upgrade $productName$.
+will upgrade Ambassador.
 
-### Version syntax and update window
+### Version Syntax and Update Window
 
 To specify version numbers, use SemVer for the version number for any level of
 precision. This can optionally end in `*`.  For example:
@@ -101,14 +94,14 @@ examples of `updateWindow` are:
 The Operator cannot guarantee minute time granularity, so specifying a minute in the crontab
 expression can lead to some updates happening sooner/later than expected.
 
-`installOSS` in an optional field which, if set to `true`, installs $OSSproductName$ instead of
-$AESproductName$.
+`installOSS` in an optional field which, if set to `true`, installs Ambassador API Gateway instead of
+Ambassador Edge Stack.
 Default: `false`.
 
 ## Customizing the installation with some Helm values
 
-`helmValues` is an optional map of configurable parameters of the $productName$ chart
-with some overriden values. Take a look at the [current list of values](https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/README.md)
+`helmValues` is an optional map of configurable parameters of the Ambassador chart
+with some overriden values. Take a look at the [current list of values](https://github.com/emissary-ingress/emissary/tree/release/v1.13/charts/ambassador#configuration)
 and their default values.
 
 Example:
@@ -119,7 +112,6 @@ kind: AmbassadorInstallation
 metadata:
   name: ambassador
 spec:
-  installOSS: true 
   version: "*"
   helmValues:
     image:
@@ -135,12 +127,12 @@ spec:
 ```
 
 * Note that the `spec.installOSS` parameter should be used instead of `spec.helmValues.enableAES` to control whether 
-  $OSSproductName$ or $AESproductName$ is installed. A configuration where both `installOSS` and `enableAES` are set to the same value will 
+  OSS or AES is installed. A configuration where both `installOSS` and `enableAES` are set to the same value will 
   introduce a conflict and result in an error.
 
 ## Install via Helm Chart
 
-You can also install the Ambassador Operator from a Helm Chart. The following Helm values are supported:
+You can also install the AES Operator from a Helm Chart. The following Helm values are supported:
 
 * `image.name`: Operator image name
 * `image.pullPolicy`: Operator image pull policy
@@ -159,18 +151,18 @@ You can also install the Ambassador Operator from a Helm Chart. The following He
     metadata:
       name: ambassador
     spec:
-      installOSS: true 
+      version: 1.2.0
     EOF
     ```
 
 ## Updates by the Operator
 
 After the `AmbassadorInstallation` is created for the first time, the Operator
-will then use the list of releases available for the $productName$ Helm Chart for
+will then use the list of releases available for the Ambassador Helm Chart for
 determining the most recent version that can be installed, using the optional
 Version Syntax for filtering the releases that are acceptable.
 
-It will then install $productName$, using any extra arguments provided in the `AmbassadorInstallation`,
+It will then install Ambassador, using any extra arguments provided in the `AmbassadorInstallation`,
 like the `baseImage`, the `logLevel` or any of the `helmValues`.
 
 For example:
@@ -182,13 +174,12 @@ kind: AmbassadorInstallation
 metadata:
   name: ambassador
 spec:
-  installOSS: true 
-  version: 1.13.0
+  version: 1.2.0
 EOF
 ```
 
-After applying an `AmbassadorInstallation` customer resource like this in a new cluster, the Operator will install a new instance of $productName$ 1.13.0 in the `ambassador` namespace, immediately. Removing this `AmbassadorInstallation` will uninstall $productName$ from this namespace.
+After applying an `AmbassadorInstallation` customer resource like this in a new cluster, the Operator will install a new instance of Ambassador 1.2.0 in the `ambassador` namespace, immediately. Removing this `AmbassadorInstallation` will uninstall Ambassador from this namespace.
 
-## Verify configuration
+## Verify Configuration
 
 **To verify that everything was installed and configured correctly,** you can visually confirm the set up in the Edge Policy Console on the “Debugging” tab. Alternatively, you can check the Operator pod in your cluster to check its health and run status.
