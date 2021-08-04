@@ -1,8 +1,10 @@
+import { FaqsSigIn, FaqsGoToCloud } from '../../../../../src/components/Docs/Cloud';
+
 # Service Catalog FAQs
 
 **Where do I sign in to Service Catalog?**
 
-Sign in to Service Catalog [here](https://app.getambassador.io/cloud/).
+<FaqsSigIn />
 
 **How can I see Service Catalog in action?**
 
@@ -71,9 +73,7 @@ Annotations added to a Kubernetes Service via YAML (or associated config templat
 
 Please check the following:
 
-* Has the Edge Stack been successfully installed in your cluster? Are all of the Edge Stack Pods in a healthy state (e.g. no status of `CrashLoopBackoff`)?
-* Have you successfully applied your Cloud Connect token to your installation of the Edge Stack? If not, please sign in to [Ambassador Cloud](https://app.getambassador.io/cloud/) and follow the Edge Stack connection instructions to visualize your cluster's information in the Service Catalog.
-* Are you running Ambassador Edge Stack 1.12 or later? Earlier versions of the Edge Stack, or an Edge Stack running in “legacy” mode, do not support reporting Service metadata to Ambassador Cloud.
+<FaqsGoToCloud />
 
 **Why have my cluster/services disappeared from Service Catalog?**
 
@@ -84,7 +84,7 @@ Please check the following:
 
 **What components get installed into my cluster when connecting to Service Catalog?**
 
-The standard [Edge Stack Services](../../../../edge-stack/latest/topics/install/) get installed within your cluster. The Edge Stack components are responsible for synchronizing the list of Services within your cluster with the list displayed within the Service Catalog.
+The standard [Edge Stack Services](../../../../edge-stack/1.13/topics/install/) get installed within your cluster. The Edge Stack components are responsible for synchronizing the list of Services within your cluster with the list displayed within the Service Catalog.
 
 **How do I share my feedback on Ambassador Cloud and Service Catalog?**
 

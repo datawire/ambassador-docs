@@ -1,8 +1,8 @@
-# Edgectl Upgrade: upgrade to Ambassador API Gateway has failed
+# Edgectl Upgrade: upgrade to $productName$ has failed
 
-You’re running a previous version of the Ambassador API Gateway, but a more recent version exists.
-To upgrade to the Ambassador Edge Stack you should have the latest version installed.
-Update your installation to Ambassador API Gateway first and rerun the upgrader.
+You’re running a previous version of the $productName$, but a more recent version exists.
+To upgrade to the $productName$ you should have the latest version installed.
+Update your installation to $productName$ first and rerun the upgrader.
 
 ## What's next?
 

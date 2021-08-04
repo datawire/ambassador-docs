@@ -2,7 +2,7 @@
 
 # Service Preview reference
 
-The following is a reference for the various components of Service Preview. 
+The following is a reference for the various components of Service Preview.
 
 See [Service Preview Quick Start](../service-preview-install) for detailed installation instructions.
 
@@ -112,7 +112,7 @@ spec:
 
 The Traffic Manager needs to be able to watch resources in the cluster so it is aware of what services are interceptable by Service Preview. The default is to provide a cluster-wide scope for this as shown above so you can run Service Preview in any namespace.
 
-It also requires the ability to read your Ambassador Edge Stack license key from the `ambassador-edge-stack` `Secret`.
+It also requires the ability to read your $productName$ license key from the `ambassador-edge-stack` `Secret`.
 
 #### Traffic Manager options
 
@@ -139,8 +139,8 @@ It also requires the ability to read your Ambassador Edge Stack license key from
 
 - __Run with namespace scope__
 
-   You can run the Traffic Agent without cluster-wide permissions if you only want to use service preview in a single namespace. 
-   
+   You can run the Traffic Agent without cluster-wide permissions if you only want to use service preview in a single namespace.
+
    To do so, you will need use the following manifest which modifies the deployment to run only in the `ambassador` namespace.
 
    ```yaml
@@ -248,7 +248,7 @@ Any pod running in a cluster with a Traffic Manager can opt in to intercept func
 
 #### Configuring RBAC
 
-Since the Traffic Agent is built on Ambassador Edge Stack, it needs a subset of the same RBAC permissions that Ambassador does. The easiest way to provide this is to create a `ServiceAccount` in your service's namespace, bound to the `traffic-agent` `Role` or `ClusterRole`.
+Since the Traffic Agent is built on $productName$, it needs a subset of the same RBAC permissions that Ambassador does. The easiest way to provide this is to create a `ServiceAccount` in your service's namespace, bound to the `traffic-agent` `Role` or `ClusterRole`.
 
 The following YAML is the basic Traffic Agent RBAC configuration manifests that is available for [download here](https://app.getambassador.io/yaml/ambassador-docs/latest/traffic-agent-rbac.yaml).
 
@@ -382,7 +382,7 @@ If you want to include the Traffic Agent with multiple services, they can all us
      - name: system:serviceaccounts
        kind: Group
        apiGroup: rbac.authorization.k8s.io
-   ``` 
+   ```
 
 #### Automatic Traffic Agent sidecar injection with Ambassador Injector
 
@@ -408,7 +408,7 @@ This works well for most usecase but there are a couple of important points to m
              containerPort: 8000   # Application port
    ```
 
-Take a look at the following for a more detailed look at what is included in [https://getambassador.io/yaml/ambassador-injector.yaml](/yaml/ambassador-injector.yaml):
+Take a look at the following for a more detailed look at what is included in [ambassador-injector.yaml](https://app.getambassador.io/yaml/ambassador-docs/latest/ambassador-injector.yaml):
 
 ```yaml
 # This is ambassador-injector.yaml
@@ -643,7 +643,7 @@ Key points include:
 - **Note 5**: The `AGENT_SERVICE` environment variable is mandatory. It sets the name that the Traffic Agent will report to the Traffic Manager for this microservice: you will have to provide this name to intercept this microservice.
 - **Note 6**: The `AGENT_PORT` environment variable is mandatory. It tells the Traffic Agent the local port on which the microservice is listening.
 - **Note 7**: The `AGENT_MANAGER_NAMESPACE` environment variable tells the Traffic Agent the namespace in which it will be able to find the Traffic Manager. If not present, it defaults to the `ambassador` namespace.
-- **Note 8**: The `AMBASSADOR_NAMESPACE` environment variable is mandatory. It lets the Traffic Agent tell the Traffic Manager the namespace in which the microservice is running. 
+- **Note 8**: The `AMBASSADOR_NAMESPACE` environment variable is mandatory. It lets the Traffic Agent tell the Traffic Manager the namespace in which the microservice is running.
 - **Note 9**: The `AMBASSADOR_SINGLE_NAMESPACE` environment variable tells the Traffic Agent to watch resources only in its current namespace. This allows the `traffic-agent` `ServiceAccount` to only have `Role` permissions instead of a cluster-wide `ClusterRole`.
 - **Note 10**: The `AGENT_LISTEN_PORT` environment variable tells the Traffic Agent the port on which to listen for incoming connections. The `Service` must point to this port (see Note 1). If not present, it defaults to port 9900.
 
@@ -664,9 +664,9 @@ If this microservice expects incoming requests to speak TLS, tell the Traffic Ag
 - Set the `getambassador.io/inject-originating-tls-secret` pod annotation, or the `AGENT_TLS_ORIG_SECRET` environment variable if injecting the sidecar manually, to the name of a Kubernetes Secret that contains a TLS certificate
 - The Traffic Agent will use that certificate originate HTTPS requests to the application
 
-### Ambassador Edge Stack
+### $productName$
 
-To enable Preview URLs, you must first enable preview URL processing in one or more Host resources. Ambassador Edge Stack uses Host resources to configure various aspects of a given host. Enabling preview URLs is as simple as adding the `previewUrl` section and setting `enabled` to `true`:
+To enable Preview URLs, you must first enable preview URL processing in one or more Host resources. $productName$ uses Host resources to configure various aspects of a given host. Enabling preview URLs is as simple as adding the `previewUrl` section and setting `enabled` to `true`:
 
 ```yaml
 # This is minimal-host-preview-url.yaml

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
@@ -6,18 +6,24 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import { products, oldStructure, metaData } from './config';
+import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl } from './config';
 import DocsHome from './components/DocsHome';
-import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
 import isAesPage from './utils/isAesPage';
+import getPrevNext from './utils/getPrevNext';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import EdgeStack from './products/EdgeStack';
+import Emissary from './products/Emissary';
 import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
+import AllVersions from './components/AllVersions';
 import ContactBlock from '../../src/components/ContactBlock';
+import ReadingTime from '../../src/components/ReadingTime';
+import Icon from '../../src/components/Icon';
+import LearningJourneyImg from './images/learning-journe-prev-next.svg';
+import SidebarContent from './components/SidebarContent';
 import './style.less';
 
 export default ({ data, location }) => {
@@ -28,56 +34,92 @@ export default ({ data, location }) => {
     const initialProduct = isHome
         ? products[0]
         : products.filter((p) => p.slug === slug[2])[0] || products[0];
-    const initialVersion = isHome
+    const isArchivedVersions = slug[3] === archivedVersionsLink.link;
+    const initialVersion = isHome || isArchivedVersions
         ? {}
         : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
     const isProduct = initialProduct.slug !== products[0].slug;
-    const isProductHome = isProduct && !!!initialVersion.id;
+    const isProductHome = isProduct && !isArchivedVersions && !!!initialVersion.id;
     const canonicalUrl = isHome
         ? 'https://www.getambassador.io/docs/'
         : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
             .slice(4)
             .join('/')}`;
 
+    const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
+    const learningPath = learningJourneyName ? `?learning-journey=${learningJourneyName}` : '';
+    const isInLearnings = learningJourneys.includes(learningJourneyName);
+    const learningJourneyData = isInLearnings ? data.allLearningjourney.nodes.filter(node => node.slug.indexOf('/') > -1 && node.slug.indexOf('.') > -1 && node.slug.split('/')[1].split('.')[0] === learningJourneyName) : [];
+    const { title: learningTitle, description: learningDescription, readingTime: learningReadingTime, topics } = isInLearnings ? JSON.parse(learningJourneyData[0].content)[0] : {};
+    const { previous: prevLearning, next: nextLearning, isInTopics } = isInLearnings ? getPrevNext(topics, page.fields.slug) : {};
+    const isLearning = isInLearnings && isInTopics;
+    const learningParseTopics = isLearning ? topics.map(topic => {
+        const items = topic.items.map(item => {
+            const readingTimeTopic = data.allMdx.edges.filter(i => i.node.fields.slug === `/docs/${item.link}`);
+            const { slug, readingTime } = readingTimeTopic[0] ? readingTimeTopic[0].node.fields : {};
+            const { reading_time_text, hide_reading_time, reading_time } = readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
+            return {
+                ...item,
+                slug,
+                readingTimeMinutes: Math.ceil(readingTime ? readingTime.minutes : 0),
+                readingTimeText: reading_time_text,
+                hideReadingTime: hide_reading_time,
+                readingTimeFront: reading_time
+            }
+        });
+
+        return {
+            ...topic,
+            items
+        }
+    }) : [];
+
     const [product, setProduct] = useState(initialProduct);
     const [version, setVersion] = useState(initialVersion);
-    const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome);
+    const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome && !isArchivedVersions);
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
-
     const isMobile = useMemo(() => {
-      return typeof window !== 'undefined' ? window.innerWidth <= 800  : true
-    },[]);
+        return typeof window !== 'undefined' ? window.innerWidth <= 800 : true
+    }, []);
 
     useEffect(() => {
-        loadJS();
-        isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
-    }, [isMobile]);
-
-    const parseLinksByVersion = (vers, links) => {
-        if (oldStructure.includes(vers)) {
-            return links;
+      const loadJS = () => {
+        if (!isMobile) {
+          if (window.docsearch) {
+            window.docsearch({
+              apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
+              indexName: 'getambassador',
+              inputSelector: '#doc-search',
+              debug: true,
+            });
+          } else {
+            setTimeout(() => {
+              loadJS();
+            }, 500);
+          }
         }
-        return links[1].items[0].items;
-    }
+      };
+      loadJS();
+      isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
+    }, [initialProduct.slug, initialVersion.id, isMobile, slug]);
 
-    const getVersions = () => {
+    const versions = useMemo(() => {
         if (!data.versions?.content) {
             return {};
         }
         const versions = data.versions?.content;
         return JSON.parse(versions);
-    }
+    }, [data.versions]);
 
     const menuLinks = useMemo(() => {
         if (!data.linkentries?.content) {
             return [];
         }
-        const linksJson = JSON.parse(data.linkentries?.content || []);
-        return parseLinksByVersion(slug[3], linksJson);
-    }, [data.linkentries, slug]);
+        return JSON.parse(template(data.linkentries?.content, versions));
+    }, [data.linkentries, versions]);
 
-    const getMetaData = () => {
+    const metadata = useMemo(() => {
         let metaDescription;
         let metaTitle;
         if (isHome) {
@@ -90,8 +132,10 @@ export default ({ data, location }) => {
             metaTitle = (page.headings && page.headings[0] ? page.headings[0].value : 'Docs') + ' | Ambassador';
             metaDescription = page.frontmatter && page.frontmatter.description ? page.frontmatter.description : page.excerpt;
         }
-        return { metaDescription, metaTitle };
-    }
+        return {
+            metaDescription: template(metaDescription, versions), metaTitle: template(metaTitle, versions)
+        };
+    }, [isHome, isProductHome, versions, initialProduct.slug, page.headings, page.frontmatter, page.excerpt]);
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
 
@@ -110,15 +154,19 @@ export default ({ data, location }) => {
         navigate(selectedProduct.link);
     };
 
-    const handleVersionChange = async (e, value = null) => {
+    const handleVersionChange = useCallback(async (e, value = null) => {
+        const path = version.archived ? siteUrl : '';
+        if (value === archivedVersionsLink.id) {
+            navigate(`${path}/docs/${product.slug}/${archivedVersionsLink.link}`);
+            return;
+        }
+
         const newValue = value ? value : e.target.value;
         const newVersion = versionList.filter((v) => v.id === newValue)[0];
         setVersion(newVersion);
         const slugPath = slug.slice(4).join('/') || '';
 
-        const newVersionLinks = await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`);
-
-        const newVersionLinksContent = parseLinksByVersion(newVersion.id, newVersionLinks.default);
+        const newVersionLinksContent = (await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`)).default;
         const links = [];
 
         function createArrayLinks(el) {
@@ -133,34 +181,19 @@ export default ({ data, location }) => {
         claenStorage();
 
         if (links.includes(slugPath.replace(/\//g, ''))) {
-            navigate(`/docs/${product.slug}/${newVersion.id}/${slugPath}`);
+            navigate(`${path}/docs/${product.slug}/${newVersion.id}/${slugPath}`);
         } else {
-            navigate(`/docs/${product.slug}/${newVersion.link}/`);
+            navigate(`${path}/docs/${product.slug}/${newVersion.link}/`);
         }
+    }, [product.slug, slug, version.archived, versionList]);
 
-    };
-
-    const loadJS = () => {
-      if(!isMobile){
-        if (window.docsearch) {
-            window.docsearch({
-                apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-                indexName: 'getambassador',
-                inputSelector: '#doc-search',
-                debug: true,
-            });
-        } else {
-            setTimeout(() => {
-                loadJS();
-            }, 500);
-        }
-}
-    };
 
     const getProductHome = (product) => {
         switch (product) {
             case 'edge-stack':
                 return <EdgeStack />;
+            case 'emissary':
+                return <Emissary />;
             case 'telepresence':
                 return <Telepresence />;
             case 'cloud':
@@ -174,8 +207,6 @@ export default ({ data, location }) => {
         }
     }
 
-    const requireReadingTime = () => !(page.fields.slug.startsWith('/docs/telepresence/') && page.fields.slug.endsWith('/quick-start/')) && !page.frontmatter.hide_reading_time;
-
     const footer = (
         <div>
             <hr className="docs__separator docs__container" />
@@ -183,7 +214,7 @@ export default ({ data, location }) => {
                 <ContactBlock />
             </section>
             {!isHome && !isProductHome && isProduct && (
-                <DocsFooter page={page} product={product.slug} version={getVersions().docsVersion} />
+                <DocsFooter page={page} product={product.slug} version={versions.docsVersion} />
             )}
         </div>
     );
@@ -199,15 +230,25 @@ export default ({ data, location }) => {
                 {getProductHome(initialProduct.slug)}
                 {footer}
             </>
+        } else if (isArchivedVersions) {
+            return <AllVersions product={initialProduct} />
         }
         return (
             <div className="docs__container-doc">
-                <Sidebar
+                <SidebarContent
+                    title={learningTitle}
+                    description={learningDescription}
+                    readingTime={learningReadingTime}
+                    sidebarTopicList={learningParseTopics}
+                    path={learningPath}
                     onVersionChanged={handleVersionChange}
                     version={version}
                     versionList={versionList}
                     topicList={menuLinks}
                     slug={page.fields.slug}
+                    location={location}
+                    isInTopics={isInTopics}
+                    isLearning={isLearning}
                 />
                 <div className="docs__doc-body-container">
                     <div className="docs__doc-body doc-body">
@@ -218,48 +259,86 @@ export default ({ data, location }) => {
                                 </Link>
                             )}
                         </div>
-                        {requireReadingTime() && <span className="docs__reading-time">{page.frontmatter.reading_time ? page.frontmatter.reading_time : page.fields.readingTime.text}</span>}
-                        <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.text}>
-                            {template(page.body, getVersions())}
+                        <ReadingTime
+                            slug={page.fields.slug}
+                            hideReadingTime={page.frontmatter.hide_reading_time}
+                            readingTimeMinutes={page.fields.readingTime.minutes}
+                            readingTimeFront={page.frontmatter.reading_time}
+                            readingTimeText={page.frontmatter.reading_time_text}
+                            itemClassName="docs__reading-time"
+                        />
+                        <MDXRenderer
+                            slug={page.fields.slug}
+                            readingTime={page.fields.readingTime.minutes}
+                        >
+                            {template(page.body, versions)}
                         </MDXRenderer>
+                        {isLearning && (
+                            <div className="docs__next-previous">
+                                <span className="docs__next-previous__title">Continue your learning journey</span>
+                                <div className="docs__next-previous__content">
+                                    <div className="docs__next-previous__previous">
+                                        {prevLearning &&
+                                            <>
+                                                <Link to={`/docs/${prevLearning.link}${learningPath}`} className="docs__next-previous__button"><Icon name="right-arrow" /> Previous</Link>
+                                                <span className="docs__next-previous__text">{prevLearning.title}</span>
+                                            </>
+                                        }
+                                    </div>
+                                    <div className="docs__next-previous__learning-journey">
+                                        <img src={LearningJourneyImg} alt="Learning Journey" />
+                                    </div>
+                                    <div className="docs__next-previous__next">
+                                        {nextLearning &&
+                                            <>
+                                                <Link to={`/docs/${nextLearning.link}${learningPath}`} className="docs__next-previous__button">Next <Icon name="right-arrow" /></Link>
+                                                <span className="docs__next-previous__text">{nextLearning.title}</span>
+                                            </>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     {footer}
                 </div>
             </div>
         );
-    }, [isHome, isProductHome]);
+    }, [footer, handleVersionChange, initialProduct, isArchivedVersions, isHome, isInTopics, isLearning, isProductHome, learningDescription, learningParseTopics, learningPath, learningReadingTime, learningTitle, location, menuLinks, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, version, versionList, versions]);
 
     return (
         <Layout location={location}>
             <Helmet>
-                <title>{getMetaData().metaTitle}</title>
-                <meta name="og:title" content={getMetaData().metaTitle} />
+                <title>{metadata.metaTitle}</title>
+                <meta name="og:title" content={metadata.metaTitle} />
                 <meta name="og:type" content="article" />
                 <link rel="canonical" href={canonicalUrl} />
-                <meta name="description" content={getMetaData().metaDescription} />
-        
-                {!isMobile && 
-                  <link
-                    rel="stylesheet"
-                    href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
-              />}
-              {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
+                <meta name="description" content={metadata.metaDescription} />
+                {!isMobile &&
+                    <link
+                        rel="stylesheet"
+                        href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
+                    />}
+                {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
             </Helmet>
             <div className="docs">
                 <nav>
                     <div className="docs__nav">
                         <div className="docs__links-content docs__dekstop">
                             <ul className="docs__products-list">
-                                {products.map((item) => (
-                                    <li
-                                        className={`${product.slug === item.slug ? 'docs__selected' : ''
-                                            }`}
-                                        key={item.name}
-                                        onClick={claenStorage}
-                                    >
-                                        <Link to={item.link}>{item.name}</Link>
-                                    </li>
-                                ))}
+                                {products.map((item) => {
+                                    const linkContent = version.archived ? <a href={`${siteUrl}${item.link}`}>{item.name}</a> : <Link to={item.link}>{item.name}</Link>;
+                                    return (
+                                        <li
+                                            className={`${product.slug === item.slug ? 'docs__selected' : ''
+                                                }`}
+                                            key={item.name}
+                                            onClick={claenStorage}
+                                        >
+                                            {linkContent}
+                                        </li>
+                                    )
+                                })}
                             </ul>
                         </div>
                         <div
@@ -277,7 +356,7 @@ export default ({ data, location }) => {
                                     label={`Version: ${version.name}`}
                                     handleOnChange={handleVersionChange}
                                     value={version.id}
-                                    options={versionList}
+                                    options={versionList.filter(v => !v.archived)}
                                 />
                             )}
                         </div>
@@ -296,19 +375,19 @@ export default ({ data, location }) => {
                     {content}
                 </div>
             </div>
-        </Layout>
+        </Layout >
     );
 };
 
 export const query = graphql`
-  query($linksslug: String, $slug: String!) {
+  query($linksslug: String, $slug: String!, $learningSlugs: [String]) {
     mdx(fields: { slug: { eq: $slug } }) {
       body
       fields {
         slug
         linksslug
         readingTime {
-            text
+            minutes
         }
       }
       excerpt(pruneLength: 150, truncate: true)
@@ -319,6 +398,7 @@ export const query = graphql`
         description
         reading_time
         hide_reading_time
+        reading_time_text
       }
       parent {
         ... on File {
@@ -333,6 +413,29 @@ export const query = graphql`
     versions(slug: { eq: $linksslug }) {
       id
       content
+    }
+    allLearningjourney {
+        nodes {
+          content
+          slug
+        }
+    }
+    allMdx ( filter: { fields: { slug: { in:  $learningSlugs } } }) {
+        edges {
+          node {
+            fields {
+              slug,
+              readingTime {
+                minutes
+              }
+            }
+            frontmatter {
+              reading_time
+              hide_reading_time
+              reading_time_text
+            }
+          }
+        }
     }
   }
 `;

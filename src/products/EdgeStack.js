@@ -23,7 +23,7 @@ const EdgeStack = () => {
       <h1 className="docs__heading-primary docs__heading-primary--aligned">
         <Icon name="edge-stack-icon" /> Edge Stack
       </h1>
-      <p>Route and secure traffic to your cluster with a Kubernetes-native API Gateway.</p>
+      <p>Route and secure traffic to your cluster with a Kubernetes-native API Gateway built on the Envoy Proxy.</p>
       <Link to={goToEdgeStackQuickStart} className="docs__button-secondary docs__m-bottom-50">
         Get Started <Icon name="right-arrow" className="docs__button-secondary--arrow" />
       </Link>

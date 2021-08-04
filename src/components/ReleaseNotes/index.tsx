@@ -4,12 +4,16 @@ import Release from './Release';
 
 const ReleaseNotes = ({
   releases,
-  images,
   product,
   handleViewMore,
   changelog: changelogURL,
+  versions,
 }) => {
   const title = useMemo(() => {
+    if (versions.productName) {
+      return `${versions.productName} Release Notes`;
+    }
+
     switch (product) {
       case 'edge-stack':
         return 'Edge Stack Release Notes';
@@ -26,7 +30,7 @@ const ReleaseNotes = ({
 
   const changelog = useMemo(() => {
     const commonText = `For a detailed list of all the changes in past releases, please consult the`;
-    
+
     if (changelogURL) {
       return (
         <>
@@ -46,8 +50,8 @@ const ReleaseNotes = ({
           <Release
             key={release.version}
             release={release}
-            images={images}
             handleViewMore={handleViewMore}
+            versions={versions}
           />
         ))}
       </div>

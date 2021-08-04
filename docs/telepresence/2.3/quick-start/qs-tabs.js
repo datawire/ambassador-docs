@@ -6,10 +6,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import HubspotForm from 'react-hubspot-form';
-import CodeBlock from '../../../../../src/components/CodeBlock';
-import LinuxIcon from '../../../../../src/assets/icons/linux.inline.svg';
-import AppleIcon from '../../../../../src/assets/icons/apple.inline.svg';
-import WindowsIcon from '../../../../../src/assets/icons/windows.inline.svg';
+import CodeBlock from '@src/components/CodeBlock';
+import LinuxIcon from '@src/assets/icons/linux.inline.svg';
+import AppleIcon from '@src/assets/icons/apple.inline.svg';
+import WindowsIcon from '@src/assets/icons/windows.inline.svg';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -101,11 +101,11 @@ export default function SimpleTabs() {
         </CodeBlock>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <div class="docs-hubspot-formwrapper">
+        <div className="docs-hubspot-formwrapper">
           <p>
             Telepresence for Windows is coming soon! Sign up here to notified when it is available. Until then, Telepresence will work with WSL 2.
           </p>
-          <div class="docs-hubspot-form">
+          <div className="docs-hubspot-form">
             <HubspotForm
               portalId='485087'
               formId='2f542f1b-3da8-4319-8057-96fed78e4c26'

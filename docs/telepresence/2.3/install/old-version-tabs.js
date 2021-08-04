@@ -5,9 +5,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import CodeBlock from '../../../../../src/components/CodeBlock';
-import LinuxIcon from '../../../../../src/assets/icons/linux.inline.svg';
-import AppleIcon from '../../../../../src/assets/icons/apple.inline.svg';
+import CodeBlock from '@src/components/CodeBlock';
+import LinuxIcon from '@src/assets/icons/linux.inline.svg';
+import AppleIcon from '@src/assets/icons/apple.inline.svg';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -68,14 +68,14 @@ export default function SimpleTabs() {
       <TabPanel value={value} index={0}>
         <CodeBlock>
         {
-          'https://app.getambassador.io/download/tel2/darwin/amd64/x.x.x/telepresence'
+          'https://app.getambassador.io/download/tel2/darwin/amd64/x.y.z/telepresence'
         }
         </CodeBlock>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <CodeBlock>
         {
-          'https://app.getambassador.io/download/tel2/linux/amd64/x.x.x/telepresence'
+          'https://app.getambassador.io/download/tel2/linux/amd64/x.y.z/telepresence'
         }
         </CodeBlock>
       </TabPanel>

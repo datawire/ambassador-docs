@@ -1,8 +1,8 @@
 # Edge Policy Console
 
-The Ambassador Edge Stack provides you with an easy-to-use interface that so you can create custom resource definitions, download YAML files, and visit the Developer Portal, all in one place.
+The $productName$ provides you with an easy-to-use interface that so you can create custom resource definitions, download YAML files, and visit the Developer Portal, all in one place.
 
-After you [install the Ambassador Edge Stack](../../install), you can log in to the Edge Policy Console (EPC) to manage your deployment using the `edgectl login` command shown when you visit your installation's host in your web browser.
+After you [install the $productName$](../../install), you can log in to the Edge Policy Console (EPC) to manage your deployment using the `edgectl login` command shown when you visit your installation's host in your web browser.
 
 Note: You can force all Edge Policy Console sessions to sign out using the **Log Out** button on the [Debugging](#debugging) page.
 
@@ -38,7 +38,7 @@ The landing page of the EPC is your dashboard, which shows metrics for:
 
 ### Hosts
 
-Hosts are domains that are managed by Ambassador Edge Stack. On this page, you can add and manage your hosts, which configures automatic HTTPS and TLS.
+Hosts are domains that are managed by $productName$. On this page, you can add and manage your hosts, which configures automatic HTTPS and TLS.
 
 See [Hosts](../../running/host-crd) for detailed information.
 
@@ -68,7 +68,7 @@ See [rate limits](../rate-limits) for more information.
 
 ### Plugins
 
-Special plugin services enhance the functionality of Ambassador Edge Stack. These plugin services are called when Ambassador handles requests.
+Special plugin services enhance the functionality of $productName$. These plugin services are called when $productName$ handles requests.
 
 On this page, you can add a new plugin or manage existing plugins.
 
@@ -80,7 +80,7 @@ This page shows all of the current Resolvers that are in use to discover your se
 
 ### Debugging
 
-The Debugging page provides an overview of everything that is happening on your deployment of the Ambassador Edge Stack.
+The Debugging page provides an overview of everything that is happening on your deployment of the $productName$.
 
 The **system info** box shows information such as IDs, system statuses, and other high-level details.
 
@@ -88,13 +88,13 @@ The **logging level** box has two buttons, `set log level to debug` and `set log
 
 To see the logs, follow [these instructions](../../running/debugging#review-ambassador-logs).
 
-The **Ambassador Configuration** box shows an immediate status along with details about the status. For example, if the status is `has issues`, it will specify some information about those issues.
+The **$productName$ Configuration** box shows an immediate status along with details about the status. For example, if the status is `has issues`, it will specify some information about those issues.
 
 The **Configuration Errors** box provides further information about any configuration errors.
 
 See [Debugging](../../running/debugging) for more information.
 
-The **Sign Out of All Sessions** box gives you the ability to terminate all Edge Policy Console sessions associated with this installation of Ambassador Edge Stack.
+The **Sign Out of All Sessions** box gives you the ability to terminate all Edge Policy Console sessions associated with this installation of $productName$.
 
 ### YAML download
 
@@ -108,7 +108,7 @@ See the [Developer Portal](../dev-portal) documentation for more information.
 
 ### Documentation
 
-The Documentation page provides you direct links to the Ambassador Edge Stack documentation (these very pages!), available resources and case studies, as well as the Ambassador blog.
+The Documentation page provides you direct links to the $productName$ documentation (these very pages!), available resources and case studies, as well as the Ambassador blog.
 
 ### Disabling the Edge Policy Console
 

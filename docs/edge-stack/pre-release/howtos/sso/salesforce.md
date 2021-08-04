@@ -20,11 +20,11 @@ To use Salesforce as your IdP, you will first need to register an OAuth applicat
 7. Click `Save` and `Continue` to create the application.
 8. Record the `Consumer Key` and `Consumer Secret` values from the `API (Enable OAuth Settings)` section in the newly created application's description page.
 
-After waiting for salesforce to register the application with their servers, you should be ready to configure Ambassador Edge Stack to Salesforce as an IdP.
+After waiting for salesforce to register the application with their servers, you should be ready to configure $AESproductName$ to Salesforce as an IdP.
 
-## Set up the Ambassador Edge Stack
+## Set up $AESproductName$
 
-After configuring an OAuth application in Salesforce, configuring Ambassador Edge Stack to make use of it for authentication is simple.
+After configuring an OAuth application in Salesforce, configuring $AESproductName$ to make use of it for authentication is simple.
 
 1. Create an [OAuth Filter](../../../topics/using/filters/oauth2) with the credentials from above:
 
@@ -41,7 +41,7 @@ After configuring an OAuth application in Salesforce, configuring Ambassador Edg
         clientID: {{Consumer Key}}
         # Consumer Secret from above
         secret: {{Consumer Secret}}
-        # The protectedOrigin is the scheme and Host of your Ambassador endpoint
+        # The protectedOrigin is the scheme and Host of your $AESproductName$ endpoint
         protectedOrigins:
         - origin: https://{{AMBASSADOR_HOST}}
     ```
@@ -57,7 +57,7 @@ After configuring an OAuth application in Salesforce, configuring Ambassador Edg
       rules:
           # Requires authentication on requests from any hostname
         - host: "*"
-          # Tells Ambassador Edge Stack to apply the Filter only on request to the quote /backend/get-quote/ endpoint
+          # Tells $AESproductName$ to apply the Filter only on request to the quote /backend/get-quote/ endpoint
           path: /backend/get-quote/
           # Identifies which Filter to use for the path and host above
           filters:

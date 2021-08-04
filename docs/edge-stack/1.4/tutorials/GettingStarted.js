@@ -27,10 +27,6 @@ class GettingStarted extends Component {
           document.getElementById("QS-showWindows").style.display = "inline-block";
           document.getElementById("QS-showWindowsAside1").style.display = "inline-block";
           break;
-        case "other":
-          document.getElementById("QS-showLinux").style.display = "inline-block";
-          document.getElementById("QS-showLinuxAside1").style.display = "inline-block";
-          break;
         default:
           document.getElementById("QS-showLinux").style.display = "inline-block";
           document.getElementById("QS-showLinuxAside1").style.display = "inline-block";
@@ -43,13 +39,11 @@ class GettingStarted extends Component {
     return (
       <div className="QS-grid">
 
-        <div className="QS-os">
-          <span id="QS-showMac" data-os="mac"><img className="QS-osLogo" src="../../images/apple.png" alt="Apple logo" /></span>
+        <span className="QS-os" id="QS-showMac" data-os="mac"><img className="QS-osLogo" src="../../images/apple.png" alt="Apple logo" /></span>
 
-          <span id="QS-showLinux" data-os="linux"><img className="QS-osLogo" src="../../images/linux.png" alt="Linux logo" /></span>
+        <span className="QS-os" id="QS-showLinux" data-os="linux"><img className="QS-osLogo" src="../../images/linux.png" alt="Linux logo" /></span>
 
-          <span id="QS-showWindows" data-os="windows"><img className="QS-osLogo" src="../../images/windows.png" alt="Windows logo" /></span>
-        </div>
+        <span className="QS-os" id="QS-showWindows" data-os="windows"><img className="QS-osLogo" src="../../images/windows.png" alt="Windows logo" /></span>
 
         <div className="QS-aside QS-aside1">
           <ul id="QS-asideBullets">

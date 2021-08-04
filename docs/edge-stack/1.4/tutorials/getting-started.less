@@ -5,7 +5,8 @@
   "os sidebar1"
   "k8 sidebar2"
   "helm sidebar3"
-  "manual0 manual"
+  "blank manual"
+  "blackbird spins"
   "main main";
   grid-gap: 15px;
   align-items: start;
@@ -23,7 +24,7 @@ a#QS-moreInstallOptions:hover {
   grid-area: main;
   padding: 5px;
   margin-left: 60px;
-  margin-top: -30px;
+  margin-top: -20px;
   position: relative;
   z-index: 2;
   cursor: default;
@@ -73,7 +74,7 @@ li.QS-asideNoBullets {
   width: auto;
   font-style: italic;
   position: relative;
-  margin-left: 5px;
+  margin-left: 0px;
   margin-right: 10px;
   margin-bottom: -10px;
   z-index: 2;
@@ -91,7 +92,7 @@ li.QS-asideNoBullets {
 }
 .QS-osLogo {
   width: 30px;
-  margin: 0 0 -4px 4px;
+  margin: 0 0 -4px -1px;
 }
 .QS-aside1 {
   grid-area: sidebar1;
@@ -119,6 +120,24 @@ details[open] summary::before { content:"▼" }
 
 summary#helmVersions {
   font-size: .7em;
+}
+#helmVersionWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+#helm2Block {
+  width: 49%;
+  padding: 5px;
+  border: 1px solid #bbb;
+  border-radius: 0.3em;
+}
+#helm3Block {
+  width: 49%;
+  padding: 5px;
+  border: 1px solid #bbb;
+  border-radius: 0.3em;
 }
 .QS-codeblockInstall {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
@@ -154,11 +173,25 @@ summary#helmVersions {
   border: thin solid gray;
   font-size: 90%;
 }
-.QS-token-function {
-  color: #FF4329;
-}
 .QS-windowsDownloadButton {
   color: black;
+}
+.QS-blackbird-image {
+  grid-area: blackbird;
+  width: 30px;
+  margin: 0 0 -4px 4px;
+}
+.QS-spin {
+  grid-area: spins;
+}
+.QS-spinText {
+  font-size: 16px;
+}
+#QS-blank {
+  grid-area: blank;
+}
+#QS-customLink {
+  padding-bottom: 10px;
 }
 #QS-fullManual {
   grid-area: manual;
@@ -175,25 +208,45 @@ summary#helmVersions {
   text-decoration: none;
 }
 @media screen and (max-width: 1200px) {
-  .QS-osLogo {
-    display: none;
+  .QS-grid {
+    margin-left: 0px;
+    width: 95%
+  }
+  img.QS-osLogo {
+    display: inline;
+  }
+}
+@media screen and (max-width: 1120px) {
+  .QS-grid {
+    margin-left: 0px;
+    width: 95%
+  }
+  img.QS-osLogo {
+    display: inline;
+  }
+}
+@media screen and (max-width: 1010px) {
+  .QS-grid {
+    width: 95%;
   }
 }
 @media screen and (max-width: 995px) {
-  .QS-osLogo {
-    display: inline;
-  }
   .QS-grid {
-    margin-left: 10px;
+    width: 95%;
   }
 }
 @media screen and (max-width: 900px) {
   .QS-grid {
-    width: 100%;
-    margin-left: -20px;
+    width: 95%;
   }
 }
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 805px) {
+  .QS-grid {
+    margin-left: -15px;
+    width: 95%;
+  }
+}
+@media screen and (max-width: 500px) {
   .QS-asideText {
     font-size: 90%;
   }
@@ -209,5 +262,9 @@ summary#helmVersions {
   .QS-aside {
     margin-left: -10px;
     padding: 5px 10px 0px;
+  }
+  .QS-grid {
+    margin-left: -15px;
+    width: 100%;
   }
 }
