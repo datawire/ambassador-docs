@@ -1,3 +1,13 @@
+import {
+    goToKubernetesDocs,
+    goToEdgeStackDocs,
+    goToEmissaryDocs,
+    goToDocsTelepresence,
+    goToDocsArgo,
+    goToCloudDocs,
+    goToEnvoy,
+  } from '../../src/utils/routes';
+
 export const products = [
     {
         slug: "home",
@@ -9,6 +19,8 @@ export const products = [
         slug: "kubernetes",
         name: "Kubernetes (K8s)",
         link: "/docs/kubernetes",
+        to: goToKubernetesDocs,
+        id: Math.random().toString(),
         version: [
             { id: "latest", name: "Latest", link: "latest/quick-start" }
         ]
@@ -17,6 +29,8 @@ export const products = [
         slug: "edge-stack",
         name: "Edge Stack",
         link: "/docs/edge-stack",
+        to: goToEdgeStackDocs,
+        id: Math.random().toString(),
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
@@ -38,6 +52,8 @@ export const products = [
         slug: "emissary",
         name: "Emissary-ingress",
         link: "/docs/emissary",
+        to: goToEmissaryDocs,
+        id: Math.random().toString(),
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
@@ -49,6 +65,8 @@ export const products = [
         slug: "telepresence",
         name: "Telepresence",
         link: "/docs/telepresence",
+        to: goToDocsTelepresence,
+        id: Math.random().toString(),
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/quick-start" },
             { id: "latest", name: "Latest", link: "latest/quick-start" },
@@ -62,6 +80,8 @@ export const products = [
         slug: "argo",
         name: "Argo",
         link: "/docs/argo",
+        to: goToDocsArgo,
+        id: Math.random().toString(),
         version: [
             { id: "latest", name: "Latest", link: "latest/quick-start" }
         ]
@@ -70,6 +90,8 @@ export const products = [
         slug: "cloud",
         name: "Cloud",
         link: "/docs/cloud",
+        to: goToCloudDocs,
+        id: Math.random().toString(),
         version: [
             { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start" }
         ]
@@ -78,6 +100,8 @@ export const products = [
         slug: "envoy",
         name: "Envoy",
         link: "/docs/envoy/latest/concepts/cloudnative",
+        to: goToEnvoy,
+        id: Math.random().toString(),
         version: [
             { id: "latest", name: "Latest", link: "latest" }
         ]
