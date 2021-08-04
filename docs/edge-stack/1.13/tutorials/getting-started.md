@@ -12,11 +12,10 @@ import { LogInText } from '../../../../../src/components/Docs/LogInText';
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-- [$productName$ quick start](#productname-quick-start)
-  - [1. Installation](#1-installation)
-  - [2. Routing traffic from the edge](#2-routing-traffic-from-the-edge)
-  - [3. Connect your cluster to Ambassador Cloud](#3-connect-your-cluster-to-ambassador-cloud)
-  - [<img class="os-logo" src="../../images/logo.png"/> What's next?](#-whats-next)
+* [1. Installation](#1-installation)
+* [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
+* [3. Connect your Cluster to Ambassador Cloud](#3-connect-your-cluster-to-ambassador-cloud)
+* [What's Next?](#img-classos-logo-srcimageslogopng-whats-next)
 
 </div>
 
