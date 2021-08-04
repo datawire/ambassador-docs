@@ -54,29 +54,25 @@ Follow the steps below to grant us access to your GitHub:
   Make sure to sign in to Ambassador cloud <strong>with your GitHub username</strong> to enable integrations.
 </Alert>
 
-1. In Ambassador Cloud, go to the <a href="https://beta-app.datawire.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
-1. Click the "Configure" button in the GitHub section.
+1. In Ambassador Cloud, go to the <a href="https://beta-app.datawire.io/cloud/demo-cluster-rollouts?step=integration" target="_blank">Teams Settings page</a> and click the **Integrations** button for your current team.
+1. Click the **Configure** button in the GitHub section.
 1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
 1. Select your personal account. The personal account is the one that has the same name as your GitHub username.
-1. Select the "All repositories" option. Full access is required in order to fork a repo on your behalf for the demo application.
-1. Click "Install" and you will be taken back to the Ambassador Cloud.
+1. Select the **All repositories** option. Full access is required in order to fork a repo on your behalf for the demo application.
+1. Click **Install** and you will be taken back to the Ambassador Cloud.
 
 ## 2. Environment Setup
 
-The rollout feature requires/uses a Kubernetes cluster and GitHub repository, please <a href="https://beta-app.datawire.io/cloud/demo-cluster-rollouts" target="_blank" onClick={(e) => {window.open(getBaseUIUrl() + '/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
+The rollout feature requires/uses a Kubernetes cluster and GitHub repository, please <a href="https://beta-app.datawire.io/cloud/demo-cluster-rollouts?step=claim" target="_blank" onClick={(e) => {window.open(getBaseUIUrl() + '/demo-cluster-rollouts', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
 
 This will also fork a repository called **emojivoto**.
 
 ## 3. Create a Rollout
 Go to the <a href="https://beta-app.datawire.io/cloud/services" target="_blank">Service Catalog</a> page and follow these steps:
 
+1. Click the "Servcies" favorites button.
 1. Look for the **web-app** service and hover over it to see the "expand" button, which will appear at the left side with a plus (+) icon.
-1. Click on the "Rollout" button for the **web-app** service to show the instructions to create a rollout.
-
-<Alert severity="info">
- You can find the <b>web-app</b> service faster by clicking on the "Services" favorites button.
-</Alert>
-
+1. Click on the **Rollout** button for the **web-app** service to show the instructions to create a rollout.
 
 Fill in the form with the following information:
 
@@ -85,23 +81,23 @@ Fill in the form with the following information:
 - Weight increment: 10%
 - Number of pods: 3
 
-Click "Start Rollout".
+Click **Start Rollout**.
 
 <Alert severity="success">Congrats! From the UI you have automatically generated a GitHub pull request that contains all of the necessary Kubernetes rollout YAML configuration.</Alert>
 
 ## 4. Review & merge PR
 
-After clicking Start Rollout the slideout will close and you will be shown the service rollouts page where one "Pending" rollout is shown.
-Click the "Pull Request" button.
+After clicking Start Rollout the slideout will close and you will be shown the service rollouts page where one **Pending** rollout is shown.
+Click the **Pull Request** button.
 A new browser tab will be opened and you will be taken to github.com where you can review and merge the PR on GitHub.
-Click on the "Files changed" tab in the pull request and explore all of the rollouts code that has been generated for you.
-Next, click back to the "Conversation" tab, click "Merge Pull Request", and click "Confirm merge".
+Click on the **Files changed** tab in the pull request and explore all of the rollouts code that has been generated for you.
+Next, click back to the **Conversation** tab, click **Merge Pull Request**, and click **Confirm merge**.
 Now quickly navigate back to your browser tab with the Ambassador Cloud service catalog to watch the progress.
 
 ## 5. Watch the Rollout progress from Ambassador Cloud
 
 From the service rollouts page you can watch the rollout progress of your new version.
-Note how the "Current Canary Weight" progress bar increases in steps in the amount you specified above in the "weights increment".
+Note how the **Current Canary Weight** progress bar increases in steps in the amount you specified above in the "weights increment".
 
 <Alert severity="success">Victory! You have successfully performed a GitOps style canary rollout of a new service without having to write lots of YAML.</Alert>
 
