@@ -35,16 +35,18 @@ export default ({ data, location }) => {
         ? products[0]
         : products.filter((p) => p.slug === slug[2])[0] || products[0];
     const isArchivedVersions = slug[3] === archivedVersionsLink.link;
-    const initialVersion = isHome || isArchivedVersions
+    const tempVersion = isHome || isArchivedVersions
         ? {}
         : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
     const isProduct = initialProduct.slug !== products[0].slug;
-    const isProductHome = isProduct && !isArchivedVersions && !!!initialVersion.id;
+    const isProductHome = isProduct && !isArchivedVersions && !!!tempVersion.id;
     const canonicalUrl = isHome
         ? 'https://www.getambassador.io/docs/'
         : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
             .slice(4)
             .join('/')}`;
+
+    const initialVersion = !isProductHome ? tempVersion : initialProduct.version.filter(v => v.id === "latest")[0];  
 
     const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
     const learningPath = learningJourneyName ? `?learning-journey=${learningJourneyName}` : '';
@@ -207,6 +209,30 @@ export default ({ data, location }) => {
         }
     }
 
+    const MainContainer = ({children}) =>(
+        <div className="docs__container-doc">
+            <SidebarContent
+                title={learningTitle}
+                description={learningDescription}
+                readingTime={learningReadingTime}
+                sidebarTopicList={learningParseTopics}
+                path={learningPath}
+                onVersionChanged={handleVersionChange}
+                version={version}
+                versionList={versionList}
+                topicList={menuLinks}
+                slug={page.fields.slug}
+                location={location}
+                isInTopics={isInTopics}
+                isLearning={isLearning}
+                />
+                <div className="docs__doc-body-container">
+                    {children}
+                    {footer}
+                </div>
+        </div>
+    )
+
     const footer = (
         <div>
             <hr className="docs__separator docs__container" />
@@ -226,85 +252,61 @@ export default ({ data, location }) => {
                 {footer}
             </>
         } else if (isProductHome) {
-            return <>
-                {getProductHome(initialProduct.slug)}
-                {footer}
-            </>
+            return <MainContainer>
+                    {getProductHome(initialProduct.slug)}
+                </MainContainer>;
         } else if (isArchivedVersions) {
             return <AllVersions product={initialProduct} />
         }
-        return (
-            <div className="docs__container-doc">
-                <SidebarContent
-                    title={learningTitle}
-                    description={learningDescription}
-                    readingTime={learningReadingTime}
-                    sidebarTopicList={learningParseTopics}
-                    path={learningPath}
-                    onVersionChanged={handleVersionChange}
-                    version={version}
-                    versionList={versionList}
-                    topicList={menuLinks}
-                    slug={page.fields.slug}
-                    location={location}
-                    isInTopics={isInTopics}
-                    isLearning={isLearning}
-                />
-                <div className="docs__doc-body-container">
-                    <div className="docs__doc-body doc-body">
-                        <div className="doc-tags">
-                            {showAesPage && (
-                                <Link className="doc-tag aes" to="/editions">
-                                    Ambassador Edge Stack
-                                </Link>
-                            )}
-                        </div>
-                        <ReadingTime
-                            slug={page.fields.slug}
-                            hideReadingTime={page.frontmatter.hide_reading_time}
-                            readingTimeMinutes={page.fields.readingTime.minutes}
-                            readingTimeFront={page.frontmatter.reading_time}
-                            readingTimeText={page.frontmatter.reading_time_text}
-                            itemClassName="docs__reading-time"
-                        />
-                        <MDXRenderer
-                            slug={page.fields.slug}
-                            readingTime={page.fields.readingTime.minutes}
-                        >
-                            {template(page.body, versions)}
-                        </MDXRenderer>
-                        {isLearning && (
-                            <div className="docs__next-previous">
-                                <span className="docs__next-previous__title">Continue your learning journey</span>
-                                <div className="docs__next-previous__content">
-                                    <div className="docs__next-previous__previous">
-                                        {prevLearning &&
-                                            <>
-                                                <Link to={`/docs/${prevLearning.link}${learningPath}`} className="docs__next-previous__button"><Icon name="right-arrow" /> Previous</Link>
-                                                <span className="docs__next-previous__text">{prevLearning.title}</span>
-                                            </>
-                                        }
-                                    </div>
-                                    <div className="docs__next-previous__learning-journey">
-                                        <img src={LearningJourneyImg} alt="Learning Journey" />
-                                    </div>
-                                    <div className="docs__next-previous__next">
-                                        {nextLearning &&
-                                            <>
-                                                <Link to={`/docs/${nextLearning.link}${learningPath}`} className="docs__next-previous__button">Next <Icon name="right-arrow" /></Link>
-                                                <span className="docs__next-previous__text">{nextLearning.title}</span>
-                                            </>
-                                        }
+        return <MainContainer>
+                <div className="docs__doc-body doc-body">
+                            <div className="doc-tags">
+                                {showAesPage && (
+                                    <Link className="doc-tag aes" to="/editions">
+                                        Ambassador Edge Stack
+                                    </Link>
+                                )}
+                            </div>
+                            <ReadingTime
+                                slug={page.fields.slug}
+                                hideReadingTime={page.frontmatter.hide_reading_time}
+                                readingTimeMinutes={page.fields.readingTime.minutes}
+                                readingTimeFront={page.frontmatter.reading_time}
+                                readingTimeText={page.frontmatter.reading_time_text}
+                                itemClassName="docs__reading-time"
+                            />
+                            <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.minutes}>
+                                {template(page.body, versions)}
+                            </MDXRenderer>
+                            {isLearning && (
+                                <div className="docs__next-previous">
+                                    <span className="docs__next-previous__title">Continue your learning journey</span>
+                                    <div className="docs__next-previous__content">
+                                        <div className="docs__next-previous__previous">
+                                            {prevLearning &&
+                                                <>
+                                                    <Link to={`/docs/${prevLearning.link}${learningPath}`} className="docs__next-previous__button"><Icon name="right-arrow" /> Previous</Link>
+                                                    <span className="docs__next-previous__text">{prevLearning.title}</span>
+                                                </>
+                                            }
+                                        </div>
+                                        <div className="docs__next-previous__learning-journey">
+                                            <img src={LearningJourneyImg} alt="Learning Journey" />
+                                        </div>
+                                        <div className="docs__next-previous__next">
+                                            {nextLearning &&
+                                                <>
+                                                    <Link to={`/docs/${nextLearning.link}${learningPath}`} className="docs__next-previous__button">Next <Icon name="right-arrow" /></Link>
+                                                    <span className="docs__next-previous__text">{nextLearning.title}</span>
+                                                </>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                    {footer}
-                </div>
-            </div>
-        );
-    }, [footer, handleVersionChange, initialProduct, isArchivedVersions, isHome, isInTopics, isLearning, isProductHome, learningDescription, learningParseTopics, learningPath, learningReadingTime, learningTitle, location, menuLinks, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, version, versionList, versions]);
+                            )}
+                        </div>
+                </MainContainer>;
+    }, [footer, initialProduct, isArchivedVersions, isHome, isLearning, isProductHome, learningPath, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, versions]);
 
     return (
         <Layout location={location}>
