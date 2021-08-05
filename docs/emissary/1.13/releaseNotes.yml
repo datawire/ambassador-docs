@@ -1,5 +1,9 @@
-# This file should be placed in the folder for the version of the product that's meant to be documented. A `/release-notes` page will be automatically generated and populated at build time.
-# Note that an entry needs to be added to the `doc-links.yml` file in order to surface the release notes in the table of contents.
+# This file should be placed in the folder for the version of the
+# product that's meant to be documented. A `/release-notes` page will
+# be automatically generated and populated at build time.
+#
+# Note that an entry needs to be added to the `doc-links.yml` file in
+# order to surface the release notes in the table of contents.
 #
 # The YAML in this file should contain:
 #
@@ -8,15 +12,40 @@
 #     - version: The (optional) version number of the release, if applicable.
 #     - date: The date of the release in the format YYYY-MM-DD.
 #     - notes: An array of noteworthy changes included in the release, each having the following attributes:
-#         - title: A short title of the noteworthy change.
-#         - body: Two or three sentences describing the change and why it is noteworthy. This is in rich text format and may contain HTML elements.
-#         - image: The URL of an image that visually represents the noteworthy change. This can be an absolute path or the name of the image file placed under the `ambassador-docs/public` folder starting with `./` (e.g., `./ambassador-example.png`).
-#         - docs: The path to the documentation page where additional information can be found.
 #         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
-#
+#         - title: A short title of the noteworthy change.
+#         - body: >-
+#             Two or three sentences describing the change and why it
+#             is noteworthy.  This is HTML, not plain text or
+#             markdown.  It is handy to use YAML's ">-" feature to
+#             allow line-wrapping.
+#         - image: >-
+#             The URL of an image that visually represents the
+#             noteworthy change.  This path is relative to the
+#             `release-notes` directory; if this file is
+#             `FOO/releaseNotes.yml`, then the image paths are
+#             relative to `FOO/release-notes/`.
+#         - docs: The path to the documentation page where additional information can be found.
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 1.13.10
+    date: '2021-07-27'
+    notes:
+      - title: Fix for CORS origins configuration on the Mapping resource
+        type: bugfix
+        body: "Fixed a regression when specifying a comma separated string for <code>cors.origins</code> on the <code>Mapping</code> resource"
+        docs: topics/using/cors
+        image: ./emissary-1.13.10-cors-origin.png
+      - title: New Envoy-configuration snapshots for debugging
+        body: "Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
+        type: change
+        docs: topics/running/environment/
+      - title: Optionally remove ratelimiting for Envoy reconfiguration
+        body: "Set <code>AMBASSADOR_AMBEX_NO_RATELIMIT</code> to <code>true</code> to completely disable ratelimiting Envoy reconfiguration under memory pressure. This can help performance with the endpoint or Consul resolvers, but could make OOMkills more likely with large configurations."
+        type: change
+        docs: topics/running/environment/
+
   - version: 1.13.9
     date: '2021-06-30'
     notes:

@@ -7,6 +7,8 @@ import Item from './Item';
 interface IVersion {
     id: string;
     name: string;
+    link: string;
+    archived?: boolean;
 }
 
 export interface ITopicItem {
@@ -23,6 +25,7 @@ interface ISidebarProps {
     version: IVersion;
     versionList: IVersion[];
     topicList: ITopicItem[];
+    archivedVersionsLink: IVersion;
     slug: string;
 }
 
@@ -31,6 +34,7 @@ const Sidebar: React.FC<ISidebarProps> = ({
     version,
     versionList,
     topicList,
+    archivedVersionsLink,
     slug
 }): JSX.Element => {
     const [isVersionOpen, setIsVersionOpen] = useState<boolean>(false);
@@ -91,7 +95,7 @@ const Sidebar: React.FC<ISidebarProps> = ({
                         name="version-icon"
                         className="docs__version-title__version-icon"
                     />
-          Version: {version.name}
+                    Version: {version.name}
                     <Icon
                         name="chevron-down"
                         className="docs__version-title__chevron-icon"
@@ -103,7 +107,7 @@ const Sidebar: React.FC<ISidebarProps> = ({
                         <Flyout
                             options={versionList}
                             onSelect={handleSelectVersion}
-                            selected={version.id}
+                            selected={version.archived ? archivedVersionsLink.id : version.id}
                         />
                     </>
                 )}
