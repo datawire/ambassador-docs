@@ -24,6 +24,7 @@ import ReadingTime from '../../src/components/ReadingTime';
 import Icon from '../../src/components/Icon';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import SidebarContent from './components/SidebarContent';
+import ContentTable from "./components/ContentTable";
 import './style.less';
 
 export default ({ data, location }) => {
@@ -305,8 +306,11 @@ export default ({ data, location }) => {
                                 </div>
                             )}
                         </div>
+                        <div className="docs__table-content">
+                            <ContentTable items={page.contentTable.items}/>
+                        </div>
                 </MainContainer>;
-    }, [footer, initialProduct, isArchivedVersions, isHome, isLearning, isProductHome, learningPath, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, versions]);
+    }, [footer, initialProduct, isArchivedVersions, isHome, isLearning, isProductHome, learningPath, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, versions, page.contentTable]);
 
     return (
         <Layout location={location}>
@@ -396,6 +400,7 @@ export const query = graphql`
       headings(depth: h1) {
         value
       }
+      contentTable: tableOfContents
       frontmatter {
         description
         reading_time
