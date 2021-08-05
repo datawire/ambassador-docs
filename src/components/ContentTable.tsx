@@ -31,18 +31,22 @@ const ContentTable: React.FC<IContentTable> = ({
   versions,
 }): JSX.Element => {
 
+  const formatString = (title) => {
+    title = title.replace(/<\/?[^>]+(>|$)/g, "");
+    return template(title, versions);
+  }
+
   const showItems = (Items) => {
     return (
       <ul>
         {Items?.map(e => {
           return <>
             <li>
-              <a href={e.url}>{template(e.title, versions)}</a>
+              <a href={e.url}>{formatString(e.title)}</a>
             </li>
             {showItems(e.items)}
           </>
         })}
-
       </ul>
     );
   }
