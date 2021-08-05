@@ -231,6 +231,10 @@ export default ({ data, location }) => {
                     {children}
                     {footer}
                 </div>
+                <div className="docs__table-content docs-article-toc">
+                    <p>ON THIS PAGE</p>
+                    <ContentTable items={page.contentTable.items} versions={versions}/>
+                </div>
         </div>
     )
 
@@ -305,9 +309,6 @@ export default ({ data, location }) => {
                                     </div>
                                 </div>
                             )}
-                        </div>
-                        <div className="docs__table-content">
-                            <ContentTable items={page.contentTable.items} versions={versions}/>
                         </div>
                 </MainContainer>;
     }, [footer, initialProduct, isArchivedVersions, isHome, isLearning, isProductHome, learningPath, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, versions, page.contentTable]);
