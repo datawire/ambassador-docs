@@ -909,8 +909,26 @@ body {
   border-radius: 4px;
   margin: 20px 0 0 0;
   padding: 10px 16px;
-
-  @media (max-width: 1201px) {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.4px;
+  font-feature-settings: 'ss02' on;
+  transition: color 200ms linear 0ms;
+  transition-property: background-color, color;
+  @media (max-width: 1200px) {
     display: none;
+  }
+  a {
+    color: @blue;
+    text-decoration: underline;
+  }
+  a:hover {
+    color: @blue-dark;
+    text-decoration: none;
   }
 }

@@ -41,10 +41,12 @@ const ContentTable: React.FC<IContentTable> = ({
       <ul>
         {Items?.map(e => {
           return <>
+          <ul>
             <li>
-              <a href={e.url}>{formatString(e.title)}</a>
+              <a href={e.url} id={e.url}>{formatString(e.title)}</a>
             </li>
             {showItems(e.items)}
+          </ul>
           </>
         })}
       </ul>

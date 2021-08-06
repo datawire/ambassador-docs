@@ -232,7 +232,6 @@ export default ({ data, location }) => {
                     {footer}
                 </div>
                 <div className="docs__table-content docs-article-toc">
-                    <p>ON THIS PAGE</p>
                     <ContentTable items={page.contentTable.items} versions={versions}/>
                 </div>
         </div>
