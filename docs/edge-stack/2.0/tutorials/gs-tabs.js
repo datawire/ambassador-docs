@@ -8,7 +8,6 @@ import Box from '@material-ui/core/Box';
 import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock'
 import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
 import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
-import TerminalIcon from '../../../../../src/assets/icons/terminal.inline.svg';
 
 
 function TabPanel(props) {

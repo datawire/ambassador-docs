@@ -1,40 +1,32 @@
-- title: Home
-  link: /docs/
-
-- title: Products
-  collapsable: false
-  items:
-    - title: Argo
-      items:
-        - title: Quick start
-          link: /quick-start/
-        - title: Core concepts
-          items:
-            - title: What is Argo?
-              link: /concepts/argo/
-            - title: Taking on "ship" responsibilities
-              link:  /concepts/responsibilities/
-            - title: CI/CD and progressive delivery - Safely shipping code
-              link: /concepts/cicd/
-            - title: Developer-centric GitOps-style deployment
-              link: /concepts/gitops/
-            - title: Canary deployments
-              link: /concepts/canary/
-        - title: How do I...
-          items:
-            - title: Manage traffic through Ambassador Edge Stack
-              link: /howtos/traffic-management/
-            - title: Observe a canary deployment
-              link: /howtos/observability/
-            - title: Transform a Deployment to a Rollout
-              link: /howtos/deployment-to-rollout/
-        - title: Technical reference
-          items:
-            - title: Ambassador Cloud Rollouts
-              link: /reference/ambassador-cloud-rollouts/
-            - title: Rollout CRD
-              link: /reference/rolloutcrd
-        - title: FAQs
-          link: /faqs/
-        # - title: Release Notes
-        #  link: /release-notes
+ - title: Quick start
+   link: /quick-start/
+ - title: Core concepts
+   items:
+     - title: What is Argo?
+       link: /concepts/argo/
+     - title: Taking on "ship" responsibilities
+       link: /concepts/responsibilities/
+     - title: CI/CD and progressive delivery - Safely shipping code
+       link: /concepts/cicd/
+     - title: Developer-centric GitOps-style deployment
+       link: /concepts/gitops/
+     - title: Canary deployments
+       link: /concepts/canary/
+ - title: How do I...
+   items:
+     - title: Manage traffic through Ambassador Edge Stack
+       link: /howtos/traffic-management/
+     - title: Observe a canary deployment
+       link: /howtos/observability/
+     - title: Transform a Deployment to a Rollout
+       link: /howtos/deployment-to-rollout/
+ - title: Technical reference
+   items:
+     - title: Ambassador Cloud Rollouts
+       link: /reference/ambassador-cloud-rollouts/
+     - title: Rollout CRD
+       link: /reference/rolloutcrd
+ - title: FAQs
+   link: /faqs/
+ # - title: Release Notes
+ #  link: /release-notes

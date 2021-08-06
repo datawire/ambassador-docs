@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# This script is a utility script for use by LukeShu during the
+# migration to per-product/version subtrees.  It isn't something that
+# is meant to be run during normal work.  If you would like to run
+# this script, and therefore would like to be involved in that
+# migration, then you should probably have a chat involving Luke about
+# the migration plan.
+
+set -euEx
+
+git fetch origin --prune
+
+for branch in $(git for-each-ref --format='%(refname:lstrip=3)' 'refs/remotes/origin/products/*/*' | sort --version-sort | grep -vFx products/telepresence/v1)
+do
+	dir=docs/${branch#products/}
+	dir=${dir/'/v'/'/'}
+
+	if [[ $dir = */master ]]
+	then
+		if test -d "${dir%master}pre-release"
+		then
+			dir="${dir%master}pre-release"
+		else
+			dir="${dir%master}latest"
+		fi
+	fi
+
+	if test -d "$dir"
+	then
+		git subtree pull --prefix="$dir" --squash origin "$branch"
+	else
+		git subtree add --prefix="$dir" --squash origin "$branch"
+	fi
+done

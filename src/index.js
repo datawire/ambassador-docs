@@ -6,7 +6,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import { products, oldStructure, metaData, learningJourneys } from './config';
+import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl } from './config';
 import DocsHome from './components/DocsHome';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
@@ -18,6 +18,7 @@ import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
 import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
+import AllVersions from './components/AllVersions';
 import ContactBlock from '../../src/components/ContactBlock';
 import ReadingTime from '../../src/components/ReadingTime';
 import Icon from '../../src/components/Icon';
@@ -26,22 +27,26 @@ import SidebarContent from './components/SidebarContent';
 import './style.less';
 
 export default ({ data, location }) => {
+
     const page = data.mdx || {};
     const slug = page.fields.slug.split('/');
     const isHome = page.fields.slug === '/docs/';
     const initialProduct = isHome
         ? products[0]
         : products.filter((p) => p.slug === slug[2])[0] || products[0];
-    const initialVersion = isHome
+    const isArchivedVersions = slug[3] === archivedVersionsLink.link;
+    const tempVersion = isHome || isArchivedVersions
         ? {}
         : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
     const isProduct = initialProduct.slug !== products[0].slug;
-    const isProductHome = isProduct && !!!initialVersion.id;
+    const isProductHome = isProduct && !isArchivedVersions && !!!tempVersion.id;
     const canonicalUrl = isHome
         ? 'https://www.getambassador.io/docs/'
         : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
             .slice(4)
             .join('/')}`;
+
+    const initialVersion = !isProductHome ? tempVersion : initialProduct.version.filter(v => v.id === "latest")[0];  
 
     const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
     const learningPath = learningJourneyName ? `?learning-journey=${learningJourneyName}` : '';
@@ -73,7 +78,7 @@ export default ({ data, location }) => {
 
     const [product, setProduct] = useState(initialProduct);
     const [version, setVersion] = useState(initialVersion);
-    const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome);
+    const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome && !isArchivedVersions);
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
     const isMobile = useMemo(() => {
@@ -81,16 +86,25 @@ export default ({ data, location }) => {
     }, []);
 
     useEffect(() => {
-        loadJS();
-        isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
-    }, [isMobile]);
-
-    const parseLinksByVersion = useCallback((vers, links) => {
-        if (oldStructure.includes(vers)) {
-            return links;
+      const loadJS = () => {
+        if (!isMobile) {
+          if (window.docsearch) {
+            window.docsearch({
+              apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
+              indexName: 'getambassador',
+              inputSelector: '#doc-search',
+              debug: true,
+            });
+          } else {
+            setTimeout(() => {
+              loadJS();
+            }, 500);
+          }
         }
-        return links[1].items[0].items;
-    }, [oldStructure]);
+      };
+      loadJS();
+      isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
+    }, [initialProduct.slug, initialVersion.id, isMobile, slug]);
 
     const versions = useMemo(() => {
         if (!data.versions?.content) {
@@ -98,15 +112,14 @@ export default ({ data, location }) => {
         }
         const versions = data.versions?.content;
         return JSON.parse(versions);
-    }, [data.versions?.content]);
+    }, [data.versions]);
 
     const menuLinks = useMemo(() => {
         if (!data.linkentries?.content) {
             return [];
         }
-        const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
-        return parseLinksByVersion(slug[3], linksJson);
-    }, [data.linkentries, slug, versions]);
+        return JSON.parse(template(data.linkentries?.content, versions));
+    }, [data.linkentries, versions]);
 
     const metadata = useMemo(() => {
         let metaDescription;
@@ -124,7 +137,7 @@ export default ({ data, location }) => {
         return {
             metaDescription: template(metaDescription, versions), metaTitle: template(metaTitle, versions)
         };
-    }, [versions, page, isHome, metaData]);
+    }, [isHome, isProductHome, versions, initialProduct.slug, page.headings, page.frontmatter, page.excerpt]);
 
     const claenStorage = () => sessionStorage.removeItem('expandedItems');
 
@@ -143,15 +156,19 @@ export default ({ data, location }) => {
         navigate(selectedProduct.link);
     };
 
-    const handleVersionChange = async (e, value = null) => {
+    const handleVersionChange = useCallback(async (e, value = null) => {
+        const path = version.archived ? siteUrl : '';
+        if (value === archivedVersionsLink.id) {
+            navigate(`${path}/docs/${product.slug}/${archivedVersionsLink.link}`);
+            return;
+        }
+
         const newValue = value ? value : e.target.value;
         const newVersion = versionList.filter((v) => v.id === newValue)[0];
         setVersion(newVersion);
         const slugPath = slug.slice(4).join('/') || '';
 
-        const newVersionLinks = await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`);
-
-        const newVersionLinksContent = parseLinksByVersion(newVersion.id, newVersionLinks.default);
+        const newVersionLinksContent = (await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`)).default;
         const links = [];
 
         function createArrayLinks(el) {
@@ -166,29 +183,12 @@ export default ({ data, location }) => {
         claenStorage();
 
         if (links.includes(slugPath.replace(/\//g, ''))) {
-            navigate(`/docs/${product.slug}/${newVersion.id}/${slugPath}`);
+            navigate(`${path}/docs/${product.slug}/${newVersion.id}/${slugPath}`);
         } else {
-            navigate(`/docs/${product.slug}/${newVersion.link}/`);
+            navigate(`${path}/docs/${product.slug}/${newVersion.link}/`);
         }
+    }, [product.slug, slug, version.archived, versionList]);
 
-    };
-
-    const loadJS = () => {
-        if (!isMobile) {
-            if (window.docsearch) {
-                window.docsearch({
-                    apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-                    indexName: 'getambassador',
-                    inputSelector: '#doc-search',
-                    debug: true,
-                });
-            } else {
-                setTimeout(() => {
-                    loadJS();
-                }, 500);
-            }
-        }
-    };
 
     const getProductHome = (product) => {
         switch (product) {
@@ -209,6 +209,30 @@ export default ({ data, location }) => {
         }
     }
 
+    const MainContainer = ({children}) =>(
+        <div className="docs__container-doc">
+            <SidebarContent
+                title={learningTitle}
+                description={learningDescription}
+                readingTime={learningReadingTime}
+                sidebarTopicList={learningParseTopics}
+                path={learningPath}
+                onVersionChanged={handleVersionChange}
+                version={version}
+                versionList={versionList}
+                topicList={menuLinks}
+                slug={page.fields.slug}
+                location={location}
+                isInTopics={isInTopics}
+                isLearning={isLearning}
+                />
+                <div className="docs__doc-body-container">
+                    {children}
+                    {footer}
+                </div>
+        </div>
+    )
+
     const footer = (
         <div>
             <hr className="docs__separator docs__container" />
@@ -228,80 +252,61 @@ export default ({ data, location }) => {
                 {footer}
             </>
         } else if (isProductHome) {
-            return <>
-                {getProductHome(initialProduct.slug)}
-                {footer}
-            </>
+            return <MainContainer>
+                    {getProductHome(initialProduct.slug)}
+                </MainContainer>;
+        } else if (isArchivedVersions) {
+            return <AllVersions product={initialProduct} />
         }
-        return (
-            <div className="docs__container-doc">
-                <SidebarContent
-                    title={learningTitle}
-                    description={learningDescription}
-                    readingTime={learningReadingTime}
-                    sidebarTopicList={learningParseTopics}
-                    path={learningPath}
-                    onVersionChanged={handleVersionChange}
-                    version={version}
-                    versionList={versionList}
-                    topicList={menuLinks}
-                    slug={page.fields.slug}
-                    location={location}
-                    isInTopics={isInTopics}
-                    isLearning={isLearning}
-                />
-                <div className="docs__doc-body-container">
-                    <div className="docs__doc-body doc-body">
-                        <div className="doc-tags">
-                            {showAesPage && (
-                                <Link className="doc-tag aes" to="/editions">
-                                    Ambassador Edge Stack
-                                </Link>
-                            )}
-                        </div>
-                        <ReadingTime
-                            slug={page.fields.slug}
-                            hideReadingTime={page.frontmatter.hide_reading_time}
-                            readingTimeMinutes={page.fields.readingTime.minutes}
-                            readingTimeFront={page.frontmatter.reading_time}
-                            readingTimeText={page.frontmatter.reading_time_text}
-                            itemClassName="docs__reading-time"
-                        />
-                        <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.minutes}>
-                            {template(page.body, versions)}
-                        </MDXRenderer>
-                        {isLearning && (
-                            <div className="docs__next-previous">
-                                <span className="docs__next-previous__title">Continue your learning journey</span>
-                                <div className="docs__next-previous__content">
-                                    <div className="docs__next-previous__previous">
-                                        {prevLearning &&
-                                            <>
-                                                <Link to={`/docs/${prevLearning.link}${learningPath}`} className="docs__next-previous__button"><Icon name="right-arrow" /> Previous</Link>
-                                                <span className="docs__next-previous__text">{prevLearning.title}</span>
-                                            </>
-                                        }
-                                    </div>
-                                    <div className="docs__next-previous__learning-journey">
-                                        <img src={LearningJourneyImg} alt="Learning Journey" />
-                                    </div>
-                                    <div className="docs__next-previous__next">
-                                        {nextLearning &&
-                                            <>
-                                                <Link to={`/docs/${nextLearning.link}${learningPath}`} className="docs__next-previous__button">Next <Icon name="right-arrow" /></Link>
-                                                <span className="docs__next-previous__text">{nextLearning.title}</span>
-                                            </>
-                                        }
+        return <MainContainer>
+                <div className="docs__doc-body doc-body">
+                            <div className="doc-tags">
+                                {showAesPage && (
+                                    <Link className="doc-tag aes" to="/editions">
+                                        Ambassador Edge Stack
+                                    </Link>
+                                )}
+                            </div>
+                            <ReadingTime
+                                slug={page.fields.slug}
+                                hideReadingTime={page.frontmatter.hide_reading_time}
+                                readingTimeMinutes={page.fields.readingTime.minutes}
+                                readingTimeFront={page.frontmatter.reading_time}
+                                readingTimeText={page.frontmatter.reading_time_text}
+                                itemClassName="docs__reading-time"
+                            />
+                            <MDXRenderer slug={page.fields.slug} readingTime={page.fields.readingTime.minutes}>
+                                {template(page.body, versions)}
+                            </MDXRenderer>
+                            {isLearning && (
+                                <div className="docs__next-previous">
+                                    <span className="docs__next-previous__title">Continue your learning journey</span>
+                                    <div className="docs__next-previous__content">
+                                        <div className="docs__next-previous__previous">
+                                            {prevLearning &&
+                                                <>
+                                                    <Link to={`/docs/${prevLearning.link}${learningPath}`} className="docs__next-previous__button"><Icon name="right-arrow" /> Previous</Link>
+                                                    <span className="docs__next-previous__text">{prevLearning.title}</span>
+                                                </>
+                                            }
+                                        </div>
+                                        <div className="docs__next-previous__learning-journey">
+                                            <img src={LearningJourneyImg} alt="Learning Journey" />
+                                        </div>
+                                        <div className="docs__next-previous__next">
+                                            {nextLearning &&
+                                                <>
+                                                    <Link to={`/docs/${nextLearning.link}${learningPath}`} className="docs__next-previous__button">Next <Icon name="right-arrow" /></Link>
+                                                    <span className="docs__next-previous__text">{nextLearning.title}</span>
+                                                </>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-                    {footer}
-                </div>
-            </div>
-        );
-    }, [isHome, isProductHome]);
+                            )}
+                        </div>
+                </MainContainer>;
+    }, [footer, initialProduct, isArchivedVersions, isHome, isLearning, isProductHome, learningPath, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, versions]);
 
     return (
         <Layout location={location}>
@@ -323,16 +328,19 @@ export default ({ data, location }) => {
                     <div className="docs__nav">
                         <div className="docs__links-content docs__dekstop">
                             <ul className="docs__products-list">
-                                {products.map((item) => (
-                                    <li
-                                        className={`${product.slug === item.slug ? 'docs__selected' : ''
-                                            }`}
-                                        key={item.name}
-                                        onClick={claenStorage}
-                                    >
-                                        <Link to={item.link}>{item.name}</Link>
-                                    </li>
-                                ))}
+                                {products.map((item) => {
+                                    const linkContent = version.archived ? <a href={`${siteUrl}${item.link}`}>{item.name}</a> : <Link to={item.link}>{item.name}</Link>;
+                                    return (
+                                        <li
+                                            className={`${product.slug === item.slug ? 'docs__selected' : ''
+                                                }`}
+                                            key={item.name}
+                                            onClick={claenStorage}
+                                        >
+                                            {linkContent}
+                                        </li>
+                                    )
+                                })}
                             </ul>
                         </div>
                         <div
@@ -350,7 +358,7 @@ export default ({ data, location }) => {
                                     label={`Version: ${version.name}`}
                                     handleOnChange={handleVersionChange}
                                     value={version.id}
-                                    options={versionList}
+                                    options={versionList.filter(v => !v.archived)}
                                 />
                             )}
                         </div>
