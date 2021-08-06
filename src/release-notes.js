@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { graphql, Link, navigate } from 'gatsby';
 import Layout from '../../src/components/Layout';
 import Search from './images/search.inline.svg';
-import { products, oldStructure } from './config';
+import { products } from './config';
 import ReleaseNotes from './components/ReleaseNotes';
 import Sidebar from './components/Sidebar';
 import Dropdown from '../../src/components/Dropdown';
@@ -16,7 +16,7 @@ export default ({ data, location, pageContext }) => {
   const slug = pageContext.slug.split('/');
   const initialProduct = useMemo(
     () => products.find((p) => p.slug === slug[2]) || products[0],
-    [slug, products],
+    [slug],
   );
 
   const initialVersion = useMemo(
@@ -33,15 +33,24 @@ export default ({ data, location, pageContext }) => {
     return typeof window !== 'undefined' ? window.innerWidth <= 800 : true;
   }, []);
   useEffect(() => {
+    const loadJS = () => {
+      if (!isMobile) {
+        if (window.docsearch) {
+          window.docsearch({
+            apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
+            indexName: 'getambassador',
+            inputSelector: '#doc-search',
+            debug: true,
+          });
+        } else {
+          setTimeout(() => {
+            loadJS();
+          }, 500);
+        }
+      }
+    };
     loadJS();
   }, [isMobile]);
-
-  const parseLinksByVersion = useCallback((vers, links) => {
-    if (oldStructure.includes(vers)) {
-      return links;
-    }
-    return links[1].items[0].items;
-  }, [oldStructure]);
 
   const versions = useMemo(() => {
     if (!data.versions?.content) {
@@ -49,15 +58,14 @@ export default ({ data, location, pageContext }) => {
     }
     const versions = data.versions?.content;
     return JSON.parse(versions);
-  }, [data.versions?.content]);
+  }, [data.versions]);
 
   const menuLinks = useMemo(() => {
     if (!data.linkentries?.content) {
       return [];
     }
-    const linksJson = JSON.parse(template(data.linkentries?.content, versions) || []);
-    return parseLinksByVersion(slug[3], linksJson);
-  }, [data.linkentries, slug]);
+    return JSON.parse(template(data.linkentries?.content, versions));
+  }, [data.linkentries, versions]);
 
   const getMetaDescription = () => {
     switch (slug[2]) {
@@ -98,20 +106,13 @@ export default ({ data, location, pageContext }) => {
     navigate(selectedProduct.link);
   };
 
-  const handleVersionChange = async (e, value = null) => {
+  const handleVersionChange = useCallback(async (e, value = null) => {
     const newValue = value ? value : e.target.value;
     const newVersion = versionList.filter((v) => v.id === newValue)[0];
     setVersion(newVersion);
     const slugPath = slug.slice(4).join('/') || '';
 
-    const newVersionLinks = await import(
-      `../docs/${product.slug}/${newVersion.id}/doc-links.yml`
-    );
-
-    const newVersionLinksContent = parseLinksByVersion(
-      newVersion.id,
-      newVersionLinks.default,
-    );
+    const newVersionLinksContent = (await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`)).default;
     const links = [];
 
     function createArrayLinks(el) {
@@ -130,9 +131,9 @@ export default ({ data, location, pageContext }) => {
     } else {
       navigate(`/docs/${product.slug}/${newVersion.link}/`);
     }
-  };
+  }, [product.slug, slug, versionList]);
 
-  const handleViewMore = ({ docs }) => {
+  const handleViewMore = useCallback(({ docs }) => {
     if (docs) {
       if (docs.indexOf('http://') === 0 || docs.indexOf('https://') === 0) {
         window.location = docs;
@@ -140,24 +141,7 @@ export default ({ data, location, pageContext }) => {
         navigate(`/docs/${product.slug}/${version.id}/${docs}`);
       }
     }
-  };
-
-  const loadJS = () => {
-    if (!isMobile) {
-      if (window.docsearch) {
-        window.docsearch({
-          apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-          indexName: 'getambassador',
-          inputSelector: '#doc-search',
-          debug: true,
-        });
-      } else {
-        setTimeout(() => {
-          loadJS();
-        }, 500);
-      }
-    }
-  };
+  }, [product.slug, version.id]);
 
   const footer = (
     <div>
@@ -189,7 +173,6 @@ export default ({ data, location, pageContext }) => {
               changelog={changelogUrl}
               releases={data.releaseNotes?.versions}
               versions={versions}
-              images={data.images?.nodes}
               product={slug[2]}
               handleViewMore={handleViewMore}
             />
@@ -198,7 +181,7 @@ export default ({ data, location, pageContext }) => {
         </div>
       </div>
     );
-  }, [data.releaseNotes]);
+  }, [data.releaseNotes, footer, handleVersionChange, handleViewMore, menuLinks, pageContext.slug, slug, version, versionList, versions]);
 
   return (
     <Layout location={location}>
@@ -303,14 +286,6 @@ export const query = graphql`
         }
       }
       slug
-    }
-    images: allFile(filter: { relativeDirectory: { eq: "public" } }) {
-      nodes {
-        publicURL
-        name
-        relativeDirectory
-        relativePath
-      }
     }
   }
 `;
