@@ -30,6 +30,7 @@ class GettingStarted extends Component {
         case "other":
           document.getElementById("QS-showLinux").style.display = "inline-block";
           document.getElementById("QS-showLinuxAside1").style.display = "inline-block";
+          break;
         default:
           document.getElementById("QS-showLinux").style.display = "inline-block";
           document.getElementById("QS-showLinuxAside1").style.display = "inline-block";
