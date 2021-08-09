@@ -91,17 +91,17 @@ need more advanced TLS options on a domain, such as setting the minimum TLS
 version, you can do it in one of the following ways.
 
 - [Transport Layer Security (TLS)](#transport-layer-security-tls)
-  - [Host](#host)
+- [`Host`](#host)
     - [Automatic TLS with ACME](#automatic-tls-with-acme)
     - [Bring your own certificate](#bring-your-own-certificate)
-    - [Host and TLSContext](#host-and-tlscontext)
+    - [`Host` and `TLSContext`](#host-and-tlscontext)
       - [Create a `TLSContext` with the name `{{HOST}}-context`](#create-a-tlscontext-with-the-name-host-context)
       - [Link a `TLSContext` to the Host](#link-a-tlscontext-to-the-host)
       - [Specify TLS configuration in the Host](#specify-tls-configuration-in-the-host)
   - [TLSContext](#tlscontext)
-    - [ALPN protocols](#alpn-protocols)
-      - [HTTP/2 support](#http2-support)
-    - [TLS parameters](#tls-parameters)
+    - [`alpn_protocols`](#alpn_protocols)
+      - [HTTP/2 Support](#http2-support)
+    - [TLS Parameters](#tls-parameters)
   - [TLS `Module` (*Deprecated*)](#tls-module-deprecated)
 
 #### Create a `TLSContext` with the name `{{HOST}}-context`

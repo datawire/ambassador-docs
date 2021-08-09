@@ -77,7 +77,7 @@ need more advanced TLS options on a domain, such as setting the minimum TLS
 version, you can do it in one of the following ways.
 
 - [Transport Layer Security (TLS)](#transport-layer-security-tls)
-  - [`AmbassadorHost`](#ambassadorhost)
+  - [`AmbassadorHost`](#host)
     - [Automatic TLS with ACME](#automatic-tls-with-acme)
     - [Bring your own certificate](#bring-your-own-certificate)
     - [`AmbassadorHost` and `TLSContext`](#ambassadorhost-and-tlscontext)
@@ -85,9 +85,9 @@ version, you can do it in one of the following ways.
       - [Link a `TLSContext` to the `AmbassadorHost`](#link-a-tlscontext-to-the-ambassadorhost)
       - [Specify TLS configuration in the `AmbassadorHost`](#specify-tls-configuration-in-the-ambassadorhost)
   - [TLSContext](#tlscontext)
-    - [ALPN protocols](#alpn-protocols)
-      - [HTTP/2 support](#http2-support)
-    - [TLS parameters](#tls-parameters)
+    - [`alpn_protocols`](#alpn_protocols)
+      - [HTTP/2 Support](#http2-support)
+    - [TLS Parameters](#tls-parameters)
   - [TLS `Module` (*Deprecated*)](#tls-module-deprecated)
 
 #### Create a `TLSContext` with the name `{{AMBASSADORHOST}}-context`
