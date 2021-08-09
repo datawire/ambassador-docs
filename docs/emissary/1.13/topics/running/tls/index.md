@@ -91,7 +91,7 @@ need more advanced TLS options on a domain, such as setting the minimum TLS
 version, you can do it in one of the following ways.
 
 - [Transport Layer Security (TLS)](#transport-layer-security-tls)
-- [`Host`](#host)
+  - [`Host`](#host)
     - [Automatic TLS with ACME](#automatic-tls-with-acme)
     - [Bring your own certificate](#bring-your-own-certificate)
     - [`Host` and `TLSContext`](#host-and-tlscontext)
