@@ -70,6 +70,8 @@ const ContentTable: React.FC<IContentTable> = ({
   useEffect(() => {
     const observer = new IntersectionObserver(callback, {
       threshold: thresholdArray(20),
+      root: document.querySelector('.docs__doc-body-container'),
+      rootMargin: '50px',
     });
     const observe = (id: string) => {
       id = id.replace("#", "");
