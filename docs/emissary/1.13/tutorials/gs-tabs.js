@@ -8,7 +8,6 @@ import Box from '@material-ui/core/Box';
 import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock'
 import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
 import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
-import TerminalIcon from '../../../../../src/assets/icons/terminal.inline.svg';
 
 
 function TabPanel(props) {
@@ -112,25 +111,23 @@ export default function SimpleTabs() {
 
         <CodeBlock>
           {
-            'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \\' +
-            '\n' +
-            'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \\' +
-            '\n' +
-            'kubectl apply -f - <<EOF' + '\n' +
-            '---' + '\n' + 
-            'apiVersion: v1' + '\n' + 
-            'kind: Service' + '\n' + 
-            'metadata:' + '\n' + 
-            '  name: ambassador' + '\n' + 
-            'spec:' + '\n' + 
-            '  type: LoadBalancer' + '\n' + 
-            '  externalTrafficPolicy: Local' + '\n' + 
-            '  ports:' + '\n' + 
-            '  - port: 80' + '\n' + 
-            '    targetPort: 8080' + '\n' + 
-            '  selector:' + '\n' + 
-            '    service: ambassador' + '\n' + 
-            'EOF'
+            'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \\\n' +
+            'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \\\n' +
+            'kubectl apply -f - <<EOF\n' +
+            '---\n' +
+            'apiVersion: v1\n' +
+            'kind: Service\n' +
+            'metadata:\n' +
+            '  name: ambassador\n' +
+            'spec:\n' +
+            '  type: LoadBalancer\n' +
+            '  externalTrafficPolicy: Local\n' +
+            '  ports:\n' +
+            '  - port: 80\n' +
+            '    targetPort: 8080\n' +
+            '  selector:\n' +
+            '    service: ambassador\n' +
+            'EOF\n'
           }
         </CodeBlock>
 

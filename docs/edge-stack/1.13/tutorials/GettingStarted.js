@@ -30,6 +30,9 @@ class GettingStarted extends Component {
         case "other":
           document.getElementById("QS-showLinux").style.display = "inline-block";
           document.getElementById("QS-showLinuxAside1").style.display = "inline-block";
+        default:
+          document.getElementById("QS-showLinux").style.display = "inline-block";
+          document.getElementById("QS-showLinuxAside1").style.display = "inline-block";
       }
     };
     renderHeader(os);
@@ -286,7 +289,7 @@ class GettingStarted extends Component {
                 <div id="helm2Block">
                   <details open>
                     <summary id="helmVersions">&nbsp;Helm2
-                      </summary>
+                    </summary>
                     <div id="QS-helm2" className="styles-module--CodeBlock--1UB4s">
                       <div className="QS-codeblockInstall">
                         <span className="QS-copyButton"><CopyButton content="
@@ -325,7 +328,7 @@ class GettingStarted extends Component {
                 <div id="helm3Block">
                   <details open>
                     <summary id="helmVersions">&nbsp;Helm3
-                      </summary>
+                    </summary>
                     <div id="QS-helm3" className="styles-module--CodeBlock--1UB4s">
                       <div className="QS-codeblockInstall">
                         <span className="QS-copyButton"><CopyButton content="
