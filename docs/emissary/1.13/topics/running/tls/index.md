@@ -84,25 +84,55 @@ spec:
 
 $productName$ will now use the certificate in `host-secret` to terminate TLS.
 
-### Host and TLSContext
+### Advanced TLS Configuration with the `Host`
 
-The Host will configure basic TLS termination settings in $productName$. If you 
-need more advanced TLS options on a domain, such as setting the minimum TLS 
-version, you can do it in one of the following ways.
+You can specify TLS configuration directly in the Host via the `tls` field. This is the recommended method for more advanced TLS Configuration.
 
-- [Transport Layer Security (TLS)](#transport-layer-security-tls)
-  - [`Host`](#host)
-    - [Automatic TLS with ACME](#automatic-tls-with-acme)
-    - [Bring your own certificate](#bring-your-own-certificate)
-    - [`Host` and `TLSContext`](#host-and-tlscontext)
-      - [Create a `TLSContext` with the name `{{HOST}}-context`](#create-a-tlscontext-with-the-name-host-context)
-      - [Link a `TLSContext` to the Host](#link-a-tlscontext-to-the-host)
-      - [Specify TLS configuration in the Host](#specify-tls-configuration-in-the-host)
-  - [TLSContext](#tlscontext)
-    - [`alpn_protocols`](#alpn_protocols)
-      - [HTTP/2 Support](#http2-support)
-    - [TLS Parameters](#tls-parameters)
-  - [TLS `Module` (*Deprecated*)](#tls-module-deprecated)
+For example, to enforce a minimum TLS version on the `Host`, the configuration will look like this:
+
+```yaml
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: example-host
+spec:
+  hostname: host.example.com
+  acmeProvider:
+    authority: none
+  tlsSecret:
+    name: min-secret
+  tls:
+    min_tls_version: v1.2
+```
+
+The following fields are accepted in the `tls` field:
+```yaml
+tls:
+  cert_chain_file: # <type: string>
+  private_key_file: # <type: string>
+  ca_secret: # <type: string>
+  cacert_chain_file: # <type: string>
+  alpn_protocols: # <type: string>
+  cert_required: # <type: bool>
+  min_tls_version: # <type: string>
+  max_tls_version: # <type: string>
+  cipher_suites: # <type: array of strings>
+  ecdh_curves: # <type: array of strings>
+  redirect_cleartext_from: # <type: int32>
+  sni: # <type: string>
+```
+
+
+### `Host` and `TLSContext`
+
+The `Host` will configure most TLS termination settings in $productName$. 
+
+If you require TLS configuration that is not available
+via the above `tls` settings in a `Host`, you can create a `TLSContext` and associate it with a `Host` with either of the following two methods.
+
+> **Note:** It is invalid to configure both `spec.tls` and `spec.tlsContext.name` on a `Host`. It is recommended to configure the `tls` setting in a `Host` without creating any `TLSContext` objects unless necessary. If you need to link a `TLSContext` to a `Host` make sure you are not also configuring the `tls` settings in that `Host`.
+
 
 #### Create a `TLSContext` with the name `{{HOST}}-context`
 
@@ -167,46 +197,6 @@ spec:
 
 **Note**: Any `hosts` or `secret` in the `TLSContext` must be the compatible with the `Host` to which it is
 being linked.
-
-#### Specify TLS configuration in the Host
-
-You can specify TLS configuration directly in the Host via the `tls` field.
-
-For example, to enforce a minimum TLS version on the `Host`, the configuration will look like this:
-
-```yaml
----
-apiVersion: getambassador.io/v2
-kind: Host
-metadata:
-  name: example-host
-spec:
-  hostname: host.example.com
-  acmeProvider:
-    authority: none
-  tlsSecret:
-    name: min-secret
-  tls:
-    min_tls_version: v1.2
-```
-
-The following fields are accepted in the `tls` field:
-```yaml
-tls:
-  cert_chain_file: # <type: string>
-  private_key_file: # <type: string>
-  ca_secret: # <type: string>
-  cacert_chain_file: # <type: string>
-  alpn_protocols: # <type: string>
-  cert_required: # <type: bool>
-  min_tls_version: # <type: string>
-  max_tls_version: # <type: string>
-  cipher_suites: # <type: array of strings>
-  ecdh_curves: # <type: array of strings>
-  redirect_cleartext_from: # <type: int32>
-  sni: # <type: string>
-```
-> **Note:** It is invalid to configure both `spec.tls` and `spec.tlsContext.name` on a `Host`. If you require only the properties described in the `tls` section above, it is recommended to configure the `tls` setting in a `Host` without creating a `TLSContext` object. If you need to link a `TLSContext` to a `Host` make sure you are not also configuring the `tls` settings in that `Host`.
 
 See [`TLSContext`](#tlscontext) below to read more on the description of these fields.
 
