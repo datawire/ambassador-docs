@@ -64,7 +64,7 @@ Make sure to sign in to Ambassador Cloud <strong>with your GitHub username</stro
 
 ## 2. Environment Setup
 
-The rollout feature requires/uses a Kubernetes cluster and GitHub repository, please <a href="https://app.getambassador.io/cloud/demo-cluster-rollouts?step=claim" target="_blank" onClick={(e) => {window.open(getBaseUIUrl() + '/demo-cluster-rollouts?step=claim', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
+The rollout feature requires/uses a Kubernetes cluster and GitHub repository, please <a href="https://app.getambassador.io/cloud/demo-cluster-rollouts?step=claim" target="_blank" onClick={(e) => {window.open('https://app.getambassador.io/cloud/demo-cluster-rollouts?step=claim', 'ambassador-cloud-rollouts-demo-cluster', 'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=550,height=750'); e.preventDefault(); }}>sign in to Ambassador Cloud to setup your demo cluster.</a>
 
 This will also fork a repository called **emojivoto**.
 
