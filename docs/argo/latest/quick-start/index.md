@@ -56,7 +56,7 @@ Make sure to sign in to Ambassador Cloud <strong>with your GitHub username</stro
 </Alert>
 
 1. In Ambassador Cloud, go to the <a href="https://app.getambassador.io/cloud/demo-cluster-rollouts?step=integration" target="_blank">Teams Settings page</a> and click the **Integrations** button for your current team.
-1. Click the **Configure** button in the GitHub section.
+1. Click the **Enable** button in the GitHub section, or the **Configure** button in case that you already have the app installed.
 1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
 1. Select your personal account. The personal account is the one that has the same name as your GitHub username.
 1. Select the **All repositories** option. Full access is required in order to fork a repo on your behalf for the demo application.
@@ -71,7 +71,7 @@ This will also fork a repository called **emojivoto**.
 ## 3. Create a Rollout
 Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page and follow these steps:
 
-1. Click the "Servcies" favorites button.
+1. Click the "Services" favorites button.
 1. Look for the **web-app** service and hover over it to see the "expand" button, which will appear at the left side with a plus (+) icon.
 1. Click on the **Rollout** button for the **web-app** service to show the instructions to create a rollout.
 
