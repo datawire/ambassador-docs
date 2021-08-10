@@ -93,7 +93,7 @@ Click the **Pull Request** button.
 A new browser tab will be opened and you will be taken to github.com where you can review and merge the PR on GitHub.
 Click on the **Files changed** tab in the pull request and explore all of the rollouts code that has been generated for you.
 Next, click back to the **Conversation** tab, click **Merge Pull Request**, and click **Confirm merge**.
-Finally, navigate back to your browser tab with the Ambassador Cloud service catalog to watch the progress.
+Finally, navigate back to your browser tab with the Ambassador Cloud service catalog to watch the progress. It can take a few seconds for the progress bar to show up.
 
 ## 5. Watch the Rollout progress from Ambassador Cloud
 
