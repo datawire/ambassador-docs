@@ -1,7 +1,7 @@
 @import '../../../../src/less/_colors.less';
 
 .note {
-  margin: 2px 0;
+  margin: 2px 0 10px;
 
   &__body {
     padding: 8px 0;
@@ -12,23 +12,27 @@
     margin-top: -15px;
   }
 
+  &__image,
+  &__image_xs {
+    img {
+      border: solid 1px @color-white-1;
+      border-radius: 4px;
+      height: auto;
+      margin-bottom: 10px;
+      object-fit: contain;
+      padding: 10px;
+      width: 100%;
+    }
+  }
+
   &__image {
     display: none;
     padding: 0 0 0 10px;
-
-    img {
-      object-fit: contain;
-      width: 100%;
-    }
   }
 
   &__image_xs {
     display: block;
     width: 100%;
-    img {
-      object-fit: contain;
-      width: 100%;
-    }
   }
 
   &__typeIcon {
@@ -43,7 +47,7 @@
     text-decoration: none;
 
     span {
-      padding: 0 0 0 10px;
+      padding: 0 0 0 15px;
     }
     &:hover {
       text-decoration: underline;
@@ -66,7 +70,7 @@
     display: flex;
 
     &__body {
-      padding: 8px 0 4px 28px;
+      padding: 8px 0 4px 35px;
     }
     &__description {
       padding: 0 10px 0 0;
@@ -74,9 +78,9 @@
     &__image {
       align-items: center;
       display: flex;
+      flex-shrink: 0;
       justify-content: center;
       width: 35%;
-      flex-shrink: 0;
     }
 
     &__image_xs {
