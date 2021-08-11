@@ -21,7 +21,7 @@ the [repository](#a8riorepository) and update them as follows:
 If no `Rollout` object is found matching the [deployment manifest name](#a8riorolloutsdeployment) (which should only
 happen the first time a rollout is created), then Ambassador Cloud will look for a `Deployment` object matching that same name.
 If found, a new `Rollout` manifest will be created referring to that deployment object and configured with the 
-[mappings](a8riorolloutsmappings). A new [canary](../../core-concepts/canary/) service based on the current service specs 
+[mappings](#a8riorolloutsmappings). A new [canary](/docs/argo/latest/concepts/canary/) service based on the current service specs 
 will also be created to allow Argo Rollouts to control the flow between the two versions.
 
 The rollout steps will then be resolved based on the provided rollout duration and weight increment along with the
