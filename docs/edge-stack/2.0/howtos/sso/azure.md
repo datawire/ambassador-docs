@@ -12,11 +12,11 @@ To use Azure as your IdP, you will first need to register an OAuth application w
 
 4. Click on `Authentication` in the left sidebar.
 
-      - Under `Redirect URIs` at the top, add a `Redirect URI` with the type `Web` and set it to `https://{{AMBASSADOR_URL}}/.ambassador/oauth2/redirection-endpoint`
+      - Under the `Platform configurations` section, click on `+ Add a platform`, then select `Web` and add this URL `https://{{AMBASSADOR_URL}}/.ambassador/oauth2/redirection-endpoint` into the `Redirect URIs` input field 
 
         **Note:** Azure AD requires the redirect endpoint to handle TLS
-      - Under `Advanced settings`, make sure the application is issuing `Access tokens` by checking next to the box that says `Access tokens`
-      - Under `Supported account types` select whichever option fits your use case
+      - Make sure your application is issuing `access tokens` by clicking on the `Access tokens (used for implicit flows)` checkbox under the `Implicit grant and hybrid flows` section
+      - Finally, click on `Configure` to save your changes
 
 5. Click on `Certificates & secrets` in the left sidebar. Click `+ New client secret` and set the expiration date you wish. Copy the value of this secret somewhere. You will need it when configuring $AESproductName$.
 

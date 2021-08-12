@@ -13,14 +13,15 @@ kind: AmbassadorListener
 metadata:
   name: example-listener
 spec:
-  port: 8080          # int32, port number on which to listen
-  protocol: HTTPS     # HTTP, HTTPS, HTTPPROXY, HTTPSPROXY, TCP
-  securityModel: XFP  # XFP (for X-Forwarded-Proto), SECURE, INSECURE
-  l7Depth: 0          # int32
+  port: 8080                     # int32, port number on which to listen
+  protocol: HTTPS                # HTTP, HTTPS, HTTPPROXY, HTTPSPROXY, TCP
+  securityModel: XFP             # XFP (for X-Forwarded-Proto), SECURE, INSECURE
+  statsPrefix: example-listener  # default depends on protocol; see below
+  l7Depth: 0                     # int32
   hostBinding: 
     namespace:
-      from: SELF      # SELF, ALL
-    selector: ...     # Kubernetes label selector
+      from: SELF                 # SELF, ALL
+    selector: ...                # Kubernetes label selector
 ```
 
 | Element | Type | Definition |
@@ -28,7 +29,8 @@ spec:
 | `port` | `int32` | The network port on which $productName$ should listen. *Required.* |
 | `protocol` | `enum`; see below | A high-level protocol type, like "HTTPS". *Exactly one of `protocol` and `protocolStack` must be supplied.* |
 | `protocolStack` | array of `enum`; see below | A sequence of low-level protocols to layer together. *Exactly one of `protocol` and `protocolStack` must be supplied.* |
-| `securityModel` | `enum`; see below | How does $productName$ decide whether requests here are secure? *Required.*|
+| `securityModel` | `enum`; see below | How does $productName$ decide whether requests here are secure? *Required.* |
+| `statsPrefix` | `string`; see below | Under what name do statistics for this `AmbassadorListener` appear? *Optional; default depends on protocol.* |
 | `l7Depth` | `int32` | How many layer 7 load balancers are between the edge of the network and $productName$? *Optional; default is 0.*|
 | `hostBinding` | `struct`, see below | Mechanism for determining which `AmbassadorHost`s will be associated with this `AmbassadorListener`. *Required* |
 
@@ -72,6 +74,72 @@ Valid `protocol` values are:
 - `selector` accepts only `AmbassadorHost`s that has labels matching the selector.
 
 `hostBinding` is mandatory, and at least one of `namespace.from` and `selector` must be set. If both are set, both must match for an `AmbassadorHost` to be accepted.
+
+### `statsPrefix`
+
+$productName$ produces detailed [statistics](../statistics) which can be monitored in a variety of ways. Statistics have hierarchical names, and the `AmbassadorListener` will cause a set of statistics to be logged under the name specified by `statsPrefix`.
+
+The default `statsPrefix` depends on the protocol for this `AmbassadorListener`:
+
+- If the `AmbassadorListener` speaks HTTPS, the default is `ingress-https`.
+- Otherwise, if the `AmbassadorListener` speaks HTTP, the default is `ingress-http`.
+- Otherwise, if the `AmbassadorListener` speaks TLS, the default is `ingress-tls-$port`.
+- Otherwise, the default is `ingress-$port`.
+
+Note that it doesn't matter whether you use `protocol` or `protocolStack`: what matters is what protocol is actually configured. Also note that the default doesn't take the HAProxy `PROXY` protocol into account.
+
+Some examples:
+
+```yaml
+---
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorListener
+metadata:
+  name: example-listener
+spec:
+  port: 8080
+  protocol: HTTPS
+  ...
+```
+
+will use a `statsPrefix` of `ingress-https`.
+
+```yaml
+---
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorListener
+metadata:
+  name: example-listener
+spec:
+  port: 8080
+  protocol: TCP
+  ...
+```
+
+will use `statsPrefix` of `ingress-8080`.
+
+```yaml
+---
+apiVersion: x.getambassador.io/v3alpha1
+kind: AmbassadorListener
+metadata:
+  name: example-listener
+spec:
+  port: 8080
+  protocol: HTTPSPROXY
+  statsPrefix: proxy-8080
+  ...
+```
+
+would also use `ingress-https`, but it explicitly overrides `statsPrefix` to `proxy-8080`.
+
+For complete information on which stastistics will appear for the `AmbassadorListener`, see [the Envoy listener statistics documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/stats.html). Some important statistics include
+
+| Statistic name                                  | Type      | Description                       |
+| :-----------------------------------------------| :-------- | :-------------------------------- |
+| `listener.$statsPrefix.downstream_cx_total`     | Counter   | Total connections                 |
+| `listener.$statsPrefix.downstream_cx_active`    | Gauge     | Total active connections          |
+| `listener.$statsPrefix.downstream_cx_length_ms` | Histogram | Connection length in milliseconds |
 
 ### `protocolStack`
 
