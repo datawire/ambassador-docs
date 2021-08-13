@@ -1,5 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
-import GSTabs2 from '../tutorials/gs-tabs2';
+import CloudGSTabs2 from '../tutorials/gs-tabs2';
 import { LogInText } from '../../../../../../src/components/Docs/LogInText';
 import { QuickStartServiceCatalogAlert } from '../../../../../../src/components/Docs/Cloud';
 

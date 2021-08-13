@@ -12,6 +12,8 @@ If you currently have the open source version of $OSSproductName$, you can upgra
   * the `ambassador` name and `ambassador` namespace
   * `installOSS: true`
 
+> **Note:** It is always advised to migrate your install of $OSSproductName$ to the `ambassador` namespace before upgrading to $AESproductName$ with any method.
+
 First, install `edgectl` by following the instructions
 [here](/docs/edge-stack/latest/topics/using/edgectl/edge-control/#installing-edge-control).
 

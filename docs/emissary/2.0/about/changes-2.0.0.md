@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 Major Changes in $productName$ 2.0.0
 ====================================
 
-## 0. 2.0 is a Developer Preview!
+# 2.0 is a Developer Preview!
 
 We're pleased to introduce $productName$ 2.0 as a **developer preview**. The 2.X family introduces
 a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global
@@ -11,7 +11,7 @@ configuration to better handle multitenant or multiorganizational installations,
 and improve performance. We welcome feedback!! Join us on [Slack](https://a8r.io/slack) and let us know
 what you think.
 
-While $productName$ 2.0.0 is functionally compatible with $productName$ 1.13, some resources have moved 
+While $productName$ 2.0.0 is functionally compatible with $productName$ 1.13, some resources have moved
 into a different APIgroup with different names. Upgrading will require editing your configuration.
 
 ## 1. Configuration API Version `x.getambassador.io/v3alpha1`
@@ -23,16 +23,16 @@ Additionally, configuration resource API versions `getambassador.io/v0` and `get
 ## 2. `AmbassadorListener`s, `AmbassadorHost`s, and `AmbassadorMapping`s
 
 $productName$ 2.0.0 introduces the new **mandatory** `AmbassadorListener` CRD, and brings new names for the
-`AmbassadorHost` and `AmbassadorMapping` resources. 
+`AmbassadorHost` and `AmbassadorMapping` resources.
 
 **NOTE WELL:** `Host` and `Mapping` are **not supported** in $productName$ 2.0.0.
 
 The motivation behind the change is that certain semantics around `AmbassadorListener`s, `AmbassadorHost`s, and `AmbassadorMapping`s change:
 
    1. `AmbassadorListener`s are never created by $productName$: they **must** be defined by the user.
-   2. $productName$ does not make sure that a wildcard `AmbassadorHost` exists: if the wildcard behavior is 
+   2. $productName$ does not make sure that a wildcard `AmbassadorHost` exists: if the wildcard behavior is
       needed, an `AmbassadorHost` with a `hostname` of `"*"` must be defined by the user.
-   3. The semantics of which `AmbassadorMappings` associate with which `AmbassadorHost` are different from how `Mapping`s 
+   3. The semantics of which `AmbassadorMappings` associate with which `AmbassadorHost` are different from how `Mapping`s
       and `Host`s worked.
    4. `AmbassadorMapping` gains a `hostname` element. `host` is an exact match or a regex, as determined by `host_regex`, but
       `hostname` is always a DNS glob.
@@ -48,10 +48,10 @@ The motivation behind the change is that certain semantics around `AmbassadorLis
 The new [`AmbassadorListener` CRD](../../topics/running/ambassadorlistener) defines where and how $productName$ should listen for requests from the network, and which `AmbassadorHost` definitions should be used to process those requests.
 
 **Note that `AmbassadorListener`s are never created by $productName$, and must be defined by the user.** If you do not
-define any `AmbassadorListener`s, $productName$ will not listen anywhere for connections, and therefore won't do 
+define any `AmbassadorListener`s, $productName$ will not listen anywhere for connections, and therefore won't do
 anything useful. It will log a `WARNING` to this effect.
 
-An `AmbassadorListener` specifically defines 
+An `AmbassadorListener` specifically defines
 
 - `port`: a port number on which to listen for new requests;
 - `protocol` and `securityModel`: the protocol stack and security model to use (e.g. `HTTPS` using the `X-Forwarded-Proto` header); and
@@ -84,11 +84,11 @@ Note also that there is no limit on how many `AmbassadorListener`s may be create
 
 ### Wildcard `AmbassadorHost`s
 
-In $productName$ 1.X, $productName$ would make sure that a wildcard `Host`, with a `hostname` of `"*"`, was always present. 
+In $productName$ 1.X, $productName$ would make sure that a wildcard `Host`, with a `hostname` of `"*"`, was always present.
 $productName$ 2.X does **not** force a wildcard `AmbassadorHost`: if you need the wildcard behavior, you will need to create
 an `AmbassadorHost` with a hostname of `"*"`.
 
-Of particular note is that $productName$ **will not** respond to queries to an IP address unless a wildcard 
+Of particular note is that $productName$ **will not** respond to queries to an IP address unless a wildcard
 `AmbassadorHost` is present. If `foo.example.com` resolves to `10.11.12.13`, and the only `AmbassadorHost` has a
 `hostname` of `foo.example.com`, then:
 

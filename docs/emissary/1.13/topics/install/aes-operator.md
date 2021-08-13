@@ -26,13 +26,10 @@ Start by installing the operator:
 
 1. Create the Operator Custom Resource schema with the following command:
    `kubectl apply -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator-crds.yaml`
-2. Install the actual CRD for the Ambassador Operator in the `ambassador` namespace with the following command:
-   `kubectl apply -n ambassador -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator.yaml`
-3. To install the Ambassador Operator CRD in a different namespace, you can specify it in `NS` and
-   then run the following command:
+2. To install the Ambassador Operator CRD. To change the namespace for the isntall, you can specify it in `NS` and then run the following command. We recommend using the `default` namespace if you are installing $productName$ and the `ambassador` namespace if you are installing $AESproductName$:
 
     ```
-    $ NS="custom-namespace"
+    $ NS="default"
     $ curl -L https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator.yaml | \
         sed -e "s/namespace: ambassador/namespace: $NS/g" | \
         kubectl apply -n $NS -f -
@@ -41,12 +38,23 @@ Start by installing the operator:
 Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the Ambassador Operator.
 
 1. To create the `AmbassadorInstallation` Custom Resource schema, use
-   [the following YAML](https://github.com/datawire/ambassador-operator#the-operator-custom-resource-cr)
-   as your guideline.
+   the following YAML as your guideline or view the [Operator README](https://github.com/datawire/ambassador-operator#the-operator-custom-resource-cr) for more information on configuration.
+
+    ```
+    apiVersion: getambassador.io/v2
+    kind: AmbassadorInstallation 
+    metadata:
+      name: ambassador 
+    spec:
+      installOSS: true 
+   ```
+
 2. Save that file as `amb-install.yaml`
 3. Edit the `amb-install.yaml` and optionally complete configurations such as Version constraint or UpdateWindow:
 4. Finally, apply your `AmbassadorInstallation` CRD to the Ambassador Operator schema
    with the following command: `kubectl apply -n ambassador -f amb-install.yaml`
+
+> **Note:** If you do not place the `AmbassadorInstallation` in the same namespace that you insatalled the Operator, it will not install anything.
 
 ### Configuration for $productName$
 
@@ -100,7 +108,7 @@ Default: `false`.
 ## Customizing the installation with some Helm values
 
 `helmValues` is an optional map of configurable parameters of the $productName$ chart
-with some overriden values. Take a look at the [current list of values](https://github.com/emissary-ingress/emissary/tree/$branch$/charts/ambassador#configuration)
+with some overriden values. Take a look at the [current list of values](https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/README.md)
 and their default values.
 
 Example:
@@ -111,6 +119,7 @@ kind: AmbassadorInstallation
 metadata:
   name: ambassador
 spec:
+  installOSS: true 
   version: "*"
   helmValues:
     image:
@@ -150,7 +159,7 @@ You can also install the Ambassador Operator from a Helm Chart. The following He
     metadata:
       name: ambassador
     spec:
-      version: 1.2.0
+      installOSS: true 
     EOF
     ```
 
@@ -173,11 +182,12 @@ kind: AmbassadorInstallation
 metadata:
   name: ambassador
 spec:
-  version: 1.2.0
+  installOSS: true 
+  version: 1.13.0
 EOF
 ```
 
-After applying an `AmbassadorInstallation` customer resource like this in a new cluster, the Operator will install a new instance of $productName$ 1.2.0 in the `ambassador` namespace, immediately. Removing this `AmbassadorInstallation` will uninstall $productName$ from this namespace.
+After applying an `AmbassadorInstallation` customer resource like this in a new cluster, the Operator will install a new instance of $productName$ 1.13.0 in the `ambassador` namespace, immediately. Removing this `AmbassadorInstallation` will uninstall $productName$ from this namespace.
 
 ## Verify configuration
 

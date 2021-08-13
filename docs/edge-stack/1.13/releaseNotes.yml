@@ -36,7 +36,7 @@ items:
         type: bugfix
         body: "The <code>Mapping</code> resource can now specify <code>docs.timeout_ms</code> to set the timeout when the Dev Portal is fetching API specifications."
         docs: topics/using/dev-portal
-        image: ./edge-stack-1.13.10-docs-timeout.png
+        image: ../images/edge-stack-1.13.10-docs-timeout.png
       - title: Dev Portal HTML tag cleanup
         type: bugfix
         body: "The Dev Portal will now strip HTML tags when displaying search results, showing just the actual content of the search result."
@@ -45,7 +45,7 @@ items:
         type: bugfix
         body: "Fixed a regression when specifying a comma separated string for <code>cors.origins</code> on the <code>Mapping</code> resource"
         docs: topics/using/cors
-        image: ./emissary-1.13.10-cors-origin.png
+        image: ../images/emissary-1.13.10-cors-origin.png
       - title: New Envoy-configuration snapshots for debugging
         body: "Envoy-configuration snapshots get saved (as ambex-#.json) in /ambassador/snapshots. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
         type: change
@@ -58,7 +58,7 @@ items:
         body: "Consul certificate-rotation logging now includes the fingerprints and validity timestamps of certificates being rotated."
         type: change
         docs: howtos/consul/
-        image: ./edge-stack-1.13.10-consul-cert-log.png
+        image: ../images/edge-stack-1.13.10-consul-cert-log.png
   - version: 1.13.9
     date: '2021-06-30'
     notes:
@@ -73,7 +73,7 @@ items:
         body: "Fixed a bug that occasionally caused missing version information for a service in the Ambassador Service Catalog, especially in clusters with high pod churn."
         type: bugfix
         docs: tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
-        image: ./edge-stack-1.13.8-cloud-bugfix.png
+        image: ../images/edge-stack-1.13.8-cloud-bugfix.png
       - title: Improved Argo Rollouts Experience with Ambassador Cloud
         body: "Ambassador Agent now reports the state of ArgoCD configurations and Deployments in order to provide proper configurations to the users while setting up the Argo Rollouts feature."
         type: feature
@@ -84,17 +84,17 @@ items:
     notes:
       - title: JSON logging support
         body: "An <code>AMBASSADOR_JSON_LOGGING</code> environment variable has been added. When set to <code>true</code> JSON format will be used for most of the control plane logs. Some (but few) logs from <code>gunicorn</code> and the Kubernetes <code>client-go</code> package will still be in text only format."
-        image: ./edge-stack-1.13.7-json-logging.png
+        image: ../images/edge-stack-1.13.7-json-logging.png
         docs: topics/running/running/#log-format
         type: feature
       - title: Consul resolver bugfix with TCPMappings
         body: "The TCPMapping has the ability to specify a resolver, however the <code>ConsulResolver</code> did not work properly with it. It now utilizes the Consul Connect service discovery instead of falling back to attempting to register an arbitrary endpoint."
-        image: ./edge-stack-1.13.7-tcpmapping-consul.png
+        image: ../images/edge-stack-1.13.7-tcpmapping-consul.png
         docs: topics/running/resolvers/#the-consul-resolver
         type: bugfix
       - title: Memory usage calculation improvements
         body: "The internal memory usage calculation that $productName$ performs has been updated to exclude cache memory. This now matches how the kernel OOMKiller calculates memory and should avoid situations where Envoy updates are throttled unnecessarily."
-        image: ./edge-stack-1.13.7-memory.png
+        image: ../images/edge-stack-1.13.7-memory.png
         docs: topics/running/scaling/#inspecting-ambassador-performance
         type: change
   - version: 1.13.4
@@ -102,6 +102,6 @@ items:
     notes:
       - title: Envoy 1.15.5
         body: $productName$ has been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). $productName$ can now be configured to reject client requests that contain escaped slashes.
-        image: ./edge-stack-1.13.4.png
+        image: ../images/edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
         type: security
