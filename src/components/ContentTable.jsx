@@ -16,7 +16,7 @@ const ContentTable = ({
   const rootElement = ".docs__doc-body-container";
   const [active, setActive] = useState("");
   let content = items && items[0].items ? items[0].items : [];
-  let ids = content.map(c => c["url"].substring(1));
+  let ids = content.map(c => c["url"] && c["url"].substring(1));
   const down = useScrollDirection(rootElement);
 
 
@@ -65,10 +65,10 @@ const useScrollDirection = (element) => {
 
 const ScrollSpyWrapper = ({ children, onUpdate, ...rest }) => {
   return (
-    <nav>
+    <ul>
       <Scrollspy {...rest} onUpdate={e => e && onUpdate(e.getAttributeNode("id").value)} />
       {children}
-    </nav>
+    </ul>
   )
 }
 
