@@ -29,7 +29,7 @@
 
 changelog: ''
 items:
-  - date: '2021-08-09'
+  - date: '2021-08-16'
     notes:
       - title: "Visualize your APIs"
         body: "Visualize your service’s OpenAPI documentation (formally known as Swagger Specifications) in the cloud, allowing you to interact and query your REST APIs directly from the Developer Control Plane."

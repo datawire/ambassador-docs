@@ -18,7 +18,6 @@ You can visualize and explore your service’s OpenAPI specification (formerly k
    kind: AmbassadorMapping
    metadata:
      name: quote-backend
-     namespace: ambassador
    spec:
      hostname: "*"
      prefix: /backend/
