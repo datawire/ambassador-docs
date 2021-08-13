@@ -7,6 +7,16 @@ import GettingStartedEdgeStack20Tabs from './gs-tabs'
 
 # $productName$ quick start
 
+<Alert severity="info">
+  We're pleased to introduce $productName$ 2.0 as a <b>developer preview</b>; our latest
+  general-availability release is <a href="../../../1.13">1.13</a>.<br/>
+  <br/>
+  The 2.X family introduces a number of changes to allow $productName$ to more gracefully
+  handle larger installations (including multitenant or multiorganizational installations),
+  reduce memory footprint, and improve performance. For more information on 2.X, please
+  check the <a href="../../release-notes">release notes</a>.
+</Alert>
+
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
@@ -69,7 +79,7 @@ EOF
   kubectl apply -n $productNamespace$ -f https://app.getambassador.io/yaml/v2-docs/latest/quickstart/qotm.yaml
   ```
 
-  <Alert severity="info">The Service and Deployment are created in the $productName$ namespace.  You can use <code>kubectl get services,deployments quote --namespace $productNamespace$ </code> to see their status.</Alert>
+  <Alert severity="info">The Service and Deployment are created in the $productName$ namespace.  You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
 3. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create an AmbassadorMapping on your cluster. This AmbassadorMapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
@@ -79,7 +89,6 @@ EOF
   kind: AmbassadorMapping
   metadata:
     name: quote-backend
-    namespace: $productNamespace$
   spec:
     hostname: "*"
     prefix: /backend/

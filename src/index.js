@@ -47,7 +47,15 @@ export default ({ data, location }) => {
             .slice(4)
             .join('/')}`;
 
-    const initialVersion = !isProductHome ? tempVersion : initialProduct.version.filter(v => v.id === "latest")[0];  
+    const initialVersion = !isProductHome ? tempVersion : initialProduct.version.filter(v => v.id === "latest")[0];
+    function createEdgissaryDevPrevMsg(newVer, newProduct) {
+      if ((newVer.id === "2.0" || newVer.id === "pre-release") || (newProduct.slug !== "emissary" && newProduct.slug !== "edge-stack")) {
+        return "";
+      }
+      return <a href={`/docs/${newProduct.slug}/2.0/tutorials/getting-started/`}>{`${newProduct.name} 2.0 is now available for Developer Preview!`}</a>;
+
+    }
+    const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(initialVersion, initialProduct);
 
     const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
     const learningPath = learningJourneyName ? `?learning-journey=${learningJourneyName}` : '';
@@ -82,6 +90,7 @@ export default ({ data, location }) => {
     const [showVersion, setShowVersion] = useState(!isHome && isProduct && !isProductHome && !isArchivedVersions);
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
+    const [edgissaryDPMessage, setEdgissaryDPMessage] = useState(initialEdgissaryDPNotificationMsg);
     const isMobile = useMemo(() => {
         return typeof window !== 'undefined' ? window.innerWidth <= 800 : true
     }, []);
@@ -154,6 +163,8 @@ export default ({ data, location }) => {
         setVersionList(selectedProduct.version);
         const newVersion = selectedProduct.version.filter(v => v.id === "latest")[0] || selectedProduct.version[0];
         setVersion(newVersion);
+        const newEdgissaryAnnouncement = createEdgissaryDevPrevMsg(newVersion, selectedProduct);
+        setEdgissaryDPMessage(newEdgissaryAnnouncement);
         navigate(selectedProduct.link);
     };
 
@@ -168,6 +179,8 @@ export default ({ data, location }) => {
         const newVersion = versionList.filter((v) => v.id === newValue)[0];
         setVersion(newVersion);
         const slugPath = slug.slice(4).join('/') || '';
+        const newEdgissaryAnnouncement = createEdgissaryDevPrevMsg(newVersion, product);
+        setEdgissaryDPMessage(newEdgissaryAnnouncement);
 
         const newVersionLinksContent = (await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`)).default;
         const links = [];
@@ -188,7 +201,7 @@ export default ({ data, location }) => {
         } else {
             navigate(`${path}/docs/${product.slug}/${newVersion.link}/`);
         }
-    }, [product.slug, slug, version.archived, versionList]);
+    }, [product, slug, version.archived, versionList]);
 
 
     const getProductHome = (product) => {
@@ -313,7 +326,7 @@ export default ({ data, location }) => {
     }, [footer, initialProduct, isArchivedVersions, isHome, isLearning, isProductHome, learningPath, nextLearning, page.body, page.fields.readingTime.minutes, page.fields.slug, page.frontmatter.hide_reading_time, page.frontmatter.reading_time, page.frontmatter.reading_time_text, prevLearning, showAesPage, versions, page.contentTable]);
 
     return (
-        <Layout location={location}>
+        <Layout location={location} customAnnouncement={edgissaryDPMessage}>
             <Helmet>
                 <title>{metadata.metaTitle}</title>
                 <meta name="og:title" content={metadata.metaTitle} />

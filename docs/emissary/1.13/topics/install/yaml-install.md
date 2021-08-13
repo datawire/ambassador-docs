@@ -24,16 +24,29 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 1. In your terminal, run the following command:
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \
-    kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \
-    kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && \
-    kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
+    kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \
+    kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \
+    kubectl apply -f - <<EOF
+    --- 
+    apiVersion: v1 
+    kind: Service 
+    metadata: 
+      name: ambassador 
+    spec:
+      type: LoadBalancer 
+      externalTrafficPolicy: Local 
+      ports:
+      - port: 80 
+        targetPort: 8080
+      selector: 
+        service: ambassador 
+    EOF
     ```
 
 2. Determine the IP address or hostname of your cluster by running the following command:
 
     ```
-    kubectl get -n ambassador service ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}"
+    kubectl get service ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}"
     ```
 
     Your load balancer may take several minutes to provision your IP address. Repeat the provided command until you get an IP address.
@@ -56,113 +69,46 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 
     Use any of the URLs listed next to `ambassador` to access $productName$.
 
-3. Navigate to `http://<your-IP-address>` and click through the certificate warning for access to the Edge Policy Console interface. The certificate warning appears because, by default, $productName$ uses a self-signed certificate for HTTPS.
-    * Chrome users should click **Advanced > Proceed to website**.
-    * Safari users should click **Show details > visit the website** and provide your password.
-
-4. To login to the Edge Policy Console, download and install `edgectl`, the command line tool Edge Control, by following the provided instructions on the page. The Console lists the correct command to run and provides download links for the `edgectl` binary.
-
-  The Edge Policy Console must authenticate your session using a Kubernetes Secret in your cluster. Edge Control accesses that secret using `kubectl`, then sends a URL to your browser that contains the corresponding session key. This extra step ensures that access to the Edge Policy Console is just as secure as access to your Kubernetes cluster.
-
-  For more information, see [Edge Control](/docs/edge-stack/latest/topics/using/edgectl/edge-control/).
-
-5. To access the Edge Policy Console going forward, you can access it using one of the following options:
-  * `edgectl login -n <namespace> <AES_host>` or
-  * `https://{{AES_URL}}/edge_stack/admin`
-
-## Configure TLS termination and automatic HTTPS
-
-**$AESproductName$ enables TLS termination by default using a self-signed certificate. See the [Host CRD](../../../topics/running/host-crd) for more information about disabling TLS.** If you have the ability to update your DNS, $AESproductName$ can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create a Mapping."
-
-1. Update your DNS so that your domain points to the IP address for your cluster.
-
-2. In the Edge Policy Console, create a `Host` resource:
-   * On the "Hosts" tab, click the **Add** button on the right.
-   * Enter your hostname (domain) in the hostname field.
-   * Check the "Use ACME to manage TLS" box.
-   * Review the Terms of Service and check the box that you agree to the Terms of Service.
-   * Enter the email address to be associated with your TLS certificate.
-   * Click the **Save** button.
-
-  You'll see the newly created `Host` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [Host CRD](../../../topics/running/host-crd).
-
-3. Once the Host is ready, navigate to `https://<hostname>` in your browser.
-   Note that the certificate warning has gone away. Additionally, the $AESproductName$ automatically will redirect HTTP connections to HTTPS.
-
 ## Create a Mapping
 
 In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of $productName$. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
 
-1. We'll start by deploying the `quote` service. Save the below configuration into a file named `quote.yaml`. This is a basic configuration that tells Kubernetes to deploy the `quote` container and create a Kubernetes `service` that points to the `quote` container.
+1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
-   ```yaml
-   ---
-   apiVersion: v1
-   kind: Service
-   metadata:
-     name: quote
-     namespace: ambassador
-   spec:
-     ports:
-     - name: http
-       port: 80
-       targetPort: 8080
-     selector:
-       app: quote
-   ---
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-     name: quote
-     namespace: ambassador
-   spec:
-     replicas: 1
-     selector:
-       matchLabels:
-         app: quote
-     strategy:
-       type: RollingUpdate
-     template:
-       metadata:
-         labels:
-           app: quote
-       spec:
-         containers:
-         - name: backend
-           image: docker.io/datawire/quote:0.2.7
-           ports:
-           - name: http
-             containerPort: 8080
+  ```
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
+  ```
+
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
+
+  ```yaml
+  ---
+  apiVersion: getambassador.io/v2
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    prefix: /backend/
+    service: quote
+
+3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
+
+4. Grab the IP of your $productName$
+   
+   ```shell
+   export EMISSARY_LB_ENDPOINT=$(kubectl get svc ambassador \
+  -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
    ```
 
-2. Deploy the `quote` service to the cluster by typing the command `kubectl apply -f quote.yaml`.
-
-3. Now, create a `Mapping` configuration that tells $productName$ to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
-
-   ```yaml
-   ---
-   apiVersion: getambassador.io/v2
-   kind: Mapping
-   metadata:
-     name: quote-backend
-     namespace: ambassador
-   spec:
-     prefix: /backend/
-     service: quote
-   ```
-
-4. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
-
-5. Test the configuration by typing `curl -Lk https://<hostname>/backend/` or `curl -Lk https://<IP address>/backend/`. You should see something similar to the following:
+5. Test the configuration by typing `curl -Lk https://$EMISSARY_LB_ENDPOINT/backend/` or `curl -Lk https://<hostname>/backend/`. You should see something similar to the following:
 
    ```
-   (⎈ |rdl-1:default)$ curl -Lk https://aes.ri.k36.net/backend/
+   $ curl -Lk http://$EMISSARY_LB_ENDPOINT/backend/
    {
     "server": "idle-cranberry-8tbb6iks",
     "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
     "time": "2019-12-11T20:10:16.525471212Z"
    }
-   ```
 
 ## View your Service metadata using Service Catalog
 
@@ -171,34 +117,20 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 ## A single source of configuration
 
 In $productName$, Kubernetes serves as the single source of
-configuration. Changes made on the command line (via `kubectl`) are reflected in
-the UI, and vice versa. This enables a consistent configuration workflow.
-
-You can see this in action by navigating to the **Mappings** tab, or
-the **Hosts** tab. You'll see an entry for the `quote-backend` Mapping that was
-just created on the command line.
+configuration. This enables a consistent configuration workflow.
 
 1. To see your mappings via the command line, run `kubectl get mappings`
 
-2. If you configured TLS, you can type `kubectl get hosts` to see the `Host` resource that was created:
+2. If you created `Mappings` or other resources in another namespace, you can view them by adding `-n <namespace>` to the `kubectl get` command or add `-A` to view resources from every namespace. Without these flags, you will only see resources in the default namespace.
 
    ```
-   (⎈ |rdl-1:default)$ kubectl get hosts
-   NAME               HOSTNAME           STATE   PHASE COMPLETED   PHASE PENDING   AGE
-   aes.ri.k36.net     aes.ri.k36.net     Ready                                    158m
+   $ kubectl get mappings
+     NAME            SOURCE HOST   SOURCE PREFIX   DEST SERVICE   STATE   REASON
+     quote-backend                 /backend/       quote 
    ```
-
-## Developer onboarding
-
-The Quote service we just deployed publishes its API as a Swagger document. This API is automatically detected by $productName$ and published.
-
-1. In the Edge Policy Console, navigate to the **APIs** tab. You'll see the documentation there for internal use.
-
-2. Navigate to `https://<hostname>/docs/` or `https://<IP address>/docs/` to see
-   the externally visible Developer Portal (make sure you include the trailing
-   `/`). This is a fully customizable portal that you can share with third
-   parties who need information about your APIs.
 
 ## What’s next?
 
 $productName$ has a comprehensive range of [features](/features/) to support the requirements of any edge microservice.
+
+

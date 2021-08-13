@@ -23,44 +23,75 @@ Since this hook is required for Helm 2 support it **IS NOT AN ERROR AND CAN BE S
 When you run the Helm chart, it installs $productName$. You can
 deploy it with either version of the tool.
 
-1. If you are installing $productName$ **for the first time on your cluster**, create the `ambassador` namespace for $productName$:
+1. **Helm 3 users:** Install the $productName$ Chart with the following command:
 
    ```
-   kubectl create namespace ambassador
+   helm install ambassador datawire/ambassador --set enableAES=false 
    ```
 
-2. **Helm 3 users:** Install the $productName$ Chart with the following command:
+2. **Helm 2 users**: Install the $productName$ Chart with the following command:
 
    ```
-   helm install ambassador --namespace ambassador datawire/ambassador
+   helm install --name ambassador datawire/ambassador --set enableAES=false 
    ```
 
-3. **Helm 2 users**: Install the $productName$ Chart with the following command:
+3. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
 
-   ```
-   helm install --name ambassador --namespace ambassador datawire/ambassador
-   ```
+## Create a Mapping
 
-4. Finish the installation by running the following command: `edgectl install` (optional) \*
-5. Provide an email address when prompted to receive notices if your domain or TLS certificate is about to expire. (optional)
+In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of $productName$. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
 
-  Your terminal should print something similar to the following:
+1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
+
   ```
-     $ edgectl install
-     -> Installing $productName$ 1.0.
-     -> Existing $productName$ installation detected.
-     -> Automatically configuring TLS.
-     Please enter an email address. We’ll use this email address to notify you prior to domain and certification expiration [None]: john@example.com.
-     -> Obtaining a TLS certificate from Let’s Encrypt.
-
-     Congratulations, you’ve successfully installed $productName$ in your Kubernetes cluster. Visit https://random-word.edgestack.me to access your $productName$ installation and for additional configuration.
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
   ```
 
-  \* [Edge Control](/docs/edge-stack/latest/topics/using/edgectl/edge-control/) (`edgectl`) automatically configures TLS for your instance and provisions a domain name for your $productName$.  This is not necessary if you already have a domain name and certificates.
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
-  This will install the necessary deployments, RBAC, Custom Resource Definitions, etc. for $productName$ to route traffic. Details on how to configure $productName$ using the Helm chart can be found in the Helm chart [README](https://github.com/datawire/ambassador/tree/$branch$/charts/ambassador).
+  ```yaml
+  ---
+  apiVersion: getambassador.io/v2
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    prefix: /backend/
+    service: quote
 
-6. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
+3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
+
+4. Grab the IP of your $productName$
+   
+   ```shell
+   export EMISSARY_LB_ENDPOINT=$(kubectl get svc ambassador \
+  -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
+   ```
+
+5. Test the configuration by typing `curl -Lk https://$EMISSARY_LB_ENDPOINT/backend/` or `curl -Lk https://<hostname>/backend/`. You should see something similar to the following:
+
+   ```
+   $ curl -Lk http://$EMISSARY_LB_ENDPOINT/backend/
+   {
+    "server": "idle-cranberry-8tbb6iks",
+    "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
+    "time": "2019-12-11T20:10:16.525471212Z"
+   }
+
+## A single source of configuration
+
+In $productName$, Kubernetes serves as the single source of
+configuration. This enables a consistent configuration workflow.
+
+1. To see your mappings via the command line, run `kubectl get mappings`
+
+2. If you created `Mappings` or other resources in another namespace, you can view them by adding `-n <namespace>` to the `kubectl get` command or add `-A` to view resources from every namespace. Without these flags, you will only see resources in the default namespace.
+
+   ```
+   $ kubectl get mappings
+     NAME            SOURCE HOST   SOURCE PREFIX   DEST SERVICE   STATE   REASON
+     quote-backend                 /backend/       quote 
+   ```
 
 ## Upgrading an existing $productName$ installation
 
@@ -103,15 +134,38 @@ If you have an existing $OSSproductName$ installation but are not yet running $A
    If you're using **Helm 3**, simply run
 
    ```
-   helm upgrade --namespace ambassador ambassador datawire/ambassador
+   helm upgrade --namespace ambassador ambassador datawire/ambassador --set enableAES=true
    ```
 
    If you're using **Helm 2**, you need to modify the command slightly:
 
    ```
-   helm upgrade --set crds.create=false --namespace ambassador ambassador datawire/ambassador
+   helm upgrade --set crds.create=false --namespace ambassador ambassador datawire/ambassador --set enableAES=true
    ```
 
 At this point, $AESproductName$ should be running with the same functionality as $OSSproductName$ as well as the added features of $AESproductName$. It's safe to do any validation required and roll-back if necessary.
 
 **Note:** $AESproductName$ will be installed with an `AuthService` and `RateLimitService`. If you are using these plugins, set `authService.create=false` and/or `rateLimit.create=false` to avoid any conflict while testing the upgrade.
+
+## Test your Mapping over HTTPS after upgrading to $AESproductName$
+
+Upgrading to $AESproductName$ will provide automatic TLS support if you have not already configured it.
+
+1. Grab the IP of your $AESproductName$
+   - Note: Make sure to remove `-n ambassador` if you decided to not migrate to the `ambassador` namespace when upgrading to $AESproductName$ 
+   
+   ```shell
+   export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador \
+  -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
+   ```
+
+2. Try submitting a request to the quote service that you deployed above
+   
+   ```
+   $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/
+   {
+     "server": "idle-cranberry-8tbb6iks",
+     "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
+     "time": "2021-02-26T15:55:06.884798988Z"
+   }
+   ```

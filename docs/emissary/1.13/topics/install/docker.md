@@ -12,7 +12,7 @@ cannot be accessed.
 By default, $productName$ uses a demo configuration to show some of its basic features. Get it running with Docker, and expose $productName$ on port 8080:
 
 ```
-docker run -it -p 8080:8080 --name=ambassador --rm docker.io/datawire/aes:$version$ --demo
+docker run -it -p 8080:8080 --name=ambassador --rm docker.io/datawire/ambassador:$version$ --demo
 ```
 
 ## 2. $productName$'s diagnostics

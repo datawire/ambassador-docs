@@ -21,7 +21,7 @@ Argo is an open source suite of projects that helps developers safely deploy cod
 
 Within a GitOps context, Argo makes application deployment and lifecycle management easier, particularly as the line between developers and operators disappears, because it automates deployment, makes rollbacks easier and can be audited for easier troubleshooting.
 
-For this guide, we will build a CD pipeline to deploy an app from a repo into a Kubernetes cluster, then perform a [canary release](../concepts/canary) on that app to test incrementally rolling out a new version.
+For this guide, we will build a CD pipeline to deploy an app from a repo into a Kubernetes cluster, then perform a [canary release](/docs/argo/latest/concepts/canary) on that app to test incrementally rolling out a new version.
 
 Argo can use Kubernetes projects formatted using different templating systems (Helm, Kustomize, etc.) but for this app we're just going to deploy a folder of static YAML files.
 
@@ -32,9 +32,9 @@ Argo can use Kubernetes projects formatted using different templating systems (H
 
 ## 1. Install and configure Edge Stack
 
-You'll first need to install Edge Stack in your cluster. Follow the [Edge Stack installation](../../../edge-stack/1.13/tutorials/getting-started) to install via Kubernetes YAML, Helm, or the command-line installer in your cluster.
+You'll first need to install Edge Stack in your cluster. Follow the [Edge Stack installation](/docs/edge-stack/1.13/tutorials/getting-started) to install via Kubernetes YAML, Helm, or the command-line installer in your cluster.
 
-By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use [endpoint routing](../../../edge-stack/1.13/topics/running/resolvers/). Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
+By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use [endpoint routing](/docs/edge-stack/1.13/topics/running/resolvers/). Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
 
 ```yaml
 apiVersion: getambassador.io/v2
