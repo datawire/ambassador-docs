@@ -244,9 +244,12 @@ export default ({ data, location }) => {
                     {children}
                     {footer}
                 </div>
-                <div className="docs__table-content docs-article-toc">
-                    <ContentTable items={page.contentTable.items} versions={versions}/>
-                </div>
+                { page.contentTable.items ?
+                    <div className="docs__table-content">
+                        <p>ON THIS PAGE</p>
+                        <ContentTable items={page.contentTable.items} versions={versions}/>
+                    </div>
+                : <></>}
         </div>
     )
 
