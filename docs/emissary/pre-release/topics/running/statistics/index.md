@@ -28,6 +28,22 @@ underscores:
 - `service: foo` will just use `foo`
 - `service: foo:8080` will use `foo_8080`
 - `service: http://foo:8080` will use `http___foo_8080`
+- `service: foo.othernamespace` will use `foo_othernamespace`
+
+The last example is worth special mention: a resource in a different namespace than the one in which $productName$ is running will automatically be qualified with the namespace of the resource itself. So, for example, if $productName$ is running in the `ambassador` namespace, and this `AmbassadorMapping` is present in the `default` namespace:
+
+```yaml
+apiVersion: getambassador.io/v3alpha1
+kind: AmbassadorMapping
+metadata:
+  name: default-mapping
+  namespace: default
+spec:
+  prefix: /default/
+  service: default-service
+```
+
+then the `service` will be qualified to `default-service.default`, so the `stats_name` will be `default_service_default` rather than simply `default_service`. To change this behavior, set `stats_name` explicitly.
 
 ## Monitoring Statistics
 
