@@ -9,8 +9,10 @@ const ContentTable = ({
 }) => {
 
   const formatString = (title) => {
+    if (title) {
     title = title.replace(/<\/?[^>]+(>|$)/g, "");
     return template(title, versions);
+    }
   }
 
   const rootElement = ".docs__doc-body-container";
