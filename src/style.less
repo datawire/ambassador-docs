@@ -590,8 +590,6 @@ body {
       align-items: flex-start;
       letter-spacing: 0.4px;
       font-feature-settings: 'ss02' on;
-      transition: color 2000ms linear 0ms;
-      transition-property: background-color, color;
       position: absolute;
       right: 1rem;
       @media (max-width: 1200px) {
@@ -614,6 +612,9 @@ body {
       a {
         color: @blue;
         text-decoration: underline;
+        transition: color 200ms linear 0ms;
+        transition-property: background-color, color;
+        transition-delay: 100ms;
       }
       a:hover, li.current>a {
         color: @blue-dark;
