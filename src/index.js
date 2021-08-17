@@ -245,12 +245,13 @@ export default ({ data, location }) => {
                         {children}
                         {footer}
                     </div>
-                    { page.contentTable.items ?
+                    { page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 0 &&
                         <div className="docs__doc-body-container__table-content">
                             <p>ON THIS PAGE</p>
+                            {console.log("esto es", page?.contentTable?.items)}
                             <ContentTable items={page.contentTable.items} versions={versions}/>
                         </div>
-                    : <></>}
+                    }
                 </div>
         </div>
     )
