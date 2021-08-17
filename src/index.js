@@ -241,15 +241,17 @@ export default ({ data, location }) => {
                 isLearning={isLearning}
                 />
                 <div className="docs__doc-body-container">
-                    {children}
-                    {footer}
-                </div>
-                { page.contentTable.items ?
-                    <div className="docs__table-content">
-                        <p>ON THIS PAGE</p>
-                        <ContentTable items={page.contentTable.items} versions={versions}/>
+                    <div className="docs__doc-body-container__article">
+                        {children}
+                        {footer}
                     </div>
-                : <></>}
+                    { page.contentTable.items ?
+                        <div className="docs__doc-body-container__table-content">
+                            <p>ON THIS PAGE</p>
+                            <ContentTable items={page.contentTable.items} versions={versions}/>
+                        </div>
+                    : <></>}
+                </div>
         </div>
     )
 
