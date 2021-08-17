@@ -4,7 +4,7 @@ Sometimes requests fail. When these requests fail for transient issues, $product
 
 Retry policy can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`AmbassadorMapping`](../mappings#configuring-ambassadormappings). Generally speaking, you should set `retry_policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
 
-Note that when setting `retry_policy`, adjusting `max_retries` in the [circuit breaker](https://www.getambassador.io/docs/edge-stack/pre-release/topics/using/circuit-breakers/) configuration should also be considered in order to account for all desired retries.
+> Note that when setting `retry_policy`, adjusting `max_retries` in the [circuit breaker](https://www.getambassador.io/docs/edge-stack/pre-release/topics/using/circuit-breakers/) configuration should also be considered in order to account for all desired retries.
 
 ## Configuring retries
 
