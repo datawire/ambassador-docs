@@ -570,7 +570,7 @@ body {
 
     &__article {
       max-width: 1175px;
-      width: 80%;
+      width: 78%;
     }
 
     &__table-content {
@@ -591,9 +591,21 @@ body {
       letter-spacing: 0.4px;
       font-feature-settings: 'ss02' on;
       position: absolute;
-      right: 1rem;
+      left: 80%;
       @media (max-width: 1200px) {
         display: none;
+      }
+      @media (min-width: 1850px) {
+        left: 78%;
+      }
+      @media (min-width: 1900px) {
+        left: 76%;
+      }
+      @media (min-width: 1950px) {
+        left: 74%;
+      }
+      @media (min-width: 2000px) {
+        left: 73%;
       }
     
       p {
