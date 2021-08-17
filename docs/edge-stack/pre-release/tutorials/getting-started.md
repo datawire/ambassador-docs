@@ -90,7 +90,6 @@ EOF
   kind: AmbassadorMapping
   metadata:
     name: quote-backend
-    namespace: $productNamespace$
   spec:
     hostname: "*"
     prefix: /backend/
