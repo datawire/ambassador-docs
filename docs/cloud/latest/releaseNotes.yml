@@ -29,6 +29,13 @@
 
 changelog: ''
 items:
+  - date: "2021-08-18"
+    notes:
+      - title: Automated Configuration Analysis with the Ambassador DCP
+        body: "Visualize the impact of Edge Stack and Emissary-ingress configuration changes to Kubernetes clusters before deploying any changes."
+        type: feature
+        image: ./gitops-quickstart-warning.png
+        docs: gitops/quick-start/
   - date: '2021-08-16'
     notes:
       - title: "Visualize your APIs"
