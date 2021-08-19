@@ -19,24 +19,34 @@ const ContentTable = ({
   const [active, setActive] = useState("");
   let content = items && items[0].items ? items[0].items : [];
   let ids = content.map(c => c["url"] && c["url"].substring(1));
-  const down = useScrollDirection(rootElement);
-
+  //const down = useScrollDirection(rootElement);
 
   const onActive = id => {
     let value = "#" + id;
-    if (!down) {
+    /*if (!down) {
       const index = ids.indexOf(id);
       value = index > 0 ? ids[index - 1] : ids[0];
       value = "#" + value;
-    }
+    }*/
     setActive(value)
   }
+
+  const onClick = (ev) => {
+      const frag = ev.target.id.substr(1);
+      const target = document.getElementById(frag);
+      if (target) {
+        console.log("aqui", target)
+        target.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }
+    };
 
   return (
     <ScrollSpyWrapper items={ids} rootEl={rootElement} onUpdate={onActive}>
       {content.map(i => (
         <li key={i.url} className={active === i.url && "current"}>
-          <a href={i.url}>{formatString(i.title)}</a>
+          <a id={i.url} onClick={onClick}>{formatString(i.title)}</a>
         </li>
       ))}
     </ScrollSpyWrapper>
@@ -46,7 +56,7 @@ const ContentTable = ({
 };
 
 
-const useScrollDirection = (element) => {
+/*const useScrollDirection = (element) => {
   const prevPositionY = useRef();
   const [down, setDown] = useState(true);
 
@@ -63,7 +73,7 @@ const useScrollDirection = (element) => {
   }
 
   return down;
-}
+}*/
 
 const ScrollSpyWrapper = ({ children, onUpdate, ...rest }) => {
   return (
