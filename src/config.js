@@ -36,6 +36,7 @@ export const products = [
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
             { id: "2.0", name: "2.0", link: "2.0/tutorials/getting-started" },
             { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
+            { id: "1.14", name: "1.14", link: "1.14/tutorials/getting-started" },
             { id: "1.12", name: "1.12", link: "1.12/tutorials/getting-started", archived: true },
             { id: "1.11", name: "1.11", link: "1.11/tutorials/getting-started", archived: true },
             { id: "1.10", name: "1.10", link: "1.10/tutorials/getting-started", archived: true },
@@ -59,6 +60,7 @@ export const products = [
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
             { id: "2.0", name: "2.0", link: "2.0/tutorials/getting-started" },
             { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
+            { id: "1.14", name: "1.14", link: "1.14/tutorials/getting-started" },
         ]
     },
     {
