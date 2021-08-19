@@ -36,7 +36,7 @@ items:
         type: change
         body: "Upgraded Envoy from 1.15 to 1.17, see the Envoy changelog for more information"
         docs: https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history
-      - title: Expose Envoy's <code>allow_chunked_length</code> HTTPProtocolOption
+      - title: Expose Envoy's allow_chunked_length HTTPProtocolOption
         type: feature
         body: "You can now set <code>allow_chunked_length</code> in the Ambassador Module to configure the same value in Envoy"
         docs: topics/running/ambassador/#content-length-headers
