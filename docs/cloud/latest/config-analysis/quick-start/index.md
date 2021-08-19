@@ -52,7 +52,7 @@ If you do not have the latest version installed, you can:
 
 1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
 
-2. At the top, click **Add Services** then click **Connection Instructions** in the `Connect your installation` section.
+2. Click **Add Services** at the top, then click **Connection Instructions** in the `Connect your installation` section.
 
 3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 
@@ -76,7 +76,7 @@ kubectl create namespace gitops-demo && \
     kubectl apply -n gitops-demo -f ./manifests
 ```
 
-This will create a `Deployment`, `Service` and `AmbassadorMapping` in the `gitops-demo` namespace in your cluster. All resources applied in this guide can be removed by running `kubectl delete namespace gitops-demo` when you're done with the quickstart.
+This will create a `Deployment`, `Service`, and `AmbassadorMapping` in the `gitops-demo` namespace in your cluster. All resources applied in this guide can be removed by running `kubectl delete namespace gitops-demo` when you're done with the quickstart.
 
 <Alert severity="info">The <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> should display information about the `quote` service!</Alert>
 
@@ -84,11 +84,11 @@ This will create a `Deployment`, `Service` and `AmbassadorMapping` in the `gitop
 
 1. Navigate to the <a href="https://app.getambassador.io/cloud/settings/teams" target="_blank">Teams Settings page</a> in Ambassador Cloud.
 
-2. Click the "Integrations" button to navigate to the github settings page.
+2. Click the **INTEGRATIONS** button to navigate to the github settings page.
 
     ![Integrations](../../images/gitops-quickstart-02.png)
 
-3. Click "Manage Permissions". You will be taken to github.com and asked to choose which account you want to install Ambassador DCP.
+3. Click **MANAGE PERMISSIONS**. You will be taken to github.com and asked to choose which account you want to install Ambassador DCP.
 
     ![Manage Permissions](../../images/gitops-quickstart-03.png)
 
@@ -100,23 +100,21 @@ This will create a `Deployment`, `Service` and `AmbassadorMapping` in the `gitop
 
     ![Git configure](../../images/gitops-quickstart-x2.png)
 
-    After clicking "Install", you will be directed back to the Ambassador DCP.
+    After clicking **Install**, you will be directed back to the Ambassador DCP.
 
-4. Once back in the Ambassador DCP, find the `a8r-gitops-example` demo repository in the list of repositories, and click "Enable".
+5. Once back in the Ambassador DCP, find the `a8r-gitops-example` demo repository in the list of repositories and click **Enable**.
 
     ![Enable Repository](../../images/gitops-quickstart-04.png)
 
-5. Configure the Ambassador DCP to access your cluster information and Kubernetes manifests from git.
+6. Configure the Ambassador DCP to access your cluster information and Kubernetes manifests from Git.
 
-    For the `manifest` text box, enter the relative path to your Kubernetes manifest files in your repository. For the demo repository, the [manifests](https://github.com/datawire/a8r-gitops-example/tree/main/manifests) live in the `manifest` directory.
+    For the `manifest` text box, enter the relative path to your Kubernetes manifest files in your repository. For the demo repository, the [manifests](https://github.com/datawire/a8r-gitops-example/tree/main/manifests) live in the `manifests` directory.
 
-    Select the cluster you initialized in step 1 from the `cluster` drop down.
-
-    Hit `Submit`. This will trigger the Ambassador DCP to create a pull request with the information you just entered into your demo repository.
+    Select the cluster you initialized in step 1 from the `cluster` dropdown.
 
     ![GitOps Form](../../images/gitops-quickstart-05.png)
 
-6. Click `Submit`. This will trigger the Ambassador DCP to create a pull request with the information you just entered into your demo repository. The pull request will add a file named `.a8r.yaml` to the root of your repository, and the contents will look something like this:
+7. Click on the **UPDATE GITOPS SETTINGS** button. This will trigger the Ambassador DCP to create a pull request with the information you just entered into your demo `a8r-gitops-example` repository. The pull request will add a file named `.a8r.yaml` to the root of your repository, and the contents will look something like this:
 
     ```
     k8s_config:
@@ -126,15 +124,18 @@ This will create a `Deployment`, `Service` and `AmbassadorMapping` in the `gitop
         cluster_name: My Awesome Cluster
     ```
 
-7. Merge the pull request to the main branch of your demo repo.
+8. Merge the pull request to the main branch of the `a8r-gitops-example` repository.
 
 <Alert severity="success"><b>Congrats!</b> Your demo repository is now configured to receive pull request feedback from the Ambassador DCP. </Alert>
 
 ## 5. Create a Pull Request
 
-Now that your repository is configured to recieve feedback from the Ambassador DCP, let's create a pull request modifying Kubernetes resources to the demo repository.
+Now that your repository is configured to receive feedback from the Ambassador DCP, let's create a pull request that modifies the Kubernetes resources in the `a8r-gitops-example` demo repository.
 
-Write the following yaml to the `manifests/echo-service.yaml` directory.
+First, navigate to the root of your local `a8r-gitops-example` demo repository and run `git pull` to fetch the newly merged `.a8r.yaml` from your global `a8r-gitops-example` demo repository.
+
+Then, create a new YAML file named `echo-service.yaml` in the `manifests` directory and paste the YAML below: 
+
 
 ```yaml
 apiVersion: apps/v1
@@ -192,11 +193,11 @@ git add manifests/echo-service.yaml
 git commit -am 'Add new echo service' && git push -u origin new-echo-service
 ```
 
-Navigate to github to create a pull request for your change. Make sure the target repository is in your git organization, not `datawire`.
+Navigate to GitHub to create a pull request for your change. Make sure the target repository is in your git organization, not `datawire`.
 
 ## 6. Review & merge Pull Request
 
-When you create a new pull request that changes your configuration, Ambassador DCP will be automaticall notified. The configuration change that you make is compared to your existing (runtime) configuration change, and the implications of this change are analyzed. Ambassador DCP will post a comment analyzing the consequences of merging the pull request into your main branch.
+When you create a new pull request that changes your configuration, Ambassador DCP will be automatically notified. The configuration change that you make is compared to your existing (runtime) configuration change, and the implications of this change are analyzed. Ambassador DCP will post a comment analyzing the consequences of merging the pull request into your main branch.
 
 In this example, Ambassador DCP detects a conflict on the `/backend` route, as multiple `AmbassadorMappings` point to the same route.
 
