@@ -243,14 +243,14 @@ export default ({ data, location }) => {
                 <div className="docs__doc-body-container">
                     <div className="docs__doc-body-container__article">
                         {children}
-                        {footer}
+                            { page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 &&
+                            <div className="docs__doc-body-container__table-content">
+                                <p>ON THIS PAGE</p>
+                                <ContentTable items={page.contentTable.items} versions={versions}/>
+                            </div>
+                            }   
                     </div>
-                    { page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 &&
-                        <div className="docs__doc-body-container__table-content">
-                            <p>ON THIS PAGE</p>
-                            <ContentTable items={page.contentTable.items} versions={versions}/>
-                        </div>
-                    }
+                        {footer}
                 </div>
         </div>
     )
