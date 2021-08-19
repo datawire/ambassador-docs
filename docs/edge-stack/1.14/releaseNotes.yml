@@ -34,7 +34,7 @@ items:
     notes:
       - title: Envoy upgraded to 1.17!
         type: change
-        body: "Upgraded Envoy from 1.15 to 1.17, see the Envoy changelog for more information"
+        body: "Upgraded Envoy from 1.15 to 1.17, see the <a href=\"https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history\">Envoy changelog</a> for more information"
         docs: https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history
       - title: Expose Envoy's allow_chunked_length HTTPProtocolOption
         type: feature
