@@ -10,8 +10,8 @@ const ContentTable = ({
 
   const formatString = (title) => {
     if (title) {
-    title = title.replace(/<\/?[^>]+(>|$)/g, "");
-    return template(title, versions);
+    const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d./g, "");
+    return template(formatedTitle, versions);
     }
   }
 
@@ -19,15 +19,9 @@ const ContentTable = ({
   const [active, setActive] = useState("");
   let content = items && items[0].items ? items[0].items : [];
   let ids = content.map(c => c["url"] && c["url"].substring(1));
-  //const down = useScrollDirection(rootElement);
 
   const onActive = id => {
     let value = "#" + id;
-    /*if (!down) {
-      const index = ids.indexOf(id);
-      value = index > 0 ? ids[index - 1] : ids[0];
-      value = "#" + value;
-    }*/
     setActive(value)
   }
 
@@ -35,7 +29,6 @@ const ContentTable = ({
       const frag = ev.target.id.substr(1);
       const target = document.getElementById(frag);
       if (target) {
-        console.log("aqui", target)
         target.scrollIntoView({
           behavior: 'smooth',
         });
@@ -54,26 +47,6 @@ const ContentTable = ({
 
 
 };
-
-
-/*const useScrollDirection = (element) => {
-  const prevPositionY = useRef();
-  const [down, setDown] = useState(true);
-
-  useEffect(() => {
-    const root = document.querySelector(element);
-    prevPositionY.current = 0;
-    root.addEventListener("scroll", handleDirection);
-  }, []);
-
-  const handleDirection = e => {
-    const positionY = e.srcElement.scrollTop;
-    setDown(positionY > prevPositionY.current);
-    prevPositionY.current = positionY;
-  }
-
-  return down;
-}*/
 
 const ScrollSpyWrapper = ({ children, onUpdate, ...rest }) => {
   return (
