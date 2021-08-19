@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
-import { Helmet } from 'react-helmet';
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
@@ -24,6 +23,7 @@ import ReadingTime from '../../src/components/ReadingTime';
 import Icon from '../../src/components/Icon';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import SidebarContent from './components/SidebarContent';
+import SEO from "../../src/components/SEO/SEO";
 import './style.less';
 
 export default ({ data, location }) => {
@@ -323,19 +323,15 @@ export default ({ data, location }) => {
 
     return (
         <Layout location={location} customAnnouncement={edgissaryDPMessage}>
-            <Helmet>
-                <title>{metadata.metaTitle}</title>
-                <meta name="og:title" content={metadata.metaTitle} />
-                <meta name="og:type" content="article" />
-                <link rel="canonical" href={canonicalUrl} />
-                <meta name="description" content={metadata.metaDescription} />
-                {!isMobile &&
+            <SEO title={metadata.metaTitle} type="article" canonicalUrl={canonicalUrl} description={metadata.metaDescription}>
+                 {!isMobile &&
                     <link
                         rel="stylesheet"
                         href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
                     />}
                 {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
-            </Helmet>
+            </SEO>
+
             <div className="docs">
                 <nav>
                     <div className="docs__nav">
