@@ -242,23 +242,29 @@ export default ({ data, location }) => {
                 />
                 <div className="docs__doc-body-container">
                     <div className="docs__doc-body-container__article">
-                        {children}
+                        <div className="docs__doc-body-container__article flex-toc">
+                            {children}
+                        </div>
+                        <div className="docs__doc-body-container__article docs__doc-body-container__article-toc">
                             { page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 &&
                             <div className="docs__doc-body-container__table-content">
                                 <p>ON THIS PAGE</p>
                                 <ContentTable items={page.contentTable.items} versions={versions}/>
                             </div>
                             }   
+                        </div>
                     </div>
+                    <div className="docs__doc-body-container__article-footer">
                         {footer}
+                    </div>
                 </div>
         </div>
     )
 
     const footer = (
-        <div>
-            <hr className="docs__separator docs__container" />
-            <section className="docs__contact docs__container">
+        <div className="docs__container docs__footer-container">
+            <hr className="docs__separator docs__container docs__footer-container" />
+            <section className="docs__contact docs__container docs__footer-container">
                 <ContactBlock />
             </section>
             {!isHome && !isProductHome && isProduct && (

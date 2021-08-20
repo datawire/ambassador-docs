@@ -128,7 +128,7 @@ body {
   }
 
   &__container {
-    width: 73%;
+    width: 100%;
     max-width: @docs-max-width;
     margin: auto;
   }
@@ -568,7 +568,6 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-
   }
 
   &__spinner {
@@ -937,22 +936,38 @@ body {
   transition: fill .2s linear;
   vertical-align: middle;
 }
-.docs__doc-body-container__article {
-  max-width: 1175px;
-  width: 78%;
-  display: flex;
-  @media (max-width: 1200px) {
-    width: 100%;
-  }
+
+.docs__footer-container {
+  max-width: 1375px;
 }
 
- .docs__doc-body-container__table-content {
+.docs__doc-body-container__article {
+  display: flex;
+  justify-content: center;  
+  width: 100%;
+}
+
+.docs__separator-continer {
+  display: flex;
+  justify-content: start;  
+  width: 100%;
+}
+
+.flex-toc {
+  max-width: 1175px;
+}
+
+.docs__doc-body-container__article-toc{
+  width: 200px;
+}
+
+.docs__doc-body-container__table-content {
   height: fit-content;
-  width: 17%;
+  width: 200px;
+  margin: 20px 10px;
   border: 1px solid #E5E5E5;
   border-radius: 4px;
   background-color: white;
-  margin: 20px 10px 5px 10px;
   padding: 10px 25px;
   font-family: Inter;
   font-style: normal;
@@ -960,26 +975,13 @@ body {
   font-size: 12px;
   line-height: 18px;
   display: flex;
+  position: absolute;
   flex-direction: column;
   align-items: flex-start;
   letter-spacing: 0.4px;
   font-feature-settings: 'ss02' on;
-  position: absolute;
-  left: 80%;
   @media (max-width: 1200px) {
     display: none;
-  }
-  @media (min-width: 1850px) {
-    left: 78%;
-  }
-  @media (min-width: 1900px) {
-    left: 76%;
-  }
-  @media (min-width: 1950px) {
-    left: 74%;
-  }
-  @media (min-width: 2000px) {
-    left: 73%;
   }
 
   p {
