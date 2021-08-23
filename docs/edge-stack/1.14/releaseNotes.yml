@@ -29,6 +29,13 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 1.14.1
+    date: '2021-08-24'
+    notes:
+      - title: Envoy security updates
+        type: change
+        body: "Upgraded envoy to 1.17.4 to address security vulnerabilities"
+        docs: https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history
   - version: 1.14.0
     date: "2021-08-19"
     notes:
