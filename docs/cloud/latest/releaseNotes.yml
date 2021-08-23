@@ -29,6 +29,13 @@
 
 changelog: ''
 items:
+  - date: "2021-09-06"
+    notes:
+      - title: "Heads Up Display"
+        body: "Develop your services using the HUD (Heads Up Display). With many widgets available, the HUD is your new day-to-day assistant to create intercepts, visualize the health of the requests during rollouts, and more!"
+        type: feature
+        image: ./cloud-hud.png
+        docs: service-catalog/quick-start/
   - date: "2021-08-18"
     notes:
       - title: Automated Configuration Analysis with the Ambassador DCP
