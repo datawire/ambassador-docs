@@ -35,7 +35,7 @@ items:
       - title: Envoy security updates
         type: change
         body: "Upgraded envoy to 1.17.4 to address security vulnerabilities"
-        docs: https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history
+        docs: https://groups.google.com/g/envoy-announce/c/5xBpsEZZDfE
   - version: 1.14.0
     date: "2021-08-19"
     notes:
