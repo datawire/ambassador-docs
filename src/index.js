@@ -264,7 +264,7 @@ export default ({ data, location }) => {
     const footer = (
         <div>
             <section className="docs__contact docs__container">
-                <hr className="docs__separator" />
+                <hr className="docs__separator-footer" />
                 <ContactBlock />
             </section>
             {!isHome && !isProductHome && isProduct && (

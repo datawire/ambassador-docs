@@ -53,6 +53,7 @@ body {
     overflow: auto;
     flex-shrink: 1;
     flex-grow: 1;
+    padding: 32px 42px;
   }
 
   &__links-content {
@@ -128,7 +129,7 @@ body {
   }
 
   &__container {
-    width: 73%;
+    width: 100%;
     max-width: @docs-max-width;
     margin: auto;
   }
@@ -185,6 +186,7 @@ body {
   }
 
   .product-page {
+    padding: 32px 42px;
     .docs__heading-primary {
       height: 70px;
     }
@@ -241,10 +243,7 @@ body {
     border-left: none;
     border-right: none;
     border-top: none;
-    margin: 40px auto 40px -55px;
-    @media (max-widh: 1699) {
-      margin: 40px auto 40px 0px;
-    }
+    margin: 40px auto;
   }
 
   &__cards {
@@ -378,7 +377,7 @@ body {
   }
 
   &__contact {
-    padding: 0 42px 162px 0px;
+    padding: 32px 42px 162px 42px;
   }
 
   &__container-doc {
@@ -942,6 +941,17 @@ body {
 
 .docs__footer-container {
   max-width: 1375px;
+}
+
+.docs__separator-footer {
+  border: 1px solid @grey-separator;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: 40px auto 40px -55px;
+  @media (max-width: 1699px) {
+    margin: 40px auto;
+  } 
 }
 
 .docs__doc-body-container__article {
