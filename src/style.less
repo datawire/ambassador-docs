@@ -128,10 +128,9 @@ body {
   }
 
   &__container {
-    width: 100%;
+    width: 73%;
     max-width: @docs-max-width;
     margin: auto;
-    padding: 32px 42px;
   }
 
   &__info {
@@ -242,7 +241,10 @@ body {
     border-left: none;
     border-right: none;
     border-top: none;
-    margin: 40px auto;
+    margin: 40px auto 40px -55px;
+    @media (max-widh: 1699) {
+      margin: 40px auto 40px 0px;
+    }
   }
 
   &__cards {
@@ -376,7 +378,7 @@ body {
   }
 
   &__contact {
-    padding: 0 42px 162px 42px;
+    padding: 0 42px 162px 0px;
   }
 
   &__container-doc {
@@ -955,7 +957,7 @@ body {
 }
 
 .flex-toc {
-  max-width: 1175px;
+  max-width: @docs-max-width;
 }
 
 .docs__doc-body-container__article-toc{

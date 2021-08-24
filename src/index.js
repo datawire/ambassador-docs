@@ -262,9 +262,9 @@ export default ({ data, location }) => {
     )
 
     const footer = (
-        <div className="docs__container docs__footer-container">
-            <hr className="docs__separator docs__container docs__footer-container" />
-            <section className="docs__contact docs__container docs__footer-container">
+        <div>
+            <section className="docs__contact docs__container">
+                <hr className="docs__separator" />
                 <ContactBlock />
             </section>
             {!isHome && !isProductHome && isProduct && (
