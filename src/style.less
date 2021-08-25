@@ -53,7 +53,6 @@ body {
     overflow: auto;
     flex-shrink: 1;
     flex-grow: 1;
-    padding: 32px 42px;
   }
 
   &__links-content {
@@ -129,7 +128,7 @@ body {
   }
 
   &__container {
-    width: 100%;
+    width: 90%;
     max-width: @docs-max-width;
     margin: auto;
   }
@@ -186,7 +185,6 @@ body {
   }
 
   .product-page {
-    padding: 32px 42px;
     .docs__heading-primary {
       height: 70px;
     }
@@ -377,7 +375,7 @@ body {
   }
 
   &__contact {
-    padding: 32px 42px 162px 42px;
+    padding-bottom: 162px;
   }
 
   &__container-doc {
@@ -887,10 +885,6 @@ body {
       }
     }
 
-    &__contact {
-      margin-left: 0;
-    }
-
     &__text-primary {
       width: 100%;
     }
@@ -940,7 +934,7 @@ body {
 }
 
 .docs__footer-container {
-  max-width: 1375px;
+  max-width: 1175px;
 }
 
 .docs__separator-footer {
@@ -948,9 +942,15 @@ body {
   border-left: none;
   border-right: none;
   border-top: none;
-  margin: 40px auto 40px -100px;
+  margin: 40px auto 40px -70px;
+  width: 90%;
+  max-width: 1175px;
   @media (max-width: 1699px) {
-    margin: 40px auto;
+    margin: 40px auto 40px -30px;
+    width: 80%;
+  } 
+  @media (max-width: 1200px) {
+    width: 100%;
   } 
 }
 
@@ -967,11 +967,18 @@ body {
 }
 
 .flex-toc {
+  width: 80%;
   max-width: @docs-max-width;
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 }
 
 .docs__doc-body-container__article-toc{
-  width: 200px;
+  width: 20%;
+  max-width: 200px;
+  box-sizing: content-box;
+  margin-right: 50px;
   @media (max-width: 1200px) {
     display: none;
   }

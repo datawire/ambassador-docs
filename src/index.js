@@ -241,6 +241,7 @@ export default ({ data, location }) => {
                 isLearning={isLearning}
                 />
                 <div className="docs__doc-body-container">
+                {console.log("here", product)}
                     <div className="docs__doc-body-container__article">
                         <div className="docs__doc-body-container__article flex-toc">
                             {children}
@@ -263,9 +264,12 @@ export default ({ data, location }) => {
 
     const footer = (
         <div>
+            {product.slug === "home" && 
+            <hr className="docs__separator docs__container" />}
             <section className="docs__contact docs__container">
-                <hr className="docs__separator-footer" />
-                <ContactBlock />
+                {product.slug !== "home" && 
+                <hr className="docs__separator docs__container docs__separator-footer" />}
+                <ContactBlock product={product.slug}/>
             </section>
             {!isHome && !isProductHome && isProduct && (
                 <DocsFooter page={page} product={product.slug} version={versions.docsVersion} />
