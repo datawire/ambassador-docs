@@ -43,12 +43,35 @@ export default ({ data, location , pageContext}) => {
 
     const initialVersion = !isProductHome ? tempVersion : initialProduct.version.filter(v => v.id === "latest")[0];
     function createEdgissaryDevPrevMsg(newVer, newProduct) {
-      if ((newVer.id === "2.0" || newVer.id === "pre-release") || (newProduct.slug !== "emissary" && newProduct.slug !== "edge-stack")) {
-        return "";
+        if (
+            process.env.GATSBY_ARCHIVE_DOCS &&
+            (newProduct.slug === 'emissary' ||
+              newProduct.slug === 'edge-stack' ||
+              newProduct.slug === 'telepresence')
+          ) {
+          return (
+            <p>
+              {`This document covers an unsupported and archived version of 
+                                            ${newProduct.name}. `}
+              <a href={`https://www.getambassador.io/docs/${newProduct.slug}`}>
+                Read the latest documentation to learn how to upgrade.
+              </a>
+            </p>
+          );
+        }
+        if (
+          newVer.id === '2.0' ||
+          newVer.id === 'pre-release' ||
+          (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
+        ) {
+          return '';
+        }
+        return (
+          <a
+            href={`/docs/${newProduct.slug}/2.0/tutorials/getting-started/`}
+          >{`${newProduct.name} 2.0 is now available for Developer Preview!`}</a>
+        );
       }
-      return <a href={`/docs/${newProduct.slug}/2.0/tutorials/getting-started/`}>{`${newProduct.name} 2.0 is now available for Developer Preview!`}</a>;
-
-    }
     const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(initialVersion, initialProduct);
 
     const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
