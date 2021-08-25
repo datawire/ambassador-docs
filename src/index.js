@@ -5,7 +5,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
 import Search from './images/search.inline.svg';
-import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl } from './config';
+import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl , getSiteUrl } from './config';
 import DocsHome from './components/DocsHome';
 import Dropdown from '../../src/components/Dropdown';
 import DocsFooter from './components/DocsFooter';
@@ -26,8 +26,7 @@ import SidebarContent from './components/SidebarContent';
 import SEO from "../../src/components/SEO/SEO";
 import './style.less';
 
-export default ({ data, location }) => {
-
+export default ({ data, location , pageContext}) => {
     const page = data.mdx || {};
     const slug = page.fields.slug.split('/');
     const isHome = page.fields.slug === '/docs/';
@@ -40,11 +39,7 @@ export default ({ data, location }) => {
         : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
     const isProduct = initialProduct.slug !== products[0].slug;
     const isProductHome = isProduct && !isArchivedVersions && !!!tempVersion.id;
-    const canonicalUrl = isHome
-        ? 'https://www.getambassador.io/docs/'
-        : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
-            .slice(4)
-            .join('/')}`;
+    const canonicalUrl = (pageContext.canonical.latest? siteUrl: getSiteUrl())+pageContext.canonical.url;
 
     const initialVersion = !isProductHome ? tempVersion : initialProduct.version.filter(v => v.id === "latest")[0];
     function createEdgissaryDevPrevMsg(newVer, newProduct) {
