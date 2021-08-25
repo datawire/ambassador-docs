@@ -4,7 +4,6 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import Layout from '../../src/components/Layout';
 import template from '../../src/utils/template';
-import Search from './images/search.inline.svg';
 import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl } from './config';
 import DocsHome from './components/DocsHome';
 import Dropdown from '../../src/components/Dropdown';
@@ -22,6 +21,7 @@ import ContactBlock from '../../src/components/ContactBlock';
 import ReadingTime from '../../src/components/ReadingTime';
 import Icon from '../../src/components/Icon';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
+import SearchBox from './components/SearchBox';
 import SidebarContent from './components/SidebarContent';
 import SEO from "../../src/components/SEO/SEO";
 import './style.less';
@@ -90,30 +90,10 @@ export default ({ data, location }) => {
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
     const [edgissaryDPMessage, setEdgissaryDPMessage] = useState(initialEdgissaryDPNotificationMsg);
-    const isMobile = useMemo(() => {
-        return typeof window !== 'undefined' ? window.innerWidth <= 800 : true
-    }, []);
 
     useEffect(() => {
-      const loadJS = () => {
-        if (!isMobile) {
-          if (window.docsearch) {
-            window.docsearch({
-              apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-              indexName: 'getambassador',
-              inputSelector: '#doc-search',
-              debug: true,
-            });
-          } else {
-            setTimeout(() => {
-              loadJS();
-            }, 500);
-          }
-        }
-      };
-      loadJS();
       isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
-    }, [initialProduct.slug, initialVersion.id, isMobile, slug]);
+    }, [initialProduct.slug, initialVersion.id, slug]);
 
     const versions = useMemo(() => {
         if (!data.versions?.content) {
@@ -324,12 +304,6 @@ export default ({ data, location }) => {
     return (
         <Layout location={location} customAnnouncement={edgissaryDPMessage}>
             <SEO title={metadata.metaTitle} type="article" canonicalUrl={canonicalUrl} description={metadata.metaDescription}>
-                 {!isMobile &&
-                    <link
-                        rel="stylesheet"
-                        href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
-                    />}
-                {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
             </SEO>
 
             <div className="docs">
@@ -371,15 +345,7 @@ export default ({ data, location }) => {
                                 />
                             )}
                         </div>
-                        <div className="docs__search-box">
-                            <Search />
-                            <input
-                                name="search"
-                                type="text"
-                                placeholder="Search documentation"
-                                id="doc-search"
-                            />
-                        </div>
+                        <SearchBox />
                     </div>
                 </nav>
                 <div className="docs__body">
