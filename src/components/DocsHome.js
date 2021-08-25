@@ -1,8 +1,9 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
+
 import AmbassadorCloud from '../../../src/assets/images/ambassador-cloud.svg';
-import Icon from '../../../src/components/Icon';
 import { Badge } from '../../../src/components/Badge';
+import Icon from '../../../src/components/Icon';
 import {
   goToTelepresenceDocs,
   goToCloudAnnotate,

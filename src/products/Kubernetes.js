@@ -1,10 +1,11 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
 
-import Icon from '../../../src/components/Icon';
 import Card from '../../../src/components/Card';
-import { KubernetesCards } from './config';
+import Icon from '../../../src/components/Icon';
 import { goToKubernetesQuickStart } from '../../../src/utils/routes';
+
+import { KubernetesCards } from './config';
 
 const Kubernetes = () => (
   <section className="docs__container product-page">

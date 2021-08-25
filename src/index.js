@@ -1,30 +1,39 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 
 import Layout from '../../src/components/Layout';
-import template from '../../src/utils/template';
-import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl , getSiteUrl } from './config';
-import DocsHome from './components/DocsHome';
+
+import ContactBlock from '../../src/components/ContactBlock';
 import Dropdown from '../../src/components/Dropdown';
+import Icon from '../../src/components/Icon';
+import ReadingTime from '../../src/components/ReadingTime';
+import SEO from '../../src/components/SEO/SEO';
+import template from '../../src/utils/template';
+
+import AllVersions from './components/AllVersions';
 import DocsFooter from './components/DocsFooter';
-import isAesPage from './utils/isAesPage';
-import getPrevNext from './utils/getPrevNext';
+import DocsHome from './components/DocsHome';
+import SearchBox from './components/SearchBox';
+import SidebarContent from './components/SidebarContent';
+import {
+  products,
+  metaData,
+  learningJourneys,
+  archivedVersionsLink,
+  siteUrl,
+  getSiteUrl,
+} from './config';
+import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
-import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
-import AllVersions from './components/AllVersions';
-import ContactBlock from '../../src/components/ContactBlock';
-import ReadingTime from '../../src/components/ReadingTime';
-import Icon from '../../src/components/Icon';
-import LearningJourneyImg from './images/learning-journe-prev-next.svg';
-import SearchBox from './components/SearchBox';
-import SidebarContent from './components/SidebarContent';
-import SEO from "../../src/components/SEO/SEO";
+import Telepresence from './products/Telepresence';
 import './style.less';
+import getPrevNext from './utils/getPrevNext';
+import isAesPage from './utils/isAesPage';
 
 export default ({ data, location , pageContext}) => {
     const page = data.mdx || {};
