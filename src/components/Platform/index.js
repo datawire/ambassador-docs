@@ -72,9 +72,6 @@ function Provider({ children, ...props }) {
     }
   }, [state, setState]);
 
-  if (!state.curTab) {
-    return null;
-  }
   return <Context.Provider value={state}>{children}</Context.Provider>;
 }
 
@@ -103,6 +100,30 @@ function TabGroup({ children, ...props }) {
   });
 
   let { curTab, setTab } = React.useContext(Context);
+
+  if (!curTab) {
+    // This is essentially the noscript case, which is important to
+    // support because of the broken link checker.
+    return (
+      <div className={styles.TabGroup}>
+        {sortedChildren.map((child) => {
+          const Icon = child.type.icon;
+          return (
+            <details key={child.type.slug}>
+              <summary className={styles.TabHead}>
+                <Icon />
+                {child.type.label}
+              </summary>
+              <div className={styles.TabBody}>
+                {child.props.children}
+              </div>
+            </details>
+          );
+        })}
+      </div>
+    );
+  }
+
   if (!slugs.has(curTab)) {
     const defaultChild = [...children].sort(
       (a, b) => b.type.priority - a.type.priority,
