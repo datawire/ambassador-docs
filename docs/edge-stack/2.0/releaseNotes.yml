@@ -29,6 +29,21 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 2.0.2-ea
+    date: '2021-08-24'
+    notes:
+      - title: Envoy security updates
+        type: change
+        body: "Upgraded envoy to 1.17.4 to address security vulnerabilities"
+        docs: https://groups.google.com/g/envoy-announce/c/5xBpsEZZDfE?pli=1
+      - title: Envoy-configuration snapshots saved
+        type: change
+        body: Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30.
+        docs: topics/running/running/
+      - title: Expose Envoy's allow_chunked_length HTTPProtocolOption
+        type: feature
+        body: "You can now set <code>allow_chunked_length</code> in the Ambassador Module to configure the same value in Envoy"
+        docs: topics/running/ambassador/#content-length-headers
   - version: 2.0.1-ea
     date: "2021-08-11"
     notes:
@@ -71,11 +86,6 @@ items:
         type: change
         body: Logs now include subsecond time resolutions, rather than just seconds.
         docs: https://github.com/emissary-ingress/emissary/pull/3650
-
-      - title: Envoy-configuration snapshots saved
-        type: change
-        body: Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30.
-        docs: topics/running/running/
 
       - title: Configurable Envoy-configuration rate limiting
         type: change

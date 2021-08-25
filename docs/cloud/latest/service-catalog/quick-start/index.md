@@ -77,7 +77,7 @@ The metadata for each service is determined by annotations included within your 
 1. Change the name of the owner of the `quote` service by replacing `<your name>` in the command below and running it.  The value could be a GitHub username, an email address, or your actual name.
 
   ```
-  kubectl annotate --overwrite svc quote -n ambassador a8r.io/owner="<your name>"
+  kubectl annotate --overwrite svc quote a8r.io/owner="<your name>"
   ```
 
 2. Refresh your Service Catalog page and look at the `quote` service to see the change with your name.

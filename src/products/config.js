@@ -18,6 +18,7 @@ import {
   goToArgoCICD,
   goToArgoCanary,
   goToCloudQuickStart,
+  goToGitOpsQuickStart,
   goToTelepresenceHowTo,
   goToTelepresenceContextProp,
   goToTelepresenceFAQs,
@@ -317,6 +318,13 @@ export const CloudCards = [
     link: goToCloudQuickStart,
     linkText: 'Get Started',
     icon: 'service-catalog'
+  },
+  {
+    title: 'Ambassador GitOps Quick Start',
+    description: 'Visualize and analyze the impact of Emissary Ingress or Edge Stack configuration changes against production during development',
+    link: goToGitOpsQuickStart,
+    linkText: 'Get Started',
+    icon: 'cicd'
   }
 ];
 

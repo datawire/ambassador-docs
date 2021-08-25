@@ -116,6 +116,13 @@ Defines the timeout, in seconds, for validating a new Envoy configuration. The d
 envoy_validation_timeout: 30
 ```
 
+##### Content-Length headers
+Allows Envoy to process requests/responses with both Content-Length and Transfer-Encoding headers set. By default such messages are rejected, but if option is enabled - Envoy will remove Content-Length header and process message. See the [Envoy documentation for more details](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/core/v3/protocol.proto.html?highlight=allow_chunked_length#config-core-v3-http1protocoloptions)
+
+```yaml
+allow_chunked_length: true
+```
+
 ---
 ## General
 
