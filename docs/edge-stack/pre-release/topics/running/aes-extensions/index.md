@@ -10,7 +10,7 @@ is concerned with how to operate and tune deployment of these extensions in AES.
 
 ## Redis
 
-Sine AES does not use a database, Redis is uses for caching state information
+Since AES does not use a database, Redis is uses for caching state information
 when an extension requires it.
 
 The Ambassador Edge Stack shares the same Redis pool for all features that use
