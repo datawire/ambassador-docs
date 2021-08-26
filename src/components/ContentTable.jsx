@@ -10,7 +10,7 @@ const ContentTable = ({
 
   const formatString = (title) => {
     if (title) {
-    const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d./g, "");
+    const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, "");
     return template(formatedTitle, versions);
     }
   }
