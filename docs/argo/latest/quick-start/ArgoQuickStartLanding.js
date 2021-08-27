@@ -16,14 +16,9 @@ class ArgoQuickStartLanding extends Component {
           />
           Argo quick start
         </h1>
-        <p>[TODO: Description here?]</p>
         <p>
-          [TODO: Where should the two pages linked below be on the nav sidebar?
-          (The left choice in Telepresence does not appear in the nav)]
-        </p>
-        <p>
-          [NOTE: Page content width expands with the description with of the
-          boxes below]
+          Do a Canary Rollout to <strong>safely deploy</strong> your app on a
+          Kubernetes cluster.
         </p>
         <div className="argo-choice-wrapper">
           <div className="argo-choice">
@@ -32,10 +27,13 @@ class ArgoQuickStartLanding extends Component {
               to Kubernetes?
             </h2>
             <p>
-              [TODO: Description <strong>here</strong>]<br />
+              Use <strong>our cluster</strong> to do a Canary Rollout with our
+              sample app. See Argo in action without writing lots of YAML.
             </p>
             <ol>
-              <li>Outline step 1...</li>
+              <li>Connect to the demo cluster</li>
+              <li>Define a Rollout</li>
+              <li>Watch a Canary Rollout in action</li>
             </ol>
             <a
               id="tp-demo-option-a"
@@ -54,10 +52,13 @@ class ArgoQuickStartLanding extends Component {
               <mark className="highlight-mark">Already</mark>a User?
             </h2>
             <p>
-              [TODO: <strong>GitHub+GitLab</strong> description?]
+              Start using Argo in your own environment. Follow these steps to do
+              a Canary Rollout for your app in <strong>your cluster</strong>.
             </p>
             <ol>
-              <li>Outline step 1...</li>
+              <li>Configure your cluster to use Argo</li>
+              <li>Set up your service and image repositories</li>
+              <li>Define and run a Canary Rollout on your service</li>
             </ol>
             <a
               id="tp-intercepts-option-b"
