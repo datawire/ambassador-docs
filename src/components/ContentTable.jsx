@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import template from '../../../src/utils/template';
 import Scrollspy from "react-scrollspy";
+import { Link as GatsbyLink } from 'gatsby';
 import { useEffect } from 'react';
 
 const ContentTable = ({
@@ -26,13 +27,16 @@ const ContentTable = ({
   }
 
   const onClick = (ev) => {
-      ev.preventDefault();
       const frag = ev.target.id.substr(1);
       const target = document.getElementById(frag);
       if (target) {
+        ev.preventDefault();
         target.scrollIntoView({
           behavior: 'smooth',
         });
+        if (window.location.hash !== ev.target.id) {
+          window.history.pushState(null, "", ev.target.id);
+        }
       }
     };
 
