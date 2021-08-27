@@ -49,7 +49,7 @@ class ArgoQuickStartLanding extends Component {
 
           <div className="argo-choice">
             <h2>
-              <mark className="highlight-mark">Already</mark>a User?
+              <mark className="highlight-mark">Already</mark>a Kubernetes User?
             </h2>
             <p>
               Start using Argo in your own environment. Follow these steps to do
