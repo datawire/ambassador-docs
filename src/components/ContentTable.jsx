@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState} from 'react';
 import template from '../../../src/utils/template';
 import Scrollspy from "react-scrollspy";
 import { useEffect } from 'react';
@@ -26,6 +26,7 @@ const ContentTable = ({
   }
 
   const onClick = (ev) => {
+      ev.preventDefault();
       const frag = ev.target.id.substr(1);
       const target = document.getElementById(frag);
       if (target) {
@@ -34,6 +35,10 @@ const ContentTable = ({
         });
       }
     };
+
+  useEffect(()=>{
+
+  },[]);
 
   return (
     <ScrollSpyWrapper items={ids} rootEl={rootElement} onUpdate={onActive}>
