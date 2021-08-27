@@ -1,8 +1,6 @@
 import React, { useState} from 'react';
 import template from '../../../src/utils/template';
 import Scrollspy from "react-scrollspy";
-import { Link as GatsbyLink } from 'gatsby';
-import { useEffect } from 'react';
 
 const ContentTable = ({
   items,
