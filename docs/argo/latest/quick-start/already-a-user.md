@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 import { LogInText } from '../../../../../src/components/Docs/LogInText';
 import { DownloadDemo } from '../../../../../src/components/Docs/DownloadDemo';
 
-# Canary Rollout Quick Start
+# Configure Rollouts for your cluster
 
 In this guide we'll give you everything you need to perform a canary rollout of a new Kubernetes service using GitOps best practices, but without needing to write lots of YAML!
 
@@ -19,7 +19,7 @@ In this guide we'll give you everything you need to perform a canary rollout of 
 * [3. Fork the rollouts-demo repo](#3-fork-the-rollouts-demo-repo)
 * [4. Update the service manifests with the proper git repo and branch](#4-update-the-service-manifests-with-the-proper-git-repo-and-branch)
 * [5. Apply the manifests in your cluster and see the service being reported in the service catalog](#5-apply-the-manifests-in-your-cluster-and-see-the-service-being-reported-in-the-service-catalog)
-* [6. Configure GitHub & DockerHub integration](#6-configure-github--dockerhub-integration)
+* [6. Configure Repository and Container Registry](#6-configure-repository-and-container-registry)
 * [7. Configure Argo CD](#7-configure-argo-cd)
 * [8. Create a Rollout](#8-create-a-rollout)
 * [9. Review & merge PR](#9-review--merge-pr)
@@ -113,7 +113,7 @@ kubectl apply -f ./manifests
 
 <Alert severity="info">Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> and you should now see the `rollout-demo` service reported in Ambassador Cloud!</Alert>
 
-## 6. Configure GitHub & DockerHub integration
+## 6. Configure Repository and Container Registry
 
 In Ambassador Cloud, go to the <a href="https://app.getambassador.io/cloud/settings/teams" target="_blank">Teams Settings page</a> and click the "Integrations" button for your current team.
 
@@ -126,14 +126,24 @@ On the new page that opens scroll down to the "Repository access" section, and c
 Then click on the dropdown menu directly below this option and select your forked rollouts-demo repo.
 Click "Save" and you will be taken back to the Ambassador Cloud integrations page.
 
+### GitLab
+
+Click the "Enable" button in the GitHub section.
+You will be taken to gitlab.com and asked in which account you want to install Ambassador DCP.
+
 ### DockerHub
 
 Click the "Enable" button in the DockerHub section and enter your DockerHub username and an access token so that Ambassador Cloud can query for available image tags.
 You can <a href="https://hub.docker.com/settings/security" target="_blank">generate a DockerHub access token</a> via your hub.docker.com account security settings.
 
+### GitLab Container Registry
+
+Click the "Enable" button in the GitLab Container Registry section and enter your GitLab Container Registry username and an access token so that Ambassador Cloud can query for available image tags.
+You can <a href="" target="_blank">generate a GitLab Container Registry access token</a> via your hub.docker.com account security settings.
+
 ## 7. Configure Argo CD
 
-From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, click the "Rollout" button for the "rollout-demo" service and select "Configure Argo for your service" and follow the instructions. This will:
+From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, click the "Rollout" button for the service you are configuring and select "Configure Argo for your service" and follow the instructions. This will:
 1. generate a deployment key in your forked repository;
 1. configure Argo CD with that deployment key to monitor your repository;
 1. install an Argo CD Application that represents the "rollout-demo" service
