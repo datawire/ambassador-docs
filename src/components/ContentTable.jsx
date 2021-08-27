@@ -36,10 +36,6 @@ const ContentTable = ({
       }
     };
 
-  useEffect(()=>{
-
-  },[]);
-
   return (
     <ScrollSpyWrapper items={ids} rootEl={rootElement} onUpdate={onActive}>
       {content.map(i => (
