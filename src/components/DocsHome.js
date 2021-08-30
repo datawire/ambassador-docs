@@ -21,7 +21,7 @@ import { products } from '../config';
 const DocsHome = () => {
   return (
     <>
-      <section className="docs__started docs__container">
+      <section className="docs__started docs__container docs__container-home">
         <div className="docs__info">
           <div className="docs__info--first">
             <h2 className="docs__heading-primary">Documentation</h2>
@@ -41,9 +41,9 @@ const DocsHome = () => {
         </div>
       </section>
 
-      <hr className="docs__separator docs__container" />
+      <hr className="docs__separator docs__container docs__container-home" />
 
-      <section className="docs__container">
+      <section className="docs__container docs__container-home">
         <span className="docs__heading-secondary">
           Explore Ambassador Products
         </span>

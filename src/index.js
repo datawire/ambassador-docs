@@ -23,6 +23,7 @@ import Icon from '../../src/components/Icon';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import SearchBox from './components/SearchBox';
 import SidebarContent from './components/SidebarContent';
+import ContentTable from "./components/ContentTable";
 import SEO from "../../src/components/SEO/SEO";
 import './style.less';
 
@@ -238,17 +239,34 @@ export default ({ data, location , pageContext}) => {
                 isLearning={isLearning}
                 />
                 <div className="docs__doc-body-container">
-                    {children}
-                    {footer}
+                    <div className="docs__doc-body-container__article">
+                        <div className="docs__doc-body-container__article flex-toc">
+                            {children}
+                        </div>
+                        <div className={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 ?"docs__doc-body-container__article docs__doc-body-container__article-toc" : "docs__doc-body-container__article-toc-none"}>
+                            { page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 &&
+                            <div className="docs__doc-body-container__table-content">
+                                <p>ON THIS PAGE</p>
+                                <ContentTable items={page.contentTable.items} versions={versions}/>
+                            </div>
+                            }   
+                        </div>
+                    </div>
+                    <div className="docs__doc-body-container__article-footer">
+                        {footer}
+                    </div>
                 </div>
         </div>
     )
 
     const footer = (
         <div>
-            <hr className="docs__separator docs__container" />
-            <section className="docs__contact docs__container">
-                <ContactBlock />
+            {product.slug === "home" && 
+            <hr className="docs__separator docs__container docs__container-home" />}
+            <section className={product.slug === "home" ? "docs__contact docs__container-home" : "docs__contact docs__container"}>
+                {product.slug !== "home" && 
+                <hr className={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 ? "docs__separator docs__container docs__separator-footer" : "docs__separator docs__container docs__separator-footer-no-article"}/>}
+                <ContactBlock product={product.slug} page={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1}/>
             </section>
             {!isHome && !isProductHome && isProduct && (
                 <DocsFooter page={page} product={product.slug} version={versions.docsVersion} />
@@ -389,6 +407,7 @@ export const query = graphql`
       headings(depth: h1) {
         value
       }
+      contentTable: tableOfContents
       frontmatter {
         description
         reading_time
