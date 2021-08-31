@@ -1,8 +1,9 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
+
 import AmbassadorCloud from '../../../src/assets/images/ambassador-cloud.svg';
-import Icon from '../../../src/components/Icon';
 import { Badge } from '../../../src/components/Badge';
+import Icon from '../../../src/components/Icon';
 import {
   goToTelepresenceDocs,
   goToCloudAnnotate,
@@ -21,7 +22,7 @@ import { products } from '../config';
 const DocsHome = () => {
   return (
     <>
-      <section className="docs__started docs__container">
+      <section className="docs__started docs__container docs__container-home">
         <div className="docs__info">
           <div className="docs__info--first">
             <h2 className="docs__heading-primary">Documentation</h2>
@@ -41,9 +42,9 @@ const DocsHome = () => {
         </div>
       </section>
 
-      <hr className="docs__separator docs__container" />
+      <hr className="docs__separator docs__container docs__container-home" />
 
-      <section className="docs__container">
+      <section className="docs__container docs__container-home">
         <span className="docs__heading-secondary">
           Explore Ambassador Products
         </span>
