@@ -1,12 +1,12 @@
 import {
-    goToKubernetesDocs,
-    goToEdgeStackDocs,
-    goToEmissaryDocs,
-    goToDocsTelepresence,
-    goToDocsArgo,
-    goToCloudDocs,
-    goToEnvoy,
-  } from '../../src/utils/routes';
+  goToKubernetesDocs,
+  goToEdgeStackDocs,
+  goToEmissaryDocs,
+  goToDocsTelepresence,
+  goToDocsArgo,
+  goToCloudDocs,
+  goToEnvoy,
+} from '../../src/utils/routes';
 
 export const products = [
     {

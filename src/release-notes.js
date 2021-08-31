@@ -1,15 +1,18 @@
+import { graphql, Link, navigate } from 'gatsby';
 import React, { useState, useMemo, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
-import { graphql, Link, navigate } from 'gatsby';
+
 import Layout from '../../src/components/Layout';
-import { products } from './config';
+
+import ContactBlock from '../../src/components/ContactBlock';
+import Dropdown from '../../src/components/Dropdown';
+import template from '../../src/utils/template';
+
+import DocsFooter from './components/DocsFooter';
 import ReleaseNotes from './components/ReleaseNotes';
 import SearchBox from './components/SearchBox';
 import Sidebar from './components/Sidebar';
-import Dropdown from '../../src/components/Dropdown';
-import DocsFooter from './components/DocsFooter';
-import ContactBlock from '../../src/components/ContactBlock';
-import template from '../../src/utils/template';
+import { products } from './config';
 import './style.less';
 
 export default ({ data, location, pageContext }) => {

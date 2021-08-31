@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import url from 'url';
 
-import Link from '../../../src/components/Link';
 import Icon from '../../../src/components/Icon';
+import Link from '../../../src/components/Link';
 
 import { ITopicItem } from './Sidebar';
 

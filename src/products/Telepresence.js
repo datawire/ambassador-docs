@@ -1,10 +1,11 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
 
-import Icon from '../../../src/components/Icon';
 import Card from '../../../src/components/Card';
-import { TelepresenceCards } from './config';
+import Icon from '../../../src/components/Icon';
 import { goToTelepresenceQuickStart } from '../../../src/utils/routes';
+
+import { TelepresenceCards } from './config';
 
 const Telepresence = () => (
   <section className="docs__started docs__container product-page">
