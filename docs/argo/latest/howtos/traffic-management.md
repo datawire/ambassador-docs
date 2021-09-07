@@ -1,6 +1,6 @@
 
 import Alert from '@material-ui/lab/Alert';
-import Tabs from './tabs'
+import Platform from '@src/components/Platform';
 
 # Manage traffic through Ambassador Edge Stack
 
@@ -21,7 +21,7 @@ Argo is an open source suite of projects that helps developers safely deploy cod
 
 Within a GitOps context, Argo makes application deployment and lifecycle management easier, particularly as the line between developers and operators disappears, because it automates deployment, makes rollbacks easier and can be audited for easier troubleshooting.
 
-For this guide, we will build a CD pipeline to deploy an app from a repo into a Kubernetes cluster, then perform a [canary release](../concepts/canary) on that app to test incrementally rolling out a new version.
+For this guide, we will build a CD pipeline to deploy an app from a repo into a Kubernetes cluster, then perform a [canary release](/docs/argo/latest/concepts/canary) on that app to test incrementally rolling out a new version.
 
 Argo can use Kubernetes projects formatted using different templating systems (Helm, Kustomize, etc.) but for this app we're just going to deploy a folder of static YAML files.
 
@@ -32,9 +32,9 @@ Argo can use Kubernetes projects formatted using different templating systems (H
 
 ## 1. Install and configure Edge Stack
 
-You'll first need to install Edge Stack in your cluster. Follow the [Edge Stack installation](../../../edge-stack/1.13/tutorials/getting-started) to install via Kubernetes YAML, Helm, or the command-line installer in your cluster.
+You'll first need to install Edge Stack in your cluster. Follow the [Edge Stack installation](/docs/edge-stack/1.13/tutorials/getting-started) to install via Kubernetes YAML, Helm, or the command-line installer in your cluster.
 
-By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use [endpoint routing](../../../edge-stack/1.13/topics/running/resolvers/). Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
+By default, Edge Stack routes via Kubernetes services. For best performance with canaries, we recommend you use [endpoint routing](/docs/edge-stack/1.13/topics/running/resolvers/). Enable endpoint routing on your cluster by saving the following configuration in a file called `resolver.yaml`:
 
 ```yaml
 apiVersion: getambassador.io/v2
@@ -64,61 +64,29 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
 
 Next, you will need to install the Argo CD CLI (for building pipelines) and the Argo Rollouts plugin (for managing and visualizing rollouts) on your laptop:
 
-<AppStateContext>
-{state => {
-  return (<CodeBlockMultiLang type="terminal" state={state}  data={
-    {
-      tabs: [
-          {
-            id: "macOS",
-            display: "macOS",
-            os:"macos",
-            prompt: "",
-            commands: [
-              {
-                input: "brew install argocd"
-              },
-              {
-                input: "brew install argoproj/tap/kubectl-argo-rollouts",
-                outputs: [
-                  "# Need brew? https://brew.sh/"
-                ]
-              }
-            ]
-          },
-          {
-            id: "linux",
-            display: "Linux",
-            os:"linux",
-            prompt: "",
-            commands: [
-              {
-                 comments:[
-                    "# Argo CD CLI"
-                 ],
-                input: "curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.14/argocd-linux-amd64"
-              },
-              {
-                comments:[],
-                input: "chmod +x /usr/local/bin/argocd"
-              },
-              {
-                 comments:[
-                    "# Argo Rollouts plugin"
-                 ],
-                input: "sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts"
-              },
-              {
-                comments:[],
-                input: "sudo chmod a+x /usr/local/bin/kubectl-argo-rollouts"
-              },
-            ]
-          }
-        ]
-    }} />)
-}
-}
-</AppStateContext>
+<Platform.TabGroup>
+<Platform.MacOSTab>
+
+```shell
+brew install argocd
+brew install argoproj/tap/kubectl-argo-rollouts
+# Need brew? https://brew.sh/
+```
+
+</Platform.MacOSTab>
+<Platform.GNULinuxTab>
+
+```shell
+# Argo CD CLI
+curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v1.7.14/argocd-linux-amd64
+chmod +x /usr/local/bin/argocd
+# Argo Rollouts plugin
+sudo curl -fL https://github.com/argoproj/argo-rollouts/releases/latest/download/kubectl-argo-rollouts-linux-amd64 -o /usr/local/bin/kubectl-argo-rollouts
+sudo chmod a+x /usr/local/bin/kubectl-argo-rollouts
+```
+
+</Platform.GNULinuxTab>
+</Platform.TabGroup>
 
 ## 3. Set up Argo
 

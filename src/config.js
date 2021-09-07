@@ -1,3 +1,13 @@
+import {
+  goToKubernetesDocs,
+  goToEdgeStackDocs,
+  goToEmissaryDocs,
+  goToDocsTelepresence,
+  goToDocsArgo,
+  goToCloudDocs,
+  goToEnvoy,
+} from '../../src/utils/routes';
+
 export const products = [
     {
         slug: "home",
@@ -9,6 +19,8 @@ export const products = [
         slug: "kubernetes",
         name: "Kubernetes (K8s)",
         link: "/docs/kubernetes",
+        to: goToKubernetesDocs,
+        id: Math.random().toString(),
         version: [
             { id: "latest", name: "Latest", link: "latest/quick-start" }
         ]
@@ -17,10 +29,13 @@ export const products = [
         slug: "edge-stack",
         name: "Edge Stack",
         link: "/docs/edge-stack",
+        to: goToEdgeStackDocs,
+        id: Math.random().toString(),
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
             { id: "2.0", name: "2.0", link: "2.0/tutorials/getting-started" },
+            { id: "1.14", name: "1.14", link: "1.14/tutorials/getting-started" },
             { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
             { id: "1.12", name: "1.12", link: "1.12/tutorials/getting-started", archived: true },
             { id: "1.11", name: "1.11", link: "1.11/tutorials/getting-started", archived: true },
@@ -38,10 +53,13 @@ export const products = [
         slug: "emissary",
         name: "Emissary-ingress",
         link: "/docs/emissary",
+        to: goToEmissaryDocs,
+        id: Math.random().toString(),
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/tutorials/getting-started" },
             { id: "latest", name: "Latest", link: "latest/tutorials/getting-started" },
             { id: "2.0", name: "2.0", link: "2.0/tutorials/getting-started" },
+            { id: "1.14", name: "1.14", link: "1.14/tutorials/getting-started" },
             { id: "1.13", name: "1.13", link: "1.13/tutorials/getting-started" },
         ]
     },
@@ -49,9 +67,12 @@ export const products = [
         slug: "telepresence",
         name: "Telepresence",
         link: "/docs/telepresence",
+        to: goToDocsTelepresence,
+        id: Math.random().toString(),
         version: [
             { id: "pre-release", name: "Pre-Release", link: "pre-release/quick-start" },
             { id: "latest", name: "Latest", link: "latest/quick-start" },
+            { id: "2.4", name: "2.4", link: "2.4/quick-start" },
             { id: "2.3", name: "2.3", link: "2.3/quick-start" },
             { id: "2.2", name: "2.2", link: "2.2/quick-start", archived: true },
             { id: "2.1", name: "2.1", link: "2.1/quick-start", archived: true },
@@ -62,6 +83,8 @@ export const products = [
         slug: "argo",
         name: "Argo",
         link: "/docs/argo",
+        to: goToDocsArgo,
+        id: Math.random().toString(),
         version: [
             { id: "latest", name: "Latest", link: "latest/quick-start" }
         ]
@@ -70,6 +93,8 @@ export const products = [
         slug: "cloud",
         name: "Cloud",
         link: "/docs/cloud",
+        to: goToCloudDocs,
+        id: Math.random().toString(),
         version: [
             { id: "latest", name: "Latest", link: "latest/service-catalog/quick-start" }
         ]
@@ -78,6 +103,8 @@ export const products = [
         slug: "envoy",
         name: "Envoy",
         link: "/docs/envoy/latest/concepts/cloudnative",
+        to: goToEnvoy,
+        id: Math.random().toString(),
         version: [
             { id: "latest", name: "Latest", link: "latest" }
         ]
@@ -122,3 +149,6 @@ export const archivedVersionsLink = { id: "archived", name: "Older Versions", li
 export const siteUrl = 'https://www.getambassador.io';
 
 export const archivedDocsUrl = 'https://archive.getambassador.io';
+
+export const getSiteUrl = () =>process.env.GATSBY_ARCHIVE_DOCS? archivedDocsUrl : siteUrl;
+

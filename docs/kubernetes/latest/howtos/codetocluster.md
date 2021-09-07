@@ -4,7 +4,7 @@
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import GSTabs from './gs-tabs.js'
+import KubeGSTabs from './gs-tabs.js'
 
 # Get code running on my cluster
 
@@ -38,7 +38,7 @@ We'll need an ingress controller for your cluster to get traffic from the intern
 
 **We recommend installing using Helm** but there are other options below to choose from.
 
-<GSTabs/>
+<KubeGSTabs/>
 
 If needed, see the list of <a href="../../../../edge-stack/latest/topics/install/" target="_blank">other installation options</a>.
 

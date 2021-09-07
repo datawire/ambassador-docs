@@ -29,6 +29,74 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 2.0.2-ea
+    date: '2021-08-24'
+    notes:
+      - title: Envoy security updates
+        type: change
+        body: "Upgraded envoy to 1.17.4 to address security vulnerabilities"
+        docs: https://groups.google.com/g/envoy-announce/c/5xBpsEZZDfE?pli=1
+      - title: Envoy-configuration snapshots saved
+        type: change
+        body: Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30.
+        docs: topics/running/running/
+      - title: Expose Envoy's allow_chunked_length HTTPProtocolOption
+        type: feature
+        body: "You can now set <code>allow_chunked_length</code> in the Ambassador Module to configure the same value in Envoy"
+        docs: topics/running/ambassador/#content-length-headers
+  - version: 2.0.1-ea
+    date: "2021-08-11"
+    notes:
+      - title: Developer Preview!
+        body: We're pleased to introduce $productName$ 2.0.1 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+        type: change
+        docs: about/changes-2.0.0
+
+      - title: Improved Ambassador Cloud visibility
+        type: feature
+        body: Ambassador Agent reports sidecar process information and Mapping OpenAPI documentation to Ambassador Cloud to provide more visibility into services and clusters.
+        docs: ../../cloud/latest/service-catalog/quick-start/
+
+      - title: Configurable per-AmbassadorListener statistics prefix
+        body: The optional <code>stats_prefix</code> element of the <code>AmbassadorListener</code> CRD now determines the prefix of HTTP statistics emitted for a specific <code>AmbassadorListener</code>.
+        type: feature
+        docs: topics/running/ambassadorlistener
+
+      - title: Configurable statistics names
+        body: The optional <code>stats_name</code> element of <code>AmbassadorMapping</code>, <code>AmbassadorTCPMapping</code>, <code>AuthService</code>, <code>LogService</code>, <code>RateLimitService</code>, and <code>TracingService</code> now sets the name under which cluster statistics will be logged. The default is the <code>service</code>, with non-alphanumeric characters replaced by underscores.
+        type: feature
+        docs: topics/running/statistics
+
+      - title: Configurable Dev Portal fetch timeout
+        type: bugfix
+        body: The <code>AmbassadorMapping</code> resource can now specify <code>docs.timeout_ms</code> to set the timeout when the Dev Portal is fetching API specifications.
+        docs: topics/using/dev-portal/
+
+      - title: Dev Portal search strips HTML tags
+        type: bugfix
+        body: The Dev Portal will now strip HTML tags when displaying search results, showing just the actual content of the search result.
+        docs: topics/using/dev-portal/
+
+      - title: Updated klog to reduce log noise
+        type: bugfix
+        body: We have updated to <code>k8s.io/klog/v2</code> to track upstream and to quiet unnecessary log output.
+        docs: https://github.com/emissary-ingress/emissary/issues/3603
+
+      - title: Subsecond time resolution in logs
+        type: change
+        body: Logs now include subsecond time resolutions, rather than just seconds.
+        docs: https://github.com/emissary-ingress/emissary/pull/3650
+
+      - title: Configurable Envoy-configuration rate limiting
+        type: change
+        body: Set <code>AMBASSADOR_AMBEX_NO_RATELIMIT</code> to <code>true</code> to completely disable ratelimiting Envoy reconfiguration under memory pressure. This can help performance with the endpoint or Consul resolvers, but could make OOMkills more likely with large configurations. The default is <code>false</code>, meaning that the rate limiter is active.
+        docs: topics/concepts/rate-limiting-at-the-edge/
+
+      - title: Improved Consul certificate rotation visibility
+        type: change
+        body: Consul certificate-rotation logging now includes the fingerprints and validity timestamps of certificates being rotated.
+        docs: howtos/consul/#consul-connector-and-encrypted-tls
+
   - version: 2.0.0-ea
     date: "2021-06-24"
     notes:

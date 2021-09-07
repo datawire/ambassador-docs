@@ -1,10 +1,11 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
 
-import Icon from '../../../src/components/Icon';
 import Card from '../../../src/components/Card';
-import { CloudCards } from './config';
+import Icon from '../../../src/components/Icon';
 import { goToCloudQuickStart } from '../../../src/utils/routes';
+
+import { CloudCards } from './config';
 
 const Cloud = () => (
   <section className="docs__started docs__container product-page">

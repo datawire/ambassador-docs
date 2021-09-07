@@ -29,6 +29,25 @@
 
 changelog: ''
 items:
+  - date: "2021-08-18"
+    notes:
+      - title: Automated Configuration Analysis with the Ambassador DCP
+        body: "Visualize the impact of Edge Stack and Emissary-ingress configuration changes to Kubernetes clusters before deploying any changes."
+        type: feature
+        image: ./gitops-quickstart-warning.png
+        docs: gitops/quick-start/
+  - date: '2021-08-16'
+    notes:
+      - title: "Visualize your APIs"
+        body: "Visualize your service’s OpenAPI documentation (formally known as Swagger Specifications) in the cloud, allowing you to interact and query your REST APIs directly from the Developer Control Plane."
+        image: ./cloud-apis-swagger.png
+        docs: visualize-api/quick-start/
+        type: feature
+      - title: "Manage your clusters"
+        body: "View connected Edge Stack and Emissary-ingress clusters in the cloud. Glimpse at usage metrics and register your installation using a free community licence to unlock Edge Stack traffic management features."
+        image: ./cloud-cluster-rps.png
+        docs: ../../edge-stack/latest/tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
+        type: feature
   - date: '2021-06-14'
     notes:
       - title: Updated views for Service Catalog

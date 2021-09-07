@@ -64,7 +64,7 @@ metadata:
   name:  quote-backend
 spec:
   regex_headers:
-    user-agent: "^(?=.*\\bAndroid\\b)(?=.*\\b(m|M)obile\\b).*|(?=.*\\biPhone\\b)(?=.*\\b(m|M)obile\\b).*$"
+    user-agent: ".*(iPhone|(a|A)ndroid).*"
   prefix: /backend/
   service: quote
 ```

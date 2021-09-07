@@ -5,7 +5,7 @@ In this tutorial, you will access and explore some of the key features of the De
 ## Prerequisites
 
 You must have [$productName$ installed](../getting-started/) in your 
-Kubernetes cluster. This tutorial assumes you have deployed the `quote` app and
+Kubernetes cluster. This tutorial assumes you have connected your cluster to Ambassador Cloud and deployed the `quote` app with the
 `AmbassadorMapping` from the [$productName$ tutorial](../getting-started/).
 
 
@@ -21,10 +21,8 @@ document. $productName$ automatically detects and publishes this documentation.
 This can help with internal and external developer onboarding by serving as a 
 single point of reference for of all your microservice APIs.
 
-1. In the Edge Policy Console, navigate to the **APIs** tab. You'll see the 
-OpenAPI documentation there for the "Quote Service API." Click **GET** to
-expand out the documentation.
-
+1. To visualize your service's API doc, go to [Ambassador Cloud](https://app.getambassador.io/cloud/), navigate to your service's detailed view, and click on the "API" tab.
+   
 1. Navigate to `https://<load-balancer-endpoint>/docs/` to see the 
 publicly visible Developer Portal. Make sure you include the trailing `/`. 
 This is a fully customizable portal that you can share with third parties who 

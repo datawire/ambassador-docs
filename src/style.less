@@ -1,4 +1,4 @@
-@import '../../src/components/Layout/vars.less';
+@import '~@src/components/Layout/vars.less';
 
 html,
 body {
@@ -128,6 +128,12 @@ body {
   }
 
   &__container {
+    width: 90%;
+    max-width: @docs-max-width;
+    margin: auto;
+  }
+
+  &__container-home {
     width: 73%;
     max-width: @docs-max-width;
     margin: auto;
@@ -375,7 +381,7 @@ body {
   }
 
   &__contact {
-    padding: 0 42px 162px 42px;
+    padding-bottom: 162px;
   }
 
   &__container-doc {
@@ -429,7 +435,6 @@ body {
 
     &--active {
       color: @blue;
-
       .docs__version-title__version-icon,
       .docs__version-title__chevron-icon {
         fill: @blue;
@@ -567,6 +572,8 @@ body {
     overflow: auto;
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   &__spinner {
@@ -758,10 +765,6 @@ body {
         margin-left: auto;
     }
 
-    &__contact {
-        margin-left: 40px;
-    }
-
     &__nav {
         flex-direction: column;
         height: 100px;
@@ -884,10 +887,6 @@ body {
       }
     }
 
-    &__contact {
-      margin-left: 0;
-    }
-
     &__text-primary {
       width: 100%;
     }
@@ -901,5 +900,168 @@ body {
   &__sidebar {
     margin-left: 20px;
     border-right: 1px solid @grey-separator;
+  }
+}
+
+.docs__footer, .docs__footer a {
+  text-decoration: underline;
+  display: flex;
+}
+
+.docs__footer {
+  border-top: 1px solid #e1e9ea;
+  font-size: 14px;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 40px;
+}
+
+.docs__footer a {
+  color: #7c7c87;
+  transition: color .2s linear;
+}
+
+.docs__footer a:hover svg {
+  fill: #272733;
+}
+
+.docs__footer a svg {
+  margin-right: 6px;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  fill: #7c7c87;
+  transition: fill .2s linear;
+  vertical-align: middle;
+}
+
+.docs__footer-container {
+  max-width: 1175px;
+}
+
+.docs__separator-footer {
+  border: 1px solid @grey-separator;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: 40px auto 40px -80px;
+  width: 90%;
+  max-width: 1175px;
+  @media (max-width: 1699px) {
+    margin: 40px auto 40px -20px;
+    width: 80%;
+  } 
+  @media (max-width: 1200px) {
+    width: 100%;
+    margin-left: 3px;
+  } 
+  @media (max-width: 999px) {
+    width: 100%;
+    margin-left: 3px;
+  } 
+}
+
+.docs__separator-footer-no-article {
+  border: 1px solid @grey-separator;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 1175px;
+  @media (max-width: 1200px) {
+    width: 100%;
+    margin-left: 3px;
+  } 
+  @media (max-width: 999px) {
+    width: 100%;
+    margin-left: 3px;
+  } 
+}
+
+.docs__doc-body-container__article {
+  display: flex;
+  justify-content: center;  
+  width: 100%;
+}
+
+.docs__separator-continer {
+  display: flex;
+  justify-content: start;  
+  width: 100%;
+}
+
+.flex-toc {
+  width: 80%;
+  max-width: @docs-max-width;
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
+}
+
+.docs__doc-body-container__article-toc{
+  width: 20%;
+  max-width: 200px;
+  box-sizing: content-box;
+  margin-right: 50px;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
+
+.docs__doc-body-container__article-toc-none{
+  display: none;
+}
+
+.docs__doc-body-container__table-content {
+  height: fit-content;
+  width: 200px;
+  margin: 20px 10px;
+  border: 1px solid #E5E5E5;
+  border-radius: 4px;
+  background-color: white;
+  padding: 10px 25px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: flex-start;
+  letter-spacing: 0.4px;
+  font-feature-settings: 'ss02' on;
+  @media (max-width: 1200px) {
+    display: none;
+  }
+
+  p {
+    color: #7C7C87;
+    font-weight: 600;
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-left: -17px;
+  }
+  
+  li {
+    list-style: inside;
+    list-style-position: outside;
+    color: @grey-electric;
+    margin-bottom: 5px;
+  }
+
+  a {
+    color: @blue;
+    text-decoration: underline;
+    transition: color 200ms linear 0ms;
+    transition-property: background-color, color;
+    transition-delay: 100ms;
+    cursor: pointer;
+  }
+
+  a:hover, li.current>a {
+    color: @blue-dark;
+    text-decoration: none;
   }
 }

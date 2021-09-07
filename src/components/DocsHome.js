@@ -1,45 +1,34 @@
-import React from 'react';
 import { Link } from 'gatsby';
-import { useAppState } from '../../../src/context';
+import React from 'react';
+
 import AmbassadorCloud from '../../../src/assets/images/ambassador-cloud.svg';
+import { Badge } from '../../../src/components/Badge';
 import Icon from '../../../src/components/Icon';
 import {
-  goToGetAmbassador,
   goToTelepresenceDocs,
+  goToCloudAnnotate,
+  goToCloudEnvironments,
   goToTutorialsGettingStarted,
   goToTelepresenceHowTo,
   goToTelepresenceEnv,
-  goToTelepresenceOutbound,
+  goToTelepresenceIntercept,
   goToMappings,
   goToOauth,
   goToKubeSSO,
+  goToCloudQuickStart,
 } from '../../../src/utils/routes';
+import { products } from '../config';
 
 const DocsHome = () => {
-  const { userInfo } = useAppState();
-  const linkText = userInfo ? 'Go to Cloud ' : 'Get Started ';
-
   return (
     <>
-      <section className="docs__started docs__container">
-        <h2 className="docs__heading-primary">Documentation</h2>
-        <p className="docs__text-primary">
-          Concepts, guides, and examples to using Ambassador.
-        </p>
+      <section className="docs__started docs__container docs__container-home">
         <div className="docs__info">
           <div className="docs__info--first">
-            <span className="docs__heading-secondary">Ambassador Cloud</span>
-            <p>
-              Adopt an integrated workflow for quickly coding, testing, and
-              releasing microservices on Kubernetes.
+            <h2 className="docs__heading-primary">Documentation</h2>
+            <p className="docs__text-primary">
+              Concepts, guides, and examples to using Ambassador.
             </p>
-            <Link to={goToGetAmbassador} className="docs__button-secondary">
-              {linkText}
-              <Icon
-                name="right-arrow"
-                className="docs__button-secondary--arrow"
-              />
-            </Link>
           </div>
           <div className="docs__info--second">
             <img
@@ -53,13 +42,49 @@ const DocsHome = () => {
         </div>
       </section>
 
-      <hr className="docs__separator docs__container" />
+      <hr className="docs__separator docs__container docs__container-home" />
 
-      <section className="docs__container">
+      <section className="docs__container docs__container-home">
         <span className="docs__heading-secondary">
           Explore Ambassador Products
         </span>
+        {products.map((product, index) => {
+          return (
+            (index > 0) &&
+              <Badge key={product.id} to={product.to}>
+                {product.name}
+              </Badge>
+            )
+          }
+        )}
         <div className="docs__cards">
+          <div className="docs__card">
+            <div className="docs__card--heading">
+              <Icon name="cloud" />
+              Cloud
+            </div>
+            <p>
+              Adopt an integrated workflow for quickly coding, testing, and
+              releasing microservices on Kubernetes
+            </p>
+            <Link to={goToCloudQuickStart} className="docs__button-tertiary">
+              Get Started{' '}
+              <Icon
+                name="right-arrow"
+                className="docs__button-tertiary--arrow"
+              />
+            </Link>
+            <hr className="docs__card--separator" />
+            <span className="docs__heading-tertiary">Popular Tutorials</span>
+            <ul className="docs__popular-list">
+              <li>
+                <Link to={goToCloudAnnotate}>Annotate a service</Link>
+              </li>
+              <li>
+                <Link to={goToCloudEnvironments}>Manage my environments</Link>
+              </li>
+            </ul>
+          </div>
           <div className="docs__card">
             <div className="docs__card--heading">
               <Icon name="telepresence-icon" />
@@ -80,17 +105,17 @@ const DocsHome = () => {
             <span className="docs__heading-tertiary">Popular Tutorials</span>
             <ul className="docs__popular-list">
               <li>
+                <Link to={goToTelepresenceIntercept}>Intercept a service</Link>
+              </li>
+              <li>
                 <Link to={goToTelepresenceHowTo}>
-                  Collaborating with Preview URLs
+                  Collaborate with preview URLs
                 </Link>
               </li>
               <li>
                 <Link to={goToTelepresenceEnv}>
-                  Importing Environment Variables
+                  Import environment variables
                 </Link>
-              </li>
-              <li>
-                <Link to={goToTelepresenceOutbound}>Outbound Sessions</Link>
               </li>
             </ul>
           </div>
@@ -117,16 +142,16 @@ const DocsHome = () => {
             <span className="docs__heading-tertiary">Popular Tutorials</span>
             <ul className="docs__popular-list">
               <li>
-                <Link to={goToMappings}>Introduction to Mappings</Link>
+                <Link to={goToMappings}>Introduction to mappings</Link>
               </li>
               <li>
                 <Link to={goToOauth}>
-                  Single Sign-On Authentication with OpenID Connect
+                  Single sign-on authentication with OpenID Connect
                 </Link>
               </li>
               <li>
                 <Link to={goToKubeSSO}>
-                  Setting up Single Sign-On with Kubectl
+                  Set up single sign-on with kubectl
                 </Link>
               </li>
             </ul>
