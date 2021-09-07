@@ -9,7 +9,6 @@ import Alert from '@material-ui/lab/Alert';
 - [Consul integration](#consul-integration)
   - [Architecture overview](#architecture-overview)
   - [Installing consul](#installing-consul)
-  - [Getting started](#getting-started)
   - [Configuring $productName$](#configuring-ambassador)
   - [Routing to consul services](#routing-to-consul-services)
   - [Consul connector and encrypted TLS](#consul-connector-and-encrypted-tls)
@@ -29,7 +28,7 @@ In this architecture, Consul serves as the source of truth for your entire data 
 
 ## Installing consul
 
-In this guide, you will register a service with Consul and use $productName$ to dynamically route requests to that service based on Consul's service discovery data. If you already have Consul installed, you will just need to configure the ConsulResolver in the [Configuring $productName$ section](#configuring-ambassador).
+In this guide, you will register a service with Consul and use $productName$ to dynamically route requests to that service based on Consul's service discovery data. If you already have Consul installed, you will just need to configure the ConsulResolver in the [Configuring $productName$ section](#configuring-productname).
 
 1. Before we install Consul, make sure to check the Consul documentation for any setup steps specific to your platform. Below you can find setup guides for some of the more popular Kubernetes platforms. This step is primarily to ensure you have the proper permissions to set up Consul, and can be skipped if your cluster has the necessary permissions already. This page will walk you through the process of installing Consul
 
@@ -75,11 +74,6 @@ In this guide, you will register a service with Consul and use $productName$ to 
    ```
    helm install -f consul-values.yaml hashicorp hashicorp/consul
    ```
-## Getting started
-
-  <Alert severity="info">
-    <strong>Note:</strong> The third value in the install command we just used (<code>hashicorp</code>) is the name of your consul install. You can change this if you have a specific reason to, and you will see that the names of your Consul pods and services will change to include this value instead of <code>hashicorp</code>
-  </Alert>
 
 ## Configuring $productName$
 
@@ -110,8 +104,6 @@ In this guide, you will register a service with Consul and use $productName$ to 
   ```
   kubectl apply -f consul-resolver.yaml
   ```
-   For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). 
-
     
    The ConsulResolver is Opt-In. In other words, after applying the ConsulResolver you need to add `resolver: consul-dc1` in each Mapping that you want to use this resolver for. Otherwise it will use your default resolver, and the service associated with that Mapping will not be registered in Consul.
 
@@ -232,7 +224,7 @@ You'll now register a demo application with Consul, and show how $productName$ c
 1. Send a request to the `quote-consul` API.
 
    ```
-   curl -k https://$AMBASSADOR_IP/quote-consul/
+   curl -Lk http://$AMBASSADOR_IP/quote-consul/
 
    {
     "server": "janky-elderberry-vtqtolsz",
@@ -377,7 +369,7 @@ This will install into your cluster:
 7. Send a request to the `/quote-connect/` API.
 
    ```
-   curl -k https://$AMBASSADOR_IP/quote-connect/
+   curl -Lk http://$AMBASSADOR_IP/quote-connect/
 
    {
     "server": "tasty-banana-2h6qpwme",
