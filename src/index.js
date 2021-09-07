@@ -1,30 +1,40 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 
 import Layout from '../../src/components/Layout';
-import template from '../../src/utils/template';
-import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl , getSiteUrl } from './config';
-import DocsHome from './components/DocsHome';
+
+import ContactBlock from '../../src/components/ContactBlock';
 import Dropdown from '../../src/components/Dropdown';
+import Icon from '../../src/components/Icon';
+import ReadingTime from '../../src/components/ReadingTime';
+import SEO from '../../src/components/SEO/SEO';
+import template from '../../src/utils/template';
+
+import AllVersions from './components/AllVersions';
+import ContentTable from './components/ContentTable';
 import DocsFooter from './components/DocsFooter';
-import isAesPage from './utils/isAesPage';
-import getPrevNext from './utils/getPrevNext';
+import DocsHome from './components/DocsHome';
+import SearchBox from './components/SearchBox';
+import SidebarContent from './components/SidebarContent';
+import {
+  products,
+  metaData,
+  learningJourneys,
+  archivedVersionsLink,
+  siteUrl,
+  getSiteUrl,
+} from './config';
+import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
-import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
-import AllVersions from './components/AllVersions';
-import ContactBlock from '../../src/components/ContactBlock';
-import ReadingTime from '../../src/components/ReadingTime';
-import Icon from '../../src/components/Icon';
-import LearningJourneyImg from './images/learning-journe-prev-next.svg';
-import SearchBox from './components/SearchBox';
-import SidebarContent from './components/SidebarContent';
-import SEO from "../../src/components/SEO/SEO";
+import Telepresence from './products/Telepresence';
 import './style.less';
+import getPrevNext from './utils/getPrevNext';
+import isAesPage from './utils/isAesPage';
 
 export default ({ data, location , pageContext}) => {
     const page = data.mdx || {};
@@ -51,7 +61,7 @@ export default ({ data, location , pageContext}) => {
           ) {
           return (
             <p>
-              {`This document covers an unsupported and archived version of 
+              {`This document covers an unsupported and archived version of
                                             ${newProduct.name}. `}
               <a href={`https://www.getambassador.io/docs/${newProduct.slug}`}>
                 Read the latest documentation to learn how to upgrade.
@@ -238,17 +248,34 @@ export default ({ data, location , pageContext}) => {
                 isLearning={isLearning}
                 />
                 <div className="docs__doc-body-container">
-                    {children}
-                    {footer}
+                    <div className="docs__doc-body-container__article">
+                        <div className="docs__doc-body-container__article flex-toc">
+                            {children}
+                        </div>
+                        <div className={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 ?"docs__doc-body-container__article docs__doc-body-container__article-toc" : "docs__doc-body-container__article-toc-none"}>
+                            { page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 &&
+                            <div className="docs__doc-body-container__table-content">
+                                <p>ON THIS PAGE</p>
+                                <ContentTable items={page.contentTable.items} versions={versions}/>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    <div className="docs__doc-body-container__article-footer">
+                        {footer}
+                    </div>
                 </div>
         </div>
     )
 
     const footer = (
         <div>
-            <hr className="docs__separator docs__container" />
-            <section className="docs__contact docs__container">
-                <ContactBlock />
+            {product.slug === "home" &&
+            <hr className="docs__separator docs__container docs__container-home" />}
+            <section className={product.slug === "home" ? "docs__contact docs__container-home" : "docs__contact docs__container"}>
+                {product.slug !== "home" &&
+                <hr className={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 ? "docs__separator docs__container docs__separator-footer" : "docs__separator docs__container docs__separator-footer-no-article"}/>}
+                <ContactBlock product={product.slug} page={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1}/>
             </section>
             {!isHome && !isProductHome && isProduct && (
                 <DocsFooter page={page} product={product.slug} version={versions.docsVersion} />
@@ -389,6 +416,7 @@ export const query = graphql`
       headings(depth: h1) {
         value
       }
+      contentTable: tableOfContents
       frontmatter {
         description
         reading_time

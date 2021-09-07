@@ -55,7 +55,7 @@ function Provider({ children, ...props }) {
     };
   }
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     if (Object.values(publicTabs).map((cls) => cls.slug).includes(query.get('os'))) {
       if (state.doAutoDetect || state.curTab !== query.get('os')) {

@@ -1,11 +1,12 @@
-import React from 'react';
 import { Link } from 'gatsby';
+import React from 'react';
 
 import ArgoImage from '../../../src/assets/images/argo.svg';
-import Icon from '../../../src/components/Icon';
 import Card from '../../../src/components/Card';
-import { ArgoCards } from './config';
+import Icon from '../../../src/components/Icon';
 import { goToArgoQuickStart } from '../../../src/utils/routes';
+
+import { ArgoCards } from './config';
 
 const Argo = () => (
   <section className="docs__container product-page">
