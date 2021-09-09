@@ -1,0 +1,39 @@
+@import '~@src/components/Layout/vars.less';
+
+.TabGroup {
+  flex-grow: 1;
+  background-color: transparent;
+
+  .TabBar {
+    background: transparent;
+    color: black;
+    border-bottom: 1px solid #e8e8e8;
+
+    .TabHead {
+      min-width: 10%;
+      text-transform: none;
+    }
+  }
+
+  .TabBody {
+  }
+
+  // There will only be a 'details' when in noscript mode.
+  // Mimic the doc-layout.less rules for "MuiTab".
+  details {
+    .TabHead {
+      svg {
+        vertical-align: middle;
+        height: 24px;
+        width: 24px;
+        margin: 0 3px 0 0;
+      }
+    }
+    &[open] .TabHead {
+      color: @blue-dark;
+      svg {
+        fill: @blue;
+      }
+    }
+  }
+}

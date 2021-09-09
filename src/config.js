@@ -1,12 +1,12 @@
 import {
-    goToKubernetesDocs,
-    goToEdgeStackDocs,
-    goToEmissaryDocs,
-    goToDocsTelepresence,
-    goToDocsArgo,
-    goToCloudDocs,
-    goToEnvoy,
-  } from '../../src/utils/routes';
+  goToKubernetesDocs,
+  goToEdgeStackDocs,
+  goToEmissaryDocs,
+  goToDocsTelepresence,
+  goToDocsArgo,
+  goToCloudDocs,
+  goToEnvoy,
+} from '../../src/utils/routes';
 
 export const products = [
     {
@@ -149,3 +149,6 @@ export const archivedVersionsLink = { id: "archived", name: "Older Versions", li
 export const siteUrl = 'https://www.getambassador.io';
 
 export const archivedDocsUrl = 'https://archive.getambassador.io';
+
+export const getSiteUrl = () =>process.env.GATSBY_ARCHIVE_DOCS? archivedDocsUrl : siteUrl;
+

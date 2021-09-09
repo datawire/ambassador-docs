@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
 import { Link } from 'gatsby';
+import React, { useState } from 'react';
 
-import Icon from '../../../src/components/Icon';
 import Card from '../../../src/components/Card';
+import Icon from '../../../src/components/Icon';
 import { goToEmissaryQuickStart } from '../../../src/utils/routes';
+
 import { EmissaryCards, EmissarySections } from './config';
 
 const Emissary = () => {

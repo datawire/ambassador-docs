@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Link from '../../../../src/components/Link';
+
 import Icon from './icon.inline.svg';
 
 // heading(n) takes an integer n in the range 1-6, and returns a React

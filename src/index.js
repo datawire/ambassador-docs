@@ -1,33 +1,42 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 
 import Layout from '../../src/components/Layout';
-import template from '../../src/utils/template';
-import Search from './images/search.inline.svg';
-import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl } from './config';
-import DocsHome from './components/DocsHome';
+
+import ContactBlock from '../../src/components/ContactBlock';
 import Dropdown from '../../src/components/Dropdown';
+import Icon from '../../src/components/Icon';
+import ReadingTime from '../../src/components/ReadingTime';
+import SEO from '../../src/components/SEO/SEO';
+import template from '../../src/utils/template';
+
+import AllVersions from './components/AllVersions';
+import ContentTable from './components/ContentTable';
 import DocsFooter from './components/DocsFooter';
-import isAesPage from './utils/isAesPage';
-import getPrevNext from './utils/getPrevNext';
+import DocsHome from './components/DocsHome';
+import SearchBox from './components/SearchBox';
+import SidebarContent from './components/SidebarContent';
+import {
+  products,
+  metaData,
+  learningJourneys,
+  archivedVersionsLink,
+  siteUrl,
+  getSiteUrl,
+} from './config';
+import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
-import Telepresence from './products/Telepresence';
 import Kubernetes from './products/Kubernetes';
-import AllVersions from './components/AllVersions';
-import ContactBlock from '../../src/components/ContactBlock';
-import ReadingTime from '../../src/components/ReadingTime';
-import Icon from '../../src/components/Icon';
-import LearningJourneyImg from './images/learning-journe-prev-next.svg';
-import SidebarContent from './components/SidebarContent';
-import SEO from "../../src/components/SEO/SEO";
+import Telepresence from './products/Telepresence';
 import './style.less';
+import getPrevNext from './utils/getPrevNext';
+import isAesPage from './utils/isAesPage';
 
-export default ({ data, location }) => {
-
+export default ({ data, location , pageContext}) => {
     const page = data.mdx || {};
     const slug = page.fields.slug.split('/');
     const isHome = page.fields.slug === '/docs/';
@@ -40,20 +49,39 @@ export default ({ data, location }) => {
         : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
     const isProduct = initialProduct.slug !== products[0].slug;
     const isProductHome = isProduct && !isArchivedVersions && !!!tempVersion.id;
-    const canonicalUrl = isHome
-        ? 'https://www.getambassador.io/docs/'
-        : `https://www.getambassador.io/docs/${slug[2]}/latest/${slug
-            .slice(4)
-            .join('/')}`;
+    const canonicalUrl = (pageContext.canonical.latest? siteUrl: getSiteUrl())+pageContext.canonical.url;
 
     const initialVersion = !isProductHome ? tempVersion : initialProduct.version.filter(v => v.id === "latest")[0];
     function createEdgissaryDevPrevMsg(newVer, newProduct) {
-      if ((newVer.id === "2.0" || newVer.id === "pre-release") || (newProduct.slug !== "emissary" && newProduct.slug !== "edge-stack")) {
-        return "";
+        if (
+            process.env.GATSBY_ARCHIVE_DOCS &&
+            (newProduct.slug === 'emissary' ||
+              newProduct.slug === 'edge-stack' ||
+              newProduct.slug === 'telepresence')
+          ) {
+          return (
+            <p>
+              {`This document covers an unsupported and archived version of
+                                            ${newProduct.name}. `}
+              <a href={`https://www.getambassador.io/docs/${newProduct.slug}`}>
+                Read the latest documentation to learn how to upgrade.
+              </a>
+            </p>
+          );
+        }
+        if (
+          newVer.id === '2.0' ||
+          newVer.id === 'pre-release' ||
+          (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
+        ) {
+          return '';
+        }
+        return (
+          <a
+            href={`/docs/${newProduct.slug}/2.0/tutorials/getting-started/`}
+          >{`${newProduct.name} 2.0 is now available for Developer Preview!`}</a>
+        );
       }
-      return <a href={`/docs/${newProduct.slug}/2.0/tutorials/getting-started/`}>{`${newProduct.name} 2.0 is now available for Developer Preview!`}</a>;
-
-    }
     const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(initialVersion, initialProduct);
 
     const learningJourneyName = new URLSearchParams(location.search).get('learning-journey');
@@ -90,30 +118,10 @@ export default ({ data, location }) => {
     const [versionList, setVersionList] = useState(initialProduct.version);
     const [showAesPage, setShowAesPage] = useState(false);
     const [edgissaryDPMessage, setEdgissaryDPMessage] = useState(initialEdgissaryDPNotificationMsg);
-    const isMobile = useMemo(() => {
-        return typeof window !== 'undefined' ? window.innerWidth <= 800 : true
-    }, []);
 
     useEffect(() => {
-      const loadJS = () => {
-        if (!isMobile) {
-          if (window.docsearch) {
-            window.docsearch({
-              apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
-              indexName: 'getambassador',
-              inputSelector: '#doc-search',
-              debug: true,
-            });
-          } else {
-            setTimeout(() => {
-              loadJS();
-            }, 500);
-          }
-        }
-      };
-      loadJS();
       isAesPage(initialProduct.slug, slug, initialVersion.id).then(result => setShowAesPage(result))
-    }, [initialProduct.slug, initialVersion.id, isMobile, slug]);
+    }, [initialProduct.slug, initialVersion.id, slug]);
 
     const versions = useMemo(() => {
         if (!data.versions?.content) {
@@ -240,17 +248,34 @@ export default ({ data, location }) => {
                 isLearning={isLearning}
                 />
                 <div className="docs__doc-body-container">
-                    {children}
-                    {footer}
+                    <div className="docs__doc-body-container__article">
+                        <div className="docs__doc-body-container__article flex-toc">
+                            {children}
+                        </div>
+                        <div className={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 ?"docs__doc-body-container__article docs__doc-body-container__article-toc" : "docs__doc-body-container__article-toc-none"}>
+                            { page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 &&
+                            <div className="docs__doc-body-container__table-content">
+                                <p>ON THIS PAGE</p>
+                                <ContentTable items={page.contentTable.items} versions={versions}/>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    <div className="docs__doc-body-container__article-footer">
+                        {footer}
+                    </div>
                 </div>
         </div>
     )
 
     const footer = (
         <div>
-            <hr className="docs__separator docs__container" />
-            <section className="docs__contact docs__container">
-                <ContactBlock />
+            {product.slug === "home" &&
+            <hr className="docs__separator docs__container docs__container-home" />}
+            <section className={product.slug === "home" ? "docs__contact docs__container-home" : "docs__contact docs__container"}>
+                {product.slug !== "home" &&
+                <hr className={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1 ? "docs__separator docs__container docs__separator-footer" : "docs__separator docs__container docs__separator-footer-no-article"}/>}
+                <ContactBlock product={product.slug} page={page?.contentTable?.items &&  page.contentTable.items[0].items?.length > 1}/>
             </section>
             {!isHome && !isProductHome && isProduct && (
                 <DocsFooter page={page} product={product.slug} version={versions.docsVersion} />
@@ -324,12 +349,6 @@ export default ({ data, location }) => {
     return (
         <Layout location={location} customAnnouncement={edgissaryDPMessage}>
             <SEO title={metadata.metaTitle} type="article" canonicalUrl={canonicalUrl} description={metadata.metaDescription}>
-                 {!isMobile &&
-                    <link
-                        rel="stylesheet"
-                        href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" type="text/css" media="all"
-                    />}
-                {!isMobile && <script defer src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>}
             </SEO>
 
             <div className="docs">
@@ -371,15 +390,7 @@ export default ({ data, location }) => {
                                 />
                             )}
                         </div>
-                        <div className="docs__search-box">
-                            <Search />
-                            <input
-                                name="search"
-                                type="text"
-                                placeholder="Search documentation"
-                                id="doc-search"
-                            />
-                        </div>
+                        <SearchBox />
                     </div>
                 </nav>
                 <div className="docs__body">
@@ -405,6 +416,7 @@ export const query = graphql`
       headings(depth: h1) {
         value
       }
+      contentTable: tableOfContents
       frontmatter {
         description
         reading_time
