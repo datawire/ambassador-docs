@@ -61,7 +61,7 @@ If you do not have the latest version installed, you can:
 5. When the token installation completes, refresh the Service Catalog page.
 
 <Alert severity="success"><b>Victory!</b> All the Services running in your cluster are now listed in Service Catalog!
-You should now be able to see all running services in your cluster at http://app.getambassador.io/cloud/services </Alert>
+You should now be able to see all running services in your cluster at <a href="https://app.getambassador.io/cloud/services" target="_blank">https://app.getambassador.io/cloud/services</a> </Alert>
 
 ## 2. Fork the demo repository
 
