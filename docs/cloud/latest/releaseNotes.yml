@@ -29,7 +29,7 @@
 
 changelog: ''
 items:
-  - date: "2021-09-06"
+  - date: "2021-09-20"
     notes:
       - title: "Heads Up Display"
         body: "Develop your services using the HUD (Heads Up Display). With many widgets available, the HUD is your new day-to-day assistant to create intercepts, visualize the progress of rollouts, and more!"
