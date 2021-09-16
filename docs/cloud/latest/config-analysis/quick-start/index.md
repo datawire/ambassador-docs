@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # Automated Configuration Analysis with the Ambassador DCP
 
-Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
+Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
 
 In this quick start, we'll walk through how you can configure Edge Stack or Emissary-ingress for a GitOps workflow using the DCP. The DCP will automatically detect and resolve configuration issues _before_ your changes go live.
 
