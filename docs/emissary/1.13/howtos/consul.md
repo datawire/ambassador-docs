@@ -321,6 +321,10 @@ This will install into your cluster:
         app: quote-connect
     ```
 
+  <Alert severity="info"> 
+    Note: Annotations are used to attach metadata to Kubernetes objects. You can use annotations to link external information to objects, working in a similar, yet different, fashion to labels. For more information on annotations, you can check out this <a href="https://kubernetes.io/blog/2021/04/20/annotating-k8s-for-humans/" >article</a>, or get started with annotations in your own cluster <a href="https://www.getambassador.io/docs/cloud/latest/service-catalog/quick-start/" > here</a>.
+  </Alert>
+
 3. Apply the demo application to your cluster with the command:
   ```
   kubectl apply -f quote-connect.yaml
