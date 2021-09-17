@@ -29,9 +29,46 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 2.0.3-ea
+    date: "TBD"
+    notes:
+      - title: Developer Preview!
+        body: We're pleased to introduce $productName$ 2.0.3 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+        type: change
+        isHeadline: true
+        docs: about/changes-2.0.0
+
+      - title: AES_LOG_LEVEL more widely effective
+        body: The environment variable <code>AES_LOG_LEVEL</code> now also sets the log level for the <code>diagd</code> logger.
+        type: feature
+        docs: topics/running/running/
+        github:
+        - title: "#3686"
+          link: https://github.com/emissary-ingress/emissary/issues/3686
+        - title: "#3666"
+          link: https://github.com/emissary-ingress/emissary/issues/3666
+
+      - title: AmbassadorMapping supports setting the DNS type
+        body: You can now set <code>dns_type</code> in the <code>AmbassadorMapping</code> to configure how Envoy will use the DNS for the service.
+        type: feature
+        docs: topics/using/mappings/#using-dns_type
+
+      - title: Building Emissary no longer requires setting DOCKER_BUILDKIT
+        body: It is no longer necessary to set <code>DOCKER_BUILDKIT=0</code> when building Emissary. A future change will fully support BuildKit.
+        type: bugfix
+        docs: https://github.com/emissary-ingress/emissary/issues/3707
+        github:
+        - title: "#3707"
+          link: https://github.com/emissary-ingress/emissary/issues/3707
+
   - version: 2.0.2-ea
     date: '2021-08-24'
     notes:
+      - title: Developer Preview!
+        body: We're pleased to introduce $productName$ 2.0.2 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+        type: change
+        isHeadline: true
+        docs: about/changes-2.0.0
       - title: Envoy security updates
         type: change
         body: "Upgraded envoy to 1.17.4 to address security vulnerabilities"
