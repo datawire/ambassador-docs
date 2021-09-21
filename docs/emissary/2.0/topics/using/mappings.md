@@ -52,6 +52,19 @@ If `tls` is present with a value that is not `true`, the value is assumed to be 
 If the `cluster_tag` attribute is present, its value will be prepended to cluster names generated from
 the `AmbassadorMapping`. This provides a simple mechanism for customizing the `cluster` name when working with metrics.
 
+## Using `dns_type`
+
+If the `dns_type` attribute is present, its value will determine how the DNS is used when locating the upstream service. Valid values are:
+
+- `strict_dns` (the default): The DNS result is assumed to define the exact membership of the cluster. For example, if DNS returns three IP addresses, the cluster is assumed to have three distinct upstream hosts. If a successful DNS query returns no hosts, the cluster is assumed to be empty. `strict_dns` makes sense for situations like a Kubernetes service, where DNS resolution is fast and returns a relatively small number of IP addresses.
+
+- `logical_dns`: Instead of assuming that the DNS result defines the full membership of the cluster, every new connection simply uses the first IP address returned by DNS. `logical_dns` makes sense for a service with a large number of IP addresses using round-robin DNS for upstream load balancing: typically each DNS query returns a different first result, and it is not necessarily possible to know the full membership of the cluster. With `logical_dns`, no attempt is made to garbage-collect connections: they will stay open until the upstream closes them.
+
+If `dns_type` is not given, `strict_dns` is the default, as this is the most conservative choice. When interacting with large web services with many IP addresses, switching to `logical_dns` may be a better choice. For more on the different types of DNS, see the [`strict_dns` Envoy documentation] or the [`logical_dns` Envoy documentation].
+
+[`strict_dns` Envoy documentation]: https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/service_discovery#strict-dns
+[`logical_dns` Envoy documentation]: https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/service_discovery#logical-dns
+
 ## Namespaces and Mappings
 
 If `AMBASSADOR_NAMESPACE` is correctly set, $productName$ can map to services in other namespaces by taking advantage of Kubernetes DNS:
