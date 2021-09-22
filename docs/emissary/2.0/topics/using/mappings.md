@@ -128,3 +128,31 @@ spec:
 
 There is a deprecated setting `use_websocket`; setting `use_websocket:
 true` is equivalent to setting `allow_upgrade: ["websocket"]`.
+
+
+## DNS configuration for Mappings
+
+`dns_type` can be used to configure the service discovery type between Strict DNS and Logical DNS.
+- Allowed values: 
+  - `strict_dns`: Ambassador will continuously and asynchronously resolve the specified DNS targets.
+  - `logical_dns`: Similar to `strict_dns`, but only uses the first IP address returned when a new connection needs to be initiated and Connections are never drained. More optimal for large scale web services that must be accessed via DNS.
+- Default: `strict_dns`
+
+
+For more information on the differences between dns types, see [the Envoy documentation for service discovery](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/service_discovery.html).
+
+> **Note:** When the [endpoint resolver](../../running/resolvers/#the-kubernetes-endpoint-resolver) is used in a `Mapping`, `dns_type` will be ignored in favor of the endpoint resolver's service discovery.
+
+
+
+```yaml
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: dnsoverwrite
+spec:
+  service: quote
+  prefix: /backend/
+  dns_type: logical_dns
+```
