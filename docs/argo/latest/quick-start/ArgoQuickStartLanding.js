@@ -62,7 +62,7 @@ class ArgoQuickStartLanding extends Component {
             </ol>
             <a
               id="tp-intercepts-option-b"
-              href="already-a-user/"
+              href="/docs/argo/latest/howtos/configure-argo-rollouts/"
               className="get-started-button"
             >
               Get Started
