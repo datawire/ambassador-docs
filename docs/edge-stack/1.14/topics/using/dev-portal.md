@@ -184,7 +184,9 @@ where:
   * `type`: Configure the items fed into search
     * `title-only` (default): only search over the names of DevPortal services and markdown pages
     * `all-content`: Search over openapi spec content and markdown page content.
-* `preserve_servers`: when set to `true`, configures the DevPortal to use server definitions from openAPI documents instead of implicitly building server definitions.
+* `preserve_servers`: By default the DevPortal displays a pre-built `curl` command that can be copied for making requests to the endpoints listed in your OpenAPI documents. When creating these `curl` commands, the DevPortal assumes that the hostname for the endpoint is the same hostname that the DevPortal is accessible through.
+
+Setting this value to true configures the DevPortal to use the hostname from the `servers` section of the OpenAPI document instead of the hostname of the DevPortal. 
 
 Example:
 
