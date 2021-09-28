@@ -42,8 +42,8 @@ items:
         docs: topics/using/mappings/#dns-configuration-for-mappings
       - title: New Server Preservation Configuration 
         type: feature
-        body: "You can now set <code>preserve_servers</code> to <code>true</code> to configure the DevPortal to use server definitions from API documents instead of implicitly building server definitions"
-        docs: topics/using/dev-portal/
+        body: "You can now set <code>buffer_limit_bytes</code> in the Module to to configure the default soft limit of 1MiB on upstream read and write buffers"
+        docs: topics/running/ambassador/#modify-default-buffer-size
   - version: 1.14.1
     date: '2021-08-24'
     notes:
