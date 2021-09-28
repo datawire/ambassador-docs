@@ -20,7 +20,7 @@ In this guide we'll give you everything you need to perform a canary rollout in 
 * [5. Configure Your Repository And Container Registry](#5-configure-your-repository-and-container-registry)
 * [6. Configure Argo CD](#6-configure-argo-cd)
 * [7. Create a Rollout](#7-create-a-rollout)
-* [8. Review & merge PR](#8-review--merge-pr)
+* [8. Review & merge](#8-review--merge)
 * [9. Watch progress](#9-watch-progress)
 
 </div>
@@ -89,7 +89,7 @@ metadata:
     a8r.io/rollouts.mappings: rollout-demo-mapping
 ```
 <Alert severity="info">
-  Fore more information on the required annotations <a href="/docs/argo/latest/reference/ambassador-cloud-rollouts/#configuration">go to Ambassador Cloud Rollouts Configuration</a> page.
+  For more information on the required annotations <a href="/docs/argo/latest/reference/ambassador-cloud-rollouts/#configuration">go to Ambassador Cloud Rollouts Configuration</a> page.
 </Alert>
 
 ## 4. Apply the manifests in your cluster
@@ -129,41 +129,44 @@ You can <a href="https://gitlab.com/-/profile/personal_access_tokens" target="_b
 
 ## 6. Configure Argo CD
 
-From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, click the "Rollout" button for the "rollout-demo" service and select "Configure Argo for your service" and follow the instructions. This will:
-1. generate a deployment key in your forked repository;
-1. configure Argo CD with that deployment key to monitor your repository;
-1. install an Argo CD Application that represents the "rollout-demo" service
+From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, look for the service you want to Rollout and click on its card. The <a href="/docs/cloud/latest/service-catalog/concepts/hud/">Heads Up Display (HUD)</a> will show information about your service along with some actions. Click on the <strong>Rollout</strong> button to show the <strong>start rollout slideout</strong>. In there, click the <strong>Configure Argo for your service</strong> option and follow the instructions. This will:
+1. Generate a deployment key in your forked repository.
+1. Configure Argo CD with that deployment key to monitor your repository.
+1. Install an Argo CD Application that represents the selected service.
+1. If you are using a GitLab repository, it will also configure a webhook in the repository.
 
 ## 7. Create a Rollout
 
-Remaining on the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, click the "Rollout" button for the "rollout-demo" service, this should show the instructions to create a rollout.
+Once ArgoCD has been configured in your cluster, you can click the <strong>Rollout</strong> button again to see the <strong>start rollout slideout</strong> where you can select the parameters needed to rollout your service.
 
 Fill in the form with the following information:
-- Image Tag: `hashicorp/http-echo 0.2.3`
-- Rollout Duration: 2 minutes
-- Weight increment: 10%
-- Number of pods: 3
+- Image Tag
+- Rollout Duration
+- Weight increment
+- Number of pods
 
-Click "Start Rollout".
+Click <strong>Start Rollout</strong>.
 
-<Alert severity="success">Congrats! From the UI you have automatically generated a GitHub pull request that contains all of the necessary Kubernetes rollout YAML configuration.</Alert>
+<Alert severity="success">
+  Congrats! From the UI you have automatically generated a GitHub pull request or GitLab merge requests that contains all of the necessary Kubernetes rollout YAML configuration.
+</Alert>
 
-## 8. Review & merge PR
+## 8. Review & merge
 
-After clicking Start Rollout the slideout will close and you will be shown the service rollouts page where one "Not Merged" rollout is shown.
-Click the "Pull Request" button.
-A new browser tab will be opened and you will be taken to github.com where you can review and merge the PR on GitHub.
-Click on the "Files changed" tab in the pull request and explore all of the rollouts code that has been generated for you.
-Next, click back to the "Conversation" tab, click "Merge Pull Request", and click "Confirm merge".
-Now quickly navigate back to your browser tab with the Ambassador Cloud service catalog to watch the progress.
+After clicking Start Rollout the slideout will close and you will be redirected to the service rollouts page where you will see one card with a badge saying <strong>Not Merged</strong>. This is your <strong>Rollout Card</strong>.
+Click the <strong>Pull Request</strong> or <strong>Merge Request</strong> button.
+A new browser tab will be opened and you will be taken to your repository where you can review and merge the Pull Request on GitHub or Merge Request on GitLab.
+Merge the Pull or Merge Request and go back to your service's rollouts page wher you will see in a few seconds the state of the Rollout Card changing from <strong>Not Merged</strong> to <strong>Merged</strong>.
 
 ## 9. Watch the Rollout progress from Ambassador Cloud
 
-From the service rollouts page you can watch the rollout progress of your new version.
-Note how the "Current Canary Weight" progress bar increases in steps in the amount you specified above in the "weights increment".
+After ArgoCD has picked up the chanes, the Rollout Card's state will change to <strong>In Progress</strong> and you can see the rollout progress of your new version.
+Note how the <strong>Current Canary Weight</strong> progress bar increases in steps in the amount you specified above in the <strong>weight increment</strong> when creating the rollout.
 
 
-<Alert severity="success">Victory! You have successfully performed a GitOps style canary rollout of a new service without having to write lots of YAML.</Alert>
+<Alert severity="success">
+  Victory! You have successfully performed a GitOps style canary rollout of a new service without having to write lots of YAML.
+</Alert>
 
 ## What's next?
 
