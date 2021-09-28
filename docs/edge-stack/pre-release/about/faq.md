@@ -16,7 +16,7 @@ We've written about [the history of $productName$](https://blog.getambassador.io
 
 ### What's the difference between $OSSproductName$ and $AESproductName$?
 
-$OSSproductName$ is a CNCF Incubating project and provides the open-source core of $AESproductName$. Originally we called $OSSProductName$ the "Ambassador API Gateway", but as the project evolved, we realized that the functionality we were building had extended far beyond an API Gateway. In particular, the $AESproductName$ is intended to provide all the functionality you need at the edge -- hence, an "edge stack." This includes an API Gateway, ingress controller, load balancer, developer portal, and more.
+$OSSproductName$ is a CNCF Incubating project and provides the open-source core of $AESproductName$. Originally we called $OSSproductName$ the "Ambassador API Gateway", but as the project evolved, we realized that the functionality we were building had extended far beyond an API Gateway. In particular, the $AESproductName$ is intended to provide all the functionality you need at the edge -- hence, an "edge stack." This includes an API Gateway, ingress controller, load balancer, developer portal, and more.
 
 ### How is $AESproductName$ licensed?
 

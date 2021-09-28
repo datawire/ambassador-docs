@@ -13,9 +13,9 @@ the Kubernetes world with:
 
 We've written about [the history of $productName$](https://blog.getambassador.io/building-ambassador-an-open-source-api-gateway-on-kubernetes-and-envoy-ed01ed520844), [Why $productName$ In Depth](../why-ambassador), [Features and Benefits](../features-and-benefits) and about the [evolution of API Gateways](../../topics/concepts/microservices-api-gateways/).
 
-### What's the difference between the $OSSproductName$ and the $AESproductName$?
+### What's the difference between $OSSproductName$ and $AESproductName$?
 
-The $OSSproductName$ was the name of the original open-source project. As the project evolved, we realized that the functionality we were building had extended far beyond an API Gateway. In particular, the $AESproductName$ is intended to provide all the functionality you need at the edge -- hence, an "edge stack." This includes an API Gateway, ingress controller, load balancer, developer portal, and more.
+$OSSproductName$ is a CNCF Incubating project and provides the open-source core of $AESproductName$. Originally we called $OSSproductName$ the "Ambassador API Gateway", but as the project evolved, we realized that the functionality we were building had extended far beyond an API Gateway. In particular, the $AESproductName$ is intended to provide all the functionality you need at the edge -- hence, an "edge stack." This includes an API Gateway, ingress controller, load balancer, developer portal, and more.
 
 ### How is $AESproductName$ licensed?
 

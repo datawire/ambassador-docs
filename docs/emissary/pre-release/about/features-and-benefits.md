@@ -6,7 +6,7 @@ As such, the $productName$ is designed to be used by both developers and operato
 
 ## Self-Service via Kubernetes Annotations
 
-$productName$ is built from the start to support _self-service_ deployments -- a developer working on a new service doesn't have to go to Operations to get their service added to the mesh, they can do it themselves in a matter of seconds. Likewise, a developer can remove their service from the mesh, or merge services, or separate services, as needed, at their convenience. All of these operations are performed via Kubernetes annotations, so it can easily integrate with your existing development workflow.
+$productName$ is built from the start to support _self-service_ deployments -- a developer working on a new service doesn't have to go to Operations to get their service added to the mesh, they can do it themselves in a matter of seconds. Likewise, a developer can remove their service from the mesh, or merge services, or separate services, as needed, at their convenience. All of these operations are performed via Kubernetes resources or annotations, so they can easily integrate with your existing development workflow.
 
 ## Flexible canary deployments
 
@@ -24,11 +24,11 @@ $productName$ uses [Envoy](https://www.envoyproxy.io) for all traffic routing an
 
 ## gRPC and HTTP/2 support
 
-$productName$ fully supports gRPC and HTTP/2 routing, thanks to Envoy's extensive capabilities in this area. See [gRPC and the $productName$](../../howtos/grpc) for more information.
+$productName$ fully supports gRPC and HTTP/2 routing, thanks to Envoy's extensive capabilities in this area. See [gRPC and $productName$](../../howtos/grpc) for more information.
 
 ## Istio Integration
 
-$productName$ integrates with the [Istio](https://istio.io) service mesh as the edge proxy. In this configuration, $productName$ routes external traffic to the internal Istio service mesh. See [Istio and the $productName$](../../howtos/istio) for details.
+$productName$ integrates with the [Istio](https://istio.io) service mesh as the edge proxy. In this configuration, $productName$ routes external traffic to the internal Istio service mesh. See [Istio and $productName$](../../howtos/istio) for details.
 
 ## Authentication
 
