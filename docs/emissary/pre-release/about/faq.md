@@ -21,7 +21,7 @@ The $OSSproductName$ was the name of the original open-source project. As the pr
 
 ### How is $AESproductName$ licensed?
 
-The core $OSSproductName$ is open source under the Apache Software License 2.0. The GitHub repository for the core is [https://github.com/datawire/ambassador](https://github.com/datawire/ambassador). Some additional features of the $AESproductName$ (e.g., Single Sign-On) are not open source and available under a proprietary license.
+The core $OSSproductName$ is open source under the Apache Software License 2.0. The GitHub repository for the core is [https://github.com/emissary-ingress/emissary](https://github.com/emissary-ingress/emissary). Some additional features of the $AESproductName$ (e.g., Single Sign-On) are not open source and available under a proprietary license.
 
 ### Can I use the add-on features for $AESproductName$ for free?
 
