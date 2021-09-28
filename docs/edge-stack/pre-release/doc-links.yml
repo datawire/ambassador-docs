@@ -80,7 +80,7 @@
            items:
              - title: Basic rate limiting
                link: /howtos/rate-limiting-tutorial
-             - title: Advanced rate limiting
+             - title: Rate limiting in $productName$
                link: /howtos/advanced-rate-limiting
              - title: Rate limiting on token claims
                link: /howtos/token-ratelimit

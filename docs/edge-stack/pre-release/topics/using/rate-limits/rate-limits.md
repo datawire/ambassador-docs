@@ -1,17 +1,17 @@
 # Rate limiting reference
 
-Rate limiting in the Ambassador Edge Stack is composed of two parts:
+Rate limiting in $productName$ is composed of two parts:
 
 * Labels that get attached to requests; a label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
   the request.
-* `RateLimit`s configure the Ambassador Edge Stack's built-in
+* `RateLimit`s configure $productName$'s built-in
   `RateLimitService`, and set limits based on the labels on the
   request.
 
 
-> This page covers using `RateLimit` resources to configure Ambassador Edge 
-  Stack to rate limit requests. See the [Basic Rate Limiting article](../) for
+> This page covers using `RateLimit` resources to configure $productName$
+  to rate limit requests. See the [Basic Rate Limiting article](../) for
   information on adding labels to requests.
 
 
@@ -151,7 +151,7 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
      request limit. This will effectively result in two separate
      ratelimits being applied depending on the dynamic behavior of
      clients. Clients that only make occasional bursts will end up
-     with an effective ratelimit of `burstFactor`*`rate`, whereas
+     with an effective ratelimit of `burstFactor` * `rate`, whereas
      clients that make requests continually will be limited to just
      `rate`. For example:
 

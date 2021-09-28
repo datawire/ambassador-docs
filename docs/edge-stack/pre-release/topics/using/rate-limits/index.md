@@ -13,7 +13,7 @@ Rate limiting in $productName$ is composed of two parts:
 
 There are two ways of setting labels on a request:
 
-1. On an individual [AmbassadorMapping](../ambassadormappings#configuring-ambassadormappings).  Labels set
+1. On an individual [AmbassadorMapping](../mappings#configuring-ambassadormappings).  Labels set
    here will only apply to requests that use that AmbassadorMapping.
 
    ```yaml
@@ -38,11 +38,10 @@ There are two ways of setting labels on a request:
        - ...
    ```
 
-2. Globally, in the [`ambassador`
-   Module](../../running/ambassador).  Labels set here are
-   applied to every single request that goes through $productName$.  This
+2. Globally, in the [`ambassador` `Module`](../../running/ambassador).  Labels set
+   here are applied to every single request that goes through $productName$.  This
    includes requests go through an AmbassadorMapping that sets more labels; for
-   those requests, the global labels are prepended to each of the
+   those requests, the global labels are prepended to each of the 
    AmbassadorMapping's label groups for the matching domain; otherwise the
    global labels are put in to a new label group named "default" for
    that domain.
@@ -78,13 +77,13 @@ $productName$ what labels to set on the request.
 > Note: The terminology used by the Envoy documentation differs from
 > the terminology used by $productName$:
 >
-> | $productName$      | Envoy             |
+> | $productName$   | Envoy             |
 > |-----------------|-------------------|
 > | label group     | descriptor        |
 > | label           | descriptor entry  |
 > | label specifier | rate limit action |
 
-The Mappings' listing of the groups of specifiers have names for the
+The `Mapping`s' listing of the groups of specifiers have names for the
 groups; the group names are useful for humans dealing with the YAML,
 but are ignored by $productName$, all $productName$ cares about are the
 *contents* of the groupings of label specifiers.
@@ -110,7 +109,7 @@ There are 5 types of label specifiers in $productName$:
 1. The Envoy source cluster name is the name of the Envoy listener
    cluster that the request name in on.
 2. The Envoy destination cluster is the name of the Envoy cluster that
-   the AmbassadorMapping routes the request to.  Typically, there is a 1:1
+   the `AmbassadorMapping` routes the request to.  Typically, there is a 1:1
    correspondence between upstream services (pointed to by Mappings)
    and clusters.  You can get the name for a cluster from the
    diagnostics service.
@@ -134,5 +133,5 @@ configured by a `RateLimit` custom resource.
 See the [$AESproductName$ RateLimit Reference](./rate-limits) for information on how
 to configure `RateLimit`s in $AESproductName$.
 
-See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an
+See the [Basic Rate Limiting tutorial](../../../howtos/rate-limiting-tutorial) for an
 example `RateLimitService` implementation for $OSSproductName$.

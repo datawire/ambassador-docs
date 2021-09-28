@@ -38,11 +38,10 @@ There are two ways of setting labels on a request:
        - ...
    ```
 
-2. Globally, in the [`ambassador`
-   Module](../../running/ambassador).  Labels set here are
-   applied to every single request that goes through $productName$.  This
+2. Globally, in the [`ambassador` `Module`](../../running/ambassador).  Labels set
+   here are applied to every single request that goes through $productName$.  This
    includes requests go through an AmbassadorMapping that sets more labels; for
-   those requests, the global labels are prepended to each of the
+   those requests, the global labels are prepended to each of the 
    AmbassadorMapping's label groups for the matching domain; otherwise the
    global labels are put in to a new label group named "default" for
    that domain.
@@ -78,13 +77,13 @@ $productName$ what labels to set on the request.
 > Note: The terminology used by the Envoy documentation differs from
 > the terminology used by $productName$:
 >
-> | $productName$      | Envoy             |
+> | $productName$   | Envoy             |
 > |-----------------|-------------------|
 > | label group     | descriptor        |
 > | label           | descriptor entry  |
 > | label specifier | rate limit action |
 
-The Mappings' listing of the groups of specifiers have names for the
+The `Mapping`s' listing of the groups of specifiers have names for the
 groups; the group names are useful for humans dealing with the YAML,
 but are ignored by $productName$, all $productName$ cares about are the
 *contents* of the groupings of label specifiers.
@@ -105,15 +104,15 @@ There are 5 types of label specifiers in $productName$:
 | 5             | `{ "generic_key": "my_val" }`          | Sets the label "`generic_key`=«`my_val`»"                                                                                               | `{ "generic_key": { "descriptor_value": "my_val" } }`                          |
 | 5 (shorthand) | `"my_val"`                             | Shorthand for `{ "generic_key": "my_val" }`                                                                                             |                                                                                |
 
-[`envoy.api.v2.route.RateLimit.Action`]: https://github.com/datawire/ambassador/blob/$branch$/api/envoy/api/v2/route/route_components.proto#L1328-L1439
+[`envoy.api.v2.route.RateLimit.Action`]: https://github.com/emissary-ingress/emissary/blob/$branch$/api/envoy/api/v2/route/route_components.proto#L1328-L1439
 
 1. The Envoy source cluster name is the name of the Envoy listener
    cluster that the request name in on.
 2. The Envoy destination cluster is the name of the Envoy cluster that
-   the AmbassadorMapping routes the request to.  Typically, there is a 1:1
+   the `AmbassadorMapping` routes the request to.  Typically, there is a 1:1
    correspondence between upstream services (pointed to by Mappings)
    and clusters.  You can get the name for a cluster from the
-   diagnostics service or Edge Policy Console.
+   diagnostics service.
 3. When setting a label from an HTTP request header, be aware that if
    that header is not set in the request, then the entire label group
    is skipped.
@@ -126,13 +125,12 @@ There are 5 types of label specifiers in $productName$:
 
 ## Rate limiting requests based on their labels
 
-This is determined by your `RateLimitService` implementation.
+This is determined by your `RateLimitService` implementation. See the
+[Basic Rate Limiting tutorial](../../../howtos/rate-limiting-tutorial) for an
+example `RateLimitService` implementation for $productName$.
 
+If you'd rather not write your own `RateLimitService` implementation,
 $AESproductName$ provides a `RateLimitService` implementation that is
-configured by a `RateLimit` custom resource.
-
-See the [$AESproductName$ RateLimit Reference](/docs/edge-stack/latest/topics/using/rate-limits/rate-limits//) for information on how
-to configure `RateLimit`s in $AESproductName$.
-
-See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an
-example `RateLimitService` implementation for $OSSproductName$.
+configured by a `RateLimit` custom resource. See the
+[$AESproductName$ RateLimit Reference](/docs/edge-stack/latest/topics/using/rate-limits/rate-limits/)
+for more information.

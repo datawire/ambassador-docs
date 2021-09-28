@@ -1,18 +1,19 @@
 # Basic rate limiting
 
-IMPORTANT: This guide applies to $OSSproductName$, use of this guide on $AESproductName$ is not fully supported.  Use the existing [RateLimitService](../../topics/using/rate-limits/) instead.
+<Alert severity="info">This guide applies to $OSSproductName$. It will not work correctly
+on $AESproductName$.</Alert>
 
-$OSSproductName$ can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure the $OSSproductName$ to use a simple third party rate limit service. If you don't want to implement your own rate limiting service, $AESproductName$ integrates a [powerful, flexible rate limiting service](../../topics/using/rate-limits/).
+$productName$ can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure $productName$ to use a simple third party rate limit service. (If you don't want to implement your own rate limiting service, $AESproductName$ integrates a [powerful, flexible rate limiting service](/docs/edge-stack/latest/topics/using/rate-limits/).)
 
 ## Before you get started
 
-This tutorial assumes you have already followed the $OSSproductName$ [Installation](../../topics/install/) and [Quickstart Tutorial](../../tutorials/quickstart-demo) guides. If you haven't done that already, you should do so now.
+This tutorial assumes you have already followed the $productName$ [Installation](../../topics/install/) and [Quickstart Tutorial](../../tutorials/quickstart-demo) guides. If you haven't done that already, you should do so now.
 
-Once completed, you'll have a Kubernetes cluster running $OSSproductName$ and the Quote of the Moment service. Let's walk through adding rate limiting to this setup.
+Once completed, you'll have a Kubernetes cluster running $productName$ and the Quote of the Moment service. Let's walk through adding rate limiting to this setup.
 
 ## 1. Deploy the rate limit service
 
-$OSSproductName$ delegates the actual rate limit logic to a third party service. We've written a [simple rate limit service](https://github.com/emissary-ingress/emissary/tree/master/docker/test-ratelimit) that:
+$productName$ delegates the actual rate limit logic to a third party service. We've written a [simple rate limit service](https://github.com/emissary-ingress/emissary/tree/master/docker/test-ratelimit) that:
 
 - listens for requests on port 5000;
 - handles gRPC `shouldRateLimit` requests;
@@ -61,7 +62,7 @@ spec:
     spec:
       containers:
       - name: example-rate-limit
-        image: agervais/ambassador-ratelimit-service:1.0.0
+        image: datawire/test_services:test-ratelimit:0.0.4
         imagePullPolicy: Always
         ports:
         - name: http-api
@@ -72,17 +73,21 @@ spec:
             memory: 100Mi
 ```
 
-This configuration tells $OSSproductName$ about the rate limit service, notably that it is serving requests at `example-rate-limit:5000`.
+This configuration tells $productName$ about the rate limit service, notably that it is serving requests at `example-rate-limit:5000`. $productName$ will see the `RateLimitService` and reconfigure itself within a few 
+seconds, allowing incoming requests to be rate-limited.
 
-$OSSproductName$ will see the RateLimitService and reconfigure itself within a few seconds. Note that the v2 API is available for the $OSSproductName$.
+<Alert severity="info">If $productName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.</Alert>
 
-## 2. Configure $OSSproductName$ Mappings
+## 2. Configure $productName$ Mappings
 
-$OSSproductName$ only validates requests on Mappings which set rate limiting descriptors. If $OSSproductName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.
+$productName$ only validates requests on `AmbassadorMapping`s which set labels to use for rate limiting,
+so you'll need to apply `labels` to your `Mapping`s to enable rate limiting. For more information
+on the labelling process, see the [Rate Limits configuration documentation](../../topics/using/rate-limits/).
 
-### v0 API
+<Alert severity="info">These `labels` require `Mapping` resources with `apiVersion` `getambassador.io/v2`
+or newer &mdash; if you're updating an old installation, check the `apiVersion`!</Alert>
 
-$OSSproductName$ 0.50.0 and later requires the `v2` API Version for rate limiting. The `v2` API uses the `labels` attribute to attach rate limiting descriptors. Review the [Rate Limits configuration documentation](../../topics/using/rate-limits/) for more information.
+<Alert severity="info">If $productName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.</Alert>
 
 Replace the label that is applied to the `service-backend` with:
 
@@ -102,7 +107,7 @@ so the AmbassadorMapping definition will now look like this:
 apiVersion: x.getambassador.io/v3alpha1
 kind: AmbassadorMapping
 metadata:
-  name: service-backend
+  name: quote-backend
 spec:
   hostname: "*"
   prefix: /backend/
@@ -115,57 +120,9 @@ spec:
           omit_if_not_present: true
 ```
 
-### v2 API
+<!-- If multiple `labels` are supplied for a single `Mapping`, $productName$ would also perform multiple requests to `example-rate-limit:5000` if we had defined multiple `rate_limits` rules on the mapping. -->
 
-$OSSproductName$ versions 0.40.2 and earlier use the `v2` API version which uses the `rate_limits` attribute to set rate limiting descriptors.
-
-```yaml
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: quote
-spec:
-  ports:
-  - name: ui
-    port: 5000
-    targetPort: 5000
-  - name: backend
-    port: 8080
-    targetPort: 8080
-  selector:
-    app: backend
----
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
-metadata:
-  name: quote-backend
-spec:
-  hostname: "*"
-  prefix: /
-  service: quote:5000
----
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
-metadata:
-  name: quote-backend
-spec:
-  hostname: "*"
-  prefix: /backend/
-  service: quote
-  rate_limits:
-  - descriptor: A test case
-    headers:
-      - "x-ambassador-test-allow"
-```
-
-This configuration tells $OSSproductName$ about the rate limit rules to apply, notably that it needs the `x-ambassador-test-allow` header, and that it should set "A test case" as the `generic_key` descriptor when performing the gRPC request.
-
-Note that both `descriptor` and `headers` are optional. However, if `headers` are defined, **they must be part of the request in order to be rate limited**.
-
-$OSSproductName$ would also perform multiple requests to `example-rate-limit:5000` if we had defined multiple `rate_limits` rules on the mapping.
-
-## 3. Test rate limiting
+## 2. Test rate limiting
 
 If we `curl` to a rate-limited URL:
 
