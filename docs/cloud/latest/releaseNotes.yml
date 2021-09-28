@@ -29,7 +29,7 @@
 
 changelog: ''
 items:
-- date: '2021-10-08'
+  - date: '2021-10-08'
     notes:
       - title: Rollouts from your GitLab repositories
         body: 'GitLab support to use Ambassador Cloud Rollouts for deploying your services using the canary release pattern.'
