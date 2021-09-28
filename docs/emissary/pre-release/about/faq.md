@@ -9,6 +9,7 @@ development workflow for a full-cycle development. $productName$ is designed for
 the Kubernetes world with:
 
 * Sophisticated traffic management capabilities (thanks to its use of [Envoy Proxy](https://www.envoyproxy.io)), such as load balancing, circuit breakers, rate limits, and automatic retries.
+[//]: # (+FIX+ AES-only)
 * API management capabilities such as a developer portal and OpenID Connect integration for Single Sign-On.
 * A declarative, self-service management model built on Kubernetes Custom Resource Definitions, enabling GitOps-style continuous delivery workflows.
 
@@ -34,7 +35,9 @@ $productName$ uses [Envoy Proxy](https://www.envoyproxy.io) as its core proxy. E
 
 ### Is $productName$ production ready?
 
-Yes. Thousands of organizations, large and small, run $productName$ in production.
+[//]: # (+FIX+ Check for OSS)
+
+Yes. Thousands of organizations, large and small, run $productName$ in production. 
 Public users include Chick-Fil-A, ADP, Microsoft, NVidia, and AppDirect, among others.
 
 ### What is the performance of $productName$?
@@ -42,6 +45,8 @@ Public users include Chick-Fil-A, ADP, Microsoft, NVidia, and AppDirect, among o
 There are many dimensions to performance. We published a benchmark of [$productName$ performance on Kubernetes](/resources/envoyproxy-performance-on-k8s/). Our internal performance regressions cover many other scenarios; we expect to publish more data in the future.
 
 ### What's the difference between a service mesh (such as Istio) and $productName$?
+
+[//]: # (+FIX+ Check for OSS)
 
 Service meshes focus on routing internal traffic from service to service
 ("east-west"). $productName$ focuses on traffic into your cluster ("north-south").
