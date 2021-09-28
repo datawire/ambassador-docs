@@ -1,10 +1,15 @@
 # Using cert-manager
 
-$productName$ has simple and easy built-in support for automatically using ACME to create and renew TLS
-certificates; configured by the [`AmbassadorHost` resource](../../topics/running/host-crd/).  However, it only supports ACME's
-`http-01` challenge; if you require more flexible certificate management (such as using ACME's `dns-01` challenge, or
-using a non-ACME certificate source), $productName$ also supports using external certificate management
-tools.
+[//]: # (+FIX+ link to "TLS and certificates" concept)
+
+$AESproductName$ has simple and easy built-in support for automatically [using ACME] with the
+`http-01` challenge to create and renew TLS certificates. However, this support is not available
+in $OSSproductName$, and it is limited to the ACME `http-01` challenge type. If you're running
+$OSSproductName$, or if you require more flexible certificate management (such as using ACME's
+`dns-01` challenge, or using a non-ACME certificate source), external certificate management
+tools are also supported.
+
+[using ACME]: (../../topics/running/host-crd/#acme-support)
 
 One such tool is Jetstack's [cert-manager](https://github.com/jetstack/cert-manager), which is a general-purpose tool
 for managing certificates in Kubernetes.  Cert-manager will automatically create and renew TLS certificates and store
