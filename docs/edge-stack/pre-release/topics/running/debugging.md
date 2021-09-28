@@ -80,13 +80,16 @@ $productName$ has two major log mechanisms: $productName$ logging and Envoy logg
 
 ### $productName$ debug logging
 
-$productName$ logging is primarily concerned with the business of noticing changes to 
+Much of $productName$'s logging is concerned with the business of noticing changes to 
 Kubernetes resources that specify the $productName$ configuration, and generating new
-Envoy configuration in response to those changes. Enabling debug logging for this part
-of the system is under the control of two environment variables:
+Envoy configuration in response to those changes. $productName$ also logs information
+about its built-in authentication, rate limiting, developer portal, ACME, etc. There
+are multiple environment variables controlling debug logging; which is required depends
+on which aspect of the system you want to debug:
 
-- Set `AES_LOG_LEVEL=debug` to debug the early boot sequence and $productName$'s interactions
-  with the Kubernetes cluster (finding changed resources, etc.).
+- Set `AES_LOG_LEVEL=debug` to debug the early boot sequence, $productName$'s interactions
+  with the Kubernetes cluster (finding changed resources, etc.), and the built-in services
+  (auth, rate limiting, etc.).
 - Set `AMBASSADOR_DEBUG=diagd` to debug the process of generating an Envoy configuration from
   the input resources.
 
