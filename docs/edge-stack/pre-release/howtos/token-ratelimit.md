@@ -12,7 +12,7 @@ $AESproductName$ is able to perform Rate Limiting based on JWT Token claims from
 - A working Keycloak instance and Keycloak Filter
 - A service exposed with an AmbassadorMapping and protected by a FilterPolicy
 
-<Alert severity="info">We'll uses Keycloak to generate tokens with unique claims.  It will work in a similar manner for any claims present on a JWT token issued by any other provider.  See <a href="../sso/keycloak/">our guide here</a> on using Keycloak with $AESproductName$.</Alert>
+<Alert severity="info">We'll use Keycloak to generate tokens with unique claims.  It will work in a similar manner for any claims present on a JWT token issued by any other provider.  See <a href="../sso/keycloak/">our guide here</a> on using Keycloak with $AESproductName$.</Alert>
 
 Here is a YAML example that describes the setup:
 
