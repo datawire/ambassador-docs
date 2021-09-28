@@ -9,13 +9,14 @@ development workflow for a full-cycle development. $productName$ is designed for
 the Kubernetes world with:
 
 * Sophisticated traffic management capabilities (thanks to its use of [Envoy Proxy](https://www.envoyproxy.io)), such as load balancing, circuit breakers, rate limits, and automatic retries.
+* API management capabilities such as a developer portal and OpenID Connect integration for Single Sign-On.
 * A declarative, self-service management model built on Kubernetes Custom Resource Definitions, enabling GitOps-style continuous delivery workflows.
 
 We've written about [the history of $productName$](https://blog.getambassador.io/building-ambassador-an-open-source-api-gateway-on-kubernetes-and-envoy-ed01ed520844), [Why $productName$ In Depth](../why-ambassador), [Features and Benefits](../features-and-benefits) and about the [evolution of API Gateways](../../topics/concepts/microservices-api-gateways/).
 
-### What's the difference between the $OSSproductName$ and the $AESproductName$?
+### What's the difference between $OSSproductName$ and $AESproductName$?
 
-The $OSSproductName$ was the name of the original open-source project. As the project evolved, we realized that the functionality we were building had extended far beyond an API Gateway. In particular, the $AESproductName$ is intended to provide all the functionality you need at the edge -- hence, an "edge stack." This includes an API Gateway, ingress controller, load balancer, developer portal, and more.
+$OSSproductName$ is a CNCF Incubating project and provides the open-source core of $AESproductName$. Originally we called $OSSProductName$ the "Ambassador API Gateway", but as the project evolved, we realized that the functionality we were building had extended far beyond an API Gateway. In particular, the $AESproductName$ is intended to provide all the functionality you need at the edge -- hence, an "edge stack." This includes an API Gateway, ingress controller, load balancer, developer portal, and more.
 
 ### How is $AESproductName$ licensed?
 
@@ -33,8 +34,6 @@ $productName$ uses [Envoy Proxy](https://www.envoyproxy.io) as its core proxy. E
 
 ### Is $productName$ production ready?
 
-[//]: # (+FIX+ Check for OSS)
-
 Yes. Thousands of organizations, large and small, run $productName$ in production. 
 Public users include Chick-Fil-A, ADP, Microsoft, NVidia, and AppDirect, among others.
 
@@ -44,8 +43,6 @@ There are many dimensions to performance. We published a benchmark of [$productN
 
 ### What's the difference between a service mesh (such as Istio) and $productName$?
 
-[//]: # (+FIX+ Check for OSS)
-
 Service meshes focus on routing internal traffic from service to service
 ("east-west"). $productName$ focuses on traffic into your cluster ("north-south").
 While both a service mesh and $productName$ can route L7 traffic, the reality is that
@@ -54,6 +51,10 @@ service mesh. Production customers of $productName$ have integrated with Consul,
 Istio, and Linkerd2.
 
 ## Common Configurations
+
+### How do I disable the 404 landing page?
+
+See the [Controlling the $productName$ 404 Page](../../howtos/controlling-404) how-to.
 
 ### How do I disable the default Admin mappings?
 
