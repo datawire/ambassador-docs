@@ -40,7 +40,7 @@ items:
         type: feature
         body: "You can now set <code>dns_type</code> between <code>strict_dns</code> and <code>logical_dns</code> in a <code>Mapping</code> to configure the Service Discovery Type"
         docs: topics/using/mappings/#dns-configuration-for-mappings
-      - title: New Server Preservation Configuration 
+      - title: Configurable buffer_limit_bytes in Modules 
         type: feature
         body: "You can now set <code>buffer_limit_bytes</code> in the Module to to configure the default soft limit of 1MiB on upstream read and write buffers"
         docs: topics/running/ambassador/#modify-default-buffer-size
