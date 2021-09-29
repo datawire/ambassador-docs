@@ -68,7 +68,7 @@ This will also fork a repository called **emojivoto**.
 Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page and follow these steps:
 
 1. Click the "Services" favorites button.
-1. Look for the **web-app** service and hover over it to see the "expand" button, which will appear at the left side with a plus (+) icon.
+1. Look for the **web-app** service and click the card to see the details pop up in the <a href="/docs/cloud/latest/service-catalog/concepts/hud/">Heads Up Display (HUD)</a>.
 1. Click on the **Rollout** button for the **web-app** service to show the instructions to create a rollout.
 
 Fill in the form with the following information:
@@ -78,7 +78,7 @@ Fill in the form with the following information:
 - Weight increment: 10%
 - Number of pods: 3
 
-Click **Start Rollout**.
+Click on **Start Rollout**.
 
 <Alert severity="success">Congrats! From the UI you have automatically generated a GitHub pull request that contains all of the necessary Kubernetes rollout YAML configuration.</Alert>
 
