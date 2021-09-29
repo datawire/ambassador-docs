@@ -31,16 +31,15 @@ helm install $productHelmName$ --devel --namespace $productNamespace$ datawire/$
 kubectl -n $productNamespace$ wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=$productHelmName$
 ```
 
-This will install the name `x.getambassador.io` APIgroup, and start $productName$ running in its the
-$productNamespace$ namespace. The `x.getambassador.io` APIgroup allows for greater isolation of
-$productName$ 1.X and $productName$ 2.X during side-by-side testing. As its `v3alpha1` version implies,
-we are actively seeking feedback on it, and it may change before its promotion to `getambassador.io/v3`.
+This will install the `getambassador.io/v3alpha1` APIgroup, and start $productName$ running in its the
+$productNamespace$ namespace. As its `v3alpha1` version implies, we are actively seeking feedback on it,
+and it may change before its promotion to `getambassador.io/v3`.
 
 ### Make sure all `ambassador_id`s are arrays, not simple strings.
 
 In any resource that you want your 2.X instance to honor, any `ambassador_id: "foo"` must become
 `ambassador_id: [ "foo" ]`. This applies to all $productName$ resources, and is supported by all versions
-since at least Ambassador 1.0.0.
+of Ambassador 1.X.
 
 ### Define an `AmbassadorListener` for each port on which your installation should listen.
 
@@ -57,32 +56,37 @@ hostBinding:
     from: ALL
 ```
 
-### Copy `Host` resources to `AmbassadorHost` resources.
+### Update `Host` resources to `v3alpha1`.
 
 <Alert severity="info">
   <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
 </Alert>
 
-For each existing `Host` resource that 2.X should honor, create an `AmbassadorHost` resource:
+$productName$ will find `Host` resources without updating the `apiVersion`. However, making
+sure that `AmbassadorListener`s, `Host`s, and `Mapping`s correctly associate with each other
+will likely require changes. Therefore, for each existing `Host` resource that you want to
+use with $productName$ 2.X:
 
-- change the `apiVersion` to `x.getambassador.io/v3alpha1`;
-- change the `kind` to `AmbassadorHost`;
+- change the `apiVersion` to `getambassador.io/v3alpha1`;
 - add `metadata.labels` as needed to match the `hostBinding` for the `AmbassadorListener`s with which
   the `AmbassadorHost` should associate; and
-- set `spec.selector` if desired, to control which `AmbassadorMappings` will be associated with this `AmbassadorHost`.
+- set `spec.mappingSelector`, if desired, to control which `AmbassadorMappings` will be associated 
+  with this `AmbassadorHost`.
 
-### Copy `Mapping` resources to `AmbassadorMapping` resources.
+### Update `Mapping` resources to `v3alpha1`.
 
 <Alert severity="info">
   <a href="../../using/intro-mappings/">Learn more about <code>AmbassadorMapping</code></a>
 </Alert>
 
-For each existing `Mapping` resource that 2.X should honor, create an `AmbassadorMapping` resource:
+$productName$ will find `Mapping` resources without updating the `apiVersion`. However, making
+sure that `AmbassadorListener`s, `Host`s, and `Mapping`s correctly associate with each other
+will likely require changes. Therefore, for each existing `Mapping` resource that you want to
+use with $productName$ 2.X:
 
 - change the `apiVersion` to `x.getambassador.io/v3alpha1`;
-- change the `kind` to `AmbassadorMapping`;
 - change `spec.host` to `spec.hostname` if possible (see below);
-- add `metadata.labels` as needed to match the `selector` for the `AmbassadorHost`s with which
+- add `metadata.labels` as needed to match the `mappingSelector` for the `AmbassadorHost`s with which
   the `AmbassadorMapping` should associate; and
 - make sure `spec.hostname` matches up with the `AmbassadorHost`s with which the `AmbassadorMapping` should associate.
 
@@ -90,7 +94,7 @@ Where `spec.host` could be an exact match or (with `host_regex`) a regular expre
 glob. `spec.hostname` is **strongly** preferred, unless a regex is absolutely required: using globs is **much** more
 performant. Therefore, we recommend using `spec.hostname` wherever possible:
 
-- if `spec.host` is being used for an exact match, simply rename it to `spec.hostname`.
+- if `spec.host` is being used for an exact match, simply rename `spec.host` to `spec.hostname`.
 - if `spec.host` is being used for a regex that effects a prefix or suffix match, rename it
   to `spec.hostname` and rewrite the regex into a DNS glob, e.g. `host: .*\.example\.com` would become
   `hostname: *.example.com`.
@@ -99,19 +103,9 @@ Additionally, when `spec.hostname` is used, the `AmbassadorMapping` will be asso
 if `spec.hostname` matches the hostname of the `AmbassadorHost`. If the `AmbassadorHost`'s `selector` is also set,
 both the `selector` and the hostname must line up.
 
-### Copy `TCPMapping` resources to `AmbassadorTCPMapping` resources.
-
-<Alert severity="info">
-  <a href="../../using/tcpmappings/">Learn more about <code>AmbassadorTCPMapping</code></a>
+<Alert severity="warning">
+  An <code>AmbassadorMapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>AmbassadorHost</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
 </Alert>
-
-For each existing `TCPMapping` resource that 2.X should honor, create an `AmbassadorTCPMapping` resource:
-
-- change the `apiVersion` to `x.getambassador.io/v3alpha1`; and
-- change the `kind` to `AmbassadorTCPMapping`.
-
-There are no further changes needed; the association between an `AmbassadorTCPMapping` is still determined by
-the port and `spec.host`, which must be an exact match.
 
 ## 2. Additional Notes
 
@@ -123,7 +117,7 @@ When migrating to $productName$ 2.X, there are several things to keep in mind:
   <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
 </Alert>
 
-The new [`AmbassadorListener` resource](../../running/ambassadorlistener) (in `x.getambassador.io/v3alpha1`) defines the
+The new [`AmbassadorListener` resource](../../running/ambassadorlistener) (in `getambassador.io/v3alpha1`) defines the
 specific ports on which $productName$ will listen, and which protocols and security model will be used per port. **The
 `AmbassadorListener` resource is mandatory.**
 
@@ -161,19 +155,30 @@ can also result in larger Envoy configurations that slow reconfiguration. Instea
 </Alert>
 
 In $productName$ 1.X, `Mapping`s were nearly always associated with every `Host`. Since this also tends to
-result in larger Envoy configurations that slow reconfiguration, $productName$ 2.X inverts this behavior:
+result in larger Envoy configurations that slow down reconfiguration, $productName$ 2.X inverts this behavior:
 **`AmbassadorHost` and `AmbassadorMapping` will not associate without explicit selection**.
 
 To have an `AmbassadorMapping` associate with an `AmbassadorHost`, at least one of the following must hold:
 
-- The `AmbassadorHost` must define a `selector` that matches a `label` on the `AmbassadorMapping`; or
-- The `AmbassadorMapping` must define `hostname` (not `host`) that matches the `hostname` of the `AmbassadorHost`.
+- The `AmbassadorHost` must define a `mappingSelector` that matches a `label` on the `AmbassadorMapping`; or
+- The `AmbassadorMapping` must define `hostname` that matches the `hostname` of the `AmbassadorHost`.
   (Note that the `hostname` of both `AmbassadorHost` and `AmbasssadorMapping` is a DNS glob.)
 
-If the `AmbassadorHost` defines a `selector` and the `AmbassadorMapping` defines a `hostname`, both must match.
+If the `AmbassadorHost` defines a `mappingSelector` and the `AmbassadorMapping` defines a `hostname`, both must match.
 
-As a migration aid, an `AmbassadorMapping` with a `hostname` of `"*"` will associate with any `AmbassadorHost` that
-has no `selector`, as will an `AmbassadorMapping` that uses `host_regex`.
+As a migration aid:
+
+- An `AmbassadorMapping` with a `hostname` of `"*"` will associate with any `AmbassadorHost` that
+has no `mappingSelector`, and
+- A `v3alpha1` `AmbassadorMapping` will honor `host` if `hostname` is not present. 
+
+<Alert severity="warning">
+  An <code>AmbassadorMapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>AmbassadorHost</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
+</Alert>
+
+<Alert severity="warning">
+  Support for <code>host</code> and <code>host_regex</code> will be removed before <code>v3alpha1</code> is promoted to <code>v3</code>.
+</Alert>
 
 ### `AmbassadorHost` is required to terminate TLS.
 
