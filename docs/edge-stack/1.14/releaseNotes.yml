@@ -29,6 +29,21 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 1.14.2
+    date: '2021-09-27'
+    notes:
+      - title: Configurable respect_dns_ttl in Mappings
+        type: feature
+        body: "You can now set <code>respect_dns_ttl</code> to <code>true</code> to force the DNS refresh rate for a <code>Mapping</code> to be set to the record's TTL obtained from DNS resolution"
+        docs: topics/using/mappings/#dns-configuration-for-mappings
+      - title: Configurable dns_type in Mappings
+        type: feature
+        body: "You can now set <code>dns_type</code> between <code>strict_dns</code> and <code>logical_dns</code> in a <code>Mapping</code> to configure the Service Discovery Type"
+        docs: topics/using/mappings/#dns-configuration-for-mappings
+      - title: Configurable buffer_limit_bytes in Modules 
+        type: feature
+        body: "You can now set <code>buffer_limit_bytes</code> in the Module to to configure the default soft limit of 1MiB on upstream read and write buffers"
+        docs: topics/running/ambassador/#modify-default-buffer-size
   - version: 1.14.1
     date: '2021-08-24'
     notes:

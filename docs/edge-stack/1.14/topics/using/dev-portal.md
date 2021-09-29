@@ -150,7 +150,6 @@ spec:
   search:
     enabled: bool         ## optional; default false
     type: "string"        ## optional; supported values ["title-only", "all-content"]; default "title-only"
-  preserve_servers: bool  ## optional; see below
 ```
 
 where:
@@ -184,7 +183,6 @@ where:
   * `type`: Configure the items fed into search
     * `title-only` (default): only search over the names of DevPortal services and markdown pages
     * `all-content`: Search over openapi spec content and markdown page content.
-* `preserve_servers`: when set to `true`, configures the DevPortal to use server definitions from openAPI documents instead of implicitly building server definitions.
 
 Example:
 
