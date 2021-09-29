@@ -109,27 +109,28 @@ kubectl apply -f ./manifests
 
 ### GitHub
 
-Click the <strong>Enable</strong> button in the GitHub section.
+Click the **Enable** button in the GitHub section.
 You will be taken to github.com and asked in which account you want to install Ambassador DCP.
 Select the account in which you forked the rollouts-demo repo.
-On the new page that opens scroll down to the "Repository access" section, and click on <strong>Only select repositories</strong>.
+On the new page that opens scroll down to the "Repository access" section, and click on **Only select repositories**.
 Then click on the dropdown menu directly below this option and select your forked rollouts-demo repo.
-Click <strong>Save</strong> and you will be taken back to the Ambassador Cloud integrations page.
+Click **Save** and you will be taken back to the Ambassador Cloud integrations page.
 
 ### DockerHub
-Click the <strong>Enable</strong> button in the DockerHub section and enter your DockerHub username and an access token so that Ambassador Cloud can query for available image tags.
+Click the **Enable** button in the DockerHub section and enter your DockerHub username and an access token so that Ambassador Cloud can query for available image tags.
 You can <a href="https://hub.docker.com/settings/security" target="_blank">generate a DockerHub access token</a> via your hub.docker.com account security settings.
 
 ### GitLab
-Click the <strong>Enable</strong> button in the GitLab section and enter your GitLab token.
+Click the **Enable** button in the GitLab section and enter your GitLab token.
 You can <a href="https://gitlab.com/-/profile/personal_access_tokens" target="_blank">generate a personal access token</a> via your GitLab Profile Settings.
 <Alert severity="info">
-  You will need to make sure the <strong>api</strong> scope is selected when generating the token for the integration to work properly with your repository. If you are only using the GitLab Container Registry, you will only need to select the <strong>read_registry</strong> scope.
+  You will need to make sure the <strong>api</strong> scope is selected when generating the token for the integration to work properly with your repository.<br />
+  If you are only using the GitLab Container Registry, you will only need to select the <strong>read_registry</strong> scope.
 </Alert>
 
 ## 6. Configure Argo CD
 
-From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, look for the service you want to Rollout and click on its card. The <a href="/docs/cloud/latest/service-catalog/concepts/hud/">Heads Up Display (HUD)</a> will show information about your service along with some actions. Click on the <strong>Rollout</strong> button to show the <strong>start rollout slideout</strong>. In there, click the <strong>Configure Argo for your service</strong> option and follow the instructions. This will:
+From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, look for the service you want to Rollout and click on its card. The <a href="/docs/cloud/latest/service-catalog/concepts/hud/">Heads Up Display (HUD)</a> will show information about your service along with some actions. Click on the **Rollout** button to show the **start rollout slideout** In there, click the **Configure Argo for your service** option and follow the instructions. This will:
 1. Generate a deployment key in your forked repository.
 1. Configure Argo CD with that deployment key to monitor your repository.
 1. Install an Argo CD Application that represents the selected service.
@@ -137,7 +138,7 @@ From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" 
 
 ## 7. Create a Rollout
 
-Once ArgoCD has been configured in your cluster, you can click the <strong>Rollout</strong> button again to see the <strong>start rollout slideout</strong> where you can select the parameters needed to rollout your service.
+Once ArgoCD has been configured in your cluster, you can click the **Rollout** button again to see the **start rollout slideout** where you can select the parameters needed to rollout your service.
 
 Fill in the form with the following information:
 - Image Tag
@@ -145,7 +146,7 @@ Fill in the form with the following information:
 - Weight increment
 - Number of pods
 
-Click <strong>Start Rollout</strong>.
+Click on **Start Rollout**.
 
 <Alert severity="success">
   Congrats! From the UI you have automatically generated a GitHub pull request or GitLab merge requests that contains all of the necessary Kubernetes rollout YAML configuration.
@@ -153,15 +154,15 @@ Click <strong>Start Rollout</strong>.
 
 ## 8. Review & merge
 
-After clicking Start Rollout the slideout will close and you will be redirected to the service rollouts page where you will see one card with a badge saying <strong>Not Merged</strong>. This is your <strong>Rollout Card</strong>.
-Click the <strong>Pull Request</strong> or <strong>Merge Request</strong> button.
+After clicking Start Rollout the slideout will close and you will be redirected to the service rollouts page where you will see one card with a badge saying **Not Merged**. This is your **Rollout Card**.
+Click the **Pull Request** or **Merge Request** button.
 A new browser tab will be opened and you will be taken to your repository where you can review and merge the Pull Request on GitHub or Merge Request on GitLab.
-Merge the Pull or Merge Request and go back to your service's rollouts page wher you will see in a few seconds the state of the Rollout Card changing from <strong>Not Merged</strong> to <strong>Merged</strong>.
+Merge the Pull or Merge Request and go back to your service's rollouts page wher you will see in a few seconds the state of the Rollout Card changing from **Not Merged** to **Merged**.
 
 ## 9. Watch the Rollout progress from Ambassador Cloud
 
-After ArgoCD has picked up the chanes, the Rollout Card's state will change to <strong>In Progress</strong> and you can see the rollout progress of your new version.
-Note how the <strong>Current Canary Weight</strong> progress bar increases in steps in the amount you specified above in the <strong>weight increment</strong> when creating the rollout.
+After ArgoCD has picked up the chanes, the Rollout Card's state will change to **In Progress** and you can see the rollout progress of your new version.
+Note how the **Current Canary Weight** progress bar increases in steps in the amount you specified above in the **weight increment** when creating the rollout.
 
 
 <Alert severity="success">
