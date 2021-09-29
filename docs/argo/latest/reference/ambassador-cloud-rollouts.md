@@ -68,7 +68,8 @@ The image repository type. Accepted values are `dockerhub` or `gitlab`.
 The name of the image repository. This is used by Ambassador Cloud to identify which container to update in the Kubernetes manifests to update with the new image version. Per example, if the container to update's specs contain: `image: datawire/demo-image:1.2.3`, the value for the annotation should be `datawire/demo-image`.
 
 <Alert severity="warning">
-  When your <strong>a8r.io/rollouts.image-repo.type</strong> annotation is set to <strong>gitlab</strong>, this annotation value needs to be the <strong>Repository ID</strong> of the container registry you are trying to reach. For example, given the https://gitlab.com/datawire/rollouts repository URL, the <strong>Repository ID</strong> will be datawire/rollouts.
+  If <strong>a8r.io/rollouts.image-repo.type</strong> is set to <strong>gitlab</strong>, <strong>a8r.io/rollouts.image-repo.name</strong> must be the <strong>Repository ID</strong> of the GitLab Container Registry you are trying to use.<br/>
+  For example, given the URL <strong>https://gitlab.com/datawire/rollouts</strong>, the <strong>Repository ID</strong> will be <strong>datawire/rollouts</strong>.
 </Alert>
 
 ### Manifests
