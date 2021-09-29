@@ -181,6 +181,14 @@ Configuration for the `PROXY` protocol is part of the `AmbassadorListener` resou
   <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.
 </Alert>
 
+### `AmbassadorHost`s and ACME
+
+In $productName$ 2.0, ACME will be disabled if an `AmbassadorHost` does not set `acmeProvider` at all (prior to $productName$ 2.0, not mentioning `acmeProvider` would result in the ACME client attempting, and failing, to start). If `acmeProvider` is set, but `acmeProvider.authority` is not set, the ACME client will continue to default to Let's Encrypt, in order to preserve compatibility with $productName$ prior to $productName$ 2.0. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+
+<Alert severity="info">
+  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+</Alert>
+
 ## 3. Other Changes
 
 ### Envoy V3 API by Default
