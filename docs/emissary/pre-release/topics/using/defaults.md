@@ -1,4 +1,4 @@
-# Using Ambassador Module defaults
+# Using `ambassador` `Module` defaults
 
 ## The defaults element
 

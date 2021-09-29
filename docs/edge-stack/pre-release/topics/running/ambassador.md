@@ -414,7 +414,40 @@ You may specify as many ranges for each kind of keyword as desired.
 
 When set to `true`, $productName$ will reject any client requests that contain escaped slashes (`%2F`, `%2f`, `%5C`, or `%5c`) in their URI path by returning HTTP 400. By default, $productName$ will forward these requests unmodified.
 
-In general, a request with an escaped slash will _not_ match an `AmbassadorMapping` prefix with an unescaped slash. However, external authentication services and other upstream services may handle escaped slashes differently, which can lead to security issues if paths with escaped slashes are allowed. By setting `reject_requests_with_escaped_slashes: true`, this class of security concern can be largely avoided.
+  - **Envoy and $productName$ behavior**
+
+  Internally, Envoy treats escaped and unescaped slashes distinctly for matching purposes. This means that an $productName$ mapping
+  for path `/httpbin/status` will not be matched by a request for `/httpbin%2fstatus`.
+
+  On the other hand, when using $productName$, escaped slashes will be treated like unescaped slashes when applying FilterPolicies. For example, a request to `/httpbin%2fstatus/200` will be matched against a FilterPolicy for `/httpbin/status/*`.
+
+  - **Security Concern Example**
+
+  With $productName$, this can become a security concern when combined with `bypass_auth` in the following scenario:
+
+     - Use an `AmbassadorMapping` for path `/prefix` with `bypass_auth` set to true. The intention here is to apply no FilterPolicies under this prefix, by default.
+
+     - Use an `AmbassadorMapping` for path `/prefix/secure/` without setting bypass_auth to true. The intention here is to selectively apply a FilterPolicy to this longer prefix.
+
+     - Have an upstream service that receives both `/prefix` and `/prefix/secure/` traffic (from the Mappings above), but the upstream service treats escaped and unescaped slashes equivalently.
+
+  In this scenario, when a client makes a request to `/prefix%2fsecure/secret.txt`, the underlying Envoy configuration will _not_ match the routing rule for `/prefix/secure/`, but will instead
+  match the routing rule for `/prefix` which has `bypass_auth` set to true. $productName$ FilterPolicies will _not_ be enforced in this case, and the upstream service will receive
+  a request that it treats equivalently to `/prefix/secure/secret.txt`, potentially leaking information that was assumed protected by an $productName$ FilterPolicy.
+
+  One way to avoid this particular scenario is to avoid using `bypass_auth` and instead use a FilterPolicy that applies no filters when no authorization behavior is desired.
+
+  The other way to avoid this scenario is to reject client requests with escaped slashes altogether to eliminate this class of path confusion security concerns. This is recommended when there is no known, legitimate reason to accept client requests that contain escaped slashes. This is especially true if it is not known whether upstream services will treat escaped and unescaped slashes equivalently.
+
+  This document is not intended to provide an exhaustive set of scenarios where path confusion can lead to security concerns. As part of good security practice it is recommended to audit end-to-end request flow and the behavior of each component’s escaped path handling to determine the best configuration for your use case.
+
+  - **Summary**
+
+  Envoy treats escaped and unescaped slashes _distinctly_ for matching purposes. Matching is the underlying behavior used by $productName$ Mappings.
+
+  $productName$ treats escaped and unescaped slashes _equivalently_ when selecting FilterPolicies. FilterPolicies are applied by $productName$ after Envoy has performed route matching.
+
+  Finally, whether upstream services treat escaped and unescaped slashes equivalently is entirely dependent on the upstream service, and therefore dependent on your use case. Configuration intended to implement security policies will require audit with respect to escaped slashes. By setting reject_requests_with_escaped_slashes, this class of security concern can largely be eliminated.
 
 ##### Trust downstream client IP
 
