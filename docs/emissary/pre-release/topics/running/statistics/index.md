@@ -20,7 +20,7 @@ interesting statistics to investigate:
 
 ## Overriding Statistics Names
 
-The optional `stats_name` element of every CRD that references a service (`AmbassadorMapping`, `AmbassadorTCPMapping`,
+The optional `stats_name` element of every CRD that references a service (`Mapping`, `TCPMapping`,
 `AuthService`, `LogService`, `RateLimitService`, and `TracingService`) can override the name under which cluster statistics
 are logged (`usersvc` above). If not set, the default is the `service` value, with non-alphanumeric characters replaced by
 underscores:
@@ -30,11 +30,11 @@ underscores:
 - `service: http://foo:8080` will use `http___foo_8080`
 - `service: foo.othernamespace` will use `foo_othernamespace`
 
-The last example is worth special mention: a resource in a different namespace than the one in which $productName$ is running will automatically be qualified with the namespace of the resource itself. So, for example, if $productName$ is running in the `ambassador` namespace, and this `AmbassadorMapping` is present in the `default` namespace:
+The last example is worth special mention: a resource in a different namespace than the one in which $productName$ is running will automatically be qualified with the namespace of the resource itself. So, for example, if $productName$ is running in the `ambassador` namespace, and this `Mapping` is present in the `default` namespace:
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
-kind: AmbassadorMapping
+kind: Mapping
 metadata:
   name: default-mapping
   namespace: default

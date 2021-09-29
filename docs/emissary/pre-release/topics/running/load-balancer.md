@@ -1,6 +1,6 @@
 # Load balancing
 
-Load balancing configuration can be set for all $productName$ mappings in the [`ambassador` `Module`](../ambassador), or set per [`AmbassadorMapping`](../../using/mappings#configuring-ambassadormappings). If nothing is set, simple round robin balancing is used via Kubernetes services.
+Load balancing configuration can be set for all $productName$ mappings in the [`ambassador` `Module`](../ambassador), or set per [`Mapping`](../../using/mappings#configuring-Mappings). If nothing is set, simple round robin balancing is used via Kubernetes services.
 
 To use advanced load balancing, you must first configure a [resolver](../resolvers) that supports advanced load balancing (e.g., the Kubernetes Endpoint Resolver or Consul Resolver). Once a resolver is configured, you can use the `load_balancer` attribute. The following fields are supported:
 
@@ -37,8 +37,8 @@ or, per mapping:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -72,8 +72,8 @@ or, per mapping:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend/
 spec:
@@ -109,8 +109,8 @@ load_balancer:
 If the cookie you wish to set affinity on is already present in incoming requests, then you only need the `cookie.name` field. However, if you want $productName$ to generate and set a cookie in response to the first request, then you need to specify a value for the `cookie.ttl` field which generates a cookie with the given expiration time.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -138,8 +138,8 @@ $productName$ allows header based session affinity if the given header is presen
 Example:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -163,8 +163,8 @@ load_balancer:
 $productName$ allows session affinity based on the source IP of incoming requests.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -194,8 +194,8 @@ spec:
 ```
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:

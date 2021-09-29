@@ -245,7 +245,7 @@ Please see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest
 
 * `add_linkerd_headers: true` will force $productName$ to include the `l5d-dst-override` header for Linkerd.
 
-When using older Linkerd installations, requests going to an upstream service may need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically.  See the [AmbassadorMapping](../../using/mappings#linkerd-interoperability-add_linkerd_headers) documentation for more details.
+When using older Linkerd installations, requests going to an upstream service may need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically.  See the [Mapping](../../using/mappings#linkerd-interoperability-add_linkerd_headers) documentation for more details.
 
 ##### Max request headers size
 
@@ -297,17 +297,17 @@ If you need more flexible and configurable options, $AESproductName$ supports a 
 
 ##### Merge slashes
 
-* `merge_slashes: true` will cause $productName$ to merge adjacent slashes in incoming paths when doing route matching and request filtering: for example, a request for `//foo///bar` would be matched to an `AmbassadorMapping` with prefix `/foo/bar`.
+* `merge_slashes: true` will cause $productName$ to merge adjacent slashes in incoming paths when doing route matching and request filtering: for example, a request for `//foo///bar` would be matched to a `Mapping` with prefix `/foo/bar`.
 
 ##### Use $productName$ namespace for service resolution
 
 * `use_ambassador_namespace_for_service_resolution: true` tells $productName$ to assume that unqualified services are in the same namespace as $productName$
 
-By default, when $productName$ sees a service name without a namespace, it assumes that the namespace is the same as the resource referring to the service. For example, for this `AmbassadorMapping`:
+By default, when $productName$ sees a service name without a namespace, it assumes that the namespace is the same as the resource referring to the service. For example, for this `Mapping`:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: mapping-1
   namespace: foo
@@ -319,7 +319,7 @@ spec:
 
 $productName$ would look for a Service named `upstream` in namespace `foo`. 
 
-However, if `use_ambassador_namespace_for_service_resolution` is `true`, this `AmbassadorMapping` would look for a Service named `foo` in the namespace in which $productName$ is installed instead.
+However, if `use_ambassador_namespace_for_service_resolution` is `true`, this `Mapping` would look for a Service named `foo` in the namespace in which $productName$ is installed instead.
 
 ---
 
@@ -329,7 +329,7 @@ However, if `use_ambassador_namespace_for_service_resolution` is `true`, this `A
 
 * `diagnostics` controls access to the diagnostics interface.
 
-By default, $productName$ creates an `AmbassadorMapping` that allows access to the diagnostic interface at `/ambassador/v0/diag` from anywhere in the cluster. To disable the `AmbassadorMapping` entirely, set `diagnostics.enabled` to `false`:
+By default, $productName$ creates a `Mapping` that allows access to the diagnostic interface at `/ambassador/v0/diag` from anywhere in the cluster. To disable the `Mapping` entirely, set `diagnostics.enabled` to `false`:
 
 
 ```yaml
@@ -343,7 +343,7 @@ With diagnostics disabled, `/ambassador/v0/diag` will respond with 404; however,
 kubectl port-forward -n ambassador deploy/ambassador 8877
 ```
 
-Alternately, to leave the `AmbassadorMapping` intact but restrict access to only the local Pod, set `diagnostics.allow_non_local` to `false`:
+Alternately, to leave the `Mapping` intact but restrict access to only the local Pod, set `diagnostics.allow_non_local` to `false`:
 
 ```yaml
 diagnostics:
@@ -362,7 +362,7 @@ See [Protecting Access to the Diagnostics Interface](../../../howtos/protecting-
 
 If both IPv4 and IPv6 are enabled, $productName$ will prefer IPv6. This can have strange effects if $productName$ receives `AAAA` records from a DNS lookup, but the underlying network of the pod doesn't actually support IPv6 traffic. For this reason, the default is IPv4 only.
 
-An [`AmbassadorMapping`](../../using/mappings) can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in an `AmbassadorMapping`, the values here are used. Most $productName$ installations will probably be able to avoid overriding these settings in Mappings.
+An [`Mapping`](../../using/mappings) can override both `enable_ipv4` and `enable_ipv6`, but if either is not stated explicitly in a `Mapping`, the values here are used. Most $productName$ installations will probably be able to avoid overriding these settings in Mappings.
 
 ##### HTTP/1.0 support
 
@@ -414,7 +414,7 @@ You may specify as many ranges for each kind of keyword as desired.
 
 When set to `true`, $productName$ will reject any client requests that contain escaped slashes (`%2F`, `%2f`, `%5C`, or `%5c`) in their URI path by returning HTTP 400. By default, $productName$ will forward these requests unmodified.
 
-In general, a request with an escaped slash will _not_ match an `AmbassadorMapping` prefix with an unescaped slash. However, external authentication services and other upstream services may handle escaped slashes differently, which can lead to security issues if paths with escaped slashes are allowed. By setting `reject_requests_with_escaped_slashes: true`, this class of security concern can be largely avoided.
+In general, a request with an escaped slash will _not_ match a `Mapping` prefix with an unescaped slash. However, external authentication services and other upstream services may handle escaped slashes differently, which can lead to security issues if paths with escaped slashes are allowed. By setting `reject_requests_with_escaped_slashes: true`, this class of security concern can be largely avoided.
 
 ##### Trust downstream client IP
 
@@ -460,7 +460,7 @@ Please see the [Envoy documentation on HTTP protocol options](https://www.envoyp
 
 * `keepalive` sets the global TCP keepalive settings.
 
-$productName$ will use these settings for all `AmbasasdorMapping`s unless overridden in an `AmbassadorMapping`'s configuration. Without `keepalive`, $productName$ follows the operating system defaults.
+$productName$ will use these settings for all `AmbasasdorMapping`s unless overridden in a `Mapping`'s configuration. Without `keepalive`, $productName$ follows the operating system defaults.
 
 For example, the following configuration:
 
@@ -481,7 +481,7 @@ If set, this specifies the timeout (in milliseconds) after which an idle connect
 
 If not set, the default idle timeout is one hour.
 
-You can override this setting with [`idle_timeout_ms` on an `AmbassadorMapping`](../../using/timeouts/).
+You can override this setting with [`idle_timeout_ms` on a `Mapping`](../../using/timeouts/).
 
 ##### Upstream max lifetime
 
@@ -491,7 +491,7 @@ If set, this specifies the maximum amount of time (in milliseconds) after which 
 
 If not set (or set to zero), then upstream connections may remain open for arbitrarily long. 
 
-You can override this setting with [`cluster_max_connection_lifetime_ms` on an `AmbassadorMapping`](../../using/timeouts/).
+You can override this setting with [`cluster_max_connection_lifetime_ms` on a `Mapping`](../../using/timeouts/).
 
 ##### Request timeout
 
@@ -501,14 +501,14 @@ If set, this specifies the default end-to-end timeout for every request.
 
 If not set, the default is three seconds.
 
-You can override this setting with [`timeout_ms` on an `AmbassadorMapping`](../../using/timeouts/).
+You can override this setting with [`timeout_ms` on a `Mapping`](../../using/timeouts/).
 
 ##### Readiness and liveness probes
 
 * `readiness_probe` sets whether `/ambassador/v0/check_ready` is automatically mapped
 * `liveness_probe` sets whether `/ambassador/v0/check_alive` is automatically mapped
 
-By default, $productName$ creates `AmbassadorMapping`s that support readiness and liveness checks at `/ambassador/v0/check_ready` and `/ambassador/v0/check_alive`. To disable the readiness `AmbassadorMapping` entirely, set `readiness_probe.enabled` to `false`:
+By default, $productName$ creates `Mapping`s that support readiness and liveness checks at `/ambassador/v0/check_ready` and `/ambassador/v0/check_alive`. To disable the readiness `Mapping` entirely, set `readiness_probe.enabled` to `false`:
 
 
 ```yaml
@@ -516,7 +516,7 @@ readiness_probe:
   enabled: false
 ```
 
-Likewise, to disable the liveness `AmbassadorMapping` entirely, set `liveness_probe.enabled` to `false`:
+Likewise, to disable the liveness `Mapping` entirely, set `liveness_probe.enabled` to `false`:
 
 
 ```yaml
@@ -535,7 +535,7 @@ readiness_probe:
   rewrite: /backend/health
 ```
 
-The liveness and readiness probes both support `prefix` and `rewrite`, with the same meanings as for [AmbassadorMappings](../../using/mappings).
+The liveness and readiness probes both support `prefix` and `rewrite`, with the same meanings as for [Mappings](../../using/mappings).
 
 ##### Retry policy
 
@@ -554,7 +554,7 @@ retry_policy:
 
 * `circuit_breakers` sets the global circuit breaking configuration defaults
 
-You can override the circuit breaker settings for individual `AmbassadorMapping`s. By default, $productName$ does not configure any circuit breakers. For more information, see the [circuit breaking reference](../../using/circuit-breakers).
+You can override the circuit breaker settings for individual `Mapping`s. By default, $productName$ does not configure any circuit breakers. For more information, see the [circuit breaking reference](../../using/circuit-breakers).
 
 ##### Default label domain and labels
 

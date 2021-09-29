@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 
 $productName$ provides a highly flexible mechanism for authentication, via the AuthService resource.  An AuthService configures $productName$ to use an external service to check authentication and authorization for incoming requests. Each incoming request is authenticated before routing to its destination.
 
-All requests are validated by the AuthService (unless the AmbassadorMapping applied to the request sets `bypass_auth`).  It is not possible to combine multiple AuthServices.  While it is possible to create multiple AuthService resources, they will be load-balanced between each resource in a round-robin fashion. This is useful for canarying an AuthService change, but is not useful for deploying multiple distinct AuthServices.  In order to combine multiple external services (either having multiple services apply to the same request, or selecting between different services for the different requests), instead of using an AuthService, use an [$AESproductName$ External Filter](/docs/edge-stack/latest/topics/using/filters/).
+All requests are validated by the AuthService (unless the Mapping applied to the request sets `bypass_auth`).  It is not possible to combine multiple AuthServices.  While it is possible to create multiple AuthService resources, they will be load-balanced between each resource in a round-robin fashion. This is useful for canarying an AuthService change, but is not useful for deploying multiple distinct AuthServices.  In order to combine multiple external services (either having multiple services apply to the same request, or selecting between different services for the different requests), instead of using an AuthService, use an [$AESproductName$ External Filter](/docs/edge-stack/latest/topics/using/filters/).
 
 <Alert severity="info">
 Because of the limitations described above, <strong>$AESproductName$ does not support AuthService resources, and you should instead use an <a href="/docs/edge-stack/latest/topics/using/filters/external">External Filter</a>,</strong> which is mostly a drop-in replacement for an AuthService. The External Filter relies on the $AESproductName$ AuthService. Make sure the $AESproductName$ AuthService is deployed before configuring External filters.
@@ -85,4 +85,4 @@ You may create multiple AuthService manifests to round-robin authentication requ
 
 ## Configuring public Mappings
 
-An AuthService can be disabled for an AmbassadorMapping by setting `bypass_auth` to `true`. This will tell $productName$ to allow all requests for that AmbassadorMapping through without interacting with the external auth service.
+An AuthService can be disabled for a Mapping by setting `bypass_auth` to `true`. This will tell $productName$ to allow all requests for that Mapping through without interacting with the external auth service.

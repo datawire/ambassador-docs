@@ -41,14 +41,14 @@ In any resource that you want your 2.X instance to honor, any `ambassador_id: "f
 `ambassador_id: [ "foo" ]`. This applies to all $productName$ resources, and is supported by all versions
 of Ambassador 1.X.
 
-### Define an `AmbassadorListener` for each port on which your installation should listen.
+### Define a `Listener` for each port on which your installation should listen.
 
 <Alert severity="info">
-  <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+  <a href="../../running/listener">Learn more about <code>Listener</code></a>
 </Alert>
 
-`AmbassadorListener` is **mandatory**. It's worth thinking about the `hostBinding`s to use for
-each `AmbassadorListener`, too, though you can start migrating with
+`Listener` is **mandatory**. It's worth thinking about the `hostBinding`s to use for
+each `Listener`, too, though you can start migrating with
 
 ```yaml
 hostBinding:
@@ -59,36 +59,36 @@ hostBinding:
 ### Update `Host` resources to `v3alpha1`.
 
 <Alert severity="info">
-  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 $productName$ will find `Host` resources without updating the `apiVersion`. However, making
-sure that `AmbassadorListener`s, `Host`s, and `Mapping`s correctly associate with each other
+sure that `Listener`s, `Host`s, and `Mapping`s correctly associate with each other
 will likely require changes. Therefore, for each existing `Host` resource that you want to
 use with $productName$ 2.X:
 
 - change the `apiVersion` to `getambassador.io/v3alpha1`;
-- add `metadata.labels` as needed to match the `hostBinding` for the `AmbassadorListener`s with which
-  the `AmbassadorHost` should associate; and
-- set `spec.mappingSelector`, if desired, to control which `AmbassadorMappings` will be associated 
-  with this `AmbassadorHost`.
+- add `metadata.labels` as needed to match the `hostBinding` for the `Listener`s with which
+  the `Host` should associate; and
+- set `spec.mappingSelector`, if desired, to control which `Mappings` will be associated 
+  with this `Host`.
 
 ### Update `Mapping` resources to `v3alpha1`.
 
 <Alert severity="info">
-  <a href="../../using/intro-mappings/">Learn more about <code>AmbassadorMapping</code></a>
+  <a href="../../using/intro-mappings/">Learn more about <code>Mapping</code></a>
 </Alert>
 
 $productName$ will find `Mapping` resources without updating the `apiVersion`. However, making
-sure that `AmbassadorListener`s, `Host`s, and `Mapping`s correctly associate with each other
+sure that `Listener`s, `Host`s, and `Mapping`s correctly associate with each other
 will likely require changes. Therefore, for each existing `Mapping` resource that you want to
 use with $productName$ 2.X:
 
-- change the `apiVersion` to `x.getambassador.io/v3alpha1`;
+- change the `apiVersion` to `getambassador.io/v3alpha1`;
 - change `spec.host` to `spec.hostname` if possible (see below);
-- add `metadata.labels` as needed to match the `mappingSelector` for the `AmbassadorHost`s with which
-  the `AmbassadorMapping` should associate; and
-- make sure `spec.hostname` matches up with the `AmbassadorHost`s with which the `AmbassadorMapping` should associate.
+- add `metadata.labels` as needed to match the `mappingSelector` for the `Host`s with which
+  the `Mapping` should associate; and
+- make sure `spec.hostname` matches up with the `Host`s with which the `Mapping` should associate.
 
 Where `spec.host` could be an exact match or (with `host_regex`) a regular expression, `spec.hostname` is always a DNS
 glob. `spec.hostname` is **strongly** preferred, unless a regex is absolutely required: using globs is **much** more
@@ -99,42 +99,42 @@ performant. Therefore, we recommend using `spec.hostname` wherever possible:
   to `spec.hostname` and rewrite the regex into a DNS glob, e.g. `host: .*\.example\.com` would become
   `hostname: *.example.com`.
 
-Additionally, when `spec.hostname` is used, the `AmbassadorMapping` will be associated with an `AmbassadorHost` only
-if `spec.hostname` matches the hostname of the `AmbassadorHost`. If the `AmbassadorHost`'s `selector` is also set,
+Additionally, when `spec.hostname` is used, the `Mapping` will be associated with a `Host` only
+if `spec.hostname` matches the hostname of the `Host`. If the `Host`'s `selector` is also set,
 both the `selector` and the hostname must line up.
 
 <Alert severity="warning">
-  An <code>AmbassadorMapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>AmbassadorHost</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
+  An <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
 </Alert>
 
 ## 2. Additional Notes
 
 When migrating to $productName$ 2.X, there are several things to keep in mind:
 
-### `AmbassadorListener` is mandatory
+### `Listener` is mandatory
 
 <Alert severity="info">
-  <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+  <a href="../../running/listener">Learn more about <code>Listener</code></a>
 </Alert>
 
-The new [`AmbassadorListener` resource](../../running/ambassadorlistener) (in `getambassador.io/v3alpha1`) defines the
+The new [`Listener` resource](../../running/listener) (in `getambassador.io/v3alpha1`) defines the
 specific ports on which $productName$ will listen, and which protocols and security model will be used per port. **The
-`AmbassadorListener` resource is mandatory.**
+`Listener` resource is mandatory.**
 
-Defining your own `AmbassadorListener`(s) allows you to carefully tailor the set of ports you actually need to use, and
-exactly which `AmbassadorHost` resources are matched with them. This can permit a system with many `AmbassadorHosts` to
+Defining your own `Listener`(s) allows you to carefully tailor the set of ports you actually need to use, and
+exactly which `Host` resources are matched with them. This can permit a system with many `Hosts` to
 work considerably more efficiently than relying on the defaults.
 
-### `AmbassadorListener` has explicit control to choose `AmbassadorHost`s
+### `Listener` has explicit control to choose `Host`s
 
 <Alert severity="info">
-  <a href="../../running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br />
-  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../running/listener">Learn more about <code>Listener</code></a><br />
+  <a href="../../running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
-`AmbassadorListener.spec.hostBinding` controls whether a given `AmbassadorHost` will be associated with
-that `AmbassadorListener`, as discussed in the [`AmbassadorListener`](../../running/ambassadorlistener) documentation.
-As a migration aid, you can tell an `AmbassadorListener` to snap up all `AmbassadorHost`s with
+`Listener.spec.hostBinding` controls whether a given `Host` will be associated with
+that `Listener`, as discussed in the [`Listener`](../../running/listener) documentation.
+As a migration aid, you can tell a `Listener` to snap up all `Host`s with
 
 ```yaml
 hostBinding:
@@ -142,53 +142,53 @@ hostBinding:
     from: ALL
 ```
 
-but **we recommend avoiding this practice in production**. Allowing every `AmbassadorHost` to associate with
-every `AmbassadorListener` can result in confusing behavior with large numbers of `AmbassadorHost`s, and it
+but **we recommend avoiding this practice in production**. Allowing every `Host` to associate with
+every `Listener` can result in confusing behavior with large numbers of `Host`s, and it
 can also result in larger Envoy configurations that slow reconfiguration. Instead, we recommend using
-`hostBinding.selector` to choose `AmbassadorHost`s more carefully.
+`hostBinding.selector` to choose `Host`s more carefully.
 
-#### `AmbassadorHost` and `AmbassadorMapping` will not automatically associate with each other
+#### `Host` and `Mapping` will not automatically associate with each other
 
 <Alert severity="info">
-  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a><br />
-  <a href="../../using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>
+  <a href="../../running/host-crd">Learn more about <code>Host</code></a><br />
+  <a href="../../using/intro-mappings">Learn more about <code>Mapping</code></a>
 </Alert>
 
 In $productName$ 1.X, `Mapping`s were nearly always associated with every `Host`. Since this also tends to
 result in larger Envoy configurations that slow down reconfiguration, $productName$ 2.X inverts this behavior:
-**`AmbassadorHost` and `AmbassadorMapping` will not associate without explicit selection**.
+**`Host` and `Mapping` will not associate without explicit selection**.
 
-To have an `AmbassadorMapping` associate with an `AmbassadorHost`, at least one of the following must hold:
+To have a `Mapping` associate with a `Host`, at least one of the following must hold:
 
-- The `AmbassadorHost` must define a `mappingSelector` that matches a `label` on the `AmbassadorMapping`; or
-- The `AmbassadorMapping` must define `hostname` that matches the `hostname` of the `AmbassadorHost`.
-  (Note that the `hostname` of both `AmbassadorHost` and `AmbasssadorMapping` is a DNS glob.)
+- The `Host` must define a `mappingSelector` that matches a `label` on the `Mapping`; or
+- The `Mapping` must define `hostname` that matches the `hostname` of the `Host`.
+  (Note that the `hostname` of both `Host` and `AmbasssadorMapping` is a DNS glob.)
 
-If the `AmbassadorHost` defines a `mappingSelector` and the `AmbassadorMapping` defines a `hostname`, both must match.
+If the `Host` defines a `mappingSelector` and the `Mapping` defines a `hostname`, both must match.
 
 As a migration aid:
 
-- An `AmbassadorMapping` with a `hostname` of `"*"` will associate with any `AmbassadorHost` that
+- A `Mapping` with a `hostname` of `"*"` will associate with any `Host` that
 has no `mappingSelector`, and
-- A `v3alpha1` `AmbassadorMapping` will honor `host` if `hostname` is not present. 
+- A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present. 
 
 <Alert severity="warning">
-  An <code>AmbassadorMapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>AmbassadorHost</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
+  An <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
 </Alert>
 
 <Alert severity="warning">
   Support for <code>host</code> and <code>host_regex</code> will be removed before <code>v3alpha1</code> is promoted to <code>v3</code>.
 </Alert>
 
-### `AmbassadorHost` is required to terminate TLS.
+### `Host` is required to terminate TLS.
 
 <Alert severity="info">
-  <a href="../../running/host-crd">Learn more about <code>AmbassadorHost</code></a><br />
+  <a href="../../running/host-crd">Learn more about <code>Host</code></a><br />
   <a href="../../running/tls#tlscontext">Learn more about <code>TLSContext</code></a>
 </Alert>
 
 In $productName$ 1.X, simply creating a `TLSContext` is sufficient to terminate TLS, but in 2.X you _must_ have an
-`AmbassadorHost`. The minimal setup to terminate TLS is now something like this:
+`Host`. The minimal setup to terminate TLS is now something like this:
 
 ```yaml
 ---
@@ -201,8 +201,8 @@ data:
   tls.crt: base64-PEM
   tls.key: base64-PEM
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: my-host
 spec:
@@ -211,5 +211,5 @@ spec:
 ```
 
 which will terminate TLS for `host.example.com`. A `TLSContext` is still right way to share data about TLS
-configuration across `Host`s: set both `tlsSecret` and `tlsContext` in the `AmbassadorHost`.
+configuration across `Host`s: set both `tlsSecret` and `tlsContext` in the `Host`.
 

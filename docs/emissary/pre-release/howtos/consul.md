@@ -107,7 +107,7 @@ In this guide, you will register a service with Consul and use $productName$ to 
   ```
 
     
-   The ConsulResolver is Opt-In. In other words, after applying the ConsulResolver you need to add `resolver: consul-dc1` in each AmbassadorMapping that you want to use this resolver for. Otherwise it will use your default resolver, and the service associated with that AmbassadorMapping will not be registered in Consul.
+   The ConsulResolver is Opt-In. In other words, after applying the ConsulResolver you need to add `resolver: consul-dc1` in each Mapping that you want to use this resolver for. Otherwise it will use your default resolver, and the service associated with that Mapping will not be registered in Consul.
 
    For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
 
@@ -200,8 +200,8 @@ You'll now register a demo application with Consul, and show how $productName$ c
 
    ```yaml
    ---
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorMapping
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
    metadata:
      name: consul-quote-mapping
    spec:
@@ -351,8 +351,8 @@ This will install into your cluster:
 
     ```yaml
     ---
-    apiVersion: x.getambassador.io/v3alpha1
-    kind: AmbassadorMapping
+    apiVersion: getambassador.io/v3alpha1
+    kind: Mapping
     metadata:
       name: quote-connect-mapping
     spec:

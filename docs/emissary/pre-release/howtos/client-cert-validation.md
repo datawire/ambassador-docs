@@ -57,11 +57,11 @@ certificates.
 
 3. Configure $productName$ to use this certificate for client certificate validation.
 
-   First create an `AmbassadorHost` to manage your domain:
+   First create a `Host` to manage your domain:
 
    ```yaml
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorHost
+   apiVersion: getambassador.io/v3alpha1
+   kind: Host
    metadata:
      name: example-host
    spec:

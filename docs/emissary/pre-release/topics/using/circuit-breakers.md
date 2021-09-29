@@ -4,7 +4,7 @@ Circuit breakers are a powerful technique to improve resilience. By preventing a
 
 ## Circuit breaker configuration
 
-Circuit breaking configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`AmbassadorMapping`](../mappings#configuring-ambassadormappings).
+Circuit breaking configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings#configuring-Mappings).
 
 The `circuit_breakers` attribute configures circuit breaking. The following fields are supported:
 
@@ -31,8 +31,8 @@ Circuit breakers defined on a single mapping:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -56,8 +56,8 @@ spec:
     - max_connections: 2048
       max_pending_requests: 2048
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:

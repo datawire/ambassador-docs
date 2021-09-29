@@ -78,7 +78,7 @@ $ kubectl apply -f zipkin.yaml
 
 ## 2. Generate some requests
 
-Use `curl` to generate a few requests to an existing $productName$ `AmbassadorMapping`. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
+Use `curl` to generate a few requests to an existing $productName$ `Mapping`. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
 
 ```
 $ curl -L $AMBASSADOR_IP/backend/

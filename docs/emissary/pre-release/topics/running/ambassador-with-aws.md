@@ -220,13 +220,13 @@ Terminating TLS at the load balancer means that $productName$ will be receiving 
 
    Note that the `spec.ports` has been changed so both the HTTP and HTTPS ports forward to the cleartext port 8080 on $productName$.
 
-* **`AmbassadorHost`:**
+* **`Host`:**
    
-   The `AmbassadorHost` configures how $productName$ handles encrypted and cleartext traffic. The following `AmbassadorHost` configuration will tell $productName$ to `Route` cleartext traffic that comes in from the load balancer:
+   The `Host` configures how $productName$ handles encrypted and cleartext traffic. The following `Host` configuration will tell $productName$ to `Route` cleartext traffic that comes in from the load balancer:
 
    ```yaml
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorHost
+   apiVersion: getambassador.io/v3alpha1
+   kind: Host
    metadata:
      name: ambassador
    spec:
@@ -275,13 +275,13 @@ Because L4 load balancers do not set `X-Forwarded` headers, $productName$ will n
 
    Note that the `spec.ports` has been changed so both the HTTP and HTTPS ports forward to the cleartext port 8080 on $productName$.
 
-* **`AmbassadorHost`:**
+* **`Host`:**
    
-   The `AmbassadorHost` configures how $productName$ handles encrypted and cleartext traffic. The following `AmbassadorHost` configuration will tell $productName$ to `Redirect` cleartext traffic that comes in from the load balancer:
+   The `Host` configures how $productName$ handles encrypted and cleartext traffic. The following `Host` configuration will tell $productName$ to `Redirect` cleartext traffic that comes in from the load balancer:
 
    ```yaml
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorHost
+   apiVersion: getambassador.io/v3alpha1
+   kind: Host
    metadata:
      name: ambassador
    spec:

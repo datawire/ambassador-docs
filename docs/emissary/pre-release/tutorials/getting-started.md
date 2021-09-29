@@ -36,15 +36,15 @@ We'll start by installing $productName$ into your cluster.
 
 ## 2. Routing traffic from the edge
 
-$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, an **`AmbassadorListener` CRD**, and an **`AmbassadorMapping` CRD**. The `AmbassadorListener` CRD tells $productName$ what port to listen on, and the `AmbassadorMapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
+$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells $productName$ what port to listen on, and the `Mapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
 
-1. Start by creating an `AmbassadorListener` resource for HTTP on port 8080:
+1. Start by creating a `Listener` resource for HTTP on port 8080:
 
    ```
    kubectl apply -f - <<EOF
    ---
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorListener
+   apiVersion: getambassador.io/v3alpha1
+   kind: Listener
    metadata:
      name: $productDeploymentName$-listener-8080
      namespace: $productNamespace$
@@ -59,10 +59,10 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
    ```
    
      <Alert severity="info">
-       This <code>AmbassadorListener</code> will associate with <i>all</i> <code>AmbassadorHost</code>s in your cluster. This is fine for the quickstart, but is likely not what you really want for production use.<br/>
+       This <code>Listener</code> will associate with <i>all</i> <code>Host</code>s in your cluster. This is fine for the quickstart, but is likely not what you really want for production use.<br/>
        <br/>
-       <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
-       <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+       <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.<br/>
+       <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.
      </Alert>
 
 2. Apply the YAML for the “Quote of the Moment" service.
@@ -73,12 +73,12 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
-3. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create an `AmbassadorMapping` on your cluster. This `AmbassadorMapping` tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
+3. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a `Mapping` on your cluster. This `Mapping` tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
   ```yaml
   ---
-  apiVersion: x.getambassador.io/v3alpha1
-  kind: AmbassadorMapping
+  apiVersion: getambassador.io/v3alpha1
+  kind: Mapping
   metadata:
     name: quote-backend
   spec:
@@ -95,7 +95,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
   kubectl apply -f quote-backend.yaml
   ```
 
-  With our `AmbassadorMapping` created, now we need to access it!
+  With our `Mapping` created, now we need to access it!
 
 5. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
 
@@ -123,7 +123,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
     }
   ```
 
-<Alert severity="success"><b>Victory!</b> You have created your first $productName$ `AmbassadorListener` and `AmbassadorMapping`, routing a request from your cluster's edge to a service!</Alert>
+<Alert severity="success"><b>Victory!</b> You have created your first $productName$ `Listener` and `Mapping`, routing a request from your cluster's edge to a service!</Alert>
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
@@ -132,8 +132,8 @@ Explore some of the popular tutorials on $productName$:
 * [Configuring $productName$ to communicate](../../howtos/configure-communications): configure how $productName$ handles communication with clients
 * [Intro to `Mappings`](../../topics/using/intro-mappings/): declaratively routes traffic from
 the edge of your cluster to a Kubernetes service
-* [`AmbassadorListener` resource](../../topics/running/ambassadorlister/): configure ports, protocols, and security options for your ingress.
-* [`AmbassadorHost` resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
+* [`Listener` resource](../../topics/running/listener/): configure ports, protocols, and security options for your ingress.
+* [`Host` resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
 
 $productName$ has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice.

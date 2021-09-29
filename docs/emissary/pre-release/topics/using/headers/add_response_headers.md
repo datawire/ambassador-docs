@@ -8,14 +8,14 @@ The `add_response_headers` attribute is a dictionary of `header`: `value` pairs.
 
 Envoy dynamic values `%DOWNSTREAM_REMOTE_ADDRESS_WITHOUT_PORT%` and `%PROTOCOL%` are supported, in addition to static values.
 
-`add_response_headers` can be set either in an `AmbassadorMapping` or using [`ambassador Module defaults`](../../defaults).
+`add_response_headers` can be set either in a `Mapping` or using [`ambassador Module defaults`](../../defaults).
 
-### AmbassadorMapping example
+### Mapping example
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -51,8 +51,8 @@ spec:
             append: False
             value: this is from object header config
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend1
 spec:
@@ -60,8 +60,8 @@ spec:
   prefix: /backend1/
   service: quote
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend2
 spec:

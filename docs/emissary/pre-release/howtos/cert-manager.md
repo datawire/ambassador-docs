@@ -106,7 +106,7 @@ The DNS-01 challenge verifies domain ownership by proving you have control over 
       name: myzone.route53.com
       # cert-manager will put the resulting Secret in the same Kubernetes 
       # namespace as the Certificate. You should create the certificate in 
-      # whichever namespace you want to configure an AmbassadorHost.
+      # whichever namespace you want to configure a Host.
     spec:
       secretName: ambassador-certs
       issuerRef:
@@ -160,7 +160,7 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
       name: ambassador-certs
       # cert-manager will put the resulting Secret in the same Kubernetes 
       # namespace as the Certificate. You should create the certificate in 
-      # whichever namespace you want to configure an AmbassadorHost.
+      # whichever namespace you want to configure a Host.
       namespace: ambassador
     spec:
       secretName: ambassador-certs
@@ -189,14 +189,14 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
     Error preparing issuer for certificate default/ambassador-certs: http-01 self check failed for domain "example.com
     ```
 
-4. Create an AmbassadorMapping for the `/.well-known/acme-challenge/` route.
+4. Create a Mapping for the `/.well-known/acme-challenge/` route.
 
-    cert-manager uses an `Ingress` to issue the challenge to `/.well-known/acme-challenge/` that is incompatible with Ambassador. We will need to create an `AmbassadorMapping` so the cert-manager can reach the temporary pod.
+    cert-manager uses an `Ingress` to issue the challenge to `/.well-known/acme-challenge/` that is incompatible with Ambassador. We will need to create a `Mapping` so the cert-manager can reach the temporary pod.
  
     ```yaml
     ---
-    apiVersion: x.getambassador.io/v3alpha1
-    kind: AmbassadorMapping
+    apiVersion: getambassador.io/v3alpha1
+    kind: Mapping
     metadata:
       name: acme-challenge-mapping
     spec:

@@ -91,7 +91,7 @@
    items:
      - title: Custom resources
        items:
-         - title: The AmbassadorHost resource
+         - title: The Host resource
            link: /topics/running/host-crd
            items:
              - title: TLS
@@ -105,8 +105,8 @@
                    link: /topics/running/tls/sni
                  - title: TLS origination
                    link: /topics/running/tls/origination
-         - title: The AmbassadorListener resource
-           link: /topics/running/ambassadorlistener
+         - title: The Listener resource
+           link: /topics/running/listener
          - title: The Module resource
            link: /topics/running/ambassador
      - title: Deploying $productName$
@@ -129,11 +129,11 @@
            link: /topics/using/gateway-api
      - title: Ingress and load balancing
        items:
-         - title: The AmbassadorMapping resource
+         - title: The Mapping resource
            items:
-             - title: AmbassadorMapping basics
+             - title: Mapping basics
                link: /topics/using/intro-mappings
-             - title: Advanced AmbassadorMapping configuration
+             - title: Advanced Mapping configuration
                link: /topics/using/mappings
              - title: AuthService settings
                link: /topics/using/authservice

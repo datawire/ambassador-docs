@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 * [What is required to use the Ingress resource?](#what-is-required-to-use-the-ingress-resource)
 * [When to use an Ingress instead of annotations or CRDs](#when-to-use-an-ingress-instead-of-annotations-or-crds)
 * [Ingress support](#ingress-support)
-* [Examples of Ingress configs vs AmbassadorMapping configs](#examples-of-ingress-configs-vs-mapping-configs)
+* [Examples of Ingress configs vs Mapping configs](#examples-of-ingress-configs-vs-mapping-configs)
 * [Ingress routes and mappings](#ingress-routes-and-mappings)
 * [The Minimal Ingress](#the-minimal-ingress)
 * [Name based virtual hosting with an Ambassador ID](#name-based-virtual-hosting-with-an-ambassador-id)
@@ -21,7 +21,7 @@ An Ingress resource is a popular way to expose Kubernetes services to the Intern
 
 ## When and how to use the Ingress resource
 
-If you're new to $productName$ and to Kubernetes, we'd recommend you start with our [quickstart](../../../tutorials/getting-started/) instead of this Ingress guide. If you're a power user and need to integrate with other software that leverages the Ingress resource, read on. The Ingress specification is very basic and does not support many of the features of $productName$, so you'll be using both the Ingress resource and $productName$'s AmbassadorMapping resource to manage your Kubernetes services.
+If you're new to $productName$ and to Kubernetes, we'd recommend you start with our [quickstart](../../../tutorials/getting-started/) instead of this Ingress guide. If you're a power user and need to integrate with other software that leverages the Ingress resource, read on. The Ingress specification is very basic and does not support many of the features of $productName$, so you'll be using both the Ingress resource and $productName$'s Mapping resource to manage your Kubernetes services.
 
 ### What is required to use the Ingress resource?
 
@@ -99,7 +99,7 @@ If you're new to $productName$ and to Kubernetes, we'd recommend you start with 
 
 ### When to use an Ingress instead of annotations or CRDs
 
-We recommend that $productName$ be configured using CRDs. The Ingress resource is available to users who need it for integration with other ecosystem tools, or who feel that it more closely matches their workflows. However, it is important to recognize that the Ingress resource is rather more limited than the $productName$ AmbassadorMapping is (for example, the Ingress spec has no support for rewriting or for TLS origination). **When in doubt, use CRDs.**
+We recommend that $productName$ be configured using CRDs. The Ingress resource is available to users who need it for integration with other ecosystem tools, or who feel that it more closely matches their workflows. However, it is important to recognize that the Ingress resource is rather more limited than the $productName$ Mapping is (for example, the Ingress spec has no support for rewriting or for TLS origination). **When in doubt, use CRDs.**
 
 ## Ingress support
 
@@ -117,11 +117,11 @@ $productName$ does **not** extend the basic Ingress specification with the follo
 
 Note that if you need to set `getambassador.io/ambassador-id` on the Ingress, you will also need to set `ambassador-id` on resources within the annotation.
 
-## Examples of Ingress configs vs AmbassadorMapping configs
+## Examples of Ingress configs vs Mapping configs
 
 ### Ingress routes and Mappings
 
-$productName$ actually creates AmbassadorMapping objects from the Ingress route rules. These AmbassadorMapping objects interact with Mappings defined in CRDs **exactly** as they would if the Ingress route rules had been specified with CRDs originally.
+$productName$ actually creates Mapping objects from the Ingress route rules. These Mapping objects interact with Mappings defined in CRDs **exactly** as they would if the Ingress route rules had been specified with CRDs originally.
 
 For example, this Ingress resource routes traffic to `/foo/` to `service1`:
 
@@ -143,12 +143,12 @@ spec:
           servicePort: 80
 ```
 
-This is the equivalent configuration using an AmbassadorMapping instead:
+This is the equivalent configuration using a Mapping instead:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: test-ingress-0-0
 spec:
@@ -176,8 +176,8 @@ spec:
           serviceName: service1
           servicePort: 80
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: my-mapping
 spec:
@@ -204,12 +204,12 @@ spec:
     servicePort: 8080
 ```
 
-This is the equivalent configuration using an AmbassadorMapping instead:
+This is the equivalent configuration using a Mapping instead:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: test-ingress
 spec:
@@ -247,12 +247,12 @@ spec:
            servicePort: 80
 ```
 
-This is the equivalent configuration using an AmbassadorMapping instead:
+This is the equivalent configuration using a Mapping instead:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: host-foo-mapping
 spec:
@@ -261,8 +261,8 @@ spec:
   host: foo.bar.com
   service: service1
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: host-bar-mapping
 spec:
@@ -299,7 +299,7 @@ spec:
             servicePort: 80
 ```
 
-This is the equivalent configuration using an AmbassadorMapping instead:
+This is the equivalent configuration using a Mapping instead:
 
 ```yaml
 ---
@@ -312,8 +312,8 @@ spec:
   - sslexample.foo.com
   secret: testsecret-tls
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: sslexample-mapping
 spec:

@@ -30,8 +30,8 @@ Imagine the backend `quote` service is a JavaScript application that can only ha
 We update the mapping for the `quote` service to add a request label `backend` to the route as part of a `request_label_group`:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:
@@ -70,8 +70,8 @@ Deploy the rate limit with `kubectl apply -f backend-ratelimit.yaml`. (Make sure
 Now suppose that the `quote` service has finally been rewritten in Golang, and it's humming along nicely. You then discover that some users are taking advantage of this speed to sometimes cause a big spike in requests. You want to make sure that your API doesn't get overwhelmed by any single user. We use the `remote_address` special value in our mapping, which will automatically label all requests with the calling IP address:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:
@@ -109,8 +109,8 @@ You've dramatically improved availability of the quote backend service, thanks t
 * We're going to implement a global rate limit on `GET` requests, but not `POST` requests.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:
@@ -178,11 +178,11 @@ spec:
 
 ### Bypassing a global rate limit
 
-Sometimes, you may have an API that cannot handle as much load as others in your cluster. In this case, a global rate limit may not be enough to ensure this API is not overloaded with requests from a user. To protect this API, you will need to create a label that tells $productName$ to apply a stricter limit on requests. With the above global rate limit configuration rate limiting based on `remote_address`, you will need to add a request label to the services `AmbassadorMapping`.
+Sometimes, you may have an API that cannot handle as much load as others in your cluster. In this case, a global rate limit may not be enough to ensure this API is not overloaded with requests from a user. To protect this API, you will need to create a label that tells $productName$ to apply a stricter limit on requests. With the above global rate limit configuration rate limiting based on `remote_address`, you will need to add a request label to the service's `Mapping`.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:

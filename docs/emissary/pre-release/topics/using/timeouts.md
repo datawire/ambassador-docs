@@ -30,7 +30,7 @@ Default: `3000`
 
 ## Module only
 
-## AmbassadorListener idle timeout: `listener_idle_timeout_ms`
+## Listener idle timeout: `listener_idle_timeout_ms`
 
 `listener_idle_timeout_ms` configures the [`idle_timeout`](https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/upstreams/http/v3/http_protocol_options.proto.html#extensions-upstreams-http-v3-httpprotocoloptions)
 in the Envoy HTTP Connection Manager and controls how long a connection from the
@@ -48,12 +48,12 @@ to missed FINs in the TCP connection.
 
 ### Example
 
-The various timeouts are applied to an AmbassadorMapping resource and can be combined.
+The various timeouts are applied to a Mapping resource and can be combined.
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:

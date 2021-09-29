@@ -24,8 +24,8 @@ these interfaces, so to create a more managed endpoint for them to use, create a
 `Mapping` to expose the endpoint:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: diag-mapping
 spec:
@@ -36,6 +36,6 @@ spec:
 ```
 
 Now, administrators can connect to the diagnostic interface using the `diag.example.com`
-hostname, and the [`AmbassadorMapping`](../../topics/using/intro-mappings) settings can
+hostname, and the [`Mapping`](../../topics/using/intro-mappings) settings can
 be appropriately configured to better control access to these services.  To learn more
 about Ambassador `Module` configurations, see [Ambassador `Module`](../../topics/running/ambassador).

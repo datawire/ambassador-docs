@@ -1,5 +1,5 @@
 ---
-description: "$productName$ uses the AmbassadorMapping resource to map a resource, like a URL prefix, to a Kubernetes service or web service."
+description: "$productName$ uses the Mapping resource to map a resource, like a URL prefix, to a Kubernetes service or web service."
 ---
 
 import Alert from '@material-ui/lab/Alert';
@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 <h3>Contents</h3>
 
 * [Examples](#examples)
-* [Applying an AmbassadorMapping Resource](#applying-a-mapping-resouce)
+* [Applying a Mapping Resource](#applying-a-mapping-resouce)
 * [Resources](#resources)
 * [Services](#services)
 * [Extending Mappings](#extending-mappings)
@@ -19,26 +19,26 @@ import Alert from '@material-ui/lab/Alert';
 
 </div>
 
-The core $productName$ resource used to manage cluster ingress is the `AmbassadorMapping` resource.
+The core $productName$ resource used to manage cluster ingress is the `Mapping` resource.
 
-**An `AmbassadorMapping` resource routes a URL path (or prefix) to a service (either a Kubernetes service or other web service).**
+**A `Mapping` resource routes a URL path (or prefix) to a service (either a Kubernetes service or other web service).**
 
 <Alert severity="warning">
-  Remember that <code>AmbassadorListener</code> and <code>AmbassadorHost</code> resources are&nbsp;
+  Remember that <code>Listener</code> and <code>Host</code> resources are&nbsp;
   <b>required</b>&nbsp;for a functioning $productName$ installation that can route traffic!<br/>
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.
 </Alert>
 
 ## Examples
 
-This `AmbassadorMapping` would route requests to `https://<hostname>/webapp/` to the `webapp-svc` Service. **This is not a
+This `Mapping` would route requests to `https://<hostname>/webapp/` to the `webapp-svc` Service. **This is not a
 complete example on its own; see below.**
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  webapp-mapping
 spec:
@@ -48,7 +48,7 @@ spec:
 
 | Name | Type | Description |
 | :--- | :--- | :--- |
-| `metadata.name` | String | Identifies the AmbassadorMapping. |
+| `metadata.name` | String | Identifies the Mapping. |
 | `spec.prefix` | String | The URL prefix identifying your resource. [See below](#resources) on how $productName$ handles resources. |
 | `spec.service` | String | The service handling the resource.  If a Kubernetes service, it must include the namespace (in the format `service.namespace`) if the service is in a different namespace than $productName$. [See below](#services) on service name formatting.|
 
@@ -57,8 +57,8 @@ complete example on its own; see below**):
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  httpbin-mapping
 spec:
@@ -69,14 +69,14 @@ spec:
 
 ### Complete example configuration
 
-For demonstration purposes, here's a possible way of combining an `AmbassadorListener`, an `AmbassadorHost`, and both `AmbassadorMapping`s above that is complete and functional:
+For demonstration purposes, here's a possible way of combining a `Listener`, a `Host`, and both `Mapping`s above that is complete and functional:
 
 - it will accept HTTP or HTTPS on port 8443;
 - $productName$ is terminating TLS;
 - HTTPS to `foo.example.com` will be routed as above;
 - HTTP to `foo.example.com` will be redirected to HTTPS;
 - HTTP or HTTPS to other hostnames will be rejected; and
-- the associations between the `AmbassadorListener`, the `AmbassadorHost`, and the `AmbassadorMappings` use Kubernetes `label`s.
+- the associations between the `Listener`, the `Host`, and the `Mappings` use Kubernetes `label`s.
 
 ```yaml
 ---
@@ -89,8 +89,8 @@ data:
   tls.crt: -certificate PEM-
   tls.key: -secret key PEM-
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: listener-8443
 spec:
@@ -102,8 +102,8 @@ spec:
       matchLabels:
         exampleName: basic-https
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
   labels:
@@ -116,8 +116,8 @@ spec:
     matchLabels:
       exampleName: basic-https
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  webapp-mapping
   labels:
@@ -127,8 +127,8 @@ spec:
   service: webapp-svc
   hostname: 'foo.example.com'
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  httpbin-mapping
   labels:
@@ -143,13 +143,13 @@ spec:
 Note the addition of `label`s and `selector`s to explicitly specify which resources should associate in this example.
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.
 </Alert>
 
-## Applying an AmbassadorMapping resource
+## Applying a Mapping resource
 
-An AmbassadorMapping resource can be managed using the same workflow as any other Kubernetes resources (like a Service or Deployment). For example, if the above AmbassadorMapping is saved into a file called `httpbin-mapping.yaml`, the following command will apply the configuration directly to $productName$:
+A Mapping resource can be managed using the same workflow as any other Kubernetes resources (like a Service or Deployment). For example, if the above Mapping is saved into a file called `httpbin-mapping.yaml`, the following command will apply the configuration directly to $productName$:
 
 ```
 kubectl apply -f httpbin-mapping.yaml
@@ -185,7 +185,7 @@ $productName$ routes traffic to a service. A service is defined as `[scheme://]s
 
 - `scheme` can be either `http` or `https`; if not present, the default is `http`.
 - `service` is the name of a service (typically the service name in Kubernetes or Consul); it is not allowed to contain the `.` character.
-- `namespace` is the namespace in which the service is running. Starting with $productName$ 1.0.0, if not supplied, it defaults to the namespace in which the AmbassadorMapping resource is defined. The default behavior can be configured using the [Module resource](../../topics/running/ambassador). When using a Consul resolver, `namespace` is not allowed.
+- `namespace` is the namespace in which the service is running. Starting with $productName$ 1.0.0, if not supplied, it defaults to the namespace in which the Mapping resource is defined. The default behavior can be configured using the [Module resource](../../topics/running/ambassador). When using a Consul resolver, `namespace` is not allowed.
 - `port` is the port to which a request should be sent. If not specified, it defaults to `80` when the scheme is `http` or `443` when the scheme is `https`. Note that the [resolver](../../topics/running/resolvers) may return a port in which case the `port` setting is ignored.
 
 <Alert severity="info">While using <code>service.namespace.svc.cluster.local</code> may work for Kubernetes resolvers, the preferred syntax is <code>service.namespace</code>.</Alert>
@@ -193,12 +193,12 @@ $productName$ routes traffic to a service. A service is defined as `[scheme://]s
 
 ## Extending Mappings
 
-AmbassadorMapping resources support a rich set of annotations to customize the specific routing behavior.  Here's an example service for implementing the [CQRS pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) (using HTTP):
+Mapping resources support a rich set of annotations to customize the specific routing behavior.  Here's an example service for implementing the [CQRS pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) (using HTTP):
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  cqrs-get
 spec:
@@ -207,8 +207,8 @@ spec:
   service: getcqrs
   hostname: '*'
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  cqrs-put
 spec:

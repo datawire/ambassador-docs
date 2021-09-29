@@ -80,7 +80,7 @@ seconds, allowing incoming requests to be rate-limited.
 
 ## 2. Configure $productName$ Mappings
 
-$productName$ only validates requests on `AmbassadorMapping`s which set labels to use for rate limiting,
+$productName$ only validates requests on `Mapping`s which set labels to use for rate limiting,
 so you'll need to apply `labels` to your `Mapping`s to enable rate limiting. For more information
 on the labelling process, see the [Rate Limits configuration documentation](../../topics/using/rate-limits/).
 
@@ -100,12 +100,12 @@ labels:
           omit_if_not_present: true
 ```
 
-so the AmbassadorMapping definition will now look like this:
+so the Mapping definition will now look like this:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:

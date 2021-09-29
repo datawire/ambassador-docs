@@ -1,19 +1,19 @@
 # TCP connections
 
-In addition to managing HTTP, GRPC, and Websockets at layer 7, $productName$ can also manage TCP connections at layer 4. The core abstraction used to support TCP connections is the `AmbassadorTCPMapping`.
+In addition to managing HTTP, GRPC, and Websockets at layer 7, $productName$ can also manage TCP connections at layer 4. The core abstraction used to support TCP connections is the `TCPMapping`.
 
-## AmbassadorTCPMapping
+## TCPMapping
 
-An $productName$ `AmbassadorTCPMapping` associates TCP connections with Kubernetes _services_. Cleartext TCP connections are defined by destination IP address and/or destination TCP port; TLS TCP connections can also be defined by the hostname presented using SNI. A service is exactly the same as in Kubernetes.
+An $productName$ `TCPMapping` associates TCP connections with Kubernetes _services_. Cleartext TCP connections are defined by destination IP address and/or destination TCP port; TLS TCP connections can also be defined by the hostname presented using SNI. A service is exactly the same as in Kubernetes.
 
-## AmbassadorTCPMapping configuration
+## TCPMapping configuration
 
 $productName$ supports a number of attributes to configure and customize mappings.
 
 | Attribute                 | Description               |
 | :------------------------ | :------------------------ |
-| `address`         | (optional) the IP address on which $productName$ should listen for connections for this AmbassadorMapping -- if not present, $productName$ will listen on all addresses )
-| `port`            | (required) the TCP port on which $productName$ should listen for connections for this AmbassadorMapping |
+| `address`         | (optional) the IP address on which $productName$ should listen for connections for this Mapping -- if not present, $productName$ will listen on all addresses )
+| `port`            | (required) the TCP port on which $productName$ should listen for connections for this Mapping |
 | `idle_timeout_ms` | (optional) the timeout, in milliseconds, after which the connection will be terminated if no traffic is seen -- if not present, no timeout is applied |
 | `enable_ipv4` | (optional) if true, enables IPv4 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](../../running/ambassador)) |
 | `enable_ipv6` | (optional) if true, enables IPv6 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](../../running/ambassador)) |
@@ -25,7 +25,7 @@ $productName$ can manage TCP connections using TLS:
 
 | Attribute                 | Description               |
 | :------------------------ | :------------------------ |
-| [`host`](../headers/host) | (optional) enables TLS _termination_ and specifies the hostname that must be presented using SNI for this `AmbassadorTCPMapping` to match -- **FORCES TLS TERMINATION**, see below |
+| [`host`](../headers/host) | (optional) enables TLS _termination_ and specifies the hostname that must be presented using SNI for this `TCPMapping` to match -- **FORCES TLS TERMINATION**, see below |
 | [`tls`](#using-tls)       | (optional) enables TLS _origination_, and may specify the name of a `TLSContext` that will determine the certificate to offer to the upstream service | 
 
 $productName$ supports multiple deployment patterns for your services. These patterns are designed to let you safely release new versions of your service while minimizing its impact on production users.
@@ -36,9 +36,9 @@ $productName$ supports multiple deployment patterns for your services. These pat
 
 The name of the mapping must be unique.
 
-### `AmbassadorTCPMapping` and TLS termination
+### `TCPMapping` and TLS termination
 
-**The `host` attribute of a `AmbassadorTCPMapping` determines whether $productName$ will terminate TLS when a client connects.** The `tls` attribute determines whether $productName$ will _originate_ TLS. The two are independent.
+**The `host` attribute of a `TCPMapping` determines whether $productName$ will terminate TLS when a client connects.** The `tls` attribute determines whether $productName$ will _originate_ TLS. The two are independent.
 
 This leaves four cases:
 
@@ -50,8 +50,8 @@ Examples:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorTCPMapping
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
 metadata:
   name:  ssh
 spec:
@@ -63,8 +63,8 @@ could be used to relay an SSH connection on port 2222, or
 
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorTCPMapping
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
 metadata:
   name:  cockroach
 spec:
@@ -80,7 +80,7 @@ In this case, $productName$ will terminate the TLS connection, require that the 
 
 This can be useful for doing host-based TLS proxying of arbitrary protocols, allowing the upstream to not have to care about TLS.
 
-Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `AmbassadorTCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `AmbassadorMapping`.)
+Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
 
 Example:
 
@@ -96,8 +96,8 @@ spec:
   - my-host-2
   secret: supersecret
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorTCPMapping
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
 metadata:
   name:  my-host-1
 spec:
@@ -105,8 +105,8 @@ spec:
   host: my-host-1
   service: upstream-host-1:9999
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorTCPMapping
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
 metadata:
   name:  my-host-2
 spec:
@@ -123,7 +123,7 @@ In this case, $productName$ will terminate the incoming TLS connection, require 
 
 This is useful for doing host routing while maintaining end-to-end encryption.
 
-Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `AmbassadorTCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `AmbassadorMapping`.)
+Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
 
 Example:
 
@@ -146,8 +146,8 @@ metadata:
 spec:
   secret: othersecret
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorTCPMapping
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
 metadata:
   name:  test-1
 spec:
@@ -156,8 +156,8 @@ spec:
   tls: true
   service: upstream-host-1:9999
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorTCPMapping
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
 metadata:
   name:  test-2
 spec:
@@ -190,8 +190,8 @@ metadata:
 spec:
   secret: othersecret
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorTCPMapping
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
 metadata:
   name:  test
 spec:
@@ -204,19 +204,19 @@ The example above will accept **any** connection to port 2222 and relay it over 
 
 #### Summary
 
-- To get a `AmbassadorTCPMapping` to terminate TLS, configure $productName$ with a termination `TLSContext` and list a `host` in the `AmbassadorTCPMapping`.
+- To get a `TCPMapping` to terminate TLS, configure $productName$ with a termination `TLSContext` and list a `host` in the `TCPMapping`.
 
-- To get a `AmbassadorTCPMapping` to originate TLS, use the `tls` attribute in the `AmbassadorTCPMapping`.
+- To get a `TCPMapping` to originate TLS, use the `tls` attribute in the `TCPMapping`.
 
 - You can mix and match as long as you think about how the protocols interact.
 
-#### Required attributes for `AmbassadorTCPMapping`s
+#### Required attributes for `TCPMapping`s
 
-- `name` is a string identifying the `AmbassadorMapping` (e.g. in diagnostics)
+- `name` is a string identifying the `Mapping` (e.g. in diagnostics)
 - `port` is an integer specifying which port to listen on for connections
 - `service` is the name of the service handling the resource; must include the namespace (e.g. `myservice.othernamespace`) if the service is in a different namespace than $productName$
 
-Note that the `service` in a `AmbassadorTCPMapping` should include a port number, and must not include a scheme.
+Note that the `service` in a `TCPMapping` should include a port number, and must not include a scheme.
 
 ## Namespaces and Mappings
 
