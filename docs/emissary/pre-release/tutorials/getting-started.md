@@ -97,7 +97,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
   With our `Mapping` created, now we need to access it!
 
-5. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
+5. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
   ```
   export LB_ENDPOINT=$(kubectl -n $productNamespace$ get svc  $productDeploymentName$ \
@@ -129,7 +129,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
 Explore some of the popular tutorials on $productName$:
 
-* [Configuring $productName$ to communicate](../../howtos/configure-communications): configure how $productName$ handles communication with clients
+* [Configuring $productName$ communications](../../howtos/configure-communications): configure how $productName$ handles communication with clients
 * [Intro to `Mappings`](../../topics/using/intro-mappings/): declaratively routes traffic from
 the edge of your cluster to a Kubernetes service
 * [`Listener` resource](../../topics/running/listener/): configure ports, protocols, and security options for your ingress.

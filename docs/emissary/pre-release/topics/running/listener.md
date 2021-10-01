@@ -43,7 +43,7 @@ Valid `protocol` values are:
 | `protocol` | Description |
 | :--------- | :---------- |
 | `HTTP` | Cleartext-only HTTP. HTTPS is not allowed. |
-| `HTTPS` | Either HTTPS or HTTP -- Envoy's TLS support can tell whether or not TLS is in use, and set `X-Forwarded-Protocol` correctly. |
+| `HTTPS` | Either HTTPS or HTTP -- Envoy's TLS support can tell whether or not TLS is in use, and it will set `X-Forwarded-Proto` correctly for later decision-making. |
 | `HTTPPROXY` | Cleartext-only HTTP, using the HAProxy `PROXY` protocol. |
 | `HTTPSPROXY` | Either HTTPS or HTTP, using the HAProxy `PROXY` protocol. |
 | `TCP` | TCP sessions without HTTP at all. You will need to use `TCPMapping`s to route requests for this `Listener`. |
@@ -55,14 +55,26 @@ Valid `protocol` values are:
 
 | `securityModel` | Description |
 | :--------- | :---------- |
+| `XFP` | Requests are secure if, and only if, `X-Forwarded-Proto` indicates HTTPS. This is appropriate in many situations; see below for more details. |
 | `SECURE` | Requests are always secure. You might set this if your load balancer always terminates TLS for you, and you can trust the clients. |
 | `INSECURE` | Requests are always insecure. You might set this for an HTTP-only `Listener`, or a `Listener` for clients that are expected to be hostile. |
-| `XFP` | Requests are secure if, and only if, `X-Forwarded-Proto` indicates HTTPS. |
 
-- For many scenarios, `XFP` is a reasonable choice: it's easy to redirect HTTP requests to HTTPS, and easy to route the resulting HTTPS requests.
-   - In normal usage, Envoy guarantees that `X-Forwarded-Proto` is set and reflects the actual wire protocol used when the request arrived at Envoy.
-   - To accomodate layer 7 proxies in front of $productName$, set `l7Depth` to the number of L7 proxies through which a request must pass before arriving at Envoy.
-- `SECURE` and `INSECURE` are helpful for cases where something downstream of $productName$ should allow only one kind of request to reach $productName$: for example, a `Listener` behind a load balancer that terminates TLS and checks client certificates might use `SecurityModel: SECURE`, then use `Host`s to reject insecure requests if one somehow arrives.
+The `X-Forwarded-Proto` header indicates whether the incoming request was sent using HTTP or HTTPS.
+Envoy guarantees that it will be present, and in cases where layer 7 proxies are not in use, it will
+accurately reflect the wire protocol the client used to get the request to Envoy. This means that a 
+`securityModel` of `XFP` is a good choice to allow $productName$ to route HTTPS, but redirect HTTP to
+HTTPS.
+
+However, when a layer 7 proxy is in use, the wire protocol used to contact Envoy will depend on the
+proxy, not the client. In that case, you need to configure the proxy to use `X-Forwarded-Proto` to
+pass information about the protocol the client used, and you'll need to set `l7depth` in the `Listener`
+to the number of layer 7 proxies in front of $productName$. This will allow correct information about
+the protocol to reach Envoy.
+
+`SECURE` and `INSECURE` are helpful for cases where something downstream of $productName$ should allow
+only one kind of request to reach $productName$.  For example, a `Listener` behind a load balancer that
+terminates TLS and checks client certificates might use `SecurityModel: SECURE`, then use `Host`s to
+reject insecure requests if one somehow arrives.
 
 ### `hostBinding`
 
@@ -133,7 +145,7 @@ spec:
 
 would also use `ingress-https`, but it explicitly overrides `statsPrefix` to `proxy-8080`.
 
-For complete information on which stastistics will appear for the `Listener`, see [the Envoy listener statistics documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/stats.html). Some important statistics include
+For complete information on which statistics will appear for the `Listener`, see [the Envoy listener statistics documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/listeners/stats.html). Some important statistics include
 
 | Statistic name                                  | Type      | Description                       |
 | :-----------------------------------------------| :-------- | :-------------------------------- |

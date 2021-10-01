@@ -38,9 +38,9 @@ We'll start by installing $productName$ into your cluster.
 
 ## 2. Routing traffic from the edge
 
-Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define $productName$’s desired state. The workflow you are going to build uses a simple demo app and the **Mapping CRD**, which is the core resource that you will use with $productName$. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
+$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells $productName$ what port to listen on, and the `Mapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
 
-1. First, create a Listener resources:
+1. Start by creating a `Listener` resource for HTTP on port 8080:
 
 ```
 kubectl apply -f - <<EOF
@@ -103,7 +103,7 @@ EOF
 
   With our Mapping created, now we need to access it!
 
-5. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
+5. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
   ```
   export LB_ENDPOINT=$(kubectl -n $productNamespace$ get svc  $productDeploymentName$ \

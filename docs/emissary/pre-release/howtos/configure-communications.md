@@ -1,13 +1,13 @@
 import Alert from '@material-ui/lab/Alert';
 
-Configuring $productName$ to Communicate
+Configuring $productName$ Communications
 ========================================
 
 For $productName$ to do its job of managing network communications for your services, it first needs to know how its own communications should be set up. This is handled by a combination of resources: the `Listener`, the `Host`, and the `TLSContext`.
 
-- `Listener`s define where, and how, $productName$ should listen for requests from the network.
-- `Host`s can be associated with one or more `Listener`s. They define which hostnames $productName$ should care about, and how to handle different kinds of requests for those hosts.
-- `TLSContext`s can be associated with one or more `Host`s. They define whether, and how, $productName$ will manage TLS certificates and options.
+- `Listener`: defines where, and how, $productName$ should listen for requests from the network.
+- `Host`: defines which hostnames $productName$ should care about, and how to handle different kinds of requests for those hosts. `Host`s can be associated with one or more `Listener`s.
+- `TLSContext`: defines whether, and how, $productName$ will manage TLS certificates and options. `TLSContext`s can be associated with one or more `Host`s.
 
 Once the basic communications setup is in place, $productName$ `Mapping`s and `TCPMapping`s can be associated with `Host`s to actually do routing.
 

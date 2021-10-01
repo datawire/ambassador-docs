@@ -36,7 +36,7 @@
    items:
      - title: Route to my services
        items:
-         - title: Configuring $productName$ to communicate
+         - title: Configuring $productName$ Communications
            link: /howtos/configure-communications
          - title: Get traffic from the edge
            link: /howtos/route
