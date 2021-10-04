@@ -34,7 +34,7 @@ We'll start by installing $productName$ into your cluster.
 
 <GettingStartedEdgeStack20Tabs/>
 
-<Alert severity="success"><b>Success!</b> You have installed $productName$, now let's get some traffic flowing to your services.</Alert>
+<Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
 ## 2. Routing traffic from the edge
 
