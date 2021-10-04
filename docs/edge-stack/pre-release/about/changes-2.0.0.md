@@ -4,7 +4,7 @@ Major Changes in $productName$ 2.0
 ==================================
 
 We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
-changes to allow productName$ to more gracefully handle larger installations, reduce
+changes to allow $productName$ to more gracefully handle larger installations, reduce
 global configuration to better handle multitenant or multiorganizational installations,
 reduce memory footprint, and improve performance. We welcome feedback!! Join us on
 [Slack](https://a8r.io/slack) and let us know what you think.
