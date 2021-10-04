@@ -49,32 +49,69 @@ Valid `protocol` values are:
 | `TCP` | TCP sessions without HTTP at all. You will need to use `TCPMapping`s to route requests for this `Listener`. |
 | `TLS` | TLS sessions without HTTP at all. You will need to use `TCPMapping`s to route requests for this `Listener`. |
 
-### `securityModel` and `l7Depth`
+### `securityModel`
 
 `securityModel` defines how the `Listener` will decide whether a request is secure or insecure:
 
 | `securityModel` | Description |
 | :--------- | :---------- |
-| `XFP` | Requests are secure if, and only if, `X-Forwarded-Proto` indicates HTTPS. This is appropriate in many situations; see below for more details. |
+| `XFP` | Requests are secure if, and only if, `X-Forwarded-Proto` indicates HTTPS. This is common; see below. |
 | `SECURE` | Requests are always secure. You might set this if your load balancer always terminates TLS for you, and you can trust the clients. |
 | `INSECURE` | Requests are always insecure. You might set this for an HTTP-only `Listener`, or a `Listener` for clients that are expected to be hostile. |
 
-The `X-Forwarded-Proto` header indicates whether the incoming request was sent using HTTP or HTTPS.
-Envoy guarantees that it will be present, and in cases where layer 7 proxies are not in use, it will
-accurately reflect the wire protocol the client used to get the request to Envoy. This means that a 
-`securityModel` of `XFP` is a good choice to allow $productName$ to route HTTPS, but redirect HTTP to
-HTTPS.
+The `X-Forwarded-Proto` header mentioned above is meant to reflect the protocol the _original client_
+used to contact $productName$. When no layer 7 proxies are in use, Envoy will make certain that the
+`X-Forwarded-Proto` header matches the wire protocol of the connection the client made to Envoy,
+which allows $productName$ to trust `X-Forwarded-Proto` for routing decisions such as deciding to
+redirect requests made using HTTP over to HTTPS for greater security. When using $productName$ as an
+edge proxy or a typical API gateway, this is a desirable configuration; setting `securityModel` to
+`XFP` makes this easy.
 
-However, when a layer 7 proxy is in use, the wire protocol used to contact Envoy will depend on the
-proxy, not the client. In that case, you need to configure the proxy to use `X-Forwarded-Proto` to
-pass information about the protocol the client used, and you'll need to set `l7depth` in the `Listener`
-to the number of layer 7 proxies in front of $productName$. This will allow correct information about
-the protocol to reach Envoy.
+When layer proxies _are_ in use, the `XFP` setting is often still desirable; however, you will also
+need to set `l7Depth` to allow it to function. See below.
 
-`SECURE` and `INSECURE` are helpful for cases where something downstream of $productName$ should allow
-only one kind of request to reach $productName$.  For example, a `Listener` behind a load balancer that
-terminates TLS and checks client certificates might use `SecurityModel: SECURE`, then use `Host`s to
-reject insecure requests if one somehow arrives.
+`SECURE` and `INSECURE` are helpful for cases where something downstream of $productName$ should be
+allowing only one kind of request to reach $productName$.  For example, a `Listener` behind a load
+balancer that terminates TLS and checks client certificates might use
+`SecurityModel: SECURE`, then use `Host`s to reject insecure requests if one somehow
+arrives.
+
+### `l7Depth`
+
+When layer 7 (L7) proxies are in use, the connection to $productName$ comes from the L7 proxy itself
+rather than from the client. Examining the protocol and IP address of that connection is useless, and 
+instead you need to configure the L7 proxy to pass extra information about the client to $productName$
+using the `X-Forwarded-Proto` and `X-Forwarded-For` headers.
+
+However, if $productName$ always trusted `X-Forwarded-Proto` and `X-Forwarded-For`, any client could
+use them to lie about itself to $productName$. As a security mechanism, therefore, you must _also_
+set `l7Depth` in the `Listener` to the number of trusted L7 proxies in front of $productName$. If
+`l7Depth` is not set in the `Listener`, the `xff_num_trusted_hops` value from the `ambassador` `Module`
+will be used. If neither is set, the default `l7Depth` is 0.
+
+When `l7Depth` is 0, any incoming `X-Forwarded-Proto` is stripped: Envoy always provides an 
+`X-Forwarded-Proto` matching the wire protocol of the incoming connection, so that `X-Forwarded-Proto`
+can be trusted. When `l7Depth` is non-zero, `X-Forwarded-Proto` is accepted from the L7 proxy, and
+trusted. The actual wire protocol in use from the L7 proxy to $productName$ is ignored.
+
+`l7Depth` also affects $productName$'s view of the client's source IP address, which is used as the
+`remote_address` field when rate limiting, and for the `X-Envoy-External-Address` header:
+
+- When `l7Depth` is 0, $productName$ uses the IP address of the incoming connection.
+- When `l7Depth` is some value N that is non-zero, the behavior is determined by the value of
+  `use_remote_address` in the `ambassador` `Module`:
+
+   - When `use_remote_address` is true (the default) then the trusted client address will be the Nth
+     address from the right end of the `X-Forwarded-For` header. (If the XFF contains fewer than N
+     addresses, Envoy falls back to using the immediate downstream connection’s source address as a
+     trusted client address.)
+
+   - When `use_remote_address` is false, the trusted client address is the (N+1)th address from the
+     right end of XFF. (If the XFF contains fewer than N+1 addresses, Envoy falls back to using the
+     immediate downstream connection’s source address as a trusted client address.)
+
+   For more detailed examples of this interaction, refer to [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers.html#x-forwarded-for).
+
 
 ### `hostBinding`
 
