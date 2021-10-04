@@ -56,7 +56,7 @@ kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.templat
 
 ## 2. Install Argo CD & Argo Rollouts
 
-In order to install Argo CD and Argo Rollouts in your cluster run the commands bellow:
+In order to install Argo CD and Argo Rollouts in your cluster run the commands below:
 
 ```
 kubectl create namespace argocd
@@ -67,7 +67,7 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
 ```
 ## 3. Get a manifests folder in your repository
 
-Inside of your repository, you will need a specific directory in which your manifests will live. Create a directory called `manifests` and inside of it add your services files. For example, add a `service.yaml` file.
+Inside of your repository, you will need a specific directory in which your manifests will live. If you still don't have any, create a directory called `manifests` and inside of it add your existing services manifests files that you want to be able to use with Canary Releases, (for example, add a `service.yaml` file). Otherwise, use the path of your `manifests` folder, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
 
 The annotations section of your `service.yaml` file should look something like the following:
 ```yaml
