@@ -67,7 +67,7 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
 ```
 ## 3. Get a manifests folder in your repository
 
-Inside of your repository, you will need a specific directory in which your manifests will live. If you still don't have any, create a directory called `manifests` and inside of it add your existing services manifests files that you want to be able to use with Canary Releases, (for example, add a `service.yaml` file). Otherwise, use the path of your `manifests` folder, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
+Inside of your repository, you will need a specific directory in which your manifests will live. If you still don't have any, create a directory called `manifests`, and inside of it add your existing services manifests files that you want to be able to use with Canary Releases, (for example, add a `service.yaml` file). Otherwise, use the path of your existing folder that contains the manifests, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
 
 The annotations section of your `service.yaml` file should look something like the following:
 ```yaml
