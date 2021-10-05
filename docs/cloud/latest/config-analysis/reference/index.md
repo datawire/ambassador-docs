@@ -8,9 +8,9 @@ Automated configuration analysis provides visibility into Edge Stack and
 Emissary-ingress configuration changes _before_ any changes get deployed to your
 clusters.
 
-The GitOps integration scans pull requests for Edge Stack and Emissary-ingress manifests, and compares
+The GitHub integration scans pull requests for Edge Stack and Emissary-ingress manifests, and compares
 the current state of your cluster installation to report any changes to
-Edge Stack or Emissary-ingress  configuration and warn about any conflicts or invalid configuration.
+Edge Stack or Emissary-ingress configuration and warn about any conflicts or invalid configuration.
 
 ## What are the current capabilities of the automated configuration analysis integration?
 
@@ -20,16 +20,16 @@ Currently, the integration relays information about:
 * Envoy metric names for any new routes
 
 Coming soon, we plan to support:
-* Notifying if the produced Envoy configuration is valid.
+* Validation for the produced Envoy configuration.
 * Validation for `AmbassadorTCPMapping`s
 * Validation for `AmbassadorHost`s
-* Other git providers
+* Support other git providers
 
 
 ## Can I support multiple directories or cluster configurations?
 
-Yes, you can configure a repository to support multiple configurations from [the
-Ambassador DCP](https://app.getambassador.io/cloud/settings/teams/gitops). These configurations are managed with the `.a8r.yaml` configuration file. For example:
+Yes, you can configure a repository to support multiple configurations from [Ambassador Cloud](https://app.getambassador.io/cloud/settings/teams/gitops).
+These configurations are managed with the `.a8r.yaml` configuration file. For example:
 
 ```
 k8s_config:
@@ -57,14 +57,14 @@ k8s_config:
     cluster_name: us-east
 ```
 
-You can either manually append to your `.a8r.yaml` file if you know your
+You can either manually edit your `.a8r.yaml` file if you know your
 `cluster_id`, or you can visit the [configuration page in the Ambassador
-DCP](https://app.getambassador.io/cloud/settings/teams/gitops) to add additional
+Cloud](https://app.getambassador.io/cloud/settings/teams/gitops) to register additional
 clusters and manifest paths.
 
 ## Will the automated configuration analysis recursively search for files?
 
-Yes, if you configure a `manifest_path`, the Ambassador DCP will recursively
+Yes, if you configure a `manifest_path`, the automated configuration analysis will recursively
 search the entire directory structure to find Kubernetes yaml files.
 
 ## What if I have manifest files for different clusters in the same directory?
@@ -72,7 +72,7 @@ search the entire directory structure to find Kubernetes yaml files.
 We strongly urge you to separate out files that get applied to different
 clusters into different directories.
 
-Organizing your manifests in this manner will save you from accidently applying
+Organizing your manifests in this manner will save you from accidentally applying
 manifests to a cluster. When running `kubectl apply -f $DIRECTORY`, kubectl will
 search the directory and apply _all_ the manifest files in that directory, and
 this could have undesired consequences.
@@ -82,4 +82,4 @@ For instance, if you have a directory `manifests` with
 ```
 kubectl apply -f manifests/
 ```
-and deploy your test app to your prod cluster, or vice versa.
+and deploy your test application to your production cluster, or vice versa.
