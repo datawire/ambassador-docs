@@ -29,17 +29,17 @@
 
 changelog: ''
 items:
-  - date: '2021-10-08'
+  - date: '2021-10-05'
     notes:
-      - title: Rollouts from your GitLab repositories
+      - title: 'Rollouts from your GitLab repositories'
         body: 'GitLab support to use Ambassador Cloud Rollouts for deploying your services using the canary release pattern.'
         image: './cloud-rollouts-beta.png'
         docs: '../../argo/latest/quick-start'
         type: feature
-  - date: "2021-09-20"
+  - date: '2021-09-20'
     notes:
-      - title: "Heads Up Display"
-        body: "Develop your services using the HUD (Heads Up Display). With many widgets available, the HUD is your new day-to-day assistant to create intercepts, visualize the progress of rollouts, and more!"
+      - title: 'Heads Up Display'
+        body: 'Develop your services using the HUD (Heads Up Display). With many widgets available, the HUD is your new day-to-day assistant to create intercepts, visualize the progress of rollouts, and more!'
         type: feature
         image: ./cloud-hud.png
         docs: service-catalog/concepts/hud
