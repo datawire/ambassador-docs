@@ -31,7 +31,7 @@ In this quick start, we'll walk through how you can configure Edge Stack or Emis
 
 3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 
-4. Follow the prompts to install or configure Edge Stack or Emissary-ingress 2.0 with a cloud token into your Kubernetes cluster.
+4. Follow the prompts to install or configure either Edge Stack or Emissary-ingress 2.0 with a cloud token into your Kubernetes cluster.
 
 5. When the installation completes, services, environments and clusters will be visible in Ambassador Cloud.
 
