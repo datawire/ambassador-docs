@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import template from '../../../src/utils/template';
 import Scrollspy from "react-scrollspy";
 
@@ -9,8 +9,8 @@ const ContentTable = ({
 
   const formatString = (title) => {
     if (title) {
-    const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, "");
-    return template(formatedTitle, versions);
+      const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, "");
+      return template(formatedTitle, versions);
     }
   }
 
@@ -25,18 +25,18 @@ const ContentTable = ({
   }
 
   const onClick = (ev) => {
-      const frag = ev.target.id.substr(1);
-      const target = document.getElementById(frag);
-      if (target) {
-        ev.preventDefault();
-        target.scrollIntoView({
-          behavior: 'smooth',
-        });
-        if (window.location.hash !== ev.target.id) {
-          window.history.pushState(null, "", ev.target.id);
-        }
+    const frag = ev.target.id.substr(1);
+    const target = document.getElementById(frag);
+    if (target) {
+      ev.preventDefault();
+      target.scrollIntoView({
+        behavior: 'smooth',
+      });
+      if (window.location.hash !== ev.target.id) {
+        window.history.pushState(null, "", ev.target.id);
       }
-    };
+    }
+  };
 
   return (
     <ScrollSpyWrapper items={ids} rootEl={rootElement} onUpdate={onActive}>
@@ -59,6 +59,8 @@ const ScrollSpyWrapper = ({ children, onUpdate, ...rest }) => {
     </ul>
   )
 }
+
+export { ScrollSpyWrapper };
 
 
 export default ContentTable;
