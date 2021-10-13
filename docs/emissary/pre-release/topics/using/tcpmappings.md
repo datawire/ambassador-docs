@@ -26,7 +26,8 @@ $productName$ can manage TCP connections using TLS:
 | Attribute                 | Description               |
 | :------------------------ | :------------------------ |
 | [`host`](../headers/host) | (optional) enables TLS _termination_ and specifies the hostname that must be presented using SNI for this `TCPMapping` to match -- **FORCES TLS TERMINATION**, see below |
-| [`tls`](#using-tls)       | (optional) enables TLS _origination_, and may specify the name of a `TLSContext` that will determine the certificate to offer to the upstream service | 
+| [`service`](#tcpmapping-and-tls)   | An `https://` prefix will enable TLS _origination_ |
+| [`tls`](#tcpmapping-and-tls)       | (optional) configures TLS _origination_ by specifying the name of a `TLSContext` that will determine the certificate to offer to the upstream service | 
 
 $productName$ supports multiple deployment patterns for your services. These patterns are designed to let you safely release new versions of your service while minimizing its impact on production users.
 
@@ -36,13 +37,13 @@ $productName$ supports multiple deployment patterns for your services. These pat
 
 The name of the mapping must be unique.
 
-### `TCPMapping` and TLS termination
+### `TCPMapping` and TLS
 
-**The `host` attribute of a `TCPMapping` determines whether $productName$ will terminate TLS when a client connects.** The `tls` attribute determines whether $productName$ will _originate_ TLS. The two are independent.
+The `host` attribute of a `TCPMapping` determines whether $productName$ will terminate TLS when a client connects. The `service` prefix (if any) and the `tls` attribute work together to determine whether $productName$ will _originate_ TLS. The two are independent.
 
 This leaves four cases:
 
-#### Neither `host` nor `tls` are set
+#### `host` is not set, and the `service` does not state `https://`
 
 In this case, $productName$ simply proxies bytes between the client and the upstream. TLS may or may not be involved, and $productName$ doesn't care. You should specify the port to use for the upstream connection; if you don't, $productName$ will guess port 80.
 
@@ -74,13 +75,13 @@ spec:
 
 could proxy a CockroachDB connection.
 
-#### `host` is set, but `tls` is not
+#### `host` is set, but the `service` has no `https://` prefix
 
 In this case, $productName$ will terminate the TLS connection, require that the host offered with SNI match the `host` attribute, and then make a **cleartext** connection to the upstream host. You should specify the port to use for the upstream connection; if you don't, $productName$ will guess port **80**.
 
 This can be useful for doing host-based TLS proxying of arbitrary protocols, allowing the upstream to not have to care about TLS.
 
-Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
+Note that this case **requires** that you have created a termination `TLSContext`, and that the termination `TLSContext` has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
 
 Example:
 
@@ -117,13 +118,13 @@ spec:
 
 The example above will accept a TLS connection with SNI on port 2222. If the client requests SNI host `my-host-1`, the decrypted traffic will be relayed to `upstream-host-1`, port 9999. If the client requests SNI host `my-host-2`, the decrypted traffic will be relayed to `upstream-host-2`, port 9999. Any other SNI host will cause the TLS handshake to fail.
 
-#### `host` and `tls` are both set
+#### `host` is set, and `service` has an `https://` prefix
 
-In this case, $productName$ will terminate the incoming TLS connection, require that the host offered with SNI match the `host` attribute, and then make a **TLS** connection to the upstream host. You should specify the port to use for the upstream connection; if you don't, $productName$ will guess port **443**.
+In this case, $productName$ will terminate the incoming TLS connection, require that the host offered with SNI match the `host` attribute, and then make a **TLS** connection to the upstream host. If `tls` is also set, $productName$ will use to determine the certificate offered to the upstream service. You should specify the port to use for the upstream connection; if you don't, $productName$ will guess port **443**.
 
 This is useful for doing host routing while maintaining end-to-end encryption.
 
-Note that this case **requires** that you have created a termination `TLSContext` that has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
+Note that this case **requires** that you have created a termination `TLSContext`, and that the termination `TLSContext` has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
 
 Example:
 
@@ -153,8 +154,7 @@ metadata:
 spec:
   port: 2222
   host: my-host-1
-  tls: true
-  service: upstream-host-1:9999
+  service: https://upstream-host-1:9999
 ---
 apiVersion: getambassador.io/v3alpha1
 kind: TCPMapping
@@ -164,7 +164,7 @@ spec:
   port: 2222
   host: my-host-2
   tls: origination-context
-  service: upstream-host-2:9999
+  service: https://upstream-host-2:9999
 ```
 
 The example above will accept a TLS connection with SNI on port 2222.
@@ -175,7 +175,7 @@ If the client requests SNI host `my-host-2`, the decrypted traffic will be relay
 
 Any other SNI host will cause the TLS handshake to fail.
 
-#### Host is not set, but `tls` is
+#### `host` is not set, but `service` has an `https://` prefix
 
 Here, $productName$ will accept the connection **without terminating TLS**, then relay traffic over a **TLS** connection upstream. This is probably useful only to accept unencrypted traffic and force it to be encrypted when it leaves $productName$.
 
@@ -196,8 +196,7 @@ metadata:
   name:  test
 spec:
   port: 2222
-  tls: true
-  service: upstream-host:9999
+  service: https://upstream-host:9999
 ```
 
 The example above will accept **any** connection to port 2222 and relay it over a **TLS** connection to `upstream-host` port 9999. No client certificate will be offered.
@@ -206,7 +205,7 @@ The example above will accept **any** connection to port 2222 and relay it over 
 
 - To get a `TCPMapping` to terminate TLS, configure $productName$ with a termination `TLSContext` and list a `host` in the `TCPMapping`.
 
-- To get a `TCPMapping` to originate TLS, use the `tls` attribute in the `TCPMapping`.
+- To get a `TCPMapping` to originate TLS, use an `http://` prefix for the `TCPMapping`'s `service`. Use the `tls` attribute as well if you want to offer a certificate to the upstream service.
 
 - You can mix and match as long as you think about how the protocols interact.
 
@@ -216,7 +215,7 @@ The example above will accept **any** connection to port 2222 and relay it over 
 - `port` is an integer specifying which port to listen on for connections
 - `service` is the name of the service handling the resource; must include the namespace (e.g. `myservice.othernamespace`) if the service is in a different namespace than $productName$
 
-Note that the `service` in a `TCPMapping` should include a port number, and must not include a scheme.
+Note that the `service` in a `TCPMapping` should include a port number, and may include a scheme of `https`.
 
 ## Namespaces and Mappings
 

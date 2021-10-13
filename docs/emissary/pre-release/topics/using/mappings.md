@@ -43,9 +43,34 @@ If multiple `Mapping`s have the same `precedence`, $productName$'s normal sortin
 
 ### Using `tls`
 
-In most cases, you won't need the `tls` attribute: just use a `service` with an `https://` prefix. However, note that if the `tls` attribute is present and `true`, $productName$ will originate TLS even if the `service` does not have the `https://` prefix.
+To originate TLS, use a `service` with an `https://` prefix. By itself, this will cause $productName$ to originate TLS without presenting a client certificate to the upstream service:
 
-If `tls` is present with a value that is not `true`, the value is assumed to be the name of a defined TLS context, which will determine the certificate presented to the upstream service. TLS context handling is a beta feature of $productName$ at present; please [contact us on Slack](https://a8r.io/Slack) if you need to specify TLS origination certificates.
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: mapping-no-cert
+spec:
+  prefix: /prefix/
+  service: https://upstream/
+```
+
+If you do need to supply a client certificate, you will also need to set `tls` to the name of a defined TLS context. The client certificate given in that context will be presented to the upstream service.
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: mapping-with-cert
+spec:
+  prefix: /prefix/
+  service: https://upstream/
+  tls: upstream-cert-context
+```
+
+(If `tls` is present, $productName$ will originate TLS even if the `service` does not have an `https://` prefix.)
 
 ### Using `cluster_tag`
 
