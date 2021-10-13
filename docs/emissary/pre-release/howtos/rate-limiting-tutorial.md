@@ -74,7 +74,10 @@ spec:
 ```
 
 This configuration tells $productName$ about the rate limit service, notably that it is serving requests at `example-rate-limit:5000`. $productName$ will see the `RateLimitService` and reconfigure itself within a few 
-seconds, allowing incoming requests to be rate-limited.
+seconds, allowing incoming requests to be rate-limited. 
+
+Note that you can configure the `RateLimitService` to use a specific label `domain`.
+If `domain` is not specified (which is the situation here), the default is `ambassador`.
 
 <Alert severity="info">If $productName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.</Alert>
 
@@ -96,11 +99,12 @@ labels:
   ambassador:
     - request_label_group:
       - x-ambassador-test-allow:
-          header: "x-ambassador-test-allow"
-          omit_if_not_present: true
+          request_headers: 
+            key: "x-ambassador-test-allow"
+            header_name: "x-ambassador-test-allow"
 ```
 
-so the Mapping definition will now look like this:
+so the `Mapping` definition will now look like this:
 
 ```yaml
 ---
@@ -116,11 +120,16 @@ spec:
     ambassador:
       - request_label_group:
         - x-ambassador-test-allow:
-          header: "x-ambassador-test-allow"
-          omit_if_not_present: true
+            request_headers: 
+              key: "x-ambassador-test-allow"
+              header_name: "x-ambassador-test-allow"
 ```
 
 <!-- If multiple `labels` are supplied for a single `Mapping`, $productName$ would also perform multiple requests to `example-rate-limit:5000` if we had defined multiple `rate_limits` rules on the mapping. -->
+
+Note that the `key` could be anything you like, but our example rate limiting service expects it to
+match the name of the header. Also note that since our `RateLimitService` expects to use labels in the
+`ambassador` domain, our `Mapping` must match.
 
 ## 2. Test rate limiting
 

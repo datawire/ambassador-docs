@@ -114,64 +114,64 @@ There are 5 types of label specifiers in $productName$:
 
 1. `source_cluster`
 
-```yaml
-source_cluster: { source_cluster: {} }
-```
-
-Sets the label `source_cluster=«Envoy source cluster name»"`. The Envoy 
-source cluster name is the name of the Envoy cluster that the request came
-in on.
-
-The syntax of this label currently _requires_ `source_cluster: {}`.
+    ```yaml
+    source_cluster: { source_cluster: {} }
+    ```
+    
+    Sets the label `source_cluster=«Envoy source cluster name»"`. The Envoy 
+    source cluster name is the name of the Envoy cluster that the request came
+    in on.
+    
+    The syntax of this label currently _requires_ `source_cluster: {}`.
 
 2. `destination_cluster`
 
-```yaml
-destination_cluster: { destination_cluster: {} }
-```
-
-Sets the label `destination_cluster=«Envoy destination cluster name»"`. The Envoy 
-destination cluster name is the name of the Envoy cluster to which the `Mapping`
-routes the request. You can get the name for a cluster from the
-[diagnostics service](../../diagnostics).
-
-The syntax of this label currently _requires_ `destination_cluster: {}`.
+    ```yaml
+    destination_cluster: { destination_cluster: {} }
+    ```
+    
+    Sets the label `destination_cluster=«Envoy destination cluster name»"`. The Envoy 
+    destination cluster name is the name of the Envoy cluster to which the `Mapping`
+    routes the request. You can get the name for a cluster from the
+    [diagnostics service](../../diagnostics).
+    
+    The syntax of this label currently _requires_ `destination_cluster: {}`.
 
 3. `remote_address`
 
-```yaml
-remote_address: { remote_address: {} }
-```
+    ```yaml
+    remote_address: { remote_address: {} }
+    ```
+    
+    Sets the label `remote_address=«IP address of the client»"`. The IP address of
+    the client will be taken from the `X-Forwarded-For` header, to correctly manage
+    situations with L7 proxies. This requires that $productName$ be correctly 
+    [configured to communicate](../../../howtos/configure-communications).
 
-Sets the label `remote_address=«IP address of the client»"`. The IP address of
-the client will be taken from the `X-Forwarded-For` header, to correctly manage
-situations with L7 proxies. This requires that $productName$ be correctly 
-[configured to communicate](../../../howtos/configure-communications).
-
-The syntax of this label currently _requires_ `remote_address: {}`.
+    The syntax of this label currently _requires_ `remote_address: {}`.
 
 4. `request_headers`
 
-```yaml
-request_headers:
-  header_name: "header-name"
-  key: mykey
-```
-
-If a header named `header-name` is present, set the label `mykey=«value of the header»`. 
-If no header named `header-name` is present, **the entire label group is dropped**.
+    ```yaml
+    request_headers:
+      header_name: "header-name"
+      key: mykey
+    ```
+    
+    If a header named `header-name` is present, set the label `mykey=«value of the header»`. 
+    If no header named `header-name` is present, **the entire label group is dropped**.
 
 5. `generic_key`
 
-```yaml
-generic_key:
-  key: mykey
-  value: myvalue
-```
-
-Sets the label `«mykey»=«myval»`. Note that supplying a `key` is supported only
-with the Envoy V3 API: if you are using Envoy V2, the `key` will always be the
-constant `generic_key`.
+    ```yaml
+    generic_key:
+      key: mykey
+      value: myvalue
+    ```
+    
+    Sets the label `«mykey»=«myval»`. Note that supplying a `key` is supported only
+    with the Envoy V3 API: if you are using Envoy V2, the `key` will always be the
+    constant `generic_key`.
 
 ## Rate limiting requests based on their labels
 
