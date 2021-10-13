@@ -20,27 +20,28 @@ $productName$ 2.0 introduces API version `getambassador.io/v3alpha1` to allow
 certain changes in configuration resources that are not backwards compatible with
 $productName$ 1.X. The most notable example of change is the addition of the
 **mandatory** `Listener` resource; however, there are important changes
-in `Host` and `Mapping` as well. 
+in `Host` and `Mapping` as well.
 
-Obviously, `v3alpha1` is an early version that may change as we receive feedback.
+<Alert severity="info">
+  $productName$ 2.0.4 supports only configuration resource API version
+  <code>getambassador.io/v3alpha1</code>. A later version will reintroduce support for
+  <code>getambassador.io/v2</code>.<br/>
+  <br/>
+  $productName$ 2.X does not support API versions <code>getambassador.io/v0</code>
+  or <code>getambassador.io/v1</code>.
+</Alert>
 
-$productName$ 2.0.4 supports only configuration resource API version
-`getambassador/v3alpha1`. A later version will reintroduce support for
-`getambassador.io/v2`.
-
-`getambassador.io/v0` and `getambassador.io/v1` are no longer supported in
-$productName$ 2.X.
-
-(API version `getambassador.io/v3alpha1` replaces `x.getambassador.io/v3alpha1` from
-the 2.0 developer previews.)
+API version `getambassador.io/v3alpha1` replaces `x.getambassador.io/v3alpha1` from
+the 2.0 developer previews. `getambassador.io/v3alpha1` may still change as we receive
+feedback.
 
 ## 2. Kubernetes 1.22 and Structural CRDs
 
-Kubernetes 1.22 requires [<i>structural CRDs</i>](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/);
-this is primarily a change meant to support better CRD validation, but it also has the 
+Kubernetes 1.22 requires [<i>structural CRDs</i>](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/).
+This change is primarily meant to support better CRD validation, but it also has the 
 effect that union types are no longer allowed in CRDs: for example, an element that can be
-either a string or a list of strings is not allowed. Several such elements appear in the
-`getambassador.io/v2` CRDs, requiring changes:
+either a string or a list of strings is not allowed. Several such elements appeared in the
+`getambassador.io/v2` CRDs, requiring changes. In `getambassador.io/v3alpha1`:
 
 - `ambassador_id` must always be a list of strings
 - `Host.mappingSelector` supersedes `Host.selector`, and controls association between Hosts and Mappings
