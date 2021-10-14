@@ -1,12 +1,23 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Basic rate limiting
 
 Rate limiting in $productName$ is composed of two parts:
 
 * The [`RateLimitService`] resource tells $productName$ what external service
   to use for rate limiting.
+
+    <Alert severity="info">If $productName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.</Alert>
+
 * _Labels_ that get attached to requests. A label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
   the request.
+
+    <Alert severity="info">
+      These <code>labels</code> require <code>Mapping</code> resources with <code>apiVersion</code>
+      <code>getambassador.io/v2</code> or newer &mdash; if you're updating an old installation, check the
+      <code>apiVersion</code>!
+    </Alert>
 
 Labels are grouped according to _domain_ and _group_:
 

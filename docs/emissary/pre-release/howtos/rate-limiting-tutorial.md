@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Basic rate limiting
 
 <Alert severity="info">This guide applies to $OSSproductName$. It will not work correctly
@@ -87,8 +89,11 @@ $productName$ only validates requests on `Mapping`s which set labels to use for 
 so you'll need to apply `labels` to your `Mapping`s to enable rate limiting. For more information
 on the labelling process, see the [Rate Limits configuration documentation](../../topics/using/rate-limits/).
 
-<Alert severity="info">These `labels` require `Mapping` resources with `apiVersion` `getambassador.io/v2`
-or newer &mdash; if you're updating an old installation, check the `apiVersion`!</Alert>
+<Alert severity="info">
+  These <code>labels</code> require <code>Mapping</code> resources with <code>apiVersion</code>
+  <code>getambassador.io/v2</code> or newer &mdash; if you're updating an old installation, check the
+  <code>apiVersion</code>!
+</Alert>
 
 <Alert severity="info">If $productName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.</Alert>
 

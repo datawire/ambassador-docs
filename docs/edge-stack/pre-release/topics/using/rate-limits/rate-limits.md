@@ -300,7 +300,8 @@ spec:
   labels:
     ambassador:
     - label_group:
-      - my_default_generic_key_label
+      - generic_key:
+          value: my_default_generic_key_label
 ```
 
 You can then create a default RateLimit for every request that matches
@@ -342,30 +343,20 @@ spec:
   labels:
     ambassador:                     # the label domain
     - string_request_label:           # the label group name -- useful for humans, ignored by Ambassador
-      - catalog                         # annotate the request with `generic_key=catalog`
+      - generic_key:                    # this is a generic_key label
+          value: catalog                  # annotate the request with `generic_key=catalog`
     - header_request_label:           # another label group name
-      - headerkey:                      # The name of the label
-          header: ":method"               # annotate the request with the specific HTTP method used
+      - request_headers:                # this is a label using request headers
+          key: headerkey                  # annotate the request with `headerkey=the specific HTTP method used`
+          header_name: ":method"          # if the :method header is somehow unset, the whole group will be dropped.
     - multi_request_label_group:
-      - authorityheader:
-          header: ":authority"
-          omit_if_not_present: true
-      - xuserheader:
-          header: "x-user"
-          omit_if_not_present: true
+      - request_headers:
+          key: authorityheader
+          header_name: ":authority"
+      - request_headers:
+          key: xuserheader
+          header_name: "x-user"           # again, if x-user is not present, the _whole group_ is dropped
 ```
-
-<!--
-
-The above example used to say
-
-    omit_if_not_present: true       # if the header is not present, omit the label
-
-on all of the header labels, but I've removed it from the example
-because "omit_if_not_present" doesn't actually work right now and is
-commented out in the code.
-
--->
 
 Let's digest the above example:
 
@@ -415,9 +406,11 @@ spec:
   labels:
     ambassador:
       - foo-app_label_group:
-        - foo-app
+        - generic_key:
+            value: foo-app
       - total_requests_group:
         - remote_address
+            remote_address: {}      # this is _required_ at present
 ---
 apiVersion: getambassador.io/v3alpha1
 kind: Mapping
@@ -430,9 +423,11 @@ spec:
   labels:
     ambassador:
       - bar-app_label_group:
-        - bar-app
+        - generic_key:
+            value: bar-app
       - total_requests_group:
         - remote_address
+            remote_address: {}      # this is _required_ at present
 ```
 
 Now requests to the `foo-app` and the `bar-app` would be labeled with
@@ -502,7 +497,8 @@ spec:
     default_labels:
       ambassador:
         defaults:
-        - "my_default_label"
+        - generic_key:
+            value: "my_default_label"
 ```
 
 The labels metadata would change
