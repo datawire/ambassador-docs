@@ -172,7 +172,7 @@ spec:
     name: minimal-secret
 ```
 
-It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName$ Communications](../../howtos/configure-communications).
 
 <Alert severity="info">
   <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.<br/>
@@ -191,11 +191,19 @@ Configuration for the `PROXY` protocol is part of the `Listener` resource in $pr
 
 A `getambassador.io/v2` `Mapping` or `TCPMapping` could specify `tls: true` to indicate TLS origination without supplying a certificate. This is not supported in `getambassador.io/v3alpha1`: instead, use an `https://` prefix on the `service`. In the [Mapping](../../topics/using/mappings/#using-tls), this is straightforward, but [there are more details for the `TCPMapping` when using TLS](../../topics/using/tcpmappings/#tcpmapping-and-tls).
 
+<Alert severity="info">
+  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
+</Alert>
+
 ### `Mapping`s and `labels`
 
 The `Mapping` CRD includes a `labels` field, used with rate limiting. The
 [syntax of the `labels`](../../topics/using/rate-limits#attaching-labels-to-requests) has changed
 for compatibility with Kubernetes 1.22.
+
+<Alert severity="info">
+  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
+</Alert>
 
 ## 3. Other Changes
 
@@ -213,7 +221,7 @@ It is no longer possible to configure TLS using the `tls` element of the `ambass
 
 ### `TLSContext` `redirect_cleartext_from` and `Host` `insecure.additionalPort`
 
-`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName$ Communications](../../howtos/configure-communications).
 
 ### Service Preview No Longer Supported
 

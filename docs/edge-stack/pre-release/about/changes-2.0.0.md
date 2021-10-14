@@ -3,10 +3,11 @@ import Alert from '@material-ui/lab/Alert';
 Major Changes in $productName$ 2.0
 ==================================
 
-We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
-changes to allow $productName$ to more gracefully handle larger installations, reduce
-global configuration to better handle multitenant or multiorganizational installations,
-reduce memory footprint, and improve performance. We welcome feedback!! Join us on
+We're pleased to introduce $productName$ 2.0.4 for general availability for new
+installations! The 2.X family introduces a number of changes to allow $productName$
+to more gracefully handle larger installations, reduce global configuration to
+better handle multitenant or multiorganizational installations, reduce memory
+footprint, and improve performance. We welcome feedback!! Join us on
 [Slack](https://a8r.io/slack) and let us know what you think.
 
 While $productName$ 2.0 is functionally compatible with $productName$ 1.14, note
@@ -19,38 +20,39 @@ $productName$ 2.0 introduces API version `getambassador.io/v3alpha1` to allow
 certain changes in configuration resources that are not backwards compatible with
 $productName$ 1.X. The most notable example of change is the addition of the
 **mandatory** `Listener` resource; however, there are important changes
-in `Host` and `Mapping` as well. 
+in `Host` and `Mapping` as well.
 
-Obviously, `v3alpha1` is an early version that may change as we receive feedback.
+<Alert severity="info">
+  $productName$ 2.0.4 supports only configuration resource API version
+  <code>getambassador.io/v3alpha1</code>. A later version will reintroduce support for
+  <code>getambassador.io/v2</code>.<br/>
+  <br/>
+  $productName$ 2.X does not support API versions <code>getambassador.io/v0</code>
+  or <code>getambassador.io/v1</code>.
+</Alert>
 
-$productName$ 2.0 supports configuration resource API versions `getambassador/v2`
-and `getambassador/v3alpha1`. `getambassador.io/v0` and `getambassador.io/v1` are no
-longer supported.
+API version `getambassador.io/v3alpha1` replaces `x.getambassador.io/v3alpha1` from
+the 2.0 developer previews. `getambassador.io/v3alpha1` may still change as we receive
+feedback.
 
-(API version `getambassador.io/v3alpha1` replaces `x.getambassador.io/v3alpha1` from
-the 2.0 developer previews.)
+## 2. Kubernetes 1.22 and Structural CRDs
+
+Kubernetes 1.22 requires [<i>structural CRDs</i>](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/).
+This change is primarily meant to support better CRD validation, but it also has the 
+effect that union types are no longer allowed in CRDs: for example, an element that can be
+either a string or a list of strings is not allowed. Several such elements appeared in the
+`getambassador.io/v2` CRDs, requiring changes. In `getambassador.io/v3alpha1`:
+
+- `ambassador_id` must always be a list of strings
+- `Host.mappingSelector` supersedes `Host.selector`, and controls association between Hosts and Mappings
+- `Mapping.hostname` supersedes `Mapping.host` and `Mapping.host_regex`
+- `Mapping.tls` can only be a string
+- `Mapping.labels` always requires maps instead of strings
 
 ## 2. `Listener`s, `Host`s, and `Mapping`s
 
 $productName$ 2.0 introduces the new **mandatory** `Listener` CRD, and
 brings some changes for the `Host` and `Mapping` resources.
-
-<!-- The motivation behind the change is that certain semantics around `Listener`s, `Host`s, and `Mapping`s change:
-
-   1. `Listener`s are never created by $productName$: they **must** be defined by the user.
-   2. $productName$ does not make sure that a wildcard `Host` exists: if the wildcard behavior is
-      needed, a `Host` with a `hostname` of `"*"` must be defined by the user.
-   3. The semantics of which `Mappings` associate with which `Host` are different from how `Mapping`s
-      and `Host`s worked.
-   4. `Mapping` gains a `hostname` element. `host` is an exact match or a regex, as determined by `host_regex`, but
-      `hostname` is always a DNS glob.
-
-<Alert severity="info">
-  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.<br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.<br/>
-  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
-</Alert>
- -->
 
 ### The `Listener` CRD
 
@@ -120,14 +122,15 @@ However, in $productName$ 2.0, a `Mapping` will not be associated with a `Host` 
 
 - The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
 
-   - Note that a `getambassador.io/v2` `Mapping` has no `hostname` element, but instead has `host` and `host_regex`.
-      - A `getambassador.io/v3` `Mapping` will honor `host` and `host_regex` as a transition aid, but `host` and `host_regex` are deprecated in favor of `hostname`.
+   - Note that a `getambassador.io/v2` `Mapping` has `host` and `host_regex`, rather than `hostname`.
+      - A `getambassador.io/v3alpha1` `Mapping` will honor `host` and `host_regex` as a transition aid, but `host` and `host_regex` are deprecated in favor of `hostname`.
       - A `Mapping` that specifies `host_regex: true` will be associated with all `Host`s. This is generally far less desirable than using `hostname` with a DNS glob.
 
 - The `Host` specifies a `mappingSelector` that matches the `Mapping`'s Kubernetes `label`s.
 
-   - Note that a `getambassador.io/v2` `Host` in which no `selector` was specified would have a default `selector`; this is no longer the case.
-   - Note also that `getambassador.io/v3alpha1` ignores `selector` and, instead, looks only at `mappingSelector`.
+   - Note that a `getambassador.io/v2` `Host` has a `selector`, rather than a `mappingSelector`.
+      - A `getambassador.io/v3alpha1` `Host` ignores `selector` and, instead, looks only at `mappingSelector`.
+      - Where a `selector` got a default value if not specified, `mappingSelector` must be explicitly stated.
 
 Without either a `hostname` match or a `label` match, the `Mapping` will not be associated with the `Host` in question. This is intended to help manage memory consumption with large numbers of `Host`s and large numbers of `Mapping`s.
 
@@ -169,7 +172,7 @@ spec:
     name: minimal-secret
 ```
 
-It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName$ Communications](../../howtos/configure-communications).
 
 <Alert severity="info">
   <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.<br/>
@@ -182,6 +185,24 @@ Configuration for the `PROXY` protocol is part of the `Listener` resource in $pr
 
 <Alert severity="info">
   <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.
+</Alert>
+
+### `Mapping`s, `TCPMapping`s, and TLS Origination
+
+A `getambassador.io/v2` `Mapping` or `TCPMapping` could specify `tls: true` to indicate TLS origination without supplying a certificate. This is not supported in `getambassador.io/v3alpha1`: instead, use an `https://` prefix on the `service`. In the [Mapping](../../topics/using/mappings/#using-tls), this is straightforward, but [there are more details for the `TCPMapping` when using TLS](../../topics/using/tcpmappings/#tcpmapping-and-tls).
+
+<Alert severity="info">
+  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
+</Alert>
+
+### `Mapping`s and `labels`
+
+The `Mapping` CRD includes a `labels` field, used with rate limiting. The
+[syntax of the `labels`](../../topics/using/rate-limits#attaching-labels-to-requests) has changed
+for compatibility with Kubernetes 1.22.
+
+<Alert severity="info">
+  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
 </Alert>
 
 ### `Host`s and ACME
@@ -208,7 +229,7 @@ It is no longer possible to configure TLS using the `tls` element of the `ambass
 
 ### `TLSContext` `redirect_cleartext_from` and `Host` `insecure.additionalPort`
 
-`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName$ Communications](../../howtos/configure-communications).
 
 ### Service Preview No Longer Supported
 

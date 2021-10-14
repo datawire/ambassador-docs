@@ -1,6 +1,6 @@
 # The `Listener` CRD
 
-The `Listener` CRD defines where, and how, $productName$ should listen for requests from the network, and which `Host` definitions should be used to process those requests. For further examples of how to use `Listener`, see [Configuring $productName$ to Communicate](../../../howtos/configure-communications).
+The `Listener` CRD defines where, and how, $productName$ should listen for requests from the network, and which `Host` definitions should be used to process those requests. For further examples of how to use `Listener`, see [Configuring $productName$ Communications](../../../howtos/configure-communications).
 
 **Note that `Listener`s are never created by $productName$, and must be defined by the user.** If you do not
 define any `Listener`s, $productName$ will not listen anywhere for connections, and therefore won't do 
