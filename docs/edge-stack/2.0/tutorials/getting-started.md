@@ -34,19 +34,19 @@ We'll start by installing $productName$ into your cluster.
 
 <GettingStartedEdgeStack20Tabs/>
 
-<Alert severity="success"><b>Success!</b> You have installed $productName$, now let's get some traffic flowing to your services.</Alert>
+<Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
 ## 2. Routing traffic from the edge
 
-Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to declaratively define $productName$’s desired state. The workflow you are going to build uses a simple demo app and the **AmbassadorMapping CRD**, which is the core resource that you will use with $productName$. It lets you route requests by host and URL path from the edge of your cluster to Kubernetes services.
+$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells $productName$ what port to listen on, and the `Mapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
 
-1. First, create an AmbassadorListener resources:
+1. Start by creating a `Listener` resource for HTTP on port 8080:
 
 ```
 kubectl apply -f - <<EOF
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: $productDeploymentName$-listener-8080
   namespace: $productNamespace$
@@ -58,8 +58,8 @@ spec:
     namespace:
       from: ALL
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: $productDeploymentName$-listener-8443
   namespace: $productNamespace$
@@ -81,12 +81,12 @@ EOF
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
-3. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create an AmbassadorMapping on your cluster. This AmbassadorMapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
+3. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
   ```yaml
   ---
-  apiVersion: x.getambassador.io/v3alpha1
-  kind: AmbassadorMapping
+  apiVersion: getambassador.io/v3alpha1
+  kind: Mapping
   metadata:
     name: quote-backend
   spec:
@@ -101,9 +101,9 @@ EOF
   kubectl apply -f quote-backend.yaml
   ```
 
-  With our AmbassadorMapping created, now we need to access it!
+  With our Mapping created, now we need to access it!
 
-5. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test accessing your service.
+5. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
   ```
   export LB_ENDPOINT=$(kubectl -n $productNamespace$ get svc  $productDeploymentName$ \
@@ -129,7 +129,7 @@ EOF
     }
   ```
 
-<Alert severity="success"><b>Victory!</b> You have created your first $productName$ AmbassadorMapping, routing a request from your cluster's edge to a service!</Alert>
+<Alert severity="success"><b>Victory!</b> You have created your first $productName$ Mapping, routing a request from your cluster's edge to a service!</Alert>
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
@@ -137,7 +137,7 @@ Explore some of the popular tutorials on $productName$:
 
 * [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from
 the edge of your cluster to a Kubernetes service
-* [AmbassadorHost resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
+* [Host resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
 * [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads
 
 $productName$ has a comprehensive range of [features](/features/) to

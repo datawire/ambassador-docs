@@ -1,10 +1,10 @@
 # AuthService settings
 
-An AmbassadorMapping can pass these settings along to an [AuthService](../../running/services/auth-service).  This is helpful to allow these specific configurations to apply only to certain Mappings and not globally.
+A Mapping can pass these settings along to an [AuthService](../../running/services/auth-service).  This is helpful to allow these specific configurations to apply only to certain Mappings and not globally.
 
 ## Bypass authentication
 
-An AuthService can be disabled for a specific AmbassadorMapping with the `bypass_auth` attribute. This will tell $productName$ to allow all requests for that AmbassadorMapping through without interacting with the external auth service.  This could be helpful, for example, for a public API.
+An AuthService can be disabled for a specific Mapping with the `bypass_auth` attribute. This will tell $productName$ to allow all requests for that Mapping through without interacting with the external auth service.  This could be helpful, for example, for a public API.
 
 ```yaml
 bypass_auth: true

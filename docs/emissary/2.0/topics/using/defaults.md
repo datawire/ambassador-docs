@@ -1,4 +1,4 @@
-# Using Ambassador Module defaults
+# Using `ambassador` `Module` defaults
 
 ## The defaults element
 
@@ -22,9 +22,9 @@ spec:
       top_key2: value2  # toplevel defaults dictionary for it.
 ```
 
-### AmbassadorMapping
+### Mapping
 
-Currently, only the `AmbassadorMapping` resource uses the `defaults` mechanism. `AmbassadorMapping` looks first for defaultable resources in the `httpmapping` class, including:
+Currently, only the `Mapping` resource uses the `defaults` mechanism. `Mapping` looks first for defaultable resources in the `httpmapping` class, including:
 
 - [`add_request_headers`](../../using/headers/add_request_headers)
 - [`add_response_headers`](../../using/headers/add_response_headers)

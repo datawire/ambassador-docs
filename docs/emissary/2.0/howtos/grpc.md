@@ -1,6 +1,6 @@
 # gRPC Connections
 
-$productName$ makes it easy to access your services from outside your application. This includes gRPC services, although a little bit of additional configuration is required: by default, Envoy connects to upstream services using HTTP/1.x and then upgrades to HTTP/2 whenever possible. However, gRPC is built on HTTP/2 and most gRPC servers do not speak HTTP/1.x at all. $productName$ must tell its underlying Envoy that your gRPC service only wants to speak to that HTTP/2, using the `grpc` attribute of an `AmbassadorMapping`.
+$productName$ makes it easy to access your services from outside your application. This includes gRPC services, although a little bit of additional configuration is required: by default, Envoy connects to upstream services using HTTP/1.x and then upgrades to HTTP/2 whenever possible. However, gRPC is built on HTTP/2 and most gRPC servers do not speak HTTP/1.x at all. $productName$ must tell its underlying Envoy that your gRPC service only wants to speak to that HTTP/2, using the `grpc` attribute of a `Mapping`.
 
 ## Writing a gRPC service for $productName$
 
@@ -59,9 +59,9 @@ Once you verify the container works, push it to your Docker registry:
 $ docker push <docker_reg>/grpc_example
 ```
 
-### AmbassadorMapping gRPC services
+### Mapping gRPC services
 
-$productName$ `AmbassadorMapping`s are based on URL prefixes; for gRPC, the URL prefix is the full-service name, including the package path (`package.service`). These are defined in the `.proto` definition file. In the example [proto definition file](https://github.com/grpc/grpc/blob/master/examples/protos/helloworld.proto) we see:
+$productName$ `Mapping`s are based on URL prefixes; for gRPC, the URL prefix is the full-service name, including the package path (`package.service`). These are defined in the `.proto` definition file. In the example [proto definition file](https://github.com/grpc/grpc/blob/master/examples/protos/helloworld.proto) we see:
 
 ```
 package helloworld;
@@ -73,8 +73,8 @@ service Greeter { ... }
 so the URL `prefix` is `helloworld.Greeter` and the mapping would be:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: grpc-py
 spec:
@@ -93,8 +93,8 @@ Note the `grpc: true` line - this is what tells Envoy to use HTTP/2 so the reque
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: example-host
 spec:
@@ -105,8 +105,8 @@ spec:
     insecure:
       action: Route
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: grpc-py
 spec:
@@ -155,9 +155,9 @@ spec:
       restartPolicy: Always
 ```
 
-The AmbassadorHost is declared here because we are using gRPC without TLS.  Since $productName$ terminates TLS by default, in the AmbassadorHost we add a `requestPolicy` which allows insecure connections. After adding the $productName$ mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
+The Host is declared here because we are using gRPC without TLS.  Since $productName$ terminates TLS by default, in the Host we add a `requestPolicy` which allows insecure connections. After adding the $productName$ mapping to the service, the rest of the Kubernetes deployment YAML file is pretty straightforward. We need to identify the container image to use, expose the `containerPort` to listen on the same port the Docker container is listening on, and map the service port (80) to the container port (50051).
 
-> For more information on insecure routing, please refer to the [`AmbassadorHost` documentation](../../topics/running/host-crd#secure-and-insecure-requests).
+> For more information on insecure routing, please refer to the [`Host` documentation](../../topics/running/host-crd#secure-and-insecure-requests).
 
 
 Once you have the YAML file and the correct Docker registry, deploy it to your cluster with `kubectl`.
@@ -273,8 +273,8 @@ Once deployed we will need to tell $productName$ to originate TLS to the applica
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: grpc-py-tls
 spec:
@@ -336,11 +336,11 @@ A simple way around this is to use $productName$ with a `LoadBalancer` service, 
 
 ### Mappings with hosts
 
-As with any `AmbassadorMapping`, your gRPC service's `AmbassadorMapping` may include a `host`:
+As with any `Mapping`, your gRPC service's `Mapping` may include a `host`:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: grpc-py
 spec:

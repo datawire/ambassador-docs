@@ -10,17 +10,17 @@ $AESproductName$ is able to perform Rate Limiting based on JWT Token claims from
 
 - $AESproductName$
 - A working Keycloak instance and Keycloak Filter
-- A service exposed with an AmbassadorMapping and protected by a FilterPolicy
+- A service exposed with a Mapping and protected by a FilterPolicy
 
-<Alert severity="info">We'll uses Keycloak to generate tokens with unique claims.  It will work in a similar manner for any claims present on a JWT token issued by any other provider.  See <a href="../sso/keycloak/">our guide here</a> on using Keycloak with $AESproductName$.</Alert>
+<Alert severity="info">We'll use Keycloak to generate tokens with unique claims.  It will work in a similar manner for any claims present on a JWT token issued by any other provider.  See <a href="../sso/keycloak/">our guide here</a> on using Keycloak with $AESproductName$.</Alert>
 
 Here is a YAML example that describes the setup:
 
 ```yaml
 ---
-# AmbassadorMapping to expose the Quote of the Moment service
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+# Mapping to expose the Quote of the Moment service
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:
@@ -77,15 +77,15 @@ spec:
       value: "{{ .token.Claims.name }}" # This extracts the "name" claim and puts it in the "x-token-name" header.
 ```
 
-## 2. Add Labels to our AmbassadorMapping
+## 2. Add Labels to our Mapping
 
-Now that the header is properly added, we need to add a label to the AmbassadorMapping of the service that we want to rate limit.  This will determine if the route established by the AmbassadorMapping will use a label when $AESproductName$ is processing where to send the request.  If so, it will add the labels as metadata to be attached when sent to the `RateLimitService` to determine whether or not the request should be rate-limited.
+Now that the header is properly added, we need to add a label to the Mapping of the service that we want to rate limit.  This will determine if the route established by the Mapping will use a label when $AESproductName$ is processing where to send the request.  If so, it will add the labels as metadata to be attached when sent to the `RateLimitService` to determine whether or not the request should be rate-limited.
 
 <Alert severity="info">Use `ambassador` as the label domain, unless you have already set up $AESproductName$ to use something else.</Alert>
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:

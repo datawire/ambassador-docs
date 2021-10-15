@@ -97,9 +97,8 @@ In this guide, you will register a service with Consul and use $productName$ to 
    > If you changed the name of the helm install from `hashicorp` to another value, make sure to update the value of the `address` field in your resolver to match it.
    >
    > If you are having trouble figuring out what your `address` field should be, it follow this format: `http://{consul server pod}.{consul server service}.{namespace}.svc.cluster.local:{consul port}`. The default Consul port should be `8500` unless you changed it.
-
+  
    This will tell $productName$ that Consul is a service discovery endpoint. 
-
 
 
 3. Apply this configuration to your cluster with:
@@ -108,7 +107,7 @@ In this guide, you will register a service with Consul and use $productName$ to 
   ```
 
     
-   The ConsulResolver is Opt-In. In other words, after applying the ConsulResolver you need to add `resolver: consul-dc1` in each AmbassadorMapping that you want to use this resolver for. Otherwise it will use your default resolver, and the service associated with that AmbassadorMapping will not be registered in Consul.
+   The ConsulResolver is Opt-In. In other words, after applying the ConsulResolver you need to add `resolver: consul-dc1` in each Mapping that you want to use this resolver for. Otherwise it will use your default resolver, and the service associated with that Mapping will not be registered in Consul.
 
    For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
 
@@ -168,7 +167,7 @@ You'll now register a demo application with Consul, and show how $productName$ c
                 memory: 100Mi
     ```
 
-<Alert severity="info">
+  <Alert severity="info">
     The <code>SERVICE_NAME</code> environment variable in the quote deployment is used to specify the service name for Consul. The default value is set to "quote-consul", so you only need to include it if you want to change the service name.
   </Alert>
 
@@ -181,6 +180,7 @@ You'll now register a demo application with Consul, and show how $productName$ c
   ```
 
    This will register the quote pod as a Consul service with the name `quote-consul` and the IP address of the quote pod. 
+
 
    > The `"consul.hashicorp.com/connect-inject": "false"` annotation tells consul that we do not want to use a Consul-Connect sidecar to register this service. Without a Consul-Connect sidecar to proxy requests, the service needs to include code to make a request to Consul to register the service. We include the environment variables `CONSUL_IP`, `POD_IP`, and `SERVICE_NAME` to provide the Quote service with enough information to build that request and send it to Consul. If you would like to see how that code works, please check out [our repo for the Quote service](https://github.com/datawire/quote). Later in this guide we will show how to configure Consul-Connect as well. 
 
@@ -200,8 +200,8 @@ You'll now register a demo application with Consul, and show how $productName$ c
 
    ```yaml
    ---
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorMapping
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
    metadata:
      name: consul-quote-mapping
    spec:
@@ -219,7 +219,6 @@ You'll now register a demo application with Consul, and show how $productName$ c
   ```
 
   Note that in the above config:
-
    - `service` the service name you specified in the quote deployment
    - `resolver` must be set to the ConsulResolver that you created in the previous step
    - `load_balancer` must be set to configure $productName$ to route directly to the Quote application endpoint(s) that are retrieved from Consul.
@@ -352,8 +351,8 @@ This will install into your cluster:
 
     ```yaml
     ---
-    apiVersion: x.getambassador.io/v3alpha1
-    kind: AmbassadorMapping
+    apiVersion: getambassador.io/v3alpha1
+    kind: Mapping
     metadata:
       name: quote-connect-mapping
     spec:

@@ -5,7 +5,7 @@ by $productName$ or upstream services.
 
 They can be configured either on the $productName$
 [`Module`](../ambassador)
-or on an [`AmbassadorMapping`](../../using/intro-mappings/), the schema is identical. See
+or on an [`Mapping`](../../using/intro-mappings/), the schema is identical. See
 below for more information on [rule precedence](#rule-precedence).
 
 - `on_status_code`: HTTP status code to match for this rewrite
@@ -130,8 +130,8 @@ consider using `text_format_source` with a JSON file and `content_type` set to
 
 ## Rule precedence
 
-If rules are set on both the `Module` and on an `AmbassadorMapping`, the rule set on
-the `AmbassadorMapping` will take precedence, ignoring any `Module` rules. This is true
+If rules are set on both the `Module` and on a `Mapping`, the rule set on
+the `Mapping` will take precedence, ignoring any `Module` rules. This is true
 even if the rules are for different status codes. For example, consider this
 configuration:
 
@@ -148,8 +148,8 @@ spec:
         body:
           text_format: "Global 404"
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: ambassador
   namespace: ambassador
@@ -162,10 +162,10 @@ spec:
       body:
          text_format: "Per-mapping 429"
 ```
-The `AmbassadorMapping` rule will prevent an override on the 404 rule defined on the
-`Module` for this `AmbassadorMapping`. The rule on the `AmbassadorMapping` will cause all rules on
+The `Mapping` rule will prevent an override on the 404 rule defined on the
+`Module` for this `Mapping`. The rule on the `Mapping` will cause all rules on
 the `Module` to be ignored, regardless of the status codes specified. A seperate
-`AmbassadorMapping` with no override rules defined will follow the 404 rule on the `Module`.
+`Mapping` with no override rules defined will follow the 404 rule on the `Module`.
 
 ## Disabling response overrides
 
@@ -175,8 +175,8 @@ individual mappings by setting
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
   namespace: ambassador

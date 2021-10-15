@@ -1,36 +1,36 @@
 import Alert from '@material-ui/lab/Alert';
 
-Configuring $productName$ to Communicate
+Configuring $productName$ Communications
 ========================================
 
-For $productName$ to do its job of managing network communications for your services, it first needs to know how its own communications should be set up. This is handled by a combination of resources: the `AmbassadorListener`, the `AmbassadorHost`, and the `TLSContext`.
+For $productName$ to do its job of managing network communications for your services, it first needs to know how its own communications should be set up. This is handled by a combination of resources: the `Listener`, the `Host`, and the `TLSContext`.
 
-- `AmbassadorListener`s define where, and how, $productName$ should listen for requests from the network.
-- `AmbassadorHost`s can be associated with one or more `AmbassadorListener`s. They define which hostnames $productName$ should care about, and how to handle different kinds of requests for those hosts.
-- `TLSContext`s can be associated with one or more `AmbassadorHost`s. They define whether, and how, $productName$ will manage TLS certificates and options.
+- `Listener`: defines where, and how, $productName$ should listen for requests from the network.
+- `Host`: defines which hostnames $productName$ should care about, and how to handle different kinds of requests for those hosts. `Host`s can be associated with one or more `Listener`s.
+- `TLSContext`: defines whether, and how, $productName$ will manage TLS certificates and options. `TLSContext`s can be associated with one or more `Host`s.
 
-Once the basic communications setup is in place, $productName$ `AmbassadorMapping`s and `AmbassadorTCPMapping`s can be associated with `AmbassadorHost`s to actually do routing.
+Once the basic communications setup is in place, $productName$ `Mapping`s and `TCPMapping`s can be associated with `Host`s to actually do routing.
 
 <Alert severity="warning">
-  Remember that <code>AmbassadorListener</code> and <code>AmbassadorHost</code> resources are&nbsp;
+  Remember that <code>Listener</code> and <code>Host</code> resources are&nbsp;
   <b>required</b>&nbsp;for a functioning $productName$ installation that can route traffic!<br/>
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.
 </Alert>
 
 <Alert severity="warning">
-  Remember than $productName$ does not make sure that a wildcard <code>AmbassadorHost</code> exists! If the 
-  wildcard behavior is needed, an <code>AmbassadorHost</code> with a <code>hostname</code> of <code>"*"</code>
+  Remember than $productName$ does not make sure that a wildcard <code>Host</code> exists! If the 
+  wildcard behavior is needed, a <code>Host</code> with a <code>hostname</code> of <code>"*"</code>
   must be defined by the user.
 </Alert>
 
 <Alert severity="info">
   Several different resources work together to configure communications. A working knowledge of all of them
   can be very useful:<br/>
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.<br/>
-  <a href="../../topics/using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>.<br/>
-  <a href="../../topics/using/tcpmappings">Learn more about <code>AmbassadorTCPMapping</code></a>.<br/>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.<br/>
+  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.<br/>
+  <a href="../../topics/using/tcpmappings">Learn more about <code>TCPMapping</code></a>.<br/>
   <a href="../../topics/running/tls/#tlscontext">Learn more about <code>TLSContext</code></a>.
 </Alert>
 
@@ -41,15 +41,15 @@ Examples / Cookbook
 
 A useful configuration is to support either HTTP or HTTPS, in this case on either port 8080 or port 8443. This
 tends to make it as easy as possible to communicate with the services behind the $productName$ instance. It uses
-two `AmbassadorListener`s and at least one `AmbassadorHost`.
+two `Listener`s and at least one `Host`.
 
 
-#### `AmbassadorListener`s:
+#### `Listener`s:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: http-listener
 spec:
@@ -60,8 +60,8 @@ spec:
     namespace:
       from: SELF   # See below
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: https-listener
 spec:
@@ -73,30 +73,30 @@ spec:
       from: SELF   # See below
 ```
 
-- Both `AmbassadorListener`s use `protocol: HTTPS` to allow Envoy to inspect incoming connections, determine
+- Both `Listener`s use `protocol: HTTPS` to allow Envoy to inspect incoming connections, determine
   whether or not TLS is in play, and set `X-Forwarded-Proto` appropriately. The `securityModel` then specifies
   that `X-Forwarded-Proto` will determine whether requests will be considered secure or insecure.
 
-- The `hostBinding` shown here will allow any `AmbassadorHost` in the same namespace as the `AmbassadorListener`s
-  to be associated with both `AmbassadorListener`s; in turn, that will allow access to that `AmbassadorHost`'s
-  `AmbassadorMapping`s from either port. For greater control, use a `selector` instead.
+- The `hostBinding` shown here will allow any `Host` in the same namespace as the `Listener`s
+  to be associated with both `Listener`s; in turn, that will allow access to that `Host`'s
+  `Mapping`s from either port. For greater control, use a `selector` instead.
 
-- Note that the `AmbassadorListener`s do not specify anything about TLS certificates. The `AmbassadorHost`
+- Note that the `Listener`s do not specify anything about TLS certificates. The `Host`
   handles that; see below.
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>
 </Alert>
 
-#### `AmbassadorHost`
+#### `Host`
 
 This example will assume that we expect to be reachable as `foo.example.com`, and that the `foo.example.com`
 certificate is stored in the Kubernetes `Secret` named `foo-secret`:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
 spec:
@@ -110,26 +110,26 @@ spec:
 
 - The `tlsSecret` specifies the certificate in use for TLS termination.
 - The `requestPolicy` specifies routing HTTPS and redirecting HTTP to HTTPS.
-- Since the `AmbassadorHost` does not specify a `selector`, only `AmbassadorMapping`s with a `hostname` that matches
-  `foo.example.com` will be associated with this `AmbassadorHost`.
+- Since the `Host` does not specify a `selector`, only `Mapping`s with a `hostname` that matches
+  `foo.example.com` will be associated with this `Host`.
 - **Note well** that simply defining a `TLSContext` is not sufficient to terminate TLS: you must define either
-  an `AmbassadorHost` or an `Ingress`.
-- Note that if no `AmbassadorHost` is present, but a TLS secret named `fallback-secret` is available, the system will
-  currently define an `AmbassadorHost` using `fallback-secret`. **This behavior is subject to change.**
+  a `Host` or an `Ingress`.
+- Note that if no `Host` is present, but a TLS secret named `fallback-secret` is available, the system will
+  currently define a `Host` using `fallback-secret`. **This behavior is subject to change.**
 
 <Alert severity="info">
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 ### HTTP-Only
 
 Another straightforward configuration is to support only HTTP, in this case on port 8080. This uses a single
-`AmbassadorListener` and a single `AmbassadorHost`:
+`Listener` and a single `Host`:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: http-listener
 spec:
@@ -140,8 +140,8 @@ spec:
     namespace:
       from: SELF   # See below
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
 spec:
@@ -153,12 +153,12 @@ spec:
 
 - Here, we listen only on port 8080, and only for HTTP. HTTPS will be rejected.
 - Since requests are only allowed using HTTP, we declare all requests `INSECURE` by definition.
-- The `AmbassadorHost` specifies routing HTTP, rather than redirecting it.
+- The `Host` specifies routing HTTP, rather than redirecting it.
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 ### TLS using ACME ($AESproductName$ only)
@@ -173,8 +173,8 @@ For demonstration purposes, we show this example listening for HTTPS on port 999
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: https-listener-9999
 spec:
@@ -185,8 +185,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
 spec:
@@ -194,8 +194,8 @@ spec:
   acmeProvider:
     email: julian@example.com
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: bar-host
 spec:
@@ -207,9 +207,9 @@ spec:
       action: Reject
 ```
 
-(`AmbassadorMapping`s are not shown.)
+(`Mapping`s are not shown.)
 
-- Our `AmbassadorListener`s will accept HTTPS and HTTP on port 9999, and the protocol used will dictate whether
+- Our `Listener`s will accept HTTPS and HTTP on port 9999, and the protocol used will dictate whether
   the requests are secure (HTTPS) or insecure (HTTP).
 - `foo-host` defaults to ACME with Let's Encrypt, since `acmeProvider.authority` is not provided.
 - `foo-host` defaults to redirecting insecure requests, since the default for `requestPolicy.insecure.action` is `Redirect`.
@@ -217,13 +217,13 @@ spec:
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 ### Multiple TLS Certificates
 
-This scenario uses TLS without ACME. Each of our two `AmbassadorHost`s uses a distinct TLS certificate. HTTPS
+This scenario uses TLS without ACME. Each of our two `Host`s uses a distinct TLS certificate. HTTPS
 traffic to either`foo.example.com` or `bar.example.com` is routed, but this time `foo.example.com` will redirect
 HTTP requests, while `bar.example.com` will route them.
 
@@ -251,8 +251,8 @@ data:
   tls.crt: -certificate PEM-
   tls.key: -secret key PEM-
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: https-listener-4848
 spec:
@@ -263,8 +263,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
 spec:
@@ -272,8 +272,8 @@ spec:
   tlsSecret:
     name: foo-example-secret
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: bar-host
 spec:
@@ -286,20 +286,20 @@ spec:
 ```
 
 - `foo-host` and `bar-host` simply reference the `tlsSecret` to use for termination.
-   - If the secret involved contains a wildcard cert, or a cert with multiple SAN, both `AmbassadorHost`s could 
+   - If the secret involved contains a wildcard cert, or a cert with multiple SAN, both `Host`s could 
      reference the same `tlsSecret`.
 - `foo-host` relies on the default insecure routing action of `Redirect`.
 - `bar-host` must explicitly specify routing HTTP.
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 ### Using a `TLSContext`
 
-If you need to share other TLS settings between two `AmbassadorHost`s, you can reference a `TLSContext` as well as 
+If you need to share other TLS settings between two `Host`s, you can reference a `TLSContext` as well as 
 the `tlsSecret`. This is the same as the previous example, but we use a `TLSContext` to set `ALPN` information, 
 and we assume that the `Secret` contains a wildcard cert.
 
@@ -322,8 +322,8 @@ spec:
   secret: wildcard-example-secret
   alpn_protocols: [h2, istio]
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: https-listener-4848
 spec:
@@ -334,8 +334,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
 spec:
@@ -345,8 +345,8 @@ spec:
   tlsSecret:
     name: wildcard-example-secret
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: bar-host
 spec:
@@ -364,8 +364,8 @@ spec:
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 ### ACME With a TLSContext ($AESproductName$ Only)
@@ -383,8 +383,8 @@ spec:
   secret: example-acme-secret
   alpn_protocols: [h2, istio]
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
 spec:
@@ -401,8 +401,8 @@ spec:
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 ### Using an L7 Load Balancer to Terminate TLS
@@ -411,8 +411,8 @@ In this scenario, a layer 7 load balancer ahead of $productName$ will terminate 
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: lb-listener
 spec:
@@ -424,8 +424,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
 spec:
@@ -436,15 +436,15 @@ spec:
 ```
 
 - We set `l7Depth` to 1 to indicate that there's a single trusted L7 load balancer ahead of us.
-- We specifically set this AmbassadorListener to HTTP-only, but we stick with port 8443 just because we expect people setting up TLS at all to expect to use port 8443. (There's nothing special about the port number, pick whatever you like.)
-- Our `AmbassadorHost` does not specify a `tlsSecret`, so $productName$ will not try to terminate TLS.
-- Since the `AmbassadorListener` still pays attention to `X-Forwarded-Proto`, both secure and insecure requests
-  are possible, and we use the `AmbassadorHost` to route HTTPS and redirect HTTP.
+- We specifically set this Listener to HTTP-only, but we stick with port 8443 just because we expect people setting up TLS at all to expect to use port 8443. (There's nothing special about the port number, pick whatever you like.)
+- Our `Host` does not specify a `tlsSecret`, so $productName$ will not try to terminate TLS.
+- Since the `Listener` still pays attention to `X-Forwarded-Proto`, both secure and insecure requests
+  are possible, and we use the `Host` to route HTTPS and redirect HTTP.
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 ### Using a Split L4 Load Balancer to Terminate TLS
@@ -460,8 +460,8 @@ We're going to route HTTPS for both `foo.example.com` and `bar.example.com`, red
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: split-lb-one-listener
 spec:
@@ -472,8 +472,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: split-lb-two-listener
 spec:
@@ -484,15 +484,15 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
 spec:
   hostname: foo.example.com
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: bar-host
 spec:
@@ -506,8 +506,8 @@ spec:
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
 ### Listening on Multiple Ports
@@ -516,8 +516,8 @@ There's no reason you need to use ports 8080 and 8443, or that you're limited to
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: listener-9001
 spec:
@@ -528,8 +528,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: listener-9002
 spec:
@@ -540,8 +540,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: listener-4001
 spec:
@@ -552,8 +552,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: route-host
 spec:
@@ -562,18 +562,18 @@ spec:
       action: Route
 ```
 
-- We can use `X-Forwarded-Proto` for all our `AmbassadorListener`s: the HTTP-only `AmbassadorListener`s will set it correctly.
-- Each `AmbassadorListener` can specify only one port, but there's no hardcoded limit on the number of `AmbassadorListener`s you can have.
+- We can use `X-Forwarded-Proto` for all our `Listener`s: the HTTP-only `Listener`s will set it correctly.
+- Each `Listener` can specify only one port, but there's no hardcoded limit on the number of `Listener`s you can have.
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
-### Using Labels to Associate `AmbassadorHost`s and `AmbassadorListener`s
+### Using Labels to Associate `Host`s and `Listener`s
 
-In the examples above, the `AmbassadorListener`s all associate with any `AmbassadorHost` in their namespace. In this 
+In the examples above, the `Listener`s all associate with any `Host` in their namespace. In this 
 example, we will use Kubernetes labels to control the association instead.
 
 Here, we'll listen for HTTP to `foo.example.com` on port 8888, and for either HTTP or HTTPS to `bar.example.com` on
@@ -582,8 +582,8 @@ HTTP for it rather than redirecting.
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: listener-8888
 spec:
@@ -595,8 +595,8 @@ spec:
       matchLabels:
         tenant: foo
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: listener-9999
 spec:
@@ -617,8 +617,8 @@ data:
   tls.crt: -wildcard here-
   tls.key: -wildcard here-
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: foo-host
   labels:
@@ -629,8 +629,8 @@ spec:
     insecure:
       action: Route
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: bar-host
   labels:
@@ -640,8 +640,8 @@ spec:
   tlsSecret:
     name: bar-secret
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: baz-host
   labels:
@@ -656,18 +656,18 @@ spec:
       action: Route
 ```
 
-- Note the `labels` on each `AmbassadorHost`, which the `hostBinding` on the `AmbassadorListener` can reference.
+- Note the `labels` on each `Host`, which the `hostBinding` on the `Listener` can reference.
    - Note also that only label selectors are supported at the moment.
 
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
-### Wildcard `AmbassadorHost`s and `AmbassadorMapping`s
+### Wildcard `Host`s and `Mapping`s
 
-In an `AmbassadorMapping`, the `host` is now treated as a glob rather than an exact match, with the goal of vastly reducing the need for `host_regex`. (The `hostname` in an `AmbassadorHost` has always been treated as a glob).
+In a `Mapping`, the `host` is now treated as a glob rather than an exact match, with the goal of vastly reducing the need for `host_regex`. (The `hostname` in a `Host` has always been treated as a glob).
 
 - **Note that only prefix and suffix matches are supported**, so `*.example.com` and `foo.*` are both fine, but `foo.*.com` will not work -- you'll need to use `host_regex` if you really need that. (This is an Envoy limitation.)
 
@@ -688,8 +688,8 @@ data:
   tls.crt: -wildcard for *.example.com here-
   tls.key: -wildcard for *.example.com here-
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorListener
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
 metadata:
   name: listener-8443
 spec:
@@ -700,8 +700,8 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: lowsec-host
 spec:
@@ -712,8 +712,8 @@ spec:
     insecure:
       action: Route
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: normal-host
 spec:
@@ -724,8 +724,8 @@ spec:
     insecure:             # redirecting is the default, but
       action: Redirect    # it's spelled out for clarity.
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: catchall-host
 spec:
@@ -738,13 +738,13 @@ spec:
 ```
 
 - We'll listen for HTTP or HTTPS on port 8443.
-- The three `AmbassadorHost`s apply different insecure routing actions depending on the hostname.
+- The three `Host`s apply different insecure routing actions depending on the hostname.
 - You could also do this with `host_regex`, but using `host` with globs will give better performance.
-   - Being able to _not_ associate a given `AmbassadorMapping` with a given `AmbassadorHost` when the `AmbassadorMapping`'s
-     `host` doesn't match helps a lot when you have many `AmbassadorHost`s.
-   - Reliably determining if a regex (for the `AmbassadorMapping`) matches a glob (for the `AmbassadorHost`) isn't really possible, so we can't prune `host_regex` `AmbassadorMapping`s at all.
+   - Being able to _not_ associate a given `Mapping` with a given `Host` when the `Mapping`'s
+     `host` doesn't match helps a lot when you have many `Host`s.
+   - Reliably determining if a regex (for the `Mapping`) matches a glob (for the `Host`) isn't really possible, so we can't prune `host_regex` `Mapping`s at all.
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a><br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>
 </Alert>

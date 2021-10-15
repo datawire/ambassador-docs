@@ -2,11 +2,11 @@ import Alert from '@material-ui/lab/Alert';
 
 # Basic authentication (for $productName$)
 
+[//]: # (+FIX+ link to "authentication and authorization" concept)
+
 <Alert severity="info">
-  This guide applies to $OSSproductName$, use of this guide with $AESproductName$ is not recommended.  $AESproductName$ does <a href="/docs/edge-stack/latest/topics/using/filters/external/">authentication using the Filter resource</a> instead of the AuthService resource as described below.
+  This guide applies to $OSSproductName$, use of this guide with $AESproductName$ is not supported.  $AESproductName$ does <a href="/docs/edge-stack/latest/topics/using/filters/external/">authentication using the Filter resource</a> instead of the AuthService resource as described below.
 </Alert>
-
-
 
 $productName$ can authenticate incoming requests before routing them to a backing
 service. In this tutorial, we'll configure $productName$ to use an external third
@@ -99,7 +99,7 @@ Note that the `READY` field says `1/1` which means the pod is up and running.
 
 ## 2. Configure $productName$ authentication
 
-Once the auth service is running, we need to tell $productName$ about it. The easiest way to do that is to map the `example-auth` service with the following:
+Once the auth service is running, we need to tell $productName$ about it. The easiest way to do that is point it to the `example-auth` service with the following:
 
 ```yaml
 ---
@@ -116,9 +116,9 @@ spec:
   - "x-qotm-session"
 ```
 
-This configuration tells $productName$ about the auth service, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_headers` are optional.
+This configuration tells $productName$ about the auth service, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_*_headers` are optional.
 
-If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillatoolkit.org) which enforces strict slashes as HTTP path separators, it is possible to end up with an infinite redirect where the auth service's framework redirects any request with non-conformant slashing. This would arise if the above example had ```path_prefix: "/extauth/"```, the auth service would see a request for ```/extauth//backend/get-quote/``` which would then be redirected to ```/extauth/backend/get-quote/``` rather than actually be handled by the authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to ```path_prefix``` regardless of non-conformant slashing.
+If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillatoolkit.org) which enforces strict slashes as HTTP path separators, it is possible to end up with an infinite redirect where the auth service's framework redirects any request with non-conformant slashing. This would arise if the above example had `path_prefix: "/extauth/"`, the auth service would see a request for `/extauth//backend/get-quote/` which would then be redirected to `/extauth/backend/get-quote/` rather than actually be handled by the authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to `path_prefix` regardless of non-conformant slashing.
 
 You can apply this file from getambassador.io with
 
@@ -184,36 +184,6 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
     "time": "2019-05-23T15:25:06.544417902Z"
 * Connection #0 to host 54.165.128.189 left intact
 }
-```
-
-## Legacy v0 API
-
-If using $productName$ v0.40.2 or earlier, use the deprecated v0 `AuthService` API
-
-```yaml
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: example-auth
-  mappings:
-    getambassador.io/config: |
-      ---
-      apiVersion: getambassador.io/v2
-      kind:  AuthService
-      name:  authentication
-      auth_service: "example-auth:3000"
-      path_prefix: "/extauth"
-      allowed_headers:
-      - "x-qotm-session"
-spec:
-  type: ClusterIP
-  selector:
-    app: example-auth
-  ports:
-  - port: 3000
-    name: http-example-auth
-    targetPort: http-api
 ```
 
 ## More

@@ -18,7 +18,7 @@ $productName$ is acting as the client as it proxies requests to services upstrea
 
 It is trivial to configure $productName$ to simply originate TLS connections as 
 the client to upstream services by setting 
-`service: https://{{UPSTREAM_SERVICE}}` in the `AmbassadorMapping` configuration. 
+`service: https://{{UPSTREAM_SERVICE}}` in the `Mapping` configuration. 
 However, in order to do mTLS with services upstream, $productName$ must also 
 have certificates to authenticate itself with the service. 
 
@@ -41,11 +41,11 @@ connections from the client. We are just using this to load certificates for
 requests upstream.
 
 After loading the certificates, we can tell $productName$ when to use them by
-setting the `tls` parameter in an `AmbassadorMapping`:
+setting the `tls` parameter in a `Mapping`:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: upstream-mapping
 spec:

@@ -1,5 +1,7 @@
 # Client certificate validation
 
+[//]: # (+FIX+ link to "TLS and client certs" concept)
+
 Sometimes, for additional security or authentication purposes, you will want
 the server to validate who the client is before establishing an encrypted 
 connection.
@@ -55,11 +57,11 @@ certificates.
 
 3. Configure $productName$ to use this certificate for client certificate validation.
 
-   First create an `AmbassadorHost` to manage your domain:
+   First create a `Host` to manage your domain:
 
    ```yaml
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorHost
+   apiVersion: getambassador.io/v3alpha1
+   kind: Host
    metadata:
      name: example-host
    spec:

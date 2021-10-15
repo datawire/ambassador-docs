@@ -459,13 +459,13 @@ Now we will show how you can use $productName$ to route to services in the Istio
 
 3. Route to the service
 
-   Traffic routing in $productName$ is configured with the [`AmbassadorMapping`](../../topics/using/intro-mappings) resource. This is a powerful configuration object that lets you configure different routing rules for different services. 
+   Traffic routing in $productName$ is configured with the [`Mapping`](../../topics/using/intro-mappings) resource. This is a powerful configuration object that lets you configure different routing rules for different services. 
 
-   The above `kubectl apply` installed the following basic `AmbassadorMapping` which has configured $productName$ to route traffic with URL prefix `/backend/` to the `quote` service.
+   The above `kubectl apply` installed the following basic `Mapping` which has configured $productName$ to route traffic with URL prefix `/backend/` to the `quote` service.
 
    ```yaml
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorMapping
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
    metadata:
      name: quote-backend
    spec:
@@ -476,12 +476,12 @@ Now we will show how you can use $productName$ to route to services in the Istio
 
    Since we have integrated $productName$ with Istio, we can tell it to use the mTLS certificates to encrypt requests to the quote service.
 
-   Simply do that by updating the above `AmbassadorMapping` with the following one.
+   Simply do that by updating the above `Mapping` with the following one.
 
    ```
    $ kubectl apply -f - <<EOF
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorMapping
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
    metadata:
      name: quote-backend
    spec:
@@ -527,13 +527,13 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
 
    This will enforce authentication for all containers in the mesh.
 
-   We can test this by removing the `tls` configuration from the quote-backend `AmbassadorMapping`
+   We can test this by removing the `tls` configuration from the quote-backend `Mapping`
    and sending a request.
 
    ```
    $ kubectl apply -f - <<EOF
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorMapping
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
    metadata:
      name: quote-backend
    spec:
@@ -557,8 +557,8 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
    ```
    $ kubectl apply -f - <<EOF
    ---
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorMapping
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
    metadata:
      name: quote-backend
    spec:
