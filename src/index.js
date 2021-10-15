@@ -72,6 +72,7 @@ export default ({ data, location , pageContext}) => {
         if (
           newVer.id === '2.0' ||
           newVer.id === 'pre-release' ||
+          newVer.id === 'latest' ||
           (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
         ) {
           return '';
