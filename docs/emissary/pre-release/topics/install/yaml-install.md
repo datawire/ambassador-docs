@@ -7,15 +7,11 @@ import Alert from '@material-ui/lab/Alert';
 # Install manually
 
 <Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
-  changes to allow $productName$ to more gracefully handle larger installations (including
-  multitenant or multiorganizational installations), reduce memory footprint, and improve
-  performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
-  some changes that aren't backward-compatible with 1.X, so <b>some configuration has
-  changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b> read
-  the <a href="migrate-to-version-2">migration guide</a> before trying to install 2.0.<br/>
-  <br/>
-  For more information on 2.X, please check the <a href="../../release-notes">release notes</a>.
+  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
+  changes to allow $productName$ to more gracefully handle larger installations
+  (including multitenant or multiorganizational installations), reduce memory footprint,
+  and improve performance. For more information on 2.X, please check the&nbsp;
+  <a href="../../release-notes">release notes</a>.
 </Alert>
 
 In this guide, we'll walk you through installing $productName$ in your Kubernetes cluster.

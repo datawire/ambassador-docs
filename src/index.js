@@ -78,8 +78,8 @@ export default ({ data, location , pageContext}) => {
         }
         return (
           <a
-            href={`/docs/${newProduct.slug}/2.0/tutorials/getting-started/`}
-          >{`${newProduct.name} 2.0 is now available for Developer Preview!`}</a>
+            href={`/docs/${newProduct.slug}/latest/tutorials/getting-started/`}
+          >{`${newProduct.name} 2.0 is now available!`}</a>
         );
       }
     const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(initialVersion, initialProduct);
