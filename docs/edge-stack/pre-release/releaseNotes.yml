@@ -45,7 +45,7 @@ items:
           <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         isHeadline: true
         docs: about/changes-2.0.0
-        image: ./tada.png
+        image: ./edge-stack-ga.png
 
       - title: API version getambassador.io/v3alpha1
         type: change
