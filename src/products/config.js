@@ -320,7 +320,7 @@ export const CloudCards = [
     icon: 'service-catalog'
   },
   {
-    title: 'Ambassador GitOps Quick Start',
+    title: 'Ambassador Config Analysis Quick Start',
     description: 'Visualize and analyze the impact of Emissary Ingress or Edge Stack configuration changes against production during development',
     link: goToGitOpsQuickStart,
     linkText: 'Get Started',
