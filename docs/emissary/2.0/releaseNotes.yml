@@ -45,6 +45,7 @@ items:
           <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         isHeadline: true
         docs: about/changes-2.0.0
+        image: ./tada.png
 
       - title: API version getambassador.io/v3alpha1
         type: change
@@ -56,6 +57,7 @@ items:
           is the only supported API version for 2.0.4</b> &mdash; full support for
           <code>getambassador.io/v2</code> will arrive soon in a later 2.X version.
         docs: about/changes-2.0.0
+        image: ./v2.0.4-v3alpha1.png
 
       - title: Support for Kubernetes 1.22
         type: feature
@@ -63,6 +65,7 @@ items:
           The <code>getambassador.io/v3alpha1</code> API version and the published chart
           and manifests have been updated to support Kubernetes 1.22.
         docs: about/changes-2.0.0
+        image: ./v2.0.4-k8s-1.22.png
 
       - title: Mappings support configuring strict or logical DNS
         type: feature
@@ -71,6 +74,7 @@ items:
           <code>logical_dns</code> in a <code>Mapping</code> to configure the Service
           Discovery Type.
         docs: topics/using/mappings/#dns-configuration-for-mappings
+        image: ./v2.0.4-mapping-dns-type.png
 
       - title: Mappings support controlling DNS refresh with DNS TTL
         type: feature
@@ -97,6 +101,7 @@ items:
         - title: "#3854"
           link: https://github.com/emissary-ingress/emissary/issues/3854
         docs: https://github.com/emissary-ingress/emissary/issues/3854
+        image: ./v2.0.4-version.png
 
       - title: Large configurations work correctly with Ambassador Cloud
         type: bugfix
@@ -114,6 +119,7 @@ items:
           The <code>l7Depth</code> element of the <code>Listener</code> CRD is 
           properly supported.
         docs: topics/running/listener#l7depth
+        image: ./v2.0.4-l7depth.png
 
   - version: 2.0.3-ea
     date: '2021-09-16'
