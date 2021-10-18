@@ -32,7 +32,7 @@ The Kubernetes Service Resolver configures $productName$ to use Kubernetes servi
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: KubernetesServiceResolver
 metadata:
   name: kubernetes-service
@@ -44,7 +44,7 @@ The Kubernetes Endpoint Resolver configures $productName$ to resolve Kubernetes 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: KubernetesEndpointResolver
 metadata:
   name: endpoint
@@ -56,7 +56,7 @@ The Consul Resolver configures $productName$ to use Consul for service discovery
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: ConsulResolver
 metadata:
   name: consul-dc1
@@ -71,7 +71,7 @@ You may want to use an environment variable if you're running a Consul agent on 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: ConsulResolver
 metadata:
   name: consul-dc1

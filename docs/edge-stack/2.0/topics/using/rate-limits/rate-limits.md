@@ -22,7 +22,7 @@ different requests.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: example-limits
@@ -270,7 +270,7 @@ Module:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador
@@ -309,7 +309,7 @@ this label:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: default-rate-limit
@@ -445,7 +445,7 @@ such:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: foo-rate-limit
@@ -456,7 +456,7 @@ spec:
      rate: 10
      unit: second
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: bar-rate-limit
@@ -467,7 +467,7 @@ spec:
      rate: 20
      unit: second
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: user-rate-limit
@@ -487,7 +487,7 @@ Module:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador

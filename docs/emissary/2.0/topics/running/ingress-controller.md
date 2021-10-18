@@ -303,7 +303,7 @@ This is the equivalent configuration using a Mapping instead:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: sslexample-termination-context

@@ -39,7 +39,7 @@ spec:
    After deploying the `Service` above and manually enabling the proxy protocol you will need to deploy the following [Ambassador `Module`](../ambassador) to tell $productName$ to use the proxy protocol and then restart $productName$ for the configuration to take effect.
 
    ```yaml
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: Module
    metadata:
      name: ambassador
@@ -301,7 +301,7 @@ Because L4 load balancers do not set `X-Forwarded` headers, $productName$ will n
    Since a L7 load balancer will be able to append to `X-Forwarded` headers, we need to configure $productName$ to trust the value of these headers. The following `Module` will configure $productName$ to trust a single L7 proxy in front of $productName$:
 
    ```yaml
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: Module
    metadata:
      name: ambassador
@@ -329,7 +329,7 @@ In AWS, there are two options for preserving the client IP address.
    When using L7 load balancers, you must configure $productName$ to trust the value of `X-Forwarded-For` and not append its own IP address to it by setting `xff_num_trusted_hops` and `use_remote_address: false` in the [Ambassador `Module`](../ambassador):
 
    ```yaml
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: Module
    metadata:
      name: ambassador
@@ -351,7 +351,7 @@ In AWS, there are two options for preserving the client IP address.
    After configuring the load balancer to use the proxy protocol, you need to tell $productName$ to expect it on the request.
 
    ```yaml
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: Module
    metadata:
      name: ambassador

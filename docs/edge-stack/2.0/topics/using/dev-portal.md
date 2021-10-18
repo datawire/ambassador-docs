@@ -123,7 +123,7 @@ the _Dev Portal_, filtering `Mappings` and namespaces and specifying the content
 `DevPortal` resources have the following syntax:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  "string"
@@ -188,7 +188,7 @@ a `DevPortal` `ambassador` resource like this:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -211,7 +211,7 @@ the _Dev Portal_ will show documentation for all the services discovered in the
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -254,7 +254,7 @@ and include it in the `content` following the example below:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -306,7 +306,7 @@ After committing and pushing changes to your devportal content repo changes to g
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -344,7 +344,7 @@ To change the documentation naming scheme for the entire _Dev Portal_, you can s
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador

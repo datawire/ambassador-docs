@@ -49,7 +49,7 @@ spec:
 We then need to configure the rate limit for the backend service. Create a new YAML file, `backend-ratelimit.yaml`, and put the following configuration into the file.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: backend-rate-limit
@@ -87,7 +87,7 @@ spec:
 We then update our rate limits to limit on `remote_address`:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: backend-rate-limit
@@ -129,7 +129,7 @@ spec:
 When we add multiple criteria to a pattern, the entire pattern matches when ANY of the rules match (i.e., a logical OR). A pattern match then triggers a rate limit event. Our rate limiting configuration becomes:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: backend-rate-limit
@@ -147,7 +147,7 @@ Suppose, like [Example 2](#example-2-per-user-rate-limiting), you want to ensure
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador
@@ -164,7 +164,7 @@ spec:
 We can then configure a global `RateLimit` object that limits on `remote_address`:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: global-rate-limit
@@ -198,7 +198,7 @@ spec:
 Now, the `request_label_group`, contains both the `generic_key: backend` *and* the `remote_address` key applied from the global rate limit. This allows us to create a separate `RateLimit` object for this route:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: backend-rate-limit

@@ -87,7 +87,7 @@ Example:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  TLSContext
 metadata:
   name:  my-context
@@ -130,7 +130,7 @@ Example:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  TLSContext
 metadata:
   name:  my-context
@@ -140,7 +140,7 @@ spec:
   - my-host-2
   secret: supersecret
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  TLSContext
 metadata:
   name:  origination-context
@@ -183,7 +183,7 @@ Example:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  TLSContext
 metadata:
   name:  origination-context

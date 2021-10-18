@@ -24,7 +24,7 @@ If present, the `ambassador` `Module` defines system-wide configuration for $pro
 The defaults in the `ambassador` `Module` are:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador
@@ -170,7 +170,7 @@ Likewise, gRPC-Web is a JSON and HTTP-based protocol that allows browser-based c
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name: ambassador

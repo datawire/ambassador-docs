@@ -27,7 +27,7 @@ Kubernetes `Secret` and use those to authenticate with the upstream service.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: upstream-context

@@ -35,7 +35,7 @@ Simple responses can be be added quickly for convenience. They are inserted into
 the manifest as either text or JSON:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador
@@ -63,7 +63,7 @@ This could be used for a customer friendly HTML document for example.  Use
 First configure the $productName$ module:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador
@@ -136,7 +136,7 @@ even if the rules are for different status codes. For example, consider this
 configuration:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador

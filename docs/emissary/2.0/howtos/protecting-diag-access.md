@@ -8,7 +8,7 @@ new, host-based `mapping` to expose the diagnostics interface more securely.  Th
 Ambassador `Module` applies system-wide configuration settings for $productName$ to follow.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador

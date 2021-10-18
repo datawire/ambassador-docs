@@ -73,7 +73,7 @@ In this section, we'll configure your Kubernetes cluster for single-sign on.
 
     ```yaml
     ---
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: TLSContext
     metadata:
       name: aes-kubeapi-context
@@ -204,7 +204,7 @@ As a quick check, you should be able to `curl https://<ambassador-domain>/api` a
 
     ```yaml
     ---
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: Filter
     metadata:
       name: "kubeapi-jwt-filter"
@@ -216,7 +216,7 @@ As a quick check, you should be able to `curl https://<ambassador-domain>/api` a
         - name: "Impersonate-User" # Impersonate-User is mandatory, you can also add an Impersonate-Groups if you want to do group-based RBAC
           value: "{{ .token.Claims.given_name }}" # This uses the first name we specified in the Keycloak user account
     ---
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: FilterPolicy
     metadata:
       name: "kubeapi-filter-policy"

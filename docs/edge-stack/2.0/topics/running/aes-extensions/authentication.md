@@ -18,7 +18,7 @@ The default AuthService is named `ambassador-edge-stack-auth` and is defined
 as:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: AuthService
 metadata:
   name: ambassador-edge-stack-auth

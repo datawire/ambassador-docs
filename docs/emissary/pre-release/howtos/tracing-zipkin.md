@@ -18,7 +18,7 @@ First, add the following YAML to a file named `zipkin.yaml`. This configuration 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TracingService
 metadata:
   name: tracing

@@ -18,7 +18,7 @@ The default `RateLimitService` is named `ambassador-edge-stack-ratelimit` and is
 defined as:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimitService
 metadata:
   name: ambassador-edge-stack-ratelimit

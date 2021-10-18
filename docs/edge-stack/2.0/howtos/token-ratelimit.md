@@ -29,7 +29,7 @@ spec:
   service: quote
 ---
 # Basic OAuth filter for Keycloak
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: keycloak-filter-ambassador
@@ -43,7 +43,7 @@ spec:
     - origin: https://host.example.com
 ---
 # Basic FilterPolicy that covers everything
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: ambassador-policy
@@ -60,7 +60,7 @@ spec:
 In order to extract the claim, we need to have the Filter use the `injectRequestHeader` config and use a golang template to pull out the exact value of the `name` claim in our access token JWT and put it in a Header for our RateLimit to catch.  Configuration is similar for both [OAuth2](../../topics/using/filters/oauth2/#oauth-resource-server-settings) and [JWT](../../topics/using/filters/jwt/).
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: keycloak-filter-ambassador
@@ -104,7 +104,7 @@ We now have appropriate labels added to the request when we send it to the rate 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: token-name-rate-limit
@@ -128,7 +128,7 @@ We've noticed that the user "Julian" uses bad code that abuses the API and consu
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: token-name-rate-limit

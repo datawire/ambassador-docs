@@ -130,7 +130,7 @@ For example, to enforce a minimum TLS version on the `Host` above, create a
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: example-host-context
@@ -153,7 +153,7 @@ For example, to enforce a minimum TLS version on the `Host` above, create a
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: min-tls-context
@@ -195,7 +195,7 @@ different configuration options.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: example-host-context
@@ -277,7 +277,7 @@ HTTP/1, set `alpn_protocols: h2,http/1.1` in the configuration.
 The `alpn_protocols` setting is also required for HTTP/2 support.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  TLSContext
 metadata:
   name:  tls
@@ -338,7 +338,7 @@ error will result.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  TLSContext
 metadata:
   name:  tls
@@ -363,7 +363,7 @@ For users of $productName$, see the [`Host` CRD](../host-crd) reference for more
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  tls

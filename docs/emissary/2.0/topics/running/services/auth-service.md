@@ -10,13 +10,13 @@ All requests are validated by the AuthService (unless the Mapping applied to the
 Because of the limitations described above, <strong>$AESproductName$ does not support AuthService resources, and you should instead use an <a href="/docs/edge-stack/latest/topics/using/filters/external">External Filter</a>,</strong> which is mostly a drop-in replacement for an AuthService. The External Filter relies on the $AESproductName$ AuthService. Make sure the $AESproductName$ AuthService is deployed before configuring External filters.
 </Alert>
 
-The currently supported version of the AuthService resource is `getambassador.io/v2`. Earlier versions are deprecated.
+The currently supported version of the AuthService resource is `getambassador.io/v3alpha1`. Earlier versions are deprecated.
 
 ## Example
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: AuthService
 metadata:
   name: authentication

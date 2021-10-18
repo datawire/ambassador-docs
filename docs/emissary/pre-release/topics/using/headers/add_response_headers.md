@@ -35,7 +35,7 @@ will add the protocol, client IP, and a static header to the response returned t
 ### Defaults example
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador

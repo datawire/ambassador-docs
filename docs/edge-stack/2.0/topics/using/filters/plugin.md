@@ -31,7 +31,7 @@ taken over the request, and the request will not be sent to your backend service
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: "example-plugin-filter"

@@ -22,7 +22,7 @@ For more information on the different policies and the implications, see [load b
 When `policy` is set to `round_robin`, $productName$ discovers healthy endpoints for the given mapping, and load balances the incoming L7 requests with round robin scheduling. To specify this:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador
@@ -57,7 +57,7 @@ Note that load balancing may not appear to be "even" due to Envoy's threading mo
 When `policy` is set to `least_request`, $productName$ discovers healthy endpoints for the given mapping, and load balances the incoming L7 requests to the endpoint with the fewest active requests. To specify this:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador
@@ -182,7 +182,7 @@ Load balancing can be configured both globally, and overridden on a per mapping 
 Load balancing can be configured both globally, and overridden on a per mapping basis.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador

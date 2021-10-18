@@ -155,7 +155,7 @@ Likewise, gRPC-Web is a JSON and HTTP-based protocol that allows browser-based c
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name: ambassador

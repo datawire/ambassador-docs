@@ -84,7 +84,7 @@ In this guide, you will register a service with Consul and use $productName$ to 
 
     ```yaml
     ---
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: ConsulResolver
     metadata:
       name: consul-dc1

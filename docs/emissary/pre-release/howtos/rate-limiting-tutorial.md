@@ -26,7 +26,7 @@ Here's the YAML we'll start with:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimitService
 metadata:
   name: ratelimit

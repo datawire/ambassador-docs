@@ -57,7 +57,7 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
 
     ```yaml
     ---
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: Module
     metadata:
       name: ambassador

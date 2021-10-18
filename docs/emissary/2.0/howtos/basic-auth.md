@@ -103,7 +103,7 @@ Once the auth service is running, we need to tell $productName$ about it. The ea
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: AuthService
 metadata:
   name: authentication

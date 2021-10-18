@@ -272,7 +272,7 @@ We do this with a `TLSContext` using the `istio-certs` secret, which tracks the 
 ```
 $ kubectl apply -f - <<EOF
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: istio-upstream
@@ -294,7 +294,7 @@ We can read these certificates from the `istio.default` `Secret` in the $product
 ```
 $ kubectl apply -f - <<EOF
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: istio-upstream
@@ -406,7 +406,7 @@ To do so, simply create a [`TracingService`](../../topics/running/services/traci
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  TracingService
 metadata:
   name:  tracing

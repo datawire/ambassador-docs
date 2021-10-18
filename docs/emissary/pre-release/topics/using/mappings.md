@@ -177,7 +177,7 @@ For more information on the differences between dns types, see [the Envoy docume
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:
   name: dnsoverwrite

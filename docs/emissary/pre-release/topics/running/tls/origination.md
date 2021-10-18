@@ -24,7 +24,7 @@ If your upstream services require more than basic HTTPS support (e.g. minimum TL
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: tls-context

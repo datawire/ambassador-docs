@@ -26,7 +26,7 @@ spec:
 will drop the header with key `x-envoy-upstream-service-time`.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador

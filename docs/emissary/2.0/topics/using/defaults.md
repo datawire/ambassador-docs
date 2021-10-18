@@ -5,7 +5,7 @@
 If present, the `ambassador Module` can define a set of defaults that will automatically be applied to certain resources:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador

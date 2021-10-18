@@ -48,7 +48,7 @@ Now you must configure your $AESproductName$ instance to use OneLogin.
 Here is an example YAML:
 
 ```yaml
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: Filter
     metadata:
     name: onelogin
@@ -68,7 +68,7 @@ Here is an example YAML:
 Some example YAML:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: oauth-policy

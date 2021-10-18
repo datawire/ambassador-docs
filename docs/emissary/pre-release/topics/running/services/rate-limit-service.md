@@ -77,7 +77,7 @@ external service to check and enforce rate limits for incoming requests:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  RateLimitService
 metadata:
   name:  ratelimit

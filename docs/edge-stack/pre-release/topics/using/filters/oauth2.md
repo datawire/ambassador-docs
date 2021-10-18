@@ -40,7 +40,7 @@ The Auth0 docs provide a guide for adding social IdP "[connections](https://auth
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: "example-oauth2-filter"
@@ -433,7 +433,7 @@ provider:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: "example-filter-policy"

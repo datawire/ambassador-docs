@@ -314,7 +314,7 @@ data:
   tls.crt: -wildcard here-
   tls.key: -wildcard here-
 ---
-apiversion: getambassador.io/v2
+apiversion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: example-context
@@ -375,7 +375,7 @@ but we use a `TLSContext` to set `ALPN` information. Again, ACME is only support
 
 ```yaml
 ---
-apiversion: getambassador.io/v2
+apiversion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: example-context
