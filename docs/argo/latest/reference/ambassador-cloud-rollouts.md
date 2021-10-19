@@ -49,6 +49,10 @@ The following annotations are leveraged to make the Rollouts flow possible.
 
 The repository on which to bring changes.
 
+#### `a8r.io/rollouts.scm.url`
+
+The URL of the repository in which the manifests or the Helm Chart is. If this annotation is not present, it will default to the `a8r.io/repository`.
+
 #### `a8r.io/rollouts.scm.path`
 
 The path in which the Kubernetes manifests should be found.
