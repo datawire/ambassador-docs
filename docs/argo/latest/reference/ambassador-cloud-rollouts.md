@@ -49,7 +49,7 @@ A new Helm values file named following the convention `a8r-values-<ENVIRONMENT_n
 will be generated with the values for the rollout configuration. These values will later to configure the
 `Rollout` manifest.
 
-If you already have a `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) in the `templates` folder,
+If you already have a `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) in the **templates** folder,
 you should configure it to use the values from the Ambassador values file. You can follow this example:
 
 ```yaml
@@ -93,7 +93,8 @@ template:
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
-    # Omitted for simplicity...
+    # The rest of the file is omitted for simplicity.
+```
 
 If no `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) is found in the `templates` folder (which should only
 happen the first time a rollout is created), then Ambassador Cloud will look for a `Deployment` object matching that same name.
