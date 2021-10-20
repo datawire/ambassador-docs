@@ -45,9 +45,9 @@ Ambassador Cloud supports detectiong of Helm charts at the [path](#a8riorollouts
 the [repository](#a8riorepository) by checking if a `Chart.yaml` file is present. In this case, the update is
 as follows:
 
-A new Helm values file named following the convention `a8r-values-<ENVIRONMENT_name>}.yaml`
-will be generated with the values for the rollout configuration. These values will later be used inside  to
-configure the `Rollout` object.
+A new Helm values file named following the convention `a8r-values-<ENVIRONMENT_name>.yaml`
+will be generated with the values for the rollout configuration. These values will later to configure the
+`Rollout` manifest.
 
 If you already have a `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) in the `templates` folder,
 you should configure it to use the values from the Ambassador values file. You can follow this example:
