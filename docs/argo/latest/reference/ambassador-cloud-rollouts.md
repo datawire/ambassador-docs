@@ -82,25 +82,9 @@ strategy:
     steps:
     {{- toYaml . | nindent 8}}
     {{- end}}
-selector:
-  matchLabels:
-    {{- include "mychart.selectorLabels" . | nindent 6 }}
 template:
-  metadata:
-  {{- with .Values.podAnnotations }}
-  annotations:
-    {{- toYaml . | nindent 8 }}
-  {{- end }}
-  labels:
-    {{- include "mychart.selectorLabels" . | nindent 8 }}
+  # Omitted for simplicity...
   spec:
-    {{- with .Values.imagePullSecrets }}
-    imagePullSecrets:
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
-    serviceAccountName: {{ include "mychart.serviceAccountName" . }}
-    securityContext:
-      {{- toYaml .Values.podSecurityContext | nindent 8 }}
     containers:
       - name: {{ .Chart.Name }}
         securityContext:
@@ -109,19 +93,7 @@ template:
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
-    {{- with .Values.nodeSelector }}
-    nodeSelector:
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
-    affinity:
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-    tolerations:
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
-```
+    # Omitted for simplicity...
 
 If no `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) is found in the `templates` folder (which should only
 happen the first time a rollout is created), then Ambassador Cloud will look for a `Deployment` object matching that same name.
