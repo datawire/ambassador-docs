@@ -8,12 +8,11 @@ export default function SlashHelper(props) {
   const location = useLocation();
   React.useEffect(() => {
     if (!location.pathname.endsWith('/')) {
-      navigate(`${location.pathname}/${location.search}${location.hash}`, {replace: true});
+      navigate(`${location.pathname}/${location.search}${location.hash}`, {
+        replace: true,
+      });
     }
   }, [location]);
 
-  return (
-    <>
-    </>
-  );
+  return <></>;
 }

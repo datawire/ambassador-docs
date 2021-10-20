@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock'
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import React from 'react';
+
 import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
 import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
-
+import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -21,11 +21,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -47,9 +43,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: 'transparent',
-
   },
-
 }));
 
 export default function SimpleTabs() {
@@ -62,56 +56,74 @@ export default function SimpleTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar elevation={0} style={{ background: 'transparent', color: 'black', borderBottom: '1px solid #e8e8e8', }} position="static">
-        <Tabs TabIndicatorProps={{ style: { background: '#AF5CF8' } }} value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab icon={<HelmIcon />} label="Helm 3" {...a11yProps(0)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab icon={<HelmIcon />} label="Helm 2" {...a11yProps(1)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab icon={<KubernetesIcon />} label="Kubernetes YAML" {...a11yProps(2)} style={{ minWidth: "10%", textTransform: 'none' }} />
+      <AppBar
+        elevation={0}
+        style={{
+          background: 'transparent',
+          color: 'black',
+          borderBottom: '1px solid #e8e8e8',
+        }}
+        position="static"
+      >
+        <Tabs
+          TabIndicatorProps={{ style: { background: '#AF5CF8' } }}
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+        >
+          <Tab
+            icon={<HelmIcon />}
+            label="Helm 3"
+            {...a11yProps(0)}
+            style={{ minWidth: '10%', textTransform: 'none' }}
+          />
+          <Tab
+            icon={<HelmIcon />}
+            label="Helm 2"
+            {...a11yProps(1)}
+            style={{ minWidth: '10%', textTransform: 'none' }}
+          />
+          <Tab
+            icon={<KubernetesIcon />}
+            label="Kubernetes YAML"
+            {...a11yProps(2)}
+            style={{ minWidth: '10%', textTransform: 'none' }}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-
         {/*Helm 3 install instructions*/}
 
         <CodeBlock>
-          {
-            '# Add the Repo:' +
+          {'# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
             '\n \n' +
             'helm install ambassador datawire/ambassador --set enableAES=false && \\' +
             '\n' +
-            'kubectl wait --for condition=available --timeout=90s deploy -lproduct=aes'
-          }
+            'kubectl wait --for condition=available --timeout=90s deploy -lproduct=aes'}
         </CodeBlock>
-
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-
         {/*Helm 2 install instructions*/}
 
         <CodeBlock>
-          {
-            '# Add the Repo:' +
+          {'# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
             '\n \n' +
             'helm install --name ambassador datawire/ambassador --set enableAES=false && \\' +
             '\n' +
-            'kubectl wait --for condition=available --timeout=90s deploy -lproduct=aes'
-          }
+            'kubectl wait --for condition=available --timeout=90s deploy -lproduct=aes'}
         </CodeBlock>
-
       </TabPanel>
 
       <TabPanel value={value} index={2}>
-
         {/*YAML install instructions*/}
 
         <CodeBlock>
-          {
-            'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \\\n' +
+          {'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \\\n' +
             'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \\\n' +
             'kubectl apply -f - <<EOF\n' +
             '---\n' +
@@ -127,11 +139,9 @@ export default function SimpleTabs() {
             '    targetPort: 8080\n' +
             '  selector:\n' +
             '    service: ambassador\n' +
-            'EOF\n'
-          }
+            'EOF\n'}
         </CodeBlock>
-
       </TabPanel>
-    </div >
+    </div>
   );
 }
