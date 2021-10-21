@@ -46,7 +46,7 @@ the [repository](#a8riorepository) by checking if a `Chart.yaml` file is present
 as follows:
 
 A new Helm values file named following the convention **a8r-values-<ENVIRONMENT_name>.yaml**
-will be generated with the values for the rollout configuration. These values will later to configure the
+will be generated with the values for the rollout configuration. These values will later be used to configure the
 `Rollout` manifest.
 
 If you already have a `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) in the **templates** folder,
