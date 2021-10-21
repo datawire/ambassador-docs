@@ -105,6 +105,8 @@ export default function SimpleTabs() {
           {'# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
+            '\n' +
+            'helm repo update' +
             '\n \n' +
             '# Create Namespace and Install:' +
             '\n' +

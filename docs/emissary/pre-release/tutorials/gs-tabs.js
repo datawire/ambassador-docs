@@ -92,6 +92,8 @@ export default function GettingStartedEmissaryTabs() {
           {'# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://app.getambassador.io' +
+            '\n' +
+            'helm repo update' +
             '\n \n' +
             '# Create Namespace and Install:' +
             '\n' +
