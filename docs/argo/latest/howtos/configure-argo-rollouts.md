@@ -29,16 +29,14 @@ In this guide we'll give you everything you need to perform a canary rollout in 
 
 If you want to get started with canary rollouts on your own environment, you will need to have **Edge Stack version 1.12 or greater** or **Emissary-ingress 1.13 or greater** installed in your cluster.
 
-**Install** Edge Stack <a href="/docs/edge-stack/1.13/tutorials/getting-started/">from here</a> if needed.
-
-<Alert severity="info">Canary Rollouts Coming Soon for Edge Stack and Emissary-ingress 2.0 and greater!</Alert>
+**Install** Edge Stack <a href="/docs/edge-stack/latest/tutorials/getting-started/">from here</a> if needed.
 
 If you already have Edge Stack or Emissary-ingress installed, **check your version** by running this command (adjust your namespace if necessary):
 
 ```
 kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
-[Upgrade Edge Stack to the latest version](/docs/edge-stack/1.13/topics/install/upgrading/) if needed.
+[Upgrade Edge Stack to the latest version](/docs/edge-stack/latest/topics/install/upgrading/) if needed.
 
 ## 1. Connect your cluster to Ambassador Cloud
 
@@ -65,6 +63,25 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 kubectl create namespace argo-rollouts
 kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
 ```
+
+### Using with EdgeStack 2.0+
+If you are using Emissary-ingress or Edge Stack 2.0+, you must use argo-rollouts v1.1 or greater.
+
+
+For Edge Stack v2.0.0 through v2.0.3 set `--ambassador-api-version` to `x.getambassador.io/v3alpha1` in the argo-rollouts deployment:
+
+```sh
+kubectl patch deployment -n argo-rollouts argo-rollouts \
+    -p '{"spec":{"template":{"spec":{"containers":[{"name":"argo-rollouts", "args":["--ambassador-api-version","x.getambassador.io/v3alpha1"]}]}}}}'
+```
+
+Starting from Edge Stack v2.0.4 or above, you must set `--ambassador-api-version` to `getambassador.io/v3alpha1` in the argo-rollouts deployment:
+
+```sh
+kubectl patch deployment -n argo-rollouts argo-rollouts \
+    -p '{"spec":{"template":{"spec":{"containers":[{"name":"argo-rollouts", "args":["--ambassador-api-version","getambassador.io/v3alpha1"]}]}}}}'
+```
+
 ## 3. Get a manifests folder in your repository
 
 Inside of your repository, you will need a specific directory in which your manifests will live. If you still don't have any, create a directory called `manifests`, and inside of it add your existing services manifests files that you want to be able to use with Canary Releases, (for example, add a `service.yaml` file). Otherwise, use the path of your existing folder that contains the manifests, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
