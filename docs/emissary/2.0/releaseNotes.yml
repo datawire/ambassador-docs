@@ -63,7 +63,9 @@ items:
         type: feature
         body: >-
           The <code>getambassador.io/v3alpha1</code> API version and the published chart
-          and manifests have been updated to support Kubernetes 1.22.
+          and manifests have been updated to support Kubernetes 1.22. Thanks to
+          <a href="https://github.com/imoisharma">Mohit Sharma</a> for contributions to
+          this feature!
         docs: about/changes-2.0.0
         image: ./v2.0.4-k8s-1.22.png
 
@@ -527,6 +529,6 @@ items:
           <code>reject_requests_with_escaped_slashes</code> option to the Ambassador module.
         image: ../images/edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
-        type: bugfix
+        type: security
 
 # Don't go any further back than 1.13.4.

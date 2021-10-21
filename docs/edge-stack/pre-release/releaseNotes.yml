@@ -32,7 +32,7 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.0.4
-    date: "TBD"
+    date: '2021-10-19'
     notes:
       - title: General availability!
         type: feature
@@ -63,7 +63,9 @@ items:
         type: feature
         body: >-
           The <code>getambassador.io/v3alpha1</code> API version and the published chart
-          and manifests have been updated to support Kubernetes 1.22.
+          and manifests have been updated to support Kubernetes 1.22. Thanks to
+          <a href="https://github.com/imoisharma">Mohit Sharma</a> for contributions to
+          this feature!
         docs: about/changes-2.0.0
         image: ./v2.0.4-k8s-1.22.png
 
@@ -535,7 +537,9 @@ items:
     date: '2021-05-11'
     notes:
       - title: Envoy 1.15.5
-        body: $productName$ has been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). $productName$ can now be configured to reject client requests that contain escaped slashes.
+        body: >-
+          Incorporate the Envoy 1.15.5 security update by adding the
+          <code>reject_requests_with_escaped_slashes</code> option to the Ambassador module.
         image: ../images/edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
         type: security
