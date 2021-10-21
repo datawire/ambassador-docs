@@ -347,6 +347,8 @@ export default ({ data, location, pageContext }) => {
     </div>
   );
 
+  const edgeStackLinks = data?.allFile.edges[0].node.internal.content;
+
   const footer = (
     <div>
       {product.slug === 'home' && (
@@ -380,6 +382,7 @@ export default ({ data, location, pageContext }) => {
       {!isHome && !isProductHome && isProduct && (
         <DocsFooter
           page={page}
+          edgeStackLinks={edgeStackLinks}
           product={product.slug}
           version={versions.docsVersion}
         />
@@ -611,6 +614,15 @@ export const query = graphql`
             reading_time
             hide_reading_time
             reading_time_text
+          }
+        }
+      }
+    }
+    allFile(filter: { relativePath: { eq: "checklist.md" } }) {
+      edges {
+        node {
+          internal {
+            content
           }
         }
       }
