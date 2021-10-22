@@ -27,7 +27,7 @@ In this guide we'll give you everything you need to perform a canary rollout in 
 
 ## Prerequisites
 
-If you want to get started with canary rollouts on your own environment, you will need to have **Edge Stack version 1.12 or greater** or **Emissary-ingress 1.13 or greater** installed in your cluster.
+If you want to get started with canary rollouts on your own environment, you will need to have **Edge Stack version 2.0.4 or greater** or **Emissary-ingress 2.0.4 or greater** installed in your cluster.
 
 **Install** Edge Stack <a href="/docs/edge-stack/latest/tutorials/getting-started/">from here</a> if needed.
 
@@ -56,28 +56,14 @@ kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.templat
 
 In order to install Argo CD and Argo Rollouts in your cluster run the commands below:
 
-```
+```sh
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 kubectl create namespace argo-rollouts
 kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
-```
 
-### Using with EdgeStack 2.0+
-If you are using Emissary-ingress or Edge Stack 2.0+, you must use argo-rollouts v1.1 or greater.
-
-
-For Edge Stack v2.0.0 through v2.0.3 set `--ambassador-api-version` to `x.getambassador.io/v3alpha1` in the argo-rollouts deployment:
-
-```sh
-kubectl patch deployment -n argo-rollouts argo-rollouts \
-    -p '{"spec":{"template":{"spec":{"containers":[{"name":"argo-rollouts", "args":["--ambassador-api-version","x.getambassador.io/v3alpha1"]}]}}}}'
-```
-
-Starting from Edge Stack v2.0.4 or above, you must set `--ambassador-api-version` to `getambassador.io/v3alpha1` in the argo-rollouts deployment:
-
-```sh
+# Adjust the api version of EdgeStack
 kubectl patch deployment -n argo-rollouts argo-rollouts \
     -p '{"spec":{"template":{"spec":{"containers":[{"name":"argo-rollouts", "args":["--ambassador-api-version","getambassador.io/v3alpha1"]}]}}}}'
 ```
