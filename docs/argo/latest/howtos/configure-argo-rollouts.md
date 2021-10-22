@@ -1,4 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
+import {getBaseUIUrl} from '../../../../../src/utils/getBaseUrl';
 import InstallArgoTabs from './InstallArgoTabs';
 
 # Configure Canary Rollout in your Cluster
@@ -104,7 +105,7 @@ kubectl apply -f ./manifests
 </Alert>
 
 ## 5. Configure your repository and container registry
-
+In order to configure the repository and the container registry to use with rollouts, you ned to go to your <a href={`${getBaseUIUrl()}/settings/teams`} target="_blank">team settings</a> and click on the **Integrations** button.
 
 ### 5.1 GitHub
 
@@ -116,6 +117,7 @@ Then click on the dropdown menu directly below this option and select your forke
 Click **Save** and you will be taken back to the Ambassador Cloud integrations page.
 
 ### 5.2 DockerHub
+
 Click the **Enable** button in the DockerHub section and enter your DockerHub username and an access token so that Ambassador Cloud can query for available image tags.
 You can <a href="https://hub.docker.com/settings/security" target="_blank">generate a DockerHub access token</a> via your hub.docker.com account security settings.
 
