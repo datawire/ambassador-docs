@@ -1,4 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
+import InstallArgoTabs from './InstallArgoTabs';
 
 # Configure Canary Rollout in your Cluster
 
@@ -33,8 +34,8 @@ If you want to get started with canary rollouts on your own environment, you wil
 
 If you already have Edge Stack or Emissary-ingress installed, **check your version** by running this command (adjust your namespace if necessary):
 
-```
-kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.template.spec.containers[0].image}'
+```shell
+kubectl get deploy --namespace ambassador edge-stack -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
 [Upgrade Edge Stack to the latest version](/docs/edge-stack/latest/topics/install/upgrading/) if needed.
 
@@ -56,20 +57,15 @@ kubectl get deploy --namespace ambassador ambassador -o jsonpath='{.spec.templat
 
 In order to install Argo CD and Argo Rollouts in your cluster run the commands below:
 
-```sh
-kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+<InstallArgoTabs />
 
-kubectl create namespace argo-rollouts
-kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
-
+```shell
 # Adjust the api version of EdgeStack
 kubectl patch deployment -n argo-rollouts argo-rollouts \
     -p '{"spec":{"template":{"spec":{"containers":[{"name":"argo-rollouts", "args":["--ambassador-api-version","getambassador.io/v3alpha1"]}]}}}}'
 ```
 
 ## 3. Get a manifests folder in your repository
-
 Inside of your repository, you will need a specific directory in which your manifests will live. If you still don't have any, create a directory called `manifests`, and inside of it add your existing services manifests files that you want to be able to use with Canary Releases, (for example, add a `service.yaml` file). Otherwise, use the path of your existing folder that contains the manifests, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
 
 The annotations section of your `service.yaml` file should look something like the following:
@@ -104,13 +100,13 @@ kubectl apply -f ./manifests
 ```
 
 <Alert severity="info">
-  Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> and you should now see the your service reported in Ambassador Cloud!
+  Verify that this is working by visiting the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> and seeing all your services.
 </Alert>
 
 ## 5. Configure your repository and container registry
 
 
-### GitHub
+### 5.1 GitHub
 
 Click the **Enable** button in the GitHub section.
 You will be taken to github.com and asked in which account you want to install Ambassador DCP.
@@ -119,11 +115,11 @@ On the new page that opens scroll down to the "Repository access" section, and c
 Then click on the dropdown menu directly below this option and select your forked rollouts-demo repo.
 Click **Save** and you will be taken back to the Ambassador Cloud integrations page.
 
-### DockerHub
+### 5.2 DockerHub
 Click the **Enable** button in the DockerHub section and enter your DockerHub username and an access token so that Ambassador Cloud can query for available image tags.
 You can <a href="https://hub.docker.com/settings/security" target="_blank">generate a DockerHub access token</a> via your hub.docker.com account security settings.
 
-### GitLab
+### 5.3 GitLab
 Click the **Enable** button in the GitLab section and enter your GitLab token.
 You can <a href="https://gitlab.com/-/profile/personal_access_tokens" target="_blank">generate a personal access token</a> via your GitLab Profile Settings.
 <Alert severity="info">
