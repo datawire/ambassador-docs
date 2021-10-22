@@ -25,14 +25,12 @@ metadata:
   name: example-host
 spec:
   hostname: host.example.com
-  acmeProvider:
-    authority: none
   tlsSecret:
     name: host-cert
 ```
 
 Now let's create a second `Host` for a different domain we want to serve behind
-$productName$. This second `Host` we can use $AESproductName$'s automatic TLS
+$productName$. This second `Host` will use $AESproductName$'s automatic TLS
 to get a certificate from Let's Encrypt.
 
 ```yaml
@@ -54,7 +52,7 @@ We now have two `Host`s with two different certificates.
 Now that we have two domains behind $productName$, we can create routes for either
 or both of them.
 
-We do this by setting the `host` attribute of a `Mapping` to the domain the
+We do this by setting the `hostname` attribute of a `Mapping` to the domain the
 `Mapping` should be created for.
 
 ```yaml
@@ -67,9 +65,11 @@ spec:
   prefix: /httpbin/
   service: httpbin.org:80
   host_rewrite: httpbin.org
-  host: host.example.com
+  hostname: host.example.com
 ```
-Will create a `/httpbin/` endpoint for `host.example.com`
+
+will create a `/httpbin/` endpoint for `host.example.com`
+
 ```yaml
 ---
 apiVersion: getambassador.io/v3alpha1
@@ -79,9 +79,10 @@ metadata:
 spec:
   prefix: /foo/
   service: foo-service
-  host: host.foo.com
+  hostname: host.foo.com
 ```
-Will create a `/foo/` endpoint for `host.foo.com`
+
+will create a `/foo/` endpoint for `host.foo.com`
 
 ```yaml
 ---
@@ -94,4 +95,5 @@ spec:
   prefix: /bar/
   service: bar-endpoint
 ```
-Will create a `/bar/` endpoint for all `Host`s.
+
+will create a `/bar/` endpoint for all `Host`s.

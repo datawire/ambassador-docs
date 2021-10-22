@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # TLS origination
 
 Sometimes you may want traffic from $productName$ to your services to be encrypted. For the cases where terminating TLS at the ingress is not enough, $productName$ can be configured to originate TLS connections to your upstream services.
@@ -20,7 +22,9 @@ spec:
 
 ## Advanced configuration using a `TLSContext`
 
-If your upstream services require more than basic HTTPS support (e.g. minimum TLS version support or SNI support) you can create a `TLSContext` for $productName$ to use when originating TLS.
+If your upstream services require more than basic HTTPS support (e.g. providing a client certificate or
+setting the minimum TLS version support) you must create a `TLSContext` for $productName$ to use when
+originating TLS. For example:
 
 ```yaml
 ---
@@ -34,7 +38,12 @@ spec:
   sni: some-sni-hostname
 ```
 
-Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`
+<Alert severity="warning">
+  The Kubernetes Secret named by <code>secret</code> must contain a valid TLS certificate.
+  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use.
+</Alert>
+
+Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`:
 
 ```yaml
 ---
@@ -51,6 +60,8 @@ spec:
 
 The `example-service` service must now support TLS v1.3 for $productName$ to connect.
 
-**Note**:
-
-A `TLSContext` requires a certificate be provided even if not using it to terminate TLS. For origination purposes, this certificate can simply be self-signed unless mTLS is required.
+<Alert severity="warning">
+  A <code>TLSContext</code> requires a certificate be provided, even in cases where the upstream
+  service does not require it (for origination) and the <code>TLSContext</code> is not being used
+  to terminate TLS. In this case, simply generate and provide a self-signed certificate.
+</Alert>

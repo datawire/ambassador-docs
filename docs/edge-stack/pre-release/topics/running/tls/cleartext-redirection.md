@@ -8,6 +8,11 @@ both forcing [automatic redirection to HTTPS](#http-https-redirection) and
 [serving cleartext](#cleartext-routing) traffic on a `Host`.
 
 <Alert severity="info">
+  If no <code>Host</code>s at all are defined, $productName$ enables HTTP->HTTPS redirection. You will
+  need to explicitly create a <code>Host</code> to enable cleartext communication at all.
+</Alert>
+
+<Alert severity="info">
   The <a href="../../listener"><code>Listener</code></a> and
   <a href="../../host-crd"><code>Host</code></a> CRDs work together to manage HTTP and HTTPS routing.
   This document is meant as a quick reference to the <code>Host</code> resource: for a more complete
@@ -28,6 +33,11 @@ This may allow routing _only_ HTTP, or it may allow HTTP and HTTPS:
 
 - If the `Host` does not specify a `tlsSecret`, it will only route HTTP, not terminating TLS at all.
 - If the `Host` does specify a `tlsSecret`, it will route both HTTP and HTTPS.
+
+<Alert severity="info">
+  If no <code>Host</code>s at all are defined, $productName$ enables HTTP->HTTPS redirection. You will
+  need to explicitly create a <code>Host</code> to enable cleartext communication at all.
+</Alert>
 
 <Alert severity="info">
   The <a href="../../listener"><code>Listener</code></a> and
@@ -67,6 +77,11 @@ $productName$ determines which requests are secure and which are insecure using 
 `securityModel` of the [`Listener`] that accepts the request.
 
 [`Listener`]: ../../listener
+
+<Alert severity="info">
+  If no <code>Host</code>s at all are defined, $productName$ enables HTTP->HTTPS redirection. You will
+  need to explicitly create a <code>Host</code> to enable cleartext communication at all.
+</Alert>
 
 <Alert severity="info">
   The <a href="../../listener"><code>Listener</code></a> and

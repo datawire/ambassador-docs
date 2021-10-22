@@ -32,8 +32,22 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
-  - version: 2.0.5
+  - version: 2.1.0
     date: 'TBD'
+    notes:
+      - title: Improved validity checking for TLS Secrets
+        type: bugfix
+        body: >-
+          $productName$ will validate that Kubernetes Secrets contain valid PEM before
+          allowing them to be used for TLS. Any Kubernetes Secret that does not contain
+          valid PEM will be rejected.
+        docs: topics/running/tls
+        github:
+        - title: "#3821"
+          link: https://github.com/emissary-ingress/emissary/issues/3821
+
+  - version: 2.0.5
+    date: '20211109'
     notes:
       - title: More aggressive HTTP cache behavior
         type: change

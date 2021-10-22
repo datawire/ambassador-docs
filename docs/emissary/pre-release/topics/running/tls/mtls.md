@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Mutual TLS (mTLS)
 
 Many organizations have security concerns that require all network traffic 
@@ -36,9 +38,14 @@ spec:
   secret: upstream-certs
 ```
 
-We give it `host: []` since we do not want to use this to terminate TLS
-connections from the client. We are just using this to load certificates for
+We use `hosts: []` for this `TLSContext` since we do not want to use it to terminate
+TLS connections from the client. We are just using this to load certificates for
 requests upstream.
+
+<Alert severity="warning">
+  The Kubernetes Secret must contain a valid TLS certificate. If it does not, $productName$
+  will reject the Secret and disable TLS termination for the <code>Host</code>.
+</Alert>
 
 After loading the certificates, we can tell $productName$ when to use them by
 setting the `tls` parameter in a `Mapping`:

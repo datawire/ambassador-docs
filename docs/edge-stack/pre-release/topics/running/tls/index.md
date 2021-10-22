@@ -6,7 +6,7 @@ $productName$'s robust TLS support exposes configuration options
 for different TLS use cases including:
 
 - [Simultaneously Routing HTTP and HTTPS](cleartext-redirection#cleartext-routing)
-- [HTTP -> HTTPS Redirection](cleartext-redirection#http-https-redirection)
+- [HTTP -> HTTPS Redirection](cleartext-redirection#http---https-redirection)
 - [Mutual TLS](mtls)
 - [Server Name Indication (SNI)](sni)
 - [TLS Origination](origination)
@@ -17,8 +17,9 @@ As explained in the [`Host`](../host-crd) reference, a `Host` represents a domai
 in $productName$ and defines how TLS is managed on that domain.
 
 **If no `Host`s are present at all**, $productName$ will synthesize a `Host` that
-allows only cleartext routing. You will need to explictly define `Host`s to enable
-TLS termination.
+terminates TLS using a self-signed TLS certificate, and redirects cleartext 
+traffic to HTTPS. You will need to explictly define `Host`s to change this behavior
+(for example, to use a different certificate or to route cleartext).
 
 <Alert severity="info">
   The examples below do not define a <code>requestPolicy</code>; however, most real-world
@@ -26,6 +27,32 @@ TLS termination.
   <br/>
   For more information, please refer to the <a href="../host-crd#secure-and-insecure-requests"><code>Host</code> documentation.</a>
 </Alert>
+
+### Automatic TLS with ACME
+
+With $AESproductName$, the `Host` can be configured to completely 
+manage TLS by requesting a certificate from a Certificate Authority using the
+[ACME HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/).
+
+After creating a DNS record, configuring $AESproductName$ to get a 
+certificate from the default CA [Let's Encrypt](https://letsencrypt.org) is as
+simple as providing a hostname and your email for the certificate:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: example-host
+spec:
+  hostname: host.example.com
+  acmeProvider:
+    authority: https://acme-v02.api.letsencrypt.org/directory # Optional: The CA you want to get your certificate from. Defaults to Let's Encrypt
+    email: julian@example.com
+```
+
+$AESproductName$ will now request a certificate from the CA and store it in a secret 
+in the same namespace as the `Host`. 
 
 ### Bring your own certificate
 
