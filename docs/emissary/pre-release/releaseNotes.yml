@@ -35,6 +35,13 @@ items:
     date: 'TBD'
     notes:
 
+      - title: Improved validity checking for error response overrides
+        type: bugfix
+        body: >-
+          $productName$ will reject error response overrides that appear to contain
+          a "%" character that is not part of a valid Envoy formatting command.
+        docs: topics/running/custom-error-responses
+
   - version: 2.0.4
     date: '2021-10-19'
     notes:
