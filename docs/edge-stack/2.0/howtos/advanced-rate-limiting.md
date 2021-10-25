@@ -41,7 +41,8 @@ spec:
   labels:
     ambassador:
       - request_label_group:
-        - backend
+        - generic_key:
+            value: backend
 ```
 
 *Note* If you're modifying an existing mapping, be careful about the `apiVersion`: the `v1` `Mapping` resource did not support `labels`, so you'll need at least `v2`.
@@ -81,7 +82,8 @@ spec:
   labels:
     ambassador:
       - request_label_group:
-        - remote_address
+        - remote_address:
+            key: remote_address
 ```
 
 We then update our rate limits to limit on `remote_address`:
@@ -120,10 +122,11 @@ spec:
   labels:
     ambassador:
       - request_label_group:
-        - remote_address
-        - backend_http_method:
-            header: ":method"
-            omit_if_not_present: true
+        - remote_address:
+            key: remote_address
+        - request_headers:
+            key: backend_http_method
+            header_name: ":method"
 ```
 
 When we add multiple criteria to a pattern, the entire pattern matches when ANY of the rules match (i.e., a logical OR). A pattern match then triggers a rate limit event. Our rate limiting configuration becomes:
@@ -158,7 +161,8 @@ spec:
     default_labels:
       ambassador:
         defaults:
-        - remote_address
+        - remote_address:
+            key: remote_address
 ```
 
 We can then configure a global `RateLimit` object that limits on `remote_address`:
@@ -192,7 +196,8 @@ spec:
   labels:
     ambassador:
       - request_label_group:
-        - backend
+        - generic_key:
+            value: backend
 ```
 
 Now, the `request_label_group`, contains both the `generic_key: backend` *and* the `remote_address` key applied from the global rate limit. This allows us to create a separate `RateLimit` object for this route:
