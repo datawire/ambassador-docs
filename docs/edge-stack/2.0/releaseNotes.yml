@@ -34,6 +34,33 @@ items:
   - version: 2.0.5
     date: 'TBD'
     notes:
+
+      - title: More aggressive HTTP cache behavior
+        type: change
+        body: >-
+          When Ambassador Edge Stack makes a cacheable internal request (such as fetching the JWKS
+          endpoint for a <code>JWT</code> <code>Filter</code>), if a cache-miss occurs but a request
+          for that resource is already in-flight, then instead of performing a second request in
+          parallel, it will now wait for the first request to finish and (if the response is
+          cacheable) use that response.  If the response turns out to be non-cacheable, then it will
+          proceed to make the second request.  This avoids the situation where if a cache entry
+          expires during a moment with high number of concurrent requests, then Edge Stack creates a
+          deluge of concurrent requests to the resource when one aught to have sufficed; this allows
+          the result to be returned more quickly while putting less load on the remote resource.
+          However, if the response turns out to be non-cacheable, then this does effectively
+          serialize requests, increasing the latency for concurrent requests.
+
+      - title: More accurate durations in the logs
+        type: bugfix
+        body: >-
+          When Ambassador Edge Stack completes an internal request (such as fetching the JWKS
+          endpoint for a <code>JWT</code> <code>Filter</code>) it logs (at the <code>info</code> log
+          level) how long the request took.  Previously, the duration logged was how long it took to
+          receive the response header, and did not count the time it takes to receive the entire
+          response body; now it properly times the entire thing.  Additionally, it now separately
+          logs the "total duration" and the "networking duration", in order to make it possible to
+          identify when a request was delayed waiting for other requests to finish.
+
   - version: 2.0.4
     date: '2021-10-19'
     notes:
