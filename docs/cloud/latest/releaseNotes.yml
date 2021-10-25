@@ -26,6 +26,7 @@
 #             `FOO/releaseNotes.yml`, then the image paths are
 #             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
+#         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
 
 changelog: ''
 items:
@@ -34,7 +35,7 @@ items:
       - title: 'Credit card payments'
         body: 'Secure and convenient self-service payments, featuring several tiers of plans to accomodate teams of every size.'
         image: './payment-tiers.png'
-        docs: 'https://www.getambassador.io/editions/'
+        href: '/editions'
         type: feature
   - date: '2021-10-05'
     notes:
