@@ -34,8 +34,7 @@ items:
       - title: 'Credit card payments'
         body: 'Secure and convenient self-service payments, featuring several tiers of plans to accomodate teams of every size.'
         image: './payment-tiers.png'
-        # todo: should this really link to documentation?
-        # docs: '../../argo/latest/quick-start'
+        docs: 'https://www.getambassador.io/editions/'
         type: feature
   - date: '2021-10-05'
     notes:
