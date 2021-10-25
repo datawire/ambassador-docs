@@ -126,7 +126,8 @@ There are 5 types of label specifiers in $productName$:
 1. `source_cluster`
 
     ```yaml
-    source_cluster: { source_cluster: {} }
+    source_cluster:
+      key: source_cluster
     ```
     
     Sets the label `source_cluster=«Envoy source cluster name»"`. The Envoy 
@@ -138,7 +139,8 @@ There are 5 types of label specifiers in $productName$:
 2. `destination_cluster`
 
     ```yaml
-    destination_cluster: { destination_cluster: {} }
+    destination_cluster: 
+      key: destination_cluster
     ```
     
     Sets the label `destination_cluster=«Envoy destination cluster name»"`. The Envoy 
@@ -151,7 +153,8 @@ There are 5 types of label specifiers in $productName$:
 3. `remote_address`
 
     ```yaml
-    remote_address: { remote_address: {} }
+    remote_address: 
+      key: remote_address
     ```
     
     Sets the label `remote_address=«IP address of the client»"`. The IP address of
