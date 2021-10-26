@@ -11,7 +11,7 @@ import Alert from '@material-ui/lab/Alert';
   changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b> read
   the <a href="migrate-to-version-2">migration guide</a> before trying to install 2.0.<br/>
   <br/>
-  For more information on 2.X, please check the <a href="../../release-notes">release notes</a>.
+  For more information on 2.X, please check the <a href="../../../release-notes">release notes</a>.
 </Alert>
 
 If you currently have the open source version of $OSSproductName$, you can upgrade to $AESproductName$ with a few simple commands. When you upgrade to $AESproductName$, you'll be able to access additional capabilities such as **automatic HTTPS/TLS termination, Swagger/OpenAPI support, API catalog, Single Sign-On, and more.** For more about the differences between $AESproductName$ and $OSSproductName$, see the [Editions page](/editions).
