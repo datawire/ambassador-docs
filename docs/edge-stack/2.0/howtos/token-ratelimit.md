@@ -95,7 +95,9 @@ spec:
   labels:
     ambassador:
     - header_request_label:
-      - headerkey: [{header: "x-token-name"}] # In pattern matching, they key queried will be "headerkey" and the value queried will be the value of "x-token-name" header
+      - request_headers:
+          key: headerkey                  # In pattern matching, they key queried will be "headerkey" and the value          
+          header_name: "x-token-name"     # queried will be the value of "x-token-name" header
 ```
 
 ## 3. Create our RateLimit
