@@ -117,7 +117,7 @@ There have been a few syntax and usage changes to the following fields in order 
 
 ## Check `Module` for changed values
 
-A few settings have moved from the `Module` in 2.0. Make sure you 
+A few settings have moved from the `Module` in 2.0. Make sure you review the following settings and move them to their new locations if you are using them in a `Module`.
 
 Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the Ambassador `Module` is no longer supported.
 
