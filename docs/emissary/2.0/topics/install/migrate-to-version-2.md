@@ -17,13 +17,16 @@ configuration updates when migrating.
 
 ## 1. Migration Process
 
-### Install $productName$ 2.0.0 next to your running instance.
+### Install $productName$ 2.0 in a new cluster.
 
-By far the easiest way to do this is with Helm:
+$productName$ introduces the new `getambassador.io/v3alpha1` api version for it's CRDs. Kubernetes has a limitation that prevents two coppies of the same CRD from being installed in the same cluster with different api versions. For this reason, we are recommending setting up 2.0 in its own new cluster and then migrating the config to the new cluster in order to not cause any downtime. 
+
+By far the easiest way to install is with Helm:
 
 ```sh
 # Add the Repo:
 helm repo add datawire https://app.getambassador.io
+helm repo update
 
 # Create Namespace and Install:
 kubectl create namespace $productNamespace$ && \
@@ -106,6 +109,21 @@ both the `selector` and the hostname must line up.
 <Alert severity="warning">
   An <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
 </Alert>
+
+There have been a few syntax and usage changes to the following fields in order to support Kubernetes 1.22 [Structural CRDs](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/)
+- Ensure that `Mapping.tls` is a string
+- `Mapping.labels` always requires maps instead of strings. You can check the [Rate Limiting Labels docs](../../topics/using/rate-limits#attaching-labels-to-requests) for examples of the new structure. 
+
+
+## Check `Module` for changed values
+
+A few settings have moved from the `Module` in 2.0. Make sure you 
+
+Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the Ambassador `Module` is no longer supported.
+
+`xff_num_trusted_hops` has been removed from the `Module`, and it's functionality has been moved to the `l7Depth` setting in the `Listener` resource.
+
+It is no longer possible to configure TLS using the `tls` element of the `module`. It's functionality is fully covered by the `TLSContext` resource. 
 
 ## 2. Additional Notes
 

@@ -179,14 +179,6 @@ It is **not** necessary to explicitly state a `TLSContext` in the `Host`: settin
   <a href="../../topics/running/tls/#tlscontext">Learn more about <code>TLSContext</code></a>.
 </Alert>
 
-### `PROXY` Protocol Configuration
-
-Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer supported. Note that the `Listener` resource can configure `PROXY` resource per-`Listener`, rather than having a single global setting. For further information, see the [`Listener` documentation](../../topics/running/listener).
-
-<Alert severity="info">
-  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.
-</Alert>
-
 ### `Mapping`s, `TCPMapping`s, and TLS Origination
 
 A `getambassador.io/v2` `Mapping` or `TCPMapping` could specify `tls: true` to indicate TLS origination without supplying a certificate. This is not supported in `getambassador.io/v3alpha1`: instead, use an `https://` prefix on the `service`. In the [Mapping](../../topics/using/mappings/#using-tls), this is straightforward, but [there are more details for the `TCPMapping` when using TLS](../../topics/using/tcpmappings/#tcpmapping-and-tls).
@@ -215,9 +207,19 @@ By default, $productName$ will configure Envoy using the [V3 Envoy API](https://
 
 The environment variable `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of the code $productName$ uses to validate and generate envoy configuration. It is enabled by default in $productName$ 2.0.
 
-### TLS, the `ambassador` `Module`, and the `tls` `Module`
+### Changes to the `ambassador` `Module`, and the `tls` `Module`
 
 It is no longer possible to configure TLS using the `tls` element of the `ambassador` `Module` or using the `tls` `Module`. Both of these cases are correctly covered by the `TLSContext` resource.
+
+With the introduction of the `Listener` resource, a few settings have moved from the `Module` to the `Listener`.
+
+Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer supported. Note that the `Listener` resource can configure `PROXY` resource per-`Listener`, rather than having a single global setting. For further information, see the [`Listener` documentation](../../topics/running/listener).
+
+`xff_num_trusted_hops` has been removed from the `Module`, and it's functionality has been moved to the `l7Depth` setting in the `Listener` resource.
+
+<Alert severity="info">
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.
+</Alert>
 
 ### `TLSContext` `redirect_cleartext_from` and `Host` `insecure.additionalPort`
 
