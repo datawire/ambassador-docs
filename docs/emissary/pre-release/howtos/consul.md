@@ -74,7 +74,7 @@ $productName$ section](#configuring-productname).
    helm repo add hashicorp https://helm.releases.hashicorp.com
    ```
 
-3. Create a new YAML file (eg. `consul-values.yaml`) for the Consul
+3. Create a new YAML file (e.g. `consul-values.yaml`) for the Consul
    installation values and copy the values below into that file.
 
    ```yaml
@@ -116,7 +116,7 @@ $productName$ section](#configuring-productname).
 
 2. Configure $productName$ to look for services registered to Consul
    by creating the ConsulResolver.  Create a file
-   (eg. `consul-resolver.yaml`) and copy the following code into that
+   (e.g. `consul-resolver.yaml`) and copy the following code into that
    file:
 
    ```yaml
@@ -170,8 +170,8 @@ Consul.  To simplify this tutorial, you'll deploy the application in
 Kubernetes, although in practice this application can be deployed
 anywhere in your data center (e.g., on VMs).
 
-1. Deploy the Quote demo application.  Create a file (eg.`quote.yaml`)
-   and copy the following code into it:
+1. Deploy the Quote demo application.  Create a file
+   (e.g. `quote.yaml`) and copy the following code into it:
 
    ```yaml
    ---
@@ -274,7 +274,7 @@ anywhere in your data center (e.g., on VMs).
    Go to `http://localhost:8500/` from a web browser and you should
    see a service named `quote-consul`.
 
-4. Create a new YAML file (eg. `quote-mapping.yaml`) for the
+4. Create a new YAML file (e.g. `quote-mapping.yaml`) for the
    `quote-consul` service:
 
    ```yaml
@@ -354,7 +354,7 @@ discovery, as detailed above.
    `"consul.hashicorp.com/connect-inject"` to `true`.  Note that in
    this version of the configuration, you do not have to configure
    environment variables for the location of the Consul server.
-   Create a file (eg. `quote-connect.yaml`) and copy the following
+   Create a file (e.g. `quote-connect.yaml`) and copy the following
    code into it:
 
    ```yaml
@@ -458,7 +458,7 @@ discovery, as detailed above.
    You should see a service registered as `quote`.  It gets its name
    from the contaner's name property we defined in the YAML above.
 
-5. Create a file (eg. `quote-connect-mapping.yaml`) and copy the
+5. Create a file (e.g. `quote-connect-mapping.yaml`) and copy the
    following code into it.  Create a Mapping to route to the `quote`
    service in Consul.
 
