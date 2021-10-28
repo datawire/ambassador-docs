@@ -311,6 +311,7 @@ anywhere in your data center (e.g., on VMs).
 6. Send a request to the `quote-consul` API.
 
    ```console
+   $ AMBASSADOR_IP=$(kubectl --namespace $productNamespace$ get services/$productDeploymentName$ -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
    $ curl -Lk http://$AMBASSADOR_IP/quote-consul/
    {
     "server": "janky-elderberry-vtqtolsz",
@@ -502,6 +503,7 @@ discovery, as detailed above.
 7. Send a request to the `/quote-connect/` API.
 
    ```console
+   $ AMBASSADOR_IP=$(kubectl --namespace $productNamespace$ get services/$productDeploymentName$ -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
    $ curl -Lk http://$AMBASSADOR_IP/quote-connect/
    {
     "server": "tasty-banana-2h6qpwme",
