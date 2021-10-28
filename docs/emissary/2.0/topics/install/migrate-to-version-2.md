@@ -19,7 +19,7 @@ configuration updates when migrating.
 
 ### Install $productName$ 2.0 in a new cluster.
 
-$productName$ introduces the new `getambassador.io/v3alpha1` api version for it's CRDs. Kubernetes has a limitation that prevents two coppies of the same CRD from being installed in the same cluster with different api versions. For this reason, we are recommending setting up 2.0 in its own new cluster and then migrating the config to the new cluster in order to not cause any downtime. 
+$productName$ introduces the new `getambassador.io/v3alpha1` API version for its CRDs. Kubernetes has a limitation that prevents two coppies of the same CRD from being installed in the same cluster with different API versions. For this reason, we are recommending setting up 2.0 in its own new cluster and then migrating the config to the new cluster in order to not cause any downtime. 
 
 By far the easiest way to install is with Helm:
 
@@ -121,9 +121,9 @@ A few settings have moved from the `Module` in 2.0. Make sure you
 
 Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the Ambassador `Module` is no longer supported.
 
-`xff_num_trusted_hops` has been removed from the `Module`, and it's functionality has been moved to the `l7Depth` setting in the `Listener` resource.
+`xff_num_trusted_hops` has been removed from the `Module`, and its functionality has been moved to the `l7Depth` setting in the `Listener` resource.
 
-It is no longer possible to configure TLS using the `tls` element of the `module`. It's functionality is fully covered by the `TLSContext` resource. 
+It is no longer possible to configure TLS using the `tls` element of the `module`. Its functionality is fully covered by the `TLSContext` resource. 
 
 ## 2. Additional Notes
 

@@ -223,7 +223,7 @@ With the introduction of the `Listener` resource, a few settings have moved from
 
 Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer supported. Note that the `Listener` resource can configure `PROXY` resource per-`Listener`, rather than having a single global setting. For further information, see the [`Listener` documentation](../../topics/running/listener).
 
-`xff_num_trusted_hops` has been removed from the `Module`, and it's functionality has been moved to the `l7Depth` setting in the `Listener` resource.
+`xff_num_trusted_hops` has been removed from the `Module`, and its functionality has been moved to the `l7Depth` setting in the `Listener` resource.
 
 <Alert severity="info">
   <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.
