@@ -233,14 +233,14 @@ items:
           configuration changes that are not backwards compatible with the 1.X family.  API versions
           <code>getambassador.io/v0</code>, <code>getambassador.io/v1</code>, and
           <code>getambassador.io/v2</code> are deprecated.  Further details are available in the <a
-          href="about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0
+          href="../about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0
           Changes</a> document.
         type: feature
         docs: about/changes-2.0.0/#1-configuration-api-version-getambassadoriov3alpha1
         image: ./edge-stack-2.0.0-v3alpha1.png
 
       - title: The AmbassadorListener Resource
-        body: The new <code>AmbassadorListener</code> CRD defines where and how to listen for requests from the network, and which <code>AmbassadorHost</code> definitions should be used to process those requests. Note that the <code>AmbassadorListener</code> CRD is <b>mandatory</b> and consolidates <i>all</i> port configuration; see the <a href="topics/running/ambassadorlistener"><code>AmbassadorListener</code> documentation</a> for more details.
+        body: The new <code>AmbassadorListener</code> CRD defines where and how to listen for requests from the network, and which <code>AmbassadorHost</code> definitions should be used to process those requests. Note that the <code>AmbassadorListener</code> CRD is <b>mandatory</b> and consolidates <i>all</i> port configuration; see the <a href="../topics/running/listener"><code>AmbassadorListener</code> documentation</a> for more details.
         type: feature
         docs: topics/running/ambassadorlistener
         image: ./edge-stack-2.0.0-listener.png
@@ -288,18 +288,18 @@ items:
         docs: about/changes-2.0.0/#proxy-protocol-configuration
 
       - title: Stricter rules for AmbassadorHost/AmbassadorMapping association
-        body: An <code>AmbassadorMapping</code> will only be matched with an <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
+        body: An <code>AmbassadorMapping</code> will only be matched with an <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="../about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
         docs: about/changes-2.0.0/#host-and-mapping-association
         type: change
 
       - title: AmbassadorHost or Ingress now required for TLS termination
-        body: An <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
+        body: An <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="../about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
         docs: about/changes-2.0.0/#host-tlscontext-and-tls-termination
         type: change
         image: ./edge-stack-2.0.0-host_crd.png
 
       - title: Envoy V3 APIs
-        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
+        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="../about/changes-2.0.0">2.0.0 Changes</a> document.
         type: change
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
