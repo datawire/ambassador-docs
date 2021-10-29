@@ -39,7 +39,7 @@ they are solely there to help configuration authors remember the different group
 Note that **at present, rate limiting supports just one domain**: the name of the
 domain must be configured in the [`RateLimitService`].
 
-[`RateLimitService`]: (../../../running/services/rate-limit-service)
+[`RateLimitService`]: ../../running/services/rate-limit-service
 
 ## Attaching labels to requests
 
@@ -146,7 +146,7 @@ There are 5 types of label specifiers in $productName$:
     Sets the label `destination_cluster=«Envoy destination cluster name»"`. The Envoy 
     destination cluster name is the name of the Envoy cluster to which the `Mapping`
     routes the request. You can get the name for a cluster from the
-    [diagnostics service](../../diagnostics).
+    [diagnostics service](../../running/diagnostics).
     
     The syntax of this label currently _requires_ `destination_cluster: {}`.
 
