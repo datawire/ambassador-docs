@@ -174,6 +174,6 @@ Note how the **Current Canary Weight** progress bar increases in steps in the am
 
 Explore some of the popular content on canary rollouts:
 
-* [Canary concepts](../concepts/canary/): Learn more about canary rollouts and Argo
-* [Canary rollouts and observability](../howtos/observability/): Explore how observability is a prerequisite of effective canary releases.
-* [Ambassador Cloud Rollouts reference](../reference/ambassador-cloud-rollouts/): Dive into the details of Argo configurations and Ambassador Cloud rollouts annotations.
+* [Canary concepts](../../concepts/canary/): Learn more about canary rollouts and Argo
+* [Canary rollouts and observability](../../howtos/observability/): Explore how observability is a prerequisite of effective canary releases.
+* [Ambassador Cloud Rollouts reference](../../reference/ambassador-cloud-rollouts/): Dive into the details of Argo configurations and Ambassador Cloud rollouts annotations.

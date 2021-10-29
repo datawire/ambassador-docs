@@ -6,7 +6,7 @@ Gzip enables $productName$ to compress upstream data upon client request. Compre
 
 When the gzip filter is enabled, request and response headers are inspected to determine whether or not the content should be compressed. If so, and the request and response headers allow, the content is compressed and then sent to the client with the appropriate headers. It also uses the zlib module, which provides `Deflate` compression and decompression code.
 
-For more details see [Envoy - Gzip](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/gzip_filter.html).
+For more details see [Envoy - Gzip](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/compressor_filter).
 
 ## The `gzip` API
 
