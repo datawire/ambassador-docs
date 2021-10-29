@@ -92,7 +92,7 @@ Let's set another annotation using YAML instead to ensure that a new deployment 
 
 ## 3. Add additional metadata via YAML
 
-Open the YAML config file of one of your services.  If you applied our `quote` service earlier, you can download the YAML <a href="https://getambassador.io/yaml/quickstart/qotm.yaml" target="_self">here</a>.
+Open the YAML config file of one of your services.  If you applied our `quote` service earlier, you can download the YAML <a href="/yaml/quickstart/qotm.yaml" target="_self">here</a>.
 
 1. Navigate to the `metadata` property and locate the `annotations` property directly beneath it.
 
