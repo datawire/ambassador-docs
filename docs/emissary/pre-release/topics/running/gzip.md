@@ -22,7 +22,7 @@ For more details see [Envoy - Gzip](https://www.envoyproxy.io/docs/envoy/latest/
 ## Example
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador
@@ -44,7 +44,7 @@ spec:
 Minimum configuration:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador

@@ -4,12 +4,12 @@ Sometimes you may want traffic from $productName$ to your services to be encrypt
 
 ## Basic configuration
 
-Telling $productName$ to talk to your services over HTTPS is easily configured in the `AmbassadorMapping` definition by setting `https://` in the `service` field.
+Telling $productName$ to talk to your services over HTTPS is easily configured in the `Mapping` definition by setting `https://` in the `service` field.
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: basic-tls
 spec:
@@ -24,7 +24,7 @@ If your upstream services require more than basic HTTPS support (e.g. minimum TL
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: tls-context
@@ -34,12 +34,12 @@ spec:
   sni: some-sni-hostname
 ```
 
-Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of an `AmbassadorMapping`
+Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: mapping-with-tls-context
 spec:

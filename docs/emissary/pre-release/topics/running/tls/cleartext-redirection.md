@@ -8,12 +8,12 @@ without encryption in cleartext.
 
 $productName$ supports both forcing 
 [automatic redirection to HTTPS](#http-https-redirection) and 
-[serving cleartext](#cleartext-routing) traffic on an `AmbassadorHost`.
+[serving cleartext](#cleartext-routing) traffic on a `Host`.
 
 ## Cleartext routing
 
 $productName$ has full support for routing cleartext traffic to upstream services
-for an `AmbassadorHost`.
+for a `Host`.
 
 ### Only cleartext
 
@@ -22,12 +22,12 @@ port 8080 in the container. See [TLS documentation](../) for information on
 how to configure TLS termination.
 
 For $AESproductName$, TLS termination is enabled by default with a
-self-signed certificate or an ACME `AmbassadorHost`. To disable TLS termination in $AESproductName$, delete any existing `AmbassadorHost`s and set the 
-`requestPolicy.insecure.action` to `Route` in an `AmbassadorHost`:
+self-signed certificate or an ACME `Host`. To disable TLS termination in $AESproductName$, delete any existing `Host`s and set the 
+`requestPolicy.insecure.action` to `Route` in a `Host`:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: example-host
 spec:
@@ -52,11 +52,11 @@ $productName$ can also support serving both HTTPS and cleartext traffic from a
 single $productName$.
 
 This configuration is the same whether you are running the Open-Source $OSSproductName$ or the $AESproductName$. The configuration is very similar to the
-`AmbassadorHost` above but with the `AmbassadorHost` configured to terminate TLS.
+`Host` above but with the `Host` configured to terminate TLS.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: example-host
 spec:
@@ -94,7 +94,7 @@ Client              $productName$
 ```
 
 In $productName$, this is configured by setting the 
-`insecure.action` in an `AmbassadorHost` to `Redirect`. 
+`insecure.action` in a `Host` to `Redirect`. 
 
 ```yaml
 requestPolicy:
@@ -145,11 +145,11 @@ to $productName$. A couple of options are
 $AESproductName$ will enable cleartext redirection by default.
 
 To enable cleartext redirection in any version of $productName$, simply configure
-an `AmbassadorHost` to redirect cleartext to HTTPS like below:
+a `Host` to redirect cleartext to HTTPS like below:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: example-host
 spec:

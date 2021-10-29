@@ -13,11 +13,19 @@ const Cloud = () => (
       <Icon name="cloud" className="docs__cloud-icon" /> Cloud
     </h1>
     <p>Your central dashboard for all Ambassador tools.</p>
-    <Link to={goToCloudQuickStart} className="docs__button-secondary docs__m-bottom-50">
-      Get Started <Icon name="right-arrow" className="docs__button-secondary--arrow" />
+    <Link
+      to={goToCloudQuickStart}
+      className="docs__button-secondary docs__m-bottom-50"
+    >
+      Get Started{' '}
+      <Icon name="right-arrow" className="docs__button-secondary--arrow" />
     </Link>
-    <div className={`docs__cards ${CloudCards.length === 1 ? 'docs__m-width-dekstop' : ''}`}>
-      {CloudCards.map(c => (
+    <div
+      className={`docs__cards ${
+        CloudCards.length === 1 ? 'docs__m-width-dekstop' : ''
+      }`}
+    >
+      {CloudCards.map((c) => (
         <Card
           key={c.title}
           title={c.title}

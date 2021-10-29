@@ -87,42 +87,50 @@ export default ({ data, location, pageContext }) => {
     navigate(selectedProduct.link);
   };
 
-  const handleVersionChange = useCallback(async (e, value = null) => {
-    const newValue = value ? value : e.target.value;
-    const newVersion = versionList.filter((v) => v.id === newValue)[0];
-    setVersion(newVersion);
-    const slugPath = slug.slice(4).join('/') || '';
+  const handleVersionChange = useCallback(
+    async (e, value = null) => {
+      const newValue = value ? value : e.target.value;
+      const newVersion = versionList.filter((v) => v.id === newValue)[0];
+      setVersion(newVersion);
+      const slugPath = slug.slice(4).join('/') || '';
 
-    const newVersionLinksContent = (await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`)).default;
-    const links = [];
+      const newVersionLinksContent = (
+        await import(`../docs/${product.slug}/${newVersion.id}/doc-links.yml`)
+      ).default;
+      const links = [];
 
-    function createArrayLinks(el) {
-      el.forEach((i) => {
-        i.link && links.push(i.link.replace(/\//g, ''));
-        i.items && createArrayLinks(i.items);
-      });
-    }
-
-    createArrayLinks(newVersionLinksContent);
-
-    claenStorage();
-
-    if (links.includes(slugPath.replace(/\//g, ''))) {
-      navigate(`/docs/${product.slug}/${newVersion.id}/${slugPath}`);
-    } else {
-      navigate(`/docs/${product.slug}/${newVersion.link}/`);
-    }
-  }, [product.slug, slug, versionList]);
-
-  const handleViewMore = useCallback(({ docs }) => {
-    if (docs) {
-      if (docs.indexOf('http://') === 0 || docs.indexOf('https://') === 0) {
-        window.location = docs;
-      } else {
-        navigate(`/docs/${product.slug}/${version.id}/${docs}`);
+      function createArrayLinks(el) {
+        el.forEach((i) => {
+          i.link && links.push(i.link.replace(/\//g, ''));
+          i.items && createArrayLinks(i.items);
+        });
       }
-    }
-  }, [product.slug, version.id]);
+
+      createArrayLinks(newVersionLinksContent);
+
+      claenStorage();
+
+      if (links.includes(slugPath.replace(/\//g, ''))) {
+        navigate(`/docs/${product.slug}/${newVersion.id}/${slugPath}`);
+      } else {
+        navigate(`/docs/${product.slug}/${newVersion.link}/`);
+      }
+    },
+    [product.slug, slug, versionList],
+  );
+
+  const handleViewMore = useCallback(
+    ({ docs }) => {
+      if (docs) {
+        if (docs.indexOf('http://') === 0 || docs.indexOf('https://') === 0) {
+          window.location = docs;
+        } else {
+          navigate(`/docs/${product.slug}/${version.id}/${docs}`);
+        }
+      }
+    },
+    [product.slug, version.id],
+  );
 
   const footer = (
     <div>
@@ -162,7 +170,18 @@ export default ({ data, location, pageContext }) => {
         </div>
       </div>
     );
-  }, [data.releaseNotes, footer, handleVersionChange, handleViewMore, menuLinks, pageContext.slug, slug, version, versionList, versions]);
+  }, [
+    data.releaseNotes,
+    footer,
+    handleVersionChange,
+    handleViewMore,
+    menuLinks,
+    pageContext.slug,
+    slug,
+    version,
+    versionList,
+    versions,
+  ]);
 
   return (
     <Layout location={location}>
@@ -221,7 +240,7 @@ export default ({ data, location, pageContext }) => {
 };
 
 export const query = graphql`
-  query($releaseNotesSlug: String, $linksSlug: String) {
+  query ($releaseNotesSlug: String, $linksSlug: String) {
     linkentries(slug: { eq: $linksSlug }) {
       id
       content

@@ -22,7 +22,7 @@ After creating an OAuth client in Google, configuring $AESproductName$ to make u
 1. Create an [OAuth Filter](../../../topics/using/filters/oauth2) with the credentials from above:
 
     ```yaml
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: Filter
     metadata:
       name: google
@@ -41,7 +41,7 @@ After creating an OAuth client in Google, configuring $AESproductName$ to make u
 2. Create a [FilterPolicy](../../../topics/using/filters/) to use the `Filter` created above
 
     ```yaml
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: FilterPolicy
     metadata:
       name: google-policy

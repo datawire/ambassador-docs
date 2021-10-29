@@ -1,10 +1,15 @@
 # Using cert-manager
 
-$productName$ has simple and easy built-in support for automatically using ACME to create and renew TLS
-certificates; configured by the [`AmbassadorHost` resource](../../topics/running/host-crd/).  However, it only supports ACME's
-`http-01` challenge; if you require more flexible certificate management (such as using ACME's `dns-01` challenge, or
-using a non-ACME certificate source), $productName$ also supports using external certificate management
-tools.
+[//]: # (+FIX+ link to "TLS and certificates" concept)
+
+$AESproductName$ has simple and easy built-in support for automatically [using ACME] with the
+`http-01` challenge to create and renew TLS certificates. However, this support is not available
+in $OSSproductName$, and it is limited to the ACME `http-01` challenge type. If you're running
+$OSSproductName$, or if you require more flexible certificate management (such as using ACME's
+`dns-01` challenge, or using a non-ACME certificate source), external certificate management
+tools are also supported.
+
+[using ACME]: (../../topics/running/host-crd/#acme-support)
 
 One such tool is Jetstack's [cert-manager](https://github.com/jetstack/cert-manager), which is a general-purpose tool
 for managing certificates in Kubernetes.  Cert-manager will automatically create and renew TLS certificates and store
@@ -101,7 +106,7 @@ The DNS-01 challenge verifies domain ownership by proving you have control over 
       name: myzone.route53.com
       # cert-manager will put the resulting Secret in the same Kubernetes 
       # namespace as the Certificate. You should create the certificate in 
-      # whichever namespace you want to configure an AmbassadorHost.
+      # whichever namespace you want to configure a Host.
     spec:
       secretName: ambassador-certs
       issuerRef:
@@ -155,7 +160,7 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
       name: ambassador-certs
       # cert-manager will put the resulting Secret in the same Kubernetes 
       # namespace as the Certificate. You should create the certificate in 
-      # whichever namespace you want to configure an AmbassadorHost.
+      # whichever namespace you want to configure a Host.
       namespace: ambassador
     spec:
       secretName: ambassador-certs
@@ -184,14 +189,14 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
     Error preparing issuer for certificate default/ambassador-certs: http-01 self check failed for domain "example.com
     ```
 
-4. Create an AmbassadorMapping for the `/.well-known/acme-challenge/` route.
+4. Create a Mapping for the `/.well-known/acme-challenge/` route.
 
-    cert-manager uses an `Ingress` to issue the challenge to `/.well-known/acme-challenge/` that is incompatible with Ambassador. We will need to create an `AmbassadorMapping` so the cert-manager can reach the temporary pod.
+    cert-manager uses an `Ingress` to issue the challenge to `/.well-known/acme-challenge/` that is incompatible with Ambassador. We will need to create a `Mapping` so the cert-manager can reach the temporary pod.
  
     ```yaml
     ---
-    apiVersion: x.getambassador.io/v3alpha1
-    kind: AmbassadorMapping
+    apiVersion: getambassador.io/v3alpha1
+    kind: Mapping
     metadata:
       name: acme-challenge-mapping
     spec:

@@ -2,9 +2,9 @@
 
 Cross-Origin resource sharing lets users request resources (e.g., images, fonts, videos) from domains outside the original domain.
 
-CORS configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`AmbassadorMapping`](../mappings#configuring-ambassadormappings).
+CORS configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`Mapping`](../mappings#configuring-Mappings).
 
-When the CORS attribute is set at either the `AmbassadorMapping` or `Module` level, $productName$ will intercept the pre-flight `OPTIONS` request and respond with the appropriate CORS headers. This means you will not need to implement any logic in your upstreams to handle these CORS `OPTIONS` requests.
+When the CORS attribute is set at either the `Mapping` or `Module` level, $productName$ will intercept the pre-flight `OPTIONS` request and respond with the appropriate CORS headers. This means you will not need to implement any logic in your upstreams to handle these CORS `OPTIONS` requests.
 
 The flow of the request will look similar to the following:
 ```
@@ -77,8 +77,8 @@ The `cors` attribute enables the CORS filter. The following settings are support
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  cors
 spec:

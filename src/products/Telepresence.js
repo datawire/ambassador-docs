@@ -12,12 +12,18 @@ const Telepresence = () => (
     <h1 className="docs__heading-primary docs__heading-primary--aligned">
       <Icon name="telepresence-icon" /> Telepresence
     </h1>
-    <p>Code and test microservices locally against a remote Kubernetes cluster.</p>
-    <Link to={goToTelepresenceQuickStart} className="docs__button-secondary docs__m-bottom-50">
-      Get Started <Icon name="right-arrow" className="docs__button-secondary--arrow" />
+    <p>
+      Code and test microservices locally against a remote Kubernetes cluster.
+    </p>
+    <Link
+      to={goToTelepresenceQuickStart}
+      className="docs__button-secondary docs__m-bottom-50"
+    >
+      Get Started{' '}
+      <Icon name="right-arrow" className="docs__button-secondary--arrow" />
     </Link>
     <div className="docs__cards">
-      {TelepresenceCards.map(c => (
+      {TelepresenceCards.map((c) => (
         <Card
           key={c.title}
           title={c.title}

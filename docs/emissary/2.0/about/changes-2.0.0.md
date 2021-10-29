@@ -1,68 +1,79 @@
 import Alert from '@material-ui/lab/Alert';
 
-Major Changes in $productName$ 2.0.0
-====================================
+Major Changes in $productName$ 2.0
+==================================
 
-# 2.0 is a Developer Preview!
+We're pleased to introduce $productName$ 2.0.4 for general availability!
+The 2.X family introduces a number of changes to allow $productName$
+to more gracefully handle larger installations, reduce global configuration to
+better handle multitenant or multiorganizational installations, reduce memory
+footprint, and improve performance. We welcome feedback!! Join us on
+[Slack](https://a8r.io/slack) and let us know what you think.
 
-We're pleased to introduce $productName$ 2.0 as a **developer preview**. The 2.X family introduces
-a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global
-configuration to better handle multitenant or multiorganizational installations, reduce memory footprint,
-and improve performance. We welcome feedback!! Join us on [Slack](https://a8r.io/slack) and let us know
-what you think.
+While $productName$ 2.0 is functionally compatible with $productName$ 1.14, note
+that this is a **major version change** and there are important differences between
+$productName$ 1.X and 2.0. For details, read on.
 
-While $productName$ 2.0.0 is functionally compatible with $productName$ 1.13, some resources have moved
-into a different APIgroup with different names. Upgrading will require editing your configuration.
+## 1. Configuration API Version `getambassador.io/v3alpha1`
 
-## 1. Configuration API Version `x.getambassador.io/v3alpha1`
-
-$productName$ 2.0.0 introduces API version `x.getambassador.io/v3alpha1` for configuration changes that are not backwards compatible with the 1.X family, notably the `AmbassadorListener`, `AmbassadorHost`, and `AmbassadorMapping` resources (see below). Obviously, `v3alpha1` is an early version that may change as we receive feedback.
-
-Additionally, configuration resource API versions `getambassador.io/v0` and `getambassador.io/v1` are no longer supported.
-
-## 2. `AmbassadorListener`s, `AmbassadorHost`s, and `AmbassadorMapping`s
-
-$productName$ 2.0.0 introduces the new **mandatory** `AmbassadorListener` CRD, and brings new names for the
-`AmbassadorHost` and `AmbassadorMapping` resources.
-
-**NOTE WELL:** `Host` and `Mapping` are **not supported** in $productName$ 2.0.0.
-
-The motivation behind the change is that certain semantics around `AmbassadorListener`s, `AmbassadorHost`s, and `AmbassadorMapping`s change:
-
-   1. `AmbassadorListener`s are never created by $productName$: they **must** be defined by the user.
-   2. $productName$ does not make sure that a wildcard `AmbassadorHost` exists: if the wildcard behavior is
-      needed, an `AmbassadorHost` with a `hostname` of `"*"` must be defined by the user.
-   3. The semantics of which `AmbassadorMappings` associate with which `AmbassadorHost` are different from how `Mapping`s
-      and `Host`s worked.
-   4. `AmbassadorMapping` gains a `hostname` element. `host` is an exact match or a regex, as determined by `host_regex`, but
-      `hostname` is always a DNS glob.
+$productName$ 2.0 introduces API version `getambassador.io/v3alpha1` to allow 
+certain changes in configuration resources that are not backwards compatible with
+$productName$ 1.X. The most notable example of change is the addition of the
+**mandatory** `Listener` resource; however, there are important changes
+in `Host` and `Mapping` as well.
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.<br/>
-  <a href="../../topics/using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>.
+  $productName$ 2.0.4 supports only configuration resource API version
+  <code>getambassador.io/v3alpha1</code>. A later version will reintroduce support for
+  <code>getambassador.io/v2</code>.<br/>
+  <br/>
+  $productName$ 2.X does not support API versions <code>getambassador.io/v0</code>
+  or <code>getambassador.io/v1</code>.
 </Alert>
 
-### The `AmbassadorListener` CRD
+API version `getambassador.io/v3alpha1` replaces `x.getambassador.io/v3alpha1` from
+the 2.0 developer previews. `getambassador.io/v3alpha1` may still change as we receive
+feedback.
 
-The new [`AmbassadorListener` CRD](../../topics/running/ambassadorlistener) defines where and how $productName$ should listen for requests from the network, and which `AmbassadorHost` definitions should be used to process those requests.
+## 2. Kubernetes 1.22 and Structural CRDs
 
-**Note that `AmbassadorListener`s are never created by $productName$, and must be defined by the user.** If you do not
-define any `AmbassadorListener`s, $productName$ will not listen anywhere for connections, and therefore won't do
+Kubernetes 1.22 requires [<i>structural CRDs</i>](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/).
+This change is primarily meant to support better CRD validation, but it also has the 
+effect that union types are no longer allowed in CRDs: for example, an element that can be
+either a string or a list of strings is not allowed. Several such elements appeared in the
+`getambassador.io/v2` CRDs, requiring changes. In `getambassador.io/v3alpha1`:
+
+- `ambassador_id` must always be a list of strings
+- `Host.mappingSelector` supersedes `Host.selector`, and controls association between Hosts and Mappings
+- `Mapping.hostname` supersedes `Mapping.host` and `Mapping.host_regex`
+- `Mapping.tls` can only be a string
+- `Mapping.labels` always requires maps instead of strings
+
+## 2. `Listener`s, `Host`s, and `Mapping`s
+
+$productName$ 2.0 introduces the new **mandatory** `Listener` CRD, and
+brings some changes for the `Host` and `Mapping` resources.
+
+### The `Listener` CRD
+
+The new [`Listener` CRD](../../topics/running/listener) defines where and how $productName$ should listen for requests from the network, and which `Host` definitions should be used to process those requests.
+
+**Note that `Listener`s are never created by $productName$, and must be defined by the user.** If you do not
+define any `Listener`s, $productName$ will not listen anywhere for connections, and therefore won't do
 anything useful. It will log a `WARNING` to this effect.
 
-An `AmbassadorListener` specifically defines
+A `Listener` specifically defines
 
 - `port`: a port number on which to listen for new requests;
 - `protocol` and `securityModel`: the protocol stack and security model to use (e.g. `HTTPS` using the `X-Forwarded-Proto` header); and
-- `hostBinding`: how to tell if a given `AmbassadorHost` should be associated with this `AmbassadorListener`:
-   - an `AmbassadorListener` can choose to consider all `AmbassadorHost`s, or only `AmbassadorHost`s in the same namespace as the `AmbassadorListener`, or
-   - an `AmbassadorListener` can choose to consider only `AmbassadorHost`s with a particular Kubernetes `label`.
+- `hostBinding`: how to tell if a given `Host` should be associated with this `Listener`:
+   - a `Listener` can choose to consider all `Host`s, or only `Host`s in the same namespace as the `Listener`, or
+   - a `Listener` can choose to consider only `Host`s with a particular Kubernetes `label`.
 
-**Note that the `hostBinding ` is mandatory.** An `AmbassadorListener` _must_ specify how to identify the `AmbassadorHost`s to associate with the `AmbassadorListener`', or the `AmbassadorListener` will be rejected. This is intended to help prevent cases where an `AmbassadorListener` mistakenly grabs too many `AmbassadorHost`s: if you truly need an `AmbassadorListener` that associates with all `AmbassadorHost`s, the easiest way is to tell the `AmbassadorListener` to look for `AmbassadorHost`s in all namespaces, with no further selectors, for example:
+**Note that the `hostBinding ` is mandatory.** A `Listener` _must_ specify how to identify the `Host`s to associate with the `Listener`', or the `Listener` will be rejected. This is intended to help prevent cases where a `Listener` mistakenly grabs too many `Host`s: if you truly need a `Listener` that associates with all `Host`s, the easiest way is to tell the `Listener` to look for `Host`s in all namespaces, with no further selectors, for example:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: listener
 metadata:
   name: all-hosts-listener
@@ -75,64 +86,72 @@ spec:
       from: ALL
 ```
 
-Note also that there is no limit on how many `AmbassadorListener`s may be created, and as such no limit on the number of ports to which an `AmbassadorHost` may be associated.
+A `Listener` that has no associated `Host`s will be logged as a `WARNING`, and will not be included in the Envoy configuration generated by $productName$.
+
+Note also that there is no limit on how many `Listener`s may be created, and as such no limit on the number of ports to which a `Host` may be associated.
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.<br/>
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.
 </Alert>
 
-### Wildcard `AmbassadorHost`s
+### Wildcard `Host`s No Longer Created
 
 In $productName$ 1.X, $productName$ would make sure that a wildcard `Host`, with a `hostname` of `"*"`, was always present.
-$productName$ 2.X does **not** force a wildcard `AmbassadorHost`: if you need the wildcard behavior, you will need to create
-an `AmbassadorHost` with a hostname of `"*"`.
+$productName$ 2.X does **not** force a wildcard `Host`: if you need the wildcard behavior, you will need to create
+a `Host` with a hostname of `"*"`.
 
 Of particular note is that $productName$ **will not** respond to queries to an IP address unless a wildcard
-`AmbassadorHost` is present. If `foo.example.com` resolves to `10.11.12.13`, and the only `AmbassadorHost` has a
+`Host` is present. If `foo.example.com` resolves to `10.11.12.13`, and the only `Host` has a
 `hostname` of `foo.example.com`, then:
 
 - requests to `http://foo.example.com/` will work, but
 - requests to `http://10.11.12.13/` will **not** work.
 
-Adding an `AmbassadorHost` with a `hostname` of `"*"` will allow the second query to work.
+Adding a `Host` with a `hostname` of `"*"` will allow the second query to work.
 
 <Alert severity="info">
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.
 </Alert>
 
-### `AmbassadorHost` and `AmbassadorMapping` Association
+### `Host` and `Mapping` Association
 
-The [`AmbassadorHost` CRD](../../topics/running/host-crd) continues to define information about hostnames, TLS certificates, and how to handle requests that are "secure" (using HTTPS) or "insecure" (using HTTP). The [`AmbassadorMapping` CRD](../../topics/using/intro-mappings) continues to define how to map the URL space to upstream services.
+The [`Host` CRD](../../topics/running/host-crd) continues to define information about hostnames, TLS certificates, and how to handle requests that are "secure" (using HTTPS) or "insecure" (using HTTP). The [`Mapping` CRD](../../topics/using/intro-mappings) continues to define how to map the URL space to upstream services.
 
-However, in $productName$ 2.0.0, an `AmbassadorMapping` will not be associated with an `AmbassadorHost` unless at least one of the following is true:
+However, in $productName$ 2.0, a `Mapping` will not be associated with a `Host` unless at least one of the following is true:
 
-- The `AmbassadorMapping` specifies a `hostname` attribute that matches the `AmbassadorHost` in question.
-- The `AmbassadorHost` specifies a `selector` that matches the `AmbassadorMapping`'s Kubernetes `label`s.
-   - Prior to 2.0.0, an `AmbassadorHost` in which no `selector` was specified would have a default `selector`; this is no longer the case.
+- The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
 
-If neither of the above is true, the `AmbassadorMapping` will not be associated with the `AmbassadorHost` in question. This is intended to help manage memory consumption with large numbers of `AmbassadorHost`s and large numbers of `AmbassadorMapping`s.
+   - Note that a `getambassador.io/v2` `Mapping` has `host` and `host_regex`, rather than `hostname`.
+      - A `getambassador.io/v3alpha1` `Mapping` will honor `host` and `host_regex` as a transition aid, but `host` and `host_regex` are deprecated in favor of `hostname`.
+      - A `Mapping` that specifies `host_regex: true` will be associated with all `Host`s. This is generally far less desirable than using `hostname` with a DNS glob.
 
-An `AmbassadorListener` that has no associated `AmbassadorHost`s will be logged as a `WARNING`, and will not be included in the Envoy configuration generated by $productName$.
+- The `Host` specifies a `mappingSelector` that matches the `Mapping`'s Kubernetes `label`s.
+
+   - Note that a `getambassador.io/v2` `Host` has a `selector`, rather than a `mappingSelector`.
+      - A `getambassador.io/v3alpha1` `Host` ignores `selector` and, instead, looks only at `mappingSelector`.
+      - Where a `selector` got a default value if not specified, `mappingSelector` must be explicitly stated.
+
+Without either a `hostname` match or a `label` match, the `Mapping` will not be associated with the `Host` in question. This is intended to help manage memory consumption with large numbers of `Host`s and large numbers of `Mapping`s.
 
 <Alert severity="info">
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.<br/>
-  <a href="../../topics/using/intro-mappings">Learn more about <code>AmbassadorMapping</code></a>.
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.<br/>
+  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
 </Alert>
 
-### Independent `AmbassadorHost` Actions
+### Independent `Host` Actions
 
-Each `AmbassadorHost` can specify its `requestPolicy.insecure.action` independently of any other `AmbassadorHost`, allowing for HTTP routing as flexible as HTTPS routing.
+Each `Host` can specify its `requestPolicy.insecure.action` independently of any other `Host`, allowing for HTTP routing as flexible as HTTPS routing.
 
 <Alert severity="info">
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.
 </Alert>
 
-### `AmbassadorHost`, `TLSContext`, and TLS Termination
+### `Host`, `TLSContext`, and TLS Termination
 
-In $productName$ 2.0.0, **`AmbassadorHost`s are required for TLS termination**. It is no longer sufficient to create a [`TLSContext`](../../topics/running/tls/#tlscontext) by itself; the [`AmbassadorHost`](../../topics/running/host-crd) is required.
+In $productName$ 2.0, **`Host`s are required for TLS termination**. It is no longer sufficient to create a [`TLSContext`](../../topics/running/tls/#tlscontext) by itself; the [`Host`](../../topics/running/host-crd) is required.
 
-The minimal setup for TLS termination is therefore a Kubernetes `Secret` of type `kubernetes.io/tls`, and an `AmbassadorHost` that uses it:
+The minimal setup for TLS termination is therefore a Kubernetes `Secret` of type `kubernetes.io/tls`, and a `Host` that uses it:
 
 ```yaml
 ---
@@ -143,8 +162,8 @@ metadata:
 data:
   tls secret goes here
 ---
-apiversion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiversion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: minimal-host
 spec:
@@ -153,57 +172,67 @@ spec:
     name: minimal-secret
 ```
 
-It is **not** necessary to explicitly state a `TLSContext` in the `AmbassadorHost`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `AmbassadorHost`. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+It is **not** necessary to explicitly state a `TLSContext` in the `Host`: setting `tlsSecret` is enough. Of course, `TLSContext` is still the ideal way to share TLS configuration between more than one `Host`. For further examples, see [Configuring $productName$ Communications](../../howtos/configure-communications).
 
 <Alert severity="info">
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.<br/>
+  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.<br/>
   <a href="../../topics/running/tls/#tlscontext">Learn more about <code>TLSContext</code></a>.
 </Alert>
 
 ### `PROXY` Protocol Configuration
 
-Configuration for the `PROXY` protocol is part of the `AmbassadorListener` resource in $productName$ 2.0.0, so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer supported. Note that the `AmbassadorListener` resource can configure `PROXY` resource per-`AmbassadorListener`, rather than having a single global setting. For further information, see the [`AmbassadorListener` documentation](../../topics/running/ambassadorlistener).
+Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer supported. Note that the `Listener` resource can configure `PROXY` resource per-`Listener`, rather than having a single global setting. For further information, see the [`Listener` documentation](../../topics/running/listener).
 
 <Alert severity="info">
-  <a href="../../topics/running/ambassadorlistener">Learn more about <code>AmbassadorListener</code></a>.
+  <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.
 </Alert>
 
-### `AmbassadorHost`s and ACME
+### `Mapping`s, `TCPMapping`s, and TLS Origination
 
-In $productName$ 2.0.0, ACME will be disabled if an `AmbassadorHost` does not set `acmeProvider` at all (prior to 2.0.0, not mentioning `acmeProvider` would result in the ACME client attempting, and failing, to start). If `acmeProvider` is set, but `acmeProvider.authority` is not set, the ACME client will continue to default to Let's Encrypt, in order to preserve compatibility with $productName$ prior to 2.0.0. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+A `getambassador.io/v2` `Mapping` or `TCPMapping` could specify `tls: true` to indicate TLS origination without supplying a certificate. This is not supported in `getambassador.io/v3alpha1`: instead, use an `https://` prefix on the `service`. In the [Mapping](../../topics/using/mappings/#using-tls), this is straightforward, but [there are more details for the `TCPMapping` when using TLS](../../topics/using/tcpmappings/#tcpmapping-and-tls).
 
 <Alert severity="info">
-  <a href="../../topics/running/host-crd">Learn more about <code>AmbassadorHost</code></a>.
+  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
+</Alert>
+
+### `Mapping`s and `labels`
+
+The `Mapping` CRD includes a `labels` field, used with rate limiting. The
+[syntax of the `labels`](../../topics/using/rate-limits#attaching-labels-to-requests) has changed
+for compatibility with Kubernetes 1.22.
+
+<Alert severity="info">
+  <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
 </Alert>
 
 ## 3. Other Changes
 
 ### Envoy V3 API by Default
 
-By default, $productName$ will configure Envoy using the [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api). In 2.0.0, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION` environment variable to "V2"; a future version will remove V2 support.
+By default, $productName$ will configure Envoy using the [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api). In $productName$ 2.0, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION` environment variable to "V2"; a future version will remove V2 support.
 
 ### More Performant Reconfiguration by Default
 
-The environment variable `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of the code $productName$ uses to validate and generate envoy configuration. It is enabled by default in 2.0.0.
+The environment variable `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of the code $productName$ uses to validate and generate envoy configuration. It is enabled by default in $productName$ 2.0.
 
 ### TLS, the `ambassador` `Module`, and the `tls` `Module`
 
 It is no longer possible to configure TLS using the `tls` element of the `ambassador` `Module` or using the `tls` `Module`. Both of these cases are correctly covered by the `TLSContext` resource.
 
-### `TLSContext` `redirect_cleartext_from` and `AmbassadorHost` `insecure.additionalPort`
+### `TLSContext` `redirect_cleartext_from` and `Host` `insecure.additionalPort`
 
-`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `AmbassadorHost` CRD. Both of these cases are covered by adding additional `AmbassadorListener`s. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
+`redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName$ Communications](../../howtos/configure-communications).
 
 ### Service Preview No Longer Supported
 
-Service Preview is no longer supported in $productName$ 2.0.0, as its use cases are supported by Telepresence.
+Service Preview is no longer supported in $productName$ 2.0, as its use cases are supported by Telepresence.
 
 ### Edge Policy Console No Longer Supported
 
-The Edge Policy Console has been removed in $productName$ 2.0.0, in favor of Ambassador Cloud.
+The Edge Policy Console has been removed in $productName$ 2.0, in favor of Ambassador Cloud.
 
 ### `Project` CRD No Longer Supported
 
-The `Project` CRD has been removed in $productName$ 2.0.0, in favor of Argo.
+The `Project` CRD has been removed in $productName$ 2.0, in favor of Argo.
 
 

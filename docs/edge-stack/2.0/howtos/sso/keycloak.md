@@ -38,7 +38,7 @@ Update the Keycloak `Filter` and `FilterPolicy` with the following:
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: Filter
    metadata:
      name: keycloak-filter
@@ -55,7 +55,7 @@ Update the Keycloak `Filter` and `FilterPolicy` with the following:
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: FilterPolicy
    metadata:
      name: httpbin-policy

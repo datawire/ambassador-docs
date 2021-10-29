@@ -38,7 +38,7 @@ Update the Auth0 `Filter` and `FilterPolicy`. You can get the `ClientID` and `se
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: Filter
    metadata:
      name: auth0-filter
@@ -56,7 +56,7 @@ Update the Auth0 `Filter` and `FilterPolicy`. You can get the `ClientID` and `se
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: FilterPolicy
    metadata:
      name: httpbin-policy

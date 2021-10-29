@@ -1,11 +1,11 @@
-# Using Ambassador Module defaults
+# Using `ambassador` `Module` defaults
 
 ## The defaults element
 
 If present, the `ambassador Module` can define a set of defaults that will automatically be applied to certain resources:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador
@@ -22,9 +22,9 @@ spec:
       top_key2: value2  # toplevel defaults dictionary for it.
 ```
 
-### AmbassadorMapping
+### Mapping
 
-Currently, only the `AmbassadorMapping` resource uses the `defaults` mechanism. `AmbassadorMapping` looks first for defaultable resources in the `httpmapping` class, including:
+Currently, only the `Mapping` resource uses the `defaults` mechanism. `Mapping` looks first for defaultable resources in the `httpmapping` class, including:
 
 - [`add_request_headers`](../../using/headers/add_request_headers)
 - [`add_response_headers`](../../using/headers/add_response_headers)

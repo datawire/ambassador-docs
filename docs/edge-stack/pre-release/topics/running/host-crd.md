@@ -1,19 +1,19 @@
-# The `AmbassadorHost` CRD
+# The `Host` CRD
 
-The custom `AmbassadorHost` resource defines how $productName$ will be
+The custom `Host` resource defines how $productName$ will be
 visible to the outside world. It collects all the following information in a
 single configuration resource:
 
 * The hostname by which $productName$ will be reachable
 * How $productName$ should handle TLS certificates
 * How $productName$ should handle secure and insecure requests
-* Which `AmbassadorMappings` should be associated with this `AmbassadorHost`
+* Which `Mappings` should be associated with this `Host`
 
-A minimal `AmbassadorHost` resource, using Let’s Encrypt to handle TLS, would be:
+A minimal `Host` resource, using Let’s Encrypt to handle TLS, would be:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: minimal-host
 spec:
@@ -22,14 +22,14 @@ spec:
     email: julian@example.com
 ```
 
-This `AmbassadorHost` tells $productName$ to expect to be reached at `host.example.com`,
+This `Host` tells $productName$ to expect to be reached at `host.example.com`,
 and to manage TLS certificates using Let’s Encrypt, registering as
 `julian@example.com`. Since it doesn’t specify otherwise, requests using
 cleartext will be automatically redirected to use HTTPS, and $productName$ will
 not search for any specific further configuration resources related to this
-`AmbassadorHost`.
+`Host`.
 
-Many examples of setting up `AmbassadorHost` and `AmbassadorListener` are available in the
+Many examples of setting up `Host` and `Listener` are available in the
 [Configuring $productName$ to Communicate](../../../howtos/configure-communications) document.
 
 ## Setting the `hostname`
@@ -49,25 +49,25 @@ The following are _not_ valid:
 In all cases, the `hostname` is used to match the `:authority` header for HTTP routing.
 When TLS termination is active, the `hostname` is also used for SNI matching.
 
-## Controlling Association with `AmbassadorMapping`s
+## Controlling Association with `Mapping`s
 
-An `AmbassadorMapping` will not be associated with an `AmbassadorHost` unless at least one of the following is true:
+A `Mapping` will not be associated with a `Host` unless at least one of the following is true:
 
-- The `AmbassadorMapping` specifies a `hostname` attribute that matches the `AmbassadorHost` in question.
-- The `AmbassadorHost` specifies a `selector` that matches the `AmbassadorMapping`'s Kubernetes `label`s.
+- The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
+- The `Host` specifies a `selector` that matches the `Mapping`'s Kubernetes `label`s.
 
-If neither of the above is true, the `AmbassadorMapping` will not be associated with the `AmbassadorHost` in 
-question. This is intended to help manage memory consumption with large numbers of `AmbassadorHost`s and large
-numbers of `AmbassadorMapping`s.
+If neither of the above is true, the `Mapping` will not be associated with the `Host` in 
+question. This is intended to help manage memory consumption with large numbers of `Host`s and large
+numbers of `Mapping`s.
 
-If the `AmbassadorHost` specifies `selector` _and_ the `AmbassadorMapping` specifies `hostname`, both must match
+If the `Host` specifies `selector` _and_ the `Mapping` specifies `hostname`, both must match
 for the association to happen.
 
 The `selector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: minimal-host
 spec:
@@ -77,13 +77,13 @@ spec:
       examplehost: host
 ```
 
-This `AmbassadorHost` will associate with the first `AmbassadorMapping` below, but not
+This `Host` will associate with the first `Mapping` below, but not
 the second:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  use-this-mapping
   labels:
@@ -92,8 +92,8 @@ spec:
   prefix: /httpbin/
   service: http://httpbin.org
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  skip-this-mapping
   labels:
@@ -107,7 +107,7 @@ Future versions of $productName$ will support `matchExpressions` as well.
 
 ## Secure and insecure requests
 
-A **secure** request arrives via HTTPS; an **insecure** request does not. By default, secure requests will be routed and insecure requests will be redirected (using an HTTP 301 response) to HTTPS. The behavior of insecure requests can be overridden using the `requestPolicy` element of an `AmbassadorHost`:
+A **secure** request arrives via HTTPS; an **insecure** request does not. By default, secure requests will be routed and insecure requests will be redirected (using an HTTP 301 response) to HTTPS. The behavior of insecure requests can be overridden using the `requestPolicy` element of a `Host`:
 
 ```yaml
 requestPolicy:
@@ -131,13 +131,13 @@ requestPolicy:
 Some special cases to be aware of here:
 
 * **Case matters in the actions:** you must use e.g. `Reject`, not `reject`.
-* The `X-Forwarded-Proto` header is honored when determining whether a request is secure or insecure. For more information, see "Load Balancers, the `AmbassadorHost` Resource, and `X-Forwarded-Proto`" below.
+* The `X-Forwarded-Proto` header is honored when determining whether a request is secure or insecure. For more information, see "Load Balancers, the `Host` Resource, and `X-Forwarded-Proto`" below.
 * ACME challenges with prefix `/.well-known/acme-challenge/` are always forced to be considered insecure, since they are not supposed to arrive over HTTPS.
-* $AESproductName$ provides native handling of ACME challenges. If you are using this support, $AESproductName$ will automatically arrange for insecure ACME challenges to be handled correctly. If you are handling ACME yourself - as you must when running $OSSproductName$ - you will need to supply appropriate `AmbassadorHost` resources and Mappings to correctly direct ACME challenges to your ACME challenge handler.
+* $AESproductName$ provides native handling of ACME challenges. If you are using this support, $AESproductName$ will automatically arrange for insecure ACME challenges to be handled correctly. If you are handling ACME yourself - as you must when running $OSSproductName$ - you will need to supply appropriate `Host` resources and `Mapping`s to correctly direct ACME challenges to your ACME challenge handler.
 
 ## TLS settings
 
-The `AmbassadorHost` is responsible for high-level TLS configuration in $productName$. There are
+The `Host` is responsible for high-level TLS configuration in $productName$. There are
 several settings covering TLS:
 
 ### ACME support
@@ -145,11 +145,11 @@ several settings covering TLS:
 $AESproductName$ comes with built in support for automatic certificate
 management using the [ACME protocol](https://tools.ietf.org/html/rfc8555).
 
-It does this by using the `hostname` of an `AmbassadorHost` to request a certificate from
+It does this by using the `hostname` of a `Host` to request a certificate from
 the `acmeProvider.authority` using the `HTTP-01` challenge. After requesting a
 certificate, $AESproductName$ will then manage the renewal process automatically.
 
-The `acmeProvider` element of the `AmbassadorHost` configures the Certificate Authority
+The `acmeProvider` element of the `Host` configures the Certificate Authority
 $AESproductName$ will request the certificate from and the email address that the CA
 will use to notify about any lifecycle events of the certificate.
 
@@ -189,12 +189,12 @@ set using the `tlsSecret` element:
 `tlsSecret` specifies a Kubernetes `Secret` is **required** for any TLS termination to occur. If ACME is enabled,
 it will set `tlsSecret`: in all other cases, TLS termination will not occur if `tlsSecret` is not specified.
 
-The following `AmbassadorHost` will configure $productName$ to read a `Secret` named 
+The following `Host` will configure $productName$ to read a `Secret` named 
 `tls-cert` for a certificate to use when terminating TLS.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: example-host
 spec:
@@ -214,12 +214,12 @@ See the [TLS discussion](../tls) for more details.
 
 ### `tls` allows manually providing additional configuration
 
-`tls` allows specifying most of the things a `TLSContext` can, inline in the `AmbassadorHost`. Note that you **must** still 
+`tls` allows specifying most of the things a `TLSContext` can, inline in the `Host`. Note that you **must** still 
 define `tlsSecret` for TLS termination to happen. It is an error to supply both `tlsContext` and `tls`.
 
 See the [TLS discussion](../tls) for more details.
 
-## Load balancers, the `AmbassadorHost` resource, and `X-Forwarded-Proto`
+## Load balancers, the `Host` resource, and `X-Forwarded-Proto`
 
 In a typical installation, $productName$ runs behind a load balancer. The
 configuration of the load balancer can affect how $productName$ sees requests
@@ -239,4 +239,4 @@ It's important to realize that Envoy manages the `X-Forwarded-Proto` header such
 
 ### CRD specification
 
-The `AmbassadorHost` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v2/Host.proto).
+The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v3alpha1/Host.proto).

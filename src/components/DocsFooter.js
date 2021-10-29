@@ -2,7 +2,7 @@ import React from 'react';
 
 import GithubIcon from '../images/github-icon.inline.svg';
 
-const DocsFooter = ({ page, product, version }) => {
+const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
   // `page` is the `mdx` GraphQL node for this page.  I am not sure
   // under what conditions it may be unset.
   //
@@ -24,6 +24,14 @@ const DocsFooter = ({ page, product, version }) => {
         version = '2';
       }
       dstUrl = `https://github.com/telepresenceio/docs/blob/release/v${version}/${restOfFilePath}`;
+      break;
+    case 'edge-stack':
+      const isValid = edgeStackLinks?.includes(
+        `${product}/${version}/${restOfFilePath}`,
+      );
+      dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${
+        isValid ? product : 'emissary'
+      }/${version}/${restOfFilePath}`;
       break;
     default:
       dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${product}/${version}/${restOfFilePath}`;

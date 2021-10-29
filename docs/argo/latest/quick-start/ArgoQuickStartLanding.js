@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import ArgoImage from '../../../../../src/assets/images/argo.svg';
+
 import './argo-quickstart-landing.less';
 
 class ArgoQuickStartLanding extends Component {

@@ -1,16 +1,16 @@
 # Advanced rate limiting
 
-$AESproductName$ integrates a flexible, high-performance Rate Limit Service (RLS). Similar to $OSSproductName$, the RLS features a decentralized configuration model so that individual teams can manage their own rate limits. For example:
+$productName$ integrates a flexible, high-performance Rate Limit Service (RLS), which features a decentralized configuration model so that individual teams can manage their own rate limits. For example:
 
 * A service owner may want to manage load shedding characteristics and ensuring specific types of requests take precedence over other types of requests
 * An operations engineer may want to ensure service availability overall when request volume is high and limit the total number of requests being passed to upstream services
 * A security engineer may want to protect against denial-of-service attacks from a bad actor
 
-Like $AESproductName$, the $AESproductName$ RLS is designed so that many different teams, with different requirements, can independently manage and control rate limiting as necessary.
+Like $productName$ itself, the $productName$ RLS is designed so that many different teams, with different requirements, can independently manage and control rate limiting as necessary.
 
 ## Request labels and domains
 
-In $AESproductName$, each request can have multiple *labels*. Labels are arbitrary key/value pairs that contain any metadata about a given request, e.g., its IP, a hard-coded value, the path of the request, and so forth. The Rate Limit Service processes these labels and enforces any limits that are set on a label. Labels can be assigned to *domains*, which are separate namespaces. Typically, different teams would be responsible for different domains.
+In $productName$, each request can have multiple *labels*. Labels are arbitrary key/value pairs that contain any metadata about a given request, e.g., its IP, a hard-coded value, the path of the request, and so forth. The Rate Limit Service processes these labels and enforces any limits that are set on a label. Labels can be assigned to *domains*, which are separate namespaces. Typically, different teams would be responsible for different domains.
 
 ## Configuring rate limiting: The 50,000 foot view
 
@@ -19,17 +19,19 @@ Logically, configuring rate limiting is straightforward.
 1. Configure a specific mapping to include one or more request labels.
 2. Configure a limit for a given request label with the `RateLimit` resource.
 
+An important point here is that the request labels themselves have *no effect* on the request: the effect comes from the RLS making decisions *based on the labels*. The `Mapping` `labels` are literally just labels &mdash; the `RateLimit` resource is where policy gets set.
+
 In the examples below, we'll use the backend service of the quote sample application.
 
 ## Example 1: Global rate limiting for availability
 
-Imagine the backend service is a Rust-y application that can only handle 3 requests per minute before crashing. While the engineering team really wants to rewrite the backend service in Golang (because Rust isn't fast enough), they haven't had a chance to do so. We want to rate limit all requests for this service to 3 requests per minute. (ProTip: Using requests per minute simplifies testing.)
+Imagine the backend `quote` service is a JavaScript application that can only handle 3 requests per minute before crashing. While the engineering team really wants to rewrite the backend service in Golang, they haven't had the chance yet, so we want to rate limit all requests for this service to 3 requests per minute. (ProTip: Using requests per minute simplifies testing.)
 
 We update the mapping for the `quote` service to add a request label `backend` to the route as part of a `request_label_group`:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:
@@ -39,15 +41,16 @@ spec:
   labels:
     ambassador:
       - request_label_group:
-        - backend
+        - generic_key:
+            value: backend
 ```
 
-*Note* If you're modifying an existing mapping, make sure you to update the apiVersion to `v2` as above from `v1`.
+*Note* If you're modifying an existing mapping, be careful about the `apiVersion`: the `v1` `Mapping` resource did not support `labels`, so you'll need at least `v2`.
 
 We then need to configure the rate limit for the backend service. Create a new YAML file, `backend-ratelimit.yaml`, and put the following configuration into the file.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: backend-rate-limit
@@ -65,11 +68,11 @@ Deploy the rate limit with `kubectl apply -f backend-ratelimit.yaml`. (Make sure
 
 ## Example 2: Per user rate limiting
 
-Suppose you've rewritten the quote backend service in Golang, and it's humming along nicely. You then discover that some users are taking advantage of this speed to sometimes cause a big spike in requests. You want to make sure that your API doesn't get overwhelmed by any single user. We use the `remote_address` special value in our mapping, which will automatically label all requests with the calling IP address:
+Now suppose that the `quote` service has finally been rewritten in Golang, and it's humming along nicely. You then discover that some users are taking advantage of this speed to sometimes cause a big spike in requests. You want to make sure that your API doesn't get overwhelmed by any single user. We use the `remote_address` special value in our mapping, which will automatically label all requests with the calling IP address:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:
@@ -79,13 +82,14 @@ spec:
   labels:
     ambassador:
       - request_label_group:
-        - remote_address
+        - remote_address:
+            key: remote_address
 ```
 
 We then update our rate limits to limit on `remote_address`:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: backend-rate-limit
@@ -97,7 +101,7 @@ spec:
      unit: minute
 ```
 
-Note for this to work, you need to make sure you've properly configured $AESproductName$ to [propagate your original client IP address](../../topics/running/ambassador#use_remote_address).
+Note for this to work, you need to make sure you've properly configured $productName$ to [propagate your original client IP address](../../topics/running/ambassador#use_remote_address).
 
 ## Example 3: Load shedding GET requests
 
@@ -107,8 +111,8 @@ You've dramatically improved availability of the quote backend service, thanks t
 * We're going to implement a global rate limit on `GET` requests, but not `POST` requests.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:
@@ -118,16 +122,17 @@ spec:
   labels:
     ambassador:
       - request_label_group:
-        - remote_address
-        - backend_http_method:
-            header: ":method"
-            omit_if_not_present: true
+        - remote_address:
+            key: remote_address
+        - request_headers:
+            key: backend_http_method
+            header_name: ":method"
 ```
 
 When we add multiple criteria to a pattern, the entire pattern matches when ANY of the rules match (i.e., a logical OR). A pattern match then triggers a rate limit event. Our rate limiting configuration becomes:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: backend-rate-limit
@@ -145,7 +150,7 @@ Suppose, like [Example 2](#example-2-per-user-rate-limiting), you want to ensure
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador
@@ -156,13 +161,14 @@ spec:
     default_labels:
       ambassador:
         defaults:
-        - remote_address
+        - remote_address:
+            key: remote_address
 ```
 
 We can then configure a global `RateLimit` object that limits on `remote_address`:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: global-rate-limit
@@ -176,11 +182,11 @@ spec:
 
 ### Bypassing a global rate limit
 
-Sometimes, you may have an API that cannot handle as much load as others in your cluster. In this case, a global rate limit may not be enough to ensure this API is not overloaded with requests from a user. To protect this API, you will need to create a label that tells $AESproductName$ to apply a stricter limit on requests. With the above global rate limit configuration rate limiting based on `remote_address`, you will need to add a request label to the services `AmbassadorMapping`.
+Sometimes, you may have an API that cannot handle as much load as others in your cluster. In this case, a global rate limit may not be enough to ensure this API is not overloaded with requests from a user. To protect this API, you will need to create a label that tells $productName$ to apply a stricter limit on requests. With the above global rate limit configuration rate limiting based on `remote_address`, you will need to add a request label to the service's `Mapping`.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: quote-backend
 spec:
@@ -190,13 +196,14 @@ spec:
   labels:
     ambassador:
       - request_label_group:
-        - backend
+        - generic_key:
+            value: backend
 ```
 
 Now, the `request_label_group`, contains both the `generic_key: backend` *and* the `remote_address` key applied from the global rate limit. This allows us to create a separate `RateLimit` object for this route:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimit
 metadata:
   name: backend-rate-limit
@@ -217,12 +224,12 @@ The following rules apply to the rate limit patterns:
 * Patterns are order-sensitive, and must respect the order in which a request is labeled.
 * Every label in a label group must exist in the pattern in order for matching to occur.
 * By default, any type of failure will let the request pass through (fail open).
-* $AESproductName$ sets a hard timeout of 20ms on the rate limiting service. If the rate limit service does not respond within the timeout period, the request will pass through.
+* $productName$ sets a hard timeout of 20ms on the rate limiting service. If the rate limit service does not respond within the timeout period, the request will pass through.
 * If a pattern does not match, the request will pass through.
 
 ## Troubleshooting rate limiting
 
-The most common source of failure of the rate limiting service will occur when the labels generated by $AESproductName$ do not match the rate limiting pattern. By default, the rate limiting service will log all incoming labels from $AESproductName$. Use a tool such as [Stern](https://github.com/wercker/stern) to watch the rate limiting logs from $AESproductName$, and ensure the labels match your descriptor.
+The most common source of failure of the rate limiting service will occur when the labels generated by $productName$ do not match the rate limiting pattern. By default, the rate limiting service will log all incoming labels from $productName$. Use a tool such as [Stern](https://github.com/wercker/stern) to watch the rate limiting logs from $productName$, and ensure the labels match your descriptor.
 
 ## More
 
