@@ -96,9 +96,13 @@ installed, you will just need to configure the `ConsulResolver` in the
      enabled: true
    ```
 
-   > Note: you are free to change the value of the `datacenter` field
-   > in the install values.  This will be the name of your Consul
-   > Datacenter.
+   <Alert severity="info">
+
+   Note: you are free to change the value of the `datacenter` field in
+   the install values.  This will be the name of your Consul
+   Datacenter.
+
+   </Alert>
 
 4. Install Consul with Helm using the `consul-values.yaml` values file
    we just created.
@@ -130,18 +134,22 @@ installed, you will just need to configure the `ConsulResolver` in the
      datacenter: dc1
    ```
 
-   > **Note:** If you changed the name of your `datacenter` in the
-   > Consul install values, make sure to change it in the resolver
-   > above to match the name of your datacenter.
-   >
-   > If you changed the name of the helm install from `hashicorp` to
-   > another value, make sure to update the value of the `address`
-   > field in your resolver to match it.
-   >
-   > If you are having trouble figuring out what your `address` field
-   > should be, it follow this format:
-   > `http://{consul_server_pod}.{consul_server_service}.{namespace}.svc.cluster.local:{consul_port}`.
-   > The default Consul port should be `8500` unless you changed it.
+   <Alert severity="info">
+
+   **Note:** If you changed the name of your `datacenter` in the
+   Consul install values, make sure to change it in the resolver above
+   to match the name of your datacenter.
+
+   If you changed the name of the helm install from `hashicorp` to
+   another value, make sure to update the value of the `address` field
+   in your resolver to match it.
+
+   If you are having trouble figuring out what your `address` field
+   should be, it follow this format:
+   `http://{consul_server_pod}.{consul_server_service}.{namespace}.svc.cluster.local:{consul_port}`.
+   The default Consul port should be `8500` unless you changed it.
+
+   </Alert>
 
    This will tell $productName$ that Consul is a service discovery endpoint.
 
@@ -244,18 +252,22 @@ anywhere in your data center (e.g., on VMs).
    This will register the quote pod as a Consul service with the name
    `quote-consul` and the IP address of the quote pod.
 
-   > The `"consul.hashicorp.com/connect-inject": "false"` annotation
-   > tells Consul that we do not want to use Consul's Connect
-   > sidecar/proxy to register this service.  Without Consul's Connect
-   > sidecar to proxy requests, the service needs to include code to
-   > make a request to Consul to register the service.  We include the
-   > environment variables `CONSUL_IP`, `POD_IP`, and `SERVICE_NAME`
-   > to provide the Quote service with enough information to build
-   > that request and send it to Consul.  If you would like to see how
-   > that code works, please check out [our repo for the Quote
-   > service](https://github.com/datawire/quote).  Later in this guide
-   > we will show how to configure Consul's Connect sidecar/proxy as
-   > well.
+   <Alert severity="info">
+
+   The `"consul.hashicorp.com/connect-inject": "false"` annotation
+   tells Consul that we do not want to use Consul's Connect
+   sidecar/proxy to register this service.  Without Consul's Connect
+   sidecar to proxy requests, the service needs to include code to
+   make a request to Consul to register the service.  We include the
+   environment variables `CONSUL_IP`, `POD_IP`, and `SERVICE_NAME` to
+   provide the Quote service with enough information to build that
+   request and send it to Consul.  If you would like to see how that
+   code works, please check out [our repo for the Quote
+   service](https://github.com/datawire/quote).  Later in this guide
+   we will show how to configure Consul's Connect sidecar/proxy as
+   well.
+
+   </Alert>
 
 3. Verify the quote pod has been registered with Consul.  You can
    verify the quote pod is registered correctly by accessing the
@@ -331,7 +343,7 @@ application, the location of which is registered in Consul.
 
 $productName$ can also use certificates stored in Consul to originate
 TLS-encrypted connections from $productName$ to the Consul service
-mesh.  This requires the use of the Ambassador "Consul Connector".
+mesh.  This requires the use of the Ambassador *Consul Connector*.
 The following steps assume you've already set up Consul for service
 discovery, as detailed above.
 
