@@ -1,8 +1,12 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Istio integration
 
 $productName$ and Istio: Edge Proxy and Service Mesh together in one. $productName$ is deployed at the edge of your network and routes incoming traffic to your internal services (aka "north-south" traffic). [Istio](https://istio.io/) is a service mesh for microservices, and is designed to add application-level Layer (L7) observability, routing, and resilience to service-to-service traffic (aka "east-west" traffic). Both Istio and $productName$ are built using [Envoy](https://www.envoyproxy.io).
 
-$productName$ and Istio can be deployed together on Kubernetes. In this configuration, incoming traffic from outside the cluster is first routed through $productName$, which then routes the traffic to Istio-powered services. $productName$ handles authentication, edge routing, TLS termination, and other traditional edge functions.
+$productName$ and Istio can be deployed together on Kubernetes. In this configuration, $productName$ manages
+traditional edge functions such as authentication, TLS termination, edge routing, and Istio mediates communication
+from $productName$ to services, and communication between services.
 
 This allows the operator to have the best of both worlds: a high performance, modern edge service ($productName$) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/docs/tasks/traffic-management/ingress/#configuring-ingress-using-an-istio-gateway) abstraction, $productName$ still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
 
@@ -12,262 +16,158 @@ This guide will explain how to take advantage of both $productName$ and Istio to
 
 - A Kubernetes cluster version 1.15 and above
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- Istio version 1.10 or higher
 
 ## Install Istio
 
-[Istio installation](https://istio.io/docs/setup/getting-started/) is outside of the scope of this document. $productName$ will integrate with any version of Istio from any installation method.
+Start by [installing Istio](https://istio.io/docs/setup/getting-started/). Any supported installation method for 
+Istio will work for use with $productName$.
 
-## Install $productName$
+## Configure Istio Auto-Injection
 
-There a number of installation options for $productName$. See the [getting started](../../tutorials/getting-started) for the full list of installation options and instructions.
+Istio functions by supplying a sidecar container running Envoy with every service in the mesh (including
+$productName$). The sidecar is what enforces Istio policies for traffic to and from the service, notably
+including mTLS encryption and certificate handling. As such, it is very important that the sidecar be
+correctly supplied for every service in the mesh!
 
-## Integrate $productName$ and Istio
+While it is possible to manage sidecars by hand, it is far easier to allow Istio to automatically inject
+the sidecar as necessary. To do this, set the `istio-injection` label on each Kubernetes Namespace for
+which you want auto-injection:
 
-> **WARNING - Istio Regression:**
-> There is a regression in Istio 1.9.0 to 1.9.4 that causes $productName$ (and other non-Istio services) to be unable to read Istio certificates. 
->
-> A patch for this regression has been released in Istio 1.9.4.
->
-> Use Istio 1.9.4 or a version before 1.9.0 to use this integration.
+```yaml
+kubectl label namespace $namespace istio-injection=enabled --overwrite
+```
 
-$productName$ integrates with Istio in three ways:
+<Alert severity="warning">
+  We will use this label to arrange for auto-injection in the `$productNamespace$` Namespace below, but
+  it is <b>critical</b> that you also apply it on other Namespaces in which you install services.
+</Alert>
 
-* Uses Istio [mutual TLS (mTLS)](#mutual-tls) certificates for end-to-end encryption
-* Integrates with Prometheus for centralized metrics collection
-* Integrates with Istio distributed tracing for end-to-end observability
+## Install $productName$ with Istio Integration
 
-Integrating $productName$ and Istio allows you to take advantage of the edge routing capabilities of $productName$ while maintaining the end-to-end security and observability that makes Istio so powerful.
+Properly integrating $productName$ with Istio provides support for:
 
-### Mutual TLS
+* [Mutual TLS (mTLS)](#mutual-tls), with certificates managed by Istio, to allow end-to-end encryption
+for east-west traffic;
+* Automatic generation of Prometheus metrics for services; and
+* Istio distributed tracing for end-to-end observability.
 
-The process of collecting mTLS certificates is different depending on your Istio version. Select your Istio version below for instructions on how to integrate $productName$ with Istio.
+The simplest way to enable everything is to install $productName$ using [Helm](https://helm.sh), though it
+is (of course) also possible when using manual installation with YAML.
 
-- [Istio 1.5 and above](#integrating-ambassador-with-istio-15-and-above)
-- [Istio 1.4 and below](#integrating-ambassador-with-istio-14-and-below)
+### Installation with Helm
 
-#### Integrating $productName$ with Istio 1.5 and above
+To install with Helm, write the following YAML to a file called `istio-integration.yaml`:
 
-Istio 1.5 introduced [istiod](https://istio.io/docs/ops/deployment/architecture/#istiod) which moved Istio towards a single control plane process.
+```yaml
+# These are annotations that will be added to the $productName$ pods.
+podAnnotations:
+  # These first two annotations tell Istio not to try to do port management for the
+  # $productName$ pod itself. Though these annotations are placed on the $productName$
+  # pods, they are interpreted by Istio.
+  traffic.sidecar.istio.io/includeInboundPorts: ""      # do not intercept any inbound ports
+  traffic.sidecar.istio.io/includeOutboundIPRanges: ""  # do not intercept any outbound traffic
 
-Below we will update the deployment of $productName$ to include the `istio-proxy` sidecar, and configure the system to allow Istio and $productName$ to share mTLS certificates:
+  # We use proxy.istio.io/config to tell the Istio proxy to write newly-generated mTLS certificates
+  # into /etc/istio-certs, which will be mounted below. Though this annotation is placed on the
+  # $productName$ pods, it is interpreted by Istio.
+  proxy.istio.io/config: |
+    proxyMetadata:
+      OUTPUT_CERTS: /etc/istio-certs
+
+  # We use sidecar.istio.io/userVolumeMount to tell the Istio sidecars to mount the istio-certs
+  # volume at /etc/istio-certs, allowing the sidecars to see the generated certificates. Though
+  # this annotation is placed on the $productName$ pods, it is interpreted by Istio.
+  sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs"}]' 
+
+# We define a single storage volume called "istio-certs". It starts out empty, and Istio
+# uses it to communicate mTLS certs between the Istio proxy and the Istio sidecars (see the
+# annotations above).
+volumes:
+  - emptyDir:
+      medium: Memory
+    name: istio-certs
+
+# We also tell $productName$ to mount the "istio-certs" volume at /etc/istio-certs in the 
+# $productName$ pod. This gives $productName$ access to the mTLS certificates, too.
+volumeMounts:
+  - name: istio-certs
+    mountPath: /etc/istio-certs/
+    readOnly: true
+
+# Finally, we need to set some environment variables for $productName$.
+env:
+  # AMBASSADOR_ISTIO_SECRET_DIR tells $productName$ to look for Istio mTLS certs, and to
+  # make them available as a secret named "istio-certs".
+  AMBASSADOR_ISTIO_SECRET_DIR: "/etc/istio-certs"
+
+  # AMBASSADOR_ENVOY_BASE_ID is set to prevent collisions with the Istio sidecar's Envoy,
+  # which runs with base-id 0.
+  AMBASSADOR_ENVOY_BASE_ID: "1"
+```
+
+To install $productName$ with Helm, using these values to configure Istio integration:
+
+1. Create the `$productNamespace$` Namespace:
+
+    ```yaml
+    kubectl create namespace $productNamespace$
+    ```
+
+2. Enable Istio auto-injection for it:
+
+    ```yaml
+    kubectl label namespace $productNamespace$ istio-injection=enabled --overwrite
+    ```
+
+3. Make sure the Helm repo is configured:
+
+    ```bash
+    helm repo add datawire https://app.getambassador.io
+    helm repo update
+    ```
+
+4. Use Helm to install $productName$ in $productNamespace$:
+
+    ```bash
+    helm install $productHelmName$ --namespace $productNamespace$ -f istio-integration.yaml datawire/$productHelmName$ && \
+    kubectl -n $productNamespace$ wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=$productDeploymentName$
+    ```
+
+### Installation Using YAML
+
+To install using YAML files, you will need to manually incorporate the contents of the `istio-integration.yaml`
+file shown above into your deployment YAML:
+
+* `pod-annotations` should be configured as Kubernetes `annotations` on the $productName$ Pods;
+* `volumes`, `volumeMounts`, and `env` contents should be included in the $productDeploymentName$ Deployment; and
+* you must also label the $productNamespace$ Namespace for auto-injection as described above.
+
+### Configuration After Installation
+
+If you have already installed $productName$ and want to enable Istio:
+
+1. Install Istio.
+2. Label the $productNamespace$ namespace for Istio auto-injection, as above.
+2. Edit the $productName$ Deployments to contain the `annotations`, `volumes`, `volumeMounts`, and `env` elements
+   shown above.
+    * If you installed with Helm, you can use `helm upgrade` with `-f istio-integration.yaml` to modify the 
+      installation for you.
+3. Restart the $productName$ pods.
+
+## Using Mutual TLS
+
+After configuring $productName$ for Istio integration, the Istio mTLS certificates will be available within
+$productName$:
 
 - Both the `istio-proxy` sidecar and $productName$ mount the `istio-certs` volume at `/etc/istio-certs`.
-- The `istio-proxy` sidecar will save the mTLS certificates into `/etc/istio-certs` (per the `OUTPUT_CERTS` environment variable).
-- $productName$ will read the mTLS certificates from `/etc/istio-certs` (per the `AMBASSADOR_ISTIO_SECRET_DIR` environment variable) and create a secret named `istio-certs`.
-   - At present, the secret name `istio-certs` cannot be changed.
-   - To make use of the secret, use a `TLSContext` as shown below.
+- The `istio-proxy` sidecar will save the mTLS certificates into `/etc/istio-certs` (per the `OUTPUT_CERTS`
+  environment variable).
+- $productName$ will read the mTLS certificates from `/etc/istio-certs` (per the `AMBASSADOR_ISTIO_SECRET_DIR`
+  environment variable) and create a Secret named `istio-certs`.
+   - At present, the Secret name `istio-certs` cannot be changed.
 
-```diff
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    product: aes
-  name: ambassador
-  namespace: ambassador
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      service: ambassador
-  template:
-    metadata:
-      annotations:
-        consul.hashicorp.com/connect-inject: 'false'
-        sidecar.istio.io/inject: 'false'
-      labels:
-        app.kubernetes.io/managed-by: getambassador.io
-        service: ambassador
-    spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  service: ambassador
-              topologyKey: kubernetes.io/hostname
-            weight: 100
-      containers:
-      - name: aes
-        image: docker.io/datawire/aes:$version$
-        imagePullPolicy: Always
-        env:
-        - name: AMBASSADOR_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: REDIS_URL
-          value: ambassador-redis:6379
-        - name: AMBASSADOR_URL
-          value: https://ambassador.ambassador.svc.cluster.local
-        - name: AMBASSADOR_INTERNAL_URL
-          value: https://127.0.0.1:8443
-        - name: AMBASSADOR_ISTIO_SECRET_DIR
-          value: "/etc/istio-certs"
-        # Necessary to run the istio-proxy sidecar
-        - name: AMBASSADOR_ENVOY_BASE_ID
-          value: "1"
-        livenessProbe:
-          httpGet:
-            path: /ambassador/v0/check_alive
-            port: 8877
-          periodSeconds: 3
-        ports:
-        - containerPort: 8080
-          name: http
-        - containerPort: 8443
-          name: https
-        - containerPort: 8877
-          name: admin
-        readinessProbe:
-          httpGet:
-            path: /ambassador/v0/check_ready
-            port: 8877
-          periodSeconds: 3
-        resources:
-          limits:
-            cpu: 1000m
-            memory: 600Mi
-          requests:
-            cpu: 200m
-            memory: 300Mi
-        securityContext:
-          allowPrivilegeEscalation: false
-        volumeMounts:
-        - mountPath: /tmp/ambassador-pod-info
-          name: ambassador-pod-info
-        - mountPath: /.config/ambassador
-          name: ambassador-edge-stack-secrets
-          readOnly: true
-        - mountPath: /etc/istio-certs/
-          name: istio-certs
-      - name: istio-proxy
-        # Use the same version as your Istio installation
-        image: istio/proxyv2:{{ISTIO_VERSION}}
-        args:
-        - proxy
-        - sidecar
-        - --domain
-        - $(POD_NAMESPACE).svc.cluster.local
-        - --serviceCluster
-        - istio-proxy-ambassador
-        - --discoveryAddress
-        - istio-pilot.istio-system.svc:15012
-        - --connectTimeout
-        - 10s
-        - --statusPort
-        - "15020"
-        - --trust-domain=cluster.local
-        - --controlPlaneBootstrap=false
-        env:
-        - name: OUTPUT_CERTS
-          value: "/etc/istio-certs"
-        - name: JWT_POLICY
-          value: third-party-jwt
-        - name: PILOT_CERT_PROVIDER
-          value: istiod
-        - name: CA_ADDR
-          value: istiod.istio-system.svc:15012
-        - name: ISTIO_META_MESH_ID
-          value: cluster.local
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: INSTANCE_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIP
-        - name: SERVICE_ACCOUNT
-          valueFrom:
-            fieldRef:
-              fieldPath: spec.serviceAccountName
-        - name: HOST_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.hostIP
-        - name: ISTIO_META_POD_NAME
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.name
-        - name: ISTIO_META_CONFIG_NAMESPACE
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-        - name: ISTIO_META_CLUSTER_ID
-          value: Kubernetes
-        imagePullPolicy: IfNotPresent
-        readinessProbe:
-          failureThreshold: 30
-          httpGet:
-            path: /healthz/ready
-            port: 15020
-            scheme: HTTP
-          initialDelaySeconds: 1
-          periodSeconds: 2
-          successThreshold: 1
-          timeoutSeconds: 1
-        volumeMounts:
-        - mountPath: /var/run/secrets/istio
-          name: istiod-ca-cert
-        - mountPath: /etc/istio/proxy
-          name: istio-envoy
-        - mountPath: /etc/istio-certs/
-          name: istio-certs
-        - mountPath: /var/run/secrets/tokens
-          name: istio-token
-        securityContext:
-          runAsUser: 0
-      volumes:
-      - name: istio-certs
-        emptyDir:
-          medium: Memory
-      - name: istiod-ca-cert
-        configMap:
-          defaultMode: 420
-          name: istio-ca-root-cert
-      - emptyDir:
-          medium: Memory
-        name: istio-envoy
-      - name: istio-token
-        projected:
-          defaultMode: 420
-          sources:
-          - serviceAccountToken:
-              audience: istio-ca
-              expirationSeconds: 43200
-              path: istio-token
-      - downwardAPI:
-          items:
-          - fieldRef:
-              fieldPath: metadata.labels
-            path: labels
-        name: ambassador-pod-info
-      - name: ambassador-edge-stack-secrets
-        secret:
-          secretName: ambassador-edge-stack
-      restartPolicy: Always
-      securityContext:
-        runAsUser: 8888
-      serviceAccountName: ambassador
-      terminationGracePeriodSeconds: 0
-```
-
-**Make sure the `istio-proxy` is the same version as your Istio installation**
-
-Deploy the YAML above with `kubectl apply` to install $productName$ with the `istio-proxy` sidecar.
-
-After applying the updated $productName$ deployment above to your cluster, we need to stage the Istio mTLS certificates for use.
-
-We do this with a `TLSContext` using the `istio-certs` secret, which tracks the mTLS certificates provided from the `istio-proxy`.
+To make use of the `istio-certs` Secret, we create a `TLSContext` referencing it:
 
 ```
 $ kubectl apply -f - <<EOF
@@ -276,133 +176,43 @@ apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: istio-upstream
-  namespace: ambassador
+  namespace: $productNamespace$
 spec:
-  secret: istio-certs     # This secret name tracks the Istio certificates read from /etc/istio-certs
-  alpn_protocols: istio
+  secret: istio-certs     # This Secret name cannot currently be changed.
+  alpn_protocols: istio   # This is required for Istio.
 EOF
 ```
 
-$productName$ is now integrated with Istio for end-to-end encryption.
-
-#### Integrating $productName$ with Istio 1.4 and below
-
-With Istio 1.4 and below, Istio stores it's mTLS certificates as a Kubernetes `Secret` in each namespace.
-
-We can read these certificates from the `istio.default` `Secret` in the $productName$ namespace with a `TLSContext`.
+Once the `TLSContext` is created, a `Mapping` can use it for TLS origination. An example might be:
 
 ```
-$ kubectl apply -f - <<EOF
 ---
 apiVersion: getambassador.io/v3alpha1
-kind: TLSContext
+kind: Mapping
 metadata:
-  name: istio-upstream
-  namespace: ambassador
+  name: mtls-mapping
 spec:
-  secret: istio.default
-  secret_namespacing: false
-  alpn_protocols: istio
-EOF
+  hostname: my-secret-host.example.com   # Make sure this matches a configured Host!
+  prefix: /my-secret-mapping/
+  tls: istio-upstream
 ```
 
-$productName$ is now integrated with Istio for end-to-end encryption.
+This `Mapping` will use mTLS when communicating with its upstream service. For more details, see
+[Routing to Services](#routing-to-services) below.
 
 ### Integrating Prometheus metrics collection
 
-Istio installs by default with a Prometheus deployment for collecting metrics from different resources in your cluster. 
-
-We can integrate $productName$ with the same Prometheus to give us a single metrics endpoint.
-
-Istio's Prometheus deployment is configured using a `ConfigMap`. To add $productName$ as a Metrics endpoint, we need to update this `ConfigMap` and restart Prometheus.
-
-1. Export the current Prometheus configuration.
-
-   * If you installed Istio with `istioctl`, you can get the YAML that was installed with
-
-      ```
-      istioctl manifest generate > istio.yaml
-      ```
-      This will export all of the YAML configuration used by Istio to a file named `istio.yaml` so you can update the `ConfigMap` there.
-
-   * If you did not install with `istioctl`, you can export the YAML of the current `ConfigMap` in your cluster with `kubectl`:
-
-      ```
-      kubectl get -n istio-system configmap prometheus  -o yaml > prom-cm.yaml
-      ```
-   
-      You should now have a `ConfigMap` that looks something like this:
-   
-      ```yaml
-      apiVersion: v1
-      kind: ConfigMap
-      metadata:
-        name: prometheus
-        namespace: istio-system
-        labels:
-          app: prometheus
-          release: istio
-      data:
-        prometheus.yml: |-
-          global:
-            scrape_interval: 15s
-          scrape_configs:
-          ...
-      ```
-
-2. Update the `Prometheus` `ConfigMap` to add $productName$ as a scraping endpoint
-
-   To configure Prometheus to get metrics from $productName$, add the following config under `scrape_configs` in the `Prometheus` `ConfigMap` we exported above and apply it with `kubectl`.
-
-   ```yaml
-   ...
-   data:
-     prometheus.yml: |-
-       global:
-         scrape_interval: 15s
-       scrape_configs:
-       # $productName$ scraping.
-       - job_name: 'ambassador'
-         kubernetes_sd_configs:
-         - role: endpoints
-           namespaces:
-             names:
-             - ambassador
-         relabel_configs:
-         - source_labels: [__meta_kubernetes_service_name,    __meta_kubernetes_endpoint_port_name]
-           action: keep
-           regex: ambassador-admin;ambassador-admin
-         - source_labels: [__meta_kubernetes_endpoint_address_target_name]
-           action: replace
-           target_label: pod_name
-       
-       # Mixer scrapping. Defaults to Prometheus and mixer on same namespace.
-       ...
-   ```
-
-3. Restart and access the Prometheus UI
-
-   The Prometheus pod must be restarted to start with the new configuration. 
-
-   ```
-   kubectl delete pod -n istio-system $(kubectl get pods -n istio-system | grep prometheus | awk '{print $1}')
-   ```
-
-   After the pod restarts you can port-forward the Prometheus `Service` to access the Prometheus UI.
-
-   ```
-   kubectl port-forward -n istio-system svc/prometheus 9090:9090
-   ```
-
-   You can now access the UI at http://localhost:9090/
+By default, the Istio sidecar will provide Prometheus metrics using `prometheus.io` annotations. To take
+advantage of these metrics, you will need to [install Prometheus](../prometheus).
 
 ### Integrating distributed tracing
 
-Enabling the [tracing component](https://istio.io/docs/tasks/observability/distributed-tracing/overview/) in Istio gives you the power to observe how a request behaves at each point in your application.
+The Istio sidecar also supports [distributed tracing](https://istio.io/docs/tasks/observability/distributed-tracing/overview/)
+by default. To take advantage of this support, you will need to:
 
-Since Istio will propagate the tracing headers automatically, integrating $productName$ with the Istio Jaeger deployment will give you end-to-end observability of requests throughout your cluster.
-
-To do so, simply create a [`TracingService`](../../topics/running/services/tracing-service) and point it at the `zipkin` `Service` in the istio-system namespace.
+1. Install a tracing provider, for example [Zipkin](../tracing-zipkin) into your cluster.
+2. Add a [`TracingService`](../../topics/running/services/tracing-service) to tell $productName$ to send tracing
+   to your tracing provider, for example: 
 
 ```yaml
 ---
@@ -410,9 +220,9 @@ apiVersion: getambassador.io/v3alpha1
 kind:  TracingService
 metadata:
   name:  tracing
-  namespace: ambassador
+  namespace: $productNamespace$
 spec:
-  service: "zipkin.istio-system:9411"
+  service: "zipkin:9411"
   driver: zipkin
   config: {}
   tag_headers:
@@ -420,13 +230,8 @@ spec:
     - ":path"
 ```
 
-After applying this configuration with `kubectl apply`, restart the $productName$ pod for the configuration to take effect.
-
-```
-kubectl delete po -n ambassador {{AMBASSADOR_POD_NAME}}
-```
-
-You can now access the tracing service UI to see $productName$ is now one of the services.
+After adding a `TracingService`, restart $productName$ for the configuration to take effect. Istio will propagate
+the tracing headers automatically, allowing for end-to-end observability within the cluster.
 
 ## Routing to services
 
@@ -580,48 +385,6 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
    }
    ```
 
-## Grafana
-
-The Istio [Grafana addon](https://istio.io/docs/tasks/observability/metrics/using-istio-dashboard/) integrates a Grafana dashboard with the Istio Prometheus deployment to visualize the metrics collected there.
-
-The metrics $productName$ adds to the list will appear in the Istio dashboard but we can add an $productName$ dashboard as well. We're going to use the $productName$ dashboard on [Grafana's](https://grafana.com/) website under entry [4689](https://grafana.com/dashboards/4698) as a starting point.
-
-First, let's start the port-forwarding for Istio's Grafana service:
-
-```
-$ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') 3000:3000 &
-```
-
-Now, open Grafana tool by accessing: `http://localhost:3000/`
-
-To install the $productName$ Dashboard:
-
-* Click on Create
-* Select Import
-* Enter number 4698
-
-Now we need to adjust the Dashboard Port to reflect our $productName$ configuration:
-
-* Open the Imported Dashboard
-* Click on Settings in the Top Right corner
-* Click on Variables
-* Change the port to 80 (according to the $productName$ service port)
-
-Next, adjust the Dashboard Registered Services metric:
-
-* Open the Imported Dashboard
-* Find Registered Services
-* Click on the down arrow and select Edit
-* Change the Metric to:
-
-```yaml
-envoy_cluster_manager_active_clusters{job="ambassador"}
-```
-
-Now let's save the changes:
-
-* Click on Save Dashboard in the Top Right corner
-
 ## FAQ
 
 ### How to test Istio certificate rotation
@@ -630,9 +393,8 @@ Istio mTLS certificates, by default, will be valid for a max of 90 days but will
 
 $productName$ will watch and update the mTLS certificates as they rotate so you will not need to worry about certificate expiration. 
 
-To test that $productName$ is properly rotating certificates you can shorten the TTL of the Istio certificates so you can verify that $productName$ is using the new certificates.
-
-In **Istio 1.5 and above**, you can configure that by setting the following environment variables in the `istiod` container.
+To test that $productName$ is properly rotating certificates you can shorten the TTL of the Istio certificates by 
+setting the following environment variables in the `istiod` container in the `istio-system` Namespace:
 
 ```yaml
 env:
@@ -640,17 +402,6 @@ env:
   value: 30m
 - name: MAX_WORKLOAD_CERT_TTL
   value: 1h
-```
-
-In **Istio 1.4 and below**, you can configure this by passing the following arguments to the `istio-citadel` container
-
-```yaml
-      containers:
-      - name: citadel
-        ...
-        args:
-          - --workload-cert-ttl=1h # Lifetime of certificates issued to workloads in Kubernetes.
-          - --max-workload-cert-ttl=48h # Maximum lifetime of certificates issued to workloads by Citadel.
 ```
 
 This will make the certificates Istio issues expire in one hour so testing certificate rotation is much easier.
