@@ -421,12 +421,12 @@ discovery, as detailed above.
        a8r.io/description: "Quote of the moment service"
        a8r.io/owner: "No owner"
        a8r.io/chat: "#ambassador"
-       a8r.io/bugs: "https://github.com/datawire/qotm/issues"
-       a8r.io/documentation: "https://github.com/datawire/qotm/blob/master/README.md"
-       a8r.io/repository: "https://github.com/datawire/qotm"
+       a8r.io/bugs: "https://github.com/datawire/quote/issues"
+       a8r.io/documentation: "https://github.com/datawire/quote/blob/master/README.md"
+       a8r.io/repository: "https://github.com/datawire/quote"
        a8r.io/support: "http://a8r.io/Slack"
-       a8r.io/runbook: "https://github.com/datawire/qotm/blob/master/README.md"
-       a8r.io/incidents: "https://github.com/datawire/qotm/issues"
+       a8r.io/runbook: "https://github.com/datawire/quote/blob/master/README.md"
+       a8r.io/incidents: "https://github.com/datawire/quote/issues"
        a8r.io/dependencies: "None"
    spec:
      ports:
