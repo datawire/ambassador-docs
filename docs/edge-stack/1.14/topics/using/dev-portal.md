@@ -410,11 +410,11 @@ defined in the AES `Deployment`. This configuration method is considered depreca
 kept only for backwards compatibility: users should configure the default values with
 the `ambassador` `DevPortal`.
 
-| Setting                  | Description                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------ |
+| Setting                  | Description                                                            |
+| ------------------------ | ---------------------------------------------------------------------- |
 | AMBASSADOR_URL           | External URL of $productName$; include the protocol (e.g., `https://`) |
-| POLL_EVERY_SECS          | Interval for polling OpenAPI docs; default 60 seconds                          |
-| DEVPORTAL_CONTENT_URL    | Default URL to the repository hosting the content for the Portal               |
-| DEVPORTAL_CONTENT_DIR    | Default content subdir (defaults to `/`)                                       |
-| DEVPORTAL_CONTENT_BRANCH | Default content branch (defaults to `master`)                                  |
-| DEVPORTAL_DOCS_BASE_PATH | Base path for api docs (defaults to `/doc/`)                                   |
+| POLL_EVERY_SECS          | Interval for polling OpenAPI docs; default 60 seconds                  |
+| DEVPORTAL_CONTENT_URL    | Default URL to the repository hosting the content for the Portal       |
+| DEVPORTAL_CONTENT_DIR    | Default content subdir (defaults to `/`)                               |
+| DEVPORTAL_CONTENT_BRANCH | Default content branch (defaults to `master`)                          |
+| DEVPORTAL_DOCS_BASE_PATH | Base path for api docs (defaults to `/doc/`)                           |

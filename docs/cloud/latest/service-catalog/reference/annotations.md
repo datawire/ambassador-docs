@@ -5,10 +5,10 @@ import Alert from '@material-ui/lab/Alert';
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [About annotations](#about-annotations)  
-* [Supported annotations](#supported-annotations)  
-* [Annotate via `kubectl`](#annotate-via-kubectl)  
-* [Annotate via YAML](#annotate-via-yaml)  
+* [About annotations](#about-annotations)
+* [Supported annotations](#supported-annotations)
+* [Annotate via `kubectl`](#annotate-via-kubectl)
+* [Annotate via YAML](#annotate-via-yaml)
 * [Example YAML](#annotate-via-kubectl)
 
 </div>
@@ -32,6 +32,7 @@ import Alert from '@material-ui/lab/Alert';
 | `a8r.io/repository` | Link to external VCS repository | `https://github.com/datawire/ambassador` |
 | `a8r.io/support` | Link to external support center | `https://a8r.io/Slack` |
 | `a8r.io/runbook` | Link to external project runbook | `https://www.getambassador.io/docs/edge-stack/latest/topics/running/debugging/` |
+| `a8r.io/ignore`  | When present, prevent the service from appearing in the Service Catalog | `any` |
 | `a8r.io/incidents`  | Link to external incident dashboard | `https://incidents.getambassador.io` |
 | `a8r.io/uptime` | Link to external uptime dashboard | `https://uptime.getambassador.io` |
 | `a8r.io/performance` | Link to external performance dashboard | `https://performance.getambassador.io` |

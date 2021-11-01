@@ -4,7 +4,7 @@ Keepalive option indicates whether `SO_KEEPALIVE` on the socket should be enable
 
 ## Keepalive configuration
 
-Keepalive configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`AmbassadorMapping`](../mappings#configuring-ambassadormappings).
+Keepalive configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings#configuring-Mappings).
 
 The `keepalive` attribute configures keepalive. The following fields are supported:
 
@@ -33,8 +33,8 @@ Keepalive probes defined on a single mapping:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -49,7 +49,7 @@ spec:
 A global keepalive configuration:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador
@@ -60,8 +60,8 @@ spec:
        interval: 10
        probes: 9
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:

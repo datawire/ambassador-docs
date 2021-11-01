@@ -78,10 +78,11 @@ Adopting a common convention for annotations ensures consistency and understanda
 |a8r.io/uptime | Link to external uptime dashboard.|
 |a8r.io/performance | Link to external performance dashboard.|
 |a8r.io/dependencies | Unstructured text describing the service dependencies for humans.|
+|a8r.io/ignore | When present with any value, prevent the service from appearing in the Service Catalog.|
 
 ## Visualizing annotations: Service catalogs
 
-As the number of microservices and annotations proliferate, running `kubectl describe` can get tedious and requires every developer to have some direct access to the cluster. 
+As the number of microservices and annotations proliferate, running `kubectl describe` can get tedious and requires every developer to have some direct access to the cluster.
 
 Recently, service catalogs have provided greater visibility in the Kubernetes ecosystem. Popularized by tools such as [Shopify's ServicesDB](https://shopify.engineering/scaling-mobile-development-by-treating-apps-as-services) and [Spotify's System Z](https://dzone.com/articles/modeling-microservices-at-spotify-with-petter-mari), service catalogs are internally-facing developer portals that present critical information about microservices.
 

@@ -332,6 +332,13 @@ If true, $productName$ will merge adjacent slashes for the purpose of route matc
 ```yaml
 merge_slashes: true
 ```
+##### Modify Default Buffer Size
+
+By default, the Envoy that ships with $productName$ uses a defailt of 1MiB soft limit for an upstream service's read and write buffer limits. This setting allows you to configure that buffer limit. See the [Envoy docs](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/cluster/v3/cluster.proto.html?highlight=per_connection_buffer_limit_bytes) for more information. 
+
+```yaml
+buffer_limit_bytes: 5242880 # Sets the default buffer limit to 5 MiB
+```
 
 ##### Override default ports
 

@@ -25,7 +25,7 @@ Filters are created as Filter resources.  The body of the resource spec depends 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name:      "string"      # required; this is how to refer to the Filter in a FilterPolicy
@@ -45,7 +45,7 @@ which HTTP requests.
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: "example-filter-policy"
@@ -115,7 +115,7 @@ In the example below, the `param-filter` Filter Plugin is loaded and configured 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: param-filter # This is the name used in FilterPolicy
@@ -125,7 +125,7 @@ spec:
     name: param-filter # The plugin's `.so` file's base name
 
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: httpbin-policy
@@ -157,7 +157,7 @@ spec:
 In this example, the `foo-keycloak` filter is used for requests to `foo.bar.com`, while the `example-auth0` filter is used for requests to `example.com`. This configuration is useful if you are hosting multiple domains in the same cluster.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: multi-domain-policy

@@ -1,6 +1,6 @@
 # Redirects
 
-$productName$ can perform 3xx redirects on `AmbassadorMapping`s to a different host, with various options to redirect the path and to return a different 3xx response code instead of the default 301.
+$productName$ can perform 3xx redirects on `Mapping`s to a different host, with various options to redirect the path and to return a different 3xx response code instead of the default 301.
 
 ## Schema
 
@@ -18,11 +18,11 @@ $productName$ can perform 3xx redirects on `AmbassadorMapping`s to a different h
 
 ### Basic redirect
 
-To effect any type of HTTP `Redirect`, the `AmbassadorMapping` *must* set `host_redirect` to `true`, with `service` set to the host to which the client should be redirected:
+To effect any type of HTTP `Redirect`, the `Mapping` *must* set `host_redirect` to `true`, with `service` set to the host to which the client should be redirected:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  redirect
 spec:
@@ -32,20 +32,20 @@ spec:
   hostname: '*'
 ```
 
-Using this `AmbassadorMapping`, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `http://httpbin.org/redirect/`.
+Using this `Mapping`, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `http://httpbin.org/redirect/`.
 
 > As always with $productName$, the trailing `/` on any URL with a
-`AmbassadorMapping` is required!
+`Mapping` is required!
 
 ### Path redirect
 
-The `AmbassadorMapping` may optionally also set additional properties to customize the behavior of the HTTP redirect response.
+The `Mapping` may optionally also set additional properties to customize the behavior of the HTTP redirect response.
 
 To also change the path portion of the URL during the redirect, set `path_redirect`:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  redirect
 spec:
@@ -63,8 +63,8 @@ Here, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `htt
 To change only a prefix of the path portion of the URL, set `prefix_redirect`:
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  redirect
 spec:
@@ -83,8 +83,8 @@ Now, a request to `http://$AMBASSADOR_URL/redirect/path/` will  be redirected to
 [See more information about using regex with $productName$](../rewrites/#regex_rewrite).
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  redirect
 spec:
@@ -104,8 +104,8 @@ To change the HTTP response code return by $productName$, set `redirect_reponse_
 can be used with any type of redirect.
 
 ```yaml
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  redirect
 spec:
@@ -129,7 +129,7 @@ An example configuration is as follows -
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador

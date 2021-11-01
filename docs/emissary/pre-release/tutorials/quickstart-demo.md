@@ -12,7 +12,7 @@ Kubernetes cluster.
 
 Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 declaratively define $productName$’s desired state. The workflow you are going to 
-build uses a sample deployment and the `AmbassadorMapping` CRD, which is the core resource
+build uses a sample deployment and the `Mapping` CRD, which is the core resource
 that you will use with $productName$ to manage your edge. It enables you to route 
 requests by host and URL path from the edge of your cluster to Kubernetes services.
 
@@ -63,12 +63,12 @@ the `quote` deployment and a service to expose that deployment on port 80.
 1. Apply the configuration to the cluster with the command `kubectl apply -f quote.yaml`.
 
 1. Copy the configuration below and save it to a file called `quote-backend.yaml` 
-so that you can create an `AmbassadorMapping` on your cluster. This `AmbassadorMapping` tells $productName$ to route all traffic inbound to the `/backend/` path, on any host that can be used to reach $productName$, to the `quote` service. 
+so that you can create a `Mapping` on your cluster. This `Mapping` tells $productName$ to route all traffic inbound to the `/backend/` path, on any host that can be used to reach $productName$, to the `quote` service. 
 
   ```yaml
   ---
-  apiVersion: x.getambassador.io/v3alpha1
-  kind: AmbassadorMapping
+  apiVersion: getambassador.io/v3alpha1
+  kind: Mapping
   metadata:
     name: quote-backend
     namespace: ambassador
@@ -100,25 +100,25 @@ balancer.
   }
   ```
 
-Success, you have created your first $productName$ `AmbassadorMapping`, routing a
+Success, you have created your first $productName$ `Mapping`, routing a
 request from your cluster's edge to a service!
 
-Since the `AmbassadorMapping` you just created controls how requests are routed, 
-changing the `AmbassadorMapping` will immediately change the routing.  To see this
-in action, use `kubectl` to edit the `AmbassadorMapping`:
+Since the `Mapping` you just created controls how requests are routed, 
+changing the `Mapping` will immediately change the routing.  To see this
+in action, use `kubectl` to edit the `Mapping`:
 
-1. Run `kubectl edit ambassadormapping quote-backend`.
+1. Run `kubectl edit Mapping quote-backend`.
 
 1. Change `prefix: /backend/` to `prefix: /quoteme/`.
 
-1. Save the file and let `kubectl` update your `AmbassadorMapping`.
+1. Save the file and let `kubectl` update your `Mapping`.
 
-1. Run `kubectl get ambassadormappings --namespace ambassador`. You will see the 
-`quote-backend` `AmbassadorMapping` has the updated prefix listed. Try to access the 
+1. Run `kubectl get Mappings --namespace ambassador`. You will see the 
+`quote-backend` `Mapping` has the updated prefix listed. Try to access the 
 endpoint again via `curl` with the updated prefix.
 
   ```
-  $ kubectl get ambassadormappings --namespace ambassador
+  $ kubectl get Mappings --namespace ambassador
   NAME            PREFIX      SERVICE   STATE   REASON
   quote-backend   /quoteme/   quote
    
@@ -130,7 +130,7 @@ endpoint again via `curl` with the updated prefix.
   }
   ```
 
-1. Change the prefix back to `/backend/` so that you can later use the `AmbassadorMapping` 
+1. Change the prefix back to `/backend/` so that you can later use the `Mapping` 
 with other tutorials.
 
 ## Developer API Documentation
@@ -153,9 +153,9 @@ need information about your APIs.
 ## Next Steps
 
 Further explore some of the concepts you learned about in this article: 
-* [`AmbassadorMapping` resource](../../topics/using/intro-mappings/): routes traffic from 
+* [`Mapping` resource](../../topics/using/intro-mappings/): routes traffic from 
 the edge of your cluster to a Kubernetes service
-* [`AmbassadorHost` resource](../../topics/running/host-crd/): sets the hostname by which
+* [`Host` resource](../../topics/running/host-crd/): sets the hostname by which
 $productName$ will be accessed and secured with TLS certificates
 * [Developer Portal](../../topics/using/dev-portal/): 
 publishes an API catalog and OpenAPI documentation

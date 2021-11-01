@@ -6,11 +6,19 @@ We assume that you already have a running $productName$ installation in the foll
 
 ## Check $productName$ status
 
-First, check to see if the Edge Policy Console is reachable. If it is successful, try to diagnose your original issue with the Console.
+1. First, check the $productName$ Deployment with the following: `kubectl get -n $productNamespace$ deployments`
 
-**If it is not successful, complete the following to see if $productName$ is running:**
+    After a brief period, the terminal will print something similar to the following:
 
-1. Get a list of Pods in the `$productNamespace$` namespace with `kubectl get pods -n $productNamespace$`.
+    ```
+    $ kubectl get -n $productNamespace$ deployments
+    NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+    $productDeploymentName$   3         3         3            3           1m
+    ```
+
+2. Check that the “desired” number of Pods matches the “current” and “available” number of Pods. 
+
+3. If they are **not** equal, check the status of the associated Pods with the following command: `kubectl get pods -n $productNamespace$`.
 
     The terminal should print something similar to the following:
 
@@ -22,18 +30,9 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
     $productDeploymentName$-85c4cf67b-vg6p5   1/1       Running   0          1m
     ```
 
-2. Then, check the $productName$ Deployment with the following: `kubectl get -n $productNamespace$ deployments`
+    The actual names of the Pods will vary. All the Pods should indicate `Running`, and all should show 1/1 containers ready.
 
-    After a brief period, the terminal will print something similar to the following:
-
-    ```
-    $ kubectl get -n $productNamespace$ deployments
-    NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    $productDeploymentName$   3         3         3            3           1m
-    ```
-
-3. Check that the “desired” number of Pods equals the “current” and “available” number of Pods. If they are **not** equal, check the status of the associated Pods with the following command: `kubectl get pods -n $productNamespace$`.
-4. Use the following command for details about the history of the Deployment: `kubectl describe -n $productNamespace$ deployment $productDeploymentName$`
+4. If the Pods do not seem reasonable, use the following command for details about the history of the Deployment: `kubectl describe -n $productNamespace$ deployment $productDeploymentName$`
 
     * Look for data in the “Replicas” field near the top of the output. For example:
         `Replicas: 3 desired | 3 updated | 3 total | 3 available | 0 unavailable`
@@ -70,28 +69,51 @@ In both the Deployment Pod and the individual Pods, take the necessary action to
 
 $productName$ logging can provide information on anything that might be abnormal or malfunctioning. While there may be a large amount of data to sort through, look for key errors such as the $productName$ process restarting unexpectedly, or a malformed Envoy configuration.
 
-### Log levels
+$productName$ has two major log mechanisms: $productName$ logging and Envoy logging. Both appear in the normal `kubectl logs` output, and both can have additional debug-level logging enabled.
 
-$productName$ has two switches that will control different log levels.
+<Alert severity="info">
+  Enabling debug-level logging can produce a <i>lot</i> of log output &mdash; enough to
+  potentially impact the performance of $productName$. We don't recommend running with debug
+  logging enabled as a matter of course; it's usually better to enable it only when needed, 
+  then reset logging to normal once you're finished debugging.
+</Alert>
 
-#### Envoy debug logs
-Envoy debug logging shows verbose information on the actions Envoy is taking on
-every request. It can be useful for understanding why connections are being
-closed or if Envoy or the upstream service is the source of the error.
+### $productName$ debug logging
 
-#### $productName$ debug logging
+$productName$ logging is primarily concerned with the business of noticing changes to 
+Kubernetes resources that specify the $productName$ configuration, and generating new
+Envoy configuration in response to those changes. Enabling debug logging for this part
+of the system is under the control of two environment variables:
 
-$AESproductName$ is built on top of $OSSproductName$ and runs an
-additional process for authentication, rate limiting, the developer portal,
-ACME, etc. Debug logging for this process will give more information on why you
-may see errors with these functions.
+- Set `AES_LOG_LEVEL=debug` to debug the early boot sequence and $productName$'s interactions
+  with the Kubernetes cluster (finding changed resources, etc.).
+- Set `AMBASSADOR_DEBUG=diagd` to debug the process of generating an Envoy configuration from
+  the input resources.
 
-You can adjust the $AESproductName$ log level by setting the
-[`AES_LOG_LEVEL` environment variable](../running/#log-levels-and-debugging).
+### $productName$ Envoy logging
+
+Envoy logging is concerned with the actions Envoy is taking for incoming requests. 
+Typically, Envoy will only output access logs, and certain errors, but enabling Envoy
+debug logging will show very verbose information about the actions Envoy is actually
+taking. It can be useful for understanding why connections are being closed, or whether
+an error status is coming from Envoy or from the upstream service.
+
+It is possible to enable Envoy logging at boot, but for the most part, it's safer to 
+enable it at runtime, right before sending a request that is known to have problems.
+To enable Envoy debug logging, use `kubectl exec` to get a shell on the $productName$
+pod, then:
+
+    ```
+    curl -XPOST http://localhost:8001/logging?level=trace && \
+    sleep 10 && \
+    curl -XPOST http://localhost:8001/logging?level=warning
+    ```
+
+This will turn on Envoy debug logging for ten seconds, then turn it off again.
 
 ### Viewing logs
 
-You can turn on Debug mode by setting AES_LOG_LEVEL=debug in your deployment, which generates verbose logging data that can be useful when trying to find a subtle error or bug.
+To view the logs from $productName$:
 
 1. Use the following command to target an individual $productName$ Pod: `kubectl get pods -n $productNamespace$`
 
@@ -123,11 +145,18 @@ The terminal will print something similar to the following:
     [2018-10-10 12:27:01.977][21][info][main] source/server/drain_manager_impl.cc:63] shutting down parent after drain
     ```
 
+Note that many deployments will have multiple logs, and the logs are independent for each Pod.
+
 ## Examine Pod and container contents
 
 You can examine the contents of the $productName$ Pod for issues, such as if volume mounts are correct and TLS certificates are present in the required directory, to determine if the Pod has the latest $productName$ configuration, or if the generated Envoy configuration is correct or as expected. In these instructions, we will look for problems related to the Envoy configuration.
 
-1. To look into an $productName$ Pod, use the container shell with the `kube-exec` and the `/bin/sh` commands. For example, `kubectl exec -it -n $productNamespace$ <$productDeploymentName$-pod-name> -- /bin/sh`
+1. To look into an $productName$ Pod, get a shell on the Pod using `kubectl exec`. For example,
+
+    ```
+    kubectl exec -it -n $productNamespace$ <$productDeploymentName$-pod-name> -- bash
+    ```
+
 2. Determine the latest configuration. If you haven't overridden the configuration directory, the latest configuration will be in `/ambassador/snapshots`. If you have overridden it, $productName$ saves configurations in `$AMBASSADOR_CONFIG_BASE_DIR/snapshots`.
 
     In the snapshots directory:
@@ -135,36 +164,15 @@ You can examine the contents of the $productName$ Pod for issues, such as if vol
     * `snapshot.yaml` contains the full input configuration that $productName$ has found;
     * `aconf.json` contains the $productName$ configuration extracted from the snapshot;
     * `ir.json` contains the IR constructed from the $productName$ configuration; and
-    * `econf.json`contains the Envoy configuration generated from the IR.
-
-    The Envoy configuration is then split into `$AMBASSADOR_CONFIG_BASE_DIR/bootstrap-ads.json` and `$AMBASSADOR_CONFIG_BASE_DIR/envoy/envoy.json`, which are the actual input files handed to Envoy.
+    * `econf.json` contains the Envoy configuration generated from the IR.
 
     In the snapshots directory, the current configuration will be stored in files with no digit suffix, and older configurations have increasing numbers. For example, `ir.json` is current, `ir-1.json` is the next oldest, then `ir-2.json`, etc.
 
-5. If something is wrong with `snapshot` or `aconf`, there is an issue with your configuration. If something is wrong with `ir` or `econf`, you should [open an issue on Github](https://github.com/emissary-ingress/emissary/issues/new/choose).
-6. To find the main configuration for Envoy, run: `$AMBASSADOR_CONFIG_BASE_DIR/envoy/envoy.json`.
-7. For the bootstrap configuration, which has details about Envoy statistics, logging, and auth, run: `$AMBASSADOR_CONFIG_BASE_DIR/bootstrap-ads.json`.
-8. For further details, you can print the Envoy configuration that is generated during the $productName$ configuration. The file will be titled `envoy-N.json` where N matches the number of the `$productDeploymentName$-config-N` directory number. Run the following command: `# cat envoy-2.json`
+3. If something is wrong with `snapshot` or `aconf`, there is an issue with your configuration. If something is wrong with `ir` or `econf`, you should [open an issue on Github](https://github.com/emissary-ingress/emissary/issues/new/choose).
 
-    The terminal will print something similar to the following:
+4. The actual input provided to Envoy is split into `$AMBASSADOR_CONFIG_BASE_DIR/bootstrap-ads.json` and `$AMBASSADOR_CONFIG_BASE_DIR/envoy/envoy.json`.
 
-    ```
-    /ambassador # cat envoy-2.json
-
-    {
-    "listeners": [
-
-    {
-        "address": "tcp://0.0.0.0:8080",
-
-        "filters": [
-        {
-            "type": "read",
-            "name": "http_connection_manager",
-            "config": {"codec_type": "auto",
-            "stat_prefix": "ingress_http",
-            "access_log": [
-                {
-    ```
-
-The contents of the Envoy configuration files can be very useful when looking for subtle mapping issues or bugs.
+   - The `bootstrap-ads.json` file contains details about Envoy statistics, logging, authentication, etc.
+   - The `envoy.json` file contains information about request routing.
+   - You may generally find it simplest to just look at the `econf.json` files in the `snapshot`
+     directory, which includes both kinds of configuration.

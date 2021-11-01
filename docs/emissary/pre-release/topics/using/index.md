@@ -2,8 +2,8 @@
 
 Application development teams use $productName$ to manage edge policies associated with a specific service. This section of the documentation covers core $productName$ elements that are typically used by the application development team.
 
-* [Introduction to Mappings](intro-mappings) The `AmbassadorMapping` resource is the core resource used by every application development team.
-* AmbassadorMapping Configuration:
+* [Introduction to Mappings](intro-mappings) The `Mapping` resource is the core resource used by every application development team.
+* Mapping Configuration:
   * [Automatic Retries](retries)
   * [Canary Releases](canary)
   * [Circuit Breakers](circuit-breakers)
@@ -25,7 +25,7 @@ Application development teams use $productName$ to manage edge policies associat
   * [Rewrites](rewrites)
   * [Timeouts](timeouts)
   * [Traffic Shadowing](shadowing)
-* [Advanced AmbassadorMapping Configuration](mappings)
+* [Advanced Mapping Configuration](mappings)
 * Rate Limiting
   * [Introduction to Rate Limits](rate-limits/)
 * [Developer Portal](dev-portal)

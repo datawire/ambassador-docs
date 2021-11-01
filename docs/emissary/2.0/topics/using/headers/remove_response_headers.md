@@ -6,14 +6,14 @@ $productName$ can remove a list of HTTP headers that would be sent to the client
 
 The `remove_response_headers` attribute takes a list of keys used to match to the header.
 
-`remove_request_headers` can be set either in an `AmbassadorMapping` or using [`ambassador Module defaults`](../../defaults).
+`remove_request_headers` can be set either in a `Mapping` or using [`ambassador Module defaults`](../../defaults).
 
-## AmbassadorMapping example
+## Mapping example
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -26,7 +26,7 @@ spec:
 will drop the header with key `x-envoy-upstream-service-time`.
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador
@@ -37,16 +37,16 @@ spec:
         remove_response_headers:
         - x-envoy-upstream-service-time
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend1
 spec:
   prefix: /backend1/
   service: quote
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend2
 spec:

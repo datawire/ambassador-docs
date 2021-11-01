@@ -7,14 +7,11 @@ import Alert from '@material-ui/lab/Alert';
 # Install manually
 
 <Alert severity="info">
-  We're pleased to introduce $productName$ 2.0 as a <b>developer preview</b>; our latest
-  general-availability release is <a href="../../../1.13">1.13</a>.<br/>
-  <br/>
-  The 2.X family introduces a number of changes to allow $productName$ to more gracefully
-  handle larger installations (including multitenant or multiorganizational installations),
-  reduce memory footprint, and improve performance. However, <b>some configuration has
-  changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b> read the&nbsp;
-  <a href="migrate-to-version-2">migration guide</a> before trying to install 2.0.
+  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
+  changes to allow $productName$ to more gracefully handle larger installations
+  (including multitenant or multiorganizational installations), reduce memory footprint,
+  and improve performance. For more information on 2.X, please check the&nbsp;
+  <a href="../../../release-notes">release notes</a>.
 </Alert>
 
 In this guide, we'll walk you through installing $productName$ in your Kubernetes cluster.

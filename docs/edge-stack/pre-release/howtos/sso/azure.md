@@ -27,7 +27,7 @@ After configuring an OAuth application in Azure AD, configuring $AESproductName$
 1. Create an [OAuth Filter](../../../topics/using/filters/oauth2) with the credentials from above:
 
     ```yaml
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: Filter
     metadata:
       name: azure-ad
@@ -47,7 +47,7 @@ After configuring an OAuth application in Azure AD, configuring $AESproductName$
 2. Create a [FilterPolicy](../../../topics/using/filters/) to use the `Filter` created above
 
     ```yaml
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: FilterPolicy
     metadata:
       name: azure-policy

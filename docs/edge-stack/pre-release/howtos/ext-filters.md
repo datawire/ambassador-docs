@@ -95,7 +95,7 @@ Once the auth service is running, we need to tell $AESproductName$ about it. The
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: authentication
@@ -115,7 +115,7 @@ Next you must apply the `Filter` to your desired hosts and paths using a `Filter
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: authentication
@@ -131,7 +131,7 @@ You can also apply the `Filter` only to specific hosts and/or paths, allowing yo
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: authentication

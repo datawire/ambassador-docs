@@ -8,7 +8,7 @@ The JWT filter type performs JWT validation on a [bearer token](https://tools.ie
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: "example-jwt-filter"
@@ -135,7 +135,7 @@ with optional fraction and a unit suffix, such as "300ms", "-1.5h" or
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: "example-filter-policy"
@@ -174,7 +174,7 @@ spec:
 #     "iat": 1516239022
 #   }
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: example-jwt-filter
@@ -261,7 +261,7 @@ spec:
             "requestId": {{ .request_id | json "    " }}
         }
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador

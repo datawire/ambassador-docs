@@ -20,7 +20,7 @@ When using JSON logging with Envoy, $productName$ will automatically append the 
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador
@@ -35,7 +35,7 @@ Next configure a TracingService that will write your traces using the DataDog tr
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: TracingService
 metadata:
   name: tracing
