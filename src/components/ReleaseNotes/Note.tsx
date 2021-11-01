@@ -4,7 +4,7 @@ import Button from '../../../../src/components/Button/Button';
 import Icon from '../../../../src/components/Icon/Icon';
 import template from '../../../../src/utils/template';
 
-import styles from './releaseNotes.module.less';
+import * as styles from './releaseNotes.module.less';
 
 const titlePrefix = {
   bugfix: 'Bug Fix',

@@ -5,7 +5,7 @@ import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import React from 'react';
 
-import styles from './styles.module.less';
+import * as styles from './styles.module.less';
 import * as allTabs from './tabs';
 
 let publicTabs = { ...allTabs };
