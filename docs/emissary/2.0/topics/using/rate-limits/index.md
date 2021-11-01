@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 
 Rate limiting in $productName$ is composed of two parts:
 
-* The [`RateLimitService`] resource tells $productName$ what external service
+* The [`RateLimitService`](../../running/services/rate-limit-service) resource tells $productName$ what external service
   to use for rate limiting.
 
     <Alert severity="info">If $productName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.</Alert>
@@ -37,9 +37,9 @@ labels:
 The names of domains and groups are not interpreted by $productName$ in any way:
 they are solely there to help configuration authors remember the different groupings.
 Note that **at present, rate limiting supports just one domain**: the name of the
-domain must be configured in the [`RateLimitService`].
+domain must be configured in the [`RateLimitService`](../../running/services/rate-limit-service).
 
-[`RateLimitService`]: ../../running/services/rate-limit-service
+
 
 ## Attaching labels to requests
 
