@@ -32,7 +32,7 @@ Service Catalog requires **Edge Stack version 1.12 or greater** or **Emissary-in
 If you already have Edge Stack or Emissary-ingress installed, **check your version** by running this command (adjust your namespace if necessary):
 
 ```
-kubectl get deploy -A -l product=aes -o jsonpath='{.items[].spec.template.spec.containers[0].image}'
+kubectl get deploy -A -l app.kubernetes.io/name=edge-stack -o jsonpath='{.items[].spec.template.spec.containers[0].image}'
 ```
 [Upgrade Edge Stack to the latest version](../../../../edge-stack/latest/topics/install/upgrading/) if needed.
 
