@@ -35,36 +35,33 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
 2. Now it is time to install Linkerd 2 itself. To do so execute the following command:
 
     ```
-    linkerd install --ha | kubectl apply -f -
+    # install the Linkerd control plane
+    
+    linkerd install | kubectl apply -f -
+
+    linkerd check
+
+    # install the Linkerd dashboard component
+
+    linkerd viz install | kubectl apply -f -
+
+    linkerd viz check
+
     ```
 
-    This will install Linkerd 2 in high-availability mode for the control plane. This means the controller and other components are started multiple times. Since Linkerd 2.5 it is also made sure the components are split across different nodes, if possible.
+    This will install Linkerd 2 in your cluster. For more details on installing Linkerd visit [their docs](https://linkerd.io/docs/).
 
     Note that this simple command automatically enables mTLS by default and registers the AutoInject Webhook with your Kubernetes API Server. You now have a production-ready Linkerd 2 setup rolled out into your cluster!
 
-3. Deploy $productName$.
+3. Deploy $productName$. This howto assumes you have already followed the $productName$ [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
 
-   **Note:** If this is your first time deploying $productName$, reviewing the [getting started guide](../../tutorials/getting-started) is strongly recommended.
+4. Configure $productName$ to add it to the Linkerd 2 service mesh.
 
-   ```
-   kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \
-   kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \
-   kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && \
-   kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
-   ```
-
-4. Configure $productName$ to add Linkerd 2 Headers to requests.
-
-    ```yaml
-    ---
-    apiVersion: getambassador.io/v3alpha1
-    kind: Module
-    metadata:
-      name: ambassador
-      namespace: ambassador
-    spec:
-      config:
-        add_linkerd_headers: true
+    ```
+    kubectl -n emissary get deploy emissary-ingress -o yaml | \
+    linkerd inject \
+    --skip-inbound-ports 80,443 - | \
+    kubectl apply -f -
     ```
 
     This will tell $productName$ to add additional headers to each request forwarded to Linkerd 2 with information about where to route this request to. This is a general setting. You can also set `add_linkerd_headers` per [Mapping](../../topics/using/mappings#mapping-configuration).
@@ -85,7 +82,7 @@ You'll now register a demo application with Linkerd 2, and show how $productName
 
     Save the above to a file called `namespace.yaml` and run `kubectl apply -f namespace.yaml`. This will enable the namespace to be handled by the AutoInjection Webhook of Linkerd 2. Every time something is deployed to that namespace, the deployment is passed to the AutoInject Controller and injected with the Linkerd 2 proxy sidecar automatically.
 
-2. Deploy the QOTM demo application.
+2. Deploy the QOTM demo application. You may have already done this as part of the getting started guide, if so, restart the application using the rollout restart command provided below.
 
     ```yaml
     ---
@@ -147,6 +144,12 @@ You'll now register a demo application with Linkerd 2, and show how $productName
     kubectl apply -f qotm.yaml
     ```
 
+    If you already had qotm deployed please restart it with
+
+    ```
+    kubectl rollout restart deploy qotm -n default
+    ```
+
     Watch via `kubectl get pod -w` as the Pod is created. Note that it starts with `0/2` containers automatically, as it has been auto-injected by the Linkerd 2 Webhook.
 
 3. Verify the QOTM pod has been registered with Linkerd 2. You can verify the QOTM pod is registered correctly by accessing the Linkerd 2 Dashboard.
@@ -200,7 +203,7 @@ Linkerd 2.8 can support [multicluster operation](https://linkerd.io/2/features/m
 2. Inject $productName$ deployment with Linkerd (even if you have AutoInject enabled):
 
     ```
-    kubectl -n ambassador get deploy ambassador -o yaml | \
+    kubectl -n emissary get deploy emissary-ingress -o yaml | \
       linkerd inject \
       --skip-inbound-ports 80,443 \
       --require-identity-on-inbound-ports 4183 - | \
@@ -209,7 +212,7 @@ Linkerd 2.8 can support [multicluster operation](https://linkerd.io/2/features/m
 
     (It's important to require identity on the gateway port so that automatic mTLS works, but it's also important to let $productName$ handle its own ports. AutoInject can't handle this on its own.)
 
-3. Configure $productName$ as normal for your application. Don't forget to set `add_linkerd_headers: true`!
+3. Configure $productName$ as normal for your application.
 
 At this point, your $productName$ installation should work fine with multicluster Linkerd as a source cluster: you can configure Linkerd to bridge to a target cluster, and all should be well.
 
@@ -264,7 +267,7 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
     In the `deployment`, you need the `config.linkerd.io/enable-gateway` `annotation`:
     
     ```
-    kubectl -n ambassador patch deploy ambassador -p='
+    kubectl -n emissary patch deploy emissary-ingress -p='
     spec:
         template:
             metadata:
@@ -279,7 +282,7 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
        - `mc-probe` needs to be defined as `port` 80, `targetPort` 8080 (or wherever $productName$ is listening)
     
     ```
-    kubectl -n ambassador patch svc ambassador --type='json' -p='[
+    kubectl -n emissary patch svc emissary-ingress --type='json' -p='[
             {"op":"add","path":"/spec/ports/-", "value":{"name": "mc-gateway", "port": 4143}},
             {"op":"replace","path":"/spec/ports/0", "value":{"name": "mc-probe", "port": 80, "targetPort": 8080}}
         ]'
@@ -288,7 +291,7 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
     Finally, the `service` also needs its own set of `annotation`s:
     
     ```
-    kubectl -n ambassador patch svc ambassador -p='
+    kubectl -n emissary patch svc emissary-ingress -p='
     metadata:
         annotations:
             mirror.linkerd.io/gateway-identity: ambassador.ambassador.serviceaccount.identity.linkerd.cluster.local
@@ -306,12 +309,12 @@ Allowing the $productName$ installation to serve as a target cluster requires ex
     kubectl -n $namespace patch svc $service -p='
     metadata:
         annotations:
-            mirror.linkerd.io/gateway-name: ambassador
-            mirror.linkerd.io/gateway-ns: ambassador
+            mirror.linkerd.io/gateway-name: emissary-ingress
+            mirror.linkerd.io/gateway-ns: emissary-ingress
     '
     ```
     
-    This annotation will tell Linkerd that the given service can be reached via the $productName$ in the `ambassador` namespace.
+    This annotation will tell Linkerd that the given service can be reached via the $productName$ in the `emissary` namespace.
 
 5. Verify that all is well from the source cluster.
 
