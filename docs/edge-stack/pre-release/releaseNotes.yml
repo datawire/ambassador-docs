@@ -248,7 +248,7 @@ items:
           configuration changes that are not backwards compatible with the 1.X family.  API versions
           <code>getambassador.io/v0</code>, <code>getambassador.io/v1</code>, and
           <code>getambassador.io/v2</code> are deprecated.  Further details are available in the <a
-          href="about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0
+          href="../about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0
           Changes</a> document.
         type: feature
         docs: about/changes-2.0.0/#1-configuration-api-version-getambassadoriov3alpha1
@@ -303,18 +303,18 @@ items:
         docs: about/changes-2.0.0/#proxy-protocol-configuration
 
       - title: Stricter rules for AmbassadorHost/AmbassadorMapping association
-        body: An <code>AmbassadorMapping</code> will only be matched with an <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
+        body: An <code>AmbassadorMapping</code> will only be matched with an <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="../about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
         docs: about/changes-2.0.0/#host-and-mapping-association
         type: change
 
       - title: AmbassadorHost or Ingress now required for TLS termination
-        body: An <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
+        body: An <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="../about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
         docs: about/changes-2.0.0/#host-tlscontext-and-tls-termination
         type: change
         image: ./edge-stack-2.0.0-host_crd.png
 
       - title: Envoy V3 APIs
-        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
+        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="../about/changes-2.0.0">2.0.0 Changes</a> document.
         type: change
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
@@ -419,7 +419,7 @@ items:
           on the <code>Mapping</code> resource.
           ([#3609](https://github.com/emissary-ingress/emissary/issues/3609))
         docs: topics/using/cors
-        image: ../images/emissary-1.13.10-cors-origin.png
+        image: ./emissary-1.13.10-cors-origin.png
 
       - title: New Envoy-configuration snapshots for debugging
         body: "Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
@@ -468,7 +468,7 @@ items:
           Cloud
         type: bugfix
         docs: tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
-        image: ../images/edge-stack-1.13.8-cloud-bugfix.png
+        image: ./edge-stack-1.13.8-cloud-bugfix.png
 
       - title: Improved Argo Rollouts Experience with Ambassador Cloud
         body: >-
@@ -485,7 +485,7 @@ items:
         body: >-
           Add AMBASSADOR_JSON_LOGGING to enable JSON for most of the Ambassador control plane. Some
           (but few) logs from gunicorn and the Kubernetes client-go package still log text.
-        image: ../images/edge-stack-1.13.7-json-logging.png
+        image: ./edge-stack-1.13.7-json-logging.png
         docs: topics/running/running/#log-format
         type: feature
 
@@ -493,7 +493,7 @@ items:
         body: >-
           Fixed a bug where the Consul resolver would not actually use Consul endpoints with
           TCPMappings.
-        image: ../images/edge-stack-1.13.7-tcpmapping-consul.png
+        image: ./edge-stack-1.13.7-tcpmapping-consul.png
         docs: topics/running/resolvers/#the-consul-resolver
         type: bugfix
 
@@ -501,7 +501,7 @@ items:
         body: >-
           Ambassador now calculates its own memory usage in a way that is more similar to how the
           kernel OOMKiller tracks memory.
-        image: ../images/edge-stack-1.13.7-memory.png
+        image: ./edge-stack-1.13.7-memory.png
         docs: topics/running/scaling/#inspecting-ambassador-performance
         type: change
 
@@ -540,7 +540,7 @@ items:
         body: >-
           Incorporate the Envoy 1.15.5 security update by adding the
           <code>reject_requests_with_escaped_slashes</code> option to the Ambassador module.
-        image: ../images/edge-stack-1.13.4.png
+        image: ./edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
         type: security
 
