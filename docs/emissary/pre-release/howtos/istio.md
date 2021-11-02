@@ -5,14 +5,25 @@ import Alert from '@material-ui/lab/Alert';
 $productName$ and Istio: Edge Proxy and Service Mesh together in one. $productName$ is deployed at the edge of your network and routes incoming traffic to your internal services (aka "north-south" traffic). [Istio](https://istio.io/) is a service mesh for microservices, and is designed to add application-level Layer (L7) observability, routing, and resilience to service-to-service traffic (aka "east-west" traffic). Both Istio and $productName$ are built using [Envoy](https://www.envoyproxy.io).
 
 $productName$ and Istio can be deployed together on Kubernetes. In this configuration, $productName$ manages
-traditional edge functions such as authentication, TLS termination, edge routing, and Istio mediates communication
+traditional edge functions such as authentication, TLS termination, and edge routing. Istio mediates communication
 from $productName$ to services, and communication between services.
 
 This allows the operator to have the best of both worlds: a high performance, modern edge service ($productName$) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/docs/tasks/traffic-management/ingress/#configuring-ingress-using-an-istio-gateway) abstraction, $productName$ still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
 
-This guide will explain how to take advantage of both $productName$ and Istio to have complete control and observability over how requests are made in your cluster. 
+This guide explains how to take advantage of both $productName$ and Istio to have complete control and observability over how requests are made in your cluster:
 
-## Prerequisites
+- [Install Istio](#install-istio) and configure auto-injection
+- [Install $productName$ with Istio integration](#install-edge)
+- [Configure an mTLS `TLSContext`](#configure-an-mtls-tlscontext)
+- [Route to services using mTLS](#route-to-services-using-mtls)
+
+If desired, you may also
+
+- [Enable strict mTLS](#enable-strict-mtls)
+- [Configure Prometheus metrics collection](#configure-prometheus-metrics-collection)
+- [Configure Istio distributed tracing](#configure-istio-distributed-tracing)
+
+To follow this guide, you need:
 
 - A Kubernetes cluster version 1.15 and above
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
@@ -23,7 +34,7 @@ This guide will explain how to take advantage of both $productName$ and Istio to
 Start by [installing Istio](https://istio.io/docs/setup/getting-started/). Any supported installation method for 
 Istio will work for use with $productName$.
 
-## Configure Istio Auto-Injection
+### Configure Istio Auto-Injection
 
 Istio functions by supplying a sidecar container running Envoy with every service in the mesh (including
 $productName$). The sidecar is what enforces Istio policies for traffic to and from the service, notably
@@ -39,10 +50,13 @@ kubectl label namespace $namespace istio-injection=enabled --overwrite
 ```
 
 <Alert severity="warning">
-  The following example uses the istio-injection label to arrange auto-injection in the $productNamespace$. It is <b>critical</b> that you apply the the label to all Namespaces in which you install services.
+  The following example uses the `istio-injection` label to arrange for auto-injection in the
+  `$productNamespace$` Namespace below. You can manage sidecar injection by hand if you wish; what
+  is <b>critical</b> is that every service that participates in the Istio mesh have the Istio 
+  sidecar.
 </Alert>
 
-## Install $productName$ with Istio Integration
+## <a name="install-edge"></a> Install $productName$ with Istio Integration
 
 Properly integrating $productName$ with Istio provides support for:
 
@@ -51,9 +65,10 @@ for east-west traffic;
 * Automatic generation of Prometheus metrics for services; and
 * Istio distributed tracing for end-to-end observability.
 
-The simplest way to enable everything is to install $productName$ using [Helm](https://helm.sh). It is of course also possible when using manual installation with YAML.
+The simplest way to enable everything is to install $productName$ using [Helm](https://helm.sh), though
+you can use manual installation with YAML if you wish.
 
-### Installation with Helm
+### Installation with Helm (Recommended)
 
 To install with Helm, write the following YAML to a file called `istio-integration.yaml`:
 
@@ -108,7 +123,7 @@ env:
   AMBASSADOR_ENVOY_BASE_ID: "1"
 ```
 
-To install $productName$ with Helm, using these values to configure Istio integration:
+To install $productName$ with Helm, use these values to configure Istio integration:
 
 1. Create the `$productNamespace$` Namespace:
 
@@ -145,7 +160,7 @@ file shown above into your deployment YAML:
 * `volumes`, `volumeMounts`, and `env` contents should be included in the $productDeploymentName$ Deployment; and
 * you must also label the $productNamespace$ Namespace for auto-injection as described above.
 
-### Configuration After Installation
+### Configuring an Existing Installation
 
 If you have already installed $productName$ and want to enable Istio:
 
@@ -157,7 +172,7 @@ If you have already installed $productName$ and want to enable Istio:
       installation for you.
 3. Restart the $productName$ pods.
 
-## Using Mutual TLS
+## Configure an mTLS `TLSContext`
 
 After configuring $productName$ for Istio integration, the Istio mTLS certificates are available within
 $productName$:
@@ -167,81 +182,54 @@ $productName$:
   environment variable).
 - $productName$ reads the mTLS certificates from `/etc/istio-certs` (per the `AMBASSADOR_ISTIO_SECRET_DIR`
   environment variable) and creates a Secret named `istio-certs`.
-   - At present, the Secret name `istio-certs` cannot be changed.
+
+   <Alert severity="warning">
+    At present, the Secret name <code>istio-certs</code> cannot be changed.
+   </Alert>
 
 To make use of the `istio-certs` Secret, create a `TLSContext` referencing it:
 
-```
-$ kubectl apply -f - <<EOF
----
-apiVersion: getambassador.io/v3alpha1
-kind: TLSContext
-metadata:
-  name: istio-upstream
-  namespace: $productNamespace$
-spec:
-  secret: istio-certs     # This Secret name cannot currently be changed.
-  alpn_protocols: istio   # This is required for Istio.
-EOF
-```
+   ```shell
+   $ kubectl apply -f - <<EOF
+   ---
+   apiVersion: getambassador.io/v3alpha1
+   kind: TLSContext
+   metadata:
+     name: istio-upstream
+     namespace: $productNamespace$
+   spec:
+     secret: istio-certs     # This Secret name cannot currently be changed.
+     alpn_protocols: istio   # This is required for Istio.
+   EOF
+   ```
 
 Once the `TLSContext` is created, a `Mapping` can use it for TLS origination. An example might be:
 
-```
----
-apiVersion: getambassador.io/v3alpha1
-kind: Mapping
-metadata:
-  name: mtls-mapping
-spec:
-  hostname: my-secret-host.example.com   # Make sure this matches a configured Host!
-  prefix: /my-secret-mapping/
-  tls: istio-upstream
-```
+   ```
+   ---
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
+   metadata:
+     name: mtls-mapping
+   spec:
+     hostname: my-secret-host.example.com   # Make sure this matches a configured Host!
+     prefix: /my-secret-mapping/
+     tls: istio-upstream
+   ```
 
-This `Mapping` will use mTLS when communicating with its upstream service. For more details, see
-[Routing to Services](#routing-to-services) below.
+This `Mapping` will use mTLS when communicating with its upstream service.
 
-### Integrating Prometheus metrics collection
+## Route to Services Using mTLS
 
-By default, the Istio sidecar provides Prometheus metrics using `prometheus.io` annotations. To take
-advantage of these metrics, you need to [install Prometheus](../prometheus).
+After integrating $productName$ with Istio, $productName$'s feature-rich routing capabilities and Istio's mTLS
+and observability are all available for all incoming traffic. To take full advantage of both, you need to 
+configure upstream services with the Istio sidecar, and you need to configure `Mapping`s to use mTLS:
 
-### Integrating distributed tracing
+### Configure Upstream Services with the Istio Sidecar
 
-The Istio sidecar also supports [distributed tracing](https://istio.io/docs/tasks/observability/distributed-tracing/overview/)
-by default. To take advantage of this support, you need to:
-
-1. Install a tracing provider, for example [Zipkin](../tracing-zipkin) into your cluster.
-2. Add a [`TracingService`](../../topics/running/services/tracing-service) to tell $productName$ to send tracing
-   to your tracing provider, for example: 
-
-```yaml
----
-apiVersion: getambassador.io/v3alpha1
-kind:  TracingService
-metadata:
-  name:  tracing
-  namespace: $productNamespace$
-spec:
-  service: "zipkin:9411"
-  driver: zipkin
-  config: {}
-  tag_headers:
-    - ":authority"
-    - ":path"
-```
-
-After adding a `TracingService`, restart $productName$ for the configuration to take effect. Istio propagates
-the tracing headers automatically, allowing for end-to-end observability within the cluster.
-
-## Routing to services
-
-Above, we integrated $productName$ with Istio to take advantage of end-to-end encryption and observability offered by Istio while leveraging the feature-rich edge routing capabilities of $productName$.
-
-Now we will show how you can use $productName$ to route to services in the Istio service mesh.
-
-1. Label the default namespace for [automatic sidecar injection](https://istio.io/docs/setup/additional-setup/sidecar-injection/#automatic-sidecar-injection)
+Upstream services must have the Istio sidecar configured. The easiest way to arrange for this is to use
+[Istio automatic sidecar injection](https://istio.io/docs/setup/additional-setup/sidecar-injection/#automatic-sidecar-injection)
+as discussed above.
 
    ```
    kubectl label namespace default istio-injection=enabled
@@ -249,26 +237,20 @@ Now we will show how you can use $productName$ to route to services in the Istio
 
    This will tell Istio to automatically inject the `istio-proxy` sidecar container into pods in this namespace.
 
-2. Install the quote example service
+### Configure `Mapping`s to Use mTLS
 
-   ```
-   kubectl apply -n default -f https://getambassador.io/yaml/backends/quote.yaml
-   ```
+Traffic routing in $productName$ is configured with the [`Mapping`](../../topics/using/intro-mappings) resource.
+This is a powerful configuration object that lets you configure different routing rules for different services.
 
-   Wait for the pod to start and see that there are two containers: the `quote` application and the `istio-proxy` sidecar.
+To configure a `Mapping` to use mTLS, you need to use the `tls` element of the `Mapping` to tell it to originate
+TLS using the `istio-upstream` `TLSContext` above:
 
-   ```
-   $ kubectl get po -n default 
-
-   NAME                     READY   STATUS    RESTARTS   AGE
-   quote-6bc6b6bd5d-jctbh   2/2     Running   0          91m
+   ```yaml
+   tls: istio-upstream
    ```
 
-3. Route to the service
-
-   Traffic routing in $productName$ is configured with the [`Mapping`](../../topics/using/intro-mappings) resource. This is a powerful configuration object that lets you configure different routing rules for different services. 
-
-   The above `kubectl apply` installed the following basic `Mapping` which has configured $productName$ to route traffic with URL prefix `/backend/` to the `quote` service.
+For example, if you have installed the Quote of the Moment service as described on the
+[Getting Started](../../../tutorials/getting-started) page, you will have a `Mapping` as follows:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
@@ -281,11 +263,9 @@ Now we will show how you can use $productName$ to route to services in the Istio
      service: quote
    ```
 
-   Since we have integrated $productName$ with Istio, we can tell it to use the mTLS certificates to encrypt requests to the quote service.
+   To take advantage of Istio mTLS, update the above `Mapping` to originate TLS using the Istio mTLS certificates:
 
-   Simply do that by updating the above `Mapping` with the following one.
-
-   ```
+   ```yaml
    $ kubectl apply -f - <<EOF
    apiVersion: getambassador.io/v3alpha1
    kind: Mapping
@@ -299,11 +279,10 @@ Now we will show how you can use $productName$ to route to services in the Istio
    EOF
    ```
 
-   Send a request to the quote service using curl:
+The behavior of your service will not seem to change, even though mTLS is active:
 
-   ```
+   ```shell
    $ curl -k https://{{AMBASSADOR_HOST}}/backend/
-
    {
        "server": "bewitched-acai-5jq7q81r",
        "quote": "A late night does not make any sense.",
@@ -311,99 +290,101 @@ Now we will show how you can use $productName$ to route to services in the Istio
    }
    ```
 
-   While the majority of the work being done is transparent to the user, you have successfully sent a request to $productName$ which routed it to the quote service in the default namespace. It was then intercepted by the `istio-proxy` which authenticated the request from $productName$ and exported various metrics and finally forwarded it on to the  quote service.
+This request first went to $productName$, which routed it over an mTLS connection to the quote service in the
+default namespace. That connection was intercepted by the `istio-proxy` which authenticated the request as 
+being from $productName$, exported various metrics, and finally forwarded it on to the actual quote service.
 
-## Enforcing authentication between containers
+## Enable Strict mTLS
 
-Istio defaults to PERMISSIVE mTLS that does not require authentication between containers in the cluster. Configuring STRICT mTLS will require all connections within the cluster be encrypted.
+Istio defaults to _permissive_ mTLS, where mTLS is allowed between services, but not required. Configuring
+[_strict_ mTLS](https://istio.io/docs/tasks/security/authentication/authn-policy/#globally-enabling-istio-mutual-tls-in-strict-mode) requires all connections within the cluster be encrypted. To switch Istio to use strict mTLS,
+apply a `PeerAuthentication` resource in each namespace that should operate in strict mode:
 
-1. Configure Istio in [STRICT mTLS](https://istio.io/docs/tasks/security/authentication/authn-policy/#globally-enabling-istio-mutual-tls-in-strict-mode) mode.
+  ```yaml
+  $ kubectl apply -f - <<EOF
+  apiVersion: security.istio.io/v1beta1
+  kind: PeerAuthentication
+  metadata:
+    name: global
+    namespace: istio-system
+  spec:
+    mtls:
+      mode: STRICT   
+  EOF
+  ```
+ 
+To test strict mTLS, remove the `tls` configuration from the quote-backend `Mapping` and send a request:
 
-   ```
-   $ kubectl apply -f - <<EOF
-   apiVersion: security.istio.io/v1beta1
-   kind: PeerAuthentication
-   metadata:
-     name: default
-     namespace: istio-system
-   spec:
-     mtls:
-       mode: STRICT   
-   EOF
-   ```
+  ```shell
+  $ kubectl apply -f - <<EOF
+  apiVersion: getambassador.io/v3alpha1
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    hostname: "*"
+    prefix: /backend/
+    service: quote
+  EOF
+  ```
 
-   This will enforce authentication for all containers in the mesh.
+  ```shell
+  $ curl -k https://{{AMBASSADOR_HOST}}/backend/
+  upstream connect error or disconnect/reset before headers. reset reason: connection termination
+  ```
 
-   We can test this by removing the `tls` configuration from the quote-backend `Mapping`
-   and sending a request.
+Make sure to restore the `tls` configuration when testing is complete!
 
-   ```
-   $ kubectl apply -f - <<EOF
-   apiVersion: getambassador.io/v3alpha1
-   kind: Mapping
-   metadata:
-     name: quote-backend
-   spec:
-     hostname: "*"
-     prefix: /backend/
-     service: quote
-   EOF
-   ```
+## Configure Prometheus Metrics Collection
 
-   ```
-   $ curl -k https://{{AMBASSADOR_HOST}}/backend/
-   
-   upstream connect error or disconnect/reset before headers. reset reason: connection termination
-   ```
+By default, the Istio sidecar provides Prometheus metrics using `prometheus.io` annotations. To take
+advantage of these metrics, you must [install Prometheus](../prometheus).
 
+### Configure Istio Distributed Tracing
 
-2. Configure $productName$ to use mTLS certificates
+The Istio sidecar also supports [distributed tracing](https://istio.io/docs/tasks/observability/distributed-tracing/overview/)
+by default. To take advantage of this support, you need to:
 
-   As we have demonstrated above we can tell $productName$ to use the mTLS certificates from Istio to authenticate with the `istio-proxy` in the quote pod.
+1. Install a tracing provider, for example [Zipkin](../tracing-zipkin) into your cluster.
+2. Add a [`TracingService`](../../topics/running/services/tracing-service) to tell $productName$ to send tracing
+   to your tracing provider, for example: 
 
-   ```
-   $ kubectl apply -f - <<EOF
+   ```yaml
    ---
    apiVersion: getambassador.io/v3alpha1
-   kind: Mapping
+   kind:  TracingService
    metadata:
-     name: quote-backend
+     name:  tracing
+     namespace: $productNamespace$
    spec:
-     hostname: "*"
-     prefix: /backend/
-     service: quote
-     tls: istio-upstream
-   EOF
+     service: "zipkin:9411"
+     driver: zipkin
+     config: {}
+     tag_headers:
+       - ":authority"
+       - ":path"
    ```
 
-   Now $productName$ will use the Istio mTLS certificates when routing to the `quote` service. 
-
-   ```
-   $ curl -k https://{{AMBASSADOR_HOST}}/backend/
-   {
-       "server": "bewitched-acai-5jq7q81r",
-       "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
-       "time": "2020-06-02T11:06:53.854468941Z"
-   }
-   ```
+After adding a `TracingService`, restart $productName$ for the configuration to take effect. Istio propagates
+the tracing headers automatically, allowing for end-to-end observability within the cluster.
 
 ## FAQ
 
 ### How to test Istio certificate rotation
 
-Istio mTLS certificates, by default, will be valid for a max of 90 days but will be rotated every day.
+By default, Istio mTLS certificates are valid for 90 days, but get rotated every day.
 
-$productName$ will watch and update the mTLS certificates as they rotate so you will not need to worry about certificate expiration. 
+$productName$ updates the mTLS certificates as they are rotated, so you don't need to worry about certificate expiration. 
 
 To test that $productName$ is properly rotating certificates, shorten the TTL of the Istio certificates by 
 setting the following environment variables in the `istiod` container in the `istio-system` Namespace:
 
-```yaml
-env:
-- name: DEFAULT_WORKLOAD_CERT_TTL
-  value: 30m
-- name: MAX_WORKLOAD_CERT_TTL
-  value: 1h
-```
+   ```yaml
+   env:
+   - name: DEFAULT_WORKLOAD_CERT_TTL
+     value: 30m
+   - name: MAX_WORKLOAD_CERT_TTL
+     value: 1h
+   ```
 
-This will make the certificates Istio issues expire in one hour so testing certificate rotation is much easier.
+This makes the certificates Istio issues expire in one hour so testing certificate rotation is much easier.
