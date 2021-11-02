@@ -4,15 +4,15 @@
 
 ## Rendering API documentation
 
-The _Dev Portal_ uses the `AmbassadorMapping` resource to automatically discover services known by
+The _Dev Portal_ uses the `Mapping` resource to automatically discover services known by
 the Ambassador Edge Stack.
 
-For each `AmbassadorMapping`, the _Dev Portal_ will attempt to fetch an OpenAPI V3 document
+For each `Mapping`, the _Dev Portal_ will attempt to fetch an OpenAPI V3 document
 when a `docs` attribute is specified.
 
-### `docs` attribute in Mappings
+### `docs` attribute in `Mapping`s
 
-This documentation endpoint is defined by the optional `docs` attribute in the `AmbassadorMapping`.
+This documentation endpoint is defined by the optional `docs` attribute in the `Mapping`.
 
 ```yaml
   docs:
@@ -26,12 +26,12 @@ where:
 
 * `path`: path for the OpenAPI V3 document.
 The Ambassador Edge Stack will append the value of `docs.path` to the `prefix`
-in the `AmbassadorMapping` so it will be able to use Envoy's routing capabilities for
+in the `Mapping` so it will be able to use Envoy's routing capabilities for
 fetching the documentation from the upstream service . You will need to update
 your microservice to return a Swagger or OAPI document at this URL.
 * `url`:  absolute URL to an OpenAPI V3 document.
-* `ignored`: ignore this `AmbassadorMapping` for documenting services. Note that the service
-will appear in the _Dev Portal_ anyway if another, non-ignored `AmbassadorMapping` exists
+* `ignored`: ignore this `Mapping` for documenting services. Note that the service
+will appear in the _Dev Portal_ anyway if another, non-ignored `Mapping` exists
 for the same service.
 * `display_name`: custom name to show for this service in the devportal.
 
@@ -40,7 +40,7 @@ for the same service.
 > Previous versions of the _Dev Portal_ tried to obtain documentation automatically
 > from `/.ambassador-internal/openapi-docs` by default, while the current version
 > will not try to obtain documentation unless a `docs` attribute is specified.
-> Users should set `docs.path` to `/.ambassador-internal/openapi-docs` in their `AmbassadorMapping`s
+> Users should set `docs.path` to `/.ambassador-internal/openapi-docs` in their `Mapping`s
 > in order to keep the previous behavior.
 >
 >
@@ -50,18 +50,18 @@ for the same service.
  `kubectl apply -f https://getambassador.io/yaml/aes-crds.yaml`
 ```
 
-> If you are on an earlier version of Ambassador, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`
+> If you are on an earlier version of Ambassador, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`.
 
 Example:
 
-With the `AmbassadorMapping`s below, the _Dev Portal_ would fetch OpenAPI documentation
+With the `Mapping`s below, the _Dev Portal_ would fetch OpenAPI documentation
 from `service-a:5000` at the path `/srv/openapi/` and from `httpbin` from an
 external URL. `service-b` would have no documentation.
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  service-a
 spec:
@@ -71,16 +71,16 @@ spec:
   docs:
     path: /openapi/            ## docs will be obtained from `/srv/openapi/`
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  service-b
 spec:
   prefix: /service-b/
   service: service-b           ## no `docs` attribute, so service-b will not be documented
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: regular-httpbin
 spec:
@@ -100,7 +100,7 @@ spec:
 
 > Limitations on Mappings with a `host` attribute
 >
-> The Dev Portal will ignore `AmbassadorMapping`s that contain `host`s that cannot be
+> The Dev Portal will ignore `Mapping`s that contain `host`s that cannot be
 > parsed as a valid hostname, or use a regular expression (when `host_regex: true`).
 
 ### Publishing the documentation
@@ -123,7 +123,7 @@ the _Dev Portal_, filtering `Mappings` and namespaces and specifying the content
 `DevPortal` resources have the following syntax:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  "string"
@@ -152,13 +152,13 @@ where:
 
 * `default`: `true` when this is the default Dev Portal configuration.
 * `content`: see [section below](#styling).
-* `selector`: rules for filtering `AmbassadorMapping`s:
-  * `matchNamespaces`: list of namespaces, used for filtering the `AmbassadorMapping`s that
+* `selector`: rules for filtering `Mapping`s:
+  * `matchNamespaces`: list of namespaces, used for filtering the `Mapping`s that
   will be shown in the `DevPortal`. When multiple namespaces are provided, the `DevPortal`
-  will consider `AmbassadorMapping`s in **any** of those namespaces.
-  * `matchLabels`: dictionary of labels, filtering the `AmbassadorMapping`s that will
+  will consider `Mapping`s in **any** of those namespaces.
+  * `matchLabels`: dictionary of labels, filtering the `Mapping`s that will
   be shown in the `DevPortal`. When multiple labels are provided, the `DevPortal`
-  will only consider the `AmbassadorMapping`s that match **all** the labels.
+  will only consider the `Mapping`s that match **all** the labels.
 * `docs`: static list of _service_/_documentation_ pairs that will be shown
   in the _Dev Portal_. Only the documentation from this list will be shown in the _Dev Portal_
   (unless additional docs are included with a `selector`).
@@ -168,10 +168,10 @@ where:
   the _hostname_).
 * `naming_scheme`: Configures how DevPortal docs are displayed and linked to in the UI.
   * "namespace.name" will display the docs with the namespace and name of the mapping.
-  e.g. an AmbassadorMapping named `quote` in namespace `default` will be displayed as `default.quote`
+  e.g. a Mapping named `quote` in namespace `default` will be displayed as `default.quote`
   and its docs will have the relative path of `/default/quote`
   * "name.prefix" will display the docs with the name and prefix of the mapping.
-  e.g. an AmbassadorMapping named `quote` with a prefix `backend` will be displayed as `quote.backend`
+  e.g. a Mapping named `quote` with a prefix `backend` will be displayed as `quote.backend`
   and its docs will have the relative path of `/quote/backend`
 * `search`: as of Edge Stack 1.13.0, the DevPortal content is now searchable
   * `enabled`: default `false``; set to true to enable search functionality.
@@ -188,7 +188,7 @@ a `DevPortal` `ambassador` resource like this:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -211,7 +211,7 @@ the _Dev Portal_ will show documentation for all the services discovered in the
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -254,7 +254,7 @@ and include it in the `content` following the example below:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -306,7 +306,7 @@ After committing and pushing changes to your devportal content repo changes to g
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -336,7 +336,7 @@ curl -X POST -Lk ${AMBASSADOR_LB_ENDPOINT}/docs/api/refreshContent
 
 #### Customizing documentation names and paths
 
-The _Dev Portal_ displays the documentation's AmbassadorMapping name and namespace by default,
+The _Dev Portal_ displays the documentation's Mapping name and namespace by default,
 but you can override this behavior.
 
 To change the documentation naming scheme for the entire _Dev Portal_, you can set
@@ -344,7 +344,7 @@ To change the documentation naming scheme for the entire _Dev Portal_, you can s
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  DevPortal
 metadata:
   name:  ambassador
@@ -357,8 +357,8 @@ With the above configuration, a mapping for `service-a`:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  service-a
 spec:
@@ -378,8 +378,8 @@ A mapping for `service-b` with `display_name` set:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  service-b
 spec:
@@ -417,4 +417,4 @@ the `ambassador` `DevPortal`.
 
 ## Visualize your API documentation in the cloud
 
-If you haven't already done so, you may want to [connect your cluster to Ambassador Cloud](../../../tutorials/getting-started). Connected clusters will automatically report your `AmbassadorMapping`'s OpenAPI documents, allowing you to host and visualize all of your services API documentation on a shared, secure and authenticated platform.
+If you haven't already done so, you may want to [connect your cluster to Ambassador Cloud](../../../tutorials/getting-started). Connected clusters will automatically report your `Mapping`s' OpenAPI documents, allowing you to host and visualize all of your services API documentation on a shared, secure and authenticated platform.

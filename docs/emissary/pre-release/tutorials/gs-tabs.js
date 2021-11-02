@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock'
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import React from 'react';
+
 import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
 import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
-
+import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -21,11 +21,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box p={3}>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box p={3}>{children}</Box>}
     </div>
   );
 }
@@ -47,9 +43,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: 'transparent',
-
   },
-
 }));
 
 export default function GettingStartedEmissaryTabs() {
@@ -62,21 +56,44 @@ export default function GettingStartedEmissaryTabs() {
 
   return (
     <div className={classes.root}>
-      <AppBar elevation={0} style={{ background: 'transparent', color: 'black', borderBottom: '1px solid #e8e8e8', }} position="static">
-        <Tabs TabIndicatorProps={{ style: { background: '#AF5CF8' } }} value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab icon={<HelmIcon />} label="Helm 3" {...a11yProps(0)} style={{ minWidth: "10%", textTransform: 'none' }} />
-          <Tab icon={<KubernetesIcon />} label="Kubernetes YAML" {...a11yProps(1)} style={{ minWidth: "10%", textTransform: 'none' }} />
+      <AppBar
+        elevation={0}
+        style={{
+          background: 'transparent',
+          color: 'black',
+          borderBottom: '1px solid #e8e8e8',
+        }}
+        position="static"
+      >
+        <Tabs
+          TabIndicatorProps={{ style: { background: '#AF5CF8' } }}
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+        >
+          <Tab
+            icon={<HelmIcon />}
+            label="Helm 3"
+            {...a11yProps(0)}
+            style={{ minWidth: '10%', textTransform: 'none' }}
+          />
+          <Tab
+            icon={<KubernetesIcon />}
+            label="Kubernetes YAML"
+            {...a11yProps(1)}
+            style={{ minWidth: '10%', textTransform: 'none' }}
+          />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-
         {/*Helm 3 install instructions*/}
 
         <CodeBlock>
-          {
-            '# Add the Repo:' +
+          {'# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://app.getambassador.io' +
+            '\n' +
+            'helm repo update' +
             '\n \n' +
             '# Create Namespace and Install:' +
             '\n' +
@@ -85,19 +102,15 @@ export default function GettingStartedEmissaryTabs() {
             'helm install emissary-ingress --devel --namespace emissary datawire/emissary-ingress && \\' +
             '\n' +
             'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress' +
-            '\n'
-          }
+            '\n'}
         </CodeBlock>
-
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-
         {/*YAML install instructions*/}
 
         <CodeBlock>
-          {
-            'kubectl create namespace emissary && \\' +
+          {'kubectl create namespace emissary && \\' +
             '\n' +
             'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-crds.yaml && \\' +
             '\n' +
@@ -106,11 +119,9 @@ export default function GettingStartedEmissaryTabs() {
             'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-ingress.yaml && \\' +
             '\n' +
             'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lproduct=aes' +
-            '\n'
-          }
+            '\n'}
         </CodeBlock>
-
       </TabPanel>
-    </div >
+    </div>
   );
 }

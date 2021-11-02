@@ -29,7 +29,7 @@ After configuring an OAuth application in Salesforce, configuring $AESproductNam
 1. Create an [OAuth Filter](../../../topics/using/filters/oauth2) with the credentials from above:
 
     ```yaml
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: Filter
     metadata:
       name: salesforce
@@ -49,7 +49,7 @@ After configuring an OAuth application in Salesforce, configuring $AESproductNam
 2. Create a [FilterPolicy](../../../topics/using/filters/) to use the `Filter` created above
 
     ```yaml
-    apiVersion: getambassador.io/v2
+    apiVersion: getambassador.io/v3alpha1
     kind: FilterPolicy
     metadata:
       name: oauth-policy

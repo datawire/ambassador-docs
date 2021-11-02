@@ -3,7 +3,7 @@
 The Ambassador Edge Stack ships with a rate limiting service that is enabled
 to perform advanced rate limiting out of the box.
 
-Configuration of the `AmbassadorMapping` and `RateLimit` resources that control **how**
+Configuration of the `Mapping` and `RateLimit` resources that control **how**
 to rate limit requests can be found in the
 [Rate Limiting](../../../using/rate-limits) section of the documentation.
 
@@ -18,7 +18,7 @@ The default `RateLimitService` is named `ambassador-edge-stack-ratelimit` and is
 defined as:
 
 ```yaml
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: RateLimitService
 metadata:
   name: ambassador-edge-stack-ratelimit

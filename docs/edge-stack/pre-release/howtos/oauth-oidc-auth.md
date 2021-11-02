@@ -8,7 +8,7 @@ First, configure an OAuth2 filter for your identity provider. For information on
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: auth-filter
@@ -47,7 +47,7 @@ Once we have a properly configured OAuth2 filter, create a FilterPolicy that app
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: httpbin-policy
@@ -89,7 +89,7 @@ Example:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: domain1-tenant
@@ -103,7 +103,7 @@ spec:
     protectedOrigins:
     - origin: http://domain1.example.com
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: domain2-tenant

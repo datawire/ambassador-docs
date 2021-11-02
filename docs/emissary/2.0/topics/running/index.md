@@ -3,7 +3,7 @@
 This section of the documentation is designed for operators and site reliability engineers who are managing the deployment of $productName$. Learn more below:
 
 * *Global Configuration:* The [Ambassador module](ambassador) is used to set system-wide configuration.
-* *Exposing $productName$ to the Internet:* The [`AmbassadorListener` CRD](ambassadorlistener) defines which ports are exposed, including their protocols and security models. The [`AmbassadorHost` CRD](host-crd) defines how $productName$ manages TLS, domains, and such.
+* *Exposing $productName$ to the Internet:* The [`Listener` CRD](listener) defines which ports are exposed, including their protocols and security models. The [`Host` CRD](host-crd) defines how $productName$ manages TLS, domains, and such.
 * *Load Balancing:* $productName$ supports a number of different [load balancing strategies](load-balancer) as well as different ways to configure [service discovery](resolvers)
 * [Gzip Compression](gzip)
 * *Deploying $productName$:* On [Amazon Web Services](ambassador-with-aws) | [Google Cloud](ambassador-with-gke) | [general security and operational notes](running), including running multiple $productNamePlural$ on a cluster

@@ -2,7 +2,7 @@
 
 Sometimes requests fail. When these requests fail for transient issues, $productName$ can automatically retry the request.
 
-Retry policy can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`AmbassadorMapping`](../mappings#configuring-ambassadormappings). Generally speaking, you should set `retry_policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
+Retry policy can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`Mapping`](../mappings#configuring-Mappings). Generally speaking, you should set `retry_policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
 
 > Note that when setting `retry_policy`, adjusting `max_retries` in the [circuit breaker](https://www.getambassador.io/docs/edge-stack/pre-release/topics/using/circuit-breakers/) configuration should also be considered in order to account for all desired retries.
 
@@ -46,8 +46,8 @@ A per mapping retry policy:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:
@@ -63,7 +63,7 @@ A global retry policy (not recommended):
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  Module
 metadata:
   name:  ambassador
@@ -73,8 +73,8 @@ spec:
       retry_on: "retriable-4xx"
       num_retries: 4
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind:  AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
 metadata:
   name:  quote-backend
 spec:

@@ -8,7 +8,7 @@ A `TracingService` manifest configures $productName$ to use an external trace vi
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind:  TracingService
 metadata:
   name:  tracing

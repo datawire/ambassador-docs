@@ -66,16 +66,16 @@ kubectl create secret tls tls-cert --cert=cert.pem --key=key.pem
 
 Now that we have stored our certificate and private key in a Kubernetes secret
 named `tls-cert`, we need to tell $productName$ to use this certificate
-for terminating TLS on a domain. An `AmbassadorHost` is used to tell $productName$ which
+for terminating TLS on a domain. A `Host` is used to tell $productName$ which
 certificate to use for TLS termination on a domain.
 
-Create the following `AmbassadorHost` to have $productName$ use the `Secret` we created
+Create the following `Host` to have $productName$ use the `Secret` we created
 above for terminating TLS on all domains.
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: wildcard-host
 spec:
@@ -93,8 +93,8 @@ spec:
 
 ```yaml
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorHost
+apiVersion: getambassador.io/v3alpha1
+kind: Host
 metadata:
   name: wildcard-host
 spec:
@@ -102,7 +102,7 @@ spec:
   ...
 ```
 
-Apply the `AmbassadorHost` configured above with `kubectl`:
+Apply the `Host` configured above with `kubectl`:
 
 ```
 kubectl apply -f wildcard-host.yaml

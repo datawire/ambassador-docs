@@ -6,7 +6,7 @@ In this tutorial, you will access and explore some of the key features of the De
 
 You must have [$productName$ installed](../getting-started/) in your 
 Kubernetes cluster. This tutorial assumes you have connected your cluster to Ambassador Cloud and deployed the `quote` app with the
-`AmbassadorMapping` from the [$productName$ tutorial](../getting-started/).
+`Mapping` from the [$productName$ tutorial](../getting-started/).
 
 
   ```

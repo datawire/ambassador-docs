@@ -26,7 +26,7 @@ Configure your OAuth `Filter` and `FilterPolicy` with the following:
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: Filter
    metadata:
      name: okta-filter
@@ -43,7 +43,7 @@ Configure your OAuth `Filter` and `FilterPolicy` with the following:
 
    ```yaml
    ---
-   apiVersion: getambassador.io/v2
+   apiVersion: getambassador.io/v3alpha1
    kind: FilterPolicy
    metadata:
      name: httpbin-policy

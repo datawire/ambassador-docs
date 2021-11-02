@@ -5,10 +5,10 @@ import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import React from 'react';
 
-import * as allTabs from './tabs';
 import styles from './styles.module.less';
+import * as allTabs from './tabs';
 
-let publicTabs = {...allTabs};
+let publicTabs = { ...allTabs };
 delete publicTabs.AbstractTab;
 delete publicTabs.UnknownTab;
 
@@ -57,7 +57,11 @@ function Provider({ children, ...props }) {
 
   React.useEffect(() => {
     const query = new URLSearchParams(window.location.search);
-    if (Object.values(publicTabs).map((cls) => cls.slug).includes(query.get('os'))) {
+    if (
+      Object.values(publicTabs)
+        .map((cls) => cls.slug)
+        .includes(query.get('os'))
+    ) {
       if (state.doAutoDetect || state.curTab !== query.get('os')) {
         setState({
           curTab: query.get('os'),
@@ -114,9 +118,7 @@ function TabGroup({ children, ...props }) {
                 <Icon />
                 {child.type.label}
               </summary>
-              <div className={styles.TabBody}>
-                {child.props.children}
-              </div>
+              <div className={styles.TabBody}>{child.props.children}</div>
             </details>
           );
         })}

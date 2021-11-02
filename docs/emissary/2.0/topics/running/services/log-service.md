@@ -17,7 +17,7 @@ The remote access log service (or ALS) must implement the
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: LogService
 metadata:
   name: example-log-service
@@ -78,7 +78,7 @@ spec:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: LogService
 metadata:
   name: als

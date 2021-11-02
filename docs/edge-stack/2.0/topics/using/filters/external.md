@@ -6,7 +6,7 @@ The external Filter calls out to an external service speaking the [`ext_authz` p
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: "my-filter"

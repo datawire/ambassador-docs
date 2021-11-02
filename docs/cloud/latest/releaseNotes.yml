@@ -29,29 +29,42 @@
 
 changelog: ''
 items:
-  - date: "2021-08-18"
+  - date: '2021-10-05'
+    notes:
+      - title: 'Rollouts from your GitLab repositories'
+        body: 'GitLab support to use Ambassador Cloud Rollouts for deploying your services using the canary release pattern.'
+        image: './cloud-rollouts-beta.png'
+        docs: '../../argo/latest/quick-start'
+        type: feature
+  - date: '2021-09-20'
+    notes:
+      - title: 'Heads Up Display'
+        body: 'Develop your services using the HUD (Heads Up Display). With many widgets available, the HUD is your new day-to-day assistant to create intercepts, visualize the progress of rollouts, and more!'
+        type: feature
+        image: ./cloud-hud.png
+        docs: service-catalog/concepts/hud
+  - date: '2021-08-18'
     notes:
       - title: Automated Configuration Analysis with the Ambassador DCP
-        body: "Visualize the impact of Edge Stack and Emissary-ingress configuration changes to Kubernetes clusters before deploying any changes."
+        body: 'Visualize the impact of Edge Stack and Emissary-ingress configuration changes to Kubernetes clusters before deploying any changes.'
         type: feature
         image: ./gitops-quickstart-warning.png
         docs: gitops/quick-start/
   - date: '2021-08-16'
     notes:
-      - title: "Visualize your APIs"
-        body: "Visualize your service’s OpenAPI documentation (formally known as Swagger Specifications) in the cloud, allowing you to interact and query your REST APIs directly from the Developer Control Plane."
+      - title: 'Visualize your APIs'
+        body: 'Visualize your service’s OpenAPI documentation (formally known as Swagger Specifications) in the cloud, allowing you to interact and query your REST APIs directly from the Developer Control Plane.'
         image: ./cloud-apis-swagger.png
         docs: visualize-api/quick-start/
         type: feature
-      - title: "Manage your clusters"
-        body: "View connected Edge Stack and Emissary-ingress clusters in the cloud. Glimpse at usage metrics and register your installation using a free community licence to unlock Edge Stack traffic management features."
+      - title: 'Manage your clusters'
+        body: 'View connected Edge Stack and Emissary-ingress clusters in the cloud. Glimpse at usage metrics and register your installation using a free community licence to unlock Edge Stack traffic management features.'
         image: ./cloud-cluster-rps.png
         docs: ../../edge-stack/latest/tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
-        type: feature
   - date: '2021-06-14'
     notes:
       - title: Updated views for Service Catalog
-        body: "Develop and manage your services through its entire cloud-native lifecycle. As services span multiple environments, you can now visualize the flow of services through the different stages. As versions get rolled out, the Service Catalog will guide you through the promotion pipeline from development to production."
+        body: 'Develop and manage your services through its entire cloud-native lifecycle. As services span multiple environments, you can now visualize the flow of services through the different stages. As versions get rolled out, the Service Catalog will guide you through the promotion pipeline from development to production.'
         image: ./cloud-new-catalog-view.png
         docs: service-catalog/quick-start/
         type: feature
@@ -61,7 +74,7 @@ items:
         docs: ../../telepresence/latest/quick-start/
         type: feature
       - title: Rollouts in developer preview
-        body: "Rollouts is a feature of Ambassador Cloud currently in developer preview. With rollouts, Ambassador Cloud and Argo will guide you through the GitOps operations for deploying your services using the canary release pattern."
+        body: 'Rollouts is a feature of Ambassador Cloud currently in developer preview. With rollouts, Ambassador Cloud and Argo will guide you through the GitOps operations for deploying your services using the canary release pattern.'
         image: ./cloud-rollouts-beta.png
         docs: ../../argo/latest/quick-start/
         type: feature

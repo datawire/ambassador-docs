@@ -50,13 +50,13 @@ const DocsHome = () => {
         </span>
         {products.map((product, index) => {
           return (
-            (index > 0) &&
+            index > 0 && (
               <Badge key={product.id} to={product.to}>
                 {product.name}
               </Badge>
             )
-          }
-        )}
+          );
+        })}
         <div className="docs__cards">
           <div className="docs__card">
             <div className="docs__card--heading">
@@ -150,9 +150,7 @@ const DocsHome = () => {
                 </Link>
               </li>
               <li>
-                <Link to={goToKubeSSO}>
-                  Set up single sign-on with kubectl
-                </Link>
+                <Link to={goToKubeSSO}>Set up single sign-on with kubectl</Link>
               </li>
             </ul>
           </div>
