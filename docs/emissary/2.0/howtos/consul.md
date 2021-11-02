@@ -19,7 +19,7 @@ import Alert from '@material-ui/lab/Alert';
 
 [Consul](https://www.consul.io) is a widely used service mesh.
 $productName$ natively supports service discovery and unauthenticated
-communication to services in Consul; additionally the *Ambassador
+communication to services in Consul.  Additionally, the *Ambassador
 Consul Connector* enables $productName$ to encrypt and authenticate
 its communication via mTLS with services in Consul that make use of
 [Consul's *Connect* feature](https://www.consul.io/docs/connect).
@@ -27,24 +27,26 @@ its communication via mTLS with services in Consul that make use of
 ## Architecture overview
 
 Using Consul with $productName$ is particularly useful when deploying
-$productName$ in so-called hybrid clouds, where applications are
-deployed on VMs and Kubernetes.  In this environment, $productName$
-can securely route over TLS to any application regardless of where it
-is deployed.
+$productName$ in hybrid cloud environments where you deploy
+applications on VMs and Kubernetes.  In this environment, Consul
+enables $productName$ to securely route over TLS to any application
+regardless of where it is deployed.
 
 In this architecture, Consul serves as the source of truth for your
 entire data center, tracking available endpoints, service
 configuration, and secrets for TLS encryption.  New applications and
 services automatically register themselves with Consul using the
-Consul agent or API.  When a request is sent through $productName$,
+Consul agent or API.  When you send a request through $productName$,
 $productName$ sends the request to an endpoint based on the data in
 Consul.
 
 ![ambassador-consul](../../images/consul-ambassador.png)
 
-In this guide, you will first register a service with Consul and use
-$productName$ to dynamically route requests to that service based on
-Consul's service discovery data.
+This guide first instructs you on registering a service with Consul
+and using $productName$ to dynamically route requests to that service
+based on Consul's service discovery data, and subsequently instructs
+you on using using the Ambassador Consul Connector to use Consul for
+authorizing and encrypting requests.
 
 ## Installing Consul
 
@@ -55,9 +57,9 @@ and skip to the next section.
    documentation for any setup steps specific to your platform.  Below
    you can find setup guides for some of the more popular Kubernetes
    platforms.  This step is primarily to ensure you have the proper
-   permissions to set up Consul, and can be skipped if your cluster
-   has the necessary permissions configured already.  This page will
-   walk you through the process of installing Consul
+   permissions to set up Consul.  You can skip these guides if your
+   cluster is already configured to grant you the necessary
+   permissions.
 
    - [Microsoft Azure Kubernetes Service (AKS)](https://learn.hashicorp.com/tutorials/consul/kubernetes-aks-azure?utm_source=consul.io&utm_medium=docs)
    - [Amazon Elastic Kubernetes Service (EKS)](https://learn.hashicorp.com/tutorials/consul/kubernetes-eks-aws?utm_source=consul.io&utm_medium=docs)
@@ -65,9 +67,9 @@ and skip to the next section.
 
    <Alert severity="info">
 
-   If you did not find your Kubernetes platform above, you can check
-   the [Consul documentation here](https://www.consul.io/docs/k8s) to
-   see if there are specific setup instructions for your platform.
+   If you did not find your Kubernetes platform above, check the
+   [Consul documentation here](https://www.consul.io/docs/k8s) to see
+   if there are specific setup instructions for your platform.
 
    </Alert>
 
@@ -79,7 +81,7 @@ and skip to the next section.
    helm repo add hashicorp https://helm.releases.hashicorp.com
    ```
 
-3. Create a new YAML file (e.g. `consul-values.yaml`) for the Consul
+3. Create a new `consul-values.yaml` YAML file for the Consul
    installation values and copy the values below into that file.
 
    ```yaml
@@ -104,7 +106,7 @@ and skip to the next section.
    <Alert severity="info">
 
    Note: you are free to change the value of the `datacenter` field in
-   the install values.  This will be the name of your Consul
+   the install values.  This is the the name of your Consul
    Datacenter.
 
    </Alert>
@@ -119,20 +121,19 @@ and skip to the next section.
 ## Installing $productName$
 
 If you have not already installed $productName$ in to your cluster,
-then head over to the [quick start
-guide](../../tutorials/getting-started) before continuing any further
-in this guide.
+then go to the [quick start guide](../../tutorials/getting-started)
+before continuing any further in this guide.
 
 ## Using Consul for service discovery
 
-In this part of the guide, you'll configure $productName$ to be able
-to look for services registered to Consul, register a demo application
-with Consul, and configure $productName$ to route to this application
-using endpoint data from Consul.
+This section of the guide instructs you on configuring $productName$
+to look for services registered to Consul, registering a demo
+application with Consul, and configuring $productName$ to route to
+this application using endpoint data from Consul.
 
-To simplify this tutorial, you'll deploy the application in
-Kubernetes, although in practice this application can be deployed
-anywhere in your data center (e.g., on VMs).
+In this tutorial, you deploy the application in Kubernetes.  However,
+this application can be deployed anywhere in your data center, such as
+on a VM.
 
 1. Configure $productName$ to look for services registered to Consul
    by creating the `ConsulResolver`.  Use `kubectl` to apply the
@@ -170,19 +171,19 @@ anywhere in your data center (e.g., on VMs).
 
    This tells $productName$ that Consul is a service discovery endpoint.
 
-   The `ConsulResolver` is opt-in.  In other words, after applying the
-   `ConsulResolver` you need to add `resolver: consul-dc1` in each
-   `Mapping` that you want to use this resolver for.  Otherwise
-   $productName$ will use your default resolver, and the service
-   associated with that `Mapping` will not be registered in Consul.
+   You must set the resolver to your `ConsulResolver` on a
+   per-`Mapping` basis, otherwise for that `Mapping` $productName$
+   uses the default resolver.  That is, in order for a `Mapping` to
+   make use of a service registered in Consul, you need to add
+   `resolver: consul-dc1` to that `Mapping`.
 
    For more information about resolver configuration, see the
    [resolver reference documentation](../../topics/running/resolvers).
    (If you're using Consul deployed elsewhere in your data center,
    make sure the `address` points to your Consul FQDN or IP address).
 
-2. Deploy the Quote demo application.  Use `kubectl` to apply the
-   following manifest:
+2. Deploy the Quote of the Moment demo application.  Use `kubectl` to
+   apply the following manifest:
 
    ```shell
    kubectl apply -f <<EOF
@@ -237,39 +238,39 @@ anywhere in your data center (e.g., on VMs).
 
    <Alert severity="info">
 
-   The `SERVICE_NAME` environment variable in the quote deployment is
-   used to specify the service name for Consul.  The default value is
-   set to "quote-consul", so you only need to include it if you want
-   to change the service name.
+   The `SERVICE_NAME` environment variable in the `quote-consul`
+   `Deployment` specifies the service name for Consul.  The default
+   value is set to "quote-consul", so you only need to include it if
+   you want to change the service name.
 
    </Alert>
 
-   The Quote application contains code to automatically register
-   itself with Consul, using the `CONSUL_IP` and `POD_IP` environment
-   variables specified within the Quote container spec.
+   The Quote of the Moment application contains code to automatically
+   register itself with Consul, using the `CONSUL_IP` and `POD_IP`
+   environment variables specified within the `quote-consul` container
+   spec.
 
-   Applying this manifest registers the quote pod as a Consul service
-   with the name `quote-consul` and the IP address of the quote pod.
+   When you apply this manifest, it registers the `Pod` in the
+   `quote-consul` `Deployment` as a Consul service with the name
+   `quote-consul` and the IP address of the `Pod`.
 
    <Alert severity="info">
 
    The `"consul.hashicorp.com/connect-inject": "false"` annotation
-   tells Consul that you do not want to use Consul's Connect
-   sidecar/proxy to register this service.  Without Consul's Connect
-   sidecar to proxy requests, the service needs to include code to
-   make a request to Consul to register the service.  The manifest
-   includes the environment variables `CONSUL_IP`, `POD_IP`, and
-   `SERVICE_NAME` to provide the Quote service with enough information
-   to build that request and send it to Consul.  If you would like to
-   see how that code works, please check out [our Git repo for the
-   Quote service](https://github.com/datawire/quote).  The next
-   section of this guide shows how to configure Consul's Connect
-   sidecar/proxy as well.
+   tells Consul that for this `Deployment` you do not want to use the
+   sidecar proxy that is part of Consul's Connect feature.  Without
+   Consul's sidecar, the service needs to include code to make a
+   request to Consul to register the service.  The manifest includes
+   the environment variables `CONSUL_IP`, `POD_IP`, and `SERVICE_NAME`
+   to provide the Quote of the Moment service with enough information
+   to build that request and send it to Consul.  To see how this code
+   works, see our [our Git repo for the Quote of the Moment
+   service](https://github.com/datawire/quote).
 
    </Alert>
 
-3. Verify the quote pod has been registered with Consul.  You can
-   verify this by accessing the Consul UI.
+3. Verify the `quote-consul` `Deployment`'s `Pod` has been registered
+   with Consul.  You can verify this by accessing the Consul UI.
 
    First use `kubectl port-forward` to make the UI available on your
    local workstation:
@@ -314,15 +315,16 @@ anywhere in your data center (e.g., on VMs).
 
    Note that in the above config:
 
-    - `service` the service name you specified in the quote deployment
+    - `service` refers to the service name you specified in the `quote-consul`
+      `Deployment`.
     - `resolver` must be set to the `ConsulResolver` that you created in
-      the previous step
+      the previous step.
     - `load_balancer` must be set to configure $productName$ to route
-      directly to the Quote application endpoint(s) that are retrieved
-      from Consul.
+      directly to the Quote of the Moment application endpoints that
+      are retrieved from Consul.
 
-5. Validate that $productName$ is now making use of that service: Send
-   a request to the `quote-consul` API.
+5. Send a request to the `/quote-consul/` API endpoint in order to
+   validate that $productName$ is now making use of that service:
 
    ```console
    $ AMBASSADOR_IP=$(kubectl --namespace $productNamespace$ get services/$productDeploymentName$ -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
@@ -337,7 +339,8 @@ anywhere in your data center (e.g., on VMs).
 <Alert severity="success">
 
 **Congratulations!** You're successfully routing traffic to the Quote
-application, the location of which is registered in Consul.
+of the Moment application, the location of which is registered in
+Consul.
 
 </Alert>
 
@@ -368,12 +371,11 @@ discovery, as detailed above.
       `ambassador-consul-connect` `Secret` into $productName$.
 
 2. Deploy a new version of the demo application, and configure it to
-   inject the Consul sidecar proxy by setting
+   inject the Consul Connect sidecar by setting
    `"consul.hashicorp.com/connect-inject"` to `true`.  Note that in
    this version of the configuration, you do not have to configure
-   environment variables for the location of the Consul server.
-   Use `kubectl` to apply the
-   following manifest:
+   environment variables for the location of the Consul server.  Use
+   `kubectl` to apply the following manifest:
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -443,29 +445,30 @@ discovery, as detailed above.
    Note: Annotations are used to attach metadata to Kubernetes
    objects.  You can use annotations to link external information to
    objects, working in a similar, yet different, fashion to labels.
-   For more information on annotations, you can check out this
-   [article](https://kubernetes.io/blog/2021/04/20/annotating-k8s-for-humans/),
-   or get started with annotations in your own cluster
-   [here](https://www.getambassador.io/docs/cloud/latest/service-catalog/quick-start/).
+   For more information on annotations, refer to the [Annotating
+   Kubernetes Services for
+   Humans](https://kubernetes.io/blog/2021/04/20/annotating-k8s-for-humans/)
+   article, or get started with annotations in your own cluster with
+   the [Ambassador Cloud Quick start
+   guide](https://www.getambassador.io/docs/cloud/latest/service-catalog/quick-start/).
 
    </Alert>
 
-   This deploys a demo application called `quote-connect` (different
-   than the `quote-consul` application in the previous section) with
-   the Consul's Connect sidecar/proxy.  The Connect sidecar/proxy will
-   register the application with Consul, require TLS to access the
-   application, and expose other [Consul Service
+   This deploys a demo application `Deployment` called `quote-connect`
+   (different than the `quote-consul` `Deployment` in the previous
+   section) with the Consul Connect sidecar proxy.  The Connect
+   sidecar registers the application with Consul, requires TLS to
+   access the application, and exposes other [Consul Service
    Segmentation](https://www.consul.io/docs/connect) features.
 
-   Setting the annotation `consul.hashicorp.com/connect-inject` to
-   `true` in this deployment tells Consul that you want this
-   application to use Consul's Connect sidecar/proxy.  The sidecar
-   proxies requests to the service it is attached to.  This is
-   something to keep in mind when you are debugging requests to the
-   service.
+   The annotation `consul.hashicorp.com/connect-inject` being set to
+   `true` in this `Deployment` tells Consul that you want this
+   `Deployment` to use the Consul Connect sidecar.  The sidecar
+   proxies requests to the service that it is attached to.  Keep this
+   in mind mind when debug requests to the service.
 
-4. Verify the quote pod has been registered with Consul.  You can
-   verify this by accessing the Consul UI.
+4. Verify the `quote-connect` `Deployment`'s `Pod` has been registered
+   with Consul.  You can verify this by accessing the Consul UI.
 
    First use `kubectl port-forward` to make the UI available on your
    local workstation:
@@ -474,7 +477,7 @@ discovery, as detailed above.
    kubectl port-forward service/hashicorp-consul-ui 8500:80
    ```
 
-   Then, while the port-forward is running, go to
+   Then, while the port-forward is running, open
    http://localhost:8500/ in a web browser.  You should see a service
    named `quote-connect`.
 
@@ -503,23 +506,26 @@ discovery, as detailed above.
    EOF
    ```
 
+   Note that in the above config:
+
     - `service` must be set to the name of the Consul sidecar service.
       You can view this with `kubectl get svc -A` it should follow the
       format of `{service name}-sidecar-proxy`.
     - `resolver` must be set to the `ConsulResolver` created when
-      configuring $productName$
+      configuring $productName$.
     - `tls` must be set to the TLSContext storing the Consul mTLS
-      certificates (e.g. `ambassador-consul`)
+      certificates, which is `ambassador-consul` in the standard
+      `ambassador-consul-connector.yaml`.
     - `load_balancer` must be set to configure $productName$ to route
-      directly to the application endpoint(s) that are retrieved from
-      Consul
+      directly to the application endpoints that are retrieved from
+      Consul.
 
-   Applying this manifest creates a Mapping that routes to the `quote`
-   service in Consul.
+   When you apply this manifest, it creates a Mapping that routes to
+   the `quote-connect` service in Consul.
 
-6. Validate that $productName$ is now able to use mTLS to have
-   encrypted and communication with that service: Send a request to
-   the `/quote-connect/` API.
+6. Send a request to the `/quote-connect/` API endpoint in order to
+   validate that $productName$ is now using mTLS to encrypt and
+   authenticate communication with that service:
 
    ```console
    $ AMBASSADOR_IP=$(kubectl --namespace $productNamespace$ get services/$productDeploymentName$ -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
@@ -534,7 +540,7 @@ discovery, as detailed above.
 <Alert severity="success">
 
 **Congratulations!** You successfully configured the service to work
-with Consul's Connect sidecar/proxy.
+with the Consul Connect sidecar.
 
 </Alert>
 
@@ -543,13 +549,13 @@ with Consul's Connect sidecar/proxy.
 The Ambassador Consul Connector can be configured with the following
 environment variables.  The defaults are best for most use-cases.
 
-| Environment Variable               | Description                                                                                                                                                                                           | Default                                              |
-|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|
-| `_AMBASSADOR_ID`                   | Set the Ambassador ID so multiple instances of this integration can run per-Cluster when there are multiple $productNamePlural$ (Required if `AMBASSADOR_ID` is set in your $productName$ deployment) | `""`                                                 |
-| `_CONSUL_HOST`                     | Set the IP or DNS name of the target Consul HTTP API server                                                                                                                                           | `127.0.0.1`                                          |
-| `_CONSUL_PORT`                     | Set the port number of the target Consul HTTP API server                                                                                                                                              | `8500`                                               |
-| `_AMBASSADOR_TLS_SECRET_NAME`      | Set the name of the Kubernetes `v1.Secret` created by this program that contains the Consul-generated TLS certificate.                                                                                | `$AMBASSADOR_ID-consul-connect`                      |
-| `_AMBASSADOR_TLS_SECRET_NAMESPACE` | Set the namespace of the Kubernetes `v1.Secret` created by this program.                                                                                                                              | (same Namespace as the Pod running this integration) |
+| Environment Variable               | Description                                                                                                                                                                                             | Default                                              |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------|
+| `_AMBASSADOR_ID`                   | Set the Ambassador ID so multiple instances of this integration can run per-Cluster when there are multiple $productNamePlural$ (Required if `AMBASSADOR_ID` is set in your $productName$ `Deployment`) | `""`                                                 |
+| `_CONSUL_HOST`                     | Set the IP or DNS name of the target Consul HTTP API server                                                                                                                                             | `127.0.0.1`                                          |
+| `_CONSUL_PORT`                     | Set the port number of the target Consul HTTP API server                                                                                                                                                | `8500`                                               |
+| `_AMBASSADOR_TLS_SECRET_NAME`      | Set the name of the Kubernetes `v1.Secret` created by this program that contains the Consul-generated TLS certificate.                                                                                  | `$AMBASSADOR_ID-consul-connect`                      |
+| `_AMBASSADOR_TLS_SECRET_NAMESPACE` | Set the namespace of the Kubernetes `v1.Secret` created by this program.                                                                                                                                | (same Namespace as the Pod running this integration) |
 
 ## More information
 

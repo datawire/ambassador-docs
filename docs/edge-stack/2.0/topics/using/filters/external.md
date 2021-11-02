@@ -36,7 +36,7 @@ spec:
     add_linkerd_headers: false
 ```
 
-The `External` spec is mostly identical to an [`AuthService`
+The `External` spec is identical to the [`AuthService`
 spec](../../../running/services/auth-service), with the following
 exceptions:
 
