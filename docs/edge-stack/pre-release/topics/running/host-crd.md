@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # The `Host` CRD
 
 The custom `Host` resource defines how $productName$ will be
@@ -8,6 +10,18 @@ single configuration resource:
 * How $productName$ should handle TLS certificates
 * How $productName$ should handle secure and insecure requests
 * Which `Mappings` should be associated with this `Host`
+
+<Alert severity="warning">
+  Remember that <code>Listener</code> resources are&nbsp;<b>required</b>&nbsp;for a functioning
+  $productName$ installation!<br/>
+  <a href="../../running/listener">Learn more about <code>Listener</code></a>.
+</Alert>
+
+<Alert severity="warning">
+  Remember than $productName$ does not make sure that a wildcard <code>Host</code> exists! If the
+  wildcard behavior is needed, a <code>Host</code> with a <code>hostname</code> of <code>"*"</code>
+  must be defined by the user.
+</Alert>
 
 A minimal `Host` resource, using Let’s Encrypt to handle TLS, would be:
 
@@ -29,7 +43,8 @@ cleartext will be automatically redirected to use HTTPS, and $productName$ will
 not search for any specific further configuration resources related to this
 `Host`.
 
-Many examples of setting up `Host` and `Listener` are available in the
+Remember that a <code>Listener</code> will also be required for this example to
+be functional. Many examples of setting up `Host` and `Listener` are available in the
 [Configuring $productName$ to Communicate](../../../howtos/configure-communications) document.
 
 ## Setting the `hostname`
@@ -54,16 +69,16 @@ When TLS termination is active, the `hostname` is also used for SNI matching.
 A `Mapping` will not be associated with a `Host` unless at least one of the following is true:
 
 - The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
-- The `Host` specifies a `selector` that matches the `Mapping`'s Kubernetes `label`s.
+- The `Host` specifies a `mapping_selector` that matches the `Mapping`'s Kubernetes `label`s.
 
 If neither of the above is true, the `Mapping` will not be associated with the `Host` in 
 question. This is intended to help manage memory consumption with large numbers of `Host`s and large
 numbers of `Mapping`s.
 
-If the `Host` specifies `selector` _and_ the `Mapping` specifies `hostname`, both must match
+If the `Host` specifies `mapping_selector` _and_ the `Mapping` specifies `hostname`, both must match
 for the association to happen.
 
-The `selector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
+The `mapping_selector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
@@ -72,22 +87,21 @@ metadata:
   name: minimal-host
 spec:
   hostname: host.example.com
-  selector:
+  mapping_selector:
     matchLabels:
       examplehost: host
 ```
 
-This `Host` will associate with the first `Mapping` below, but not
-the second:
+The above `Host` will associate with these `Mapping`s:
 
 ```yaml
 ---
 apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
-  name:  use-this-mapping
+  name:  mapping-with-label-match
   labels:
-    examplehost: host
+    examplehost: host          # This matches the Host's mapping_selector.
 spec:
   prefix: /httpbin/
   service: http://httpbin.org
@@ -95,11 +109,65 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
-  name:  skip-this-mapping
+  name:  mapping-with-hostname-match
+spec:
+  hostname: host.example.com   # This is an exact match of the Host's hostname.
+  prefix: /httpbin/
+  service: http://httpbin.org
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  mapping-with-hostname-glob-match
+spec:
+  hostname: "*.example.com"    # This glob matches the Host's hostname too.
+  prefix: /httpbin/
+  service: http://httpbin.org
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  mapping-with-both-matches
   labels:
-    examplehost: staging
+    examplehost: host          # This matches the Host's mapping_selector.
+spec:
+  hostname: "*.example.com"    # This glob matches the Host's hostname.
+  prefix: /httpbin/
+  service: http://httpbin.org
+```
+
+It will _not_ associate with any of these:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  skip-mapping-wrong-label
+  labels:  
+    examplehost: staging       # This doesn't match the Host's mapping_selector.
 spec:
   prefix: /httpbin/
+  service: http://httpbin.org
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  skip-mapping-wrong-hostname
+spec:
+  hosname: "bad.example.com"  # This doesn't match the Host's hostname.
+  prefix: /httpbin/
+  service: http://httpbin.org
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  skip-mapping-still-wrong
+  labels:  
+    examplehost: staging       # This doesn't match the Host's mapping_selector,
+spec:                          # and if the Host specifies mapping_selector AND the
+  hostname: host.example.com   # Mapping specifies hostname, BOTH must match. So
+  prefix: /httpbin/            # the matching hostname isn't good enough.
   service: http://httpbin.org
 ```
 
@@ -239,4 +307,4 @@ It's important to realize that Envoy manages the `X-Forwarded-Proto` header such
 
 ### CRD specification
 
-The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v3alpha1/Host.proto).
+The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v2/Host.proto).

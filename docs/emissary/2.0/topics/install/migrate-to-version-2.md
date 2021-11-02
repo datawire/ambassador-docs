@@ -73,7 +73,7 @@ use with $productName$ 2.X:
 - change the `apiVersion` to `getambassador.io/v3alpha1`;
 - add `metadata.labels` as needed to match the `hostBinding` for the `Listener`s with which
   the `Host` should associate; and
-- set `spec.mappingSelector`, if desired, to control which `Mappings` will be associated 
+- set `spec.mapping_selector`, if desired, to control which `Mappings` will be associated 
   with this `Host`.
 
 ### Update `Mapping` resources to `v3alpha1`.
@@ -89,7 +89,7 @@ use with $productName$ 2.X:
 
 - change the `apiVersion` to `getambassador.io/v3alpha1`;
 - change `spec.host` to `spec.hostname` if possible (see below);
-- add `metadata.labels` as needed to match the `mappingSelector` for the `Host`s with which
+- add `metadata.labels` as needed to match the `mapping_selector` for the `Host`s with which
   the `Mapping` should associate; and
 - make sure `spec.hostname` matches up with the `Host`s with which the `Mapping` should associate.
 
@@ -178,16 +178,16 @@ result in larger Envoy configurations that slow down reconfiguration, $productNa
 
 To have a `Mapping` associate with a `Host`, at least one of the following must hold:
 
-- The `Host` must define a `mappingSelector` that matches a `label` on the `Mapping`; or
+- The `Host` must define a `mapping_selector` that matches a `label` on the `Mapping`; or
 - The `Mapping` must define `hostname` that matches the `hostname` of the `Host`.
   (Note that the `hostname` of both `Host` and `AmbasssadorMapping` is a DNS glob.)
 
-If the `Host` defines a `mappingSelector` and the `Mapping` defines a `hostname`, both must match.
+If the `Host` defines a `mapping_selector` and the `Mapping` defines a `hostname`, both must match.
 
 As a migration aid:
 
 - A `Mapping` with a `hostname` of `"*"` will associate with any `Host` that
-has no `mappingSelector`, and
+has no `mapping_selector`, and
 - A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present. 
 
 <Alert severity="warning">
