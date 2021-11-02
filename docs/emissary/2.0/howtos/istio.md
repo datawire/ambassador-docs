@@ -39,8 +39,7 @@ kubectl label namespace $namespace istio-injection=enabled --overwrite
 ```
 
 <Alert severity="warning">
-  We will use this label to arrange for auto-injection in the `$productNamespace$` Namespace below, but
-  it is <b>critical</b> that you also apply it on other Namespaces in which you install services.
+  The following example uses the istio-injection label to arrange auto-injection in the $productNamespace$. It is <b>critical</b> that you apply the the label to all Namespaces in which you install services.
 </Alert>
 
 ## Install $productName$ with Istio Integration
@@ -52,14 +51,17 @@ for east-west traffic;
 * Automatic generation of Prometheus metrics for services; and
 * Istio distributed tracing for end-to-end observability.
 
-The simplest way to enable everything is to install $productName$ using [Helm](https://helm.sh), though it
-is (of course) also possible when using manual installation with YAML.
+The simplest way to enable everything is to install $productName$ using [Helm](https://helm.sh). It is of course also possible when using manual installation with YAML.
 
 ### Installation with Helm
 
 To install with Helm, write the following YAML to a file called `istio-integration.yaml`:
 
 ```yaml
+# Listeners are required in $productName$ 2.0. 
+# This will create the two default Listeners for HTTP on port 8080 and HTTPS on port 8443.
+createDefaultListeners: true
+
 # These are annotations that will be added to the $productName$ pods.
 podAnnotations:
   # These first two annotations tell Istio not to try to do port management for the
@@ -136,7 +138,7 @@ To install $productName$ with Helm, using these values to configure Istio integr
 
 ### Installation Using YAML
 
-To install using YAML files, you will need to manually incorporate the contents of the `istio-integration.yaml`
+To install using YAML files, you need to manually incorporate the contents of the `istio-integration.yaml`
 file shown above into your deployment YAML:
 
 * `pod-annotations` should be configured as Kubernetes `annotations` on the $productName$ Pods;
@@ -157,17 +159,17 @@ If you have already installed $productName$ and want to enable Istio:
 
 ## Using Mutual TLS
 
-After configuring $productName$ for Istio integration, the Istio mTLS certificates will be available within
+After configuring $productName$ for Istio integration, the Istio mTLS certificates are available within
 $productName$:
 
 - Both the `istio-proxy` sidecar and $productName$ mount the `istio-certs` volume at `/etc/istio-certs`.
-- The `istio-proxy` sidecar will save the mTLS certificates into `/etc/istio-certs` (per the `OUTPUT_CERTS`
+- The `istio-proxy` sidecar saves the mTLS certificates into `/etc/istio-certs` (per the `OUTPUT_CERTS`
   environment variable).
-- $productName$ will read the mTLS certificates from `/etc/istio-certs` (per the `AMBASSADOR_ISTIO_SECRET_DIR`
-  environment variable) and create a Secret named `istio-certs`.
+- $productName$ reads the mTLS certificates from `/etc/istio-certs` (per the `AMBASSADOR_ISTIO_SECRET_DIR`
+  environment variable) and creates a Secret named `istio-certs`.
    - At present, the Secret name `istio-certs` cannot be changed.
 
-To make use of the `istio-certs` Secret, we create a `TLSContext` referencing it:
+To make use of the `istio-certs` Secret, create a `TLSContext` referencing it:
 
 ```
 $ kubectl apply -f - <<EOF
@@ -202,13 +204,13 @@ This `Mapping` will use mTLS when communicating with its upstream service. For m
 
 ### Integrating Prometheus metrics collection
 
-By default, the Istio sidecar will provide Prometheus metrics using `prometheus.io` annotations. To take
-advantage of these metrics, you will need to [install Prometheus](../prometheus).
+By default, the Istio sidecar provides Prometheus metrics using `prometheus.io` annotations. To take
+advantage of these metrics, you need to [install Prometheus](../prometheus).
 
 ### Integrating distributed tracing
 
 The Istio sidecar also supports [distributed tracing](https://istio.io/docs/tasks/observability/distributed-tracing/overview/)
-by default. To take advantage of this support, you will need to:
+by default. To take advantage of this support, you need to:
 
 1. Install a tracing provider, for example [Zipkin](../tracing-zipkin) into your cluster.
 2. Add a [`TracingService`](../../topics/running/services/tracing-service) to tell $productName$ to send tracing
@@ -230,7 +232,7 @@ spec:
     - ":path"
 ```
 
-After adding a `TracingService`, restart $productName$ for the configuration to take effect. Istio will propagate
+After adding a `TracingService`, restart $productName$ for the configuration to take effect. Istio propagates
 the tracing headers automatically, allowing for end-to-end observability within the cluster.
 
 ## Routing to services
@@ -393,7 +395,7 @@ Istio mTLS certificates, by default, will be valid for a max of 90 days but will
 
 $productName$ will watch and update the mTLS certificates as they rotate so you will not need to worry about certificate expiration. 
 
-To test that $productName$ is properly rotating certificates you can shorten the TTL of the Istio certificates by 
+To test that $productName$ is properly rotating certificates, shorten the TTL of the Istio certificates by 
 setting the following environment variables in the `istiod` container in the `istio-system` Namespace:
 
 ```yaml
