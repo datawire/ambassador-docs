@@ -224,8 +224,11 @@ This `Mapping` will use mTLS when communicating with its upstream service.
 ## Route to Services Using mTLS
 
 After integrating $productName$ with Istio, $productName$'s feature-rich routing capabilities and Istio's mTLS
-and observability are all available for all incoming traffic. To take full advantage of both, you need to 
-configure upstream services with the Istio sidecar, and you need to configure `Mapping`s to use mTLS:
+and observability are all available for all incoming traffic. To take full advantage of both, you need to:
+
+- configure upstream services with the Istio sidecar;
+- configure `Mapping`s to use mTLS; and
+- verify your service port configuration.
 
 ### Configure Upstream Services with the Istio Sidecar
 
@@ -265,7 +268,8 @@ For example, if you have installed the Quote of the Moment service as described 
      service: quote
    ```
 
-   To take advantage of Istio mTLS, update the above `Mapping` to originate TLS using the Istio mTLS certificates:
+   To take advantage of Istio mTLS, update the above `Mapping` to originate TLS using the Istio mTLS
+   certificates and to force access on port 80:
 
    ```yaml
    $ kubectl apply -f - <<EOF
@@ -276,10 +280,17 @@ For example, if you have installed the Quote of the Moment service as described 
    spec:
      hostname: "*"
      prefix: /backend/
-     service: quote
-     tls: istio-upstream
+     service: quote:80       # Be explicit about port 80. THIS IS IMPORTANT: see below
+     tls: istio-upstream     # Originate TLS with the mTLS certificate
    EOF
    ```
+
+   <Alert severity="warning">
+     You <b>must</b> either explicitly specify port 80 in your <code>Mapping</code>'s <code>service</code>
+     element, or set up the Kubernetes <code>Service</code> resource for your upstream service to map port
+     443. If you don't do one of these, connections to your upstream will hang &mdash; see the 
+     <a href="#configure-service-ports">"Configure Service Ports"</a> section below for more information.
+   </Alert>
 
 The behavior of your service will not seem to change, even though mTLS is active:
 
@@ -295,6 +306,50 @@ The behavior of your service will not seem to change, even though mTLS is active
 This request first went to $productName$, which routed it over an mTLS connection to the quote service in the
 default namespace. That connection was intercepted by the `istio-proxy` which authenticated the request as 
 being from $productName$, exported various metrics, and finally forwarded it on to the actual quote service.
+
+### Configure Service Ports
+
+When mTLS is active, Istio makes TLS connections to your services. Since Istio handles the TLS protocol for
+you, you don't need to modify your services &mdash; however, the TLS connection will still use port 443 
+if you don't configure your `Mapping`s to _explicitly_ use port 80.
+
+If your upstream service was not written to use TLS, its `Service` resource may only map port 80. If Istio
+attempts a TLS connection on port 443 when port 443 is not defined by the `Service` resource, the connection
+will hang _even though the Istio sidecar is active_, because Kubernetes itself doesn't know how to handle
+the connection to port 443.
+
+As shown above, one simple way to deal with this situation is to explicitly specify port 80 in the `Mapping`'s
+`service`:
+
+   ```yaml
+   service: quote:80       # Be explicit about port 80.
+   ```
+
+Another way is to set up your Kubernetes `Service` to map both port 80 and port 443. For example, the
+Quote of the Moment (which listens on port 8080 in its pod) might use a `Service` like this:
+
+   ```yaml
+   apiVersion: v1
+   kind: Service
+   metadata:
+     name: quote
+   spec:
+     type: ClusterIP
+     selector:
+       app: quote
+     ports:
+     - name: http
+       port: 80
+       protocol: TCP
+       targetPort: 8080
+     - name: https
+       port: 443
+       protocol: TCP
+       targetPort: 8080
+   ```
+
+Note that ports 80 and 443 are both mapped to `targetPort` 8080, where the service is actually listening.
+This permits Istio routing to work whether mTLS is active or not.
 
 ## Enable Strict mTLS
 
