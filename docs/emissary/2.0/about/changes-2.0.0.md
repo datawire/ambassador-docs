@@ -44,7 +44,7 @@ either a string or a list of strings is not allowed. Several such elements appea
 `getambassador.io/v2` CRDs, requiring changes. In `getambassador.io/v3alpha1`:
 
 - `ambassador_id` must always be a list of strings
-- `Host.mapping_selector` supersedes `Host.selector`, and controls association between Hosts and Mappings
+- `Host.mappingSelector` supersedes `Host.selector`, and controls association between Hosts and Mappings
 - `Mapping.hostname` supersedes `Mapping.host` and `Mapping.host_regex`
 - `Mapping.tls` can only be a string
 - `Mapping.labels` always requires maps instead of strings
@@ -126,11 +126,11 @@ However, in $productName$ 2.0, a `Mapping` will not be associated with a `Host` 
       - A `getambassador.io/v3alpha1` `Mapping` will honor `host` and `host_regex` as a transition aid, but `host` and `host_regex` are deprecated in favor of `hostname`.
       - A `Mapping` that specifies `host_regex: true` will be associated with all `Host`s. This is generally far less desirable than using `hostname` with a DNS glob.
 
-- The `Host` specifies a `mapping_selector` that matches the `Mapping`'s Kubernetes `label`s.
+- The `Host` specifies a `mappingSelector` that matches the `Mapping`'s Kubernetes `label`s.
 
-   - Note that a `getambassador.io/v2` `Host` has a `selector`, rather than a `mapping_selector`.
-      - A `getambassador.io/v3alpha1` `Host` ignores `selector` and, instead, looks only at `mapping_selector`.
-      - Where a `selector` got a default value if not specified, `mapping_selector` must be explicitly stated.
+   - Note that a `getambassador.io/v2` `Host` has a `selector`, rather than a `mappingSelector`.
+      - A `getambassador.io/v3alpha1` `Host` ignores `selector` and, instead, looks only at `mappingSelector`.
+      - Where a `selector` got a default value if not specified, `mappingSelector` must be explicitly stated.
 
 Without either a `hostname` match or a `label` match, the `Mapping` will not be associated with the `Host` in question. This is intended to help manage memory consumption with large numbers of `Host`s and large numbers of `Mapping`s.
 

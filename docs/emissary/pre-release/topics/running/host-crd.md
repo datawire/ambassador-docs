@@ -65,13 +65,13 @@ When TLS termination is active, the `hostname` is also used for SNI matching.
 A `Mapping` will not be associated with a `Host` unless at least one of the following is true:
 
 - The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
-- The `Host` specifies a `mapping_selector` that matches the `Mapping`'s Kubernetes `label`s.
+- The `Host` specifies a `mappingSelector` that matches the `Mapping`'s Kubernetes `label`s.
 
 If neither of the above is true, the `Mapping` will not be associated with the `Host` in
 question. This is intended to help manage memory consumption with large numbers of `Host`s and large
 numbers of `Mapping`s.
 
-If the `Host` specifies `mapping_selector` _and_ the `Mapping` specifies `hostname`, both must match
+If the `Host` specifies `mappingSelector` _and_ the `Mapping` specifies `hostname`, both must match
 for the association to happen.
 
 The `selector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
@@ -83,7 +83,7 @@ metadata:
   name: minimal-host
 spec:
   hostname: host.example.com
-  mapping_selector:
+  mappingSelector:
     matchLabels:
       examplehost: host
 ```
@@ -97,7 +97,7 @@ kind:  Mapping
 metadata:
   name:  mapping-with-label-match
   labels:
-    examplehost: host          # This matches the Host's mapping_selector.
+    examplehost: host          # This matches the Host's mappingSelector.
 spec:
   prefix: /httpbin/
   service: http://httpbin.org
@@ -125,7 +125,7 @@ kind:  Mapping
 metadata:
   name:  mapping-with-both-matches
   labels:
-    examplehost: host          # This matches the Host's mapping_selector.
+    examplehost: host          # This matches the Host's mappingSelector.
 spec:
   hostname: "*.example.com"    # This glob matches the Host's hostname.
   prefix: /httpbin/
@@ -141,7 +141,7 @@ kind:  Mapping
 metadata:
   name:  skip-mapping-wrong-label
   labels:  
-    examplehost: staging       # This doesn't match the Host's mapping_selector.
+    examplehost: staging       # This doesn't match the Host's mappingSelector.
 spec:
   prefix: /httpbin/
   service: http://httpbin.org
@@ -160,8 +160,8 @@ kind:  Mapping
 metadata:
   name:  skip-mapping-still-wrong
   labels:  
-    examplehost: staging       # This doesn't match the Host's mapping_selector,
-spec:                          # and if the Host specifies mapping_selector AND the
+    examplehost: staging       # This doesn't match the Host's mappingSelector,
+spec:                          # and if the Host specifies mappingSelector AND the
   hostname: host.example.com   # Mapping specifies hostname, BOTH must match. So
   prefix: /httpbin/            # the matching hostname isn't good enough.
   service: http://httpbin.org
