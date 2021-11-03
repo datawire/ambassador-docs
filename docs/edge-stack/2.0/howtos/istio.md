@@ -73,54 +73,56 @@ you can use manual installation with YAML if you wish.
 To install with Helm, write the following YAML to a file called `istio-integration.yaml`:
 
 ```yaml
-# Listeners are required in $productName$ 2.0. 
-# This will create the two default Listeners for HTTP on port 8080 and HTTPS on port 8443.
-createDefaultListeners: true
-
-# These are annotations that will be added to the $productName$ pods.
-podAnnotations:
-  # These first two annotations tell Istio not to try to do port management for the
-  # $productName$ pod itself. Though these annotations are placed on the $productName$
-  # pods, they are interpreted by Istio.
-  traffic.sidecar.istio.io/includeInboundPorts: ""      # do not intercept any inbound ports
-  traffic.sidecar.istio.io/includeOutboundIPRanges: ""  # do not intercept any outbound traffic
-
-  # We use proxy.istio.io/config to tell the Istio proxy to write newly-generated mTLS certificates
-  # into /etc/istio-certs, which will be mounted below. Though this annotation is placed on the
-  # $productName$ pods, it is interpreted by Istio.
-  proxy.istio.io/config: |
-    proxyMetadata:
-      OUTPUT_CERTS: /etc/istio-certs
-
-  # We use sidecar.istio.io/userVolumeMount to tell the Istio sidecars to mount the istio-certs
-  # volume at /etc/istio-certs, allowing the sidecars to see the generated certificates. Though
-  # this annotation is placed on the $productName$ pods, it is interpreted by Istio.
-  sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs"}]' 
-
-# We define a single storage volume called "istio-certs". It starts out empty, and Istio
-# uses it to communicate mTLS certs between the Istio proxy and the Istio sidecars (see the
-# annotations above).
-volumes:
-  - emptyDir:
-      medium: Memory
-    name: istio-certs
-
-# We also tell $productName$ to mount the "istio-certs" volume at /etc/istio-certs in the 
-# $productName$ pod. This gives $productName$ access to the mTLS certificates, too.
-volumeMounts:
-  - name: istio-certs
-    mountPath: /etc/istio-certs/
-    readOnly: true
-
-# Finally, we need to set some environment variables for $productName$.
-env:
-  # AMBASSADOR_ISTIO_SECRET_DIR tells $productName$ to look for Istio mTLS certs, and to
-  # make them available as a secret named "istio-certs".
-  AMBASSADOR_ISTIO_SECRET_DIR: "/etc/istio-certs"
-
-  # AMBASSADOR_ENVOY_BASE_ID is set to prevent collisions with the Istio sidecar's Envoy,
-  # which runs with base-id 0.
-  AMBASSADOR_ENVOY_BASE_ID: "1"
+# All of the values we need to customize live under the emissary-ingress toplevel key.
+emissary-ingress:
+  # Listeners are required in $productName$ 2.0. 
+  # This will create the two default Listeners for HTTP on port 8080 and HTTPS on port 8443.
+  createDefaultListeners: true
+  
+  # These are annotations that will be added to the $productName$ pods.
+  podAnnotations:
+    # These first two annotations tell Istio not to try to do port management for the
+    # $productName$ pod itself. Though these annotations are placed on the $productName$
+    # pods, they are interpreted by Istio.
+    traffic.sidecar.istio.io/includeInboundPorts: ""      # do not intercept any inbound ports
+    traffic.sidecar.istio.io/includeOutboundIPRanges: ""  # do not intercept any outbound traffic
+  
+    # We use proxy.istio.io/config to tell the Istio proxy to write newly-generated mTLS certificates
+    # into /etc/istio-certs, which will be mounted below. Though this annotation is placed on the
+    # $productName$ pods, it is interpreted by Istio.
+    proxy.istio.io/config: |
+      proxyMetadata:
+        OUTPUT_CERTS: /etc/istio-certs
+  
+    # We use sidecar.istio.io/userVolumeMount to tell the Istio sidecars to mount the istio-certs
+    # volume at /etc/istio-certs, allowing the sidecars to see the generated certificates. Though
+    # this annotation is placed on the $productName$ pods, it is interpreted by Istio.
+    sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs"}]' 
+  
+  # We define a single storage volume called "istio-certs". It starts out empty, and Istio
+  # uses it to communicate mTLS certs between the Istio proxy and the Istio sidecars (see the
+  # annotations above).
+  volumes:
+    - emptyDir:
+        medium: Memory
+      name: istio-certs
+  
+  # We also tell $productName$ to mount the "istio-certs" volume at /etc/istio-certs in the 
+  # $productName$ pod. This gives $productName$ access to the mTLS certificates, too.
+  volumeMounts:
+    - name: istio-certs
+      mountPath: /etc/istio-certs/
+      readOnly: true
+  
+  # Finally, we need to set some environment variables for $productName$.
+  env:
+    # AMBASSADOR_ISTIO_SECRET_DIR tells $productName$ to look for Istio mTLS certs, and to
+    # make them available as a secret named "istio-certs".
+    AMBASSADOR_ISTIO_SECRET_DIR: "/etc/istio-certs"
+  
+    # AMBASSADOR_ENVOY_BASE_ID is set to prevent collisions with the Istio sidecar's Envoy,
+    # which runs with base-id 0.
+    AMBASSADOR_ENVOY_BASE_ID: "1"
 ```
 
 To install $productName$ with Helm, use these values to configure Istio integration:
