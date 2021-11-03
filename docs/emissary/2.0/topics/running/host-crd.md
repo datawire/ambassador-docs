@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# The `Host` CRD
+# The **Host** CRD
 
 The custom `Host` resource defines how $productName$ will be
 visible to the outside world. It collects all the following information in a

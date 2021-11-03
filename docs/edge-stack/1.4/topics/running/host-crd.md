@@ -1,4 +1,4 @@
-# The `Host` CRD, ACME Support, and External Load Balancer Configuration
+# The **Host** CRD, ACME Support, and External Load Balancer Configuration
 
 The custom `Host` resource defines how the Ambassador Edge Stack will be
 visible to the outside world. It collects all the following information in a
