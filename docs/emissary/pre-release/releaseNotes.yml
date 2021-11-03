@@ -34,13 +34,25 @@ items:
   - version: 2.0.5
     date: 'TBD'
     notes:
-
       - title: Improved validity checking for error response overrides
         type: bugfix
         body: >-
           $productName$ will reject error response overrides that appear to contain
           a "%" character that is not part of a valid Envoy formatting command.
         docs: topics/running/custom-error-responses
+
+      - title: mappingSelector is now correctly supported in the Host CRD
+        type: bugfix
+        body: >-
+          The <code>Host</code> CRD now correctly supports the <code>mappingSelector</code>
+          element, as documented. As a transition aid, <code>selector</code> is a synonym for
+          <code>mappingSelector</code>; a future version of $productName$ will remove the
+          <code>selector</code> element.
+        github:
+        - title: 3902
+          link: https://github.com/emissary-ingress/emissary/issues/3902
+        docs: https://github.com/emissary-ingress/emissary/issues/3902
+        image: ./v2.0.4-mappingselector.png
 
   - version: 2.0.4
     date: '2021-10-19'
