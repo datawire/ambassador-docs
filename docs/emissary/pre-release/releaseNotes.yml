@@ -34,6 +34,16 @@ items:
   - version: 2.0.5
     date: 'TBD'
     notes:
+
+      - title: AuthService circuit breakers
+        type: feature
+        body: >-
+          It is now possible to set the <code>circuit_breakers</code> for <code>AuthServices</code>,
+          same as could previously be done for <code>Mappings</code> and <code>TCPMappings</code>.
+          This makes it possible to configure your <code>AuthService</code> to be able to handle
+          larger numbers of concurrent requests.
+        docs: topics/running/services/auth-service/
+
       - title: Improved validity checking for error response overrides
         type: bugfix
         body: >-
