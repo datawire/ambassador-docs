@@ -419,7 +419,7 @@ items:
           on the <code>Mapping</code> resource.
           ([#3609](https://github.com/emissary-ingress/emissary/issues/3609))
         docs: topics/using/cors
-        image: ../../1.13/images/emissary-1.13.10-cors-origin.png
+        image: ../images/emissary-1.13.10-cors-origin.png
 
       - title: New Envoy-configuration snapshots for debugging
         body: "Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
@@ -468,7 +468,7 @@ items:
           Cloud
         type: bugfix
         docs: tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
-        image: ../../1.13/images/edge-stack-1.13.8-cloud-bugfix.png
+        image: ../images/edge-stack-1.13.8-cloud-bugfix.png
 
       - title: Improved Argo Rollouts Experience with Ambassador Cloud
         body: >-
@@ -485,7 +485,7 @@ items:
         body: >-
           Add AMBASSADOR_JSON_LOGGING to enable JSON for most of the Ambassador control plane. Some
           (but few) logs from gunicorn and the Kubernetes client-go package still log text.
-        image: ../../1.13/images/edge-stack-1.13.7-json-logging.png
+        image: ../images/edge-stack-1.13.7-json-logging.png
         docs: topics/running/running/#log-format
         type: feature
 
@@ -493,7 +493,7 @@ items:
         body: >-
           Fixed a bug where the Consul resolver would not actually use Consul endpoints with
           TCPMappings.
-        image: ../../1.13/images/edge-stack-1.13.7-tcpmapping-consul.png
+        image: ../images/edge-stack-1.13.7-tcpmapping-consul.png
         docs: topics/running/resolvers/#the-consul-resolver
         type: bugfix
 
@@ -501,7 +501,7 @@ items:
         body: >-
           Ambassador now calculates its own memory usage in a way that is more similar to how the
           kernel OOMKiller tracks memory.
-        image: ../../1.13/images/edge-stack-1.13.7-memory.png
+        image: ../images/edge-stack-1.13.7-memory.png
         docs: topics/running/scaling/#inspecting-ambassador-performance
         type: change
 
@@ -540,7 +540,7 @@ items:
         body: >-
           Incorporate the Envoy 1.15.5 security update by adding the
           <code>reject_requests_with_escaped_slashes</code> option to the Ambassador module.
-        image: ../../1.13/images/edge-stack-1.13.4.png
+        image: ../images/edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
         type: security
 
