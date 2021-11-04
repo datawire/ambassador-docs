@@ -29,7 +29,7 @@
 #             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
 
-changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
+changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.0.5
     date: 'TBD'
@@ -48,7 +48,7 @@ items:
           the result to be returned more quickly while putting less load on the remote resource.
           However, if the response turns out to be non-cacheable, then this does effectively
           serialize requests, increasing the latency for concurrent requests.
-        image: ./v2.0.5-auth-cache-change.png
+        image: ./v2.0.5-cache-change.png
 
       - title: AuthService circuit breakers
         type: feature
