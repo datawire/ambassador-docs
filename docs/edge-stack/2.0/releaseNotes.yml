@@ -34,16 +34,6 @@ items:
   - version: 2.0.5
     date: 'TBD'
     notes:
-
-      - title: AuthService circuit breakers
-        type: feature
-        body: >-
-          It is now possible to set the <code>circuit_breakers</code> for <code>AuthServices</code>,
-          same as could previously be done for <code>Mappings</code> and <code>TCPMappings</code>.
-          This makes it possible to configure your <code>AuthService</code> to be able to handle
-          larger numbers of concurrent requests.
-        docs: topics/running/services/auth-service/
-
       - title: More aggressive HTTP cache behavior
         type: change
         body: >-
@@ -58,6 +48,17 @@ items:
           the result to be returned more quickly while putting less load on the remote resource.
           However, if the response turns out to be non-cacheable, then this does effectively
           serialize requests, increasing the latency for concurrent requests.
+        image: ./v2.0.5-auth-cache-change.png
+
+      - title: AuthService circuit breakers
+        type: feature
+        body: >-
+          It is now possible to set the <code>circuit_breakers</code> for <code>AuthServices</code>,
+          exactly the same as for <code>Mappings</code> and <code>TCPMappings</code>. This makes it
+          possible to configure your <code>AuthService</code> to be able to handle more than 1024
+          concurrent requests.
+        docs: topics/running/services/auth-service/
+        image: ./v2.0.5-auth-circuit-breaker.png
 
       - title: More accurate durations in the logs
         type: bugfix
@@ -73,8 +74,9 @@ items:
       - title: Improved validity checking for error response overrides
         type: bugfix
         body: >-
-          $productName$ will reject error response overrides that appear to contain
-          a "%" character that is not part of a valid Envoy formatting command.
+          Any token delimited by '%' is now validated agains a whitelist of valid
+          Envoy command operators. Any mapping containing an <code>error_response_overrides</code>
+          section with invalid command operators will be discarded.
         docs: topics/running/custom-error-responses
 
       - title: mappingSelector is now correctly supported in the Host CRD
@@ -88,7 +90,7 @@ items:
         - title: 3902
           link: https://github.com/emissary-ingress/emissary/issues/3902
         docs: https://github.com/emissary-ingress/emissary/issues/3902
-        image: ./v2.0.4-mappingselector.png
+        image: ./v2.0.5-mappingselector.png
 
   - version: 2.0.4
     date: '2021-10-19'
@@ -478,7 +480,7 @@ items:
           on the <code>Mapping</code> resource.
           ([#3609](https://github.com/emissary-ingress/emissary/issues/3609))
         docs: topics/using/cors
-        image: ./emissary-1.13.10-cors-origin.png
+        image: ../images/emissary-1.13.10-cors-origin.png
 
       - title: New Envoy-configuration snapshots for debugging
         body: "Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
@@ -527,7 +529,7 @@ items:
           Cloud
         type: bugfix
         docs: tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
-        image: ./edge-stack-1.13.8-cloud-bugfix.png
+        image: ../images/edge-stack-1.13.8-cloud-bugfix.png
 
       - title: Improved Argo Rollouts Experience with Ambassador Cloud
         body: >-
@@ -544,7 +546,7 @@ items:
         body: >-
           Add AMBASSADOR_JSON_LOGGING to enable JSON for most of the Ambassador control plane. Some
           (but few) logs from gunicorn and the Kubernetes client-go package still log text.
-        image: ./edge-stack-1.13.7-json-logging.png
+        image: ../images/edge-stack-1.13.7-json-logging.png
         docs: topics/running/running/#log-format
         type: feature
 
@@ -552,7 +554,7 @@ items:
         body: >-
           Fixed a bug where the Consul resolver would not actually use Consul endpoints with
           TCPMappings.
-        image: ./edge-stack-1.13.7-tcpmapping-consul.png
+        image: ../images/edge-stack-1.13.7-tcpmapping-consul.png
         docs: topics/running/resolvers/#the-consul-resolver
         type: bugfix
 
@@ -560,7 +562,7 @@ items:
         body: >-
           Ambassador now calculates its own memory usage in a way that is more similar to how the
           kernel OOMKiller tracks memory.
-        image: ./edge-stack-1.13.7-memory.png
+        image: ../images/edge-stack-1.13.7-memory.png
         docs: topics/running/scaling/#inspecting-ambassador-performance
         type: change
 
@@ -599,7 +601,7 @@ items:
         body: >-
           Incorporate the Envoy 1.15.5 security update by adding the
           <code>reject_requests_with_escaped_slashes</code> option to the Ambassador module.
-        image: ./edge-stack-1.13.4.png
+        image: ../images/edge-stack-1.13.4.png
         docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
         type: security
 
