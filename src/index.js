@@ -163,7 +163,7 @@ export default ({ data, location, pageContext }) => {
 
   useEffect(() => {
     isAesPage(initialProduct.slug, slug, initialVersion.id).then((result) =>
-      setShowAesPage(result),
+      setShowAesPage(!!result),
     );
   }, [initialProduct.slug, initialVersion.id, slug]);
 
