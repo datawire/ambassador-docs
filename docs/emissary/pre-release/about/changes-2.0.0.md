@@ -221,6 +221,7 @@ Configuration for the `PROXY` protocol is part of the `Listener` resource in $pr
   <a href="../../topics/running/listener">Learn more about <code>Listener</code></a>.
 </Alert>
 
+
 ### `TLSContext` `redirect_cleartext_from` and `Host` `insecure.additionalPort`
 
 `redirect_cleartext_from` has been removed from the `TLSContext` resource; `insecure.additionalPort` has been removed from the `Host` CRD. Both of these cases are covered by adding additional `Listener`s. For further examples, see [Configuring $productName$ Communications](../../howtos/configure-communications).

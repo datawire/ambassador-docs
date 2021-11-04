@@ -12,7 +12,7 @@ changes to allow $productName$ to more gracefully handle larger installations (i
 multitenant or multiorganizational installations), reduce memory footprint, and improve
 performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
 some changes that aren't backward-compatible with 1.X. These changes are detailed in
-[Major Changes in $productName$ 2.0](../../../about/changes-2.0.0), and they require
+[Major Changes in $productName$ 2.0.0](../../../about/changes-2.0.0), and they require
 configuration updates when migrating.
 
 ## 1. Migration Process
