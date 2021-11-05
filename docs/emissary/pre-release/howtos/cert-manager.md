@@ -23,7 +23,7 @@ changes and reload certificates upon renewal.
 
 ## Install cert-manager
 
-There are many different ways to [install cert-manager](https://docs.cert-manager.io/en/latest/getting-started/install.html). For simplicity, we will use Helm.
+There are many different ways to [install cert-manager](https://cert-manager.io/docs/installation/). For simplicity, we will use Helm.
 
 1. Create the cert-manager CRDs.
     ```
@@ -52,7 +52,7 @@ An `Issuer` or `ClusterIssuer` identifies which Certificate Authority cert-manag
 
 ### Certificate
 
-A [Certificate](https://cert-manager.readthedocs.io/en/latest/reference/certificates.html) is a namespaced resource that references an `Issuer` or `ClusterIssuer` for issuing certificates. `Certificate`s define the DNS name(s) a key and certificate should be issued for, as well as the secret to store those files (e.g. `ambassador-certs`). Configuration depends on which ACME [challenge](#challenge) you are using.
+A [Certificate](https://cert-manager.io/docs/concepts/certificate/) is a namespaced resource that references an `Issuer` or `ClusterIssuer` for issuing certificates. `Certificate`s define the DNS name(s) a key and certificate should be issued for, as well as the secret to store those files (e.g. `ambassador-certs`). Configuration depends on which ACME [challenge](#challenge) you are using.
 
 By duplicating issuers, certificates, and secrets one can support multiple domains with [SNI](../../topics/running/tls/sni).
 
@@ -62,9 +62,9 @@ cert-manager supports two kinds of ACME challenges that verify domain ownership 
 
 ### DNS-01 challenge
 
-The DNS-01 challenge verifies domain ownership by proving you have control over its DNS records. Issuer configuration will depend on your [DNS provider](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/index.html#supported-dns01-providers). This example uses [AWS Route53](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/route53.html).
+The DNS-01 challenge verifies domain ownership by proving you have control over its DNS records. Issuer configuration will depend on your [DNS provider](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers). This example uses [AWS Route53](https://cert-manager.io/docs/configuration/acme/dns01/route53/).
 
-1. Create the IAM policy specified in the cert-manager [AWS Route53](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/route53.html) documentation.
+1. Create the IAM policy specified in the cert-manager [AWS Route53](https://cert-manager.io/docs/configuration/acme/dns01/route53/) documentation.
 
 2. Note the `accessKeyID` and create a `secret` named `prod-route53-credentials-secret` in the cert-manager namespace that has a key value: `secret-access-key` from your AWS IaM credentials.
 
