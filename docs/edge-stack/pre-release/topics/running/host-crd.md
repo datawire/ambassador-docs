@@ -1,4 +1,6 @@
-# The `Host` CRD
+import Alert from '@material-ui/lab/Alert';
+
+# The **Host** CRD
 
 The custom `Host` resource defines how $productName$ will be
 visible to the outside world. It collects all the following information in a
@@ -8,6 +10,18 @@ single configuration resource:
 * How $productName$ should handle TLS certificates
 * How $productName$ should handle secure and insecure requests
 * Which `Mappings` should be associated with this `Host`
+
+<Alert severity="warning">
+  Remember that <code>Listener</code> resources are&nbsp;<b>required</b>&nbsp;for a functioning
+  $productName$ installation!<br/>
+  <a href="../../running/listener">Learn more about <code>Listener</code></a>.
+</Alert>
+
+<Alert severity="warning">
+  Remember than $productName$ does not make sure that a wildcard <code>Host</code> exists! If the
+  wildcard behavior is needed, a <code>Host</code> with a <code>hostname</code> of <code>"*"</code>
+  must be defined by the user.
+</Alert>
 
 A minimal `Host` resource, using Let’s Encrypt to handle TLS, would be:
 
@@ -29,7 +43,8 @@ cleartext will be automatically redirected to use HTTPS, and $productName$ will
 not search for any specific further configuration resources related to this
 `Host`.
 
-Many examples of setting up `Host` and `Listener` are available in the
+Remember that a <code>Listener</code> will also be required for this example to
+be functional. Many examples of setting up `Host` and `Listener` are available in the
 [Configuring $productName$ to Communicate](../../../howtos/configure-communications) document.
 
 ## Setting the `hostname`
@@ -54,16 +69,16 @@ When TLS termination is active, the `hostname` is also used for SNI matching.
 A `Mapping` will not be associated with a `Host` unless at least one of the following is true:
 
 - The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
-- The `Host` specifies a `selector` that matches the `Mapping`'s Kubernetes `label`s.
+- The `Host` specifies a `mappingSelector` that matches the `Mapping`'s Kubernetes `label`s.
 
 If neither of the above is true, the `Mapping` will not be associated with the `Host` in 
 question. This is intended to help manage memory consumption with large numbers of `Host`s and large
 numbers of `Mapping`s.
 
-If the `Host` specifies `selector` _and_ the `Mapping` specifies `hostname`, both must match
+If the `Host` specifies `mappingSelector` _and_ the `Mapping` specifies `hostname`, both must match
 for the association to happen.
 
-The `selector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
+The `mappingSelector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
@@ -72,22 +87,21 @@ metadata:
   name: minimal-host
 spec:
   hostname: host.example.com
-  selector:
+  mappingSelector:
     matchLabels:
       examplehost: host
 ```
 
-This `Host` will associate with the first `Mapping` below, but not
-the second:
+The above `Host` will associate with these `Mapping`s:
 
 ```yaml
 ---
 apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
-  name:  use-this-mapping
+  name:  mapping-with-label-match
   labels:
-    examplehost: host
+    examplehost: host          # This matches the Host's mappingSelector.
 spec:
   prefix: /httpbin/
   service: http://httpbin.org
@@ -95,11 +109,65 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
-  name:  skip-this-mapping
+  name:  mapping-with-hostname-match
+spec:
+  hostname: host.example.com   # This is an exact match of the Host's hostname.
+  prefix: /httpbin/
+  service: http://httpbin.org
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  mapping-with-hostname-glob-match
+spec:
+  hostname: "*.example.com"    # This glob matches the Host's hostname too.
+  prefix: /httpbin/
+  service: http://httpbin.org
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  mapping-with-both-matches
   labels:
-    examplehost: staging
+    examplehost: host          # This matches the Host's mappingSelector.
+spec:
+  hostname: "*.example.com"    # This glob matches the Host's hostname.
+  prefix: /httpbin/
+  service: http://httpbin.org
+```
+
+It will _not_ associate with any of these:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  skip-mapping-wrong-label
+  labels:  
+    examplehost: staging       # This doesn't match the Host's mappingSelector.
 spec:
   prefix: /httpbin/
+  service: http://httpbin.org
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  skip-mapping-wrong-hostname
+spec:
+  hosname: "bad.example.com"  # This doesn't match the Host's hostname.
+  prefix: /httpbin/
+  service: http://httpbin.org
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  skip-mapping-still-wrong
+  labels:  
+    examplehost: staging       # This doesn't match the Host's mappingSelector,
+spec:                          # and if the Host specifies mappingSelector AND the
+  hostname: host.example.com   # Mapping specifies hostname, BOTH must match. So
+  prefix: /httpbin/            # the matching hostname isn't good enough.
   service: http://httpbin.org
 ```
 
@@ -233,7 +301,7 @@ considers the request secure or insecure. As such:
 - **$productName$ fully supports TLS termination at the load balancer** with a single exception, listed below.
 - If you are using a layer 7 load balancer, **it is critical that the system be configured correctly**:
   - The load balancer must correctly handle `X-Forwarded-For` and `X-Forwarded-Proto`.
-  - The `l7Depth` element in the [`Listener` CRD](../../listener.md) must be set to the number of layer 7 load balancers the request passes through to reach $productName$ (in the typical case, where the client speaks to the load balancer, which then speaks to $productName$, you would set `l7Depth` to 1). If `l7Depth` remains at its default of 0, the system might route correctly, but upstream services will see the load balancer's IP address instead of the actual client's IP address.
+  - The `l7Depth` element in the [`Listener` CRD](../../running/listener) must be set to the number of layer 7 load balancers the request passes through to reach $productName$ (in the typical case, where the client speaks to the load balancer, which then speaks to $productName$, you would set `l7Depth` to 1). If `l7Depth` remains at its default of 0, the system might route correctly, but upstream services will see the load balancer's IP address instead of the actual client's IP address.
 
 It's important to realize that Envoy manages the `X-Forwarded-Proto` header such that it **always** reflects the most trustworthy information Envoy has about whether the request arrived encrypted or unencrypted. If no `X-Forwarded-Proto` is received from downstream, **or if it is considered untrustworthy**, Envoy will supply an `X-Forwarded-Proto` that reflects the protocol used for the connection to Envoy itself. The `l7Depth` element is also used when determining trust for `X-Forwarded-For`, and it is therefore important to set it correctly. Its default of 0 should always be correct when $productName$ is behind only layer 4 load balancers; it should need to be changed **only** when layer 7 load balancers are involved.
 

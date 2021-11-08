@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
   performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
   some changes that aren't backward-compatible with 1.X, so <b>some configuration has
   changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b> read
-  the <a href="migrate-to-version-2">migration guide</a> before trying to install 2.0.<br/>
+  the <a href="/docs/emissary/latest/topics/install/migrate-to-version-2/">migration guide</a> before trying to install 2.0.<br/>
   <br/>
   For more information on 2.X, please check the <a href="../../../release-notes">release notes</a>.
 </Alert>

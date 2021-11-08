@@ -31,6 +31,40 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 2.0.5
+    date: 'TBD'
+    notes:
+      - title: AuthService circuit breakers
+        type: feature
+        body: >-
+          It is now possible to set the <code>circuit_breakers</code> for <code>AuthServices</code>,
+          exactly the same as for <code>Mappings</code> and <code>TCPMappings</code>. This makes it
+          possible to configure your <code>AuthService</code> to be able to handle more than 1024
+          concurrent requests.
+        docs: topics/running/services/auth-service/
+        image: ./v2.0.5-auth-circuit-breaker.png
+
+      - title: Improved validity checking for error response overrides
+        type: bugfix
+        body: >-
+          Any token delimited by '%' is now validated agains a whitelist of valid
+          Envoy command operators. Any mapping containing an <code>error_response_overrides</code>
+          section with invalid command operators will be discarded.
+        docs: topics/running/custom-error-responses
+
+      - title: mappingSelector is now correctly supported in the Host CRD
+        type: bugfix
+        body: >-
+          The <code>Host</code> CRD now correctly supports the <code>mappingSelector</code>
+          element, as documented. As a transition aid, <code>selector</code> is a synonym for
+          <code>mappingSelector</code>; a future version of $productName$ will remove the
+          <code>selector</code> element.
+        github:
+        - title: 3902
+          link: https://github.com/emissary-ingress/emissary/issues/3902
+        docs: https://github.com/emissary-ingress/emissary/issues/3902
+        image: ./v2.0.5-mappingselector.png
+
   - version: 2.0.4
     date: '2021-10-19'
     notes:
@@ -118,7 +152,7 @@ items:
       - title: Listeners correctly support l7Depth
         type: bugfix
         body: >-
-          The <code>l7Depth</code> element of the <code>Listener</code> CRD is 
+          The <code>l7Depth</code> element of the <code>Listener</code> CRD is
           properly supported.
         docs: topics/running/listener#l7depth
         image: ./v2.0.4-l7depth.png
@@ -233,7 +267,7 @@ items:
           configuration changes that are not backwards compatible with the 1.X family.  API versions
           <code>getambassador.io/v0</code>, <code>getambassador.io/v1</code>, and
           <code>getambassador.io/v2</code> are deprecated.  Further details are available in the <a
-          href="about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0
+          href="../about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0
           Changes</a> document.
         type: feature
         docs: about/changes-2.0.0/#1-configuration-api-version-getambassadoriov3alpha1
@@ -288,18 +322,18 @@ items:
         docs: about/changes-2.0.0/#proxy-protocol-configuration
 
       - title: Stricter rules for AmbassadorHost/AmbassadorMapping association
-        body: An <code>AmbassadorMapping</code> will only be matched with an <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
+        body: An <code>AmbassadorMapping</code> will only be matched with an <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="../about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
         docs: about/changes-2.0.0/#host-and-mapping-association
         type: change
 
       - title: AmbassadorHost or Ingress now required for TLS termination
-        body: An <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
+        body: An <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="../about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
         docs: about/changes-2.0.0/#host-tlscontext-and-tls-termination
         type: change
         image: ./edge-stack-2.0.0-host_crd.png
 
       - title: Envoy V3 APIs
-        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
+        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="../about/changes-2.0.0">2.0.0 Changes</a> document.
         type: change
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 

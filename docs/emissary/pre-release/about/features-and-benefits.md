@@ -32,7 +32,7 @@ $productName$ integrates with the [Istio](https://istio.io) service mesh as the 
 
 ## Authentication
 
-$productName$ supports authenticating incoming requests using a custom authentication service. When configured, the $productName$ will check with your external authentication service prior to routing an incoming request. For more information, see the [authentication guide](../../topics/running/services/auth-services).
+$productName$ supports authenticating incoming requests using a custom authentication service. When configured, the $productName$ will check with your external authentication service prior to routing an incoming request. For more information, see the [authentication guide](../../topics/running/services/auth-service).
 
 ## Rate limiting
 
