@@ -1,6 +1,6 @@
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
 import Layout from '../../src/components/Layout';
 
@@ -466,6 +466,8 @@ export default ({ data, location, pageContext }) => {
   }, [
     footer,
     initialProduct,
+    initialVersion,
+    slug,
     isArchivedVersions,
     isHome,
     isLearning,

@@ -7,7 +7,7 @@ import '../style.less';
 
 
 
-const showAesPage = (props) => {
+const ShowAesPage = (props) => {
 
 
   const [showAesPage, setShowAesPage] = useState('');
@@ -28,4 +28,4 @@ const showAesPage = (props) => {
   );
 };
 
-export default showAesPage;
+export default ShowAesPage;
