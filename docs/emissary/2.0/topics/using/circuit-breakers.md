@@ -4,7 +4,7 @@ Circuit breakers are a powerful technique to improve resilience. By preventing a
 
 ## Circuit breaker configuration
 
-Circuit breaking configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings#configuring-Mappings).
+Circuit breaking configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings).
 
 The `circuit_breakers` attribute configures circuit breaking. The following fields are supported:
 

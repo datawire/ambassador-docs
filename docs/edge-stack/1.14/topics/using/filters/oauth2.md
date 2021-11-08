@@ -416,7 +416,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
      and otherwise falls back to `"userinfo"` validation.
 
 [RE2]: https://github.com/google/re2/wiki/Syntax
-[`regex_type` in the `ambassador Module`]: ../../../running/ambassador/#regular-expressions-regex_type
+[`regex_type` in the `ambassador Module`]: ../../../running/ambassador/#regular-expressions
 
 ### HTTP client
 
