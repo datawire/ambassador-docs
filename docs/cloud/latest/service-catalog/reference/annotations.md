@@ -44,7 +44,7 @@ import Alert from '@material-ui/lab/Alert';
 | `a8r.io/rollouts.deployment` | Name of the Kubernetes Deployment or Rollout object to update for rollouts | `demo-app` |
 | `a8r.io/rollouts.mappings` | Coma separated list of Mapping objects that should control rollout traffic | `demo-app-mapping,other-mapping` |
 
-To learn more about the `a8r.io/rollouts.*` annotations, see the [progressive delivery reference](../../progressive-delivery/configuration/).
+To learn more about the `a8r.io/rollouts.*` annotations, see the [progressive delivery reference](/docs/argo/latest/reference/ambassador-cloud-rollouts/#a8riorolloutsscmpath).
 
 ## Annotate via `kubectl`
 

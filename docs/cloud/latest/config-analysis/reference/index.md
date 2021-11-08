@@ -15,14 +15,14 @@ Edge Stack or Emissary-ingress configuration and warn about any conflicts or inv
 ## What are the current capabilities of the automated configuration analysis integration?
 
 Currently, the integration relays information about:
-* New routes created by `AmbassadorMapping`s
-* Conflicting routes (e.g. two `AmbassadorMapping`s configuring the same `prefix` on the same `AmbassadorHost`)
+* New routes created by `Mapping`s
+* Conflicting routes (e.g. two `Mapping`s configuring the same `prefix` on the same `Host`)
 * Envoy metric names for any new routes
 
 Coming soon, we plan to support:
 * Validation for the produced Envoy configuration.
-* Validation for `AmbassadorTCPMapping`s
-* Validation for `AmbassadorHost`s
+* Validation for `TCPMapping`s
+* Validation for `Host`s
 * Support other git providers
 
 

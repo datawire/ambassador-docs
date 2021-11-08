@@ -157,7 +157,7 @@ Further explore some of the concepts you learned about in this article:
 the edge of your cluster to a Kubernetes service
 * [`Host` resource](../../topics/running/host-crd/): sets the hostname by which
 $productName$ will be accessed and secured with TLS certificates
-* [Developer Portal](../../topics/using/dev-portal/): 
+* [Developer Portal](../../tutorials/dev-portal-tutorial/): 
 publishes an API catalog and OpenAPI documentation
 
 $productName$ has a comprehensive range of [features](/features/) to
