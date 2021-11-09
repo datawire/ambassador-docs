@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 - [Consul integration](#consul-integration)
   - [Architecture overview](#architecture-overview)
   - [Installing consul](#installing-consul)
-  - [Configuring $productName$](#configuring-ambassador)
+  - [Configuring $productName$](#configuring-$productName$)
   - [Routing to consul services](#routing-to-consul-services)
   - [Consul connector and encrypted TLS](#consul-connector-and-encrypted-tls)
   - [Environment variables](#environment-variables)
