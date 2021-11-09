@@ -394,7 +394,7 @@ Will be displayed in the _Dev Portal_ as `Cat Service`, and the documentation wi
 accessed at `$AMBASSADOR_URL/docs/doc/Cat%20Service`.
 
 
-## <a href="#global-config"></a>Default configuration
+## Default configuration
 
 The _Dev Portal_ supports some default configuration in some environment variables
 (for backwards compatibility).
