@@ -60,7 +60,7 @@ kubectl label namespace $namespace istio-injection=enabled --overwrite
 
 Properly integrating $productName$ with Istio provides support for:
 
-* [Mutual TLS (mTLS)](#mutual-tls), with certificates managed by Istio, to allow end-to-end encryption
+* [Mutual TLS (mTLS)](../../topics/running/tls/mtls), with certificates managed by Istio, to allow end-to-end encryption
 for east-west traffic;
 * Automatic generation of Prometheus metrics for services; and
 * Istio distributed tracing for end-to-end observability.
