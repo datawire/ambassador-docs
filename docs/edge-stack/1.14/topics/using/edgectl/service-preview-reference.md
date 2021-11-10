@@ -6,7 +6,7 @@ The following is a reference for the various components of Service Preview.
 
 See [Service Preview Quick Start](../service-preview-install) for detailed installation instructions.
 
-### Traffic Manager
+## Traffic Manager
 
 The Traffic Manager is the central point of communication between Traffic Agents in the cluster and Edge Control Daemons on developer workstations.
 
@@ -114,7 +114,7 @@ The Traffic Manager needs to be able to watch resources in the cluster so it is 
 
 It also requires the ability to read your $productName$ license key from the `ambassador-edge-stack` `Secret`.
 
-#### Traffic Manager options
+## Traffic Manager options
 
 - __Remove permission to read `Secret`s__
 
@@ -242,11 +242,11 @@ It also requires the ability to read your $productName$ license key from the `am
            name: ambassador-pod-info
    ```
 
-### Traffic Agent
+## Traffic Agent
 
 Any pod running in a cluster with a Traffic Manager can opt in to intercept functionality by including the Traffic Agent container.
 
-#### Configuring RBAC
+## Configuring RBAC
 
 Since the Traffic Agent is built on $productName$, it needs a subset of the same RBAC permissions that Ambassador does. The easiest way to provide this is to create a `ServiceAccount` in your service's namespace, bound to the `traffic-agent` `Role` or `ClusterRole`.
 
@@ -304,7 +304,7 @@ subjects:
 
 If you want to include the Traffic Agent with multiple services, they can all use the same `ServiceAccount` name, as long as it exists in every namespace.
 
-##### RBAC options
+## RBAC options
 
 - __Run with namespace scope__
 
@@ -384,7 +384,7 @@ If you want to include the Traffic Agent with multiple services, they can all us
        apiGroup: rbac.authorization.k8s.io
    ```
 
-#### Automatic Traffic Agent sidecar injection with Ambassador Injector
+## Automatic Traffic Agent sidecar injection with Ambassador Injector
 
 The Ambassador Injector automatically injects the Traffic Agent sidecar into services that you want to use Service Preview with.
 
@@ -508,7 +508,7 @@ webhooks:
         resources: ["pods"]
 ```
 
-#### Manual Traffic Agent sidecar configuration
+## Manual Traffic Agent sidecar configuration
 
 Each service that you want to work with Service Preview requires the Traffic Agent sidecar. This is typically managed by the Ambassador Injector.
 
@@ -647,13 +647,13 @@ Key points include:
 - **Note 9**: The `AMBASSADOR_SINGLE_NAMESPACE` environment variable tells the Traffic Agent to watch resources only in its current namespace. This allows the `traffic-agent` `ServiceAccount` to only have `Role` permissions instead of a cluster-wide `ClusterRole`.
 - **Note 10**: The `AGENT_LISTEN_PORT` environment variable tells the Traffic Agent the port on which to listen for incoming connections. The `Service` must point to this port (see Note 1). If not present, it defaults to port 9900.
 
-#### gRPC support
+## gRPC support
 
 The Traffic-Agent can inspect and intercept gRPC traffic for deployments exposing gRPC endpoints instead of plain HTTP:
 - Set the `getambassador.io/inject-traffic-agent-grpc: "true"` pod annotation, or the `AGENT_ENABLE_GRPC: "true"` environment variable if injecting the sidecar manually.
 - The Traffic Agent will instruct Envoy to use HTTP/2 on its listen port (named `grpc` instead of `http`; 9900 by default)
 
-#### TLS support
+## TLS support
 
 If other microservices in the cluster expect to speak TLS to this microservice, tell the Traffic Agent to terminate TLS:
 - Set the `getambassador.io/inject-terminating-tls-secret` pod annotation, or the `AGENT_TLS_TERM_SECRET` environment variable if injecting the sidecar manually, to the name of a Kubernetes Secret that contains a TLS certificate
@@ -664,7 +664,7 @@ If this microservice expects incoming requests to speak TLS, tell the Traffic Ag
 - Set the `getambassador.io/inject-originating-tls-secret` pod annotation, or the `AGENT_TLS_ORIG_SECRET` environment variable if injecting the sidecar manually, to the name of a Kubernetes Secret that contains a TLS certificate
 - The Traffic Agent will use that certificate originate HTTPS requests to the application
 
-### $productName$
+## $productName$
 
 To enable Preview URLs, you must first enable preview URL processing in one or more Host resources. $productName$ uses Host resources to configure various aspects of a given host. Enabling preview URLs is as simple as adding the `previewUrl` section and setting `enabled` to `true`:
 
