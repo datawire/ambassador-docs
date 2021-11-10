@@ -28,5 +28,5 @@ Application development teams use $productName$ to manage edge policies associat
 * [Advanced Mapping Configuration](mappings)
 * Rate Limiting
   * [Introduction to Rate Limits](rate-limits/)
-* [Developer Portal](dev-portal)
+* [Developer Portal](../../tutorials/dev-portal-tutorial)
 * [Gateway API](gateway-api)

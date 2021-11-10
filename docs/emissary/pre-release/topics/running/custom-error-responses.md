@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Custom error responses
 
 Custom error responses set overrides for HTTP response statuses generated either
@@ -28,6 +30,15 @@ Only one of `text_format`, `json_format`, or `text_format_source` may be provide
 
 Custom response bodies are subject to Envoy's AccessLog substitution syntax
 and variables, see [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#config-access-log-format-strings) for more information.
+
+<Alert severity="warning">
+  Since Envoy does not currently provide a way to escape the "%" symbol in its substitution
+  strings, $productName$ will reject overrides that appear to contain "%" symbols that are
+  not part of a vaild command to Envoy.<br/>
+  <br/>
+  (Note that when using a "text/html" response, it may be possible to use HTML entity encoding
+  - &amp;#x25; - to convey a "%" sign.)
+</Alert>
 
 ## Simple response bodies
 

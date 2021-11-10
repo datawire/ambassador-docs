@@ -4,7 +4,12 @@ Circuit breakers are a powerful technique to improve resilience. By preventing a
 
 ## Circuit breaker configuration
 
-Circuit breaking configuration can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador) or set per [`Mapping`](../mappings#configuring-Mappings).
+A default circuit breaking configuration can be set for all
+$productName$ resources in the [`ambassador
+Module`](../../running/ambassador), or set to a different value on a
+per-resource basis for [`Mappings`](../mappings#configuring-Mappings),
+[`TCPMappings`](../tcpmappings/), and
+[`AuthServices`](../../running/services/auth-service/).
 
 The `circuit_breakers` attribute configures circuit breaking. The following fields are supported:
 
@@ -25,9 +30,13 @@ circuit_breakers:
 |`max_requests`|`1024`|Specifies the maximum number of parallel outstanding requests to an upstream service. In practice, this is more applicable to HTTP/2 than HTTP/1.1.|
 |`max_retries`|`3`|Specifies the maximum number of parallel retries allowed to an upstream service.|
 
+The `max_*` fields can be reduced to shrink the "blast radius," or
+increased to enable $productName$ to handle a larger number of
+concurrent requests.
+
 ## Examples
 
-Circuit breakers defined on a single mapping:
+Circuit breakers defined on a single `Mapping`:
 
 ```yaml
 ---
@@ -41,6 +50,21 @@ spec:
   circuit_breakers:
   - max_connections: 2048
     max_pending_requests: 2048
+```
+
+Circuit breakers defined on a single `AuthService`:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind: AuthService
+metadata:
+  name: dancing-walrus
+spec:
+  auth_service: http://dancing-walrus:8500
+  proto: grpc
+  circuit_breakers:
+  - max_requests: 4096
 ```
 
 A global circuit breaker:
