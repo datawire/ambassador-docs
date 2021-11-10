@@ -60,7 +60,7 @@ kubectl label namespace $namespace istio-injection=enabled --overwrite
 
 Properly integrating $productName$ with Istio provides support for:
 
-* [Mutual TLS (mTLS)](../../topics/running/tls/mtls), with certificates managed by Istio, to allow end-to-end encryption
+* [Mutual TLS (mTLS)](/docs/edge-stack/latest/topics/running/tls/mtls/#mutual-tls-mtls), with certificates managed by Istio, to allow end-to-end encryption
 for east-west traffic;
 * Automatic generation of Prometheus metrics for services; and
 * Istio distributed tracing for end-to-end observability.
@@ -255,7 +255,7 @@ TLS using the `istio-upstream` `TLSContext` above:
    ```
 
 For example, if you have installed the Quote of the Moment service as described on the
-[Getting Started](../../../tutorials/getting-started) page, you will have a `Mapping` as follows:
+[Getting Started](../../../2.0/tutorials/getting-started) page, you will have a `Mapping` as follows:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
