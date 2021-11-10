@@ -1,5 +1,5 @@
-- title: Quick Start
-  link: /service-catalog/quick-start/
+- title: Create a local K8s Dev Environment
+  link: /service-catalog/complete-k8s/
 - title: Core concepts
   items:
   - title: Using a service catalog
