@@ -2,12 +2,7 @@
 
 $productName$ features a built-in [Rate Limit Service (RLS)](../../topics/running/services/rate-limit-service/#external-rate-limit-service). The $productName$ RLS uses a decentralized configuration model that enables individual teams the ability to independently manage [rate limits](https://www.getambassador.io/learn/kubernetes-glossary/rate-limiting) independently. 
 
-All of the examples on this page use the backend service of the quote sample application to illustrate how to perform the following rate limiting functions:
-
-* [Rate limiting for availability](#rate-limiting-for-availability)
-* [Per user rate limiting](#per-user-rate-limiting)
-* [Load shedding](#load-shedding)
-* [Global rate limiting](#global-rate-limiting)
+All of the examples on this page use the backend service of the quote sample application to illustrate how to perform the rate limiting functions.
 
 ## Rate Limiting in $productName$
 
