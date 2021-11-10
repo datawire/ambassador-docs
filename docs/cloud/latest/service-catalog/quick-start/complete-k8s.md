@@ -1,18 +1,18 @@
 # Creating a Local Kubernetes Development Environment
 
-This tutorial shows you how to create an effective Kubernetes development environment to enable  fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
+This tutorial shows you how to create an effective Kubernetes development environment to enable fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
 
 ## Prerequisites
 
 To begin, you need a set of services that you can deploy to a Kubernetes cluster. These services must be:
 
-* [Containerized](../learn/kubernetes-glossary/container/).
+* [Containerized](../../../../../../learn/kubernetes-glossary/container/).
  	- Best practices for [writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
 	- Many modern code editors, such as [VS Code](https://code.visualstudio.com/docs/containers/overview) and [IntelliJ IDEA](https://code.visualstudio.com/docs/containers/overview), can automatically generate Dockerfiles.
 * Have a Kubernetes manifest that can be used to successfully deploy your application to a Kubernetes cluster. This includes YAML config files, or Helm charts, or whatever method you prefer.
 	- Many modern code editors, such as VS Code, have [plugins](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) that will [automatically generate](https://marketplace.visualstudio.com/items?itemName=GoogleCloudTools.cloudcode) a large amount of the Service and Deployment configuration files.
-The kubectl command-line tool includes a number of [config generators](https://kubernetes.io/docs/reference/kubectl/conventions/#generators) for creating basic Service and Deployment files.
-For helm users, the [`helm create` command](https://helm.sh/docs/helm/helm_create/) can be used to create the directory and file scaffolding for your chart.
+	- The kubectl command-line tool includes a number of [config generators](https://kubernetes.io/docs/reference/kubectl/conventions/#generators) for creating basic Service and Deployment files.
+	- For helm users, the [`helm create` command](https://helm.sh/docs/helm/helm_create/) can be used to create the directory and file scaffolding for your chart.
 * Follow cloud native application architecture best practices.
 	- Design services using the [Twelve-Factor Application](https://12factor.net/) approach.
 	- Ensure that your services and ingress gateway include HTTP [header propagation](https://www.getambassador.io/learn/kubernetes-glossary/header-propagation/) for good observability and diagnostics. Many modern language-specific web frameworks support this out-of-the-box, and the [OpenTelemetry documentation](https://opentelemetry.lightstep.com/core-concepts/context-propagation/) also contains good guidance. 
@@ -67,7 +67,7 @@ After you finish your deployment, you need to configure a copy of a single servi
 
 Once you have the development container running, you can integrate your local development environment and the remote cluster. This enables you to access your remote app and instantly see any local changes you have made using your development container.
 
-1. First, download the latest [Telepresence binary](../telepresence/latest/install/) for your operating system and run `telepresence connect`.
+1. First, download the latest [Telepresence binary](../../../../../telepresence/latest/install/) for your operating system and run `telepresence connect`.
  Your local service is now able to interact with services and dependencies in your remote cluster.
  For example, you can run `curl remote-service-name.namespace:port/path` and get an instant response locally in the same way you would in a remote cluster.  
 2. Run `telepresence intercept your-service-name` to reroute traffic for the service you’re working on.
