@@ -331,7 +331,7 @@ export const CloudCards = [
   {
     title: 'Create a local K8s Dev Environment',
     description:
-      'Create a remaote Kubernetes deployment environemt and make sharable changes for others to review.',
+      'Create a remote Kubernetes deployment environemt and make sharable changes for others to review.',
     link: goToCloudQuickStart,
     linkText: 'Get Started',
     icon: 'service-catalog',
