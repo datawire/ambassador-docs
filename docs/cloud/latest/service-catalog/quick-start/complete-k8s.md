@@ -1,6 +1,6 @@
 # Creating a Local Kubernetes Development Environment
 
-This tutorial shows you how to create an effective Kubernetes development environment to enable fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
+This tutorial shows you how to use Ambassador Cloud to create an effective Kubernetes development environment to enable fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
 
 ## Prerequisites
 
@@ -104,7 +104,6 @@ Refresh your view of the app at ${INGRESS_IP}.
 	# telepresence intercept your-service-name
 
 	# happy coding!
-
 	```
 ## Share the result of your local changes with others
 
