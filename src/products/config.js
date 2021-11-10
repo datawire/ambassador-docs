@@ -329,9 +329,9 @@ export const ArgoCards = [
 
 export const CloudCards = [
   {
-    title: 'Service Catalog Quick Start',
+    title: 'Create a local K8s Dev Environment',
     description:
-      'Eliminate tribal knowledge, speed incident response, and improve developer productivity.',
+      'Create a remaote Kubernetes deployment environemt and make sharable changes for others to review.',
     link: goToCloudQuickStart,
     linkText: 'Get Started',
     icon: 'service-catalog',
