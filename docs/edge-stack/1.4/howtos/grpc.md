@@ -316,4 +316,4 @@ A simple way around this is to use Ambassador Edge Stack with a `LoadBalancer` s
 
 ## gRPC-Web
 
-Ambassador Edge Stack also supports the [gRPC-Web](../../topics/running/ambassador#grpc-web-enable_grpc_web) protocol for browser-based gRPC applications.
+Ambassador Edge Stack also supports the [gRPC-Web](../../topics/running/ambassador#grpc) protocol for browser-based gRPC applications.

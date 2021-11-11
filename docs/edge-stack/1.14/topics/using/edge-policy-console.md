@@ -21,7 +21,7 @@ The EPC makes it easy to configure what you need for a successful deployment. Ho
 * [YAML Download](#yaml-download)
 * [APIs](#apis)
 * [Documentation](#documentation)
-* [Support](#support)
+* [Disabling the Edge Policy Console](#disabling-the-edge-policy-console)
 
 On most pages, you have the option to click `See YAML` which will provide you the raw YAML file for your CRD. For those that want YAML changes for Git source control, all of your configuration changes will be saved to the YAML Download" tab.
 

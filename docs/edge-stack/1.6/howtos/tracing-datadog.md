@@ -10,7 +10,7 @@ After completing the Getting Started guide you will have a Kubernetes cluster ru
 
 ## 1. Configure the DataDog Agent
 
-You will need to configure the DataDog agent so that it uses a host-port and accepts non-local APM traffic, you can follow the DataDog [documentation](https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing) on how to do this.
+You will need to configure the DataDog agent so that it uses a host-port and accepts non-local APM traffic, you can follow the DataDog [documentation](https://docs.datadoghq.com/agent/kubernetes/apm/?tab=daemonset) on how to do this.
 
 ## 2. Configure Envoy JSON logging
 

@@ -38,7 +38,7 @@ labels:
 
 There are two ways of setting labels on a request:
 
-1. You can set labels on an individual [`Mapping`](../mappings#configuring-Mappings). These labels
+1. You can set labels on an individual [`Mapping`](../mappings). These labels
    will only apply to requests that use that `Mapping`.
 
    ```yaml
@@ -139,7 +139,7 @@ There are 5 types of label specifiers in $productName$:
     Sets the label `destination_cluster=«Envoy destination cluster name»"`. The Envoy 
     destination cluster name is the name of the Envoy cluster to which the `Mapping`
     routes the request. You can get the name for a cluster from the
-    [diagnostics service](../../diagnostics).
+    [diagnostics service](../../running/diagnostics/).
     
     The syntax of this label currently _requires_ `destination_cluster: {}`.
 

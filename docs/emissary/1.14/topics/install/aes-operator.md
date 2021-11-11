@@ -4,7 +4,7 @@ The Ambassador Operator is a Kubernetes Operator that controls the
 complete lifecycle of $productName$ in your cluster. It also
 automates many of the repeatable tasks you have to perform for $productName$. Once installed, the Ambassador Operator will automatically complete rapid
 installations and seamless upgrades to new versions of $productName$.  [Read
-more](https://github.com/datawire/ambassador-operator/blob/master/README.md#version-syntax)
+more](https://github.com/datawire/ambassador-operator/blob/master/README.md)
 about the benefits of the Operator.
 
 A Kubernetes operator is a software extension that makes it easier to manage and automate your
@@ -38,7 +38,7 @@ Start by installing the operator:
 Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the Ambassador Operator.
 
 1. To create the `AmbassadorInstallation` Custom Resource schema, use
-   the following YAML as your guideline or view the [Operator README](https://github.com/datawire/ambassador-operator#the-operator-custom-resource-cr) for more information on configuration.
+   the following YAML as your guideline or view the [Operator README](https://github.com/datawire/ambassador-operator) for more information on configuration.
 
     ```
     apiVersion: getambassador.io/v2
@@ -54,7 +54,7 @@ Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to
 4. Finally, apply your `AmbassadorInstallation` CRD to the Ambassador Operator schema
    with the following command: `kubectl apply -n ambassador -f amb-install.yaml`
 
-> **Note:** If you do not place the `AmbassadorInstallation` in the same namespace that you insatalled the Operator, it will not install anything.
+> **Note:** If you do not place the `AmbassadorInstallation` in the same namespace that you installed the Operator, it will not install anything.
 
 ### Configuration for $productName$
 

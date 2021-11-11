@@ -352,7 +352,7 @@ spec:
   host: api.example.com
 ```
 
-Some gRPC client libraries produce requests where the `host` or `:authority` header includes the port number. For example, a request to the above service might include `host: api.example.com:443` instead of just `host: api.example.com`. To avoid having $productName$ return a 404 (not found) response to these requests due to the mismatched host, you may want to set `strip_matching_host_port` in the [Ambassador module](../../topics/running/ambassador#strip_matching_host_port).
+Some gRPC client libraries produce requests where the `host` or `:authority` header includes the port number. For example, a request to the above service might include `host: api.example.com:443` instead of just `host: api.example.com`. To avoid having $productName$ return a 404 (not found) response to these requests due to the mismatched host, you may want to set `strip_matching_host_port` in the [Ambassador module](../../topics/running/ambassador/#strip-matching-host-port).
 
 Alternately, you may find it cleaner to make sure your gRPC client does not include the port in the `host` header. Here is an example using gRPC/Go.
 
@@ -371,4 +371,4 @@ conn, err := grpc.Dial(hostname+":"+port, opts...)
 
 ## gRPC-Web
 
-$productName$ also supports the [gRPC-Web](../../topics/running/ambassador#grpc-web-enable_grpc_web) protocol for browser-based gRPC applications.
+$productName$ also supports the [gRPC-Web](../../topics/running/ambassador/#grpc) protocol for browser-based gRPC applications.

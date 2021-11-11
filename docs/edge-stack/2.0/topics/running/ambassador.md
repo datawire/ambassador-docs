@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 * [General](#general)
 * [gRPC](#grpc)
 * [Header behavior](#header-behavior)
-* [Misc](#misc)
+* [Misc](#miscellaneous)
 * [Observability](#observability)
 * [Protocols](#protocols)
 * [Security](#security)
