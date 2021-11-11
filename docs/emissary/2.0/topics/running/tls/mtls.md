@@ -72,6 +72,6 @@ $productName$ integrates with multiple service meshes and makes it easy to
 configure mTLS to upstream services for all of them. Click the links below to 
 see how to configure $productName$ to do mTLS with any of these service meshes:
 
-- [Consul Connect](../../../../howtos/consul/#using-consul-for-authorization-and-encryption)
+- [Consul Connect](../../../../howtos/consul)
 
-- [Istio](../../../../howtos/istio/#istio-mutual-tls)
+- [Istio](../../../../howtos/istio)

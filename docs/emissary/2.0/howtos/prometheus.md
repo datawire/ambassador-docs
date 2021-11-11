@@ -26,7 +26,7 @@ deployment.
 Starting with $productName$ `0.71.0`, Prometheus can scrape stats/metrics
 directly from Envoy's `/metrics` endpoint, removing the need to
 [configure $productName$ to output stats to
-StatsD](#statsd-exporter-output-statistics-to-ambassador-edge-stack).
+StatsD](#statsd-exporter-output-statistics-to-productname).
 
 The `/metrics` endpoint can be accessed internally via the $productName$ admin port (default 8877):
 
