@@ -35,6 +35,14 @@ items:
   - version: 2.1.0
     date: 'TBD'
     notes:
+      - title: Smoother migrations with support for getambassador.io/v2 CRDs
+        type: feature
+        body: >-
+          $productName$ supports <code>getambassador.io/v2</code> CRDs, to simplify migration from $productName$
+          1.X. <b>Note</b>: for the most seamless migration from 1.X, upgrade your $productName$ 1.X installation
+          to version 1.14.3 before migrating!
+        docs: topics/install/migrate-to-version-2
+
       - title: Improved validity checking for TLS Secrets
         type: bugfix
         body: >-
