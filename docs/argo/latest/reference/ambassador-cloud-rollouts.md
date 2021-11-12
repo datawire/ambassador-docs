@@ -95,10 +95,7 @@ spec:
 ```
 
 3. If no `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) is found in the **templates** folder (which should only
-happen the first time a rollout is created), then Ambassador Cloud will look for a `Deployment` object matching that same name.
-If found, a new `Rollout` manifest will be created referring to that deployment object and configured with the
-Helm values file previously generated, which includes the [mappings](#a8riorolloutsmappings). A new [canary](/docs/argo/latest/concepts/canary/)
-service based on the current service specs will also be created to allow Argo Rollouts to control the flow between the two versions.
+happen the first time a rollout is created), use the example above to create one.
 
 4. Ambassador Cloud will then update those manifests on a new branch, open a pull request targeting the
 [base branch](#a8riorolloutsscmbranch) and show you the new rollout in the service rollouts page.
