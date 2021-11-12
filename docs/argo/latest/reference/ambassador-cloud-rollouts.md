@@ -97,16 +97,20 @@ spec:
 3. If no `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) is found in the **templates** folder (which should only
 happen the first time a rollout is created), use the example above to create one.
 
-4. Ambassador Cloud will then update those manifests on a new branch, open a pull request targeting the
+4. Create a `Service` object for the canary pods by duplicating the existing service and appending `-canary` to its name.
+
+5. Create a `Mapping` object pointing to the "stable" `Service`.
+
+6. Ambassador Cloud will then update those manifests on a new branch, open a pull request targeting the
 [base branch](#a8riorolloutsscmbranch) and show you the new rollout in the service rollouts page.
 You'll see a "Merge pull request" button that will take you to the pull request where you can approve it and merge it.
 
-5. Before merging the pull request, disable the Argo Application's auto-sync feature in case you have it enabled. You will
+7. Before merging the pull request, disable the Argo Application's auto-sync feature in case you have it enabled. You will
 re-enable it back in step 7. Once the pull request is merged, Argo CD will detect that a new version of the `Application` has
 been pushed on the repository.
 
-6. Now you will have to configure your Argo Application to use the Ambassador Helm values file
-**after** your own. This configuraiton can be found in the `Parameters` section of your Application.
+8. Now you will have to configure your Argo Application to use the Ambassador Helm values file
+**after** your own. This configuration can be found in the `Parameters` section of your Application.
 
 <Alert severity="warning">
     By default, Argo CD fetches data from your repository every 3 minutes. If still don't see the Ambassador
