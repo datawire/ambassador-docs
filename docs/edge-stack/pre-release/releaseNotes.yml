@@ -35,6 +35,12 @@ items:
   - version: 2.1.0
     date: 'TBD'
     notes:
+      - title: Ambassador Edge Stack CRDs are fully validated
+        type: change
+        body: >-
+          The $productName$ CRDs (<code>Filter</code>, <code>FilterPolicy</code>, and <code>RateLimit</code>)
+          will now be validated for correct syntax by Kubernetes itself. This means that <code>kubectl apply</code>
+          will reject invalid CRDs before they are actually applied, preventing them from causing errors.
 
       - title: External Filter correctly supports all AuthService fields
         type: change
