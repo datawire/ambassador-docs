@@ -64,36 +64,34 @@ metadata:
     {{- toYaml . | nindent 4}}
   {{- end}}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-replicas: {{ .Values.ambassador.rollouts.replicas }}
-  {{- end }}
-revisionHistoryLimit: 5
-strategy:
-  canary:
-    canaryService: {{ include "mychart.fullname" . }}-canary
-    stableService: {{ include "mychart.fullname" . }}-stable
-    {{- with .Values.ambassador.rollouts.trafficMappings }}
-    trafficRouting:
-      ambassador:
-        mappings:
-        {{- toYaml . | nindent 10 }}
-    {{- end}}
-    {{- with .Values.ambassador.rollouts.steps }}
-    steps:
-    {{- toYaml . | nindent 8}}
-    {{- end}}
-template:
-  spec:
-    containers:
-      - name: {{ .Chart.Name }}
-        securityContext:
-          {{- toYaml .Values.securityContext | nindent 12 }}
-        image: "{{ .Values.ambassador.rollouts.image.repository }}:{{ .Values.ambassador.rollouts.image.tag | default .Chart.AppVersion }}"
-        imagePullPolicy: {{ .Values.imagePullPolicy }}
-        resources:
-          {{- toYaml .Values.resources | nindent 12 }}
-    # ...
-    # The rest of the file is omitted for simplicity.
+    replicas: {{ .Values.ambassador.rollouts.replicas }}
+    revisionHistoryLimit: 5
+    strategy:
+      canary:
+        canaryService: {{ include "mychart.fullname" . }}-canary
+        stableService: {{ include "mychart.fullname" . }}-stable
+        {{- with .Values.ambassador.rollouts.trafficMappings }}
+        trafficRouting:
+          ambassador:
+            mappings:
+            {{- toYaml . | nindent 10 }}
+        {{- end}}
+        {{- with .Values.ambassador.rollouts.steps }}
+        steps:
+        {{- toYaml . | nindent 8}}
+        {{- end}}
+    template:
+      spec:
+        containers:
+          - name: {{ .Chart.Name }}
+            securityContext:
+              {{- toYaml .Values.securityContext | nindent 12 }}
+            image: "{{ .Values.ambassador.rollouts.image.repository }}:{{ .Values.ambassador.rollouts.image.tag | default .Chart.AppVersion }}"
+            imagePullPolicy: {{ .Values.imagePullPolicy }}
+            resources:
+              {{- toYaml .Values.resources | nindent 12 }}
+        # ...
+        # The rest of the file is omitted for simplicity.
 ```
 
 3. If no `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) is found in the **templates** folder (which should only
