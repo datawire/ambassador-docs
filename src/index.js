@@ -1,6 +1,6 @@
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
 import Layout from '../../src/components/Layout';
 
@@ -34,7 +34,7 @@ import Kubernetes from './products/Kubernetes';
 import Telepresence from './products/Telepresence';
 import './style.less';
 import getPrevNext from './utils/getPrevNext';
-import isAesPage from './utils/isAesPage';
+import IsAesPage from './components/ShowAesPage';
 
 export default ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -156,16 +156,9 @@ export default ({ data, location, pageContext }) => {
     !isHome && isProduct && !isProductHome && !isArchivedVersions,
   );
   const [versionList, setVersionList] = useState(initialProduct.version);
-  const [showAesPage, setShowAesPage] = useState(false);
   const [edgissaryDPMessage, setEdgissaryDPMessage] = useState(
     initialEdgissaryDPNotificationMsg,
   );
-
-  useEffect(() => {
-    isAesPage(initialProduct.slug, slug, initialVersion.id).then((result) =>
-      setShowAesPage(result),
-    );
-  }, [initialProduct.slug, initialVersion.id, slug]);
 
   const versions = useMemo(() => {
     if (!data.versions?.content) {
@@ -409,11 +402,7 @@ export default ({ data, location, pageContext }) => {
       <MainContainer>
         <div className="docs__doc-body doc-body">
           <div className="doc-tags">
-            {showAesPage && (
-              <Link className="doc-tag aes" to="/editions">
-                Ambassador Edge Stack
-              </Link>
-            )}
+            <IsAesPage initialProduct={initialProduct.slug} slug={slug} initialVersion={initialVersion.id}/>
           </div>
           <ReadingTime
             slug={page.fields.slug}
@@ -477,6 +466,8 @@ export default ({ data, location, pageContext }) => {
   }, [
     footer,
     initialProduct,
+    initialVersion,
+    slug,
     isArchivedVersions,
     isHome,
     isLearning,
@@ -490,7 +481,6 @@ export default ({ data, location, pageContext }) => {
     page.frontmatter.reading_time,
     page.frontmatter.reading_time_text,
     prevLearning,
-    showAesPage,
     versions,
   ]);
 

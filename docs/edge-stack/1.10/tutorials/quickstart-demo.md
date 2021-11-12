@@ -204,7 +204,7 @@ Learn more about [how site reliability engineers and operators run Edge Stack](.
 in production environments.
 
 To learn how Edge Stack works, use cases, best practices, and more, check out 
-the [docs home](../../) or read the [Ambassador Story](../../about/why-ambassador).
+the [Quick Start page](../getting-started/) or read the [Ambassador Story](../../about/why-ambassador).
 
 For a custom configuration, you can install Edge Stack 
 [manually](../../topics/install/yaml-install).

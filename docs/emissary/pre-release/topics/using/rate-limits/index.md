@@ -45,7 +45,7 @@ domain must be configured in the [`RateLimitService`](../../running/services/rat
 
 There are two ways of setting labels on a request:
 
-1. You can set labels on an individual [`Mapping`](../mappings#configuring-Mappings). These labels
+1. You can set labels on an individual [`Mapping`](../mappings). These labels
    will only apply to requests that use that `Mapping`.
 
    ```yaml

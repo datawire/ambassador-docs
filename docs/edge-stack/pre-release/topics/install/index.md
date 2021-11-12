@@ -58,5 +58,5 @@ your production needs for $AESproductName$ or $OSSproductName$. Read more about
 # What’s Next?
 $productName$ has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice. To learn more about how $productName$ works, along with use cases, best practices, and more,
-check out the [Welcome page](../../) or read the [$productName$
+check out the [Welcome page](../../tutorials/getting-started/) or read the [$productName$
 Story](../../about/why-ambassador).

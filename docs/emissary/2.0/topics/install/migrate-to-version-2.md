@@ -112,7 +112,7 @@ both the `selector` and the hostname must line up.
 
 There have been a few syntax and usage changes to the following fields in order to support Kubernetes 1.22 [Structural CRDs](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/)
 - Ensure that `Mapping.tls` is a string
-- `Mapping.labels` always requires maps instead of strings. You can check the [Rate Limiting Labels docs](../../topics/using/rate-limits#attaching-labels-to-requests) for examples of the new structure. 
+- `Mapping.labels` always requires maps instead of strings. You can check the [Rate Limiting Labels docs](../../using/rate-limits/#attaching-labels-to-requests) for examples of the new structure. 
 
 
 ## Check `Module` for changed values

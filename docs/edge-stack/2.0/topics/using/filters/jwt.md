@@ -52,7 +52,7 @@ spec:
       bodyTemplate: "string"            # optional; default is `{{ . | json "" }}`
 ```
 
- - `insecureTLS` disables TLS verification for the cases when `jwksURI` begins with `https://`.  This is discouraged in favor of either using plain `http://` or [installing a self-signed certificate](#installing-self-signed-certificates).
+ - `insecureTLS` disables TLS verification for the cases when `jwksURI` begins with `https://`.  This is discouraged in favor of either using plain `http://` or [installing a self-signed certificate](../#installing-self-signed-certificates).
  - `renegotiateTLS` allows a remote server to request TLS renegotiation. Accepted values are "never", "onceAsClient", and "freelyAsClient".
  - `leewayForExpiresAt` allows tokens expired by this much to be used;
    to account for clock skew and network latency between the HTTP
@@ -128,7 +128,7 @@ with optional fraction and a unit suffix, such as "300ms", "-1.5h" or
 [Go `text/template` functions]: https://golang.org/pkg/text/template/#hdr-Functions
 [`http.Header`]: https://golang.org/pkg/net/http/#Header
 [`jwt.ValidationError`]: https://godoc.org/github.com/dgrijalva/jwt-go#ValidationError
-[Lua Scripts]: /docs/edge-stack/latest/topics/running/ambassador/#lua-scripts-lua_scripts
+[Lua Scripts]: /docs/edge-stack/latest/topics/running/ambassador/#lua-scripts
 [Sprig `hasKey`]: https://masterminds.github.io/sprig/dicts.html#haskey
 
 ## JWT path-specific arguments

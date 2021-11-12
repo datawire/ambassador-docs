@@ -8,7 +8,7 @@ $productName$ and Istio can be deployed together on Kubernetes. In this configur
 traditional edge functions such as authentication, TLS termination, and edge routing. Istio mediates communication
 from $productName$ to services, and communication between services.
 
-This allows the operator to have the best of both worlds: a high performance, modern edge service ($productName$) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/docs/tasks/traffic-management/ingress/#configuring-ingress-using-an-istio-gateway) abstraction, $productName$ still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
+This allows the operator to have the best of both worlds: a high performance, modern edge service ($productName$) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/#configuring-ingress-using-an-istio-gateway) abstraction, $productName$ still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
 
 This guide explains how to take advantage of both $productName$ and Istio to have complete control and observability over how requests are made in your cluster:
 
@@ -60,7 +60,7 @@ kubectl label namespace $namespace istio-injection=enabled --overwrite
 
 Properly integrating $productName$ with Istio provides support for:
 
-* [Mutual TLS (mTLS)](#mutual-tls), with certificates managed by Istio, to allow end-to-end encryption
+* [Mutual TLS (mTLS)](../../topics/running/tls/mtls), with certificates managed by Istio, to allow end-to-end encryption
 for east-west traffic;
 * Automatic generation of Prometheus metrics for services; and
 * Istio distributed tracing for end-to-end observability.
@@ -255,7 +255,7 @@ TLS using the `istio-upstream` `TLSContext` above:
    ```
 
 For example, if you have installed the Quote of the Moment service as described on the
-[Getting Started](../../../tutorials/getting-started) page, you will have a `Mapping` as follows:
+[Getting Started](../../../latest/tutorials/getting-started) page, you will have a `Mapping` as follows:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
