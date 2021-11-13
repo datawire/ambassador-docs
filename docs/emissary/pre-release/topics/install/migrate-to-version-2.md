@@ -184,145 +184,70 @@ For a test cluster **only**, it is possible to simply upgrade a running cluster 
 - If you need to roll back, switch the image back to its original value, then re-apply the
   original CRDs.
 
-----
+## Convert Configuration Resources to `getambassador.io/v3alpha1`
 
-# Don't Review Below Here Yet.
+Once your $productName$ $version$ installation is running, it is **strongly recommended** that
+you convert your existing configuration resources from `getambassador.io/v2` to
+`getambassador.io/v3alpha1`.
 
-### Install $productName$ 2.0 in a new cluster.
+<Alert severity="info">
+  There is no need to convert all your resources to <code>getambassador.io/v3alpha1</code>
+  immediately; it will be fine if you do this lazily. However, some functionality of
+  $productName$ $version$ is not available without using <code>getambassador.io/v3alpha1</code>
+  resources.
+</Alert>
 
-$productName$ introduces the new `getambassador.io/v3alpha1` API version for its CRDs. Kubernetes has a limitation that prevents two coppies of the same CRD from being installed in the same cluster with different API versions. For this reason, we are recommending setting up 2.0 in its own new cluster and then migrating the config to the new cluster in order to not cause any downtime. 
+In general, the best way to convert any resource is to start with `kubectl get`: using
+`kubectl get -o yaml` on any `getambassador.io/v2` resource will cause $productName$ to
+translate it to a `getambassador.io/v3alpha1` resource. You can then verify that the 
+`getambassador.io/v3alpha1` resource looks correct and re-apply it, which will convert the
+stored copy to `getambassador.io/v3alpha1`.
 
-By far the easiest way to install is with Helm:
+As you do the conversion, here are the things to bear in mind:
 
-```sh
-# Add the Repo:
-helm repo add datawire https://app.getambassador.io
-helm repo update
+### `ambassador_id` must be an array, not a simple string.
 
-# Create Namespace and Install:
-kubectl create namespace $productNamespace$ && \
-helm install $productHelmName$ --devel --namespace $productNamespace$ datawire/$productHelmName$ && \
-kubectl -n $productNamespace$ wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=$productHelmName$
-```
+`getambassador.io/v2` allowed `ambassador_id` to be either an array of strings, or a simple
+string. In `getambassador.io/v3alpha1`, only the array form is supported: instead of
+`ambassador_id: "foo"`, use `ambassador_id: [ "foo" ]`. This applies to all $productName$
+resources, and is supported by all versions of Ambassador 1.X.
 
-This will install the `getambassador.io/v3alpha1` APIgroup, and start $productName$ running in its the
-$productNamespace$ namespace. As its `v3alpha1` version implies, we are actively seeking feedback on it,
-and it may change before its promotion to `getambassador.io/v3`.
-
-### Make sure all `ambassador_id`s are arrays, not simple strings.
-
-In any resource that you want your 2.X instance to honor, any `ambassador_id: "foo"` must become
-`ambassador_id: [ "foo" ]`. This applies to all $productName$ resources, and is supported by all versions
-of Ambassador 1.X.
-
-### Define a `Listener` for each port on which your installation should listen.
+### You must have a `Listener` for each port on which $productName$ should listen.
 
 <Alert severity="info">
   <a href="../../running/listener">Learn more about <code>Listener</code></a>
 </Alert>
 
-`Listener` is **mandatory**. It's worth thinking about the `hostBinding`s to use for
-each `Listener`, too, though you can start migrating with
+`Listener` is **mandatory**. Defining your own `Listener`(s) allows you to carefully
+tailor the set of ports you actually need to use, and exactly which `Host` resources
+are matched with them (see below).
+
+### `Listener`, `Host`, and `Mapping` must be explicit about how they associate.
+
+Making sure that `Listener`s, `Host`s, and `Mapping`s correctly associate with each other
+is an important part of $productName$ 2.X configuration:
+
+#### `Listener` and `Host` are associated through `Listener.hostBinding`
+
+<Alert severity="info">
+  <a href="../../running/listener">Learn more about <code>Listener</code></a><br/>
+  <a href="../../running/host-crd">Learn more about <code>Host</code></a>
+</Alert>
+
+In a `Listener`, the `hostBinding` controls whether a given `Host` will be associated
+ith that `Listener`, as discussed in the [`Listener`](../../running/listener) documentation.
+**We recommend using `hostBinding.selector`** to choose only `Host`s that have a defined
+Kubernetes label:
 
 ```yaml
 hostBinding:
-  namespace:
-    from: ALL
+  selector:
+    matchLabels:
+      my-listener: listener-8080
 ```
 
-### Update `Host` resources to `v3alpha1`.
+causes only `Host`s with the `my-listener: listener-8080` label.
 
-<Alert severity="info">
-  <a href="../../running/host-crd">Learn more about <code>Host</code></a>
-</Alert>
-
-$productName$ will find `Host` resources without updating the `apiVersion`. However, making
-sure that `Listener`s, `Host`s, and `Mapping`s correctly associate with each other
-will likely require changes. Therefore, for each existing `Host` resource that you want to
-use with $productName$ 2.X:
-
-- change the `apiVersion` to `getambassador.io/v3alpha1`;
-- add `metadata.labels` as needed to match the `hostBinding` for the `Listener`s with which
-  the `Host` should associate; and
-- set `spec.mappingSelector`, if desired, to control which `Mappings` will be associated 
-  with this `Host`.
-
-### Update `Mapping` resources to `v3alpha1`.
-
-<Alert severity="info">
-  <a href="../../using/intro-mappings/">Learn more about <code>Mapping</code></a>
-</Alert>
-
-$productName$ will find `Mapping` resources without updating the `apiVersion`. However, making
-sure that `Listener`s, `Host`s, and `Mapping`s correctly associate with each other
-will likely require changes. Therefore, for each existing `Mapping` resource that you want to
-use with $productName$ 2.X:
-
-- change the `apiVersion` to `getambassador.io/v3alpha1`;
-- change `spec.host` to `spec.hostname` if possible (see below);
-- add `metadata.labels` as needed to match the `mappingSelector` for the `Host`s with which
-  the `Mapping` should associate; and
-- make sure `spec.hostname` matches up with the `Host`s with which the `Mapping` should associate.
-
-Where `spec.host` could be an exact match or (with `host_regex`) a regular expression, `spec.hostname` is always a DNS
-glob. `spec.hostname` is **strongly** preferred, unless a regex is absolutely required: using globs is **much** more
-performant. Therefore, we recommend using `spec.hostname` wherever possible:
-
-- if `spec.host` is being used for an exact match, simply rename `spec.host` to `spec.hostname`.
-- if `spec.host` is being used for a regex that effects a prefix or suffix match, rename it
-  to `spec.hostname` and rewrite the regex into a DNS glob, e.g. `host: .*\.example\.com` would become
-  `hostname: *.example.com`.
-
-Additionally, when `spec.hostname` is used, the `Mapping` will be associated with a `Host` only
-if `spec.hostname` matches the hostname of the `Host`. If the `Host`'s `selector` is also set,
-both the `selector` and the hostname must line up.
-
-<Alert severity="warning">
-  An <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
-</Alert>
-
-There have been a few syntax and usage changes to the following fields in order to support Kubernetes 1.22 [Structural CRDs](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/)
-- Ensure that `Mapping.tls` is a string
-- `Mapping.labels` always requires maps instead of strings. You can check the [Rate Limiting Labels docs](../../using/rate-limits#attaching-labels-to-requests) for examples of the new structure. 
-
-
-## Check `Module` for changed values
-
-A few settings have moved from the `Module` in 2.0. Make sure you review the following settings and move them to their new locations if you are using them in a `Module`.
-
-Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the Ambassador `Module` is no longer supported.
-
-`xff_num_trusted_hops` has been removed from the `Module`, and its functionality has been moved to the `l7Depth` setting in the `Listener` resource.
-
-It is no longer possible to configure TLS using the `tls` element of the `module`. Its functionality is fully covered by the `TLSContext` resource. 
-
-## 2. Additional Notes
-
-When migrating to $productName$ 2.X, there are several things to keep in mind:
-
-### `Listener` is mandatory
-
-<Alert severity="info">
-  <a href="../../running/listener">Learn more about <code>Listener</code></a>
-</Alert>
-
-The new [`Listener` resource](../../running/listener) (in `getambassador.io/v3alpha1`) defines the
-specific ports on which $productName$ will listen, and which protocols and security model will be used per port. **The
-`Listener` resource is mandatory.**
-
-Defining your own `Listener`(s) allows you to carefully tailor the set of ports you actually need to use, and
-exactly which `Host` resources are matched with them. This can permit a system with many `Hosts` to
-work considerably more efficiently than relying on the defaults.
-
-### `Listener` has explicit control to choose `Host`s
-
-<Alert severity="info">
-  <a href="../../running/listener">Learn more about <code>Listener</code></a><br />
-  <a href="../../running/host-crd">Learn more about <code>Host</code></a>
-</Alert>
-
-`Listener.spec.hostBinding` controls whether a given `Host` will be associated with
-that `Listener`, as discussed in the [`Listener`](../../running/listener) documentation.
 As a migration aid, you can tell a `Listener` to snap up all `Host`s with
 
 ```yaml
@@ -331,21 +256,20 @@ hostBinding:
     from: ALL
 ```
 
-but **we recommend avoiding this practice in production**. Allowing every `Host` to associate with
-every `Listener` can result in confusing behavior with large numbers of `Host`s, and it
-can also result in larger Envoy configurations that slow reconfiguration. Instead, we recommend using
-`hostBinding.selector` to choose `Host`s more carefully.
+but **we recommend avoiding this practice in production**. Allowing every `Host` to associate
+with every `Listener` can result in confusing behavior with large numbers of `Host`s, and it
+can also result in larger Envoy configurations that slow reconfiguration.
 
-#### `Host` and `Mapping` will not automatically associate with each other
+#### `Host` and `Mapping` are associated through `Host.mappingSelector`
 
 <Alert severity="info">
   <a href="../../running/host-crd">Learn more about <code>Host</code></a><br />
   <a href="../../using/intro-mappings">Learn more about <code>Mapping</code></a>
 </Alert>
 
-In $productName$ 1.X, `Mapping`s were nearly always associated with every `Host`. Since this also tends to
-result in larger Envoy configurations that slow down reconfiguration, $productName$ 2.X inverts this behavior:
-**`Host` and `Mapping` will not associate without explicit selection**.
+In $productName$ 1.X, `Mapping`s were nearly always associated with every `Host`. Since this
+tends to result in larger Envoy configurations that slow down reconfiguration, $productName$ 2.X
+inverts this behavior: **`Host` and `Mapping` will not associate without explicit selection**.
 
 To have a `Mapping` associate with a `Host`, at least one of the following must hold:
 
@@ -362,22 +286,25 @@ has no `mappingSelector`, and
 - A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present. 
 
 <Alert severity="warning">
-  An <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
+  A <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with
+  <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code>
+  with a DNS glob.
 </Alert>
 
 <Alert severity="warning">
-  Support for <code>host</code> and <code>host_regex</code> will be removed before <code>v3alpha1</code> is promoted to <code>v3</code>.
+  Support for <code>host</code> and <code>host_regex</code> will be removed before
+  <code>v3alpha1</code> is promoted to <code>v3</code>.
 </Alert>
 
-### `Host` is required to terminate TLS.
+### Use `Host` to terminate TLS
 
 <Alert severity="info">
   <a href="../../running/host-crd">Learn more about <code>Host</code></a><br />
   <a href="../../running/tls#tlscontext">Learn more about <code>TLSContext</code></a>
 </Alert>
 
-In $productName$ 1.X, simply creating a `TLSContext` is sufficient to terminate TLS, but in 2.X you _must_ have an
-`Host`. The minimal setup to terminate TLS is now something like this:
+In $productName$ 1.X, simply creating a `TLSContext` is sufficient to terminate TLS, but in
+2.X you _must_ use a `Host`. The minimal setup to terminate TLS is now something like this:
 
 ```yaml
 ---
@@ -399,6 +326,136 @@ spec:
   tlsSecret: my-secret
 ```
 
-which will terminate TLS for `host.example.com`. A `TLSContext` is still right way to share data about TLS
-configuration across `Host`s: set both `tlsSecret` and `tlsContext` in the `Host`.
+which will terminate TLS for `host.example.com`. A `TLSContext` is still right way to share data
+about TLS configuration across `Host`s: set both `tlsSecret` and `tlsContext` in the `Host`.
 
+### `Mapping` should use `hostname` if possible
+
+<Alert severity="info">
+  <a href="../../using/intro-mappings/">Learn more about <code>Mapping</code></a>
+</Alert>
+
+The `getambassador.io/v3alpha1` `Mapping` introduces the new `hostname` element, which is always
+a DNS glob. Using `hostname` instead of `host` is **strongly recommended** unless you absolutely
+require regular expression matching:
+
+- if `host` is being used for an exact match, simply rename `host` to `hostname`.
+- if `host` is being used for a regex that effects a prefix or suffix match, rename it
+  to `hostname` and rewrite the regex into a DNS glob, e.g. `host: .*\.example\.com` would become
+  `hostname: *.example.com`.
+
+Additionally, when `hostname` is used, the `Mapping` will be associated with a `Host` only
+if `hostname` matches the hostname of the `Host`. If the `Host`'s `selector` is also set,
+both the `selector` and the hostname must line up.
+
+<Alert severity="warning">
+  An <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with
+  <b>all</b> <code>Host</code>s. This is generally far less desirable than using
+  <code>hostname</code> with a DNS glob.
+</Alert>
+
+### `Mapping` added headers must not be simple strings
+
+<Alert severity="info">
+  <a href="../../using/intro-mappings/">Learn more about <code>Mapping</code></a>
+</Alert>
+
+The `getambassador.io/v2` `Mapping` supported strings and dictionaries for `add_request_headers` and
+`add_response_headers`, for example:
+
+    ```yaml
+    add_request_headers:
+      X-Add-String: bar
+      X-Add-Dict: 
+        value: bar
+    ```
+
+In `getambassador.io/v2`, both `X-Add-String` and `X-Add-Dict` will be added with the value `bar`.
+
+The string form - shown with `X-Add-String` - is not supported in `getambassador.io/v3alpha1`. Use the
+dictionary form instead (which works in both `getambassador.io/v2` and `getambassador.io/v3alpha1`).
+
+### `tls` cannot be `true` in `AuthService`, `Mapping`, `RateLimitService`, and `TCPMapping`
+
+<Alert severity="info">
+  <a href="../../using/authservice/">Learn more about <code>AuthService</code></a><br/>
+  <a href="../../using/intro-mappings/">Learn more about <code>Mapping</code></a><br/>
+  <a href="../../using/rate-limits/">Learn more about <code>RateLimitService</code></a><br/>
+  <a href="../../using/tcpmappings/">Learn more about <code>TCPMapping</code></a>
+</Alert>
+
+The `tls` element in `AuthService`, `Mapping`, `RateLimitService`, and `TCPMapping` controls TLS 
+origination. In `getambassador.io/v2`, it may be a string naming a `TLSContext` to use to determine
+which client certificate is sent, or the boolean value `true` to request TLS origination with no
+cluent certificate being sent. 
+
+In `getambassador.io/v3alpha1`, only the string form is supported. To originate TLS with no client
+certificate (the semantic of `tls: true`), omit the `tls` element and prefix the `service` with 
+`https://`. Note that `TCPMapping` in `getambassador.io/v2` does not support the `https://prefix`.
+
+### `Mapping` `headers` and `query_parameters` must not be `true`
+
+<Alert severity="info">
+  <a href="../../using/intro-mappings/">Learn more about <code>Mapping</code></a>
+</Alert>
+
+`headers` and `query_parameters` in a `Mapping` control header matches and query-parameter matches. In
+`getambassador.io/v2`, they support both strings and dictionaries, and each has a `_regex` variant.
+For example:
+
+   ```yaml
+   headers:
+     x-exact-match: foo
+     x-existence-match: true
+   headers_regex:
+     x-regex-match: "fo.*o"
+   ```
+
+In this example, the `Mapping` will require the `x-exact-match` header to have the value `foo`, the 
+`x-regex-match` whose value starts with `fo` and ends with `o`. However, `x-existence-match` requires
+simply that the `x-existence-match` header exists.
+
+In `getambassador.io/v3alpha1`, the `true` value for an existence match is not supported. Instead, 
+use `headers_regex` for the same header with value of `.*`. This is fully supported in 1.k)
+
+`query_parameters` and `query_parameters_regex` work exactly like `headers`  and `headers_reex`.
+
+## `Mapping` `labels` must be converted to new syntax
+
+<Alert severity="info">
+  <a href="../../using/intro-mappings/">Learn more about <code>Mapping</code></a>
+</Alert>
+
+In `getambassador.io/v2`, the `labels` element in a `Mapping` supported several different types of
+data. In `getambassador.io/v3alpha1`, all labels must have the same type, so labels must be converted
+to the new syntax:
+
+| `getambassador.io/v2`            | `getambassador.io/v3alpha1`                                 |
+|----------------------------------|-------------------------------------------------------------|
+| `source_cluster`                 | `{ source_cluster: { key: source_cluster } }`               |                          
+| `destination_cluster`            | `{ destination_cluster: { key: destination_cluster }` }     |
+| `remote_address`                 | `{ remote_address: { key: remote_address } }`               |
+| `{ my_key: { header: my_hdr } }` | `{ generic_key: { value: my_val } }`                        |
+| `{ my_val }`                     | `{ generic_key: { value: my_val } }`                        |
+| `{ my_key: { header: my_hdr } }` | `{ request_headers: { key: my_key, header_name: my_hdr } }` |
+
+You can check the [Rate Limiting Labels documentation](../../using/rate-limits#attaching-labels-to-requests)
+for more examples.
+
+## Some `Module` settings have moved or changed
+
+<Alert severity="info">
+  <a href="../../running/listener">Learn more about <code>Listener</code></a>
+</Alert>
+
+A few settings have moved from the `Module` in 2.0. Make sure you review the following settings
+and move them to their new locations if you are using them in a `Module`.
+
+Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0,
+so the `use_proxy_protocol` element of the Ambassador `Module` is no longer supported.
+
+`xff_num_trusted_hops` has been removed from the `Module`, and its functionality has been moved
+to the `l7Depth` setting in the `Listener` resource.
+
+It is no longer possible to configure TLS using the `tls` element of the `module`. Its
+functionality is fully covered by the `TLSContext` resource. 
