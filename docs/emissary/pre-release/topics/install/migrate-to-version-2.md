@@ -54,6 +54,11 @@ until after the $productName$ 1.X installation is shut down.
     example goes here
     ```
 
+   <Alert severity="warning">
+     Do not use the <code>ambassador</code> Helm chart to install $productName$ 2.X:
+     you must use the <code>emissary</code> Helm chart instead.
+   </Alert>
+
 - At this point, $productName$ 1.14.3 and $productName$ 2.0 are running simultaneously, 
   reading the same `getambassador.io/v2` configuration resources.
    - Internally, $productName$ $version$ is translating the `getambassador.io/v2` resources
