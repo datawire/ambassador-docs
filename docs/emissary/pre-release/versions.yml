@@ -11,8 +11,11 @@ productCRDName: emissary-crds.yaml
 productYAMLFile: emissary-ingress.yaml
 productNamespace: emissary
 productDeploymentName: emissary-ingress
+productContainerName: ambassador
 productHelmName: emissary-ingress
 productDockerImage: emissary
+productDockerRegistry: docker.io/emissaryingress
+productFullDockerImage: docker.io/emissaryingress/emissary
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
 AESproductName: "Ambassador Edge Stack"

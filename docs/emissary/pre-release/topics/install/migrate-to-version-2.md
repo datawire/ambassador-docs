@@ -7,15 +7,181 @@ import Alert from '@material-ui/lab/Alert';
   <a href="../upgrading">Upgrading $productName$ Guide</a>.
 </Alert>
 
-We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
+## Migration Overview
+
+We're pleased to introduce $productName$ $version$! The 2.X family introduces a number of
 changes to allow $productName$ to more gracefully handle larger installations (including
 multitenant or multiorganizational installations), reduce memory footprint, and improve
 performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
 some changes that aren't backward-compatible with 1.X. These changes are detailed in
-[Major Changes in $productName$ 2.0.0](../../../about/changes-2.0.0), and they require
-configuration updates when migrating.
+[Major Changes in $productName$ 2.0.0](../../../about/changes-2.0.0).
 
-## 1. Migration Process
+Although $productName$ 2.X can support the `getambassador.io/v2` configuration resources
+used by $productName$ 1.X, taking full advantage of $productName$ 2.X capabilities
+**requires** updating your configuration to use `getambassador.io/v3alpha1` configuration
+resources. Since there are differences between `getambassador.io/v2` and
+`getambassador.io/v3alpha1`, some edits will be required to change configuration versions.
+
+<Alert severity="warning">
+  $productName$ 2.X does not support <code>getambassador.io/v0</code>
+  or <code>getambassador.io/v1</code> resources. Convert these resources to 
+  <code>getambassador.io/v2</code> before beginning migration.
+</Alert>
+
+Given the need to make configuration changes, there are a few ways to migrate:
+
+### RECOMMENDED: Run $productName$ $version$ alongside $productName$ 1.14.3
+
+This is our recommended migration path. It will preserve the functionality of your existing
+$productName$ 1.X installation until the new $productName$ 2.X installation is verified
+to work, and it does not require changing any resources to `getambassador.io/v3alpha1`
+until after the $productName$ 1.X installation is shut down.
+
+- First, if you're not already running $productName$ 1.14.3, **upgrade to 1.14.3**.
+   <Alert severity="warning">
+     <b>Upgrading to 1.14.3 is very important.</b> $productName$ versions prior to 1.14.3
+     don't correctly restrict which CRD versions they request, and $productName$ 2.X allows
+     Kubernetes to convert older CRD versions into <code>getambassador.io/v3alpha1</code>
+     resources. This means that, if you install $productName$ 2.X into the same cluster as
+     a version prior to 1.14.3, the older version will suddenly start seeing
+     <code>getambassador.io/v3alpha1</code> resources, which it won't understand.
+   </Alert>
+
+- Next, install $productName$ $version$ alongside 1.14.3. This is most easily done with
+  [Helm](../helm) and its canary option.
+
+    ```bash
+    example goes here
+    ```
+
+- At this point, $productName$ 1.14.3 and $productName$ 2.0 are running simultaneously, 
+  reading the same `getambassador.io/v2` configuration resources.
+   - Internally, $productName$ $version$ is translating the `getambassador.io/v2` resources
+     to `getambassador.io/v3alpha1` resources with the same function.
+
+- **Create `Listener`s for $productName$ $version$.**
+   - When $productName$ $version$ starts, it will not have any `Listener`s, and it will not
+     create any. You must create `Listener` resources by hand, or $productName$ $version$
+     will not listen on any ports.
+
+- Test. Each $productName$ instance has its own Kubernetes Service, so you can test the new
+  instance without disrupting traffic to the existing instance.
+
+- If you need to make changes, **make them to the existing `getambassador.io/v2` CRDs**. 
+  Changing a given resource to `getambassador.io/v3alpha1` will cause $productName$ 1.14.3
+  to stop being able to see it.
+     <Alert severity="warning">
+      <b>Do not use <code>kubectl edit</code> to fix resources.</b> This will have the
+      effect of converting the resource to <code>getambassador.io/v3alpha1</code>, and
+      $productName$ 1.14.3 will no longer see it.
+    </Alert>
+
+- Once everything is working with both versions, consider splitting traffic between the
+  two installations for a final check. This is easily accomplished using [Helm](../helm)
+  and its canary option.
+
+- Shut down $productName$ 1.14.3.
+
+- Go ahead and convert your `getambassador.io/v2` resources to `getambassador.io/v3alpha1`
+  resources. The simplest way to do this is simply `kubectl get -o yaml | kubectl apply -f -`
+  for each resource.
+   - This can happen lazily, over whatever time span is desired. New resources should
+     be created as `getambassador.io/v3alpha1` CRDs.
+
+### Run $productName$ $version$ in a separate cluster
+
+This is somewhat safer than running the two versions in the same cluster. However, in many
+cases, the extra effort will mean it is not a cost-effective tradeoff.
+
+- Install $productName$ $version$ in a completely new cluster.
+
+- **Create `Listener`s for $productName$ $version$.**
+   - When $productName$ $version$ starts, it will not have any `Listener`s, and it will not
+     create any. You must create `Listener` resources by hand, or $productName$ $version$
+     will not listen on any ports.
+
+- Copy the entire configuration from the $productName$ 1.X cluster to the $productName$
+  $version$ cluster. This is most simply done with `kubectl get -o yaml | kubectl apply -f -`.
+   - This will create `getambassador.io/v2` resources in the $productName$ $version$ cluster.
+     $productName$ $version$ will translate them internally to `getambassador.io/v3alpha1`
+     resources.
+
+- Test. Each $productName$ instance has its own cluster, so you can test the new
+  instance without disrupting traffic to the existing instance.
+
+- If you need to make changes, you can change the `getambassador.io/v2` resource, or go ahead
+  and convert the resource you're changing to `getambassador.io/v3alpha1` by using
+  `kubectl edit`.
+
+- Once everything is working with both versions, transfer incoming traffic to the $productName$
+  $version$ cluster.
+
+- Go ahead and convert your `getambassador.io/v2` resources to `getambassador.io/v3alpha1`
+  resources. The simplest way to do this is simply `kubectl get -o yaml | kubectl apply -f -`
+  for each resource.
+   - This can happen lazily, over whatever time desired. New resources should be created as
+     `getambassador.io/v3alpha1` CRDs.
+
+### Apply new CRDs and update the running image.
+
+<Alert severity="warning">
+  <b>THIS IS NOT RECOMMENDED FOR PRODUCTION CLUSTERS.</b> It is extremely risky, but may
+  be the simplest strategy for test cluster.
+</Alert>
+
+For a test cluster **only**, it is possible to simply upgrade a running cluster in flight.
+
+- Scale your running $productName$ installation to zero replicas:
+
+    ```bash
+    kubectl scale deploy $productDeploymentName$ -n $productNamespace$ --replicas=0
+    ```
+
+  This will prevent errors between the time that the CRDs are upgraded and the time that
+  $productName$ $version$ comes up.
+
+- Apply the new CRDs:
+
+    ```bash
+    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
+    ```
+
+- Update the image:
+
+    ```bash
+    kubectl set image deployment/$productDeploymentName$ -n $productNamespace$ $productContainerName$=$productFullDockerImage$:$version$
+    ```
+
+- Scale your running $productName$ installation back up to the desired number of replicas, for
+  example:
+  
+    ```bash
+    kubectl scale deploy $productDeploymentName$ -n $productNamespace$ --replicas=3
+    ```
+
+  This will scale up to three replicas.
+
+- Test. If you need to make changes, **make them to the existing `getambassador.io/v2` CRDs**. 
+  Changing a given resource to `getambassador.io/v3alpha1` will make it much harder to roll
+  back.
+     <Alert severity="warning">
+      <b>Do not use <code>kubectl edit</code> to fix resources.</b> This will have the
+      effect of converting the resource to <code>getambassador.io/v3alpha1</code>, which
+      will make it harder to roll back if needed.
+    </Alert>
+
+- Go ahead and convert your `getambassador.io/v2` resources to `getambassador.io/v3alpha1`
+  resources. The simplest way to do this is simply `kubectl get -o yaml | kubectl apply -f -`
+  for each resource.
+   - This can happen lazily, over whatever time span is desired. New resources should be created
+     as `getambassador.io/v3alpha1` CRDs.
+
+- If you need to roll back, switch the image back to its original value, then re-apply the
+  original CRDs.
+
+----
+
+# Don't Review Below Here Yet.
 
 ### Install $productName$ 2.0 in a new cluster.
 
