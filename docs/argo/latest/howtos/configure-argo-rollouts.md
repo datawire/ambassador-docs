@@ -62,7 +62,8 @@ In order to install Argo CD and Argo Rollouts in your cluster run the commands b
 
 ```shell
 # Adjust the api version of EdgeStack
-kubectl patch deployment -n argo-rollouts argo-rollouts \
+kubectl patch deployment -n argo-rollouts \
+    $(kubectl get -nargo-rollouts -l app.kubernetes.io/component=rollouts-controller deploy -o=jsonpath='{.items[].metadata.name}') \
     -p '{"spec":{"template":{"spec":{"containers":[{"name":"argo-rollouts", "args":["--ambassador-api-version","getambassador.io/v3alpha1"]}]}}}}'
 ```
 
