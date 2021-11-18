@@ -1,21 +1,16 @@
+import QSCards from './devenvironment-cards';
+
 # Creating a Local Kubernetes Development Environment
 
-This tutorial shows you how to use Ambassador Cloud to create an effective Kubernetes development environment to enable fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
+This tutorial shows you how to create an effective Kubernetes development environment to enable  fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
 
 ## Prerequisites
 
 To begin, you need a set of services that you can deploy to a Kubernetes cluster. These services must be:
 
-* [Containerized](../../../../../../learn/kubernetes-glossary/container/).
- 	- Best practices for [writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/).
-	- Many modern code editors, such as [VS Code](https://code.visualstudio.com/docs/containers/overview) and [IntelliJ IDEA](https://code.visualstudio.com/docs/containers/overview), can automatically generate Dockerfiles.
-* Have a Kubernetes manifest that can be used to successfully deploy your application to a Kubernetes cluster. This includes YAML config files, or Helm charts, or whatever method you prefer.
-	- Many modern code editors, such as VS Code, have [plugins](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) that will [automatically generate](https://marketplace.visualstudio.com/items?itemName=GoogleCloudTools.cloudcode) a large amount of the Service and Deployment configuration files.
-	- The kubectl command-line tool includes a number of [config generators](https://kubernetes.io/docs/reference/kubectl/conventions/#generators) for creating basic Service and Deployment files.
-	- For helm users, the [`helm create` command](https://helm.sh/docs/helm/helm_create/) can be used to create the directory and file scaffolding for your chart.
-* Follow cloud native application architecture best practices.
-	- Design services using the [Twelve-Factor Application](https://12factor.net/) approach.
-	- Ensure that your services and ingress gateway include HTTP [header propagation](https://www.getambassador.io/learn/kubernetes-glossary/header-propagation/) for good observability and diagnostics. Many modern language-specific web frameworks support this out-of-the-box, and the [OpenTelemetry documentation](https://opentelemetry.lightstep.com/core-concepts/context-propagation/) also contains good guidance. 
+[Containerized](../../../../../learn/kubernetes-glossary/container/).
+Have a Kubernetes manifest that can be used to successfully deploy your application to a Kubernetes cluster. This includes YAML config files, or Helm charts, or whatever method you prefer.
+Follow cloud native application architecture best practices:
 
 
 ## Deploy your application to a remote K8s cluster
@@ -104,6 +99,7 @@ Refresh your view of the app at ${INGRESS_IP}.
 	# telepresence intercept your-service-name
 
 	# happy coding!
+
 	```
 ## Share the result of your local changes with others
 
@@ -117,3 +113,7 @@ Once you have your local development environment configured for fast feedback, y
 4. Once the command completes, take the “previewURL” that was generated as part of the output and share this with your teammates. Ask them to access the application via this URL (rather than the regular application URL).
 5. Make a small change in your local code that causes a visible change that you can see when accessing your app. Build your service to trigger a reload within the container.
 6. Ask your teammates to refresh their view of the application and instantly see the local changes you’ve made.
+
+## <img class="os-logo" src="../../images/logo.png"/> What's Next?
+
+<QSCards/>
