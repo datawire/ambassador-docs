@@ -40,7 +40,7 @@ export default function CenteredGrid() {
         <Grid item xs={4}>
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
-              <a href="../../../../../telepresence/latest/concepts/intercepts/?intercept=personal/">
+              <a href="../../../../../telepresence/latest/concepts/intercepts/">
                 <b>Collaborating</b>
               </a>
             </Typography>

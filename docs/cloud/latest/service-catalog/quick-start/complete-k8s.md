@@ -1,8 +1,12 @@
+---
+description: "Create your complete Kubernetes development environment and use Telepresence to intercept services running in your Kubernetes cluster, speeding up local development and debugging."
+---
+
 import QSCards from './devenvironment-cards';
 
-# Creating a Local Kubernetes Development Environment
+# Creating a local kubernetes development environment
 
-This tutorial shows you how to create an effective Kubernetes development environment to enable  fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
+This tutorial shows you how to use Ambassador Cloud to create an effective Kubernetes development environment to enable  fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
 
 ## Prerequisites
 
@@ -114,6 +118,6 @@ Once you have your local development environment configured for fast feedback, y
 5. Make a small change in your local code that causes a visible change that you can see when accessing your app. Build your service to trigger a reload within the container.
 6. Ask your teammates to refresh their view of the application and instantly see the local changes you’ve made.
 
-## <img class="os-logo" src="../../images/logo.png"/> What's Next?
+## What's Next?
 
 <QSCards/>
