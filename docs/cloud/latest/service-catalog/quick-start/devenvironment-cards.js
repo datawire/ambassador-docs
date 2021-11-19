@@ -29,11 +29,11 @@ export default function CenteredGrid() {
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
               <a href="../../howtos/environments/">
-                <b>FAQs</b>
+                <b>Cloud Environment</b>
               </a>
             </Typography>
             <Typography variant="body2" component="p">
-              Now that you've completed your environment setup, learn how to manage it in Ambassador Cloud.
+              Now that you've completed your development environment setup, learn how to manage it in Ambassador Cloud.
             </Typography>
           </Paper>
         </Grid>
@@ -53,7 +53,7 @@ export default function CenteredGrid() {
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
               <a href="../../../../../telepresence/latest/howtos/preview-urls/">
-                <b>Outbound Sessions</b>
+                <b>Preview URLs</b>
               </a>
             </Typography>
             <Typography variant="body2" component="p">
