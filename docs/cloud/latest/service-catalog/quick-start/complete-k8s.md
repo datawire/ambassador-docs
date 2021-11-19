@@ -17,7 +17,7 @@ Have a Kubernetes manifest that can be used to successfully deploy your applicat
 Follow cloud native application architecture best practices:
 
 
-## Deploy your application to a remote K8s cluster
+## Deploy your application to a remote Kubernetes cluster
 
 First, ensure that your entire application is running in a Kubernetes cluster and available for access to either your users or to yourself acting as a user.
 
