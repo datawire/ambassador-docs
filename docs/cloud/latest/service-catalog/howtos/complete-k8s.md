@@ -1,6 +1,6 @@
 ---
 description: "Create your complete Kubernetes development environment and use Telepresence to intercept services running in your Kubernetes cluster, speeding up local development and debugging."
----
+---yarn 
 
 # Creating a local kubernetes development environment
 
@@ -121,3 +121,7 @@ Once you have your local development environment configured for fast feedback, y
 4. Once the command completes, take the “previewURL” that was generated as part of the output and share this with your teammates. Ask them to access the application via this URL (rather than the regular application URL).
 5. Make a small change in your local code that causes a visible change that you can see when accessing your app. Build your service to trigger a reload within the container.
 6. Ask your teammates to refresh their view of the application and instantly see the local changes you’ve made.
+
+## <img class="os-logo" src="../../../images/logo.png"/> What's Next?
+
+Now that you've created a complete Kubernetes development environment, learn more about how to [manage your environment in Ambassador Cloud](howtos/environments/) or how to [create Preview URLs in Telepresence](../../../../../telepresence/latest/howtos/preview-urls/).
