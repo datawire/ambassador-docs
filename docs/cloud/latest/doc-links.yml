@@ -1,5 +1,17 @@
-- title: Create a local K8s Dev Environment
-  link: /service-catalog/quick-start/complete-k8s/
+- title: Quick Start
+  link: /service-catalog/quick-start/
+- title: How do I...
+  items:
+  - title: Create a local K8s Dev Environment
+    link: /service-catalog/howtos/complete-k8s/
+  - title: Annotate a service
+    link: /service-catalog/howtos/annotate/
+  - title: Manage my environments
+    link: /service-catalog/howtos/environments/
+  - title: Filter my service view
+    link: /service-catalog/howtos/favorites/
+  - title: Configure Automated Configuration Analysis
+    link: /config-analysis/quick-start
 - title: Core concepts
   items:
   - title: Using a service catalog
@@ -12,27 +24,17 @@
     link: /service-catalog/concepts/environments/
   - title: Incident response in the cloud-native world
     link: /service-catalog/concepts/ir
-  - title: How do I...
-    items:
-        - title: Annotate a service
-          link: /service-catalog/howtos/annotate/
-        - title: Manage my environments
-          link: /service-catalog/howtos/environments/
-        - title: Filter my service view
-          link: /service-catalog/howtos/favorites/
-        - title: Configure Automated Configuration Analysis
-          link: /config-analysis/quick-start
-  - title: Reference
-    items:
-    - title: Annotations
-      link: /service-catalog/reference/annotations/
-    - title: Automated Configuration Analysis
-      link: /config-analysis/reference
-    - title: FAQs
-      link: /service-catalog/faqs/
-  - title: Visualize Your APIs
-    items:
-    - title: Quick Start
-      link: /visualize-api/quick-start
+- title: Reference
+  items:
+  - title: Annotations
+    link: /service-catalog/reference/annotations/
+  - title: Automated Configuration Analysis
+    link: /config-analysis/reference
+  - title: FAQs
+    link: /service-catalog/faqs/
+- title: Visualize Your APIs
+  items:
+  - title: Quick Start
+    link: /visualize-api/quick-start
 - title: Release Notes
   link: /release-notes/
