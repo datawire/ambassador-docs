@@ -191,3 +191,7 @@ You'll now register a demo application with Linkerd 2, and show how $productName
 Congratulations! You're successfully routing traffic to the QOTM application, the location of which is registered in Linkerd 2. The traffic to $productName$ is not TLS secured, but from $productName$ to the QOTM an automatic mTLS connection is being used.
 
 If you now [configure TLS termination](../../topics/running/tls) in $productName$, you have an end-to-end secured connection.
+
+## More information
+
+For more about $productName$'s integration with Linkerd, read the [service discovery configuration](../../topics/running/resolvers) documentation.
