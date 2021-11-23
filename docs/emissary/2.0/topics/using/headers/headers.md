@@ -24,6 +24,10 @@ spec:
 
 will allow requests to /backend/ to succeed only if the x-quote-mode header has the value backend and the x-random-header has the value `datawire`.
 
+<Alert severity="info">
+  1.x versions of the Ambassador Edge Stack could test for the existence of a header using <code>x-sample-header:true</code>. Since 2.0, the same functionality could be achieved using <code>regex_headers</code>.
+</Alert>
+
 ## Regex headers
 
 You can also set the `value` of a regex header to `".*"` to test for the existence of a header.
