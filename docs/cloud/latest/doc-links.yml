@@ -3,7 +3,7 @@
 - title: How do I...
   items:
   - title: Create a local K8s Dev Environment
-    link: ../../telepresence/latest/install/qs-java-advanced/
+    link: service-catalog/howtos/qs-java-advanced/
   - title: Annotate a service
     link: /service-catalog/howtos/annotate/
   - title: Manage my environments
