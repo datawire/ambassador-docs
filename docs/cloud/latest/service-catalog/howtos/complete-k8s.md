@@ -1,6 +1,6 @@
 ---
 description: "Create your complete Kubernetes development environment and use Telepresence to intercept services running in your Kubernetes cluster, speeding up local development and debugging."
----yarn 
+--- 
 
 # Creating a local kubernetes development environment
 
