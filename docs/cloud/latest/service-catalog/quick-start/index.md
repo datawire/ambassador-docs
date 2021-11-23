@@ -1,5 +1,4 @@
 import Alert from '@material-ui/lab/Alert';
-import CloudGSTabs2 from '../tutorials/gs-tabs2';
 import { LogInText } from '../../../../../../src/components/Docs/LogInText';
 import { QuickStartServiceCatalogAlert } from '../../../../../../src/components/Docs/Cloud';
 
@@ -131,4 +130,5 @@ Open the YAML config file of one of your services.  If you applied our `quote` s
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
-You've updated the owner and repo URL, but **Service Catalog supports many more annotations!**  See the full list [here](../reference/annotations/).
+You've updated the owner and repo URL, but Service Catalog supports many more annotations! See the full list [here](../reference/annotations/).
+

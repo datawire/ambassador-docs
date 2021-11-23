@@ -1,6 +1,10 @@
-# Creating a Local Kubernetes Development Environment
+---
+description: "Create your complete Kubernetes development environment and use Telepresence to intercept services running in your Kubernetes cluster, speeding up local development and debugging."
+--- 
 
-This tutorial shows you how to use Ambassador Cloud to create an effective Kubernetes development environment to enable fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
+# Creating a local kubernetes development environment
+
+This tutorial shows you how to use Ambassador Cloud to create an effective Kubernetes development environment to enable  fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
 
 ## Prerequisites
 
@@ -17,8 +21,7 @@ To begin, you need a set of services that you can deploy to a Kubernetes cluster
 	- Design services using the [Twelve-Factor Application](https://12factor.net/) approach.
 	- Ensure that your services and ingress gateway include HTTP [header propagation](https://www.getambassador.io/learn/kubernetes-glossary/header-propagation/) for good observability and diagnostics. Many modern language-specific web frameworks support this out-of-the-box, and the [OpenTelemetry documentation](https://opentelemetry.lightstep.com/core-concepts/context-propagation/) also contains good guidance. 
 
-
-## Deploy your application to a remote K8s cluster
+## Deploy your application to a remote Kubernetes cluster
 
 First, ensure that your entire application is running in a Kubernetes cluster and available for access to either your users or to yourself acting as a user.
 
@@ -104,6 +107,7 @@ Refresh your view of the app at ${INGRESS_IP}.
 	# telepresence intercept your-service-name
 
 	# happy coding!
+
 	```
 ## Share the result of your local changes with others
 
@@ -117,3 +121,7 @@ Once you have your local development environment configured for fast feedback, y
 4. Once the command completes, take the “previewURL” that was generated as part of the output and share this with your teammates. Ask them to access the application via this URL (rather than the regular application URL).
 5. Make a small change in your local code that causes a visible change that you can see when accessing your app. Build your service to trigger a reload within the container.
 6. Ask your teammates to refresh their view of the application and instantly see the local changes you’ve made.
+
+## <img class="os-logo" src="../../../images/logo.png"/> What's Next?
+
+Now that you've created a complete Kubernetes development environment, learn more about how to [manage your environment in Ambassador Cloud](howtos/environments/) or how to [create Preview URLs in Telepresence](../../../../../telepresence/latest/howtos/preview-urls/).
