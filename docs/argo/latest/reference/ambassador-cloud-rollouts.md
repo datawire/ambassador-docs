@@ -92,7 +92,8 @@ spec:
         # The rest of the file is omitted for simplicity.
 ```
 3. If no `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) is found in the **templates** folder (which should only
-happen the first time a rollout is created), use the example above to create one.
+happen the first time a rollout is created), use the example above to create one. More information about the `Rollout`
+spec can be found in [the official Argo Rollouts documentation](https://argoproj.github.io/argo-rollouts/features/specification/).
 4. Create a `Service` object for the canary pods by duplicating the existing service and appending `-canary` to its name.
 5. Create a `Mapping` object pointing to the "stable" `Service`.
 6. Ambassador Cloud will then update those manifests on a new branch, open a pull request targeting the
