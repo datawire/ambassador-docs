@@ -1,9 +1,19 @@
+/* 
+  You need to add the URL in exceptions object without the version as a key and the value with the desired canonical URL
+*/
+
+const exceptions = {
+  '/docs/cloud/service-catalog/howtos/complete-k8s/':
+    '/docs/telepresence/latest/service-catalog/howtos/complete-k8s/',
+};
+
 const getCanonicalUrl = (slugs, currentSlug) => {
   let regex = /(\/[^/]*\/[^/]*)\/[^/]*(\/.*)/;
   const match = regex.exec(currentSlug);
-  let canonicalSlug = currentSlug;
-  let latest = currentSlug.includes('/latest/');
-  if (match && !latest) {
+  const slugWithoutVersion = match ? `${match[1]}${match[2]}` : '';
+  let canonicalSlug = exceptions[slugWithoutVersion] ?? currentSlug;
+  let latest = canonicalSlug.includes('/latest/');
+  if (match && !latest && !exceptions[slugWithoutVersion]) {
     const version = slugs.reduce(
       (acc, value) => {
         const current = value.node.fields.slug;

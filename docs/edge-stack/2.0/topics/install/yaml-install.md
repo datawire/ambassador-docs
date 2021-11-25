@@ -11,13 +11,13 @@ import Alert from '@material-ui/lab/Alert';
   changes to allow $productName$ to more gracefully handle larger installations
   (including multitenant or multiorganizational installations), reduce memory footprint,
   and improve performance. For more information on 2.X, please check the&nbsp;
-  <a href="../../release-notes">release notes</a>.
+  <a href="../../../release-notes">release notes</a>.
 </Alert>
 
 In this guide, we'll walk you through installing $productName$ in your Kubernetes cluster.
 
 The manual install process does not allow for as much control over configuration
-as the [Helm install method](./helm), so if you need more control over your $productName$
+as the [Helm install method](../helm), so if you need more control over your $productName$
 installation, it is recommended that you use helm.
 
 ## Before you begin

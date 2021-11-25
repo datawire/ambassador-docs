@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 
 Rate limiting in $productName$ is composed of two parts:
 
-* The [`RateLimitService`] resource tells $productName$ what external service
+* The [`RateLimitService`](../../running/services/rate-limit-service) resource tells $productName$ what external service
   to use for rate limiting.
 
     <Alert severity="info">If $productName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.</Alert>
@@ -37,15 +37,15 @@ labels:
 The names of domains and groups are not interpreted by $productName$ in any way:
 they are solely there to help configuration authors remember the different groupings.
 Note that **at present, rate limiting supports just one domain**: the name of the
-domain must be configured in the [`RateLimitService`].
+domain must be configured in the [`RateLimitService`](../../running/services/rate-limit-service).
 
-[`RateLimitService`]: (../../../running/services/rate-limit-service)
+
 
 ## Attaching labels to requests
 
 There are two ways of setting labels on a request:
 
-1. You can set labels on an individual [`Mapping`](../mappings#configuring-Mappings). These labels
+1. You can set labels on an individual [`Mapping`](../mappings). These labels
    will only apply to requests that use that `Mapping`.
 
    ```yaml
@@ -126,7 +126,8 @@ There are 5 types of label specifiers in $productName$:
 1. `source_cluster`
 
     ```yaml
-    source_cluster: { source_cluster: {} }
+    source_cluster:
+      key: source_cluster
     ```
     
     Sets the label `source_cluster=«Envoy source cluster name»"`. The Envoy 
@@ -138,20 +139,22 @@ There are 5 types of label specifiers in $productName$:
 2. `destination_cluster`
 
     ```yaml
-    destination_cluster: { destination_cluster: {} }
+    destination_cluster: 
+      key: destination_cluster
     ```
     
     Sets the label `destination_cluster=«Envoy destination cluster name»"`. The Envoy 
     destination cluster name is the name of the Envoy cluster to which the `Mapping`
     routes the request. You can get the name for a cluster from the
-    [diagnostics service](../../diagnostics).
+    [diagnostics service](../../running/diagnostics).
     
     The syntax of this label currently _requires_ `destination_cluster: {}`.
 
 3. `remote_address`
 
     ```yaml
-    remote_address: { remote_address: {} }
+    remote_address: 
+      key: remote_address
     ```
     
     Sets the label `remote_address=«IP address of the client»"`. The IP address of

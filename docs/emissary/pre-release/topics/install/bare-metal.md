@@ -7,7 +7,7 @@ import Alert from '@material-ui/lab/Alert';
   changes to allow $productName$ to more gracefully handle larger installations
   (including multitenant or multiorganizational installations), reduce memory footprint,
   and improve performance. For more information on 2.X, please check the&nbsp;
-  <a href="../../release-notes">release notes</a>.
+  <a href="../../../release-notes">release notes</a>.
 </Alert>
 
 In cloud environments, provisioning a readily available network load balancer with $productName$ is the best option for handling ingress into your Kubernetes cluster. When running Kubernetes on a bare metal setup, where network load balancers are not available by default, we need to consider different options for exposing $productName$. 

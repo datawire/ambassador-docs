@@ -16,8 +16,8 @@ In this guide we'll give you everything you need to perform a canary rollout of 
 - [1. Configure GitHub Access](#1-configure-github-access)
 - [2. Environment Setup](#2-environment-setup)
 - [3. Create a Rollout](#3-create-a-rollout)
-- [4. Review & merge PR](#3-review--merge-pr)
-- [5. Watch progress](#4-watch-progress)
+- [4. Review & merge PR](#4-review--merge-pr)
+- [5. Watch progress](#5-watch-progress)
 
 
 </div>
@@ -102,6 +102,6 @@ Note how the **Current Canary Weight** progress bar increases in steps in the am
 
 Explore some of the popular content on canary rollouts:
 
-- [Canary concepts](../concepts/canary/): Learn more about canary rollouts and Argo
-- [Canary rollouts and observability](../howtos/observability/): Explore how observability is a prerequisite of effective canary releases.
-- [Ambassador Cloud Rollouts reference](../reference/ambassador-cloud-rollouts/): Dive into the details of Argo configurations and Ambassador Cloud rollouts annotations.
+- [Canary concepts](../../concepts/canary/): Learn more about canary rollouts and Argo
+- [Canary rollouts and observability](../../howtos/observability/): Explore how observability is a prerequisite of effective canary releases.
+- [Ambassador Cloud Rollouts reference](../../reference/ambassador-cloud-rollouts/): Dive into the details of Argo configurations and Ambassador Cloud rollouts annotations.

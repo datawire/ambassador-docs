@@ -5,7 +5,7 @@ complete lifecycle of Ambassador in your cluster. It also
 automates many of the repeatable tasks you have to perform for the Ambassador
 Edge Stack. Once installed, the AES Operator will automatically complete rapid
 installations and seamless upgrades to new versions of Ambassador.  [Read
-more](https://github.com/datawire/ambassador-operator/blob/master/README.md#version-syntax)
+more](https://github.com/datawire/ambassador-operator/blob/master/README.md)
 about the benefits of the Operator.
 
 A Kubernetes operator is a software extension that makes it easier to manage and automate your
@@ -42,7 +42,7 @@ Start by installing the operator:
 Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to the AES Operator.
 
 1. To create the `AmbassadorInstallation` Custom Resource schema, use
-   [the following YAML](https://github.com/datawire/ambassador-operator#the-operator-custom-resource-cr)
+   [the following YAML](https://github.com/datawire/ambassador-operator)
    as your guideline.
 2. Save that file as `amb-install.yaml`
 3. Edit the `amb-install.yaml` and optionally complete configurations such as Version constraint or UpdateWindow:
