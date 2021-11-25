@@ -30,10 +30,10 @@
 
 changelog: ''
 items:
-  - date: '2021-12-03'
+  - date: '2021-12-09'
     notes:
-      - title: 'Credit card payments'
-        body: 'Secure and convenient self-service payments, featuring several tiers of plans to accomodate teams of every size.'
+      - title: 'Subscriptions'
+        body: 'Secure payments and convenient self-service subscriptions, featuring several tiers of plans to accommodate projects of every size.'
         image: './payment-tiers.png'
         href: '/editions'
         type: feature
