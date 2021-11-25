@@ -72,7 +72,7 @@ The DNS-01 challenge verifies domain ownership by proving you have control over 
 
     ```yaml
     ---
-    apiVersion: cert-manager.io/v1alpha2
+    apiVersion: cert-manager.io/v1
     kind: ClusterIssuer
     metadata:
       name: letsencrypt-prod
@@ -100,7 +100,7 @@ The DNS-01 challenge verifies domain ownership by proving you have control over 
 
     ```yaml
     ---
-    apiVersion: cert-manager.io/v1alpha2
+    apiVersion: cert-manager.io/v1
     kind: Certificate
     metadata:
       name: myzone.route53.com
@@ -133,7 +133,7 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
 
     ```yaml
     ---
-    apiVersion: cert-manager.io/v1alpha2
+    apiVersion: cert-manager.io/v1
     kind: ClusterIssuer
     metadata:
       name: letsencrypt-prod
@@ -154,7 +154,7 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
 
     ```yaml
     ---
-    apiVersion: cert-manager.io/v1alpha2
+    apiVersion: cert-manager.io/v1
     kind: Certificate
     metadata:
       name: ambassador-certs
