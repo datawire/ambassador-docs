@@ -24,7 +24,7 @@ $productName$ 1.X installation is shut down.
    ```bash
    helm install -n $productNamespace$ --create-namespace \
      $productHelmName$ datawire/$productHelmName$ \
-     --set canary.enabled=true && \
+     --set emissary-ingress.canary.enabled=true && \
    kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
    ```
 

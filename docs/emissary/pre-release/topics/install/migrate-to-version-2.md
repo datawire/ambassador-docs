@@ -21,32 +21,46 @@ some changes that aren't backward-compatible with 1.X. These changes are detaile
   cluster!
 </Alert>
 
-Migration is a six-step process:
+Migration is a five-step process:
 
-1. **Install migration CRDs.**
+1. **Convert older configuration resources to `getambassador.io/v2`.**
+
+   $productName$ 2.X does not support <code>getambassador.io/v0</code> or
+   <code>getambassador.io/v1</code> resources. If you are still using any of these
+   resources, convert them to <code>getambassador.io/v2</code> before beginning migration.
+
+2. **Install new CRDs.**
+
+   Before installing $productName$ $version$ itself, you must configure your
+   Kubernetes cluster to support its new `getambassador.io/v3alpha1` configuration
+   resources:
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$version$/$productYAMLPath$/$productDockerImage$-migration.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/$version$/$productYAMLPath$/$productCRDName$
    ```
 
-   The migration CRDs configure the Kubernetes cluster with basic support for the
-   `getambassador.io/v3alpha1` CRDs.
+   Note that `getambassador.io/v2` resources are still supported, but **you must
+   install support for `getambassador.io/v3alpha1`** to run $productName$ $version$,
+   even if you intend to continue using only `getambassador.io/v2` resources for some
+   time.
 
-2. **Install $productName$ $version$.**
+3. **Install $productName$ $version$.**
 
+   After installing the new CRDs, you need to install $productName$ $version$ itself.
    The [recommended strategy](../migrate-to-2-recommended) is to run $productName$ $version$
-   and $productName$ 1.14.2 side-by-side in the same cluster, with each having a different
+   and $productName$ 1.X side-by-side in the same cluster, with each having a different
    Kubernetes Service. This allows the two to share most or all of their configuration
    while still keeping traffic isolated for ease of testing $productName$ $version$. 
 
    In this configuration, $productName$ $version$ will use both `getambassador.io/v2`
-   and `getambassador.io/v3alpha1` resources for configuration; $productName$ 1.X will
+   and `getambassador.io/v3alpha1` resources for configuration, and $productName$ 1.X will
    only use the `getambassador.io/v2` resources.
 
    Alternately, you can [install $productName$ $version$ in a separate cluster](../migrate-to-2-alternate).
-   This is somewhat safer, but is more effort.
+   This permits absolute certainty that your $productName$ 1.X configuration will not be
+   affected by changes meant for $productName$ $version$, but is more effort.
 
-3. **Test!**
+4. **Test!**
 
    Your $productName$ $version$ installation can support the `getambassador.io/v2`
    configuration resources used by $productName$ 1.X, but you may need to make some
@@ -67,45 +81,16 @@ Migration is a six-step process:
     configuration resources to indicate which resources should be used by each installation.<br/>
    </Alert>
 
-   If you find that you need to roll back, just reinstall your 1.X CRDs and delete your 
+   **If you find that you need to roll back**, just reinstall your 1.X CRDs and delete your 
    installation of $productName$ $version$.
 
-4. **Shut down $productName$ 1.14.2.**
+4. **When ready, shut down $productName$ 1.X.**
 
-   Shutting down $productName$ 1.14.2 is the first step of switching to a configuration
-   using just `getambassador.io/v3alpha1`. 
+   You can run $productName$ 1.X and $productName$ $version$ as long as you care to. 
+   However, taking full advantage of $productName$ 2.X's capabilities **requires**
+   [updating your configuration to use `getambassador.io/v3alpha1` configuration resources](../convert-to-v3alpha1),
+   since some useful features in $productName$ $version$ are only available using 
+   `getambassador.io/v3alpha1` resources.
 
-   <Alert severity="info">
-     You can still roll back to $productName$ 1.14.2 at this point by simply reinstalling it
-     (using the same namespace, `AMBASSADOR_ID`, and `AMBASSADOR_LABEL_SELECTOR`, if applicable).
-   </Alert>
-
-5. **Install the final CRDs.**
-
-   <Alert severity="info">
-     <b>Rolling back to $productName$ 1.14.2 after this step is not possible.</b> Use caution,
-     and make sure that $productName$ $version$ is functioning correctly before taking this step!
-   </Alert>
-
-   ```
-   kubectl apply -f https://app.getambassador.io/yaml/$version$/$productYAMLPath$/$productCRDName$
-   ```
-
-   This lets the Kubernetes cluster know to start treating new configuration resources as
-   `getambassador.io/v3alpha1` by default.
-
-6. **Finally, [upgrade other configuration resources.](../convert-to-v3alpha1)**
-
-   At this point it is safe to [fully update your resources to `getambassador.io/v3alpha1`](../convert-to-v3alpha1).
-
-   $productName$ 2.X supports the same `getambassador.io/v2` configuration resources used
-   by $productName$ 1.X. However, taking full advantage of $productName$ 2.X's capabilities
-   **requires** updating your configuration to use `getambassador.io/v3alpha1` configuration
-   resources. Since there are differences between `getambassador.io/v2` and
-   `getambassador.io/v3alpha1`, some edits will be required to change configuration versions.
-
-   <Alert severity="warning">
-     $productName$ 2.X does not support <code>getambassador.io/v0</code>
-     or <code>getambassador.io/v1</code> resources. Convert these resources to 
-     <code>getambassador.io/v2</code> before beginning migration.
-   </Alert>
+   Once $productName$ 1.X is no longer running, you may [convert](..convert-to-v3alpha1)
+   any remaining `getambassador.io/v2` resourcses to `getambassador.io/v3alpha1`.

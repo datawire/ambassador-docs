@@ -4,8 +4,9 @@ import Alert from '@material-ui/lab/Alert';
 
 ## Run $productName$ $version$ in a separate cluster
 
-This is somewhat safer than running the two versions in the same cluster. However, in many
-cases, the extra effort will mean it is not a cost-effective tradeoff.
+This permits absolute certainty that your $productName$ 1.X configuration will not be
+affected by changes meant for $productName$ $version$. However, in many cases, the
+extra effort will mean it is not a cost-effective tradeoff.
 
 1. Install $productName$ $version$ in a completely new cluster.
 
