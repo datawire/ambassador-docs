@@ -157,7 +157,7 @@ Now the service health is determined by contacting ambassador-admin service
 
 ### Enabling HTTP -> HTTPS 
 
-- Configure Ambassador to [redirect traffic from HTTP to HTTPS](../tls/cleartext-redirection/#protocol-based-redirection). 
+- Configure Ambassador to [redirect traffic from HTTP to HTTPS](../tls/cleartext-redirection/#http-https-redirection). 
 - you need to restart Ambassador to effect the changes
 
 The result should be that http://www.example.com will redirect to https://www.example.com. 

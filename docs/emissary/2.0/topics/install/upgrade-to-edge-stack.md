@@ -28,7 +28,7 @@ If you currently have the open source version of $OSSproductName$, you can upgra
 3. [Redirect traffic](#3-redirect-traffic)
 4. [Delete the old Deployment](#4-delete-the-old-deployment)
 5. [Update and restart](#5-update-and-restart)
-6. [What's next?](#6-whats-next)
+6. [What's next?](
 
 ## Before you begin
 

@@ -235,5 +235,5 @@ The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traf
 
 [Go `net.Dial`]: https://golang.org/pkg/net/#Dial
 [Go `strconv.ParseBool`]: https://golang.org/pkg/strconv/#ParseBool
-[Go `time.ParseDuration`]: https://golang.org/pkg/strconv/#ParseDuration
+[Go `time.ParseDuration`]: https://pkg.go.dev/time#ParseDuration
 [Redis 6 ACL]: https://redis.io/topics/acl
