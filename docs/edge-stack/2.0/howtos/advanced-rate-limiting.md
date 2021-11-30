@@ -24,44 +24,44 @@ Global rate limiting applies to the entire Kubernetes service mesh. This example
 
 1. First, add a request label to the `request_label_group` of the `quote` service's `Mapping` resource. This example uses `backend` for the label:
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: Mapping
-metadata:
-  name: quote-backend
-spec:
-  hostname: "*"
-  prefix: /backend/
-  service: quote
-  labels:
-    ambassador:
-      - request_label_group:
-        - generic_key:
-            value: backend
-```
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    hostname: "*"
+    prefix: /backend/
+    service: quote
+    labels:
+      ambassador:
+        - request_label_group:
+          - generic_key:
+              value: backend
+  ```
 
-Apply the mapping configuration changes with `kubectl apply -f quote-backend.yaml`.
+  Apply the mapping configuration changes with `kubectl apply -f quote-backend.yaml`.
 
-<Alert severity="info">
-You need to use <code>v2</code> or later for the <code>apiVersion</code> in the <code>Mapping</code> resource. Previous versions do not support <code>labels</code>. 
-</Alert>
+  <Alert severity="info">
+  You need to use <code>v2</code> or later for the <code>apiVersion</code> in the <code>Mapping</code> resource. Previous versions do not support <code>labels</code>. 
+  </Alert>
 
 2. Next, configure the `RateLimit` resource for the service. Create a new YAML file named `backend-ratelimit.yaml` and apply the rate limit details as follows:
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: RateLimit
-metadata:
-  name: backend-rate-limit
-spec:
-  domain: ambassador
-  limits:
-   - pattern: [{generic_key: backend}]
-     rate: 3
-     unit: minute
-```
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: RateLimit
+  metadata:
+    name: backend-rate-limit
+  spec:
+    domain: ambassador
+    limits:
+     - pattern: [{generic_key: backend}]
+       rate: 3
+       unit: minute
+  ```
 
-In the code above, the `generic_key` is a hard-coded value that is used when you add a single string label to a request.
+  In the code above, the `generic_key` is a hard-coded value that is used when you add a single string label to a request.
 
 3. Deploy the rate limit with `kubectl apply -f backend-ratelimit.yaml`. 
 
@@ -73,36 +73,36 @@ This example shows how to use the `remote_address` special value in the mapping 
 
 1. Add a request label to the `request_label_group` of the `quote` service's `Mapping` resource. This example uses `remote_address` for the label:
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: Mapping
-metadata:
-  name: quote-backend
-spec:
-  hostname: "*"
-  prefix: /backend/
-  service: quote
-  labels:
-    ambassador:
-      - request_label_group:
-        - remote_address:
-            key: remote_address
-```
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    hostname: "*"
+    prefix: /backend/
+    service: quote
+    labels:
+      ambassador:
+        - request_label_group:
+          - remote_address:
+              key: remote_address
+  ```
 
 2. Update the rate limit amounts for the `RateLimit` service and enter the `remote_address` to the following pattern:
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: RateLimit
-metadata:
-  name: backend-rate-limit
-spec:
-  domain: ambassador
-  limits:
-   - pattern: [{remote_address: "*"}]
-     rate: 3
-     unit: minute
-```
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: RateLimit
+  metadata:
+    name: backend-rate-limit
+  spec:
+    domain: ambassador
+    limits:
+     - pattern: [{remote_address: "*"}]
+       rate: 3
+       unit: minute
+  ```
 
 ## Load shedding 
 
@@ -113,42 +113,42 @@ To allow per user rate limits, you need to make sure you've properly configured 
 
 1. Add a request labels to the `request_label_group` of the `quote` service's `Mapping` resource. This example uses `remote_address` for the per user limit, and `backend_http_method`for load shedding. The load shedding uses `":method"` to identify that the `RateLimit` will use a HTTP request method in its pattern.
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: Mapping
-metadata:
-  name: quote-backend
-spec:
-  hostname: "*"
-  prefix: /backend/
-  service: quote
-  labels:
-    ambassador:
-      - request_label_group:
-        - remote_address:
-            key: remote_address
-        - request_headers:
-            key: backend_http_method
-            header_name: ":method"
-```
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    hostname: "*"
+    prefix: /backend/
+    service: quote
+    labels:
+      ambassador:
+        - request_label_group:
+          - remote_address:
+              key: remote_address
+          - request_headers:
+              key: backend_http_method
+              header_name: ":method"
+  ```
 
 2. Update the rate limit amounts for the `RateLimit` service. 
 For the rate limit `pattern`, include the `remote_address` IP address and the `backend_http_mthod`. 
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: RateLimit
-metadata:
-  name: backend-rate-limit
-spec:
-  domain: ambassador
-  limits:
-   - pattern: [{remote_address: "*"}, {backend_http_method: GET}]
-     rate: 3
-     unit: minute
-```
-
-When a pattern has multiple criteria, the rate limit runs when when any of the rules of the pattern match. For the example above, this means either a `remote_address` or `backend_http_method` pattern triggers the rate limiting.
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: RateLimit
+  metadata:
+    name: backend-rate-limit
+  spec:
+    domain: ambassador
+    limits:
+     - pattern: [{remote_address: "*"}, {backend_http_method: GET}]
+       rate: 3
+       unit: minute
+  ```
+  
+  When a pattern has multiple criteria, the rate limit runs when when any of the rules of the pattern match. For the example above, this means either a `remote_address` or `backend_http_method` pattern triggers the rate limiting.
 
 ## Global rate limiting
 
@@ -156,37 +156,36 @@ Similar to the per user rate limiting, you can use [global rate limiting](../../
 
 1. Add a request label to the `request_label_group` of the `quote` service's `Module` resource. This example uses the `remote_address` special value. 
 
-```yaml
----
-apiVersion: getambassador.io/v3alpha1
-kind: Module
-metadata:
-  name: ambassador
-spec:
-  config:
-    use_remote_address: true
-    default_label_domain: ambassador
-    default_labels:
-      ambassador:
-        defaults:
-        - remote_address:
-            key: remote_address
-```
-
+  ```yaml
+  ---
+  apiVersion: getambassador.io/v3alpha1
+  kind: Module
+  metadata:
+    name: ambassador
+  spec:
+    config:
+      use_remote_address: true
+      default_label_domain: ambassador
+      default_labels:
+        ambassador:
+          defaults:
+          - remote_address:
+              key: remote_address
+  ```
 2. Update the rate limit amounts for the `RateLimit` service and enter the `remote_address` to the following pattern:
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: RateLimit
-metadata:
-  name: global-rate-limit
-spec:
-  domain: ambassador
-  limits:
-   - pattern: [{remote_address: "*"}]
-     rate: 10
-     unit: minute
-```
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: RateLimit
+  metadata:
+    name: global-rate-limit
+  spec:
+    domain: ambassador
+    limits:
+     - pattern: [{remote_address: "*"}]
+       rate: 10
+       unit: minute
+  ```
 
 ### Bypassing a global rate limit
 
@@ -195,38 +194,38 @@ In the example above, the global rate limit is defined in the `Module` resource.
 
 1. In addition to the configurations applied in the global rate limit example above, add an additional label to the `request_label_group` of the `Mapping` resource. This example uses `backend` for the label:
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: Mapping
-metadata:
-  name: quote-backend
-spec:
-  hostname: "*"
-  prefix: /backend/
-  service: quote
-  labels:
-    ambassador:
-      - request_label_group:
-        - generic_key:
-            value: backend
-```
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    hostname: "*"
+    prefix: /backend/
+    service: quote
+    labels:
+      ambassador:
+        - request_label_group:
+          - generic_key:
+              value: backend
+  ```
 
 2. Now, the `request_label_group` contains both the `generic_key: backend` and the `remote_address` key applied from the global rate limit. This creates a separate `RateLimit` object for this route:
 
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: RateLimit
-metadata:
-  name: backend-rate-limit
-spec:
-  domain: ambassador
-  limits:
-   - pattern: [{remote_address: "*"}, {generic_key: backend}]
-     rate: 3
-     unit: minute
-```
+  ```yaml
+  apiVersion: getambassador.io/v3alpha1
+  kind: RateLimit
+  metadata:
+    name: backend-rate-limit
+  spec:
+    domain: ambassador
+    limits:
+     - pattern: [{remote_address: "*"}, {generic_key: backend}]
+       rate: 3
+       unit: minute
+  ```
 
-Requests to `/backend/` now are now limited after 3 requests. All other requests use the global rate limit policy.
+  Requests to `/backend/` now are now limited after 3 requests. All other requests use the global rate limit policy.
 
 ## Rate limit matching rules
 
