@@ -363,3 +363,11 @@ In AWS, there are two options for preserving the client IP address.
 
    After configuring the above `Module`, you will need to restart $productName$ for the changes to take effect.
    
+
+## Configuring Edge Stack for AWS Fargate
+
+AWS Fargate is an alternative to managed-node Kubernetes in AWS. Fargate abstracts instances, but this also removes the ability for pods to introspect many details - including Region, Instance-ID, and VPC. To run $productName$ on Fargate you will need to add the [AWS Load Balancer Controller]() to your cluster to allow provisioning of load balancers. If you haven't set up the Load Balancer Controller before make sure you add the VPC and Region information to your installation, or the process will not work. 
+
+After installing the load balancer controller add the annotation:
+` service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip `
+to your $productName$ service to configure the NLB to target Fargate - which is IP only.
