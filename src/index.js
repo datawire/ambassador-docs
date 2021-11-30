@@ -5,6 +5,7 @@ import React, { useState, useMemo, useCallback } from 'react';
 import Layout from '../../src/components/Layout';
 
 import ContactBlock from '../../src/components/ContactBlock';
+import DatawireMetaData from '../../src/components/DatawireMetaData';
 import Dropdown from '../../src/components/Dropdown';
 import Icon from '../../src/components/Icon';
 import ReadingTime from '../../src/components/ReadingTime';
@@ -371,6 +372,14 @@ export default ({ data, location, pageContext }) => {
             page.contentTable.items[0].items?.length > 1
           }
         />
+        {!isHome && !isProductHome && isProduct && (
+        <DatawireMetaData
+          page={page}
+          edgeStackLinks={edgeStackLinks}
+          product={product.slug}
+          version={versions.docsVersion}
+        />
+      )}
       </section>
       {!isHome && !isProductHome && isProduct && (
         <DocsFooter
