@@ -109,7 +109,7 @@ spec:
 Another technique for rate limiting involves load shedding. With load shedding, you can define which HTTP request method to allow or deny. 
 
 This example shows how to implement load per user rate limiting along with load shedding on `GET` requests. 
-To allow per user rate limits, you need to make sure you've properly configured $productName$ to [propagate your original client IP address](../../topics/running/ambassador#use_remote_address).
+To allow per user rate limits, you need to make sure you've properly configured $productName$ to [propagate your original client IP address](../../topics/running/ambassador#trust-downstream-client-ip).
 
 1. Add a request labels to the `request_label_group` of the `quote` service's `Mapping` resource. This example uses `remote_address` for the per user limit, and `backend_http_method`for load shedding. The load shedding uses `":method"` to identify that the `RateLimit` will use a HTTP request method in its pattern.
 

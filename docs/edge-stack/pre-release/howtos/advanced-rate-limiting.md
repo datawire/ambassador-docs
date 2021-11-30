@@ -2,12 +2,7 @@
 
 $productName$ features a built-in [Rate Limit Service (RLS)](../../topics/running/services/rate-limit-service/#external-rate-limit-service). The $productName$ RLS uses a decentralized configuration model that enables individual teams the ability to independently manage [rate limits](https://www.getambassador.io/learn/kubernetes-glossary/rate-limiting) independently. 
 
-All of the examples on this page use the backend service of the quote sample application to illustrate how to perform the following rate limiting functions:
-
-* [Rate limiting for availability](#rate-limiting-for-availability)
-* [Per user rate limiting](#per-user-rate-limiting)
-* [Load shedding](#load-shedding)
-* [Global rate limiting](#global-rate-limiting)
+All of the examples on this page use the backend service of the quote sample application to illustrate how to perform the rate limiting functions.
 
 ## Rate Limiting in $productName$
 
@@ -29,44 +24,44 @@ Global rate limiting applies to the entire Kubernetes service mesh. This example
 
 1. First, add a request label to the `request_label_group` of the `quote` service's `Mapping` resource. This example uses `backend` for the label:
 
-  ```yaml
-  apiVersion: getambassador.io/v3alpha1
-  kind: Mapping
-  metadata:
-    name: quote-backend
-  spec:
-    hostname: "*"
-    prefix: /backend/
-    service: quote
-    labels:
-      ambassador:
-        - request_label_group:
-          - generic_key:
-              value: backend
-  ```
+```yaml
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: quote-backend
+spec:
+  hostname: "*"
+  prefix: /backend/
+  service: quote
+  labels:
+    ambassador:
+      - request_label_group:
+        - generic_key:
+            value: backend
+```
 
-  Apply the mapping configuration changes with `kubectl apply -f quote-backend.yaml`.
+Apply the mapping configuration changes with `kubectl apply -f quote-backend.yaml`.
 
-  <Alert severity="info">
-  You need to use <code>v2</code> or later for the <code>apiVersion</code> in the <code>Mapping</code> resource. Previous versions do not support <code>labels</code>. 
-  </Alert>
+<Alert severity="info">
+You need to use <code>v2</code> or later for the <code>apiVersion</code> in the <code>Mapping</code> resource. Previous versions do not support <code>labels</code>. 
+</Alert>
 
 2. Next, configure the `RateLimit` resource for the service. Create a new YAML file named `backend-ratelimit.yaml` and apply the rate limit details as follows:
 
-  ```yaml
-  apiVersion: getambassador.io/v3alpha1
-  kind: RateLimit
-  metadata:
-    name: backend-rate-limit
-  spec:
-    domain: ambassador
-    limits:
-     - pattern: [{generic_key: backend}]
-       rate: 3
-       unit: minute
-  ```
+```yaml
+apiVersion: getambassador.io/v3alpha1
+kind: RateLimit
+metadata:
+  name: backend-rate-limit
+spec:
+  domain: ambassador
+  limits:
+   - pattern: [{generic_key: backend}]
+     rate: 3
+     unit: minute
+```
 
-  In the code above, the `generic_key` is a hard-coded value that is used when you add a single string label to a request.
+In the code above, the `generic_key` is a hard-coded value that is used when you add a single string label to a request.
 
 3. Deploy the rate limit with `kubectl apply -f backend-ratelimit.yaml`. 
 
@@ -114,7 +109,7 @@ spec:
 Another technique for rate limiting involves load shedding. With load shedding, you can define which HTTP request method to allow or deny. 
 
 This example shows how to implement load per user rate limiting along with load shedding on `GET` requests. 
-To allow per user rate limits, you need to make sure you've properly configured $productName$ to [propagate your original client IP address](../../topics/running/ambassador#use_remote_address).
+To allow per user rate limits, you need to make sure you've properly configured $productName$ to [propagate your original client IP address](../../topics/running/ambassador#trust-downstream-client-ip).
 
 1. Add a request labels to the `request_label_group` of the `quote` service's `Mapping` resource. This example uses `remote_address` for the per user limit, and `backend_http_method`for load shedding. The load shedding uses `":method"` to identify that the `RateLimit` will use a HTTP request method in its pattern.
 
