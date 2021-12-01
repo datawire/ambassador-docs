@@ -155,7 +155,7 @@ spec:
 where:
 
 * `default`: `true` when this is the default Dev Portal configuration.
-* `content`: see [section below](#styling).
+* `content`: see [section below](#styling-the-devportal).
 * `selector`: rules for filtering `Mapping`s:
   * `matchNamespaces`: list of namespaces, used for filtering the `Mapping`s that
   will be shown in the `DevPortal`. When multiple namespaces are provided, the `DevPortal`
@@ -237,7 +237,7 @@ spec:
 > For more information on extending the number of services in your `DevPortal` please contact sales via our [pricing information page](/editions/).
 
 
-#### <a href="#styling"></a>Styling the `DevPortal`
+#### Styling the `DevPortal`
 
 The look and feel of a `DevPortal` can be fully customized for your particular
 organization by specifying a different `content`, customizing not only _what_

@@ -405,7 +405,7 @@ diagnostics:
 
 Configures $productName$ statistics. These values can be set in the $productName$ module or in an environment variable.
 
-For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd).
+For more information, see the [Statistics reference](../statistics).
 
 
 ---

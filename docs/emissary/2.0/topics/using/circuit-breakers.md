@@ -7,7 +7,7 @@ Circuit breakers are a powerful technique to improve resilience. By preventing a
 A default circuit breaking configuration can be set for all
 $productName$ resources in the [`ambassador
 Module`](../../running/ambassador), or set to a different value on a
-per-resource basis for [`Mappings`](../mappings#configuring-Mappings),
+per-resource basis for [`Mappings`](../mappings),
 [`TCPMappings`](../tcpmappings/), and
 [`AuthServices`](../../running/services/auth-service/).
 
