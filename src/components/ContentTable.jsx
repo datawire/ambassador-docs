@@ -38,7 +38,7 @@ const ContentTable = ({ items, versions }) => {
   return (
     <ScrollSpyWrapper items={ids} rootEl={rootElement} onUpdate={onActive}>
       {content.map((i) => (
-        <li key={i.url} className={active === i.url && 'current'}>
+        <li key={i.url} className={active === i.url ? 'current' : undefined}>
           <a href={i.url} id={i.url} onClick={onClick}>
             {formatString(i.title)}
           </a>
