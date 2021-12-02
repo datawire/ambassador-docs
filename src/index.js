@@ -1,7 +1,6 @@
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
-import { useAppDispatch, useAppState } from '../../src/context/context';
 
 import Layout from '../../src/components/Layout';
 
@@ -161,9 +160,6 @@ export default ({ data, location, pageContext }) => {
   const [edgissaryDPMessage, setEdgissaryDPMessage] = useState(
     initialEdgissaryDPNotificationMsg,
   );
-  
-  const { userInfo } = useAppState();
-
 
   const versions = useMemo(() => {
     if (!data.versions?.content) {
@@ -376,7 +372,7 @@ export default ({ data, location, pageContext }) => {
             page.contentTable.items[0].items?.length > 1
           }
         />
-        {!isHome && !isProductHome && isProduct && !userInfo && (
+        {!isHome && !isProductHome && isProduct && (
         <DatawireMetaData
           page={page}
           edgeStackLinks={edgeStackLinks}
