@@ -1,6 +1,7 @@
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
+import { useAppDispatch, useAppState } from '../../src/context/context';
 
 import Layout from '../../src/components/Layout';
 
@@ -160,6 +161,9 @@ export default ({ data, location, pageContext }) => {
   const [edgissaryDPMessage, setEdgissaryDPMessage] = useState(
     initialEdgissaryDPNotificationMsg,
   );
+  const dispatch = useAppDispatch();
+  const { userInfo, loading } = useAppState();
+
 
   const versions = useMemo(() => {
     if (!data.versions?.content) {
@@ -372,12 +376,13 @@ export default ({ data, location, pageContext }) => {
             page.contentTable.items[0].items?.length > 1
           }
         />
-        {!isHome && !isProductHome && isProduct && (
+        {!isHome && !isProductHome && isProduct && !userInfo && (
         <DatawireMetaData
           page={page}
           edgeStackLinks={edgeStackLinks}
           product={product.slug}
           version={versions.docsVersion}
+          resources={page.exports}
         />
       )}
       </section>
@@ -562,6 +567,16 @@ export const query = graphql`
   query ($linksslug: String, $slug: String!, $learningSlugs: [String]) {
     mdx(fields: { slug: { eq: $slug } }) {
       body
+      exports {
+        pageSource {
+          name
+          path
+        }
+        resources {
+          name
+          path
+        }
+      }
       fields {
         slug
         linksslug
