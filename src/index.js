@@ -161,8 +161,8 @@ export default ({ data, location, pageContext }) => {
   const [edgissaryDPMessage, setEdgissaryDPMessage] = useState(
     initialEdgissaryDPNotificationMsg,
   );
-  const dispatch = useAppDispatch();
-  const { userInfo, loading } = useAppState();
+  
+  const { userInfo } = useAppState();
 
 
   const versions = useMemo(() => {
