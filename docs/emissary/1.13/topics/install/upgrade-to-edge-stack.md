@@ -38,7 +38,7 @@ edgectl upgrade
 4. [Delete the old Deployment](#4-delete-the-old-deployment)
 5. [Update and restart](#5-update-and-restart)
 6. [Access the Edge Policy Console](#6-access-the-edge-policy-console)
-7. [What's next?](#6-whats-next)
+7. [What's next?](#7-whats-next)
 
 ## Before you begin
 

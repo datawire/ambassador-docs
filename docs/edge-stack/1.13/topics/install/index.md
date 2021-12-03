@@ -120,5 +120,5 @@ your production needs for Ambassador Edge Stack or Ambassador API Gateway. Read 
 The Ambassador Edge Stack has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice. To learn more about how the
 Ambassador Edge Stack works, along with use cases, best practices, and more,
-check out the [Welcome page](../../) or read the [Ambassador
+check out the [Quick Start](../../tutorials/getting-started) or read the [Ambassador
 Story](../../about/why-ambassador).
