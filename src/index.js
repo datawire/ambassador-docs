@@ -564,11 +564,7 @@ export const query = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       body
       exports {
-        pageSource {
-          name
-          path
-        }
-        resources {
+        metaData {
           name
           path
         }

@@ -140,12 +140,8 @@ support the requirements of any edge microservice.
 
 To learn more about how $productName$ works, read the [$productName$ Story](../../about/why-ambassador).
 
-export const pageSource = {
-  name: "Page Source",
-  path: "https://github.com/datawire/getambassador.io/blob/master/ambassador-docs/docs/emissary/2.0/tutorials/getting-started.md",
-};
-
-export const resources = {
-  name: "Resource",
-  path: "/resource",
-};
+export const metaData = [
+  {name: "Page Source", path: "https://github.com/datawire/getambassador.io/blob/master/ambassador-docs/docs/emissary/2.0/tutorials/getting-started.md"},
+  {name: "Resource", path: "/thisPath"},
+  {name: "More", path: "/more"},
+]
