@@ -142,6 +142,10 @@ To learn more about how $productName$ works, read the [$productName$ Story](../.
 
 export const metaData = [
   {name: "Page Source", path: "https://github.com/datawire/getambassador.io/blob/master/ambassador-docs/docs/emissary/2.0/tutorials/getting-started.md"},
-  {name: "Resource", path: "/thisPath"},
-  {name: "More", path: "/more"},
+  {name: "Release notes", path: "../../release-notes"},
+  {name: "Listener", path: "../../topics/running/listener"},
+  {name: "Host", path: "../../topics/running/host-crd"},
+  {name: "Configuring comunications", path: "../../howtos/configure-communications"},
+  {name: "Mappings", path: "../../topics/using/intro-mappings/"},
+  {name: "Madfghdfhbdfs", path: "../../topics/using/intro-mappings/"},
 ]
