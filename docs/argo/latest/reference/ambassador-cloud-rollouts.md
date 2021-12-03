@@ -50,47 +50,49 @@ is generated with the values for the rollout configuration. These values will la
 `Rollout` manifest.
 2. If you already have a `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) in the **templates** folder,
 you should configure it to use the values from the Ambassador values file. You can follow this example:
-```yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
-metadata:
-  name: {{ include "mychart.fullname" . }}
-  labels:
-    {{- include "mychart.labels" . | nindent 4 }}
-  {{- with .Values.ambassador.rollouts.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4}}
-  {{- end}}
-spec:
-    replicas: {{ .Values.ambassador.rollouts.replicas }}
-    revisionHistoryLimit: 5
-    strategy:
-      canary:
-        canaryService: {{ include "mychart.fullname" . }}-canary
-        stableService: {{ include "mychart.fullname" . }}-stable
-        {{- with .Values.ambassador.rollouts.trafficMappings }}
-        trafficRouting:
-          ambassador:
-            mappings:
-            {{- toYaml . | nindent 10 }}
-        {{- end}}
-        {{- with .Values.ambassador.rollouts.steps }}
-        steps:
-        {{- toYaml . | nindent 8}}
-        {{- end}}
-    template:
-      spec:
-        containers:
-          - name: {{ .Chart.Name }}
-            securityContext:
-              {{- toYaml .Values.securityContext | nindent 12 }}
-            image: "{{ .Values.ambassador.rollouts.image.repository }}:{{ .Values.ambassador.rollouts.image.tag | default .Chart.AppVersion }}"
-            imagePullPolicy: {{ .Values.imagePullPolicy }}
-            resources:
-              {{- toYaml .Values.resources | nindent 12 }}
-        # ...
-        # The rest of the file is omitted for simplicity.
-```
+
+    ```yaml
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    metadata:
+      name: {{ include "mychart.fullname" . }}
+      labels:
+        {{- include "mychart.labels" . | nindent 4 }}
+      {{- with .Values.ambassador.rollouts.annotations }}
+      annotations:
+        {{- toYaml . | nindent 4}}
+      {{- end}}
+    spec:
+        replicas: {{ .Values.ambassador.rollouts.replicas }}
+        revisionHistoryLimit: 5
+        strategy:
+          canary:
+            canaryService: {{ include "mychart.fullname" . }}-canary
+            stableService: {{ include "mychart.fullname" . }}-stable
+            {{- with .Values.ambassador.rollouts.trafficMappings }}
+            trafficRouting:
+              ambassador:
+                mappings:
+                {{- toYaml . | nindent 10 }}
+            {{- end}}
+            {{- with .Values.ambassador.rollouts.steps }}
+            steps:
+            {{- toYaml . | nindent 8}}
+            {{- end}}
+        template:
+          spec:
+            containers:
+              - name: {{ .Chart.Name }}
+                securityContext:
+                  {{- toYaml .Values.securityContext | nindent 12 }}
+                image: "{{ .Values.ambassador.rollouts.image.repository }}:{{ .Values.ambassador.rollouts.image.tag | default .Chart.AppVersion }}"
+                imagePullPolicy: {{ .Values.imagePullPolicy }}
+                resources:
+                  {{- toYaml .Values.resources | nindent 12 }}
+            # ...
+            # The rest of the file is omitted for simplicity.
+    ```
+
 3. If there is no `Rollout` object that matches the [deployment manifest name](#a8riorolloutsdeployment) in the **templates** folder,
 use the example above to create one. More information about the `Rollout`. This should only occur the first time a rollout is created.
 For more information about `Rollout` spec see [the official Argo Rollouts documentation](https://argoproj.github.io/argo-rollouts/features/specification/).
