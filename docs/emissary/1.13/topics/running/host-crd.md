@@ -66,7 +66,7 @@ acmeProvider:
 * If the authority is not supplied, the Let’s Encrypt production environment is assumed.
 
 * In general, `email-of-registrant` is mandatory when using ACME: it should be
-a valid email address that will reach someone responsible for certificate 
+a valid email address that will reach someone responsible for certificate
 management.
 
 * ACME stores certificates in Kubernetes secrets. The name of the secret can be
@@ -125,11 +125,11 @@ requestPolicy:
     additionalPort: insecure-port
 ```
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
-> 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
-> 
-> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
+> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config.
+>
+> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all Host resources.
+>
+> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`.
 
 The `insecure-action` can be one of:
 
@@ -197,6 +197,8 @@ LB" refers to a layer 7 load balancer.
   - [`Host` Specification](#host-specification)
     - [CRD Specification](#crd-specification)
 
+<div id="https-only-tls-terminated-at-ambassador-not-redirecting-cleartext"/>
+
 ### HTTPS-only, TLS terminated at $productName$, not redirecting cleartext
 
   This example is the same with a L4 LB, or without a load balancer. It also covers an L4 LB that terminates TLS, then re-originates TLS from the load balancer to $productName$.
@@ -256,6 +258,8 @@ LB" refers to a layer 7 load balancer.
 
   With the configuration above, the system will look for a TLS secret in `manual-secret-for-foo`, but it will not run ACME for it.
 
+<div id="https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080"/>
+
 ### HTTPS-only, TLS terminated at $productName$, redirecting cleartext from port 8080
 
 This example is the same for an L4 LB, or without a load balancer at all.
@@ -294,13 +298,17 @@ This example is the same for an L4 LB, or without a load balancer at all.
     requestPolicy:
       insecure:
         action: Route
-  ```  
+  ```
 
   In this case, the Host resource explicitly requests no ACME handling and no TLS, then states that insecure requests must be routed instead of redirected.
+
+<div id="l4-lb-https-only-tls-terminated-at-ambassador-not-redirecting-cleartext"/>
 
 ### L4 LB, HTTPS-only, TLS terminated at $productName$, not redirecting cleartext
 
   Configure this exactly like [case 1](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
+
+<div id="l4-lb-https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080"/>
 
 ### L4 LB, HTTPS-only, TLS terminated at $productName$, redirecting cleartext from port 8080
 
@@ -310,15 +318,21 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
   Configure this exactly like [case 3](#http-only). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
 
+<div id="l4-lb-tls-terminated-at-lb-lb-speaks-cleartext-to-ambassador"/>
+
 ### L4 LB, TLS terminated at LB, LB speaks cleartext to $productName$
 
   Configure this exactly like [case 3](#http-only), since by the time the connection arrives at $productName$, it will appear to be insecure. Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
+
+<div id="l4-lb-tls-terminated-at-lb-lb-speaks-tls-to-ambassador"/>
 
 ### L4 LB, TLS terminated at LB, LB speaks TLS to $productName$
 
   Configure this exactly like [case 1](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
 
   Note that since $productName$ _is_ terminating TLS, managing $productName$'s TLS certificate will be important.
+
+<div id="l4-split-lb-tls-terminated-at-ambassador"/>
 
 ### L4 split LB, TLS terminated at $productName$
 
@@ -334,7 +348,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 ### L7 LB
 
-  In general, L7 load balancers will be expected to provide a correct `X-Forwarded-Proto` header, and will require `xff_num_trusted_hops` set to the depth of the L7 LB stack in front of $productName$. 
+  In general, L7 load balancers will be expected to provide a correct `X-Forwarded-Proto` header, and will require `xff_num_trusted_hops` set to the depth of the L7 LB stack in front of $productName$.
 
   - `client -> L7 LB -> $productName$` would require `xff_num_trusted_hops: 1`
   - `client -> L7 LB -> L7 LB -> $productName$` would require `xff_num_trusted_hops: 2`
