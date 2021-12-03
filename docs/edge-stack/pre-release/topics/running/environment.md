@@ -25,7 +25,7 @@ Use the following variables for the environment of your $productName$ container:
 | Core                              | `AMBASSADOR_DISABLE_SNAPSHOT_SERVER`                                                     | `false`                                             | Boolean; non-empty=true, empty=false |
 | Core                              | `AMBASSADOR_JSON_LOGGING`                                                                | `false`                                             | Boolean; non-empty=true, empty=false |
 | $AESproductName$                        | [`AES_LOG_LEVEL`](../aes-extensions/#aes_log_level)                                      | `warn`                                              | Log level |
-| $AESproductName$                        | [`AES_RATELIMIT_PREVIEW`](../aes-extensions/ratelimit#aes-ratelimit_preview)         | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
+| $AESproductName$                        | [`AES_RATELIMIT_PREVIEW`](../aes-redis/#aes_ratelimit_preview)         | `false`                                             | Boolean; [Go `strconv.ParseBool`][] |
 | $AESproductName$                        | [`AES_AUTH_TIMEOUT`](../aes-extensions/authentication/#timeout-variables)                  | `4s`                                                | Duration; [Go `time.ParseDuration`][]
 | Primary Redis (L4)                | [`REDIS_SOCKET_TYPE`](../aes-redis#socket_type)                                          | `tcp`                                               | Go network such as `tcp` or `unix`; see [Go `net.Dial`][] |
 | Primary Redis (L4)                | [`REDIS_URL`](../aes-redis#url)                                                          | None, must be set explicitly                        | Go network address; for TCP this is a `host:port` pair; see [Go `net.Dial`][] |
@@ -103,5 +103,5 @@ $productName$ uses the following ports to listen for HTTP/HTTPS traffic automati
 
 [Go `net.Dial`]: https://golang.org/pkg/net/#Dial
 [Go `strconv.ParseBool`]: https://golang.org/pkg/strconv/#ParseBool
-[Go `time.ParseDuration`]: https://golang.org/pkg/strconv/#ParseDuration
+[Go `time.ParseDuration`]: https://pkg.go.dev/time#ParseDuration
 [Redis 6 ACL]: https://redis.io/topics/acl

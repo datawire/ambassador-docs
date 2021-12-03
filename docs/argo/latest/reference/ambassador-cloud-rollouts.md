@@ -28,7 +28,7 @@ will also be created to allow Argo Rollouts to control the flow between the two 
 
 The rollout steps will then be resolved based on the provided rollout duration and weight increment along with the
 new number of pods. Ambassador Cloud will also search for a container (either in the `Rollout` or `Deployment` manifest) that
-has an `image` property matching the configured [image name](#a8riorolloutsimagereponame) and update it with the
+has an `image` property matching the configured [image name](#a8riorolloutsimage-reponame) and update it with the
 provided new image tag.
 
 Ambassador Cloud will then update those manifests on a new branch, open a pull request targeting the

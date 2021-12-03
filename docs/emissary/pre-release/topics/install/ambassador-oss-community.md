@@ -26,7 +26,7 @@ is currently available out-of-the-box in some Kubernetes installers and local en
     <tr>
       <td style="text-align:center">
         <a href="https://kind.sigs.k8s.io/" target="_blank">
-          <img width="75" src="https://github.com/kubernetes-sigs/kind/blob/master/logo/logo.png?raw=true"></img>
+          <img width="75" src="https://raw.githubusercontent.com/kubernetes-sigs/kind/main/logo/logo.png"></img>
         </a>
       </td>
       <td>
@@ -40,7 +40,7 @@ is currently available out-of-the-box in some Kubernetes installers and local en
         </a>
       </td>
       <td>
-        <a href="https://kubespray.io/#/docs/ambassador" target="_blank">kubespray</a> documentation.
+        <a href="https://kubespray.io/" target="_blank">kubespray</a> documentation.
       </td>
     </tr>
     <tr>
@@ -50,7 +50,7 @@ is currently available out-of-the-box in some Kubernetes installers and local en
         </a>
       </td>
       <td>
-        <a href="https://kops.sigs.k8s.io/addons/#ambassador" target="_blank">KOPS</a> documentation.
+        <a href="https://kops.sigs.k8s.io/addons/" target="_blank">KOPS</a> documentation.
       </td>
     </tr>
     <tr>

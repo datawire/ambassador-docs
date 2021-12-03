@@ -391,7 +391,7 @@ diagnostics:
 
 Configures $productName$ statistics. These values can be set in the $productName$ module or in an environment variable.
 
-For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd).
+For more information, see the [Statistics reference](../statistics).
 
 
 ---
@@ -662,7 +662,7 @@ circuit_breakers
 
 Set a default domain and request labels to every request for use by rate limiting.
 
-For more on how to use these, see the [Rate Limit reference](../../using/rate-limits##an-example-with-global-labels-and-groups).
+For more on how to use these, see the [Rate Limit reference](../../using/rate-limits).
 
 ##### Load balancer
 

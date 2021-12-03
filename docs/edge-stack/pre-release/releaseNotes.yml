@@ -29,8 +29,69 @@
 #             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
 
-changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
+changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 2.0.5
+    date: 'TBD'
+    notes:
+      - title: More aggressive HTTP cache behavior
+        type: change
+        body: >-
+          When Ambassador Edge Stack makes a cacheable internal request (such as fetching the JWKS
+          endpoint for a <code>JWT</code> <code>Filter</code>), if a cache-miss occurs but a request
+          for that resource is already in-flight, then instead of performing a second request in
+          parallel, it will now wait for the first request to finish and (if the response is
+          cacheable) use that response.  If the response turns out to be non-cacheable, then it will
+          proceed to make the second request.  This avoids the situation where if a cache entry
+          expires during a moment with high number of concurrent requests, then Edge Stack creates a
+          deluge of concurrent requests to the resource when one aught to have sufficed; this allows
+          the result to be returned more quickly while putting less load on the remote resource.
+          However, if the response turns out to be non-cacheable, then this does effectively
+          serialize requests, increasing the latency for concurrent requests.
+        image: ./v2.0.5-cache-change.png
+
+      - title: AuthService circuit breakers
+        type: feature
+        body: >-
+          It is now possible to set the <code>circuit_breakers</code> for <code>AuthServices</code>,
+          exactly the same as for <code>Mappings</code> and <code>TCPMappings</code>. This makes it
+          possible to configure your <code>AuthService</code> to be able to handle more than 1024
+          concurrent requests.
+        docs: topics/running/services/auth-service/
+        image: ./v2.0.5-auth-circuit-breaker.png
+
+      - title: More accurate durations in the logs
+        type: bugfix
+        body: >-
+          When Ambassador Edge Stack completes an internal request (such as fetching the JWKS
+          endpoint for a <code>JWT</code> <code>Filter</code>) it logs (at the <code>info</code> log
+          level) how long the request took.  Previously, the duration logged was how long it took to
+          receive the response header, and did not count the time it takes to receive the entire
+          response body; now it properly times the entire thing.  Additionally, it now separately
+          logs the "total duration" and the "networking duration", in order to make it possible to
+          identify when a request was delayed waiting for other requests to finish.
+
+      - title: Improved validity checking for error response overrides
+        type: bugfix
+        body: >-
+          Any token delimited by '%' is now validated agains a whitelist of valid
+          Envoy command operators. Any mapping containing an <code>error_response_overrides</code>
+          section with invalid command operators will be discarded.
+        docs: topics/running/custom-error-responses
+
+      - title: mappingSelector is now correctly supported in the Host CRD
+        type: bugfix
+        body: >-
+          The <code>Host</code> CRD now correctly supports the <code>mappingSelector</code>
+          element, as documented. As a transition aid, <code>selector</code> is a synonym for
+          <code>mappingSelector</code>; a future version of $productName$ will remove the
+          <code>selector</code> element.
+        github:
+        - title: 3902
+          link: https://github.com/emissary-ingress/emissary/issues/3902
+        docs: https://github.com/emissary-ingress/emissary/issues/3902
+        image: ./v2.0.5-mappingselector.png
+
   - version: 2.0.4
     date: '2021-10-19'
     notes:
@@ -118,7 +179,7 @@ items:
       - title: Listeners correctly support l7Depth
         type: bugfix
         body: >-
-          The <code>l7Depth</code> element of the <code>Listener</code> CRD is 
+          The <code>l7Depth</code> element of the <code>Listener</code> CRD is
           properly supported.
         docs: topics/running/listener#l7depth
         image: ./v2.0.4-l7depth.png
@@ -196,7 +257,7 @@ items:
       - title: Configurable per-AmbassadorListener statistics prefix
         body: The optional <code>stats_prefix</code> element of the <code>AmbassadorListener</code> CRD now determines the prefix of HTTP statistics emitted for a specific <code>AmbassadorListener</code>.
         type: feature
-        docs: topics/running/ambassadorlistener
+        docs: topics/running/listener
 
       - title: Configurable statistics names
         body: The optional <code>stats_name</code> element of <code>AmbassadorMapping</code>, <code>AmbassadorTCPMapping</code>, <code>AuthService</code>, <code>LogService</code>, <code>RateLimitService</code>, and <code>TracingService</code> now sets the name under which cluster statistics will be logged. The default is the <code>service</code>, with non-alphanumeric characters replaced by underscores.
@@ -248,16 +309,16 @@ items:
           configuration changes that are not backwards compatible with the 1.X family.  API versions
           <code>getambassador.io/v0</code>, <code>getambassador.io/v1</code>, and
           <code>getambassador.io/v2</code> are deprecated.  Further details are available in the <a
-          href="about/changes-2.0.0/#1-configuration-api-version-xgetambassadoriov3alpha1">2.0.0
+          href="../about/changes-2.0.0/#1-configuration-api-version-getambassadoriov3alpha1">2.0.0
           Changes</a> document.
         type: feature
         docs: about/changes-2.0.0/#1-configuration-api-version-getambassadoriov3alpha1
         image: ./edge-stack-2.0.0-v3alpha1.png
 
       - title: The AmbassadorListener Resource
-        body: The new <code>AmbassadorListener</code> CRD defines where and how to listen for requests from the network, and which <code>AmbassadorHost</code> definitions should be used to process those requests. Note that the <code>AmbassadorListener</code> CRD is <b>mandatory</b> and consolidates <i>all</i> port configuration; see the <a href="topics/running/ambassadorlistener"><code>AmbassadorListener</code> documentation</a> for more details.
+        body: The new <code>AmbassadorListener</code> CRD defines where and how to listen for requests from the network, and which <code>AmbassadorHost</code> definitions should be used to process those requests. Note that the <code>AmbassadorListener</code> CRD is <b>mandatory</b> and consolidates <i>all</i> port configuration; see the <a href="../topics/running/listener"><code>AmbassadorListener</code> documentation</a> for more details.
         type: feature
-        docs: topics/running/ambassadorlistener
+        docs: topics/running/listener
         image: ./edge-stack-2.0.0-listener.png
 
       - title: AmbassadorMapping hostname DNS glob support
@@ -303,18 +364,18 @@ items:
         docs: about/changes-2.0.0/#proxy-protocol-configuration
 
       - title: Stricter rules for AmbassadorHost/AmbassadorMapping association
-        body: An <code>AmbassadorMapping</code> will only be matched with an <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
+        body: An <code>AmbassadorMapping</code> will only be matched with an <code>AmbassadorHost</code> if the <code>AmbassadorMapping</code>'s <code>host</code> or the <code>AmbassadorHost</code>'s <code>selector</code> (or both) are explicitly set, and match. This change can significantly improve $productName$'s memory footprint when many <code>AmbassadorHost</code>s are involved. Further details are available in the <a href="../about/changes-2.0.0/#host-and-mapping-association">2.0.0 Changes</a> document.
         docs: about/changes-2.0.0/#host-and-mapping-association
         type: change
 
       - title: AmbassadorHost or Ingress now required for TLS termination
-        body: An <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
+        body: An <code>AmbassadorHost</code> or <code>Ingress</code> resource is now required when terminating TLS -- simply creating a <code>TLSContext</code> is not sufficient. Further details are available in the <a href="../about/changes-2.0.0/#host-tlscontext-and-tls-termination"><code>AmbassadorHost</code> CRD documentation.</a>
         docs: about/changes-2.0.0/#host-tlscontext-and-tls-termination
         type: change
         image: ./edge-stack-2.0.0-host_crd.png
 
       - title: Envoy V3 APIs
-        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="about/changes-2.0.0">2.0.0 Changes</a> document.
+        body: By default, $productName$ will configure Envoy using the V3 Envoy API. This change is mostly transparent to users, but note that Envoy V3 does not support unsafe regular expressions or, e.g., Zipkin's V1 collector protocol. Further details are available in the <a href="../about/changes-2.0.0">2.0.0 Changes</a> document.
         type: change
         docs: about/changes-2.0.0/#envoy-v3-api-by-default
 
@@ -366,7 +427,8 @@ items:
           The default is 1MiB.
         docs: topics/running/ambassador/#modify-default-buffer-size
 
-      - type: feature
+      - title: DevPortal supports configuring what server is displayed
+        type: feature
         body: >-
           You can now set <code>preserve_servers</code> in Ambassador Edge Stack's
           <code>DevPortal</code> resource to configure the DevPortal to use server definitions from
@@ -436,18 +498,28 @@ items:
         type: change
         docs: topics/running/environment/
 
-      - type: bugfix
+      - title: Mappings support configuring the DevPortal fetch timeout
+        type: bugfix
         body: >-
           The <code>Mapping</code> resource can now specify <code>docs.timeout_ms</code> to set the
           timeout when the Dev Portal is fetching API specifications.
-      - type: bugfix
+        docs: topics/using/dev-portal
+        image: ../images/edge-stack-1.13.10-docs-timeout.png
+
+      - title: Dev Portal will strip HTML tags when displaying results
+        type: bugfix
         body: >-
           The Dev Portal will now strip HTML tags when displaying search results, showing just the
           actual content of the search result.
-      - type: change
+        docs: topics/using/dev-portal
+
+      - title: Consul certificate rotation logs more information
+        type: change
         body: >-
           Consul certificate-rotation logging now includes the fingerprints and validity timestamps
           of certificates being rotated.
+        docs: howtos/consul/
+        image: ../images/edge-stack-1.13.10-consul-cert-log.png
 
   - version: 1.13.9
     date: '2021-06-30'

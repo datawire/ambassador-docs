@@ -1,5 +1,4 @@
 import Alert from '@material-ui/lab/Alert';
-import CloudGSTabs2 from '../tutorials/gs-tabs2';
 import { LogInText } from '../../../../../../src/components/Docs/LogInText';
 import { QuickStartServiceCatalogAlert } from '../../../../../../src/components/Docs/Cloud';
 
@@ -32,7 +31,7 @@ Service Catalog requires **Edge Stack version 1.12 or greater** or **Emissary-in
 If you already have Edge Stack or Emissary-ingress installed, **check your version** by running this command (adjust your namespace if necessary):
 
 ```
-kubectl get deploy -A -l product=aes -o jsonpath='{.items[].spec.template.spec.containers[0].image}'
+kubectl get deploy -A -l app.kubernetes.io/name=edge-stack -o jsonpath='{.items[].spec.template.spec.containers[0].image}'
 ```
 [Upgrade Edge Stack to the latest version](../../../../edge-stack/latest/topics/install/upgrading/) if needed.
 
@@ -92,7 +91,7 @@ Let's set another annotation using YAML instead to ensure that a new deployment 
 
 ## 3. Add additional metadata via YAML
 
-Open the YAML config file of one of your services.  If you applied our `quote` service earlier, you can download the YAML [here](/yaml/quickstart/qotm.yaml).
+Open the YAML config file of one of your services.  If you applied our `quote` service earlier, you can download the YAML <a href="/yaml/quickstart/qotm.yaml" target="_blank">here</a>.
 
 1. Navigate to the `metadata` property and locate the `annotations` property directly beneath it.
 
@@ -131,4 +130,5 @@ Open the YAML config file of one of your services.  If you applied our `quote` s
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
-You've updated the owner and repo URL, but **Service Catalog supports many more annotations!**  See the full list [here](../reference/annotations/).
+You've updated the owner and repo URL, but Service Catalog supports many more annotations! See the full list [here](../reference/annotations/).
+

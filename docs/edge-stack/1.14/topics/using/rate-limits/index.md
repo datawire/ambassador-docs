@@ -13,7 +13,7 @@ Rate limiting in $productName$ is composed of two parts:
 
 There are two ways of setting labels on a request:
 
-1. On an individual [Mapping](../mappings#configuring-mappings).  Labels set
+1. On an individual [Mapping](../mappings).  Labels set
    here will only apply to requests that use that Mapping.
 
    ```yaml

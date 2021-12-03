@@ -98,6 +98,8 @@ export default function SimpleTabs() {
           {'# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
+            '\n' +
+            'helm repo update' +
             '\n \n' +
             'helm install ambassador datawire/ambassador --set enableAES=false && \\' +
             '\n' +
@@ -112,6 +114,8 @@ export default function SimpleTabs() {
           {'# Add the Repo:' +
             '\n' +
             'helm repo add datawire https://www.getambassador.io' +
+            '\n' +
+            'helm repo update' +
             '\n \n' +
             'helm install --name ambassador datawire/ambassador --set enableAES=false && \\' +
             '\n' +

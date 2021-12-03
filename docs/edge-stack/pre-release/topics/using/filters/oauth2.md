@@ -385,7 +385,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
        non-encrypted signed JWTs as Access Tokens, and configuring the
        signing appropriately
      + This behavior can be modified by delegating to [`JWT`
-       Filter](#filter-type-jwt) with `accessTokenJWTFilter`:
+       Filter](../jwt/) with `accessTokenJWTFilter`:
        - `name` and `namespace` are used to identify which JWT Filter
          to use.  It is an error to point at a Filter that is not a
          JWT filter.
@@ -416,7 +416,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
      and otherwise falls back to `"userinfo"` validation.
 
 [RE2]: https://github.com/google/re2/wiki/Syntax
-[`regex_type` in the `ambassador Module`]: ../../../running/ambassador/#regular-expressions-regex_type
+[`regex_type` in the `ambassador Module`]: ../../../running/ambassador/
 
 ### HTTP client
 
@@ -508,7 +508,7 @@ spec:
          obeying [`regex_type` in the `ambassador Module`][]) but does
          not support the `\C` escape sequence.
     * By default, it serves an authorization-denied error page; by default HTTP 403 ("Forbidden"), but this can be configured by the `httpStatusCode` sub-argument.
-    * Instead of serving that simple error page, it can instead be configured to call out to a list of other Filters, by setting the `filters` list. The syntax and semantics of this list are the same as `.spec.rules[].filters` in a [`FilterPolicy`](#filterpolicy-definition). Be aware that if one of these filters modify the request rather than returning a response, then the request will be allowed through to the backend service, even though the `OAuth2` Filter denied it.
+    * Instead of serving that simple error page, it can instead be configured to call out to a list of other Filters, by setting the `filters` list. The syntax and semantics of this list are the same as `.spec.rules[].filters` in a [`FilterPolicy`](../#filterpolicy-definition). Be aware that if one of these filters modify the request rather than returning a response, then the request will be allowed through to the backend service, even though the `OAuth2` Filter denied it.
     * It is invalid to specify both `httpStatusCode` and `filters`.
 
 ## XSRF protection

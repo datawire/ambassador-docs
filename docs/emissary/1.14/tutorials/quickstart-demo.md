@@ -135,7 +135,7 @@ Learn more about [how site reliability engineers and operators run $productName$
 in production environments.
 
 To learn how $productName$ works, use cases, best practices, and more, check out
-the [docs home](../../) or read the [$productName$ Story](../../about/why-ambassador).
+the [Quick Start page](../../tutorials/getting-started/) or read the [$productName$ Story](../../about/why-ambassador).
 
 For a custom configuration, you can install $productName$
 [manually](../../topics/install/yaml-install).

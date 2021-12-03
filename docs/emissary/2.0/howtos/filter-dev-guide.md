@@ -37,7 +37,7 @@ We've created an example filter that you can customize for your particular use c
 4. Push the image to your Docker registry: `docker push $DOCKER_REGISTRY/amb-sidecar-plugin:VERSION`.
 
 5. Configure $AESproductName$ to use the plugin by creating a `Filter`
-   and `FilterPolicy` CRD, as per the [filter reference](../../topics/using/filters).
+   and `FilterPolicy` CRD, as per the [filter reference](/docs/edge-stack/latest/topics/using/filters/).
 
 6. Update the standard $AESproductName$ manifest to use your Docker
    image instead of the standard sidecar.
@@ -94,4 +94,4 @@ Note in the example above the `X-Dc` header is added. This lets you inspect the 
 
 ## Further reading
 
-For more details about configuring filters and the `plugin` interface, see the [filter reference](../../topics/using/filters/).
+For more details about configuring filters and the `plugin` interface, see the [filter reference](/docs/edge-stack/latest/topics/using/filters/).

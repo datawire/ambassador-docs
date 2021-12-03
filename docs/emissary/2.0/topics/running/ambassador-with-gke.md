@@ -180,7 +180,7 @@ spec:
 
 ## 6. Configure $productName$ to do HTTP -> HTTPS redirection
 
-Configure $productName$ to [redirect traffic from HTTP to HTTPS](../tls/cleartext-redirection/#protocol-based-redirection). You will need to restart $productName$ to effect the changes with `kubectl rollout restart deployment ambassador`.
+Configure $productName$ to [redirect traffic from HTTP to HTTPS](../tls/cleartext-redirection/#http-https-redirection). You will need to restart $productName$ to effect the changes with `kubectl rollout restart deployment ambassador`.
 
 The result should be that `http://www.example.com` will redirect to `https://www.example.com`.
 

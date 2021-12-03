@@ -157,7 +157,7 @@ Further explore some of the concepts you learned about in this article:
 the edge of your cluster to a Kubernetes service
 * [`Host` resource](../../topics/running/host-crd/): sets the hostname by which
 $productName$ will be accessed and secured with TLS certificates
-* [Developer Portal](../../topics/using/dev-portal/): 
+* [Developer Portal](../../tutorials/dev-portal-tutorial/): 
 publishes an API catalog and OpenAPI documentation
 
 $productName$ has a comprehensive range of [features](/features/) to
@@ -170,7 +170,7 @@ Learn more about [how site reliability engineers and operators run $productName$
 in production environments.
 
 To learn how $productName$ works, use cases, best practices, and more, check out 
-the [docs home](../../) or read the [$productName$ Story](../../about/why-ambassador).
+the [Quick Start](../getting-started) or read the [$productName$ Story](../../about/why-ambassador).
 
 For a custom configuration, you can install $productName$ 
 [manually](../../topics/install/yaml-install).

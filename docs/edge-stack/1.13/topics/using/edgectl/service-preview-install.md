@@ -380,7 +380,7 @@ Now that you have Service Preview installed, let's see how you can use it to int
 
 Take a look at the [Service Preview Tutorial](../service-preview-tutorial) to get Service Preview working for the `Hello` service we installed!
 
----
+```
 
 ## <img class="os-logo" src="../../../../images/helm.png"/> Install with Helm
 
