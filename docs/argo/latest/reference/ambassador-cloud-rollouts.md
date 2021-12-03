@@ -41,12 +41,12 @@ progressive delivery of the `Rollout` object and its progress will be reported i
 
 ## Helm support
 
-Ambassador Cloud supports detecting of Helm charts at the [path](#a8riorolloutsscmpath) of
+Ambassador Cloud supports the detection of Helm charts at the [path](#a8riorolloutsscmpath) of
 the [repository](#a8riorepository) by checking if a `Chart.yaml` file is present. In this case, the update is
 as follows:
 
 1. A new Helm values file named following the convention **a8r-values-<ENVIRONMENT_name>.yaml** (for example, **a8r-values-staging.yaml**)
-will be generated with the values for the rollout configuration. These values will later be used to configure the
+is generated with the values for the rollout configuration. These values will later be used to configure the
 `Rollout` manifest.
 2. If you already have a `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) in the **templates** folder,
 you should configure it to use the values from the Ambassador values file. You can follow this example:
@@ -91,19 +91,19 @@ spec:
         # ...
         # The rest of the file is omitted for simplicity.
 ```
-3. If no `Rollout` object matching the [deployment manifest name](#a8riorolloutsdeployment) is found in the **templates** folder (which should only
-happen the first time a rollout is created), use the example above to create one. More information about the `Rollout`
-spec can be found in [the official Argo Rollouts documentation](https://argoproj.github.io/argo-rollouts/features/specification/).
+3. If there is no `Rollout` object that matches the [deployment manifest name](#a8riorolloutsdeployment) in the **templates** folder,
+use the example above to create one. More information about the `Rollout`. This should only occur the first time a rollout is created.
+For more information about `Rollout` spec see [the official Argo Rollouts documentation](https://argoproj.github.io/argo-rollouts/features/specification/).
 4. Create a `Service` object for the canary pods by duplicating the existing service and appending `-canary` to its name.
 5. Create a `Mapping` object pointing to the "stable" `Service`.
-6. Ambassador Cloud will then update those manifests on a new branch, open a pull request targeting the
-[base branch](#a8riorolloutsscmbranch) and show you the new rollout in the service rollouts page.
-You'll see a "Merge pull request" button that will take you to the pull request where you can approve it and merge it.
-7. Before merging the pull request, disable the Argo Application's auto-sync feature in case you have it enabled. You will
-re-enable it back in step 7. Once the pull request is merged, Argo CD will detect that a new version of the `Application` has
+6. Ambassador Cloud updates the manifests on a new branch. Then opens a pull request to target the
+[base branch](#a8riorolloutsscmbranch). The new rollout appears in the service's rollouts page, with a "Merge pull request" button.
+Click on this button to open the pull request page, where you can approve and merge it.
+7. Before you merge the pull request, disable the Argo Application's auto-sync feature in case you have it enabled. You will
+re-enable it back in step 9. Once the pull request is merged, Argo CD will detect that a new version of the `Application` has
 been pushed on the repository.
 8. Now you will have to configure your Argo Application to use the Ambassador Helm values file
-**after** your own. This configuration can be found in the `Parameters` section of your Application.
+**after** your own. This configuration is found in the `Parameters` section of your Application.
 <Alert severity="warning">
     By default, Argo CD fetches data from your repository every 3 minutes. If still don't see the Ambassador
     Helm values file and don't want to wait any longer, you can run a "Refresh" or "Hard Refresh" of the
@@ -111,7 +111,7 @@ been pushed on the repository.
 </Alert>
 9. Finally, it's time to re-enable the Application's auto-sync or refresh your application. Argo CD will detect that the `Application`
 is out of sync and will update the manifests in the cluster to match the ones in the repository. Argo Rollouts will proceed to the
-progressive delivery of the `Rollout` object and its progress will be reported in Ambassador Cloud.
+progressive delivery of the `Rollout` object and its progress is reported in Ambassador Cloud.
 
 ## Configuration
 
