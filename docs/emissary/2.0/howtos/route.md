@@ -80,7 +80,7 @@ For demonstration purposes, here's a possible way of combining a `Listener`, a `
 
 ```yaml
 ---
-apiversion: v1
+apiVersion: v1
 kind: Secret
 type: kubernetes.io/tls
 metadata:

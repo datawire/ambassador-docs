@@ -2,7 +2,7 @@
 description: "Create your complete Kubernetes development environment and use Telepresence to intercept services running in your Kubernetes cluster, speeding up local development and debugging."
 --- 
 
-# Creating a local kubernetes development environment
+# Creating a local Kubernetes development environment
 
 This tutorial shows you how to use Ambassador Cloud to create an effective Kubernetes development environment to enable  fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
 
