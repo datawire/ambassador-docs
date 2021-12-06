@@ -12,8 +12,9 @@ We assume that you already have a running $productName$ installation in the foll
 
     ```
     $ kubectl get -n $productNamespace$ deployments
-    NAME         DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    $productDeploymentName$   3         3         3            3           1m
+    NAME                DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+    $productDeploymentName$          3         3         3            3           1m
+    $productDeploymentName$-apiext   3         3         3            3           1m
     ```
 
 2. Check that the “desired” number of Pods matches the “current” and “available” number of Pods. 
@@ -28,6 +29,9 @@ We assume that you already have a running $productName$ installation in the foll
     $productDeploymentName$-85c4cf67b-4pfj2   1/1       Running   0          1m
     $productDeploymentName$-85c4cf67b-fqp9g   1/1       Running   0          1m
     $productDeploymentName$-85c4cf67b-vg6p5   1/1       Running   0          1m
+    $productDeploymentName$-apiext-736f8497d-j34pf   1/1       Running   0          1m
+    $productDeploymentName$-apiext-736f8497d-9gfpq   1/1       Running   0          1m
+    $productDeploymentName$-apiext-736f8497d-p5wgx   1/1       Running   0          1m
     ```
 
     The actual names of the Pods will vary. All the Pods should indicate `Running`, and all should show 1/1 containers ready.

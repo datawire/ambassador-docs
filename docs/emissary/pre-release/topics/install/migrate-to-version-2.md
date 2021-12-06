@@ -44,6 +44,12 @@ Migration is a five-step process:
    even if you intend to continue using only `getambassador.io/v2` resources for some
    time.
 
+   <Alert severity="info">
+     At this point, both <code>getambassador/v2</code> and <code>getambassador/v3alpha1</code>
+     CRDs will be defined, but only <code>getambassador/v2</code> CRDs will be usable until
+     the next step.
+   </Alert>
+
 3. **Install $productName$ $version$.**
 
    After installing the new CRDs, you need to install $productName$ $version$ itself.
@@ -59,6 +65,20 @@ Migration is a five-step process:
    Alternately, you can [install $productName$ $version$ in a separate cluster](../migrate-to-2-alternate).
    This permits absolute certainty that your $productName$ 1.X configuration will not be
    affected by changes meant for $productName$ $version$, but is more effort.
+
+   <Alert severity="info">
+     $productName$ $version$ includes a Deployment in the $productNamespace$ namespace
+     called <code>$productDeploymentName$-apiext</code>. This is the APIserver extension
+     that supports converting $productName$ CRDs between <code>getambassador.io/v2</code>
+     and <code>getambassador.io/v3alpha1</code>. This Deployment needs to be running at
+     all times.
+   </Alert>
+
+   <Alert severity="warning">
+     If the <code>$productDeploymentName$-apiext</code> Deployment's Pods all stop running,
+     you will not be able to use <code>getambassador.io/v3alpha1</code> CRDs until restarting
+     the <code>$productDeploymentName$-apiext</code> Deployment.
+   </Alert>
 
 4. **Test!**
 

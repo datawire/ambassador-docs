@@ -56,6 +56,20 @@ When you run the Helm chart, it installs $productName$.
      We strongly recommend following along with our <a href="../../../tutorials/getting-started">Quickstart Guide</a> to get started by creating a <code>Listener</code>, deploying a simple service to test with, and setting up a <code>Mapping</code> to route requests from $productName$ to the demo service.
   </Alert>
 
+   <Alert severity="info">
+     $productName$ $version$ includes a Deployment in the $productNamespace$ namespace
+     called <code>$productDeploymentName$-apiext</code>. This is the APIserver extension
+     that supports converting $productName$ CRDs between <code>getambassador.io/v2</code>
+     and <code>getambassador.io/v3alpha1</code>. This Deployment needs to be running at
+     all times.
+   </Alert>
+
+   <Alert severity="warning">
+     If the <code>$productDeploymentName$-apiext</code> Deployment's Pods all stop running,
+     you will not be able to use <code>getambassador.io/v3alpha1</code> CRDs until restarting
+     the <code>$productDeploymentName$-apiext</code> Deployment.
+   </Alert>
+
 For more advanced configuration and details about helm values,
 [please see the helm chart.](https://github.com/datawire/edge-stack/tree/main/charts/edge-stack/README.md)
 
