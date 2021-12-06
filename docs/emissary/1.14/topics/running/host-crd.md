@@ -198,9 +198,7 @@ LB" refers to a layer 7 load balancer.
     - [CRD Specification](#crd-specification)
 
 
-<div id="https-only-tls-terminated-at-ambassador-not-redirecting-cleartext"/>
-
-### HTTPS-only, TLS terminated at $productName$, not redirecting cleartext
+<h3 id="https-only-tls-terminated-at-ambassador-not-redirecting-cleartext">HTTPS-only, TLS terminated at $productName$, not redirecting cleartext</h3>
 
   This example is the same with a L4 LB, or without a load balancer. It also covers an L4 LB that terminates TLS, then re-originates TLS from the load balancer to $productName$.
 
@@ -259,9 +257,7 @@ LB" refers to a layer 7 load balancer.
 
   With the configuration above, the system will look for a TLS secret in `manual-secret-for-foo`, but it will not run ACME for it.
 
-<div id="https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080"/>
-
-### HTTPS-only, TLS terminated at $productName$, redirecting cleartext from port 8080
+<h3 id="https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080">HTTPS-only, TLS terminated at $productName$, redirecting cleartext from port 8080</h3>
 
 This example is the same for an L4 LB, or without a load balancer at all.
 
@@ -303,15 +299,11 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
   In this case, the Host resource explicitly requests no ACME handling and no TLS, then states that insecure requests must be routed instead of redirected.
 
-<div id="l4-lb-https-only-tls-terminated-at-ambassador-not-redirecting-cleartext"/>
-
-### L4 LB, HTTPS-only, TLS terminated at $productName$, not redirecting cleartext
+<h3 id="l4-lb-https-only-tls-terminated-at-ambassador-not-redirecting-cleartext">L4 LB, HTTPS-only, TLS terminated at $productName$, not redirecting cleartext</h3>
 
   Configure this exactly like [case 1](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
 
-<div id="l4-lb-https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080"/>
-
-### L4 LB, HTTPS-only, TLS terminated at $productName$, redirecting cleartext from port 8080
+<h3 id="l4-lb-https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080">L4 LB, HTTPS-only, TLS terminated at $productName$, redirecting cleartext from port 8080</h3>
 
   This use case is not supported by $productName$ 1.1.1. It will be supported in a forthcoming release.
 
@@ -319,23 +311,17 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
   Configure this exactly like [case 3](#http-only). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
 
-<div id="l4-lb-tls-terminated-at-lb-lb-speaks-cleartext-to-ambassador"/>
-
-### L4 LB, TLS terminated at LB, LB speaks cleartext to $productName$
+<h3 id="l4-lb-tls-terminated-at-lb-lb-speaks-cleartext-to-ambassador">L4 LB, TLS terminated at LB, LB speaks cleartext to $productName$</h3>
 
   Configure this exactly like [case 3](#http-only), since by the time the connection arrives at $productName$, it will appear to be insecure. Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
 
-<div id="l4-lb-tls-terminated-at-lb-lb-speaks-tls-to-ambassador"/>
-
-### L4 LB, TLS terminated at LB, LB speaks TLS to $productName$
+<h3 id="l4-lb-tls-terminated-at-lb-lb-speaks-tls-to-ambassador">L4 LB, TLS terminated at LB, LB speaks TLS to $productName$</h3>
 
   Configure this exactly like [case 1](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
 
   Note that since $productName$ _is_ terminating TLS, managing $productName$'s TLS certificate will be important.
 
-<div id="l4-split-lb-tls-terminated-at-ambassador"/>
-
-### L4 split LB, TLS terminated at $productName$
+<h3 id="l4-split-lb-tls-terminated-at-ambassador">L4 split LB, TLS terminated at $productName$</h3>
 
   In this scenario, an L4 load balancer terminates TLS on port 443 and relays that traffic as cleartext to $productName$ on port 8443, but the load balancer also relays cleartext traffic on port 80 to $productName$ on port 8080. (This could also be two L4 load balancers working in concert.)
 
