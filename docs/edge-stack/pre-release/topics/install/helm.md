@@ -76,7 +76,7 @@ Upgrading an existing installation of $productName$ is a two-step process:
    ```
     helm repo update
     helm upgrade -n $productNamespace$ \
-        $productHelmName$ --devel \
+        $productHelmName$ \
         datawire/$productHelmName$ && \
     kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
    ```
