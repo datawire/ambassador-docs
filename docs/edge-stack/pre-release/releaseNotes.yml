@@ -42,6 +42,7 @@ items:
           1.X. <b>Note</b>: for the most seamless migration from 1.X, upgrade your $productName$ 1.X installation
           to version 1.14.3 before migrating!
         docs: topics/install/migrate-to-version-2
+        image: ./v2.1.0-smoother-migration.png
 
       - title: Ambassador Edge Stack CRDs are fully validated
         type: change
@@ -58,14 +59,7 @@ items:
           <code>protocol_version</code>, and <code>stats_name</code> fields, as well as changing the
           <code>tls</code> field to be a string rather than a bool.
         # Editor's note: Depending on the implementation strategy, I may decide to drop `stats_name`.
-
-      - title: Smoother migrations with support for getambassador.io/v2 CRDs
-        type: feature
-        body: >-
-          $productName$ supports <code>getambassador.io/v2</code> CRDs, to simplify migration from $productName$
-          1.X. <b>Note:<b> it is important to read the <a href="../topics/install/migrate-to-version-2">migration
-          documentation</a> before starting migration.
-        docs: topics/install/migrate-to-version-2
+        docs: topics/using/filters/external
 
       - title: Correctly handle all changing canary configurations
         type: bugfix
@@ -97,6 +91,7 @@ items:
         - title: 3818
           link: https://github.com/emissary-ingress/emissary/issues/3818
         docs: https://github.com/emissary-ingress/emissary/issues/3818
+        image: ./v2.1.0-gzip-enabled.png
 
       - title: Update to busybox 1.34.1
         type: security

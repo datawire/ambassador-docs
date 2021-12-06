@@ -42,6 +42,7 @@ items:
           1.X. <b>Note:<b> it is important to read the <a href="../topics/install/migrate-to-version-2">migration
           documentation</a> before starting migration.
         docs: topics/install/migrate-to-version-2
+        image: ./v2.1.0-smoother-migration.png
 
       - title: Correctly handle all changing canary configurations
         type: bugfix
@@ -73,6 +74,7 @@ items:
         - title: 3818
           link: https://github.com/emissary-ingress/emissary/issues/3818
         docs: https://github.com/emissary-ingress/emissary/issues/3818
+        image: v2.1.0-gzip-enabled.png
 
       - title: Update to busybox 1.34.1
         type: security
