@@ -181,17 +181,16 @@ See [`TLSContext`](#tlscontext) below to read more on the description of these f
   this implict <code>TLSContext</code> link.
 </Alert>
 
-If a `TLSContext` exists with:
+The `Host` will implicitly link to the `TLSContext` when a `TLSContext` exists with the following: 
 
 - the name `{{NAME_OF_AMBASSADORHOST}}-context`
 - `hosts` in the `TLSContext` set to the same value as `hostname` in the `Host`, and
 - `secret` in the `TLSContext` set to the same value as `tlsSecret` in the `Host`
 
-then the `Host` will implicitly link to the `TLSContext.` **As noted above, this 
-implicit linking is deprecated.**
+**As noted above, this implicit linking is deprecated.**
 
 For example, another way to enforce a minimum TLS version on the `Host` above would
-be to simply create the `TLSContext` with the name `example-host-context`:
+be to simply create the `TLSContext` with the name `example-host-context` and then not modify the `Host`.:
 
 ```yaml
 ---
@@ -206,7 +205,6 @@ spec:
   min_tls_version: v1.2
 ```
 
-and then not modify the `Host`.
 
 <Alert severity="warning">
   The <code>Host</code>'s <code>hostname</code> and the <code>TLSContext</code>'s&nbsp;

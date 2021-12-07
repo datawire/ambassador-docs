@@ -2,13 +2,13 @@ import Alert from '@material-ui/lab/Alert';
 
 # Cleartext support
 
-While most modern web applications will choose to encrypt all traffic, there remain
+While most modern web applications choose to encrypt all traffic, there remain
 cases where supporting cleartext communications is important. $productName$ supports
 both forcing [automatic redirection to HTTPS](#http-https-redirection) and 
 [serving cleartext](#cleartext-routing) traffic on a `Host`.
 
 <Alert severity="info">
-  If no <code>Host</code>s at all are defined, $productName$ enables HTTP->HTTPS redirection. You will
+  If no <code>Host</code>s are defined, $productName$ enables HTTP->HTTPS redirection. You will
   need to explicitly create a <code>Host</code> to enable cleartext communication at all.
 </Alert>
 
@@ -29,13 +29,13 @@ requestPolicy:
     action: Redirect
 ```
 
-This may allow routing _only_ HTTP, or it may allow HTTP and HTTPS:
+This allows routing for either HTTP and HTTPS, or _only_ HTTP, depending on `tlsSecret` configuration:
 
 - If the `Host` does not specify a `tlsSecret`, it will only route HTTP, not terminating TLS at all.
 - If the `Host` does specify a `tlsSecret`, it will route both HTTP and HTTPS.
 
 <Alert severity="info">
-  If no <code>Host</code>s at all are defined, $productName$ enables HTTP->HTTPS redirection. You will
+  If no <code>Host</code>s are defined, $productName$ enables HTTP->HTTPS redirection. You will
   need to explicitly create a <code>Host</code> to enable cleartext communication at all.
 </Alert>
 
@@ -79,7 +79,7 @@ $productName$ determines which requests are secure and which are insecure using 
 [`Listener`]: ../../listener
 
 <Alert severity="info">
-  If no <code>Host</code>s at all are defined, $productName$ enables HTTP->HTTPS redirection. You will
+  If no <code>Host</code>s are defined, $productName$ enables HTTP->HTTPS redirection. You will
   need to explicitly create a <code>Host</code> to enable cleartext communication at all.
 </Alert>
 
