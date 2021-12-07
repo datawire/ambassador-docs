@@ -68,7 +68,7 @@ spec:
   hostname: host.example.com
 ```
 
-This creates a `/httpbin/` endpoint for `host.example.com`
+The above creates a `/httpbin/` endpoint for `host.example.com`.
 
 ```yaml
 ---
@@ -82,7 +82,7 @@ spec:
   hostname: host.foo.com
 ```
 
-This creates a `/foo/` endpoint for `host.foo.com`
+The above creates a `/foo/` endpoint for `host.foo.com`.
 
 ```yaml
 ---
@@ -96,4 +96,4 @@ spec:
   service: bar-endpoint
 ```
 
-This creates a `/bar/` endpoint for all `Host`s.
+The above creates a `/bar/` endpoint for all `Host`s.
