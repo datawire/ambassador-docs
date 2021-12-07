@@ -100,7 +100,7 @@ has no `mappingSelector`, and
 </Alert>
 
 <Alert severity="warning">
-  A <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with&nbsp;
+  A <code>Mapping</code> that specifies <code>host_regex: true</code> is associated with&nbsp;
   <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code>
   with a DNS glob.
 </Alert>
