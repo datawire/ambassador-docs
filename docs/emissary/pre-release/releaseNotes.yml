@@ -39,7 +39,7 @@ items:
         type: feature
         body: >-
           $productName$ supports <code>getambassador.io/v2</code> CRDs, to simplify migration from $productName$
-          1.X. <b>Note:<b> it is important to read the <a href="../topics/install/migrate-to-version-2">migration
+          1.X. <b>Note:</b> it is important to read the <a href="../topics/install/migrate-to-version-2">migration
           documentation</a> before starting migration.
         docs: topics/install/migrate-to-version-2
         image: ./v2.1.0-smoother-migration.png
@@ -55,6 +55,7 @@ items:
         - title: 3945
           link: https://github.com/emissary-ingress/emissary/issues/3945
         docs: https://github.com/emissary-ingress/emissary/issues/3945
+        image: ./v2.1.0-canary.png
 
       - title: Secrets used for ACME private keys will not log errors
         type: bugfix
@@ -74,7 +75,7 @@ items:
         - title: 3818
           link: https://github.com/emissary-ingress/emissary/issues/3818
         docs: https://github.com/emissary-ingress/emissary/issues/3818
-        image: v2.1.0-gzip-enabled.png
+        image: ./v2.1.0-gzip-enabled.png
 
       - title: Update to busybox 1.34.1
         type: security
