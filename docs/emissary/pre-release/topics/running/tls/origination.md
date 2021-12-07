@@ -38,11 +38,6 @@ spec:
   sni: some-sni-hostname
 ```
 
-<Alert severity="warning">
-  The Kubernetes Secret named by <code>secret</code> must contain a valid TLS certificate.
-  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use.
-</Alert>
-
 Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`:
 
 ```yaml
