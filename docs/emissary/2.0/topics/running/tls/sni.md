@@ -69,7 +69,7 @@ spec:
   host_rewrite: httpbin.org
   host: host.example.com
 ```
-Will create a `/httpbin/` endpoint for `host.example.com`
+This creates a `/httpbin/` endpoint for `host.example.com`
 ```yaml
 ---
 apiVersion: getambassador.io/v3alpha1
@@ -81,7 +81,7 @@ spec:
   service: foo-service
   host: host.foo.com
 ```
-Will create a `/foo/` endpoint for `host.foo.com`
+This creates a `/foo/` endpoint for `host.foo.com`
 
 ```yaml
 ---
@@ -94,4 +94,4 @@ spec:
   prefix: /bar/
   service: bar-endpoint
 ```
-Will create a `/bar/` endpoint for all `Host`s.
+This creates a `/bar/` endpoint for all `Host`s.

@@ -22,7 +22,7 @@ spec:
 
 ## Advanced configuration using a `TLSContext`
 
-If your upstream services require more than basic HTTPS support (e.g. providing a client certificate or
+If your upstream services require more than basic HTTPS support (for example, providing a client certificate or
 setting the minimum TLS version support) you must create a `TLSContext` for $productName$ to use when
 originating TLS. For example:
 

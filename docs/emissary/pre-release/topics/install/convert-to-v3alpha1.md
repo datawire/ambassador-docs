@@ -7,10 +7,8 @@ you convert your existing configuration resources from `getambassador.io/v2` to
 `getambassador.io/v3alpha1`.
 
 <Alert severity="info">
-  There is no need to convert all your resources to <code>getambassador.io/v3alpha1</code>
-  immediately; it will be fine if you do this lazily. However, some functionality of
-  $productName$ $version$ is not available without using <code>getambassador.io/v3alpha1</code>
-  resources.
+  While it is not necessary to convert all your resources to <code>getambassador.io/v3alpha1</code>
+  immediately, you should ultimately update them all for full functionality with $productName$
 </Alert>
 
 In general, the best way to convert any resource is to start with `kubectl get`: using
@@ -40,8 +38,7 @@ are matched with them (see below).
 
 ## 3. `Listener`, `Host`, and `Mapping` must be explicit about how they associate.
 
-Making sure that `Listener`s, `Host`s, and `Mapping`s correctly associate with each other
-is an important part of $productName$ 2.X configuration:
+You need to have `Listener`s, `Host`s, and `Mapping`s correctly associated with each other for $productName$ 2.X configuration.
 
 ### 3.1. `Listener` and `Host` are associated through `Listener.hostBinding`
 
@@ -50,9 +47,8 @@ is an important part of $productName$ 2.X configuration:
   <a href="../../running/host-crd">Learn more about <code>Host</code></a>
 </Alert>
 
-In a `Listener`, the `hostBinding` controls whether a given `Host` will be associated
-ith that `Listener`, as discussed in the [`Listener`](../../running/listener) documentation.
-**We recommend using `hostBinding.selector`** to choose only `Host`s that have a defined
+In a `Listener`, the `hostBinding` controls whether a given `Host` is associated with that `Listener`, as discussed in the [`Listener`](../../running/listener) documentation.
+**The recommended setting is using `hostBinding.selector`** to choose only `Host`s that have a defined
 Kubernetes label:
 
 ```yaml
@@ -62,9 +58,10 @@ hostBinding:
       my-listener: listener-8080
 ```
 
-causes this `Listener` to associate only with `Host`s that have a `my-listener: listener-8080` label.
+The above example shows a `Listener` configured to associate only with `Host`s that have a `my-listener: listener-8080` label.
 
-As a migration aid, you can tell a `Listener` to snap up all `Host`s with
+For migration purposes, it is possible to have a `Listener` associate with all of the `Host`s. This is not recommended for production environments, however, as it can resulting confusing behavior with large numbers of `Host`s, and it
+can also result in larger Envoy configurations that slow reconfiguration.
 
 ```yaml
 hostBinding:
@@ -78,10 +75,6 @@ can also result in larger Envoy configurations that slow reconfiguration.
 
 ### 3.2. `Host` and `Mapping` are associated through `Host.mappingSelector`
 
-<Alert severity="info">
-  <a href="../../running/host-crd">Learn more about <code>Host</code></a><br />
-  <a href="../../using/intro-mappings">Learn more about <code>Mapping</code></a>
-</Alert>
 
 In $productName$ 1.X, `Mapping`s were nearly always associated with every `Host`. Since this
 tends to result in larger Envoy configurations that slow down reconfiguration, $productName$ 2.X
@@ -100,6 +93,11 @@ As a migration aid:
 - A `Mapping` with a `hostname` of `"*"` will associate with any `Host` that
 has no `mappingSelector`, and
 - A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present. 
+
+<Alert severity="info">
+  <a href="../../running/host-crd">Learn more about <code>Host</code></a><br />
+  <a href="../../using/intro-mappings">Learn more about <code>Mapping</code></a>
+</Alert>
 
 <Alert severity="warning">
   A <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with&nbsp;
@@ -142,7 +140,7 @@ spec:
   tlsSecret: my-secret
 ```
 
-which will terminate TLS for `host.example.com`. A `TLSContext` is still right way to share data
+In the example above, TLS is terminated for `host.example.com`. A `TLSContext` is still right way to share data
 about TLS configuration across `Host`s: set both `tlsSecret` and `tlsContext` in the `Host`.
 
 ## 5. `Mapping` should use `hostname` if possible
@@ -209,7 +207,7 @@ For example:
      x-regex-match: "fo.*o"
    ```
 
-In this example, the `Mapping` will require the `x-exact-match` header to have the value `foo`, the 
+In this example, the `Mapping` requires the `x-exact-match` header to have the value `foo`, the 
 `x-regex-match` whose value starts with `fo` and ends with `o`. However, `x-existence-match` requires
 simply that the `x-existence-match` header exists.
 
@@ -229,8 +227,8 @@ data. In `getambassador.io/v3alpha1`, all labels must have the same type, so lab
 to the new syntax:
 
 | `getambassador.io/v2`            | `getambassador.io/v3alpha1`                                 |
-|----------------------------------|-------------------------------------------------------------|
-| `source_cluster`                 | `{ source_cluster: { key: source_cluster } }`               |                          
+| -------------------------------- | ----------------------------------------------------------- |
+| `source_cluster`                 | `{ source_cluster: { key: source_cluster } }`               |
 | `destination_cluster`            | `{ destination_cluster: { key: destination_cluster }` }     |
 | `remote_address`                 | `{ remote_address: { key: remote_address } }`               |
 | `{ my_key: { header: my_hdr } }` | `{ generic_key: { value: my_val } }`                        |

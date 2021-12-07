@@ -38,7 +38,7 @@ This allows routing for either HTTP and HTTPS, or _only_ HTTP, depending on `tls
 
 ## HTTP->HTTPS redirection
 
-Most modern websites that force HTTPS will also automatically redirect any 
+Most websites that force HTTPS will also automatically redirect any 
 requests that come into it over HTTP:
 
 ```

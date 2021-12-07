@@ -13,10 +13,9 @@ for different TLS use cases including:
 
 ## `Host`
 
-As explained in the [`Host`](../host-crd) reference, a `Host` represents a domain
-in $productName$ and defines how TLS is managed on that domain.
+A `Host` represents a domain in $productName$ and defines how the domain manages TLS. For more information on the Host resource, see [The Host CRD reference documentation](../host-crd).
 
-**If no `Host`s are present at all**, $productName$ will synthesize a `Host` that
+**If no `Host`s are present**, $productName$ synthesizes a `Host` that
 allows only cleartext routing. You will need to explictly define `Host`s to enable
 TLS termination.
 
@@ -32,8 +31,7 @@ TLS termination.
 The `Host` can read a certificate from a Kubernetes Secret and use that certificate
 to terminate TLS on a domain. 
 
-The following will configure $productName$ to use the certificate contained in the
-Kubernetes Secret named `host-secret` to terminate TLS on the `host.example.com` domain:
+The following example shows the certificate contained in the Kubernetes Secret named 'host-secret' configured to have $productName$ terminate TLS on the 'host.example.com' domain:
 
 ```yaml
 ---
@@ -47,14 +45,12 @@ spec:
     name: host-secret
 ```
 
-$productName$ will now use the certificate in `host-secret` to terminate TLS.
-
 ### Advanced TLS configuration with the `Host`
 
 You can specify TLS configuration directly in the `Host` via the `tls` field. This is the
 recommended method to do more advanced TLS configuration for a single `Host`.
 
-For example, to enforce a minimum TLS version on the `Host`, the configuration will look like this:
+For example, the configuration to enforce a minimum TLS version on the `Host` looks as follows:
 
 ```yaml
 ---
@@ -91,7 +87,7 @@ as described below.
 
 ### `Host` and `TLSContext`
 
-A `Host` can be linked to a [`TLSContext`](#tlscontext) instead of defining `tls`
+You can link a `Host` to a [`TLSContext`](#tlscontext) instead of defining `tls`
 settings in the `Host` itself. This is primarily useful for sharing settings between
 multiple `Host`s. 
 
@@ -99,7 +95,7 @@ multiple `Host`s.
 
 <Alert severity="warning">
   It is invalid to use both the <code>tls</code> setting and the <code>tlsContext</code>
-  setting on the same <code>Host</code>. We recommend using the <code>tls</code> setting
+  setting on the same <code>Host</code>. The recommended setting is using the <code>tls</code> setting
   unless you have multiple <code>Host</code>s that need to share TLS configuration.
 </Alert>
 
@@ -121,7 +117,7 @@ spec:
   min_tls_version: v1.2
 ```
 
-and link it to the `Host` via the `tlsContext` field as shown:
+Next, link it to the `Host` via the `tlsContext` field as shown:
 
 ```yaml
 ---
@@ -163,7 +159,7 @@ The `Host` will implicitly link to the `TLSContext` when a `TLSContext` exists w
 **As noted above, this implicit linking is deprecated.**
 
 For example, another way to enforce a minimum TLS version on the `Host` above would
-be to simply create the `TLSContext` with the name `example-host-context` and then not modify the `Host`.:
+be to simply create the `TLSContext` with the name `example-host-context` and then not modify the `Host`:
 
 ```yaml
 ---

@@ -4,9 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 
 ## Run $productName$ $version$ in a separate cluster
 
-This permits absolute certainty that your $productName$ 1.X configuration will not be
-affected by changes meant for $productName$ $version$. However, in many cases, the
-extra effort will mean it is not a cost-effective tradeoff.
+When you run your $productName$ 1.X configuration in a separate cluster, it is not affected by changes meant for $productName$ $version$. However, this can result in extra effort and is not time-efficient.
 
 1. Install $productName$ $version$ in a completely new cluster.
 
@@ -23,11 +21,10 @@ extra effort will mean it is not a cost-effective tradeoff.
    $productName$ $version$ will translate them internally to `getambassador.io/v3alpha1`
    resources.
 
-4. Test. Each $productName$ instance has its own cluster, so you can test the new
+4. Each $productName$ instance has its own cluster, so you can test the new
    instance without disrupting traffic to the existing instance.
 
-5. If you need to make changes, you can change the `getambassador.io/v2` resource, or go ahead
-   and convert the resource you're changing to `getambassador.io/v3alpha1` by using
+5. If you need to make changes, you can change the `getambassador.io/v2` resource, or convert the resource you're changing to `getambassador.io/v3alpha1` by using
    `kubectl edit`.
 
 6. Once everything is working with both versions, transfer incoming traffic to the $productName$

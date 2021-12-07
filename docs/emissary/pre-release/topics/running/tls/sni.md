@@ -30,7 +30,7 @@ spec:
 ```
 
 Now let's create a second `Host` for a different domain we want to serve behind
-$productName$. This second `Host` will use $AESproductName$'s automatic TLS
+$productName$. This second `Host` uses $AESproductName$'s automatic TLS
 to get a certificate from Let's Encrypt.
 
 ```yaml
@@ -68,7 +68,7 @@ spec:
   hostname: host.example.com
 ```
 
-will create a `/httpbin/` endpoint for `host.example.com`
+This creates a `/httpbin/` endpoint for `host.example.com`
 
 ```yaml
 ---
@@ -82,7 +82,7 @@ spec:
   hostname: host.foo.com
 ```
 
-will create a `/foo/` endpoint for `host.foo.com`
+This creates a `/foo/` endpoint for `host.foo.com`
 
 ```yaml
 ---
@@ -96,4 +96,4 @@ spec:
   service: bar-endpoint
 ```
 
-will create a `/bar/` endpoint for all `Host`s.
+This creates a `/bar/` endpoint for all `Host`s.

@@ -77,7 +77,7 @@ comes in over port `8080`.
 
 ## HTTP->HTTPS redirection
 
-Most modern websites that force HTTPS will also automatically redirect any 
+Most websites that force HTTPS will also automatically redirect any 
 requests that come into it over HTTP. In $AESproductName$, this is
 enabled by default but can easily be enabled in any version of $productName$.
 
