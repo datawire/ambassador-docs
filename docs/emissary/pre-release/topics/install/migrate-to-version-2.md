@@ -113,4 +113,4 @@ Migration is a five-step process:
    `getambassador.io/v3alpha1` resources.
 
    Once $productName$ 1.X is no longer running, you may [convert](..convert-to-v3alpha1)
-   any remaining `getambassador.io/v2` resourcses to `getambassador.io/v3alpha1`.
+   any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
