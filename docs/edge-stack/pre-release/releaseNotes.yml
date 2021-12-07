@@ -51,16 +51,6 @@ items:
           will now be validated for correct syntax by Kubernetes itself. This means that <code>kubectl apply</code>
           will reject invalid CRDs before they are actually applied, preventing them from causing errors.
         image: ./v2.1.0-edge-stack-validation.png
-        
-      - title: External Filter correctly supports all AuthService fields
-        type: change
-        body: >-
-          <code>External</code> <code>Filter</code>s have been modified to be in-sync with Emissary
-          <code>AuthService</code>s.  This adds the <code>add_auth_headers</code>,
-          <code>protocol_version</code>, and <code>stats_name</code> fields, as well as changing the
-          <code>tls</code> field to be a string rather than a bool.
-        # Editor's note: Depending on the implementation strategy, I may decide to drop `stats_name`.
-        docs: topics/using/filters/external
 
       - title: Correctly handle all changing canary configurations
         type: bugfix
