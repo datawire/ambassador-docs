@@ -39,8 +39,7 @@ When you run the Helm chart, it installs $productName$.
 
     ```
 	 helm install -n $productNamespace$ --create-namespace \
-		 $productHelmName$ --devel \
-		 datawire/$productHelmName$ && \
+		 $productHelmName$ datawire/$productHelmName$ && \
 	 kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
     ```
 
