@@ -37,19 +37,19 @@ In this quick start, we'll walk through how you can configure Edge Stack or Emis
 
 4. Follow the prompts to install or configure either Edge Stack or Emissary-ingress 2.0 with a cloud token into your Kubernetes cluster.
 
+   <Alert severity="warning">
+     You must use Edge Stack or Emissary-ingress 2.0.5 or later to enable automated configuration analysis.
+   </Alert>
+
+   If you do not have the latest version installed, you can:
+   
+   * [Install the latest version of Edge Stack](/docs/edge-stack/2.0/topics/install/)
+   * [Upgrade Edge Stack to the latest version](/docs/edge-stack/2.0/topics/install/upgrading/)
+
 5. When the installation completes, services, environments and clusters will be visible in Ambassador Cloud.
 
 <Alert severity="success"><b>Victory!</b> All the Services running in your cluster are now listed in Service Catalog!
 You should now be able to see all running services in your cluster at <a href="https://app.getambassador.io/cloud/services" target="_blank">https://app.getambassador.io/cloud/services</a> </Alert>
-
-If you do not have the latest version installed, you can:
-
-* [Install the latest version of Edge Stack](/docs/edge-stack/2.0/topics/install/)
-* [Upgrade Edge Stack to the latest version](/docs/edge-stack/2.0/topics/install/upgrading/)
-
-<Alert severity="warning">
-  You must use Edge Stack or Emissary-ingress 2.0.5 or later to enable automated configuration analysis.
-</Alert>
 
 ## 2. Fork the demo repository
 
