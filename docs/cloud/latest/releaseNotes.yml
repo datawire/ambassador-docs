@@ -28,14 +28,19 @@
 #         - docs: The path to the documentation page where additional information can be found.
 #         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
 
+
 changelog: ''
 items:
-  - date: '2021-12-09'
+  - date: '2021-12-08'
     notes:
       - title: 'Subscriptions'
         body: 'Secure payments and convenient self-service subscriptions, featuring several tiers of plans to accommodate projects of every size.'
         image: './payment-tiers.png'
         href: '/editions'
+      - title: To Cells From Environments
+        body: 'Ambassador Cloud switched to Cells from the Environment concept. A Cell is an instance of your entire application. With Cells you are not limited to just three stages, you have the freedom to define the stages and their relationships to represent the application lifecycle.'
+        image: ./cloud-new-multi-cells.png
+        docs: service-catalog/concepts/cells
         type: feature
   - date: '2021-10-05'
     notes:

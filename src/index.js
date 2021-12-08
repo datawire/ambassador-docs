@@ -2,29 +2,30 @@ import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
 
+
+
 import Layout from '../../src/components/Layout';
 
+
+
 import ContactBlock from '../../src/components/ContactBlock';
+import DatawireMetaData from '../../src/components/DatawireMetaData';
 import Dropdown from '../../src/components/Dropdown';
 import Icon from '../../src/components/Icon';
 import ReadingTime from '../../src/components/ReadingTime';
 import SEO from '../../src/components/SEO/SEO';
 import template from '../../src/utils/template';
 
+
+
 import AllVersions from './components/AllVersions';
 import ContentTable from './components/ContentTable';
 import DocsFooter from './components/DocsFooter';
 import DocsHome from './components/DocsHome';
 import SearchBox from './components/SearchBox';
+import IsAesPage from './components/ShowAesPage';
 import SidebarContent from './components/SidebarContent';
-import {
-  products,
-  metaData,
-  learningJourneys,
-  archivedVersionsLink,
-  siteUrl,
-  getSiteUrl,
-} from './config';
+import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl, getSiteUrl } from './config';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
@@ -34,7 +35,7 @@ import Kubernetes from './products/Kubernetes';
 import Telepresence from './products/Telepresence';
 import './style.less';
 import getPrevNext from './utils/getPrevNext';
-import IsAesPage from './components/ShowAesPage';
+
 
 export default ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -340,7 +341,7 @@ export default ({ data, location, pageContext }) => {
     </div>
   );
 
-  const edgeStackLinks = data?.allFile.edges[0].node.internal.content;
+  const edgeStackLinks = data?.allFile.edges[0]?.node.internal.content;
 
   const footer = (
     <div>
@@ -371,6 +372,15 @@ export default ({ data, location, pageContext }) => {
             page.contentTable.items[0].items?.length > 1
           }
         />
+        {!isHome && !isProductHome && isProduct && (
+        <DatawireMetaData
+          page={page}
+          edgeStackLinks={edgeStackLinks}
+          product={product.slug}
+          version={versions.docsVersion}
+          resources={page.exports}
+        />
+      )}
       </section>
       {!isHome && !isProductHome && isProduct && (
         <DocsFooter
@@ -553,6 +563,12 @@ export const query = graphql`
   query ($linksslug: String, $slug: String!, $learningSlugs: [String]) {
     mdx(fields: { slug: { eq: $slug } }) {
       body
+      exports {
+        metaData {
+          name
+          path
+        }
+      }
       fields {
         slug
         linksslug
