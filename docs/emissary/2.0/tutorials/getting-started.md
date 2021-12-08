@@ -8,7 +8,7 @@ import GettingStartedEmissaryTabs from './gs-tabs'
 # $productName$ quick start
 
 <Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
+  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
   changes to allow $productName$ to more gracefully handle larger installations
   (including multitenant or multiorganizational installations), reduce memory footprint,
   and improve performance. For more information on 2.X, please check the&nbsp;
@@ -57,7 +57,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
          from: ALL
    EOF
    ```
-   
+
      <Alert severity="info">
        This <code>Listener</code> will associate with <i>all</i> <code>Host</code>s in your cluster. This is fine for the quickstart, but is likely not what you really want for production use.<br/>
        <br/>
@@ -139,13 +139,3 @@ $productName$ has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice.
 
 To learn more about how $productName$ works, read the [$productName$ Story](../../about/why-ambassador).
-
-export const metaData = [
-  {name: "Page Source", path: "https://github.com/datawire/getambassador.io/blob/master/ambassador-docs/docs/emissary/2.0/tutorials/getting-started.md"},
-  {name: "Release notes", path: "../../release-notes"},
-  {name: "Listener", path: "../../topics/running/listener"},
-  {name: "Host", path: "../../topics/running/host-crd"},
-  {name: "Configuring comunications", path: "../../howtos/configure-communications"},
-  {name: "Mappings", path: "../../topics/using/intro-mappings/"},
-  {name: "Madfghdfhbdfs", path: "../../topics/using/intro-mappings/"},
-]
