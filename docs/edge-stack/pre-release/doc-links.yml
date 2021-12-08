@@ -258,9 +258,9 @@
                link: /howtos/client-cert-validation
  - title: Developer Portal
    link: /topics/using/dev-portal
- - title: Changes in 2.0.0
-   link: /about/changes-2.0.0
- - title: Known issues in 2.0.0
+ - title: Changes in $productName$ 2.X
+   link: /about/changes-2.x
+ - title: Known issues in $productName$ $version$
    link: /about/known-issues
  - title: FAQs
    link: /about/faq

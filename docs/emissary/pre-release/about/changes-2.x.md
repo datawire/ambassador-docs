@@ -1,34 +1,30 @@
 import Alert from '@material-ui/lab/Alert';
 
-Major Changes in $productName$ 2.0
+Major Changes in $productName$ 2.X
 ==================================
 
-We're pleased to introduce $productName$ 2.0.4 for general availability!
 The 2.X family introduces a number of changes to allow $productName$
 to more gracefully handle larger installations, reduce global configuration to
 better handle multitenant or multiorganizational installations, reduce memory
 footprint, and improve performance. We welcome feedback!! Join us on
 [Slack](https://a8r.io/slack) and let us know what you think.
 
-While $productName$ 2.0 is functionally compatible with $productName$ 1.14, note
+While $productName$ 2 is functionally compatible with $productName$ 1.14, note
 that this is a **major version change** and there are important differences between
-$productName$ 1.X and 2.0. For details, read on.
+$productName$ 1.X and $productName$ $version$. For details, read on.
 
 ## 1. Configuration API Version `getambassador.io/v3alpha1`
 
-$productName$ 2.0 introduces API version `getambassador.io/v3alpha1` to allow
+$productName$ 2.0 introduced API version `getambassador.io/v3alpha1` to allow
 certain changes in configuration resources that are not backwards compatible with
 $productName$ 1.X. The most notable example of change is the addition of the
 **mandatory** `Listener` resource; however, there are important changes
 in `Host` and `Mapping` as well.
 
 <Alert severity="info">
-  $productName$ 2.0.4 supports only configuration resource API version
-  <code>getambassador.io/v3alpha1</code>. A later version will reintroduce support for
-  <code>getambassador.io/v2</code>.<br/>
-  <br/>
-  $productName$ 2.X does not support API versions <code>getambassador.io/v0</code>
-  or <code>getambassador.io/v1</code>.
+  $productName$ 2.X supports only API versions <code>getambassador.io/v2</code>
+  and <code>getambassador.io/v3alpha1</code>. If you are using any resources with
+  older API versions, you will need to upgrade them.
 </Alert>
 
 API version `getambassador.io/v3alpha1` replaces `x.getambassador.io/v3alpha1` from
@@ -51,8 +47,8 @@ either a string or a list of strings is not allowed. Several such elements appea
 
 ## 2. `Listener`s, `Host`s, and `Mapping`s
 
-$productName$ 2.0 introduces the new **mandatory** `Listener` CRD, and
-brings some changes for the `Host` and `Mapping` resources.
+$productName$ 2.0 introduced the new **mandatory** `Listener` CRD, and made some changes
+to the `Host` and `Mapping` resources.
 
 ### The `Listener` CRD
 
@@ -118,7 +114,7 @@ Adding a `Host` with a `hostname` of `"*"` will allow the second query to work.
 
 The [`Host` CRD](../../topics/running/host-crd) continues to define information about hostnames, TLS certificates, and how to handle requests that are "secure" (using HTTPS) or "insecure" (using HTTP). The [`Mapping` CRD](../../topics/using/intro-mappings) continues to define how to map the URL space to upstream services.
 
-However, in $productName$ 2.0, a `Mapping` will not be associated with a `Host` unless at least one of the following is true:
+However, as of $productName$ 2.0, a `Mapping` will not be associated with a `Host` unless at least one of the following is true:
 
 - The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
 
@@ -149,7 +145,7 @@ Each `Host` can specify its `requestPolicy.insecure.action` independently of any
 
 ### `Host`, `TLSContext`, and TLS Termination
 
-In $productName$ 2.0, **`Host`s are required for TLS termination**. It is no longer sufficient to create a [`TLSContext`](../../topics/running/tls/#tlscontext) by itself; the [`Host`](../../topics/running/host-crd) is required.
+As of $productName$ 2.0, **`Host`s are required for TLS termination**. It is no longer sufficient to create a [`TLSContext`](../../topics/running/tls/#tlscontext) by itself; the [`Host`](../../topics/running/host-crd) is required.
 
 The minimal setup for TLS termination is therefore a Kubernetes `Secret` of type `kubernetes.io/tls`, and a `Host` that uses it:
 
@@ -197,23 +193,15 @@ for compatibility with Kubernetes 1.22.
   <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
 </Alert>
 
-### `Host`s and ACME
-
-In $productName$ 2.0, ACME will be disabled if a `Host` does not set `acmeProvider` at all (prior to $productName$ 2.0, not mentioning `acmeProvider` would result in the ACME client attempting, and failing, to start). If `acmeProvider` is set, but `acmeProvider.authority` is not set, the ACME client will continue to default to Let's Encrypt, in order to preserve compatibility with $productName$ prior to $productName$ 2.0. For further examples, see [Configuring $productName$ to Communicate](../../howtos/configure-communications).
-
-<Alert severity="info">
-  <a href="../../topics/running/host-crd">Learn more about <code>Host</code></a>.
-</Alert>
-
 ## 3. Other Changes
 
 ### Envoy V3 API by Default
 
-By default, $productName$ will configure Envoy using the [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api). In $productName$ 2.0, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION` environment variable to "V2"; a future version will remove V2 support.
+By default, $productName$ 2.X will configure Envoy using the [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api). In $productName$ $version$, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION` environment variable to "V2"; a future version will remove V2 support.
 
 ### More Performant Reconfiguration by Default
 
-The environment variable `AMBASSADOR_FAST_RECONFIGURE` is a feature flag that enables a higher performance implementation of the code $productName$ uses to validate and generate envoy configuration. It is enabled by default in $productName$ 2.0.
+In $productName$ 1.X, the environment variable `AMBASSADOR_FAST_RECONFIGURE` could be used to enable a higher performance implementation of the code $productName$ uses to validate and generate Envoy configuration. In $productName$ 2.X, this higher-performance mode is always enabled.
 
 ### Changes to the `ambassador` `Module`, and the `tls` `Module`
 
@@ -221,7 +209,7 @@ It is no longer possible to configure TLS using the `tls` element of the `ambass
 
 With the introduction of the `Listener` resource, a few settings have moved from the `Module` to the `Listener`.
 
-Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.0, so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer supported. Note that the `Listener` resource can configure `PROXY` resource per-`Listener`, rather than having a single global setting. For further information, see the [`Listener` documentation](../../topics/running/listener).
+Configuration for the `PROXY` protocol is part of the `Listener` resource in $productName$ 2.X, so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer supported. Note that the `Listener` resource can configure `PROXY` resource per-`Listener`, rather than having a single global setting. For further information, see the [`Listener` documentation](../../topics/running/listener).
 
 `xff_num_trusted_hops` has been removed from the `Module`, and its functionality has been moved to the `l7Depth` setting in the `Listener` resource.
 
@@ -235,12 +223,12 @@ Configuration for the `PROXY` protocol is part of the `Listener` resource in $pr
 
 ### Service Preview No Longer Supported
 
-Service Preview is no longer supported in $productName$ 2.0, as its use cases are supported by Telepresence.
+Service Preview is no longer supported as of $productName$ 2.X, as its use cases are supported by Telepresence.
 
 ### Edge Policy Console No Longer Supported
 
-The Edge Policy Console has been removed in $productName$ 2.0, in favor of Ambassador Cloud.
+The Edge Policy Console has been removed as of $productName$ 2.X, in favor of Ambassador Cloud.
 
 ### `Project` CRD No Longer Supported
 
-The `Project` CRD has been removed in $productName$ 2.0, in favor of Argo.
+The `Project` CRD has been removed as of $productName$ 2.X, in favor of Argo.
