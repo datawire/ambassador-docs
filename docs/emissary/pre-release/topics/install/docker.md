@@ -2,6 +2,13 @@ import Alert from '@material-ui/lab/Alert';
 
 # Install with Docker
 
+<Alert severity="warning">
+  To migrate from $productName$ 1.X to $productName$ 2.X, see the
+  <a href="../migrate-to-version-2"> $productName$ 2.X Migration Guide</a>. This guide
+  <b> will not work</b> for that, due to changes to the configuration resources used
+  for $productName$ 2.X.
+</Alert>
+
 <Alert severity="info">
   We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
   changes to allow $productName$ to more gracefully handle larger installations
