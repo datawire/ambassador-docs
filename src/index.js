@@ -9,6 +9,7 @@ import Layout from '../../src/components/Layout';
 
 
 import ContactBlock from '../../src/components/ContactBlock';
+import DatawireMetaData from '../../src/components/DatawireMetaData';
 import Dropdown from '../../src/components/Dropdown';
 import Icon from '../../src/components/Icon';
 import ReadingTime from '../../src/components/ReadingTime';
@@ -371,6 +372,15 @@ export default ({ data, location, pageContext }) => {
             page.contentTable.items[0].items?.length > 1
           }
         />
+        {!isHome && !isProductHome && isProduct && (
+        <DatawireMetaData
+          page={page}
+          edgeStackLinks={edgeStackLinks}
+          product={product.slug}
+          version={versions.docsVersion}
+          resources={page.exports}
+        />
+      )}
       </section>
       {!isHome && !isProductHome && isProduct && (
         <DocsFooter
@@ -553,6 +563,12 @@ export const query = graphql`
   query ($linksslug: String, $slug: String!, $learningSlugs: [String]) {
     mdx(fields: { slug: { eq: $slug } }) {
       body
+      exports {
+        metaData {
+          name
+          path
+        }
+      }
       fields {
         slug
         linksslug
