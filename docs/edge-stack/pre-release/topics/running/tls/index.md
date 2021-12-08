@@ -199,7 +199,6 @@ spec:
   min_tls_version: v1.2
 ```
 
-
 <Alert severity="warning">
   The <code>Host</code>'s <code>hostname</code> and the <code>TLSContext</code>'s&nbsp;
   <code>hosts</code> must have compatible settings. If they do not, requests may not

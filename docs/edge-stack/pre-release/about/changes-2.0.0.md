@@ -187,22 +187,6 @@ A `getambassador.io/v2` `Mapping` or `TCPMapping` could specify `tls: true` to i
   <a href="../../topics/using/intro-mappings">Learn more about <code>Mapping</code></a>.
 </Alert>
 
-### `External` `Filter`s and TLS Origination
-
-A `getambassador.io/v2` `External` `Filter` could specify `tls: true`
-to indicate TLS origination, and had no way of supplying a client
-certificate.  In `getambassador.io/v3alpha1`: The `tls` field is no
-longer a bool; instead use an `https://` or `http://` prefix on the
-`auth_service` to control whether TLS is originated, and the `tls`
-field is now a string, set it to the name of a `TLSContext` to supply
-a client certificate to use (same as a `Mapping`).
-
-<Alert severity="info">
-
-[Learn more about `External` `Filter`s](../../topics/using/filters/external/)
-
-</Alert>
-
 ### `Mapping`s and `labels`
 
 The `Mapping` CRD includes a `labels` field, used with rate limiting. The
