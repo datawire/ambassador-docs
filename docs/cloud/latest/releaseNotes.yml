@@ -37,6 +37,7 @@ items:
         body: 'Secure payments and convenient self-service subscriptions, featuring several tiers of plans to accommodate projects of every size.'
         image: './payment-tiers.png'
         href: '/editions'
+        type: feature
       - title: To Cells From Environments
         body: 'Ambassador Cloud switched to Cells from the Environment concept. A Cell is an instance of your entire application. With Cells you are not limited to just three stages, you have the freedom to define the stages and their relationships to represent the application lifecycle.'
         image: ./cloud-new-multi-cells.png
@@ -74,6 +75,7 @@ items:
         body: 'View connected Edge Stack and Emissary-ingress clusters in the cloud. Glimpse at usage metrics and register your installation using a free community licence to unlock Edge Stack traffic management features.'
         image: ./cloud-cluster-rps.png
         docs: ../../edge-stack/latest/tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
+        type: feature
   - date: '2021-06-14'
     notes:
       - title: Updated views for Service Catalog
