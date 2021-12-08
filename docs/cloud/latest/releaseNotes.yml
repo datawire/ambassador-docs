@@ -26,9 +26,17 @@
 #             `FOO/releaseNotes.yml`, then the image paths are
 #             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
+# A cell is a complete, independent instance of the entire application.
 
 changelog: ''
 items:
+  - date: '2021-12-03'
+    notes:
+      - title: To Cells From Environments
+        body: 'Ambassador Cloud switched to Cells from the Environment concept. A Cell is an instance of your entire application. With Cells you are not limited to just three stages, you have the freedom to define the stages and their relationships to represent the application lifecycle.'
+        image: ./cloud-new-multi-cells.png
+        docs: service-catalog/concepts/cells
+        type: feature
   - date: '2021-10-05'
     notes:
       - title: 'Rollouts from your GitLab repositories'
