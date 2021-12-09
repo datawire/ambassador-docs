@@ -1,0 +1,22 @@
+version: 2.1.0
+aproVersion: 0.11.0
+qotmVersion: 1.7
+quoteVersion: 0.5.0
+branch: release/v2.1
+docsVersion: "2.1"
+productName: "Emissary-ingress"
+productNamePlural: "Emissary-ingresses"
+productYAMLPath: emissary
+productCRDName: emissary-crds.yaml
+productYAMLFile: emissary-ingress.yaml
+productNamespace: emissary
+productDeploymentName: emissary-ingress
+productContainerName: ambassador
+productHelmName: emissary-ingress
+productDockerImage: emissary
+productDockerRegistry: docker.io/emissaryingress
+productFullDockerImage: docker.io/emissaryingress/emissary
+OSSproductName: "Emissary-ingress"
+OSSproductNamePlural: "Emissary-ingresses"
+AESproductName: "Ambassador Edge Stack"
+AESproductNamePlural: "Ambassador Edge Stacks"
