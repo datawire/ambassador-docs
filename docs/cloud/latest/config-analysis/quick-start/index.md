@@ -1,11 +1,5 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Automated Configuration Analysis with Ambassador Cloud
-
-Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
-
-In this quick start, we'll walk through how you can configure Edge Stack or Emissary-ingress with automated configuration analysis, integrating checks into your GitOps pull request workflow. The automated configuration analysis will detect and resolve configuration issues _before_ your changes go live.
-
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
@@ -18,6 +12,16 @@ In this quick start, we'll walk through how you can configure Edge Stack or Emis
 * [What's Next?](#whats-next)
 
 </div>
+
+# Automated Configuration Analysis with Ambassador Cloud
+
+Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
+
+In this quick start, we'll walk through how you can configure Edge Stack or Emissary-ingress with automated configuration analysis, integrating checks into your GitOps pull request workflow. The automated configuration analysis will detect and resolve configuration issues _before_ your changes go live.
+
+<Alert severity="warning">
+  You must use Edge Stack or Emissary-ingress 2.0.5 or later to enable automated configuration analysis.
+</Alert>
 
 ## 1. Connect your cluster to Ambassador Cloud
 
@@ -33,19 +37,19 @@ In this quick start, we'll walk through how you can configure Edge Stack or Emis
 
 4. Follow the prompts to install or configure either Edge Stack or Emissary-ingress 2.0 with a cloud token into your Kubernetes cluster.
 
+   <Alert severity="warning">
+     You must use Edge Stack or Emissary-ingress 2.0.5 or later to enable automated configuration analysis.
+   </Alert>
+
+   If you do not have the latest version installed, you can:
+   
+   * [Install the latest version of Edge Stack](/docs/edge-stack/2.0/topics/install/)
+   * [Upgrade Edge Stack to the latest version](/docs/edge-stack/2.0/topics/install/upgrading/)
+
 5. When the installation completes, services, environments and clusters will be visible in Ambassador Cloud.
 
 <Alert severity="success"><b>Victory!</b> All the Services running in your cluster are now listed in Service Catalog!
 You should now be able to see all running services in your cluster at <a href="https://app.getambassador.io/cloud/services" target="_blank">https://app.getambassador.io/cloud/services</a> </Alert>
-
-<Alert severity="info">
-  Ensure you have Edge Stack or Emissary-ingress 2.0 or later to enable automated configuration analysis.
-</Alert>
-
-If you do not have the latest version installed, you can:
-
-* [Install the latest version of Edge Stack](/docs/edge-stack/2.0/topics/install/)
-* [Upgrade Edge Stack to the latest version](/docs/edge-stack/2.0/topics/install/upgrading/)
 
 ## 2. Fork the demo repository
 
@@ -60,7 +64,7 @@ kubectl create namespace gitops-demo && \
 kubectl apply -n gitops-demo -f ./manifests
 ```
 
-This will create a `Deployment`, `Service`, and `AmbassadorMapping` in the `gitops-demo` namespace in your cluster. All resources applied in this guide can be removed by running `kubectl delete namespace gitops-demo` when you're done with the quickstart.
+This will create a `Deployment`, `Service`, and `Mapping` in the `gitops-demo` namespace in your cluster. All resources applied in this guide can be removed by running `kubectl delete namespace gitops-demo` when you're done with the quickstart.
 
 <Alert severity="info">The <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> should display information about the quote service!</Alert>
 
@@ -96,7 +100,7 @@ This will create a `Deployment`, `Service`, and `AmbassadorMapping` in the `gito
     k8s_config:
     - manifest_path: /manifests/
       cluster_info:
-        cluster_id: 282b8880-24d4-530c-87aa-55f75132985b
+        cluster_id: 01234567-89ab-cdef-0123-456789abcdef
         cluster_name: My Awesome Cluster
     ```
 
@@ -149,8 +153,8 @@ spec:
   selector:
     app: echo-server
 ---
-apiVersion: x.getambassador.io/v3alpha1
-kind: AmbassadorMapping
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
 metadata:
   name: echo-server
   namespace: gitops-demo
@@ -174,13 +178,13 @@ Navigate to GitHub to create a pull request for your change. Make sure the targe
 
 When you create a new pull request that changes your configuration, Ambassador Cloud will be automatically notified. The configuration change that you make is compared to your existing (runtime) configuration change, and the implications of this change are analyzed. Ambassador Cloud will post a comment, analyzing the consequences of merging the pull request into your main branch.
 
-In this example, the automated configuration analysis detects a conflict on the `/backend` route, as multiple `AmbassadorMappings` point to the same route.
+In this example, the automated configuration analysis detects a conflict on the `/backend` route, as multiple `Mappings` point to the same route.
 
 ![Conflicting Routes](../../images/gitops-quickstart-warning.png)
 
 In this case, we didn't intend to create a route conflict, so we'll make a change to fix this particular problem.
 
-In `manifests/echo-service.yaml`, edit the prefix for the `echo-service` `AmbassadorMapping`, so that it doesn't conflict with the `quote` service:
+In `manifests/echo-service.yaml`, edit the prefix for the `echo-service` `Mapping`, so that it doesn't conflict with the `quote` service:
 
 ```diff
  metadata:
