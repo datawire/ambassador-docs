@@ -45,6 +45,15 @@ important caveats:
    that should be visible to $productName$ $version$, then set
    `AMBASSADOR_LABEL_SELECTOR=version-two=true` in its Deployment.
 
+3. **If $productName$ 1.X is using ACME, $productName$ $version$ cannot also use ACME.**
+
+   The processes that handle ACME challenges cannot be managed by both $productName$
+   1.X and $productName$ $version$ at the same time. The simplest way of managing this
+   is to let $productName$ 1.X handle ACME during the migration, to allow for a smoother
+   rollback if necessary.
+
+   This is the most common case requiring isolated configurations as described above.
+
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.X configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
@@ -52,7 +61,7 @@ ACME, but it is more effort.
 
 ## Side-by-Side Migration Steps
 
-Migration is a five-step process:
+Migration is a six-step process:
 
 1. **Convert older configuration resources to `getambassador.io/v2`.**
 
@@ -60,7 +69,25 @@ Migration is a five-step process:
    <code>getambassador.io/v1</code> resources. If you are still using any of these
    resources, convert them to <code>getambassador.io/v2</code> before beginning migration.
 
-2. **Install new CRDs.**
+2. **Isolate configurations if using ACME.**
+
+   If your $productName$ 1.X installation is using ACME, you must isolate the
+   configurations of $productName$ 1.X and $productName$ $version$ using labels,
+   so that you can prevent $productName$ $version$ from attempting to use ACME
+   at the same time:
+
+   ```
+   # Label all Ambassador CRDs as being OK for $productName$ 2.X...
+   kubectl label ambassador-crds --all version-two=true
+
+   # ...but then mark Hosts as _not_ OK for $productName$ 2.X.
+   kubectl label hosts --all version-two-
+   ```
+
+   This prevents $productName$ $version$ from trying to manage ACME on existing
+   `Host`s.
+
+3. **Install new CRDs.**
 
    Before installing $productName$ $version$ itself, you must configure your
    Kubernetes cluster to support its new `getambassador.io/v3alpha1` configuration
@@ -81,7 +108,7 @@ Migration is a five-step process:
      the next step.
    </Alert>
 
-3. **Install $productName$ $version$.**
+4. **Install $productName$ $version$.**
 
    After installing the new CRDs, you need to install $productName$ $version$ itself.
    This is most easily done with [Helm](../helm):
@@ -119,7 +146,15 @@ Migration is a five-step process:
    [configuring $productName$ Communications](../../../howtos/configure-communications)
    and [updating CRDs to `getambassador.io/v3alpha1`](../convert-to-v3alpha1). 
 
-   At minimum, you'll need to add [`Listener`s](../../running/listener) as needed.
+   - At minimum, you'll need to add [`Listener`s](../../running/listener) as needed.
+
+   - If  your $productName$ 1.X installation is using ACME, you'll also need to duplicate
+     your `Host`s:
+
+      - Make sure the duplicate `Host` uses `apiVersion: getambassador.io/v3alpha1`.
+      - Make sure the duplicate `Host` has a different resource name.
+      - Make sure the duplicate `Host` has the same `tlsSecret` and `hostname` as the original!
+      - Make sure the duplicate `Host` has ACME disabled.
 
    <Alert severity="info">
     Kubernetes will not allow you to have a <code>getambassador.io/v3alpha1</code> resource
@@ -134,7 +169,7 @@ Migration is a five-step process:
    **If you find that you need to roll back**, just reinstall your 1.X CRDs and delete your 
    installation of $productName$ $version$.
 
-4. **When ready, shut down $productName$ 1.X.**
+6. **When ready, shut down $productName$ 1.X.**
 
    You can run $productName$ 1.X and $productName$ $version$ as long as you care to. 
    However, taking full advantage of $productName$ 2.X's capabilities **requires**
@@ -143,4 +178,8 @@ Migration is a five-step process:
    `getambassador.io/v3alpha1` resources.
 
    Once $productName$ 1.X is no longer running, you may [convert](..convert-to-v3alpha1)
-   any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+   any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`. 
+
+   If your $productName$ 1.X installation was managing ACME, you will also need to 
+   re-enable ACME on your `getambassador.io/v3alpha1` `Host`s, as appropriate.
+
