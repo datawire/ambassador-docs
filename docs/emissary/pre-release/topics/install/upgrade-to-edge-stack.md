@@ -41,21 +41,23 @@ If they are not, the initial migration tests may fail.
 
 First, install $AESproductName$ alongside your existing $OSSproductName$ installation so you can test your workload against the new deployment.
 
-Note: Make sure you apply the manifests in the same namespace as your current $OSSproductName$ installation.
+Note: **Make sure you apply the manifests in the same namespace as your current $OSSproductName$ installation.**
+Our `oss-migration.yaml` assumes that you have installed $OSSproductName$ in the `emissary` namespace; if this is
+not correct for your installation, you'll need to download the file and edit it.
 
-- **If you are already running $OSSproductName$ $version$**, you need to run multiple commands,
-  replacing `<namespace>` appropriately:
-
-   ```
-   kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml &&
-   kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-$version$-migration.yaml
-   ```
-
-- **If you are currently running $OSSproductName$ before $version$**, you need to run only one command,
-  replacing `<namespace>` appropriately::
+- **If you are already running $OSSproductName$ $version$**, run these commands:
 
    ```
-   kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml &&
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml &&
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/oss-$version$-migration.yaml
+   ```
+
+- **If you are currently running $OSSproductName$ before $version$**, run these commands:
+
+   ```
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml &&
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml
    ```
 
 ## 2. Test the new Deployment
@@ -65,7 +67,7 @@ At this point, you have $OSSproductName$ and $AESproductName$ running side by si
 Get the IP address to connect to $AESproductName$ by running the following command:
 
 ```
-kubectl get service test-aes -n <namespace>
+kubectl get service test-aes -n emissary
 ```
 
 Test that $AESproductName$ is working properly.
@@ -74,25 +76,25 @@ Test that $AESproductName$ is working properly.
 
 Once you’re satisfied with the new deployment, begin to route traffic to $AESproductName$.
 
-Edit the current $OSSproductName$ service with `kubectl edit service -n <namespace> emissary-ingress` and change the selector to `product: aes`.
+Edit the current $OSSproductName$ service with `kubectl edit service -n emissary emissary-ingress` and change the selector to `product: aes`.
 
 ## 4. Delete the old Deployment
 
 You can now safely delete the older $OSSproductName$ deployment and $AESproductName$ service.
 
 ```
-kubectl delete deployment -n <namespace> emissary-ingress
-kubectl delete service -n <namespace> test-aes
+kubectl delete deployment -n emissary emissary-ingress
+kubectl delete service -n emissary test-aes
 ```
 
 ## 5. Update and restart
 
-Apply the new CRDs, resources and restart the $AESproductName$ pod for changes to take effect:
+Apply the new CRDs, resources and restart the $AESproductName$ pod for changes to take effect. **Again, our published `resources-migration.yaml` assumes that you are using the `emissary` namespace**; if you are using a different namespace, you'll need to download and edit the file.
 
 ```
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml && \
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/resources-migration.yaml && \
-kubectl rollout -n <namespace> restart deployment/aes
+kubectl apply -n emissary -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml && \
+kubectl apply -n emissary -f https://app.getambassador.io/yaml/edge-stack/latest/resources-migration.yaml && \
+kubectl rollout -n emissary restart deployment/aes
 ```
 
 ## 6. What's next?
