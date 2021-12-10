@@ -3,15 +3,13 @@ import Alert from '@material-ui/lab/Alert';
 # Upgrade to $AESproductName$
 
 <Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
-  changes to allow $productName$ to more gracefully handle larger installations (including
-  multitenant or multiorganizational installations), reduce memory footprint, and improve
-  performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
-  some changes that aren't backward-compatible with 1.X, so <b>some configuration has
-  changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b> read
-  the <a href="/docs/emissary/latest/topics/install/migrate-to-version-2/">migration guide</a> before trying to install 2.0.<br/>
-  <br/>
-  For more information on 2.X, please check the <a href="../../../release-notes">release notes</a>.
+  The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle
+  larger installations (including multitenant or multiorganizational installations), reduce 
+  memory footprint, and improve performance. In keeping with [SemVer](https://semver.org),
+  $productName$ 2.X introduces some changes that aren't backward-compatible with 1.X, so <b>some
+  configuration has changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b>
+  read the <a href="/docs/emissary/latest/topics/install/migrate-to-version-2/">migration guide</a>
+  before trying to install any 2.X version.<br/>
 </Alert>
 
 If you currently have the open source version of $OSSproductName$, you can upgrade to $AESproductName$ with a few simple commands. When you upgrade to $AESproductName$, you'll be able to access additional capabilities such as **automatic HTTPS/TLS termination, Swagger/OpenAPI support, API catalog, Single Sign-On, and more.** For more about the differences between $AESproductName$ and $OSSproductName$, see the [Editions page](/editions).

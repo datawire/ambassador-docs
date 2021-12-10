@@ -2,21 +2,6 @@ import Alert from '@material-ui/lab/Alert';
 
 # Install with Docker
 
-<Alert severity="warning">
-  To migrate from $productName$ 1.X to $productName$ 2.X, see the
-  <a href="../migrate-to-version-2"> $productName$ 2.X Migration Guide</a>. This guide
-  <b> will not work</b> for that, due to changes to the configuration resources used
-  for $productName$ 2.X.
-</Alert>
-
-<Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
-  changes to allow $productName$ to more gracefully handle larger installations
-  (including multitenant or multiorganizational installations), reduce memory footprint,
-  and improve performance. For more information on 2.X, please check the&nbsp;
-  <a href="../../../release-notes">release notes</a>.
-</Alert>
-
 In this Docker quickstart guide, we'll get $productName$ running locally
 with a demo configuration. In the next section, we'll then walk through how to
 deploy $productName$ in Kubernetes with a custom configuration.

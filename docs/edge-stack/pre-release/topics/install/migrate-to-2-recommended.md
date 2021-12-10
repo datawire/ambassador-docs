@@ -19,7 +19,7 @@ $productName$ 1.X installation is shut down.
    ```
 
 2. Next, install $productName$ $version$ alongside 1.X. This is most easily done with
-   [Helm](../helm) and its canary option.
+   [Helm](../helm):
 
    ```bash
    helm install -n $productNamespace$ --create-namespace \

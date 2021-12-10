@@ -13,14 +13,6 @@ import Alert from '@material-ui/lab/Alert';
   for $productName$ 2.X.
 </Alert>
 
-<Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
-  changes to allow $productName$ to more gracefully handle larger installations
-  (including multitenant or multiorganizational installations), reduce memory footprint,
-  and improve performance. For more information on 2.X, please check the&nbsp;
-  <a href="../../../release-notes">release notes</a>.
-</Alert>
-
 In this guide, we'll walk you through installing $productName$ in your Kubernetes cluster.
 
 The manual install process does not allow for as much control over configuration
