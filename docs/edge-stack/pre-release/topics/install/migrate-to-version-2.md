@@ -84,7 +84,8 @@ Migration is a six-step process:
    kubectl label hosts --all version-two-
    ```
 
-   This prevents $productName$ $version$ from trying to manage ACME on existing
+   **Repeat the above for each namespace where you have $productName$ configuration
+   resources.** This prevents $productName$ $version$ from trying to manage ACME on existing
    `Host`s.
 
 3. **Install new CRDs.**
@@ -111,13 +112,24 @@ Migration is a six-step process:
 4. **Install $productName$ $version$.**
 
    After installing the new CRDs, you need to install $productName$ $version$ itself.
-   This is most easily done with [Helm](../helm):
+   This is most easily done with [Helm](../helm).
 
-   ```bash
-   helm install -n $productNamespace$ --create-namespace \
-     $productHelmName$ datawire/$productHelmName$ && \
-   kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-   ```
+   - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
+
+      ```bash
+      helm install -n $productNamespace$ --create-namespace \
+        $productHelmName$ datawire/$productHelmName$ && \
+      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+      ```
+
+   - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
+
+      ```bash
+      helm install -n $productNamespace$ --create-namespace \
+        $productHelmName$ datawire/$productHelmName$ \
+        --set emissary.env.AMBASSADOR_LABEL_SELECTOR="version-two=true" && \
+      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+      ```
 
    <Alert severity="warning">
      You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
