@@ -30,24 +30,33 @@ If you currently have the open source version of $OSSproductName$, you can upgra
 
 ## Before you begin
 
-Make sure that you follow the steps in the given order - not doing that might crash your $OSSproductName$ installation or make it inconsistent.
+Make sure that you **follow the steps in the given order** - not doing that might crash your $OSSproductName$ installation or make it inconsistent.
 
 Check if you have an [`AuthService`](../../running/services/auth-service) or
 [`RateLimitService`](../../running/services/rate-limit-service) installed. If
 you do, make sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
 If they are not, the initial migration tests may fail.
 
-## 1. Apply the migration manifest
+## 1. Apply the migration CRDs.
 
 First, install $AESproductName$ alongside your existing $OSSproductName$ installation so you can test your workload against the new deployment.
 
 Note: Make sure you apply the manifests in the same namespace as your current $OSSproductName$ installation.
 
-Use the following command to install $AESproductName$, replacing `<namespace>` appropriately:
+- **If you are already running $OSSproductName$ $version$**, you need to run multiple commands,
+  replacing `<namespace>` appropriately:
 
-```
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml
-```
+   ```
+   kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml &&
+   kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-$version$-migration.yaml
+   ```
+
+- **If you are currently running $OSSproductName$ before $version$**, you need to run only one command,
+  replacing `<namespace>` appropriately::
+
+   ```
+   kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml
+   ```
 
 ## 2. Test the new Deployment
 
