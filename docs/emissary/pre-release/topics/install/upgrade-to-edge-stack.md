@@ -45,16 +45,6 @@ Note: **Make sure you apply the manifests in the same namespace as your current 
 Our `oss-migration.yaml` assumes that you have installed $OSSproductName$ in the `emissary` namespace; if this is
 not correct for your installation, you'll need to download the file and edit it.
 
-- **If you are already running $OSSproductName$ $version$**, run these commands:
-
-   ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml &&
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml &&
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/oss-$version$-migration.yaml
-   ```
-
-- **If you are currently running $OSSproductName$ before $version$**, run these commands:
-
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml &&
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml
