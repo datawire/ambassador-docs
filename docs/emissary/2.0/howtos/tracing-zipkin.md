@@ -71,8 +71,10 @@ $ kubectl apply -f zipkin.yaml
 ```
 
 As a final step we want to restart $productName$ as this is necessary to add the tracing header. This command will restart all the Pods (assuming $productName$ is installed in the <code>ambassador</code> namespace):
-  <br/>
-  <code>kubectl -n ambassador rollout restart deploy</code>
+
+```
+$ kubectl -n ambassador rollout restart deploy
+```
 
 ## 2. Generate some requests
 
