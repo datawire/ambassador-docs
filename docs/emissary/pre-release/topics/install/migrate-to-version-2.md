@@ -52,7 +52,7 @@ ACME, but it is more effort.
 
 ## Side-by-Side Migration Steps
 
-Migration is a five-step process:
+Migration is a six-step process:
 
 1. **Convert older configuration resources to `getambassador.io/v2`.**
 
@@ -83,22 +83,25 @@ Migration is a five-step process:
 
 3. **Install $productName$ $version$.**
 
-   After installing the new CRDs, you need to install $productName$ $version$ itself.
-   This is most easily done with [Helm](../helm):
+   After installing the new CRDs, you need to install $productName$ $version$ itself
+   **in the same namespace as your existing $productName$ 1.X installation**. It's important
+   to use the same namespace so that the two installations can see the same secrets, etc.
+
+   This is most easily done with [Helm](../helm). **Note that if your $productName$ 1.X
+   installation uses a nonstandard namespace, you will need to include the namespace in
+   the commands below.**
 
    - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
 
       ```bash
-      helm install -n $productNamespace$ --create-namespace \
-        $productHelmName$ datawire/$productHelmName$ && \
+      helm install $productHelmName$ datawire/$productHelmName$ && \
       kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
       ```
 
    - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
 
       ```bash
-      helm install -n $productNamespace$ --create-namespace \
-        $productHelmName$ datawire/$productHelmName$ \
+      helm install $productHelmName$ datawire/$productHelmName$ \
         --set env.AMBASSADOR_LABEL_SELECTOR="version-two=true" && \
       kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
       ```
@@ -122,7 +125,55 @@ Migration is a five-step process:
      the <code>$productDeploymentName$-apiext</code> Deployment.
    </Alert>
 
-5. **Test!**
+5. **Install `Listener`s and `Host`s as needed.**
+
+   An important difference between $productName$ 1.X and $productName$ $version$ is the
+   new **mandatory** `Listener` CRD. Also, when running both installations side by side,
+   you will need to make sure that a `Host` is present for the new $productName$ $version$
+   Service. For example:
+
+   ```bash
+   kubectl apply -f - <<EOF
+   ---
+   apiVersion: getambassador.io/v3alpha1
+   kind: Listener
+   metadata:
+     name: ambassador-http-listener
+   spec:
+     port: 8080
+     protocol: HTTPS
+     securityModel: XFP
+     hostBinding:
+       namespace:
+         from: ALL
+   ---
+   apiVersion: getambassador.io/v3alpha1
+   kind: Listener
+   metadata:
+     name: ambassador-https-listener
+   spec:
+     port: 8443
+     protocol: HTTPS
+     securityModel: XFP
+     hostBinding:
+       namespace:
+         from: ALL
+   ---
+   apiVersion: getambassador.io/v3alpha1
+   kind: Host
+   metadata:
+     name: emissary-host
+   spec:
+     hostname: $EMISSARY_HOSTNAME
+     tlsSecret:
+       name: $EMISSARY_TLS_SECRET
+   EOF
+   ```
+
+   This example requires that you know the hostname for the $productName$ Service (`$EMISSARY_HOSTNAME`)
+   and that you have created a TLS Secret for it in `$EMISSARY_TLS_SECRET`.
+
+6. **Test!**
 
    Your $productName$ $version$ installation can support the `getambassador.io/v2`
    configuration resources used by $productName$ 1.X, but you may need to make some
