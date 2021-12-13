@@ -67,7 +67,7 @@ Migration is a six-step process:
    resources:
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$version$/$productYAMLPath$/$productCRDName$
+   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
    ```
 
    Note that `getambassador.io/v2` resources are still supported, but **you must
@@ -87,29 +87,47 @@ Migration is a six-step process:
    **in the same namespace as your existing $productName$ 1.X installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   This is most easily done with [Helm](../helm). **Note that if your $productName$ 1.X
+   You should install $productName$ $version$ using Helm if you installed $productName$ 1.X
+   with Helm, or by manually applying YAML if not. To check if you installed $productName$ 1.X
+   with Helm, run the following command to see if it returns resources:
+
+   ```
+   $ helm list
+   NAME              NAMESPACE REVISION  UPDATED     ...
+   $productDeploymentName$ default  1           ...
+   ```
+
+   - If Helm returns resources, continue with [Helm](../helm). **Note that if your $productName$ 1.X
    installation uses a nonstandard namespace, you will need to include the namespace in
    the commands below.**
 
-   - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
+      - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
 
-      ```bash
-      helm install $productHelmName$ datawire/$productHelmName$ && \
-      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+         ```bash
+         helm install $productHelmName$ datawire/$productHelmName$ && \
+         kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+         ```
+
+      - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
+
+         ```bash
+         helm install $productHelmName$ datawire/$productHelmName$ \
+           --set env.AMBASSADOR_LABEL_SELECTOR="version-two=true" && \
+         kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+         ```
+
+      <Alert severity="warning">
+       You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
+       Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
+      </Alert>
+
+   - If Helm does not return resources, continue with YAML. **Note that if your $productName$
+     1.X installation uses a nonstandard namespace, or if you need to set `AMBASSADOR_LABEL_SELECTOR`,
+     you will need to download the YAML and edit it.**
+
+     ```
+      kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/emissary-defaultns.yaml
       ```
-
-   - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
-
-      ```bash
-      helm install $productHelmName$ datawire/$productHelmName$ \
-        --set env.AMBASSADOR_LABEL_SELECTOR="version-two=true" && \
-      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-      ```
-
-   <Alert severity="warning">
-     You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
-     Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
-   </Alert>
 
    <Alert severity="info">
      $productName$ $version$ includes a Deployment in the $productNamespace$ namespace
@@ -125,7 +143,7 @@ Migration is a six-step process:
      the <code>$productDeploymentName$-apiext</code> Deployment.
    </Alert>
 
-5. **Install `Listener`s and `Host`s as needed.**
+4. **Install `Listener`s and `Host`s as needed.**
 
    An important difference between $productName$ 1.X and $productName$ $version$ is the
    new **mandatory** `Listener` CRD. Also, when running both installations side by side,
@@ -173,15 +191,13 @@ Migration is a six-step process:
    This example requires that you know the hostname for the $productName$ Service (`$EMISSARY_HOSTNAME`)
    and that you have created a TLS Secret for it in `$EMISSARY_TLS_SECRET`.
 
-6. **Test!**
+5. **Test!**
 
    Your $productName$ $version$ installation can support the `getambassador.io/v2`
    configuration resources used by $productName$ 1.X, but you may need to make some
    changes to the configuration, as detailed in the documentation on 
    [configuring $productName$ Communications](../../../howtos/configure-communications)
    and [updating CRDs to `getambassador.io/v3alpha1`](../convert-to-v3alpha1). 
-
-   At minimum, you'll need to add [`Listener`s](../../running/listener) as needed.
 
    <Alert severity="info">
     Kubernetes will not allow you to have a <code>getambassador.io/v3alpha1</code> resource
@@ -196,13 +212,34 @@ Migration is a six-step process:
    **If you find that you need to roll back**, just reinstall your 1.X CRDs and delete your 
    installation of $productName$ $version$.
 
-4. **When ready, shut down $productName$ 1.X.**
 
-   You can run $productName$ 1.X and $productName$ $version$ as long as you care to. 
-   However, taking full advantage of $productName$ 2.X's capabilities **requires**
+6. **When ready, switch over to $productName$ $version$.**
+
+   You can run $productName$ 1.X and $productName$ $version$ side-by-side as long as you care
+   to. However, taking full advantage of $productName$ 2.X's capabilities **requires**
    [updating your configuration to use `getambassador.io/v3alpha1` configuration resources](../convert-to-v3alpha1),
    since some useful features in $productName$ $version$ are only available using 
    `getambassador.io/v3alpha1` resources.
+
+   When you're ready to have $productName$ $version$ handle traffic on its own, switch
+   your original $productName$ 1.X Service to point to $productName$ $version$. Use
+   `kubectl edit ambassador` and change the `selectors` to:
+
+   ```
+   app.kubernetes.io/instance: emissary-ingress
+   app.kubernetes.io/name: emissary-ingress
+   profile: main
+   ```
+
+   Once that is done, it's safe to remove the `ambassador-admin` Service and the `ambassador`
+   Deployment:
+
+   ```
+   kubectl delete service/ambassador-admin deployment/ambassador
+   ```
+
+   You may also want to redirect DNS to the `emissary-ingress` Service and remove the
+   `ambassador` Service.
 
    Once $productName$ 1.X is no longer running, you may [convert](..convert-to-v3alpha1)
    any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
