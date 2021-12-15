@@ -50,8 +50,7 @@ important notes:
 
 You can also migrate by [installing $AESproductName$ $version$ in a separate cluster](../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ $version$ configuration will not be
-affected by changes meant for $AESproductName$ $version$, and it eliminates concerns about
-ACME, but it is more effort.
+affected by changes meant for $AESproductName$ $version$, but it is more effort.
 
 ## Side-by-Side Migration Steps
 
