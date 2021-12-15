@@ -23,17 +23,16 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$doc
 
 ## If you installed $productName$ using Helm
 
-| If you're running.            | You can upgrade to |
-|-------------------------------|--------------------|
-| $productName$ 2.0.0 or later  | [$productName$ $version$](../upgrade/helm/edge-stack-2.0/edge-stack-2.1) |
+| If you're running.            | You can upgrade to                                                        |
+|-------------------------------|---------------------------------------------------------------------------|
+| $productName$ 2.0.0 or later  | [$productName$ $version$](../upgrade/helm/edge-stack-2.0/edge-stack-2.1)  |
 | $productName$ 1.14.2          | [$productName$ $version$](../upgrade/helm/edge-stack-1.14/edge-stack-2.1) |
-| $productName$ prior to 1.14.2 | [$productName$ 1.14.2](../../../../1.14/topics/install/upgrading) before upgrading further |
-
+| $productName$ prior to 1.14.2 | [$productName$ 1.14.2](../../../../1.14/topics/install/upgrading)         |
 
 ## If you installed $productName$ manually by applying YAML
 
-| If you're running.         | You can upgrade to |
-|----------------------------|--------------------|
-| $productName$ 2.0.0 or later  | [$productName$ $version$](../upgrade/yaml/edge-stack-2.0/edge-stack-2.1) |
+| If you're running.            | You can upgrade to                                                        |
+|-------------------------------|---------------------------------------------------------------------------|
+| $productName$ 2.0.0 or later  | [$productName$ $version$](../upgrade/yaml/edge-stack-2.0/edge-stack-2.1)  |
 | $productName$ 1.14.2          | [$productName$ $version$](../upgrade/yaml/edge-stack-1.14/edge-stack-2.1) |
-| $productName$ prior to 1.14.2 | [$productName$ 1.14.2](../../../../1.14/topics/install/upgrading) before upgrading further |
+| $productName$ prior to 1.14.2 | [$productName$ 1.14.2](../../../../1.14/topics/install/upgrading)         |
