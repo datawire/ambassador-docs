@@ -5,7 +5,7 @@
    items:
      - title: Install with Helm
        link: /topics/install/helm
-     - title: Install with kubectl
+     - title: Install with Kubernetes YAML
        link: /topics/install/yaml-install
      - title: Try the demo with Docker
        link: /topics/install/docker

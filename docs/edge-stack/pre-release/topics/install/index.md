@@ -6,34 +6,32 @@ import './index.less'
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [Install via Helm](#img-classos-logo-srcimageshelm-navypng-install-via-helm)
-* [Install via Kubernetes YAML](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
-* [Install Locally on Docker](#img-classos-logo-srcimagesdockerpng-install-locally-on-docker)
-* [Upgrade Options](#upgrade-options)
+* [Install with Helm](#img-classos-logo-srcimageshelm-navypng-install-via-helm)
+* [Install with Kubernetes YAML](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
+* [Try the demo with Docker](#img-classos-logo-srcimagesdockerpng-install-locally-on-docker)
+* [Upgrade or migrate to a newer version](#upgrade-options)
 * [Container Images](#container-images)
 * [What's Next?](#whats-next)
 
 </div>
 
-## <img class="os-logo" src="../../images/helm-navy.png"/> Install via Helm
+## <img class="os-logo" src="../../images/helm-navy.png"/> Install with Helm
 Helm, the package manager for Kubernetes, is the recommended way to install
 $productName$. Full details are in the [Helm instructions.](helm/)
 
-## <img class="os-logo" src="../../images/kubernetes.png"/> Install via Kubernetes YAML
+## <img class="os-logo" src="../../images/kubernetes.png"/> Install with Kubernetes YAML
 Another way to install $productName$ if you are unable to use Helm is to
 directly apply Kubernetes YAML. See details in the
 [manual YAML installation instructions.](yaml-install).
 
-## <img class="os-logo" src="../../images/docker.png"/> Install Locally on Docker
+## <img class="os-logo" src="../../images/docker.png"/> Try the demo with Docker
 The Docker install will let you try the $productName$ locally in seconds,
 but is not supported for production workloads. [Try $productName$ on Docker.](docker/)
 
-## Upgrade Options
+## Upgrade or migrate to a newer version
 If you already have an existing installation of $AESproductName$ or
-$OSSproductName$, you can upgrade your instance:
-
-1. [Upgrade to $AESproductName$ from $OSSproductName$](upgrade-to-edge-stack/).
-2. [Upgrade your $productName$ instance](upgrading/) to the latest version.
+$OSSproductName$, you can upgrade your instance. The [migration matrix](migration-matrix/)
+shows you how.
 
 ## Container Images
 Although our installation guides will favor using the `docker.io` container registry,
