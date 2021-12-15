@@ -123,26 +123,26 @@ Migration is a six-step process:
      do it instead.
    </Alert>
 
-   Typically, $productName$ 1.14.2 was installed in the `default` namespace. If you installed
+   Typically, $productName$ 1.14.2 was installed in the `ambassador` namespace. If you installed
    $productName$ 1.14.2 in a different namespace, change the namespace in the commands below.
 
    - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
 
       ```bash
-      helm install -n default \
+      helm install -n ambassador \
            --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
            edge-stack datawire/edge-stack && \
-      kubectl rollout status  -n default deployment/edge-stack -w
+      kubectl rollout status  -n ambassador deployment/edge-stack -w
       ```
 
    - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
 
       ```bash
-      helm install -n default \
+      helm install -n ambassador \
            --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
            --set emissary-ingress.env.AMBASSADOR_LABEL_SELECTOR="version-two=true" \
            edge-stack datawire/edge-stack && \
-      kubectl rollout status -n default deployment/edge-stack -w
+      kubectl rollout status -n ambassador deployment/edge-stack -w
       ```
 
    <Alert severity="warning">
@@ -247,8 +247,8 @@ Migration is a six-step process:
 
    ```
    kubectl delete service/ambassador-admin deployment/ambassador
-   helm upgrade -n default edge-stack datawire/edge-stack && \
-   kubectl rollout status -n default deployment/edge-stack -w
+   helm upgrade -n ambassador edge-stack datawire/edge-stack && \
+   kubectl rollout status -n ambassador deployment/edge-stack -w
    ```
 
    You may also want to redirect DNS to the `edge-stack` Service and remove the
