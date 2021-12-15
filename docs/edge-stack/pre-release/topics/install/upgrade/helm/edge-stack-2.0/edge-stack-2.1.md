@@ -1,29 +1,84 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrading $productName$
+# Upgrade $productName$ 2.0.5 to $productName$ $version$ (Helm)
 
-<Alert severity="warning">
-  To migrate from $productName$ 1.X to $productName$ 2.X, see the
-  <a href="../migrate-to-version-2"> $productName$ 2.X Migration Guide</a>. This guide
-  <b> will not work</b> for that, due to changes to the configuration resources used
-  for $productName$ 2.X.
+<Alert severity="info">
+  This guide covers migrating from $productName$ 2.0.5 to $productName$ $version$. If
+  this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
+  matrix</a>.
 </Alert>
 
-Since $productName$'s configuration is entirely stored in Kubernetes resources, no special process
-is necessary to upgrade $productName$.
+<Alert severity="warning">
+  <b>Upgrading from $productName$ 2.0.5 to $productName$ $version$ typically requires downtime.</b>
+  In some situations, Ambassador Labs Support may be able to assist with a zero-downtime migration;
+  contact support with questions.
+</Alert>
 
-The steps to upgrade depend on the method that was used to install $productName$, as indicated below.
+Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step process:
 
-## Which upgrade method should I use?
+1. **Delete $productName$ 2.0.5.**
 
-To check if you installed $productName$ with Helm, run the following command to see if it returns resources:
-```
-$ helm list -n emissary
-NAME            	NAMESPACE	REVISION	UPDATED     ...
-$productDeploymentName$	$productNamespace$ 	1           ...
-```
+   <Alert severity="warning">
+     Delete <b>only</b> the Deployment for $productName$ 2.0.5 in order to preserve all of
+     your existing configuration.
+   </Alert>
 
-If Helm reports a release of $productName$ in your cluster, you should
-[upgrade with the help of Helm](../helm/#upgrading-an-existing-installation).
+   Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
+   in the `ambassador` namespace.
+ 
+   ```
+   kubectl delete -n ambassador deployment edge-stack
+   ```
 
-Otherwise, you should follow [the YAML upgrade guide](../yaml-install/#install-or-upgrade-with-yaml)
+2. **Install new CRDs.**
+
+   Before installing $productName$ $version$ itself, you need to update the CRDs in
+   your cluster; Helm will not do this for you. This will allow supporting
+   `getambassador.io/v2` resources as well as `getambassador.io/v3alpha1`; it is mandatory.
+
+   ```
+   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   ```
+
+   <Alert severity="info">
+     $productName$ $version$ includes a Deployment in the `emissary-system` namespace
+     called <code>$productDeploymentName$-apiext</code>. This is the APIserver extension
+     that supports converting $productName$ CRDs between <code>getambassador.io/v2</code>
+     and <code>getambassador.io/v3alpha1</code>. This Deployment needs to be running at
+     all times.
+   </Alert>
+
+   <Alert severity="warning">
+     If the <code>$productDeploymentName$-apiext</code> Deployment's Pods all stop running,
+     you will not be able to use <code>getambassador.io/v3alpha1</code> CRDs until restarting
+     the <code>$productDeploymentName$-apiext</code> Deployment.
+   </Alert>
+
+3. **Install $productName$ $version$.**
+
+   After installing the new CRDs, use Helm to install $productName$ $version$. This will install
+   in the `$productNamespace$` namespace. If necessary for your installation (e.g. if you were
+   running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
+
+      ```bash
+      helm install -n $productNamespace$ --create-namespace \
+         $productHelmName$ datawire/$productHelmName$ && \
+      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+      ```
+
+   <Alert severity="warning">
+     You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
+     Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
+   </Alert>
+
+4. **Redirect traffic.**
+
+   Switch your original $productName$ 2.0.5 Service to point to $productName$ $version$. Use
+   `kubectl edit service -n ambassador edge-stack` and change the `selectors` to:
+
+   ```
+   app.kubernetes.io/instance: edge-stack
+   app.kubernetes.io/name: edge-stack
+   profile: main
+   ```
