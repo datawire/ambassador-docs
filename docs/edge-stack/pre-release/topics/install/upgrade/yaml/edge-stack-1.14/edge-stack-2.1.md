@@ -68,6 +68,11 @@ important caveats:
    sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
    If they are not, the initial migration tests may fail.
 
+5. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
+
+   This is required to manage a known issue. This issue will be resolved in a future 
+   $AESproductName$ release.
+
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about

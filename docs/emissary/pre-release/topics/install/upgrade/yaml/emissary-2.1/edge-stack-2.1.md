@@ -25,7 +25,7 @@ You can upgrade from $productName$ to $AESproductName$ with a few simple command
 
 The recommended strategy for migration is to run $productName$ $version$ and $AESproductName$
 $version$ side-by-side in the same cluster. This gives $AESproductName$ $version$
-and $AESproductName$ $version$ access to all the same configuration resources, with two
+and $AESproductName$ $version$ access to all the same configuration resources, with some
 important notes:
 
 1. **If needed, you can use labels to further isolate configurations.**
@@ -41,12 +41,13 @@ important notes:
    that should be visible to $AESproductName$ $version$, then set
    `AMBASSADOR_LABEL_SELECTOR=version-two=true` in its Deployment.
 
-2. **Check `AuthService` and `RateLimitService` resources, if any.**
+2. **$AESproductName$ ACME and `Filter`s will be disabled while $productName$ is still running.**
 
-   If you have an [`AuthService`](../../running/services/auth-service) or
-   [`RateLimitService`](../../running/services/rate-limit-service) installed, make
-   sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
-   If they are not, the initial migration tests may fail.
+   Since $AESproductName$ and $productName$ share configuration, $AESproductName$ cannot
+   configure its ACME or other filter processors without also affecting $productName$. This
+   migration process is written to simply disable these $AESproductName$ features to make
+   it simpler to roll back, if needed. Alternate, you can isolate the two configurations
+   as described above.
 
 You can also migrate by [installing $AESproductName$ $version$ in a separate cluster](../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ $version$ configuration will not be
@@ -127,10 +128,11 @@ Migration is a five-step process:
    ```
 
    Once that is done, it's safe to remove the `emissary-ingress-admin` Service and the `emissary-ingress`
-   Deployment:
+   Deployment, and to enable $AESproductName$'s filter configuration:
 
    ```
    kubectl delete -n emissary service/emissary-ingress-admin deployment/emissary-ingress
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/resources-migration.yaml
    ```
 
    You may also want to redirect DNS to the `edge-stack` Service and remove the

@@ -68,6 +68,11 @@ important caveats:
    sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
    If they are not, the initial migration tests may fail.
 
+5. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
+
+   This is required to manage a known issue. This issue will be resolved in a future 
+   $AESproductName$ release.
+
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
@@ -245,9 +250,11 @@ Migration is a six-step process:
    Once that is done, it's safe to remove the `ambassador-admin` Service and the `ambassador`
    Deployment, and to enable ACME in $productName$ $version$:
 
-   ```
+   ```bash
    kubectl delete service/ambassador-admin deployment/ambassador
-   helm upgrade -n ambassador edge-stack datawire/edge-stack && \
+   helm upgrade -n ambassador \
+        --set emissary-ingress.env.AES_ACME_LEADER_DISABLE= \
+        edge-stack datawire/edge-stack && \
    kubectl rollout status -n ambassador deployment/edge-stack -w
    ```
 
