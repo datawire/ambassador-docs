@@ -6,11 +6,11 @@
      - title: Install with Helm
        link: /topics/install/helm
      - title: Upgrade to a newer version
-       link: /topics/install/upgrading
+       link: /topics/install/migration-matrix
      - title: Migrate to $productName$ 2.X
-       link: /topics/install/migrate-to-version-2
+       link: /topics/install/migration-matrix
      - title: Upgrade to $AESproductName$
-       link: /topics/install/upgrade-to-edge-stack
+       link: /topics/install/migration-matrix
      - title: Install with Docker
        link: /topics/install/docker
      - title: Install manually

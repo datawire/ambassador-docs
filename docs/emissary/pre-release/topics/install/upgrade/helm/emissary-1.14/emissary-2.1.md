@@ -1,10 +1,17 @@
 import Alert from '@material-ui/lab/Alert';
 
-# $productName$ 2.X Migration Guide
+# Upgrade $productName$ 1.14.2 to $productName$ $version$ (Helm)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 1.X to $productName$ 2.X. To upgrade within
-  the same major version, see the <a href="../upgrading">Upgrading $productName$ Guide</a>.
+  This guide covers migrating from $productName$ 1.14.2 to $productName$ $version$. If
+  this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
+  matrix</a>.
+</Alert>
+
+<Alert severity="warning">
+  This guide is written for upgrading an installation originally made using Helm.
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-1.14/emissary-2.1">YAML-based
+  upgrade instructions</a>.
 </Alert>
 
 We're pleased to introduce $productName$ $version$! The 2.X family introduces a number of
@@ -21,21 +28,21 @@ some changes that aren't backward-compatible with 1.X. These changes are detaile
   cluster!
 </Alert>
 
-The recommended strategy for migration is to run $productName$ 1.X and $productName$
+The recommended strategy for migration is to run $productName$ 1.14.2 and $productName$
 $version$ side-by-side in the same cluster. This gives $productName$ $version$
-and $productName$ 1.X access to all the same configuration resources, with some
+and $productName$ 1.14.2 access to all the same configuration resources, with some
 important caveats:
 
-1. **$productName$ 1.X will not see any `getambassador.io/v3alpha1` resources.**
+1. **$productName$ 1.14.2 will not see any `getambassador.io/v3alpha1` resources.**
 
    This is intentional; it provides a way to apply configuration only to 
    $productName$ $version$, while not interfering with the operation of your
-   $productName$ 1.X installation.
+   $productName$ 1.14.2 installation.
 
 2. **If needed, you can use labels to further isolate configurations.**
 
    If you need to prevent your $productName$ $version$ installation from
-   seeing a particular bit of $productName$ 1.X configuration, you can apply
+   seeing a particular bit of $productName$ 1.14.2 configuration, you can apply
    a Kubernetes label to the configuration resources that should be seen by
    your $productName$ $version$ installation, then set its
    `AMBASSADOR_LABEL_SELECTOR` enviroment variable to restrict its configuration
@@ -46,7 +53,7 @@ important caveats:
    `AMBASSADOR_LABEL_SELECTOR=version-two=true` in its Deployment.
 
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../migrate-to-2-alternate).
-This permits absolute certainty that your $productName$ 1.X configuration will not be
+This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
 ACME, but it is more effort.
 
@@ -91,11 +98,11 @@ Migration is a six-step process:
 3. **Install $productName$ $version$.**
 
    After installing the new CRDs, you need to install $productName$ $version$ itself
-   **in the same namespace as your existing $productName$ 1.X installation**. It's important
+   **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   You should install $productName$ $version$ using Helm if you installed $productName$ 1.X
-   with Helm, or by manually applying YAML if not. To check if you installed $productName$ 1.X
+   You should install $productName$ $version$ using Helm if you installed $productName$ 1.14.2
+   with Helm, or by manually applying YAML if not. To check if you installed $productName$ 1.14.2
    with Helm, run the following command to see if it returns resources:
 
    ```
@@ -104,7 +111,7 @@ Migration is a six-step process:
    $productDeploymentName$ default  1           ...
    ```
 
-   - If Helm returns resources, continue with [Helm](../helm). **Note that if your $productName$ 1.X
+   - If Helm returns resources, continue with [Helm](../helm). **Note that if your $productName$ 1.14.2
    installation uses a nonstandard namespace, you will need to include the namespace in
    the commands below.**
 
@@ -129,7 +136,7 @@ Migration is a six-step process:
       </Alert>
 
    - If Helm does not return resources, continue with YAML. **Note that if your $productName$
-     1.X installation uses a nonstandard namespace, or if you need to set `AMBASSADOR_LABEL_SELECTOR`,
+     1.14.2 installation uses a nonstandard namespace, or if you need to set `AMBASSADOR_LABEL_SELECTOR`,
      you will need to download the YAML and edit it.**
 
      ```
@@ -152,7 +159,7 @@ Migration is a six-step process:
 
 4. **Install `Listener`s and `Host`s as needed.**
 
-   An important difference between $productName$ 1.X and $productName$ $version$ is the
+   An important difference between $productName$ 1.14.2 and $productName$ $version$ is the
    new **mandatory** `Listener` CRD. Also, when running both installations side by side,
    you will need to make sure that a `Host` is present for the new $productName$ $version$
    Service. For example:
@@ -201,7 +208,7 @@ Migration is a six-step process:
 5. **Test!**
 
    Your $productName$ $version$ installation can support the `getambassador.io/v2`
-   configuration resources used by $productName$ 1.X, but you may need to make some
+   configuration resources used by $productName$ 1.14.2, but you may need to make some
    changes to the configuration, as detailed in the documentation on 
    [configuring $productName$ Communications](../../../howtos/configure-communications)
    and [updating CRDs to `getambassador.io/v3alpha1`](../convert-to-v3alpha1). 
@@ -211,25 +218,24 @@ Migration is a six-step process:
     with the same name as a <code>getambassador.io/v2</code> resource or vice versa: only
     one version can be stored at a time.<br/>
     <br/>
-    If you find that your $productName$ $version$ installation and your $productName$ 1.X
+    If you find that your $productName$ $version$ installation and your $productName$ 1.14.2
     installation absolutely must have resources that are only seen by one version or the
     other way, see overview section 2, "If needed, you can use labels to further isolate configurations".
    </Alert>
 
-   **If you find that you need to roll back**, just reinstall your 1.X CRDs and delete your 
+   **If you find that you need to roll back**, just reinstall your 1.14.2 CRDs and delete your 
    installation of $productName$ $version$.
-
 
 6. **When ready, switch over to $productName$ $version$.**
 
-   You can run $productName$ 1.X and $productName$ $version$ side-by-side as long as you care
+   You can run $productName$ 1.14.2 and $productName$ $version$ side-by-side as long as you care
    to. However, taking full advantage of $productName$ 2.X's capabilities **requires**
    [updating your configuration to use `getambassador.io/v3alpha1` configuration resources](../convert-to-v3alpha1),
    since some useful features in $productName$ $version$ are only available using 
    `getambassador.io/v3alpha1` resources.
 
    When you're ready to have $productName$ $version$ handle traffic on its own, switch
-   your original $productName$ 1.X Service to point to $productName$ $version$. Use
+   your original $productName$ 1.14.2 Service to point to $productName$ $version$. Use
    `kubectl edit ambassador` and change the `selectors` to:
 
    ```
@@ -248,5 +254,5 @@ Migration is a six-step process:
    You may also want to redirect DNS to the `emissary-ingress` Service and remove the
    `ambassador` Service.
 
-   Once $productName$ 1.X is no longer running, you may [convert](..convert-to-v3alpha1)
+   Once $productName$ 1.14.2 is no longer running, you may [convert](..convert-to-v3alpha1)
    any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
