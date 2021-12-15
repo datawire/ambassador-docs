@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ $version$ to $AESproductName$ $version$ (Helm)
+# Upgrade $productName$ $version$ to $AESproductName$ $version$ (YAML)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ $version$ to $AESproductName$ $version$. If
@@ -98,6 +98,7 @@ Migration is a five-step process:
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-emissaryns-migration.yaml && \
    kubectl rollout status -n emissary deployment/aes -w
    ```
+
 3. **Test!**
 
    Your $AESproductName$ $version$ installation should come up running with the configuration
