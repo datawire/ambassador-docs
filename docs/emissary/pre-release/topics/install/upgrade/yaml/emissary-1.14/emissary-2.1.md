@@ -45,7 +45,7 @@ important caveats:
    seeing a particular bit of $productName$ 1.14.2 configuration, you can apply
    a Kubernetes label to the configuration resources that should be seen by
    your $productName$ $version$ installation, then set its
-   `AMBASSADOR_LABEL_SELECTOR` enviroment variable to restrict its configuration
+   `AMBASSADOR_LABEL_SELECTOR` environment variable to restrict its configuration
    to only the labelled resources.
 
    For example, you could apply a `version-two: true` label to all resources
