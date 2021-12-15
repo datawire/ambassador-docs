@@ -119,7 +119,7 @@ Migration is a six-step process:
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-defaultns-migration.yaml && \
-   kubectl rollout status -n default deployment/edge-stack -w
+   kubectl rollout status -n default deployment/aes -w
    ```
 
 4. **Install `Listener`s and `Host`s as needed.**
@@ -201,7 +201,7 @@ Migration is a six-step process:
 
    When you're ready to have $AESproductName$ $version$ handle traffic on its own, switch
    your original $productName$ 1.14.2 Service to point to $AESproductName$ $version$. Use
-   `kubectl edit ambassador` and change the `selectors` to:
+   `kubectl edit service ambassador` and change the `selectors` to:
 
    ```
    app.kubernetes.io/instance: edge-stack

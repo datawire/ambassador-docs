@@ -5,10 +5,8 @@
    items:
      - title: Install with Helm
        link: /topics/install/helm
-     - title: Upgrade to a newer version
-       link: /topics/install/upgrading
-     - title: Migrate to $productName$ 2.X
-       link: /topics/install/migrate-to-version-2
+     - title: Upgrade or migrate to a newer version
+       link: /topics/install/migration-matrix
      - title: Install with Docker
        link: /topics/install/docker
      - title: Install manually

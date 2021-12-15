@@ -230,7 +230,7 @@ Migration is a six-step process:
 
    When you're ready to have $productName$ $version$ handle traffic on its own, switch
    your original $productName$ 1.X Service to point to $productName$ $version$. Use
-   `kubectl edit ambassador` and change the `selectors` to:
+   `kubectl edit service ambassador` and change the `selectors` to:
 
    ```
    app.kubernetes.io/instance: emissary-ingress
