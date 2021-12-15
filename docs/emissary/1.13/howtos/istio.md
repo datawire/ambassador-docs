@@ -42,8 +42,8 @@ Integrating $productName$ and Istio allows you to take advantage of the edge rou
 
 The process of collecting mTLS certificates is different depending on your Istio version. Select your Istio version below for instructions on how to integrate $productName$ with Istio.
 
-- [Istio 1.5 and above](#integrating-ambassador-with-istio-15-and-above)
-- [Istio 1.4 and below](#integrating-ambassador-with-istio-14-and-below)
+- [Istio 1.5 and above](#integrating-productname-with-istio-15-and-above)
+- [Istio 1.4 and below](#integrating-productname-with-istio-14-and-below)
 
 #### Integrating $productName$ with Istio 1.5 and above
 
