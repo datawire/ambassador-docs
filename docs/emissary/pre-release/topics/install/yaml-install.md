@@ -26,7 +26,7 @@ $productName$ is designed to run in Kubernetes for production. The most essentia
 * Kubernetes 1.11 or later
 * The `kubectl` command-line tool
 
-## Install or Upgrade with YAML
+## Install with YAML
 
 $productName$ is typically deployed to Kubernetes from the command line. If you don't have Kubernetes, you should use our [Docker](../docker) image to deploy $productName$ locally.
 
@@ -73,3 +73,8 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
   <Alert severity="info">
      We strongly recommend following along with our <a href="../../../tutorials/getting-started">Quickstart Guide</a> to get started by creating a <code>Listener</code>, deploying a simple service to test with, and setting up a <code>Mapping</code> to route requests from $productName$ to the demo service.
   </Alert>
+
+## Upgrading an existing installation
+
+See the [migration matrix](../migration-matrix) for instructions about upgrading
+$productName$.

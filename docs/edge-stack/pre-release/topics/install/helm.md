@@ -91,24 +91,5 @@ For more advanced configuration and details about helm values,
 
 ## Upgrading an existing installation
 
-**Note: Do not use these instructions** to migrate from $OSSproductName$ to $AESproductName$. See [Migrating to $AESproductName$](../upgrade-to-edge-stack/) instead.
-
-Upgrading an existing installation of $productName$ is a two-step process:
-
-1. First, apply any CRD updates:
-
-   ```
-    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml
-   ```
-
-2. Next, upgrade $productName$ itself:
-
-   ```
-    helm repo update
-    helm upgrade -n $productNamespace$ \
-        $productHelmName$ \
-        datawire/$productHelmName$ && \
-    kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-   ```
-
-  This will upgrade the image and deploy and other necessary resources for $productName$.
+See the [migration matrix](../migration-matrix) for instructions about upgrading
+$productName$.
