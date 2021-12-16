@@ -378,4 +378,4 @@ conn, err := grpc.Dial(hostname+":"+port, opts...)
 
 ## gRPC-Web
 
-$productName$ also supports the [gRPC-Web](../../topics/running/ambassador#grpc-web-enable_grpc_web) protocol for browser-based gRPC applications.
+$productName$ also supports the [gRPC-Web](../../topics/running/ambassador/#grpc-web) protocol for browser-based gRPC applications.
