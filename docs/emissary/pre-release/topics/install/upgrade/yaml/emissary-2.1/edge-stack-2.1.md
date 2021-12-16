@@ -49,7 +49,7 @@ important notes:
    it simpler to roll back, if needed. Alternate, you can isolate the two configurations
    as described above.
 
-You can also migrate by [installing $AESproductName$ $version$ in a separate cluster](../migrate-to-2-alternate).
+You can also migrate by [installing $AESproductName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ $version$ configuration will not be
 affected by changes meant for $AESproductName$ $version$, but it is more effort.
 

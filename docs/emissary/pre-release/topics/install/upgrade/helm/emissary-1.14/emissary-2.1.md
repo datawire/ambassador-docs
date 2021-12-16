@@ -52,7 +52,7 @@ important caveats:
    that should be visible to $productName$ $version$, then set
    `AMBASSADOR_LABEL_SELECTOR=version-two=true` in its Deployment.
 
-You can also migrate by [installing $productName$ $version$ in a separate cluster](../migrate-to-2-alternate).
+You can also migrate by [installing $productName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
 ACME, but it is more effort.
