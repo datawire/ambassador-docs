@@ -9,14 +9,6 @@ import Alert from '@material-ui/lab/Alert';
   for $productName$ 2.X.
 </Alert>
 
-<Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
-  changes to allow $productName$ to more gracefully handle larger installations
-  (including multitenant or multiorganizational installations), reduce memory footprint,
-  and improve performance. For more information on 2.X, please check the&nbsp;
-  <a href="../../../release-notes">release notes</a>.
-</Alert>
-
 [Helm](https://helm.sh) is a package manager for Kubernetes that automates the release and management of software on Kubernetes. $productName$ can be installed via a Helm chart with a few simple steps, depending on if you are deploying for the first time, upgrading $productName$ from an existing installation, or migrating from $productName$.
 
 ## Before you begin
@@ -34,8 +26,32 @@ helm repo update
 
 When you run the Helm chart, it installs $productName$.
 
+1. Install the $productName$ CRDs.
 
-1. Install the $productName$ Chart with the following command:
+   Before installing $productName$ $version$ itself, you must configure your
+   Kubernetes cluster to support the `getambassador.io/v3alpha1` and `getambassador.io/v2`
+   configuration resources. This is required.
+
+   ```
+   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   ```
+
+   <Alert severity="info">
+     $productName$ $version$ includes a Deployment in the `emissary-system` namespace
+     called <code>$productDeploymentName$-apiext</code>. This is the APIserver extension
+     that supports converting $productName$ CRDs between <code>getambassador.io/v2</code>
+     and <code>getambassador.io/v3alpha1</code>. This Deployment needs to be running at
+     all times.
+   </Alert>
+
+   <Alert severity="warning">
+     If the <code>$productDeploymentName$-apiext</code> Deployment's Pods all stop running,
+     you will not be able to use <code>getambassador.io/v3alpha1</code> CRDs until restarting
+     the <code>$productDeploymentName$-apiext</code> Deployment.
+   </Alert>
+
+2. Install the $productName$ Chart with the following command:
 
     ```
 	 helm install -n $productNamespace$ --create-namespace \
@@ -43,7 +59,7 @@ When you run the Helm chart, it installs $productName$.
 	 kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
     ```
 
-2. Next Steps
+3. Next Steps
    
    $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources. 
 
@@ -75,24 +91,5 @@ For more advanced configuration and details about helm values,
 
 ## Upgrading an existing installation
 
-**Note: Do not use these instructions** to migrate from $OSSproductName$ to $AESproductName$. See [Migrating to $AESproductName$](../upgrade-to-edge-stack/) instead.
-
-Upgrading an existing installation of $productName$ is a two-step process:
-
-1. First, apply any CRD updates:
-
-   ```
-    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml
-   ```
-
-2. Next, upgrade $productName$ itself:
-
-   ```
-    helm repo update
-    helm upgrade -n $productNamespace$ \
-        $productHelmName$ \
-        datawire/$productHelmName$ && \
-    kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-   ```
-
-  This will upgrade the image and deploy and other necessary resources for $productName$.
+See the [migration matrix](../migration-matrix) for instructions about upgrading
+$productName$.

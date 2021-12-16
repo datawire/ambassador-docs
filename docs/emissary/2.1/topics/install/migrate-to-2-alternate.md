@@ -1,10 +1,15 @@
 import Alert from '@material-ui/lab/Alert';
 
-# $productName$ 2.X Migration Guide
+# Upgrading $productName$ with a separate cluster
 
-## Run $productName$ $version$ in a separate cluster
+You can upgrade from any version of $AESproductName$ or $OSSproductName$ to
+any version of either by installing the new version in a new Kubernetes cluster,
+then copying over configuration as needed. This is the way to be absolutely
+certain that each installation cannot affect the other: it is extremely safe,
+but is also significantly more effort.
 
-When you run your $productName$ 1.X configuration in a separate cluster, it is not affected by changes meant for $productName$ $version$. However, this can result in extra effort and is not time-efficient.
+For example, to upgrade from some other version of $AESproductName$ or
+$OSSproductName$ to $productName$ $version$:
 
 1. Install $productName$ $version$ in a completely new cluster.
 
@@ -24,8 +29,8 @@ When you run your $productName$ 1.X configuration in a separate cluster, it is n
 4. Each $productName$ instance has its own cluster, so you can test the new
    instance without disrupting traffic to the existing instance.
 
-5. If you need to make changes, you can change the `getambassador.io/v2` resource, or convert the resource you're changing to `getambassador.io/v3alpha1` by using
-   `kubectl edit`.
+5. If you need to make changes, you can change the `getambassador.io/v2` resource, or convert the
+   resource you're changing to `getambassador.io/v3alpha1` by using `kubectl edit`.
 
 6. Once everything is working with both versions, transfer incoming traffic to the $productName$
    $version$ cluster.
