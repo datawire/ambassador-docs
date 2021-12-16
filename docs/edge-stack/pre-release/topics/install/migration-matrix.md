@@ -28,6 +28,7 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$doc
 | $productName$ 2.0.0 or later  | [$productName$ $version$](../upgrade/helm/edge-stack-2.0/edge-stack-2.1)  |
 | $productName$ 1.14.2          | [$productName$ $version$](../upgrade/helm/edge-stack-1.14/edge-stack-2.1) |
 | $productName$ prior to 1.14.2 | [$productName$ 1.14.2](../../../../1.14/topics/install/upgrading)         |
+| $OSSproductName$ $version$    | [$AESproductName$ $version$](../../../../../emissary/$docsVersion$/topics/install/upgrade/helm/emissary-2.1/edge-stack-2.1)  |
 
 ## If you installed $productName$ manually by applying YAML
 
@@ -36,3 +37,4 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$doc
 | $productName$ 2.0.0 or later  | [$productName$ $version$](../upgrade/yaml/edge-stack-2.0/edge-stack-2.1)  |
 | $productName$ 1.14.2          | [$productName$ $version$](../upgrade/yaml/edge-stack-1.14/edge-stack-2.1) |
 | $productName$ prior to 1.14.2 | [$productName$ 1.14.2](../../../../1.14/topics/install/upgrading)         |
+| $OSSproductName$ $version$    | [$AESproductName$ $version$](../../../../../emissary/$docsVersion$/topics/install/upgrade/yaml/emissary-2.1/edge-stack-2.1)  |
