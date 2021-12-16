@@ -26,8 +26,32 @@ helm repo update
 
 When you run the Helm chart, it installs $productName$.
 
+1. Install the $productName$ CRDs.
 
-1. Install the $productName$ Chart with the following command:
+   Before installing $productName$ $version$ itself, you must configure your
+   Kubernetes cluster to support the `getambassador.io/v3alpha1` and `getambassador.io/v2`
+   configuration resources. This is required.
+
+   ```
+   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   ```
+
+   <Alert severity="info">
+     $productName$ $version$ includes a Deployment in the `emissary-system` namespace
+     called <code>$productDeploymentName$-apiext</code>. This is the APIserver extension
+     that supports converting $productName$ CRDs between <code>getambassador.io/v2</code>
+     and <code>getambassador.io/v3alpha1</code>. This Deployment needs to be running at
+     all times.
+   </Alert>
+
+   <Alert severity="warning">
+     If the <code>$productDeploymentName$-apiext</code> Deployment's Pods all stop running,
+     you will not be able to use <code>getambassador.io/v3alpha1</code> CRDs until restarting
+     the <code>$productDeploymentName$-apiext</code> Deployment.
+   </Alert>
+
+2. Install the $productName$ Chart with the following command:
 
     ```
 	 helm install -n $productNamespace$ --create-namespace \
@@ -35,7 +59,7 @@ When you run the Helm chart, it installs $productName$.
 	 kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
     ```
 
-2. Next Steps
+3. Next Steps
    
    $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources. 
 
