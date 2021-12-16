@@ -14,23 +14,9 @@ import Alert from '@material-ui/lab/Alert';
   contact support with questions.
 </Alert>
 
-Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step process:
+Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step process:
 
-1. **Delete $productName$ 2.0.5.**
-
-   <Alert severity="warning">
-     Delete <b>only</b> the Deployment for $productName$ 2.0.5 in order to preserve all of
-     your existing configuration.
-   </Alert>
-
-   Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
-   in the `ambassador` namespace.
- 
-   ```
-   kubectl delete -n ambassador deployment edge-stack
-   ```
-
-2. **Install new CRDs.**
+1. **Install new CRDs.**
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
    your cluster; Helm will not do this for you. This will allow supporting
@@ -55,6 +41,20 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
      the <code>$productDeploymentName$-apiext</code> Deployment.
    </Alert>
 
+2. **Delete $productName$ 2.0.5 Deployment.**
+
+   <Alert severity="warning">
+     Delete <b>only</b> the Deployment for $productName$ 2.0.5 in order to preserve all of
+     your existing configuration.
+   </Alert>
+
+   Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
+   in the `ambassador` namespace.
+ 
+   ```
+   kubectl delete -n ambassador deployment edge-stack
+   ```
+
 3. **Install $productName$ $version$.**
 
    After installing the new CRDs, use Helm to install $productName$ $version$. This will install
@@ -65,15 +65,4 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes.yaml && \
    kubectl rollout status -n ambassador deployment/edge-stack -w
-   ```
-
-4. **Redirect traffic.**
-
-   Switch your original $productName$ 2.0.5 Service to point to $productName$ $version$. Use
-   `kubectl edit service -n ambassador edge-stack` and change the `selectors` to:
-
-   ```
-   app.kubernetes.io/instance: edge-stack
-   app.kubernetes.io/name: edge-stack
-   profile: main
    ```

@@ -16,21 +16,7 @@ import Alert from '@material-ui/lab/Alert';
 
 Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step process:
 
-1. **Delete $productName$ 2.0.5.**
-
-   <Alert severity="warning">
-     Delete <b>only</b> the Deployment for $productName$ 2.0.5 in order to preserve all of
-     your existing configuration.
-   </Alert>
-
-   Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
-   in the `ambassador` namespace.
- 
-   ```
-   kubectl delete -n ambassador deployment edge-stack
-   ```
-
-2. **Install new CRDs.**
+1. **Install new CRDs.**
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
    your cluster; Helm will not do this for you. This will allow supporting
@@ -55,6 +41,20 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
      the <code>$productDeploymentName$-apiext</code> Deployment.
    </Alert>
 
+2. **Delete $productName$ 2.0.5 Deployment.**
+
+   <Alert severity="warning">
+     Delete <b>only</b> the Deployment for $productName$ 2.0.5 in order to preserve all of
+     your existing configuration.
+   </Alert>
+
+   Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
+   in the `ambassador` namespace.
+ 
+   ```
+   kubectl delete -n ambassador deployment edge-stack
+   ```
+
 3. **Install $productName$ $version$.**
 
    After installing the new CRDs, use Helm to install $productName$ $version$. This will install
@@ -62,7 +62,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
    running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
 
       ```bash
-      helm install -n $productNamespace$ --create-namespace \
+      helm upgrade -n $productNamespace$ \
          $productHelmName$ datawire/$productHelmName$ && \
       kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
       ```
@@ -71,14 +71,3 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
      You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
      Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
    </Alert>
-
-4. **Redirect traffic.**
-
-   Switch your original $productName$ 2.0.5 Service to point to $productName$ $version$. Use
-   `kubectl edit service -n ambassador edge-stack` and change the `selectors` to:
-
-   ```
-   app.kubernetes.io/instance: edge-stack
-   app.kubernetes.io/name: edge-stack
-   profile: main
-   ```
