@@ -3,7 +3,7 @@ description: "A simple three step guide to installing $productName$ and quickly 
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import GettingStartedEdgeStack20Tabs from './gs-tabs'
+import GettingStartedEdgeStack21Tabs from './gs-tabs'
 
 # $productName$ quick start
 
@@ -30,7 +30,7 @@ We'll start by installing $productName$ into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GettingStartedEdgeStack20Tabs/>
+<GettingStartedEdgeStack21Tabs/>
 
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
