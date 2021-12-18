@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # Cleartext support
 
-While most modern web applications will choose to encrypt all traffic, there
+While most modern web applications choose to encrypt all traffic, there
 are reasons why you will want to support clients who access your website
 without encryption in cleartext.
 
@@ -77,7 +77,7 @@ comes in over port `8080`.
 
 ## HTTP->HTTPS redirection
 
-Most modern websites that force HTTPS will also automatically redirect any 
+Most websites that force HTTPS will also automatically redirect any 
 requests that come into it over HTTP. In $AESproductName$, this is
 enabled by default but can easily be enabled in any version of $productName$.
 

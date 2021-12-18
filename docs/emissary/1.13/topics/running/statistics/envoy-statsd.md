@@ -111,7 +111,7 @@ the Prometheus StatsD Exporter documentation to learn how to modify
 its mappings.
 
 [mappings]: ../../../using/mappings
-[Metric Mapping and Configuration]: https://github.com/prometheus/statsd_exporter/tree/v0.6.0#metric-mapping-and-configuration
+[Metric Mapping and Configuration]: https://github.com/prometheus/statsd_exporter/tree/v0.6.0/#user-content-metric-mapping-and-configuration
 
 #### Configuring Prometheus StatsD Exporter with Helm
 

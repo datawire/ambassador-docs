@@ -362,7 +362,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 ## Service Preview URLs
 
-See [Service Preview](/docs/edge-stack/latest/topics/using/edgectl/service-preview-reference#ambassador-edge-stack) for more information.
+See [Service Preview](/docs/edge-stack/latest/topics/using/edgectl/service-preview-reference/) for more information.
 
 ## Host specification
 

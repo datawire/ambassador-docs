@@ -1,9 +1,11 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Envoy statistics with StatsD
 
 > For an overview of other options for gathering statistics on
 > $productName$, see the [Statistics and Monitoring](../) overview.
 
-At the core of $productName$ is [Envoy Proxy][], which has built-in
+At the core of $productName$ is [Envoy Proxy], which has built-in
 support for exporting a multitude of statistics about its own
 operations to StatsD (or to the modified DogStatsD used by Datadog).
 
@@ -33,14 +35,14 @@ the statistics to a different StatsD server by setting the
 existing StatsD sink available in your cluster.
 
 We have included a few example configurations in the
-[`statsd-sink/`][] directory to help you get started.  Clone the
+[`statsd-sink/`] directory to help you get started.  Clone the
 repository to get local, editable copies.
 
 [`statsd-sink/`]: https://github.com/emissary-ingress/emissary/tree/$branch$/deployments/statsd-sink
 
 ## Using Graphite as the StatsD sink
 
-[Graphite][] is a web-based real-time graphing system.  Spin up an
+[Graphite] is a web-based real-time graphing system.  Spin up an
 example Graphite setup:
 
 [Graphite]: http://graphite.readthedocs.org/
@@ -63,20 +65,20 @@ This sets up Graphite access at `http://localhost:8080/`.
 
 ## Using Prometheus StatsD Exporter as the StatsD sink
 
-> $productName$ has an endpoint that has exposes statistics in a format
-> that Prometheus understands natively.  If you're using Prometheus,
-> we recommend configuring Prometheus to talk to [the `:8877/metrics`
-> endpoint][] directly, instead of instead of going through StatsD and
-> a translator.
+<Alert severity="info">
+  $productName$ $version$ has an endpoint that has exposes statistics in
+  a format that Prometheus understands natively.  If you're using Prometheus,
+  we recommend configuring Prometheus to talk to&nbsp;
+  <a href="../8877-metrics">the <code>:8877/metrics</code> endpoint</a>&nbsp;
+  directly, instead of instead of going through StatsD and a translator.
+</Alert>
 
-[the `:8877/metrics` endpoint]: ../8877-metrics
-
-[Prometheus][] is an open-source monitoring and alerting system.
+[Prometheus] is an open-source monitoring and alerting system.
 Prometheus does not natively understand the StatsD protocol, but you
-can deploy the [Prometheus StatsD Exporter][] to act as the StatsD
-sink, and it will translate from StatsD to the [exposition format][]
+can deploy the [Prometheus StatsD Exporter] to act as the StatsD
+sink, and it will translate from StatsD to the [exposition format]
 that Prometheus requires.  An example of how deploying Prometheus
-StatsD Exporter is available in [`prom-statsd-sink.yaml`][].
+StatsD Exporter is available in [`prom-statsd-sink.yaml`].
 
 [Prometheus]: https://prometheus.io/
 [Prometheus StatsD Exporter]: https://github.com/prometheus/statsd_exporter
@@ -86,8 +88,8 @@ StatsD Exporter is available in [`prom-statsd-sink.yaml`][].
 To finally get the statistics to Prometheus, you then configure a
 Prometheus target to read from `statsd-sink` on port 9102.
 
-You could instead add the `statsd-sink` service and Prometheus StatsD
-Exporter as a sidecar on the $productName$ pod.  If you do this, make
+You could instead also add the `statsd-sink` service and Prometheus StatsD
+Exporter as a sidecar on the $productName$ pod. If you do this, make
 sure to set `STATSD_HOST=localhost` so that UDP packets are routed to
 the sidecar.
 
@@ -106,12 +108,12 @@ sum of all similar metrics from different services.  In this case, it
 is common to differentiate the metrics for an individual service with
 a `label`.  This can be done by configuring a Prometheus StatsD
 Exporter "mapping" (not to be confused with an [$productName$
-`Mapping`][Mappings]).  See [Metric Mapping and Configuration][] in
+`Mapping`][Mappings]).  See [Metric Mapping and Configuration] in
 the Prometheus StatsD Exporter documentation to learn how to modify
 its mappings.
 
 [Mappings]: ../../../using/mappings
-[Metric Mapping and Configuration]: https://github.com/prometheus/statsd_exporter/#metric-mapping-and-configuration
+[Metric Mapping and Configuration]: https://github.com/prometheus/statsd_exporter/#user-content-metric-mapping-and-configuration
 
 #### Configuring Prometheus StatsD Exporter with Helm
 
@@ -130,13 +132,10 @@ it to something like this:
         cluster_name: "$1"
 ```
 
-#### Configuring Prometheus StatsD Exporter with `kubectl`
+#### Configuring Prometheus StatsD Exporter in `prom-statsd-sink.yaml`
 
-In the [`ambassador-rbac-prometheus.yaml`][] example template there is
-a `ConfigMap` that should be updated.  Add your mapping to the
-`configuration` property.
-
-[`ambassador-rbac-prometheus.yaml`]: https://app.getambassador.io/yaml/ambassador-docs/latest/ambassador/ambassador-rbac-prometheus.yaml
+If you are using the [`prom-statsd-sink.yaml`] example, edit its `ambassador-config`
+ConfigMap with your Prometheus mappings, for example:
 
 ```yaml
 ---
@@ -158,17 +157,17 @@ data:
 ### Using the Prometheus Operator to configure Prometheus for use with the Prometheus StatsD Exporter
 
 If you don't already have a Prometheus setup, the [Prometheus
-Operator][] is a powerful way to create and deploy Prometheus
+Operator] is a powerful way to create and deploy Prometheus
 instances.  Use the following YAML to quickly configure the Prometheus
 Operator with $productName$:
 
-- [`statsd-sink.yaml`][] Creates the Prometheus Stats Exporter
+- [`statsd-sink.yaml`] Creates the Prometheus Stats Exporter
   deployment and `statsd-sink` service that receives the statistics
   from $productName$ and translates them to Prometheus metrics.  It also
   creates a `ServiceMonitor` resource that tells the Prometheus
   Operator to configure Prometheus to fetch those metrics from the
   StatsD Exporter.
-- [`prometheus.yaml`][] Deploys the Prometheus Operator and creates
+- [`prometheus.yaml`] Deploys the Prometheus Operator and creates
   `Prometheus` resource that tells the Prometheus Operator to create
   the actual Prometheus deployment.
 
@@ -201,17 +200,17 @@ kubectl port-forward prometheus-prometheus-0 9090
 
 ![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../../images/grafana.png)
 
-If you're using Grafana, [Alex Gervais][] has written a template
-[$productName$ dashboard for Grafana][] that works with either the
+If you're using Grafana, [Alex Gervais] has written a template
+[$productName$ dashboard for Grafana] that works with either the
 metrics exposed by the Prometheus StatsD Exporter, or by [the
-`:8877/metrics` endpoint][].
+`:8877/metrics` endpoint].
 
 [Alex Gervais]: https://twitter.com/alex_gervais
 [$productName$ dashboard for Grafana]: https://grafana.com/dashboards/4698
 
 ## Using Datadog DogStatsD as the StatsD sink
 
-If you are a user of the [Datadog][] monitoring system, pulling in the
+If you are a user of the [Datadog] monitoring system, pulling in the
 Envoy statistics from $productName$ is very easy.
 
 [Datadog]: https://www.datadoghq.com/
