@@ -33,7 +33,7 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.0.5
-    date: 'TBD'
+    date: '20211109'
     notes:
       - title: AuthService circuit breakers
         type: feature

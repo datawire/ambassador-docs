@@ -11,8 +11,9 @@ for different TLS use cases including:
 
 ## `Host`
 
-As explained in the [`Host`](../host-crd) reference, a `Host` represents a domain
-in $productName$ and defines how TLS is managed on that domain. In $AESproductName$, the simplest configuration
+A `Host` represents a domain in $productName$ and defines how the domain manages TLS. For more information on the Host resource, see [The Host CRD reference documentation](../host-crd).
+
+In $AESproductName$, the simplest configuration
 of a `Host` will enable TLS with a self-signed certificate and redirect cleartext traffic to HTTPS. 
 
 > The example below does not define a `requestPolicy`; however, this is something to keep in mind as you begin using the `Host` `CRD` in $productName$.
@@ -22,13 +23,12 @@ of a `Host` will enable TLS with a self-signed certificate and redirect cleartex
 
 ### Automatic TLS with ACME
 
-With $AESproductName$, the `Host` can be configured to completely 
-manage TLS by requesting a certificate from a Certificate Authority using the
+With $AESproductName$, you can configure the `Host` to manage TLS by 
+requesting a certificate from a Certificate Authority using the
 [ACME HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/).
 
-After creating a DNS record, configuring $AESproductName$ to get a 
-certificate from the default CA [Let's Encrypt](https://letsencrypt.org) is as
-simple as providing a hostname and your email for the certificate:
+
+After you create a DNS record, configure $AESproductName$ to get a certificate from the default CA, [Let's Encrypt](https://letsencrypt.org), by providing a hostname and your email for the certificate:
 
 ```yaml
 ---
@@ -43,7 +43,7 @@ spec:
     email: julian@example.com
 ```
 
-$AESproductName$ will now request a certificate from the CA and store it in a secret 
+$AESproductName$ will now request a certificate from the CA and store it in a Secret 
 in the same namespace as the `Host`.
 
 ### Bring your own certificate
@@ -68,13 +68,11 @@ spec:
     name: host-secret
 ```
 
-$productName$ will now use the certificate in `host-secret` to terminate TLS.
-
 ### Advanced TLS configuration with the `Host`
 
 You can specify TLS configuration directly in the `Host` via the `tls` field. This is the recommended method for more advanced TLS Configuration.
 
-For example, to enforce a minimum TLS version on the `Host`, the configuration will look like this:
+For example, the configuration to enforce a minimum TLS version on the `Host` looks as follows:
 
 ```yaml
 ---
@@ -162,7 +160,7 @@ spec:
   min_tls_version: v1.2
 ```
 
-and link it to the `Host` via the `tlsContext` field as shown:
+Next, link it to the `Host` via the `tlsContext` field as shown:
 
 ```yaml
 ---
