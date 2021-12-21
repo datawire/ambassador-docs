@@ -11,18 +11,6 @@ import './index.less'
   <a href="../../release-notes">release notes</a>.
 </Alert>
 
-<div class="docs-article-toc">
-<h3>Contents</h3>
-
-* [Install via Helm](#img-classos-logo-srcimageshelm-navypng-install-via-helm)
-* [Install via Kubernetes YAML](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
-* [Install Locally on Docker](#img-classos-logo-srcimagesdockerpng-install-locally-on-docker)
-* [Upgrade Options](#upgrade-options)
-* [Container Images](#container-images)
-* [What's Next?](#whats-next)
-
-</div>
-
 ## <img class="os-logo" src="../../images/helm-navy.png"/> Install via Helm
 Helm, the package manager for Kubernetes, is the recommended way to install
 $productName$. Full details are in the [Helm instructions.](helm/)
