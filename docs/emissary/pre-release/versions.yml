@@ -8,7 +8,7 @@ productName: "Emissary-ingress"
 productNamePlural: "Emissary-ingresses"
 productYAMLPath: emissary
 productCRDName: emissary-crds.yaml
-productYAMLFile: emissary-ingress.yaml
+productYAMLFile: emissary-emissaryns.yaml
 productNamespace: emissary
 productDeploymentName: emissary-ingress
 productContainerName: ambassador

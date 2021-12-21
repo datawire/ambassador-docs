@@ -3,7 +3,7 @@ description: "A simple three step guide to installing $productName$ and quickly 
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import GettingStartedEdgeStack20Tabs from './gs-tabs'
+import GettingStartedEdgeStack21Tabs from './gs-tabs'
 
 # $productName$ quick start
 
@@ -30,7 +30,7 @@ We'll start by installing $productName$ into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GettingStartedEdgeStack20Tabs/>
+<GettingStartedEdgeStack21Tabs/>
 
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
@@ -79,9 +79,11 @@ EOF
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
-3. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
+3. Apply the YAML for a `Mapping` to tell $productName$ to route all traffic inbound to the `/backend/`
+   path to the `quote` Service:
 
   ```yaml
+  kubectl apply -f - <<EOF
   ---
   apiVersion: getambassador.io/v3alpha1
   kind: Mapping
@@ -91,24 +93,19 @@ EOF
     hostname: "*"
     prefix: /backend/
     service: quote
+    docs:
+      path: "/.ambassador-internal/openapi-docs"
+  EOF
   ```
 
-4. Apply the configuration to the cluster:
-
-  ```
-  kubectl apply -f quote-backend.yaml
-  ```
-
-  With our Mapping created, now we need to access it!
-
-5. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test access to your service.
+4. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
   ```
   export LB_ENDPOINT=$(kubectl -n $productNamespace$ get svc  $productDeploymentName$ \
     -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
   ```
 
-6. Test the configuration by accessing the service through the $productName$ load balancer:
+5. Test the configuration by accessing the service through the $productName$ load balancer:
 
   ```
   $ curl -Lki https://$LB_ENDPOINT/backend/
