@@ -19,7 +19,7 @@ changes to allow $productName$ to more gracefully handle larger installations (i
 multitenant or multiorganizational installations), reduce memory footprint, and improve
 performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
 some changes that aren't backward-compatible with 1.X. These changes are detailed in
-[Major Changes in $productName$ 2.X](../../../about/changes-2.x).
+[Major Changes in $productName$ 2.X](/docs/edge-stack/latest/about/changes-2.x/).
 
 ## Migration Overview
 
