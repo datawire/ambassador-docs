@@ -36,7 +36,7 @@ interface.  If you do not have the time or resources to implement your own rate
 limit service, $AESproductName$ integrates a high-performance rate
 limiting service.
 
-[Envoy's `v2/rls.proto`]: https://github.com/emissary-ingress/emissary/tree/$branch$/api/envoy/service/ratelimit/v2/rls.proto
+[Envoy's `v2/rls.proto`]: https://github.com/emissary-ingress/emissary/tree/master/api/envoy/service/ratelimit/v2/rls.proto
 
 $productName$ generates a gRPC request to the external rate limit
 service and provides a list of labels on which the rate limit service can base
