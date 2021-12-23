@@ -29,7 +29,7 @@
 #             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
 
-changelog: https://github.com/datawire/edge-stack/blob/master/CHANGELOG.md
+changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.0.5
     date: '20211109'
@@ -106,7 +106,7 @@ items:
           <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         isHeadline: true
         docs: about/changes-2.0.0
-        image: edge-stack-ga.png
+        image: ./edge-stack-ga.png
 
       - title: API version getambassador.io/v3alpha1
         type: change

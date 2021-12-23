@@ -30,7 +30,7 @@
 #         - docs: The path to the documentation page where additional information can be found.
 #         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
 
-changelog: https://github.com/datawire/edge-stack/blob/master/CHANGELOG.md
+changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.1.0
     date: 'TBD'
@@ -179,7 +179,7 @@ items:
           <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         isHeadline: true
         docs: about/changes-2.x
-        image: edge-stack-ga.png
+        image: ./edge-stack-ga.png
 
       - title: API version getambassador.io/v3alpha1
         type: change
