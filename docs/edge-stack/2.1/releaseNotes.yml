@@ -179,7 +179,7 @@ items:
           <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         isHeadline: true
         docs: about/changes-2.x
-        image: ./edge-stack-ga.png
+        image: ./edge-stack-GA.png
 
       - title: API version getambassador.io/v3alpha1
         type: change
