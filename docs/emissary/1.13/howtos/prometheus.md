@@ -26,7 +26,7 @@ deployment.
 Starting with $productName$ `0.71.0`, Prometheus can scrape stats/metrics
 directly from Envoy's `/metrics` endpoint, removing the need to
 [configure $productName$ to output stats to
-StatsD](#statsd-exporter-output-statistics-to-ambassador-edge-stack).
+StatsD](statsd-exporter-output-statistics-to-productname).
 
 The `/metrics` endpoint can be accessed internally via the $productName$ admin port (default 8877):
 
@@ -74,11 +74,11 @@ standard YAML files.  Alternatively, you can install it with
 1. Deploy the Prometheus Operator
 
    To deploy the Prometheus Operator, you can clone the repository and
-   follow the instructions in the README, or simply apply the
-   published YAML with `kubectl`.
+   follow the instructions in the README, or simply create the resources
+   published in the YAML with `kubectl`.
 
     ```
-    kubectl apply -f https://raw.githubusercontent.com/coreos/prometheus-operator/master/bundle.yaml
+    kubectl create -f https://raw.githubusercontent.com/coreos/prometheus-operator/master/bundle.yaml
     ```
 
     **Note:** The YAML assumes Kubernetes 1.16 and above.  If running a

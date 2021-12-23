@@ -4,7 +4,7 @@ The Ambassador Edge Stack's robust TLS support exposes configuration options
 for different TLS use cases including:
 
 - [Simultaneously Routing HTTP and HTTPS](cleartext-redirection#cleartext-routing)
-- [HTTP -> HTTPS Redirection](cleartext-redirection#http---https-redirection)
+- [HTTP -> HTTPS Redirection](cleartext-redirection#http-https-redirection)
 - [Mutual TLS](mtls)
 - [Server Name Indication (SNI)](sni)
 - [TLS Origination](origination)

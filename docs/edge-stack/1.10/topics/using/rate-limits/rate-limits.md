@@ -255,7 +255,7 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
     * `.RateLimitResponse.OverallCode` → `int` : `1` for OK, `2` for
       OVER_LIMIT.
     * `.RateLimitResponse.Statuses` →
-      [`[]*RateLimitResponse_DescriptorStatus]`][`v2.RateLimitResponse_DescriptorStatus`]
+      [`[]*RateLimitResponse_DescriptorStatus]`]`v2.RateLimitResponse_DescriptorStatus`
       The itemized status codes for each limit that was selected for
       this request.
     * `.RetryAfter` → `time.Duration` the amount of time until all of
@@ -285,7 +285,7 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
        * `.RateLimitResponse.OverallCode` → `int` : `1` for OK, `2` for
          OVER_LIMIT.
        * `.RateLimitResponse.Statuses` →
-         [`[]*RateLimitResponse_DescriptorStatus]`][`v2.RateLimitResponse_DescriptorStatus`]
+         [`[]*RateLimitResponse_DescriptorStatus]`]`v2.RateLimitResponse_DescriptorStatus`
          The itemized status codes for each limit that was selected for
          this request.
        * `.RetryAfter` → `time.Duration` the amount of time until all of
@@ -304,7 +304,6 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
 [`JWT` Filter]: ../../filters/jwt
 [Go `text/template`]: https://golang.org/pkg/text/template/
 [Go `text/template` functions]: https://golang.org/pkg/text/template/#hdr-Functions
-[`v2.RateLimitResponse_DescriptorStatus`]: https://godoc.org/github.com/emissary-ingress/emissary/pkg/api/envoy/service/ratelimit/v2#RateLimitResponse_DescriptorStatus
 [Sprig `hasKey`]: https://masterminds.github.io/sprig/dicts.html#haskey
 
 ## Examples

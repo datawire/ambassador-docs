@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import Button from '../../../../src/components/Button/Button';
 import Icon from '../../../../src/components/Icon/Icon';
 import template from '../../../../src/utils/template';
+import {isBrowser} from '../../../../src/utils/isBrowser';
 
 import * as styles from './releaseNotes.module.less';
 
@@ -22,11 +23,11 @@ const typeIcon = {
 
 const Note = ({ note, onViewMore, versions }) => {
   const title = useMemo(() => {
-    if (titlePrefix[note.type]) {
+    if (titlePrefix[note.type] && note.image) {
       return `${titlePrefix[note.type]}: ${note.title}`;
     }
     return note.title;
-  }, [note.title, note.type]);
+  }, [note.title, note.type, note.image]);
 
   return (
     <div className={styles.note}>
@@ -46,13 +47,13 @@ const Note = ({ note, onViewMore, versions }) => {
         />
         {note.image && (
           <div className={styles.note__image_xs}>
-            <img src={note.image} alt={title} height="172" width="207" />
+            <img  alt={note.title} height="172" width="207" src={(isBrowser ? window.location : '') + note.image}/>
           </div>
         )}
       </div>
       {note.image && (
         <div className={styles.note__image}>
-          <img src={note.image} alt={title} height="172" width="207" />
+          <img src={(isBrowser ? window.location : '') + note.image} alt={note.title} height="172" width="207" />
         </div>
       )}
     </div>

@@ -21,7 +21,7 @@ If you are installing Service Preview and $productName$ for the first time, `edg
 
 The YAML installation method will walk you through a step-by-step deployment of all the resources necessary for installing Service Preview alongside the $productName$. The YAML installation method is the most common approach to install $productName$, especially in production environments, with our default, customizable manifest.
 
-### <img class="os-logo" src="../../../../images/helm.png"/> [Install with Helm](#img-classos-logo-srcimageshelmpng-install-with-helm-1)
+### <img class="os-logo" src="../../../../images/helm.png"/> [Install with Helm](../../../install/helm)
 
 Helm is a popular Kubernetes package manager. The $productName$ helm chart allows you to install Service Preview alongside the $productName$.
 

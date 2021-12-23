@@ -11,18 +11,6 @@ import './index.less'
   <a href="../../release-notes">release notes</a>.
 </Alert>
 
-<div class="docs-article-toc">
-<h3>Contents</h3>
-
-* [Install via Helm](#img-classos-logo-srcimageshelm-navypng-install-via-helm)
-* [Install via Kubernetes YAML](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
-* [Install Locally on Docker](#img-classos-logo-srcimagesdockerpng-install-locally-on-docker)
-* [Upgrade Options](#upgrade-options)
-* [Container Images](#container-images)
-* [What's Next?](#whats-next)
-
-</div>
-
 ## <img class="os-logo" src="../../images/helm-navy.png"/> Install via Helm
 Helm, the package manager for Kubernetes, is the recommended way to install
 $productName$. Full details are in the [Helm instructions.](helm/)
@@ -58,5 +46,5 @@ your production needs for $AESproductName$ or $OSSproductName$. Read more about
 # What’s Next?
 $productName$ has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice. To learn more about how $productName$ works, along with use cases, best practices, and more,
-check out the [Welcome page](../../) or read the [$productName$
+check out the [Welcome page](../../../) or read the [$productName$
 Story](../../about/why-ambassador).

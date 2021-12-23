@@ -26,39 +26,60 @@
 #             `FOO/releaseNotes.yml`, then the image paths are
 #             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
+#         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 1.13.10
     date: '2021-07-27'
     notes:
-      - title: Dev Portal timeout configuration support
-        type: bugfix
-        body: "The <code>Mapping</code> resource can now specify <code>docs.timeout_ms</code> to set the timeout when the Dev Portal is fetching API specifications."
-        docs: topics/using/dev-portal
-        image: ../images/edge-stack-1.13.10-docs-timeout.png
-      - title: Dev Portal HTML tag cleanup
-        type: bugfix
-        body: "The Dev Portal will now strip HTML tags when displaying search results, showing just the actual content of the search result."
-        docs: topics/using/dev-portal
       - title: Fix for CORS origins configuration on the Mapping resource
         type: bugfix
-        body: "Fixed a regression when specifying a comma separated string for <code>cors.origins</code> on the <code>Mapping</code> resource"
+        body: >-
+          Fixed a regression when specifying a comma separated string for <code>cors.origins</code>
+          on the <code>Mapping</code> resource.
+          ([#3609](https://github.com/emissary-ingress/emissary/issues/3609))
         docs: topics/using/cors
         image: ../images/emissary-1.13.10-cors-origin.png
+
       - title: New Envoy-configuration snapshots for debugging
-        body: "Envoy-configuration snapshots get saved (as ambex-#.json) in /ambassador/snapshots. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
+        body: "Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
         type: change
         docs: topics/running/environment/
+
       - title: Optionally remove ratelimiting for Envoy reconfiguration
-        body: "Set <code>AMBASSADOR_AMBEX_NO_RATELIMIT</code> to <code>true</code> to completely disable ratelimiting Envoy reconfiguration under memory pressure. This can help performance with the endpoint or Consul resolvers, but could make OOMkills more likely with large configurations."
+        body: >-
+          Set <code>AMBASSADOR_AMBEX_NO_RATELIMIT</code> to <code>true</code> to completely disable
+          ratelimiting Envoy reconfiguration under memory pressure. This can help performance with
+          the endpoint or Consul resolvers, but could make OOMkills more likely with large
+          configurations. The default is <code>false</code>, meaning that the rate limiter is
+          active.
         type: change
         docs: topics/running/environment/
-      - title: More logging around Consul certificate rotation
-        body: "Consul certificate-rotation logging now includes the fingerprints and validity timestamps of certificates being rotated."
+
+      - title: Mappings support configuring the DevPortal fetch timeout
+        type: bugfix
+        body: >-
+          The <code>Mapping</code> resource can now specify <code>docs.timeout_ms</code> to set the
+          timeout when the Dev Portal is fetching API specifications.
+        docs: topics/using/dev-portal
+        image: ../images/edge-stack-1.13.10-docs-timeout.png
+
+      - title: Dev Portal will strip HTML tags when displaying results
+        type: bugfix
+        body: >-
+          The Dev Portal will now strip HTML tags when displaying search results, showing just the
+          actual content of the search result.
+        docs: topics/using/dev-portal
+
+      - title: Consul certificate rotation logs more information
         type: change
+        body: >-
+          Consul certificate-rotation logging now includes the fingerprints and validity timestamps
+          of certificates being rotated.
         docs: howtos/consul/
         image: ../images/edge-stack-1.13.10-consul-cert-log.png
+
   - version: 1.13.9
     date: '2021-06-30'
     notes:

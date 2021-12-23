@@ -4,7 +4,7 @@ $productName$ and Istio: Edge Proxy and Service Mesh together in one. $productNa
 
 $productName$ and Istio can be deployed together on Kubernetes. In this configuration, incoming traffic from outside the cluster is first routed through $productName$, which then routes the traffic to Istio-powered services. $productName$ handles authentication, edge routing, TLS termination, and other traditional edge functions.
 
-This allows the operator to have the best of both worlds: a high performance, modern edge service ($productName$) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/docs/tasks/traffic-management/ingress/#configuring-ingress-using-an-istio-gateway) abstraction, $productName$ still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
+This allows the operator to have the best of both worlds: a high performance, modern edge service ($productName$) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/#configuring-ingress-using-an-istio-gateway) abstraction, $productName$ still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
 
 This guide will explain how to take advantage of both $productName$ and Istio to have complete control and observability over how requests are made in your cluster. 
 
@@ -42,8 +42,8 @@ Integrating $productName$ and Istio allows you to take advantage of the edge rou
 
 The process of collecting mTLS certificates is different depending on your Istio version. Select your Istio version below for instructions on how to integrate $productName$ with Istio.
 
-- [Istio 1.5 and above](#integrating-ambassador-with-istio-15-and-above)
-- [Istio 1.4 and below](#integrating-ambassador-with-istio-14-and-below)
+- [Istio 1.5 and above](#integrating-productname-with-istio-15-and-above)
+- [Istio 1.4 and below](#integrating-productname-with-istio-14-and-below)
 
 #### Integrating $productName$ with Istio 1.5 and above
 

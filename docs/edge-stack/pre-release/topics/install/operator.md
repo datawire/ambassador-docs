@@ -6,7 +6,7 @@ The Ambassador Operator is a Kubernetes Operator that controls the
 complete lifecycle of $productName$ in your cluster. It also
 automates many of the repeatable tasks you have to perform for $productName$. Once installed, the Ambassador Operator will automatically complete rapid
 installations and seamless upgrades to new versions of $productName$.  [Read
-more](https://github.com/datawire/ambassador-operator/blob/master/README.md#version-syntax)
+more](https://github.com/datawire/ambassador-operator/blob/master/README.md)
 about the benefits of the Operator.
 
 A Kubernetes operator is a software extension that makes it easier to manage and automate your

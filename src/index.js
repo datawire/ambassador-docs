@@ -1,30 +1,31 @@
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
+
+
 
 import Layout from '../../src/components/Layout';
 
+
+
 import ContactBlock from '../../src/components/ContactBlock';
+import DatawireMetaData from '../../src/components/DatawireMetaData';
 import Dropdown from '../../src/components/Dropdown';
 import Icon from '../../src/components/Icon';
 import ReadingTime from '../../src/components/ReadingTime';
 import SEO from '../../src/components/SEO/SEO';
 import template from '../../src/utils/template';
 
+
+
 import AllVersions from './components/AllVersions';
 import ContentTable from './components/ContentTable';
 import DocsFooter from './components/DocsFooter';
 import DocsHome from './components/DocsHome';
 import SearchBox from './components/SearchBox';
+import IsAesPage from './components/ShowAesPage';
 import SidebarContent from './components/SidebarContent';
-import {
-  products,
-  metaData,
-  learningJourneys,
-  archivedVersionsLink,
-  siteUrl,
-  getSiteUrl,
-} from './config';
+import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl, getSiteUrl } from './config';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
@@ -34,7 +35,7 @@ import Kubernetes from './products/Kubernetes';
 import Telepresence from './products/Telepresence';
 import './style.less';
 import getPrevNext from './utils/getPrevNext';
-import isAesPage from './utils/isAesPage';
+
 
 export default ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -75,7 +76,7 @@ export default ({ data, location, pageContext }) => {
       );
     }
     if (
-      newVer.id === '2.0' ||
+      newVer.id === '2.1' ||
       newVer.id === 'pre-release' ||
       newVer.id === 'latest' ||
       (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
@@ -85,7 +86,7 @@ export default ({ data, location, pageContext }) => {
     return (
       <a
         href={`/docs/${newProduct.slug}/latest/tutorials/getting-started/`}
-      >{`${newProduct.name} 2.0 is now available!`}</a>
+      >{`${newProduct.name} 2.1 is now available!`}</a>
     );
   }
   const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(
@@ -156,16 +157,9 @@ export default ({ data, location, pageContext }) => {
     !isHome && isProduct && !isProductHome && !isArchivedVersions,
   );
   const [versionList, setVersionList] = useState(initialProduct.version);
-  const [showAesPage, setShowAesPage] = useState(false);
   const [edgissaryDPMessage, setEdgissaryDPMessage] = useState(
     initialEdgissaryDPNotificationMsg,
   );
-
-  useEffect(() => {
-    isAesPage(initialProduct.slug, slug, initialVersion.id).then((result) =>
-      setShowAesPage(result),
-    );
-  }, [initialProduct.slug, initialVersion.id, slug]);
 
   const versions = useMemo(() => {
     if (!data.versions?.content) {
@@ -347,7 +341,7 @@ export default ({ data, location, pageContext }) => {
     </div>
   );
 
-  const edgeStackLinks = data?.allFile.edges[0].node.internal.content;
+  const edgeStackLinks = data?.allFile.edges[0]?.node.internal.content;
 
   const footer = (
     <div>
@@ -378,6 +372,15 @@ export default ({ data, location, pageContext }) => {
             page.contentTable.items[0].items?.length > 1
           }
         />
+        {!isHome && !isProductHome && isProduct && (
+        <DatawireMetaData
+          page={page}
+          edgeStackLinks={edgeStackLinks}
+          product={product.slug}
+          version={versions.docsVersion}
+          resources={page.exports}
+        />
+      )}
       </section>
       {!isHome && !isProductHome && isProduct && (
         <DocsFooter
@@ -409,11 +412,7 @@ export default ({ data, location, pageContext }) => {
       <MainContainer>
         <div className="docs__doc-body doc-body">
           <div className="doc-tags">
-            {showAesPage && (
-              <Link className="doc-tag aes" to="/editions">
-                Ambassador Edge Stack
-              </Link>
-            )}
+            <IsAesPage initialProduct={initialProduct.slug} slug={slug} initialVersion={initialVersion.id}/>
           </div>
           <ReadingTime
             slug={page.fields.slug}
@@ -477,6 +476,8 @@ export default ({ data, location, pageContext }) => {
   }, [
     footer,
     initialProduct,
+    initialVersion,
+    slug,
     isArchivedVersions,
     isHome,
     isLearning,
@@ -490,7 +491,6 @@ export default ({ data, location, pageContext }) => {
     page.frontmatter.reading_time,
     page.frontmatter.reading_time_text,
     prevLearning,
-    showAesPage,
     versions,
   ]);
 
@@ -563,6 +563,12 @@ export const query = graphql`
   query ($linksslug: String, $slug: String!, $learningSlugs: [String]) {
     mdx(fields: { slug: { eq: $slug } }) {
       body
+      exports {
+        metaData {
+          name
+          path
+        }
+      }
       fields {
         slug
         linksslug

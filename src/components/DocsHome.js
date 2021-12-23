@@ -7,7 +7,7 @@ import Icon from '../../../src/components/Icon';
 import {
   goToTelepresenceDocs,
   goToCloudAnnotate,
-  goToCloudEnvironments,
+  goToCloudCells,
   goToTutorialsGettingStarted,
   goToTelepresenceHowTo,
   goToTelepresenceEnv,
@@ -81,7 +81,7 @@ const DocsHome = () => {
                 <Link to={goToCloudAnnotate}>Annotate a service</Link>
               </li>
               <li>
-                <Link to={goToCloudEnvironments}>Manage my environments</Link>
+                <Link to={goToCloudCells}>Manage my cells</Link>
               </li>
             </ul>
           </div>

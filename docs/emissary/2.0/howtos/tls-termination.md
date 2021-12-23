@@ -2,7 +2,7 @@
 
 TLS encryption is one of the basic requirements of having a secure system.
 $AESproductName$ [automatically enables TLS termination/HTTPs
-](../../topics/running/host-crd#acme-and-tls-settings), making TLS encryption
+](../../topics/running/host-crd#acme-support), making TLS encryption
 easy and centralizing TLS termination for all of your services in Kubernetes.
 
 While this automatic certificate management in $AESproductName$ helps
@@ -89,7 +89,7 @@ spec:
       hostname: wildcard-host
 ```
 
-**Note:** If running multiple instances of $productName$ in one cluster remember to include the `ambassador_id` property in the `spec`, e.g.:
+**Note:** If running multiple instances of $productName$ in one cluster remember to include the `ambassador_id` property in the `spec`, e.g:
 
 ```yaml
 ---
