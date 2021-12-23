@@ -30,7 +30,7 @@
 #         - docs: The path to the documentation page where additional information can be found.
 #         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
 
-changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
+changelog: https://github.com/datawire/edge-stack/blob/master/CHANGELOG.md
 items:
   - version: 2.1.0
     date: 'TBD'
@@ -39,9 +39,9 @@ items:
         type: feature
         body: >-
           $productName$ supports <code>getambassador.io/v2</code> CRDs, to simplify migration from $productName$
-          1.X. <b>Note:</b> it is important to read the <a href="../topics/install/migrate-to-version-2">migration
+          1.X. <b>Note:</b> it is important to read the <a href="../topics/install/migration-matrix">migration
           documentation</a> before starting migration.
-        docs: topics/install/migrate-to-version-2
+        docs: topics/install/migration-matrix
         image: ./v2.1.0-smoother-migration.png
 
       - title: Ambassador Edge Stack CRDs are fully validated
@@ -179,7 +179,7 @@ items:
           <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         isHeadline: true
         docs: about/changes-2.x
-        image: ./edge-stack-ga.png
+        image: edge-stack-ga.png
 
       - title: API version getambassador.io/v3alpha1
         type: change
@@ -191,7 +191,7 @@ items:
           is the only supported API version for 2.0.4</b> &mdash; full support for
           <code>getambassador.io/v2</code> will arrive soon in a later 2.X version.
         docs: about/changes-2.x
-        image: ./v2.0.4-v3alpha1.png
+        image: v2.0.4-v3alpha1.png
 
       - title: Support for Kubernetes 1.22
         type: feature
@@ -201,7 +201,7 @@ items:
           <a href="https://github.com/imoisharma">Mohit Sharma</a> for contributions to
           this feature!
         docs: about/changes-2.x
-        image: ./v2.0.4-k8s-1.22.png
+        image: v2.0.4-k8s-1.22.png
 
       - title: Mappings support configuring strict or logical DNS
         type: feature
@@ -210,12 +210,12 @@ items:
           <code>logical_dns</code> in a <code>Mapping</code> to configure the Service
           Discovery Type.
         docs: topics/using/mappings/#dns-configuration-for-mappings
-        image: ./v2.0.4-mapping-dns-type.png
+        image: v2.0.4-mapping-dns-type.png
 
       - title: Mappings support controlling DNS refresh with DNS TTL
         type: feature
         body: >-
-          You can now set <code>respect_dns_ttl</code> to <code>true</code> to force the
+          ou can now set <code>respect_dns_ttl</code> to <code>true</code> to force the
           DNS refresh rate for a <code>Mapping</code> to be set to the record's TTL
           obtained from DNS resolution.
         docs: topics/using/mappings/#dns-configuration-for-mappings

@@ -29,7 +29,7 @@
 #             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
 
-changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
+changelog: https://github.com/datawire/edge-stack/blob/master/CHANGELOG.md
 items:
   - version: 2.0.5
     date: '20211109'
