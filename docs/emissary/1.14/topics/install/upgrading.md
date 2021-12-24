@@ -21,7 +21,7 @@ ambassador         1/1     1            1           ...
 ## Installed via Helm?
 
 If you installed using the Helm chart or `edgectl install`, then you should
-[upgrade with the help of Helm](../helm/#upgrading-an-existing-ambassador-edge-stack-installation).
+[upgrade with the help of Helm](../helm/#upgrading-an-existing-productname-installation).
 To verify this, run the following command to see if it returns resources:
 ```
 $ kubectl get deployment -A -l 'app.kubernetes.io/name=ambassador'

@@ -38,7 +38,7 @@ We have included a few example configurations in the
 [`statsd-sink/`] directory to help you get started.  Clone the
 repository to get local, editable copies.
 
-[`statsd-sink/`]: https://github.com/emissary-ingress/emissary/tree/$branch$/deployments/statsd-sink
+[`statsd-sink/`]: https://github.com/emissary-ingress/emissary/tree/master/deployments/statsd-sink
 
 ## Using Graphite as the StatsD sink
 
@@ -83,7 +83,7 @@ StatsD Exporter is available in [`prom-statsd-sink.yaml`].
 [Prometheus]: https://prometheus.io/
 [Prometheus StatsD Exporter]: https://github.com/prometheus/statsd_exporter
 [exposition format]: https://prometheus.io/docs/instrumenting/exposition_formats/
-[`prom-statsd-sink.yaml`]: https://github.com/emissary-ingress/emissary/blob/$branch$/deployments/statsd-sink/prometheus/prom-statsd-sink.yaml
+[`prom-statsd-sink.yaml`]: https://github.com/emissary-ingress/emissary/blob/master/deployments/statsd-sink/prometheus/prom-statsd-sink.yaml
 
 To finally get the statistics to Prometheus, you then configure a
 Prometheus target to read from `statsd-sink` on port 9102.
@@ -113,7 +113,7 @@ the Prometheus StatsD Exporter documentation to learn how to modify
 its mappings.
 
 [Mappings]: ../../../using/mappings
-[Metric Mapping and Configuration]: https://github.com/prometheus/statsd_exporter/#metric-mapping-and-configuration
+[Metric Mapping and Configuration]: https://github.com/prometheus/statsd_exporter/#user-content-metric-mapping-and-configuration
 
 #### Configuring Prometheus StatsD Exporter with Helm
 
@@ -172,8 +172,8 @@ Operator with $productName$:
   the actual Prometheus deployment.
 
 [Prometheus operator]: https://github.com/coreos/prometheus-operator
-[`statsd-sink.yaml`]: https://github.com/emissary-ingress/emissary/blob/$branch$/deployments/statsd-sink/prometheus/statsd-sink.yaml
-[`prometheus.yaml`]: https://github.com/emissary-ingress/emissary/blob/$branch$/deployments/statsd-sink/prometheus/prometheus.yaml
+[`statsd-sink.yaml`]: https://github.com/emissary-ingress/emissary/blob/master/deployments/statsd-sink/prometheus/statsd-sink.yaml
+[`prometheus.yaml`]: https://github.com/emissary-ingress/emissary/blob/master/deployments/statsd-sink/prometheus/prometheus.yaml
 
 Make sure that the `ServiceMonitor` is in the same namespace as
 $productName$.  A walk-through of the basics of configuring the
@@ -238,7 +238,7 @@ to act as the StatsD sink.  To do this, replace the sample API key in
 our [sample YAML file][`dd-statsd-sink.yaml`] with your own, then
 apply that YAML:
 
-[`dd-statsd-sink.yaml`]: https://github.com/emissary-ingress/emissary/blob/$branch$/deployments/statsd-sink/datadog/dd-statsd-sink.yaml
+[`dd-statsd-sink.yaml`]: https://github.com/emissary-ingress/emissary/blob/master/deployments/statsd-sink/datadog/dd-statsd-sink.yaml
 
 ```
 kubectl apply -f statsd-sink/datadog/dd-statsd-sink.yaml
