@@ -3,7 +3,6 @@ import './index.less'
 
 # Installing $productName$
 
-
 ## <img class="os-logo" src="../../images/helm-navy.png"/> Install with Helm
 Helm, the package manager for Kubernetes, is the recommended way to install
 $productName$. Full details are in the [Helm instructions.](helm/)

@@ -63,7 +63,7 @@ important caveats:
 
 4. **Check `AuthService` and `RateLimitService` resources, if any.**
 
-   If you have an [`AuthService`](../../../../../using/authservice) or
+   If you have an [`AuthService`](../../../../../using/authservice/) or
    [`RateLimitService`](../../../../../running/services/rate-limit-service) installed, make
    sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
    If they are not, the initial migration tests may fail.
