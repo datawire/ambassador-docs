@@ -215,7 +215,7 @@ items:
       - title: Mappings support controlling DNS refresh with DNS TTL
         type: feature
         body: >-
-          ou can now set <code>respect_dns_ttl</code> to <code>true</code> to force the
+          You can now set <code>respect_dns_ttl</code> to <code>true</code> to force the
           DNS refresh rate for a <code>Mapping</code> to be set to the record's TTL
           obtained from DNS resolution.
         docs: topics/using/mappings/#dns-configuration-for-mappings
