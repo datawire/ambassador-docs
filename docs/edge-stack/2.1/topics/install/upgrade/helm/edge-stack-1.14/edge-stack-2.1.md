@@ -169,6 +169,7 @@ Migration is a six-step process:
    kind: Listener
    metadata:
      name: ambassador-http-listener
+     namespace: ambassador
    spec:
      port: 8080
      protocol: HTTPS
@@ -181,6 +182,7 @@ Migration is a six-step process:
    kind: Listener
    metadata:
      name: ambassador-https-listener
+     namespace: ambassador
    spec:
      port: 8443
      protocol: HTTPS
