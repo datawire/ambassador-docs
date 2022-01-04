@@ -19,7 +19,7 @@ changes to allow $productName$ to more gracefully handle larger installations (i
 multitenant or multiorganizational installations), reduce memory footprint, and improve
 performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
 some changes that aren't backward-compatible with 1.X. These changes are detailed in
-[Major Changes in $productName$ 2.X](../../../about/changes-2.x).
+[Major Changes in $productName$ 2.X](/docs/edge-stack/latest/about/changes-2.x/).
 
 ## Migration Overview
 
@@ -111,7 +111,7 @@ Migration is a six-step process:
    $productDeploymentName$ default  1           ...
    ```
 
-   - If Helm returns resources, continue with [Helm](../helm). **Note that if your $productName$ 1.14.2
+   - If Helm returns resources, continue with [Helm](/docs/edge-stack/latest/topics/install/helm/#install-with-helm). **Note that if your $productName$ 1.14.2
    installation uses a nonstandard namespace, you will need to include the namespace in
    the commands below.**
 
@@ -210,8 +210,8 @@ Migration is a six-step process:
    Your $productName$ $version$ installation can support the `getambassador.io/v2`
    configuration resources used by $productName$ 1.14.2, but you may need to make some
    changes to the configuration, as detailed in the documentation on 
-   [configuring $productName$ Communications](../../../howtos/configure-communications)
-   and [updating CRDs to `getambassador.io/v3alpha1`](../convert-to-v3alpha1). 
+   [configuring $productName$ Communications](../../../../../../howtos/configure-communications)
+   and [updating CRDs to `getambassador.io/v3alpha1`](../../../../convert-to-v3alpha1). 
 
    <Alert severity="info">
     Kubernetes will not allow you to have a <code>getambassador.io/v3alpha1</code> resource
@@ -230,7 +230,7 @@ Migration is a six-step process:
 
    You can run $productName$ 1.14.2 and $productName$ $version$ side-by-side as long as you care
    to. However, taking full advantage of $productName$ 2.X's capabilities **requires**
-   [updating your configuration to use `getambassador.io/v3alpha1` configuration resources](../convert-to-v3alpha1),
+   [updating your configuration to use `getambassador.io/v3alpha1` configuration resources](../../../../convert-to-v3alpha1),
    since some useful features in $productName$ $version$ are only available using 
    `getambassador.io/v3alpha1` resources.
 
@@ -254,5 +254,5 @@ Migration is a six-step process:
    You may also want to redirect DNS to the `emissary-ingress` Service and remove the
    `ambassador` Service.
 
-   Once $productName$ 1.14.2 is no longer running, you may [convert](..convert-to-v3alpha1)
+   Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
    any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
