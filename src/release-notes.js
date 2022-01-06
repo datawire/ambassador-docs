@@ -203,8 +203,9 @@ export default ({ data, location, pageContext }) => {
               <ul className="docs__products-list">
                 {products.map((item) => (
                   <li
-                    className={`${product.slug === item.slug ? 'docs__selected' : ''
-                      }`}
+                    className={`${
+                      product.slug === item.slug ? 'docs__selected' : ''
+                    }`}
                     key={item.name}
                     onClick={claenStorage}
                   >
@@ -214,8 +215,9 @@ export default ({ data, location, pageContext }) => {
               </ul>
             </div>
             <div
-              className={`docs__dropdown-container docs__mobile${versionList.length > 1 ? ' docs__dropdown-version' : ''
-                }`}
+              className={`docs__dropdown-container docs__mobile${
+                versionList.length > 1 ? ' docs__dropdown-version' : ''
+              }`}
             >
               <Dropdown
                 label={product.name}
