@@ -81,6 +81,8 @@
                link: /howtos/istio
              - title: Linkerd 2 integration
                link: /howtos/linkerd2
+             - title: ExternalDNS integration
+               link: /howtos/external-dns
  - title: Technical reference
    items:
      - title: Custom resources
