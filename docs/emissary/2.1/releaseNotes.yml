@@ -33,8 +33,15 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.1.0
-    date: 'TBD'
+    date: '2021-12-16'
     notes:
+      - title: Envoy V2 API deprecation
+        type: change
+        body: >-
+          Support for the Envoy V2 API is deprecated in $productName$ v2.1, and will be removed in $productName$ 
+          v2.2.0. The <code>AMBASSADOR_ENVOY_API_VERSION</code> environment variable will be removed at the same
+          time. Only the Envoy V3 API will be supported (this has been the default since $productName$ v1.14.0).
+
       - title: Smoother migrations with support for getambassador.io/v2 CRDs
         type: feature
         body: >-
