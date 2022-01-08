@@ -115,7 +115,7 @@ After applying the above configuration, ExternalDNS is ready to use. Configure a
     metadata:
 	    name: your-hostname
       annotations:
-	      external-dns.ambassador-service: emissary-ingress.emissary
+	      external-dns.ambassador-service: edge-stack.ambassador
     spec:
 	    acmeProvider:
 	      authority: none
