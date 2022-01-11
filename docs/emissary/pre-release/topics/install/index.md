@@ -3,18 +3,6 @@ import './index.less'
 
 # Installing $productName$
 
-<div class="docs-article-toc">
-<h3>Contents</h3>
-
-* [Install with Helm](#img-classos-logo-srcimageshelm-navypng-install-via-helm)
-* [Install with Kubernetes YAML](#img-classos-logo-srcimageskubernetespng-install-via-kubernetes-yaml)
-* [Try the demo with Docker](#img-classos-logo-srcimagesdockerpng-install-locally-on-docker)
-* [Upgrade or migrate to a newer version](#upgrade-options)
-* [Container Images](#container-images)
-* [What's Next?](#whats-next)
-
-</div>
-
 ## <img class="os-logo" src="../../images/helm-navy.png"/> Install with Helm
 Helm, the package manager for Kubernetes, is the recommended way to install
 $productName$. Full details are in the [Helm instructions.](helm/)

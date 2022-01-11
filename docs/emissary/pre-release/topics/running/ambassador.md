@@ -9,7 +9,6 @@ import Alert from '@material-ui/lab/Alert';
 * [General](#general)
 * [gRPC](#grpc)
 * [Header behavior](#header-behavior)
-* [Misc](#misc)
 * [Observability](#observability)
 * [Protocols](#protocols)
 * [Security](#security)
@@ -413,9 +412,9 @@ See the [Envoy documentation on the `X-Forwarded-For header` ](https://www.envoy
 
 ##### `X-Forwarded-For` trusted hops
 
-* `xff_num_trusted_hops` sets the default value for [the `l7Depth` setting of a `Listener`](../listener/#securitymodel-and-l7depth). The default is 0.
+* `xff_num_trusted_hops` sets the default value for [the `l7Depth` setting of a `Listener`](../listener/#securitymodel). The default is 0.
 
-See the [`Listener` documentation](../listener/#securitymodel-and-l7depth) for more details.
+See the [`Listener` documentation](../listener/#securitymodel) for more details.
 
 ---
 

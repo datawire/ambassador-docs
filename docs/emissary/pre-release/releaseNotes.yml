@@ -39,9 +39,9 @@ items:
         type: feature
         body: >-
           $productName$ supports <code>getambassador.io/v2</code> CRDs, to simplify migration from $productName$
-          1.X. <b>Note:</b> it is important to read the <a href="../topics/install/migrate-to-version-2">migration
+          1.X. <b>Note:</b> it is important to read the <a href="../topics/install/migration-matrix">migration
           documentation</a> before starting migration.
-        docs: topics/install/migrate-to-version-2
+        docs: topics/install/migration-matrix
         image: ./v2.1.0-smoother-migration.png
 
       - title: Correctly handle all changing canary configurations

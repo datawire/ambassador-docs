@@ -95,7 +95,7 @@ configuration. This enables a consistent configuration workflow.
 
 ## Upgrading an existing $productName$ installation
 
-**Note:** If your existing installation is running $OSSproductName$, **do not use these instructions**. See [Migrating to $AESproductName$](#migrating-to-the-ambassador-edge-stack) instead.
+**Note:** If your existing installation is running $OSSproductName$, **do not use these instructions**. See [Migrating to $AESproductName$](#migrating-to-aesproductname) instead.
 
 Upgrading an existing installation of $productName$ is a two-step process:
 
