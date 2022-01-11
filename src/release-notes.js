@@ -15,7 +15,7 @@ import Sidebar from './components/Sidebar';
 import { products } from './config';
 import './style.less';
 
-export default ({ data, location, pageContext }) => {
+const releaseNotes = ({ data, location, pageContext }) => {
   const slug = pageContext.slug.split('/');
   const initialProduct = useMemo(
     () => products.find((p) => p.slug === slug[2]) || products[0],
@@ -272,3 +272,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default releaseNotes;

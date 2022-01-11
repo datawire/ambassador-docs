@@ -9,7 +9,7 @@ exports.onCreateWebpackConfig = ({ actions, stage, getConfig }) => {
     },
   });
 
-  if (stage === 'build-javascript') {
+  if (stage === 'build-javascript' || stage === 'develop') {
     //https://github.com/webpack-contrib/mini-css-extract-plugin#remove-order-warnings
     const config = getConfig();
     const miniCssExtractPlugin = config.plugins.find(

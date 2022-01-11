@@ -37,7 +37,7 @@ import Telepresence from './products/Telepresence';
 import './style.less';
 import getPrevNext from './utils/getPrevNext';
 
-export default ({ data, location, pageContext }) => {
+const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
   const slug = page.fields.slug.split('/');
   const isHome = page.fields.slug === '/docs/';
@@ -639,3 +639,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default index;
