@@ -32,6 +32,19 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 2.1.1
+    date: 'TBD'
+    notes:
+      - title: Fix discovery of Filters, FilterPolicies, and RateLimits.  
+        type: bugfix
+        body: >-
+          In $productName$ version 2.1 <code>Filter</code>, <code>FilterPolicy</code>, and <code>RateLimit</code> resources using 
+          <code>getambassador.io/v3alpha1</code> CRDs would not be properly retrieved from Kubetnetes. $productName$ now requests 
+          the correct version of these resources so that they can be used.
+        github:
+        - title: 3945
+          link: https://github.com/emissary-ingress/emissary/issues/3982
+        
   - version: 2.1.0
     date: '2021-12-16'
     notes:
