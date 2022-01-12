@@ -118,7 +118,7 @@ function TabGroup({ children, ...props }) {
                 <Icon />
                 {child.type.label}
               </summary>
-              <div className="TabBody">{child.props.children}</div>
+              <div className={styles.TabBody}>{child.props.children}</div>
             </details>
           );
         })}
@@ -161,7 +161,7 @@ function TabGroup({ children, ...props }) {
             <TabPanel
               key={child.type.slug}
               value={child.type.slug}
-              className="TabBody"
+              className={styles.TabBody}
             >
               {child.props.children}
             </TabPanel>
