@@ -4,7 +4,7 @@ The documentation in this repository is built with [Gatsby](https://www.gatsbyjs
 
 ## Contributing
 
-We welcome all contributions! See [LICENSE](LICENSE) for applicable terms and conditions.
+We welcome all contributions! See [LICENSE](https://raw.githubusercontent.com/datawire/ambassador-docs/master/LICENSE) for applicable terms and conditions.
 
 ## Authoring Documentation
 
