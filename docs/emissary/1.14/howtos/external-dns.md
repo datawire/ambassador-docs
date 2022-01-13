@@ -105,17 +105,21 @@ The following configuration is an example configuring $productName$ - ExternalDN
   kubectl apply -f externaldns-ambassador.yaml
   ```
 
+  <Alert severity="info">
+    For the above example, ensure that you are using an EKS cluster, or <a href="https://aws.amazon.com/blogs/containers/connect-any-kubernetes-cluster-to-amazon-eks/">register your cluster with AWS</a> so that ExternalDNS can view and edit your AWS Hosted Zones. If you are using a cluster outside EKS and not registered with AWS you will see permissions errors from the ExternalDNS pod when attempting to list the Hosted Zones.
+  </Alert>
+  
 ## Usage
 
 After applying the above configuration, ExternalDNS is ready to use. Configure a `Host` with the following annotation to allow ExternalDNS to get the IP address of your $productName$'s LoadBalancer and register it with your DNS provider. 
 
   ```yaml
-    apiVersion: getambassador.io/v3alpha1
+    apiVersion: getambassador.io/v2
     kind: Host
     metadata:
 	    name: your-hostname
       annotations:
-	      external-dns.ambassador-service: edge-stack.ambassador
+	      external-dns.ambassador-service: ambassador.default
     spec:
 	    acmeProvider:
 	      authority: none

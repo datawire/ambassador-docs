@@ -103,6 +103,8 @@
        items:
          - title: Knative Serverless Framework
            link: /howtos/knative
+         - title: ExternalDNS integration
+           link: /howtos/external-dns
          - title: Service meshes
            items:
              - title: Consul integration
