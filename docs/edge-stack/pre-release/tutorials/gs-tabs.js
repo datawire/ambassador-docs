@@ -99,7 +99,7 @@ export default function GettingStartedEdgeStack21Tabs() {
             '\n' +
             'kubectl create namespace ambassador && \\' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-crds.yaml' +
+            'kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml' +
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
