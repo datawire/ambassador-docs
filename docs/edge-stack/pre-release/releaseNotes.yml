@@ -33,7 +33,7 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.1.1
-    date: '2022-01-13'
+    date: '2022-01-14'
     notes:
       - title: Fix discovery of Filters, FilterPolicies, and RateLimits
         type: bugfix
