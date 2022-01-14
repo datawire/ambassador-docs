@@ -67,7 +67,7 @@ Global rate limiting applies to the entire Kubernetes service mesh. This example
 
 ## Per user rate limiting
 
-Per user rate limiting enables you to apply the defined rate limit to specific IP addresses. To allow per user rate limits, you need to make sure you've properly configured $productName$ to [propagate your original client IP address](../../topics/running/ambassador#use_remote_address).
+Per user rate limiting enables you to apply the defined rate limit to specific IP addresses. To allow per user rate limits, you need to make sure you've properly configured $productName$ to [propagate your original client IP address](../../topics/running/ambassador/#trust-downstream-client-ip).
 
 This example shows how to use the `remote_address` special value in the mapping to target specific IP addresses:
 

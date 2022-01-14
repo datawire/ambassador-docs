@@ -8,7 +8,7 @@ single configuration resource:
 * How $productName$ should handle TLS certificates
 * How $productName$ should handle secure and insecure requests
 * Which resources to examine for further configuration
-* How $productName$ should handle [Service Preview URLs](/docs/edge-stack/latest/topics/using/edgectl/service-preview-reference#ambassador-edge-stack)
+* How $productName$ should handle [Service Preview URLs](/docs/edge-stack/latest/topics/using/edgectl/service-preview-reference/)
 
 A minimal Host resource, using Let’s Encrypt to handle TLS, would be:
 
@@ -362,7 +362,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 ## Service Preview URLs
 
-See [Service Preview](/docs/edge-stack/latest/topics/using/edgectl/service-preview-reference#ambassador-edge-stack) for more information.
+See [Service Preview](/docs/edge-stack/latest/topics/using/edgectl/service-preview-reference/) for more information.
 
 ## Host specification
 
