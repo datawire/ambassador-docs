@@ -33,25 +33,27 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.1.1
-    date: 'TBD'
+    date: '2022-01-13'
     notes:
-      - title: Fix discovery of Filters, FilterPolicies, and RateLimits.  
+      - title: Fix discovery of Filters, FilterPolicies, and RateLimits
         type: bugfix
         body: >-
-          In $productName$ version 2.1 <code>Filter</code>, <code>FilterPolicy</code>, and <code>RateLimit</code> resources using 
-          <code>getambassador.io/v3alpha1</code> CRDs would not be properly retrieved from Kubetnetes. $productName$ now requests 
-          the correct version of these resources so that they can be used.
+          In Edge Stack 2.1.0, it erroneously ignored <code>Filters</code>,
+          <code>FilterPolicies</code>, and <code>RateLimits</code> that were created as
+          <code>v3alpha1</code> (but correctly paid attention to them if they were created as
+          <code>v2</code> or older).  This is fixed; it will now correctly pay attention to both API
+          versions.
         github:
         - title: 3945
           link: https://github.com/emissary-ingress/emissary/issues/3982
-        
+
   - version: 2.1.0
     date: '2021-12-16'
     notes:
       - title: Envoy V2 API deprecation
         type: change
         body: >-
-          Support for the Envoy V2 API is deprecated in $productName$ v2.1, and will be removed in $productName$ 
+          Support for the Envoy V2 API is deprecated in $productName$ v2.1, and will be removed in $productName$
           v2.2.0. The <code>AMBASSADOR_ENVOY_API_VERSION</code> environment variable will be removed at the same
           time. Only the Envoy V3 API will be supported (this has been the default since $productName$ v1.14.0).
 
@@ -92,12 +94,12 @@ items:
           ACME client does), an error would always be logged about the Secret not being
           present, even though it was present, and everything was working correctly.
           This error is no longer logged.
-      
+
       - title: When using gzip, upstreams will no longer receive encoded data
         type: bugfix
         body: >-
           When using gzip compression, upstream services will no longer receive compressed
-          data. This bug was introduced in 1.14.0. The fix restores the default behavior of 
+          data. This bug was introduced in 1.14.0. The fix restores the default behavior of
           not sending compressed data to upstream services.
         github:
         - title: 3818
