@@ -21,3 +21,8 @@ Emissary-ingress Python code incorporates Free and Open Source software under th
 * [Python Software Foundation license](https://spdx.org/licenses/PSF-2.0.html)
 * [Unicode License Agreement for Data Files and Software (2015)](https://spdx.org/licenses/Unicode-DFS-2015.html)
 * public domain
+
+
+Emissary-ingress Node.Js code incorporates Free and Open Source software under the following licenses:
+
+TODO
