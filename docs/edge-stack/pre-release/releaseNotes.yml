@@ -44,7 +44,7 @@ items:
           <code>v2</code> or older).  This is fixed; it will now correctly pay attention to both API
           versions.
         github:
-        - title: 3945
+        - title: "#3945"
           link: https://github.com/emissary-ingress/emissary/issues/3982
 
   - version: 2.1.0
