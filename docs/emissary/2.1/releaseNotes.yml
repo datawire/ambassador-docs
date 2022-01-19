@@ -59,7 +59,7 @@ items:
           <code>Mapping</code>s together). This has been corrected, so that all such
           updates correctly take effect.
         github:
-        - title: 3945
+        - title: "#3945"
           link: https://github.com/emissary-ingress/emissary/issues/3945
         docs: https://github.com/emissary-ingress/emissary/issues/3945
         image: ./v2.1.0-canary.png
@@ -79,7 +79,7 @@ items:
           data. This bug was introduced in 1.14.0. The fix restores the default behavior of 
           not sending compressed data to upstream services.
         github:
-        - title: 3818
+        - title: "#3818"
           link: https://github.com/emissary-ingress/emissary/issues/3818
         docs: https://github.com/emissary-ingress/emissary/issues/3818
         image: ./v2.1.0-gzip-enabled.png
@@ -132,7 +132,7 @@ items:
           <code>mappingSelector</code>; a future version of $productName$ will remove the
           <code>selector</code> element.
         github:
-        - title: 3902
+        - title: "#3902"
           link: https://github.com/emissary-ingress/emissary/issues/3902
         docs: https://github.com/emissary-ingress/emissary/issues/3902
         image: ./v2.0.5-mappingselector.png
