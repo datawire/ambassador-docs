@@ -39,6 +39,8 @@ spec:
     requireIssuedAt:    bool          # optional; default is false
     leewayForIssuedAt:  "duration"    # optional; default is "0"
 
+    maxStale:                         # optional; default is "0"
+
     injectRequestHeaders:             # optional; default is []
     - name:   "header-name-string"      # required
       value:  "go-template-string"      # required
@@ -63,6 +65,7 @@ spec:
  - `leewayForIssuedAt` allows tokens issued this much in the future to
    be used; to account for clock skew between the HTTP client and
    the Ambassador Edge Stack.
+ - `maxStale` How long to keep stale cached OIDC replies for. This sets the `max-stale` Cache-Control directive on requests, and also ignores the `no-store` and `no-cache` Cache-Control directives on responses. This is useful for maintaining good performance when working with identity providers with misconfigured Cache-Control.
  - `injectRequestHeaders` injects HTTP header fields in to the request before sending it to the upstream service; where the header value can be set based on the JWT value.  The value is specified as a [Go `text/template`][] string, with the following data made available to it:
 
     * `.token.Raw` → `string` the raw JWT
