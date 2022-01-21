@@ -32,7 +32,7 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.0.5
-    date: 'TBD'
+    date: '20211109'
     notes:
       - title: More aggressive HTTP cache behavior
         type: change
@@ -87,7 +87,7 @@ items:
           <code>mappingSelector</code>; a future version of $productName$ will remove the
           <code>selector</code> element.
         github:
-        - title: 3902
+        - title: "#3902"
           link: https://github.com/emissary-ingress/emissary/issues/3902
         docs: https://github.com/emissary-ingress/emissary/issues/3902
         image: ./v2.0.5-mappingselector.png
@@ -106,7 +106,7 @@ items:
           <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
         isHeadline: true
         docs: about/changes-2.0.0
-        image: ./edge-stack-ga.png
+        image: ./edge-stack-GA.png
 
       - title: API version getambassador.io/v3alpha1
         type: change

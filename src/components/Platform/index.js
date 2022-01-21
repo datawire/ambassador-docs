@@ -5,7 +5,7 @@ import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import React from 'react';
 
-import styles from './styles.module.less';
+import * as styles from './styles.module.less';
 import * as allTabs from './tabs';
 
 let publicTabs = { ...allTabs };
@@ -118,7 +118,7 @@ function TabGroup({ children, ...props }) {
                 <Icon />
                 {child.type.label}
               </summary>
-              <div className={styles.TabBody}>{child.props.children}</div>
+              <div className="TabBody">{child.props.children}</div>
             </details>
           );
         })}
@@ -161,7 +161,7 @@ function TabGroup({ children, ...props }) {
             <TabPanel
               key={child.type.slug}
               value={child.type.slug}
-              className={styles.TabBody}
+              className="TabBody"
             >
               {child.props.children}
             </TabPanel>

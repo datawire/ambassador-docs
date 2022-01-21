@@ -107,7 +107,7 @@ if `spec.hostname` matches the hostname of the `Host`. If the `Host`'s `selector
 both the `selector` and the hostname must line up.
 
 <Alert severity="warning">
-  An <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
+  An <code>Mapping</code> that specifies <code>host_regex: true</code> is associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
 </Alert>
 
 There have been a few syntax and usage changes to the following fields in order to support Kubernetes 1.22 [Structural CRDs](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/)
@@ -152,7 +152,9 @@ work considerably more efficiently than relying on the defaults.
 
 `Listener.spec.hostBinding` controls whether a given `Host` will be associated with
 that `Listener`, as discussed in the [`Listener`](../../running/listener) documentation.
-As a migration aid, you can tell a `Listener` to snap up all `Host`s with
+
+For migration purposes, it is possible to have a `Listener` associate with all of the `Host`s. This is not recommended for production environments, however, as it can resulting confusing behavior with large numbers of `Host`s, and it
+can also result in larger Envoy configurations that slow reconfiguration.
 
 ```yaml
 hostBinding:
@@ -191,7 +193,7 @@ has no `mappingSelector`, and
 - A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present. 
 
 <Alert severity="warning">
-  An <code>Mapping</code> that specifies <code>host_regex: true</code> will be associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
+  An <code>Mapping</code> that specifies <code>host_regex: true</code> is associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
 </Alert>
 
 <Alert severity="warning">
@@ -228,6 +230,6 @@ spec:
   tlsSecret: my-secret
 ```
 
-which will terminate TLS for `host.example.com`. A `TLSContext` is still right way to share data about TLS
+In the example above, TLS is terminated for `host.example.com`. A `TLSContext` is still right way to share data about TLS
 configuration across `Host`s: set both `tlsSecret` and `tlsContext` in the `Host`.
 

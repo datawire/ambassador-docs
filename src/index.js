@@ -2,11 +2,7 @@ import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
 
-
-
 import Layout from '../../src/components/Layout';
-
-
 
 import ContactBlock from '../../src/components/ContactBlock';
 import DatawireMetaData from '../../src/components/DatawireMetaData';
@@ -16,8 +12,6 @@ import ReadingTime from '../../src/components/ReadingTime';
 import SEO from '../../src/components/SEO/SEO';
 import template from '../../src/utils/template';
 
-
-
 import AllVersions from './components/AllVersions';
 import ContentTable from './components/ContentTable';
 import DocsFooter from './components/DocsFooter';
@@ -25,7 +19,14 @@ import DocsHome from './components/DocsHome';
 import SearchBox from './components/SearchBox';
 import IsAesPage from './components/ShowAesPage';
 import SidebarContent from './components/SidebarContent';
-import { products, metaData, learningJourneys, archivedVersionsLink, siteUrl, getSiteUrl } from './config';
+import {
+  products,
+  metaData,
+  learningJourneys,
+  archivedVersionsLink,
+  siteUrl,
+  getSiteUrl,
+} from './config';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
@@ -36,8 +37,7 @@ import Telepresence from './products/Telepresence';
 import './style.less';
 import getPrevNext from './utils/getPrevNext';
 
-
-export default ({ data, location, pageContext }) => {
+const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
   const slug = page.fields.slug.split('/');
   const isHome = page.fields.slug === '/docs/';
@@ -76,7 +76,7 @@ export default ({ data, location, pageContext }) => {
       );
     }
     if (
-      newVer.id === '2.0' ||
+      newVer.id === '2.1' ||
       newVer.id === 'pre-release' ||
       newVer.id === 'latest' ||
       (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
@@ -86,7 +86,7 @@ export default ({ data, location, pageContext }) => {
     return (
       <a
         href={`/docs/${newProduct.slug}/latest/tutorials/getting-started/`}
-      >{`${newProduct.name} 2.0 is now available!`}</a>
+      >{`${newProduct.name} 2.1 is now available!`}</a>
     );
   }
   const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(
@@ -373,14 +373,14 @@ export default ({ data, location, pageContext }) => {
           }
         />
         {!isHome && !isProductHome && isProduct && (
-        <DatawireMetaData
-          page={page}
-          edgeStackLinks={edgeStackLinks}
-          product={product.slug}
-          version={versions.docsVersion}
-          resources={page.exports}
-        />
-      )}
+          <DatawireMetaData
+            page={page}
+            edgeStackLinks={edgeStackLinks}
+            product={product.slug}
+            version={versions.docsVersion}
+            resources={page.exports}
+          />
+        )}
       </section>
       {!isHome && !isProductHome && isProduct && (
         <DocsFooter
@@ -412,7 +412,11 @@ export default ({ data, location, pageContext }) => {
       <MainContainer>
         <div className="docs__doc-body doc-body">
           <div className="doc-tags">
-            <IsAesPage initialProduct={initialProduct.slug} slug={slug} initialVersion={initialVersion.id}/>
+            <IsAesPage
+              initialProduct={initialProduct.slug}
+              slug={slug}
+              initialVersion={initialVersion.id}
+            />
           </div>
           <ReadingTime
             slug={page.fields.slug}
@@ -635,3 +639,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default index;

@@ -89,7 +89,7 @@ spec:
       hostname: wildcard-host
 ```
 
-**Note:** If running multiple instances of $productName$ in one cluster remember to include the `ambassador_id` property in the `spec`, e.g.:
+**Note:** If running multiple instances of $productName$ in one cluster remember to include the `ambassador_id` property in the `spec`, e.g:
 
 ```yaml
 ---

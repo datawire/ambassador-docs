@@ -5,7 +5,7 @@ import Icon from '../../../../src/components/Icon/Icon';
 import template from '../../../../src/utils/template';
 import {isBrowser} from '../../../../src/utils/isBrowser';
 
-import styles from './releaseNotes.module.less';
+import * as styles from './releaseNotes.module.less';
 
 const titlePrefix = {
   bugfix: 'Bug Fix',
