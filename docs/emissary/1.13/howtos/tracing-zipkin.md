@@ -75,6 +75,9 @@ As a final step we want to restart $productName$ as this is necessary to add the
 ```
 $ kubectl -n ambassador rollout restart deploy
 ```
+<Alert severity="warning">
+  Restarting $productName$ is required after deploying a Tracing Service for changes to take effect.
+</Alert>
 
 ## 2. Generate some requests
 
