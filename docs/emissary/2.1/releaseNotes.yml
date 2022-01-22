@@ -119,8 +119,6 @@ items:
           Resource validation errors are now reported more consistently; it was the case that in
           some situations a validation error would not be reported.
 
-      # next changelog item here
-
   - version: 2.1.1
     date: 'N/A'
     notes:
@@ -139,6 +137,14 @@ items:
         isHeadline: true
         body: >-
           <i>Emissary-ingress 2.1.0 is not recommended; upgrade to 2.1.2 instead.</i>
+
+      - title: Envoy V2 API deprecation
+        type: change
+        body: >-
+          Support for the Envoy V2 API is deprecated in $productName$ v2.1, and will be removed in $productName$ 
+          v2.2.0. The <code>AMBASSADOR_ENVOY_API_VERSION</code> environment variable will be removed at the same
+          time. Only the Envoy V3 API will be supported (this has been the default since $productName$ v1.14.0).
+
       - title: Smoother migrations with support for getambassador.io/v2 CRDs
         type: feature
         body: >-
@@ -156,7 +162,7 @@ items:
           <code>Mapping</code>s together). This has been corrected, so that all such
           updates correctly take effect.
         github:
-        - title: 3945
+        - title: "#3945"
           link: https://github.com/emissary-ingress/emissary/issues/3945
         docs: https://github.com/emissary-ingress/emissary/issues/3945
         image: ./v2.1.0-canary.png
@@ -176,7 +182,7 @@ items:
           data. This bug was introduced in 1.14.0. The fix restores the default behavior of 
           not sending compressed data to upstream services.
         github:
-        - title: 3818
+        - title: "#3818"
           link: https://github.com/emissary-ingress/emissary/issues/3818
         docs: https://github.com/emissary-ingress/emissary/issues/3818
         image: ./v2.1.0-gzip-enabled.png
@@ -229,7 +235,7 @@ items:
           <code>mappingSelector</code>; a future version of $productName$ will remove the
           <code>selector</code> element.
         github:
-        - title: 3902
+        - title: "#3902"
           link: https://github.com/emissary-ingress/emissary/issues/3902
         docs: https://github.com/emissary-ingress/emissary/issues/3902
         image: ./v2.0.5-mappingselector.png

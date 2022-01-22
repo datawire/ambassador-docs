@@ -10,12 +10,12 @@ The `keepalive` attribute configures keepalive. The following fields are support
 
 ```yaml
 keepalive:
-  time: <integer>
+  idle_time: <integer>
   interval: <integer>
   probes: <integer>
 ```
 
-### `time`
+### `idle_time`
 
 (Default: `7200`) The number of seconds a connection needs to be idle before keep-alive probes start being sent.
 
@@ -41,7 +41,7 @@ spec:
   prefix: /backend/
   service: quote
   keepalive:
-    time: 100
+    idle_time: 100
     interval: 10
     probes: 9
 ```
@@ -56,7 +56,7 @@ metadata:
 spec:
   config:
     keepalive:
-       time: 100
+       idle_time: 100
        interval: 10
        probes: 9
 ---

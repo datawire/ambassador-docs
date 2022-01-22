@@ -15,7 +15,7 @@ import Sidebar from './components/Sidebar';
 import { products } from './config';
 import './style.less';
 
-export default ({ data, location, pageContext }) => {
+const releaseNotes = ({ data, location, pageContext }) => {
   const slug = pageContext.slug.split('/');
   const initialProduct = useMemo(
     () => products.find((p) => p.slug === slug[2]) || products[0],
@@ -203,8 +203,9 @@ export default ({ data, location, pageContext }) => {
               <ul className="docs__products-list">
                 {products.map((item) => (
                   <li
-                    className={`${product.slug === item.slug ? 'docs__selected' : ''
-                      }`}
+                    className={`${
+                      product.slug === item.slug ? 'docs__selected' : ''
+                    }`}
                     key={item.name}
                     onClick={claenStorage}
                   >
@@ -214,8 +215,9 @@ export default ({ data, location, pageContext }) => {
               </ul>
             </div>
             <div
-              className={`docs__dropdown-container docs__mobile${versionList.length > 1 ? ' docs__dropdown-version' : ''
-                }`}
+              className={`docs__dropdown-container docs__mobile${
+                versionList.length > 1 ? ' docs__dropdown-version' : ''
+              }`}
             >
               <Dropdown
                 label={product.name}
@@ -270,3 +272,5 @@ export const query = graphql`
     }
   }
 `;
+
+export default releaseNotes;

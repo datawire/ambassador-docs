@@ -85,7 +85,7 @@ The following configuration is an example configuring $productName$ - ExternalDN
             image: registry.opensource.zalan.do/teapot/external-dns:latest
             args:
             - --source=ambassador-host
-            - --domain-filter=example.net # will make ExternalDNS see only the hosted zones matching provided domain, omit to process all available hosted zones
+            - --domain-filter=example.com # will make ExternalDNS see only the hosted zones matching provided domain, omit to process all available hosted zones
             - --provider=aws
             - --policy=upsert-only # would prevent ExternalDNS from deleting any records, omit to enable full synchronization
             - --aws-zone-type=public # only look at public hosted zones (valid values are public, private or no value for both)
@@ -114,12 +114,12 @@ The following configuration is an example configuring $productName$ - ExternalDN
 After applying the above configuration, ExternalDNS is ready to use. Configure a `Host` with the following annotation to allow ExternalDNS to get the IP address of your $productName$'s LoadBalancer and register it with your DNS provider. 
 
   ```yaml
-    apiVersion: getambassador.io/v3alpha1
+    apiVersion: getambassador.io/v2
     kind: Host
     metadata:
 	    name: your-hostname
       annotations:
-	      external-dns.ambassador-service: $productDeploymentName$.$productNamespace$
+	      external-dns.ambassador-service: ambassador.ambassador
     spec:
 	    acmeProvider:
 	      authority: none

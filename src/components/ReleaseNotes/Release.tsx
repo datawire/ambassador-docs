@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import Note from './Note';
-import styles from './releaseNotes.module.less';
+import * as styles from './releaseNotes.module.less';
 
 const month = [
   'January',

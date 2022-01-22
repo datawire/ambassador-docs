@@ -22,7 +22,7 @@ Whether your application is growing organically or whether you are deliberately 
 helpful to recognize how $productName$ behaves as it reaches the edge of its performance
 envelope along any of these dimensions.
 
-As $productName$ approaches the edge if its performance envelope, it will often manifest as
+As $productName$ approaches the edge of its performance envelope, it will often manifest as
 mysterious pod restarts triggered by Kubernetes. This does not always mean there is a problem, it
 could just mean you need to tune some of the resource limits set in your deployment. When it comes
 to scaling, Kubernetes will generally kill an $productName$ pod for one of two reasons: exceeding
@@ -97,7 +97,7 @@ period there is no guarantee $productName$ would know where to send a given requ
 endpoint will only return 200 when all routing information has been loaded. After the initial
 bootstrap period it behaves identically to the `check_alive` endpoint.
 
-Generally $productName$'s readiness probe should be configured with the same settings as its liveness
+Generally $productName$'s readiness probes should be configured with the same settings as its liveness
 probes.
 
 ## `AMBASSADOR_FAST_RECONFIGURE` and `AMBASSADOR_LEGACY_MODE` flags
@@ -112,7 +112,7 @@ by default, but if you are experiencing performance problems you should try sett
 ## `AMBASSADOR_DRAIN_TIME`
 
 The `AMBASSADOR_DRAIN_TIME` variable controls how much of a grace period $productName$ provides active
-clients when reconfiguration happen. Its unit is seconds and it defaults to 600 (10 minutes). This
+clients when reconfiguration happens. Its unit is seconds and it defaults to 600 (10 minutes). This
 can impact memory usage because $productName$ needs to keep around old versions of its configuration
 for the duration of the drain time.
 
