@@ -2,7 +2,6 @@ version: 1.13.10
 qotmVersion: 1.7
 quoteVersion: 0.5.0
 branch: release/v1.13
-docsVersion: "1.13"
 productName: "Ambassador Edge Stack"
 productNamePlural: "Ambassador Edge Stacks"
 OSSproductName: "Emissary-ingress"

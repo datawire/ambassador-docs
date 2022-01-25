@@ -1,8 +1,8 @@
-version: 2.1.2
-qotmVersion: 1.7
-quoteVersion: 0.5.0
+# branch info
 branch: release/v2.1
-docsVersion: "2.1"
+
+# self
+version: 2.1.2
 productName: "Emissary-ingress"
 productNamePlural: "Emissary-ingresses"
 productYAMLPath: emissary
@@ -15,7 +15,17 @@ productHelmName: emissary-ingress
 productDockerImage: emissary
 productDockerRegistry: docker.io/emissaryingress
 productFullDockerImage: docker.io/emissaryingress/emissary
+
+# OSS (self)
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
+
+# AES (not self)
+aesVersion: 2.1.2
+aesDocsVersion: "pre-release"
 AESproductName: "Ambassador Edge Stack"
 AESproductNamePlural: "Ambassador Edge Stacks"
+
+# other products
+qotmVersion: 1.7
+quoteVersion: 0.5.0

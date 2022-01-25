@@ -3,10 +3,12 @@ import Alert from '@material-ui/lab/Alert';
 # Install with Helm
 
 <Alert severity="warning">
+
   To migrate from $productName$ 1.X to $productName$ 2.X, see the
-  <a href="../upgrade/helm/emissary-2.1/edge-stack-2.1/#side-by-side-migration-steps"> $productName$ 2.X Migration Guide</a>. This guide
-  <b> will not work</b> for that, due to changes to the configuration resources used
-  for $productName$ 2.X.
+  [$productName$ migration matrix](../migration-matrix/). This guide
+  **will not work** for that, due to changes to the configuration
+  resources used for $productName$ 2.X.
+
 </Alert>
 
 [Helm](https://helm.sh) is a package manager for Kubernetes that automates the release and management of software on Kubernetes. $productName$ can be installed via a Helm chart with a few simple steps, depending on if you are deploying for the first time, upgrading $productName$ from an existing installation, or migrating from $productName$.

@@ -19,22 +19,22 @@ $productName$ is listed. If so, you installed using Helm.)
 
 ## If you are currently running $AESproductName$
 
-See the [instructions on updating $AESproductName$](../../../../../edge-stack/$docsVersion$/topics/install/migration-matrix).
+See the [instructions on updating $AESproductName$](../../../../../edge-stack/$aesDocsVersion$/topics/install/migration-matrix).
 
 ## If you installed $OSSproductName$ using Helm
 
-| If you're running.               | You can upgrade to                                                         |
-|----------------------------------|----------------------------------------------------------------------------|
-| $OSSproductName$ $version$       | [$AESproductName$ $version$](../upgrade/helm/emissary-2.1/edge-stack-2.1)  |
-| $OSSproductName$ 2.0.5           | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.0/emissary-2.1)    |
-| $OSSproductName$ 1.14.2          | [$OSSproductName$ $version$](../upgrade/helm/emissary-1.14/emissary-2.1)   |
-| $OSSproductName$ prior to 1.14.2 | [$OSSproductName$ 1.14.2](../../../../1.14/topics/install/upgrading)       |
+| If you're running.               | You can upgrade to                                                                                                         |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| $OSSproductName$ $version$       | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/helm/emissary-2.1/edge-stack-2.1) |
+| $OSSproductName$ 2.0.5           | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.0/emissary-2.1)                                                    |
+| $OSSproductName$ 1.14.2          | [$OSSproductName$ $version$](../upgrade/helm/emissary-1.14/emissary-2.1)                                                   |
+| $OSSproductName$ prior to 1.14.2 | [$OSSproductName$ 1.14.2](../../../../1.14/topics/install/upgrading)                                                       |
 
 ## If you installed $OSSproductName$ manually by applying YAML
 
-| If you're running.               | You can upgrade to                                                         |
-|----------------------------------|----------------------------------------------------------------------------|
-| $OSSproductName$ $version$       | [$AESproductName$ $version$](../upgrade/yaml/emissary-2.1/edge-stack-2.1)  |
-| $OSSproductName$ 2.0.5           | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.0/emissary-2.1)    |
-| $OSSproductName$ 1.14.2          | [$OSSproductName$ $version$](../upgrade/yaml/emissary-1.14/emissary-2.1)   |
-| $OSSproductName$ prior to 1.14.2 | [$OSSproductName$ 1.14.2](../../../../1.14/topics/install/upgrading)       |
+| If you're running.               | You can upgrade to                                                                                                         |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| $OSSproductName$ $version$       | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/yaml/emissary-2.1/edge-stack-2.1) |
+| $OSSproductName$ 2.0.5           | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.0/emissary-2.1)                                                    |
+| $OSSproductName$ 1.14.2          | [$OSSproductName$ $version$](../upgrade/yaml/emissary-1.14/emissary-2.1)                                                   |
+| $OSSproductName$ prior to 1.14.2 | [$OSSproductName$ 1.14.2](../../../../1.14/topics/install/upgrading)                                                       |
