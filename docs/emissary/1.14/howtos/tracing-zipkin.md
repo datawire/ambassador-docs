@@ -70,10 +70,13 @@ Next, deploy this configuration into your cluster:
 $ kubectl apply -f zipkin.yaml
 ```
 
-<Alert severity="info">
-  $productName$ will need to be restarted to configure itself to add the tracing header. This command will restart all the Pods (assuming $productName$ is installed in the <code>ambassador</code> namespace):
-  <br/>
-  <code>kubectl -n ambassador rollout restart deploy</code>
+As a final step we want to restart $productName$ as this is necessary to add the tracing header. This command will restart all the Pods (assuming $productName$ is installed in the <code>ambassador</code> namespace):
+
+```
+$ kubectl -n ambassador rollout restart deploy
+```
+<Alert severity="warning">
+  Restarting $productName$ is required after deploying a Tracing Service for changes to take effect.
 </Alert>
 
 ## 2. Generate some requests
