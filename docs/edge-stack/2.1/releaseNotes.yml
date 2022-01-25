@@ -42,6 +42,13 @@ items:
           v2.2.0. The <code>AMBASSADOR_ENVOY_API_VERSION</code> environment variable will be removed at the same
           time. Only the Envoy V3 API will be supported (this has been the default since $productName$ v1.14.0).
 
+      - title: Docker BuildKit always used for builds
+        type: change
+        body: >-
+          Docker BuildKit is enabled for all Emissary builds. Additionally, the Go
+          build cache is fully enabled when building images, speeding up repeated builds.
+        docs: https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md
+
       - title: Fix OAuth2 Filter jwtAssertion
         type: bugfix
         body: >-
@@ -49,6 +56,7 @@ items:
           <code>clientAuthentication.method=jwtAssertion</code> would not function correctly as it
           would fail to select the signing-method-appropriate function to parse the private key.
         docs: topics/using/filters/oauth2
+        image: ./v2.1.2-filter-jwtassertion.png
 
       - title: Fix ifRequestHeader without a value
         type: bugfix
@@ -66,8 +74,9 @@ items:
           Ambassador Edge Stack 2.1.1 generated invalid Envoy configuration for
           <code>getambassador.io/v2</code> <code>Mappings</code> that set
           <code>spec.cors.origins</code> to a string rather than a list of strings; this has been
-          fixed, and these <code>Mappings<code> should once again function correctly.
+          fixed, and these <code>Mappings</code> should once again function correctly.
         docs: topics/using/cors/#the-cors-attribute
+        image: ./v2.1.2-mapping-cors.png
 
       - title: Correctly handle canary Mapping weights when reconfiguring
         type: bugfix
@@ -84,6 +93,7 @@ items:
           <code>weight</code> less than 100, will be correctly configured to receive all
           traffic as if the <code>weight</code> were 100.
         docs: topics/using/canary/#the-weight-attribute
+        image: ./v2.1.2-mapping-less-weighted.png
 
       - title: Correctly handle empty rewrite in a Mapping
         type: bugfix
@@ -91,15 +101,7 @@ items:
           Using <code>rewrite: ""</code> in a <code>Mapping</code> is correctly handled
           to mean "do not rewrite the path at all".
         docs: topics/using/rewrites
-
-      - title: Correctly handle DNS wildcards when associating Hosts and Mappings
-        type: bugfix
-        body: >-
-          <code>Mapping</code>s with DNS wildcard <code>hostname</code> will now be correctly
-          matched with <code>Host</code>s. Previously, the case where both the <code>Host</code>
-          and the <code>Mapping</code> use DNS wildcards for their hostnames could sometimes 
-          not correctly match when they should have.
-        docs: howtos/configure-communications/
+        image: ./v2.1.2-mapping-no-rewrite.png
 
       - title: Correctly use Mappings with host redirects
         type: bugfix
@@ -110,6 +112,16 @@ items:
         - title: 3709
           link: https://github.com/emissary-ingress/emissary/issues/3709
         docs: https://github.com/emissary-ingress/emissary/issues/3709
+
+      - title: Correctly handle DNS wildcards when associating Hosts and Mappings
+        type: bugfix
+        body: >-
+          <code>Mapping</code>s with DNS wildcard <code>hostname</code> will now be correctly
+          matched with <code>Host</code>s. Previously, the case where both the <code>Host</code>
+          and the <code>Mapping</code> use DNS wildcards for their hostnames could sometimes 
+          not correctly match when they should have.
+        docs: howtos/configure-communications/
+        image: ./v2.1.2-host-mapping-matching.png
 
       - title: Fix overriding global settings for adding or removing headers
         type: bugfix
@@ -139,19 +151,13 @@ items:
           Resources that exist as <code>getambassador.io/config</code> annotations rather than as
           native Kubernetes resources are now validated and internally converted to v3alpha1 and,
           the same as native Kubernetes resources.
+        image: ./v2.1.2-annotations.png
 
       - title: Validation error reporting
         type: bugfix
         body: >-
           Resource validation errors are now reported more consistently; it was the case that in
           some situations a validation error would not be reported.
-
-      - title: Docker BuildKit always used for builds
-        type: change
-        body: >-
-          Docker BuildKit is enabled for all Emissary builds. Additionally, the Go
-          build cache is fully enabled when building images, speeding up repeated builds.
-        docs: https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md
 
   - version: 2.1.1
     date: '2022-01-14'
