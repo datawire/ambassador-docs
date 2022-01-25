@@ -266,7 +266,7 @@ Check out a local copy of your content repo and from within run the following do
 
 ```
 docker run -it --rm --volume $PWD:/content --publish 8877:8877 \
-  docker.io/datawire/ambassador_pro:local-devportal-$aproVersion$
+  docker.io/datawire/ambassador_pro:local-devportal-$localDevPortalVersion$
 ```
 
 and open `http://localhost:8877` in your browser. Any changes made locally to
