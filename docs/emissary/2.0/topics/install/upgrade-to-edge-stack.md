@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
   performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
   some changes that aren't backward-compatible with 1.X, so <b>some configuration has
   changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b> read
-  the <a href="/docs/emissary/latest/topics/install/migrate-to-version-2/">migration guide</a> before trying to install 2.0.<br/>
+  the <a href="../migrate-to-version-2/">migration guide</a> before trying to install 2.0.<br/>
   <br/>
   For more information on 2.X, please check the <a href="../../../release-notes">release notes</a>.
 </Alert>
@@ -48,7 +48,7 @@ Note: Make sure you apply the manifests in the same namespace as your current $O
 Use the following command to install $AESproductName$, replacing `<namespace>` appropriately:
 
 ```
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml
+kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/$version$/oss-migration.yaml
 ```
 
 ## 2. Test the new Deployment
@@ -83,8 +83,8 @@ kubectl delete service -n <namespace> test-aes
 Apply the new CRDs, resources and restart the $AESproductName$ pod for changes to take effect:
 
 ```
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml && \
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/resources-migration.yaml && \
+kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \
+kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/$version$/resources-migration.yaml && \
 kubectl rollout -n <namespace> restart deployment/aes
 ```
 

@@ -255,7 +255,7 @@ TLS using the `istio-upstream` `TLSContext` above:
    ```
 
 For example, if you have installed the Quote of the Moment service as described on the
-[Getting Started](../../../latest/tutorials/getting-started) page, you will have a `Mapping` as follows:
+[Getting Started](../../tutorials/getting-started) page, you will have a `Mapping` as follows:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
