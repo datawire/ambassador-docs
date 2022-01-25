@@ -67,7 +67,7 @@ items:
           <code>getambassador.io/v2</code> <code>Mappings</code> that set
           <code>spec.cors.origins</code> to a string rather than a list of strings; this has been
           fixed, and these <code>Mappings<code> should once again function correctly.
-        docs: topics/using/cors/#cross-origin-resource-sharing-cors
+        docs: topics/using/cors/#the-cors-attribute
 
       - title: Correctly handle canary Mapping weights when reconfiguring
         type: bugfix
