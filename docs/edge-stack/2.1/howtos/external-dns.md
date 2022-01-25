@@ -9,20 +9,20 @@ import Alert from '@material-ui/lab/Alert';
 
 ### Prerequisites
 
-Start by checking the [ExternalDNS repo's deployment instructions](https://github.com/kubernetes-sigs/external-dns#deploying-to-a-cluster) to get information about the supported DNS providers and steps to setup ExternalDNS for your provider. Each DNS provider will have its own required steps as well as annotations, arguments, and permissions needed for the following configuration.
+Before you begin, review [ExternalDNS repo's deployment instructions](https://github.com/kubernetes-sigs/external-dns#deploying-to-a-cluster) to get information about supported DNS providers and steps to setup ExternalDNS for your provider. Each DNS provider has its own required steps, as well as annotations, arguments, and permissions needed for the following configuration.
 
 
 ### Installation
 
-Configuration for a `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` are necessary for the ExternalDNS deployment to support compatability with $productName$ and allow ExternalDNS to get hostnames from $productName$'s `Hosts`.
+Configuration for a `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` is necessary for the ExternalDNS deployment to support compatibility with $productName$ and allow ExternalDNS to get hostnames from $productName$'s `Hosts`.
 
-The following configuration is an example configuring $productName$ - ExternalDNS integration with [AWS Route53](https://aws.amazon.com/route53/) as the DNS provider. Refer to the ExternalDNS documentation above for annotations and arguments for your DNS Provider.
+The following configuration is an example configuring $productName$ - ExternalDNS integration with [AWS Route53](https://aws.amazon.com/route53/) as the DNS provider. Refer to the [ExternalDNS documentation](https://github.com/kubernetes-sigs/external-dns#deploying-to-a-cluster) for annotations and arguments for your DNS Provider.
 
 
-1. Create a YAML file named `externaldns-config.yaml`, and copy the following configuration into it.
+1. Create a YAML file named `externaldns-config.yaml`, and copy the following configuration into it:
 
   <Alert severity="info">
-    Ensure that the <code>apiGroups</code> include <code>"getambassador.io"</code> following <code>"networking.k8s.io"</code> and the <code>resources</code> include <code>"hosts"</code> after <code>"ingresses"</code>.
+    Ensure that the <code>apiGroups</code> include <code>"getambassador.io"</code> following <code>"networking.k8s.io"</code>, and that the <code>resources</code> include <code>"hosts"</code> after <code>"ingresses"</code>.
   </Alert>
 
     ```yaml
@@ -93,13 +93,13 @@ The following configuration is an example configuring $productName$ - ExternalDN
             - --txt-owner-id= {Hosted Zone ID} # Insert Route53 Hosted Zone ID here
     ```
 
-2. Review the arguments section from the ExternalDNS deployment 
+2. Review the arguments section from the ExternalDNS deployment.
 
   Configure or remove arguments to fit your needs. Additional arguments required for your DNS provider can be found by checking the [ExternalDNS repo's deployment instructions](https://github.com/kubernetes-sigs/external-dns#deploying-to-a-cluster).
 
    * `--source=ambassador-host` - required across all DNS providers to tell ExternalDNS to look for hostnames in the $productName$ `Host` configurations.
 
-3. Apply the above config with the following command to deploy ExternalDNS to your cluster and configure support for $productName$
+3. Apply the above config with the following command to deploy ExternalDNS to your cluster and configure support for $productName$:
 
   ```shell
   kubectl apply -f externaldns-ambassador.yaml
@@ -107,7 +107,7 @@ The following configuration is an example configuring $productName$ - ExternalDN
 
 ## Usage
 
-After applying the above configuration, ExternalDNS is ready to use. Configure a `Host` with the following annotation to allow ExternalDNS to get the IP address of your $productName$'s LoadBalancer and register it with your DNS provider. 
+After you've applied the above configuration, ExternalDNS is ready to use. Configure a `Host` with the following annotation to allow ExternalDNS to get the IP address of your $productName$'s LoadBalancer and register it with your DNS provider: 
 
   ```yaml
     apiVersion: getambassador.io/v3alpha1
