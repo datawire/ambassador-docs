@@ -24,8 +24,8 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 1. In your terminal, run the following command:
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \
-    kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-crds.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml && \
     kubectl apply -f - <<EOF
     ---
     apiVersion: v1

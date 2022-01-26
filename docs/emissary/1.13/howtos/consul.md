@@ -246,7 +246,7 @@ $productName$ can also use certificates stored in Consul to originate encrypted 
 1. The $productName$ Consul connector retrieves the TLS certificate issued by the Consul CA and stores it in a Kubernetes secret for $productName$ to use. Deploy $productName$ Consul Connector with `kubectl`:
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/consul/ambassador-consul-connector.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/consul/ambassador-consul-connector.yaml
    ```
 
 This will install into your cluster:

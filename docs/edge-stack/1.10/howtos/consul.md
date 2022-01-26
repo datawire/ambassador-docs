@@ -17,7 +17,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 2. Deploy Ambassador Edge Stack. Note: If this is your first time deploying Ambassador Edge Stack, reviewing the [quick start guide](../../tutorials/getting-started) is strongly recommended.
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml
    ```
 
    If you're on GKE, or haven't previously created the Ambassador Edge Stack service, please see the [quick start guide](../../tutorials/getting-started).
@@ -138,7 +138,7 @@ Ambassador Edge Stack can also use certificates stored in Consul to originate en
 1. The Ambassador Consul connector retrieves the TLS certificate issued by the Consul CA and stores it in a Kubernetes secret for Ambassador Edge Stack to use. Deploy the Ambassador Edge Stack Consul Connector with `kubectl`:
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/consul/ambassador-consul-connector.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/consul/ambassador-consul-connector.yaml
    ```
 
 This will install into your cluster:
@@ -156,7 +156,7 @@ Having duplicates of the Consul connector resources in the `ambassador` and `def
 First, delete the service account, Consul connector service and TLSContext resources from the `default` namespace:
 
     ```
-    kubectl delete -f https://www.getambassador.io/yaml/consul/ambassador-consul-connector-old.yaml
+    kubectl delete -f https://app.getambassador.io/yaml/ambassador-docs/$version$/consul/ambassador-consul-connector-old.yaml
     ```
 
 Then, delete the secret created by the connector service in the `default` namespace.

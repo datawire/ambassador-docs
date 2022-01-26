@@ -45,8 +45,8 @@ If you previously installed Edge Stack using YAML manifests, you can upgrade wit
 these commands:
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
-kubectl apply -f https://www.getambassador.io/yaml/aes.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml
 ```
 
 This will trigger a rolling upgrade of Ambassador Edge Stack.

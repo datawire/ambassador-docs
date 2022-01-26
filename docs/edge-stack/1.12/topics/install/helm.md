@@ -71,7 +71,7 @@ Upgrading an existing installation of the Ambassador Edge Stack is a two-step pr
 1. First, apply any CRD updates (as of Helm 3, this is not supported in the chart itself):
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
    ```
 
 2. Next, upgrade the Ambassador Edge Stack itself:
@@ -95,7 +95,7 @@ If you have an existing Ambassador API Gateway installation but are not yet runn
    To take full advantage of the Ambassador Edge Stack, you'll need the new `Host` CRD, and you'll need the new `getambassador.io/v2` version of earlier CRDs. To upgrade all the CRDs, run
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
    ```
 
 2. Upgrade your Ambassador installation.

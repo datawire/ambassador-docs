@@ -40,8 +40,8 @@ If you're using the YAML files supplied by Datawire, you'll be able to upgrade s
 the following `kubectl apply` command:
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
-kubectl apply -f https://www.getambassador.io/yaml/aes.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml
 ```
 
 This will trigger a rolling upgrade of Ambassador Edge Stack.

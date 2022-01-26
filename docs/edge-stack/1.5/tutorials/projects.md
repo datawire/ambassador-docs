@@ -26,7 +26,7 @@ manual install of Ambassador, you can include this registry and enable
 the project controller by running the following command:
 
 ```bash
-kubectl apply -f https://www.getambassador.io/yaml/projects.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/projects.yaml
 ```
 
 If you use Helm to install Ambassador, you can get the equivalent by

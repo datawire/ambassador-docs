@@ -97,7 +97,7 @@ standard YAML files.  Alternatively, you can install it with
     First, create RBAC resources for your Prometheus instance
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/monitoring/prometheus-rbac.yaml
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/monitoring/prometheus-rbac.yaml
     ```
 
     Then, copy the YAML below, and save it in a file called
@@ -451,7 +451,7 @@ Exporter](https://github.com/prometheus/statsd_exporter) to do this.
 1. Deploy the StatsD Exporter in the `default` namespace
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/monitoring/statsd-sink.yaml
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/monitoring/statsd-sink.yaml
     ```
 
 2. Configure $productName$ to output statistics to `statsd`

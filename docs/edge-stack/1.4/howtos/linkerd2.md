@@ -44,7 +44,7 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
    **Note:** If this is your first time deploying Ambassador Edge Stack, reviewing the Ambassador Edge Stack [getting started](../../tutorials/getting-started) is strongly recommended.
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml
    ```
 
    If you're on GKE, or haven't previously created the Ambassador Edge Stack service, please see [the quick start guide](../../tutorials/getting-started).

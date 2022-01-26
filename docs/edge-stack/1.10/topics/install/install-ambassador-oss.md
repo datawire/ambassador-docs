@@ -35,13 +35,13 @@ kubectl create clusterrolebinding my-cluster-admin-binding --clusterrole=cluster
 Then, you can deploy the Ambassador API Gateway. Start by installing CRDs required by Ambassador:
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-crds.yaml
 ```
 
 Then, apply the RBAC configuration with:
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml
 ```
 
 We recommend downloading the YAML files and exploring the content. You will see that an `ambassador-admin` NodePort Service is created (which provides an Ambassador ODD Diagnostic web UI), along with an ambassador ClusterRole, ServiceAccount, and ClusterRoleBinding. An Ambassador Deployment is also created.

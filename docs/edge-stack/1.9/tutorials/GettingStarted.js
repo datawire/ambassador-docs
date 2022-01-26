@@ -218,7 +218,7 @@ class GettingStarted extends Component {
                   <span className="QS-copyButton">
                     <CopyButton
                       content="
-                kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes"
+                kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml && kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml && kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes"
                     >
                       Copy
                     </CopyButton>
@@ -229,7 +229,7 @@ class GettingStarted extends Component {
                     <span className="token plain">apply</span>
                     <span className="token plain"> </span>
                     <span className="token plain">
-                      -f https://www.getambassador.io/yaml/aes-crds.yaml
+                      -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
                     </span>
                     <span className="token plain"> </span>
                     <span className="token plain">&&</span>
@@ -263,7 +263,7 @@ class GettingStarted extends Component {
                     <span className="token plain">apply</span>
                     <span className="token plain"> </span>
                     <span className="token plain">
-                      -f https://www.getambassador.io/yaml/aes.yaml
+                      -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml
                     </span>
                     <span className="token plain"> </span>
                     <span className="token plain">&&</span>

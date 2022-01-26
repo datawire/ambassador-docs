@@ -26,7 +26,7 @@ manual install of $productName$, you can include this registry and enable
 the project controller by running the following command:
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/projects.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/projects.yaml
 ```
 
 **Note:** RBAC changes need to be made to fully activate the projects after manual project install:  Apply the following to add the RBAC permissions and restart the $productName$ Pods for the changes to take effect.

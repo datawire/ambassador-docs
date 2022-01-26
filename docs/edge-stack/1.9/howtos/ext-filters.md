@@ -73,7 +73,7 @@ Note that the cluster does not yet contain any Ambassador AuthService definition
 The YAML above is published at getambassador.io, so if you like, you can just do
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/demo/demo-auth.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/demo/demo-auth.yaml
 ```
 
 to spin everything up. (Of course, you can also use a local file, if you prefer.)

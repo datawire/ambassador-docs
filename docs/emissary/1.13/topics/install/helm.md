@@ -102,7 +102,7 @@ Upgrading an existing installation of $productName$ is a two-step process:
 1. First, apply any CRD updates (as of Helm 3, this is not supported in the chart itself):
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
    ```
 
 2. Next, upgrade $productName$ itself:
@@ -126,7 +126,7 @@ If you have an existing $OSSproductName$ installation but are not yet running $A
    To take full advantage of $productName$, you'll need the new `Host` CRD, and you'll need the new `getambassador.io/v2` version of earlier CRDs. To upgrade all the CRDs, run
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
    ```
 
 2. Upgrade your $productName$ installation.
