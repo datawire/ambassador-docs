@@ -470,7 +470,7 @@ items:
         type: change
         body: >-
           <code>AMBASSADOR_ENVOY_API_VERSION</code> now defaults to <code>V3</code>
-        docs: https://www.getambassador.io/docs/edge-stack/latest/topics/running/running/#ambassador_envoy_api_version
+        docs: topics/running/running/#ambassador_envoy_api_version
 
       - title: Subsecond time resolution in logs
         type: change

@@ -65,7 +65,7 @@ important notes:
    profile: main
    ```
 
-You can also migrate by [installing $AESproductName$ $version$ in a separate cluster](/docs/edge-stack/latest/topics/install/migrate-to-2-alternate/).
+You can also migrate by [installing $AESproductName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate/).
 This permits absolute certainty that your $OSSproductName$ $version$ configuration will not be
 affected by changes meant for $AESproductName$ $version$, but it is more effort.
 
@@ -186,4 +186,4 @@ Migration is a five-step process:
 
 5. What's next?
 
-   Now that you have $AESproductName$ up and running, check out the [Getting Started](/docs/edge-stack/latest/tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.
+   Now that you have $AESproductName$ up and running, check out the [Getting Started](../../../../../../tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.

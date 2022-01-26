@@ -293,7 +293,7 @@ Some caveats around the embedded scripts:
 * They're run on every request/response to every URL.
 * They're inlined in the $productName$ YAML; as such, we do not recommend using Lua scripts for long, complex logic.
 
-If you need more flexible and configurable options, $AESproductName$ supports a [pluggable Filter system](/docs/edge-stack/latest/topics/using/filters/).
+If you need more flexible and configurable options, $AESproductName$ supports a [pluggable Filter system](../../using/filters/).
 
 ##### Merge slashes
 

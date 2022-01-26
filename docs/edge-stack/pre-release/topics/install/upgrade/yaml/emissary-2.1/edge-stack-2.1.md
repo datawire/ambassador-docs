@@ -156,4 +156,4 @@ Migration is a five-step process:
 
 5. What's next?
 
-   Now that you have $AESproductName$ up and running, check out the [Getting Started](/docs/edge-stack/latest/tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.
+   Now that you have $AESproductName$ up and running, check out the [Getting Started](../../../../../../tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.
