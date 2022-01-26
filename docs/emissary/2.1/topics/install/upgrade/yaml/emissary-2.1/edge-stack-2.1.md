@@ -49,6 +49,22 @@ important notes:
    it simpler to roll back, if needed. Alternate, you can isolate the two configurations
    as described above.
 
+3. **Be careful about label selectors on Kubernetes Services!**
+
+   If you have services in $OSSproductName$ 1.14.2 that use selectors that will match
+   Pods from $AESproductName$ $version$, traffic will be erroneously split between
+   $OSSproductName$ 1.14.2 and $AESproductName$ $version$. The labels used by $AESproductName$
+   $version$ include:
+
+   ```yaml
+   app.kubernetes.io/name: edge-stack
+   app.kubernetes.io/instance: edge-stack
+   app.kubernetes.io/part-of: edge-stack
+   app.kubernetes.io/managed-by: getambassador.io
+   product: aes
+   profile: main
+   ```
+
 You can also migrate by [installing $AESproductName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $OSSproductName$ $version$ configuration will not be
 affected by changes meant for $AESproductName$ $version$, but it is more effort.
