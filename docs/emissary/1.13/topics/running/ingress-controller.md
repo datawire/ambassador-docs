@@ -68,8 +68,8 @@ If you're new to $productName$ and to Kubernetes, we'd recommend you start with 
 - You may need to set your Ingress resource's `ambassador-id`.
 
   If you are [using `amabssador-id` on your Module](../running/#ambassador_id), you'll need to add the `getambassador.io/ambassador-id`
-  annotation to your Ingress. See the [examples below](/docs/edge-stack/latest/topics/running/ingress-controller/#name-based-virtual-hosting-with-an-ambassador-id
-).
+  annotation to your Ingress. See the [examples below](#name-based-virtual-hosting-with-an-ambassador-id).
+
 - You must create a Service resource with the correct `app.kubernetes.io/component` label.
 
   $productName$ will automatically load balance Ingress resources using the endpoint exposed

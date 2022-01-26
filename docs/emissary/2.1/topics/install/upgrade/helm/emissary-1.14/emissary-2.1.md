@@ -19,7 +19,7 @@ changes to allow $productName$ to more gracefully handle larger installations (i
 multitenant or multiorganizational installations), reduce memory footprint, and improve
 performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
 some changes that aren't backward-compatible with 1.X. These changes are detailed in
-[Major Changes in $productName$ 2.X](/docs/edge-stack/latest/about/changes-2.x/).
+[Major Changes in $productName$ 2.X](../../../../../../about/changes-2.x/).
 
 ## Migration Overview
 
@@ -127,7 +127,7 @@ Migration is a six-step process:
    $productDeploymentName$ default  1           ...
    ```
 
-   - If Helm returns resources, continue with [Helm](/docs/edge-stack/latest/topics/install/helm/#install-with-helm). **Note that if your $productName$ 1.14.2
+   - If Helm returns resources, continue with [Helm](../../../../helm/#install-with-helm). **Note that if your $productName$ 1.14.2
    installation uses a nonstandard namespace, you will need to include the namespace in
    the commands below.**
 
