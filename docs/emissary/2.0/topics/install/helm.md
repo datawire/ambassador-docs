@@ -69,7 +69,7 @@ Upgrading an existing installation of $productName$ is a two-step process:
 1. First, apply any CRD updates:
 
    ```
-    kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-crds.yaml
+    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
    ```
 
 2. Next, upgrade $productName$ itself:
