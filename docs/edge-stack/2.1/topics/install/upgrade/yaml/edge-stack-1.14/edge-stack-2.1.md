@@ -73,6 +73,22 @@ important caveats:
    This is required to manage a known issue. This issue will be resolved in a future 
    $AESproductName$ release.
 
+6. **Be careful about label selectors on Kubernetes Services!**
+
+   If you have services in $productName$ 1.14.2 that use selectors that will match
+   Pods from $productName$ $version$, traffic will be erroneously split between
+   $productName$ 1.14.2 and $productName$ $version$. The labels used by $productName$
+   $version$ include:
+
+   ```yaml
+   app.kubernetes.io/name: edge-stack
+   app.kubernetes.io/instance: edge-stack
+   app.kubernetes.io/part-of: edge-stack
+   app.kubernetes.io/managed-by: getambassador.io
+   product: aes
+   profile: main
+   ```
+
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
