@@ -93,7 +93,7 @@ Migration is a six-step process:
    time.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
@@ -156,7 +156,7 @@ Migration is a six-step process:
      you will need to download the YAML and edit it.**
 
      ```
-     kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/emissary-defaultns.yaml
+     kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml
      ```
 
    <Alert severity="info">

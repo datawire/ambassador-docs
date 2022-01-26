@@ -25,7 +25,7 @@ shows you how.
 Although our installation guides will favor using the `docker.io` container registry,
 we publish $AESproductName$ and $OSSproductName$ releases to multiple registries.
 
-Starting with version 1.0.0, you can pull the $productDockerImage$ image from any of the following registries:
+Starting with version 1.0.0, you can pull the aes image from any of the following registries:
 - `docker.io/datawire/`
 - `gcr.io/datawire/`
 

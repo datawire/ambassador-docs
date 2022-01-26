@@ -5,13 +5,9 @@ branch: release/v2.0
 version: 2.0.5
 productName: "Ambassador Edge Stack"
 productNamePlural: "Ambassador Edge Stacks"
-productYAMLPath: edge-stack
-productCRDName: aes-crds.yaml
-productYAMLFile: aes.yaml
 productNamespace: ambassador
 productDeploymentName: edge-stack
 productHelmName: edge-stack
-productDockerImage: aes
 
 # OSS (not self)
 ossVersion: 2.0.5

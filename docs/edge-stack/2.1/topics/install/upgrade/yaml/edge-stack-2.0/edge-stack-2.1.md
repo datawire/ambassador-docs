@@ -23,7 +23,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step pr
    `getambassador.io/v2` resources as well as `getambassador.io/v3alpha1`; it is mandatory.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 

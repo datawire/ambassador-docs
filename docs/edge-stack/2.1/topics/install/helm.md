@@ -35,7 +35,7 @@ When you run the Helm chart, it installs $productName$.
    configuration resources. This is required.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 

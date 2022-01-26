@@ -5,16 +5,9 @@ branch: release/v2.1
 version: 2.1.2
 productName: "Ambassador Edge Stack"
 productNamePlural: "Ambassador Edge Stacks"
-productYAMLPath: edge-stack
-productCRDName: aes-crds.yaml
-productYAMLFile: aes.yaml
 productNamespace: ambassador
 productDeploymentName: edge-stack
-productContainerName: aes
 productHelmName: edge-stack
-productDockerImage: aes
-productDockerRegistry: docker.io/datawire
-productFullDockerImage: docker.io/datawire/aes
 
 # OSS (not self)
 ossVersion: 2.1.2

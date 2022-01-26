@@ -5,16 +5,9 @@ branch: release/v2.1
 version: 2.1.2
 productName: "Emissary-ingress"
 productNamePlural: "Emissary-ingresses"
-productYAMLPath: emissary
-productCRDName: emissary-crds.yaml
-productYAMLFile: emissary-emissaryns.yaml
 productNamespace: emissary
 productDeploymentName: emissary-ingress
-productContainerName: ambassador
 productHelmName: emissary-ingress
-productDockerImage: emissary
-productDockerRegistry: docker.io/emissaryingress
-productFullDockerImage: docker.io/emissaryingress/emissary
 
 # OSS (self)
 ossVersion: 2.1.2
