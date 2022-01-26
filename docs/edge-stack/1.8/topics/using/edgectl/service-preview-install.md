@@ -107,7 +107,7 @@ The following will create the required resources in the default namespace. If yo
 Create the RBAC resources with `kubectl`:
 
 ```
-kubectl apply -f https://getambassador.io/yaml/traffic-agent-rbac.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/traffic-agent-rbac.yaml
 ```
 
 Then, apply the `Hello` service manifest that is annotated to inject the Traffic Agent.
@@ -214,8 +214,8 @@ Services in your cluster opt-in to using Service Preview by injecting the Traffi
 Deploy the Traffic Manager and Ambassador Injector in the `ambassador` namespace with `kubectl`:
 
 ```
-kubectl apply -f https://getambassador.io/yaml/traffic-manager.yaml
-kubectl apply -f https://getambassador.io/yaml/ambassador-injector.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/traffic-manager.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador-injector.yaml
 ```
 
 The above will deploy:
@@ -294,7 +294,7 @@ The following will create the required resources in the default namespace. If yo
 Create the RBAC resources with `kubectl`:
 
 ```
-kubectl apply -f https://getambassador.io/yaml/traffic-agent-rbac.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/traffic-agent-rbac.yaml
 
 Then, apply the `Hello` service manifest that is annotated to inject the Traffic Agent.
 
@@ -482,7 +482,7 @@ The following will create the required resources in the default namespace. If yo
 Create the RBAC resources with `kubectl`:
 
 ```
-kubectl apply -f https://getambassador.io/yaml/traffic-agent-rbac.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/traffic-agent-rbac.yaml
 ```
 
 Then, apply the `Hello` service manifest that is annotated to inject the Traffic Agent.

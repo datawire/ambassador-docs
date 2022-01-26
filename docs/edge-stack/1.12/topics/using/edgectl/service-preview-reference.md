@@ -408,7 +408,7 @@ This works well for most usecase but there are a couple of important points to m
              containerPort: 8000   # Application port
    ```
 
-Take a look at the following for a more detailed look at what is included in [https://getambassador.io/yaml/ambassador-injector.yaml](/yaml/ambassador-injector.yaml):
+Take a look at the following for a more detailed look at what is included in [https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador-injector.yaml](/yaml/ambassador-injector.yaml):
 
 ```yaml
 # This is ambassador-injector.yaml

@@ -50,7 +50,7 @@ to respond on their docs endpoint
 > Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of $productName$.
 
 ```yaml
- `kubectl apply -f https://getambassador.io/yaml/aes-crds.yaml`
+ `kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml`
 ```
 
 > If you are on an earlier version of $productName$, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`

@@ -445,7 +445,7 @@ Now we will show how you can use $productName$ to route to services in the Istio
 2. Install the quote example service
 
    ```
-   kubectl apply -n default -f https://getambassador.io/yaml/backends/quote.yaml
+   kubectl apply -n default -f https://app.getambassador.io/yaml/ambassador-docs/$version$/backends/quote.yaml
    ```
 
    Wait for the pod to start and see that there are two containers: the `quote` application and the `istio-proxy` sidecar.
