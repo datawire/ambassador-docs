@@ -61,5 +61,3 @@ The following fields are only used if `proto` is set to `http`. They are ignored
 |`allowed_request_headers` | [] |lists the headers that will be sent copied from the incoming request to the request made to the external auth service (case-insensitive). In addition to the headers listed in this field, the following headers are always included: `Authorization`, `Cookie`, `From`, `Proxy-Authorization`, `User-Agent`, `X-Forwarded-For`, `X-Forwarded-Host`, and `X-Forwarded-Proto`.
 |`allowed_authorization_headers`| [] | Lists the headers that will be copied from the response from the external auth service to the request sent to the upstream backend service (if the external auth service indicates that the request to the upstream backend service should be allowed).  In addition to the headers listed in this field, the following headers are always included: `Authorization`, `Location`, `Proxy-Authenticate`, `Set-cookie`, `WWW-Authenticate`|
 |`add_linkerd_headers` | `false` | When true, in the request to the external auth service, adds an `l5d-dst-override` HTTP header that is set to the hostname and port number of the external auth service. |
-
-

@@ -109,7 +109,7 @@ class GettingStarted extends Component {
             <div
               id="QS-showLinuxAside1"
               data-os="linux"
-              className="	
+              className="
         QS-asideText"
             >
               <li>New user? Get Edgectl, the $productName$ CLI</li>

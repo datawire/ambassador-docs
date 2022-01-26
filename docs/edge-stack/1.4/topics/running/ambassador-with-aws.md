@@ -34,9 +34,9 @@ In Kubernetes, when using the AWS integration and a service of type `LoadBalance
 
 Kubernetes on AWS exposes a mechanism to request certain load balancer configurations by annotating the `type: LoadBalancer` `Service`. The most complete set and explanations of these annotations can be found in this [Kubernetes document](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer). This document will go over the subset that is most relevant when deploying Ambassador Edge Stack.
 
-- `service.beta.kubernetes.io/aws-load-balancer-ssl-cert`: 
+- `service.beta.kubernetes.io/aws-load-balancer-ssl-cert`:
     Configures the load balancer to use a valid certificate ARN to terminate TLS at the Load Balancer.
-    
+
     Traffic from the client into the load balancer is encrypted but, since TLS is being terminated at the load balancer, traffic from the load balancer to Ambassador Edge Stack will be cleartext and Ambassador Edge Stack will be listening on the cleartext port 8080.
 
 - `service.beta.kubernetes.io/aws-load-balancer-ssl-ports`:
@@ -49,15 +49,15 @@ Kubernetes on AWS exposes a mechanism to request certain load balancer configura
 
 - `service.beta.kubernetes.io/aws-load-balancer-type: "nlb"`:
     When this annotation is set it will launch a Network Load Balancer (NLB) instead of a classic ELB.
-    
+
 - `service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled`:
     Configures the ELB to load balance across zones. For high availability, it is typical to deploy nodes across availability zones so this should be set to `"true"`.
-    
+
 - `service.beta.kubernetes.io/aws-load-balancer-proxy-protocol`:
     Configures the ELB to enable the proxy protocol. `"*"`, which enables the proxy protocol on all ELB backends, is the only acceptable value.
 
     If setting this value, you need to make sure Envoy is configured to use the proxy protocol. This can be configured by setting `use_proxy_proto: true` and `use_remote_address: false` in the [ambassador `Module`](../ambassador). **Note:** a restart of Ambassador Edge Stack is required for this configuration to take effect.
-    
+
 
 ## YAML Configuration
 
@@ -176,7 +176,7 @@ metadata:
         server:
           enabled: true
           redirect_cleartext_from: 8080
-spec: 
+spec:
   externalTrafficPolicy: Local
   type: LoadBalancer
   ports:

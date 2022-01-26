@@ -6,7 +6,7 @@ $productName$ and Istio can be deployed together on Kubernetes. In this configur
 
 This allows the operator to have the best of both worlds: a high performance, modern edge service ($productName$) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/#configuring-ingress-using-an-istio-gateway) abstraction, $productName$ still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
 
-This guide will explain how to take advantage of both $productName$ and Istio to have complete control and observability over how requests are made in your cluster. 
+This guide will explain how to take advantage of both $productName$ and Istio to have complete control and observability over how requests are made in your cluster.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ There a number of installation options for $productName$. See the [getting start
 ## Integrate $productName$ and Istio
 
 > **WARNING - Istio Regression:**
-> There is a regression in Istio 1.9.0 to 1.9.4 that causes $productName$ (and other non-Istio services) to be unable to read Istio certificates. 
+> There is a regression in Istio 1.9.0 to 1.9.4 that causes $productName$ (and other non-Istio services) to be unable to read Istio certificates.
 >
 > A patch for this regression has been released in Istio 1.9.4.
 >
@@ -310,7 +310,7 @@ $productName$ is now integrated with Istio for end-to-end encryption.
 
 ### Integrating Prometheus metrics collection
 
-Istio installs by default with a Prometheus deployment for collecting metrics from different resources in your cluster. 
+Istio installs by default with a Prometheus deployment for collecting metrics from different resources in your cluster.
 
 We can integrate $productName$ with the same Prometheus to give us a single metrics endpoint.
 
@@ -330,9 +330,9 @@ Istio's Prometheus deployment is configured using a `ConfigMap`. To add $product
       ```
       kubectl get -n istio-system configmap prometheus  -o yaml > prom-cm.yaml
       ```
-   
+
       You should now have a `ConfigMap` that looks something like this:
-   
+
       ```yaml
       apiVersion: v1
       kind: ConfigMap
@@ -375,14 +375,14 @@ Istio's Prometheus deployment is configured using a `ConfigMap`. To add $product
          - source_labels: [__meta_kubernetes_endpoint_address_target_name]
            action: replace
            target_label: pod_name
-       
+
        # Mixer scrapping. Defaults to Prometheus and mixer on same namespace.
        ...
    ```
 
 3. Restart and access the Prometheus UI
 
-   The Prometheus pod must be restarted to start with the new configuration. 
+   The Prometheus pod must be restarted to start with the new configuration.
 
    ```
    kubectl delete pod -n istio-system $(kubectl get pods -n istio-system | grep prometheus | awk '{print $1}')
@@ -451,7 +451,7 @@ Now we will show how you can use $productName$ to route to services in the Istio
    Wait for the pod to start and see that there are two containers: the `quote` application and the `istio-proxy` sidecar.
 
    ```
-   $ kubectl get po -n default 
+   $ kubectl get po -n default
 
    NAME                     READY   STATUS    RESTARTS   AGE
    quote-6bc6b6bd5d-jctbh   2/2     Running   0          91m
@@ -459,7 +459,7 @@ Now we will show how you can use $productName$ to route to services in the Istio
 
 3. Route to the service
 
-   Traffic routing in $productName$ is configured with the [`Mapping`](../../topics/using/intro-mappings) resource. This is a powerful configuration object that lets you configure different routing rules for different services. 
+   Traffic routing in $productName$ is configured with the [`Mapping`](../../topics/using/intro-mappings) resource. This is a powerful configuration object that lets you configure different routing rules for different services.
 
    The above `kubectl apply` installed the following basic `Mapping` which has configured $productName$ to route traffic with URL prefix `/backend/` to the `quote` service.
 
@@ -519,7 +519,7 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
      namespace: istio-system
    spec:
      mtls:
-       mode: STRICT   
+       mode: STRICT
    EOF
    ```
 
@@ -542,7 +542,7 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
 
    ```
    $ curl -k https://{{AMBASSADOR_HOST}}/backend/
-   
+
    upstream connect error or disconnect/reset before headers. reset reason: connection termination
    ```
 
@@ -565,7 +565,7 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
    EOF
    ```
 
-   Now $productName$ will use the Istio mTLS certificates when routing to the `quote` service. 
+   Now $productName$ will use the Istio mTLS certificates when routing to the `quote` service.
 
    ```
    $ curl -k https://{{AMBASSADOR_HOST}}/backend/
@@ -624,7 +624,7 @@ Now let's save the changes:
 
 Istio mTLS certificates, by default, will be valid for a max of 90 days but will be rotated every day.
 
-$productName$ will watch and update the mTLS certificates as they rotate so you will not need to worry about certificate expiration. 
+$productName$ will watch and update the mTLS certificates as they rotate so you will not need to worry about certificate expiration.
 
 To test that $productName$ is properly rotating certificates you can shorten the TTL of the Istio certificates so you can verify that $productName$ is using the new certificates.
 

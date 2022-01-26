@@ -102,9 +102,9 @@
      - title: Microservices API Gateways
        link: /topics/concepts/microservices-api-gateways
      - title: Edge Stack Architecture
-       link: /topics/concepts/architecture 
+       link: /topics/concepts/architecture
  - title: Technical Reference
-   items: 
+   items:
      - title: Using AES for Developers
        link: /topics/using/
        items:

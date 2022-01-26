@@ -24,7 +24,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
@@ -50,7 +50,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
 
    Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
    in the `ambassador` namespace.
- 
+
    ```
    kubectl delete -n ambassador deployment edge-stack
    ```

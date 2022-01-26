@@ -42,11 +42,11 @@ Then, create the `AmbassadorInstallation` Custom Resource schema and apply it to
 
     ```
     apiVersion: getambassador.io/v2
-    kind: AmbassadorInstallation 
+    kind: AmbassadorInstallation
     metadata:
-      name: ambassador 
+      name: ambassador
     spec:
-      installOSS: true 
+      installOSS: true
    ```
 
 2. Save that file as `amb-install.yaml`
@@ -119,7 +119,7 @@ kind: AmbassadorInstallation
 metadata:
   name: ambassador
 spec:
-  installOSS: true 
+  installOSS: true
   version: "*"
   helmValues:
     image:
@@ -134,8 +134,8 @@ spec:
       type: NodePort
 ```
 
-* Note that the `spec.installOSS` parameter should be used instead of `spec.helmValues.enableAES` to control whether 
-  $OSSproductName$ or $AESproductName$ is installed. A configuration where both `installOSS` and `enableAES` are set to the same value will 
+* Note that the `spec.installOSS` parameter should be used instead of `spec.helmValues.enableAES` to control whether
+  $OSSproductName$ or $AESproductName$ is installed. A configuration where both `installOSS` and `enableAES` are set to the same value will
   introduce a conflict and result in an error.
 
 ## Install via Helm Chart
@@ -159,7 +159,7 @@ You can also install the Ambassador Operator from a Helm Chart. The following He
     metadata:
       name: ambassador
     spec:
-      installOSS: true 
+      installOSS: true
     EOF
     ```
 
@@ -182,7 +182,7 @@ kind: AmbassadorInstallation
 metadata:
   name: ambassador
 spec:
-  installOSS: true 
+  installOSS: true
   version: 1.13.0
 EOF
 ```

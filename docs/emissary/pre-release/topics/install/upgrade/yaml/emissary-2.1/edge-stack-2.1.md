@@ -65,7 +65,7 @@ Migration is a five-step process:
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
@@ -91,7 +91,7 @@ Migration is a five-step process:
    Our `aes-emissaryns-migration.yaml` assumes that $OSSproductName$ $version$ is installed in the
    `emissary` namespace. If you installed $OSSproductName$ $version$ into a different namespace, you'll
    need to download `aes-emissaryns-migration.yaml` file and edit it.
-   
+
    **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, download `aes-emissaryns-migration.yaml` and edit it to
    do so.
 
@@ -103,7 +103,7 @@ Migration is a five-step process:
 3. **Test!**
 
    Your $AESproductName$ $version$ installation should come up running with the configuration
-   resources used by $OSSproductName$ $version$, including `Listener`s and `Host`s. 
+   resources used by $OSSproductName$ $version$, including `Listener`s and `Host`s.
 
    <Alert severity="info">
      If you find that your $AESproductName$ $version$ installation and your $OSSproductName$ $version$

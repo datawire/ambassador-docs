@@ -193,7 +193,7 @@ documentation.
 
 1. Install the Prometheus Operator from the helm chart
 
-    ```	
+    ```
     helm install -n prometheus stable/prometheus-operator
     ```
 
@@ -286,9 +286,9 @@ or set `grafana.enabled: false` and follow the instructions below.
 To deploy Grafana behind $productName$: replace
 `{{AMBASSADOR_IP}}` with the IP address or DNS name of your $productName$ service, copy the YAML below, and apply it with `kubectl`:
 
-**Note:** If you forgot how to get the value of your `AMBASSADOR_IP` or 
-have not set-up DNS, you can get the IP by using the `kubectl get services -n ambassador` 
-command, and select the External-IP of your $productName$ LoadBalancer service. 
+**Note:** If you forgot how to get the value of your `AMBASSADOR_IP` or
+have not set-up DNS, you can get the IP by using the `kubectl get services -n ambassador`
+command, and select the External-IP of your $productName$ LoadBalancer service.
 
 ```yaml
 ---
@@ -391,7 +391,7 @@ in with `username: admin` : `password: admin`.
 Before you can import the $productName$ dashboard. You need to add a data source.
 From the Grafana home page, select `Create your first data source`. Now,
 select 'Prometheus'. In the URL section, type in `http://prometheus.default:9090`.
-We deployed prometheus to the default namespace in our example, but if you 
+We deployed prometheus to the default namespace in our example, but if you
 deployed it to a different namespace, make sure to replace `default` with your
 namespace. Press `Save & Test` to confirm that the data source works.
 
@@ -503,7 +503,7 @@ spec:
 #### Dashboard
 
 Now that you have metrics scraping from StatsD You can use [this version of
-the dashboard](https://grafana.com/grafana/dashboards/4698) (ID: 4698) configured to work 
+the dashboard](https://grafana.com/grafana/dashboards/4698) (ID: 4698) configured to work
 with metrics scraped from StatsD or the metrics Endpoint. You can configure it the
-same way as the previous dashboard. Adding the prometheus data source is also required, 
-so if you did not add that yet, make sure to configure it before adding the dashboard. 
+same way as the previous dashboard. Adding the prometheus data source is also required,
+so if you did not add that yet, make sure to configure it before adding the dashboard.

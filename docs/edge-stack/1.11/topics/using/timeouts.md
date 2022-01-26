@@ -17,7 +17,7 @@ Default: `3000`
 
 `cluster_idle_timeout_ms` controls how long a connection stream will remain open if there are no active requests. This timeout operates based on outgoing requests to upstream services. It can be disabled by setting the value to `0`.
 
-Default: `3600000` (1 hour). 
+Default: `3600000` (1 hour).
 
 ## Connect Timeout: `connect_timeout_ms`
 
@@ -31,7 +31,7 @@ Default: `3000`
 
 `listener_idle_timeout_ms` controls how long a connection stream will remain open if there are no active requests.  This timeout operates based on incoming requests to the listener. It can be disabled by setting the value to `0`.  **Caution** Disabling this timeout increases the likelihood of stream leaks due to missed FINs in the TCP connection.
 
-Default: `30000`  
+Default: `30000`
 
 ### Example
 

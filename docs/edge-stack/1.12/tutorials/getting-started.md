@@ -36,11 +36,11 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 
   ```
   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
-  ```  
+  ```
 
   <Alert severity="info">The Service and Deployment are created in the Ambassador namespace.  You can use <code>kubectl get services,deployments quote --namespace ambassador</code> to see their status.</Alert>
 
-2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells Edge Stack to route all traffic inbound to the `/backend/` path to the `quote` Service.  
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells Edge Stack to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
   ```yaml
   ---
@@ -58,7 +58,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 
   ```
   kubectl apply -f quote-backend.yaml
-  ```  
+  ```
 
   With our Mapping created, now we need to access it!
 
@@ -71,17 +71,17 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 
 5. Test the configuration by accessing the service through the Ambassador load balancer:
 
-  `curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/`  
+  `curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/`
 
   ```
-  $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/  
+  $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/
 
     {
      "server": "idle-cranberry-8tbb6iks",
      "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
      "time": "2021-02-26T15:55:06.884798988Z"
     }
-  ```  
+  ```
 
 <Alert severity="success"><b>Victory!</b> You have created your first Edge Stack Mapping, routing a request from your cluster's edge to a service!</Alert>
 
@@ -97,7 +97,7 @@ The Service Catalog is a web-based interface that lists all of your cluster's Se
 
 4. Follow the prompts to install the cloud token into your cluster.
 
-5. When the token installation completes, refresh the Service Catalog page.  
+5. When the token installation completes, refresh the Service Catalog page.
 
 <Alert severity="success"><b>Fantastic!</b> You can now see all your Services in your Ambassador Cloud account! Metadata on your Services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="../../../../cloud/latest/service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your Services.</Alert>
 
@@ -105,7 +105,7 @@ The Service Catalog is a web-based interface that lists all of your cluster's Se
 
 Explore some of the popular tutorials on Edge Stack:
 
-* [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from 
+* [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from
 the edge of your cluster to a Kubernetes service
 * [Host resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
 * [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads

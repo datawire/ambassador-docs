@@ -24,7 +24,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step pr
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
@@ -50,7 +50,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step pr
 
    Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
    in the `ambassador` namespace.
- 
+
    ```
    kubectl delete -n ambassador deployment edge-stack
    ```
@@ -59,7 +59,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step pr
 
    After installing the new CRDs, use Helm to install $productName$ $version$. This will install
    in the `$productNamespace$` namespace. If necessary for your installation (e.g. if you were
-   running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can download `aes.yaml` and edit as 
+   running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can download `aes.yaml` and edit as
    needed.
 
    ```

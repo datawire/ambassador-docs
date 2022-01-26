@@ -170,9 +170,9 @@ spec:
           image: docker.io/datawire/hello-world:latest
           ports:
             - name: http
-              containerPort: 8000 
+              containerPort: 8000
 EOF
- 
+
 service/hello created
 mapping.getambassador.io/hello created
 deployment.apps/hello created
@@ -189,7 +189,7 @@ Found 1 interceptable deployment(s):
 
 Take a look at the [Traffic Agent reference](../service-preview-reference#traffic-agent) for more information on how to connect your services to Service Preview.
 
-Service Preview is now installed in your cluster and ready to intercept traffic sent to the `Hello` service! 
+Service Preview is now installed in your cluster and ready to intercept traffic sent to the `Hello` service!
 
 ## Next Steps
 

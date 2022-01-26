@@ -140,7 +140,7 @@ apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
   name:  skip-mapping-wrong-label
-  labels:  
+  labels:
     examplehost: staging       # This doesn't match the Host's mappingSelector.
 spec:
   prefix: /httpbin/
@@ -159,7 +159,7 @@ apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
   name:  skip-mapping-still-wrong
-  labels:  
+  labels:
     examplehost: staging       # This doesn't match the Host's mappingSelector,
 spec:                          # and if the Host specifies mappingSelector AND the
   hostname: host.example.com   # Mapping specifies hostname, BOTH must match. So

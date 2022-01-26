@@ -21,7 +21,7 @@ Below, we'll configure Ambassador to map `/httpbin/` to `httpbin.org`.
 
 ### 1. Deploying the Ambassador API Gateway
 
-The following steps deploy Ambassador in the default namespace. 
+The following steps deploy Ambassador in the default namespace.
 
 **Note:** If you're using Google Kubernetes Engine, you'll need to grant permissions to the account that will be setting up the Ambassador API Gateway. To do this, get your official GKE username, and then grant `cluster-admin` role privileges to that username:
 
@@ -124,7 +124,7 @@ See the [TLS HOWTO](../../../howtos/tls-termination) to quickly enable HTTPS sup
 ## Helm
 
 In the following instructions, we'll install the open-source Ambassador API
-Gateway with Helm. 
+Gateway with Helm.
 
 Although the [Helm chart](https://github.com/emissary-ingress/emissary/tree/release/v1.13/charts/ambassador) installs
 the Ambassador Edge Stack by default, the Ambassador API Gateway is still

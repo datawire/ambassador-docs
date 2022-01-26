@@ -2,7 +2,7 @@
 
 **Note:** The Ambassador Edge Stack can issue and manage certificate with the ACME HTTP-01 challenge.
 
-cert-manager is still required for DNS-01 challenges for wildcard domains and when using Ambassador OSS. 
+cert-manager is still required for DNS-01 challenges for wildcard domains and when using Ambassador OSS.
 
 ---
 
@@ -188,7 +188,7 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
 4. Create a Mapping for the `/.well-known/acme-challenge/` route.
 
 cert-manager uses an `Ingress` resource to issue the challenge to `/.well-known/acme-challenge/` but, since Ambassador is not an `Ingress`, we will need to create a `Mapping` so the cert-manager can reach the temporary pod.
- 
+
 ```yaml
     ---
     apiVersion: getambassador.io/v2

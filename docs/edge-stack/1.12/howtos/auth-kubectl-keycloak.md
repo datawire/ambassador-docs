@@ -115,7 +115,7 @@ In this section, we'll configure your Kubernetes cluster for single-sign on.
     metadata:
       name: aes-impersonator-rolebinding
     subjects:
-    - apiGroup: rbac.authorization.k8s.io 
+    - apiGroup: rbac.authorization.k8s.io
       kind: User
       name: aes-kubeapi
     roleRef:

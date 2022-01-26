@@ -297,7 +297,7 @@ items:
       - title: Add configurable cache for OIDC replies to the JWT Filter
         type: feature
         body: >-
-          The <code>maxStale</code> field is now supported in in the JWT Filter to configure how long $productname$ should cache OIDC responses for similar to the existing <code>maxStale</code> field in the OAuth2 Filter. 
+          The <code>maxStale</code> field is now supported in in the JWT Filter to configure how long $productname$ should cache OIDC responses for similar to the existing <code>maxStale</code> field in the OAuth2 Filter.
         docs: topics/using/filters/jwt
 
   - version: 2.0.0-ea

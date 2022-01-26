@@ -49,7 +49,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
          from: ALL
    EOF
    ```
-   
+
      <Alert severity="info">
        This <code>Listener</code> will associate with <i>all</i> <code>Host</code>s in your cluster. This is fine for the quickstart, but is likely not what you really want for production use.<br/>
        <br/>

@@ -133,7 +133,7 @@ This section will focus on setting up Prometheus to scrape stats from Ambassador
 
 1. Install the Prometheus Operator from the helm chart
 
-    ```	
+    ```
     helm install -n prometheus stable/prometheus-operator
     ```
 

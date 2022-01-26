@@ -8,4 +8,3 @@ This section discusses:
 * [Microservices API Gateways](microservices-api-gateways)
 * [The Ambassador Operating Model: Continuous Delivery, GitOps, and Declarative Configuration](gitops-continuous-delivery)
 * [Progressive Delivery](progressive-delivery)
-

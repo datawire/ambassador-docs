@@ -83,7 +83,7 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
    * Review the Terms of Service and check the box that you agree to the Terms of Service.
    * Enter the email address to be associated with your TLS certificate.
    * Click the **Save** button.
-  
+
   You'll see the newly created `Host` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [Host CRD](../../../topics/running/host-crd).
 
 3. Once the Host is ready, navigate to `https://<hostname>` in your browser.
@@ -115,7 +115,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
 
 4. Grab the IP of your $productName$
-   
+
    ```shell
    export AMBASSADOR_LB_ENDPOINT=$(kubectl get svc ambassador -n ambassador \
   -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")

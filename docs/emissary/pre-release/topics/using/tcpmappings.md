@@ -27,7 +27,7 @@ $productName$ can manage TCP connections using TLS:
 | :------------------------ | :------------------------ |
 | [`host`](../headers/host) | (optional) enables TLS _termination_ and specifies the hostname that must be presented using SNI for this `TCPMapping` to match -- **FORCES TLS TERMINATION**, see below |
 | [`service`](#tcpmapping-and-tls)   | An `https://` prefix will enable TLS _origination_ |
-| [`tls`](#tcpmapping-and-tls)       | (optional) configures TLS _origination_ by specifying the name of a `TLSContext` that will determine the certificate to offer to the upstream service | 
+| [`tls`](#tcpmapping-and-tls)       | (optional) configures TLS _origination_ by specifying the name of a `TLSContext` that will determine the certificate to offer to the upstream service |
 
 $productName$ supports multiple deployment patterns for your services. These patterns are designed to let you safely release new versions of your service while minimizing its impact on production users.
 

@@ -100,7 +100,7 @@ items:
         body: >-
           <code>Mapping</code>s with DNS wildcard <code>hostname</code> will now be correctly
           matched with <code>Host</code>s. Previously, the case where both the <code>Host</code>
-          and the <code>Mapping</code> use DNS wildcards for their hostnames could sometimes 
+          and the <code>Mapping</code> use DNS wildcards for their hostnames could sometimes
           not correctly match when they should have.
         docs: howtos/configure-communications/
         image: ./v2.1.2-host-mapping-matching.png
@@ -163,7 +163,7 @@ items:
       - title: Envoy V2 API deprecation
         type: change
         body: >-
-          Support for the Envoy V2 API is deprecated in $productName$ v2.1, and will be removed in $productName$ 
+          Support for the Envoy V2 API is deprecated in $productName$ v2.1, and will be removed in $productName$
           v2.2.0. The <code>AMBASSADOR_ENVOY_API_VERSION</code> environment variable will be removed at the same
           time. Only the Envoy V3 API will be supported (this has been the default since $productName$ v1.14.0).
 

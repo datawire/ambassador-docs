@@ -27,19 +27,19 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
     kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \
     kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \
     kubectl apply -f - <<EOF
-    --- 
-    apiVersion: v1 
-    kind: Service 
-    metadata: 
-      name: ambassador 
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: ambassador
     spec:
-      type: LoadBalancer 
-      externalTrafficPolicy: Local 
+      type: LoadBalancer
+      externalTrafficPolicy: Local
       ports:
-      - port: 80 
+      - port: 80
         targetPort: 8080
-      selector: 
-        service: ambassador 
+      selector:
+        service: ambassador
     EOF
     ```
 
@@ -94,7 +94,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
 
 4. Grab the IP of your $productName$
-   
+
    ```shell
    export EMISSARY_LB_ENDPOINT=$(kubectl get svc ambassador \
   -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
@@ -126,11 +126,9 @@ configuration. This enables a consistent configuration workflow.
    ```
    $ kubectl get mappings
      NAME            SOURCE HOST   SOURCE PREFIX   DEST SERVICE   STATE   REASON
-     quote-backend                 /backend/       quote 
+     quote-backend                 /backend/       quote
    ```
 
 ## What’s next?
 
 $productName$ has a comprehensive range of [features](/features/) to support the requirements of any edge microservice.
-
-

@@ -13,7 +13,7 @@ you convert your existing configuration resources from `getambassador.io/v2` to
 
 In general, the best way to convert any resource is to start with `kubectl get`: using
 `kubectl get -o yaml` on any `getambassador.io/v2` resource will cause $productName$ to
-translate it to a `getambassador.io/v3alpha1` resource. You can then verify that the 
+translate it to a `getambassador.io/v3alpha1` resource. You can then verify that the
 `getambassador.io/v3alpha1` resource looks correct and re-apply it, which will convert the
 stored copy to `getambassador.io/v3alpha1`.
 
@@ -92,7 +92,7 @@ As a migration aid:
 
 - A `Mapping` with a `hostname` of `"*"` will associate with any `Host` that
 has no `mappingSelector`, and
-- A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present. 
+- A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present.
 
 <Alert severity="info">
   <a href="../../running/host-crd">Learn more about <code>Host</code></a><br />
@@ -180,7 +180,7 @@ The `getambassador.io/v2` `Mapping` supported strings and dictionaries for `add_
 ```yaml
 add_request_headers:
   X-Add-String: bar
-  X-Add-Dict: 
+  X-Add-Dict:
     value: bar
 ```
 
@@ -207,11 +207,11 @@ For example:
      x-regex-match: "fo.*o"
    ```
 
-In this example, the `Mapping` requires the `x-exact-match` header to have the value `foo`, the 
+In this example, the `Mapping` requires the `x-exact-match` header to have the value `foo`, the
 `x-regex-match` whose value starts with `fo` and ends with `o`. However, `x-existence-match` requires
 simply that the `x-existence-match` header exists.
 
-In `getambassador.io/v3alpha1`, the `true` value for an existence match is not supported. Instead, 
+In `getambassador.io/v3alpha1`, the `true` value for an existence match is not supported. Instead,
 use `headers_regex` for the same header with value of `.*`. This is fully supported in 1.k)
 
 `query_parameters` and `query_parameters_regex` work exactly like `headers`  and `headers_reex`.
@@ -247,13 +247,13 @@ for more examples.
   <a href="../../using/tcpmappings/">Learn more about <code>TCPMapping</code></a>
 </Alert>
 
-The `tls` element in `AuthService`, `Mapping`, `RateLimitService`, and `TCPMapping` controls TLS 
+The `tls` element in `AuthService`, `Mapping`, `RateLimitService`, and `TCPMapping` controls TLS
 origination. In `getambassador.io/v2`, it may be a string naming a `TLSContext` to use to determine
 which client certificate is sent, or the boolean value `true` to request TLS origination with no
-cluent certificate being sent. 
+cluent certificate being sent.
 
 In `getambassador.io/v3alpha1`, only the string form is supported. To originate TLS with no client
-certificate (the semantic of `tls: true`), omit the `tls` element and prefix the `service` with 
+certificate (the semantic of `tls: true`), omit the `tls` element and prefix the `service` with
 `https://`. Note that `TCPMapping` in `getambassador.io/v2` does not support the `https://prefix`.
 
 ## 10. Some `Module` settings have moved or changed
@@ -272,4 +272,4 @@ so the `use_proxy_protocol` element of the `ambassador` `Module` is no longer su
 to the `l7Depth` setting in the `Listener` resource.
 
 - It is no longer possible to configure TLS using the `tls` element of the `Module`. Its
-functionality is fully covered by the `TLSContext` resource. 
+functionality is fully covered by the `TLSContext` resource.

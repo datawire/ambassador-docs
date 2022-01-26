@@ -16,7 +16,7 @@ We assume that you already have a running $productName$ installation in the foll
     $productDeploymentName$   3         3         3            3           1m
     ```
 
-2. Check that the “desired” number of Pods matches the “current” and “available” number of Pods. 
+2. Check that the “desired” number of Pods matches the “current” and “available” number of Pods.
 
 3. If they are **not** equal, check the status of the associated Pods with the following command: `kubectl get pods -n $productNamespace$`.
 
@@ -74,13 +74,13 @@ $productName$ has two major log mechanisms: $productName$ logging and Envoy logg
 <Alert severity="info">
   Enabling debug-level logging can produce a <i>lot</i> of log output &mdash; enough to
   potentially impact the performance of $productName$. We don't recommend running with debug
-  logging enabled as a matter of course; it's usually better to enable it only when needed, 
+  logging enabled as a matter of course; it's usually better to enable it only when needed,
   then reset logging to normal once you're finished debugging.
 </Alert>
 
 ### $productName$ debug logging
 
-$productName$ logging is primarily concerned with the business of noticing changes to 
+$productName$ logging is primarily concerned with the business of noticing changes to
 Kubernetes resources that specify the $productName$ configuration, and generating new
 Envoy configuration in response to those changes. Enabling debug logging for this part
 of the system is under the control of two environment variables:
@@ -92,13 +92,13 @@ of the system is under the control of two environment variables:
 
 ### $productName$ Envoy logging
 
-Envoy logging is concerned with the actions Envoy is taking for incoming requests. 
+Envoy logging is concerned with the actions Envoy is taking for incoming requests.
 Typically, Envoy will only output access logs, and certain errors, but enabling Envoy
 debug logging will show very verbose information about the actions Envoy is actually
 taking. It can be useful for understanding why connections are being closed, or whether
 an error status is coming from Envoy or from the upstream service.
 
-It is possible to enable Envoy logging at boot, but for the most part, it's safer to 
+It is possible to enable Envoy logging at boot, but for the most part, it's safer to
 enable it at runtime, right before sending a request that is known to have problems.
 To enable Envoy debug logging, use `kubectl exec` to get a shell on the $productName$
 pod, then:

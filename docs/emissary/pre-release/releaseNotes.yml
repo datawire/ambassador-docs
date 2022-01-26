@@ -64,12 +64,12 @@ items:
           ACME client does), an error would always be logged about the Secret not being
           present, even though it was present, and everything was working correctly.
           This error is no longer logged.
-      
+
       - title: When using gzip, upstreams will no longer receive encoded data
         type: bugfix
         body: >-
           When using gzip compression, upstream services will no longer receive compressed
-          data. This bug was introduced in 1.14.0. The fix restores the default behavior of 
+          data. This bug was introduced in 1.14.0. The fix restores the default behavior of
           not sending compressed data to upstream services.
         github:
         - title: "#3818"

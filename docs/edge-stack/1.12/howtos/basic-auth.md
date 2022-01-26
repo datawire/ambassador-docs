@@ -8,10 +8,10 @@ import Alert from '@material-ui/lab/Alert';
 
 
 
-Ambassador can authenticate incoming requests before routing them to a backing 
-service. In this tutorial, we'll configure Ambassador to use an external third 
+Ambassador can authenticate incoming requests before routing them to a backing
+service. In this tutorial, we'll configure Ambassador to use an external third
 party authentication service. We're assuming also that you are running the
-quote application in your cluster as described in the 
+quote application in your cluster as described in the
 [Ambassador tutorial](../../tutorials/quickstart-demo/).
 
 ## Before You Get Started
@@ -147,13 +147,13 @@ We get a 401 since we haven't authenticated.
 > Host: 54.165.128.189:32281
 > User-Agent: curl/7.63.0
 > Accept: */*
-> 
+>
 < HTTP/1.1 401 Unauthorized
 < www-authenticate: Basic realm="Ambassador Realm"
 < content-length: 0
 < date: Thu, 23 May 2019 15:24:55 GMT
 < server: envoy
-< 
+<
 * Connection #0 to host 54.165.128.189 left intact
 ```
 
@@ -170,14 +170,14 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
 > Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 > User-Agent: curl/7.63.0
 > Accept: */*
-> 
+>
 < HTTP/1.1 200 OK
 < content-type: application/json
 < date: Thu, 23 May 2019 15:25:06 GMT
 < content-length: 172
 < x-envoy-upstream-service-time: 0
 < server: envoy
-< 
+<
 {
     "server": "humble-blueberry-o2v493st",
     "quote": "Nihilism gambles with lives, happiness, and even destiny itself!",

@@ -23,9 +23,9 @@ By default, the Bookinfo application uses the Istio ingress. To use the Ambassad
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
-metadata: 
+metadata:
   name: httpbin
-spec:     
+spec:
   prefix: /httpbin/
   service: httpbin.org
   host_rewrite: httpbin.org
@@ -89,9 +89,9 @@ If you're seeing a similar response, then everything is working great!
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
-metadata: 
+metadata:
   name: productpage
-spec:     
+spec:
   prefix: /productpage/
   rewrite: /productpage
   service: productpage:9080
@@ -221,9 +221,9 @@ This will define an `upstream` that uses the Istio certificates. We can now reus
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
-metadata: 
+metadata:
   name: productpage
-spec:     
+spec:
   prefix: /productpage/
   rewrite: /productpage
   service: https://productpage:9080

@@ -38,7 +38,7 @@ for the same service.
 > will not try to obtain documentation unless a `docs` attribute is specified.
 > Users should set `docs.path` to `/.ambassador-internal/openapi-docs` in their `Mapping`s
 > in order to keep the previous behavior.
-> 
+>
 >
 > The `docs` field of Mappings was not introduced until `Ambassador Edge Stack` version 1.9 because Ambassador was automatically searching for docs on `/.ambassador-internal/openapi-docs`
 > Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of Ambassador.

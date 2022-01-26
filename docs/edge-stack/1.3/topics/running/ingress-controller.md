@@ -47,9 +47,9 @@ If you're new to the Ambassador Edge Stack and to Kubernetes, we'd recommend you
 
 - You must create a `Service` resource with the correct `app.kubernetes.io/component` label.
 
-  The Ambassador Edge Stack will automatically load balance Ingress resources using the endpoint exposed 
+  The Ambassador Edge Stack will automatically load balance Ingress resources using the endpoint exposed
   from the Service with the annotation `app.kubernetes.io/component: ambassador-service`.
-  
+
   ```yaml
       kind: Service
       apiVersion: v1
@@ -123,7 +123,7 @@ spec:
           servicePort: 80
 ```
 
-is **exactly equivalent** to a `Mapping` CRD of 
+is **exactly equivalent** to a `Mapping` CRD of
 
 ```yaml
 ---

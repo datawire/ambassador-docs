@@ -11,10 +11,10 @@ This document focuses on how to deploy and manage the rate limiting extension.
 
 ## Ambassador Configuration
 
-Ambassador uses the [`RateLimitService` plugin](../../services/rate-limit-service) 
+Ambassador uses the [`RateLimitService` plugin](../../services/rate-limit-service)
 to connect to the rate limiting extension in the Ambassador Edge Stack.
 
-The default `RateLimitService` is named `ambassador-edge-stack-ratelimit` and is 
+The default `RateLimitService` is named `ambassador-edge-stack-ratelimit` and is
 defined as:
 
 ```yaml
@@ -34,7 +34,7 @@ request labels.
 
 ## Authentication Extension Configuration
 
-Certain use cases may require some tuning of the rate limiting extension. 
+Certain use cases may require some tuning of the rate limiting extension.
 Configuration of this extension is managed via environment variables.
 [The Ambassador Container](../../environment) has a full list of environment
 variables available for configuration. This document highlights the ones used
@@ -59,8 +59,8 @@ variables rather than the usual `REDIS_*` variables.
 
 #### `AES_RATELIMIT_PREVIEW`
 
-Set `AES_RATELIMIT_PREVIEW` to `true` to access support for redis clustering, 
-local caching, and an upgraded redis client with improved scalability in 
+Set `AES_RATELIMIT_PREVIEW` to `true` to access support for redis clustering,
+local caching, and an upgraded redis client with improved scalability in
 preview mode.
 
 #### `LOCAL_CACHE_SIZE_IN_BYTES`
@@ -69,9 +69,9 @@ preview mode.
 
 The AES rate limit extension can optionally cache over-the-limit keys so it does
 not need to read the redis cache again for requests with labels that are already
-over the limit. 
+over the limit.
 
-Setting `LOCAL_CACHE_SIZE_IN_BYTES` to a non-zero value with enable local 
+Setting `LOCAL_CACHE_SIZE_IN_BYTES` to a non-zero value with enable local
 caching.
 
 #### `NEAR_LIMIT_RATIO`

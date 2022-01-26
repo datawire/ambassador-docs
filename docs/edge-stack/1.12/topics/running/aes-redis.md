@@ -5,13 +5,13 @@ all components of the Ambassador Edge Stack share a Redis connection pool.
 
 ## Rate Limit Service
 
-The rate limiting service, can be configured to use different connection pools 
+The rate limiting service, can be configured to use different connection pools
 for handling per-second rate limits or connecting to Redis clusters.
 
 ### AES_RATELIMIT_PREVIEW
 
-Set `AES_RATELIMIT_PREVIEW` to `true` to access support for redis clustering, 
-local caching, and an upgraded redis client with improved scalability in 
+Set `AES_RATELIMIT_PREVIEW` to `true` to access support for redis clustering,
+local caching, and an upgraded redis client with improved scalability in
 preview mode.
 
 ### REDIS_PERSECOND
@@ -23,39 +23,39 @@ variables rather than the usual `REDIS_*` variables.
 
 ## Redis layer 4 connectivity (L4)
 
- 
-#### `SOCKET_TYPE` 
+
+#### `SOCKET_TYPE`
 
 The Go network to use to talk to Redis. see [Go `net.Dial`][]
 
 Most users will leave this as the default of `tcp`.
 
-#### `URL` 
+#### `URL`
 
-The URL to dial to talk to Redis 
+The URL to dial to talk to Redis
 
-This will be either a hostname:port pair or a comma separated list of 
+This will be either a hostname:port pair or a comma separated list of
 hostname:port pairs depending on the [`TYPE`](#redis-type) you are using.
-  
+
 For `REDIS_URL` (but not `REDIS_PERSECOND_URL`), not setting a value disables
 Ambassador Edge Stack features that require Redis.
 
-#### `TLS_ENABLED`  
+#### `TLS_ENABLED`
 
 Specifies whether to use TLS when talking to Redis.
 
-#### `TLS_INSECURE` 
+#### `TLS_INSECURE`
 
 Specifies whether to skip certificate verification when
-using TLS to talk to Redis.  
+using TLS to talk to Redis.
 
-Consider [installing the self-signed certificate for your Redis in to the 
-Ambassador Edge Stack container](../../using/filters/#installing-self-signed-certificates) 
+Consider [installing the self-signed certificate for your Redis in to the
+Ambassador Edge Stack container](../../using/filters/#installing-self-signed-certificates)
 in order to leave certificate verification on.
 
 ## Redis authentication (auth)
 
-**Default** 
+**Default**
 
 Configure authentication to a redis pool using the default implementation.
 
@@ -66,19 +66,19 @@ established.
 
 #### `USERNAME`
 
-If set, then that username is used with the password to log in as that user in 
-the [Redis 6 ACL][].  It is invalid to set a username without setting a 
+If set, then that username is used with the password to log in as that user in
+the [Redis 6 ACL][].  It is invalid to set a username without setting a
 password.  It is invalid to set a username with Redis 5 or lower.
 
-**Rate Limit Preview** 
+**Rate Limit Preview**
 
-Configure authentication to a redis pool using the preview rate limiting 
+Configure authentication to a redis pool using the preview rate limiting
 implementation
 
-#### `AUTH` 
+#### `AUTH`
 
-If set, the value will be used as the password to authenticate to redis with 
-username `default`. 
+If set, the value will be used as the password to authenticate to redis with
+username `default`.
 
 There is no way to change the username with this implementation.
 
@@ -89,20 +89,20 @@ There is no way to change the username with this implementation.
 
   The number of connections to keep around when idle.
 
-  The total number of connections may go lower than this if there are errors.  
+  The total number of connections may go lower than this if there are errors.
 
   The total number of connections may go higher than this during a load surge.
 
-#### `PING_INTERVAL` 
+#### `PING_INTERVAL`
 
   The rate at which Ambassador will ping the idle connections in the normal pool
-  (not extra connections created for a load surge). 
+  (not extra connections created for a load surge).
 
   Ambassador will `PING` one of them every `PING_INTERVAL÷POOL_SIZE` so
   that each connection will on average be `PING`ed every `PING_INTERVAL`.
-  
 
-#### `TIMEOUT` 
+
+#### `TIMEOUT`
 
   Sets 4 different timeouts:
 
@@ -114,28 +114,28 @@ There is no way to change the username with this implementation.
 
   A value of "0" means "no timeout".
 
-#### `SURGE_LIMIT_INTERVAL`  
+#### `SURGE_LIMIT_INTERVAL`
 
   During a load surge, if the pool is depleted, then Ambassador may create new
   connections to Redis in order to fulfill demand, at a maximum rate of one new
-  connection per `SURGE_LIMIT_INTERVAL`.  
+  connection per `SURGE_LIMIT_INTERVAL`.
 
   A value of "0" (the default) means "allow new connections to be created as
   fast as necessary.
 
   The total number of connections that Ambassador can surge to is unbounded.
 
-#### `SURGE_LIMIT_AFTER` 
+#### `SURGE_LIMIT_AFTER`
 
   The number of connections that can be created *after* the normal pool is
-  depleted before `SURGE_LIMIT_INTERVAL` kicks in. 
+  depleted before `SURGE_LIMIT_INTERVAL` kicks in.
 
   The first `POOL_SIZE+SURGE_LIMIT_AFTER` connections are allowed to
-  be created as fast as necessary.  
+  be created as fast as necessary.
 
   This setting has no effect if `SURGE_LIMIT_INTERVAL` is 0.
 
-#### `SURGE_POOL_SIZE`  
+#### `SURGE_POOL_SIZE`
 
   Normally during a surge, excess connections beyond `POOL_SIZE` are
   closed immediately after they are done being used, instead of being returned
@@ -145,14 +145,14 @@ There is no way to change the username with this implementation.
   created during a surge.
 
   Excess connections beyond `POOL_SIZE+SURGE_POOL_SIZE` will still
-  be closed immediately after use.  
+  be closed immediately after use.
 
 #### `SURGE_POOL_DRAIN_INTERVAL`
 
-  How quickly to drain connections from the surge pool after a surge is over. 
+  How quickly to drain connections from the surge pool after a surge is over.
 
   Connections are closed at a rate of one connection per
-  `SURGE_POOL_DRAIN_INTERVAL`. 
+  `SURGE_POOL_DRAIN_INTERVAL`.
 
   This setting has no effect if `SURGE_POOL_SIZE` is 0.
 
@@ -162,7 +162,7 @@ Redis currently support three different deployment methods. Ambassador Edge
 Stack can now support using a Redis deployed in any of these ways for rate
 limiting when `AES_RATELIMIT_PREVIEW=true`.
 
-#### `TYPE` 
+#### `TYPE`
 
 - `SINGLE`: Talk to a single instance of redis, or a redis proxy.
 
@@ -177,7 +177,7 @@ limiting when `AES_RATELIMIT_PREVIEW=true`.
   cluster followed by hostname:port pairs. The list size should be >= 2.
   The first item is the name of the master and the rest are the sentinels.
 
-- `CLUSTER`: Talk to a redis in cluster mode (see 
+- `CLUSTER`: Talk to a redis in cluster mode (see
   https://redis.io/topics/cluster-spec)
 
   Requires the redis `REDIS_URL` or `REDIS_PERSECOND_URL` to be either a
@@ -186,17 +186,17 @@ limiting when `AES_RATELIMIT_PREVIEW=true`.
 
   `PIPELINE_WINDOW` must be set when `TYPE: CLUSTER`.
 
-#### `PIPELINE_WINDOW` 
+#### `PIPELINE_WINDOW`
 
-The duration after which internal pipelines will be flushed. 
+The duration after which internal pipelines will be flushed.
 
 If window is zero then implicit pipelining will be disabled.
 
 > `150us` is recommended when using implicit pipelining in production.
 
-#### `PIPELINE_LIMIT` 
+#### `PIPELINE_LIMIT`
 
-The maximum number of commands that can be pipelined before flushing. 
+The maximum number of commands that can be pipelined before flushing.
 
 If limit is zero then no limit will be used and pipelines will only be limited
 by the specified time window.

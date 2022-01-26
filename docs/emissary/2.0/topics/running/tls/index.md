@@ -1,6 +1,6 @@
 # Transport Layer Security (TLS)
 
-$productName$'s robust TLS support exposes configuration options 
+$productName$'s robust TLS support exposes configuration options
 for different TLS use cases including:
 
 - [Simultaneously Routing HTTP and HTTPS](cleartext-redirection/#cleartext-routing)
@@ -14,7 +14,7 @@ for different TLS use cases including:
 A `Host` represents a domain in $productName$ and defines how the domain manages TLS. For more information on the Host resource, see [The Host CRD reference documentation](../host-crd).
 
 In $AESproductName$, the simplest configuration
-of a `Host` will enable TLS with a self-signed certificate and redirect cleartext traffic to HTTPS. 
+of a `Host` will enable TLS with a self-signed certificate and redirect cleartext traffic to HTTPS.
 
 > The example below does not define a `requestPolicy`; however, this is something to keep in mind as you begin using the `Host` `CRD` in $productName$.
 >
@@ -23,7 +23,7 @@ of a `Host` will enable TLS with a self-signed certificate and redirect cleartex
 
 ### Automatic TLS with ACME
 
-With $AESproductName$, you can configure the `Host` to manage TLS by 
+With $AESproductName$, you can configure the `Host` to manage TLS by
 requesting a certificate from a Certificate Authority using the
 [ACME HTTP-01 challenge](https://letsencrypt.org/docs/challenge-types/).
 
@@ -43,17 +43,17 @@ spec:
     email: julian@example.com
 ```
 
-$AESproductName$ will now request a certificate from the CA and store it in a Secret 
+$AESproductName$ will now request a certificate from the CA and store it in a Secret
 in the same namespace as the `Host`.
 
 ### Bring your own certificate
 
-For both $AESproductName$ and $OSSproductName$, the `Host` can read a 
-certificate from a Kubernetes secret and use that certificate to terminate TLS 
+For both $AESproductName$ and $OSSproductName$, the `Host` can read a
+certificate from a Kubernetes secret and use that certificate to terminate TLS
 on a domain.
 
-The following will configure $productName$ to grab a certificate from a secret 
-named `host-secret` and use that secret for terminating TLS on the 
+The following will configure $productName$ to grab a certificate from a secret
+named `host-secret` and use that secret for terminating TLS on the
 `host.example.com` domain:
 
 ```yaml
@@ -109,7 +109,7 @@ tls:
 
 ### `Host` and `TLSContext`
 
-The `Host` will configure most TLS termination settings in $productName$. 
+The `Host` will configure most TLS termination settings in $productName$.
 
 If you require TLS configuration that is not available
 via the above `tls` settings in a `Host`, you can create a `TLSContext` and associate it with a `Host` with either of the following two methods.
@@ -120,10 +120,10 @@ via the above `tls` settings in a `Host`, you can create a `TLSContext` and asso
 #### Create a `TLSContext` with the name `{{AMBASSADORHOST}}-context`
 
 You can create a [`TLSContext`](#tlscontext) with the name
-`{{NAME_OF_AMBASSADORHOST}}-context`, `hosts` set to the same `hostname`, and `secret` 
+`{{NAME_OF_AMBASSADORHOST}}-context`, `hosts` set to the same `hostname`, and `secret`
 set to the same `tlsSecret`.
 
-For example, to enforce a minimum TLS version on the `Host` above, create a 
+For example, to enforce a minimum TLS version on the `Host` above, create a
 `TLSContext` named `example-host-context` with the following configuration:
 
 ```yaml
@@ -185,10 +185,10 @@ See [`TLSContext`](#tlscontext) below to read more on the description of these f
 
 ## TLSContext
 
-The `TLSContext` is used to configure advanced TLS options in $productName$. 
-Remember, a `TLSContext` should always be paired with a `Host`. 
+The `TLSContext` is used to configure advanced TLS options in $productName$.
+Remember, a `TLSContext` should always be paired with a `Host`.
 
-A full schema of the `TLSContext` can be found below with descriptions of the 
+A full schema of the `TLSContext` can be found below with descriptions of the
 different configuration options.
 
 ```yaml
@@ -199,8 +199,8 @@ metadata:
   name: example-host-context
 spec:
   # 'hosts' defines the hosts for which this TLSContext is relevant.
-  # It ties into SNI. A TLSContext without "hosts" is useful only for 
-  # originating TLS. 
+  # It ties into SNI. A TLSContext without "hosts" is useful only for
+  # originating TLS.
   # type: array of strings
   #
   # hosts: []
@@ -223,7 +223,7 @@ spec:
   #
   # ca_secret: None
 
-  # Tells $productName$ whether to interpret a "." in the secret name as a "." or 
+  # Tells $productName$ whether to interpret a "." in the secret name as a "." or
   # a namespace identifier.
   # type: boolean
   #
@@ -267,7 +267,7 @@ spec:
 ### ALPN protocols
 
 The `alpn_protocols` setting configures the TLS ALPN protocol. To use gRPC over
-TLS, set `alpn_protocols: h2`. If you need to support HTTP/2 upgrade from 
+TLS, set `alpn_protocols: h2`. If you need to support HTTP/2 upgrade from
 HTTP/1, set `alpn_protocols: h2,http/1.1` in the configuration.
 
 #### HTTP/2 support
@@ -284,31 +284,31 @@ spec:
   hosts: ["*"]
   alpn_protocols: h2[, http/1.1]
 ```
-Without setting alpn_protocols as shown above, HTTP2 will not be available via 
+Without setting alpn_protocols as shown above, HTTP2 will not be available via
 negotiation and will have to be explicitly requested by the client.
 
 If you leave off http/1.1, only HTTP2 connections will be supported.
 
 ### TLS parameters
 
-The `min_tls_version` setting configures the minimum TLS protocol version that 
-$productName$ will use to establish a secure connection. When a client 
-using a lower version attempts to connect to the server, the handshake will 
+The `min_tls_version` setting configures the minimum TLS protocol version that
+$productName$ will use to establish a secure connection. When a client
+using a lower version attempts to connect to the server, the handshake will
 result in the following error: `tls: protocol version not supported`.
 
-The `max_tls_version` setting configures the maximum TLS protocol version that 
-$productName$ will use to establish a secure connection. When a client 
-using a higher version attempts to connect to the server, the handshake will 
-result in the following error: 
+The `max_tls_version` setting configures the maximum TLS protocol version that
+$productName$ will use to establish a secure connection. When a client
+using a higher version attempts to connect to the server, the handshake will
+result in the following error:
 `tls: server selected unsupported protocol version`.
 
-The `cipher_suites` setting configures the supported ciphers found below using the 
-[configuration parameters for BoringSSL](https://commondatastorage.googleapis.com/chromium-boringssl-docs/ssl.h.html#Cipher-suite-configuration) when negotiating a TLS 1.0-1.2 connection. 
-This setting has no effect when negotiating a TLS 1.3 connection.  When a client does not 
+The `cipher_suites` setting configures the supported ciphers found below using the
+[configuration parameters for BoringSSL](https://commondatastorage.googleapis.com/chromium-boringssl-docs/ssl.h.html#Cipher-suite-configuration) when negotiating a TLS 1.0-1.2 connection.
+This setting has no effect when negotiating a TLS 1.3 connection.  When a client does not
 support a matching cipher a handshake error will result.
 
 The `ecdh_curves` setting configures the supported ECDH curves when negotiating
-a TLS connection.  When a client does not support a matching ECDH a handshake 
+a TLS connection.  When a client does not support a matching ECDH a handshake
 error will result.
 
 ```

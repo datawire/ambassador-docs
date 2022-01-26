@@ -31,7 +31,7 @@ The following configuration is an example configuring $productName$ - ExternalDN
     kind: ServiceAccount
     metadata:
       name: external-dns
-      annotations: 
+      annotations:
         eks.amazonaws.com/role-arn: {ARN} # AWS ARN role
     ---
     apiVersion: rbac.authorization.k8s.io/v1
@@ -107,7 +107,7 @@ The following configuration is an example configuring $productName$ - ExternalDN
 
 ## Usage
 
-After you've applied the above configuration, ExternalDNS is ready to use. Configure a `Host` with the following annotation to allow ExternalDNS to get the IP address of your $productName$'s LoadBalancer and register it with your DNS provider: 
+After you've applied the above configuration, ExternalDNS is ready to use. Configure a `Host` with the following annotation to allow ExternalDNS to get the IP address of your $productName$'s LoadBalancer and register it with your DNS provider:
 
   ```yaml
     apiVersion: getambassador.io/v3alpha1

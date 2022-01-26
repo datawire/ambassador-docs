@@ -26,13 +26,13 @@ deploy it with either version of the tool.
 1. **Helm 3 users:** Install the $productName$ Chart with the following command:
 
    ```
-   helm install ambassador datawire/ambassador --set enableAES=false 
+   helm install ambassador datawire/ambassador --set enableAES=false
    ```
 
 2. **Helm 2 users**: Install the $productName$ Chart with the following command:
 
    ```
-   helm install --name ambassador datawire/ambassador --set enableAES=false 
+   helm install --name ambassador datawire/ambassador --set enableAES=false
    ```
 
 3. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
@@ -62,7 +62,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
 
 4. Grab the IP of your $productName$
-   
+
    ```shell
    export EMISSARY_LB_ENDPOINT=$(kubectl get svc ambassador \
   -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
@@ -90,7 +90,7 @@ configuration. This enables a consistent configuration workflow.
    ```
    $ kubectl get mappings
      NAME            SOURCE HOST   SOURCE PREFIX   DEST SERVICE   STATE   REASON
-     quote-backend                 /backend/       quote 
+     quote-backend                 /backend/       quote
    ```
 
 ## Upgrading an existing $productName$ installation
@@ -152,15 +152,15 @@ At this point, $AESproductName$ should be running with the same functionality as
 Upgrading to $AESproductName$ will provide automatic TLS support if you have not already configured it.
 
 1. Grab the IP of your $AESproductName$
-   - Note: Make sure to remove `-n ambassador` if you decided to not migrate to the `ambassador` namespace when upgrading to $AESproductName$ 
-   
+   - Note: Make sure to remove `-n ambassador` if you decided to not migrate to the `ambassador` namespace when upgrading to $AESproductName$
+
    ```shell
    export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador \
   -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
    ```
 
 2. Try submitting a request to the quote service that you deployed above
-   
+
    ```
    $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/
    {

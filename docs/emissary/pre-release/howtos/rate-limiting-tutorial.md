@@ -75,8 +75,8 @@ spec:
             memory: 100Mi
 ```
 
-This configuration tells $productName$ about the rate limit service, notably that it is serving requests at `example-rate-limit:5000`. $productName$ will see the `RateLimitService` and reconfigure itself within a few 
-seconds, allowing incoming requests to be rate-limited. 
+This configuration tells $productName$ about the rate limit service, notably that it is serving requests at `example-rate-limit:5000`. $productName$ will see the `RateLimitService` and reconfigure itself within a few
+seconds, allowing incoming requests to be rate-limited.
 
 Note that you can configure the `RateLimitService` to use a specific label `domain`.
 If `domain` is not specified (which is the situation here), the default is `ambassador`.
@@ -104,7 +104,7 @@ labels:
   ambassador:
     - request_label_group:
       - x-ambassador-test-allow:
-          request_headers: 
+          request_headers:
             key: "x-ambassador-test-allow"
             header_name: "x-ambassador-test-allow"
 ```
@@ -125,7 +125,7 @@ spec:
     ambassador:
       - request_label_group:
         - x-ambassador-test-allow:
-            request_headers: 
+            request_headers:
               key: "x-ambassador-test-allow"
               header_name: "x-ambassador-test-allow"
 ```
