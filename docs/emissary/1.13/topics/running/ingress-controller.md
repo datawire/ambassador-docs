@@ -44,7 +44,7 @@ If you're new to $productName$ and to Kubernetes, we'd recommend you start with 
 
 - $productName$ will need RBAC permissions to get, list, watch, and update Ingress resources.
 
-  You can see this in the [`aes-crds.yaml`](https://app.getambassador.io/yaml/ambassador-docs/latest/aes.yaml)
+  You can see this in the [`aes-crds.yaml`](https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml)
   file, but this is the critical rule to add to $productName$'s `Role` or `ClusterRole`:
 
   ```yaml

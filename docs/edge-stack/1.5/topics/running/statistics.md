@@ -81,7 +81,7 @@ If you deploy Prometheus using Helm the value that you should change is `prometh
 
 #### Configuring for `kubectl`
 
-In the [`ambassador-rbac-prometheus.yaml`](https://app.getambassador.io/yaml/ambassador-docs/latest/ambassador/ambassador-rbac-prometheus.yaml) example template there is a `ConfigMap` that should be updated. Add your mapping to the `configuration` property.
+In the [`ambassador-rbac-prometheus.yaml`](https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac-prometheus.yaml) example template there is a `ConfigMap` that should be updated. Add your mapping to the `configuration` property.
 
 ```yaml
 ---

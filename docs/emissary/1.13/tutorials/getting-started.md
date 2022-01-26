@@ -36,7 +36,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
   ```
-  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/quickstart/qotm.yaml
   ```
 
 

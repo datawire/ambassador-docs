@@ -36,7 +36,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 1. First, apply the YAML for the “Quote of the Moment" service.
 
   ```
-  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/quickstart/qotm.yaml
   ```
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
