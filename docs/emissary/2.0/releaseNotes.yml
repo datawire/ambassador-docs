@@ -226,7 +226,7 @@ items:
       - title: Improved Ambassador Cloud visibility
         type: feature
         body: Ambassador Agent reports sidecar process information and <code>AmbassadorMapping</code> OpenAPI documentation to Ambassador Cloud to provide more visibility into services and clusters.
-        docs: ../../cloud/latest/service-catalog/quick-start/
+        docs: /docs/cloud/latest/service-catalog/quick-start/
 
       - title: Configurable per-AmbassadorListener statistics prefix
         body: The optional <code>stats_prefix</code> element of the <code>AmbassadorListener</code> CRD now determines the prefix of HTTP statistics emitted for a specific <code>AmbassadorListener</code>.
