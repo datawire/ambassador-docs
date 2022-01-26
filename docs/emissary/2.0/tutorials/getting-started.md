@@ -68,7 +68,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 2. Apply the YAML for the “Quote of the Moment" service.
 
   ```
-  kubectl apply -f https://app.getambassador.io/yaml/v2-docs/latest/quickstart/qotm.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/quickstart/qotm.yaml
   ```
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
