@@ -68,7 +68,7 @@ Upgrading an existing installation of $productName$ is a two-step process:
 1. First, apply any CRD updates:
 
    ```
-    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml
+    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
    ```
 
 2. Next, upgrade $productName$ itself:

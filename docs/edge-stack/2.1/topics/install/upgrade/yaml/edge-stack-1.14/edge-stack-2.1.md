@@ -149,7 +149,7 @@ Migration is a six-step process:
    as needed.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-defaultns-migration.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-defaultns-migration.yaml && \
    kubectl rollout status -n default deployment/aes -w
    ```
 

@@ -63,6 +63,6 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step pr
    needed.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes.yaml && \
    kubectl rollout status -n ambassador deployment/edge-stack -w
    ```

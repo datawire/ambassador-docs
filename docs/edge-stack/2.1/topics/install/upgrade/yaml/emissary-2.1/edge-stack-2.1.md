@@ -112,7 +112,7 @@ Migration is a five-step process:
    do so.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-emissaryns-migration.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml && \
    kubectl rollout status -n emissary deployment/aes -w
    ```
 
@@ -148,7 +148,7 @@ Migration is a five-step process:
 
    ```
    kubectl delete -n emissary service/emissary-ingress-admin deployment/emissary-ingress
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/resources-migration.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/resources-migration.yaml
    ```
 
    You may also want to redirect DNS to the `edge-stack` Service and remove the
