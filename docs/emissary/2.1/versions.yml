@@ -17,6 +17,7 @@ productDockerRegistry: docker.io/emissaryingress
 productFullDockerImage: docker.io/emissaryingress/emissary
 
 # OSS (self)
+ossVersion: 2.1.2
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
 

@@ -14,6 +14,7 @@ productHelmName: edge-stack
 productDockerImage: aes
 
 # OSS (not self)
+ossVersion: 2.0.5
 ossDocsVersion: "2.0"
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"

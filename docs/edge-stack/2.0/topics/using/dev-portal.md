@@ -47,7 +47,7 @@ for the same service.
 > The `docs` field of Mappings was not introduced until `Ambassador Edge Stack` version 1.9 because Ambassador was automatically searching for docs on `/.ambassador-internal/openapi-docs`
 > Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of Ambassador.
 ```yaml
- `kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml`
+ `kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml`
 ```
 
 > If you are on an earlier version of Ambassador, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`.

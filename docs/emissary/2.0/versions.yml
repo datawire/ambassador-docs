@@ -14,6 +14,7 @@ productHelmName: emissary-ingress
 productDockerImage: emissary
 
 # OSS (self)
+ossVersion: 2.0.5
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
 
