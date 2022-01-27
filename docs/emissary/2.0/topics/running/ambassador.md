@@ -286,6 +286,14 @@ If you need more flexible and configurable options, $AESproductName$ supports a 
 
 For example, with `merge_slashes: true`, a request for `//foo///bar` would be matched to a `Mapping` with prefix `/foo/bar`.
 
+##### Modify Default Buffer Size
+
+By default, the Envoy that ships with $productName$ uses a defailt of 1MiB soft limit for an upstream service's read and write buffer limits. This setting allows you to configure that buffer limit. See the [Envoy docs](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/cluster/v3/cluster.proto.html?highlight=per_connection_buffer_limit_bytes) for more information.
+
+```yaml
+buffer_limit_bytes: 5242880 # Sets the default buffer limit to 5 MiB
+```
+
 ##### Use $productName$ namespace for service resolution
 
 * `use_ambassador_namespace_for_service_resolution: true` tells $productName$ to assume that unqualified services are in the same namespace as $productName$. The default is `false`.
