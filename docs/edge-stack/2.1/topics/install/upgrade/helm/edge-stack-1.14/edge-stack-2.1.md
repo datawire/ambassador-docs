@@ -68,6 +68,21 @@ important caveats:
    sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
    If they are not, the initial migration tests may fail.
 
+   Additionally, you must make sure that $productName$ $version$ does not attempt to create
+   duplicate `AuthService` and `RateLimitService` entries, using
+
+   ```
+   --set rateLimit.create=false
+   ```
+
+   and
+
+   ```
+   --set authService.create=false
+   ```
+
+   when installing with Helm.
+
 5. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
 
    This is required to manage a known issue. This issue will be resolved in a future
@@ -98,11 +113,21 @@ ACME, but it is more effort.
 
 Migration is a six-step process:
 
-1. **Convert older configuration resources to `getambassador.io/v2`.**
+1. **Make sure that older configuration resources are not present.**
 
    $productName$ 2.X does not support `getambassador.io/v0` or `getambassador.io/v1`
-   resources. If you are still using any of these resources, convert them to
-   `getambassador.io/v2` before beginning migration.
+   resources, and Kubernetes will not permit removing support for CRD versions that are
+   still in use for stored resources. To verify that no resources older than
+   `getambassador.io/v2` are active, run
+
+   ```
+   kubectl get crds -o 'go-template={{range .items}}{{.metadata.name}}={{.status.storedVersions}}{{"\n"}}{{end}}' | fgrep getambassador.io
+   ```
+
+   If `v1` is present in the output, **do not begin migration.** The old resources must be
+   converted to `getambassador.io/v2` and the `storedVersion` information in the cluster
+   must be updated. If necessary, contact Ambassador Labs on [Slack](https://a8r.io/slack)
+   for more information.
 
 2. **Install new CRDs.**
 
@@ -151,6 +176,8 @@ Migration is a six-step process:
 
       ```bash
       helm install -n ambassador \
+           --set rateLimit.create=false \
+           --set authService.create=false \
            --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
            edge-stack datawire/edge-stack && \
       kubectl rollout status  -n ambassador deployment/edge-stack -w
@@ -160,6 +187,8 @@ Migration is a six-step process:
 
       ```bash
       helm install -n ambassador \
+           --set rateLimit.create=false \
+           --set authService.create=false \
            --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
            --set emissary-ingress.env.AMBASSADOR_LABEL_SELECTOR="version-two=true" \
            edge-stack datawire/edge-stack && \
