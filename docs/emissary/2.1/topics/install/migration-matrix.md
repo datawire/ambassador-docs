@@ -26,6 +26,7 @@ See the [instructions on updating $AESproductName$](../../../../../edge-stack/$a
 | If you're running.               | You can upgrade to                                                                                                         |
 |----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | $OSSproductName$ $version$       | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/helm/emissary-2.1/edge-stack-2.1) |
+| $OSSproductName$ 2.1.0 or 2.1.1  | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.1/emissary-2.1)                                                    |
 | $OSSproductName$ 2.0.5           | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.0/emissary-2.1)                                                    |
 | $OSSproductName$ 1.14.2          | [$OSSproductName$ $version$](../upgrade/helm/emissary-1.14/emissary-2.1)                                                   |
 | $OSSproductName$ prior to 1.14.2 | [$OSSproductName$ 1.14.2](../../../../1.14/topics/install/upgrading)                                                       |
@@ -35,6 +36,7 @@ See the [instructions on updating $AESproductName$](../../../../../edge-stack/$a
 | If you're running.               | You can upgrade to                                                                                                         |
 |----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | $OSSproductName$ $version$       | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/yaml/emissary-2.1/edge-stack-2.1) |
+| $OSSproductName$ 2.1.0 or 2.1.1  | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.1/emissary-2.1)                                                    |
 | $OSSproductName$ 2.0.5           | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.0/emissary-2.1)                                                    |
 | $OSSproductName$ 1.14.2          | [$OSSproductName$ $version$](../upgrade/yaml/emissary-1.14/emissary-2.1)                                                   |
 | $OSSproductName$ prior to 1.14.2 | [$OSSproductName$ 1.14.2](../../../../1.14/topics/install/upgrading)                                                       |
