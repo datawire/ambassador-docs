@@ -342,8 +342,12 @@ const index = ({ data, location, pageContext }) => {
   );
 
   const edgeStackLinks = data?.allFile.edges[0]?.node.internal.content;
-  const docsMatch = versions?.version?.match(/\d+.\d+/g);
-  const docsVersion = docsMatch?.length > 0 && docsMatch[0];
+
+  let docsVersion = versions?.docsVersion;
+  if (!docsVersion) {
+    const docsMatch = versions?.version?.match(/\d+.\d+/g);
+    docsVersion = docsMatch?.length > 0 && docsMatch[0];
+  }
 
   const footer = (
     <div>
