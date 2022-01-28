@@ -379,7 +379,7 @@ const index = ({ data, location, pageContext }) => {
             page={page}
             edgeStackLinks={edgeStackLinks}
             product={product.slug}
-            version={docVersion}
+            version={docsVersion}
             resources={page.exports}
           />
         )}
@@ -389,7 +389,7 @@ const index = ({ data, location, pageContext }) => {
           page={page}
           edgeStackLinks={edgeStackLinks}
           product={product.slug}
-          version={docVersion}
+          version={docsVersion}
         />
       )}
     </div>
