@@ -154,6 +154,9 @@ Migration is a six-step process:
    - It sets the `AES_ACME_LEADER_DISABLE` environment variable to prevent $productName$ $version$
      from trying to manage ACME (leaving $productName$ 1.14.2 to do it instead).
    - It does NOT set `AMBASSADOR_LABEL_SELECTOR`.
+   - It does NOT create an `AuthService` or `RateLimitService`. It is very important that $productName$
+     $version$ not attempt to create these resources, as they are already provided for your $productName$
+     1.14.2 installation.
 
    If any of these do not match your situation, download `aes-defaultns-migration.yaml` and edit it
    as needed.

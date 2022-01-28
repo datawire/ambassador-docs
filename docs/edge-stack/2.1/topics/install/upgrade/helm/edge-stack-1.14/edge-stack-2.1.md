@@ -68,6 +68,21 @@ important caveats:
    sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
    If they are not, the initial migration tests may fail.
 
+   Additionally, you must make sure that $productName$ $version$ does not attempt to create
+   duplicate `AuthService` and `RateLimitService` entries, using
+
+   ```
+   --set rateLimit.create=false
+   ```
+
+   and
+
+   ```
+   --set authService.create=false
+   ```
+
+   when installing with Helm.
+
 5. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
 
    This is required to manage a known issue. This issue will be resolved in a future
@@ -161,6 +176,8 @@ Migration is a six-step process:
 
       ```bash
       helm install -n ambassador \
+           --set rateLimit.create=false \
+           --set authService.create=false \
            --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
            edge-stack datawire/edge-stack && \
       kubectl rollout status  -n ambassador deployment/edge-stack -w
@@ -170,6 +187,8 @@ Migration is a six-step process:
 
       ```bash
       helm install -n ambassador \
+           --set rateLimit.create=false \
+           --set authService.create=false \
            --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
            --set emissary-ingress.env.AMBASSADOR_LABEL_SELECTOR="version-two=true" \
            edge-stack datawire/edge-stack && \
