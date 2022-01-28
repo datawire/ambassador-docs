@@ -157,7 +157,7 @@ Migration is a six-step process:
          ```
 
       <Alert severity="warning">
-       You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
+       You must use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v2.1/charts/emissary-ingress"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.
        Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
       </Alert>
 
