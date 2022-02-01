@@ -237,4 +237,3 @@ and Open Source software:
     sigs.k8s.io/kustomize                                                                v2.0.3+incompatible                                         Apache License 2.0
     sigs.k8s.io/structured-merge-diff/v4                                                 v4.0.2                                                      Apache License 2.0
     sigs.k8s.io/yaml                                                                     v1.2.0                                                      3-clause BSD license, MIT license
-

@@ -35,13 +35,13 @@ kubectl create clusterrolebinding my-cluster-admin-binding --clusterrole=cluster
 Then, you can deploy $OSSproductName$. Start by installing CRDs required by $OSSproductName$:
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-crds.yaml
 ```
 
 Then, apply the RBAC configuration with:
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml
 ```
 
 We recommend downloading the YAML files and exploring the content. You will see that an `ambassador-admin` NodePort Service is created (which provides an $OSSproductName$ ODD Diagnostic web UI), along with an ambassador ClusterRole, ServiceAccount, and ClusterRoleBinding. An Ambassador Deployment is also created.

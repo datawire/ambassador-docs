@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
   performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
   some changes that aren't backward-compatible with 1.X, so <b>some configuration has
   changed</b> between 1.X and 2.X: if you're currently running 1.X, <b>please</b> read
-  the <a href="/docs/emissary/latest/topics/install/migrate-to-version-2/">migration guide</a> before trying to install 2.0.<br/>
+  the <a href="../migrate-to-version-2/">migration guide</a> before trying to install 2.0.<br/>
   <br/>
   For more information on 2.X, please check the <a href="../../../release-notes">release notes</a>.
 </Alert>
@@ -18,7 +18,7 @@ If you currently have the open source version of $OSSproductName$, you can upgra
 
 **Prerequisites**:
 
-* You must have properly installed $OSSproductName$ previously following [these](/docs/emissary/$docsVersion$/topics/install) instructions.
+* You must have properly installed $OSSproductName$ previously following [these](../) instructions.
 * You must have TLS configured and working properly on your $OSSproductName$ instance
 
 **To upgrade your instance of $OSSproductName$**:
@@ -48,7 +48,7 @@ Note: Make sure you apply the manifests in the same namespace as your current $O
 Use the following command to install $AESproductName$, replacing `<namespace>` appropriately:
 
 ```
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/oss-migration.yaml
+kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/$version$/oss-migration.yaml
 ```
 
 ## 2. Test the new Deployment
@@ -83,11 +83,11 @@ kubectl delete service -n <namespace> test-aes
 Apply the new CRDs, resources and restart the $AESproductName$ pod for changes to take effect:
 
 ```
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml && \
-kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/latest/resources-migration.yaml && \
+kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \
+kubectl apply -n <namespace> -f https://app.getambassador.io/yaml/edge-stack/$version$/resources-migration.yaml && \
 kubectl rollout -n <namespace> restart deployment/aes
 ```
 
 ## 6. What's next?
 
-Now that you have $AESproductName$ up and running, check out the [Getting Started](../../../../../edge-stack/latest/tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.
+Now that you have $AESproductName$ up and running, check out the [Getting Started](../../../tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.

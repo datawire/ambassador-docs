@@ -16,7 +16,7 @@ $productName$ 1.X and 2.0. For details, read on.
 
 ## 1. Configuration API Version `getambassador.io/v3alpha1`
 
-$productName$ 2.0 introduces API version `getambassador.io/v3alpha1` to allow 
+$productName$ 2.0 introduces API version `getambassador.io/v3alpha1` to allow
 certain changes in configuration resources that are not backwards compatible with
 $productName$ 1.X. The most notable example of change is the addition of the
 **mandatory** `Listener` resource; however, there are important changes
@@ -38,7 +38,7 @@ feedback.
 ## 2. Kubernetes 1.22 and Structural CRDs
 
 Kubernetes 1.22 requires [<i>structural CRDs</i>](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/).
-This change is primarily meant to support better CRD validation, but it also has the 
+This change is primarily meant to support better CRD validation, but it also has the
 effect that union types are no longer allowed in CRDs: for example, an element that can be
 either a string or a list of strings is not allowed. Several such elements appeared in the
 `getambassador.io/v2` CRDs, requiring changes. In `getambassador.io/v3alpha1`:
@@ -244,5 +244,3 @@ The Edge Policy Console has been removed in $productName$ 2.0, in favor of Ambas
 ### `Project` CRD No Longer Supported
 
 The `Project` CRD has been removed in $productName$ 2.0, in favor of Argo.
-
-

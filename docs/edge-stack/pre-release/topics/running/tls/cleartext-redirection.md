@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 
 While most modern web applications choose to encrypt all traffic, there remain
 cases where supporting cleartext communications is important. $productName$ supports
-both forcing [automatic redirection to HTTPS](#http-https-redirection) and 
+both forcing [automatic redirection to HTTPS](#http-https-redirection) and
 [serving cleartext](#cleartext-routing) traffic on a `Host`.
 
 <Alert severity="info">
@@ -48,7 +48,7 @@ This allows routing for either HTTP and HTTPS, or _only_ HTTP, depending on `tls
 
 ## HTTP->HTTPS redirection
 
-Most websites that force HTTPS will also automatically redirect any 
+Most websites that force HTTPS will also automatically redirect any
 requests that come into it over HTTP:
 
 ```
@@ -65,7 +65,7 @@ Client              $productName$
 |                             |
 ```
 
-In $productName$, this is configured by setting the `insecure.action` in a `Host` to `Redirect`. 
+In $productName$, this is configured by setting the `insecure.action` in a `Host` to `Redirect`.
 
 ```yaml
 requestPolicy:

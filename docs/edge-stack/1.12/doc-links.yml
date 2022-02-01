@@ -130,7 +130,7 @@
              - title: Linkerd 2 Integration
                link: /howtos/linkerd2
  - title: Technical Reference
-   items: 
+   items:
      - title: Using AES for Developers
        link: /topics/using/
        items:
@@ -297,6 +297,6 @@
          - title: Using Edge Control in CI
            link: /topics/using/edgectl/edge-control-in-ci
      - title: Technical Reference
-       link: /topics/using/edgectl/service-preview-reference    
+       link: /topics/using/edgectl/service-preview-reference
  - title: Developer Portal
    link: /topics/using/dev-portal/

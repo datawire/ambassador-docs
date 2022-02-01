@@ -57,7 +57,7 @@ See the Envoy documentation for the [standard log format](https://www.envoyproxy
 
 * `envoy_validation_timeout` defines the timeout, in seconds, for validating a new Envoy configuration. The default is 10.
 
-A value of 0 disables Envoy configuration validation. Most installations will not need to change this setting. 
+A value of 0 disables Envoy configuration validation. Most installations will not need to change this setting.
 
 For example:
 
@@ -65,7 +65,7 @@ For example:
 envoy_validation_timeout: 30
 ```
 
-would allow 30 seconds to validate the generated Envoy configuration. 
+would allow 30 seconds to validate the generated Envoy configuration.
 
 ##### Error response overrides
 
@@ -286,6 +286,14 @@ If you need more flexible and configurable options, $AESproductName$ supports a 
 
 For example, with `merge_slashes: true`, a request for `//foo///bar` would be matched to a `Mapping` with prefix `/foo/bar`.
 
+##### Modify Default Buffer Size
+
+By default, the Envoy that ships with $productName$ uses a defailt of 1MiB soft limit for an upstream service's read and write buffer limits. This setting allows you to configure that buffer limit. See the [Envoy docs](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/cluster/v3/cluster.proto.html?highlight=per_connection_buffer_limit_bytes) for more information.
+
+```yaml
+buffer_limit_bytes: 5242880 # Sets the default buffer limit to 5 MiB
+```
+
 ##### Use $productName$ namespace for service resolution
 
 * `use_ambassador_namespace_for_service_resolution: true` tells $productName$ to assume that unqualified services are in the same namespace as $productName$. The default is `false`.
@@ -304,7 +312,7 @@ spec:
   service: upstream
 ```
 
-$productName$ would look for a Service named `upstream` in namespace `foo`. 
+$productName$ would look for a Service named `upstream` in namespace `foo`.
 
 However, if `use_ambassador_namespace_for_service_resolution` is `true`, this `Mapping` would look for a Service named `foo` in the namespace in which $productName$ is installed instead.
 
@@ -462,7 +470,7 @@ You can override this setting with [`idle_timeout_ms` on a `Mapping`](../../usin
 
 If set, this specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000 ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
 
-If not set (or set to zero), then upstream connections may remain open for arbitrarily long. 
+If not set (or set to zero), then upstream connections may remain open for arbitrarily long.
 
 You can override this setting with [`cluster_max_connection_lifetime_ms` on a `Mapping`](../../using/timeouts/).
 
@@ -497,7 +505,7 @@ liveness_probe:
   enabled: false
 ```
 
-A disabled probe endpoint will respond with 404; however, the service is still running, and will be accessible on localhost port 8877 from inside the $productName$ Pod. 
+A disabled probe endpoint will respond with 404; however, the service is still running, and will be accessible on localhost port 8877 from inside the $productName$ Pod.
 
 You can change these to route requests to some other service. For example, to have the readiness probe map to the `quote` application's health check:
 

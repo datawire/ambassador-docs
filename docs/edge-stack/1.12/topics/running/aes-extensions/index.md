@@ -1,7 +1,7 @@
 # Ambassador Edge Stack Extensions
 
 The Ambassador Edge Stack contains a number of pre-built extensions that make
-running, deploying, and exposing your applications in Kubernetes easier. 
+running, deploying, and exposing your applications in Kubernetes easier.
 
 Use of AES extensions is implemented via Kubernetes Custom Resources.
 Documentation for how to uses the various extensions can be found throughout the

@@ -162,8 +162,8 @@ true` is equivalent to setting `allow_upgrade: ["websocket"]`.
 - Default: `false`
 
 
-`dns_type` can be used to configure the service discovery type between Strict DNS and Logical DNS. You can 
-- Allowed values: 
+`dns_type` can be used to configure the service discovery type between Strict DNS and Logical DNS. You can
+- Allowed values:
   - `strict_dns`: Ambassador will continuously and asynchronously resolve the specified DNS targets.
   - `logical_dns`: Similar to `strict_dns`, but only uses the first IP address returned when a new connection needs to be initiated and Connections are never drained. More optimal for large scale web services that must be accessed via DNS.
 - Default: `strict_dns`

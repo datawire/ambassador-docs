@@ -24,22 +24,22 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 1. In your terminal, run the following command:
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \
-    kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-crds.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml && \
     kubectl apply -f - <<EOF
-    --- 
-    apiVersion: v1 
-    kind: Service 
-    metadata: 
-      name: ambassador 
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: ambassador
     spec:
-      type: LoadBalancer 
-      externalTrafficPolicy: Local 
+      type: LoadBalancer
+      externalTrafficPolicy: Local
       ports:
-      - port: 80 
+      - port: 80
         targetPort: 8080
-      selector: 
-        service: ambassador 
+      selector:
+        service: ambassador
     EOF
     ```
 
@@ -76,7 +76,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
   ```
-  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/quickstart/qotm.yaml
   ```
 
 2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
@@ -94,7 +94,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
 
 4. Grab the IP of your $productName$
-   
+
    ```shell
    export EMISSARY_LB_ENDPOINT=$(kubectl get svc ambassador \
   -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
@@ -126,11 +126,9 @@ configuration. This enables a consistent configuration workflow.
    ```
    $ kubectl get mappings
      NAME            SOURCE HOST   SOURCE PREFIX   DEST SERVICE   STATE   REASON
-     quote-backend                 /backend/       quote 
+     quote-backend                 /backend/       quote
    ```
 
 ## What’s next?
 
 $productName$ has a comprehensive range of [features](/features/) to support the requirements of any edge microservice.
-
-

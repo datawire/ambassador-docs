@@ -54,7 +54,7 @@ spec:
   path_redirect: /ip
 ```
 
-Here, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `http://httpbin.org/ip/`. 
+Here, a request to `http://$AMBASSADOR_URL/redirect/` will be redirected to `http://httpbin.org/ip/`.
 
 ### Prefix Redirect
 
@@ -92,7 +92,7 @@ spec:
     pattern: '/foo/([0-9]*)/list'
     substitution: '/bar/\1'
 ```
-A request to `http://$AMBASSADOR_URL/foo/12345/list` will be redirected to 
+A request to `http://$AMBASSADOR_URL/foo/12345/list` will be redirected to
 `http://$AMBASSADOR_URL/bar/12345`.
 
 ### Redirect Response Code

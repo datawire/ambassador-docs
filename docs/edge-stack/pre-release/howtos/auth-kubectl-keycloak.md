@@ -11,7 +11,7 @@ This tutorial relies on $AESproductName$ to manage access to your Kubernetes clu
 *Note* This guide was designed and validated using an Azure AKS Cluster.  It's possible that this procedure will work with other cloud providers, but there is a lot of variance in the Authentication mechanisms for the Kubernetes API.  See the troubleshooting note at the bottom for more info.
 
 * Azure AKS Cluster [here](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster)
-* Install $AESproductName$ [here](/docs/edge-stack/latest/topics/install/)
+* Install $AESproductName$ [here](../../topics/install/)
 * Deploy Keycloak on Kubernetes [here](https://www.keycloak.org/getting-started/getting-started-kube)
 
 ## Cluster Setup
@@ -116,7 +116,7 @@ In this section, we'll configure your Kubernetes cluster for single-sign on.
     metadata:
       name: aes-impersonator-rolebinding
     subjects:
-    - apiGroup: rbac.authorization.k8s.io 
+    - apiGroup: rbac.authorization.k8s.io
       kind: User
       name: aes-kubeapi
     roleRef:

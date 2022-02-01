@@ -83,7 +83,7 @@ Note that the cluster does not yet contain any $productName$ AuthService definit
 The YAML above is published at getambassador.io, so if you like, you can just do
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/demo/demo-auth.yaml
+kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/demo/demo-auth.yaml
 ```
 
 to spin everything up. (Of course, you can also use a local file, if you prefer.)
@@ -123,7 +123,7 @@ If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillato
 You can apply this file from getambassador.io with
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/demo/demo-auth-enable.yaml
+kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/demo/demo-auth-enable.yaml
 ```
 
 or, again, apply it from a local file if you prefer.

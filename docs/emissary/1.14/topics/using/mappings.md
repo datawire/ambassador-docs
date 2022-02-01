@@ -61,7 +61,7 @@ If `AMBASSADOR_NAMESPACE` is correctly set, $productName$ can map to services in
 
 ### Linkerd interoperability (`add_linkerd_headers`)
 
-When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically, based on the `service` attribute in the `Mapping`. 
+When using Linkerd, requests going to an upstream service need to include the `l5d-dst-override` header to ensure that Linkerd will route them correctly. Setting `add_linkerd_headers` does this automatically, based on the `service` attribute in the `Mapping`.
 
 If `add_linkerd_headers` is not specified for a given `Mapping`, the default is taken from the `ambassador`[Module](../../running/ambassador). The overall default is `false`: you must explicitly enable `add_linkerd_headers` for $productName$ to add the header for you (although you can always add it yourself with `add_request_headers`, of course).
 
@@ -123,7 +123,7 @@ true` is equivalent to setting `allow_upgrade: ["websocket"]`.
 
 
 `dns_type` can be used to configure the service discovery type between Strict DNS and Logical DNS.
-- Allowed values: 
+- Allowed values:
   - `strict_dns`: Ambassador will continuously and asynchronously resolve the specified DNS targets.
   - `logical_dns`: Similar to `strict_dns`, but only uses the first IP address returned when a new connection needs to be initiated and Connections are never drained. More optimal for large scale web services that must be accessed via DNS.
 - Default: `strict_dns`

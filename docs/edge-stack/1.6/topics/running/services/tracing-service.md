@@ -36,7 +36,7 @@ spec:
   This field functions as an upper limit on the total configured sampling rate. For instance, setting `client`
   to `100%` but `overall` to `1%` will result in only `1%` of client requests with the appropriate headers to be force
   traced. Defaults to 100.
-    
+
 
 Please note that you must use the HTTP/2 pseudo-header names. For example:
 

@@ -1,4 +1,4 @@
-> **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](../../../../../../telepresence/latest/faqs) or [go to the quick start guide](../../../../../../telepresence/latest/quick-start/).**
+> **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](/docs/telepresence/latest/faqs) or [go to the quick start guide](/docs/telepresence/latest/quick-start/).**
 
 # Service Preview reference
 
@@ -10,7 +10,7 @@ See [Service Preview Quick Start](../service-preview-install) for detailed insta
 
 The Traffic Manager is the central point of communication between Traffic Agents in the cluster and Edge Control Daemons on developer workstations.
 
-The following YAML is the basic Traffic Manager installation manifests that is available for [download here](https://app.getambassador.io/yaml/ambassador-docs/latest/traffic-manager.yaml).
+The following YAML is the basic Traffic Manager installation manifests that is available for [download here](https://app.getambassador.io/yaml/ambassador-docs/$version$/traffic-manager.yaml).
 
 ```yaml
 # This is traffic-manager.yaml
@@ -250,7 +250,7 @@ Any pod running in a cluster with a Traffic Manager can opt in to intercept func
 
 Since the Traffic Agent is built on $productName$, it needs a subset of the same RBAC permissions that Ambassador does. The easiest way to provide this is to create a `ServiceAccount` in your service's namespace, bound to the `traffic-agent` `Role` or `ClusterRole`.
 
-The following YAML is the basic Traffic Agent RBAC configuration manifests that is available for [download here](https://app.getambassador.io/yaml/ambassador-docs/latest/traffic-agent-rbac.yaml).
+The following YAML is the basic Traffic Agent RBAC configuration manifests that is available for [download here](https://app.getambassador.io/yaml/ambassador-docs/$version$/traffic-agent-rbac.yaml).
 
 ```yaml
 # This is traffic-agent-rbac.yaml
@@ -390,7 +390,7 @@ The Ambassador Injector automatically injects the Traffic Agent sidecar into ser
 
 It does this with a [Mutating Admission Webhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) that runs when pods are created in the cluster.
 
-The Ambassador Injector can be installed in your cluster in the Ambassador namespace from [this YAML manifest]. (https://app.getambassador.io/yaml/ambassador-docs/latest/ambassador-injector.yaml).
+The Ambassador Injector can be installed in your cluster in the Ambassador namespace from [this YAML manifest]. (https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador-injector.yaml).
 
 This works well for most usecase but there are a couple of important points to make sure the Ambassador Injector is able to function properly.
 
@@ -408,7 +408,7 @@ This works well for most usecase but there are a couple of important points to m
              containerPort: 8000   # Application port
    ```
 
-Take a look at the following for a more detailed look at what is included in [ambassador-injector.yaml](https://app.getambassador.io/yaml/ambassador-docs/latest/ambassador-injector.yaml):
+Take a look at the following for a more detailed look at what is included in [ambassador-injector.yaml](https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador-injector.yaml):
 
 ```yaml
 # This is ambassador-injector.yaml

@@ -47,9 +47,9 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
    **Note:** If this is your first time deploying Edge Stack, reviewing the [getting started guide](../../tutorials/getting-started) is strongly recommended.
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml && \
    kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \
-   kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml && \
    kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
    ```
 
@@ -173,7 +173,7 @@ You'll now register a demo application with Linkerd 2, and show how Edge Stack c
   Save the above YAML to a file named `qotm-mapping.yaml`, and apply it with:
   ```
   kubectl apply -f qotm-mapping.yaml
-  ``` 
+  ```
   to apply this configuration to your Kubernetes cluster. Note that in the above config there is nothing special to make it work with Linkerd 2. The general config for Edge Stack already adds Linkerd Headers when forwarding requests to the service mesh.
 
 1. Send a request to the `qotm-Linkerd2` API.
@@ -237,7 +237,7 @@ Allowing the Edge Stack installation to serve as a target cluster requires expli
 2. Configure the target cluster Edge Stack to support Linkerd health checks.
 
     Multicluster Linkerd does its own health checks beyond what Kubernetes does, so a `Mapping` is needed to allow Linkerd's health checks to succeed:
-    
+
     ```yaml
     apiVersion: getambassador.io/v2
     kind: Mapping
@@ -250,17 +250,17 @@ Allowing the Edge Stack installation to serve as a target cluster requires expli
       service: localhost:8877
       bypass_auth: true
     ```
-    
+
     When configuring Edge Stack, Kubernetes is usually configured to run health checks directly against port 8877 -- however, that port is not meant to be exposed outside the cluster. The `Mapping` permits accessing the health check endpoint without directly exposing the port.
-    
+
     (The actual prefix in the `Mapping` is not terribly important, but it needs to match the metadata supplied to the service mirror controller, below.)
 
 3. Configure the target cluster Edge Stack for the service mirror controller.
 
     This requires changes to the Edge Stack's `deployment` and `service`. **For all of these commands, you will need to make sure your Kubernetes context is set to talk to the target cluster.**
-    
+
     In the `deployment`, you need the `config.linkerd.io/enable-gateway` `annotation`:
-    
+
     ```
     kubectl -n ambassador patch deploy ambassador -p='
     spec:
@@ -270,21 +270,21 @@ Allowing the Edge Stack installation to serve as a target cluster requires expli
                     config.linkerd.io/enable-gateway: "true"
     '
     ```
-    
+
     In the `service`, you need to provide appropriate named `port` definitions:
-    
+
        - `mc-gateway` needs to be defined as `port` 4143
        - `mc-probe` needs to be defined as `port` 80, `targetPort` 8080 (or wherever Edge Stack is listening)
-    
+
     ```
     kubectl -n ambassador patch svc ambassador --type='json' -p='[
             {"op":"add","path":"/spec/ports/-", "value":{"name": "mc-gateway", "port": 4143}},
             {"op":"replace","path":"/spec/ports/0", "value":{"name": "mc-probe", "port": 80, "targetPort": 8080}}
         ]'
     ```
-    
+
     Finally, the `service` also needs its own set of `annotation`s:
-    
+
     ```
     kubectl -n ambassador patch svc ambassador -p='
     metadata:
@@ -295,7 +295,7 @@ Allowing the Edge Stack installation to serve as a target cluster requires expli
             mirror.linkerd.io/probe-period: "3"
     '
     ```
-    
+
     (Here, the value of `mirror.linkerd.io/probe-path` must match the `prefix` using for the probe `Mapping` above.)
 
 4. Configure individual exported services. Adding the following annotations to a service will tell the service to use Edge Stack as the gateway:
@@ -308,25 +308,25 @@ Allowing the Edge Stack installation to serve as a target cluster requires expli
             mirror.linkerd.io/gateway-ns: ambassador
     '
     ```
-    
+
     This annotation will tell Linkerd that the given service can be reached via the Edge Stack in the `ambassador` namespace.
 
 5. Verify that all is well from the source cluster.
 
     **For all of these commands, you'll need to set your Kubernetes context for the _source_ cluster.**
-    
+
     First, check to make that the clusters are correctly linked:
-    
+
     ```
     linkerd check --multicluster
     ```
-    
+
     Next, make sure that the Edge Stack gateway shows up when listing active gateways:
-    
+
     ```
     linkerd multicluster gateways
     ```
-    
+
     At this point, all should be well!
 
 ## More information

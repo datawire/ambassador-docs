@@ -7,7 +7,7 @@ Ambassador Edge Stack enables you to control timeouts in several different ways.
 
 `timeout_ms` is the end-to-end timeout for an entire user-level transaction in milliseconds. It begins after the full incoming request is received up until the full response stream is returned to the client. This timeout includes all retries. It can be disabled by setting the value to `0`.
 
-Default: `3000`  
+Default: `3000`
 
 ## Idle Timeout: `idle_timeout_ms`
 
@@ -21,10 +21,10 @@ Default: `3000`
 
 `cluster_idle_timeout_ms` controls how long a connection stream will remain open if there are no active requests. This timeout operates based on outgoing requests to upstream services.It can be disabled by setting the value to `0`.
 
-Default: `3600000` (or 1 hour). 
+Default: `3600000` (or 1 hour).
 ## Connect Timeout: `connect_timeout_ms`
 
-`connect_timeout_ms` sets the connection-level timeout for Ambassador Edge Stack to an upstream service at the network layer.  This timeout runs until Ambassador can verify that a TCP connection has been established, including the TLS handshake.  This timeout cannot be disabled. 
+`connect_timeout_ms` sets the connection-level timeout for Ambassador Edge Stack to an upstream service at the network layer.  This timeout runs until Ambassador can verify that a TCP connection has been established, including the TLS handshake.  This timeout cannot be disabled.
 
 Default: `3000`
 
@@ -34,7 +34,7 @@ Default: `3000`
 
 `listener_idle_timeout_ms` controls how long a connection stream will remain open if there are no active requests.  This timeout operates based on incoming requests to the listener. It can be disabled by setting the value to `0`.  **Caution** Disabling this timeout increases the likelihood of stream leaks due to missed FINs in the TCP connection.
 
- Default: `30000`  
+ Default: `30000`
 
 ### Example
 

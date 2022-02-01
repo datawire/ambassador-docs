@@ -19,7 +19,7 @@ configuration updates when migrating.
 
 ### Install $productName$ 2.0 in a new cluster.
 
-$productName$ introduces the new `getambassador.io/v3alpha1` API version for its CRDs. Kubernetes has a limitation that prevents two coppies of the same CRD from being installed in the same cluster with different API versions. For this reason, we are recommending setting up 2.0 in its own new cluster and then migrating the config to the new cluster in order to not cause any downtime. 
+$productName$ introduces the new `getambassador.io/v3alpha1` API version for its CRDs. Kubernetes has a limitation that prevents two coppies of the same CRD from being installed in the same cluster with different API versions. For this reason, we are recommending setting up 2.0 in its own new cluster and then migrating the config to the new cluster in order to not cause any downtime.
 
 By far the easiest way to install is with Helm:
 
@@ -73,7 +73,7 @@ use with $productName$ 2.X:
 - change the `apiVersion` to `getambassador.io/v3alpha1`;
 - add `metadata.labels` as needed to match the `hostBinding` for the `Listener`s with which
   the `Host` should associate; and
-- set `spec.mappingSelector`, if desired, to control which `Mappings` will be associated 
+- set `spec.mappingSelector`, if desired, to control which `Mappings` will be associated
   with this `Host`.
 
 ### Update `Mapping` resources to `v3alpha1`.
@@ -112,7 +112,7 @@ both the `selector` and the hostname must line up.
 
 There have been a few syntax and usage changes to the following fields in order to support Kubernetes 1.22 [Structural CRDs](https://kubernetes.io/blog/2019/06/20/crd-structural-schema/)
 - Ensure that `Mapping.tls` is a string
-- `Mapping.labels` always requires maps instead of strings. You can check the [Rate Limiting Labels docs](../../using/rate-limits/#attaching-labels-to-requests) for examples of the new structure. 
+- `Mapping.labels` always requires maps instead of strings. You can check the [Rate Limiting Labels docs](../../using/rate-limits/#attaching-labels-to-requests) for examples of the new structure.
 
 
 ## Check `Module` for changed values
@@ -123,7 +123,7 @@ Configuration for the `PROXY` protocol is part of the `Listener` resource in $pr
 
 `xff_num_trusted_hops` has been removed from the `Module`, and its functionality has been moved to the `l7Depth` setting in the `Listener` resource.
 
-It is no longer possible to configure TLS using the `tls` element of the `module`. Its functionality is fully covered by the `TLSContext` resource. 
+It is no longer possible to configure TLS using the `tls` element of the `module`. Its functionality is fully covered by the `TLSContext` resource.
 
 ## 2. Additional Notes
 
@@ -190,7 +190,7 @@ As a migration aid:
 
 - A `Mapping` with a `hostname` of `"*"` will associate with any `Host` that
 has no `mappingSelector`, and
-- A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present. 
+- A `v3alpha1` `Mapping` will honor `host` if `hostname` is not present.
 
 <Alert severity="warning">
   An <code>Mapping</code> that specifies <code>host_regex: true</code> is associated with <b>all</b> <code>Host</code>s. This is generally far less desirable than using <code>hostname</code> with a DNS glob.
@@ -232,4 +232,3 @@ spec:
 
 In the example above, TLS is terminated for `host.example.com`. A `TLSContext` is still right way to share data about TLS
 configuration across `Host`s: set both `tlsSecret` and `tlsContext` in the `Host`.
-

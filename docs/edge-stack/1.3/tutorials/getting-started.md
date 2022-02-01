@@ -98,8 +98,8 @@ Encrypt. Then your terminal will print something similar to the following:
 <div class="codeblockInstall">
 Email address [<span class="userInputText">john@example.com</span>]:<br/>
 
--> Acquiring DNS name random-word-3421.edgestack.me 
--> Obtaining a TLS certificate from Let's Encrypt 
+-> Acquiring DNS name random-word-3421.edgestack.me
+-> Obtaining a TLS certificate from Let's Encrypt
 -> TLS configured successfully
 
 Congratulations! You've successfully installed the Ambassador Edge Stack in
@@ -112,7 +112,7 @@ Ambassador Edge Stack to automatically provision TLS and HTTPS for a domain
 name, so you can get started right away.
 
 Your new [Edge Policy Console](../../topics/using/edge-policy-console) will open
-automatically in your browser at the provided URL or IP address. 
+automatically in your browser at the provided URL or IP address.
 
 ![AES success](../../images/aes-success.png)
 
@@ -137,8 +137,6 @@ Determine the IP address and port number of your Ambassador service.
 The following command will open the Edge Policy Console once you accept a
 self-signed certificate in your browser.
 $ <span class="userInputText">edgectl login -n ambassador IP_ADDRESS:PORT</span>
-
-See [https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started/](../getting-started/)
 </div>
 
 ## Installation Success

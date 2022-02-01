@@ -19,7 +19,7 @@ changes to allow $productName$ to more gracefully handle larger installations (i
 multitenant or multiorganizational installations), reduce memory footprint, and improve
 performance. In keeping with [SemVer](https://semver.org), $productName$ 2.X introduces
 some changes that aren't backward-compatible with 1.X. These changes are detailed in
-[Major Changes in $productName$ 2.X](/docs/emissary/latest/about/changes-2.x/).
+[Major Changes in $productName$ 2.X](../../../../../../about/changes-2.x/).
 
 ## Migration Overview
 
@@ -35,7 +35,7 @@ important caveats:
 
 1. **$productName$ 1.14.2 will not see any `getambassador.io/v3alpha1` resources.**
 
-   This is intentional; it provides a way to apply configuration only to 
+   This is intentional; it provides a way to apply configuration only to
    $productName$ $version$, while not interfering with the operation of your
    $productName$ 1.14.2 installation.
 
@@ -52,6 +52,22 @@ important caveats:
    that should be visible to $productName$ $version$, then set
    `AMBASSADOR_LABEL_SELECTOR=version-two=true` in its Deployment.
 
+3. **Be careful about label selectors on Kubernetes Services!**
+
+   If you have services in $productName$ 1.14.2 that use selectors that will match
+   Pods from $productName$ $version$, traffic will be erroneously split between
+   $productName$ 1.14.2 and $productName$ $version$. The labels used by $productName$
+   $version$ include:
+
+   ```yaml
+   app.kubernetes.io/name: emissary-ingress
+   app.kubernetes.io/instance: emissary-ingress
+   app.kubernetes.io/part-of: emissary-ingress
+   app.kubernetes.io/managed-by: getambassador.io
+   product: aes
+   profile: main
+   ```
+
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
@@ -61,11 +77,21 @@ ACME, but it is more effort.
 
 Migration is a six-step process:
 
-1. **Convert older configuration resources to `getambassador.io/v2`.**
+1. **Make sure that older configuration resources are not present.**
 
-   $productName$ 2.X does not support <code>getambassador.io/v0</code> or
-   <code>getambassador.io/v1</code> resources. If you are still using any of these
-   resources, convert them to <code>getambassador.io/v2</code> before beginning migration.
+   $productName$ 2.X does not support `getambassador.io/v0` or `getambassador.io/v1`
+   resources, and Kubernetes will not permit removing support for CRD versions that are
+   still in use for stored resources. To verify that no resources older than
+   `getambassador.io/v2` are active, run
+
+   ```
+   kubectl get crds -o 'go-template={{range .items}}{{.metadata.name}}={{.status.storedVersions}}{{"\n"}}{{end}}' | fgrep getambassador.io
+   ```
+
+   If `v1` is present in the output, **do not begin migration.** The old resources must be
+   converted to `getambassador.io/v2` and the `storedVersion` information in the cluster
+   must be updated. If necessary, contact Ambassador Labs on [Slack](https://a8r.io/slack)
+   for more information.
 
 2. **Install new CRDs.**
 
@@ -77,8 +103,8 @@ Migration is a six-step process:
    time.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
@@ -104,12 +130,12 @@ Migration is a six-step process:
    Our `emissary-defaultns.yaml` assumes that $productName$ 1.14.2 is installed in the
    `default` namespace. If you installed $productName$ 1.14.2 into a different namespace, you'll
    need to download `emissary-defaultns.yaml` file and edit it.
-   
+
    **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, download `emissary-defaultns-migration.yaml`
    and edit it to do so.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/emissary-defaultns.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml && \
    kubectl rollout status -n default deployment/edge-stack -w
    ```
 
@@ -179,9 +205,9 @@ Migration is a six-step process:
 
    Your $productName$ $version$ installation can support the `getambassador.io/v2`
    configuration resources used by $productName$ 1.14.2, but you may need to make some
-   changes to the configuration, as detailed in the documentation on 
+   changes to the configuration, as detailed in the documentation on
    [configuring $productName$ Communications](../../../../../../howtos/configure-communications)
-   and [updating CRDs to `getambassador.io/v3alpha1`](../../../../convert-to-v3alpha1). 
+   and [updating CRDs to `getambassador.io/v3alpha1`](../../../../convert-to-v3alpha1).
 
    <Alert severity="info">
     Kubernetes will not allow you to have a <code>getambassador.io/v3alpha1</code> resource
@@ -193,7 +219,7 @@ Migration is a six-step process:
     other way, see overview section 2, "If needed, you can use labels to further isolate configurations".
    </Alert>
 
-   **If you find that you need to roll back**, just reinstall your 1.14.2 CRDs and delete your 
+   **If you find that you need to roll back**, just reinstall your 1.14.2 CRDs and delete your
    installation of $productName$ $version$.
 
 6. **When ready, switch over to $productName$ $version$.**
@@ -201,7 +227,7 @@ Migration is a six-step process:
    You can run $productName$ 1.14.2 and $productName$ $version$ side-by-side as long as you care
    to. However, taking full advantage of $productName$ 2.X's capabilities **requires**
    [updating your configuration to use `getambassador.io/v3alpha1` configuration resources](../../../../convert-to-v3alpha1),
-   since some useful features in $productName$ $version$ are only available using 
+   since some useful features in $productName$ $version$ are only available using
    `getambassador.io/v3alpha1` resources.
 
    When you're ready to have $productName$ $version$ handle traffic on its own, switch

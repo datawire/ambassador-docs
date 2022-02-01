@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GettingStartedEmissaryTabs() {
+export default function GettingStartedEmissaryTabs(props) {
+  const version = props.version;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -112,11 +113,11 @@ export default function GettingStartedEmissaryTabs() {
         <CodeBlock>
           {'kubectl create namespace emissary && \\' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-crds.yaml && \\' +
+            `kubectl apply -f https://app.getambassador.io/yaml/emissary/${version}/emissary-crds.yaml && \\` +
             '\n' +
             'kubectl wait --for condition=established --timeout=90s crd -lapp.kubernetes.io/name=ambassador && \\' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-ingress.yaml && \\' +
+            `kubectl apply -f https://app.getambassador.io/yaml/emissary/${version}/emissary-ingress.yaml && \\` +
             '\n' +
             'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lproduct=aes' +
             '\n'}

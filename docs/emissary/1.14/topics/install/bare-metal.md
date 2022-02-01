@@ -1,6 +1,6 @@
 # Install with bare metal
 
-In cloud environments, provisioning a readily available network load balancer with $productName$ is the best option for handling ingress into your Kubernetes cluster. When running Kubernetes on a bare metal setup, where network load balancers are not available by default, we need to consider different options for exposing $productName$. 
+In cloud environments, provisioning a readily available network load balancer with $productName$ is the best option for handling ingress into your Kubernetes cluster. When running Kubernetes on a bare metal setup, where network load balancers are not available by default, we need to consider different options for exposing $productName$.
 
 ## Exposing $productName$ via NodePort
 
@@ -28,7 +28,7 @@ Using a `NodePort` leaves $productName$ isolated from the host network, allowing
 
 ## Exposing $productName$ via host network
 
-When running $productName$ on a bare metal install of Kubernetes, you have the option to configure $productName$ pods to use the network of the host they are running on. This method allows you to bind $productName$ directly to port 80 or 443 so you won't need to identify the port in requests. 
+When running $productName$ on a bare metal install of Kubernetes, you have the option to configure $productName$ pods to use the network of the host they are running on. This method allows you to bind $productName$ directly to port 80 or 443 so you won't need to identify the port in requests.
 
 i.e `http://<External-Node-IP>:<NodePort>/` becomes `http://<External-Node-IP>/`
 
@@ -70,7 +70,7 @@ spec:
         - name: AMBASSADOR_NAMESPACE
           valueFrom:
             fieldRef:
-              fieldPath: metadata.namespace          
+              fieldPath: metadata.namespace
         livenessProbe:
           httpGet:
             path: /ambassador/v0/check_alive

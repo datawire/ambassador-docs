@@ -1,5 +1,5 @@
 # Edgectl Install: Unable to talk to an AES Pod
- 
+
 The installer failed to communicate with an $productName$ (AES) Pod in your Kubernetes cluster to validate the installation.
 
 ## What's next?
@@ -15,4 +15,3 @@ This is an unusual failure case, so we will have to help you on our Support chan
   * `kubectl -n ambassador logs <name of the pod>`
 
 Those commands capture the state of things in your Kubernetes cluster. This information will allow us to start from a good spot to help you.
-

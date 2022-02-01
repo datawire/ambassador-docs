@@ -13,7 +13,7 @@ If you installed using the Operator, then you'll need to [use the Operator to pe
 To verify whether the Operator was used to install $productName$, run the following command
 to see if it returns resources:
 ```
-$ kubectl get deployment -A -l 'app.kubernetes.io/name=ambassador,app.kubernetes.io/managed-by in (amb-oper,amb-oper-manifest,amb-oper-helm,amb-oper-azure)' 
+$ kubectl get deployment -A -l 'app.kubernetes.io/name=ambassador,app.kubernetes.io/managed-by in (amb-oper,amb-oper-manifest,amb-oper-helm,amb-oper-azure)'
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 ambassador         1/1     1            1           ...
 ```
@@ -47,8 +47,8 @@ If you previously installed $productName$ using YAML manifests, you can upgrade 
 these commands:
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
-kubectl apply -f https://www.getambassador.io/yaml/aes.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml
 ```
 
 This will trigger a rolling upgrade of $productName$.

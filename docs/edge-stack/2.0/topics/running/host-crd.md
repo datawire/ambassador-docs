@@ -71,7 +71,7 @@ A `Mapping` will not be associated with a `Host` unless at least one of the foll
 - The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
 - The `Host` specifies a `mappingSelector` that matches the `Mapping`'s Kubernetes `label`s.
 
-If neither of the above is true, the `Mapping` will not be associated with the `Host` in 
+If neither of the above is true, the `Mapping` will not be associated with the `Host` in
 question. This is intended to help manage memory consumption with large numbers of `Host`s and large
 numbers of `Mapping`s.
 
@@ -144,7 +144,7 @@ apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
   name:  skip-mapping-wrong-label
-  labels:  
+  labels:
     examplehost: staging       # This doesn't match the Host's mappingSelector.
 spec:
   prefix: /httpbin/
@@ -163,7 +163,7 @@ apiVersion: getambassador.io/v3alpha1
 kind:  Mapping
 metadata:
   name:  skip-mapping-still-wrong
-  labels:  
+  labels:
     examplehost: staging       # This doesn't match the Host's mappingSelector,
 spec:                          # and if the Host specifies mappingSelector AND the
   hostname: host.example.com   # Mapping specifies hostname, BOTH must match. So
@@ -232,7 +232,7 @@ acmeProvider:
 * If the authority is not supplied, the Let’s Encrypt production environment is assumed.
 
 * In general, `email-of-registrant` is mandatory when using ACME: it should be
-a valid email address that will reach someone responsible for certificate 
+a valid email address that will reach someone responsible for certificate
 management.
 
 * ACME stores certificates in Kubernetes secrets. The name of the secret can be
@@ -257,7 +257,7 @@ set using the `tlsSecret` element:
 `tlsSecret` specifies a Kubernetes `Secret` is **required** for any TLS termination to occur. If ACME is enabled,
 it will set `tlsSecret`: in all other cases, TLS termination will not occur if `tlsSecret` is not specified.
 
-The following `Host` will configure $productName$ to read a `Secret` named 
+The following `Host` will configure $productName$ to read a `Secret` named
 `tls-cert` for a certificate to use when terminating TLS.
 
 ```yaml
@@ -275,14 +275,14 @@ spec:
 
 ### `tlsContext` links to a `TLSContext` for additional configuration
 
-`tlsContext` specifies a [`TLSContext`](#) to use for additional TLS information. Note that you **must** still 
+`tlsContext` specifies a [`TLSContext`](#) to use for additional TLS information. Note that you **must** still
 define `tlsSecret` for TLS termination to happen. It is an error to supply both `tlsContext` and `tls`.
 
 See the [TLS discussion](../tls) for more details.
 
 ### `tls` allows manually providing additional configuration
 
-`tls` allows specifying most of the things a `TLSContext` can, inline in the `Host`. Note that you **must** still 
+`tls` allows specifying most of the things a `TLSContext` can, inline in the `Host`. Note that you **must** still
 define `tlsSecret` for TLS termination to happen. It is an error to supply both `tlsContext` and `tls`.
 
 See the [TLS discussion](../tls) for more details.

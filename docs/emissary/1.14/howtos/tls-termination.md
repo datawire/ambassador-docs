@@ -9,8 +9,8 @@ While this automatic certificate management in $AESproductName$ helps
 simply TLS configuration in your cluster, the Open-Source $OSSproductName$
 still requires you provide your own certificate to enable TLS.
 
-The following will walk you through the process of enabling TLS with a 
-self-signed certificate created with the `openssl` utility. 
+The following will walk you through the process of enabling TLS with a
+self-signed certificate created with the `openssl` utility.
 
 **Note** these instructions also work if you would like to provide your own
 certificate to $AESproductName$.
@@ -20,7 +20,7 @@ certificate to $AESproductName$.
 This guide requires you have the following installed:
 
 - A Kubernetes cluster v1.11 or newer
-- The Kubernetes command-line tool, 
+- The Kubernetes command-line tool,
 [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [openssl](https://www.openssl.org/source/)
 
@@ -31,7 +31,7 @@ This guide requires you have the following installed:
 ## Create a self-signed certificate
 
 OpenSSL is a tool that allows us to create self-signed certificates for opening
-a TLS encrypted connection. The `openssl` command below will create a 
+a TLS encrypted connection. The `openssl` command below will create a
 create a certificate and private key pair that $productName$ can use for TLS
 termination.
 
@@ -55,7 +55,7 @@ termination.
 ## Store the certificate and key in a Kubernetes Secret
 
 $productName$ dynamically loads TLS certificates by reading them from
-Kubernetes secrets. Use `kubectl` to create a `tls` secret to hold the pem 
+Kubernetes secrets. Use `kubectl` to create a `tls` secret to hold the pem
 files we created above.
 
 ```
@@ -126,7 +126,7 @@ spec:
 ...
 ```
 
-If the output to the `kubectl` command is not similar to the example above, 
+If the output to the `kubectl` command is not similar to the example above,
 edit the $productName$ service to add the `https` port.
 
 After verifying $productName$ is listening on port 443, send a request

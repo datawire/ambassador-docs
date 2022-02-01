@@ -56,6 +56,3 @@ The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traf
 | 8003	| ambex	  | Internal ambex snapshot access; not exposed outside pod |
 | 8080	| envoy	  | Default HTTP service port |
 | 8443	| envoy	  | Default HTTPS service port |
-
-
-

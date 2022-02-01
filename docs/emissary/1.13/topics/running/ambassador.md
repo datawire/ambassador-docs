@@ -674,4 +674,3 @@ More information at the [load balancer reference](../load-balancer).
 load_balancer:
   policy: round_robin
 ```
-

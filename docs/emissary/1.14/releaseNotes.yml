@@ -83,7 +83,7 @@ items:
       - title: Default Envoy API version is now V3
         type: change
         body: The default Envoy API version has changed from V2 to V3, as V2 has fallen out of support, and has been removed as of Envoy 1.18.0.
-        docs: https://www.getambassador.io/docs/edge-stack/latest/topics/running/running/#ambassador_envoy_api_version
+        docs: topics/running/running/#ambassador_envoy_api_version
       - title: Subsecond time resolution in logs
         type: change
         body: Logs now include subsecond time resolutions, rather than just seconds.

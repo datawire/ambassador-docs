@@ -11,10 +11,10 @@ The Filter and FilterPolicy resources are used to [configure how to do authentic
 
 ## Edge Stack configuration
 
-Edge Stack uses the [AuthService plugin](../../services/auth-service) 
+Edge Stack uses the [AuthService plugin](../../services/auth-service)
 to connect to the authentication extension.
 
-The default AuthService is named `ambassador-edge-stack-auth` and is defined 
+The default AuthService is named `ambassador-edge-stack-auth` and is defined
 as:
 
 ```yaml
@@ -33,25 +33,25 @@ spec:
 
 This configures Envoy to talk to the extension process running on port 8500
 using gRPC and trim the body from the request when doing so. The default error
-code of 503 is usually overwritten by the Filter that is authenticating the 
+code of 503 is usually overwritten by the Filter that is authenticating the
 request.
 
 This default AuthService works for most use cases. If you need to
 tune how Edge Stack connects to the authentication extension (like changing the
-default timeout), you can find the full configuration options in the 
+default timeout), you can find the full configuration options in the
 [AuthService plugin docs](../../services/auth-service).
 
 ## Authentication extension configuration
 
-Certain use cases may require some tuning of the authentication extension. 
+Certain use cases may require some tuning of the authentication extension.
 Configuration of this extension is managed via environment variables.
 [The Ambassador container](../../environment) has a full list of environment
-variables available for configuration, including the variables used by the 
+variables available for configuration, including the variables used by the
 authentication extension.
 
 #### Redis
 
-The authentication extension uses Redis for caching the response from the 
+The authentication extension uses Redis for caching the response from the
 `token endpoint` when performing OAuth.
 
 Edge Stack shares the same Redis pool for all features that use Redis.  More information is available for [tuning Redis](../../aes-redis) if needed.
@@ -61,11 +61,11 @@ Edge Stack shares the same Redis pool for all features that use Redis.  More inf
 The `AES_AUTH_TIMEOUT` environment variable configures the default timeout in
 the authentication extension.
 
-This timeout is necessary so that any error responses configured by Filters 
-that the extension runs make their way to the client.  Otherwise they would be 
+This timeout is necessary so that any error responses configured by Filters
+that the extension runs make their way to the client.  Otherwise they would be
 overruled by the timeout from Envoy if a request takes longer than five seconds.
 
-If you have a long chain of Filters or a Filter that takes five or more seconds to respond, 
+If you have a long chain of Filters or a Filter that takes five or more seconds to respond,
 you can increase the timeout value to give your Filters enough time to run.
 
 <Alert severity="warning">

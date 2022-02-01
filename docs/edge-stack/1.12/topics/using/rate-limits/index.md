@@ -2,8 +2,8 @@
 
 Rate limiting in Ambassador is composed of two parts:
 
-* `RateLimitService` that tells Ambassador what service to use for rate 
-  limiting. (The Ambassador Edge Stack provides a `RateLimitService` 
+* `RateLimitService` that tells Ambassador what service to use for rate
+  limiting. (The Ambassador Edge Stack provides a `RateLimitService`
   implementation for you).
 * Labels that get attached to requests; a label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
@@ -125,13 +125,13 @@ There are 5 types of label specifiers in Ambassador:
 
 ## Rate limiting requests based on their labels
 
-This is determined by your `RateLimitService` implementation. 
+This is determined by your `RateLimitService` implementation.
 
-The Ambassador Edge Stack provides a `RateLimitService` implementation that is 
+The Ambassador Edge Stack provides a `RateLimitService` implementation that is
 configured by a `RateLimit` custom resource.
 
-See the [AES RateLimit Reference](./rate-limits) for information on how 
+See the [AES RateLimit Reference](./rate-limits) for information on how
 to configure `RateLimit`s in Ambassador Edge Stack.
 
-See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an 
+See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an
 example `RateLimitService` implementation for Ambassador OSS.

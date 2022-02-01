@@ -184,9 +184,9 @@ Further explore some of the concepts you learned about in this article:
 the edge of your cluster to a Kubernetes service
 * [`Host` resource](../../topics/running/host-crd/): sets the hostname by which
 $productName$ will be accessed and secured with TLS certificates
-* [Edge Policy Console](/docs/edge-stack/latest/topics/using/edge-policy-console/): a web-based
+* [Edge Policy Console](../../topics/using/edge-policy-console/): a web-based
 interface used to configure and monitor $productName$
-* [Developer Portal](/docs/edge-stack/latest/topics/using/dev-portal/):
+* [Developer Portal](../../topics/using/dev-portal/):
 publishes an API catalog and OpenAPI documentation
 
 $productName$ has a comprehensive range of [features](/features/) to

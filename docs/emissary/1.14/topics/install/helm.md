@@ -26,13 +26,13 @@ deploy it with either version of the tool.
 1. **Helm 3 users:** Install the $productName$ Chart with the following command:
 
    ```
-   helm install ambassador datawire/ambassador --set enableAES=false 
+   helm install ambassador datawire/ambassador --set enableAES=false
    ```
 
 2. **Helm 2 users**: Install the $productName$ Chart with the following command:
 
    ```
-   helm install --name ambassador datawire/ambassador --set enableAES=false 
+   helm install --name ambassador datawire/ambassador --set enableAES=false
    ```
 
 3. [Set up Service Catalog](../../../tutorials/getting-started/#2-routing-traffic-from-the-edge) to view all of your service metadata in Ambassador Cloud.
@@ -44,7 +44,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
   ```
-  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/quickstart/qotm.yaml
   ```
 
 2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
@@ -62,7 +62,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
 
 4. Grab the IP of your $productName$
-   
+
    ```shell
    export EMISSARY_LB_ENDPOINT=$(kubectl get svc ambassador \
   -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
@@ -90,7 +90,7 @@ configuration. This enables a consistent configuration workflow.
    ```
    $ kubectl get mappings
      NAME            SOURCE HOST   SOURCE PREFIX   DEST SERVICE   STATE   REASON
-     quote-backend                 /backend/       quote 
+     quote-backend                 /backend/       quote
    ```
 
 ## Upgrading an existing $productName$ installation
@@ -102,7 +102,7 @@ Upgrading an existing installation of $productName$ is a two-step process:
 1. First, apply any CRD updates (as of Helm 3, this is not supported in the chart itself):
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
    ```
 
 2. Next, upgrade $productName$ itself:
@@ -126,7 +126,7 @@ If you have an existing $OSSproductName$ installation but are not yet running $A
    To take full advantage of $productName$, you'll need the new `Host` CRD, and you'll need the new `getambassador.io/v2` version of earlier CRDs. To upgrade all the CRDs, run
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
    ```
 
 2. Upgrade your $productName$ installation.
@@ -152,15 +152,15 @@ At this point, $AESproductName$ should be running with the same functionality as
 Upgrading to $AESproductName$ will provide automatic TLS support if you have not already configured it.
 
 1. Grab the IP of your $AESproductName$
-   - Note: Make sure to remove `-n ambassador` if you decided to not migrate to the `ambassador` namespace when upgrading to $AESproductName$ 
-   
+   - Note: Make sure to remove `-n ambassador` if you decided to not migrate to the `ambassador` namespace when upgrading to $AESproductName$
+
    ```shell
    export AMBASSADOR_LB_ENDPOINT=$(kubectl -n ambassador get svc ambassador \
   -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
    ```
 
 2. Try submitting a request to the quote service that you deployed above
-   
+
    ```
    $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/
    {

@@ -32,7 +32,7 @@ your microservice to return a Swagger or OAPI document at this URL.
 * `ignored`: ignore this `Mapping` for documenting services. Note that the service
 will appear in the _Dev Portal_ anyway if another, non-ignored `Mapping` exists
 for the same service.
-* `timeout_ms`: number of milliseconds that the devportal HTTP client will wait for a service 
+* `timeout_ms`: number of milliseconds that the devportal HTTP client will wait for a service
 to respond on their docs endpoint
 * `display_name`: custom name to show for this service in the devportal.
 
@@ -45,12 +45,12 @@ to respond on their docs endpoint
 > in order to keep the previous behavior.
 >
 >
-> The `docs` field of Mappings was not introduced until `$productName$` version 1.9 because 
+> The `docs` field of Mappings was not introduced until `$productName$` version 1.9 because
 > $productName$ was automatically searching for docs on `/.ambassador-internal/openapi-docs`.
 > Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of $productName$.
 
 ```yaml
- `kubectl apply -f https://getambassador.io/yaml/aes-crds.yaml`
+ `kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml`
 ```
 
 > If you are on an earlier version of $productName$, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`
@@ -59,7 +59,7 @@ Example:
 
 With the `Mapping`s below, the _Dev Portal_ would fetch OpenAPI documentation
 from `service-a:5000` at the path `/srv/openapi/` and from `httpbin` from an
-external URL. `service-b` would have no documentation. The httpbin service must 
+external URL. `service-b` would have no documentation. The httpbin service must
 respond in 4000 seconds or else the request will time out.
 
 ```yaml

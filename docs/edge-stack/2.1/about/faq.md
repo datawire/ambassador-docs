@@ -34,7 +34,7 @@ $productName$ uses [Envoy Proxy](https://www.envoyproxy.io) as its core proxy. E
 
 ### Is $productName$ production ready?
 
-Yes. Thousands of organizations, large and small, run $productName$ in production. 
+Yes. Thousands of organizations, large and small, run $productName$ in production.
 Public users include Chick-Fil-A, ADP, Microsoft, NVidia, and AppDirect, among others.
 
 ### What is the performance of $productName$?

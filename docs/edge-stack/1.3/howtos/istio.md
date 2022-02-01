@@ -23,9 +23,9 @@ By default, the Bookinfo application uses the Istio ingress. To use the Ambassad
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
-metadata: 
+metadata:
   name: httpbin
-spec:     
+spec:
   prefix: /httpbin/
   service: httpbin.org
   host_rewrite: httpbin.org
@@ -89,9 +89,9 @@ If you're seeing a similar response, then everything is working great!
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
-metadata: 
+metadata:
   name: productpage
-spec:     
+spec:
   prefix: /productpage/
   rewrite: /productpage
   service: productpage:9080
@@ -221,9 +221,9 @@ This will define an `upstream` that uses the Istio certificates. We can now reus
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
-metadata: 
+metadata:
   name: productpage
-spec:     
+spec:
   prefix: /productpage/
   rewrite: /productpage
   service: https://productpage:9080
@@ -309,10 +309,10 @@ spec:
 
 Istio also provides a Prometheus service that is an open-source monitoring and alerting system which is supported by the Ambassador Edge Stack as well. It is possible to integrate the Ambassador Edge Stack into Istio's Prometheus to have all statistics and monitoring in a single place.
 
-First, we need to change our Ambassador Edge Stack Deployment to use the [Prometheus StatsD Exporter](https://github.com/prometheus/statsd_exporter) as its sidecar. Do this by applying the [ambassador-rbac-prometheus.yaml](https://app.getambassador.io/yaml/ambassador-docs/latest/ambassador/ambassador-rbac-prometheus.yaml):
+First, we need to change our Ambassador Edge Stack Deployment to use the [Prometheus StatsD Exporter](https://github.com/prometheus/statsd_exporter) as its sidecar. Do this by applying the [ambassador-rbac-prometheus.yaml](https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac-prometheus.yaml):
 
 ```sh
-$ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac-prometheus.yaml
+$ kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac-prometheus.yaml
 ```
 
 This YAML is changing the StatsD container definition on our Deployment to use the Prometheus StatsD Exporter as a sidecar:
@@ -345,7 +345,7 @@ spec:
 Now we need to add a `scrape` configuration to Istio's Prometheus so that it can pool data from our Ambassador Edge Stack. This is done by applying the new ConfigMap:
 
 ```sh
-$ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-istio-configmap.yaml
+$ kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-istio-configmap.yaml
 ```
 
 This ConfigMap YAML changes the `prometheus` ConfigMap that is on `istio-system` Namespace and adds the following:

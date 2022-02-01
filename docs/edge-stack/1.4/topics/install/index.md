@@ -21,8 +21,8 @@ import './index.less'
 
 <span id="index-installMac"></span><br/>
 
-## <img class="os-logo" src="../../images/apple.png"/> Install from MacOS 
-1. (1a) [Download the `edgectl` installer](https://metriton.datawire.io/downloads/darwin/edgectl) 
+## <img class="os-logo" src="../../images/apple.png"/> Install from MacOS
+1. (1a) [Download the `edgectl` installer](https://metriton.datawire.io/downloads/darwin/edgectl)
  or (1b) download it with a curl command:
 
     ```shell
@@ -36,13 +36,13 @@ import './index.less'
 
 2. Run the installer with `edgectl install`
 
-3. The installer will provision a load balancer, configure TLS, 
-and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 
+3. The installer will provision a load balancer, configure TLS,
+and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain
 allows the Ambassador Edge Stack to automatically provision TLS and HTTPS
 for a domain name, so you can get started right away.
 <span id="index-installLinux"></span><br/>
 
-## <img class="os-logo" src="../../images/linux.png"/> Install from Linux 
+## <img class="os-logo" src="../../images/linux.png"/> Install from Linux
 
 1. (1a) [Download the `edgectl` installer](https://metriton.datawire.io/downloads/linux/edgectl) or
  (1b) download it with a curl
@@ -53,37 +53,37 @@ for a domain name, so you can get started right away.
     ```
 2. Run the installer with `edgectl install`
 
-3. The installer will provision a load balancer, configure TLS, 
-and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 
+3. The installer will provision a load balancer, configure TLS,
+and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain
 allows the Ambassador Edge Stack to automatically provision TLS and HTTPS
 for a domain name, so you can get started right away.
 <p id="index-installWindows"></p><br/>
 
-## <img class="os-logo" src="../../images/windows.png"/> Install from Windows 
+## <img class="os-logo" src="../../images/windows.png"/> Install from Windows
 
 1. [Download the `edgectl.exe` installer](https://metriton.datawire.io/downloads/windows/edgectl.exe).
 2. Run the installer with `edgectl install`
-3. The installer will provision a load balancer, configure TLS, 
-and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain 
+3. The installer will provision a load balancer, configure TLS,
+and provide you with an `edgestack.me` subdomain. The `edgestack.me` subdomain
 allows the Ambassador Edge Stack to automatically provision TLS and HTTPS
 for a domain name, so you can get started right away.
 <p id="index-installKubernetesYaml"></p><br/>
 
-## <img class="os-logo" src="../../images/kubernetes.png"/> Install via Kubernetes YAML 
+## <img class="os-logo" src="../../images/kubernetes.png"/> Install via Kubernetes YAML
 Kubernetes via YAML is the most common approach to install Ambassador Edge Stack,
 especially in production environments, with our default, customizable manifest.
 So if you want complete configuration control over specific parameters of your
 installation, use the [manual YAML installation method](yaml-install).
 <p id="index-installHelm"></p><br/>
 
-## <img class="os-logo" src="../../images/helm-navy.png"/> Install via Helm 
+## <img class="os-logo" src="../../images/helm-navy.png"/> Install via Helm
 Helm, the package manager for Kubernetes, is another popular way to install
 Ambassador Edge Stack through the pre-packaged Helm chart. Full details, including
 the differences for Helm 2 and Helm3, are in the [Helm instructions.](helm/)
 <p id="index-installDocker"></p><br/>
 
-## <img class="os-logo" src="../../images/docker.png"/> Install Locally on Docker 
-The Docker install will let you try the Ambassador Edge Stack locally in seconds, 
+## <img class="os-logo" src="../../images/docker.png"/> Install Locally on Docker
+The Docker install will let you try the Ambassador Edge Stack locally in seconds,
 but is not supported for production workloads. [Try Ambassador on Docker.](docker/)
 <p id="index-installAmbassadorOperator"></p><br/>
 
@@ -94,9 +94,9 @@ Operator, [follow the Ambassador Edge Stack Operator instructions](aes-operator)
 <p id="index-installBareMetal"></p><br/>
 
 ## Install on Bare Metal
-If you don't have a load balancer in front of your Kubernetes, the Bare Metal 
-installation mechanism can still be used to expose the Ambassador Edge Stack. 
-We've got [instructions for bare metal installations] including exposing 
+If you don't have a load balancer in front of your Kubernetes, the Bare Metal
+installation mechanism can still be used to expose the Ambassador Edge Stack.
+We've got [instructions for bare metal installations] including exposing
 the Ambassador Edge Stack via a NodePort or the host network.
 <p id="index-installUpgrade"></p><br/>
 

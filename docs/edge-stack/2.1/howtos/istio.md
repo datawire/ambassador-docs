@@ -31,7 +31,7 @@ To follow this guide, you need:
 
 ## Install Istio
 
-Start by [installing Istio](https://istio.io/docs/setup/getting-started/). Any supported installation method for 
+Start by [installing Istio](https://istio.io/docs/setup/getting-started/). Any supported installation method for
 Istio will work for use with $productName$.
 
 ### Configure Istio Auto-Injection
@@ -52,7 +52,7 @@ kubectl label namespace $namespace istio-injection=enabled --overwrite
 <Alert severity="warning">
   The following example uses the `istio-injection` label to arrange for auto-injection in the
   `$productNamespace$` Namespace below. You can manage sidecar injection by hand if you wish; what
-  is <b>critical</b> is that every service that participates in the Istio mesh have the Istio 
+  is <b>critical</b> is that every service that participates in the Istio mesh have the Istio
   sidecar.
 </Alert>
 
@@ -75,10 +75,10 @@ To install with Helm, write the following YAML to a file called `istio-integrati
 ```yaml
 # All of the values we need to customize live under the emissary-ingress toplevel key.
 emissary-ingress:
-  # Listeners are required in $productName$ 2.0. 
+  # Listeners are required in $productName$ 2.0.
   # This will create the two default Listeners for HTTP on port 8080 and HTTPS on port 8443.
   createDefaultListeners: true
-  
+
   # These are annotations that will be added to the $productName$ pods.
   podAnnotations:
     # These first two annotations tell Istio not to try to do port management for the
@@ -86,19 +86,19 @@ emissary-ingress:
     # pods, they are interpreted by Istio.
     traffic.sidecar.istio.io/includeInboundPorts: ""      # do not intercept any inbound ports
     traffic.sidecar.istio.io/includeOutboundIPRanges: ""  # do not intercept any outbound traffic
-  
+
     # We use proxy.istio.io/config to tell the Istio proxy to write newly-generated mTLS certificates
     # into /etc/istio-certs, which will be mounted below. Though this annotation is placed on the
     # $productName$ pods, it is interpreted by Istio.
     proxy.istio.io/config: |
       proxyMetadata:
         OUTPUT_CERTS: /etc/istio-certs
-  
+
     # We use sidecar.istio.io/userVolumeMount to tell the Istio sidecars to mount the istio-certs
     # volume at /etc/istio-certs, allowing the sidecars to see the generated certificates. Though
     # this annotation is placed on the $productName$ pods, it is interpreted by Istio.
-    sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs"}]' 
-  
+    sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs"}]'
+
   # We define a single storage volume called "istio-certs". It starts out empty, and Istio
   # uses it to communicate mTLS certs between the Istio proxy and the Istio sidecars (see the
   # annotations above).
@@ -106,20 +106,20 @@ emissary-ingress:
     - emptyDir:
         medium: Memory
       name: istio-certs
-  
-  # We also tell $productName$ to mount the "istio-certs" volume at /etc/istio-certs in the 
+
+  # We also tell $productName$ to mount the "istio-certs" volume at /etc/istio-certs in the
   # $productName$ pod. This gives $productName$ access to the mTLS certificates, too.
   volumeMounts:
     - name: istio-certs
       mountPath: /etc/istio-certs/
       readOnly: true
-  
+
   # Finally, we need to set some environment variables for $productName$.
   env:
     # AMBASSADOR_ISTIO_SECRET_DIR tells $productName$ to look for Istio mTLS certs, and to
     # make them available as a secret named "istio-certs".
     AMBASSADOR_ISTIO_SECRET_DIR: "/etc/istio-certs"
-  
+
     # AMBASSADOR_ENVOY_BASE_ID is set to prevent collisions with the Istio sidecar's Envoy,
     # which runs with base-id 0.
     AMBASSADOR_ENVOY_BASE_ID: "1"
@@ -170,7 +170,7 @@ If you have already installed $productName$ and want to enable Istio:
 2. Label the $productNamespace$ namespace for Istio auto-injection, as above.
 2. Edit the $productName$ Deployments to contain the `annotations`, `volumes`, `volumeMounts`, and `env` elements
    shown above.
-    * If you installed with Helm, you can use `helm upgrade` with `-f istio-integration.yaml` to modify the 
+    * If you installed with Helm, you can use `helm upgrade` with `-f istio-integration.yaml` to modify the
       installation for you.
 3. Restart the $productName$ pods.
 
@@ -255,7 +255,7 @@ TLS using the `istio-upstream` `TLSContext` above:
    ```
 
 For example, if you have installed the Quote of the Moment service as described on the
-[Getting Started](../../../latest/tutorials/getting-started) page, you will have a `Mapping` as follows:
+[Getting Started](../../tutorials/getting-started) page, you will have a `Mapping` as follows:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
@@ -288,7 +288,7 @@ For example, if you have installed the Quote of the Moment service as described 
    <Alert severity="warning">
      You <b>must</b> either explicitly specify port 80 in your <code>Mapping</code>'s <code>service</code>
      element, or set up the Kubernetes <code>Service</code> resource for your upstream service to map port
-     443. If you don't do one of these, connections to your upstream will hang &mdash; see the 
+     443. If you don't do one of these, connections to your upstream will hang &mdash; see the
      <a href="#configure-service-ports">"Configure Service Ports"</a> section below for more information.
    </Alert>
 
@@ -304,13 +304,13 @@ The behavior of your service will not seem to change, even though mTLS is active
    ```
 
 This request first went to $productName$, which routed it over an mTLS connection to the quote service in the
-default namespace. That connection was intercepted by the `istio-proxy` which authenticated the request as 
+default namespace. That connection was intercepted by the `istio-proxy` which authenticated the request as
 being from $productName$, exported various metrics, and finally forwarded it on to the actual quote service.
 
 ### Configure Service Ports
 
 When mTLS is active, Istio makes TLS connections to your services. Since Istio handles the TLS protocol for
-you, you don't need to modify your services &mdash; however, the TLS connection will still use port 443 
+you, you don't need to modify your services &mdash; however, the TLS connection will still use port 443
 if you don't configure your `Mapping`s to _explicitly_ use port 80.
 
 If your upstream service was not written to use TLS, its `Service` resource may only map port 80. If Istio
@@ -366,10 +366,10 @@ apply a `PeerAuthentication` resource in each namespace that should operate in s
     namespace: istio-system
   spec:
     mtls:
-      mode: STRICT   
+      mode: STRICT
   EOF
   ```
- 
+
 To test strict mTLS, remove the `tls` configuration from the quote-backend `Mapping` and send a request:
 
   ```shell
@@ -404,7 +404,7 @@ by default. To take advantage of this support, you need to:
 
 1. Install a tracing provider, for example [Zipkin](../tracing-zipkin) into your cluster.
 2. Add a [`TracingService`](../../topics/running/services/tracing-service) to tell $productName$ to send tracing
-   to your tracing provider, for example: 
+   to your tracing provider, for example:
 
    ```yaml
    ---
@@ -431,9 +431,9 @@ the tracing headers automatically, allowing for end-to-end observability within 
 
 By default, Istio mTLS certificates are valid for 90 days, but get rotated every day.
 
-$productName$ updates the mTLS certificates as they are rotated, so you don't need to worry about certificate expiration. 
+$productName$ updates the mTLS certificates as they are rotated, so you don't need to worry about certificate expiration.
 
-To test that $productName$ is properly rotating certificates, shorten the TTL of the Istio certificates by 
+To test that $productName$ is properly rotating certificates, shorten the TTL of the Istio certificates by
 setting the following environment variables in the `istiod` container in the `istio-system` Namespace:
 
    ```yaml

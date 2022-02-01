@@ -40,8 +40,8 @@ Services in your cluster opt-in to using Service Preview by injecting the Traffi
 If you used the `edgectl install` command, the Traffic Manager and the Ambassador Injector have already been installed and configured for you. Otherwise, deploy the Traffic Manager and Ambassador Injector in the `ambassador` namespace with `kubectl`
 
 ```
-kubectl apply -f https://getambassador.io/yaml/traffic-manager.yaml
-kubectl apply -f https://getambassador.io/yaml/ambassador-injector.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/traffic-manager.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador-injector.yaml
 ```
 
 The above will deploy:
@@ -112,7 +112,7 @@ With the automatic injector, we can simply add it to our services by annotating 
 First, you need to create the RBAC resources required for the Traffic Agent to run in the namespace you want to intercept.
 
 ```
-kubectl apply -f https://getambassador.io/yaml/traffic-agent-rbac.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/traffic-agent-rbac.yaml
 ```
 
 Then, apply the `Hello` service manifest that is annotated to inject the Traffic Agent.
@@ -170,9 +170,9 @@ spec:
           image: docker.io/datawire/hello-world:latest
           ports:
             - name: http
-              containerPort: 8000 
+              containerPort: 8000
 EOF
- 
+
 service/hello created
 mapping.getambassador.io/hello created
 deployment.apps/hello created
@@ -189,7 +189,7 @@ Found 1 interceptable deployment(s):
 
 Take a look at the [Traffic Agent reference](../service-preview-reference#traffic-agent) for more information on how to connect your services to Service Preview.
 
-Service Preview is now installed in your cluster and ready to intercept traffic sent to the `Hello` service! 
+Service Preview is now installed in your cluster and ready to intercept traffic sent to the `Hello` service!
 
 ## Next Steps
 

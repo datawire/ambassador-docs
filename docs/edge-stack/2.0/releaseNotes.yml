@@ -252,7 +252,7 @@ items:
       - title: Improved Ambassador Cloud visibility
         type: feature
         body: Ambassador Agent reports sidecar process information and <code>AmbassadorMapping</code> OpenAPI documentation to Ambassador Cloud to provide more visibility into services and clusters.
-        docs: ../../cloud/latest/service-catalog/quick-start/
+        docs: /docs/cloud/latest/service-catalog/quick-start/
 
       - title: Configurable per-AmbassadorListener statistics prefix
         body: The optional <code>stats_prefix</code> element of the <code>AmbassadorListener</code> CRD now determines the prefix of HTTP statistics emitted for a specific <code>AmbassadorListener</code>.
@@ -297,7 +297,7 @@ items:
       - title: Add configurable cache for OIDC replies to the JWT Filter
         type: feature
         body: >-
-          The <code>maxStale</code> field is now supported in in the JWT Filter to configure how long $productname$ should cache OIDC responses for similar to the existing <code>maxStale</code> field in the OAuth2 Filter. 
+          The <code>maxStale</code> field is now supported in in the JWT Filter to configure how long $productname$ should cache OIDC responses for similar to the existing <code>maxStale</code> field in the OAuth2 Filter.
         docs: topics/using/filters/jwt
 
   - version: 2.0.0-ea
@@ -470,7 +470,7 @@ items:
         type: change
         body: >-
           <code>AMBASSADOR_ENVOY_API_VERSION</code> now defaults to <code>V3</code>
-        docs: https://www.getambassador.io/docs/edge-stack/latest/topics/running/running/#ambassador_envoy_api_version
+        docs: topics/running/running/#ambassador_envoy_api_version
 
       - title: Subsecond time resolution in logs
         type: change

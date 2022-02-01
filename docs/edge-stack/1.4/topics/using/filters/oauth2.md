@@ -130,8 +130,8 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
 
     * If you provide more than one `protectedOrigin`, all are assumed to share the same authentication system, so that logging into one origin logs you into all origins. To have multiple independent origins, use multiple `Filter`s.
 
-  - `clientURL` (**DEPRECATED**): If present, setting `clientURL` is exactly the same as setting 
-     
+  - `clientURL` (**DEPRECATED**): If present, setting `clientURL` is exactly the same as setting
+
     ```
     protectedOrigins:
     - origin: clientURL-value
@@ -139,13 +139,13 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
 
     `clientURL` will be removed in a future release; you should switch to using `protectedOrigins` instead.
 
-* By default, any cookies set by the Ambassador Edge Stack will be set to expire when the session expires naturally. Use the `useSessionCookies` setting to specify expiration on session cookies instead; the cookies will be deleted when the user closes their web browser.  
+* By default, any cookies set by the Ambassador Edge Stack will be set to expire when the session expires naturally. Use the `useSessionCookies` setting to specify expiration on session cookies instead; the cookies will be deleted when the user closes their web browser.
 		* However, this can prematurely delete cookies if the user closes their web browser. Conversely, it also means that cookies can persist for longer than normal if the user does not close their browser.
 		* Any prematurely deleted cookies may or may not affect user-perceived behavior, depending on
-		   the behavior of the identity provider.  
+		   the behavior of the identity provider.
 		* Any cookies persisting longer will not affect behavior of the system; the Ambassador Edge
 		   Stack validates whether the session is expired when considering the
-		   cookie.  
+		   cookie.
 	* If `useSessionCookies` is non-`null`, then by default it will have the cookies for all requests be session cookies or not  according to the `useSessionCookies.value` sub-argument.  Setting the `ifRequestHeader` sub-argument to use `value` for requests that have (and `!value` for requests that don't have) the HTTP header field `name` (case-insensitive) either set to (if `negate: false`) or not set to (if `negate: true`)
     + a non-empty string if neither `value` nor `valueRegex` are set
     + the exact string `value` (case-sensitive) (if `value` is set)

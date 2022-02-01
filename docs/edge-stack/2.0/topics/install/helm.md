@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
+  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
   changes to allow $productName$ to more gracefully handle larger installations
   (including multitenant or multiorganizational installations), reduce memory footprint,
   and improve performance. For more information on 2.X, please check the&nbsp;
@@ -44,8 +44,8 @@ When you run the Helm chart, it installs $productName$.
     ```
 
 2. Next Steps
-   
-   $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources. 
+
+   $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources.
 
    - [The `Listener` Resource](../../running/listener/) is required to configure which ports the $productName$ pods listen on so that they can begin responding to requests.
    - [The `Mapping` Resouce](../../using/intro-mappings/) is used to configure routing requests to services in your cluster.
@@ -68,7 +68,7 @@ Upgrading an existing installation of $productName$ is a two-step process:
 1. First, apply any CRD updates:
 
    ```
-    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml
+    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
    ```
 
 2. Next, upgrade $productName$ itself:

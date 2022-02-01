@@ -14,14 +14,14 @@ $OSSproductName$ to $productName$ $version$:
 1. Install $productName$ $version$ in a completely new cluster.
 
 2. **Create `Listener`s for $productName$ $version$.**
-   
+
    When $productName$ $version$ starts, it will not have any `Listener`s, and it will not
    create any. You must create `Listener` resources by hand, or $productName$ $version$
    will not listen on any ports.
 
 3. Copy the entire configuration from the $productName$ 1.X cluster to the $productName$
    $version$ cluster. This is most simply done with `kubectl get -o yaml | kubectl apply -f -`.
-   
+
    This will create `getambassador.io/v2` resources in the $productName$ $version$ cluster.
    $productName$ $version$ will translate them internally to `getambassador.io/v3alpha1`
    resources.

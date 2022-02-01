@@ -74,8 +74,8 @@ The ELB is the first generation AWS Elastic Load Balancer. It is the default typ
    * Can modify the request (append to `X-Forwarded-*` headers)
 * Can perform TLS termination
 
-**Notes:** 
-- While it has been superseded by the `Network Load Balancer` and `Application Load Balancer` the ELB offers the simplest way of provisioning an L4 or L7 load balancer in Kubernetes. 
+**Notes:**
+- While it has been superseded by the `Network Load Balancer` and `Application Load Balancer` the ELB offers the simplest way of provisioning an L4 or L7 load balancer in Kubernetes.
 - All  of the [load balancer annotations](#load-balancer-annotations) are respected by the ELB.
 - If using the ELB for TLS termination, it is recommended to run in L7 mode so it can modify `X-Forwarded-Proto` correctly.
 
@@ -93,8 +93,8 @@ The NLB is a second generation AWS Elastic Load Balancer. It can be ensure by a 
    * Cannot modify the request
 * Can perform TLS termination
 
-**Notes:** 
-- The NLB is the most efficient load balancer capable of handling millions of requests per second. It is recommended for streaming connections since it will maintain the connection stream between the client and $productName$. 
+**Notes:**
+- The NLB is the most efficient load balancer capable of handling millions of requests per second. It is recommended for streaming connections since it will maintain the connection stream between the client and $productName$.
 - Most of the [load balancer annotations](#load-balancer-annotations) are respected by the NLB. You will need to manually configure the proxy protocol and take an extra step to enable cross zone load balancing.
 - Since it operates at L4 and cannot modify the request, you will need to tell $productName$ if it is terminating TLS or not (see [TLS termination](#tls-termination) notes below).
 
@@ -110,9 +110,9 @@ The ALB is a second generation AWS Elastic Load Balancer. It cannot be ensured b
    * Can modify the request (append to `X-Forwarded-*` headers)
 * Can perform TLS termination
 
-**Notes:**  
+**Notes:**
 
-- The ALB can perform routing based on the path, headers, host, etc.. Since $productName$ performs this kind of routing in your cluster, unless you are using the same load balancer to route to services outside of Kubernetes, the overhead of provisioning an ALB is often not worth the benefits. 
+- The ALB can perform routing based on the path, headers, host, etc.. Since $productName$ performs this kind of routing in your cluster, unless you are using the same load balancer to route to services outside of Kubernetes, the overhead of provisioning an ALB is often not worth the benefits.
 - If you would like to use an ALB, you will need to expose $productName$ with a `type: NodePort` service and manually configure the ALB to forward to the correct ports.
 - None of the [load balancer annotations](#load-balancer-annotations) are respected by the ALB. You will need to manually configure all options.
 - The ALB will properly set the `X-Forward-Proto` header if terminating TLS. See (see [TLS termination](#tls-termination) notes below).
@@ -121,10 +121,10 @@ The ALB is a second generation AWS Elastic Load Balancer. It cannot be ensured b
 
 Kubernetes on AWS exposes a mechanism to request certain load balancer configurations by annotating the `type: LoadBalancer` `Service`. The most complete set and explanations of these annotations can be found in this [Kubernetes document](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer). This document will go over the subset that is most relevant when deploying $productName$.
 
-- `service.beta.kubernetes.io/aws-load-balancer-ssl-cert`: 
+- `service.beta.kubernetes.io/aws-load-balancer-ssl-cert`:
 
     Configures the load balancer to use a valid certificate ARN to terminate TLS at the Load Balancer.
-    
+
     Traffic from the client into the load balancer is encrypted but, since TLS is being terminated at the load balancer, traffic from the load balancer to $productName$ will be cleartext. You will need to configure $productName$ differently depending on whether the load balancer is running in L4 or L7 (see [TLS termination](#tls-termination) notes below).
 
 - `service.beta.kubernetes.io/aws-load-balancer-ssl-ports`:
@@ -140,18 +140,18 @@ Kubernetes on AWS exposes a mechanism to request certain load balancer configura
 - `service.beta.kubernetes.io/aws-load-balancer-type: "nlb"`:
 
     When this annotation is set it will launch a [Network Load Balancer (NLB)](#network-load-balancer-nlb) instead of a classic ELB.
-    
+
 - `service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled`:
 
     Configures the load balancer to load balance across zones. For high availability, it is typical to deploy nodes across availability zones so this should be set to `"true"`.
 
     **Note:** You cannot configure this annotation and `service.beta.kubernetes.io/aws-load-balancer-type: "nlb"` at the same time. You must first deploy the `Service` with an NLB and then update it with the cross zone load balancing configuration.
-    
+
 - `service.beta.kubernetes.io/aws-load-balancer-proxy-protocol`:
 
     Configures the ELB to enable the proxy protocol. `"*"`, which enables the proxy protocol on all ELB backends, is the only acceptable value.
 
-    The proxy protocol can be used to preserve the client IP address. 
+    The proxy protocol can be used to preserve the client IP address.
 
     If setting this value, you need to make sure $productName$ is configured to use the proxy protocol (see [preserving the client IP address](#preserving-the-client-ip-address) below).
 
@@ -169,7 +169,7 @@ The following documentation will cover the different options available to you an
 
 ### TLS termination at $productName$
 
-Terminating TLS at $productName$ will guarantee you to be able to use all of the TLS termination options that $productName$ exposes including enforcing the minimum TLS version, setting the `alpn_protocols`, and redirecting cleartext to HTTPS. 
+Terminating TLS at $productName$ will guarantee you to be able to use all of the TLS termination options that $productName$ exposes including enforcing the minimum TLS version, setting the `alpn_protocols`, and redirecting cleartext to HTTPS.
 
 If terminating TLS at $productName$, you can provision any AWS load balancer that you want with the following (default) port assignments:
 
@@ -221,7 +221,7 @@ Terminating TLS at the load balancer means that $productName$ will be receiving 
    Note that the `spec.ports` has been changed so both the HTTP and HTTPS ports forward to the cleartext port 8080 on $productName$.
 
 * **`Host`:**
-   
+
    The `Host` configures how $productName$ handles encrypted and cleartext traffic. The following `Host` configuration will tell $productName$ to `Route` cleartext traffic that comes in from the load balancer:
 
    ```yaml
@@ -276,7 +276,7 @@ Because L4 load balancers do not set `X-Forwarded` headers, $productName$ will n
    Note that the `spec.ports` has been changed so both the HTTP and HTTPS ports forward to the cleartext port 8080 on $productName$.
 
 * **`Host`:**
-   
+
    The `Host` configures how $productName$ handles encrypted and cleartext traffic. The following `Host` configuration will tell $productName$ to `Redirect` cleartext traffic that comes in from the load balancer:
 
    ```yaml
@@ -362,4 +362,3 @@ In AWS, there are two options for preserving the client IP address.
    ```
 
    After configuring the above `Module`, you will need to restart $productName$ for the changes to take effect.
-   

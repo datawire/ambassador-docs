@@ -127,8 +127,8 @@ export default function SimpleTabs() {
         {/*YAML install instructions*/}
 
         <CodeBlock>
-          {'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml && \\\n' +
-            'kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml && \\\n' +
+          {'kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-crds.yaml && \\\n' +
+            'kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml && \\\n' +
             'kubectl apply -f - <<EOF\n' +
             '---\n' +
             'apiVersion: v1\n' +

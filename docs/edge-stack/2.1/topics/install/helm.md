@@ -3,10 +3,12 @@ import Alert from '@material-ui/lab/Alert';
 # Install with Helm
 
 <Alert severity="warning">
+
   To migrate from $productName$ 1.X to $productName$ 2.X, see the
-  <a href="../upgrade/helm/emissary-2.1/edge-stack-2.1/#side-by-side-migration-steps"> $productName$ 2.X Migration Guide</a>. This guide
-  <b> will not work</b> for that, due to changes to the configuration resources used
-  for $productName$ 2.X.
+  [$productName$ migration matrix](../migration-matrix/). This guide
+  **will not work** for that, due to changes to the configuration
+  resources used for $productName$ 2.X.
+
 </Alert>
 
 [Helm](https://helm.sh) is a package manager for Kubernetes that automates the release and management of software on Kubernetes. $productName$ can be installed via a Helm chart with a few simple steps, depending on if you are deploying for the first time, upgrading $productName$ from an existing installation, or migrating from $productName$.
@@ -33,8 +35,8 @@ When you run the Helm chart, it installs $productName$.
    configuration resources. This is required.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
@@ -60,8 +62,8 @@ When you run the Helm chart, it installs $productName$.
     ```
 
 3. Next Steps
-   
-   $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources. 
+
+   $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources.
 
    - [The `Listener` Resource](../../running/listener/) is required to configure which ports the $productName$ pods listen on so that they can begin responding to requests.
    - [The `Mapping` Resouce](../../using/intro-mappings/) is used to configure routing requests to services in your cluster.

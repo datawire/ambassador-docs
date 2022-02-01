@@ -49,6 +49,22 @@ important notes:
    it simpler to roll back, if needed. Alternate, you can isolate the two configurations
    as described above.
 
+3. **Be careful about label selectors on Kubernetes Services!**
+
+   If you have services in $OSSproductName$ 1.14.2 that use selectors that will match
+   Pods from $AESproductName$ $version$, traffic will be erroneously split between
+   $OSSproductName$ 1.14.2 and $AESproductName$ $version$. The labels used by $AESproductName$
+   $version$ include:
+
+   ```yaml
+   app.kubernetes.io/name: edge-stack
+   app.kubernetes.io/instance: edge-stack
+   app.kubernetes.io/part-of: edge-stack
+   app.kubernetes.io/managed-by: getambassador.io
+   product: aes
+   profile: main
+   ```
+
 You can also migrate by [installing $AESproductName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $OSSproductName$ $version$ configuration will not be
 affected by changes meant for $AESproductName$ $version$, but it is more effort.
@@ -59,13 +75,12 @@ Migration is a five-step process:
 
 1. **Install new CRDs.**
 
-   Before installing $AESproductName$ $version$ itself, you need to update the CRDs in
-   your cluster. This will allow supporting `getambassador.io/v2` resources as well as
-   `getambassador.io/v3alpha1`; it is mandatory.
+   Before installing $productName$ $version$ itself, you need to update the CRDs in
+   your cluster. This is mandatory during any upgrade of $productName$.
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
@@ -91,19 +106,19 @@ Migration is a five-step process:
    Our `aes-emissaryns-migration.yaml` assumes that $OSSproductName$ $version$ is installed in the
    `emissary` namespace. If you installed $OSSproductName$ $version$ into a different namespace, you'll
    need to download `aes-emissaryns-migration.yaml` file and edit it.
-   
+
    **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, download `aes-emissaryns-migration.yaml` and edit it to
    do so.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-emissaryns-migration.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml && \
    kubectl rollout status -n emissary deployment/aes -w
    ```
 
 3. **Test!**
 
    Your $AESproductName$ $version$ installation should come up running with the configuration
-   resources used by $OSSproductName$ $version$, including `Listener`s and `Host`s. 
+   resources used by $OSSproductName$ $version$, including `Listener`s and `Host`s.
 
    <Alert severity="info">
      If you find that your $AESproductName$ $version$ installation and your $OSSproductName$ $version$
@@ -132,7 +147,7 @@ Migration is a five-step process:
 
    ```
    kubectl delete -n emissary service/emissary-ingress-admin deployment/emissary-ingress
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/resources-migration.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/resources-migration.yaml
    ```
 
    You may also want to redirect DNS to the `edge-stack` Service and remove the
@@ -140,4 +155,4 @@ Migration is a five-step process:
 
 5. What's next?
 
-   Now that you have $AESproductName$ up and running, check out the [Getting Started](../../../../../../../../edge-stack/latest/tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.
+   Now that you have $AESproductName$ up and running, check out the [Getting Started](../../../../../../tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.

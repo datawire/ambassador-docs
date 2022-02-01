@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
+  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
   changes to allow $productName$ to more gracefully handle larger installations
   (including multitenant or multiorganizational installations), reduce memory footprint,
   and improve performance. For more information on 2.X, please check the&nbsp;

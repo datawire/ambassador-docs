@@ -26,8 +26,8 @@ Migration is a two-step process:
    `getambassador.io/v2` resources as well as `getambassador.io/v3alpha1`; it is mandatory.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">

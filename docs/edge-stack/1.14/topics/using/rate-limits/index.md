@@ -2,8 +2,8 @@
 
 Rate limiting in $productName$ is composed of two parts:
 
-* `RateLimitService` that tells $productName$ what service to use for rate 
-  limiting. (The $productName$ provides a `RateLimitService` 
+* `RateLimitService` that tells $productName$ what service to use for rate
+  limiting. (The $productName$ provides a `RateLimitService`
   implementation for you).
 * Labels that get attached to requests; a label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
@@ -125,13 +125,13 @@ There are 5 types of label specifiers in $productName$:
 
 ## Rate limiting requests based on their labels
 
-This is determined by your `RateLimitService` implementation. 
+This is determined by your `RateLimitService` implementation.
 
-The $productName$ provides a `RateLimitService` implementation that is 
+The $productName$ provides a `RateLimitService` implementation that is
 configured by a `RateLimit` custom resource.
 
-See the [AES RateLimit Reference](./rate-limits) for information on how 
+See the [AES RateLimit Reference](./rate-limits) for information on how
 to configure `RateLimit`s in $productName$.
 
-See the [Basic Rate Limiting with $OSSproductName$](../../../howtos/rate-limiting-tutorial) for an 
+See the [Basic Rate Limiting with $OSSproductName$](../../../howtos/rate-limiting-tutorial) for an
 example `RateLimitService` implementation for $OSSproductName$.

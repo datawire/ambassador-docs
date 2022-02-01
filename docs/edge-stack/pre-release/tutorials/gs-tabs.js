@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GettingStartedEdgeStack21Tabs() {
+export default function GettingStartedEdgeStack21Tabs(props) {
+  const version = props.version;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -99,7 +100,7 @@ export default function GettingStartedEdgeStack21Tabs() {
             '\n' +
             'kubectl create namespace ambassador && \\' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml' +
+            `kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes-crds.yaml` +
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
@@ -113,11 +114,11 @@ export default function GettingStartedEdgeStack21Tabs() {
         {/*YAML install instructions*/}
 
         <CodeBlock>
-          {'kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml && \\' +
+          {`kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes-crds.yaml && \\` +
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes.yaml && \\' +
+            `kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes.yaml && \\` +
             '\n' +
             'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes' +
             '\n'}

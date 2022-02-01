@@ -19,12 +19,11 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
 1. **Install new CRDs.**
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
-   your cluster; Helm will not do this for you. This will allow supporting
-   `getambassador.io/v2` resources as well as `getambassador.io/v3alpha1`; it is mandatory.
+   your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/$productYAMLPath$/$version$/$productCRDName$
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
@@ -50,7 +49,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
 
    Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
    in the `ambassador` namespace.
- 
+
    ```
    kubectl delete -n ambassador deployment edge-stack
    ```

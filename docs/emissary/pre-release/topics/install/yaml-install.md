@@ -7,10 +7,12 @@ import Alert from '@material-ui/lab/Alert';
 # Install manually
 
 <Alert severity="warning">
+
   To migrate from $productName$ 1.X to $productName$ 2.X, see the
-  <a href="../upgrade/yaml/emissary-2.1/edge-stack-2.1/#side-by-side-migration-steps"> $productName$ 2.X Migration Guide</a>. This guide
-  <b> will not work</b> for that, due to changes to the configuration resources used
-  for $productName$ 2.X.
+  [$productName$ migration matrix](../migration-matrix/).  This guide
+  **will not work** for that, due to changes to the configuration
+  resources used for $productName$ 2.X.
+
 </Alert>
 
 In this guide, we'll walk you through installing $productName$ in your Kubernetes cluster.
@@ -62,8 +64,8 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
     Your load balancer may take several minutes to provision your IP address. Repeat the provided command until you get an IP address.
 
 3. Next Steps
-   
-   $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources. 
+
+   $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources.
 
    - [The `Listener` Resource](../../running/listener/) is required to configure which ports the $productName$ pods listen on so that they can begin responding to requests.
    - [The `Mapping` Resouce](../../using/intro-mappings/) is used to configure routing requests to services in your cluster.

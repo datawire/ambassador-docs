@@ -359,7 +359,7 @@ discovery, as detailed above.
    `kubectl`:
 
    ```shell
-   kubectl apply -f https://app.getambassador.io/yaml/v2-docs/latest/consul/ambassador-consul-connector.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/consul/ambassador-consul-connector.yaml
    ```
 
    This installs in to your cluster:

@@ -148,7 +148,7 @@ spec:
     - name: auth0
 ```
 
-<Alert severity="info"> 
+<Alert severity="info">
   $productName$ will choose the first FilterPolicy rule that matches the incoming request. As in the above example, you must list your rules in the order of least to most generic.
 </Alert>
 

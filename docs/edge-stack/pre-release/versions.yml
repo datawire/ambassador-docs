@@ -1,22 +1,24 @@
-version: 2.1.1
-aproVersion: 0.11.0
-qotmVersion: 1.7
-quoteVersion: 0.5.0
+# branch info
 branch: release/v2.1
-docsVersion: "2.1"
+
+# self
+version: 2.1.2
 productName: "Ambassador Edge Stack"
 productNamePlural: "Ambassador Edge Stacks"
-productYAMLPath: edge-stack
-productCRDName: aes-crds.yaml
-productYAMLFile: aes.yaml
 productNamespace: ambassador
 productDeploymentName: edge-stack
-productContainerName: aes
 productHelmName: edge-stack
-productDockerImage: aes
-productDockerRegistry: docker.io/datawire
-productFullDockerImage: docker.io/datawire/aes
+
+# OSS (not self)
+ossVersion: 2.1.2
+ossDocsVersion: "pre-release"
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
+
+# AES (self)
 AESproductName: "Ambassador Edge Stack"
 AESproductNamePlural: "Ambassador Edge Stacks"
+
+# other products
+qotmVersion: 1.7
+quoteVersion: 0.5.0

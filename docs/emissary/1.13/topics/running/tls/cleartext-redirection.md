@@ -6,8 +6,8 @@ While most modern web applications will choose to encrypt all traffic, there
 are reasons why you will want to support clients who access your website
 without encryption in cleartext.
 
-$productName$ supports both forcing 
-[automatic redirection to HTTPS](#http-https-redirection) and 
+$productName$ supports both forcing
+[automatic redirection to HTTPS](#http-https-redirection) and
 [serving cleartext](#cleartext-routing) traffic on a `Host`.
 
 ## Cleartext routing
@@ -22,7 +22,7 @@ port 8080 in the container. See [TLS documentation](../) for information on
 how to configure TLS termination.
 
 For $AESproductName$, TLS termination is enabled by default with a
-self-signed certificate or an ACME `Host`. To disable TLS termination in $AESproductName$, delete any existing `Host`s and set the 
+self-signed certificate or an ACME `Host`. To disable TLS termination in $AESproductName$, delete any existing `Host`s and set the
 `requestPolicy.insecure.action` to `Route` in a `Host`:
 
 ```yaml
@@ -39,12 +39,12 @@ spec:
       action: Route
 ```
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
-> 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
-> 
-> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
-> 
+> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an $productName$ instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config.
+>
+> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that $productName$ instance. If the behavior expected out of $productName$ is anything other than `Redirect`, it must be explicitly enumerated in all Host resources.
+>
+> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`.
+>
 > For more information, please refer to the [`Host` documentation](../../host-crd#secure-and-insecure-requests).
 >
 >The `insecure-action` can be one of:
@@ -90,7 +90,7 @@ comes in over port `8080`.
 
 ## HTTP->HTTPS redirection
 
-Most modern websites that force HTTPS will also automatically redirect any 
+Most modern websites that force HTTPS will also automatically redirect any
 requests that come into it over HTTP. In $AESproductName$, this is
 enabled by default but can easily be enabled in any version of $productName$.
 
@@ -106,8 +106,8 @@ Client              $productName$
 |                             |
 ```
 
-In $productName$, this is configured by setting the 
-`insecure.action` in a `Host` to `Redirect`. 
+In $productName$, this is configured by setting the
+`insecure.action` in a `Host` to `Redirect`.
 
 ```yaml
 requestPolicy:
@@ -119,7 +119,7 @@ requestPolicy:
 $productName$ will then enable cleartext redrection in two ways.
 
 First, $productName$ will listen on the `insecure.additionalPort` and consider any
-traffic on this port as `insecure` and redirect it to HTTPS. 
+traffic on this port as `insecure` and redirect it to HTTPS.
 
 ```yaml
 requestPolicy:
@@ -128,8 +128,8 @@ requestPolicy:
     additionalPort: 8080
 ```
 
-Additionally, $productName$ will also check the `X-Forwarded-Proto` header of 
-the incoming request on the `secure` port (`8443`)and issue a 301 redirect if 
+Additionally, $productName$ will also check the `X-Forwarded-Proto` header of
+the incoming request on the `secure` port (`8443`)and issue a 301 redirect if
 it is set to `HTTP`.
 
 The value of `X-Forwarded-Proto` is dependent on whatever is forwarding traffic
@@ -137,7 +137,7 @@ to $productName$. A couple of options are
 
 - Layer 4 Load Balancer, Proxy, or direct from the client:
 
-   `X-Forwarded-Proto`  is not set or is untrusted. Envoy will set it based 
+   `X-Forwarded-Proto`  is not set or is untrusted. Envoy will set it based
    off the protocol of the incoming request.
 
    If Envoy determines the request is encrypted, it will be set to `HTTPS`. If

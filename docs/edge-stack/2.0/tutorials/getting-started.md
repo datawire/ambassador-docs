@@ -8,7 +8,7 @@ import GettingStartedEdgeStack20Tabs from './gs-tabs'
 # $productName$ quick start
 
 <Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of 
+  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
   changes to allow $productName$ to more gracefully handle larger installations
   (including multitenant or multiorganizational installations), reduce memory footprint,
   and improve performance. For more information on 2.X, please check the&nbsp;
@@ -30,7 +30,7 @@ We'll start by installing $productName$ into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GettingStartedEdgeStack20Tabs/>
+<GettingStartedEdgeStack20Tabs version="$version$" />
 
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
@@ -74,7 +74,7 @@ EOF
 2. Apply the YAML for the “Quote of the Moment" service.
 
   ```
-  kubectl apply -f https://app.getambassador.io/yaml/v2-docs/latest/quickstart/qotm.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/quickstart/qotm.yaml
   ```
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>

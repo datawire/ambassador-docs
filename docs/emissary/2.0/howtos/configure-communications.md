@@ -19,7 +19,7 @@ Once the basic communications setup is in place, $productName$ `Mapping`s and `T
 </Alert>
 
 <Alert severity="warning">
-  Remember than $productName$ does not make sure that a wildcard <code>Host</code> exists! If the 
+  Remember than $productName$ does not make sure that a wildcard <code>Host</code> exists! If the
   wildcard behavior is needed, a <code>Host</code> with a <code>hostname</code> of <code>"*"</code>
   must be defined by the user.
 </Alert>
@@ -101,7 +101,7 @@ metadata:
   name: foo-host
 spec:
   hostname: "foo.example.com"
-  tlsSecret: 
+  tlsSecret:
     name: foo-secret
   requestPolicy:
     insecure:
@@ -165,7 +165,7 @@ spec:
 
 This scenario uses ACME to get certificates for `foo.example.com` and `bar.example.com`. HTTPS traffic to either
 host is routed; HTTP traffic to `foo.example.com` will be redirected to HTTPS, but HTTP traffic to `bar.example.com`
-will be rejected outright. 
+will be rejected outright.
 
 Since this example uses ACME, **it is only supported in $AESproductName$**.
 
@@ -286,7 +286,7 @@ spec:
 ```
 
 - `foo-host` and `bar-host` simply reference the `tlsSecret` to use for termination.
-   - If the secret involved contains a wildcard cert, or a cert with multiple SAN, both `Host`s could 
+   - If the secret involved contains a wildcard cert, or a cert with multiple SAN, both `Host`s could
      reference the same `tlsSecret`.
 - `foo-host` relies on the default insecure routing action of `Redirect`.
 - `bar-host` must explicitly specify routing HTTP.
@@ -299,8 +299,8 @@ spec:
 
 ### Using a `TLSContext`
 
-If you need to share other TLS settings between two `Host`s, you can reference a `TLSContext` as well as 
-the `tlsSecret`. This is the same as the previous example, but we use a `TLSContext` to set `ALPN` information, 
+If you need to share other TLS settings between two `Host`s, you can reference a `TLSContext` as well as
+the `tlsSecret`. This is the same as the previous example, but we use a `TLSContext` to set `ALPN` information,
 and we assume that the `Secret` contains a wildcard cert.
 
 ```yaml
@@ -573,7 +573,7 @@ spec:
 
 ### Using Labels to Associate `Host`s and `Listener`s
 
-In the examples above, the `Listener`s all associate with any `Host` in their namespace. In this 
+In the examples above, the `Listener`s all associate with any `Host` in their namespace. In this
 example, we will use Kubernetes labels to control the association instead.
 
 Here, we'll listen for HTTP to `foo.example.com` on port 8888, and for either HTTP or HTTPS to `bar.example.com` on

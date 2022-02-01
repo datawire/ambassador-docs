@@ -3,7 +3,7 @@
 The `Listener` CRD defines where, and how, $productName$ should listen for requests from the network, and which `Host` definitions should be used to process those requests. For further examples of how to use `Listener`, see [Configuring $productName$ Communications](../../../howtos/configure-communications).
 
 **Note that `Listener`s are never created by $productName$, and must be defined by the user.** If you do not
-define any `Listener`s, $productName$ will not listen anywhere for connections, and therefore won't do 
+define any `Listener`s, $productName$ will not listen anywhere for connections, and therefore won't do
 anything useful. It will log a `WARNING` to this effect.
 
 ```yaml
@@ -18,7 +18,7 @@ spec:
   securityModel: XFP             # XFP (for X-Forwarded-Proto), SECURE, INSECURE
   statsPrefix: example-listener  # default depends on protocol; see below
   l7Depth: 0                     # int32
-  hostBinding: 
+  hostBinding:
     namespace:
       from: SELF                 # SELF, ALL
     selector: ...                # Kubernetes label selector
@@ -79,7 +79,7 @@ arrives.
 ### `l7Depth`
 
 When layer 7 (L7) proxies are in use, the connection to $productName$ comes from the L7 proxy itself
-rather than from the client. Examining the protocol and IP address of that connection is useless, and 
+rather than from the client. Examining the protocol and IP address of that connection is useless, and
 instead you need to configure the L7 proxy to pass extra information about the client to $productName$
 using the `X-Forwarded-Proto` and `X-Forwarded-For` headers.
 
@@ -89,7 +89,7 @@ set `l7Depth` in the `Listener` to the number of trusted L7 proxies in front of 
 `l7Depth` is not set in the `Listener`, the `xff_num_trusted_hops` value from the `ambassador` `Module`
 will be used. If neither is set, the default `l7Depth` is 0.
 
-When `l7Depth` is 0, any incoming `X-Forwarded-Proto` is stripped: Envoy always provides an 
+When `l7Depth` is 0, any incoming `X-Forwarded-Proto` is stripped: Envoy always provides an
 `X-Forwarded-Proto` matching the wire protocol of the incoming connection, so that `X-Forwarded-Proto`
 can be trusted. When `l7Depth` is non-zero, `X-Forwarded-Proto` is accepted from the L7 proxy, and
 trusted. The actual wire protocol in use from the L7 proxy to $productName$ is ignored.
@@ -192,7 +192,7 @@ For complete information on which statistics will appear for the `Listener`, see
 
 ### `protocolStack`
 
-**`protocolStack` is not recommended if you can instead use `protocol`.** 
+**`protocolStack` is not recommended if you can instead use `protocol`.**
 
 Where `protocol` allows configuring the `Listener` to use well-known protocol stacks, `protocolStack` allows configuring exactly which protocols will be layered together. If `protocol` allows what you need, it is safer to use `Protocol` than to risk having the stack broken with an incorrect `protocolStack`.
 

@@ -46,7 +46,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GettingStartedEmissary21Tabs() {
+export default function GettingStartedEmissary21Tabs(props) {
+  const version = props.version;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -99,7 +100,7 @@ export default function GettingStartedEmissary21Tabs() {
             '\n' +
             'kubectl create namespace emissary && \\' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-crds.yaml' +
+            `kubectl apply -f https://app.getambassador.io/yaml/emissary/${version}/emissary-crds.yaml` +
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
@@ -116,11 +117,11 @@ export default function GettingStartedEmissary21Tabs() {
         <CodeBlock>
           {'kubectl create namespace emissary && \\' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-crds.yaml && \\' +
+            `kubectl apply -f https://app.getambassador.io/yaml/emissary/${version}/emissary-crds.yaml && \\` +
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
-            'kubectl apply -f https://app.getambassador.io/yaml/emissary/latest/emissary-emissaryns.yaml && \\' +
+            `kubectl apply -f https://app.getambassador.io/yaml/emissary/${version}/emissary-emissaryns.yaml && \\` +
             '\n' +
             'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lproduct=aes' +
             '\n'}

@@ -5,7 +5,7 @@ import Alert from '@material-ui/lab/Alert';
 <Alert severity="info">This guide applies to $OSSproductName$. It will not work correctly
 on $AESproductName$.</Alert>
 
-$productName$ can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure $productName$ to use a simple third party rate limit service. (If you don't want to implement your own rate limiting service, $AESproductName$ integrates a [powerful, flexible rate limiting service](/docs/edge-stack/latest/topics/using/rate-limits/).)
+$productName$ can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure $productName$ to use a simple third party rate limit service. (If you don't want to implement your own rate limiting service, $AESproductName$ integrates a [powerful, flexible rate limiting service](/docs/edge-stack/latest/topics/using/rate-limits/rate-limits/).)
 
 ## Before you get started
 
@@ -75,8 +75,8 @@ spec:
             memory: 100Mi
 ```
 
-This configuration tells $productName$ about the rate limit service, notably that it is serving requests at `example-rate-limit:5000`. $productName$ will see the `RateLimitService` and reconfigure itself within a few 
-seconds, allowing incoming requests to be rate-limited. 
+This configuration tells $productName$ about the rate limit service, notably that it is serving requests at `example-rate-limit:5000`. $productName$ will see the `RateLimitService` and reconfigure itself within a few
+seconds, allowing incoming requests to be rate-limited.
 
 Note that you can configure the `RateLimitService` to use a specific label `domain`.
 If `domain` is not specified (which is the situation here), the default is `ambassador`.
@@ -104,7 +104,7 @@ labels:
   ambassador:
     - request_label_group:
       - x-ambassador-test-allow:
-          request_headers: 
+          request_headers:
             key: "x-ambassador-test-allow"
             header_name: "x-ambassador-test-allow"
 ```
@@ -125,7 +125,7 @@ spec:
     ambassador:
       - request_label_group:
         - x-ambassador-test-allow:
-            request_headers: 
+            request_headers:
               key: "x-ambassador-test-allow"
               header_name: "x-ambassador-test-allow"
 ```

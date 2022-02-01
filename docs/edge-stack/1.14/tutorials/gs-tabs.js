@@ -142,11 +142,11 @@ export default function SimpleTabs() {
         {/*YAML install instructions*/}
 
         <CodeBlock>
-          {'kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \\' +
+          {'kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml && \\' +
             '\n' +
             'kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \\' +
             '\n' +
-            'kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && \\' +
+            'kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml && \\' +
             '\n' +
             'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes' +
             '\n'}

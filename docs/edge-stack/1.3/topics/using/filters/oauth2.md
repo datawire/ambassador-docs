@@ -120,13 +120,13 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
  - `clientURL`: (You determine this, and give it to your identity provider) Identifies a hostname that can appropriately set cookies for the application.  Only the scheme (`https://`) and authority (`example.com:1234`) parts are used; the path part of the URL is ignored.  You will also likely need to register `${clientURL}/callback` as an authorized callback endpoint with
    your identity provider.
 
-* By default, any cookies set by the Ambassador Edge Stack will be set to expire when the session expires naturally. Use the `useSessionCookies` setting to specify expiration on session cookies instead; the cookies will be deleted when the user closes their web browser.  
+* By default, any cookies set by the Ambassador Edge Stack will be set to expire when the session expires naturally. Use the `useSessionCookies` setting to specify expiration on session cookies instead; the cookies will be deleted when the user closes their web browser.
 		* However, this can prematurely delete cookies if the user closes their web browser. Conversely, it also means that cookies can persist for longer than normal if the user does not close their browser.
 		* Any prematurely deleted cookies may or may not affect user-perceived behavior, depending on
-		   the behavior of the identity provider.  
+		   the behavior of the identity provider.
 		* Any cookies persisting longer will not affect behavior of the system; the Ambassador Edge
 		   Stack validates whether the session is expired when considering the
-		   cookie.  
+		   cookie.
 	* If `useSessionCookies` is non-`null`, then by default it will have the cookies for all requests be session cookies or not  according to the `useSessionCookies.value` sub-argument.  Setting the `ifRequestHeader` sub-argument to use `value` for requests that have (and `!value` for requests that don't have) the HTTP header field `name` (case-insensitive) either set to (if `negate: false`) or not set to (if `negate: true`)
     + a non-empty string if neither `value` nor `valueRegex` are set
     + the exact string `value` (case-sensitive) (if `value` is set)

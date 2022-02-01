@@ -35,7 +35,7 @@ important caveats:
 
 1. **$productName$ 1.14.2 will not see any `getambassador.io/v3alpha1` resources.**
 
-   This is intentional; it provides a way to apply configuration only to 
+   This is intentional; it provides a way to apply configuration only to
    $productName$ $version$, while not interfering with the operation of your
    $productName$ 1.14.2 installation.
 
@@ -70,8 +70,24 @@ important caveats:
 
 5. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
 
-   This is required to manage a known issue. This issue will be resolved in a future 
+   This is required to manage a known issue. This issue will be resolved in a future
    $AESproductName$ release.
+
+6. **Be careful about label selectors on Kubernetes Services!**
+
+   If you have services in $productName$ 1.14.2 that use selectors that will match
+   Pods from $productName$ $version$, traffic will be erroneously split between
+   $productName$ 1.14.2 and $productName$ $version$. The labels used by $productName$
+   $version$ include:
+
+   ```yaml
+   app.kubernetes.io/name: edge-stack
+   app.kubernetes.io/instance: edge-stack
+   app.kubernetes.io/part-of: edge-stack
+   app.kubernetes.io/managed-by: getambassador.io
+   product: aes
+   profile: main
+   ```
 
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
@@ -99,7 +115,7 @@ Migration is a six-step process:
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \
-   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system 
+   kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
@@ -133,7 +149,7 @@ Migration is a six-step process:
    as needed.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-defaultns-migration.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-defaultns-migration.yaml && \
    kubectl rollout status -n default deployment/aes -w
    ```
 
@@ -200,9 +216,9 @@ Migration is a six-step process:
 
    Your $productName$ $version$ installation can support the `getambassador.io/v2`
    configuration resources used by $productName$ 1.14.2, but you may need to make some
-   changes to the configuration, as detailed in the documentation on 
+   changes to the configuration, as detailed in the documentation on
    [configuring $productName$ Communications](../../../../../../howtos/configure-communications)
-   and [updating CRDs to `getambassador.io/v3alpha1`](../../../../convert-to-v3alpha1). 
+   and [updating CRDs to `getambassador.io/v3alpha1`](../../../../convert-to-v3alpha1).
 
    <Alert severity="info">
      Kubernetes will not allow you to have a <code>getambassador.io/v3alpha1</code> resource
@@ -214,7 +230,7 @@ Migration is a six-step process:
      other way, see overview section 2, "If needed, you can use labels to further isolate configurations".
    </Alert>
 
-   **If you find that you need to roll back**, just reinstall your 1.14.2 CRDs, delete your 
+   **If you find that you need to roll back**, just reinstall your 1.14.2 CRDs, delete your
    installation of $productName$ $version$, and delete the `emissary-system` namespace.
 
 6. **When ready, switch over to $productName$ $version$.**
@@ -222,7 +238,7 @@ Migration is a six-step process:
    You can run $productName$ 1.14.2 and $productName$ $version$ side-by-side as long as you care
    to. However, taking full advantage of $productName$ 2.X's capabilities **requires**
    [updating your configuration to use `getambassador.io/v3alpha1` configuration resources](../../../../convert-to-v3alpha1),
-   since some useful features in $productName$ $version$ are only available using 
+   since some useful features in $productName$ $version$ are only available using
    `getambassador.io/v3alpha1` resources.
 
    When you're ready to have $productName$ $version$ handle traffic on its own, switch

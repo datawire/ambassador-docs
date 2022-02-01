@@ -36,7 +36,7 @@ Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
 1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
   ```
-  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quickstart/qotm.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/quickstart/qotm.yaml
   ```
 
 
@@ -101,7 +101,7 @@ The Service Catalog is a web-based interface that lists all of your cluster's Se
 
 5. When the token installation completes, refresh the Service Catalog page.
 
-<Alert severity="success"><b>Fantastic!</b> You can now see all your Services in your Ambassador Cloud account! Metadata on your Services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="../../../../cloud/latest/service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your Services.</Alert>
+<Alert severity="success"><b>Fantastic!</b> You can now see all your Services in your Ambassador Cloud account! Metadata on your Services about the owner, repo location, etc. can also be shown in Service Catalog via Kubernetes annotations. Continue in the <a href="/docs/cloud/latest/service-catalog/quick-start/">Service Catalog docs</a> to set annotations on your Services.</Alert>
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 

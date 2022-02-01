@@ -4,7 +4,7 @@ Sometimes requests fail. When these requests fail for transient issues, $product
 
 Retry policy can be set for all $productName$ mappings in the [`ambassador Module`](../../running/ambassador), or set per [`Mapping`](../mappings). Generally speaking, you should set `retry_policy` on a per mapping basis. Global retries can easily result in unexpected cascade failures.
 
-> Note that when setting `retry_policy`, adjusting `max_retries` in the [circuit breaker](https://www.getambassador.io/docs/edge-stack/latest/topics/using/circuit-breakers/) configuration should also be considered in order to account for all desired retries.
+> Note that when setting `retry_policy`, adjusting `max_retries` in the [circuit breaker](../circuit-breakers/) configuration should also be considered in order to account for all desired retries.
 
 ## Configuring retries
 
@@ -23,7 +23,7 @@ retry_policy:
 
 | Value | Description |
 | --- | --- |
-|`5xx`| Retries if the upstream service responds with any 5xx code or does not respond at all 
+|`5xx`| Retries if the upstream service responds with any 5xx code or does not respond at all
 |`gateway-error`| Similar to a `5xx` but only applies to a 502, 503, or 504 response
 |`connect-failure`| Retries on a connection failure to the upstream service (included in `5xx`)
 |`retriable-4xx`| Retries on a retriable 4xx response (currently only 409)
