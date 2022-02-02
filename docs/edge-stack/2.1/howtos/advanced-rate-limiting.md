@@ -148,7 +148,7 @@ For the rate limit `pattern`, include the `remote_address` IP address and the `b
        unit: minute
   ```
 
-  When a pattern has multiple criteria, the rate limit runs when when any of the rules of the pattern match. For the example above, this means either a `remote_address` or `backend_http_method` pattern triggers the rate limiting.
+  When a pattern has multiple criteria, the rate limit runs when any of the rules of the pattern match. For the example above, this means either a `remote_address` or `backend_http_method` pattern triggers the rate limiting.
 
 ## Global rate limiting
 
