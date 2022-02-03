@@ -77,11 +77,21 @@ ACME, but it is more effort.
 
 Migration is a six-step process:
 
-1. **Convert older configuration resources to `getambassador.io/v2`.**
+1. **Make sure that older configuration resources are not present.**
 
-   $productName$ 2.X does not support <code>getambassador.io/v0</code> or
-   <code>getambassador.io/v1</code> resources. If you are still using any of these
-   resources, convert them to <code>getambassador.io/v2</code> before beginning migration.
+   $productName$ 2.X does not support `getambassador.io/v0` or `getambassador.io/v1`
+   resources, and Kubernetes will not permit removing support for CRD versions that are
+   still in use for stored resources. To verify that no resources older than
+   `getambassador.io/v2` are active, run
+
+   ```
+   kubectl get crds -o 'go-template={{range .items}}{{.metadata.name}}={{.status.storedVersions}}{{"\n"}}{{end}}' | fgrep getambassador.io
+   ```
+
+   If `v1` is present in the output, **do not begin migration.** The old resources must be
+   converted to `getambassador.io/v2` and the `storedVersion` information in the cluster
+   must be updated. If necessary, contact Ambassador Labs on [Slack](https://a8r.io/slack)
+   for more information.
 
 2. **Install new CRDs.**
 

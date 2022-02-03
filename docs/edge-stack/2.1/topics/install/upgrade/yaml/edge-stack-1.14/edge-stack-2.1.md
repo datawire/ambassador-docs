@@ -98,11 +98,21 @@ ACME, but it is more effort.
 
 Migration is a six-step process:
 
-1. **Convert older configuration resources to `getambassador.io/v2`.**
+1. **Make sure that older configuration resources are not present.**
 
    $productName$ 2.X does not support `getambassador.io/v0` or `getambassador.io/v1`
-   resources. If you are still using any of these resources, convert them to
-   `getambassador.io/v2` before beginning migration.
+   resources, and Kubernetes will not permit removing support for CRD versions that are
+   still in use for stored resources. To verify that no resources older than
+   `getambassador.io/v2` are active, run
+
+   ```
+   kubectl get crds -o 'go-template={{range .items}}{{.metadata.name}}={{.status.storedVersions}}{{"\n"}}{{end}}' | fgrep getambassador.io
+   ```
+
+   If `v1` is present in the output, **do not begin migration.** The old resources must be
+   converted to `getambassador.io/v2` and the `storedVersion` information in the cluster
+   must be updated. If necessary, contact Ambassador Labs on [Slack](https://a8r.io/slack)
+   for more information.
 
 2. **Install new CRDs.**
 
@@ -144,6 +154,9 @@ Migration is a six-step process:
    - It sets the `AES_ACME_LEADER_DISABLE` environment variable to prevent $productName$ $version$
      from trying to manage ACME (leaving $productName$ 1.14.2 to do it instead).
    - It does NOT set `AMBASSADOR_LABEL_SELECTOR`.
+   - It does NOT create an `AuthService` or `RateLimitService`. It is very important that $productName$
+     $version$ not attempt to create these resources, as they are already provided for your $productName$
+     1.14.2 installation.
 
    If any of these do not match your situation, download `aes-defaultns-migration.yaml` and edit it
    as needed.

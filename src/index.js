@@ -343,6 +343,12 @@ const index = ({ data, location, pageContext }) => {
 
   const edgeStackLinks = data?.allFile.edges[0]?.node.internal.content;
 
+  let docsVersion = versions?.docsVersion;
+  if (!docsVersion) {
+    const docsMatch = versions?.version?.match(/\d+.\d+/g);
+    docsVersion = docsMatch?.length > 0 && docsMatch[0];
+  }
+
   const footer = (
     <div>
       {product.slug === 'home' && (
@@ -377,7 +383,7 @@ const index = ({ data, location, pageContext }) => {
             page={page}
             edgeStackLinks={edgeStackLinks}
             product={product.slug}
-            version={versions.docsVersion}
+            version={docsVersion}
             resources={page.exports}
           />
         )}
@@ -387,7 +393,7 @@ const index = ({ data, location, pageContext }) => {
           page={page}
           edgeStackLinks={edgeStackLinks}
           product={product.slug}
-          version={versions.docsVersion}
+          version={docsVersion}
         />
       )}
     </div>
