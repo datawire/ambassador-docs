@@ -124,4 +124,4 @@ Once you have your local development environment configured for fast feedback, y
 
 ## <img class="os-logo" src="../../../images/logo.png"/> What's Next?
 
-Now that you've created a complete Kubernetes development environment, learn more about how to [manage your environment in Ambassador Cloud](howtos/environments/) or how to [create Preview URLs in Telepresence](../../../../../telepresence/latest/howtos/preview-urls/).
+Now that you've created a complete Kubernetes development environment, learn more about how to [manage your environment in Ambassador Cloud](../cells/) or how to [create Preview URLs in Telepresence](../../../../../telepresence/latest/howtos/preview-urls/).
