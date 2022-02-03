@@ -108,7 +108,7 @@ Default: `false`.
 ## Customizing the installation with some Helm values
 
 `helmValues` is an optional map of configurable parameters of the $productName$ chart
-with some overriden values. Take a look at the [current list of values](https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/README.md)
+with some overriden values. Take a look at the [current list of values](https://github.com/emissary-ingress/emissary/blob/v2.1.0/charts/emissary-ingress/README.md)
 and their default values.
 
 Example:
