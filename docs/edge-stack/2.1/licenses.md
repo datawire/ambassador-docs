@@ -1,4 +1,4 @@
-Edge stack incorporates Free and Open Source software under the following licenses:
+Edge Stack incorporates Free and Open Source software under the following licenses:
 
 * [2-clause BSD license](https://opensource.org/licenses/BSD-2-Clause)
 * [3-clause BSD license](https://opensource.org/licenses/BSD-3-Clause)
