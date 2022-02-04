@@ -142,7 +142,7 @@ const releaseNotes = ({ data, location, pageContext }) => {
       <section className="docs__contact docs__container">
         <ContactBlock />
       </section>
-      <DocsFooter product={product.slug} version={versions.docsVersion} />
+      <DocsFooter product={product.slug} version={versions.ossDocsVersion} />
     </div>
   );
 

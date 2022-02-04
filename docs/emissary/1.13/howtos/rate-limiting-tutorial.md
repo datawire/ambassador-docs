@@ -12,7 +12,7 @@ Once completed, you'll have a Kubernetes cluster running $OSSproductName$ and th
 
 ## 1. Deploy the rate limit service
 
-$OSSproductName$ delegates the actual rate limit logic to a third party service. We've written a [simple rate limit service](https://github.com/emissary-ingress/emissary/tree/master/docker/test-ratelimit) that:
+$OSSproductName$ delegates the actual rate limit logic to a third party service. We've written a [simple rate limit service](https://github.com/emissary-ingress/emissary/tree/v2.1.0/docker/test-ratelimit) that:
 
 - listens for requests on port 5000;
 - handles gRPC `shouldRateLimit` requests;
