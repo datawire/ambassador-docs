@@ -75,9 +75,8 @@ Migration is a five-step process:
 
 1. **Install new CRDs.**
 
-   Before installing $AESproductName$ $version$ itself, you need to update the CRDs in
-   your cluster. This will allow supporting `getambassador.io/v2` resources as well as
-   `getambassador.io/v3alpha1`; it is mandatory.
+   Before installing $productName$ $version$ itself, you need to update the CRDs in
+   your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \

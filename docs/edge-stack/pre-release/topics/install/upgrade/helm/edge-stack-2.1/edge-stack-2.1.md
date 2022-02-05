@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.0.5 to $productName$ $version$ (Helm)
+# Upgrade $productName$ 2.1.0 or 2.1.1 to $productName$ $version$ (Helm)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.0.5 to $productName$ $version$. If
+  This guide covers migrating from $productName$ 2.1.0 or 2.1.1 to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.0/emissary-2.1">YAML-based
+  This guide is written for upgrading an installation made using Helm.
+  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-2.1/edge-stack-2.1">Helm-based
   upgrade instructions</a>.
 </Alert>
 
@@ -45,14 +45,17 @@ Migration is a two-step process:
 
 2. **Install $productName$ $version$.**
 
-   After installing the new CRDs, use Helm to upgrade $productName$ $version$:
+   After installing the new CRDs, use Helm to install $productName$ $version$. This will install
+   in the `$productNamespace$` namespace. If necessary for your installation (e.g. if you were
+   running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
 
       ```bash
-      helm upgrade emissary-ingress && \
-      kubectl rollout status  -n emissary deployment/emissary-ingress -w
+      helm upgrade -n $productNamespace$ \
+         $productHelmName$ datawire/$productHelmName$ && \
+      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
       ```
 
    <Alert severity="warning">
-    You must use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v2.1/charts/emissary-ingress"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.
-    Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
+     You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
+     Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
    </Alert>

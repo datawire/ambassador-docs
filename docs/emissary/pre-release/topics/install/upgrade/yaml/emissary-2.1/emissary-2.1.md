@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.0.5 to $productName$ $version$ (Helm)
+# Upgrade $productName$ 2.1.0 or 2.1.1 to $productName$ $version$ (YAML)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.0.5 to $productName$ $version$. If
+  This guide covers migrating from $productName$ 2.1.0 or 2.1.1 to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.0/emissary-2.1">YAML-based
+  This guide is written for upgrading an installation made without using Helm.
+  If you originally installed with Helm, see the <a href="../../../helm/emissary-2.1/emissary-2.1">Helm-based
   upgrade instructions</a>.
 </Alert>
 
@@ -22,7 +22,7 @@ Migration is a two-step process:
 1. **Install new CRDs.**
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
-   your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
+   your cluster. This is mandatory during any upgrade of $productName$.
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
@@ -45,14 +45,9 @@ Migration is a two-step process:
 
 2. **Install $productName$ $version$.**
 
-   After installing the new CRDs, use Helm to upgrade $productName$ $version$:
+   After installing the new CRDs, upgrade $productName$ $version$:
 
       ```bash
-      helm upgrade emissary-ingress && \
+      kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml && \
       kubectl rollout status  -n emissary deployment/emissary-ingress -w
       ```
-
-   <Alert severity="warning">
-    You must use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v2.1/charts/emissary-ingress"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.
-    Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
-   </Alert>

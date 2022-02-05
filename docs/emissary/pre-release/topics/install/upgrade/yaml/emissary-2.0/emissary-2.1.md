@@ -14,16 +14,15 @@ import Alert from '@material-ui/lab/Alert';
   upgrade instructions</a>.
 </Alert>
 
-Since $productName$'s configuration is entirely stored in Kubernetes resources, no special process
-is necessary to upgrade $productName$.
+Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between minor
+versions is straightforward.
 
 Migration is a two-step process:
 
 1. **Install new CRDs.**
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
-   your cluster; Helm will not do this for you. This will allow supporting
-   `getambassador.io/v2` resources as well as `getambassador.io/v3alpha1`; it is mandatory.
+   your cluster. This is mandatory during any upgrade of $productName$.
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
