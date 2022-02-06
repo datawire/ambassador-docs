@@ -37,6 +37,10 @@ spec:
   min_tls_version: v1.3
   sni: some-sni-hostname
 ```
+<Alert severity="warning">
+  The Kubernetes Secret named by <code>secret</code> must contain a valid TLS certificate.
+  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use.
+</Alert>
 
 Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`:
 
@@ -54,6 +58,11 @@ spec:
 ```
 
 The `example-service` service must now support TLS v1.3 for $productName$ to connect.
+
+<Alert severity="warning">
+  The Kubernetes Secret named by <code>secret</code> must contain a valid TLS certificate.
+  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use.
+</Alert>
 
 <Alert severity="warning">
   A <code>TLSContext</code> requires a certificate be provided, even in cases where the upstream

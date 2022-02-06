@@ -73,6 +73,12 @@ spec:
     name: host-secret
 ```
 
+<Alert severity="warning">
+  The Kubernetes Secret named by <code>tlsSecret</code> must contain a valid TLS certificate.
+  If it does not, $productName$ will reject the Secret and disable TLS termination for the
+  <code>Host</code>.
+</Alert>
+
 ### Advanced TLS configuration with the `Host`
 
 You can specify TLS configuration directly in the `Host` via the `tls` field. This is the
@@ -93,6 +99,12 @@ spec:
   tls:
     min_tls_version: v1.2
 ```
+
+<Alert severity="warning">
+  The Kubernetes Secret named by <code>tlsSecret</code> must contain a valid TLS certificate.
+  If it does not, $productName$ will reject the Secret and disable TLS termination for the
+  <code>Host</code>.
+</Alert>
 
 The following fields are accepted in the `tls` field:
 ```yaml
@@ -160,6 +172,12 @@ spec:
   tlsContext:
     name: min-tls-context
 ```
+<Alert severity="warning">
+  The <code>Host</code> and the <code>TLSContext</code> must name the same Kubernetes
+  Secret, and that Secret must contain a valid TLS certificate. If either of these
+  conditions is not met, $productName$ will reject the Secret and disable TLS termination
+  for the <code>Host</code>.
+</Alert>
 
 <Alert severity="warning">
   The <code>Host</code>'s <code>hostname</code> and the <code>TLSContext</code>'s&nbsp;
@@ -201,6 +219,13 @@ spec:
   secret: host-secret
   min_tls_version: v1.2
 ```
+
+<Alert severity="warning">
+  The <code>Host</code> and the <code>TLSContext</code> must name the same Kubernetes
+  Secret, and that Secret must contain a valid TLS certificate. If either of these
+  conditions is not met, $productName$ will reject the Secret and disable TLS termination
+  for the <code>Host</code>.
+</Alert>
 
 <Alert severity="warning">
   The <code>Host</code>'s <code>hostname</code> and the <code>TLSContext</code>'s&nbsp;
@@ -284,6 +309,12 @@ spec:
   # private_key_file: None
   # cacert_chain_file: None
 ```
+<Alert severity="warning">
+  <code>secret</code> and (if used) <code>ca_secret</code> must specify Kubernetes
+  Secrets containing a valid TLS certificate. If not, $productName$ will reject the
+  <code>TLSContext</code> entirely, which will disable TLS for <code>Host</code>s
+  using the <code>TLSContext</code>.
+</Alert>
 
 ### ALPN protocols
 

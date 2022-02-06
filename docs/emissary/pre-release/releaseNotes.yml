@@ -55,6 +55,17 @@ items:
           link: https://github.com/emissary-ingress/emissary/issues/3906
         docs: topics/running/statistics/8877-metrics/
 
+      - title: Validate certificates in TLS Secrets
+        type: bugfix
+        body: >-
+          Kubernetes Secrets that should contain TLS certificates are now validated before being
+          accepted for configuration. A Secret that contains an invalid TLS certificate will be logged
+          as an invalid resource.
+        github:
+        - title: 3821
+          link: https://github.com/emissary-ingress/emissary/issues/3821
+        docs: https://github.com/emissary-ingress/emissary/issues/3821
+
       - title: $productName$ will watch for Cloud Connect Tokens
         type: change
         body: >-
