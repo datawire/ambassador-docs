@@ -66,6 +66,16 @@ items:
           link: https://github.com/emissary-ingress/emissary/issues/3821
         docs: https://github.com/emissary-ingress/emissary/issues/3821
 
+      - title: Support binary uploads for AuthService
+        type: feature
+        body: >-
+          $productName$ now supports sending binary body data to the AuthService by
+          configuring <code>include_body.body_raw_bytes</code>.
+        github:
+        - title: "Support binary uploads"
+          link: https://github.com/emissary-ingress/emissary/pull/3995
+        docs: topics/running/services/auth-service/#fields
+
       - title: $productName$ will watch for Cloud Connect Tokens
         type: change
         body: >-
