@@ -29,15 +29,30 @@ below for more information on [rule precedence](#rule-precedence).
 Only one of `text_format`, `json_format`, or `text_format_source` may be provided.
 
 Custom response bodies are subject to Envoy's AccessLog substitution syntax
-and variables, see [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#config-access-log-format-strings) for more information.
+and variables, see [Envoy's documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#config-access-log-format-strings) for more information. 
 
-<Alert severity="warning">
-  Since Envoy does not currently provide a way to escape the "%" symbol in its substitution
-  strings, $productName$ will reject overrides that appear to contain "%" symbols that are
-  not part of a vaild command to Envoy.<br/>
-  <br/>
-  (Note that when using a "text/html" response, it may be possible to use HTML entity encoding
-  - &amp;#x25; - to convey a "%" sign.)
+Note that the AccessLog substitutions use `%` as a delimiter (for example,
+`%RESPONSE_CODE%`). To include a literal `%` in a custom response body, use `%%`.
+For example,
+
+```
+%%RESPONSE_CODE%% %RESPONSE_CODE%
+```
+
+would render as
+
+```
+%RESPONSE_CODE% 401
+```
+
+for a request that resulted in a response code of 401.
+
+<Alert severity="Warning">
+  If the <code>%</code> symbol is not escaped as above (<code>%%</code>), it may
+  only be as part of an <a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#config-access-log-format-strings">
+  AccessLog substitution</a>, for example <code>%RESPONSE_CODE%</code> or
+  <code>%PROTOCOL%</code>. If a <code>%</code> is neither part of a valid
+  substitution nor an escape, $productName$ will ignore the custom error response.
 </Alert>
 
 ## Simple response bodies
