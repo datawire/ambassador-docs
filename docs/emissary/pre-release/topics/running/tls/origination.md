@@ -39,7 +39,9 @@ spec:
 ```
 <Alert severity="warning">
   The Kubernetes Secret named by <code>secret</code> must contain a valid TLS certificate.
-  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use.
+  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use;
+  see <b><a href="../#certificates-and-secrets">Certificates and Secrets</a></b> in the
+  TLS overview.
 </Alert>
 
 Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`:
@@ -61,7 +63,9 @@ The `example-service` service must now support TLS v1.3 for $productName$ to con
 
 <Alert severity="warning">
   The Kubernetes Secret named by <code>secret</code> must contain a valid TLS certificate.
-  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use.
+  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use;
+  see <b><a href="../#certificates-and-secrets">Certificates and Secrets</a></b> in the
+  TLS overview.  
 </Alert>
 
 <Alert severity="warning">

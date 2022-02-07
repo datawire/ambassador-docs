@@ -44,7 +44,9 @@ requests upstream.
 
 <Alert severity="warning">
   The Kubernetes Secret must contain a valid TLS certificate. If it does not, $productName$
-  will reject the Secret and disable TLS termination for the <code>Host</code>.
+  will reject the Secret and completely disable the <code>Host</code>; see&nbsp;
+  <b><a href="../#certificates-and-secrets">Certificates and
+  Secrets</a></b> in the TLS overview.
 </Alert>
 
 After loading the certificates, we can tell $productName$ when to use them by
