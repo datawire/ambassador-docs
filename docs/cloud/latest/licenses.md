@@ -8,7 +8,6 @@ Ambassador Cloud incorporates Free and Open Source software under the following 
 * [Creative Commons Attribution 3.0 Unported](https://spdx.org/licenses/CC-BY-3.0.html)
 * [Creative Commons Attribution 4.0 International](https://spdx.org/licenses/CC-BY-4.0.html)
 * [Creative Commons Zero v1.0 Universal](https://spdx.org/licenses/CC0-1.0.html)
-* [Do What The F*ck You Want To Public License](https://spdx.org/licenses/WTFPL.html)
 * [Eclipse Public License 1.0](https://spdx.org/licenses/EPL-1.0.html)
 * [ISC license](https://opensource.org/licenses/ISC)
 * [MIT license](https://opensource.org/licenses/MIT)
