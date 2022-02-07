@@ -4,6 +4,16 @@ If you’re experiencing issues with the $productName$ and cannot diagnose the i
 
 We assume that you already have a running $productName$ installation in the following sections.
 
+## A Note on TLS
+
+[TLS] can appear intractable if you haven't set up [certificates] correctly. If you're
+having trouble with TLS, always [check the logs] of your $productName$ Pods and look for
+certificate errors.
+
+[TLS]: ../tls
+[certificates]: ../tls#certificates-and-secrets
+[check the logs]: #review-logs
+
 ## Check $productName$ status
 
 1. First, check the $productName$ Deployment with the following: `kubectl get -n $productNamespace$ deployments`

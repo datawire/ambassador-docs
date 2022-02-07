@@ -34,6 +34,17 @@ Once the basic communications setup is in place, $productName$ `Mapping`s and `T
   <a href="../../topics/running/tls/#tlscontext">Learn more about <code>TLSContext</code></a>.
 </Alert>
 
+A Note on TLS
+-------------
+
+[TLS] can appear intractable if you haven't set up [certificates] correctly. If you're
+having trouble with TLS, always [check the logs] of your $productName$ Pods and look for
+certificate errors.
+
+[TLS]: ../../topics/running/tls
+[certificates]: ../../topics/running/tls#certificates-and-secrets
+[check the logs]: ../../topics/running/debugging#review-logs
+
 Examples / Cookbook
 -------------------
 
