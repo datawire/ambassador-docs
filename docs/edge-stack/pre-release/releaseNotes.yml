@@ -79,11 +79,11 @@ items:
           link: https://github.com/emissary-ingress/emissary/issues/3821
         docs: https://github.com/emissary-ingress/emissary/issues/3821
 
-      - title: $productName$ will watch for Cloud Connect Tokens
+      - title: Ambassador Edge Stack will watch for Cloud Connect Tokens
         type: change
         body: >-
           $productName$ will now watch for ConfigMap or Secret resources specified by the
-          `AGENT_CONFIG_RESOURCE_NAME` environment variable in order to allow all
+          <code>AGENT_CONFIG_RESOURCE_NAME</code> environment variable in order to allow all
           components (and not only the Ambassador Agent) to authenticate requests to
           Ambassador Cloud.
 
