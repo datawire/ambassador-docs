@@ -77,7 +77,7 @@ items:
         github:
         - title: 3821
           link: https://github.com/emissary-ingress/emissary/issues/3821
-        docs: https://github.com/emissary-ingress/emissary/issues/3821
+        docs: ../topics/running/tls
 
       - title: Ambassador Edge Stack will watch for Cloud Connect Tokens
         type: change
