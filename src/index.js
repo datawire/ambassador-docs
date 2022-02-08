@@ -15,7 +15,7 @@ import template from '../../src/utils/template';
 import AllVersions from './components/AllVersions';
 import ContentTable from './components/ContentTable';
 import DocsFooter from './components/DocsFooter';
-import DocsHome from './components/DocsHome';
+import DocsHome from './components/DocsHome/DocsHome';
 import SearchBox from './components/SearchBox';
 import IsAesPage from './components/ShowAesPage';
 import SidebarContent from './components/SidebarContent';
