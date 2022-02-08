@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.1/edge-stack-2.1">YAML-based
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.2/edge-stack-2.2">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -49,14 +49,26 @@ important notes:
    it simpler to roll back, if needed. Alternate, you can isolate the two configurations
    as described above.
 
-3. **Be careful about label selectors on Kubernetes Services!**
+3. **Be careful to only have one $productName$ Agent running at a time.**
 
-   If you have services in $OSSproductName$ 1.14.2 that use selectors that will match
+   The $productName$ Agent is responsible for communications between
+   $productName$ and Ambassador Cloud. If multiple versions of the Agent are
+   running simultaneously, Ambassador Cloud could see conflicting information
+   about your cluster.
+
+   The best way to avoid multiple agents when installing with Helm is to use
+   `--set emissary-ingress.agent.enabled=false` to tell Helm not to install a
+   new Agent with productName$ $version$. Once testing is done, you can switch
+   Agents safely.
+
+4. **Be careful about label selectors on Kubernetes Services!**
+
+   If you have services in $OSSproductName$ 2.2 that use selectors that will match
    Pods from $AESproductName$ $version$, traffic will be erroneously split between
-   $OSSproductName$ 1.14.2 and $AESproductName$ $version$. The labels used by $AESproductName$
+   $OSSproductName$ 2.2 and $AESproductName$ $version$. The labels used by $AESproductName$
    $version$ include:
 
-   ```
+   ```yaml
    app.kubernetes.io/name: edge-stack
    app.kubernetes.io/instance: edge-stack
    app.kubernetes.io/part-of: edge-stack
@@ -71,7 +83,7 @@ affected by changes meant for $AESproductName$ $version$, but it is more effort.
 
 ## Side-by-Side Migration Steps
 
-Migration is a five-step process:
+Migration is a six-step process:
 
 1. **Install new CRDs.**
 
@@ -116,6 +128,7 @@ Migration is a five-step process:
 
       ```bash
       helm install -n emissary \
+           --set emissary-ingress.agent.enabled=false \
            --set=authService.create=false \
            --set=rateLimit.create=false \
            --set=createDevPortalMappings=false \
@@ -127,6 +140,7 @@ Migration is a five-step process:
 
       ```bash
       helm install -n emissary \
+           --set emissary-ingress.agent.enabled=false \
            --set=authService.create=false \
            --set=rateLimit.create=false \
            --set=createDevPortalMappings=false \
@@ -136,7 +150,7 @@ Migration is a five-step process:
       ```
 
    <Alert severity="warning">
-     You must use the <a href="https://github.com/datawire/edge-stack/"><code>edge-stack</code> Helm chart</a> to install $AESproductName$ $version$.
+     You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName</code> Helm chart</a> to install $AESproductName$ $version$.
      Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
    </Alert>
 
@@ -161,28 +175,55 @@ Migration is a five-step process:
    your original $OSSproductName$ $version$ Service to point to $AESproductName$ $version$. Use
    `kubectl edit -n emissary service emissary-ingress` and change the `selectors` to:
 
-   ```
+   ```yaml
    app.kubernetes.io/instance: edge-stack
    app.kubernetes.io/name: edge-stack
    profile: main
    ```
 
-   Once that is done, it's safe to remove the `emissary-ingress-admin` Service and the `emissary-ingress`
-   Deployment, and to enable $AESproductName$'s filter configuration:
+   Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
+   Service.
 
-   ```bash
-   kubectl delete -n emissary service/emissary-ingress-admin deployment/emissary-ingress
-   helm upgrade -n emissary \
-        --set=authService.create=true \
-        --set=rateLimit.create=true \
-        --set=createDevPortalMappings=true \
-        edge-stack datawire/edge-stack && \
-   kubectl rollout status -n emissary deployment/edge-stack -w
+5. **Install the $productName$ $version$ Ambassador Agent.**
+
+   First, scale the $OSSproductName$ agent to 0:
+
+   ```
+   kubectl scale -n emissary deployment/emissary-agent --replicas=0
    ```
 
-   You may also want to redirect DNS to the `edge-stack` Service and remove the
-   `emissary-ingress` Service.
+   Once that's done, install the new Agent:
 
-5. What's next?
+   ```
+   helm install -n emissary $productHelmName$ datawire/$productHelmName$ \
+     --set emissary-ingress.agent.enabled=true
+   ```
 
-   Now that you have $AESproductName$ up and running, check out the [Getting Started](../../../../../../tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.
+6. **Finally, enable ACME and filtering in $productName$ $version$.**
+
+   First, scale the $OSSproductName$ Deployment to 0: 
+
+   ```
+   kubectl scale -n emissary deployment/emissary --replicase=0
+   ```
+
+   Once that's done, enable ACME and filtering in $productName$ $version$:
+
+   ```bash
+   helm upgrade -n emissary \
+     --set=authService.create=true \
+     --set=rateLimit.create=true \
+     --set=createDevPortalMappings=true \
+   edge-stack datawire/edge-stack && \
+   kubectl rollout status -n ambassador deployment/edge-stack -w
+   ````
+
+Congratulations! At this point, $productName$ $version$ is fully running, and
+it's safe to remove the old `emissary` and `emissary-agent` Deployments:
+
+```
+kubectl delete -n emissary deployment/emissary deployment/emissary-agent
+```
+
+You may also want to redirect DNS to the `edge-stack` Service and remove the
+`ambassador` Service.

@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-1.14/edge-stack-2.1">Helm-based
+  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-1.14/edge-stack-2.2">Helm-based
   upgrade instructions</a>.
 </Alert>
 
@@ -63,17 +63,43 @@ important caveats:
 
 4. **Check `AuthService` and `RateLimitService` resources, if any.**
 
-   If you have an [`AuthService`](../../../../../using/authservice) or
+   If you have an [`AuthService`](../../../../../using/authservice/) or
    [`RateLimitService`](../../../../../running/services/rate-limit-service) installed, make
    sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
    If they are not, the initial migration tests may fail.
 
-5. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
+   Additionally, when installing with Helm, you must make sure that $productName$ $version$
+   does not attempt to create duplicate `AuthService` and `RateLimitService` entries. Add
+
+   ```
+   --set rateLimit.create=false
+   ```
+
+   and
+
+   ```
+   --set authService.create=false
+   ```
+
+   on the Helm command line to prevent duplicating these resources.
+
+5. **Be careful to only have one $productName$ Agent running at a time.**
+
+   The $productName$ Agent is responsible for communications between
+   $productName$ and Ambassador Cloud. If multiple versions of the Agent are
+   running simultaneously, Ambassador Cloud could see conflicting information
+   about your cluster.
+
+   The migration YAML used below to install $productName$ $version$ will not
+   install a duplicate agent. If you are building your own YAML, make sure not
+   to include a duplicate agent.
+
+6. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
 
    This is required to manage a known issue. This issue will be resolved in a future
    $AESproductName$ release.
 
-6. **Be careful about label selectors on Kubernetes Services!**
+7. **Be careful about label selectors on Kubernetes Services!**
 
    If you have services in $productName$ 1.14.2 that use selectors that will match
    Pods from $productName$ $version$, traffic will be erroneously split between
@@ -96,7 +122,7 @@ ACME, but it is more effort.
 
 ## Side-by-Side Migration Steps
 
-Migration is a six-step process:
+Migration is an eight-step process:
 
 1. **Make sure that older configuration resources are not present.**
 
@@ -148,21 +174,22 @@ Migration is a six-step process:
    **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   Our `aes-defaultns-migration.yaml` is set up as follows:
+   Our `aes-ambassadorns-migration.yaml` is set up as follows:
 
-   - It assumes that $productName$ 1.14.2 is installed in the `default` namespace.
+   - It assumes that $productName$ 1.14.2 is installed in the `ambassador` namespace (this was typical).
    - It sets the `AES_ACME_LEADER_DISABLE` environment variable to prevent $productName$ $version$
      from trying to manage ACME (leaving $productName$ 1.14.2 to do it instead).
    - It does NOT set `AMBASSADOR_LABEL_SELECTOR`.
-   - It does NOT create an `AuthService` or `RateLimitService`. It is very important that $productName$
+   - It does NOT install the Ambassador Agent.
+   - It does NOT create an `AuthService` or a `RateLimitService`. It is very important that $productName$
      $version$ not attempt to create these resources, as they are already provided for your $productName$
      1.14.2 installation.
 
-   If any of these do not match your situation, download `aes-defaultns-migration.yaml` and edit it
+   If any of these do not match your situation, download `aes-ambassadorns-migration.yaml` and edit it
    as needed.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-defaultns-migration.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-migration.yaml && \
    kubectl rollout status -n default deployment/aes -w
    ```
 
@@ -264,21 +291,47 @@ Migration is a six-step process:
    profile: main
    ```
 
-   Once that is done, it's safe to remove the `ambassador-admin` Service and the `ambassador`
-   Deployment, and to enable ACME in $productName$ $version$:
+   Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
+   Service.
+
+7. **Install the $productName$ $version$ Ambassador Agent.**
+
+   First, scale the 1.14.2 agent to 0:
 
    ```
-   kubectl delete service/ambassador-admin deployment/ambassador
+   kubectl scale deployment/ambassador-agent --replicas=0
+   ```
+
+   Once that's done, install the new Agent:
+
+   ```
+   helm install $productHelmName$ datawire/$productHelmName$ \
+     --set agent.enabled=true
+   ```
+
+8. **Finally, enable ACME in $productName$ $version$.**
+
+   First, scale the 1.14 Ambassador to 0: 
+
+   ```
+   kubectl scale deployment/ambassador --replicase=0
+   ```
+
+   Once that's done, enable ACME in $productName$ $version$:
+
+   ```bash
    kubectl set env deploy/aes AES_ACME_LEADER_DISABLE-
-   kubectl rollout status -n default deployment/aes -w
-   ```
+   kubectl rollout status -n ambassador deployment/edge-stack -w
+   ````
 
-   You may also want to redirect DNS to the `edge-stack` Service and remove the
-   `ambassador` Service.
+Congratulations! At this point, $productName$ $version$ is fully running, and
+it's safe to remove the `ambassador` and `ambassador-agent` Deployments:
 
-   Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
-   any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+```
+kubectl delete deployment/ambassador deployment/ambassador-agent
+```
 
-6. What's next?
-
-   Now that you have $productName$ up and running, check out the [Getting Started](../../../../../../tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.
+Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
+any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+You may also want to redirect DNS to the `edge-stack` Service and remove the
+`ambassador` Service.

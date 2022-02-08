@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/edge-stack-1.14/edge-stack-2.1">YAML-based
+  If you did not install with Helm, see the <a href="../../../yaml/edge-stack-1.14/edge-stack-2.2">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -83,12 +83,24 @@ important caveats:
 
    on the Helm command line to prevent duplicating these resources.
 
-5. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
+5. **Be careful to only have one $productName$ Agent running at a time.**
+
+   The $productName$ Agent is responsible for communications between
+   $productName$ and Ambassador Cloud. If multiple versions of the Agent are
+   running simultaneously, Ambassador Cloud could see conflicting information
+   about your cluster.
+
+   The best way to avoid multiple agents when installing with Helm is to use
+   `--set emissary-ingress.agent.enabled=false` to tell Helm not to install a
+   new Agent with productName$ $version$. Once testing is done, you can switch
+   Agents safely.
+
+6. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
 
    This is required to manage a known issue. This issue will be resolved in a future
    $AESproductName$ release.
 
-6. **Be careful about label selectors on Kubernetes Services!**
+7. **Be careful about label selectors on Kubernetes Services!**
 
    If you have services in $productName$ 1.14.2 that use selectors that will match
    Pods from $productName$ $version$, traffic will be erroneously split between
@@ -111,7 +123,7 @@ ACME, but it is more effort.
 
 ## Side-by-Side Migration Steps
 
-Migration is a six-step process:
+Migration is an eight-step process:
 
 1. **Make sure that older configuration resources are not present.**
 
@@ -176,6 +188,7 @@ Migration is a six-step process:
 
       ```bash
       helm install -n ambassador \
+           --set emissary-ingress.agent.enabled=false \
            --set rateLimit.create=false \
            --set authService.create=false \
            --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
@@ -187,6 +200,7 @@ Migration is a six-step process:
 
       ```bash
       helm install -n ambassador \
+           --set emissary-ingress.agent.enabled=false \
            --set rateLimit.create=false \
            --set authService.create=false \
            --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
@@ -196,8 +210,8 @@ Migration is a six-step process:
       ```
 
    <Alert severity="warning">
-     You must use the <a href="https://github.com/datawire/edge-stack/"><code>edge-stack</code> Helm chart</a> to install $productName$ $version$.
-     Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
+    You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> for $productName$ $version$.
+    Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
    </Alert>
 
 4. **Install `Listener`s and `Host`s as needed.**
@@ -292,23 +306,49 @@ Migration is a six-step process:
    profile: main
    ```
 
-   Once that is done, it's safe to remove the `ambassador-admin` Service and the `ambassador`
-   Deployment, and to enable ACME in $productName$ $version$:
+   Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
+   Service.
 
-   ```bash
-   kubectl delete service/ambassador-admin deployment/ambassador
-   helm upgrade -n ambassador \
-        --set emissary-ingress.env.AES_ACME_LEADER_DISABLE= \
-        edge-stack datawire/edge-stack && \
-   kubectl rollout status -n ambassador deployment/edge-stack -w
+7. **Install the $productName$ $version$ Ambassador Agent.**
+
+   First, scale the 1.14.2 agent to 0:
+
+   ```
+   kubectl scale deployment/ambassador-agent --replicas=0
    ```
 
-   You may also want to redirect DNS to the `edge-stack` Service and remove the
-   `ambassador` Service.
+   Once that's done, install the new Agent:
 
-   Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
-   any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+   ```
+   helm install $productHelmName$ datawire/$productHelmName$ \
+     --set agent.enabled=true
+   ```
 
-6. What's next?
+8. **Finally, enable ACME in $productName$ $version$.**
 
-   Now that you have $productName$ up and running, check out the [Getting Started](../../../../../../tutorials/getting-started) guide for recommendations on what to do next and take full advantage of its features.
+   First, scale the 1.14 Ambassador to 0: 
+
+   ```
+   kubectl scale deployment/ambassador --replicase=0
+   ```
+
+   Once that's done, enable ACME in $productName$ $version$:
+
+   ```bash
+   helm upgrade -n ambassador \
+      --set emissary-ingress.env.AES_ACME_LEADER_DISABLE= \
+      edge-stack datawire/edge-stack && \
+   kubectl rollout status -n ambassador deployment/edge-stack -w
+   ````
+
+Congratulations! At this point, $productName$ $version$ is fully running, and
+it's safe to remove the old `ambassador` and `ambassador-agent` Deployments:
+
+```
+kubectl delete deployment/ambassador deployment/ambassador-agent
+```
+
+Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
+any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+You may also want to redirect DNS to the `edge-stack` Service and remove the
+`ambassador` Service.

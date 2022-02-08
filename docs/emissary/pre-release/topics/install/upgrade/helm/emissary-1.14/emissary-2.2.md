@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-1.14/emissary-2.1">YAML-based
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-1.14/emissary-2.2">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -68,6 +68,17 @@ important caveats:
    profile: main
    ```
 
+4. **Be careful to only have one $productName$ Agent running at a time.**
+
+   The $productName$ Agent is responsible for communications between
+   $productName$ and Ambassador Cloud. If multiple versions of the Agent are
+   running simultaneously, Ambassador Cloud could see conflicting information
+   about your cluster.
+
+   The best way to avoid multiple agents when installing with Helm is to use
+   `--set agent.enabled=false` to tell Helm not to install a new Agent with
+   $productName$ $version$. Once testing is done, you can switch Agents safely.
+
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
@@ -75,7 +86,7 @@ ACME, but it is more effort.
 
 ## Side-by-Side Migration Steps
 
-Migration is a six-step process:
+Migration is a seven-step process:
 
 1. **Make sure that older configuration resources are not present.**
 
@@ -127,47 +138,31 @@ Migration is a six-step process:
    **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   You should install $productName$ $version$ using Helm if you installed $productName$ 1.14.2
-   with Helm, or by manually applying YAML if not. To check if you installed $productName$ 1.14.2
-   with Helm, run the following command to see if it returns resources:
-
-   ```
-   $ helm list
-   NAME              NAMESPACE REVISION  UPDATED     ...
-   $productDeploymentName$ default  1           ...
-   ```
-
-   - If Helm returns resources, continue with [Helm](../../../../helm/#install-with-helm). **Note that if your $productName$ 1.14.2
+   **Note that if your $productName$ 1.14.2
    installation uses a nonstandard namespace, you will need to include the namespace in
    the commands below.**
 
-      - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
+   - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
 
-         ```bash
-         helm install $productHelmName$ datawire/$productHelmName$ && \
-         kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-         ```
+      ```bash
+      helm install $productHelmName$ datawire/$productHelmName$ \
+        --set agent.enabled=false \
+      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+      ```
 
-      - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
+   - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
 
-         ```bash
-         helm install $productHelmName$ datawire/$productHelmName$ \
-           --set env.AMBASSADOR_LABEL_SELECTOR="version-two=true" && \
-         kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-         ```
+      ```bash
+      helm install $productHelmName$ datawire/$productHelmName$ \
+        --set agent.enabled=false \
+        --set env.AMBASSADOR_LABEL_SELECTOR="version-two=true" && \
+      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+      ```
 
-      <Alert severity="warning">
-       You must use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v2.1/charts/emissary-ingress"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.
-       Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
-      </Alert>
-
-   - If Helm does not return resources, continue with YAML. **Note that if your $productName$
-     1.14.2 installation uses a nonstandard namespace, or if you need to set `AMBASSADOR_LABEL_SELECTOR`,
-     you will need to download the YAML and edit it.**
-
-     ```
-     kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml
-     ```
+   <Alert severity="warning">
+    You must use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v2.1/charts/emissary-ingress"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.
+    Do not use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v1.14/charts/ambassador"><code>ambassador</code> Helm chart</a>.
+   </Alert>
 
    <Alert severity="info">
      $productName$ $version$ includes a Deployment in the $productNamespace$ namespace
@@ -270,15 +265,31 @@ Migration is a six-step process:
    profile: main
    ```
 
-   Once that is done, it's safe to remove the `ambassador-admin` Service and the `ambassador`
-   Deployment:
+   Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
+   Service.
+
+7. **Finally, install the $productName$ $version$ Ambassador Agent.**
+
+   First, scale the 1.14.2 agent to 0:
 
    ```
-   kubectl delete service/ambassador-admin deployment/ambassador
+   kubectl scale deployment/ambassador-agent --replicas=0
    ```
 
-   You may also want to redirect DNS to the `emissary-ingress` Service and remove the
-   `ambassador` Service.
+   Ocne that's done, install the new Agent:
 
-   Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
-   any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+   ```
+   helm install $productHelmName$ datawire/$productHelmName$ \
+     --set agent.enabled=true
+   ```
+
+Congratulations! At this point, $productName$ $version$ is fully running and it's safe to remove the `ambassador` and `ambassador-agent` Deployments:
+
+```
+kubectl delete deployment/ambassador deployment/ambassador-agent
+```
+
+Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
+any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+You may also want to redirect DNS to the `edge-stack` Service and remove the
+`ambassador` Service.

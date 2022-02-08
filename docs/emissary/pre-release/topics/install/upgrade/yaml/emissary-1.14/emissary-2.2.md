@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/emissary-1.14/emissary-2.1">Helm-based
+  If you originally installed with Helm, see the <a href="../../../helm/emissary-1.14/emissary-2.2">Helm-based
   upgrade instructions</a>.
 </Alert>
 
@@ -68,6 +68,17 @@ important caveats:
    profile: main
    ```
 
+4. **Be careful to only have one $productName$ Agent running at a time.**
+
+   The $productName$ Agent is responsible for communications between
+   $productName$ and Ambassador Cloud. If multiple versions of the Agent are
+   running simultaneously, Ambassador Cloud could see conflicting information
+   about your cluster.
+
+   The migration YAML used below to install $productName$ $version$ will not
+   install a duplicate agent. If you are building your own YAML, make sure not
+   to include a duplicate agent.
+
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
@@ -75,7 +86,7 @@ ACME, but it is more effort.
 
 ## Side-by-Side Migration Steps
 
-Migration is a six-step process:
+Migration is a seven-step process:
 
 1. **Make sure that older configuration resources are not present.**
 
@@ -240,15 +251,32 @@ Migration is a six-step process:
    profile: main
    ```
 
-   Once that is done, it's safe to remove the `ambassador-admin` Service and the `ambassador`
-   Deployment:
+   Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
+   Service.
+
+7. **Finally, install the $productName$ $version$ Ambassador Agent.**
+
+   First, scale the 1.14.2 agent to 0:
 
    ```
-   kubectl delete service/ambassador-admin deployment/ambassador
+   kubectl scale deployment/ambassador-agent --replicas=0
    ```
 
-   You may also want to redirect DNS to the `emissary-ingress` Service and remove the
-   `ambassador` Service.
+   Ocne that's done, install the new Agent into the same namespace as your
+   Emissary deployment -- again, if your Emissary installation uses a nonstandard
+   namespace, you will need to download and edit `emissary-defaultns-agent.yaml`:
 
-   Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
-   any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+   ```
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns-agent.yaml
+   ```
+
+Congratulations! At this point, $productName$ $version$ is fully running and it's safe to remove the `ambassador` and `ambassador-agent` Deployments:
+
+```
+kubectl delete deployment/ambassador deployment/ambassador-agent
+```
+
+Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
+any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.
+You may also want to redirect DNS to the `edge-stack` Service and remove the
+`ambassador` Service.

@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.0.5 to $productName$ $version$ (YAML)
+# Upgrade $productName$ 2.1.X to $productName$ $version$ (YAML)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.0.5 to $productName$ $version$. If
+  This guide covers migrating from $productName$ 2.1.0 or 2.1.1 to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/emissary-2.0/emissary-2.1">Helm-based
+  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-2.1/edge-stack-2.2">Helm-based
   upgrade instructions</a>.
 </Alert>
 
