@@ -68,8 +68,8 @@ important caveats:
    sure that they are using the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services).
    If they are not, the initial migration tests may fail.
 
-   Additionally, you must make sure that $productName$ $version$ does not attempt to create
-   duplicate `AuthService` and `RateLimitService` entries, using
+   Additionally, when installing with Helm, you must make sure that $productName$ $version$
+   does not attempt to create duplicate `AuthService` and `RateLimitService` entries. Add
 
    ```
    --set rateLimit.create=false
@@ -81,7 +81,7 @@ important caveats:
    --set authService.create=false
    ```
 
-   when installing with Helm.
+   on the Helm command line to prevent duplicating these resources.
 
 5. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
 
