@@ -5,15 +5,15 @@ import Alert from '@material-ui/lab/Alert';
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [When and how to use the Ingress resource](#when-and-how-to-use-the-ingress-resource)
-* [What is required to use the Ingress resource?](#what-is-required-to-use-the-ingress-resource)
-* [When to use an Ingress instead of annotations or CRDs](#when-to-use-an-ingress-instead-of-annotations-or-crds)
-* [Ingress support](#ingress-support)
-* [Examples of Ingress configs vs Mapping configs](#examples-of-ingress-configs-vs-mapping-configs)
-* [Ingress routes and mappings](#ingress-routes-and-mappings)
-* [The Minimal Ingress](#the-minimal-ingress)
-* [Name based virtual hosting with an Ambassador ID](#name-based-virtual-hosting-with-an-ambassador-id)
-* [TLS Termination](#tls-termination)
+- [When and how to use the Ingress resource](#when-and-how-to-use-the-ingress-resource)
+- [What is required to use the Ingress resource?](#what-is-required-to-use-the-ingress-resource)
+- [When to use an Ingress instead of annotations or CRDs](#when-to-use-an-ingress-instead-of-annotations-or-crds)
+- [Ingress support](#ingress-support)
+- [Examples of Ingress configs vs Mapping configs](#examples-of-ingress-configs-vs-mapping-configs)
+- [Ingress routes and mappings](#ingress-routes-and-mappings)
+- [The Minimal Ingress](#the-minimal-ingress)
+- [Name based virtual hosting with an Ambassador ID](#name-based-virtual-hosting-with-an-ambassador-id)
+- [TLS Termination](#tls-termination)
 
 </div>
 
@@ -27,15 +27,15 @@ If you're new to $productName$ and to Kubernetes, we'd recommend you start with 
 
 - Know what version of Kubernetes you are using.
 
-   - In Kubernetes 1.13 and below, the Ingress was only included in the `extensions` API.
+  - In Kubernetes 1.13 and below, the Ingress was only included in the `extensions` API.
 
-   - Starting in Kubernetes 1.14, the Ingress was added to the new `networking.k8s.io` API.
+  - Starting in Kubernetes 1.14, the Ingress was added to the new `networking.k8s.io` API.
 
-   - Kubernetes 1.18 introduced the IngressClass resource to the existing `networking.k8s.io/v1beta1` API.
+  - Kubernetes 1.18 introduced the IngressClass resource to the existing `networking.k8s.io/v1beta1` API.
 
-   <Alert severity="info"> If you are using 1.14 and above, it is recommended to use <code>apiVersion: networking.k8s.io/v1beta1</code> when defining an Ingress. Since both are still supported in all 1.14+ versions of Kubernetes, this document will use <code>extensions/v1beta1</code> for compatibility reasons.
-   If you are using 1.18 and above, sample usage of the IngressClass resource and <code>pathType</code> field are <a href="https://blog.getambassador.io/new-kubernetes-1-18-extends-ingress-c34abdc2f064"> available on our blog</a>.
-   </Alert>
+  <Alert severity="info"> If you are using 1.14 and above, it is recommended to use <code>apiVersion: networking.k8s.io/v1beta1</code> when defining an Ingress. Since both are still supported in all 1.14+ versions of Kubernetes, this document will use <code>extensions/v1beta1</code> for compatibility reasons.
+  If you are using 1.18 and above, sample usage of the IngressClass resource and <code>pathType</code> field are <a href="https://blog.getambassador.io/new-kubernetes-1-18-extends-ingress-c34abdc2f064"> available on our blog</a>.
+  </Alert>
 
 - You will need RBAC permissions to create Ingress resources in either
   the `extensions` `apiGroup` (present in all supported versions of
@@ -44,16 +44,16 @@ If you're new to $productName$ and to Kubernetes, we'd recommend you start with 
 
 - $productName$ will need RBAC permissions to get, list, watch, and update Ingress resources.
 
-  You can see this in the [`aes-crds.yaml`](https://app.getambassador.io/yaml/v2-docs/$ossVersion$/aes.yaml)
+  You can see this in the [`aes-crds.yaml`](https://app.getambassador.io/yaml/ambassador-docs/latest/aes.yaml)
   file, but this is the critical rule to add to $productName$'s `Role` or `ClusterRole`:
 
   ```yaml
-  - apiGroups: [ "extensions", "networking.k8s.io" ]
-    resources: [ "ingresses", "ingressclasses" ]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [ "extensions", "networking.k8s.io" ]
-    resources: [ "ingresses/status" ]
-    verbs: ["update"]
+  - apiGroups: ['extensions', 'networking.k8s.io']
+    resources: ['ingresses', 'ingressclasses']
+    verbs: ['get', 'list', 'watch']
+  - apiGroups: ['extensions', 'networking.k8s.io']
+    resources: ['ingresses/status']
+    verbs: ['update']
   ```
 
   <Alert severity="info">
@@ -105,15 +105,15 @@ We recommend that $productName$ be configured using CRDs. The Ingress resource i
 
 $productName$ supports basic core functionality of the Ingress resource, as defined by the [Ingress resource](https://kubernetes.io/docs/concepts/services-networking/ingress/) itself:
 
-* Basic routing is supported, including the `route` specification and the default backend functionality. It's particularly easy to use a minimal Ingress to the $productName$ diagnostic UI.
-* [TLS termination](../tls/) is supported. You can use multiple Ingress resources for SNI.
-* Using the Ingress resource in concert with $productName$ CRDs or annotations is supported. This includes $productName$ annotations on the Ingress resource itself.
+- Basic routing is supported, including the `route` specification and the default backend functionality. It's particularly easy to use a minimal Ingress to the $productName$ diagnostic UI.
+- [TLS termination](../tls/) is supported. You can use multiple Ingress resources for SNI.
+- Using the Ingress resource in concert with $productName$ CRDs or annotations is supported. This includes $productName$ annotations on the Ingress resource itself.
 
 $productName$ does **not** extend the basic Ingress specification with the following exceptions:
 
-* The `getambassador.io/ambassador-id` annotation allows you to set [the Ambassador ID](../running/#ambassador_id) for the Ingress itself.
+- The `getambassador.io/ambassador-id` annotation allows you to set [the Ambassador ID](../running/#ambassador_id) for the Ingress itself.
 
-* The `getambassador.io/config` annotation can be provided on the Ingress resource, just as on a Service.
+- The `getambassador.io/config` annotation can be provided on the Ingress resource, just as on a Service.
 
 Note that if you need to set `getambassador.io/ambassador-id` on the Ingress, you will also need to set `ambassador-id` on resources within the annotation.
 
@@ -135,12 +135,12 @@ metadata:
   name: test-ingress
 spec:
   rules:
-  - http:
-      paths:
-      - path: /foo/
-        backend:
-          serviceName: service1
-          servicePort: 80
+    - http:
+        paths:
+          - path: /foo/
+            backend:
+              serviceName: service1
+              servicePort: 80
 ```
 
 This is the equivalent configuration using a Mapping instead:
@@ -152,7 +152,7 @@ kind: Mapping
 metadata:
   name: test-ingress-0-0
 spec:
-  hostname: "*"
+  hostname: '*'
   prefix: /foo/
   service: service1:80
 ```
@@ -169,19 +169,19 @@ metadata:
   name: test-ingress
 spec:
   rules:
-  - http:
-      paths:
-      - path: /foo/
-        backend:
-          serviceName: service1
-          servicePort: 80
+    - http:
+        paths:
+          - path: /foo/
+            backend:
+              serviceName: service1
+              servicePort: 80
 ---
 apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:
   name: my-mapping
 spec:
-  hostname: "*"
+  hostname: '*'
   prefix: /foo/
   service: service2
 ```
@@ -213,7 +213,7 @@ kind: Mapping
 metadata:
   name: test-ingress
 spec:
-  hostname: "*"
+  hostname: '*'
   prefix: /
   service: exampleservice:8080
 ```
@@ -256,7 +256,7 @@ kind: Mapping
 metadata:
   name: host-foo-mapping
 spec:
-  ambassador_id: [ "externalid" ]
+  ambassador_id: ['externalid']
   prefix: /
   host: foo.bar.com
   service: service1
@@ -266,7 +266,7 @@ kind: Mapping
 metadata:
   name: host-bar-mapping
 spec:
-  ambassador_id: [ "externalid" ]
+  ambassador_id: ['externalid']
   prefix: /
   host: bar.foo.com
   service: service2
@@ -286,17 +286,17 @@ metadata:
   name: tls-example-ingress
 spec:
   tls:
-  - hosts:
-    - sslexample.foo.com
-    secretName: testsecret-tls
+    - hosts:
+        - sslexample.foo.com
+      secretName: testsecret-tls
   rules:
     - host: sslexample.foo.com
       http:
         paths:
-        - path: /
-          backend:
-            serviceName: service1
-            servicePort: 80
+          - path: /
+            backend:
+              serviceName: service1
+              servicePort: 80
 ```
 
 This is the equivalent configuration using a Mapping instead:
@@ -309,7 +309,7 @@ metadata:
   name: sslexample-termination-context
 spec:
   hosts:
-  - sslexample.foo.com
+    - sslexample.foo.com
   secret: testsecret-tls
 ---
 apiVersion: getambassador.io/v3alpha1
