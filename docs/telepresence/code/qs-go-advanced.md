@@ -4,8 +4,8 @@ description: "Create your complete Kubernetes development environment and use Te
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import { DownloadDemo } from '../../../../../src/components/Docs/DownloadDemo';
-import { UserInterceptCommand } from '../../../../../src/components/Docs/Telepresence';
+import { DownloadDemo } from '../../../../src/components/Docs/DownloadDemo';
+import { UserInterceptCommand } from '../../../../src/components/Docs/Telepresence';
 
 # Creating a local Go Kubernetes development environment
 
