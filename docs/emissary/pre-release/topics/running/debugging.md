@@ -94,7 +94,7 @@ $productName$ has two major log mechanisms: $productName$ logging and Envoy logg
 
 ### $productName$ debug logging
 
-$productName$ logging is primarily concerned with the business of noticing changes to
+Much of $productName$'s logging is concerned with the business of noticing changes to
 Kubernetes resources that specify the $productName$ configuration, and generating new
 Envoy configuration in response to those changes. Enabling debug logging for this part
 of the system is under the control of two environment variables:
