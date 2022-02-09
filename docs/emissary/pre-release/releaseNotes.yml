@@ -51,7 +51,7 @@ items:
           instance was not actually left doing debugging logging, for example.
           (Thanks to <a href="https://github.com/jfrabaute">Fabrice</a>!)
         github:
-        - title: 3906
+        - title: "#3906"
           link: https://github.com/emissary-ingress/emissary/issues/3906
         docs: topics/running/statistics/8877-metrics/
 
@@ -75,7 +75,7 @@ items:
           accepted for configuration. A Secret that contains an invalid TLS certificate will be logged
           as an invalid resource.
         github:
-        - title: 3821
+        - title: "#3821"
           link: https://github.com/emissary-ingress/emissary/issues/3821
         docs: ../topics/running/tls
 
@@ -92,7 +92,7 @@ items:
         body: >-
           Support for streaming Envoy metrics about the clusters to Ambassador's cloud.
         github:
-        - title: 4053
+        - title: "#4053"
           link: https://github.com/emissary-ingress/emissary/pull/4053
 
       - title: Support received commands to pause, continue and abort a Rollout via Agent directives
@@ -103,7 +103,7 @@ items:
           is sent to Ambassador Cloud including the command ID, whether it ran successfully, and
           an error message in case there was any.
         github:
-          - title: 4040
+          - title: "#4040"
             link: https://github.com/emissary-ingress/emissary/pull/4040
 
       - title: Update to Alpine 3.15
