@@ -42,6 +42,20 @@ items:
           v3.0. The <code>AMBASSADOR_ENVOY_API_VERSION</code> environment variable will be removed at the same
           time. Only the Envoy V3 API will be supported (this has been the default since $productName$ v1.14.0).
 
+      - title: Ambassador Edge Stack will watch for Cloud Connect Tokens
+        type: change
+        body: >-
+          $productName$ will now watch for ConfigMap or Secret resources specified by the
+          <code>AGENT_CONFIG_RESOURCE_NAME</code> environment variable in order to allow all
+          components (and not only the Ambassador Agent) to authenticate requests to
+          Ambassador Cloud.
+
+      - title: Update to Alpine 3.15
+        type: security
+        body: >-
+          Emissary has been upgraded from Alpine 3.12 to Alpine 3.15, which incorporates numerous
+          security patches.
+
       - title: Support a log-level metric
         type: feature
         body: >-
@@ -68,25 +82,6 @@ items:
         - title: "Upstream Envoy: 19383"
           link: https://github.com/envoyproxy/envoy/pull/19383
 
-      - title: Validate certificates in TLS Secrets
-        type: bugfix
-        body: >-
-          Kubernetes Secrets that should contain TLS certificates are now validated before being
-          accepted for configuration. A Secret that contains an invalid TLS certificate will be logged
-          as an invalid resource.
-        github:
-        - title: "#3821"
-          link: https://github.com/emissary-ingress/emissary/issues/3821
-        docs: ../topics/running/tls
-
-      - title: Ambassador Edge Stack will watch for Cloud Connect Tokens
-        type: change
-        body: >-
-          $productName$ will now watch for ConfigMap or Secret resources specified by the
-          <code>AGENT_CONFIG_RESOURCE_NAME</code> environment variable in order to allow all
-          components (and not only the Ambassador Agent) to authenticate requests to
-          Ambassador Cloud.
-
       - title: Stream metrics from Envoy to the Ambassador cloud
         type: feature
         body: >-
@@ -106,11 +101,16 @@ items:
           - title: "#4040"
             link: https://github.com/emissary-ingress/emissary/pull/4040
 
-      - title: Update to Alpine 3.15
-        type: security
+      - title: Validate certificates in TLS Secrets
+        type: bugfix
         body: >-
-          Emissary has been upgraded from Alpine 3.12 to Alpine 3.15, which incorporates numerous
-          security patches.
+          Kubernetes Secrets that should contain TLS certificates are now validated before being
+          accepted for configuration. A Secret that contains an invalid TLS certificate will be logged
+          as an invalid resource.
+        github:
+        - title: "#3821"
+          link: https://github.com/emissary-ingress/emissary/issues/3821
+        docs: ../topics/running/tls
 
   - version: 2.1.2
     date: '2022-01-25'
