@@ -1,4 +1,5 @@
 @import '~@src/components/Layout/vars.less';
+@import '../../src/less/index.less';
 
 html,
 body {
@@ -53,6 +54,9 @@ body {
     overflow: auto;
     flex-shrink: 1;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__links-content {
@@ -134,9 +138,16 @@ body {
   }
 
   &__container-home {
-    width: 1050px;
-    max-width: @docs-max-width;
+    width: 100%;
+    max-width: 1052px;
     margin: auto;
+    .tablet({
+      max-width: 696px;
+    });
+    .phone
+      ({
+      max-width: 328px;
+    });;
   }
 
   &__info {
