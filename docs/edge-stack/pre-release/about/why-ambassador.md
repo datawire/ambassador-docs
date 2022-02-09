@@ -4,7 +4,7 @@ $productName$ gives platform engineers a comprehensive, self-service edge stack 
 
 ## How Does $productName$ work?
 
-$productName$ is a Kubernetes-native [microservices API gateway](../../topics/concepts/microservices-api-gateways) built on the open core of $OSSproductName and the [Envoy Proxy](https://www.envoyproxy.io). $productName$ is built from the ground up to support multiple, independent teams that need to rapidly publish, monitor, and update services for end-users. $productName$ can also be used to handle the functions of a Kubernetes ingress controller and load balancer (for more, see [this blog post](https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d)).
+$productName$ is a Kubernetes-native [microservices API gateway](../../topics/concepts/microservices-api-gateways) built on the open core of $OSSproductName$ and the [Envoy Proxy](https://www.envoyproxy.io). $productName$ is built from the ground up to support multiple, independent teams that need to rapidly publish, monitor, and update services for end-users. $productName$ can also be used to handle the functions of a Kubernetes ingress controller and load balancer (for more, see [this blog post](https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d)).
 
 ## Cloud-native applications today
 
