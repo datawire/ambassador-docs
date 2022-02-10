@@ -144,10 +144,9 @@ body {
     .tablet({
       max-width: 696px;
     });
-    .phone
-      ({
-      max-width: 328px;
-    });;
+    @media (max-width: 700px) {
+      max-width: calc(100% - 32px);
+    }
   }
 
   &__info {
@@ -1114,6 +1113,13 @@ body {
   a {
     text-decoration: underline;
     color: black;
+  }
+}
+.docs__footer-wrapper {
+  width: 100%;
+  hr,
+  section {
+    margin-top: 0px;
   }
 }
 

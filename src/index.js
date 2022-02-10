@@ -346,7 +346,9 @@ const index = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div>
+    <div
+      className={`${product.slug === 'home' ? 'docs__footer-wrapper' : ''} `}
+    >
       {product.slug === 'home' && (
         <hr className="docs__separator docs__container docs__container-home" />
       )}
