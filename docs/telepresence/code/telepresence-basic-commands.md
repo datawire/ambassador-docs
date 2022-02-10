@@ -32,7 +32,7 @@ After you connect to your cluster, enter `telepresence login` to launch Ambassad
 Enter `telepresence list` and Telepresence populates a list of the services available to intercept:
 
 ```console
-   $ telepresence list
+$ telepresence list
    ...
    example-service: ready to intercept (traffic-agent not yet installed)
    ...
@@ -44,12 +44,11 @@ Enter `kubectl get service <service name> --output yaml` to retrieve the port of
 
 ```console
 $ kubectl get service example-service --output yaml
-...
-   ports:
-     - name: http
-     port: 80
-     protocol: TCP
-     targetPort: http
    ...
-   ```
-
+ports:
+   - name: http
+   port: 80
+   protocol: TCP
+   targetPort: http
+   ...
+```
