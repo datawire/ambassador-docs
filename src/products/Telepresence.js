@@ -8,10 +8,10 @@ import { goToTelepresenceQuickStart } from '../../../src/utils/routes';
 import { TelepresenceCards } from './config';
 
 const Card = ({ img, title, description }) => (
-  <div>
-    <img src={img} />
-    <h3>{title}</h3>
-    <p>{description}</p>
+  <div className="docs__quickStart-card">
+    <img src={img} className="docs__quickStart-card--img" />
+    <h2 className="docs__quickStart-card--title">{title}</h2>
+    <p className="docs__quickStart-card--description">{description}</p>
   </div>
 );
 
@@ -19,12 +19,12 @@ const Telepresence = () => {
   return (
     <section className="docs__quickStart-container">
       <div className="docs__quickStart-hero">
-        <div className="docs__quickStart-container">
+        <div className="docs__quickStart-text">
           <h1 className="docs__quickStart-title">
             <span className="docs__quickStart-code">Code</span> with
             Telepresence
           </h1>
-          <p>
+          <p className="docs__quickStart-description">
             Ambassador Labs helps make it easier to code with Telepresence. Set
             up your ideal development environment for Kubernetes in seconds with
             Telepresence. Use Telepresence’s intercepts and make continuous
@@ -32,15 +32,15 @@ const Telepresence = () => {
             your Kubernetes coding process.
           </p>
         </div>
-        <img />
+        <img className="docs__quickStart-img" />
       </div>
       <hr className="docs__separator docs__container docs__container-home" />
-      <p>
+      <p className="docs__quickStart-overview">
         This guide provides an overview of the key ideas behind Telepresence, as
         well as the instructions you need to get Telepresence up and running in
         your environment quickly.
       </p>
-      <div>
+      <div className="docs__quickStart-cards">
         <Card
           title={'Quick start guide'}
           description={
