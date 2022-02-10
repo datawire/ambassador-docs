@@ -1,11 +1,9 @@
-import { Link } from 'gatsby';
 import React from 'react';
 
-//import Card from '../../../src/components/Card';
-import Icon from '../../../src/components/Icon';
-import { goToTelepresenceQuickStart } from '../../../src/utils/routes';
-
-import { TelepresenceCards } from './config';
+import CodeHero from '../../../src/assets/images/code/code_Hero.svg';
+import CodeDocTele from '../../../src/assets/images/code/code_doc_tele.svg';
+import CodeQuickStart from '../../../src/assets/images/code/code_quick_start_hero.svg';
+import CodeTele from '../../../src/assets/images/code/code_tele.svg';
 
 const Card = ({ img, title, description }) => (
   <div className="docs__quickStart-card">
@@ -32,9 +30,11 @@ const Telepresence = () => {
             your Kubernetes coding process.
           </p>
         </div>
-        <img className="docs__quickStart-img" />
+        <div className="docs__quickStart-img--container">
+          <img className="docs__quickStart-img" src={CodeHero} />
+        </div>
       </div>
-      <hr className="docs__separator docs__container docs__container-home" />
+      <hr className="docs__separator docs__quickStart-separator" />
       <p className="docs__quickStart-overview">
         This guide provides an overview of the key ideas behind Telepresence, as
         well as the instructions you need to get Telepresence up and running in
@@ -43,18 +43,21 @@ const Telepresence = () => {
       <div className="docs__quickStart-cards">
         <Card
           title={'Quick start guide'}
+          img={CodeQuickStart}
           description={
             'Visit the quick start guide to see how easily Telepresence works in a demo environment.'
           }
         />
         <Card
           title={'Telepresence overview'}
+          img={CodeTele}
           description={
             'Run through the installation guide and create an intercept in your own environment to share with coworkers to see how easy coding collaboration is with Telepresence as a foundation to your Kubernetes development cycle.'
           }
         />
         <Card
           title={'Advanced Telepresence documentation'}
+          img={CodeDocTele}
           description={
             'View the full user guide to learn advanced techniques to make your continuous integration even more powerful.'
           }
@@ -63,35 +66,5 @@ const Telepresence = () => {
     </section>
   );
 };
-
-const Telepresence1 = () => (
-  <section className="docs__started docs__container product-page">
-    <h1 className="docs__heading-primary docs__heading-primary--aligned">
-      <Icon name="telepresence-icon" /> Telepresence
-    </h1>
-    <p>
-      Code and test microservices locally against a remote Kubernetes cluster.
-    </p>
-    <Link
-      to={goToTelepresenceQuickStart}
-      className="docs__button-secondary docs__m-bottom-50"
-    >
-      Get Started{' '}
-      <Icon name="right-arrow" className="docs__button-secondary--arrow" />
-    </Link>
-    <div className="docs__cards">
-      {TelepresenceCards.map((c) => (
-        <Card
-          key={c.title}
-          title={c.title}
-          description={c.description}
-          link={c.link}
-          linkText={c.linkText}
-          icon={c.icon}
-        />
-      ))}
-    </div>
-  </section>
-);
 
 export default Telepresence;
