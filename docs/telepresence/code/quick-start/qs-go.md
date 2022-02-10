@@ -148,7 +148,7 @@ Telepresence connects your local workstation to a remote Kubernetes cluster.
 `curl -ik https://kubernetes.default`
 
   <Alert severity="info">
-    <strong>Didn't work?</strong> Make sure you are using Telepresence 2.0.3 or greater, check with <code>telepresence version</code> and upgrade <a href="../../install/upgrade/">here</a> if needed.
+    <strong>Didn't work?</strong> Make sure you are using Telepresence 2.0.3 or greater, check with <code>telepresence version</code> and upgrade <a href="../../upgrade/">here</a> if needed.
   </Alert>
 
   ```
@@ -392,7 +392,7 @@ Normal traffic coming to your app gets the <strong style="color:green">green</st
 
 ## Create a complete development environment using this demo application
 
-Apply what you've learned from this guide and employ the Emojivoto application in your own local development environment. See the [Creating a local Kubernetes development environment](../../install/qs-go-advanced/) page to learn more.
+Apply what you've learned from this guide and employ the Emojivoto application in your own local development environment. See the [Creating a local Kubernetes development environment](../../qs-go-advanced/) page to learn more.
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 

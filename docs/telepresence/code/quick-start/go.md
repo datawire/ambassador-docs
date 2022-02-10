@@ -187,4 +187,4 @@ Preview URLs allows you to safely share your development environment. With this 
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
-Apply what you've learned from this guide and employ the Emojivoto application in your own local development environment. See the [Creating a local Kubernetes development environment](../../install/qs-go-advanced/) page to learn more.
+Apply what you've learned from this guide and employ the Emojivoto application in your own local development environment. See the [Creating a local Kubernetes development environment](../../qs-go-advanced/) page to learn more.
