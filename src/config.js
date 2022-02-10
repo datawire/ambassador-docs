@@ -16,6 +16,27 @@ export const products = [
     version: [],
   },
   {
+    slug: 'code',
+    name: 'Code',
+    link: '/docs/code',
+    id: Math.random().toString(),
+    version: [
+      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
+    ],
+  },
+  {
+    slug: 'ship',
+    name: 'Ship',
+    link: '/docs',
+    version: [],
+  },
+  {
+    slug: 'run',
+    name: 'Run',
+    link: '/docs',
+    version: [],
+  },
+  {
     slug: 'kubernetes',
     name: 'Kubernetes (K8s)',
     link: '/docs/kubernetes',
@@ -187,6 +208,21 @@ export const metaData = {
     title: 'Docs Home | Ambassador Labs',
     description:
       'Concepts, guides, and examples to using Ambassador Cloud, Edge Stack, Telepresence, Kubernetes and Argo.',
+  },
+  code: {
+    title: 'Code | Ambassador Labs',
+    description:
+      'Code tutorials using Telepresence',
+  },
+  ship: {
+    title: 'Code | Ambassador Labs',
+    description:
+      'Code tutorials using Telepresence',
+  },
+  run: {
+    title: 'Code | Ambassador Labs',
+    description:
+      'Code tutorials using Telepresence',
   },
   kubernetes: {
     title: 'Kubernetes (K8s) Docs | Ambassador Labs',
