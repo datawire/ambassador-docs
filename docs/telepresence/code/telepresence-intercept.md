@@ -16,14 +16,14 @@ For a detailed walk-though on creating intercepts using our sample app, follow t
 
 ## Prerequisites
 
-Before you begin, you need to have [Telepresence installed](./install-and-update-telepresence/), a Kubernetes deployment with publicly accessible services, and either the Kubernetes command-line tool, [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/), or the OpenShift Container Platform command-line interface, [`oc`](https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-installing-cli_cli-developer-commands). 
+Before you begin, you need to have [Telepresence installed](../install-and-update-telepresence/), a Kubernetes deployment with publicly accessible services, and either the Kubernetes command-line tool, [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/), or the OpenShift Container Platform command-line interface, [`oc`](https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-installing-cli_cli-developer-commands). 
 
 This document uses kubectl in all example commands. OpenShift users can substitute oc [commands instead](https://docs.openshift.com/container-platform/4.1/cli_reference/developer-cli-commands.html).
 
 
 ## Intercept your service with a global intercept
 
-With Telepresence, you can create a [global intercept](./intercepts-overview/?intercept=global) that intercepts all traffic going to a service in your cluster and routes it to your local environment instead. 
+With Telepresence, you can create a [global intercept](../intercepts-overview/?intercept=global) that intercepts all traffic going to a service in your cluster and routes it to your local environment instead. 
 
 1. Connect to your cluster with `telepresence connect`.
 

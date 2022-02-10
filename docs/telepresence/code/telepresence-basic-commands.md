@@ -5,7 +5,7 @@ description: "Simple commands for your Telepresence service."
 
 # Telepresence basic commands
 
-Once you've installed [Telepresence](./install-and-update-telepresence), take a moment to familiarize yourself with these basic Telepresence commands.
+Once you've installed [Telepresence](../install-and-update-telepresence), take a moment to familiarize yourself with these basic Telepresence commands.
 
 ## Connect to Telepresence
 

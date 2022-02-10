@@ -71,7 +71,7 @@ After you finish your deployment, you need to configure a copy of a single servi
 
 Once you have the development container running, you can integrate your local development environment and the remote cluster. This enables you to access your remote app and instantly see any local changes you have made using your development container.
 
-1. First, download the latest [Telepresence binary](./install-and-update-telepresence/) for your operating system and run `telepresence connect`.
+1. First, download the latest [Telepresence binary](../install-and-update-telepresence/) for your operating system and run `telepresence connect`.
  Your local service is now able to interact with services and dependencies in your remote cluster.
  For example, you can run `curl remote-service-name.namespace:port/path` and get an instant response locally in the same way you would in a remote cluster.  
 2. Run `telepresence intercept your-service-name` to reroute traffic for the service you’re working on.

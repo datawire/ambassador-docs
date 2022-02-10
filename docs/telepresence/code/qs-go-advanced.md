@@ -11,7 +11,7 @@ import { UserInterceptCommand } from '../../../../src/components/Docs/Telepresen
 
 This tutorial shows you how to use Ambassador Cloud to create an effective Kubernetes development environment to enable fast, local development with the ability to interact with services and dependencies that run in a remote Kubernetes cluster.
 
-For the hands-on part of this guide, you will build upon [this tutorial with the emojivoto application](./quick-start/go/), which is written in Go. 
+For the hands-on part of this guide, you will build upon [this tutorial with the emojivoto application](../quick-start/go/), which is written in Go. 
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Use your existing `kubectl apply`, `helm install`, or continuous deployment syst
 2. Deploy your application (using kubectl, helm or your CD system), and verify that the services are running with `kubectl get svc`.
 3. Verify that you can access the application running by visiting the Ingress IP or domain name. We’ll refer to this as ${INGRESS_IP} from now on.
 
-If you followed the [emojivoto application tutorial](./quick-start/go/) referenced at the beginning of this guide, you will see that your Kubernetes cluster has all of the necessary services deployed and has the ingress configured to expose your application by way of an IP address.
+If you followed the [emojivoto application tutorial](../quick-start/go/) referenced at the beginning of this guide, you will see that your Kubernetes cluster has all of the necessary services deployed and has the ingress configured to expose your application by way of an IP address.
 
 ## Create a local development container to modify a service
 
@@ -57,14 +57,14 @@ After you finish your deployment, you need to configure a copy of a single servi
  Alternatively, you can use a Cloud Native Buildpack, such as those provided by Google Cloud. The [Google Go buildpack](https://github.com/GoogleCloudPlatform/buildpacks) has live-reloading configured by default.
 5. Next, test that the container is working properly. In the root directory of your source rep, enter: 
 `docker build -t example-dev-container:0.1 -f Dev.Dockerfile .`
-If you ran the the [emojivoto application example](./quick-start/go/), the container has already been built for you and you can skip this step.
+If you ran the the [emojivoto application example](../quick-start/go/), the container has already been built for you and you can skip this step.
 6. Run the development container and mount the current directory as a volume. This way, any code changes you make locally are synchronized into the container. Enter:
  `docker run -v $(pwd):/opt/emojivoto/emojivoto-voting-svc/api datawire/telepresence-emojivoto-go-demo`
  Now, code changes you make locally trigger a reload of the application in the container.
 7. Open the current directory with your source code in your IDE. Make a change to the source code and trigger a build/compilation.
  The container logs show that the application has been reloaded.
 
-If you followed the [emojivoto application tutorial](./quick-start/go/) referenced at the beginning of this guide, the emojivoto development container is already downloaded. When you examine the `docker run` command you executed, you can see an AMBASSADOR_API_KEY token included as an environment variable. Copy and paste this into the example command below. Clone the emojivoto code repo and run the container with the updated configuration to expose the application's ports locally and volume mount your local copy of the application source code into the container:
+If you followed the [emojivoto application tutorial](../quick-start/go/) referenced at the beginning of this guide, the emojivoto development container is already downloaded. When you examine the `docker run` command you executed, you can see an AMBASSADOR_API_KEY token included as an environment variable. Copy and paste this into the example command below. Clone the emojivoto code repo and run the container with the updated configuration to expose the application's ports locally and volume mount your local copy of the application source code into the container:
 ```
 $ git clone git@github.com:danielbryantuk/emojivoto.git
 $ cd emojivoto-voting-svc/api
@@ -75,7 +75,7 @@ $ docker run -d -p8083:8083 -p8081:8081 --name voting-demo --cap-add=NET_ADMIN -
 
 Once you have the development container running, you can integrate your local development environment and the remote cluster. This enables you to access your remote app and instantly see any local changes you have made using your development container.
 
-1. First, download the latest [Telepresence binary](./install-and-update-telepresence/) for your operating system and run `telepresence connect`.
+1. First, download the latest [Telepresence binary](../install-and-update-telepresence/) for your operating system and run `telepresence connect`.
  Your local service is now able to interact with services and dependencies in your remote cluster.
  For example, you can run `curl remote-service-name.namespace:port/path` and get an instant response locally in the same way you would in a remote cluster.  
 2. Extract the KUBECONFIG from your dev container from the [emojivoto application tutorial](.quick-start/go/) and then connect your container to the remote cluster with Telepresence:
@@ -180,7 +180,7 @@ Refresh your view of the app at ${INGRESS_IP}.
 	# happy coding!
 
 	```
-8. Run the setup-dev-env.sh script locally. Use the $AMBASSADOR_API_KEY you created from Docker in the [emojivoto application tutorial](./quick-start/go/) or in [Ambassador Cloud](https://app.getambassador.io/cloud/services/).
+8. Run the setup-dev-env.sh script locally. Use the $AMBASSADOR_API_KEY you created from Docker in the [emojivoto application tutorial](../quick-start/go/) or in [Ambassador Cloud](https://app.getambassador.io/cloud/services/).
 	```
 	export AMBASSADOR_API_KEY=<your key>
 	git clone git@github.com:danielbryantuk/emojivoto.git
