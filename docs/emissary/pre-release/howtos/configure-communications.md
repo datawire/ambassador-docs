@@ -215,6 +215,8 @@ spec:
 - `foo-host` defaults to redirecting insecure requests, since the default for `requestPolicy.insecure.action` is `Redirect`.
 - `bar-host` uses Let's Encrypt as well, but it will reject insecure requests.
 
+**If you use ACME for multiple Hosts, add a wildcard Host too.**
+This is required to manage a known issue. This issue will be resolved in a future Ambassador Edge Stack release.
 
 <Alert severity="info">
   <a href="../../topics/running/listener">Learn more about <code>Listener</code></a><br/>
