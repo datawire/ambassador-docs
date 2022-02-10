@@ -289,6 +289,8 @@ const index = ({ data, location, pageContext }) => {
         return <Argo />;
       case 'kubernetes':
         return <Kubernetes />;
+      case 'code':
+        return <Telepresence />;
       default:
         return <EdgeStack />;
     }

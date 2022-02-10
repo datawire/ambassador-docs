@@ -30,9 +30,11 @@ const Telepresence = () => {
             your Kubernetes coding process.
           </p>
         </div>
-        <img className="docs__quickStart-img" src={CodeHero} />
+        <div className="docs__quickStart-img--container">
+          <img className="docs__quickStart-img" src={CodeHero} />
+        </div>
       </div>
-      <hr className="docs__separator docs__container docs__container-home" />
+      <hr className="docs__separator docs__quickStart-separator" />
       <p className="docs__quickStart-overview">
         This guide provides an overview of the key ideas behind Telepresence, as
         well as the instructions you need to get Telepresence up and running in
