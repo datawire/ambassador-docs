@@ -1,6 +1,10 @@
 import { Link } from 'gatsby';
 import React from 'react';
 
+import CodeHero from '../../../src/assets/images/code/code_Hero.svg';
+import CodeDocTele from '../../../src/assets/images/code/code_doc_tele.svg';
+import CodeQuickStart from '../../../src/assets/images/code/code_quick_start_hero.svg';
+import CodeTele from '../../../src/assets/images/code/code_tele.svg';
 //import Card from '../../../src/components/Card';
 import Icon from '../../../src/components/Icon';
 import { goToTelepresenceQuickStart } from '../../../src/utils/routes';
@@ -32,7 +36,7 @@ const Telepresence = () => {
             your Kubernetes coding process.
           </p>
         </div>
-        <img className="docs__quickStart-img" />
+        <img className="docs__quickStart-img" src={CodeHero} />
       </div>
       <hr className="docs__separator docs__container docs__container-home" />
       <p className="docs__quickStart-overview">
@@ -43,18 +47,21 @@ const Telepresence = () => {
       <div className="docs__quickStart-cards">
         <Card
           title={'Quick start guide'}
+          img={CodeQuickStart}
           description={
             'Visit the quick start guide to see how easily Telepresence works in a demo environment.'
           }
         />
         <Card
           title={'Telepresence overview'}
+          img={CodeTele}
           description={
             'Run through the installation guide and create an intercept in your own environment to share with coworkers to see how easy coding collaboration is with Telepresence as a foundation to your Kubernetes development cycle.'
           }
         />
         <Card
           title={'Advanced Telepresence documentation'}
+          img={CodeDocTele}
           description={
             'View the full user guide to learn advanced techniques to make your continuous integration even more powerful.'
           }
