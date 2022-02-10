@@ -31,7 +31,7 @@
 
 changelog: ''
 items:
-  - date: '2022-02-08'
+  - date: '2022-02-10'
     notes:
       - title: 'Edge Stack community licenses'
         body: 'Starting with Edge Stack 2.2, activating a free community license in your cluster is now easier than ever for cloud-connected installations.'
