@@ -196,7 +196,7 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: foo-host
@@ -205,7 +205,7 @@ spec:
   acmeProvider:
     email: julian@example.com
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: bar-host
@@ -244,7 +244,7 @@ For demonstration purposes, we show this example listening for HTTPS on port 484
 
 ```yaml
 ---
-apiversion: v1
+apiVersion: v1
 kind: Secret
 type: kubernetes.io/tls
 metadata:
@@ -253,7 +253,7 @@ data:
   tls.crt: -certificate PEM-
   tls.key: -secret key PEM-
 ---
-apiversion: v1
+apiVersion: v1
 kind: Secret
 type: kubernetes.io/tls
 metadata:
@@ -274,7 +274,7 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: foo-host
@@ -283,7 +283,7 @@ spec:
   tlsSecret:
     name: foo-example-secret
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: bar-host
@@ -316,7 +316,7 @@ and we assume that the `Secret` contains a wildcard cert.
 
 ```yaml
 ---
-apiversion: v1
+apiVersion: v1
 kind: Secret
 type: kubernetes.io/tls
 metadata:
@@ -325,7 +325,7 @@ data:
   tls.crt: -wildcard here-
   tls.key: -wildcard here-
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: example-context
@@ -345,7 +345,7 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: foo-host
@@ -356,7 +356,7 @@ spec:
   tlsSecret:
     name: wildcard-example-secret
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: bar-host
@@ -386,7 +386,7 @@ but we use a `TLSContext` to set `ALPN` information. Again, ACME is only support
 
 ```yaml
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: TLSContext
 metadata:
   name: example-context
@@ -394,7 +394,7 @@ spec:
   secret: example-acme-secret
   alpn_protocols: [h2, istio]
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: foo-host
@@ -495,14 +495,14 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: foo-host
 spec:
   hostname: foo.example.com
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: bar-host
@@ -563,7 +563,7 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: route-host
@@ -619,7 +619,7 @@ spec:
       matchLabels:
         tenant: bar
 ---
-apiversion: v1
+apiVersion: v1
 kind: Secret
 type: kubernetes.io/tls
 metadata:
@@ -628,7 +628,7 @@ data:
   tls.crt: -wildcard here-
   tls.key: -wildcard here-
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: foo-host
@@ -640,7 +640,7 @@ spec:
     insecure:
       action: Route
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: bar-host
@@ -651,7 +651,7 @@ spec:
   tlsSecret:
     name: bar-secret
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: baz-host
@@ -690,7 +690,7 @@ In this example, we'll accept both HTTP and HTTPS, but:
 
 ```yaml
 ---
-apiversion: v1
+apiVersion: v1
 kind: Secret
 type: kubernetes.io/tls
 metadata:
@@ -711,7 +711,7 @@ spec:
     namespace:
       from: SELF
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: lowsec-host
@@ -723,7 +723,7 @@ spec:
     insecure:
       action: Route
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: normal-host
@@ -735,7 +735,7 @@ spec:
     insecure:             # redirecting is the default, but
       action: Redirect    # it's spelled out for clarity.
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: catchall-host
