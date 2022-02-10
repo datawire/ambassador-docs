@@ -138,24 +138,33 @@ Migration is a seven-step process:
    **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   **Note that if your $productName$ 1.14.2
-   installation uses a nonstandard namespace, you will need to include the namespace in
-   the commands below.**
+   Start by making sure that your `emissary` Helm repo is set correctly:
+
+   ```bash
+   helm repo delete datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
+   ```
+
+   Typically, $productName$ 1.14.2 was installed in the `ambassador` namespace. If you installed
+   $productName$ 1.14.2 in a different namespace, change the namespace in the commands below.
 
    - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
 
       ```bash
-      helm install $productHelmName$ datawire/$productHelmName$ \
-        --set agent.enabled=false \
+      helm install -n ambassador \
+           --set agent.enabled=false \
+           $productHelmName$ datawire/$productHelmName$ && \
       kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
       ```
 
    - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
 
       ```bash
-      helm install $productHelmName$ datawire/$productHelmName$ \
-        --set agent.enabled=false \
-        --set env.AMBASSADOR_LABEL_SELECTOR="version-two=true" && \
+      helm install -n ambassador \
+           --set agent.enabled=false \
+           --set env.AMBASSADOR_LABEL_SELECTOR="version-two=true" \
+           $productHelmName$ datawire/$productHelmName$ && \
       kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
       ```
 
@@ -273,14 +282,17 @@ Migration is a seven-step process:
    First, scale the 1.14.2 agent to 0:
 
    ```
-   kubectl scale deployment/ambassador-agent --replicas=0
+   kubectl scale -n ambassador deployment/ambassador-agent --replicas=0
    ```
 
-   Ocne that's done, install the new Agent:
+   Once that's done, install the new Agent. **Note that if you needed to set
+   `AMBASSADOR_LABEL_SELECTOR`, you must add that to this `helm upgrade` command.**
 
-   ```
-   helm install $productHelmName$ datawire/$productHelmName$ \
-     --set agent.enabled=true
+   ```bash
+   helm upgrade -n ambassador \
+        --set agent.enabled=true \
+        $productHelmName$ datawire/$productHelmName$ \
+   kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
    ```
 
 Congratulations! At this point, $productName$ $version$ is fully running and it's safe to remove the `ambassador` and `ambassador-agent` Deployments:

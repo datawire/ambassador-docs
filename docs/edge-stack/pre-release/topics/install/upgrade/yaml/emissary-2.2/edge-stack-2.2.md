@@ -162,13 +162,14 @@ Migration is a six-step process:
    First, scale the $OSSproductName$ agent to 0:
 
    ```
-   kubectl scale -n emissary deployment/emissary-agent --replicas=0
+   kubectl scale -n emissary deployment/emissary-ingress-agent --replicas=0
    ```
 
    Once that's done, install the new Agent:
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-agent.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-agent.yaml && \
+   kubectl rollout status -n emissary deployment/edge-stack-agent -w
    ```
 
 6. **Finally, enable ACME and filtering in $productName$ $version$.**
@@ -176,14 +177,20 @@ Migration is a six-step process:
    First, scale the $OSSproductName$ Deployment to 0: 
 
    ```bash
-   kubectl scale -n emissary deployment/emissary --replicase=0
+   kubectl scale -n emissary deployment/emissary-ingress --replicase=0
    ```
 
-   Once that's done, enable ACME and filtering in $productName$ $version$:
+   Once that's done, apply resources specific to $AESproductName$:
 
    ```bash
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml
-   kubectl rollout status -n ambassador deployment/edge-stack -w
+   ```
+
+   Then, finally, enable ACME and filtering in $productName$ $version$:
+
+   ```bash
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml
+   kubectl rollout status -n emissary deployment/aes -w
    ````
 
 Congratulations! At this point, $productName$ $version$ is fully running, and

@@ -45,9 +45,18 @@ Migration is a two-step process:
 
 2. **Install $productName$ $version$.**
 
-   After installing the new CRDs, upgrade $productName$ $version$:
+   After installing the new CRDs, upgrade $productName$ $version$.
 
-      ```bash
-      kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml && \
-      kubectl rollout status  -n emissary deployment/emissary-ingress -w
-      ```
+   <Alert severity="info">
+     Our <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml"><code>emissary-emissaryns.yaml</code></a> file
+     uses the `emissary` namespace, since this is the default for $productName$.
+     We also publish <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml"><code>emissary-defaultns.yaml</code></a> for the 
+     `default` namespace and <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-ambassadorns.yaml"><code>emissary-ambassadorns.yaml</code></a>
+     for the `ambassador` namespace. For any other namespace, you should download
+     one of these files and edit the namespaces by hand.
+   </Alert>
+
+   ```bash
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml && \
+   kubectl rollout status  -n emissary deployment/emissary-ingress -w
+   ```

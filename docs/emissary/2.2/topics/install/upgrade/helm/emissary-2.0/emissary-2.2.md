@@ -45,12 +45,24 @@ Migration is a two-step process:
 
 2. **Install $productName$ $version$.**
 
-   After installing the new CRDs, use Helm to upgrade $productName$ $version$:
+   After installing the new CRDs, use Helm to install $productName$ $version$. Start by
+   making sure that your `datawire` Helm repo is set correctly:
 
-      ```bash
-      helm upgrade emissary-ingress && \
-      kubectl rollout status  -n emissary deployment/emissary-ingress -w
-      ```
+   ```bash
+   helm repo delete datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
+   ```
+
+   Then, update your $productName$ installation in the `$productNamespace$` namespace.
+   If necessary for your installation (e.g. if you were running with
+   `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
+
+   ```bash
+   helm upgrade -n $productNamespace$ \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status  -n $productNamespace$ deployment/emissary-ingress -w
+   ```
 
    <Alert severity="warning">
     You must use the <a href="https://github.com/emissary-ingress/emissary/tree/release/v2.1/charts/emissary-ingress"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.

@@ -138,12 +138,24 @@ Migration is a seven-step process:
    **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   Our `emissary-defaultns.yaml` assumes that $productName$ 1.14.2 is installed in the
-   `default` namespace. If you installed $productName$ 1.14.2 into a different namespace, you'll
-   need to download `emissary-defaultns.yaml` file and edit it.
+   We publish three manifests for different namespaces. Use only the one that
+   matches the namespace into which you installed $productName$ 1.14.2:
 
-   **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, download `emissary-defaultns-migration.yaml`
-   and edit it to do so.
+   - [`emissary-emissaryns.yaml`] for the `emissary` namespace;
+   - [`emissary-defaultns.yaml`] for the `default` namespace; and
+   - [`emissary-ambassadorns.yaml`] for the `ambassador` namespace.
+
+   If you installed $productName$ 1.14.2 into some other namespace, you'll need to
+   download one of the files and edit it to match your namespace.
+
+   [`emissary-emissaryns.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml
+   [`emissary-defaultns.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml
+   [`emissary-ambassadorns.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-ambassadorns.yaml
+
+   **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, you'll need to download
+   your chosen file and and edit it to do so.
+
+   Assuming that you're using the `default` namespace:
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml && \
@@ -259,12 +271,26 @@ Migration is a seven-step process:
    First, scale the 1.14.2 agent to 0:
 
    ```
-   kubectl scale deployment/ambassador-agent --replicas=0
+   kubectl scale -n default deployment/ambassador-agent --replicas=0
    ```
 
-   Ocne that's done, install the new Agent into the same namespace as your
-   Emissary deployment -- again, if your Emissary installation uses a nonstandard
-   namespace, you will need to download and edit `emissary-defaultns-agent.yaml`:
+   Once that's done, install the new Agent into the same namespace as your
+   Emissary deployment. Again, we supply three files for three different
+   namespaces: use only the one that matches the namespace into which you
+   installed $productName$ 1.14.2.
+
+   - [`emissary-emissaryns-agent.yaml`] for the `emissary` namespace;
+   - [`emissary-defaultns-agent.yaml`] for the `default` namespace; and
+   - [`emissary-ambassadorns-agent.yaml`] for the `ambassador` namespace.
+
+   If you installed $productName$ 1.14.2 into some other namespace, you'll need to
+   download one of the files and edit it to match your namespace.
+
+   [`emissary-emissaryns-agent.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns-agent.yaml
+   [`emissary-defaultns-agent.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns-agent.yaml
+   [`emissary-ambassadorns-agent.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-ambassadorns-agent.yaml
+
+   Assuming that you're using the `default` namespace:
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns-agent.yaml

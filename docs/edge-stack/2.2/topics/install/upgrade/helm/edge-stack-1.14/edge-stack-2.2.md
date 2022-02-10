@@ -181,6 +181,14 @@ Migration is an eight-step process:
      do it instead.
    </Alert>
 
+   Start by making sure that your `datawire` Helm repo is set correctly:
+
+   ```bash
+   helm repo delete datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
+   ```
+
    Typically, $productName$ 1.14.2 was installed in the `ambassador` namespace. If you installed
    $productName$ 1.14.2 in a different namespace, change the namespace in the commands below.
 
@@ -314,14 +322,20 @@ Migration is an eight-step process:
    First, scale the 1.14.2 agent to 0:
 
    ```
-   kubectl scale deployment/ambassador-agent --replicas=0
+   kubectl scale -n ambassador deployment/ambassador-agent --replicas=0
    ```
 
-   Once that's done, install the new Agent:
+   Once that's done, install the new Agent. **Note that if you needed to set
+   `AMBASSADOR_LABEL_SELECTOR`, you must add that to this `helm upgrade` command.**
 
-   ```
-   helm install $productHelmName$ datawire/$productHelmName$ \
-     --set agent.enabled=true
+   ```bash
+   helm upgrade -n ambassador \
+        --set emissary-ingress.agent.enabled=true \
+        --set rateLimit.create=false \
+        --set authService.create=false \
+        --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
+      $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status -n ambassador deployment/edge-stack -w      
    ```
 
 8. **Finally, enable ACME in $productName$ $version$.**
@@ -329,15 +343,20 @@ Migration is an eight-step process:
    First, scale the 1.14 Ambassador to 0: 
 
    ```
-   kubectl scale deployment/ambassador --replicase=0
+   kubectl scale -n ambassador deployment/ambassador --replicas=0
    ```
 
-   Once that's done, enable ACME in $productName$ $version$:
+   Once that's done, enable ACME in $productName$ $version$. **Note that if you
+   needed to set `AMBASSADOR_LABEL_SELECTOR`, you must add that to this
+   `helm upgrade` command.**
 
    ```bash
    helm upgrade -n ambassador \
-      --set emissary-ingress.env.AES_ACME_LEADER_DISABLE= \
-      edge-stack datawire/edge-stack && \
+        --set emissary-ingress.agent.enabled=true \
+        --set rateLimit.create=false \
+        --set authService.create=false \
+        --set emissary-ingress.env.AES_ACME_LEADER_DISABLE= \
+      $productHelmName$ datawire/$productHelmName$ && \
    kubectl rollout status -n ambassador deployment/edge-stack -w
    ````
 
@@ -345,7 +364,7 @@ Congratulations! At this point, $productName$ $version$ is fully running, and
 it's safe to remove the old `ambassador` and `ambassador-agent` Deployments:
 
 ```
-kubectl delete deployment/ambassador deployment/ambassador-agent
+kubectl delete -n ambassador deployment/ambassador deployment/ambassador-agent
 ```
 
 Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)

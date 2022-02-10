@@ -121,6 +121,14 @@ Migration is a six-step process:
      $OSSproductName$ $version$.
    </Alert>
 
+   Start by making sure that your `datawire` Helm repo is set correctly:
+
+   ```bash
+   helm repo delete datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
+   ```
+
    Typically, $OSSproductName$ $version$ was installed in the `emissary` namespace. If you installed
    $OSSproductName$ $version$ in a different namespace, change the namespace in the commands below.
 
@@ -129,9 +137,6 @@ Migration is a six-step process:
       ```bash
       helm install -n emissary \
            --set emissary-ingress.agent.enabled=false \
-           --set=authService.create=false \
-           --set=rateLimit.create=false \
-           --set=createDevPortalMappings=false \
            edge-stack datawire/edge-stack && \
       kubectl rollout status  -n emissary deployment/edge-stack -w
       ```
@@ -141,9 +146,6 @@ Migration is a six-step process:
       ```bash
       helm install -n emissary \
            --set emissary-ingress.agent.enabled=false \
-           --set=authService.create=false \
-           --set=rateLimit.create=false \
-           --set=createDevPortalMappings=false \
            --set emissary-ingress.env.AMBASSADOR_LABEL_SELECTOR="version-two=true" \
            edge-stack datawire/edge-stack && \
       kubectl rollout status -n emissary deployment/edge-stack -w
@@ -194,9 +196,11 @@ Migration is a six-step process:
 
    Once that's done, install the new Agent:
 
-   ```
-   helm install -n emissary $productHelmName$ datawire/$productHelmName$ \
-     --set emissary-ingress.agent.enabled=true
+   ```bash
+   helm upgrade -n emissary \
+        --set emissary-ingress.agent.enabled=true \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status -n emissary-ingress deployment/edge-stack -w
    ```
 
 6. **Finally, enable ACME and filtering in $productName$ $version$.**
@@ -211,11 +215,9 @@ Migration is a six-step process:
 
    ```bash
    helm upgrade -n emissary \
-     --set=authService.create=true \
-     --set=rateLimit.create=true \
-     --set=createDevPortalMappings=true \
-   edge-stack datawire/edge-stack && \
-   kubectl rollout status -n ambassador deployment/edge-stack -w
+        --set emissary-ingress.agent.enabled=true
+        edge-stack datawire/edge-stack && \
+   kubectl rollout status -n emissary deployment/edge-stack -w
    ````
 
 Congratulations! At this point, $productName$ $version$ is fully running, and

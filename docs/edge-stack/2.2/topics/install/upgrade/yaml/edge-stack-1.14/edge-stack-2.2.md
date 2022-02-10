@@ -190,7 +190,7 @@ Migration is an eight-step process:
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-migration.yaml && \
-   kubectl rollout status -n default deployment/aes -w
+   kubectl rollout status -n ambassador deployment/aes -w
    ```
 
    <Alert severity="warning">
@@ -283,7 +283,7 @@ Migration is an eight-step process:
 
    When you're ready to have $productName$ $version$ handle traffic on its own, switch
    your original $productName$ 1.14.2 Service to point to $productName$ $version$. Use
-   `kubectl edit service ambassador` and change the `selectors` to:
+   `kubectl edit -n ambassador service ambassador` and change the `selectors` to:
 
    ```
    app.kubernetes.io/instance: edge-stack
@@ -291,7 +291,7 @@ Migration is an eight-step process:
    profile: main
    ```
 
-   Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
+   Repeat using `kubectl edit -n ambassador service ambassador-admin` for the `ambassador-admin`
    Service.
 
 7. **Install the $productName$ $version$ Ambassador Agent.**
@@ -299,14 +299,14 @@ Migration is an eight-step process:
    First, scale the 1.14.2 agent to 0:
 
    ```
-   kubectl scale deployment/ambassador-agent --replicas=0
+   kubectl scale -n ambassador deployment/ambassador-agent --replicas=0
    ```
 
    Once that's done, install the new Agent:
 
    ```
-   helm install $productHelmName$ datawire/$productHelmName$ \
-     --set agent.enabled=true
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-agent.yaml && \
+   kubectl rollout status -n ambassador deployment/edge-stack-agent -w
    ```
 
 8. **Finally, enable ACME in $productName$ $version$.**
@@ -314,21 +314,21 @@ Migration is an eight-step process:
    First, scale the 1.14 Ambassador to 0: 
 
    ```
-   kubectl scale deployment/ambassador --replicase=0
+   kubectl scale -n ambassador deployment/ambassador --replicase=0
    ```
 
    Once that's done, enable ACME in $productName$ $version$:
 
    ```bash
-   kubectl set env deploy/aes AES_ACME_LEADER_DISABLE-
-   kubectl rollout status -n ambassador deployment/edge-stack -w
+   kubectl set env -n ambassador deployment/aes AES_ACME_LEADER_DISABLE-
+   kubectl rollout status -n ambassador deployment/aes -w
    ````
 
 Congratulations! At this point, $productName$ $version$ is fully running, and
 it's safe to remove the `ambassador` and `ambassador-agent` Deployments:
 
 ```
-kubectl delete deployment/ambassador deployment/ambassador-agent
+kubectl delete -n ambassador deployment/ambassador deployment/ambassador-agent
 ```
 
 Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)

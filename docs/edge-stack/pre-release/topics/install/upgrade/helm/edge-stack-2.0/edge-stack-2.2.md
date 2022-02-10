@@ -62,15 +62,24 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
 
 3. **Install $productName$ $version$.**
 
-   After installing the new CRDs, use Helm to install $productName$ $version$. This will install
-   in the `$productNamespace$` namespace. If necessary for your installation (e.g. if you were
-   running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
+   After installing the new CRDs, use Helm to install $productName$ $version$. Start by
+   making sure that your `datawire` Helm repo is set correctly:
 
-      ```bash
-      helm upgrade -n $productNamespace$ \
-         $productHelmName$ datawire/$productHelmName$ && \
-      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-      ```
+   ```bash
+   helm repo delete datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
+   ```
+   
+   Then, install $productName$ in the `$productNamespace$` namespace. If necessary for
+   your installation (e.g. if you were running with `AMBASSADOR_SINGLE_NAMESPACE` set),
+   you can choose a different namespace.
+
+   ```bash
+   helm install -n $productNamespace$ \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+   ```
 
    <Alert severity="warning">
      You must use the <a href="https://github.com/datawire/edge-stack/"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
