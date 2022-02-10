@@ -143,6 +143,7 @@ spec:
     matchLabels:          ## optional; default is {}
       "string": "string"
   naming_scheme: "string" ## optional; supported values [ "namespace.name", "name.prefix" ]; default "namespace.name"
+  preserve_servers: bool ## optional; default false
   search:
     enabled: bool         ## optional; default false
     type: "string"        ## optional; supported values ["title-only", "all-content"]; default "title-only"
@@ -173,6 +174,10 @@ where:
   * "name.prefix" will display the docs with the name and prefix of the mapping.
   e.g. a Mapping named `quote` with a prefix `backend` will be displayed as `quote.backend`
   and its docs will have the relative path of `/quote/backend`
+* `preserve_servers`: Configures the DevPortal to no longer dynamically build server definitions
+  for the "try it out" request builder by using the Edge Stack hostname. When set to `true`, the
+  DevPortal will instead display the server definitions from the `servers` section of the Open API
+  docs supplied to the DevPortal for the service.
 * `search`: as of Edge Stack 1.13.0, the DevPortal content is now searchable
   * `enabled`: default `false``; set to true to enable search functionality.
     * When `enabled=false`, the DevPortal search endpoint (`/[DEVPORTAL_PATH/api/search`) will return an empty response

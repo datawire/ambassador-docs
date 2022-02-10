@@ -117,6 +117,14 @@ items:
         docs: ../topics/running/tls
         image: ./v2.2.0-tls-cert-validation.png
 
+      - title: Devportal support for using API server definitions from OpenAPI docs
+        type: feature
+        body: >-
+          You can now set <code>preserve_servers</code> in Ambassador Edge Stack's
+          <code>DevPortal</code> resource to configure the DevPortal to use server definitions from
+          the OpenAPI document when displaying connection information for services in the DevPortal.
+        docs: topics/using/dev-portal/
+
   - version: 2.1.2
     date: '2022-01-25'
     notes:
@@ -758,13 +766,6 @@ items:
           <code>Module</code> to to change the size of the upstream read and write buffers.
           The default is 1MiB.
         docs: topics/running/ambassador/#modify-default-buffer-size
-
-      - title: DevPortal supports configuring what server is displayed
-        type: feature
-        body: >-
-          You can now set <code>preserve_servers</code> in Ambassador Edge Stack's
-          <code>DevPortal</code> resource to configure the DevPortal to use server definitions from
-          the OpenAPI document when displaying connection information for services in the DevPortal.
 
   - version: 1.14.1
     date: '2021-08-24'
