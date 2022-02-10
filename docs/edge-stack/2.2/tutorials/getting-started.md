@@ -24,20 +24,6 @@ We'll start by installing $productName$ into your cluster.
 
 <GettingStartedEdgeStack21Tabs version="$version$" />
 
-### Connecting your installation to Ambassador Cloud
-
-Now is a great moment to connect your new installation to Ambassador Cloud in order to fully leverage the power of $productName$ and the Developer Control Plane (DCP).
-
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/services/) with GitHub, GitLab or Google and select your team account.
-
-2. At the top, click **Add Services** then click **Connection Instructions** in the **Connect your installation** section.
-
-3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
-
-4. Follow the prompts to install the cloud token into your cluster.
-
-5. When the token installation completes, your services will be listed in the DCP.
-
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
 ## 2. Routing traffic from the edge
@@ -46,38 +32,38 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
 1. Start by creating a `Listener` resource for HTTP on port 8080:
 
-    ```
-    kubectl apply -f - <<EOF
-    ---
-    apiVersion: getambassador.io/v3alpha1
-    kind: Listener
-    metadata:
-      name: $productDeploymentName$-listener-8080
-      namespace: $productNamespace$
-    spec:
-      port: 8080
-      protocol: HTTP
-      securityModel: XFP
-      hostBinding:
-        namespace:
-          from: ALL
-    ---
-    apiVersion: getambassador.io/v3alpha1
-    kind: Listener
-    metadata:
-      name: $productDeploymentName$-listener-8443
-      namespace: $productNamespace$
-    spec:
-      port: 8443
-      protocol: HTTPS
-      securityModel: XFP
-      hostBinding:
-        namespace:
-          from: ALL
-    EOF
-    ```
+```
+kubectl apply -f - <<EOF
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: $productDeploymentName$-listener-8080
+  namespace: $productNamespace$
+spec:
+  port: 8080
+  protocol: HTTP
+  securityModel: XFP
+  hostBinding:
+    namespace:
+      from: ALL
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: $productDeploymentName$-listener-8443
+  namespace: $productNamespace$
+spec:
+  port: 8443
+  protocol: HTTPS
+  securityModel: XFP
+  hostBinding:
+    namespace:
+      from: ALL
+EOF
+```
 
-2. Apply the YAML for the "Quote of the Moment" service.
+2. Apply the YAML for the “Quote of the Moment" service.
 
   ```
   kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/quickstart/qotm.yaml
@@ -85,21 +71,8 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
-3. Generate the YAML for a `Mapping` to tell $productName$ to route all traffic inbound to the `/backend/`
-   path to the `quote` Service.
-
-  In this step, we'll be using the Mapping Editor, which you can find in the service details view of your [Ambassador Cloud connected installation](#connecting-your-installation-to-ambassador-cloud).
-  Open your browser to https://app.getambassador.io/cloud/services/quote/details and click on **New Mapping**.
-
-  Default options are automatically populated. **Configure the following settings**, then click **Generate Mapping**:
-    - **Path Matching**: `/backend/`
-    - **Mapping Properties > + Add Property > OpenAPI Docs**: `/.ambassador-internal/openapi-docs`
-
-    ![](../../images/mapping-editor.png)
-
-  Whether you decide to automatically push the change to Git for this newly create Mapping resource or not, the resulting Mapping should be similar to the example below.
-
-  **Apply this YAML to your target cluster now.**
+3. Apply the YAML for a `Mapping` to tell $productName$ to route all traffic inbound to the `/backend/`
+   path to the `quote` Service:
 
   ```yaml
   kubectl apply -f - <<EOF
@@ -143,17 +116,15 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
     }
   ```
 
-<Alert severity="success"><b>Victory!</b> You have created your first $productName$ <code>Listener</code> and <code>Mapping</code>, routing a request from your cluster's edge to a service!</Alert>
+<Alert severity="success"><b>Victory!</b> You have created your first $productName$ Mapping, routing a request from your cluster's edge to a service!</Alert>
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
 Explore some of the popular tutorials on $productName$:
 
-* [Configuring $productName$ communications](../../howtos/configure-communications): configure how $productName$ handles communication with clients
-* [Intro to `Mappings`](../../topics/using/intro-mappings/): declaratively routes traffic from
+* [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from
 the edge of your cluster to a Kubernetes service
-* [`Listener` resource](../../topics/running/listener/): configure ports, protocols, and security options for your ingress.
-* [`Host` resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
+* [Host resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
 * [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads
 
 $productName$ has a comprehensive range of [features](/features/) to

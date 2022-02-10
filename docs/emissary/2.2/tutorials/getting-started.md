@@ -24,20 +24,6 @@ We'll start by installing $productName$ into your cluster.
 
 <GettingStartedEmissary21Tabs version="$version$" />
 
-### Connecting your installation to Ambassador Cloud
-
-Now is a great moment to connect your new installation to Ambassador Cloud in order to fully leverage the power of $productName$ and the Developer Control Plane (DCP).
-
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/services/) with GitHub, GitLab or Google and select your team account.
-
-2. At the top, click **Add Services** then click **Connection Instructions** in the **Connect your installation** section.
-
-3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
-
-4. Follow the prompts to install the cloud token into your cluster.
-
-5. When the token installation completes, your services will be listed in the DCP.
-
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
 ## 2. Routing traffic from the edge
@@ -79,21 +65,8 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
-3. Generate the YAML for a `Mapping` to tell $productName$ to route all traffic inbound to the `/backend/`
-   path to the `quote` Service.
-
-  In this step, we'll be using the Mapping Editor, which you can find in the service details view of your [Ambassador Cloud connected installation](#connecting-your-installation-to-ambassador-cloud).
-  Open your browser to https://app.getambassador.io/cloud/services/quote/details and click on **New Mapping**.
-
-  Default options are automatically populated. **Configure the following settings**, then click **Generate Mapping**:
-    - **Path Matching**: `/backend/`
-    - **Mapping Properties > + Add Property > OpenAPI Docs**: `/.ambassador-internal/openapi-docs`
-
-    ![](../../images/mapping-editor.png)
-
-  Whether you decide to automatically push the change to Git for this newly create Mapping resource or not, the resulting Mapping should be similar to the example below.
-
-  **Apply this YAML to your target cluster now.**
+3. Apply the YAML for a `Mapping` to tell $productName$ to route all traffic inbound to the `/backend/`
+   path to the `quote` Service:
 
   ```yaml
   kubectl apply -f - <<EOF
