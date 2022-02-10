@@ -7,14 +7,6 @@ import GettingStartedEdgeStack21Tabs from './gs-tabs'
 
 # $productName$ quick start
 
-<Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
-  changes to allow $productName$ to more gracefully handle larger installations
-  (including multitenant or multiorganizational installations), reduce memory footprint,
-  and improve performance. For more information on 2.X, please check the&nbsp;
-  <a href="../../release-notes">release notes</a>.
-</Alert>
-
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
@@ -38,7 +30,7 @@ Now is a great moment to connect your new installation to Ambassador Cloud in or
 
 1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/services/) with GitHub, GitLab or Google and select your team account.
 
-2. At the top, click **Add Services** then click **Connection Instructions** in the Edge Stack installation section.
+2. At the top, click **Add Services** then click **Connection Instructions** in the **Connect your installation** section.
 
 3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 
@@ -151,15 +143,17 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
     }
   ```
 
-<Alert severity="success"><b>Victory!</b> You have created your first $productName$ Mapping, routing a request from your cluster's edge to a service!</Alert>
+<Alert severity="success"><b>Victory!</b> You have created your first $productName$ <code>Listener</code> and <code>Mapping</code>, routing a request from your cluster's edge to a service!</Alert>
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
 Explore some of the popular tutorials on $productName$:
 
-* [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from
+* [Configuring $productName$ communications](../../howtos/configure-communications): configure how $productName$ handles communication with clients
+* [Intro to `Mappings`](../../topics/using/intro-mappings/): declaratively routes traffic from
 the edge of your cluster to a Kubernetes service
-* [Host resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
+* [`Listener` resource](../../topics/running/listener/): configure ports, protocols, and security options for your ingress.
+* [`Host` resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
 * [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads
 
 $productName$ has a comprehensive range of [features](/features/) to
