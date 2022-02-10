@@ -142,7 +142,7 @@ export const products = [
         link: 'pre-release/quick-start',
       },
       { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
-      { id: 'code', name: 'Code', link: 'code/quick-start' },
+      { id: 'code', name: '2.5', link: 'code/quick-start' },
       { id: '2.4', name: '2.4', link: '2.4/quick-start' },
       { id: '2.3', name: '2.3', link: '2.3/quick-start' },
       { id: '2.2', name: '2.2', link: '2.2/quick-start', archived: true },
