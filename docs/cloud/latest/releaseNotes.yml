@@ -31,6 +31,13 @@
 
 changelog: ''
 items:
+  - date: '2022-02-21'
+    notes:
+      - title: 'Mapping Editor'
+        body: "The new Ambassador Cloud Mapping Editor let's you craft Mapping resources following best practices to easily expose services to the internet. Get started with Edge Stack 2.2 and follow our guide to setup your first Mapping."
+        image: './mapping-editor.png'
+        docs: '../../edge-stack/latest/tutorials/getting-started/'
+        type: feature
   - date: '2022-02-10'
     notes:
       - title: 'Edge Stack community licenses'
