@@ -30,6 +30,7 @@ import {
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
+import Code from './products/Code';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
 import Kubernetes from './products/Kubernetes';
@@ -276,24 +277,17 @@ const index = ({ data, location, pageContext }) => {
   );
 
   const getProductHome = (product) => {
-    switch (product) {
-      case 'edge-stack':
-        return <EdgeStack />;
-      case 'emissary':
-        return <Emissary />;
-      case 'telepresence':
-        return <Telepresence />;
-      case 'cloud':
-        return <Cloud />;
-      case 'argo':
-        return <Argo />;
-      case 'kubernetes':
-        return <Kubernetes />;
-      case 'code':
-        return <Telepresence />;
-      default:
-        return <EdgeStack />;
-    }
+    const Product =
+      {
+        'edge-stack': EdgeStack,
+        emissary: Emissary,
+        telepresence: Telepresence,
+        cloud: Cloud,
+        argo: Argo,
+        kubernetes: Kubernetes,
+        code: Code,
+      }[product] || EdgeStack;
+    return <Product />;
   };
 
   const MainContainer = ({ children }) => (
@@ -352,7 +346,9 @@ const index = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div>
+    <div
+      className={`${product.slug === 'home' ? 'docs__footer-wrapper' : ''} `}
+    >
       {product.slug === 'home' && (
         <hr className="docs__separator docs__container docs__container-home" />
       )}
