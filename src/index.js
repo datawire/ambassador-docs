@@ -538,7 +538,12 @@ const index = ({ data, location, pageContext }) => {
                       );
                     }
                   })}
-                  <li>
+                  <li 
+                    className={`${
+                      product.isProduct ? 'docs__selected__dropdown' : ''
+                    }`}
+                    key="products"
+                  >
                     <Dropdown
                       label={'Products'}
                       className={'docs__nav-dropdown'}

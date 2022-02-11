@@ -86,12 +86,6 @@ body {
     align-items: center;
 
     li {
-      &.docs__selected a {
-        font-weight: 600;
-        border-color: @blue;
-        color: @blue;
-      }
-
       a {
         font-size: 14px;
         margin-right: 30px;
@@ -122,6 +116,7 @@ body {
         justify-content: center;
         color: inherit;
         fill: @gray500;
+        padding: 0 10px;
         
         & > label {
           color: inherit;
@@ -152,6 +147,19 @@ body {
           fill: @blue;
           text-decoration: none;
         }
+      }
+
+      &.docs__selected a {
+        font-weight: 600;
+        border-color: @blue;
+        color: @blue;
+      }
+
+      &.docs__selected__dropdown .custom-dropdown {
+        font-weight: 600;
+        border-color: @blue;
+        color: @blue;
+        fill: @blue;
       }
     }
   }
