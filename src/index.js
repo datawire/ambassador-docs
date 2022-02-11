@@ -518,7 +518,7 @@ const index = ({ data, location, pageContext }) => {
               <div className="docs__links-content docs__dekstop">
                 <ul className="docs__products-list">
                   {products.map((item) => {
-                    if(!item.isProduct) {
+                    if (!item.isProduct) {
                       const linkContent = version.archived ? (
                         <a href={`${siteUrl}${item.link}`}>{item.name}</a>
                       ) : (
@@ -540,35 +540,39 @@ const index = ({ data, location, pageContext }) => {
                   <li>
                     <Dropdown
                       label={'Products'}
+                      className={'docs__nav-dropdown'}
                       handleOnChange={handleProductChange}
                       value={'products'}
-                      options={products.filter(i => i.isProduct).map((i) => ({ id: i.slug, name: i.name }))}
+                      options={products
+                        .filter((i) => i.isProduct)
+                        .map((i) => ({ id: i.slug, name: i.name }))}
                     />
                   </li>
                 </ul>
               </div>
               <div
-              className={`docs__dropdown-container docs__mobile${
-                showVersion && versionList.length > 1
-                  ? ' docs__dropdown-version'
-                  : ''
-              }`}>
-              <Dropdown
-                label={product.name}
-                handleOnChange={handleProductChange}
-                value={product.slug}
-                options={products.map((i) => ({ id: i.slug, name: i.name }))}
-              />
-              {showVersion && versionList.length > 1 && (
+                className={`docs__dropdown-container docs__mobile${
+                  showVersion && versionList.length > 1
+                    ? ' docs__dropdown-version'
+                    : ''
+                }`}
+              >
                 <Dropdown
-                  label={`Version: ${version.name}`}
-                  handleOnChange={handleVersionChange}
-                  value={version.id}
-                  options={versionList.filter((v) => !v.archived)}
+                  label={product.name}
+                  handleOnChange={handleProductChange}
+                  value={product.slug}
+                  options={products.map((i) => ({ id: i.slug, name: i.name }))}
                 />
-              )}
-            </div>
-            <SearchBox />
+                {showVersion && versionList.length > 1 && (
+                  <Dropdown
+                    label={`Version: ${version.name}`}
+                    handleOnChange={handleVersionChange}
+                    value={version.id}
+                    options={versionList.filter((v) => !v.archived)}
+                  />
+                )}
+              </div>
+              <SearchBox />
             </div>
           </div>
         </nav>
