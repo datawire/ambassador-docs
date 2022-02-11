@@ -12,12 +12,14 @@ productHelmName: edge-stack
 # OSS (not self)
 ossVersion: 2.2.0
 ossDocsVersion: 2.2
+ossChartVersion: 7.3.0
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
 
 # AES (self)
 aesVersion: 2.2.0
 aesDocsVersion: 2.2
+aesChartVersion: 7.3.0
 AESproductName: "Ambassador Edge Stack"
 AESproductNamePlural: "Ambassador Edge Stacks"
 
