@@ -552,7 +552,7 @@ const index = ({ data, location, pageContext }) => {
                 </ul>
               </div>
               <div className={'docs__nav-burger'}>
-                <Burger title={'Docs Home'} />
+                <Burger title={product.name} />
               </div>
               {/* <div
                 className={`docs__dropdown-container docs__mobile${
