@@ -8,7 +8,7 @@ import Run from '../../../../src/assets/images/home/home-run.svg';
 import Ship from '../../../../src/assets/images/home/home-ship.svg';
 import Telepresence from '../../../../src/assets/images/home/home-telepresence.svg';
 import Button from '../../../../src/components/Button';
-import { goToDocsTelepresence } from '../../../../src/utils/routes';
+import { goToCodeDocs } from '../../../../src/utils/routes';
 
 import './styles.less';
 
@@ -69,7 +69,7 @@ const DocsHome = () => {
             'With Telepresence, you can easily build and ship code. Telepresence enables you to configure and maintain development and testing environments without impacting performance.'
           }
           image={Code}
-          getStarted={goToDocsTelepresence}
+          getStarted={goToCodeDocs}
           docDescription={'Advanced Telepresence documentation'}
           docImage={Telepresence}
         />
