@@ -537,6 +537,14 @@ const index = ({ data, location, pageContext }) => {
                       );
                     }
                   })}
+                  <li>
+                    <Dropdown
+                      label={'Products'}
+                      handleOnChange={handleProductChange}
+                      value={'products'}
+                      options={products.filter(i => i.isProduct).map((i) => ({ id: i.slug, name: i.name }))}
+                    />
+                  </li>
                 </ul>
               </div>
               <div
