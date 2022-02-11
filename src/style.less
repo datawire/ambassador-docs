@@ -104,6 +104,50 @@ body {
           text-decoration: none;
         }
       }
+
+      .custom-dropdown {
+        color: @black;
+        cursor: pointer;
+        font-size: 14px;
+        border: 1.5px solid transparent;
+        border-radius: 4px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: inherit;
+        fill: @gray500;
+        
+        & > label {
+          color: inherit;
+          font-weight: normal;
+          cursor: pointer;
+          padding-right: 5px;
+        }
+
+        & > svg {
+          fill: inherit;
+          width: 20px;
+          height: 20px;
+         
+        }
+
+        & > select {
+          cursor: pointer;
+
+          & > option {
+            background: @color-blue-light;
+            color: @black;
+            font-size: 14px;
+          }
+        }
+
+        &:hover {
+          color: @blue;
+          fill: @blue;
+          text-decoration: none;
+        }
+      }
     }
   }
 
