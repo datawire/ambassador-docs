@@ -31,13 +31,12 @@
 
 changelog: ''
 items:
-  - date: '2022-02-10'
+  - date: TBD
     notes:
-      - title: 'Edge Stack community licenses'
-        body: 'Starting with Edge Stack 2.2, activating a free community license in your cluster is now easier than ever for cloud-connected installations.'
-        image: './community-license.png'
-        docs: '../../edge-stack/latest/about/faq/#can-i-use-the-add-on-features-for-aesproductname-for-free'
-        type: change
+      - title: Intercept from the cloud
+        body: Start a Telepresence intercept by simply clicking a button.
+        docs: service-catalog/howtos/intercept/
+        type: feature
   - date: '2021-12-08'
     notes:
       - title: 'Subscriptions'
