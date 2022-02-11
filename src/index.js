@@ -4,6 +4,7 @@ import React, { useState, useMemo, useCallback } from 'react';
 
 import Layout from '../../src/components/Layout';
 
+import Burger from '../../src/components/Burger/Burger';
 import ContactBlock from '../../src/components/ContactBlock';
 import DatawireMetaData from '../../src/components/DatawireMetaData';
 import Dropdown from '../../src/components/Dropdown';
@@ -550,7 +551,10 @@ const index = ({ data, location, pageContext }) => {
                   </li>
                 </ul>
               </div>
-              <div
+              <div className={'docs__nav-burger'}>
+                <Burger title={'Docs Home'} />
+              </div>
+              {/* <div
                 className={`docs__dropdown-container docs__mobile${
                   showVersion && versionList.length > 1
                     ? ' docs__dropdown-version'
@@ -572,6 +576,7 @@ const index = ({ data, location, pageContext }) => {
                   />
                 )}
               </div>
+              */}
               <SearchBox />
             </div>
           </div>

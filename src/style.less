@@ -52,8 +52,13 @@ body {
       display: flex;
       justify-content: space-between;
       flex: 1 1;
+      width: 100%;
       max-width: 1060px;
       margin-right: 6px;
+    }
+    &-burger {
+      display: none;
+      align-items: center;
     }
   }
 
@@ -804,7 +809,7 @@ body {
     }
 
     &__search-box {
-      width: 100%;
+      display: none;
     }
 
     &__separator {
@@ -813,8 +818,12 @@ body {
 
     &__nav {
       flex-direction: column;
-      height: 100px;
+      height: 70px;
       padding-top: 5px;
+
+      &-burger {
+        display: flex;
+      }
     }
 
     &__products-list {
