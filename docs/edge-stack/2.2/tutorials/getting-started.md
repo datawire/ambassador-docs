@@ -77,7 +77,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
     EOF
     ```
 
-2. Apply the YAML for the "Quote of the Moment" service.
+2. Apply the YAML for the "Quote" service.
 
   ```
   kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/quickstart/qotm.yaml
