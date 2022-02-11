@@ -158,7 +158,7 @@ metadata:
 data:
   tls secret goes here
 ---
-apiversion: getambassador.io/v3alpha1
+apiVersion: getambassador.io/v3alpha1
 kind: Host
 metadata:
   name: minimal-host

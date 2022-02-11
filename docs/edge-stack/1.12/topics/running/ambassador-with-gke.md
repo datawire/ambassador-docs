@@ -138,7 +138,7 @@ You should now be able to access the web service via `https://www.example.com`.
 Create and apply a BackendConfig resource with a [custom health check](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#direct_health) specified:
 
 ```yaml
-apiversion: cloud.google.com/v1
+apiVersion: cloud.google.com/v1
 kind: backendconfig
 metadata:
   name: ambassador-hc-config
