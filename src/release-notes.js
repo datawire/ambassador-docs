@@ -136,13 +136,19 @@ const releaseNotes = ({ data, location, pageContext }) => {
     [product.slug, version.id],
   );
 
+  let docsVersion = versions?.docsVersion;
+  if (!docsVersion) {
+    const docsMatch = versions?.version?.match(/\d+.\d+/g);
+    docsVersion = docsMatch?.length > 0 && docsMatch[0];
+  }
+
   const footer = (
     <div>
       <hr className="docs__separator docs__container" />
       <section className="docs__contact docs__container">
         <ContactBlock />
       </section>
-      <DocsFooter product={product.slug} version={versions.ossDocsVersion} />
+      <DocsFooter product={product.slug} version={docsVersion} />
     </div>
   );
 
