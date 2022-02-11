@@ -39,6 +39,7 @@ export const products = [
   {
     slug: 'kubernetes',
     name: 'Kubernetes (K8s)',
+    isProduct: true,
     link: '/docs/kubernetes',
     to: goToKubernetesDocs,
     id: Math.random().toString(),
@@ -47,6 +48,7 @@ export const products = [
   {
     slug: 'edge-stack',
     name: 'Edge Stack',
+    isProduct: true,
     link: '/docs/edge-stack',
     to: goToEdgeStackDocs,
     id: Math.random().toString(),
@@ -130,6 +132,7 @@ export const products = [
   {
     slug: 'emissary',
     name: 'Emissary-ingress',
+    isProduct: true,
     link: '/docs/emissary',
     to: goToEmissaryDocs,
     id: Math.random().toString(),
@@ -153,6 +156,7 @@ export const products = [
   {
     slug: 'telepresence',
     name: 'Telepresence',
+    isProduct: true,
     link: '/docs/telepresence',
     to: goToDocsTelepresence,
     id: Math.random().toString(),
@@ -173,6 +177,7 @@ export const products = [
   {
     slug: 'argo',
     name: 'Argo',
+    isProduct: true,
     link: '/docs/argo',
     to: goToDocsArgo,
     id: Math.random().toString(),
@@ -181,6 +186,7 @@ export const products = [
   {
     slug: 'cloud',
     name: 'Cloud',
+    isProduct: true,
     link: '/docs/cloud',
     to: goToCloudDocs,
     id: Math.random().toString(),
@@ -195,6 +201,7 @@ export const products = [
   {
     slug: 'envoy',
     name: 'Envoy',
+    isProduct: true,
     link: '/docs/envoy/latest/concepts/cloudnative',
     to: goToEnvoy,
     id: Math.random().toString(),

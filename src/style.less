@@ -39,14 +39,22 @@ body {
   &__nav {
     height: 70px;
     background: @color-blue-light;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 0 25px;
     border-bottom: 1px solid @grey-separator;
     position: relative;
     width: 100%;
     z-index: 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      flex: 1 1;
+      max-width: 1060px;
+      margin-right: 6px;
+    }
   }
 
   &__body {
@@ -71,7 +79,6 @@ body {
   &__products-list {
     display: flex;
     align-items: center;
-    margin-left: 20px;
 
     li {
       &.docs__selected a {

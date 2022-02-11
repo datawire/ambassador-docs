@@ -514,35 +514,37 @@ const index = ({ data, location, pageContext }) => {
       <div className="docs">
         <nav>
           <div className="docs__nav">
-            <div className="docs__links-content docs__dekstop">
-              <ul className="docs__products-list">
-                {products.map((item) => {
-                  const linkContent = version.archived ? (
-                    <a href={`${siteUrl}${item.link}`}>{item.name}</a>
-                  ) : (
-                    <Link to={item.link}>{item.name}</Link>
-                  );
-                  return (
-                    <li
-                      className={`${
-                        product.slug === item.slug ? 'docs__selected' : ''
-                      }`}
-                      key={item.name}
-                      onClick={claenStorage}
-                    >
-                      {linkContent}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div
+            <div className="docs__nav__content">
+              <div className="docs__links-content docs__dekstop">
+                <ul className="docs__products-list">
+                  {products.map((item) => {
+                    if(!item.isProduct) {
+                      const linkContent = version.archived ? (
+                        <a href={`${siteUrl}${item.link}`}>{item.name}</a>
+                      ) : (
+                        <Link to={item.link}>{item.name}</Link>
+                      );
+                      return (
+                        <li
+                          className={`${
+                            product.slug === item.slug ? 'docs__selected' : ''
+                          }`}
+                          key={item.name}
+                          onClick={claenStorage}
+                        >
+                          {linkContent}
+                        </li>
+                      );
+                    }
+                  })}
+                </ul>
+              </div>
+              <div
               className={`docs__dropdown-container docs__mobile${
                 showVersion && versionList.length > 1
                   ? ' docs__dropdown-version'
                   : ''
-              }`}
-            >
+              }`}>
               <Dropdown
                 label={product.name}
                 handleOnChange={handleProductChange}
@@ -559,6 +561,7 @@ const index = ({ data, location, pageContext }) => {
               )}
             </div>
             <SearchBox />
+            </div>
           </div>
         </nav>
         <div className="docs__body">{content}</div>
