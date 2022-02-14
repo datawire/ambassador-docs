@@ -10,18 +10,18 @@ Note: You can force all Edge Policy Console sessions to sign out using the **Log
 
 The EPC makes it easy to configure what you need for a successful deployment. However, you'll also be able to use the command line to complete any of your configurations.
 
-* [Dashboard](#dashboard)
-* [Hosts](#hosts)
-* [Mappings](#mappings)
-* [Filters](#filters)
-* [Rate Limits](#rate-limits)
-* [Plugins](#plugins)
-* [Resolvers](#resolvers)
-* [Debugging](#debugging)
-* [YAML Download](#yaml-download)
-* [APIs](#apis)
-* [Documentation](#documentation)
-* [Disabling the Edge Policy Console](#disabling-the-edge-policy-console)
+- [Dashboard](#dashboard)
+- [Hosts](#hosts)
+- [Mappings](#mappings)
+- [Filters](#filters)
+- [Rate Limits](#rate-limits)
+- [Plugins](#plugins)
+- [Resolvers](#resolvers)
+- [Debugging](#debugging)
+- [YAML Download](#yaml-download)
+- [APIs](#apis)
+- [Documentation](#documentation)
+- [Disabling the Edge Policy Console](#disabling-the-edge-policy-console)
 
 On most pages, you have the option to click `See YAML` which will provide you the raw YAML file for your CRD. For those that want YAML changes for Git source control, all of your configuration changes will be saved to the YAML Download" tab.
 
@@ -31,10 +31,10 @@ You can also browse the [Edge Control documentation](../edgectl/edge-control) fo
 
 The landing page of the EPC is your dashboard, which shows metrics for:
 
-* counts of Hosts, Mappings, and Plugins
-* System status of Envoy and Redis
-* System Service health, which you can click for more details
-* [Throughput rates](../rate-limit-speedometers) for Rate Limited and for Authenticated traffic
+- counts of Hosts, Mappings, and Plugins
+- System status of Envoy and Redis
+- System Service health, which you can click for more details
+- [Throughput rates](../rate-limit-speedometers) for Rate Limited and for Authenticated traffic
 
 ### Hosts
 
@@ -111,6 +111,5 @@ See the [Developer Portal](../dev-portal) documentation for more information.
 The Documentation page provides you direct links to the $productName$ documentation (these very pages!), available resources and case studies, as well as the Ambassador blog.
 
 ### Disabling the Edge Policy Console
-
 
 If necessary, you can disable external access to the Edge Policy Console using the [Ambassador module](../../running/ambassador).

@@ -6,10 +6,10 @@ The custom `Host` resource defines how $productName$ will be
 visible to the outside world. It collects all the following information in a
 single configuration resource:
 
-* The hostname by which $productName$ will be reachable
-* How $productName$ should handle TLS certificates
-* How $productName$ should handle secure and insecure requests
-* Which `Mappings` should be associated with this `Host`
+- The hostname by which $productName$ will be reachable
+- How $productName$ should handle TLS certificates
+- How $productName$ should handle secure and insecure requests
+- Which `Mappings` should be associated with this `Host`
 
 <Alert severity="warning">
   Remember that <code>Listener</code> resources are&nbsp;<b>required</b>&nbsp;for a functioning
@@ -97,41 +97,41 @@ The above `Host` will associate with these `Mapping`s:
 ```yaml
 ---
 apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  mapping-with-label-match
+  name: mapping-with-label-match
   labels:
-    examplehost: host          # This matches the Host's mappingSelector.
+    examplehost: host # This matches the Host's mappingSelector.
 spec:
   prefix: /httpbin/
   service: http://httpbin.org
 ---
 apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  mapping-with-hostname-match
+  name: mapping-with-hostname-match
 spec:
-  hostname: host.example.com   # This is an exact match of the Host's hostname.
+  hostname: host.example.com # This is an exact match of the Host's hostname.
   prefix: /httpbin/
   service: http://httpbin.org
 ---
 apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  mapping-with-hostname-glob-match
+  name: mapping-with-hostname-glob-match
 spec:
-  hostname: "*.example.com"    # This glob matches the Host's hostname too.
+  hostname: '*.example.com' # This glob matches the Host's hostname too.
   prefix: /httpbin/
   service: http://httpbin.org
 ---
 apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  mapping-with-both-matches
+  name: mapping-with-both-matches
   labels:
-    examplehost: host          # This matches the Host's mappingSelector.
+    examplehost: host # This matches the Host's mappingSelector.
 spec:
-  hostname: "*.example.com"    # This glob matches the Host's hostname.
+  hostname: '*.example.com' # This glob matches the Host's hostname.
   prefix: /httpbin/
   service: http://httpbin.org
 ```
@@ -141,33 +141,33 @@ It will _not_ associate with any of these:
 ```yaml
 ---
 apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  skip-mapping-wrong-label
+  name: skip-mapping-wrong-label
   labels:
-    examplehost: staging       # This doesn't match the Host's mappingSelector.
+    examplehost: staging # This doesn't match the Host's mappingSelector.
 spec:
   prefix: /httpbin/
   service: http://httpbin.org
 ---
 apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  skip-mapping-wrong-hostname
+  name: skip-mapping-wrong-hostname
 spec:
-  hosname: "bad.example.com"  # This doesn't match the Host's hostname.
+  hosname: 'bad.example.com' # This doesn't match the Host's hostname.
   prefix: /httpbin/
   service: http://httpbin.org
 ---
 apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
+kind: Mapping
 metadata:
-  name:  skip-mapping-still-wrong
+  name: skip-mapping-still-wrong
   labels:
-    examplehost: staging       # This doesn't match the Host's mappingSelector,
-spec:                          # and if the Host specifies mappingSelector AND the
-  hostname: host.example.com   # Mapping specifies hostname, BOTH must match. So
-  prefix: /httpbin/            # the matching hostname isn't good enough.
+    examplehost: staging # This doesn't match the Host's mappingSelector,
+spec: # and if the Host specifies mappingSelector AND the
+  hostname: host.example.com # Mapping specifies hostname, BOTH must match. So
+  prefix: /httpbin/ # the matching hostname isn't good enough.
   service: http://httpbin.org
 ```
 
@@ -186,22 +186,22 @@ requestPolicy:
 
 The `insecure-action` can be one of:
 
-* `Redirect` (the default): redirect to HTTPS
-* `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
-* `Reject`: reject the request with a 400 response
+- `Redirect` (the default): redirect to HTTPS
+- `Route`: go ahead and route as normal; this will allow handling HTTP requests normally
+- `Reject`: reject the request with a 400 response
 
 ```yaml
 requestPolicy:
   insecure:
-    additionalPort: -1   # This is how to disable the default redirection from 8080.
+    additionalPort: -1 # This is how to disable the default redirection from 8080.
 ```
 
 Some special cases to be aware of here:
 
-* **Case matters in the actions:** you must use e.g. `Reject`, not `reject`.
-* The `X-Forwarded-Proto` header is honored when determining whether a request is secure or insecure. For more information, see "Load Balancers, the `Host` Resource, and `X-Forwarded-Proto`" below.
-* ACME challenges with prefix `/.well-known/acme-challenge/` are always forced to be considered insecure, since they are not supposed to arrive over HTTPS.
-* $AESproductName$ provides native handling of ACME challenges. If you are using this support, $AESproductName$ will automatically arrange for insecure ACME challenges to be handled correctly. If you are handling ACME yourself - as you must when running $OSSproductName$ - you will need to supply appropriate `Host` resources and `Mapping`s to correctly direct ACME challenges to your ACME challenge handler.
+- **Case matters in the actions:** you must use e.g. `Reject`, not `reject`.
+- The `X-Forwarded-Proto` header is honored when determining whether a request is secure or insecure. For more information, see "Load Balancers, the `Host` Resource, and `X-Forwarded-Proto`" below.
+- ACME challenges with prefix `/.well-known/acme-challenge/` are always forced to be considered insecure, since they are not supposed to arrive over HTTPS.
+- $AESproductName$ provides native handling of ACME challenges. If you are using this support, $AESproductName$ will automatically arrange for insecure ACME challenges to be handled correctly. If you are handling ACME yourself - as you must when running $OSSproductName$ - you will need to supply appropriate `Host` resources and `Mapping`s to correctly direct ACME challenges to your ACME challenge handler.
 
 ## TLS settings
 
@@ -229,28 +229,30 @@ acmeProvider:
 
 **Notes on ACME Support:**
 
-* If the authority is not supplied, the Let’s Encrypt production environment is assumed.
+- If the authority is not supplied, the Let’s Encrypt production environment is assumed.
 
-* In general, `email-of-registrant` is mandatory when using ACME: it should be
-a valid email address that will reach someone responsible for certificate
-management.
+- In general, `email-of-registrant` is mandatory when using ACME: it should be
+  a valid email address that will reach someone responsible for certificate
+  management.
 
-* ACME stores certificates in Kubernetes secrets. The name of the secret can be
-set using the `tlsSecret` element:
-   ```yaml
-   acmeProvider:
-     email: user@example.com
-   tlsSecret:
-     name: tls-cert
-   ```
-   if not supplied, a name will be automatically generated from the `hostname` and `email`.
+- ACME stores certificates in Kubernetes secrets. The name of the secret can be
+  set using the `tlsSecret` element:
 
-* $AESproductName$ uses the [`HTTP-01` challenge
-](https://letsencrypt.org/docs/challenge-types/) for ACME support:
-   - Does not require permission to edit DNS records
-   - The `hostname` must be reachable from the internet so the CA can check
-   `POST` to an endpoint in $AESproductName$.
-   - Wildcard domains are not supported.
+  ```yaml
+  acmeProvider:
+    email: user@example.com
+  tlsSecret:
+    name: tls-cert
+  ```
+
+  if not supplied, a name will be automatically generated from the `hostname` and `email`.
+
+- $AESproductName$ uses the [`HTTP-01` challenge
+  ](https://letsencrypt.org/docs/challenge-types/) for ACME support:
+  - Does not require permission to edit DNS records
+  - The `hostname` must be reachable from the internet so the CA can check
+    `POST` to an endpoint in $AESproductName$.
+  - Wildcard domains are not supported.
 
 ### `tlsSecret` enables TLS termination
 
@@ -307,4 +309,4 @@ It's important to realize that Envoy manages the `X-Forwarded-Proto` header such
 
 ### CRD specification
 
-The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v2/Host.proto).
+The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/release/v2.0/api/getambassador.io/v2/Host.proto).
