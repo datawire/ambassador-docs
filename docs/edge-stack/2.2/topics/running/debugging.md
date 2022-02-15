@@ -79,7 +79,7 @@ certificate errors.
 
 In both the Deployment Pod and the individual Pods, take the necessary action to address any discovered issues.
 
-## Review $productName$ logs {#review-logs}
+<h2 id="review-logs">Review $productName$ logs</h2>
 
 $productName$ logging can provide information on anything that might be abnormal or malfunctioning. While there may be a large amount of data to sort through, look for key errors such as the $productName$ process restarting unexpectedly, or a malformed Envoy configuration.
 
