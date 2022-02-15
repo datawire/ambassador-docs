@@ -10,7 +10,7 @@ We assume that you already have a running $productName$ installation in the foll
 having trouble with TLS, always [check the logs] of your $productName$ Pods and look for
 certificate errors.
 
-[TLS]: ../tls
+[tls]: ../tls
 [certificates]: ../tls#certificates-and-secrets
 [check the logs]: #review-logs
 
@@ -18,68 +18,68 @@ certificate errors.
 
 1. First, check the $productName$ Deployment with the following: `kubectl get -n $productNamespace$ deployments`
 
-    After a brief period, the terminal will print something similar to the following:
+   After a brief period, the terminal will print something similar to the following:
 
-    ```
-    $ kubectl get -n $productNamespace$ deployments
-    NAME                DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    $productDeploymentName$          3         3         3            3           1m
-    $productDeploymentName$-apiext   3         3         3            3           1m
-    ```
+   ```
+   $ kubectl get -n $productNamespace$ deployments
+   NAME                DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+   $productDeploymentName$          3         3         3            3           1m
+   $productDeploymentName$-apiext   3         3         3            3           1m
+   ```
 
 2. Check that the “desired” number of Pods matches the “current” and “available” number of Pods.
 
 3. If they are **not** equal, check the status of the associated Pods with the following command: `kubectl get pods -n $productNamespace$`.
 
-    The terminal should print something similar to the following:
+   The terminal should print something similar to the following:
 
-    ```
-    $ kubectl get pods -n $productNamespace$
-    NAME                         READY     STATUS    RESTARTS   AGE
-    $productDeploymentName$-85c4cf67b-4pfj2   1/1       Running   0          1m
-    $productDeploymentName$-85c4cf67b-fqp9g   1/1       Running   0          1m
-    $productDeploymentName$-85c4cf67b-vg6p5   1/1       Running   0          1m
-    $productDeploymentName$-apiext-736f8497d-j34pf   1/1       Running   0          1m
-    $productDeploymentName$-apiext-736f8497d-9gfpq   1/1       Running   0          1m
-    $productDeploymentName$-apiext-736f8497d-p5wgx   1/1       Running   0          1m
-    ```
+   ```
+   $ kubectl get pods -n $productNamespace$
+   NAME                         READY     STATUS    RESTARTS   AGE
+   $productDeploymentName$-85c4cf67b-4pfj2   1/1       Running   0          1m
+   $productDeploymentName$-85c4cf67b-fqp9g   1/1       Running   0          1m
+   $productDeploymentName$-85c4cf67b-vg6p5   1/1       Running   0          1m
+   $productDeploymentName$-apiext-736f8497d-j34pf   1/1       Running   0          1m
+   $productDeploymentName$-apiext-736f8497d-9gfpq   1/1       Running   0          1m
+   $productDeploymentName$-apiext-736f8497d-p5wgx   1/1       Running   0          1m
+   ```
 
-    The actual names of the Pods will vary. All the Pods should indicate `Running`, and all should show 1/1 containers ready.
+   The actual names of the Pods will vary. All the Pods should indicate `Running`, and all should show 1/1 containers ready.
 
 4. If the Pods do not seem reasonable, use the following command for details about the history of the Deployment: `kubectl describe -n $productNamespace$ deployment $productDeploymentName$`
 
-    * Look for data in the “Replicas” field near the top of the output. For example:
-        `Replicas: 3 desired | 3 updated | 3 total | 3 available | 0 unavailable`
+   - Look for data in the “Replicas” field near the top of the output. For example:
+     `Replicas: 3 desired | 3 updated | 3 total | 3 available | 0 unavailable`
 
-    * Look for data in the “Events” log field near the bottom of the output, which often displays data such as a fail image pull, RBAC issues, or a lack of cluster resources. For example:
+   - Look for data in the “Events” log field near the bottom of the output, which often displays data such as a fail image pull, RBAC issues, or a lack of cluster resources. For example:
 
-        ```
-        Events:
-        Type    Reason              Age     From                      Message
-        ----    ------              ----    ----                      -------
-        Normal  ScalingReplicaSet    2m     deployment-controller      Scaled up replica set $productDeploymentName$-85c4cf67b to 3
-        ```
+     ```
+     Events:
+     Type    Reason              Age     From                      Message
+     ----    ------              ----    ----                      -------
+     Normal  ScalingReplicaSet    2m     deployment-controller      Scaled up replica set $productDeploymentName$-85c4cf67b to 3
+     ```
 
 5. Additionally, use the following command to “describe” the individual Pods: `kubectl describe pods -n $productNamespace$ <$productDeploymentName$-pod-name>`
 
-    * Look for data in the “Status” field near the top of the output. For example, `Status: Running`
+   - Look for data in the “Status” field near the top of the output. For example, `Status: Running`
 
-    * Look for data in the “Events” field near the bottom of the output, as it will often show issues such as image pull failures, volume mount issues, and container crash loops. For example:
-        ```
-        Events:
-        Type    Reason                 Age   From                                                     Message
-        ----    ------                 ----  ----                                                     -------
-        Normal  Scheduled              4m    default-scheduler                                        Successfully assigned $productDeploymentName$-85c4cf67b-4pfj2 to gke-ambassador-demo-default-pool-912378e5-dkxc
-        Normal  SuccessfulMountVolume  4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  MountVolume.SetUp succeeded for volume "$productDeploymentName$-token-tmk94"
-        Normal  Pulling                4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  pulling image "docker.io/datawire/ambassador:0.40.0"
-        Normal  Pulled                 4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Successfully pulled image "docker.io/datawire/ambassador:0.40.0"
-        Normal  Created                4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Created container
-        Normal  Started                4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Started container
-        ```
+   - Look for data in the “Events” field near the bottom of the output, as it will often show issues such as image pull failures, volume mount issues, and container crash loops. For example:
+     ```
+     Events:
+     Type    Reason                 Age   From                                                     Message
+     ----    ------                 ----  ----                                                     -------
+     Normal  Scheduled              4m    default-scheduler                                        Successfully assigned $productDeploymentName$-85c4cf67b-4pfj2 to gke-ambassador-demo-default-pool-912378e5-dkxc
+     Normal  SuccessfulMountVolume  4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  MountVolume.SetUp succeeded for volume "$productDeploymentName$-token-tmk94"
+     Normal  Pulling                4m    kubelet, gke-ambassador-demo-default-pool-912378e5-dkxc  pulling image "docker.io/datawire/ambassador:0.40.0"
+     Normal  Pulled                 4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Successfully pulled image "docker.io/datawire/ambassador:0.40.0"
+     Normal  Created                4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Created container
+     Normal  Started                4m    kubelet, gke-$productDeploymentName$-demo-default-pool-912378e5-dkxc  Started container
+     ```
 
 In both the Deployment Pod and the individual Pods, take the necessary action to address any discovered issues.
 
-## Review $productName$ logs
+## Review $productName$ logs {#review-logs}
 
 $productName$ logging can provide information on anything that might be abnormal or malfunctioning. While there may be a large amount of data to sort through, look for key errors such as the $productName$ process restarting unexpectedly, or a malformed Envoy configuration.
 
@@ -134,13 +134,13 @@ To view the logs from $productName$:
 
 1. Use the following command to target an individual $productName$ Pod: `kubectl get pods -n $productNamespace$`
 
-    The terminal will print something similar to the following:
+   The terminal will print something similar to the following:
 
-    ```
-    $ kubectl get pods -n $productNamespace$
-    NAME                         READY     STATUS    RESTARTS   AGE
-    $productDeploymentName$-85c4cf67b-4pfj2   1/1       Running   0          3m
-    ```
+   ```
+   $ kubectl get pods -n $productNamespace$
+   NAME                         READY     STATUS    RESTARTS   AGE
+   $productDeploymentName$-85c4cf67b-4pfj2   1/1       Running   0          3m
+   ```
 
 2. Then, run the following: `kubectl logs -n $productNamespace$ <$productDeploymentName$-pod-name>`
 
@@ -170,20 +170,20 @@ You can examine the contents of the $productName$ Pod for issues, such as if vol
 
 1. To look into an $productName$ Pod, get a shell on the Pod using `kubectl exec`. For example,
 
-    ```
-    kubectl exec -it -n $productNamespace$ <$productDeploymentName$-pod-name> -- bash
-    ```
+   ```
+   kubectl exec -it -n $productNamespace$ <$productDeploymentName$-pod-name> -- bash
+   ```
 
 2. Determine the latest configuration. If you haven't overridden the configuration directory, the latest configuration will be in `/ambassador/snapshots`. If you have overridden it, $productName$ saves configurations in `$AMBASSADOR_CONFIG_BASE_DIR/snapshots`.
 
-    In the snapshots directory:
+   In the snapshots directory:
 
-    * `snapshot.yaml` contains the full input configuration that $productName$ has found;
-    * `aconf.json` contains the $productName$ configuration extracted from the snapshot;
-    * `ir.json` contains the IR constructed from the $productName$ configuration; and
-    * `econf.json` contains the Envoy configuration generated from the IR.
+   - `snapshot.yaml` contains the full input configuration that $productName$ has found;
+   - `aconf.json` contains the $productName$ configuration extracted from the snapshot;
+   - `ir.json` contains the IR constructed from the $productName$ configuration; and
+   - `econf.json` contains the Envoy configuration generated from the IR.
 
-    In the snapshots directory, the current configuration will be stored in files with no digit suffix, and older configurations have increasing numbers. For example, `ir.json` is current, `ir-1.json` is the next oldest, then `ir-2.json`, etc.
+   In the snapshots directory, the current configuration will be stored in files with no digit suffix, and older configurations have increasing numbers. For example, `ir.json` is current, `ir-1.json` is the next oldest, then `ir-2.json`, etc.
 
 3. If something is wrong with `snapshot` or `aconf`, there is an issue with your configuration. If something is wrong with `ir` or `econf`, you should [open an issue on Github](https://github.com/emissary-ingress/emissary/issues/new/choose).
 

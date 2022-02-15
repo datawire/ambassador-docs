@@ -15,7 +15,7 @@ for different TLS use cases including:
 
 Properly-functioning TLS requires the use of [TLS certificates] to prove that the
 various systems communicating are who they say they are. At minimum, $productName$
-must have a server certificate that identifies it to clients; when [mTLS](../mtls)
+must have a server certificate that identifies it to clients; when [mTLS](./mtls)
 or [client certificate authentication] are in use, additional certificates are needed.
 
 You supply certificates to $productName$ in Kubernetes [TLS Secrets]. These Secrets
@@ -31,9 +31,9 @@ tls-broken-cert.default.1 2 errors:;  1. K8sSecret secret tls-broken-cert.defaul
 certificate will be disabled entirely: in $productName$ $version$, this includes
 disabling cleartext communication for such a `Host`.
 
-[TLS Certificates]: https://protonmail.com/blog/tls-ssl-certificate/
+[tls certificates]: https://protonmail.com/blog/tls-ssl-certificate/
 [client certificate authentication]: ../../../howtos/client-cert-validation/
-[TLS Secrets]: https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets
+[tls secrets]: https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets
 
 ## `Host`
 
@@ -85,7 +85,7 @@ to terminate TLS on a domain.
 
 The following example shows the certificate contained in the Kubernetes Secret named
 `host-secret` configured to have $productName$ terminate TLS on the `host.example.com`
-domain: 
+domain:
 
 ```yaml
 ---
@@ -135,19 +135,20 @@ spec:
 </Alert>
 
 The following fields are accepted in the `tls` field:
+
 ```yaml
 tls:
-  cert_chain_file:    # string
-  private_key_file:   # string
-  ca_secret:          # string
-  cacert_chain_file:  # string
-  alpn_protocols:     # string
-  cert_required:      # bool
-  min_tls_version:    # string
-  max_tls_version:    # string
-  cipher_suites:      # array of strings
-  ecdh_curves:        # array of strings
-  sni:                # string
+  cert_chain_file: # string
+  private_key_file: # string
+  ca_secret: # string
+  cacert_chain_file: # string
+  alpn_protocols: # string
+  cert_required: # bool
+  min_tls_version: # string
+  max_tls_version: # string
+  cipher_suites: # array of strings
+  ecdh_curves: # array of strings
+  sni: # string
 ```
 
 These fields have the same function as in the [`TLSContext`](#tlscontext) resource,
@@ -180,7 +181,7 @@ metadata:
   name: min-tls-context
 spec:
   hosts:
-  - host.example.com
+    - host.example.com
   secret: min-secret
   min_tls_version: v1.2
 ```
@@ -245,7 +246,7 @@ metadata:
   name: example-host-context
 spec:
   hosts:
-  - host.example.com
+    - host.example.com
   secret: host-secret
   min_tls_version: v1.2
 ```
@@ -361,14 +362,15 @@ The `alpn_protocols` setting is also required for HTTP/2 support.
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
-kind:  TLSContext
+kind: TLSContext
 metadata:
-  name:  tls
+  name: tls
 spec:
   secret: ambassador-certs
-  hosts: ["*"]
+  hosts: ['*']
   alpn_protocols: h2[, http/1.1]
 ```
+
 Without setting alpn_protocols as shown above, HTTP2 will not be available via
 negotiation and will have to be explicitly requested by the client.
 
@@ -389,11 +391,11 @@ result in the following error:
 
 The `cipher_suites` setting configures the supported ciphers found below using the
 [configuration parameters for BoringSSL](https://commondatastorage.googleapis.com/chromium-boringssl-docs/ssl.h.html#Cipher-suite-configuration) when negotiating a TLS 1.0-1.2 connection.
-This setting has no effect when negotiating a TLS 1.3 connection.  When a client does not
+This setting has no effect when negotiating a TLS 1.3 connection. When a client does not
 support a matching cipher a handshake error will result.
 
 The `ecdh_curves` setting configures the supported ECDH curves when negotiating
-a TLS connection.  When a client does not support a matching ECDH a handshake
+a TLS connection. When a client does not support a matching ECDH a handshake
 error will result.
 
 ```
@@ -422,18 +424,18 @@ error will result.
 ```yaml
 ---
 apiVersion: getambassador.io/v3alpha1
-kind:  TLSContext
+kind: TLSContext
 metadata:
-  name:  tls
+  name: tls
 spec:
-  hosts: ["*"]
+  hosts: ['*']
   secret: ambassador-certs
   min_tls_version: v1.0
   max_tls_version: v1.3
   cipher_suites:
-  - "[ECDHE-ECDSA-AES128-GCM-SHA256|ECDHE-ECDSA-CHACHA20-POLY1305]"
-  - "[ECDHE-RSA-AES128-GCM-SHA256|ECDHE-RSA-CHACHA20-POLY1305]"
+    - '[ECDHE-ECDSA-AES128-GCM-SHA256|ECDHE-ECDSA-CHACHA20-POLY1305]'
+    - '[ECDHE-RSA-AES128-GCM-SHA256|ECDHE-RSA-CHACHA20-POLY1305]'
   ecdh_curves:
-  - X25519
-  - P-256
+    - X25519
+    - P-256
 ```
