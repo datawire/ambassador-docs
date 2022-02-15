@@ -10,17 +10,17 @@
   items:
     - title: What is Telepresence?
       link: what-is-telepresence
-    - title: Telepresence technical details
+    - title: Technical details
       link: telepresence-technical-details
-    - title: Intercepts in Telepresence
+    - title: Intercepts overview
       link: intercepts-overview
 - title: Telepresence basic operations
   items:
-    - title: Telepresence installation and updates
+    - title: Installation and updates
       link: install-and-update-telepresence
-    - title: Basic Telepresence commands
+    - title: Basic commands
       link: telepresence-basic-commands
-    - title: Creating a Telepresence Intercept
+    - title: Creating an intercept
       link: telepresence-intercept
 - title: Telepresence advanced user guide
   link: ../../telepresence
