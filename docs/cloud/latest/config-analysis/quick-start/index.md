@@ -42,7 +42,7 @@ In this quick start, we'll walk through how you can configure Edge Stack or Emis
    </Alert>
 
    If you do not have the latest version installed, you can:
-   
+
    * [Install the latest version of Edge Stack](/docs/edge-stack/2.0/topics/install/)
    * [Upgrade Edge Stack to the latest version](/docs/edge-stack/2.0/topics/install/upgrading/)
 
@@ -86,7 +86,7 @@ This will create a `Deployment`, `Service`, and `Mapping` in the `gitops-demo` n
 
     After clicking **Install**, you will be directed back to Ambassador Cloud.
 
-5. Once back in Ambassador Cloud, click the **CONFIGURE** GitHub settings button once more and find the `a8r-gitops-example` demo repository in the list of repositories. Click **ENABLE ANALYSIS**.
+5. Once back in Ambassador Cloud, click the **CONFIGURE** GitHub settings button once more and find the `a8r-gitops-example` demo repository in the list of repositories. Click **ENABLE INTEGRATIONS**.
 
 6. Configure Ambassador Cloud to access your cluster information and Kubernetes manifests from Git.
 
@@ -94,7 +94,7 @@ This will create a `Deployment`, `Service`, and `Mapping` in the `gitops-demo` n
 
     Select the cluster you initialized in step 1 from the `cluster` dropdown.
 
-7. Click on the **UPDATE ANALYSIS SETTINGS** button. This will trigger Ambassador Cloud to create a pull request with the information you just entered into your forked demo `a8r-gitops-example` repository. The pull request will add a file named `.a8r.yaml` to the root of your repository, and the contents will look something like this:
+7. Click on the **UPDATE REPOSITORY SETTINGS** button. This will trigger Ambassador Cloud to create a pull request with the information you just entered into your forked demo `a8r-gitops-example` repository. The pull request will add a file named `.a8r.yaml` to the root of your repository, and the contents will look something like this:
 
     ```
     k8s_config:
