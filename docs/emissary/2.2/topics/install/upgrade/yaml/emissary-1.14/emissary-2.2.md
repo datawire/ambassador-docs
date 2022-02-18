@@ -138,19 +138,17 @@ Migration is a seven-step process:
    **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   We publish three manifests for different namespaces. Use only the one that
+   We publish two manifests for different namespaces. Use only the one that
    matches the namespace into which you installed $productName$ 1.14.2:
 
-   - [`emissary-emissaryns.yaml`] for the `emissary` namespace;
-   - [`emissary-defaultns.yaml`] for the `default` namespace; and
-   - [`emissary-ambassadorns.yaml`] for the `ambassador` namespace.
+   - [`emissary-emissaryns.yaml`] for the `emissary` namespace; or
+   - [`emissary-defaultns.yaml`] for the `default` namespace.
 
    If you installed $productName$ 1.14.2 into some other namespace, you'll need to
    download one of the files and edit it to match your namespace.
 
    [`emissary-emissaryns.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml
    [`emissary-defaultns.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml
-   [`emissary-ambassadorns.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-ambassadorns.yaml
 
    **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, you'll need to download
    your chosen file and and edit it to do so.
@@ -275,20 +273,18 @@ Migration is a seven-step process:
    ```
 
    Once that's done, install the new Agent into the same namespace as your
-   Emissary deployment. Again, we supply three files for three different
+   Emissary deployment. Again, we supply two files for two different
    namespaces: use only the one that matches the namespace into which you
    installed $productName$ 1.14.2.
 
-   - [`emissary-emissaryns-agent.yaml`] for the `emissary` namespace;
-   - [`emissary-defaultns-agent.yaml`] for the `default` namespace; and
-   - [`emissary-ambassadorns-agent.yaml`] for the `ambassador` namespace.
+   - [`emissary-emissaryns-agent.yaml`] for the `emissary` namespace; or
+   - [`emissary-defaultns-agent.yaml`] for the `default` namespace.
 
    If you installed $productName$ 1.14.2 into some other namespace, you'll need to
    download one of the files and edit it to match your namespace.
 
    [`emissary-emissaryns-agent.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns-agent.yaml
    [`emissary-defaultns-agent.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns-agent.yaml
-   [`emissary-ambassadorns-agent.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-ambassadorns-agent.yaml
 
    Assuming that you're using the `default` namespace:
 
