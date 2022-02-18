@@ -252,7 +252,7 @@ TLS using the `istio-upstream` `TLSContext` above:
    tls: istio-upstream
    ```
 
-For example, if you have installed the Quote of the Moment service as described on the
+For example, if you have installed the Quote service as described on the
 [Getting Started](../../tutorials/getting-started) page, you will have a `Mapping` as follows:
 
    ```yaml
@@ -324,7 +324,7 @@ As shown above, one simple way to deal with this situation is to explicitly spec
    ```
 
 Another way is to set up your Kubernetes `Service` to map both port 80 and port 443. For example, the
-Quote of the Moment (which listens on port 8080 in its pod) might use a `Service` like this:
+Quote (which listens on port 8080 in its pod) might use a `Service` like this:
 
    ```yaml
    apiVersion: v1
