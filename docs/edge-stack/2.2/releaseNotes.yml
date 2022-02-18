@@ -49,7 +49,7 @@ items:
         docs: ../../argo/latest/howtos/manage-rollouts-using-cloud
 
   - version: 2.2.0
-    date: 'TBD'
+    date: '2022-02-10'
     notes:
       - title: Envoy V2 API deprecation
         type: change
