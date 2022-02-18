@@ -32,6 +32,22 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 2.2.1
+    date: '2022-02-22'
+    notes:
+      - title: Envoy V2 API deprecation
+        type: change
+        body: >-
+          Support for the Envoy V2 API is deprecated as of $productName$ v2.1, and will be removed in $productName$
+          v3.0. The <code>AMBASSADOR_ENVOY_API_VERSION</code> environment variable will be removed at the same
+          time. Only the Envoy V3 API will be supported (this has been the default since $productName$ v1.14.0).
+
+      - title: Correctly support canceling rollouts
+        type: bugfix
+        body: >-
+          The Ambassador Agent now correctly supports requests to cancel a rollout.
+        docs: ../../../argo/latest/howtos/manage-rollouts-using-cloud
+
   - version: 2.2.0
     date: 'TBD'
     notes:
