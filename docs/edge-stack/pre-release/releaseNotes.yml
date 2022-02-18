@@ -46,7 +46,7 @@ items:
         type: bugfix
         body: >-
           The Ambassador Agent now correctly supports requests to cancel a rollout.
-        docs: ../../../argo/latest/howtos/manage-rollouts-using-cloud
+        docs: ../../argo/latest/howtos/manage-rollouts-using-cloud
 
   - version: 2.2.0
     date: 'TBD'
