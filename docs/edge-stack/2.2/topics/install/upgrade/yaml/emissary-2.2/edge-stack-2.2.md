@@ -115,8 +115,8 @@ Migration is a six-step process:
    **in the same namespace as your existing $OSSproductName$ $version$ installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   We publish three manifests for different namespaces. Use only the one that
-   matches the namespace into which you installed $OSSproductName$ $version$:
+    Ambassador Labs publishes three manifests for different namespaces. Use only the one that
+    matches the namespace where you installed $OSSproductName$ $version$:
 
    - [`aes-emissaryns-migration.yaml`] for the `emissary` namespace;
    - [`aes-defaultns-migration.yaml`] for the `default` namespace; and
@@ -197,8 +197,8 @@ Migration is a six-step process:
 6. **Finally, enable ACME and filtering in $productName$ $version$.**
 
    <Alert severity="warning">
-      Enabling filtering correctly in $productName$ $version$ <i>requires</i> that no
-      <code>AuthService</code> or <code>RateLimitService</code> resources be present; see
+      To correctly enable filtering in $productName$ $version$, no
+      <code>AuthService</code> or <code>RateLimitService</code> resources can be present; see
       below for more.
    </Alert>
 

@@ -51,7 +51,7 @@ Migration is a two-step process:
      Our <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml"><code>emissary-emissaryns.yaml</code></a> file
      uses the `emissary` namespace, since this is the default for $productName$.
      We also publish <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml"><code>emissary-defaultns.yaml</code></a> for the 
-     `default` namespace. For any other namespace, you should download one of these files and edit the namespaces by hand.
+     `default` namespace. For any other namespace, you should download one of these files and edit the namespaces manually.
    </Alert>
 
    ```bash

@@ -138,8 +138,8 @@ Migration is a seven-step process:
    **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   We publish two manifests for different namespaces. Use only the one that
-   matches the namespace into which you installed $productName$ 1.14.2:
+   Ambassador Labs publishes three manifests for different namespaces. Use only the one that
+   matches the namespace where you installed $productName$ 1.14.2:
 
    - [`emissary-emissaryns.yaml`] for the `emissary` namespace; or
    - [`emissary-defaultns.yaml`] for the `default` namespace.
@@ -273,9 +273,9 @@ Migration is a seven-step process:
    ```
 
    Once that's done, install the new Agent into the same namespace as your
-   Emissary deployment. Again, we supply two files for two different
-   namespaces: use only the one that matches the namespace into which you
-   installed $productName$ 1.14.2.
+   Emissary deployment. Ambassador Labs supplies three files for three different
+   namespaces. Use only the one that matches the namespace where you installed 
+   $productName$ 1.14.2.
 
    - [`emissary-emissaryns-agent.yaml`] for the `emissary` namespace; or
    - [`emissary-defaultns-agent.yaml`] for the `default` namespace.

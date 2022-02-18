@@ -174,8 +174,8 @@ Migration is an eight-step process:
    **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   We publish three manifests for different namespaces. Use only the one that
-   matches the namespace into which you installed $productName$ 1.14.2:
+   Ambassador Labs publishes three manifests for different namespaces. Use only the one that
+   matches the namespace where you installed $productName$ 1.14.2:
 
    - [`aes-emissaryns-migration.yaml`] for the `emissary` namespace;
    - [`aes-defaultns-migration.yaml`] for the `default` namespace; and
