@@ -147,7 +147,7 @@ expression can lead to some updates happening sooner/later than expected.
 ## Customizing the installation with some Helm values
 
 `helmValues` is an optional map of configurable parameters of the $productName$ chart
-with some overriden values. Take a look at the [current list of values](https://github.com/datawire/edge-stack/tree/main/charts/edge-stack#configuration)
+with some overriden values. Take a look at the [current list of values](https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$#configuration)
 and their default values.
 
 Example:

@@ -38,6 +38,13 @@ items:
         image: './mapping-editor.png'
         docs: '../../edge-stack/latest/tutorials/getting-started/'
         type: feature
+  - date: '2022-02-18'
+    notes:
+      - title: Intercept from the cloud
+        body: Starting with Telepresence 2.5.0, intercepting a service can now be initiated from Ambassador Cloud.
+        docs: service-catalog/howtos/intercept/
+        image: './intercept-slideout-service-list.png'
+        type: feature
   - date: '2022-02-10'
     notes:
       - title: 'Edge Stack community licenses'
