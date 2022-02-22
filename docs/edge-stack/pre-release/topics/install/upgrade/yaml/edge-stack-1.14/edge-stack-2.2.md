@@ -174,19 +174,31 @@ Migration is an eight-step process:
    **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   Our `aes-ambassadorns-migration.yaml` is set up as follows:
+   We publish three manifests for different namespaces. Use only the one that
+   matches the namespace into which you installed $productName$ 1.14.2:
 
-   - It assumes that $productName$ 1.14.2 is installed in the `ambassador` namespace (this was typical).
-   - It sets the `AES_ACME_LEADER_DISABLE` environment variable to prevent $productName$ $version$
+   - [`aes-emissaryns-migration.yaml`] for the `emissary` namespace;
+   - [`aes-defaultns-migration.yaml`] for the `default` namespace; and
+   - [`aes-ambassadorns-migration.yaml`] for the `ambassador` namespace.
+
+   All three files are set up as follows:
+
+   - They set the `AES_ACME_LEADER_DISABLE` environment variable to prevent $productName$ $version$
      from trying to manage ACME (leaving $productName$ 1.14.2 to do it instead).
-   - It does NOT set `AMBASSADOR_LABEL_SELECTOR`.
-   - It does NOT install the Ambassador Agent.
-   - It does NOT create an `AuthService` or a `RateLimitService`. It is very important that $productName$
+   - They do NOT set `AMBASSADOR_LABEL_SELECTOR`.
+   - They do NOT install the Ambassador Agent.
+   - They do NOT create an `AuthService` or a `RateLimitService`. It is very important that $productName$
      $version$ not attempt to create these resources, as they are already provided for your $productName$
      1.14.2 installation.
 
-   If any of these do not match your situation, download `aes-ambassadorns-migration.yaml` and edit it
+   If any of these do not match your situation, download [`aes-ambassadorns-migration.yaml`] and edit it
    as needed.
+
+   [`aes-emissaryns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml
+   [`aes-defaultns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-defaultns-migration.yaml
+   [`aes-ambassadorns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-migration.yaml
+
+   Assuming you're using the `ambassador` namespace, as was typical for $productName$ 1.14.2:
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-migration.yaml && \
@@ -311,7 +323,7 @@ Migration is an eight-step process:
 
 8. **Finally, enable ACME in $productName$ $version$.**
 
-   First, scale the 1.14 Ambassador to 0: 
+   First, scale the 1.14 Ambassador to 0:
 
    ```
    kubectl scale -n ambassador deployment/ambassador --replicase=0
