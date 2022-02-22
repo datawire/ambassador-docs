@@ -42,6 +42,12 @@ items:
           v3.0. The <code>AMBASSADOR_ENVOY_API_VERSION</code> environment variable will be removed at the same
           time. Only the Envoy V3 API will be supported (this has been the default since $productName$ v1.14.0).
 
+      - title: Envoy security updates
+        type: security
+        body: >-
+          Upgraded Envoy to address security vulnerabilities CVE-2021-43824, CVE-2021-43825, CVE-2021-43826,
+          CVE-2022-21654, and CVE-2022-21655.
+        docs: https://groups.google.com/g/envoy-announce/c/bIUgEDKHl4g
       - title: Correctly support canceling rollouts
         type: bugfix
         body: >-
