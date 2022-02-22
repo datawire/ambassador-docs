@@ -114,7 +114,7 @@ spec:
   grpc: True
   prefix: /helloworld.Greeter/
   rewrite: /helloworld.Greeter/
-  service: grpc-example
+  service: grpc-example:50051
 
 ---
 apiVersion: v1
