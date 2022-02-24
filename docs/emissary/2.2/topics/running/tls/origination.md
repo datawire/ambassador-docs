@@ -37,11 +37,14 @@ spec:
   min_tls_version: v1.3
   sni: some-sni-hostname
 ```
+
 <Alert severity="warning">
-  The Kubernetes Secret named by <code>secret</code> must contain a valid TLS certificate.
-  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use;
-  see <b><a href="../#certificates-and-secrets">Certificates and Secrets</a></b> in the
-  TLS overview.
+
+  The Kubernetes Secret named by `secret` must contain a valid TLS certificate. If the
+  environment variable `AMBASSADOR_FORCE_SECRET_VALIDATION` is set and the Secret contains
+  an invalid certificate, $productName$ will reject the `TLSContext` and prevent its use;
+  see [**Certificates and Secrets**](../#certificates-and-secrets) in the TLS overview.
+
 </Alert>
 
 Configure $productName$ to use this `TLSContext` for connections to upstream services by setting the `tls` attribute of a `Mapping`:
@@ -62,14 +65,18 @@ spec:
 The `example-service` service must now support TLS v1.3 for $productName$ to connect.
 
 <Alert severity="warning">
-  The Kubernetes Secret named by <code>secret</code> must contain a valid TLS certificate.
-  If it does not, $productName$ will reject the <code>TLSContext</code> and prevent its use;
-  see <b><a href="../#certificates-and-secrets">Certificates and Secrets</a></b> in the
-  TLS overview.  
+
+  The Kubernetes Secret named by `secret` must contain a valid TLS certificate. If the
+  environment variable `AMBASSADOR_FORCE_SECRET_VALIDATION` is set and the Secret contains
+  an invalid certificate, $productName$ will reject the `TLSContext` and prevent its use;
+  see [**Certificates and Secrets**](../#certificates-and-secrets) in the TLS overview.
+
 </Alert>
 
 <Alert severity="warning">
-  A <code>TLSContext</code> requires a certificate be provided, even in cases where the upstream
-  service does not require it (for origination) and the <code>TLSContext</code> is not being used
+
+  A `TLSContext` requires a certificate be provided, even in cases where the upstream
+  service does not require it (for origination) and the `TLSContext` is not being used
   to terminate TLS. In this case, simply generate and provide a self-signed certificate.
+
 </Alert>
