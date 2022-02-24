@@ -21,7 +21,7 @@ To allow cleartext to be routed, set the `requestPolicy.insecure.action` of a `H
 ```yaml
 requestPolicy:
   insecure:
-    action: Redirect
+    action: Route
 ```
 
 This allows routing for either HTTP and HTTPS, or _only_ HTTP, depending on `tlsSecret` configuration:
