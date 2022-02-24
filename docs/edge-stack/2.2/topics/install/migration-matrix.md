@@ -27,8 +27,8 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$oss
 |----------------------------------|------------------------------------------------------------------------------|
 | $AESproductName$ 2.1.X           | [$AESproductName$ $version$](../upgrade/helm/edge-stack-2.1/edge-stack-2.2)  |
 | $AESproductName$ 2.0.X           | [$AESproductName$ $version$](../upgrade/helm/edge-stack-2.0/edge-stack-2.2)  |
-| $AESproductName$ 1.14.2          | [$AESproductName$ $version$](../upgrade/helm/edge-stack-1.14/edge-stack-2.2) |
-| $AESproductName$ prior to 1.14.2 | [$AESproductName$ 1.14.2](../../../../1.14/topics/install/upgrading)         |
+| $AESproductName$ 1.14.X          | [$AESproductName$ $version$](../upgrade/helm/edge-stack-1.14/edge-stack-2.2) |
+| $AESproductName$ prior to 1.14.X | [$AESproductName$ 1.14.X](../../../../1.14/topics/install/upgrading)         |
 | $OSSproductName$ $ossVersion$    | [$AESproductName$ $version$](../upgrade/helm/emissary-2.2/edge-stack-2.2)    |
 
 ## If you installed $AESproductName$ manually by applying YAML
@@ -37,6 +37,6 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$oss
 |----------------------------------|------------------------------------------------------------------------------|
 | $AESproductName$ 2.1.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.1/edge-stack-2.2)  |
 | $AESproductName$ 2.0.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.0/edge-stack-2.2)  |
-| $AESproductName$ 1.14.2          | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-1.14/edge-stack-2.2) |
-| $AESproductName$ prior to 1.14.2 | [$AESproductName$ 1.14.2](../../../../1.14/topics/install/upgrading)         |
+| $AESproductName$ 1.14.X          | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-1.14/edge-stack-2.2) |
+| $AESproductName$ prior to 1.14.X | [$AESproductName$ 1.14.X](../../../../1.14/topics/install/upgrading)         |
 | $OSSproductName$ $ossVersion$    | [$AESproductName$ $version$](../upgrade/yaml/emissary-2.2/edge-stack-2.2)    |
