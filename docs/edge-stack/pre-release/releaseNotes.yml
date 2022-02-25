@@ -33,7 +33,7 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.2.2
-    date: 'TBD'
+    date: '2022-02-25'
     notes:
       - title: TLS Secret validation is now opt-in
         type: change
@@ -48,7 +48,7 @@ items:
         github:
           - title: 4134
             link: https://github.com/emissary-ingress/emissary/issues/4134
-        docs: https://github.com/emissary-ingress/emissary/issues/4134
+        docs: topics/running/tls#certificates-and-secrets
   
   - version: 2.2.1
     date: '2022-02-22'
