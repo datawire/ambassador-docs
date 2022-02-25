@@ -41,6 +41,8 @@ items:
           You may now choose to enable TLS Secret validation by setting the
           <code>AMBASSADOR_FORCE_SECRET_VALIDATION=true</code> environment variable. The default configuration does not
           enforce secret validation.
+        docs: topics/running/tls#certificates-and-secrets
+
       - title: Correctly validate EC (Elliptic Curve) Private Keys
         type: bugfix
         body: >-
