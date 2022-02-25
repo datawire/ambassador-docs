@@ -11,7 +11,7 @@ $productName$ can validate incoming requests before routing them to a backing se
 
 This tutorial assumes you have already followed the $productName$ [Installation](../../topics/install/) and [Quickstart Tutorial](../../tutorials/quickstart-demo) guides. If you haven't done that already, you should do so now.
 
-Once completed, you'll have a Kubernetes cluster running $productName$ and the Quote of the Moment service. Let's walk through adding rate limiting to this setup.
+Once completed, you'll have a Kubernetes cluster running $productName$ and the Quote service. Let's walk through adding rate limiting to this setup.
 
 ## 1. Deploy the rate limit service
 

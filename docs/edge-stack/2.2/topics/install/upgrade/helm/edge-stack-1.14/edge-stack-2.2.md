@@ -340,7 +340,7 @@ Migration is an eight-step process:
 
 8. **Finally, enable ACME in $productName$ $version$.**
 
-   First, scale the 1.14 Ambassador to 0: 
+   First, scale the 1.14 Ambassador to 0:
 
    ```
    kubectl scale -n ambassador deployment/ambassador --replicas=0

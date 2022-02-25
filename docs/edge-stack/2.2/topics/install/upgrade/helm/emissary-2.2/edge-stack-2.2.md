@@ -205,7 +205,7 @@ Migration is a six-step process:
 
 6. **Finally, enable ACME and filtering in $productName$ $version$.**
 
-   First, scale the $OSSproductName$ Deployment to 0: 
+   First, scale the $OSSproductName$ Deployment to 0:
 
    ```
    kubectl scale -n emissary deployment/emissary --replicase=0

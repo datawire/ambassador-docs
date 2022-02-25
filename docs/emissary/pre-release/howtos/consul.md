@@ -182,7 +182,7 @@ on a VM.
    (If you're using Consul deployed elsewhere in your data center,
    make sure the `address` points to your Consul FQDN or IP address).
 
-2. Deploy the Quote of the Moment demo application.  Use `kubectl` to
+2. Deploy the Quote demo application.  Use `kubectl` to
    apply the following manifest:
 
    ```shell
@@ -245,7 +245,7 @@ on a VM.
 
    </Alert>
 
-   The Quote of the Moment application contains code to automatically
+   The Quote application contains code to automatically
    register itself with Consul, using the `CONSUL_IP` and `POD_IP`
    environment variables specified within the `quote-consul` container
    spec.
@@ -262,9 +262,9 @@ on a VM.
    Consul's sidecar, the service needs to include code to make a
    request to Consul to register the service.  The manifest includes
    the environment variables `CONSUL_IP`, `POD_IP`, and `SERVICE_NAME`
-   to provide the Quote of the Moment service with enough information
+   to provide the Quote service with enough information
    to build that request and send it to Consul.  To see how this code
-   works, see our [our Git repo for the Quote of the Moment
+   works, see our [our Git repo for the Quote
    service](https://github.com/datawire/quote).
 
    </Alert>
@@ -320,7 +320,7 @@ on a VM.
     - `resolver` must be set to the `ConsulResolver` that you created in
       the previous step.
     - `load_balancer` must be set to configure $productName$ to route
-      directly to the Quote of the Moment application endpoints that
+      directly to the Quote application endpoints that
       are retrieved from Consul.
 
 5. Send a request to the `/quote-consul/` API endpoint in order to
@@ -339,7 +339,7 @@ on a VM.
 <Alert severity="success">
 
 **Congratulations!** You're successfully routing traffic to the Quote
-of the Moment application, the location of which is registered in
+application, the location of which is registered in
 Consul.
 
 </Alert>
@@ -420,7 +420,7 @@ discovery, as detailed above.
    metadata:
      name: quote-connect
      annotations:
-       a8r.io/description: "Quote of the moment service"
+       a8r.io/description: "Quote service"
        a8r.io/owner: "No owner"
        a8r.io/chat: "#ambassador"
        a8r.io/bugs: "https://github.com/datawire/quote/issues"

@@ -25,7 +25,7 @@ Migration is a two-step process:
    your cluster. This is mandatory during any upgrade of $productName$.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 

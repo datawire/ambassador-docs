@@ -115,9 +115,31 @@ Migration is a six-step process:
    **in the same namespace as your existing $OSSproductName$ $version$ installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   Our `aes-emissaryns-migration.yaml` assumes that $OSSproductName$ $version$ is installed in the
-   `emissary` namespace. If you installed $OSSproductName$ $version$ into a different namespace, you'll
-   need to download `aes-emissaryns-migration.yaml` file and edit it.
+   We publish three manifests for different namespaces. Use only the one that
+   matches the namespace into which you installed $OSSproductName$ $version$:
+
+   - [`aes-emissaryns-migration.yaml`] for the `emissary` namespace;
+   - [`aes-defaultns-migration.yaml`] for the `default` namespace; and
+   - [`aes-ambassadorns-migration.yaml`] for the `ambassador` namespace.
+
+   All three files are set up as follows:
+
+   - They set the `AES_ACME_LEADER_DISABLE` environment variable; you'll enable ACME towards the end of
+     the migration.
+   - They do NOT create any `AuthService` or a `RateLimitService`, since your $OSSproductName$ may have
+     these defined. Again, you'll manage these at the end of migration.
+   - They do NOT set `AMBASSADOR_LABEL_SELECTOR`.
+   - They do NOT install the Ambassador Agent, since there is already an Ambassador Agent running for
+     $OSSproductName$ $version$.
+
+   If any of these do not match your situation, download [`aes-emissaryns-migration.yaml`] and edit it
+   as needed.
+
+   [`aes-emissaryns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml
+   [`aes-defaultns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-defaultns-migration.yaml
+   [`aes-ambassadorns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-migration.yaml
+
+   Assuming you're using the `emissary` namespace, as was typical for $OSSproductName$ $version$:
 
    **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, download `aes-emissaryns-migration.yaml` and edit it to
    do so.
@@ -174,7 +196,28 @@ Migration is a six-step process:
 
 6. **Finally, enable ACME and filtering in $productName$ $version$.**
 
-   First, scale the $OSSproductName$ Deployment to 0: 
+   <Alert severity="warning">
+      Enabling filtering correctly in $productName$ $version$ <i>requires</i> that no
+      <code>AuthService</code> or <code>RateLimitService</code> resources be present; see
+      below for more.
+   </Alert>
+
+   First, make sure that no `AuthService` or `RateLimitService` resources are present; delete
+   these if necessary.
+
+   - If you are currently using an external authentication service that provides functionality
+     you'll still require, turn it into an [`External` `Filter`] (with a [`FilterPolicy`] to
+     direct requests that need it correctly).
+
+   - If you are currently using a `RateLimitService`, you can set up
+     [Edge Stack Rate Limiting] instead.
+
+   [`External` `Filter`]: ../../../../../../howtos/ext-filters#2-configure-aesproductname-authentication
+   [`FilterPolicy`]: ../../../../../../howtos/ext-filters#2-configure-aesproductname-authentication
+   [Edge Stack Rate Limiting]: ../../../../../using/rate-limits
+
+   After making sure no `AuthService` or `RateLimitService` resources are present, scale the
+   $OSSproductName$ Deployment to 0:
 
    ```bash
    kubectl scale -n emissary deployment/emissary-ingress --replicase=0
@@ -183,13 +226,13 @@ Migration is a six-step process:
    Once that's done, apply resources specific to $AESproductName$:
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/resources-migration.yaml
    ```
 
    Then, finally, enable ACME and filtering in $productName$ $version$:
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml
+   kubectl set env -n emissary deployment/aes AES_ACME_LEADER_DISABLE-
    kubectl rollout status -n emissary deployment/aes -w
    ````
 

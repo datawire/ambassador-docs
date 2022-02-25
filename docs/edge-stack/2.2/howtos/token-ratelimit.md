@@ -18,7 +18,7 @@ Here is a YAML example that describes the setup:
 
 ```yaml
 ---
-# Mapping to expose the Quote of the Moment service
+# Mapping to expose the Quote service
 apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:

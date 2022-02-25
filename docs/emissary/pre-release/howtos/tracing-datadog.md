@@ -6,7 +6,7 @@ In this tutorial, we'll configure $productName$ to initiate a trace on some samp
 
 This tutorial assumes you have already followed $productName$ [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
 
-After completing the Getting Started guide you will have a Kubernetes cluster running $productName$ and the Quote of the Moment service. Let's walk through adding tracing to this setup.
+After completing the Getting Started guide you will have a Kubernetes cluster running $productName$ and the Quote service. Let's walk through adding tracing to this setup.
 
 ## 1. Configure the DataDog agent
 
