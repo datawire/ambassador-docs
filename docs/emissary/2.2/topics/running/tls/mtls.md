@@ -43,10 +43,12 @@ TLS connections from the client. We are just using this to load certificates for
 requests upstream.
 
 <Alert severity="warning">
-  The Kubernetes Secret must contain a valid TLS certificate. If it does not, $productName$
-  will reject the Secret and completely disable the <code>Host</code>; see&nbsp;
-  <b><a href="../#certificates-and-secrets">Certificates and
-  Secrets</a></b> in the TLS overview.
+
+  The Kubernetes Secret must contain a valid TLS certificate. If the environment
+  variable `AMBASSADOR_FORCE_SECRET_VALIDATION` is set and the Secret contains an invalid
+  certificate, $productName$ will reject the Secret and completely disable the `Host`;
+  see [**Certificates and Secrets**](../#certificates-and-secrets) in the TLS overview.
+
 </Alert>
 
 After loading the certificates, we can tell $productName$ when to use them by
