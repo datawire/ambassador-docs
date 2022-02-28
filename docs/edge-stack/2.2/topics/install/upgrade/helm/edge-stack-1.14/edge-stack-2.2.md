@@ -138,7 +138,7 @@ Migration is an eight-step process:
 
    If `v1` is present in the output, **do not begin migration.** The old resources must be
    converted to `getambassador.io/v2` and the `storedVersion` information in the cluster
-   must be updated. If necessary, contact Ambassador Labs on [Slack](https://a8r.io/slack)
+   must be updated. If necessary, contact Ambassador Labs on [Slack](http://a8r.io/slack)
    for more information.
 
 2. **Install new CRDs.**

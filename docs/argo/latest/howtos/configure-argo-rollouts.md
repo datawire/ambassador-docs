@@ -81,7 +81,7 @@ metadata:
     a8r.io/owner: Ambassador Labs
     a8r.io/documentation: https://www.getambassador.io/docs/cloud/latest/service-catalog/howtos/rollout/
     a8r.io/repository: git@github.com:datawire/rollouts-demo.git
-    a8r.io/support: https://a8r.io/Slack
+    a8r.io/support: http://a8r.io/slack
     a8r.io/rollouts.scm.path: manifests
     a8r.io/rollouts.scm.branch: main
     a8r.io/rollouts.image-repo.type: dockerhub

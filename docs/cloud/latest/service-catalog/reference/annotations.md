@@ -30,7 +30,7 @@ import Alert from '@material-ui/lab/Alert';
 | `a8r.io/logs` | Link to external log viewer | `https://kibana.getambassador.io` |
 | `a8r.io/documentation` | Link to external project documentation | `https://www.getambassador.io/docs/edge-stack/latest/` |
 | `a8r.io/repository` | Link to external VCS repository | `https://github.com/datawire/ambassador` |
-| `a8r.io/support` | Link to external support center | `https://a8r.io/Slack` |
+| `a8r.io/support` | Link to external support center | `http://a8r.io/slack` |
 | `a8r.io/runbook` | Link to external project runbook | `https://www.getambassador.io/docs/edge-stack/latest/topics/running/debugging/` |
 | `a8r.io/ignore`  | When present, prevent the service from appearing in the Service Catalog | `any` |
 | `a8r.io/incidents`  | Link to external incident dashboard | `https://incidents.getambassador.io` |
@@ -94,7 +94,7 @@ metadata:
     a8r.io/logs: "https://kibana.getambassador.io"
     a8r.io/documentation: "https://www.getambassador.io/docs/edge-stack/latest/"
     a8r.io/repository: "https://github.com/datawire/ambassador"
-    a8r.io/support: "https://a8r.io/Slack"
+    a8r.io/support: "http://a8r.io/slack"
     a8r.io/runbook: "https://www.getambassador.io/docs/edge-stack/latest/topics/running/debugging/"
     a8r.io/incidents: "https://incidents.getambassador.io"
     a8r.io/uptime: "https://uptime.getambassador.io"

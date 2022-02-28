@@ -46,7 +46,7 @@ $productName$ takes full advantage of Kubernetes and Envoy Proxy.
 
 ## For more information
 
-[Deploy $productName$ today](../../tutorials/getting-started) and join the community [Slack Channel](https://a8r.io/Slack).
+[Deploy $productName$ today](../../tutorials/getting-started) and join the community [Slack Channel](http://a8r.io/slack).
 
 Interested in learning more?
 
