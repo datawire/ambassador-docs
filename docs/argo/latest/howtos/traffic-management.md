@@ -126,7 +126,7 @@ argocd app create --name echo --repo https://github.com/<your Github username>/a
 
 To access your deployed app, first get your load balancer IP:
 ```
-export LOAD_BALANCER_IP=$(kubectl -n ambassador get svc ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
+export LOAD_BALANCER_IP=$(kubectl -n ambassador get svc edge-stack -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
 ```
 
 Now curl the service:
