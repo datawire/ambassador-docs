@@ -8,7 +8,7 @@ The 2.X family introduces a number of changes to allow $productName$
 to more gracefully handle larger installations, reduce global configuration to
 better handle multitenant or multiorganizational installations, reduce memory
 footprint, and improve performance. We welcome feedback!! Join us on
-[Slack](https://a8r.io/slack) and let us know what you think.
+[Slack](http://a8r.io/slack) and let us know what you think.
 
 While $productName$ 2.0 is functionally compatible with $productName$ 1.14, note
 that this is a **major version change** and there are important differences between

@@ -14,17 +14,18 @@ must have a server certificate that identifies it to clients; when [mTLS] or
 [client certificate authentication] are in use, additional certificates are needed.
 
 You supply certificates to $productName$ in Kubernetes [TLS Secrets]. These Secrets
-_must_ contain valid X.509 certificates with valid PKCS1 or PKCS8 private keys. If
-a Secret does not contain a valid certificate, an error message will be logged, for
+_must_ contain valid X.509 certificates with valid PKCS1, PKCS8, or Elliptic Curve private
+keys. If a Secret does not contain a valid certificate, an error message will be logged, for
 example:
 
 ```
 tls-broken-cert.default.1 2 errors:;  1. K8sSecret secret tls-broken-cert.default tls.key cannot be parsed as PKCS1 or PKCS8: asn1: syntax error: data truncated;  2. K8sSecret secret tls-broken-cert.default tls.crt cannot be parsed as x.509: x509: malformed certificate
 ```
 
-**Note well** that a `Host` or `TLSContext` resource attempting to use an invalid
-certificate will be disabled entirely: in $productName$ $version$, this includes
-disabling cleartext communication for such a `Host`.
+If you set the `AMBASSADOR_FORCE_SECRET_VALIDATION` environment variable, the invalid
+Secret will be rejected, and a `Host` or `TLSContext` resource attempting to use an invalid
+certificate will be disabled entirely. **Note** that in $productName$ $version$, this
+includes disabling cleartext communication for such a `Host`.
 
 [TLS Certificates]: https://protonmail.com/blog/tls-ssl-certificate/
 [mTLS]: mtls
@@ -68,10 +69,12 @@ spec:
 ```
 
 <Alert severity="warning">
+
   The Kubernetes Secret named by <code>tlsSecret</code> must contain a valid TLS certificate.
-  If it does not, $productName$ will reject the Secret and completely disable the
-  <code>Host</code>; see <b><a href="#certificates-and-secrets">Certificates and
-  Secrets</a></b> above.
+  If `AMBASSADOR_FORCE_SECRET_VALIDATION` is set and the Secret contains an invalid
+  certificate, $productName$ will reject the Secret and completely disable the
+  `Host`; see [**Certificates and Secrets**](#certificates-and-secrets) above.
+
 </Alert>
 
 ### Advanced TLS configuration with the `Host`
@@ -96,10 +99,12 @@ spec:
 ```
 
 <Alert severity="warning">
+
   The Kubernetes Secret named by <code>tlsSecret</code> must contain a valid TLS certificate.
-  If it does not, $productName$ will reject the Secret and completely disable the
-  <code>Host</code>; see <b><a href="#certificates-and-secrets">Certificates and
-  Secrets</a></b> above.
+  If `AMBASSADOR_FORCE_SECRET_VALIDATION` is set and the Secret contains an invalid
+  certificate, $productName$ will reject the Secret and completely disable the
+  `Host`; see [**Certificates and Secrets**](#certificates-and-secrets) above.
+
 </Alert>
 
 The following fields are accepted in the `tls` field:
@@ -170,17 +175,26 @@ spec:
 ```
 
 <Alert severity="warning">
-  The <code>Host</code> and the <code>TLSContext</code> must name the same Kubernetes
-  Secret, and that Secret must contain a valid TLS certificate. If either of these
-  conditions is not met, $productName$ will reject the Secret and completely disable
-  the <code>Host</code>; see <b><a href="#certificates-and-secrets">Certificates and
-  Secrets</a></b> above.
+
+  The `Host` and the `TLSContext` must name the same Kubernetes Secret; if not,
+  $productName$ will disable TLS for the `Host`.
+
 </Alert>
 
 <Alert severity="warning">
-  The <code>Host</code>'s <code>hostname</code> and the <code>TLSContext</code>'s&nbsp;
-  <code>hosts</code> must have compatible settings. If they do not, requests may not
-  be accepted.
+
+  The Kubernetes Secret named by <code>tlsSecret</code> must contain a valid TLS certificate.
+  If `AMBASSADOR_FORCE_SECRET_VALIDATION` is set and the Secret contains an invalid
+  certificate, $productName$ will reject the Secret and completely disable the
+  `Host`; see [**Certificates and Secrets**](#certificates-and-secrets) above.
+
+</Alert>
+
+<Alert severity="warning">
+
+  The `Host`'s `hostname` and the `TLSContext`'s `hosts` must have compatible settings. If
+  they do not, requests may not be accepted.
+
 </Alert>
 
 See [`TLSContext`](#tlscontext) below to read more on the description of these fields.
@@ -219,17 +233,26 @@ spec:
 ```
 
 <Alert severity="warning">
-  The <code>Host</code> and the <code>TLSContext</code> must name the same Kubernetes
-  Secret, and that Secret must contain a valid TLS certificate. If either of these
-  conditions is not met, $productName$ will reject the Secret and completely disable
-  the <code>Host</code>; see <b><a href="#certificates-and-secrets">Certificates and
-  Secrets</a></b> above.
+
+  The `Host` and the `TLSContext` must name the same Kubernetes Secret; if not,
+  $productName$ will disable TLS for the `Host`.
+
 </Alert>
 
 <Alert severity="warning">
-  The <code>Host</code>'s <code>hostname</code> and the <code>TLSContext</code>'s&nbsp;
-  <code>hosts</code> must have compatible settings. If they do not, requests may not
-  be accepted.
+
+  The Kubernetes Secret named by <code>tlsSecret</code> must contain a valid TLS certificate.
+  If `AMBASSADOR_FORCE_SECRET_VALIDATION` is set and the Secret contains an invalid
+  certificate, $productName$ will reject the Secret and completely disable the
+  `Host`; see [**Certificates and Secrets**](#certificates-and-secrets) above.
+
+</Alert>
+
+<Alert severity="warning">
+
+  The `Host`'s `hostname` and the `TLSContext`'s `hosts` must have compatible settings. If
+  they do not, requests may not be accepted.
+
 </Alert>
 
 Full reference for all options available to the `TLSContext` can be found [below](#tlscontext).
@@ -310,11 +333,13 @@ spec:
 ```
 
 <Alert severity="warning">
-  <code>secret</code> and (if used) <code>ca_secret</code> must specify Kubernetes
-  Secrets containing a valid TLS certificate. If not, $productName$ will reject the
-  <code>TLSContext</code> entirely, which will also disable any <code>Host</code>s
-  using the <code>TLSContext</code>. See <b><a href="#certificates-and-secrets">Certificates
-  and Secrets</a></b> above.
+
+  `secret` and (if used) `ca_secret` must specify Kubernetes Secrets containing valid TLS
+  certificates. If `AMBASSADOR_FORCE_SECRET_VALIDATION` is set and either Secret contains
+  an invalid certificate, $productName$ will reject the Secret, which will also completely
+  disable any `Host` using the `TLSContext`; see [**Certificates and Secrets**](#certificates-and-secrets)
+  above.
+
 </Alert>
 
 ### ALPN protocols

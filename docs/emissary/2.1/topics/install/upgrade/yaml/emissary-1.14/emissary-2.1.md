@@ -1,9 +1,9 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 1.14.2 to $productName$ $version$ (YAML)
+# Upgrade $productName$ 1.14.X to $productName$ $version$ (YAML)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 1.14.2 to $productName$ $version$. If
+  This guide covers migrating from $productName$ 1.14.X to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
@@ -28,21 +28,21 @@ some changes that aren't backward-compatible with 1.X. These changes are detaile
   cluster!
 </Alert>
 
-The recommended strategy for migration is to run $productName$ 1.14.2 and $productName$
+The recommended strategy for migration is to run $productName$ 1.14 and $productName$
 $version$ side-by-side in the same cluster. This gives $productName$ $version$
-and $productName$ 1.14.2 access to all the same configuration resources, with some
+and $productName$ 1.14 access to all the same configuration resources, with some
 important caveats:
 
-1. **$productName$ 1.14.2 will not see any `getambassador.io/v3alpha1` resources.**
+1. **$productName$ 1.14 will not see any `getambassador.io/v3alpha1` resources.**
 
    This is intentional; it provides a way to apply configuration only to
    $productName$ $version$, while not interfering with the operation of your
-   $productName$ 1.14.2 installation.
+   $productName$ 1.14 installation.
 
 2. **If needed, you can use labels to further isolate configurations.**
 
    If you need to prevent your $productName$ $version$ installation from
-   seeing a particular bit of $productName$ 1.14.2 configuration, you can apply
+   seeing a particular bit of $productName$ 1.14 configuration, you can apply
    a Kubernetes label to the configuration resources that should be seen by
    your $productName$ $version$ installation, then set its
    `AMBASSADOR_LABEL_SELECTOR` environment variable to restrict its configuration
@@ -54,9 +54,9 @@ important caveats:
 
 3. **Be careful about label selectors on Kubernetes Services!**
 
-   If you have services in $productName$ 1.14.2 that use selectors that will match
+   If you have services in $productName$ 1.14 that use selectors that will match
    Pods from $productName$ $version$, traffic will be erroneously split between
-   $productName$ 1.14.2 and $productName$ $version$. The labels used by $productName$
+   $productName$ 1.14 and $productName$ $version$. The labels used by $productName$
    $version$ include:
 
    ```yaml
@@ -69,7 +69,7 @@ important caveats:
    ```
 
 You can also migrate by [installing $productName$ $version$ in a separate cluster](../../../../migrate-to-2-alternate).
-This permits absolute certainty that your $productName$ 1.14.2 configuration will not be
+This permits absolute certainty that your $productName$ 1.14 configuration will not be
 affected by changes meant for $productName$ $version$, and it eliminates concerns about
 ACME, but it is more effort.
 
@@ -90,7 +90,7 @@ Migration is a six-step process:
 
    If `v1` is present in the output, **do not begin migration.** The old resources must be
    converted to `getambassador.io/v2` and the `storedVersion` information in the cluster
-   must be updated. If necessary, contact Ambassador Labs on [Slack](https://a8r.io/slack)
+   must be updated. If necessary, contact Ambassador Labs on [Slack](http://a8r.io/slack)
    for more information.
 
 2. **Install new CRDs.**
@@ -124,11 +124,11 @@ Migration is a six-step process:
 3. **Install $productName$ $version$.**
 
    After installing the new CRDs, you need to install $productName$ $version$ itself
-   **in the same namespace as your existing $productName$ 1.14.2 installation**. It's important
+   **in the same namespace as your existing $productName$ 1.14 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   Our `emissary-defaultns.yaml` assumes that $productName$ 1.14.2 is installed in the
-   `default` namespace. If you installed $productName$ 1.14.2 into a different namespace, you'll
+   Our `emissary-defaultns.yaml` assumes that $productName$ 1.14 is installed in the
+   `default` namespace. If you installed $productName$ 1.14 into a different namespace, you'll
    need to download `emissary-defaultns.yaml` file and edit it.
 
    **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, download `emissary-defaultns-migration.yaml`
@@ -155,7 +155,7 @@ Migration is a six-step process:
 
 4. **Install `Listener`s and `Host`s as needed.**
 
-   An important difference between $productName$ 1.14.2 and $productName$ $version$ is the
+   An important difference between $productName$ 1.14 and $productName$ $version$ is the
    new **mandatory** `Listener` CRD. Also, when running both installations side by side,
    you will need to make sure that a `Host` is present for the new $productName$ $version$
    Service. For example:
@@ -204,7 +204,7 @@ Migration is a six-step process:
 5. **Test!**
 
    Your $productName$ $version$ installation can support the `getambassador.io/v2`
-   configuration resources used by $productName$ 1.14.2, but you may need to make some
+   configuration resources used by $productName$ 1.14, but you may need to make some
    changes to the configuration, as detailed in the documentation on
    [configuring $productName$ Communications](../../../../../../howtos/configure-communications)
    and [updating CRDs to `getambassador.io/v3alpha1`](../../../../convert-to-v3alpha1).
@@ -214,24 +214,24 @@ Migration is a six-step process:
     with the same name as a <code>getambassador.io/v2</code> resource or vice versa: only
     one version can be stored at a time.<br/>
     <br/>
-    If you find that your $productName$ $version$ installation and your $productName$ 1.14.2
+    If you find that your $productName$ $version$ installation and your $productName$ 1.14
     installation absolutely must have resources that are only seen by one version or the
     other way, see overview section 2, "If needed, you can use labels to further isolate configurations".
    </Alert>
 
-   **If you find that you need to roll back**, just reinstall your 1.14.2 CRDs and delete your
+   **If you find that you need to roll back**, just reinstall your 1.14 CRDs and delete your
    installation of $productName$ $version$.
 
 6. **When ready, switch over to $productName$ $version$.**
 
-   You can run $productName$ 1.14.2 and $productName$ $version$ side-by-side as long as you care
+   You can run $productName$ 1.14 and $productName$ $version$ side-by-side as long as you care
    to. However, taking full advantage of $productName$ 2.X's capabilities **requires**
    [updating your configuration to use `getambassador.io/v3alpha1` configuration resources](../../../../convert-to-v3alpha1),
    since some useful features in $productName$ $version$ are only available using
    `getambassador.io/v3alpha1` resources.
 
    When you're ready to have $productName$ $version$ handle traffic on its own, switch
-   your original $productName$ 1.14.2 Service to point to $productName$ $version$. Use
+   your original $productName$ 1.14 Service to point to $productName$ $version$. Use
    `kubectl edit service ambassador` and change the `selectors` to:
 
    ```
@@ -250,5 +250,5 @@ Migration is a six-step process:
    You may also want to redirect DNS to the `emissary-ingress` Service and remove the
    `ambassador` Service.
 
-   Once $productName$ 1.14.2 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
+   Once $productName$ 1.14 is no longer running, you may [convert](../../../../convert-to-v3alpha1)
    any remaining `getambassador.io/v2` resources to `getambassador.io/v3alpha1`.

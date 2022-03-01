@@ -51,9 +51,9 @@ important notes:
 
 3. **Be careful about label selectors on Kubernetes Services!**
 
-   If you have services in $OSSproductName$ 1.14.2 that use selectors that will match
+   If you have services in $OSSproductName$ 2.1 that use selectors that will match
    Pods from $AESproductName$ $version$, traffic will be erroneously split between
-   $OSSproductName$ 1.14.2 and $AESproductName$ $version$. The labels used by $AESproductName$
+   $OSSproductName$ 2.1 and $AESproductName$ $version$. The labels used by $AESproductName$
    $version$ include:
 
    ```yaml

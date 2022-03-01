@@ -115,7 +115,7 @@ learn more about Ambassador Module configurations, see [Ambassador Module](../..
 
 ### How do I get help for $productName$?
 
-We have an online [Slack community](https://a8r.io/Slack) with thousands of
+We have an online [Slack community](http://a8r.io/slack) with thousands of
 users. We try to help out as often as possible, although we can't promise a
 particular response time. If you need a guaranteed SLA, we also have commercial
 contracts. [Contact sales](/contact-us/) for more information.

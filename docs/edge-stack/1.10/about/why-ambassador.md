@@ -46,7 +46,7 @@ Ambassador Edge Stack takes full advantage of Kubernetes and Envoy Proxy.
 
 ## For More Information
 
-[Deploy Ambassador Edge Stack today](../../tutorials/getting-started) and join the community [Slack Channel](https://a8r.io/Slack).
+[Deploy Ambassador Edge Stack today](../../tutorials/getting-started) and join the community [Slack Channel](http://a8r.io/slack).
 
 Interested in learning more?
 
