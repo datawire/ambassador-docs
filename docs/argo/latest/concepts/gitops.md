@@ -1,3 +1,7 @@
+---
+    description: Maximize your Ship capabilities with GitOps
+---
+
 # Developer-centric GitOps-style deployment 
 
 ## What is GitOps?
@@ -15,7 +19,7 @@ Changes are automated via the source control system; GitOps enables Kubernetes c
 
 ## Why GitOps for progressive delivery?
 
-GitOps offers developers a way to manage operational workflows, particularly for Kubernetes, that relies on familiar processes, e.g., pull requests, which they already use to merge code. These same processes and tools can be used to push Kubernetes resources into production. 
+GitOps offers developers a way to manage operational workflows, particularly for Kubernetes, that relies on familiar processes like pull requests, which developers already use to merge code. These same processes and tools can be used to push Kubernetes resources into production. 
 
 The idea of GitOps for developers is to allow for ease of use: a developer writes code, sends a pull request via a version control system, it's reviewed by another person, and from there, there is no further human interaction. Humans don't need full access to production environments. Compliance and change audits become trivial. The rollout is automated in a GitOps workflow, in the form, for example, of a canary deployment using a tool like Argo.
 

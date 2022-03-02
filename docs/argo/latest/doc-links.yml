@@ -1,18 +1,6 @@
 - title: Quick start
   link: /quick-start/
-- title: Core concepts
-  items:
-    - title: What is Argo?
-      link: /concepts/argo/
-    - title: Taking on "ship" responsibilities
-      link: /concepts/responsibilities/
-    - title: CI/CD and progressive delivery - Safely shipping code
-      link: /concepts/cicd/
-    - title: Developer-centric GitOps-style deployment
-      link: /concepts/gitops/
-    - title: Canary deployments
-      link: /concepts/canary/
-- title: How do I...
+- title: User guide
   items:
     - title: Manage traffic through Ambassador Edge Stack
       link: /howtos/traffic-management/
