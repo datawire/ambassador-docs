@@ -14,6 +14,8 @@
       link: /service-catalog/howtos/favorites/
     - title: Configure Automated Configuration Analysis
       link: /config-analysis/quick-start
+    - title: Organize the service catalog
+      link: /service-catalog/howtos/organize-service-catalog
 - title: Core concepts
   items:
     - title: Using a service catalog
@@ -26,6 +28,10 @@
       link: /service-catalog/concepts/cells/
     - title: Incident response in the cloud-native world
       link: /service-catalog/concepts/ir
+    - title: Services
+      link: /service-catalog/concepts/services/
+    - title: Service Groups
+      link: /service-catalog/concepts/service-groups/
 - title: Reference
   items:
     - title: Annotations
