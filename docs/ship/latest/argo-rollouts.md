@@ -1,10 +1,11 @@
 ---
-description: Create a rollout with Argo
+Title: Simple rollouts with Argo and Ambassador Cloud
+description: Leverage the power of Ambassador Cloud for quick, painless, and secure rollouts.
 ---
 
-# Create a rollout with Argo
+# Simple rollouts with Argo and Ambassador Cloud
 
-To create a rollout with Argo, first Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, find for the service you want to rollout and click on its card. The <a href="/docs/cloud/latest/service-catalog/concepts/hud/">Heads Up Display (HUD)</a> displays information about your service along with available actions related to the service. Click the **Rollout** button to show the **start rollout slideout**, then click **Configure Argo for your service**  and follow the instructions. 
+With Argo and Ambassador Cloud's Developer Control Plane, it's easy to create a rollout. Go to the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, find for the service you want to rollout and click on its card. The <a href="/docs/cloud/latest/service-catalog/concepts/hud/">Heads Up Display (HUD)</a> displays information about your service along with available actions related to the service. To begin your rollout, click the **Rollout** button to show the **start rollout slideout**, then click **Configure Argo for your service**  and follow the instructions. 
 
 This process does the following:
 1. Generates a deployment key in your forked repository.

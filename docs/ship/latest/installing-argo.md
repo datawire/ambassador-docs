@@ -1,14 +1,15 @@
 ---
+Title: Argo Installation
 description: Install and configure Argo
 ---
 
 # Installing Argo
 
-To install Argo, first you should have the current version of Edge Stack installed in your cluster. Follow the [Edge Stack installation guide](../../run/latest/install-edge-stack) to set this up in your environment.
+To install Argo, you need the current version of Edge Stack installed in your cluster. Follow the [Edge Stack installation guide](../../run/latest/install-edge-stack) to set this up in your environment.
 
 ## Connect your cluster to Ambassador Cloud
 
-Once you've installed Edge Stack, you need to connect your cluster to Ambassador Cloud:
+Once you've installed Edge Stack, connect your cluster to Ambassador Cloud:
 
 1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
 2. In Ambassador Cloud, click **Add Services** in the upper-right of the screen, then click **Connection Instructions** in the Edge Stack installation section.

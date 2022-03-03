@@ -1,4 +1,5 @@
 ---
+    Title: What is Argo?
     description: An introduction to Ambassador Labs' Argo
 ---
 
@@ -6,7 +7,7 @@
 
 [Argo](/products/argo/) is an open source suite of projects that helps developers deliver software more rapidly and safely. With Argo, you can observe your deployments and release seamlessly. If problems ever arise, Argo is there to help simplify rollbacks as well.  
 
-## Argo tools
+## The Argo tools
 
 **Argo Workflows and Pipelines** is a container-native workflow engine for orchestrating parallel jobs on Kubernetes. 
 

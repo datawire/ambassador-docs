@@ -1,22 +1,12 @@
 ---
-description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
+Title: Edge Stack quick start
+description: "A simple three step guide to installing Edge Stack and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
 ---
 
 import Alert from '@material-ui/lab/Alert';
 import GettingStartedEdgeStack21Tabs from './gs-tabs'
 
-# $productName$ quick start
-
-<Alert severity="info">
-  We're pleased to introduce $productName$ 2.0! The 2.X family introduces a number of
-  changes to allow $productName$ to more gracefully handle larger installations
-  (including multitenant or multiorganizational installations), reduce memory footprint,
-  and improve performance. For more information on 2.X, please check the&nbsp;
-  <a href="../../release-notes">release notes</a>.
-</Alert>
-
-<div class="docs-article-toc">
-<h3>Contents</h3>
+# Edge Stack quick start
 
 * [1. Installation](#1-installation)
 * [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
@@ -26,17 +16,17 @@ import GettingStartedEdgeStack21Tabs from './gs-tabs'
 
 ## 1. Installation
 
-We'll start by installing $productName$ into your cluster.
+We'll start by installing Edge Stack into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
 <GettingStartedEdgeStack21Tabs version="$version$" />
 
-<Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
+<Alert severity="success"><b>Success!</b> At this point, you have installed Edge Stack. Now let's get some traffic flowing to your services.</Alert>
 
 ## 2. Routing traffic from the edge
 
-$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells $productName$ what port to listen on, and the `Mapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
+Edge Stack uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells Edge Stack what port to listen on, and the `Mapping` CRD tells Edge Stack how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
 
 1. Start by creating a `Listener` resource for HTTP on port 8080:
 
@@ -79,7 +69,7 @@ EOF
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
-3. Apply the YAML for a `Mapping` to tell $productName$ to route all traffic inbound to the `/backend/`
+3. Apply the YAML for a `Mapping` to tell Edge Stack to route all traffic inbound to the `/backend/`
    path to the `quote` Service:
 
   ```yaml
@@ -98,14 +88,14 @@ EOF
   EOF
   ```
 
-4. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test access to your service.
+4. Store the Edge Stack load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
   ```
   export LB_ENDPOINT=$(kubectl -n $productNamespace$ get svc  $productDeploymentName$ \
     -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
   ```
 
-5. Test the configuration by accessing the service through the $productName$ load balancer:
+5. Test the configuration by accessing the service through the Edge Stack load balancer:
 
   ```
   $ curl -Lki https://$LB_ENDPOINT/backend/
@@ -124,18 +114,4 @@ EOF
     }
   ```
 
-<Alert severity="success"><b>Victory!</b> You have created your first $productName$ Mapping, routing a request from your cluster's edge to a service!</Alert>
-
-## <img class="os-logo" src="../../images/logo.png"/> What's next?
-
-Explore some of the popular tutorials on $productName$:
-
-* [Intro to Mappings](../../topics/using/intro-mappings/): declaratively routes traffic from
-the edge of your cluster to a Kubernetes service
-* [Host resource](../../topics/running/host-crd/): configure a hostname and TLS options for your ingress.
-* [Rate Limiting](../../topics/using/rate-limits/rate-limits/): create policies to control sustained traffic loads
-
-$productName$ has a comprehensive range of [features](/features/) to
-support the requirements of any edge microservice.
-
-To learn more about how $productName$ works, read the [$productName$ Story](../../about/why-ambassador).
+<Alert severity="success"><b>Victory!</b> You have created your first Edge Stack Mapping, routing a request from your cluster's edge to a service!</Alert>

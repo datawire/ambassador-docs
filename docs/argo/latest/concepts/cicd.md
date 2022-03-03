@@ -1,7 +1,7 @@
 ---
-    description: "Ship" with Argo
+    Title: Ship with Argo
+    description: How Argo can change the way you Ship
 ---
-
 
 # Ship with Argo
 

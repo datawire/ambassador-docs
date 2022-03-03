@@ -1,4 +1,5 @@
 ---
+    Title: Edge Stack installation
     description: How to install Edge Stack in your Kubernetes environment.
 ---
 

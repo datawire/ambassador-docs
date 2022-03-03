@@ -1,14 +1,15 @@
 ---
-description: Edge Stack communication overview
+	Title: Routing and communication in Edge Stack.
+	description: An overview of communication in Edge Stack
 ---
 
 # Routing and communication overview
 
-Edge stack uses a number of resources to handle network routing and communication. You can propogate these associations in a number of different ways according to your needs; Edge Stack is deeply customizable and can cater to complex demands to help you Run with ease.
+Edge stack uses a number of resources to handle network routing and communication. You can propogate these associations in a variety of different ways according to your needs; Edge Stack is deeply customizable and can cater to complex demands to help you Run with ease.
 
-Edge Stack uses the `Mapping` resource to manage traffic routing. This `Mapping` resource routes a URL path or prefix to a service, either a Kubernetes service or another web service. The `Mapping` resource can be managed by the same workflow as other Kubernetes resources, such as Service or Deployment resources. 
+Edge Stack uses the `Mapping` resource as the primary means to manage traffic routing. The `Mapping` resource routes a URL path or prefix to a service, either a Kubernetes service or another web service. In combination with Edge Stack's custom resources, your Mappings define how communications and resources are managed and secured. A `Mapping` can be managed by the same workflow as other Kubernetes resources, such as Service or Deployment resources. 
 
-Edge Stack also features its own custom resources to aid in routing and communication. The primary custom resources Edge Stack uses are `Listener`, `Host`, and `TLSContext`.
+Edge Stack features its own custom resources todetail the nuances of routing and communication for your services. The primary custom resources Edge Stack uses are `Listener`, `Host`, and `TLSContext`.
 
 ## What is the `Mapping` Resource?
 

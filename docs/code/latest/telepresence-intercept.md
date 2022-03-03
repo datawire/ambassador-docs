@@ -18,7 +18,7 @@ For a detailed walk-though on creating intercepts using our sample app, follow t
 
 Before you begin, you need to have [Telepresence installed](../install-and-update-telepresence/), a Kubernetes deployment with publicly accessible services, and either the Kubernetes command-line tool, [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/), or the OpenShift Container Platform command-line interface, [`oc`](https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-installing-cli_cli-developer-commands). 
 
-This document uses kubectl in all example commands. OpenShift users can substitute oc [commands instead](https://docs.openshift.com/container-platform/4.1/cli_reference/developer-cli-commands.html).
+For the sake of simplicity, this document uses kubectl in all example commands. OpenShift users can substitute oc [commands instead](https://docs.openshift.com/container-platform/4.1/cli_reference/developer-cli-commands.html).
 
 
 ## Intercept your service with a global intercept
@@ -78,9 +78,3 @@ You can now:
   your Kubernetes environment.
 - Query services only exposed in your cluster's network.
 - Set breakpoints in your IDE to investigate bugs.
-
-   <Alert severity="info">
-
-    **Didn't work?** Make sure the port you're listening on matches the one you specified when you created your intercept.
-
-   </Alert>

@@ -1,4 +1,5 @@
 ---
+    Title: Maximize Edge Stack's potential with GitOps 
     description: Maximize your Ship capabilities with GitOps
 ---
 

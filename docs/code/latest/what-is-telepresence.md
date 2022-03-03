@@ -1,3 +1,8 @@
+---
+Title: What is Telepresence and how does it help you Code.
+description: "Familiarize yourself with Ambassador Labs' Telepresence and learn how you can leverage it to improve the way you Code"
+---
+
 # What is Telepresence
 
 Telepresence is an open source tool that lets developers [code and test microservices locally against a remote Kubernetes cluster](../quick-start/). Telepresence facilitates more efficient development workflows while relieving the need to worry about other service dependencies. In short, Telepresence helps you code and iterate more efficiently.
@@ -11,7 +16,7 @@ With Telepresence, you can connect your local development machine seamlessly to 
 Telepresence enables you to create [intercepts](../intercepts-overview/) to direct select traffic from a service without disrupting other traffic. This way you can code and debug your associated service locally using your preferred local IDE and in-process debugger. You can test your integrations by making requests against the remote cluster’s ingress and observe how the resulting internal traffic is handled by your service running locally. You can also share a preview of your intercept with others on your tem for real-time collaboration. 
 
 
-## How does Telepresence help you code more efficiently?
+## How this helps you code more efficiently
 
 The dev loop can be jump-started with the right development environment and Kubernetes development tools to support speed, efficiency and collaboration. Telepresence is designed to let Kubernetes developers code as though their laptop is in their Kubernetes cluster, enabling the service to run locally and be proxied into the remote cluster. Telepresence runs code locally and forwards requests to and from the remote Kubernetes cluster, bypassing the much slower process of waiting for a container to build, pushing it to registry, and deploying to production.
 
