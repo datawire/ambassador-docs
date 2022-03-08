@@ -18,7 +18,7 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
     : '';
 
   // Don't produce an edit link for generated files.
-  if restOfFilePath === "licenses.md" {
+  if (restOfFilePath === "licenses.md") {
     return (
       <footer className="docs__footer"></footer>
     );
