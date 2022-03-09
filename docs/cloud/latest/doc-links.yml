@@ -12,6 +12,8 @@
       link: /service-catalog/howtos/cells/
     - title: Filter my service view
       link: /service-catalog/howtos/favorites/
+    - title: Enable GitOps workflows
+      link: /gitops/quick-start
     - title: Configure Automated Configuration Analysis
       link: /config-analysis/quick-start
 - title: Core concepts
