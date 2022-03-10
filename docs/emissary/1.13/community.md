@@ -9,4 +9,4 @@ Our [changelog](https://github.com/emissary-ingress/emissary/blob/$branch$/CHANG
 describes new features, bug fixes, and updates to each version of Emissary-ingress.
 
 ## Meetings
-Check out our community [meeting schedule](https://github.com/emissary-ingress/emissary/blob/main/MEETING_SCHEDULE.md) for opportunities to interact with Emissary-ingress developers.
+Check out our community [meeting schedule](https://github.com/emissary-ingress/emissary/blob/master/MEETING_SCHEDULE.md) for opportunities to interact with Emissary-ingress developers.
