@@ -10,7 +10,7 @@ import Platform from '@src/components/Platform';
 * [Prerequisites](#prerequisites)
 * [1. Install and configure Edge Stack](#1-install-and-configure-edge-stack)
 * [2. Install Argo](#2-install-argo)
-* [3. Set up Argo](#3setup-argo)
+* [3. Set up Argo](#3-set-up-argo)
 * [4. Deploy the sample app](#4-deploy-the-sample-app)
 * [5. Create the canary deployment](#5-create-the-canary-deployment)
 * [6. Rollout a new version](#6-rollout-a-new-version)
