@@ -96,7 +96,7 @@
            link: /topics/running/ambassador-deployment
          - title: The $productName$ container environment
            link: /topics/running/environment
-         - title: $productName$ with AWS
+         - title: Emissary-ingress with AWS
            link: /topics/running/ambassador-with-aws
          - title: $productName$ with GKE
            link: /topics/running/ambassador-with-gke

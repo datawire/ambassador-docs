@@ -1,21 +1,21 @@
 ---
-    title: Emissary-ingress with AWS
-    description: How to configure Emissary-ingress for AWS.
+    title: Edge Stack with AWS
+    description: How to configure Edge Stack for AWS.
 ---
 
-# Emissary-ingress with AWS
+# Edge Stack with AWS
 
-Emissary-ingress is a platform-agnostic Kubernetes API gateway. It runs in any distribution of Kubernetes, whether it is managed by a cloud provider or on homegrown bare-metal servers.
+Edge Stack is a platform-agnostic Kubernetes API gateway. It runs in any distribution of Kubernetes, whether it is managed by a cloud provider or on homegrown bare-metal servers.
 
-This document provides a reference for different configuration options available to run with Kubernetes in AWS. See [Installing Emissary-ingress](../../install) for the available installation methods.
+This document provides a reference for different configuration options available to run with Kubernetes in AWS. See [Installing Edge Stack](../../install) for the available installation methods.
 
 ## Recommended configuration
 
-There are many configuration options available for you to run Emissary-ingress in AWS. While you should familiarize yourself with all the options on this page to understand what is best for you, the recommended configuration to run Emissary-ingress in AWS is as follows:
+There are many configuration options available for you to run Edge Stack in AWS. While you should familiarize yourself with all the options on this page to understand what is best for you, the recommended configuration to run Edge Stack in AWS is as follows:
 
-For most use cases, Ambassador Labs recommends you terminate TLS at Emissary-ingress so you can take advantage of all the TLS configuration options available in Emissary-ingress. This includes configuration of the allowed TLS versions,  `alpn_protocol` options, and HTTP -> HTTPS redirection enforcement.
+For most use cases, Ambassador Labs recommends you terminate TLS at Edge Stack so you can take advantage of all the TLS configuration options available in Edge Stack. This includes configuration of the allowed TLS versions,  `alpn_protocol` options, HTTP -> HTTPS redirection enforcement, and [automatic certificate management](../host-crd) in Edge Stack.
 
-When you terminate TLS at Emissary-ingress, you should deploy an L4 [Network Load Balancer (NLB)](#network-load-balancer-nlb) with the proxy protocol enabled to get the best performance out of your load balancer while still preserving the client IP address.
+When you terminate TLS at Edge Stack, you should deploy an L4 [Network Load Balancer (NLB)](#network-load-balancer-nlb) with the proxy protocol enabled to get the best performance out of your load balancer while still preserving the client IP address.
 
 The following `Service` should be configured to deploy an NLB with cross zone load balancing enabled (see [NLB notes](#network-load-balancer-nlb) for caveats on the cross-zone-load-balancing annotation). You need to configure the proxy protocol in the NLB manually in the AWS Console.
 
@@ -41,9 +41,9 @@ spec:
     service: ambassador
 ```
 
-After you deploy the `Service` above and manually enable the proxy protocol, you need to deploy a `Listener` resource to tell Emissary-ingress to use the proxy protocol. See the [`Listener` resource documentation](../listener) for `Listener` setup details.
+After you deploy the `Service` above and manually enable the proxy protocol, you need to deploy a `Listener` resource to tell Edge Stack to use the proxy protocol. See the [`Listener` resource documentation](../listener) for `Listener` setup details.
 
-Once you deploy the `Listener`, restart Emissary-ingress for the configurations to take effect. Emissary-ingress now expects traffic from the load balancer to be wrapped with the proxy protocol so it can read the client IP address.
+Once you deploy the `Listener`, restart Edge Stack for the configurations to take effect. Edge Stack now expects traffic from the load balancer to be wrapped with the proxy protocol so it can read the client IP address.
 
 ## AWS load balancer notes
 
@@ -88,9 +88,9 @@ The NLB is a second generation layer 4 AWS Elastic Load Balancer. Running at L4,
 * Can perform TLS termination
 
 **Notes:**
-- The NLB is the most efficient load balancer, capable of handling millions of requests per second. Ambassador Labs recommends this for streaming connections since it maintains the connection stream between the client and Emissary-ingress.
+- The NLB is the most efficient load balancer, capable of handling millions of requests per second. Ambassador Labs recommends this for streaming connections since it maintains the connection stream between the client and Edge Stack
 - Most of the [load balancer annotations](#load-balancer-annotations) are respected by the NLB. You need to manually configure the proxy protocol and take an extra step to enable cross-zone load balancing.
-- Because it operates at L4 and cannot modify the request, you need to tell Emissary-ingress whether or not to terminate TLS (see [TLS termination](#tls-termination) notes below for more details).
+- Because it operates at L4 and cannot modify the request, you need to tell Edge Stack whether or not to terminate TLS (see [TLS termination](#tls-termination) notes below for more details).
 
 ### Application Load Balancer (ALB)
 
@@ -106,20 +106,20 @@ The ALB is a second generation AWS Elastic Load Balancer. It cannot be ensured b
 
 **Notes:**
 
-- The ALB performs routing based on the path, headers, and host. Because Emissary-ingress performs this kind of routing in your cluster, the overhead of provisioning an ALB is often not worth the benefits unless you are using the same load balancer to route to services outside of Kubernetes, 
-- If you choose to use an ALB, you need to expose Emissary-ingress with a `type: NodePort` service and manually configure the ALB to forward to the correct ports.
+- The ALB performs routing based on the path, headers, and host. Because Edge Stack performs this kind of routing in your cluster, the overhead of provisioning an ALB is often not worth the benefits unless you are using the same load balancer to route to services outside of Kubernetes, 
+- If you choose to use an ALB, you need to expose Edge Stackwith a `type: NodePort` service and manually configure the ALB to forward to the correct ports.
 - None of the [load balancer annotations](#load-balancer-annotations) are respected by the ALB. You need to manually configure all options.
 - The ALB sets the `X-Forward-Proto` header if terminating TLS. See (see [TLS termination](#tls-termination) notes below).
 
 ## Load balancer annotations
 
-Kubernetes on AWS exposes a mechanism to request certain load balancer configurations by annotating the `type: LoadBalancer` `Service`. The most complete set and explanations of these annotations can be found in [this Kubernetes concepts document](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer). The following is the most relevant information for Emissary-ingress deployment.
+Kubernetes on AWS exposes a mechanism to request certain load balancer configurations by annotating the `type: LoadBalancer` `Service`. The most complete set and explanations of these annotations can be found in [this Kubernetes concepts document](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer). The following is the most relevant information for Edge Stack deployment.
 
 - `service.beta.kubernetes.io/aws-load-balancer-ssl-cert`:
 
     This configures the load balancer to use a valid certificate ARN to terminate TLS at the Load Balancer.
 
-    Traffic from the client into the load balancer is encrypted but, since TLS is terminated at the load balancer, traffic from the load balancer to Emissary-ingress will be cleartext. You need to configure Emissary-ingress differently depending on whether the load balancer is running in L4 or L7 (see [TLS termination](#tls-termination) notes below).
+    Traffic from the client into the load balancer is encrypted but, since TLS is terminated at the load balancer, traffic from the load balancer to Edge Stack will be cleartext. You need to configure Edge Stack differently depending on whether the load balancer is running in L4 or L7 (see [TLS termination](#tls-termination) notes below).
 
 - `service.beta.kubernetes.io/aws-load-balancer-ssl-ports`:
 
@@ -147,23 +147,23 @@ Kubernetes on AWS exposes a mechanism to request certain load balancer configura
 
     The proxy protocol can be used to preserve the client IP address.
 
-    If you set this value, you need to make sure Emissary-ingress is configured to use the proxy protocol (see [preserving the client IP address](#preserving-the-client-ip-address) below).
+    If you set this value, you need to make sure Edge Stack is configured to use the proxy protocol (see [preserving the client IP address](#preserving-the-client-ip-address) below).
 
     **Note:** This annotation is not recognized if `aws-load-balancer-type: "nlb"` is configured. Proxy protocol must be manually enabled for NLBs.
 
 ## TLS termination
 
-TLS termination is an important part of any modern web app. Emissary-ingress exposes many TLS termination configuration options, which makes it a powerful tool to manage encryption between your clients and microservices. Refer to the [TLS Termination](../tls) documentation for more information on how to configure TLS termination at Emissary-ingress.
+TLS termination is an important part of any modern web app. Edge Stack exposes many TLS termination configuration options, which makes it a powerful tool to manage encryption between your clients and microservices. Refer to the [TLS Termination](../tls) documentation for more information on how to configure TLS termination at Edge Stack.
 
 With AWS, the AWS Certificate Manager (ACM) makes it easy to configure TLS termination at an AWS load balancer with the load balancer annotations above.
 
-This means that when you run Emissary-ingress in AWS, you have a choice of two options on where to terminate TLS. You can terminate TLS at the load balancer using a certificate from the ACM, or you can terminate TLS at Emissary-ingress using a certificate stored as a `Secret` in your cluster.
+This means that when you run Edge Stack in AWS, you have a choice of two options on where to terminate TLS. You can terminate TLS at the load balancer using a certificate from the ACM, or you can terminate TLS at Edge Stack using a certificate stored as a `Secret` in your cluster.
 
-### TLS termination at Emissary-ingress
+### TLS termination at Edge Stack
 
- TLS termination at Emissary-ingress allows you to use all of the TLS termination options that Emissary-ingress exposes. This includes the ability to enforce the minimum TLS version, set the `alpn_protocols`, and redirect cleartext to HTTPS.
+ TLS termination at Edge Stack allows you to use all of the TLS termination options that Edge Stack exposes. This includes the ability to enforce the minimum TLS version, set the `alpn_protocols`, and redirect cleartext to HTTPS.
 
-If you terminate TLS at Emissary-ingress, you can provision any AWS load balancer that you want with the following default port assignments:
+If you terminate TLS at Edge Stack, you can provision any AWS load balancer that you want with the following default port assignments:
 
 ```yaml
 spec:
@@ -176,13 +176,13 @@ spec:
     targetPort: 8443
 ```
 
-Although TLS termination at Emissary-ingress makes it easier to expose more advanced TLS configuration options, it has the drawback of not being able to use the ACM to manage certificates.
+Although TLS termination at Edge Stack makes it easier to expose more advanced TLS configuration options, it has the drawback of not being able to use the ACM to manage certificates. You need to manage your TLS certificates yourself or use the [automatic certificate management](../host-crd) available in Edge Stack to have Edge Stack do it for you.
 
 ### TLS termination at the load balancer
 
-If you choose to terminate TLS at your Amazon load balancer, you can use the ACM to manage TLS certificates. This option can add complexity to your Emissary-ingress configuration depending on which load balancer you are using.
+If you choose to terminate TLS at your Amazon load balancer, you can use the ACM to manage TLS certificates. This option can add complexity to your Edge Stack configuration depending on which load balancer you are using.
 
- TLS termination at the load balancer means that Emissary-ingress receives all traffic as un-encrypted cleartext traffic. Since Emissary-ingress expects service both encrypted and cleartext traffic by default, you need to make the following configuration changes to Emissary-ingress to support this:
+ TLS termination at the load balancer means that Edge Stack receives all traffic as un-encrypted cleartext traffic. Since Edge Stack expects service both encrypted and cleartext traffic by default, you need to make the following configuration changes to Edge Stack to support this:
 
 #### L4 load balancer (default ELB or NLB)
 
@@ -210,11 +210,11 @@ If you choose to terminate TLS at your Amazon load balancer, you can use the ACM
        service: ambassador
    ```
 
-   Note that the `spec.ports` has been changed so both the HTTP and HTTPS ports forward to the cleartext port 8080 on Emissary-ingress.
+   Note that the `spec.ports` has been changed so both the HTTP and HTTPS ports forward to the cleartext port 8080 on Edge Stack.
 
 * **`Host`:**
 
-   The `Host` configures how Emissary-ingress handles encrypted and cleartext traffic. The following `Host` configuration tells Emissary-ingress to `Route` cleartext traffic that comes in from the load balancer:
+   The `Host` configures how Edge Stack handles encrypted and cleartext traffic. The following `Host` configuration tells Edge Stack to `Route` cleartext traffic that comes in from the load balancer:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
@@ -235,7 +235,7 @@ If you choose to terminate TLS at your Amazon load balancer, you can use the ACM
 
 **Important:**
 
-Because L4 load balancers do not set `X-Forwarded` headers, Emissary-ingress in unable to distinguish between traffic that came in to the load balancer as encrypted or cleartext. Because of this, **HTTP -> HTTPS redirection is not possible when terminating TLS at an L4 load balancer**.
+Because L4 load balancers do not set `X-Forwarded` headers, Edge Stack in unable to distinguish between traffic that came in to the load balancer as encrypted or cleartext. Because of this, **HTTP -> HTTPS redirection is not possible when terminating TLS at an L4 load balancer**.
 
 #### L7 load balancer (ELB or ALB)
 
@@ -265,11 +265,11 @@ Because L4 load balancers do not set `X-Forwarded` headers, Emissary-ingress in 
        service: ambassador
    ```
 
-   Note that the `spec.ports` has been changed so both the HTTP and HTTPS ports forward to the cleartext port 8080 on Emissary-ingress.
+   Note that the `spec.ports` has been changed so both the HTTP and HTTPS ports forward to the cleartext port 8080 on Edge Stack.
 
 * **`Host`:**
 
-   The `Host` configures how Emissary-ingress handles encrypted and cleartext traffic. The following `Host` configuration will tell Emissary-ingress to `Redirect` cleartext traffic that comes in from the load balancer:
+   The `Host` configures how Edge Stack handles encrypted and cleartext traffic. The following `Host` configuration will tell Edge Stack to `Redirect` cleartext traffic that comes in from the load balancer:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
@@ -290,7 +290,7 @@ Because L4 load balancers do not set `X-Forwarded` headers, Emissary-ingress in 
 
 * **Module:**
 
-   Since an L7 load balancer is able to append to `X-Forwarded` headers, you need to configure Emissary-ingress to trust the value of these headers. The following `Module` configures Emissary-ingress to trust a single L7 proxy in front of Emissary-ingress:
+   Since an L7 load balancer is able to append to `X-Forwarded` headers, you need to configure Edge Stack to trust the value of these headers. The following `Module` configures Edge Stack to trust a single L7 proxy in front of Edge Stack:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
@@ -306,11 +306,11 @@ Because L4 load balancers do not set `X-Forwarded` headers, Emissary-ingress in 
 
 **Note:**
 
-Emissary-ingress uses the value of `X-Forwarded-Proto` to know if the request originated as encrypted or cleartext. Unlike L4 load balancers, L7 load balancers set this header so HTTP -> HTTPS redirection is possible when terminating TLS at an L7 load balancer.
+Edge Stack uses the value of `X-Forwarded-Proto` to know if the request originated as encrypted or cleartext. Unlike L4 load balancers, L7 load balancers set this header so HTTP -> HTTPS redirection is possible when terminating TLS at an L7 load balancer.
 
 ## Preserving the client IP address
 
-Many applications want to know the IP address of the connecting client. In Kubernetes, this IP address is often obscured by the IP address of the `Node` that forwards the request to Emissary-ingress, so additional configuration is required if you need to preserve the client IP address.
+Many applications want to know the IP address of the connecting client. In Kubernetes, this IP address is often obscured by the IP address of the `Node` that forwards the request to Edge Stack, so additional configuration is required if you need to preserve the client IP address.
 
 In AWS, there are two options to preserve the client IP address:
 
@@ -318,7 +318,7 @@ In AWS, there are two options to preserve the client IP address:
 
    An L7 load balancer populates the `X-Forwarded-For` header with the IP address of the downstream connecting client. If your clients connect directly to the load balancer, this is the IP address of your client.
 
-   When you use L7 load balancers, you must configure Emissary-ingress to trust the value of `X-Forwarded-For` and not append its own IP address to it. You need to set `xff_num_trusted_hops` and `use_remote_address: false` in the [Ambassador `Module`](../ambassador) as follows:
+   When you use L7 load balancers, you must configure Edge Stack to trust the value of `X-Forwarded-For` and not append its own IP address to it. You need to set `xff_num_trusted_hops` and `use_remote_address: false` in the [Ambassador `Module`](../ambassador) as follows:
 
    ```yaml
    apiVersion: getambassador.io/v3alpha1
@@ -332,7 +332,7 @@ In AWS, there are two options to preserve the client IP address:
        use_remote_address: false
    ```
 
-   After you configure the the above `Module`, restart Emissary-ingress for the changes to take effect.
+   After you configure the the above `Module`, restart Edge Stack for the changes to take effect.
 
 2. Use the proxy protocol
 
@@ -340,7 +340,7 @@ In AWS, there are two options to preserve the client IP address:
 
    In AWS, you can configure ELBs to use the proxy protocol with the `service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"` annotation on the service. You must manually configure this on ALBs and NLBs.
 
-   Once you configure the load balancer to use the proxy protocol, you need to tell Emissary-ingress to expect it on the request with the `Listener` resource. See the [`Listener` resource documentation](../listener) for setup details.
+   Once you configure the load balancer to use the proxy protocol, you need to tell Edge Stack to expect it on the request with the `Listener` resource. See the [`Listener` resource documentation](../listener) for setup details.
 
 
 
