@@ -312,7 +312,7 @@ const index = ({ data, location, pageContext }) => {
         isLearning={isLearning}
       />
       <div className="docs__doc-body-container">
-        <div className="docs__doc-body-container__article">
+        <div className="docs__content_container">
           <div className="docs__doc-body-container__article flex-toc">
             {children}
           </div>
@@ -350,7 +350,7 @@ const index = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div>
+    <div className={product.slug === 'home'? '' : 'docs__doc-footer-container'}>
       {product.slug === 'home' && (
         <hr className="docs__separator docs__container docs__container-home" />
       )}

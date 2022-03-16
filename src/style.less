@@ -398,6 +398,45 @@ body {
     padding-bottom: 10px;
   }
 
+  &__content_container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  @media (min-width: 1200px) {
+    &__nav,
+    &__doc-sidebar,
+    .docs__doc-body-container__table-content {
+      position: fixed;
+    }
+
+    &__body {
+      margin-top: 70px;
+    }
+
+    &__doc-footer-container {
+      margin-left: 300px;
+    }
+
+    &__content_container {
+      margin-left: 300px;
+      width: 75%;
+    }
+  }
+
+  @media (min-width: 1500px) {
+    &__content_container {
+      width: 80%;
+    }
+  }
+
+  @media (min-width: 1800px) {
+    &__content_container {
+      width: 85%;
+    }
+  }
+
   &__version {
     height: 50px;
     border-bottom: 1px solid @grey-separator;
