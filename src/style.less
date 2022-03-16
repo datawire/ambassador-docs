@@ -43,12 +43,13 @@ body {
     justify-content: space-between;
     padding: 0 25px;
     border-bottom: 1px solid @grey-separator;
-    position: relative;
+    position: fixed;
     width: 100%;
     z-index: 9;
   }
 
   &__body {
+    margin-top: 70px;
     height: 100%;
     overflow: auto;
     flex-shrink: 1;
@@ -405,14 +406,9 @@ body {
   }
 
   @media (min-width: 1200px) {
-    &__nav,
     &__doc-sidebar,
     .docs__doc-body-container__table-content {
       position: fixed;
-    }
-
-    &__body {
-      margin-top: 70px;
     }
 
     &__doc-footer-container {
