@@ -124,8 +124,8 @@
            link: /topics/running/environment
          - title: $productName$ and Redis
            link: /topics/running/aes-redis
-         - title: Edge Stack with AWS
-           link: /topics/running/edge-stack-with-aws
+         - title: $productName$ with AWS
+           link: /topics/running/ambassador-with-aws
          - title: $productName$ with GKE
            link: /topics/running/ambassador-with-gke
          - title: Advanced deployment configuration
