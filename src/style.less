@@ -31,6 +31,15 @@ body {
   position: relative;
   overflow: hidden;
 
+  &-margin-top-announcement {
+    margin-top: 48px;
+  }
+
+  &-announcement-container {
+    position: fixed;
+    width: 100%;
+  }
+
   nav {
     flex-grow: 0;
   }
@@ -826,6 +835,10 @@ body {
 
     &__desktop {
       display: none;
+    }
+
+    &__content_container {
+      width: 100%;
     }
 
     &__doc-body-container {
