@@ -10,9 +10,11 @@ On the main Service Catalog view: the service listing:
 
 1. Locate the service you wish to add to your favorites.
 
-2. Click on the service's **"..."** button to open the pop-up menu.
+2. Hover over the service row to display the flyout buttons
 
-3. Click **Add to favorites**.
+3. Click the star symbol.
+
+![Service flyout buttons](../../../images/add-service-to-favorites.png)
 
 Favorited services will be displayed with a star icon next to the service name.
 
