@@ -2,9 +2,9 @@
 
 Service Groups allow you to organize services in the ways that best suit your workflow. These groupings allow you to easily visualize and manage multiple services that exist across your environments.
 
-You can identify a <a href="../../concepts/services//">service</a> deployed accross your environments, and add it into a service group.
+You can identify a [service](/docs/cloud/latest/service-catalog/concepts/services) deployed accross your environments, and add it into a service group.
 
-The service catalog allows you to see all of the important details for each of your <a href="../../concepts/services/">services</a> and service groups.
+The service catalog allows you to see all of the important details for each of your [services](/docs/cloud/latest/service-catalog/concepts/services) and service groups.
 
 ![The service groups view](../../../images/service-group-root.png)
 

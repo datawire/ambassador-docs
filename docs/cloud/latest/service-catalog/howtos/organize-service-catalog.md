@@ -1,7 +1,7 @@
 
 # Organize the service catalog
 
-The service catalog references all your services across your environments. Because the number of services can be difficult to manage in larger environments, Ambassador Cloud allows you to create service groups to organize your environment . This guide describes how to use <a href="../../concepts/service-groups/">service groups</a> to help you to visualize and manage your environments.
+The service catalog references all your services across your environments. Because the number of services can be difficult to manage in larger environments, Ambassador Cloud allows you to create service groups to organize your environment . This guide describes how to use [service groups](/docs/cloud/latest/service-catalog/concepts/service-groups) to help you to visualize and manage your environments.
 
 ## Identify the services you want to group together
 
