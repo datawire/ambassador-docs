@@ -14,7 +14,9 @@ On the main Service Catalog view: the service listing:
 
 3. Click the star symbol.
 
-![Service flyout buttons](../../../images/add-service-to-favorites.png)
+<p align="center">
+  <img src="../../../images/add-service-to-favorites.png" width="300" alt="Service flyout buttons"/>
+</p>
 
 Favorited services will be displayed with a star icon next to the service name.
 
