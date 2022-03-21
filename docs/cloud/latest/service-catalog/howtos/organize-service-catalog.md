@@ -1,11 +1,11 @@
 
 # Organize the service catalog
 
-The service catalog references all your services across your environments. Because the number of services can be difficult to manage in larger environments, Ambassador Cloud allows you to create service groups to organize your environment . This guide describes how to use [service groups](/docs/cloud/latest/service-catalog/concepts/service-groups) to help you to visualize and manage your environments.
+Microservice applications may span many namespaces or environments making them difficult to visualise and manage. The service catalog allows you to list all of your services so that they are organised and accessible in a single place. This guide describes how to use [service groups](/docs/cloud/latest/service-catalog/concepts/service-groups) to help you to visualize and manage your environments.
 
 ## Identify the services you want to group together
 
-Services can be grouped together in different fashions depending on your need. The most common use case is to group
+Services can be logically grouped together based on your needs. The most common use case is to group
 services which are related to a group of functionalities or a specific application.
 
 Taking the example of a database working as a multi-node cluster, you may have:
@@ -46,3 +46,7 @@ It would be a good idea to group all of them under a **database** group.
   </p>
 
 3. Click **save** to apply the changes. The group is automatically deleted if there are no more services in it.
+
+## Move a service to a different group
+
+TBD
