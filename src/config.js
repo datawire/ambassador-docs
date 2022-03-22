@@ -27,14 +27,21 @@ export const products = [
   {
     slug: 'ship',
     name: 'Ship',
-    link: '/docs',
-    version: [],
+    link: '/docs/ship',
+    id: Math.random().toString(),
+    version: [
+      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
+    ],
   },
   {
     slug: 'run',
     name: 'Run',
-    link: '/docs',
+    link: '/docs/run',
     version: [],
+    id: Math.random().toString(),
+    version: [
+      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
+    ],
   },
   {
     slug: 'kubernetes',

@@ -287,6 +287,8 @@ const index = ({ data, location, pageContext }) => {
         argo: Argo,
         kubernetes: Kubernetes,
         code: Code,
+        ship: Code,
+        run: Code
       }[product] || EdgeStack;
     return <Product />;
   };

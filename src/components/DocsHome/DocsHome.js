@@ -8,7 +8,7 @@ import Run from '../../../../src/assets/images/home/home-run.svg';
 import Ship from '../../../../src/assets/images/home/home-ship.svg';
 import Telepresence from '../../../../src/assets/images/home/home-telepresence.svg';
 import Button from '../../../../src/components/Button';
-import { goToCodeDocs } from '../../../../src/utils/routes';
+import { goToCodeDocs, goToShipDocs, goToRunDocs } from '../../../../src/utils/routes';
 import Link from '../../../../src/components/Link';
 import { goToDocsTelepresence } from '../../../../src/utils/routes';
 
@@ -81,7 +81,7 @@ const DocsHome = () => {
             'With Argo, you can release updates cleanly and monitor your rollouts as you do. Create canary releases of new versions of a service easily with the option to safely rollback changes when necessarily.'
           }
           image={Ship}
-          getStarted={''}
+          getStarted={goToShipDocs}
           docDescription={'Advanced Argo documentation'}
           docImage={Argo}
         />
@@ -91,7 +91,7 @@ const DocsHome = () => {
             'In a fast-paced development environment, it is essential to keep services running 24/7. Mitigate issues, monitor updates, and maintain complete control over protecting your services with Edge Stack.'
           }
           image={Run}
-          getStarted={''}
+          getStarted={goToRunDocs}
           docDescription={'Advanced Edge Stack documentation'}
           docImage={EdgeStack}
         />
