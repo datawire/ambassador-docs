@@ -140,7 +140,7 @@ on a VM.
    following manifest:
 
    ```shell
-   kubectl apply -f <<EOF
+   kubectl apply -f - <<EOF
    ---
    apiVersion: getambassador.io/v3alpha1
    kind: ConsulResolver

@@ -91,7 +91,7 @@ items:
           Any <code>Mapping</code> that uses the <code>host_redirect</code> field is now properly discovered and used. Thanks
           to <a href="https://github.com/gferon">Gabriel Féron</a> for contributing this bugfix!
         github:
-        - title: 3709
+        - title: "#3709"
           link: https://github.com/emissary-ingress/emissary/issues/3709
         docs: https://github.com/emissary-ingress/emissary/issues/3709
 
@@ -273,7 +273,7 @@ items:
           gracefully handle larger installations, reduce global configuration to better
           handle multitenant or multiorganizational installations, reduce memory footprint, and
           improve performance. We welcome feedback!! Join us on
-          <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+          <a href="http://a8r.io/slack">Slack</a> and let us know what you think.
         isHeadline: true
         docs: about/changes-2.x
         image: ./emissary-ga.png
@@ -358,7 +358,7 @@ items:
     date: '2021-09-16'
     notes:
       - title: Developer Preview!
-        body: We're pleased to introduce $productName$ 2.0.3 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+        body: We're pleased to introduce $productName$ 2.0.3 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="http://a8r.io/slack">Slack</a> and let us know what you think.
         type: change
         isHeadline: true
         docs: about/changes-2.x
@@ -390,7 +390,7 @@ items:
     date: '2021-08-24'
     notes:
       - title: Developer Preview!
-        body: We're pleased to introduce $productName$ 2.0.2 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+        body: We're pleased to introduce $productName$ 2.0.2 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="http://a8r.io/slack">Slack</a> and let us know what you think.
         type: change
         isHeadline: true
         docs: about/changes-2.x
@@ -414,7 +414,7 @@ items:
     date: "2021-08-12"
     notes:
       - title: Developer Preview!
-        body: We're pleased to introduce $productName$ 2.0.1 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+        body: We're pleased to introduce $productName$ 2.0.1 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="http://a8r.io/slack">Slack</a> and let us know what you think.
         type: change
         isHeadline: true
         docs: about/changes-2.x
@@ -453,7 +453,7 @@ items:
     date: "2021-06-24"
     notes:
       - title: Developer Preview!
-        body: We're pleased to introduce $productName$ 2.0.0 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="https://a8r.io/slack">Slack</a> and let us know what you think.
+        body: We're pleased to introduce $productName$ 2.0.0 as a <b>developer preview</b>. The 2.X family introduces a number of changes to allow $productName$ to more gracefully handle larger installations, reduce global configuration to better handle multitenant or multiorganizational installations, reduce memory footprint, and improve performance. We welcome feedback!! Join us on <a href="http://a8r.io/slack">Slack</a> and let us know what you think.
         type: change
         docs: about/changes-2.x
         isHeadline: true

@@ -1,8 +1,8 @@
 # branch info
-branch: release/v2.1
+branch: release/v2.2
 
 # self
-version: 2.1.2
+version: 2.2.2
 productName: "Emissary-ingress"
 productNamePlural: "Emissary-ingresses"
 productNamespace: emissary
@@ -10,13 +10,16 @@ productDeploymentName: emissary-ingress
 productHelmName: emissary-ingress
 
 # OSS (self)
-ossVersion: 2.1.2
+ossVersion: 2.2.2
+ossDocsVersion: "pre-release"
+ossChartVersion: 7.3.2
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
 
 # AES (not self)
-aesVersion: 2.1.2
+aesVersion: 2.2.2
 aesDocsVersion: "pre-release"
+aesChartVersion: 7.3.2
 AESproductName: "Ambassador Edge Stack"
 AESproductNamePlural: "Ambassador Edge Stacks"
 

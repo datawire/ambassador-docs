@@ -51,6 +51,9 @@ spec:
 $AESproductName$ will now request a certificate from the CA and store it in a Secret
 in the same namespace as the `Host`.
 
+**If you use ACME for multiple Hosts, add a wildcard Host too.**
+This is required to manage a known issue. This issue will be resolved in a future Ambassador Edge Stack release.
+
 ### Bring your own certificate
 
 The `Host` can read a certificate from a Kubernetes Secret and use that certificate

@@ -78,7 +78,7 @@ const index = ({ data, location, pageContext }) => {
       );
     }
     if (
-      newVer.id === '2.1' ||
+      newVer.id === '2.2' ||
       newVer.id === 'pre-release' ||
       newVer.id === 'latest' ||
       (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
@@ -88,7 +88,7 @@ const index = ({ data, location, pageContext }) => {
     return (
       <a
         href={`/docs/${newProduct.slug}/latest/tutorials/getting-started/`}
-      >{`${newProduct.name} 2.1 is now available!`}</a>
+      >{`${newProduct.name} 2.2 is now available!`}</a>
     );
   }
   const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(
@@ -105,11 +105,11 @@ const index = ({ data, location, pageContext }) => {
   const isInLearnings = learningJourneys.includes(learningJourneyName);
   const learningJourneyData = isInLearnings
     ? data.allLearningjourney.nodes.filter(
-        (node) =>
-          node.slug.indexOf('/') > -1 &&
-          node.slug.indexOf('.') > -1 &&
-          node.slug.split('/')[1].split('.')[0] === learningJourneyName,
-      )
+      (node) =>
+        node.slug.indexOf('/') > -1 &&
+        node.slug.indexOf('.') > -1 &&
+        node.slug.split('/')[1].split('.')[0] === learningJourneyName,
+    )
     : [];
   const {
     title: learningTitle,
@@ -125,32 +125,32 @@ const index = ({ data, location, pageContext }) => {
   const isLearning = isInLearnings && isInTopics;
   const learningParseTopics = isLearning
     ? topics.map((topic) => {
-        const items = topic.items.map((item) => {
-          const readingTimeTopic = data.allMdx.edges.filter(
-            (i) => i.node.fields.slug === `/docs/${item.link}`,
-          );
-          const { slug, readingTime } = readingTimeTopic[0]
-            ? readingTimeTopic[0].node.fields
-            : {};
-          const { reading_time_text, hide_reading_time, reading_time } =
-            readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
-          return {
-            ...item,
-            slug,
-            readingTimeMinutes: Math.ceil(
-              readingTime ? readingTime.minutes : 0,
-            ),
-            readingTimeText: reading_time_text,
-            hideReadingTime: hide_reading_time,
-            readingTimeFront: reading_time,
-          };
-        });
-
+      const items = topic.items.map((item) => {
+        const readingTimeTopic = data.allMdx.edges.filter(
+          (i) => i.node.fields.slug === `/docs/${item.link}`,
+        );
+        const { slug, readingTime } = readingTimeTopic[0]
+          ? readingTimeTopic[0].node.fields
+          : {};
+        const { reading_time_text, hide_reading_time, reading_time } =
+          readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
         return {
-          ...topic,
-          items,
+          ...item,
+          slug,
+          readingTimeMinutes: Math.ceil(
+            readingTime ? readingTime.minutes : 0,
+          ),
+          readingTimeText: reading_time_text,
+          hideReadingTime: hide_reading_time,
+          readingTimeFront: reading_time,
         };
-      })
+      });
+
+      return {
+        ...topic,
+        items,
+      };
+    })
     : [];
 
   const [product, setProduct] = useState(initialProduct);
@@ -311,14 +311,14 @@ const index = ({ data, location, pageContext }) => {
         isLearning={isLearning}
       />
       <div className="docs__doc-body-container">
-        <div className="docs__doc-body-container__article">
+        <div className="docs__content_container">
           <div className="docs__doc-body-container__article flex-toc">
             {children}
           </div>
           <div
             className={
               page?.contentTable?.items &&
-              page.contentTable.items[0].items?.length > 1
+                page.contentTable.items[0].items?.length > 1
                 ? 'docs__doc-body-container__article docs__doc-body-container__article-toc'
                 : 'docs__doc-body-container__article-toc-none'
             }
@@ -349,9 +349,7 @@ const index = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div
-      className={`${product.slug === 'home' ? 'docs__footer-wrapper' : ''} `}
-    >
+    <div className={product.slug === 'home' ? '' : 'docs__doc-footer-container'}>
       {product.slug === 'home' && (
         <hr className="docs__separator docs__container docs__container-home" />
       )}
@@ -366,7 +364,7 @@ const index = ({ data, location, pageContext }) => {
           <hr
             className={
               page?.contentTable?.items &&
-              page.contentTable.items[0].items?.length > 1
+                page.contentTable.items[0].items?.length > 1
                 ? 'docs__separator docs__container docs__separator-footer'
                 : 'docs__separator docs__container docs__separator-footer-no-article'
             }
@@ -506,7 +504,7 @@ const index = ({ data, location, pageContext }) => {
   ]);
 
   return (
-    <Layout location={location} customAnnouncement={edgissaryDPMessage}>
+    <Layout location={location} customAnnouncement={edgissaryDPMessage} customAnnouncementClass='docs-announcement-container'>
       <SEO
         title={metadata.metaTitle}
         type="article"
@@ -514,7 +512,7 @@ const index = ({ data, location, pageContext }) => {
         description={metadata.metaDescription}
       ></SEO>
 
-      <div className="docs">
+      <div className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''}`}>
         <nav>
           <div className="docs__nav">
             <div className="docs__nav__content">
@@ -568,6 +566,40 @@ const index = ({ data, location, pageContext }) => {
                     : ''
                 }`}
               >
+            <div className="docs__links-content docs__dekstop">
+              <ul className="docs__products-list">
+                {products.map((item) => {
+                  const linkContent = version.archived ? (
+                    <a href={`${siteUrl}${item.link}`}>{item.name}</a>
+                  ) : (
+                    <Link to={item.link}>{item.name}</Link>
+                  );
+                  return (
+                    <li
+                      className={`${product.slug === item.slug ? 'docs__selected' : ''
+                        }`}
+                      key={item.name}
+                      onClick={claenStorage}
+                    >
+                      {linkContent}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div
+              className={`docs__dropdown-container docs__mobile${showVersion && versionList.length > 1
+                ? ' docs__dropdown-version'
+                : ''
+                }`}
+            >
+              <Dropdown
+                label={product.name}
+                handleOnChange={handleProductChange}
+                value={product.slug}
+                options={products.map((i) => ({ id: i.slug, name: i.name }))}
+              />
+              {showVersion && versionList.length > 1 && (
                 <Dropdown
                   label={product.name}
                   handleOnChange={handleProductChange}

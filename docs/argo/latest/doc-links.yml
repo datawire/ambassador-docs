@@ -10,6 +10,8 @@
       link: /howtos/deployment-to-rollout/
     - title: Configure Canary Rollout in my own Cluster
       link: /howtos/configure-argo-rollouts/
+    - title: Manage Rollouts using Cloud
+      link: /howtos/manage-rollouts-using-cloud
 - title: Technical reference
   items:
     - title: Ambassador Cloud Rollouts

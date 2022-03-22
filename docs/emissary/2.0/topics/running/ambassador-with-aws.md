@@ -26,10 +26,10 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - name: HTTP
+  - name: http
     port: 80
     targetPort: 8080
-  - name: HTTPS
+  - name: https
     port: 443
     targetPort: 8443
   selector:

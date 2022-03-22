@@ -58,7 +58,7 @@ When you run the Helm chart, it installs $productName$.
 
 
 For more advanced configuration and details about helm values,
-[please see the helm chart.](https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/README.md)
+[please see the helm chart.](https://github.com/emissary-ingress/emissary/blob/v2.1.0/charts/emissary-ingress/README.md)
 
 ## Upgrading an existing installation
 

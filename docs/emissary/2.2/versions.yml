@@ -1,0 +1,28 @@
+# branch info
+branch: release/v2.2
+
+# self
+version: 2.2.2
+productName: "Emissary-ingress"
+productNamePlural: "Emissary-ingresses"
+productNamespace: emissary
+productDeploymentName: emissary-ingress
+productHelmName: emissary-ingress
+
+# OSS (self)
+ossVersion: 2.2.2
+ossDocsVersion: 2.2
+ossChartVersion: 7.3.2
+OSSproductName: "Emissary-ingress"
+OSSproductNamePlural: "Emissary-ingresses"
+
+# AES (not self)
+aesVersion: 2.2.2
+aesDocsVersion: 2.2
+aesChartVersion: 7.3.2
+AESproductName: "Ambassador Edge Stack"
+AESproductNamePlural: "Ambassador Edge Stacks"
+
+# other products
+qotmVersion: 1.7
+quoteVersion: 0.5.0

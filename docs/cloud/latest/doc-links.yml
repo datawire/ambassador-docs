@@ -6,6 +6,8 @@
       link: service-catalog/howtos/qs-java-advanced/
     - title: Annotate a service
       link: /service-catalog/howtos/annotate/
+    - title: Intercept a service
+      link: /service-catalog/howtos/intercept/
     - title: Manage my cells
       link: /service-catalog/howtos/cells/
     - title: Filter my service view

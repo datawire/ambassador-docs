@@ -31,6 +31,27 @@
 
 changelog: ''
 items:
+  - date: '2022-02-21'
+    notes:
+      - title: 'Mapping Editor'
+        body: "The new Ambassador Cloud Mapping Editor lets you craft Mapping resources following best practices to easily expose services to the internet. Get started with Edge Stack 2.2 and follow our guide to set up your first Mapping."
+        image: './mapping-editor.png'
+        docs: '../../edge-stack/latest/tutorials/getting-started/'
+        type: feature
+  - date: '2022-02-18'
+    notes:
+      - title: Intercept from the cloud
+        body: Starting with Telepresence 2.5.0, intercepting a service can now be initiated from Ambassador Cloud.
+        docs: service-catalog/howtos/intercept/
+        image: './intercept-slideout-service-list.png'
+        type: feature
+  - date: '2022-02-10'
+    notes:
+      - title: 'Edge Stack community licenses'
+        body: 'Starting with Edge Stack 2.2, activating a free community license in your cluster is now easier than ever for cloud-connected installations.'
+        image: './community-license.png'
+        docs: '../../edge-stack/latest/about/faq/#can-i-use-the-add-on-features-for-aesproductname-for-free'
+        type: change
   - date: '2021-12-08'
     notes:
       - title: 'Subscriptions'

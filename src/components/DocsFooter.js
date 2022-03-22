@@ -17,6 +17,13 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
     ? page.parent.relativePath.split('/').slice(3).join('/')
     : '';
 
+  // Don't produce an edit link for generated files.
+  if (restOfFilePath === "licenses.md") {
+    return (
+      <footer className="docs__footer"></footer>
+    );
+  }
+
   let dstUrl;
   switch (product) {
     case 'telepresence':

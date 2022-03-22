@@ -259,4 +259,4 @@ It's important to realize that Envoy manages the `X-Forwarded-Proto` header such
 
 ### CRD specification
 
-The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v2/Host.proto).
+The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/v2.1.0/api/getambassador.io/v2/Host.proto).

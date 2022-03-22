@@ -4,7 +4,7 @@ The installer failed to communicate with an $productName$ (AES) Pod in your Kube
 
 ## What's next?
 
-This is an unusual failure case, so we will have to help you on our Support channel. Please run these commands and then get in touch on [Slack](https://a8r.io/Slack).
+This is an unusual failure case, so we will have to help you on our Support channel. Please run these commands and then get in touch on [Slack](http://a8r.io/slack).
 
 * What is the status of the associated Deployment?
   * `kubectl -n ambassador get deploy ambassador`
