@@ -143,13 +143,19 @@ const releaseNotes = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div>
-      <hr className="docs__separator docs__container" />
-      <section className="docs__contact docs__container">
-        <ContactBlock />
-      </section>
-      <DocsFooter product={product.slug} version={docsVersion} />
-    </div>
+    <>
+      <div className='docs__footer-principal-container'>
+        <div className='docs__footer-contact-container'>
+          <hr className="docs__separator-footer-release" />
+          <section className="docs__contact">
+            <ContactBlock />
+          </section>
+        </div>
+      </div>
+      <div className='docs__doc-footer-container'>
+        <DocsFooter product={product.slug} version={docsVersion} />
+      </div>
+    </>
   );
 
   const content = useMemo(() => {
@@ -178,7 +184,7 @@ const releaseNotes = ({ data, location, pageContext }) => {
               />
             </div>
           </div>
-          <div className='docs__doc-footer-container'>
+          <div className="docs__doc-body-container__article-footer">
             {footer}
           </div>
         </div>
