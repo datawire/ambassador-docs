@@ -1,6 +1,6 @@
 ---
-   Title: Connect Edge Stack with Ambassador Cloud
-   description: Connect Edge Stack to Ambassador Cloud.
+Title: Connect Edge Stack with Ambassador Cloud
+description: Connect Edge Stack to Ambassador Cloud.
 ---
 
 # Connecting Edge Stack to Ambassador Cloud

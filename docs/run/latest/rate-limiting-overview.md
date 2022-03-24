@@ -1,6 +1,6 @@
 ---
-    Title: Rate limiting in Edge Stack
-    description: An overview of rate limiting and load shedding with Edge Stack
+Title: Rate limiting in Edge Stack
+description: An overview of rate limiting and load shedding with Edge Stack
 ---
 
 # Rate limiting overview

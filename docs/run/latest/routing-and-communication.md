@@ -1,6 +1,6 @@
 ---
-	Title: Routing and communication in Edge Stack.
-	description: An overview of communication in Edge Stack
+Title: Routing and communication in Edge Stack.
+description: An overview of communication in Edge Stack
 ---
 
 # Routing and communication overview
