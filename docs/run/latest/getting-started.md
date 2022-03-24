@@ -12,8 +12,6 @@ import GettingStartedEdgeStack21Tabs from './gs-tabs'
 * [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
 * [What's Next?](#img-classos-logo-srcimageslogopng-whats-next)
 
-</div>
-
 ## 1. Installation
 
 We'll start by installing Edge Stack into your cluster.

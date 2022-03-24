@@ -28,4 +28,3 @@ Edge Stack's three primary custom resources are as follows:
 * The `Listener` resource, which defines where and how Ambassador Edge Stack should listen for requests from the network.
 * The `Host` resource. which defines which hostnames Ambassador Edge Stack is associated with by the `Mappings`. This defines how to Edge Stack handles the different kinds of requests for those hosts. Hosts can be associated with one or more Listeners.
 * The `TLSContext` resource defines how Ambassador Edge Stack manages TLS certificates and options. TLSContexts can be associated with one or more Hosts.
-
