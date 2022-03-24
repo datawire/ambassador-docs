@@ -12,7 +12,7 @@ import DocsFooter from './components/DocsFooter';
 import ReleaseNotes from './components/ReleaseNotes';
 import SearchBox from './components/SearchBox';
 import Sidebar from './components/Sidebar';
-import { products } from './config';
+import { products, archivedDocsUrl } from './config';
 import './style.less';
 
 const releaseNotes = ({ data, location, pageContext }) => {
@@ -91,6 +91,11 @@ const releaseNotes = ({ data, location, pageContext }) => {
     async (e, value = null) => {
       const newValue = value ? value : e.target.value;
       const newVersion = versionList.filter((v) => v.id === newValue)[0];
+
+      if (newVersion.archived) {
+        return navigate(`${archivedDocsUrl}/docs/${product.slug}/${newVersion.link}`)
+      }
+
       setVersion(newVersion);
       const slugPath = slug.slice(4).join('/') || '';
 
