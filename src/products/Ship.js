@@ -9,30 +9,30 @@ import ProductTemplate from './ProductTemplate';
 
 const props = {
   heroDescription:
-    'Ambassador Labs helps make it easier to ship with Telepresence. Set up your ideal development environment for Kubernetes in seconds with Telepresence. Use Telepresence’s intercepts and make continuous integration and team collaboration an easy and efficient part of your Kubernetes coding process.',
+    'With Ambassador Labs’ Argo, you can ship your products and monitor your rollouts easily. Argo’s event-driven workflow automation takes the pain out of deployments with advanced metrics for rollouts, and the ability to seamlessly rollback deployments if any issues arise.',
   titleFirstWord: 'Ship',
-  titleRest: 'with Telepresence',
+  titleRest: 'with Argo',
   heroImg: ShipHero,
   overview:
-    ' This guide provides an overview of the key ideas behind Telepresence, as well as the instructions you need to get Telepresence up and running in your environment quickly.',
+    'This guide provides an overview of the key ideas behind Argo, as well as the instructions you need to get Argo up and running in your environment quickly.',
   cards: [
     {
       title: 'Quick start guide',
       img: ShipQuickStart,
       description:
-        'Visit the quick start guide to see how easily Telepresence works in a demo environment.',
+        'Visit the quick start guide to create a basic rollout in a demo environment.',
     },
     {
-      title: 'Telepresence overview',
+      title: 'Argo overview',
       img: ShipTele,
       description:
-        'Run through the installation guide and create an intercept in your own environment to share with coworkers to see how easy coding collaboration is with Telepresence as a foundation to your Kubernetes development cycle.',
+        'Run through the installation guide and get Argo up and running in your own environment.',
     },
     {
-      title: 'Advanced Telepresence documentation',
+      title: 'Advanced Argo documentation',
       img: ShipDocTele,
       description:
-        'View the full user guide to learn advanced techniques to make your continuous integration even more powerful.',
+        'View the full user guide to learn advanced techniques to further tailor Argo to your needs.',
     },
   ],
 };

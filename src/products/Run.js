@@ -9,30 +9,30 @@ import ProductTemplate from './ProductTemplate';
 
 const props = {
   heroDescription:
-    'Ambassador Labs helps make it easier to run with Telepresence. Set up your ideal development environment for Kubernetes in seconds with Telepresence. Use Telepresence’s intercepts and make continuous integration and team collaboration an easy and efficient part of your Kubernetes coding process.',
+    'Edge Stack is a powerful asset that keeps you in control of how you run your Kubernetes services. Advanced traffic management capabilities such as load balancing, rate limiting, and circuit breaking are key to ensure the availability and scalability of your microservices. Edge Stack makes is possible able to manage and respond quickly to production incidents in your workflow.',
   titleFirstWord: 'Run',
-  titleRest: 'with Telepresence',
+  titleRest: 'with Edge Stack',
   heroImg: RunHero,
   overview:
-    ' This guide provides an overview of the key ideas behind Telepresence, as well as the instructions you need to get Telepresence up and running in your environment quickly.',
+    'This guide provides an overview of the key ideas that Edge Stack is built to solve.',
   cards: [
     {
       title: 'Quick start guide',
       img: RunQuickStart,
       description:
-        'Visit the quick start guide to see how easily Telepresence works in a demo environment.',
+        'Here you can find all the basic information you need to install Edge Stack in your environment.',
     },
     {
-      title: 'Telepresence overview',
+      title: 'Edge Stack overview',
       img: RunTele,
       description:
-        'Run through the installation guide and create an intercept in your own environment to share with coworkers to see how easy coding collaboration is with Telepresence as a foundation to your Kubernetes development cycle.',
+        'Find out how to install Edge Stack and see how it can help you manage routing, load balancing, rate limiting, and authentication if your Kubernetes environment.',
     },
     {
-      title: 'Advanced Telepresence documentation',
+      title: 'Advanced Edge Stack documentation',
       img: RunDocTele,
       description:
-        'View the full user guide to learn advanced techniques to make your continuous integration even more powerful.',
+        'View the full user guide to learn advanced techniques for maximizing Edge Stack’s capabilities for your needs.',
     },
   ],
 };
