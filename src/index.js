@@ -32,6 +32,8 @@ import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import Code from './products/Code';
+import Ship from './products/Ship';
+import Run from './products/Run';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
 import Kubernetes from './products/Kubernetes';
@@ -287,8 +289,8 @@ const index = ({ data, location, pageContext }) => {
         argo: Argo,
         kubernetes: Kubernetes,
         code: Code,
-        ship: Code,
-        run: Code
+        ship: Ship,
+        run: Run
       }[product] || EdgeStack;
     return <Product />;
   };
