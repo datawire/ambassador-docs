@@ -21,13 +21,13 @@ It would be a good idea to group all of them under a **database** group.
 1. Hover the mouse on a service that does not belong to a group, and click on the **move to group** option.
 
   <p align="center">
-    <img src="../../../images/service-group-create.png"/>
+    <img src="../../../images/service-group-create.png" width="300"/>
   </p>
 
 2. Select an existing group, or click on **new group** to add a one and name it. Then click on **save**.
 
   <p align="center">
-    <img src="../../../images/service-group-add.png"/>
+    <img src="../../../images/service-group-add.png" width="600"/>
   </p>
 
 
@@ -36,17 +36,29 @@ It would be a good idea to group all of them under a **database** group.
 1. Hover over a group and click **manage this group** to edit it.
 
   <p align="center">
-    <img src="../../../images/service-group-manage.png"/>
+    <img src="../../../images/service-group-manage.png" width="200" />
   </p>
 
 2. Select the **services** tab and click **remove** to remove services from the group.
   
   <p align="center">
-    <img src="../../../images/service-group-remove.png"/>
+    <img src="../../../images/service-group-remove.png" width="600" />
   </p>
 
 3. Click **save** to apply the changes. The group is automatically deleted if there are no more services in it.
 
-## Move a service to a different group
+## Rename a group.
 
-TBD
+1. Hover over a group and click **manage this group** to edit it.
+
+  <p align="center">
+    <img src="../../../images/service-group-manage.png" width="200"/>
+  </p>
+
+2. Select the **general** tab, enter a new name for your group.
+  
+  <p align="center">
+    <img src="../../../images/service-group-rename.png"  width="600"/>
+  </p>
+
+3. Click **save** to apply the changes.
