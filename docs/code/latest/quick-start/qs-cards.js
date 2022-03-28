@@ -28,19 +28,6 @@ export default function CenteredGrid() {
         <Grid item xs={4}>
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
-              <a href="../qs-java/">
-                <b>Create a Local K8s Dev Environment</b>
-              </a>
-            </Typography>
-            <Typography variant="body2" component="p">
-              Read the advanced guide on how to create your own complete
-              Kubernetes development environment.
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={4}>
-          <Paper variant="outlined" className={classes.paper}>
-            <Typography variant="h6" component="h2">
               <a href="../../howtos/preview-urls/">
                 <b>Collaborating</b>
               </a>
@@ -61,6 +48,19 @@ export default function CenteredGrid() {
             <Typography variant="body2" component="p">
               While connected to the cluster, your laptop can interact with
               services as if it was another pod in the cluster.
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper variant="outlined" className={classes.paper}>
+            <Typography variant="h6" component="h2">
+              <a href="../../faqs/">
+                <b>FAQs</b>
+              </a>
+            </Typography>
+            <Typography variant="body2" component="p">
+              Learn more about uses cases and the technical implementation of
+              Telepresence.
             </Typography>
           </Paper>
         </Grid>

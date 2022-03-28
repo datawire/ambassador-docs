@@ -151,10 +151,5 @@ Preview URLs, when created, generate an ingress request containing a custom head
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
-Apply what you've learned from this guide and employ the Emojivoto application in your own local development environment. See the Creating a local Kubernetes development environment pages for [Golang](../../qs-go-advanced/) and [Java](../../qs-java-advanced) page to learn more.
 
-export const metaData = [
-{name: "Emojivoto app", path: "https://github.com/datawire/emojivoto"},
-{name: "Docker container", path: "https://github.com/datawire/demo-containers"},
-{name: "Login component", path: "https://github.com/datawire/getambassador.io/blob/master/src/components/Docs/Telepresence/Login.js"},
-]
+You've intercepted a service in one of our demo clusters, now you can use Telepresence to [intercept a service in your own environment](https://www.getambassador.io/docs/telepresence/latest/howtos/intercepts/)!
