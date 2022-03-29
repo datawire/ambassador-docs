@@ -179,6 +179,7 @@ const index = ({ data, location, pageContext }) => {
   const metadata = useMemo(() => {
     let metaDescription;
     let metaTitle;
+    let metaRobots;
     if (isHome) {
       metaTitle = metaData['home'].title;
       metaDescription = metaData['home'].description;
@@ -193,10 +194,12 @@ const index = ({ data, location, pageContext }) => {
         page.frontmatter && page.frontmatter.description
           ? page.frontmatter.description
           : page.excerpt;
+      metaRobots = page.frontmatter && page.frontmatter.indexable === false ? 'noindex,nofollow' : null;
     }
     return {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
+      metaRobots,
     };
   }, [
     isHome,
@@ -511,7 +514,8 @@ const index = ({ data, location, pageContext }) => {
         type="article"
         canonicalUrl={canonicalUrl}
         description={metadata.metaDescription}
-      ></SEO>
+        robots={metadata.metaRobots}
+      />
 
       <div className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''}`}>
         <nav>
@@ -594,6 +598,7 @@ export const query = graphql`
         reading_time
         hide_reading_time
         reading_time_text
+        indexable
       }
       parent {
         ... on File {
