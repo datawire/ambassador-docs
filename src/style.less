@@ -1066,7 +1066,6 @@ body {
 
 .docs__footer-principal-container {
   display: flex;
-  flex-direction: column;
   width: 100%;
   @media (min-width: 1000px) {
     width: 74%;
@@ -1078,11 +1077,15 @@ body {
   @media (max-width: 999px) {
     width: 100%;
   }
+  @media (min-width: 1200px) {
+    width: 71%;
+  }
   @media (min-width: 1500px) {
     width: 80%;
   }
   @media (min-width: 1800px) {
     width: 84%;
+    justify-content: center;
   }
 }
 

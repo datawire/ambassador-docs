@@ -2,36 +2,16 @@ import React, { useMemo } from 'react';
 
 import Note from './Note';
 import * as styles from './releaseNotes.module.less';
-
-const month = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+import getDate from '../../utils/getDate';
 
 const Release = ({ release, handleViewMore, versions }) => {
   const formattedDate = useMemo(() => {
-    if (release.date) {
-      const [yyyy, mm, dd] = release.date.split('-');
-      if (yyyy && mm && dd) {
-        return `${month[Number(mm - 1)]} ${dd}, ${yyyy}`;
-      }
-    }
-    return '';
+    return release.date ? getDate(release.date) : ''
   }, [release.date]);
 
   return (
     <div className={styles.release}>
-      <h2>
+      <h2 id={release.version || release.date}>
         {release.version && (
           <>
             Version {release.version}{' '}

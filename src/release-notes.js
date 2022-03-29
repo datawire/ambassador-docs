@@ -3,11 +3,11 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 
 import Layout from '../../src/components/Layout';
-
 import ContactBlock from '../../src/components/ContactBlock';
+import ContentTable from './components/ContentTable';
 import Dropdown from '../../src/components/Dropdown';
 import template from '../../src/utils/template';
-
+import getDate from '../src/utils/getDate';
 import DocsFooter from './components/DocsFooter';
 import ReleaseNotes from './components/ReleaseNotes';
 import SearchBox from './components/SearchBox';
@@ -141,6 +141,26 @@ const releaseNotes = ({ data, location, pageContext }) => {
     [product.slug, version.id],
   );
 
+  const versionDecoration = (text) => `Version ${text}`
+
+  const getContentTableData = (data) => {
+    const items = data.map(item => {
+      const url = item.version ? `#${item.version}` : `#${item.date}`;
+      const title = item.version ?
+        versionDecoration(item.version) :
+        getDate(item.date);
+
+      return {
+        url,
+        title
+      }
+    })
+
+    return [{
+      items
+    }]
+  }
+
   let docsVersion = versions?.docsVersion;
   if (!docsVersion) {
     const docsMatch = versions?.version?.match(/\d+.\d+/g);
@@ -156,6 +176,9 @@ const releaseNotes = ({ data, location, pageContext }) => {
             <ContactBlock />
           </section>
         </div>
+        <div className='docs__doc-body-container__article docs__doc-body-container__article-toc'>
+
+        </div>
       </div>
       <div className='docs__doc-footer-container'>
         <DocsFooter product={product.slug} version={docsVersion} />
@@ -168,6 +191,8 @@ const releaseNotes = ({ data, location, pageContext }) => {
       ? template(data.releaseNotes.changelog, versions)
       : '';
 
+    const toc = getContentTableData(data.releaseNotes.versions, 'version',)
+
     return (
       <div className="docs__container-doc">
         <Sidebar
@@ -179,14 +204,24 @@ const releaseNotes = ({ data, location, pageContext }) => {
         />
         <div className="docs__doc-body-container">
           <div className='docs__content_container'>
-            <div className="docs__doc-body doc-body">
-              <ReleaseNotes
-                changelog={changelogUrl}
-                releases={data.releaseNotes?.versions}
-                versions={versions}
-                product={slug[2]}
-                handleViewMore={handleViewMore}
-              />
+            <div className="docs__doc-body-container__article flex-toc">
+              <div className="docs__doc-body doc-body">
+                <ReleaseNotes
+                  changelog={changelogUrl}
+                  releases={data.releaseNotes?.versions}
+                  versions={versions}
+                  product={slug[2]}
+                  handleViewMore={handleViewMore}
+                />
+              </div>
+            </div>
+            <div className='docs__doc-body-container__article docs__doc-body-container__article-toc'>
+              <div className="docs__doc-body-container__table-content">
+                <p>ON THIS PAGE</p>
+                <ContentTable
+                  items={toc}
+                />
+              </div>
             </div>
           </div>
           <div className="docs__doc-body-container__article-footer">

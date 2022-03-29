@@ -294,6 +294,14 @@ const index = ({ data, location, pageContext }) => {
     }
   };
 
+  const formatString = (title) => {
+    if (title) {
+      const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, '');
+      return template(formatedTitle, versions);
+    }
+  };
+
+
   const MainContainer = ({ children }) => (
     <div className="docs__container-doc">
       <SidebarContent
@@ -330,7 +338,7 @@ const index = ({ data, location, pageContext }) => {
                   <p>ON THIS PAGE</p>
                   <ContentTable
                     items={page.contentTable.items}
-                    versions={versions}
+                    formatString={formatString}
                   />
                 </div>
               )}
