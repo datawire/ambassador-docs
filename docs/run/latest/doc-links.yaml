@@ -2,7 +2,7 @@
   link: getting-started
 - title: Run with Edge Stack
   items:
-     - title: Run with Edge Stack
+     - title: What is Edge Stack?
        link: ../../edge-stack/latest/topics/concepts/gitops-continuous-delivery
      - title: The Kubernetes network architecture
        link: ../../edge-stack/latest/topics/concepts/kubernetes-network-architecture
