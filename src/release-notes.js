@@ -12,7 +12,7 @@ import DocsFooter from './components/DocsFooter';
 import ReleaseNotes from './components/ReleaseNotes';
 import SearchBox from './components/SearchBox';
 import Sidebar from './components/Sidebar';
-import { products } from './config';
+import { products, archivedDocsUrl } from './config';
 import './style.less';
 
 const releaseNotes = ({ data, location, pageContext }) => {
@@ -91,6 +91,11 @@ const releaseNotes = ({ data, location, pageContext }) => {
     async (e, value = null) => {
       const newValue = value ? value : e.target.value;
       const newVersion = versionList.filter((v) => v.id === newValue)[0];
+
+      if (newVersion.archived) {
+        return navigate(`${archivedDocsUrl}/docs/${product.slug}/${newVersion.link}`)
+      }
+
       setVersion(newVersion);
       const slugPath = slug.slice(4).join('/') || '';
 
@@ -143,13 +148,19 @@ const releaseNotes = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div>
-      <hr className="docs__separator docs__container" />
-      <section className="docs__contact docs__container">
-        <ContactBlock />
-      </section>
-      <DocsFooter product={product.slug} version={docsVersion} />
-    </div>
+    <>
+      <div className='docs__footer-principal-container'>
+        <div className='docs__footer-contact-container'>
+          <hr className="docs__separator-footer-release" />
+          <section className="docs__contact">
+            <ContactBlock />
+          </section>
+        </div>
+      </div>
+      <div className='docs__doc-footer-container'>
+        <DocsFooter product={product.slug} version={docsVersion} />
+      </div>
+    </>
   );
 
   const content = useMemo(() => {
@@ -167,16 +178,20 @@ const releaseNotes = ({ data, location, pageContext }) => {
           slug={pageContext.slug}
         />
         <div className="docs__doc-body-container">
-          <div className="docs__doc-body doc-body">
-            <ReleaseNotes
-              changelog={changelogUrl}
-              releases={data.releaseNotes?.versions}
-              versions={versions}
-              product={slug[2]}
-              handleViewMore={handleViewMore}
-            />
+          <div className='docs__content_container'>
+            <div className="docs__doc-body doc-body">
+              <ReleaseNotes
+                changelog={changelogUrl}
+                releases={data.releaseNotes?.versions}
+                versions={versions}
+                product={slug[2]}
+                handleViewMore={handleViewMore}
+              />
+            </div>
           </div>
-          {footer}
+          <div className="docs__doc-body-container__article-footer">
+            {footer}
+          </div>
         </div>
       </div>
     );
@@ -209,9 +224,8 @@ const releaseNotes = ({ data, location, pageContext }) => {
               <ul className="docs__products-list">
                 {products.map((item) => (
                   <li
-                    className={`${
-                      product.slug === item.slug ? 'docs__selected' : ''
-                    }`}
+                    className={`${product.slug === item.slug ? 'docs__selected' : ''
+                      }`}
                     key={item.name}
                     onClick={claenStorage}
                   >
@@ -221,9 +235,8 @@ const releaseNotes = ({ data, location, pageContext }) => {
               </ul>
             </div>
             <div
-              className={`docs__dropdown-container docs__mobile${
-                versionList.length > 1 ? ' docs__dropdown-version' : ''
-              }`}
+              className={`docs__dropdown-container docs__mobile${versionList.length > 1 ? ' docs__dropdown-version' : ''
+                }`}
             >
               <Dropdown
                 label={product.name}
