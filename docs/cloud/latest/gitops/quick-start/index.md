@@ -13,7 +13,7 @@ import Alert from '@material-ui/lab/Alert';
 
 Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
 
-In this quick start, we'll walk through how you can configure Edge Stack or Emissary-ingress with GitHub, integrating checks into your GitOps pull request workflow, creating Mapping resources without an IDE, and generating preview URLs to share unreleased changes in opened pull requests with your colleagues.
+This quick start walks through how you can configure Edge Stack or Emissary-ingress with GitHub, integrate checks into your GitOps pull request workflow, create Mapping resources without an IDE, and generate preview URLs to share unreleased changes in opened pull requests with your colleagues.
 
 ## 1. Connect your cluster to Ambassador Cloud
 
@@ -34,10 +34,10 @@ In this quick start, we'll walk through how you can configure Edge Stack or Emis
    * [Install the latest version of Edge Stack](/docs/edge-stack/latest/topics/install/)
    * [Upgrade Edge Stack to the latest version](/docs/edge-stack/latest/topics/install/upgrading/)
 
-5. When the installation completes, services, environments and clusters will be visible in Ambassador Cloud.
+5. Once the installation is complete, services, environments, and clusters are visible in Ambassador Cloud.
 
 <Alert severity="success"><b>Victory!</b> All the Services running in your cluster are now listed in Service Catalog!
-You should now be able to see all running services in your cluster at <a href="https://app.getambassador.io/cloud/services" target="_blank">https://app.getambassador.io/cloud/services</a> </Alert>
+You can now see all running services in your cluster at <a href="https://app.getambassador.io/cloud/services" target="_blank">https://app.getambassador.io/cloud/services</a> </Alert>
 
 ## 2. Configure the GitHub integration
 
@@ -45,9 +45,9 @@ You should now be able to see all running services in your cluster at <a href="h
 
 2. Click the **INTEGRATIONS** button to navigate to the Integration settings, then click the **CONFIGURE** GitHub settings button.
 
-3. Click **MANAGE PERMISSIONS** button. You will be taken to github.com and asked to choose which account you want to install Ambassador DCP.
+3. Click **MANAGE PERMISSIONS** button. This takes you to github.com where you can choose which account you want to install Ambassador DCP.
 
-4. Select the account which contains your git repository holding your Kubernetes manifest files.
+4. Select the account that contains the git repository with your Kubernetes manifest files.
 
     ![Git Account](../../images/gitops-quickstart-x1.png)
 
@@ -65,7 +65,7 @@ You should now be able to see all running services in your cluster at <a href="h
 
     Select the cluster you initialized in step 1 from the `cluster` dropdown.
 
-7. Click on the **UPDATE REPOSITORY SETTINGS** button. This will trigger Ambassador Cloud to create a pull request with the information you just entered into your git repository. The pull request will add a file named `.a8r.yaml` to the root of your repository, and the contents will look something like this:
+7. Click the **UPDATE REPOSITORY SETTINGS** button. This triggers Ambassador Cloud to create a pull request with the information you just entered into your git repository. The pull request adds a file named .a8r.yaml to the root of your repository. The contents will look something like this:
 
     ```
     k8s_config:
