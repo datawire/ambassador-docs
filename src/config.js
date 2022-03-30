@@ -20,18 +20,14 @@ export const products = [
     name: 'Code',
     link: '/docs/code',
     id: Math.random().toString(),
-    version: [
-      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
-    ],
+    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
   },
   {
     slug: 'ship',
     name: 'Ship',
     link: '/docs/ship',
     id: Math.random().toString(),
-    version: [
-      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
-    ],
+    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
   },
   {
     slug: 'run',
@@ -39,9 +35,7 @@ export const products = [
     link: '/docs/run',
     version: [],
     id: Math.random().toString(),
-    version: [
-      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
-    ],
+    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
   },
   {
     slug: 'kubernetes',
@@ -227,18 +221,15 @@ export const metaData = {
   },
   code: {
     title: 'Code | Ambassador Labs',
-    description:
-      'Code tutorials using Telepresence',
+    description: 'Code tutorials using Telepresence',
   },
   ship: {
     title: 'Ship | Ambassador Labs',
-    description:
-      'Code tutorials using Telepresence',
+    description: 'Ship tutorials using Argo',
   },
   run: {
     title: 'Run | Ambassador Labs',
-    description:
-      'Code tutorials using Telepresence',
+    description: 'Run tutorials using Edge Stack',
   },
   kubernetes: {
     title: 'Kubernetes (K8s) Docs | Ambassador Labs',

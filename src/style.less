@@ -1296,7 +1296,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 90px 0;
+    margin: 90px 0 15px;
   }
   &-text {
     max-width: 507px;
@@ -1335,6 +1335,13 @@ body {
     }
     &--title {
       margin: 16px 0 8px 0;
+    }
+    & a {
+      color: @black;
+      &:hover {
+        color: @blue;
+        text-decoration: none;
+      }
     }
   }
   @media (max-width: 1200px) {
