@@ -1,22 +1,23 @@
-const month = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+const month = {
+  '01': 'January',
+  '02': 'February',
+  '03': 'March',
+  '04': 'April',
+  '05': 'May',
+  '06': 'June',
+  '07': 'July',
+  '08': 'August',
+  '09': 'September',
+  '10': 'October',
+  '11': 'November',
+  '12': 'December',
+};
 
 export default function (date) {
   const [yyyy, mm, dd] = date.split('-');
+
   if (yyyy && mm && dd) {
-    return `${month[Number(mm - 1)]} ${dd}, ${yyyy}`;
+    return `${month[mm]} ${dd}, ${yyyy}`;
   } else {
     return ''
   }

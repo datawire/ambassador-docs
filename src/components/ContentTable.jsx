@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Scrollspy from 'react-scrollspy';
 
-const ContentTable = ({ items, formatString }) => {
+const ContentTable = ({ items }) => {
   const rootElement = '.docs__doc-body-container';
   const [active, setActive] = useState('');
   let content = items && items[0].items ? items[0].items : [];
@@ -36,7 +36,7 @@ const ContentTable = ({ items, formatString }) => {
       {content.map((i) => (
         <li key={i.url} className={active === i.url ? 'current' : undefined}>
           <a href={i.url} id={i.url} onClick={onClick}>
-            {(formatString) ? formatString(i.title) : i.title}
+            {i.title}
           </a>
         </li>
       ))}

@@ -16,18 +16,20 @@ import { products, archivedDocsUrl } from './config';
 import './style.less';
 
 const releaseNotes = ({ data, location, pageContext }) => {
+  const PRODUCT_NAME = 2;
+  const PRODUCT_VERSION = 3;
   const slug = pageContext.slug.split('/');
   const initialProduct = useMemo(
-    () => products.find((p) => p.slug === slug[2]) || products[0],
+    () => products.find((p) => p.slug === slug[PRODUCT_NAME]) || products[0],
     [slug],
   );
 
   const initialVersion = useMemo(
-    () => initialProduct.version.filter((v) => v.id === slug[3])[0] || {},
+    () => initialProduct.version.filter((v) => v.id === slug[PRODUCT_VERSION])[0] || {},
     [initialProduct, slug],
   );
 
-  const canonicalUrl = `https://www.getambassador.io/docs/${slug[2]}/latest/release-notes`;
+  const canonicalUrl = `https://www.getambassador.io/docs/${slug[PRODUCT_NAME]}/latest/release-notes`;
 
   const [product, setProduct] = useState(initialProduct);
   const [version, setVersion] = useState(initialVersion);
@@ -49,7 +51,7 @@ const releaseNotes = ({ data, location, pageContext }) => {
   }, [data.linkentries, versions]);
 
   const getMetaDescription = () => {
-    switch (slug[2]) {
+    switch (slug[PRODUCT_NAME]) {
       case 'edge-stack':
         return 'Release notes for Ambassador Edge Stack, a comprehensive, self-service edge stack for Kubernetes applications built on the open source Ambassador API Gateway and Envoy Proxy.';
       case 'telepresence':
@@ -141,20 +143,11 @@ const releaseNotes = ({ data, location, pageContext }) => {
     [product.slug, version.id],
   );
 
-  const versionDecoration = (text) => `Version ${text}`
-
   const getContentTableData = (data) => {
-    const items = data.map(item => {
-      const url = item.version ? `#${item.version}` : `#${item.date}`;
-      const title = item.version ?
-        versionDecoration(item.version) :
-        getDate(item.date);
-
-      return {
-        url,
-        title
-      }
-    })
+    const items = data.map(item => ({
+      url: item.version ? `#${item.version}` : `#${item.date}`,
+      title: item.version ? `Version ${item.version}` : getDate(item.date)
+    }))
 
     return [{
       items
@@ -191,7 +184,7 @@ const releaseNotes = ({ data, location, pageContext }) => {
       ? template(data.releaseNotes.changelog, versions)
       : '';
 
-    const toc = getContentTableData(data.releaseNotes.versions, 'version',)
+    const toc = getContentTableData(data.releaseNotes.versions)
 
     return (
       <div className="docs__container-doc">
@@ -210,7 +203,7 @@ const releaseNotes = ({ data, location, pageContext }) => {
                   changelog={changelogUrl}
                   releases={data.releaseNotes?.versions}
                   versions={versions}
-                  product={slug[2]}
+                  product={slug[PRODUCT_NAME]}
                   handleViewMore={handleViewMore}
                 />
               </div>

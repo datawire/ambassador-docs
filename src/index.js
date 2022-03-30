@@ -301,6 +301,16 @@ const index = ({ data, location, pageContext }) => {
     }
   };
 
+  let toc = []
+
+  if (page?.contentTable?.items &&
+    page.contentTable.items[0].items?.length > 1) {
+    toc = page.contentTable.items[0].items.map(el => ({
+      ...el,
+      title: formatString(el.title)
+    }));
+  }
+
 
   const MainContainer = ({ children }) => (
     <div className="docs__container-doc">
@@ -337,8 +347,7 @@ const index = ({ data, location, pageContext }) => {
                 <div className="docs__doc-body-container__table-content">
                   <p>ON THIS PAGE</p>
                   <ContentTable
-                    items={page.contentTable.items}
-                    formatString={formatString}
+                    items={[{ items: toc }]}
                   />
                 </div>
               )}
