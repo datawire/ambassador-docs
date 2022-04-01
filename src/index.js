@@ -32,11 +32,11 @@ import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import Code from './products/Code';
-import Ship from './products/Ship';
-import Run from './products/Run';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
 import Kubernetes from './products/Kubernetes';
+import Run from './products/Run';
+import Ship from './products/Ship';
 import Telepresence from './products/Telepresence';
 import './style.less';
 import getPrevNext from './utils/getPrevNext';
@@ -107,11 +107,11 @@ const index = ({ data, location, pageContext }) => {
   const isInLearnings = learningJourneys.includes(learningJourneyName);
   const learningJourneyData = isInLearnings
     ? data.allLearningjourney.nodes.filter(
-      (node) =>
-        node.slug.indexOf('/') > -1 &&
-        node.slug.indexOf('.') > -1 &&
-        node.slug.split('/')[1].split('.')[0] === learningJourneyName,
-    )
+        (node) =>
+          node.slug.indexOf('/') > -1 &&
+          node.slug.indexOf('.') > -1 &&
+          node.slug.split('/')[1].split('.')[0] === learningJourneyName,
+      )
     : [];
   const {
     title: learningTitle,
@@ -127,32 +127,32 @@ const index = ({ data, location, pageContext }) => {
   const isLearning = isInLearnings && isInTopics;
   const learningParseTopics = isLearning
     ? topics.map((topic) => {
-      const items = topic.items.map((item) => {
-        const readingTimeTopic = data.allMdx.edges.filter(
-          (i) => i.node.fields.slug === `/docs/${item.link}`,
-        );
-        const { slug, readingTime } = readingTimeTopic[0]
-          ? readingTimeTopic[0].node.fields
-          : {};
-        const { reading_time_text, hide_reading_time, reading_time } =
-          readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
-        return {
-          ...item,
-          slug,
-          readingTimeMinutes: Math.ceil(
-            readingTime ? readingTime.minutes : 0,
-          ),
-          readingTimeText: reading_time_text,
-          hideReadingTime: hide_reading_time,
-          readingTimeFront: reading_time,
-        };
-      });
+        const items = topic.items.map((item) => {
+          const readingTimeTopic = data.allMdx.edges.filter(
+            (i) => i.node.fields.slug === `/docs/${item.link}`,
+          );
+          const { slug, readingTime } = readingTimeTopic[0]
+            ? readingTimeTopic[0].node.fields
+            : {};
+          const { reading_time_text, hide_reading_time, reading_time } =
+            readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
+          return {
+            ...item,
+            slug,
+            readingTimeMinutes: Math.ceil(
+              readingTime ? readingTime.minutes : 0,
+            ),
+            readingTimeText: reading_time_text,
+            hideReadingTime: hide_reading_time,
+            readingTimeFront: reading_time,
+          };
+        });
 
-      return {
-        ...topic,
-        items,
-      };
-    })
+        return {
+          ...topic,
+          items,
+        };
+      })
     : [];
 
   const [product, setProduct] = useState(initialProduct);
@@ -290,7 +290,7 @@ const index = ({ data, location, pageContext }) => {
         kubernetes: Kubernetes,
         code: Code,
         ship: Ship,
-        run: Run
+        run: Run,
       }[product] || EdgeStack;
     return <Product />;
   };
@@ -320,7 +320,7 @@ const index = ({ data, location, pageContext }) => {
           <div
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1
                 ? 'docs__doc-body-container__article docs__doc-body-container__article-toc'
                 : 'docs__doc-body-container__article-toc-none'
             }
@@ -351,7 +351,9 @@ const index = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div className={product.slug === 'home' ? '' : 'docs__doc-footer-container'}>
+    <div
+      className={product.slug === 'home' ? '' : 'docs__doc-footer-container'}
+    >
       {product.slug === 'home' && (
         <hr className="docs__separator docs__container docs__container-home" />
       )}
@@ -366,7 +368,7 @@ const index = ({ data, location, pageContext }) => {
           <hr
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1
                 ? 'docs__separator docs__container docs__separator-footer'
                 : 'docs__separator docs__container docs__separator-footer-no-article'
             }
@@ -506,7 +508,11 @@ const index = ({ data, location, pageContext }) => {
   ]);
 
   return (
-    <Layout location={location} customAnnouncement={edgissaryDPMessage} customAnnouncementClass='docs-announcement-container'>
+    <Layout
+      location={location}
+      customAnnouncement={edgissaryDPMessage}
+      customAnnouncementClass="docs-announcement-container"
+    >
       <SEO
         title={metadata.metaTitle}
         type="article"
@@ -514,7 +520,11 @@ const index = ({ data, location, pageContext }) => {
         description={metadata.metaDescription}
       ></SEO>
 
-      <div className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''}`}>
+      <div
+        className={`docs ${
+          edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
+        }`}
+      >
         <nav>
           <div className="docs__nav">
             <div className="docs__nav__content">
@@ -540,7 +550,7 @@ const index = ({ data, location, pageContext }) => {
                       );
                     }
                   })}
-                  <li 
+                  <li
                     className={`${
                       product.isProduct ? 'docs__selected__dropdown' : ''
                     }`}
@@ -559,7 +569,16 @@ const index = ({ data, location, pageContext }) => {
                 </ul>
               </div>
               <div className={'docs__nav-burger'}>
-                <Burger title={product.name} />
+                <Burger title={product.name}>
+                  {products.map((item) => {
+                    const linkContent = <Link to={item.link}>{item.name}</Link>;
+                    return (
+                      <li key={item.name} onClick={claenStorage}>
+                        {linkContent}
+                      </li>
+                    );
+                  })}
+                </Burger>
               </div>
               {/* <div
                 className={`docs__dropdown-container docs__mobile${
