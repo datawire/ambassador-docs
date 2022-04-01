@@ -3,11 +3,11 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 
 import Layout from '../../src/components/Layout';
-
 import ContactBlock from '../../src/components/ContactBlock';
+import ContentTable from './components/ContentTable';
 import Dropdown from '../../src/components/Dropdown';
 import template from '../../src/utils/template';
-
+import getDate from '../src/utils/getDate';
 import DocsFooter from './components/DocsFooter';
 import ReleaseNotes from './components/ReleaseNotes';
 import SearchBox from './components/SearchBox';
@@ -16,18 +16,20 @@ import { products, archivedDocsUrl } from './config';
 import './style.less';
 
 const releaseNotes = ({ data, location, pageContext }) => {
+  const PRODUCT_NAME = 2;
+  const PRODUCT_VERSION = 3;
   const slug = pageContext.slug.split('/');
   const initialProduct = useMemo(
-    () => products.find((p) => p.slug === slug[2]) || products[0],
+    () => products.find((p) => p.slug === slug[PRODUCT_NAME]) || products[0],
     [slug],
   );
 
   const initialVersion = useMemo(
-    () => initialProduct.version.filter((v) => v.id === slug[3])[0] || {},
+    () => initialProduct.version.filter((v) => v.id === slug[PRODUCT_VERSION])[0] || {},
     [initialProduct, slug],
   );
 
-  const canonicalUrl = `https://www.getambassador.io/docs/${slug[2]}/latest/release-notes`;
+  const canonicalUrl = `https://www.getambassador.io/docs/${slug[PRODUCT_NAME]}/latest/release-notes`;
 
   const [product, setProduct] = useState(initialProduct);
   const [version, setVersion] = useState(initialVersion);
@@ -49,7 +51,7 @@ const releaseNotes = ({ data, location, pageContext }) => {
   }, [data.linkentries, versions]);
 
   const getMetaDescription = () => {
-    switch (slug[2]) {
+    switch (slug[PRODUCT_NAME]) {
       case 'edge-stack':
         return 'Release notes for Ambassador Edge Stack, a comprehensive, self-service edge stack for Kubernetes applications built on the open source Ambassador API Gateway and Envoy Proxy.';
       case 'telepresence':
@@ -141,6 +143,17 @@ const releaseNotes = ({ data, location, pageContext }) => {
     [product.slug, version.id],
   );
 
+  const getContentTableData = (data) => {
+    const items = data.map(item => ({
+      url: item.version ? `#${item.version}` : `#${item.date}`,
+      title: item.version ? `Version ${item.version}` : getDate(item.date)
+    }))
+
+    return [{
+      items
+    }]
+  }
+
   let docsVersion = versions?.docsVersion;
   if (!docsVersion) {
     const docsMatch = versions?.version?.match(/\d+.\d+/g);
@@ -156,6 +169,9 @@ const releaseNotes = ({ data, location, pageContext }) => {
             <ContactBlock />
           </section>
         </div>
+        <div className='docs__doc-body-container__article docs__doc-body-container__article-toc'>
+
+        </div>
       </div>
       <div className='docs__doc-footer-container'>
         <DocsFooter product={product.slug} version={docsVersion} />
@@ -168,6 +184,8 @@ const releaseNotes = ({ data, location, pageContext }) => {
       ? template(data.releaseNotes.changelog, versions)
       : '';
 
+    const toc = getContentTableData(data.releaseNotes.versions)
+
     return (
       <div className="docs__container-doc">
         <Sidebar
@@ -179,14 +197,24 @@ const releaseNotes = ({ data, location, pageContext }) => {
         />
         <div className="docs__doc-body-container">
           <div className='docs__content_container'>
-            <div className="docs__doc-body doc-body">
-              <ReleaseNotes
-                changelog={changelogUrl}
-                releases={data.releaseNotes?.versions}
-                versions={versions}
-                product={slug[2]}
-                handleViewMore={handleViewMore}
-              />
+            <div className="docs__doc-body-container__article flex-toc">
+              <div className="docs__doc-body doc-body">
+                <ReleaseNotes
+                  changelog={changelogUrl}
+                  releases={data.releaseNotes?.versions}
+                  versions={versions}
+                  product={slug[PRODUCT_NAME]}
+                  handleViewMore={handleViewMore}
+                />
+              </div>
+            </div>
+            <div className='docs__doc-body-container__article docs__doc-body-container__article-toc'>
+              <div className="docs__doc-body-container__table-content">
+                <p>ON THIS PAGE</p>
+                <ContentTable
+                  items={toc}
+                />
+              </div>
             </div>
           </div>
           <div className="docs__doc-body-container__article-footer">
