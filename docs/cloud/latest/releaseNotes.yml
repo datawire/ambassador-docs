@@ -34,7 +34,7 @@ items:
   - date: '2022-04-11'
     notes:
       - title: 'Deployment Previews'
-        body: "Connecting Ambassador Cloud to your GitHub pull request workflow allows you to easily setup preview URLs and share unreleased changed with your teammates."
+        body: "Connecting Ambassador Cloud to your GitHub pull request workflow allows you to easily setup preview URLs and share unreleased changes with your teammates."
         image: './deployment-previews.png'
         docs: gitops/quick-start/
         type: feature
