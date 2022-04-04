@@ -1,9 +1,8 @@
-
 import Alert from '@material-ui/lab/Alert';
 
 # Edge Stack and Redis
 
-The Ambassador Edge Stack make use of Redis for several purposes.  By default,
+The Ambassador Edge Stack make use of Redis for several purposes. By default,
 all components of the Ambassador Edge Stack share a Redis connection pool.
 
 ## Rate Limit Service
@@ -25,7 +24,6 @@ RateLimits; this second connection pool is configured by the `REDIS_PERSECOND_*`
 variables rather than the usual `REDIS_*` variables.
 
 ## Redis layer 4 connectivity (L4)
-
 
 #### `SOCKET_TYPE`
 
@@ -56,7 +54,6 @@ Consider [installing the self-signed certificate for your Redis in to the
 Ambassador Edge Stack container](../../using/filters/#installing-self-signed-certificates)
 in order to leave certificate verification on.
 
-
 ## Redis authentication (auth)
 
 **Default**
@@ -71,9 +68,8 @@ established.
 #### `USERNAME`
 
 If set, then that username is used with the password to log in as that user in
-the [Redis 6 ACL](https://redis.io/topics/acl).  It is invalid to set a username without setting a
-password.  It is invalid to set a username with Redis 5 or lower.
-
+the [Redis 6 ACL](https://redis.io/docs/manual/security/acl/). It is invalid to set a username without setting a
+password. It is invalid to set a username with Redis 5 or lower.
 
 The following YAML snippet is an example of configuring Redis authentication in the Ambassador deployment's environment variables.
 
@@ -87,6 +83,7 @@ env:
       key: password
       name: ambassador-redis-password
 ```
+
   <Alert severity="info">
     This example demonstrates getting the redis password from a secret called <code>ambassador-redis-password</code> instead
     of providing the value directly.
@@ -108,7 +105,6 @@ If you configure `REDIS_AUTH`, then `REDIS_USERNAME` cannot be changed from the 
 `REDIS_USERNAME` and `REDIS_PASSWORD` handle all Redis authentication that is separate from Rate Limit Preview so
 failing to set them when using `REDIS_AUTH` will result in Ambassador not being able to authenticate with Redis for
 all of its other functionality.
-
 
 Adding `AUTH` to the example above for rate limit preview would look like the following snippet.
 
@@ -133,79 +129,77 @@ env:
   overwrite the basic Redis authentication behavior for systems outside of rate limit preview.
 </Alert>
 
-
 ## Redis performance tuning (tune)
 
 #### `POOL_SIZE`
 
-  The number of connections to keep around when idle.
+The number of connections to keep around when idle.
 
-  The total number of connections may go lower than this if there are errors.
+The total number of connections may go lower than this if there are errors.
 
-  The total number of connections may go higher than this during a load surge.
+The total number of connections may go higher than this during a load surge.
 
 #### `PING_INTERVAL`
 
-  The rate at which Ambassador will ping the idle connections in the normal pool
-  (not extra connections created for a load surge).
+The rate at which Ambassador will ping the idle connections in the normal pool
+(not extra connections created for a load surge).
 
-  Ambassador will `PING` one of them every `PING_INTERVAL÷POOL_SIZE` so
-  that each connection will on average be `PING`ed every `PING_INTERVAL`.
-
+Ambassador will `PING` one of them every `PING_INTERVAL÷POOL_SIZE` so
+that each connection will on average be `PING`ed every `PING_INTERVAL`.
 
 #### `TIMEOUT`
 
-  Sets 4 different timeouts:
+Sets 4 different timeouts:
 
-   1. `(*net.Dialer).Timeout` for establishing connections
-   2. `(*redis.Client).ReadTimeout` for reading a single complete response
-   3. `(*redis.Client).WriteTimeout` for writing a single complete request
-   4. The timeout when waiting for a connection to become available from the
-      pool (not including the dial time, which is timed out separately)
+1.  `(*net.Dialer).Timeout` for establishing connections
+2.  `(*redis.Client).ReadTimeout` for reading a single complete response
+3.  `(*redis.Client).WriteTimeout` for writing a single complete request
+4.  The timeout when waiting for a connection to become available from the
+    pool (not including the dial time, which is timed out separately)
 
-  A value of "0" means "no timeout".
+A value of "0" means "no timeout".
 
 #### `SURGE_LIMIT_INTERVAL`
 
-  During a load surge, if the pool is depleted, then Ambassador may create new
-  connections to Redis in order to fulfill demand, at a maximum rate of one new
-  connection per `SURGE_LIMIT_INTERVAL`.
+During a load surge, if the pool is depleted, then Ambassador may create new
+connections to Redis in order to fulfill demand, at a maximum rate of one new
+connection per `SURGE_LIMIT_INTERVAL`.
 
-  A value of "0" (the default) means "allow new connections to be created as
-  fast as necessary.
+A value of "0" (the default) means "allow new connections to be created as
+fast as necessary.
 
-  The total number of connections that Ambassador can surge to is unbounded.
+The total number of connections that Ambassador can surge to is unbounded.
 
 #### `SURGE_LIMIT_AFTER`
 
-  The number of connections that can be created *after* the normal pool is
-  depleted before `SURGE_LIMIT_INTERVAL` kicks in.
+The number of connections that can be created _after_ the normal pool is
+depleted before `SURGE_LIMIT_INTERVAL` kicks in.
 
-  The first `POOL_SIZE+SURGE_LIMIT_AFTER` connections are allowed to
-  be created as fast as necessary.
+The first `POOL_SIZE+SURGE_LIMIT_AFTER` connections are allowed to
+be created as fast as necessary.
 
-  This setting has no effect if `SURGE_LIMIT_INTERVAL` is 0.
+This setting has no effect if `SURGE_LIMIT_INTERVAL` is 0.
 
 #### `SURGE_POOL_SIZE`
 
-  Normally during a surge, excess connections beyond `POOL_SIZE` are
-  closed immediately after they are done being used, instead of being returned
-  to a pool.
+Normally during a surge, excess connections beyond `POOL_SIZE` are
+closed immediately after they are done being used, instead of being returned
+to a pool.
 
-  `SURGE_POOL_SIZE` configures a "reserve" pool for excess connections
-  created during a surge.
+`SURGE_POOL_SIZE` configures a "reserve" pool for excess connections
+created during a surge.
 
-  Excess connections beyond `POOL_SIZE+SURGE_POOL_SIZE` will still
-  be closed immediately after use.
+Excess connections beyond `POOL_SIZE+SURGE_POOL_SIZE` will still
+be closed immediately after use.
 
 #### `SURGE_POOL_DRAIN_INTERVAL`
 
-  How quickly to drain connections from the surge pool after a surge is over.
+How quickly to drain connections from the surge pool after a surge is over.
 
-  Connections are closed at a rate of one connection per
-  `SURGE_POOL_DRAIN_INTERVAL`.
+Connections are closed at a rate of one connection per
+`SURGE_POOL_DRAIN_INTERVAL`.
 
-  This setting has no effect if `SURGE_POOL_SIZE` is 0.
+This setting has no effect if `SURGE_POOL_SIZE` is 0.
 
 ## Redis type
 
