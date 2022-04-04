@@ -21,7 +21,7 @@ It would be a good idea to group all of them under a **database** group.
 1. Hover the mouse on a service that does not belong to a group, and click on the **move to group** option.
 
   <p align="center">
-    <img src="../../../images/service-group-create.png" width="300"/>
+    <img src="../../../images/service-group-create.png" width="250"/>
   </p>
 
 2. Select an existing group, or click on **new group** to add a one and name it. Then click on **save**.
