@@ -879,6 +879,14 @@ body {
 
     &__search-box {
       width: 100%;
+
+      .algolia-autocomplete {
+        width: 100%;
+      }
+
+      input {
+        width: 100%;
+      }
     }
 
     &__separator {
@@ -950,20 +958,15 @@ body {
 
   @media (max-width: 750px) {
     &__body {
-      margin-top: 50px;
+      margin-top: 80px;
     }
 
     &__nav {
-      height: 50px;
-      padding-top: 0;
+      height: 80px;
     }
 
     &__dropdown-container {
       height: 50px;
-    }
-
-    &__search-box {
-      display: none;
     }
 
     &__button-primary {
