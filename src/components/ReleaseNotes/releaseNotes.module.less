@@ -43,6 +43,7 @@
 
   &__title {
     display: grid;
+    width: fit-content;
     grid-template-columns: 20px auto;
     text-decoration: none;
 
@@ -52,6 +53,16 @@
     &:hover {
       text-decoration: underline;
       color: @color-blue-dark;
+    }
+
+    &_no_link {
+      display: grid;
+      grid-template-columns: 20px auto;
+      text-decoration: none;
+
+      span {
+        padding: 0 0 0 15px;
+      }
     }
   }
 }
@@ -93,6 +104,14 @@
         display: inline-block;
         padding-top: 5px;
         vertical-align: top;
+      }
+
+      &_no_link {
+        span {
+          display: inline-block;
+          padding-top: 5px;
+          vertical-align: top;
+        }
       }
     }
   }
