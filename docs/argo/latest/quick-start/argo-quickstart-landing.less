@@ -6,6 +6,9 @@
   margin: 0 auto 140px;
   max-width: @docs-max-width;
   min-width: @docs-min-width;
+  @media only screen and (max-width: 600px) {
+    margin-bottom: 0;
+  }
 
   h1,
   h2 {
@@ -102,6 +105,14 @@
     margin: 20px 0 50px;
     padding: 0 0 62px;
     width: 100%;
+
+    @media only screen and (max-width: 600px) {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 40px;
+      border-bottom: 0;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
 
     .argo-choice {
       ol {
