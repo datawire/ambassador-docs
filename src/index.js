@@ -520,9 +520,9 @@ const index = ({ data, location, pageContext }) => {
     versions,
   ]);
 
-  const onClickDetail = (item) => {
+  const onClickMenuBurgerDetail = (item) => {
     if (item.link) {
-      navigate(item.link)
+      navigate(item.link);
       return;
     }
 
@@ -532,44 +532,40 @@ const index = ({ data, location, pageContext }) => {
           title: 'Products',
           backAction: true
         },
-        menu: initialItems.products,
+        menu: item.items,
         navigationTree: [
           'Products'
         ]
-      }
+      };
 
-      setBurgerMenu(menu)
+      setBurgerMenu(menu);
       return;
     }
 
-    const items = getMenuContent(menuLinks.find(elment => elment.title === item.title)?.items)
-    /*   let items = findContent(menuLinks, item.title)
-       console.log('items --->', items)
-       items = getMenuContent(items) */
     const menu = {
       ...burgerMenu,
       header: {
         title: item.title,
         backAction: true
       },
-      menu: items,
+      menu: getMenuContent(item.items),
       navigationTree: [
         ...burgerMenu.navigationTree,
         item.title
       ]
-    }
+    };
 
-    setBurgerMenu(menu)
+    setBurgerMenu(menu);
   }
 
-  const onClickHeader = (item) => {
+  const onClickMenuBugerHeader = (item) => {
     if (burgerMenu.navigationTree.length === 1) {
       setBurgerMenu({
         title: '',
         header: {},
         menu: [],
         navigationTree: []
-      })
+      });
 
       return;
     }
@@ -578,25 +574,27 @@ const index = ({ data, location, pageContext }) => {
       navigate(`/docs/`);
       return;
     }
+
+    // Fix: When return from a tree navigation
   }
 
-  const getInitialItems = (items, page) => {
+  const getBurgerMenuInitialItems = (items, page) => {
     return items.reduce((previous, current) => {
-      if (product.name === current.name) return previous
+      if (product.name === current.name) return previous;
 
       const item = {
         title: current.name,
         link: current.link,
         detail: !current.link,
-        onClickDetail: () => onClickDetail(current)
-      }
+        onClickDetail: () => onClickMenuBurgerDetail(current)
+      };
 
       !current.isProduct && current.name !== page ?
         previous.items.push(item) :
-        previous.products.push(item)
+        previous.products.push(item);
 
-      return previous
-    }, { products: [], items: [] })
+      return previous;
+    }, { products: [], items: [] });
   }
 
   const getMenuContent = (items) => {
@@ -605,20 +603,13 @@ const index = ({ data, location, pageContext }) => {
         title: item.title,
         link: getUrl(`/${slug[1]}/${slug[2]}/latest/`, item.link),
         detail: !item.link,
-      }
+        items: item.items
+      };
       return ({
         ...content,
-        onClickDetail: () => onClickDetail(content)
-      })
-    })
-  }
-
-  const findContent = (items, selectedItem) => {
-    return items.reduce((previous, current, index, array) => {
-      if (current.title === selectedItem) return array
-      if (current.items?.find(el => el.title === selectedItem)) return current
-      return previous
-    }, [])
+        onClickDetail: () => onClickMenuBurgerDetail(content)
+      });
+    });
   }
 
   const getUrl = (path, page) => {
@@ -633,39 +624,43 @@ const index = ({ data, location, pageContext }) => {
     return url.resolve(`${path}`, cleanLink);
   }
 
-  const getBurgerMenuItems = (slug, home) => {
+  const getBurgerMenuItems = (slug) => {
     if (slug === 'home') {
       return [
         ...initialItems.items,
         {
           title: 'Products',
           detail: true,
-          onClickDetail: () => onClickDetail({ name: 'Products' })
+          onClickDetail: () => onClickMenuBurgerDetail({
+            name: 'Products',
+            items: initialItems.products
+          })
         }
-      ]
+      ];
     }
 
     if (products.find(item => item.slug === slug)) {
-      return getMenuContent(menuLinks)
+      return getMenuContent(menuLinks);
     }
 
+    // FIX: When is not home or not product home
     /*if (menuLinks.length > 0) {
       const currentLinks = findContent(menuLinks, slug)
       return getMenuContent(currentLinks.items)
     } */
 
-    return []
+    return [];
   }
 
-  const initialItems = getInitialItems(products, product.name)
+  const initialItems = getBurgerMenuInitialItems(products, product.name);
   const initialHeader = {
     title: product.name,
     active: true,
     backAction: !(product.name === 'Docs Home'),
-    onClick: () => onClickHeader(product.name)
-  }
+    onClick: () => onClickMenuBugerHeader(product.name)
+  };
 
-  const burgerMenuItems = getBurgerMenuItems(product.slug, isProductHome)
+  const burgerMenuItems = getBurgerMenuItems(product.slug);
 
   return (
     <Layout
@@ -731,80 +726,17 @@ const index = ({ data, location, pageContext }) => {
                   title={burgerMenu.title || metadata.metaName}
                   header={burgerMenu.header.title ? {
                     ...burgerMenu.header,
-                    onClick: () => onClickHeader({ title: metadata.metaName })
+                    onClick: () => onClickMenuBugerHeader({ title: metadata.metaName })
                   } : initialHeader}
                   items={burgerMenu.menu.length > 0 ? burgerMenu.menu : burgerMenuItems}
                   showSarchBar
                 />
               </div>
-              {/* <div
-                className={`docs__dropdown-container docs__mobile${
-                  showVersion && versionList.length > 1
-                    ? ' docs__dropdown-version'
-                    : ''
-                }`}
-              >
-            <div className="docs__links-content docs__dekstop">
-              <ul className="docs__products-list">
-                {products.map((item) => {
-                  const linkContent = version.archived ? (
-                    <a href={`${siteUrl}${item.link}`}>{item.name}</a>
-                  ) : (
-                    <Link to={item.link}>{item.name}</Link>
-                  );
-                  return (
-                    <li
-                      className={`${product.slug === item.slug ? 'docs__selected' : ''
-                        }`}
-                      key={item.name}
-                      onClick={claenStorage}
-                    >
-                      {linkContent}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div
-              className={`docs__dropdown-container docs__mobile${showVersion && versionList.length > 1
-                ? ' docs__dropdown-version'
-                : ''
-                }`}
-            >
-              <Dropdown
-                label={product.name}
-                handleOnChange={handleProductChange}
-                value={product.slug}
-                options={products.map((i) => ({ id: i.slug, name: i.name }))}
-              />
-              {showVersion && versionList.length > 1 && (
-                <Dropdown
-                  label={product.name}
-                  handleOnChange={handleProductChange}
-                  value={product.slug}
-                  options={products.map((i) => ({ id: i.slug, name: i.name }))}
-                />
-                {showVersion && versionList.length > 1 && (
-                  <Dropdown
-                    label={`Version: ${version.name}`}
-                    handleOnChange={handleVersionChange}
-                    value={version.id}
-                    options={versionList.filter((v) => !v.archived)}
-                  />
-                )}
-              </div>
-              */}
               <SearchBox />
             </div>
           </div>
         </nav>
         <div className="docs__body">
-          <div>
-            {
-              burgerMenu.navigationTree.map(item => <div>{item}</div>)
-            }
-          </div>
-
           {content}
         </div>
       </div>
