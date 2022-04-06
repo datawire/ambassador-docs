@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import Scrollspy from 'react-scrollspy';
 
-import template from '../../../src/utils/template';
-
-const ContentTable = ({ items, versions }) => {
-  const formatString = (title) => {
-    if (title) {
-      const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, '');
-      return template(formatedTitle, versions);
-    }
-  };
-
+const ContentTable = ({ items }) => {
   const rootElement = '.docs__doc-body-container';
   const [active, setActive] = useState('');
   let content = items && items[0].items ? items[0].items : [];
@@ -26,9 +17,14 @@ const ContentTable = ({ items, versions }) => {
     const target = document.getElementById(frag);
     if (target) {
       ev.preventDefault();
-      target.scrollIntoView({
-        behavior: 'smooth',
-      });
+      const position = target.getBoundingClientRect()
+      const body = document.body.getBoundingClientRect()
+
+      window.scroll({
+        top: position.top - body.top - 140,
+        behavior: 'smooth'
+      })
+
       if (window.location.hash !== ev.target.id) {
         window.history.pushState(null, '', ev.target.id);
       }
@@ -37,10 +33,10 @@ const ContentTable = ({ items, versions }) => {
 
   return (
     <ScrollSpyWrapper items={ids} rootEl={rootElement} onUpdate={onActive}>
-      {content.map((i) => (
-        <li key={i.url} className={active === i.url ? 'current' : undefined}>
-          <a href={i.url} id={i.url} onClick={onClick}>
-            {formatString(i.title)}
+      {content.map((contentElement) => (
+        <li key={contentElement.url} className={active === contentElement.url ? 'current' : undefined}>
+          <a href={contentElement.url} id={contentElement.url} onClick={onClick}>
+            {contentElement.title}
           </a>
         </li>
       ))}
