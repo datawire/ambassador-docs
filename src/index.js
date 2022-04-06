@@ -155,16 +155,16 @@ const index = ({ data, location, pageContext }) => {
     })
     : [];
 
-  const [product, setProduct] = useState(initialProduct);
-  const [version, setVersion] = useState(initialVersion);
-
-  const [burgerMenu, setBurgerMenu] = useState({
+  const burgerMenuInitialState = {
     title: '',
     header: {},
     menu: [],
     navigationTree: []
-  })
+  }
 
+  const [product, setProduct] = useState(initialProduct);
+  const [version, setVersion] = useState(initialVersion);
+  const [burgerMenu, setBurgerMenu] = useState(burgerMenuInitialState)
   const [showVersion, setShowVersion] = useState(
     !isHome && isProduct && !isProductHome && !isArchivedVersions,
   );
@@ -193,7 +193,7 @@ const index = ({ data, location, pageContext }) => {
     let metaTitle;
     let metaName;
     let metaRobots;
-    
+
     if (isHome) {
       metaName = initialProduct.name;
       metaTitle = metaData['home'].title;
@@ -590,13 +590,7 @@ const index = ({ data, location, pageContext }) => {
     }
 
     if (burgerMenu.navigationTree.length === 1) {
-      setBurgerMenu({
-        title: '',
-        header: {},
-        menu: [],
-        navigationTree: []
-      });
-
+      setBurgerMenu(burgerMenuInitialState);
       return;
     }
 
@@ -615,7 +609,11 @@ const index = ({ data, location, pageContext }) => {
     })
 
     return;
+
+
   }
+
+  const onCloseMenuBurger = () => setBurgerMenu(burgerMenuInitialState)
 
   const getBurgerMenuInitialItems = (items, page) => {
     return items.reduce((previous, current) => {
@@ -765,6 +763,7 @@ const index = ({ data, location, pageContext }) => {
                   } : initialHeader}
                   items={burgerMenu.menu.length > 0 ? burgerMenu.menu : burgerMenuItems}
                   onClickItem={onClickMenuBurgerDetail}
+                  onCloseMenu={onCloseMenuBurger}
                   showSarchBar
                 />
               </div>
