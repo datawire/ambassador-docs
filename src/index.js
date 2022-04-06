@@ -526,7 +526,7 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
-    if (item.name === 'Products') {
+    if (item.title === 'Products') {
       const menu = {
         header: {
           title: 'Products',
@@ -542,16 +542,21 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
+    const items = getMenuContent(item.items)
+
     const menu = {
       ...burgerMenu,
       header: {
         title: item.title,
-        backAction: true
+        backAction: true,
       },
       menu: getMenuContent(item.items),
       navigationTree: [
         ...burgerMenu.navigationTree,
-        item.title
+        {
+          title: item.title,
+          items
+        }
       ]
     };
 
@@ -559,6 +564,11 @@ const index = ({ data, location, pageContext }) => {
   }
 
   const onClickMenuBugerHeader = (item) => {
+    if (burgerMenu.navigationTree.length === 0 && item !== 'Docs Home') {
+      navigate(`/docs/`);
+      return;
+    }
+
     if (burgerMenu.navigationTree.length === 1) {
       setBurgerMenu({
         title: '',
@@ -570,12 +580,21 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
-    if (burgerMenu.navigationTree.length === 0 && item !== 'Docs Home') {
-      navigate(`/docs/`);
-      return;
-    }
+    const navigationTree = [...burgerMenu.navigationTree]
+    navigationTree.pop()
+    const currentItem = navigationTree[navigationTree.length - 1]
 
-    // Fix: When return from a tree navigation
+    setBurgerMenu({
+      ...burgerMenu,
+      header: {
+        backAction: true,
+        title: currentItem.title
+      },
+      menu: currentItem.items,
+      navigationTree
+    })
+
+    return;
   }
 
   const getBurgerMenuInitialItems = (items, page) => {
@@ -585,8 +604,7 @@ const index = ({ data, location, pageContext }) => {
       const item = {
         title: current.name,
         link: current.link,
-        detail: !current.link,
-        onClickDetail: () => onClickMenuBurgerDetail(current)
+        detail: !current.link
       };
 
       !current.isProduct && current.name !== page ?
@@ -606,8 +624,7 @@ const index = ({ data, location, pageContext }) => {
         items: item.items
       };
       return ({
-        ...content,
-        onClickDetail: () => onClickMenuBurgerDetail(content)
+        ...content
       });
     });
   }
@@ -631,10 +648,7 @@ const index = ({ data, location, pageContext }) => {
         {
           title: 'Products',
           detail: true,
-          onClickDetail: () => onClickMenuBurgerDetail({
-            name: 'Products',
-            items: initialItems.products
-          })
+          items: initialItems.products
         }
       ];
     }
@@ -729,6 +743,7 @@ const index = ({ data, location, pageContext }) => {
                     onClick: () => onClickMenuBugerHeader({ title: metadata.metaName })
                   } : initialHeader}
                   items={burgerMenu.menu.length > 0 ? burgerMenu.menu : burgerMenuItems}
+                  onClickItem={onClickMenuBurgerDetail}
                   showSarchBar
                 />
               </div>
