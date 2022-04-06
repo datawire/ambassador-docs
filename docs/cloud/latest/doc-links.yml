@@ -36,8 +36,6 @@
       link: /service-catalog/reference/annotations/
     - title: Automated Configuration Analysis
       link: /config-analysis/reference
-    - title: Deployment Previews
-      link: /deployment-previews/quick-start
     - title: FAQs
       link: /service-catalog/faqs/
 - title: Visualize Your APIs

@@ -47,11 +47,11 @@ You can now see all running services in your cluster at <a href="https://app.get
 
 3. Click **MANAGE PERMISSIONS** button. This takes you to github.com where you can choose which account you want to install Ambassador DCP.
 
-4. Select the account that contains the git repository with your Kubernetes manifest files.
+4. Select the account that contains the git repositories with your Kubernetes manifest files and your application code.
 
     ![Git Account](../../images/gitops-quickstart-x1.png)
 
-    Configure the installation for the desired repository:
+    Configure the installation for the desired repositories:
 
     ![Git configure](../../images/gitops-quickstart-x2.png)
 
@@ -84,4 +84,4 @@ You can now see all running services in your cluster at <a href="https://app.get
 Activate your GitOps integration by:
 - [Automating configuration analysis](../../config-analysis/quick-start).
 - Opening pull requests for Mappings created in the [Ambassador Cloud UI](https://app.getambassador.io/cloud/services).
-- Generating preview URLs for your pull requests. // TODO: Link directly to Cloud or another docs page?
+- [Generating preview URLs for your pull requests](../../deployment-previews/quick-start).
