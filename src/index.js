@@ -193,8 +193,8 @@ const index = ({ data, location, pageContext }) => {
     let metaDescription;
     let metaTitle;
     let metaName;
-
     let metaRobots;
+    
     if (isHome) {
       metaName = initialProduct.name;
       metaTitle = metaData['home'].title;
@@ -221,7 +221,7 @@ const index = ({ data, location, pageContext }) => {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
       metaName,
-      metaRobots,
+      metaRobots
     };
   }, [
     isHome,
@@ -550,7 +550,7 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
-    if (item.name === 'Products') {
+    if (item.title === 'Products') {
       const menu = {
         header: {
           title: 'Products',
@@ -564,6 +564,8 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
+    const items = getMenuContent(item.items)
+
     const menu = {
       ...burgerMenu,
       header: {
@@ -571,13 +573,24 @@ const index = ({ data, location, pageContext }) => {
         backAction: true,
       },
       menu: getMenuContent(item.items),
-      navigationTree: [...burgerMenu.navigationTree, item.title],
+      navigationTree: [
+        ...burgerMenu.navigationTree,
+        {
+          title: item.title,
+          items
+        }
+      ]
     };
 
     setBurgerMenu(menu);
   };
 
   const onClickMenuBugerHeader = (item) => {
+    if (burgerMenu.navigationTree.length === 0 && item !== 'Docs Home') {
+      navigate(`/docs/`);
+      return;
+    }
+
     if (burgerMenu.navigationTree.length === 1) {
       setBurgerMenu({
         title: '',
@@ -589,25 +602,32 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
-    if (burgerMenu.navigationTree.length === 0 && item !== 'Docs Home') {
-      navigate(`/docs/`);
-      return;
-    }
+    const navigationTree = [...burgerMenu.navigationTree]
+    navigationTree.pop()
+    const currentItem = navigationTree[navigationTree.length - 1]
 
-    // Fix: When return from a tree navigation
-  };
+    setBurgerMenu({
+      ...burgerMenu,
+      header: {
+        backAction: true,
+        title: currentItem.title
+      },
+      menu: currentItem.items,
+      navigationTree
+    })
+
+    return;
+  }
 
   const getBurgerMenuInitialItems = (items, page) => {
-    return items.reduce(
-      (previous, current) => {
-        if (product.name === current.name) return previous;
+    return items.reduce((previous, current) => {
+      if (product.name === current.name) return previous;
 
-        const item = {
-          title: current.name,
-          link: current.link,
-          detail: !current.link,
-          onClickDetail: () => onClickMenuBurgerDetail(current),
-        };
+      const item = {
+        title: current.name,
+        link: current.link,
+        detail: !current.link
+      };
 
         !current.isProduct && current.name !== page
           ? previous.items.push(item)
@@ -627,10 +647,9 @@ const index = ({ data, location, pageContext }) => {
         detail: !item.link,
         items: item.items,
       };
-      return {
-        ...content,
-        onClickDetail: () => onClickMenuBurgerDetail(content),
-      };
+      return ({
+        ...content
+      });
     });
   };
 
@@ -653,12 +672,8 @@ const index = ({ data, location, pageContext }) => {
         {
           title: 'Products',
           detail: true,
-          onClickDetail: () =>
-            onClickMenuBurgerDetail({
-              name: 'Products',
-              items: initialItems.products,
-            }),
-        },
+          items: initialItems.products
+        }
       ];
     }
 
@@ -751,23 +766,12 @@ const index = ({ data, location, pageContext }) => {
               <div className={'docs__nav-burger'}>
                 <Burger
                   title={burgerMenu.title || metadata.metaName}
-                  header={
-                    burgerMenu.header.title
-                      ? {
-                          ...burgerMenu.header,
-                          onClick: () =>
-                            onClickMenuBugerHeader({
-                              title: metadata.metaName,
-                            }),
-                        }
-                      : initialHeader
-                  }
-                  items={
-                    burgerMenu.menu.length > 0
-                      ? burgerMenu.menu
-                      : burgerMenuItems
-                  }
-                  showSarchBar
+                  header={burgerMenu.header.title ? {
+                    ...burgerMenu.header,
+                    onClick: () => onClickMenuBugerHeader({ title: metadata.metaName })
+                  } : initialHeader}
+                  items={burgerMenu.menu.length > 0 ? burgerMenu.menu : burgerMenuItems}
+                  onClickItem={onClickMenuBurgerDetail}
                 />
               </div>
               <SearchBox />
