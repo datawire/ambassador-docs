@@ -26,7 +26,7 @@ import {
   learningJourneys,
   archivedVersionsLink,
   siteUrl,
-  getSiteUrl,
+  getSiteUrl
 } from './config';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
@@ -40,6 +40,7 @@ import Ship from './products/Ship';
 import Telepresence from './products/Telepresence';
 import './style.less';
 import getPrevNext from './utils/getPrevNext';
+import getDocsActiveVersion from './utils/getDocsActiveVersion';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -215,7 +216,7 @@ const index = ({ data, location, pageContext }) => {
     return {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
-      metaName,
+      metaName: template(metaName, versions),
       metaRobots
     };
   }, [
@@ -541,6 +542,11 @@ const index = ({ data, location, pageContext }) => {
   ]);
 
   const onClickMenuBurgerDetail = (item) => {
+    if (item.isVersion) {
+      handleVersionChange({}, item.id);
+      return;
+    }
+
     if (item.link) {
       navigate(item.link);
       return;
@@ -639,6 +645,8 @@ const index = ({ data, location, pageContext }) => {
         title: item.title,
         link: getUrl(`/${slug[1]}/${slug[2]}/latest/`, item.link),
         detail: !item.link,
+        isVersion: item.isVersion,
+        id: item.id,
         items: item.items
       };
       return ({
@@ -692,7 +700,23 @@ const index = ({ data, location, pageContext }) => {
     onClick: () => onClickMenuBugerHeader(product.name)
   };
 
-  const burgerMenuItems = getBurgerMenuItems(product.slug);
+  let burgerMenuItems = getBurgerMenuItems(product.slug);
+
+  if (versionList.length > 1) {
+    const versionsToShow = getDocsActiveVersion(versionList);
+    const version = {
+      title: 'Versions',
+      detail: true,
+      items: versionsToShow.map(version => ({
+        ...version, title: version.name, isVersion: true
+      }))
+    };
+
+    burgerMenuItems = [
+      version,
+      ...burgerMenuItems
+    ];
+  }
 
   return (
     <Layout

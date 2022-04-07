@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import SidebarTopics from '../../../src/components/SidebarTopics';
 import Sidebar from '../components/Sidebar';
+import getDocsActiveVersion from '../utils/getDocsActiveVersion';
 import { archivedVersionsLink } from '../config';
 
 class SidebarContent extends Component {
@@ -11,11 +12,7 @@ class SidebarContent extends Component {
     this.setState({ isClient: true });
   }
 
-  hasArchivedVersions = this.props.versionList.some((v) => v.archived);
-  newVersions = this.props.versionList.filter((v) => !v.archived);
-  versionsToShow = this.hasArchivedVersions
-    ? this.newVersions.concat(archivedVersionsLink)
-    : this.newVersions;
+  versionsToShow = getDocsActiveVersion(this.props.versionList);
 
   render() {
     return (
