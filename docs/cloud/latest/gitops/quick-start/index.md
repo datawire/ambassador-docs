@@ -27,7 +27,7 @@ This quick start walks through how you can configure Edge Stack or Emissary-ingr
 
 3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 
-4. Follow the prompts to install or configure either Edge Stack or Emissary-ingress 2.2 or later with a cloud token into your Kubernetes cluster.
+4. Follow the prompts to install or configure version 2.2 or later of either Edge Stack or Emissary-ingress with a cloud token into your Kubernetes cluster.
 
    If you do not have the latest version installed, you can:
 
@@ -61,7 +61,7 @@ You can now see all running services in your cluster at <a href="https://app.get
 
 6. Configure Ambassador Cloud to access your cluster information and Kubernetes manifests from Git.
 
-    For the `manifest` text box, enter the relative path to your Kubernetes manifest files in your repository.
+    In the `manifest` text box, enter the relative path to your Kubernetes manifest files in your repository.
 
     Select the cluster you initialized in step 1 from the `cluster` dropdown.
 

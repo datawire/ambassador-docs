@@ -14,10 +14,10 @@ import Alert from '@material-ui/lab/Alert';
 Deployment previews are a clean, simple mechanism to easily provide access to a development
 version of a service while it is still a pull request, _before_ merging the new code. This
 reduces development time by making it significantly faster to iterate on new features or
-bugfixes: rather than needing to manually coordinate deployments to staging or test
+bugfixes. This means you no longer need to manually coordinate deployments to staging or test
 environments, deployment previews can handle as many development streams as you need for you.
 
-Note that this is a licensed feature.
+<Alert severity="info"> The deployment previews are a licensed feature in Ambassador Cloud. For more information, refer to <a href="../../../../../editions/">Ambassador Labs' various service plans.</a> </Alert>
 
 ## Setup
 
@@ -38,10 +38,9 @@ together, using a [GitOps workflow](../../../../edge-stack/latest/topics/concept
    </Alert>
 
 2. ArgoCD must be configured to sync manifests from a GitHub or GitLab repository into your
-   cluster. This is the _infrastructure repository_; it may be same as the code repository,
-   or it may be different.
+   cluster. This is the _infrastructure repository_; it may or may not be the same code respiratory. Confirm how your repository is configured before proceeding.
 
-   If you haven't done this yet, follow the [ArgoCD quick start](../../../../argo/latest/quick-start/).
+   If you haven't configured how manifests are synced from your GitLab or GitHub repository yet, follow the [ArgoCD quick start](../../../../argo/latest/quick-start/) to complete this process.
 
 3. Deployment previews rely on a Telepresence pod daemon container for routing. Your
    cluster must have RBAC configured for the deployment preview daemon container:
@@ -50,7 +49,9 @@ together, using a [GitOps workflow](../../../../edge-stack/latest/topics/concept
    kubectl apply -f https://github.com/AliceProxy/deploy-preview/blob/main/manifests/deploy-previews-rbac.yaml
    ```
 
-   The above sample RBAC policy assumes you are deploying your previews in the `deploy-previews` namespace.
+   <Alert severity="info">
+   The above sample RBAC policy as well and rest of this document assumes that you are deploying your previews in the <code>deploy-previews</code> namespace. If you are deploying your previews in a different namespace then simply change all instances of <code>namespace: deploy-previews</code> to match your namespace.
+   </Alert>
 
 4. Your cluster needs a Secret containing your Ambassador Cloud API Key:
 
@@ -87,22 +88,22 @@ together, using a [GitOps workflow](../../../../edge-stack/latest/topics/concept
 
 ## Usage
 
-After setup is complete, simply open a pull request in your code repository:
+After setup is complete, open a pull request in your code repository:
 
-1. After CI publishes the image and manifests for your new deployment, Argo will sync the new
+1. After CI publishes the image and manifests for your new deployment, Argo syncs the new
    deployment preview manifests into your cluster. (This may take a few minutes, depending on
    how Argo is configured.)
 
-2. At that point, the deployment preview pod will request a new preview URL
-   from Ambassador Cloud. Once the URL has been created, it will be posted to your PR as a
+2. Once argo has synced the new manifests into your cluster, the deployment preview pod requests a new preview URL
+   from Ambassador Cloud. Once the URL has been created, it is posted to your PR as a
    comment.
 
 3. Simply open the preview URL in your browser and (if needed) authenticate to
    Ambassador Cloud to interact with your new deployment. You can share this URL with other
    members of your Ambassador Cloud organization to get their feedback, too.
 
-4. Once your PR is merged or closed, CI will remove the deployment preview manifests.
-   If Argo is properly configured to automatically prune resources, it will remove the
+4. Once your PR is merged or closed, CI removes the deployment preview manifests.
+   If Argo is properly configured to automatically prune resources, it removes the
    deployment preview from your cluster. (Again, this may take a few minutes, depending on how
    Argo is configured.)
 
