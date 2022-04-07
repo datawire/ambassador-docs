@@ -1,7 +1,7 @@
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
-
+import url from 'url';
 import Layout from '../../src/components/Layout';
 
 import Burger from '../../src/components/Burger/Burger';
@@ -32,11 +32,11 @@ import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
 import Code from './products/Code';
-import Ship from './products/Ship';
-import Run from './products/Run';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
 import Kubernetes from './products/Kubernetes';
+import Run from './products/Run';
+import Ship from './products/Ship';
 import Telepresence from './products/Telepresence';
 import './style.less';
 import getPrevNext from './utils/getPrevNext';
@@ -157,6 +157,14 @@ const index = ({ data, location, pageContext }) => {
 
   const [product, setProduct] = useState(initialProduct);
   const [version, setVersion] = useState(initialVersion);
+
+  const [burgerMenu, setBurgerMenu] = useState({
+    title: '',
+    header: {},
+    menu: [],
+    navigationTree: []
+  })
+
   const [showVersion, setShowVersion] = useState(
     !isHome && isProduct && !isProductHome && !isArchivedVersions,
   );
@@ -183,24 +191,32 @@ const index = ({ data, location, pageContext }) => {
   const metadata = useMemo(() => {
     let metaDescription;
     let metaTitle;
+    let metaName;
+    let metaRobots;
+    
     if (isHome) {
+      metaName = initialProduct.name;
       metaTitle = metaData['home'].title;
       metaDescription = metaData['home'].description;
     } else if (isProductHome) {
+      metaName = initialProduct.name;
       metaTitle = metaData[initialProduct.slug].title;
       metaDescription = metaData[initialProduct.slug].description;
     } else {
-      metaTitle =
-        (page.headings && page.headings[0] ? page.headings[0].value : 'Docs') +
-        ' | Ambassador';
+      metaName = (page.headings && page.headings[0] ? page.headings[0].value : 'Docs');
+      metaTitle = metaName + ' | Ambassador';
       metaDescription =
         page.frontmatter && page.frontmatter.description
           ? page.frontmatter.description
           : page.excerpt;
+      metaRobots = page.frontmatter && page.frontmatter.indexable === false ? 'noindex,nofollow' : null;
     }
+
     return {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
+      metaName,
+      metaRobots
     };
   }, [
     isHome,
@@ -290,10 +306,28 @@ const index = ({ data, location, pageContext }) => {
         kubernetes: Kubernetes,
         code: Code,
         ship: Ship,
-        run: Run
+        run: Run,
       }[product] || EdgeStack;
     return <Product />;
   };
+
+  const formatString = (title) => {
+    if (title) {
+      const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, '');
+      return template(formatedTitle, versions);
+    }
+  };
+
+  let toc = []
+
+  if (page?.contentTable?.items &&
+    page.contentTable.items[0].items?.length > 1) {
+    toc = page.contentTable.items[0].items.map(el => ({
+      ...el,
+      title: formatString(el.title)
+    }));
+  }
+
 
   const MainContainer = ({ children }) => (
     <div className="docs__container-doc">
@@ -330,8 +364,7 @@ const index = ({ data, location, pageContext }) => {
                 <div className="docs__doc-body-container__table-content">
                   <p>ON THIS PAGE</p>
                   <ContentTable
-                    items={page.contentTable.items}
-                    versions={versions}
+                    items={[{ items: toc }]}
                   />
                 </div>
               )}
@@ -351,7 +384,9 @@ const index = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div className={product.slug === 'home' ? '' : 'docs__doc-footer-container'}>
+    <div
+      className={product.slug === 'home' ? '' : 'docs__doc-footer-container'}
+    >
       {product.slug === 'home' && (
         <hr className="docs__separator docs__container docs__container-home" />
       )}
@@ -505,16 +540,180 @@ const index = ({ data, location, pageContext }) => {
     versions,
   ]);
 
+  const onClickMenuBurgerDetail = (item) => {
+    if (item.link) {
+      navigate(item.link);
+      return;
+    }
+
+    if (item.title === 'Products') {
+      const menu = {
+        header: {
+          title: 'Products',
+          backAction: true
+        },
+        menu: item.items,
+        navigationTree: [
+          'Products'
+        ]
+      };
+
+      setBurgerMenu(menu);
+      return;
+    }
+
+    const items = getMenuContent(item.items)
+
+    const menu = {
+      ...burgerMenu,
+      header: {
+        title: item.title,
+        backAction: true,
+      },
+      menu: getMenuContent(item.items),
+      navigationTree: [
+        ...burgerMenu.navigationTree,
+        {
+          title: item.title,
+          items
+        }
+      ]
+    };
+
+    setBurgerMenu(menu);
+  }
+
+  const onClickMenuBugerHeader = (item) => {
+    if (burgerMenu.navigationTree.length === 0 && item !== 'Docs Home') {
+      navigate(`/docs/`);
+      return;
+    }
+
+    if (burgerMenu.navigationTree.length === 1) {
+      setBurgerMenu({
+        title: '',
+        header: {},
+        menu: [],
+        navigationTree: []
+      });
+
+      return;
+    }
+
+    const navigationTree = [...burgerMenu.navigationTree]
+    navigationTree.pop()
+    const currentItem = navigationTree[navigationTree.length - 1]
+
+    setBurgerMenu({
+      ...burgerMenu,
+      header: {
+        backAction: true,
+        title: currentItem.title
+      },
+      menu: currentItem.items,
+      navigationTree
+    })
+
+    return;
+  }
+
+  const getBurgerMenuInitialItems = (items, page) => {
+    return items.reduce((previous, current) => {
+      if (product.name === current.name) return previous;
+
+      const item = {
+        title: current.name,
+        link: current.link,
+        detail: !current.link
+      };
+
+      !current.isProduct && current.name !== page ?
+        previous.items.push(item) :
+        previous.products.push(item);
+
+      return previous;
+    }, { products: [], items: [] });
+  }
+
+  const getMenuContent = (items) => {
+    return items.map(item => {
+      const content = {
+        title: item.title,
+        link: getUrl(`/${slug[1]}/${slug[2]}/latest/`, item.link),
+        detail: !item.link,
+        items: item.items
+      };
+      return ({
+        ...content
+      });
+    });
+  }
+
+  const getUrl = (path, page) => {
+    if (!page) return;
+
+    let cleanLink = page;
+
+    if (cleanLink.startsWith('/')) {
+      cleanLink = cleanLink.slice(1);
+    }
+
+    return url.resolve(`${path}`, cleanLink);
+  }
+
+  const getBurgerMenuItems = (slug) => {
+    if (slug === 'home') {
+      return [
+        ...initialItems.items,
+        {
+          title: 'Products',
+          detail: true,
+          items: initialItems.products
+        }
+      ];
+    }
+
+    if (products.find(item => item.slug === slug)) {
+      return getMenuContent(menuLinks);
+    }
+
+    // FIX: When is not home or not product home
+    /*if (menuLinks.length > 0) {
+      const currentLinks = findContent(menuLinks, slug)
+      return getMenuContent(currentLinks.items)
+    } */
+
+    return [];
+  }
+
+  const initialItems = getBurgerMenuInitialItems(products, product.name);
+  const initialHeader = {
+    title: product.name,
+    active: true,
+    backAction: !(product.name === 'Docs Home'),
+    onClick: () => onClickMenuBugerHeader(product.name)
+  };
+
+  const burgerMenuItems = getBurgerMenuItems(product.slug);
+
   return (
-    <Layout location={location} customAnnouncement={edgissaryDPMessage} customAnnouncementClass='docs-announcement-container'>
+    <Layout
+      location={location}
+      customAnnouncement={edgissaryDPMessage}
+      customAnnouncementClass="docs-announcement-container"
+    >
       <SEO
         title={metadata.metaTitle}
         type="article"
         canonicalUrl={canonicalUrl}
         description={metadata.metaDescription}
-      ></SEO>
+        robots={metadata.metaRobots}
+      />
 
-      <div className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''}`}>
+      <div
+        className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
+          }`}
+      >
         <nav>
           <div className="docs__nav">
             <div className="docs__nav__content">
@@ -529,9 +728,8 @@ const index = ({ data, location, pageContext }) => {
                       );
                       return (
                         <li
-                          className={`${
-                            product.slug === item.slug ? 'docs__selected' : ''
-                          }`}
+                          className={`${product.slug === item.slug ? 'docs__selected' : ''
+                            }`}
                           key={item.name}
                           onClick={claenStorage}
                         >
@@ -540,10 +738,10 @@ const index = ({ data, location, pageContext }) => {
                       );
                     }
                   })}
-                  <li 
-                    className={`${
-                      product.isProduct ? 'docs__selected__dropdown' : ''
-                    }`}
+
+                  <li
+                    className={`${product.isProduct ? 'docs__selected__dropdown' : ''
+                      }`}
                     key="products"
                   >
                     <Dropdown
@@ -559,70 +757,24 @@ const index = ({ data, location, pageContext }) => {
                 </ul>
               </div>
               <div className={'docs__nav-burger'}>
-                <Burger title={product.name} />
-              </div>
-              {/* <div
-                className={`docs__dropdown-container docs__mobile${
-                  showVersion && versionList.length > 1
-                    ? ' docs__dropdown-version'
-                    : ''
-                }`}
-              >
-            <div className="docs__links-content docs__dekstop">
-              <ul className="docs__products-list">
-                {products.map((item) => {
-                  const linkContent = version.archived ? (
-                    <a href={`${siteUrl}${item.link}`}>{item.name}</a>
-                  ) : (
-                    <Link to={item.link}>{item.name}</Link>
-                  );
-                  return (
-                    <li
-                      className={`${product.slug === item.slug ? 'docs__selected' : ''
-                        }`}
-                      key={item.name}
-                      onClick={claenStorage}
-                    >
-                      {linkContent}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div
-              className={`docs__dropdown-container docs__mobile${showVersion && versionList.length > 1
-                ? ' docs__dropdown-version'
-                : ''
-                }`}
-            >
-              <Dropdown
-                label={product.name}
-                handleOnChange={handleProductChange}
-                value={product.slug}
-                options={products.map((i) => ({ id: i.slug, name: i.name }))}
-              />
-              {showVersion && versionList.length > 1 && (
-                <Dropdown
-                  label={product.name}
-                  handleOnChange={handleProductChange}
-                  value={product.slug}
-                  options={products.map((i) => ({ id: i.slug, name: i.name }))}
+                <Burger
+                  title={burgerMenu.title || metadata.metaName}
+                  header={burgerMenu.header.title ? {
+                    ...burgerMenu.header,
+                    onClick: () => onClickMenuBugerHeader({ title: metadata.metaName })
+                  } : initialHeader}
+                  items={burgerMenu.menu.length > 0 ? burgerMenu.menu : burgerMenuItems}
+                  onClickItem={onClickMenuBurgerDetail}
+                  showSarchBar
                 />
-                {showVersion && versionList.length > 1 && (
-                  <Dropdown
-                    label={`Version: ${version.name}`}
-                    handleOnChange={handleVersionChange}
-                    value={version.id}
-                    options={versionList.filter((v) => !v.archived)}
-                  />
-                )}
               </div>
-              */}
               <SearchBox />
             </div>
           </div>
         </nav>
-        <div className="docs__body">{content}</div>
+        <div className="docs__body">
+          {content}
+        </div>
       </div>
     </Layout>
   );
@@ -655,6 +807,7 @@ export const query = graphql`
         reading_time
         hide_reading_time
         reading_time_text
+        indexable
       }
       parent {
         ... on File {
