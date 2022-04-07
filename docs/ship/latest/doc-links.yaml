@@ -11,7 +11,7 @@
 - title: Argo Basic Operations
   items:
     - title: Installation
-    - link: installing-argo
+      link: installing-argo
     - title: Creating rollouts
       link: argo-rollouts
 - title: Argo advanced user guide

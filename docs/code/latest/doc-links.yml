@@ -18,7 +18,7 @@
   items:
     - title: Installation and updates
       link: install-and-update-telepresence
-    - title: Basic commands
+    - title: Basic user commands
       link: telepresence-basic-commands
     - title: Creating an intercept
       link: telepresence-intercept
