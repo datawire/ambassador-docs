@@ -687,7 +687,7 @@ const index = ({ data, location, pageContext }) => {
       return getMenuContent(menuLinks);
     }
 
-    // FIX: When is not home or not product home
+    // FIX: When is no home or not product home
     /*if (menuLinks.length > 0) {
       const currentLinks = findContent(menuLinks, slug)
       return getMenuContent(currentLinks.items)
