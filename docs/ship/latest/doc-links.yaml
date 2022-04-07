@@ -3,15 +3,15 @@
 - title: Ship with Argo
   items:
     - title: What is Argo?
-      link: ../../argo/latest/concepts/argo/
+      link: argo
     - title: Ship progressively and safely 
-      link: ../../argo/latest/concepts/cicd/
+      link: cicd
     - title: GitOps and the Ship process
-      link: ../../argo/latest/concepts/gitops/
+      link: gitops
 - title: Argo Basic Operations
   items:
     - title: Installation
-    - link: installing-argo
+      link: installing-argo
     - title: Creating rollouts
       link: argo-rollouts
 - title: Argo advanced user guide

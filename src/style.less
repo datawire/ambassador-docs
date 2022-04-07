@@ -953,6 +953,11 @@ body {
     }
 
     &__search-box {
+      display: none;
+    }
+
+    .custom__burger-search-box &__search-box {
+      display: flex;
       width: 100%;
 
       .algolia-autocomplete {
@@ -1037,10 +1042,6 @@ body {
   @media (max-width: 750px) {
     &__body {
       margin-top: 80px;
-    }
-
-    &__nav {
-      height: 80px;
     }
 
     &__dropdown-container {

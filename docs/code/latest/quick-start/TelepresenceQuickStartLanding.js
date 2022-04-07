@@ -1,6 +1,7 @@
+import { Link } from 'gatsby';
 import React from 'react';
 
-import Icon from '../../../../../src/components/Icon';
+import Icon from '../../../../src/components/Icon';
 
 import './telepresence-quickstart-landing.less';
 
@@ -11,108 +12,67 @@ const RightArrow = (props) => (
   </svg>
 );
 
-/** @type React.FC<{color: 'green'|'blue', withConnector: boolean}> */
-const Box = ({ children, color = 'blue', withConnector = false }) => (
-  <>
-    {withConnector && (
-      <div className="connector-container">
-        <span />
-      </div>
-    )}
-    <div className={`box-container ${color}`}>{children}</div>
-  </>
-);
-
 const TelepresenceQuickStartLanding = () => (
   <div className="telepresence-quickstart-landing">
     <h1>
       <Icon name="telepresence-icon" /> Telepresence
     </h1>
     <p>
-      Explore the use cases of Telepresence with a free remote Kubernetes
-      cluster, or dive right in using your own.
+      Set up your ideal development environment for Kubernetes in seconds.
+      Accelerate your inner development loop with hot reload using your existing
+      IDE, and workflow.
     </p>
 
     <div className="demo-cluster-container">
       <div>
-        <div className="main-title-container">
-          <h2 className="title underlined">
-            Use <strong>Our</strong> Free Demo Cluster
+        <div className="box-container">
+          <h2>
+            <strong>Set Up Telepresence with Ambassador Cloud</strong>
           </h2>
           <p>
-            See how Telepresence works without having to mess with your
-            production environments.
+            Seamlessly integrate Telepresence into your existing Kubernetes
+            environment by following our 3-step setup guide.
           </p>
+          <Link
+            to="https://app.getambassador.io/cloud/welcome?docs_source=telepresence-quick-start"
+            className="docs__button-secondary blue "
+          >
+            Get Started
+          </Link>
         </div>
-        <Box color="blue" withConnector>
-          <p className="reading-time">6 minutes</p>
-          <h2 className="title">Integration Testing</h2>
-          <p>
-            See how changes to a single service impact your entire application
-            without having to run your entire app locally.
-          </p>
-          <a className="get-started blue" href="demo-node/">
-            GET STARTED{' '}
-            <RightArrow width={20} height={20} fill="currentColor" />
-          </a>
-        </Box>
-        <Box color="blue" withConnector>
-          <p className="reading-time">5 minutes</p>
-          <h2 className="title">Fast code changes</h2>
-          <p>
-            Make changes to your service locally and see the results instantly,
-            without waiting for containers to build.
-          </p>
-          <a className="get-started blue" href="go/">
-            GET STARTED{' '}
-            <RightArrow width={20} height={20} fill="currentColor" />
-          </a>
-        </Box>
       </div>
-      <div>
-        <div className="main-title-container">
-          <h2 className="title underlined">
-            Use <strong>Your</strong> Cluster
-          </h2>
-          <p>
-            Understand how Telepresence fits in to your Kubernetes development
-            workflow.
-          </p>
-        </div>
-        <Box color="green" withConnector>
-          <p className="reading-time">10 minutes</p>
-          <h2 className="title">Intercept your service in your cluster</h2>
-          <p>
-            Query services only exposed in your cluster's network. Make changes
-            and see them instantly in your K8s environment.
-          </p>
-          <a className="get-started green" href="../howtos/intercepts/">
-            GET STARTED{' '}
-            <RightArrow width={20} height={20} fill="currentColor" />
-          </a>
-        </Box>
-      </div>
+      <p>
+        <Link
+          className="get-started blue inline"
+          to="/docs/telepresence/latest/howtos/intercepts/"
+        >
+          Do it Yourself:
+        </Link>{' '}
+        install Telepresence and manually connect to your Kubernetes workloads.
+      </p>
     </div>
 
     <div className="telepresence-video">
-      <h2 className="telepresence-video-title">Watch the Demo</h2>
       <div className="video-section">
         <div>
-          <p>
-            See Telepresence in action in our <strong>3-minute</strong> demo
-            video that you can share with your teammates.
-          </p>
+          <h2 className="telepresence-video-title">
+            What Can Telepresence Do for You?
+          </h2>
+          <p>Telepresence gives Kubernetes application developers:</p>
           <ul>
             <li>Instant feedback loops</li>
-            <li>Infinite-scale development environments</li>
+            <li>Remote development environments</li>
             <li>Access to your favorite local tools</li>
             <li>Easy collaborative development with teammates</li>
           </ul>
+          <Link className="learn-more blue" to="/products/telepresence">
+            LEARN MORE <RightArrow width={24} height={24} fill="currentColor" />
+          </Link>
         </div>
         <div className="video-container">
           <iframe
             title="Telepresence Demo"
-            src="https://www.youtube.com/embed/W_a3aErN3NU"
+            src="https://www.youtube.com/embed/pfLtYyrWUg0"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

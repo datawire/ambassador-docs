@@ -1,17 +1,19 @@
 @import '~@src/components/Layout/vars.less';
 
-.telepresence-quickstart-landing {
+.doc-body .telepresence-quickstart-landing {
   font-family: @InterFont;
   color: @black;
-  margin: 0 auto 140px;
-  max-width: @docs-max-width;
+  margin: -8.4px auto 48px;
+  max-width: 1050px;
   min-width: @docs-min-width;
+  width: 100%;
 
   h1 {
     color: @blue-dark;
     font-weight: normal;
     letter-spacing: 0.25px;
     font-size: 33px;
+    margin: 0 0 15px;
   }
   p {
     font-size: 0.875rem;
@@ -23,11 +25,10 @@
   .demo-cluster-container {
     display: grid;
     margin: 40px 0;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 40px;
-    @media screen and (max-width: 720px) {
+    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
+    @media screen and (max-width: 900px) {
       grid-template-columns: repeat(1, 1fr);
-      row-gap: 50px;
     }
   }
   .main-title-container {
@@ -39,11 +40,10 @@
       font-size: 0.875rem;
     }
   }
-  h2.title {
-    font-size: 1.5rem;
+  h2 {
+    font-size: 23px;
     color: @black;
-    font-weight: normal;
-    margin: 0 0 10px 0;
+    margin: 0 0 20px 0;
     padding: 0;
     &.underlined {
       padding-bottom: 2px;
@@ -51,40 +51,50 @@
       text-align: center;
     }
     strong {
-      font-weight: 600;
+      font-weight: 800;
+    }
+    &.subtitle {
+      margin-bottom: 10px;
+      font-size: 19px;
+      line-height: 28px;
     }
   }
-  .reading-time {
-    color: #7c7c87;
-    margin: 0;
-  }
+  .learn-more,
   .get-started {
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 600;
     letter-spacing: 1.25px;
     display: flex;
     align-items: center;
-    margin: 20px 20px 10px;
     text-decoration: none;
-    &.green {
-      color: @green;
-    }
-    &.green:hover {
-      color: @green-dark;
+    &.inline {
+      display: inline-block;
+      text-decoration: underline;
+      font-size: unset;
+      font-weight: normal;
+      &:hover {
+        text-decoration: none;
+      }
     }
     &.blue {
-      color: @blue;
+      color: @blue-5;
     }
     &.blue:hover {
       color: @blue-dark;
     }
   }
 
+  .learn-more {
+    margin-top: 20px;
+    padding: 13px 0;
+  }
+
   .box-container {
-    border: 1.5px solid @grey-separator;
-    border-radius: 5px;
-    padding: 10px;
-    position: relative;
+    &.border {
+      border: 1.5px solid @grey-separator;
+      border-radius: 5px;
+      padding: 10px;
+    }
     &::before {
       content: '';
       position: absolute;
@@ -95,27 +105,10 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
-    &.green::before {
-      background: @green;
-      box-shadow: 0 0 0 5px #00c05b45;
-    }
-    &.blue::before {
-      background: @blue;
-      box-shadow: 0 0 0 5px #0066ff45;
-    }
     p {
       font-size: 0.875rem;
       line-height: 24px;
       padding: 0;
-    }
-  }
-  .connector-container {
-    display: flex;
-    justify-content: center;
-    span {
-      background: @grey-separator;
-      width: 1.5px;
-      height: 37px;
     }
   }
 
@@ -123,22 +116,20 @@
     border: 2px solid @grey-separator;
     box-shadow: -6px 12px 0px fade(@black, 12%);
     border-radius: 8px;
-    padding: 20px;
+    padding: 18px;
     h2.telepresence-video-title {
-      padding: 0;
-      margin: 0;
-    }
-
-    strong {
-      color: @blue;
+      font-weight: 400;
+      font-size: 23px;
+      line-height: 33px;
+      color: @blue-6;
     }
   }
 
   .video-section {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    column-gap: 10px;
-    @media screen and (max-width: 1400px) {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    @media screen and (max-width: 800px) {
       grid-template-columns: 1fr;
     }
     ul {
