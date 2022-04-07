@@ -547,7 +547,7 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
-    if (item.link) {
+    if (item.link && !item.items) {
       navigate(item.link);
       return;
     }
@@ -644,7 +644,7 @@ const index = ({ data, location, pageContext }) => {
       const content = {
         title: item.title,
         link: getUrl(`/${slug[1]}/${slug[2]}/latest/`, item.link),
-        detail: !item.link,
+        detail: item.link ? item.items ? true : false : true,
         isVersion: item.isVersion,
         id: item.id,
         items: item.items
