@@ -2,6 +2,7 @@ import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
 import url from 'url';
+
 import Layout from '../../src/components/Layout';
 
 import Burger from '../../src/components/Burger/Burger';
@@ -107,11 +108,11 @@ const index = ({ data, location, pageContext }) => {
   const isInLearnings = learningJourneys.includes(learningJourneyName);
   const learningJourneyData = isInLearnings
     ? data.allLearningjourney.nodes.filter(
-      (node) =>
-        node.slug.indexOf('/') > -1 &&
-        node.slug.indexOf('.') > -1 &&
-        node.slug.split('/')[1].split('.')[0] === learningJourneyName,
-    )
+        (node) =>
+          node.slug.indexOf('/') > -1 &&
+          node.slug.indexOf('.') > -1 &&
+          node.slug.split('/')[1].split('.')[0] === learningJourneyName,
+      )
     : [];
   const {
     title: learningTitle,
@@ -127,32 +128,32 @@ const index = ({ data, location, pageContext }) => {
   const isLearning = isInLearnings && isInTopics;
   const learningParseTopics = isLearning
     ? topics.map((topic) => {
-      const items = topic.items.map((item) => {
-        const readingTimeTopic = data.allMdx.edges.filter(
-          (i) => i.node.fields.slug === `/docs/${item.link}`,
-        );
-        const { slug, readingTime } = readingTimeTopic[0]
-          ? readingTimeTopic[0].node.fields
-          : {};
-        const { reading_time_text, hide_reading_time, reading_time } =
-          readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
-        return {
-          ...item,
-          slug,
-          readingTimeMinutes: Math.ceil(
-            readingTime ? readingTime.minutes : 0,
-          ),
-          readingTimeText: reading_time_text,
-          hideReadingTime: hide_reading_time,
-          readingTimeFront: reading_time,
-        };
-      });
+        const items = topic.items.map((item) => {
+          const readingTimeTopic = data.allMdx.edges.filter(
+            (i) => i.node.fields.slug === `/docs/${item.link}`,
+          );
+          const { slug, readingTime } = readingTimeTopic[0]
+            ? readingTimeTopic[0].node.fields
+            : {};
+          const { reading_time_text, hide_reading_time, reading_time } =
+            readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
+          return {
+            ...item,
+            slug,
+            readingTimeMinutes: Math.ceil(
+              readingTime ? readingTime.minutes : 0,
+            ),
+            readingTimeText: reading_time_text,
+            hideReadingTime: hide_reading_time,
+            readingTimeFront: reading_time,
+          };
+        });
 
-      return {
-        ...topic,
-        items,
-      };
-    })
+        return {
+          ...topic,
+          items,
+        };
+      })
     : [];
 
   const [product, setProduct] = useState(initialProduct);
@@ -162,8 +163,8 @@ const index = ({ data, location, pageContext }) => {
     title: '',
     header: {},
     menu: [],
-    navigationTree: []
-  })
+    navigationTree: [],
+  });
 
   const [showVersion, setShowVersion] = useState(
     !isHome && isProduct && !isProductHome && !isArchivedVersions,
@@ -203,13 +204,17 @@ const index = ({ data, location, pageContext }) => {
       metaTitle = metaData[initialProduct.slug].title;
       metaDescription = metaData[initialProduct.slug].description;
     } else {
-      metaName = (page.headings && page.headings[0] ? page.headings[0].value : 'Docs');
+      metaName =
+        page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
       metaTitle = metaName + ' | Ambassador';
       metaDescription =
         page.frontmatter && page.frontmatter.description
           ? page.frontmatter.description
           : page.excerpt;
-      metaRobots = page.frontmatter && page.frontmatter.indexable === false ? 'noindex,nofollow' : null;
+      metaRobots =
+        page.frontmatter && page.frontmatter.indexable === false
+          ? 'noindex,nofollow'
+          : null;
     }
 
     return {
@@ -318,16 +323,17 @@ const index = ({ data, location, pageContext }) => {
     }
   };
 
-  let toc = []
+  let toc = [];
 
-  if (page?.contentTable?.items &&
-    page.contentTable.items[0].items?.length > 1) {
-    toc = page.contentTable.items[0].items.map(el => ({
+  if (
+    page?.contentTable?.items &&
+    page.contentTable.items[0].items?.length > 1
+  ) {
+    toc = page.contentTable.items[0].items.map((el) => ({
       ...el,
-      title: formatString(el.title)
+      title: formatString(el.title),
     }));
   }
-
 
   const MainContainer = ({ children }) => (
     <div className="docs__container-doc">
@@ -354,7 +360,7 @@ const index = ({ data, location, pageContext }) => {
           <div
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1
                 ? 'docs__doc-body-container__article docs__doc-body-container__article-toc'
                 : 'docs__doc-body-container__article-toc-none'
             }
@@ -363,9 +369,7 @@ const index = ({ data, location, pageContext }) => {
               page.contentTable.items[0].items?.length > 1 && (
                 <div className="docs__doc-body-container__table-content">
                   <p>ON THIS PAGE</p>
-                  <ContentTable
-                    items={[{ items: toc }]}
-                  />
+                  <ContentTable items={[{ items: toc }]} />
                 </div>
               )}
           </div>
@@ -401,7 +405,7 @@ const index = ({ data, location, pageContext }) => {
           <hr
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1
                 ? 'docs__separator docs__container docs__separator-footer'
                 : 'docs__separator docs__container docs__separator-footer-no-article'
             }
@@ -550,12 +554,10 @@ const index = ({ data, location, pageContext }) => {
       const menu = {
         header: {
           title: 'Products',
-          backAction: true
+          backAction: true,
         },
         menu: item.items,
-        navigationTree: [
-          'Products'
-        ]
+        navigationTree: ['Products'],
       };
 
       setBurgerMenu(menu);
@@ -581,7 +583,7 @@ const index = ({ data, location, pageContext }) => {
     };
 
     setBurgerMenu(menu);
-  }
+  };
 
   const onClickMenuBugerHeader = (item) => {
     if (burgerMenu.navigationTree.length === 0 && item !== 'Docs Home') {
@@ -594,7 +596,7 @@ const index = ({ data, location, pageContext }) => {
         title: '',
         header: {},
         menu: [],
-        navigationTree: []
+        navigationTree: [],
       });
 
       return;
@@ -627,27 +629,29 @@ const index = ({ data, location, pageContext }) => {
         detail: !current.link
       };
 
-      !current.isProduct && current.name !== page ?
-        previous.items.push(item) :
-        previous.products.push(item);
+        !current.isProduct && current.name !== page
+          ? previous.items.push(item)
+          : previous.products.push(item);
 
-      return previous;
-    }, { products: [], items: [] });
-  }
+        return previous;
+      },
+      { products: [], items: [] },
+    );
+  };
 
   const getMenuContent = (items) => {
-    return items.map(item => {
+    return items.map((item) => {
       const content = {
         title: item.title,
         link: getUrl(`/${slug[1]}/${slug[2]}/latest/`, item.link),
         detail: !item.link,
-        items: item.items
+        items: item.items,
       };
       return ({
         ...content
       });
     });
-  }
+  };
 
   const getUrl = (path, page) => {
     if (!page) return;
@@ -659,7 +663,7 @@ const index = ({ data, location, pageContext }) => {
     }
 
     return url.resolve(`${path}`, cleanLink);
-  }
+  };
 
   const getBurgerMenuItems = (slug) => {
     if (slug === 'home') {
@@ -673,7 +677,7 @@ const index = ({ data, location, pageContext }) => {
       ];
     }
 
-    if (products.find(item => item.slug === slug)) {
+    if (products.find((item) => item.slug === slug)) {
       return getMenuContent(menuLinks);
     }
 
@@ -684,14 +688,14 @@ const index = ({ data, location, pageContext }) => {
     } */
 
     return [];
-  }
+  };
 
   const initialItems = getBurgerMenuInitialItems(products, product.name);
   const initialHeader = {
     title: product.name,
     active: true,
     backAction: !(product.name === 'Docs Home'),
-    onClick: () => onClickMenuBugerHeader(product.name)
+    onClick: () => onClickMenuBugerHeader(product.name),
   };
 
   const burgerMenuItems = getBurgerMenuItems(product.slug);
@@ -711,8 +715,9 @@ const index = ({ data, location, pageContext }) => {
       />
 
       <div
-        className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
-          }`}
+        className={`docs ${
+          edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
+        }`}
       >
         <nav>
           <div className="docs__nav">
@@ -728,8 +733,9 @@ const index = ({ data, location, pageContext }) => {
                       );
                       return (
                         <li
-                          className={`${product.slug === item.slug ? 'docs__selected' : ''
-                            }`}
+                          className={`${
+                            product.slug === item.slug ? 'docs__selected' : ''
+                          }`}
                           key={item.name}
                           onClick={claenStorage}
                         >
@@ -740,8 +746,9 @@ const index = ({ data, location, pageContext }) => {
                   })}
 
                   <li
-                    className={`${product.isProduct ? 'docs__selected__dropdown' : ''
-                      }`}
+                    className={`${
+                      product.isProduct ? 'docs__selected__dropdown' : ''
+                    }`}
                     key="products"
                   >
                     <Dropdown
@@ -765,16 +772,13 @@ const index = ({ data, location, pageContext }) => {
                   } : initialHeader}
                   items={burgerMenu.menu.length > 0 ? burgerMenu.menu : burgerMenuItems}
                   onClickItem={onClickMenuBurgerDetail}
-                  showSarchBar
                 />
               </div>
               <SearchBox />
             </div>
           </div>
         </nav>
-        <div className="docs__body">
-          {content}
-        </div>
+        <div className="docs__body">{content}</div>
       </div>
     </Layout>
   );
