@@ -13,7 +13,7 @@
     - title: Technical details
       link: telepresence-technical-details
     - title: Intercepts overview
-      link: ../../telepresence/latest/concepts/intercepts
+      link: intercepts-overview
 - title: Telepresence basic operations
   items:
     - title: Installation and updates

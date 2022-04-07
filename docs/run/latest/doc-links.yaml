@@ -3,13 +3,13 @@
 - title: Run with Edge Stack
   items:
      - title: What is Edge Stack?
-       link: ../../edge-stack/latest/topics/concepts/gitops-continuous-delivery
+       link: /gitops-continuous-delivery
      - title: The Kubernetes network architecture
-       link: ../../edge-stack/latest/topics/concepts/kubernetes-network-architecture
+       link: /kubernetes-network-architecture
      - title: Microservices API gateways
-       link: ../../edge-stack/latest/topics/concepts/microservices-api-gateways
+       link: /microservices-api-gateways
      - title: Edge Stack architecture
-       link: ../../edge-stack/latest/topics/concepts/architecture     
+       link: /architecture     
 - title: Edge Stack operations overview
   items:
      - title: Installation
