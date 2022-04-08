@@ -31,7 +31,7 @@ filter.
 1. Click on the service you want to intercept to go into the Service Details view
 1. Choose a cell and click the intercept button
 1. [Fill out the form to complete the intercept.](#fill-out-the-form-to-complete-the-intercept)
-<img width="300" alt="Intercept this service" src="../../../images/intercept-this-service.png">
+<img width="300" alt="Intercept this service" src="../../../images/intercept-this-service.png" />
 
 ## Intercept from the Service Details view
 
