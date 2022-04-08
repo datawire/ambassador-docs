@@ -123,7 +123,7 @@ ServiceAccount:
        #   [...]
        # Inject the preview-daemon container
        - name: preview-daemon
-         image: docker.io/alicewasko/todd:1.5
+         image: docker.io/datawire/tel2:2.5.6-podd.0
          ports:
            - name: http
              containerPort: 80
@@ -134,6 +134,7 @@ ServiceAccount:
              cpu: "0.1"
              memory: 100Mi
          args:
+           - --pod-daemon
            - --workload-name=$NAME
            - --workload-namespace=$NAMESPACE
            - --ingress-tls=true
