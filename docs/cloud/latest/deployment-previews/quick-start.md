@@ -141,6 +141,7 @@ ServiceAccount:
            - --ingress-host=$INGRESS_HOST
            - --ingress-l5host=$PUBLIC_HOSTNAME
            - --pull-request=$PULL_REQUEST_URL
+           - --port=$PORT
          env:
            - name: AMBASSADOR_CLOUD_APIKEY
              valueFrom:
@@ -155,7 +156,7 @@ ServiceAccount:
 
 In the manifest, several things must be customized:
 
-- `$NAME` and `$NAMESPACE` need to match the name and namespace of your live application
+- `$NAME`, `$NAMESPACE`, and `$PORT` need to match the name, namespace, and port of your live application
   (non-preview) Deployment.
 - `$INGRESS_HOST` needs to be the DNS name or IP address of the Edge Stack running in your cluster.
   In standard installations, it should be `edge-stack.ambassador`.
