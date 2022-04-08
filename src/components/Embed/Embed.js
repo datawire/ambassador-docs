@@ -42,7 +42,6 @@ export default ({ code }) => {
   if (isYoutubeVideo(url)) {
     const urlArr = url.split('/');
     const youtubeId = urlArr[urlArr.length - 1];
-    console.log(youtubeId);
 
     return (
       <div ref={ref} className={classnames(baseClass, styles.sixteenByNine)}>
