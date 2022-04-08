@@ -647,7 +647,7 @@ const index = ({ data, location, pageContext }) => {
     return items.map((item) => {
       const content = {
         title: item.title,
-        link: getUrl(`/${slug[1]}/${slug[2]}/latest/`, item.link),
+        link: getUrl(`/${slug[1]}/${slug[2]}/${version.id}/`, item.link),
         detail: item.link ? item.items ? true : false : true,
         isVersion: item.isVersion,
         id: item.id,
@@ -687,12 +687,6 @@ const index = ({ data, location, pageContext }) => {
       return getMenuContent(menuLinks);
     }
 
-    // FIX: When is no home or not product home
-    /*if (menuLinks.length > 0) {
-      const currentLinks = findContent(menuLinks, slug)
-      return getMenuContent(currentLinks.items)
-    } */
-
     return [];
   };
 
@@ -705,11 +699,12 @@ const index = ({ data, location, pageContext }) => {
   };
 
   let burgerMenuItems = getBurgerMenuItems(product.slug);
+  const hasMultipleVersions = versionList.length > 1
 
-  if (versionList.length > 1) {
+  if (hasMultipleVersions) {
     const versionsToShow = getDocsActiveVersion(versionList);
-    const version = {
-      title: 'Versions',
+    const versionBurgerMenu = {
+      title: `Version: ${version.name}`,
       detail: true,
       items: versionsToShow.map(version => ({
         ...version, title: version.name, isVersion: true
@@ -717,9 +712,23 @@ const index = ({ data, location, pageContext }) => {
     };
 
     burgerMenuItems = [
-      version,
+      versionBurgerMenu,
       ...burgerMenuItems
     ];
+  }
+
+  let burgerMenuTitle = metadata.metaName
+
+  if (!isHome && version.id !== 'latest') {
+    if (isProductHome) {
+      burgerMenuTitle = (hasMultipleVersions) ?
+        `${burgerMenuTitle}: V.${version.name}` : burgerMenuTitle
+    }
+
+    if (!isProductHome) {
+      burgerMenuTitle = (hasMultipleVersions) ?
+        `${product.name} V.${version.name}: ${burgerMenuTitle}` : `${product.name}: ${burgerMenuTitle}`
+    }
   }
 
   return (
@@ -784,7 +793,7 @@ const index = ({ data, location, pageContext }) => {
               </div>
               <div className={'docs__nav-burger'}>
                 <Burger
-                  title={burgerMenu.title || metadata.metaName}
+                  title={burgerMenu.title || burgerMenuTitle}
                   header={burgerMenu.header.title ? {
                     ...burgerMenu.header,
                     onClick: () => onClickMenuBugerHeader({ title: metadata.metaName })
