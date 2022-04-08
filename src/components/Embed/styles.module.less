@@ -1,0 +1,25 @@
+.wrapper {
+  max-width: 800px;
+  margin: 1.5em auto 2.5em;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.sixteenByNine {
+  // Maintain the iframe's 16/9 proportions
+  position: relative;
+  iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+  lite-youtube {
+    width: 100%;
+    height: 100%;
+  }
+  > div:first-of-type {
+    padding-bottom: 56.25%;
+  }
+}
