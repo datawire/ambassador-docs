@@ -80,6 +80,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    &_bread-container {
+      width: 100%;
+      @media (min-width: 1000px) {
+        display: none;
+      }  
+    }
   }
 
   &__links-content {

@@ -39,9 +39,10 @@ import Kubernetes from './products/Kubernetes';
 import Run from './products/Run';
 import Ship from './products/Ship';
 import Telepresence from './products/Telepresence';
-import './style.less';
 import getPrevNext from './utils/getPrevNext';
 import getDocsActiveVersion from './utils/getDocsActiveVersion';
+import { Breadcrumbs } from '../../src/components/Breadcrumbs/Breadcrumbs'
+import './style.less';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -699,7 +700,7 @@ const index = ({ data, location, pageContext }) => {
   };
 
   let burgerMenuItems = getBurgerMenuItems(product.slug);
-  const hasMultipleVersions = versionList.length > 1
+  const hasMultipleVersions = versionList.length > 1;
 
   if (hasMultipleVersions) {
     const versionsToShow = getDocsActiveVersion(versionList);
@@ -717,9 +718,25 @@ const index = ({ data, location, pageContext }) => {
     ];
   }
 
-  let burgerMenuTitle = metadata.metaName
+  let burgerMenuTitle = metadata.metaName;
+  let breadCrumb =[{
+    label: 'Docs',
+    url: '/docs'
+  }]
+
+  if (!isProductHome && !isHome) {
+    breadCrumb.push({
+      label: product.name,
+      url: product.link
+    })
+  }
 
   if (!isHome && version.id !== 'latest') {
+    breadCrumb.push({
+      label: version.name,
+      url: getUrl(`/${slug[1]}/${slug[2]}/`, version.link)
+    })
+
     if (isProductHome) {
       burgerMenuTitle = (hasMultipleVersions) ?
         `${burgerMenuTitle}: V.${version.name}` : burgerMenuTitle
@@ -807,7 +824,23 @@ const index = ({ data, location, pageContext }) => {
             </div>
           </div>
         </nav>
-        <div className="docs__body">{content}</div>
+        <div className="docs__body">
+          {product.name !== 'Docs Home' && 
+            <div className='docs__body_bread-container'>
+              <Breadcrumbs 
+                style={{
+                  margin: 'unset',
+                  marginTop: '10px',
+                  padding: '0px 20px',
+                  width: '100%'
+                }}
+                title={burgerMenu.title || metadata.metaName}
+                links={breadCrumb}
+              />
+            </div>
+          }
+          {content}
+        </div>
       </div>
     </Layout>
   );
