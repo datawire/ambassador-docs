@@ -35,7 +35,7 @@ items:
     notes:
       - title: New service catalog view
         body: 'The service catalog moved from a grid view to a more readable and collapsible list of services. Now you can group services to manage your applications.'
-        image: './group-services.png'
+        image: './service-catalog-preview.png'
         docs: './service-catalog/howtos/organize-service-catalog/'
         type: feature
   - date: '2022-02-21'
