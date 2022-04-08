@@ -59,7 +59,7 @@ A Rollout that is paused is kept at the canary weight based on the moment it was
 
 You can pause a Rollout to give you more time to look into the status of your service since it begun.
 
-The pause button can be found on the Service Details page in the **Rollouts** tab or on the HUD in the service overview.
+The pause button can be found on the Service Details page in the **Rollouts** tab.
 
 <Alert severity="warning">
 Has the exact effect as pausing a rollout in the Argo Rollouts Dashboard or by running *kubectl argo rollouts pause &lt;ROLLOUT_NAME&gt;*
