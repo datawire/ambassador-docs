@@ -32,7 +32,9 @@ filter.
 1. Choose a cell and click the intercept button
 1. [Fill out the form to complete the intercept.](#fill-out-the-form-to-complete-the-intercept)
 
-<img width="300" alt="Intercept this service" src="../../../images/intercept-this-service.png" />
+<p align="center">
+   <img width="300" alt="Intercept this service" src="../../../images/intercept-this-service.png" />
+</p>
 
 ## Intercept from the Service Details view
 
