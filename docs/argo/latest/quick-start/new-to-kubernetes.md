@@ -70,7 +70,8 @@ Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">
 1. Filter Services by Favorites (optional)
 1. Look for the **web-app** service and click the row to open the Service Details page
 1. Choose a cell and click on the rollout button to show the instructions to create a rollout
-<img width="300" alt="Rollout this service" src="../images/rollout-this-service.png" />
+
+<img width="300" alt="Rollout this service" src="../../images/rollout-this-service.png" />
 
 Fill in the form with the following information:
 
