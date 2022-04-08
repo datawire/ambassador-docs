@@ -134,7 +134,7 @@ ServiceAccount:
              cpu: "0.1"
              memory: 100Mi
          args:
-           - --pod-daemon
+           - pod-daemon
            - --workload-name=$NAME
            - --workload-namespace=$NAMESPACE
            - --ingress-tls=true
