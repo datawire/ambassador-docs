@@ -20,8 +20,6 @@
   items:
     - title: Using a service catalog
       link: /service-catalog/concepts/using
-    - title: Using the HUD
-      link: /service-catalog/concepts/hud
     - title: Annotating Kubernetes Services for humans
       link: /service-catalog/concepts/annotating/
     - title: Cells
