@@ -797,7 +797,7 @@ const index = ({ data, location, pageContext }) => {
                     key="products"
                   >
                     <Dropdown
-                      label={'Products'}
+                      label={`Products${product.name == 'Docs Home' ? '' : ' - ' + product.name}`}
                       className={'docs__nav-dropdown'}
                       handleOnChange={handleProductChange}
                       value={'products'}
