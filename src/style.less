@@ -1388,6 +1388,8 @@ body {
     justify-content: space-between;
   }
   &-card {
+    display: flex;
+    flex-direction: column;
     width: 288px;
     &--img {
       width: 50px;
@@ -1395,13 +1397,17 @@ body {
     }
     &--title {
       margin: 16px 0 8px 0;
-    }
-    & a {
-      color: @black;
-      &:hover {
-        color: @blue;
-        text-decoration: none;
+      & a {
+        color: @black;
+        &:hover {
+          color: @blue;
+          text-decoration: none;
+        }
       }
+    }
+    &--button-get-started {
+      margin-top: auto;
+      margin-left: 30px;
     }
   }
   @media (max-width: 1200px) {
@@ -1427,6 +1433,9 @@ body {
     }
     &-card {
       max-width: 202px;
+      &--button-get-started {
+        margin-left: 20px;
+      }
     }
   }
   .phone({
@@ -1453,6 +1462,9 @@ body {
        max-width: 100%;
        width: 100%;
        margin-top: 48px;
+       &--button-get-started {
+        margin-left: 0;
+      }
      }
   });
 }

@@ -10,6 +10,15 @@ const Card = ({ img, title, description, link }) => (
       <a href={link}>{title}</a>
     </h2>
     <p className="docs__quickStart-card--description">{description}</p>
+    <div className="docs__quickStart-card--button-get-started">
+        <Link
+          to={link}
+          className="docs__button-secondary docs__m-bottom-50"
+        >
+          Get Started{' '}
+          <Icon name="right-arrow" className="docs__button-secondary--arrow" />
+        </Link>
+      </div>
   </div>
 );
 
