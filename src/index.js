@@ -800,7 +800,7 @@ const index = ({ data, location, pageContext }) => {
                       label={`Products${product.name == 'Docs Home' ? '' : ' - ' + product.name}`}
                       className={'docs__nav-dropdown'}
                       handleOnChange={handleProductChange}
-                      value={'products'}
+                      value={product.slug}
                       options={products
                         .filter((i) => i.isProduct)
                         .map((i) => ({ id: i.slug, name: i.name }))}
