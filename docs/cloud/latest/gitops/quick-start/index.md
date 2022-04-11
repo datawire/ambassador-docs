@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 
 </div>
 
-# GitOps with Ambassador Cloud
+# Configuring Ambassador Cloud for GitOps
 
 Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
 
