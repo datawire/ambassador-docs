@@ -5,6 +5,7 @@ import url from 'url';
 
 import Layout from '../../src/components/Layout';
 
+import { Breadcrumbs } from '../../src/components/Breadcrumbs/Breadcrumbs';
 import Burger from '../../src/components/Burger/Burger';
 import ContactBlock from '../../src/components/ContactBlock';
 import DatawireMetaData from '../../src/components/DatawireMetaData';
@@ -27,7 +28,7 @@ import {
   learningJourneys,
   archivedVersionsLink,
   siteUrl,
-  getSiteUrl
+  getSiteUrl,
 } from './config';
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
@@ -39,10 +40,9 @@ import Kubernetes from './products/Kubernetes';
 import Run from './products/Run';
 import Ship from './products/Ship';
 import Telepresence from './products/Telepresence';
-import getPrevNext from './utils/getPrevNext';
-import getDocsActiveVersion from './utils/getDocsActiveVersion';
-import { Breadcrumbs } from '../../src/components/Breadcrumbs/Breadcrumbs'
 import './style.less';
+import getDocsActiveVersion from './utils/getDocsActiveVersion';
+import getPrevNext from './utils/getPrevNext';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -110,11 +110,11 @@ const index = ({ data, location, pageContext }) => {
   const isInLearnings = learningJourneys.includes(learningJourneyName);
   const learningJourneyData = isInLearnings
     ? data.allLearningjourney.nodes.filter(
-      (node) =>
-        node.slug.indexOf('/') > -1 &&
-        node.slug.indexOf('.') > -1 &&
-        node.slug.split('/')[1].split('.')[0] === learningJourneyName,
-    )
+        (node) =>
+          node.slug.indexOf('/') > -1 &&
+          node.slug.indexOf('.') > -1 &&
+          node.slug.split('/')[1].split('.')[0] === learningJourneyName,
+      )
     : [];
   const {
     title: learningTitle,
@@ -130,32 +130,32 @@ const index = ({ data, location, pageContext }) => {
   const isLearning = isInLearnings && isInTopics;
   const learningParseTopics = isLearning
     ? topics.map((topic) => {
-      const items = topic.items.map((item) => {
-        const readingTimeTopic = data.allMdx.edges.filter(
-          (i) => i.node.fields.slug === `/docs/${item.link}`,
-        );
-        const { slug, readingTime } = readingTimeTopic[0]
-          ? readingTimeTopic[0].node.fields
-          : {};
-        const { reading_time_text, hide_reading_time, reading_time } =
-          readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
-        return {
-          ...item,
-          slug,
-          readingTimeMinutes: Math.ceil(
-            readingTime ? readingTime.minutes : 0,
-          ),
-          readingTimeText: reading_time_text,
-          hideReadingTime: hide_reading_time,
-          readingTimeFront: reading_time,
-        };
-      });
+        const items = topic.items.map((item) => {
+          const readingTimeTopic = data.allMdx.edges.filter(
+            (i) => i.node.fields.slug === `/docs/${item.link}`,
+          );
+          const { slug, readingTime } = readingTimeTopic[0]
+            ? readingTimeTopic[0].node.fields
+            : {};
+          const { reading_time_text, hide_reading_time, reading_time } =
+            readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
+          return {
+            ...item,
+            slug,
+            readingTimeMinutes: Math.ceil(
+              readingTime ? readingTime.minutes : 0,
+            ),
+            readingTimeText: reading_time_text,
+            hideReadingTime: hide_reading_time,
+            readingTimeFront: reading_time,
+          };
+        });
 
-      return {
-        ...topic,
-        items,
-      };
-    })
+        return {
+          ...topic,
+          items,
+        };
+      })
     : [];
 
   const burgerMenuInitialState = {
@@ -163,11 +163,11 @@ const index = ({ data, location, pageContext }) => {
     header: {},
     menu: [],
     navigationTree: [],
-  }
+  };
 
   const [product, setProduct] = useState(initialProduct);
   const [version, setVersion] = useState(initialVersion);
-  const [burgerMenu, setBurgerMenu] = useState(burgerMenuInitialState)
+  const [burgerMenu, setBurgerMenu] = useState(burgerMenuInitialState);
   const [showVersion, setShowVersion] = useState(
     !isHome && isProduct && !isProductHome && !isArchivedVersions,
   );
@@ -223,7 +223,7 @@ const index = ({ data, location, pageContext }) => {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
       metaName: template(metaName, versions),
-      metaRobots
+      metaRobots,
     };
   }, [
     isHome,
@@ -362,7 +362,7 @@ const index = ({ data, location, pageContext }) => {
           <div
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1
                 ? 'docs__doc-body-container__article docs__doc-body-container__article-toc'
                 : 'docs__doc-body-container__article-toc-none'
             }
@@ -407,7 +407,7 @@ const index = ({ data, location, pageContext }) => {
           <hr
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1
                 ? 'docs__separator docs__container docs__separator-footer'
                 : 'docs__separator docs__container docs__separator-footer-no-article'
             }
@@ -571,7 +571,7 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
-    const items = getMenuContent(item.items)
+    const items = getMenuContent(item.items);
 
     const menu = {
       ...burgerMenu,
@@ -584,9 +584,9 @@ const index = ({ data, location, pageContext }) => {
         ...burgerMenu.navigationTree,
         {
           title: item.title,
-          items
-        }
-      ]
+          items,
+        },
+      ],
     };
 
     setBurgerMenu(menu);
@@ -603,43 +603,42 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
-    const navigationTree = [...burgerMenu.navigationTree]
-    navigationTree.pop()
-    const currentItem = navigationTree[navigationTree.length - 1]
+    const navigationTree = [...burgerMenu.navigationTree];
+    navigationTree.pop();
+    const currentItem = navigationTree[navigationTree.length - 1];
 
     setBurgerMenu({
       ...burgerMenu,
       header: {
         backAction: true,
-        title: currentItem.title
+        title: currentItem.title,
       },
       menu: currentItem.items,
-      navigationTree
-    })
+      navigationTree,
+    });
 
     return;
+  };
 
-
-  }
-
-  const onCloseMenuBurger = () => setBurgerMenu(burgerMenuInitialState)
+  const onCloseMenuBurger = () => setBurgerMenu(burgerMenuInitialState);
 
   const getBurgerMenuInitialItems = (items, page) => {
-    return items.reduce((previous, current) => {
-      if (product.name === current.name) return previous;
+    return items.reduce(
+      (previous, current) => {
+        if (product.name === current.name) return previous;
 
-      const item = {
-        title: current.name,
-        link: current.link,
-        detail: !current.link
-      };
+        const item = {
+          title: current.name,
+          link: current.link,
+          detail: !current.link,
+        };
 
-      !current.isProduct && current.name !== page
-        ? previous.items.push(item)
-        : previous.products.push(item);
+        !current.isProduct && current.name !== page
+          ? previous.items.push(item)
+          : previous.products.push(item);
 
-      return previous;
-    },
+        return previous;
+      },
       { products: [], items: [] },
     );
   };
@@ -649,14 +648,14 @@ const index = ({ data, location, pageContext }) => {
       const content = {
         title: item.title,
         link: getUrl(`/${slug[1]}/${slug[2]}/${version.id}/`, item.link),
-        detail: item.link ? item.items ? true : false : true,
+        detail: item.link ? (item.items ? true : false) : true,
         isVersion: item.isVersion,
         id: item.id,
-        items: item.items
+        items: item.items,
       };
-      return ({
-        ...content
-      });
+      return {
+        ...content,
+      };
     });
   };
 
@@ -679,8 +678,8 @@ const index = ({ data, location, pageContext }) => {
         {
           title: 'Products',
           detail: true,
-          items: initialItems.products
-        }
+          items: initialItems.products,
+        },
       ];
     }
 
@@ -707,44 +706,47 @@ const index = ({ data, location, pageContext }) => {
     const versionBurgerMenu = {
       title: `Version: ${version.name}`,
       detail: true,
-      items: versionsToShow.map(version => ({
-        ...version, title: version.name, isVersion: true
-      }))
+      items: versionsToShow.map((version) => ({
+        ...version,
+        title: version.name,
+        isVersion: true,
+      })),
     };
 
-    burgerMenuItems = [
-      versionBurgerMenu,
-      ...burgerMenuItems
-    ];
+    burgerMenuItems = [versionBurgerMenu, ...burgerMenuItems];
   }
 
   let burgerMenuTitle = metadata.metaName;
-  let breadCrumb =[{
-    label: 'Docs',
-    url: '/docs'
-  }]
+  let breadCrumb = [
+    {
+      label: 'Docs',
+      url: '/docs',
+    },
+  ];
 
   if (!isProductHome && !isHome) {
     breadCrumb.push({
       label: product.name,
-      url: product.link
-    })
+      url: product.link,
+    });
   }
 
   if (!isHome && version.id !== 'latest') {
     breadCrumb.push({
       label: version.name,
-      url: getUrl(`/${slug[1]}/${slug[2]}/`, version.link)
-    })
+      url: getUrl(`/${slug[1]}/${slug[2]}/`, version.link),
+    });
 
     if (isProductHome) {
-      burgerMenuTitle = (hasMultipleVersions) ?
-        `${burgerMenuTitle}: V.${version.name}` : burgerMenuTitle
+      burgerMenuTitle = hasMultipleVersions
+        ? `${burgerMenuTitle}: V.${version.name}`
+        : burgerMenuTitle;
     }
 
     if (!isProductHome) {
-      burgerMenuTitle = (hasMultipleVersions) ?
-        `${product.name} V.${version.name}: ${burgerMenuTitle}` : `${product.name}: ${burgerMenuTitle}`
+      burgerMenuTitle = hasMultipleVersions
+        ? `${product.name} V.${version.name}: ${burgerMenuTitle}`
+        : `${product.name}: ${burgerMenuTitle}`;
     }
   }
 
@@ -763,8 +765,9 @@ const index = ({ data, location, pageContext }) => {
       />
 
       <div
-        className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
-          }`}
+        className={`docs ${
+          edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
+        }`}
       >
         <nav>
           <div className="docs__nav">
@@ -780,8 +783,9 @@ const index = ({ data, location, pageContext }) => {
                       );
                       return (
                         <li
-                          className={`${product.slug === item.slug ? 'docs__selected' : ''
-                            }`}
+                          className={`${
+                            product.slug === item.slug ? 'docs__selected' : ''
+                          }`}
                           key={item.name}
                           onClick={claenStorage}
                         >
@@ -792,12 +796,17 @@ const index = ({ data, location, pageContext }) => {
                   })}
 
                   <li
-                    className={`${product.isProduct ? 'docs__selected__dropdown' : ''
-                      }`}
+                    className={`${
+                      product.isProduct ? 'docs__selected__dropdown' : ''
+                    }`}
                     key="products"
                   >
                     <Dropdown
-                      label={`Products${product.name == 'Docs Home' ? '' : ' - ' + product.name}`}
+                      label={`Products${
+                        product.name == 'Docs Home' || !product.isProduct
+                          ? ''
+                          : ' - ' + product.name
+                      }`}
                       className={'docs__nav-dropdown'}
                       handleOnChange={handleProductChange}
                       value={product.slug}
@@ -811,11 +820,22 @@ const index = ({ data, location, pageContext }) => {
               <div className={'docs__nav-burger'}>
                 <Burger
                   title={burgerMenu.title || burgerMenuTitle}
-                  header={burgerMenu.header.title ? {
-                    ...burgerMenu.header,
-                    onClick: () => onClickMenuBugerHeader({ title: metadata.metaName })
-                  } : initialHeader}
-                  items={burgerMenu.menu.length > 0 ? burgerMenu.menu : burgerMenuItems}
+                  header={
+                    burgerMenu.header.title
+                      ? {
+                          ...burgerMenu.header,
+                          onClick: () =>
+                            onClickMenuBugerHeader({
+                              title: metadata.metaName,
+                            }),
+                        }
+                      : initialHeader
+                  }
+                  items={
+                    burgerMenu.menu.length > 0
+                      ? burgerMenu.menu
+                      : burgerMenuItems
+                  }
                   onClickItem={onClickMenuBurgerDetail}
                   onCloseMenu={onCloseMenuBurger}
                 />
@@ -825,20 +845,20 @@ const index = ({ data, location, pageContext }) => {
           </div>
         </nav>
         <div className="docs__body">
-          {product.name !== 'Docs Home' && 
-            <div className='docs__body_bread-container'>
-              <Breadcrumbs 
+          {product.name !== 'Docs Home' && (
+            <div className="docs__body_bread-container">
+              <Breadcrumbs
                 style={{
                   margin: 'unset',
                   marginTop: '10px',
                   padding: '0px 20px',
-                  width: '100%'
+                  width: '100%',
                 }}
                 title={burgerMenu.title || metadata.metaName}
                 links={breadCrumb}
               />
             </div>
-          }
+          )}
           {content}
         </div>
       </div>

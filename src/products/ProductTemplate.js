@@ -11,14 +11,11 @@ const Card = ({ img, title, description, link }) => (
     </h2>
     <p className="docs__quickStart-card--description">{description}</p>
     <div className="docs__quickStart-card--button-get-started">
-        <Link
-          to={link}
-          className="docs__button-secondary docs__m-bottom-50"
-        >
-          Get Started{' '}
-          <Icon name="right-arrow" className="docs__button-secondary--arrow" />
-        </Link>
-      </div>
+      <Link to={link} className="docs__button-secondary docs__m-bottom-50">
+        Get Started{' '}
+        <Icon name="right-arrow" className="docs__button-secondary--arrow" />
+      </Link>
+    </div>
   </div>
 );
 
