@@ -122,7 +122,7 @@ ServiceAccount:
        #   image: image-built-from-pull-request
        #   [...]
        # Inject the preview-daemon container
-       - name: preview-daemon
+       - name: pod-daemon
          image: docker.io/datawire/tel2:2.5.6-podd.0
          ports:
            - name: http
@@ -137,20 +137,18 @@ ServiceAccount:
            - pod-daemon
            - --workload-name=$NAME
            - --workload-namespace=$NAMESPACE
+           - --port=$PORT
            - --ingress-tls=true
            - --ingress-port=443
            - --ingress-host=$INGRESS_HOST
            - --ingress-l5host=$PUBLIC_HOSTNAME
            - --pull-request=$PULL_REQUEST_URL
-           - --port=$PORT
          env:
            - name: AMBASSADOR_CLOUD_APIKEY
              valueFrom:
                secretKeyRef:
                  name: deployment-preview-apikey
                  key: AMBASSADOR_CLOUD_APIKEY
-           - name: TELEPRESENCE_VERSION
-             value: v2.5.4
            - name: MANAGER_NAMESPACE
              value: ambassador
    ```
