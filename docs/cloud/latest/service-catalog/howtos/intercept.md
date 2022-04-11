@@ -28,9 +28,13 @@ filter.
 ## Intercept from the main Service Catalog view
 
 1. Start your local instance of the service
-1. Select a service you want to intercept
-1. In the Heads Up Display (HUD) section at the bottom of the screen, click the `+ Intercept` button.
+1. Click on the service you want to intercept to go into the Service Details view
+1. Choose a cell and click the intercept button
 1. [Fill out the form to complete the intercept.](#fill-out-the-form-to-complete-the-intercept)
+
+<p align="center">
+   <img width="300" alt="Intercept this service" src="../../../images/intercept-this-service.png" />
+</p>
 
 ## Intercept from the Service Details view
 
