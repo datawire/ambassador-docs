@@ -731,7 +731,7 @@ const index = ({ data, location, pageContext }) => {
     });
   }
 
-  if (!isHome && version.id !== 'latest') {
+  if (!isHome && version.id && version?.id !== 'latest') {
     breadCrumb.push({
       label: version.name,
       url: getUrl(`/${slug[1]}/${slug[2]}/`, version.link),
