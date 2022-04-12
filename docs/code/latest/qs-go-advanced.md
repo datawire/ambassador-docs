@@ -78,7 +78,7 @@ Once you have the development container running, you can integrate your local de
 1. First, download the latest [Telepresence binary](../install-and-update-telepresence/) for your operating system and run `telepresence connect`.
  Your local service is now able to interact with services and dependencies in your remote cluster.
  For example, you can run `curl remote-service-name.namespace:port/path` and get an instant response locally in the same way you would in a remote cluster.  
-2. Extract the KUBECONFIG from your dev container from the [emojivoto application tutorial](.quick-start/go/) and then connect your container to the remote cluster with Telepresence:
+2. Extract the KUBECONFIG from your dev container from the [emojivoto application tutorial](./quick-start/go/) and then connect your container to the remote cluster with Telepresence:
 	```
 	$ CONTAINER_ID=$(docker inspect --format="{{.Id}}" "/voting-demo")
 	$ docker cp $CONTAINER_ID:/opt/telepresence-demo-cluster.yaml ./emojivoto_k8s_context.yaml
