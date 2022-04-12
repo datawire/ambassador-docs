@@ -11,7 +11,7 @@ This process does the following:
 1. Generates a deployment key in your forked repository.
 1. Configures Argo CD with that deployment key to monitor your repository.
 1. Installs an Argo CD application that represents the selected service.
-1. For users who have [integrated Argo with their GitLab](installing-argo/###_Enable_integration_with_GitHub,_DockerHub,_or_GitLab) repository, this also configures a webhook in the repository.
+1. For users who have [integrated Argo with their GitLab](../installing-argo/#enable-integration-with-github-dockerhub-or-gitlab) repository, this also configures a webhook in the repository.
 
 ## Create a Rollout
 
