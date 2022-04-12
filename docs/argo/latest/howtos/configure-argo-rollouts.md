@@ -132,7 +132,7 @@ You can <a href="https://gitlab.com/-/profile/personal_access_tokens" target="_b
 
 ## 6. Configure Argo CD
 
-From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, look for the service you want to Rollout and click on its card. The <a href="/docs/cloud/latest/service-catalog/concepts/hud/">Heads Up Display (HUD)</a> will show information about your service along with some actions. Click on the **Rollout** button to show the **start rollout slideout** In there, click the **Configure Argo for your service** option and follow the instructions. This will:
+From the Ambassador Cloud <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page, look for the service you want to Rollout and click on it. Click on the **Rollout** button to show the **start rollout slideout** In there, click the **Configure Argo for your service** option and follow the instructions. This will:
 1. Generate a deployment key in your forked repository.
 1. Configure Argo CD with that deployment key to monitor your repository.
 1. Install an Argo CD Application that represents the selected service.

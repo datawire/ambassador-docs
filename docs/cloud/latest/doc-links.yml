@@ -12,20 +12,28 @@
       link: /service-catalog/howtos/cells/
     - title: Filter my service view
       link: /service-catalog/howtos/favorites/
+    - title: Enable GitOps workflows
+      link: /gitops/quick-start
     - title: Configure Automated Configuration Analysis
       link: /config-analysis/quick-start
+    - title: Use Deployment Previews
+      link: /deployment-previews/quick-start
+    - title: Organize the service catalog
+      link: /service-catalog/howtos/organize-service-catalog
 - title: Core concepts
   items:
     - title: Using a service catalog
       link: /service-catalog/concepts/using
-    - title: Using the HUD
-      link: /service-catalog/concepts/hud
     - title: Annotating Kubernetes Services for humans
       link: /service-catalog/concepts/annotating/
     - title: Cells
       link: /service-catalog/concepts/cells/
     - title: Incident response in the cloud-native world
       link: /service-catalog/concepts/ir
+    - title: Services
+      link: /service-catalog/concepts/services/
+    - title: Service Groups
+      link: /service-catalog/concepts/service-groups/
 - title: Reference
   items:
     - title: Annotations

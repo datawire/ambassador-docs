@@ -17,16 +17,16 @@ import Alert from '@material-ui/lab/Alert';
 
 Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
 
-In this quick start, we'll walk through how you can configure Edge Stack or Emissary-ingress with automated configuration analysis, integrating checks into your GitOps pull request workflow. The automated configuration analysis will detect and resolve configuration issues _before_ your changes go live.
+This quick start walks you through how to configure Edge Stack or Emissary-ingress with automated configuration analysis, integrating checks into your GitOps pull request workflow. The automated configuration analysis will detect and resolve configuration issues _before_ your changes go live.
 
 <Alert severity="warning">
-  You must use Edge Stack or Emissary-ingress 2.0.5 or later to enable automated configuration analysis.
+  You must use Edge Stack or Emissary-ingress 2.2 or later to enable automated configuration analysis.
 </Alert>
 
 ## 1. Connect your cluster to Ambassador Cloud
 
 <Alert severity="info">
-  If you followed the <a href="/docs/edge-stack/2.0/tutorials/getting-started/">Edge Stack quick start</a>, you can skip this step.
+  If you followed the <a href="/docs/edge-stack/latest/tutorials/getting-started/">Edge Stack quick start</a>, you can skip this step and begin the second step, <a href="#2-fork-the-demo-repository">Fork the demo repository</a>.
 </Alert>
 
 1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/) with your preferred identity provider.
@@ -35,18 +35,14 @@ In this quick start, we'll walk through how you can configure Edge Stack or Emis
 
 3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
 
-4. Follow the prompts to install or configure either Edge Stack or Emissary-ingress 2.0 with a cloud token into your Kubernetes cluster.
-
-   <Alert severity="warning">
-     You must use Edge Stack or Emissary-ingress 2.0.5 or later to enable automated configuration analysis.
-   </Alert>
+4. Follow the prompts to install or configure either Edge Stack or Emissary-ingress 2.2 or later with a cloud token into your Kubernetes cluster.
 
    If you do not have the latest version installed, you can:
 
-   * [Install the latest version of Edge Stack](/docs/edge-stack/2.0/topics/install/)
-   * [Upgrade Edge Stack to the latest version](/docs/edge-stack/2.0/topics/install/upgrading/)
+   * [Install the latest version of Edge Stack](/docs/edge-stack/latest/topics/install/)
+   * [Upgrade Edge Stack to the latest version](/docs/edge-stack/latest/topics/install/upgrading/)
 
-5. When the installation completes, services, environments and clusters will be visible in Ambassador Cloud.
+5. When the installation completes, services, environments and clusters are visible in Ambassador Cloud.
 
 <Alert severity="success"><b>Victory!</b> All the Services running in your cluster are now listed in Service Catalog!
 You should now be able to see all running services in your cluster at <a href="https://app.getambassador.io/cloud/services" target="_blank">https://app.getambassador.io/cloud/services</a> </Alert>

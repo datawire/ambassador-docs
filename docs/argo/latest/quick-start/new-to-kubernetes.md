@@ -67,9 +67,13 @@ This will also fork a repository called **emojivoto**.
 ## 3. Create a Rollout
 Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page and follow these steps:
 
-1. Click the "Services" favorites button.
-1. Look for the **web-app** service and click the card to see the details pop up in the <a href="/docs/cloud/latest/service-catalog/concepts/hud/">Heads Up Display (HUD)</a>.
-1. Click on the **Rollout** button for the **web-app** service to show the instructions to create a rollout.
+1. Filter Services by Favorites (optional)
+1. Look for the **web-app** service and click the row to open the Service Details page
+1. Choose a cell and click on the rollout button to show the instructions to create a rollout
+
+<p align="center">
+  <img width="300" alt="Rollout this service" src="../../images/rollout-this-service.png" />
+</p>
 
 Fill in the form with the following information:
 

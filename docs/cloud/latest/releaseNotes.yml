@@ -31,6 +31,20 @@
 
 changelog: ''
 items:
+  - date: '2022-04-11'
+    notes:
+      - title: 'Deployment Previews'
+        body: "Connecting Ambassador Cloud to your GitHub pull request workflow allows you to easily setup preview URLs and share unreleased changes with your teammates."
+        image: './deployment-previews.png'
+        docs: deployment-previews/quick-start/
+        type: feature
+  - date: '2022-04-15'
+    notes:
+      - title: New service catalog view
+        body: 'The service catalog moved from a grid view to a more readable and collapsible list of services. Now you can group services to manage your applications.'
+        image: './service-catalog-preview.png'
+        docs: './service-catalog/howtos/organize-service-catalog/'
+        type: feature
   - date: '2022-02-21'
     notes:
       - title: 'Mapping Editor'
