@@ -3,11 +3,13 @@ import React, { useState, useMemo, useCallback } from 'react';
 import { Helmet } from 'react-helmet';
 
 import Layout from '../../src/components/Layout';
+
 import ContactBlock from '../../src/components/ContactBlock';
-import ContentTable from './components/ContentTable';
 import Dropdown from '../../src/components/Dropdown';
 import template from '../../src/utils/template';
 import getDate from '../src/utils/getDate';
+
+import ContentTable from './components/ContentTable';
 import DocsFooter from './components/DocsFooter';
 import ReleaseNotes from './components/ReleaseNotes';
 import SearchBox from './components/SearchBox';
@@ -25,7 +27,9 @@ const releaseNotes = ({ data, location, pageContext }) => {
   );
 
   const initialVersion = useMemo(
-    () => initialProduct.version.filter((v) => v.id === slug[PRODUCT_VERSION])[0] || {},
+    () =>
+      initialProduct.version.filter((v) => v.id === slug[PRODUCT_VERSION])[0] ||
+      {},
     [initialProduct, slug],
   );
 
@@ -95,7 +99,9 @@ const releaseNotes = ({ data, location, pageContext }) => {
       const newVersion = versionList.filter((v) => v.id === newValue)[0];
 
       if (newVersion.archived) {
-        return navigate(`${archivedDocsUrl}/docs/${product.slug}/${newVersion.link}`)
+        return navigate(
+          `${archivedDocsUrl}/docs/${product.slug}/${newVersion.link}`,
+        );
       }
 
       setVersion(newVersion);
@@ -144,15 +150,17 @@ const releaseNotes = ({ data, location, pageContext }) => {
   );
 
   const getContentTableData = (data) => {
-    const items = data.map(item => ({
+    const items = data.map((item) => ({
       url: item.version ? `#${item.version}` : `#${item.date}`,
-      title: item.version ? `Version ${item.version}` : getDate(item.date)
-    }))
+      title: item.version ? `Version ${item.version}` : getDate(item.date),
+    }));
 
-    return [{
-      items
-    }]
-  }
+    return [
+      {
+        items,
+      },
+    ];
+  };
 
   let docsVersion = versions?.docsVersion;
   if (!docsVersion) {
@@ -162,18 +170,16 @@ const releaseNotes = ({ data, location, pageContext }) => {
 
   const footer = (
     <>
-      <div className='docs__footer-principal-container'>
-        <div className='docs__footer-contact-container'>
+      <div className="docs__footer-principal-container">
+        <div className="docs__footer-contact-container">
           <hr className="docs__separator-footer-release" />
           <section className="docs__contact">
             <ContactBlock />
           </section>
         </div>
-        <div className='docs__doc-body-container__article docs__doc-body-container__article-toc'>
-
-        </div>
+        <div className="docs__doc-body-container__article docs__doc-body-container__article-toc"></div>
       </div>
-      <div className='docs__doc-footer-container'>
+      <div className="docs__doc-footer-container">
         <DocsFooter product={product.slug} version={docsVersion} />
       </div>
     </>
@@ -184,7 +190,7 @@ const releaseNotes = ({ data, location, pageContext }) => {
       ? template(data.releaseNotes.changelog, versions)
       : '';
 
-    const toc = getContentTableData(data.releaseNotes.versions)
+    const toc = getContentTableData(data.releaseNotes.versions);
 
     return (
       <div className="docs__container-doc">
@@ -196,7 +202,7 @@ const releaseNotes = ({ data, location, pageContext }) => {
           slug={pageContext.slug}
         />
         <div className="docs__doc-body-container">
-          <div className='docs__content_container'>
+          <div className="docs__content_container">
             <div className="docs__doc-body-container__article flex-toc">
               <div className="docs__doc-body doc-body">
                 <ReleaseNotes
@@ -208,12 +214,10 @@ const releaseNotes = ({ data, location, pageContext }) => {
                 />
               </div>
             </div>
-            <div className='docs__doc-body-container__article docs__doc-body-container__article-toc'>
+            <div className="docs__doc-body-container__article docs__doc-body-container__article-toc">
               <div className="docs__doc-body-container__table-content">
                 <p>ON THIS PAGE</p>
-                <ContentTable
-                  items={toc}
-                />
+                <ContentTable items={toc} />
               </div>
             </div>
           </div>
@@ -248,40 +252,73 @@ const releaseNotes = ({ data, location, pageContext }) => {
       <div className="docs">
         <nav>
           <div className="docs__nav">
-            <div className="docs__links-content docs__dekstop">
-              <ul className="docs__products-list">
-                {products.map((item) => (
+            <div className="docs__nav__content">
+              <div className="docs__links-content docs__dekstop">
+                <ul className="docs__products-list">
+                  {products.map((item) => {
+                    if (!item.isProduct) {
+                      const linkContent = version.archived ? (
+                        <a href={`${siteUrl}${item.link}`}>{item.name}</a>
+                      ) : (
+                        <Link to={item.link}>{item.name}</Link>
+                      );
+                      return (
+                        <li
+                          className={`${
+                            product.slug === item.slug ? 'docs__selected' : ''
+                          }`}
+                          key={item.name}
+                          onClick={claenStorage}
+                        >
+                          {linkContent}
+                        </li>
+                      );
+                    }
+                  })}
                   <li
-                    className={`${product.slug === item.slug ? 'docs__selected' : ''
-                      }`}
-                    key={item.name}
-                    onClick={claenStorage}
+                    className={`${
+                      product.isProduct ? 'docs__selected__dropdown' : ''
+                    }`}
+                    key="products"
                   >
-                    <Link to={item.link}>{item.name}</Link>
+                    <Dropdown
+                      label={`Products${
+                        product.name == 'Docs Home' || !product.isProduct
+                          ? ''
+                          : ' - ' + product.name
+                      }`}
+                      className={'docs__nav-dropdown'}
+                      handleOnChange={handleProductChange}
+                      value={product.slug}
+                      options={products
+                        .filter((i) => i.isProduct)
+                        .map((i) => ({ id: i.slug, name: i.name }))}
+                    />
                   </li>
-                ))}
-              </ul>
-            </div>
-            <div
-              className={`docs__dropdown-container docs__mobile${versionList.length > 1 ? ' docs__dropdown-version' : ''
+                </ul>
+              </div>
+              <div
+                className={`docs__dropdown-container docs__mobile${
+                  versionList.length > 1 ? ' docs__dropdown-version' : ''
                 }`}
-            >
-              <Dropdown
-                label={product.name}
-                handleOnChange={handleProductChange}
-                value={product.slug}
-                options={products.map((i) => ({ id: i.slug, name: i.name }))}
-              />
-              {versionList.length > 1 && (
+              >
                 <Dropdown
-                  label={`Version: ${version.name}`}
-                  handleOnChange={handleVersionChange}
-                  value={version.id}
-                  options={versionList}
+                  label={product.name}
+                  handleOnChange={handleProductChange}
+                  value={product.slug}
+                  options={products.map((i) => ({ id: i.slug, name: i.name }))}
                 />
-              )}
+                {versionList.length > 1 && (
+                  <Dropdown
+                    label={`Version: ${version.name}`}
+                    handleOnChange={handleVersionChange}
+                    value={version.id}
+                    options={versionList}
+                  />
+                )}
+              </div>
+              <SearchBox />
             </div>
-            <SearchBox />
           </div>
         </nav>
         <div className="docs__body">{content}</div>
