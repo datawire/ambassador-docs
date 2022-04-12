@@ -14,7 +14,7 @@ ExternalIp
 } from '../../../../../src/components/Docs/Telepresence';
 import Alert from '@material-ui/lab/Alert';
 import Platform from '@src/components/Platform';
-import QSCards from './qs-cards';
+import QSCardsCode from './qs-cards';
 import { UserInterceptCommand, DemoClusterWarning } from '../../../../../src/components/Docs/Telepresence';
 
 # Telepresence Quick Start

@@ -4,7 +4,7 @@ description: "Install Telepresence and learn to use it to intercept services run
 
 import Alert from '@material-ui/lab/Alert';
 import Platform from '@src/components/Platform';
-import QSCards from './qs-cards'
+import QSCardsCode from './qs-cards'
 
 <div class="docs-language-toc">
 
@@ -392,4 +392,4 @@ Normal traffic coming to your app gets the <strong style="color:green">green</st
 
 ## <img class="os-logo" src="../../images/logo.png"/> What's Next?
 
-<QSCards/>
+<QSCardsCode/>

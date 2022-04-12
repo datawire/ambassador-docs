@@ -28,7 +28,7 @@ export default function CenteredGrid() {
         <Grid item xs={4}>
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
-              <a href="../../../telepresence/latest/howtos/preview-urls/">
+              <a href="../../../../telepresence/latest/howtos/preview-urls/">
                 <b>Collaborating</b>
               </a>
             </Typography>
@@ -41,7 +41,7 @@ export default function CenteredGrid() {
         <Grid item xs={4}>
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
-              <a href="../../../telepresence/latest/howtos/outbound/">
+              <a href="../../../../telepresence/latest/howtos/outbound/">
                 <b>Outbound Sessions</b>
               </a>
             </Typography>
@@ -54,7 +54,7 @@ export default function CenteredGrid() {
         <Grid item xs={4}>
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
-              <a href="../../../telepresence/latest/faqs/">
+              <a href="../../../../telepresence/latest/faqs/">
                 <b>FAQs</b>
               </a>
             </Typography>

@@ -5,7 +5,7 @@ description: "Start using Telepresence in your own environment. Follow these ste
 
 import Alert from '@material-ui/lab/Alert';
 import Platform from '@src/components/Platform';
-import QSCards from './quick-start/qs-cards'
+import QSCardsCode from './quick-start/qs-cards'
 
 # Intercept a service in your own environment
 
