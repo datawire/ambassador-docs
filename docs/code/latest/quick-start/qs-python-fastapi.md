@@ -147,7 +147,7 @@ Telepresence connects your local workstation to a remote Kubernetes cluster.
 2. Test that Telepresence is working properly by connecting to the Kubernetes API server:
 `curl -ik https://kubernetes.default`
 
-  <Alert severity="info"><b>Didn't work?</b> Make sure you are using Telepresence 2.0.3 or greater, check with <code>telepresence version</code> and upgrade <a href="../../install/upgrade/">here</a> if needed.</Alert>
+  <Alert severity="info"><b>Didn't work?</b> Make sure you are using Telepresence 2.0.3 or greater, check with <code>telepresence version</code> and upgrade <a href="../../../../telepresence/latest/install/upgrade/">here</a> if needed.</Alert>
 
   ```
   $ curl -ik https://kubernetes.default
@@ -321,7 +321,7 @@ easily share the services you’re working on with your teammates.
    If you are in an environment where Telepresence cannot launch a
    local browser for you to interact with, you will need to pass the
    [`--apikey` flag to `telepresence
-   login`](../../reference/client/login/).
+   login`](../../../../telepresence/latest/reference/client/login/).
 
 3. Start the intercept again:
 `telepresence intercept dataprocessingservice --port 3000`
