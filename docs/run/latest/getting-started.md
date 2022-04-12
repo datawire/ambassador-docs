@@ -10,7 +10,7 @@ import GettingStartedEdgeStack21Tabs from './gs-tabs'
 
 * [1. Installation](#1-installation)
 * [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
-* [What's Next?](#img-classos-logo-srcimageslogopng-whats-next)
+* [What's Next?]()
 
 ## 1. Installation
 
