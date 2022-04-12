@@ -16,7 +16,7 @@ To begin, you need a set of services that you can deploy to a Kubernetes cluster
 	- Many modern code editors, such as [VS Code](https://code.visualstudio.com/docs/containers/overview) and [IntelliJ IDEA](https://code.visualstudio.com/docs/containers/overview), can automatically generate Dockerfiles.
 * Have a Kubernetes manifest that can be used to successfully deploy your application to a Kubernetes cluster. This includes YAML config files, or Helm charts, or whatever method you prefer.
 	- Many modern code editors, such as VS Code, have [plugins](https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools) that will [automatically generate](https://marketplace.visualstudio.com/items?itemName=GoogleCloudTools.cloudcode) a large amount of the Service and Deployment configuration files.
-	- The kubectl command-line tool includes a number of [config generators](https://kubernetes.io/docs/reference/kubectl/conventions/#generators) for creating basic Service and Deployment files.
+	- The kubectl command-line tool includes a number of [config generators](https://v1-21.docs.kubernetes.io/docs/reference/kubectl/conventions/#generators) for creating basic Service and Deployment files.
 	- For helm users, the [`helm create` command](https://helm.sh/docs/helm/helm_create/) can be used to create the directory and file scaffolding for your chart.
 * Follow cloud native application architecture best practices.
 	- Design services using the [Twelve-Factor Application](https://12factor.net/) approach.
