@@ -35,7 +35,7 @@ export const products = [
     link: '/docs/run',
     version: [],
     id: Math.random().toString(),
-    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
+    version: [{ id: 'latest', name: 'Latest', link: 'latest/getting-started' }],
   },
   {
     slug: 'kubernetes',
