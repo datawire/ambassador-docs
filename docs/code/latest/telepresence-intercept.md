@@ -11,7 +11,7 @@ import QSCardsCode from './quick-start/qs-cards'
 
 Telepresence enables you to create intercepts to a target Kubernetes workload. Once you have created and intercept, you can code and debug your associated service locally. 
 
-For a detailed walk-though on creating intercepts using our sample app, follow the [quick start guide](../../quick-start/demo-node/).
+For a detailed walk-though on creating intercepts using our sample app, follow the [quick start guide](../quick-start/demo-node/).
 
 
 ## Prerequisites
