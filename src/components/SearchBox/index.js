@@ -4,6 +4,8 @@ import { Helmet } from 'react-helmet';
 import SearchIcon from './search.inline.svg';
 
 export default function SearchBox(props) {
+  const inputSelector = props.selector || 'doc-search'
+
   const isMobile = React.useMemo(() => {
     return typeof window !== 'undefined' ? window.innerWidth <= 800 : true;
   }, []);
@@ -20,7 +22,7 @@ export default function SearchBox(props) {
         window.docsearch({
           apiKey: '8f887d5b28fbb0aeb4b98fd3c4350cbd',
           indexName: 'getambassador',
-          inputSelector: '#doc-search',
+          inputSelector: `#${inputSelector}`,
           debug: true,
         });
       } catch {
@@ -53,7 +55,7 @@ export default function SearchBox(props) {
         name="search"
         type="text"
         placeholder="Search documentation"
-        id="doc-search"
+        id={inputSelector}
       />
     </div>
   );
