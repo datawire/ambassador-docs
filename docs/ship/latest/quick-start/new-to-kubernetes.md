@@ -68,7 +68,7 @@ This will also fork a repository called **emojivoto**.
 Go to the <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> page and follow these steps:
 
 1. Click the "Services" favorites button.
-1. Look for the **web-app** service and click the card to see the details pop up in the display</a>.
+1. Look for the **web-app** service and click the card to see the details pop up in the display.
 1. Click on the **Rollout** button for the **web-app** service to show the instructions to create a rollout.
 
 Fill in the form with the following information:
