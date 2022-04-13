@@ -1,9 +1,12 @@
 import { graphql, Link, navigate } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
+import url from 'url';
 
 import Layout from '../../src/components/Layout';
 
+import { Breadcrumbs } from '../../src/components/Breadcrumbs/Breadcrumbs';
+import Burger from '../../src/components/Burger/Burger';
 import ContactBlock from '../../src/components/ContactBlock';
 import DatawireMetaData from '../../src/components/DatawireMetaData';
 import Dropdown from '../../src/components/Dropdown';
@@ -15,7 +18,7 @@ import template from '../../src/utils/template';
 import AllVersions from './components/AllVersions';
 import ContentTable from './components/ContentTable';
 import DocsFooter from './components/DocsFooter';
-import DocsHome from './components/DocsHome';
+import DocsHome from './components/DocsHome/DocsHome';
 import SearchBox from './components/SearchBox';
 import IsAesPage from './components/ShowAesPage';
 import SidebarContent from './components/SidebarContent';
@@ -30,11 +33,15 @@ import {
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
+import Code from './products/Code';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
 import Kubernetes from './products/Kubernetes';
+import Run from './products/Run';
+import Ship from './products/Ship';
 import Telepresence from './products/Telepresence';
 import './style.less';
+import getDocsActiveVersion from './utils/getDocsActiveVersion';
 import getPrevNext from './utils/getPrevNext';
 
 const index = ({ data, location, pageContext }) => {
@@ -103,11 +110,11 @@ const index = ({ data, location, pageContext }) => {
   const isInLearnings = learningJourneys.includes(learningJourneyName);
   const learningJourneyData = isInLearnings
     ? data.allLearningjourney.nodes.filter(
-      (node) =>
-        node.slug.indexOf('/') > -1 &&
-        node.slug.indexOf('.') > -1 &&
-        node.slug.split('/')[1].split('.')[0] === learningJourneyName,
-    )
+        (node) =>
+          node.slug.indexOf('/') > -1 &&
+          node.slug.indexOf('.') > -1 &&
+          node.slug.split('/')[1].split('.')[0] === learningJourneyName,
+      )
     : [];
   const {
     title: learningTitle,
@@ -123,36 +130,44 @@ const index = ({ data, location, pageContext }) => {
   const isLearning = isInLearnings && isInTopics;
   const learningParseTopics = isLearning
     ? topics.map((topic) => {
-      const items = topic.items.map((item) => {
-        const readingTimeTopic = data.allMdx.edges.filter(
-          (i) => i.node.fields.slug === `/docs/${item.link}`,
-        );
-        const { slug, readingTime } = readingTimeTopic[0]
-          ? readingTimeTopic[0].node.fields
-          : {};
-        const { reading_time_text, hide_reading_time, reading_time } =
-          readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
-        return {
-          ...item,
-          slug,
-          readingTimeMinutes: Math.ceil(
-            readingTime ? readingTime.minutes : 0,
-          ),
-          readingTimeText: reading_time_text,
-          hideReadingTime: hide_reading_time,
-          readingTimeFront: reading_time,
-        };
-      });
+        const items = topic.items.map((item) => {
+          const readingTimeTopic = data.allMdx.edges.filter(
+            (i) => i.node.fields.slug === `/docs/${item.link}`,
+          );
+          const { slug, readingTime } = readingTimeTopic[0]
+            ? readingTimeTopic[0].node.fields
+            : {};
+          const { reading_time_text, hide_reading_time, reading_time } =
+            readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
+          return {
+            ...item,
+            slug,
+            readingTimeMinutes: Math.ceil(
+              readingTime ? readingTime.minutes : 0,
+            ),
+            readingTimeText: reading_time_text,
+            hideReadingTime: hide_reading_time,
+            readingTimeFront: reading_time,
+          };
+        });
 
-      return {
-        ...topic,
-        items,
-      };
-    })
+        return {
+          ...topic,
+          items,
+        };
+      })
     : [];
+
+  const burgerMenuInitialState = {
+    title: '',
+    header: {},
+    menu: [],
+    navigationTree: [],
+  };
 
   const [product, setProduct] = useState(initialProduct);
   const [version, setVersion] = useState(initialVersion);
+  const [burgerMenu, setBurgerMenu] = useState(burgerMenuInitialState);
   const [showVersion, setShowVersion] = useState(
     !isHome && isProduct && !isProductHome && !isArchivedVersions,
   );
@@ -179,26 +194,35 @@ const index = ({ data, location, pageContext }) => {
   const metadata = useMemo(() => {
     let metaDescription;
     let metaTitle;
+    let metaName;
     let metaRobots;
+
     if (isHome) {
+      metaName = initialProduct.name;
       metaTitle = metaData['home'].title;
       metaDescription = metaData['home'].description;
     } else if (isProductHome) {
+      metaName = initialProduct.name;
       metaTitle = metaData[initialProduct.slug].title;
       metaDescription = metaData[initialProduct.slug].description;
     } else {
-      metaTitle =
-        (page.headings && page.headings[0] ? page.headings[0].value : 'Docs') +
-        ' | Ambassador';
+      metaName =
+        page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
+      metaTitle = metaName + ' | Ambassador';
       metaDescription =
         page.frontmatter && page.frontmatter.description
           ? page.frontmatter.description
           : page.excerpt;
-      metaRobots = page.frontmatter && page.frontmatter.indexable === false ? 'noindex,nofollow' : null;
+      metaRobots =
+        page.frontmatter && page.frontmatter.indexable === false
+          ? 'noindex,nofollow'
+          : null;
     }
+
     return {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
+      metaName: template(metaName, versions),
       metaRobots,
     };
   }, [
@@ -279,22 +303,19 @@ const index = ({ data, location, pageContext }) => {
   );
 
   const getProductHome = (product) => {
-    switch (product) {
-      case 'edge-stack':
-        return <EdgeStack />;
-      case 'emissary':
-        return <Emissary />;
-      case 'telepresence':
-        return <Telepresence />;
-      case 'cloud':
-        return <Cloud />;
-      case 'argo':
-        return <Argo />;
-      case 'kubernetes':
-        return <Kubernetes />;
-      default:
-        return <EdgeStack />;
-    }
+    const Product =
+      {
+        'edge-stack': EdgeStack,
+        emissary: Emissary,
+        telepresence: Telepresence,
+        cloud: Cloud,
+        argo: Argo,
+        kubernetes: Kubernetes,
+        code: Code,
+        ship: Ship,
+        run: Run,
+      }[product] || EdgeStack;
+    return <Product />;
   };
 
   const formatString = (title) => {
@@ -304,16 +325,17 @@ const index = ({ data, location, pageContext }) => {
     }
   };
 
-  let toc = []
+  let toc = [];
 
-  if (page?.contentTable?.items &&
-    page.contentTable.items[0].items?.length > 1) {
-    toc = page.contentTable.items[0].items.map(el => ({
+  if (
+    page?.contentTable?.items &&
+    page.contentTable.items[0].items?.length > 1
+  ) {
+    toc = page.contentTable.items[0].items.map((el) => ({
       ...el,
-      title: formatString(el.title)
+      title: formatString(el.title),
     }));
   }
-
 
   const MainContainer = ({ children }) => (
     <div className="docs__container-doc">
@@ -340,7 +362,7 @@ const index = ({ data, location, pageContext }) => {
           <div
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1
                 ? 'docs__doc-body-container__article docs__doc-body-container__article-toc'
                 : 'docs__doc-body-container__article-toc-none'
             }
@@ -349,9 +371,7 @@ const index = ({ data, location, pageContext }) => {
               page.contentTable.items[0].items?.length > 1 && (
                 <div className="docs__doc-body-container__table-content">
                   <p>ON THIS PAGE</p>
-                  <ContentTable
-                    items={[{ items: toc }]}
-                  />
+                  <ContentTable items={[{ items: toc }]} />
                 </div>
               )}
           </div>
@@ -370,7 +390,9 @@ const index = ({ data, location, pageContext }) => {
   }
 
   const footer = (
-    <div className={product.slug === 'home' ? '' : 'docs__doc-footer-container'}>
+    <div
+      className={product.slug === 'home' ? '' : 'docs__doc-footer-container'}
+    >
       {product.slug === 'home' && (
         <hr className="docs__separator docs__container docs__container-home" />
       )}
@@ -385,7 +407,7 @@ const index = ({ data, location, pageContext }) => {
           <hr
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1
                 ? 'docs__separator docs__container docs__separator-footer'
                 : 'docs__separator docs__container docs__separator-footer-no-article'
             }
@@ -524,8 +546,216 @@ const index = ({ data, location, pageContext }) => {
     versions,
   ]);
 
+  const onClickMenuBurgerDetail = (item) => {
+    if (item.isVersion) {
+      handleVersionChange({}, item.id);
+      return;
+    }
+
+    if (item.link && !item.items) {
+      navigate(item.link);
+      return;
+    }
+
+    if (item.title === 'Products') {
+      const menu = {
+        header: {
+          title: 'Products',
+          backAction: true,
+        },
+        menu: item.items,
+        navigationTree: ['Products'],
+      };
+
+      setBurgerMenu(menu);
+      return;
+    }
+
+    const items = getMenuContent(item.items);
+
+    const menu = {
+      ...burgerMenu,
+      header: {
+        title: item.title,
+        backAction: true,
+      },
+      menu: getMenuContent(item.items),
+      navigationTree: [
+        ...burgerMenu.navigationTree,
+        {
+          title: item.title,
+          items,
+        },
+      ],
+    };
+
+    setBurgerMenu(menu);
+  };
+
+  const onClickMenuBugerHeader = (item) => {
+    if (burgerMenu.navigationTree.length === 0 && item !== 'Docs Home') {
+      navigate(`/docs/`);
+      return;
+    }
+
+    if (burgerMenu.navigationTree.length === 1) {
+      setBurgerMenu(burgerMenuInitialState);
+      return;
+    }
+
+    const navigationTree = [...burgerMenu.navigationTree];
+    navigationTree.pop();
+    const currentItem = navigationTree[navigationTree.length - 1];
+
+    setBurgerMenu({
+      ...burgerMenu,
+      header: {
+        backAction: true,
+        title: currentItem.title,
+      },
+      menu: currentItem.items,
+      navigationTree,
+    });
+
+    return;
+  };
+
+  const onCloseMenuBurger = () => setBurgerMenu(burgerMenuInitialState);
+
+  const getBurgerMenuInitialItems = (items, page) => {
+    return items.reduce(
+      (previous, current) => {
+        if (product.name === current.name) return previous;
+
+        const item = {
+          title: current.name,
+          link: current.link,
+          detail: !current.link,
+        };
+
+        !current.isProduct && current.name !== page
+          ? previous.items.push(item)
+          : previous.products.push(item);
+
+        return previous;
+      },
+      { products: [], items: [] },
+    );
+  };
+
+  const getMenuContent = (items) => {
+    return items.map((item) => {
+      const content = {
+        title: item.title,
+        link: getUrl(`/${slug[1]}/${slug[2]}/${version.id}/`, item.link),
+        detail: item.link ? (item.items ? true : false) : true,
+        isVersion: item.isVersion,
+        id: item.id,
+        items: item.items,
+      };
+      return {
+        ...content,
+      };
+    });
+  };
+
+  const getUrl = (path, page) => {
+    if (!page) return;
+
+    let cleanLink = page;
+
+    if (cleanLink.startsWith('/')) {
+      cleanLink = cleanLink.slice(1);
+    }
+
+    return url.resolve(`${path}`, cleanLink);
+  };
+
+  const getBurgerMenuItems = (slug) => {
+    if (slug === 'home') {
+      return [
+        ...initialItems.items,
+        {
+          title: 'Products',
+          detail: true,
+          items: initialItems.products,
+        },
+      ];
+    }
+
+    if (products.find((item) => item.slug === slug)) {
+      return getMenuContent(menuLinks);
+    }
+
+    return [];
+  };
+
+  const initialItems = getBurgerMenuInitialItems(products, product.name);
+  const initialHeader = {
+    title: product.name,
+    active: true,
+    backAction: !(product.name === 'Docs Home'),
+    onClick: () => onClickMenuBugerHeader(product.name),
+  };
+
+  let burgerMenuItems = getBurgerMenuItems(product.slug);
+  const hasMultipleVersions = versionList.length > 1;
+
+  if (hasMultipleVersions) {
+    const versionsToShow = getDocsActiveVersion(versionList);
+    const versionBurgerMenu = {
+      title: `Version: ${version.name}`,
+      detail: true,
+      items: versionsToShow.map((version) => ({
+        ...version,
+        title: version.name,
+        isVersion: true,
+      })),
+    };
+
+    burgerMenuItems = [versionBurgerMenu, ...burgerMenuItems];
+  }
+
+  let burgerMenuTitle = metadata.metaName;
+  let breadCrumb = [
+    {
+      label: 'Docs',
+      url: '/docs',
+    },
+  ];
+
+  if (!isProductHome && !isHome) {
+    breadCrumb.push({
+      label: product.name,
+      url: product.link,
+    });
+  }
+
+  if (!isHome && version.id && version?.id !== 'latest') {
+    breadCrumb.push({
+      label: version.name,
+      url: getUrl(`/${slug[1]}/${slug[2]}/`, version.link),
+    });
+
+    if (isProductHome) {
+      burgerMenuTitle = hasMultipleVersions
+        ? `${burgerMenuTitle}: V.${version.name}`
+        : burgerMenuTitle;
+    }
+
+    if (!isProductHome) {
+      burgerMenuTitle = hasMultipleVersions
+        ? `${product.name} V.${version.name}: ${burgerMenuTitle}`
+        : `${product.name}: ${burgerMenuTitle}`;
+    }
+  }
+
   return (
-    <Layout location={location} customAnnouncement={edgissaryDPMessage} customAnnouncementClass='docs-announcement-container'>
+    <Layout
+      location={location}
+      customAnnouncement={edgissaryDPMessage}
+      customAnnouncementClass="docs-announcement-container"
+    >
       <SEO
         title={metadata.metaTitle}
         type="article"
@@ -534,55 +764,103 @@ const index = ({ data, location, pageContext }) => {
         robots={metadata.metaRobots}
       />
 
-      <div className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''}`}>
+      <div
+        className={`docs ${
+          edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
+        }`}
+      >
         <nav>
           <div className="docs__nav">
-            <div className="docs__links-content docs__dekstop">
-              <ul className="docs__products-list">
-                {products.map((item) => {
-                  const linkContent = version.archived ? (
-                    <a href={`${siteUrl}${item.link}`}>{item.name}</a>
-                  ) : (
-                    <Link to={item.link}>{item.name}</Link>
-                  );
-                  return (
-                    <li
-                      className={`${product.slug === item.slug ? 'docs__selected' : ''
-                        }`}
-                      key={item.name}
-                      onClick={claenStorage}
-                    >
-                      {linkContent}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div
-              className={`docs__dropdown-container docs__mobile${showVersion && versionList.length > 1
-                ? ' docs__dropdown-version'
-                : ''
-                }`}
-            >
-              <Dropdown
-                label={product.name}
-                handleOnChange={handleProductChange}
-                value={product.slug}
-                options={products.map((i) => ({ id: i.slug, name: i.name }))}
-              />
-              {showVersion && versionList.length > 1 && (
-                <Dropdown
-                  label={`Version: ${version.name}`}
-                  handleOnChange={handleVersionChange}
-                  value={version.id}
-                  options={versionList.filter((v) => !v.archived)}
+            <div className="docs__nav__content">
+              <div className="docs__links-content docs__dekstop">
+                <ul className="docs__products-list">
+                  {products.map((item) => {
+                    if (!item.isProduct) {
+                      const linkContent = version.archived ? (
+                        <a href={`${siteUrl}${item.link}`}>{item.name}</a>
+                      ) : (
+                        <Link to={item.link}>{item.name}</Link>
+                      );
+                      return (
+                        <li
+                          className={`${
+                            product.slug === item.slug ? 'docs__selected' : ''
+                          }`}
+                          key={item.name}
+                          onClick={claenStorage}
+                        >
+                          {linkContent}
+                        </li>
+                      );
+                    }
+                  })}
+
+                  <li
+                    className={`${
+                      product.isProduct ? 'docs__selected__dropdown' : ''
+                    }`}
+                    key="products"
+                  >
+                    <Dropdown
+                      label={`Products${
+                        product.name == 'Docs Home' || !product.isProduct
+                          ? ''
+                          : ' - ' + product.name
+                      }`}
+                      className={'docs__nav-dropdown'}
+                      handleOnChange={handleProductChange}
+                      value={product.slug}
+                      options={products
+                        .filter((i) => i.isProduct)
+                        .map((i) => ({ id: i.slug, name: i.name }))}
+                    />
+                  </li>
+                </ul>
+              </div>
+              <div className={'docs__nav-burger'}>
+                <Burger
+                  title={burgerMenu.title || burgerMenuTitle}
+                  header={
+                    burgerMenu.header.title
+                      ? {
+                          ...burgerMenu.header,
+                          onClick: () =>
+                            onClickMenuBugerHeader({
+                              title: metadata.metaName,
+                            }),
+                        }
+                      : initialHeader
+                  }
+                  items={
+                    burgerMenu.menu.length > 0
+                      ? burgerMenu.menu
+                      : burgerMenuItems
+                  }
+                  onClickItem={onClickMenuBurgerDetail}
+                  onCloseMenu={onCloseMenuBurger}
                 />
-              )}
+              </div>
+              <SearchBox />
             </div>
-            <SearchBox />
           </div>
         </nav>
-        <div className="docs__body">{content}</div>
+        <div className="docs__body">
+          {product.name !== 'Docs Home' && (
+            <div className="docs__body_bread-container">
+              <Breadcrumbs
+                style={{
+                  margin: 'unset',
+                  marginTop: '10px',
+                  padding: '0px 20px',
+                  width: '100%',
+                }}
+                title={burgerMenu.title || metadata.metaName}
+                links={breadCrumb}
+              />
+            </div>
+          )}
+          {content}
+        </div>
       </div>
     </Layout>
   );

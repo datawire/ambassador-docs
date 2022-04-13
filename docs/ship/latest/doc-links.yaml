@@ -1,0 +1,18 @@
+- title: Quick start
+  link: /quick-start/
+- title: Ship with Argo
+  items:
+    - title: What is Argo?
+      link: argo
+    - title: Ship progressively and safely 
+      link: cicd
+    - title: GitOps and the Ship process
+      link: gitops
+- title: Argo Basic Operations
+  items:
+    - title: Installation
+      link: installing-argo
+    - title: Creating rollouts
+      link: argo-rollouts
+- title: Argo advanced user guide
+  link: ../../argo

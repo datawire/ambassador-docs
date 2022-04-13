@@ -1,3 +1,7 @@
+---
+    description: Rollouts in Ambassador Labs' Argo
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Ambassador Cloud Rollouts
