@@ -1,0 +1,5 @@
+version: "1.0"
+dlVersion: "latest"
+docsVersion: "1.0"
+branch: release/v2
+productName: "Code"

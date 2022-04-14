@@ -11,22 +11,7 @@
        link: /topics/install/docker
      - title: Upgrade or migrate to a newer version
        link: /topics/install/migration-matrix
- - title: Core concepts
-   link: /topics/concepts/
-   items:
-     - title: Kubernetes network architecture
-       link: /topics/concepts/kubernetes-network-architecture
-     - title: "The Ambassador operating model: GitOps and continuous delivery"
-       link: /topics/concepts/gitops-continuous-delivery
-     - title: Progressive delivery
-       link: /topics/concepts/progressive-delivery
-     - title: Microservices API gateways
-       link: /topics/concepts/microservices-api-gateways
-     - title: $productName$ architecture
-       link: /topics/concepts/architecture
-     - title: Rate limiting at the edge
-       link: /topics/concepts/rate-limiting-at-the-edge
- - title: How do I...
+ - title: User guide
    items:
      - title: Route to my services
        items:

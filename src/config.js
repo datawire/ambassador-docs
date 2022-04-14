@@ -16,8 +16,31 @@ export const products = [
     version: [],
   },
   {
+    slug: 'code',
+    name: 'Code',
+    link: '/docs/code',
+    id: Math.random().toString(),
+    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
+  },
+  {
+    slug: 'ship',
+    name: 'Ship',
+    link: '/docs/ship',
+    id: Math.random().toString(),
+    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
+  },
+  {
+    slug: 'run',
+    name: 'Run',
+    link: '/docs/run',
+    version: [],
+    id: Math.random().toString(),
+    version: [{ id: 'latest', name: 'Latest', link: 'latest/getting-started' }],
+  },
+  {
     slug: 'kubernetes',
     name: 'Kubernetes (K8s)',
+    isProduct: true,
     link: '/docs/kubernetes',
     to: goToKubernetesDocs,
     id: Math.random().toString(),
@@ -26,6 +49,7 @@ export const products = [
   {
     slug: 'edge-stack',
     name: 'Edge Stack',
+    isProduct: true,
     link: '/docs/edge-stack',
     to: goToEdgeStackDocs,
     id: Math.random().toString(),
@@ -110,6 +134,7 @@ export const products = [
   {
     slug: 'emissary',
     name: 'Emissary-ingress',
+    isProduct: true,
     link: '/docs/emissary',
     to: goToEmissaryDocs,
     id: Math.random().toString(),
@@ -134,6 +159,7 @@ export const products = [
   {
     slug: 'telepresence',
     name: 'Telepresence',
+    isProduct: true,
     link: '/docs/telepresence',
     to: goToDocsTelepresence,
     id: Math.random().toString(),
@@ -155,6 +181,7 @@ export const products = [
   {
     slug: 'argo',
     name: 'Argo',
+    isProduct: true,
     link: '/docs/argo',
     to: goToDocsArgo,
     id: Math.random().toString(),
@@ -163,6 +190,7 @@ export const products = [
   {
     slug: 'cloud',
     name: 'Cloud',
+    isProduct: true,
     link: '/docs/cloud',
     to: goToCloudDocs,
     id: Math.random().toString(),
@@ -177,6 +205,7 @@ export const products = [
   {
     slug: 'envoy',
     name: 'Envoy',
+    isProduct: true,
     link: '/docs/envoy/latest/concepts/cloudnative',
     to: goToEnvoy,
     id: Math.random().toString(),
@@ -189,6 +218,18 @@ export const metaData = {
     title: 'Docs Home | Ambassador Labs',
     description:
       'Concepts, guides, and examples to using Ambassador Cloud, Edge Stack, Telepresence, Kubernetes and Argo.',
+  },
+  code: {
+    title: 'Code | Ambassador Labs',
+    description: 'Code tutorials using Telepresence',
+  },
+  ship: {
+    title: 'Ship | Ambassador Labs',
+    description: 'Ship tutorials using Argo',
+  },
+  run: {
+    title: 'Run | Ambassador Labs',
+    description: 'Run tutorials using Edge Stack',
   },
   kubernetes: {
     title: 'Kubernetes (K8s) Docs | Ambassador Labs',

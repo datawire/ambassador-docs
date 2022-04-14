@@ -1,9 +1,11 @@
+---
+    Title: Canary deployments with Argo
+    description: An overview of canary deployments in Argo
+---
+
 # Canary deployments
 
-
-## What is a canary deployment?
-
-A **[canary deployment](/docs/edge-stack/1.13/topics/using/canary/)** is designed to make sure that a "simple fix" or change to code won't kill your application. Like the proverbial canary being sent into the coal mine, only a small subset of users will be exposed to new code to test what happens. Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things, i.e. keeping the canary alive.
+A canary deployment is designed to make sure that a "simple fix" or change to code won't kill your application. Like the proverbial canary being sent into the coal mine, only a small subset of users will be exposed to new code to test what happens. Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things, i.e. keeping the canary alive.
 
 ## How do canary releases limit risk when rolling out software changes?
 

@@ -40,6 +40,11 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
         isValid ? product : 'emissary'
       }/${version}/${restOfFilePath}`;
       break;
+    case 'code':
+    case 'ship':
+    case 'run': 
+      dstUrl = 'https://github.com/datawire/ambassador-docs/blob/master/docs'
+      break; 
     default:
       dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${product}/${version}/${restOfFilePath}`;
       break;
