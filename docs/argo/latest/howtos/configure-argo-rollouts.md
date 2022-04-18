@@ -70,7 +70,7 @@ kubectl patch deployment -n argo-rollouts \
 ## 3. Create a manifests folder in your repository
 Inside of your repository, you will need a specific directory in which your manifests will live. If you don't already have one, create a directory called `manifests`. Inside of it add your existing services manifest files that you want to be able to use with Canary Releases, (for example, add a `service.yaml` file).
 
-An exmaple repository can be found [here](https://github.com/datawire/rollouts-demo). Otherwise, use the path of your existing folder that contains the manifests, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
+An example repository can be found [here](https://github.com/datawire/rollouts-demo). Otherwise, use the path of your existing folder that contains the manifests, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
 
 The annotations section of your `service.yaml` file should look something like the following:
 ```yaml
