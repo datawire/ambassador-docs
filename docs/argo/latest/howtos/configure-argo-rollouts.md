@@ -67,8 +67,8 @@ kubectl patch deployment -n argo-rollouts \
     -p '{"spec":{"template":{"spec":{"containers":[{"name":"argo-rollouts", "args":["--ambassador-api-version","getambassador.io/v3alpha1"]}]}}}}'
 ```
 
-## 3. Get a manifests folder in your repository
-Inside of your repository, you will need a specific directory in which your manifests will live. If you still don't have any, create a directory called `manifests`, and inside of it add your existing services manifests files that you want to be able to use with Canary Releases, (for example, add a `service.yaml` file). Otherwise, use the path of your existing folder that contains the manifests, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
+## 3. Create a manifests folder in your repository
+Inside of your repository, you will need a specific directory in which your manifests will live. If you still don't have any, create a directory called `manifests`, and inside of it add your existing services manifests files that you want to be able to use with Canary Releases, (for example, add a `service.yaml` file) an exmaple repository can be found [here](https://github.com/datawire/rollouts-demo). Otherwise, use the path of your existing folder that contains the manifests, relative to the root of your repository, in the `a8r.io/rollouts/scm.path` annotation.
 
 The annotations section of your `service.yaml` file should look something like the following:
 ```yaml
@@ -80,7 +80,7 @@ metadata:
     a8r.io/description: Demo service to try the rollout feature
     a8r.io/owner: Ambassador Labs
     a8r.io/documentation: https://www.getambassador.io/docs/cloud/latest/service-catalog/howtos/rollout/
-    a8r.io/repository: git@github.com:datawire/rollouts-demo.git
+    a8r.io/repository: git@github.com:<org>/<repo>.git
     a8r.io/support: http://a8r.io/slack
     a8r.io/rollouts.scm.path: manifests
     a8r.io/rollouts.scm.branch: main
@@ -95,7 +95,7 @@ metadata:
 
 ## 4. Apply the manifests in your cluster
 
-From your root of your locally forked rollouts-demo repository, apply the Kubernetes manifests to your cluster:
+From your root of your locally forked [rollouts-demo](https://github.com/datawire/rollouts-demo) repository, update the a8r.io/repository annotation from `git@github.com:datawire/rollouts-demo.git` to `git@gthub.com:<org>/<repo>.git`, then apply the Kubernetes manifests to your cluster with the command:
 
 ```
 kubectl apply -f ./manifests
