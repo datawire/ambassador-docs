@@ -1,5 +1,4 @@
 import Alert from '@material-ui/lab/Alert';
-import { StaticImage } from "gatsby-plugin-image"
 
 # Basic authentication
 
@@ -202,7 +201,7 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
 }
 ```
 
-## <StaticImage className="os-logo" src="../../images/logo.png"/> What's next?
+## <img class="os-logo" src="../../images/logo.png"/> What's next?
 
 * Get started with authentication by [installing $AESproductName$](../../tutorials/getting-started/).
 
