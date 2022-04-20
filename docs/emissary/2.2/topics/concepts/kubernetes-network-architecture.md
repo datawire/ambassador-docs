@@ -42,9 +42,9 @@ Each instance of your application is deployed in a Kubernetes pod. As the worklo
 
 When traffic is routed to the pods via a Kubernetes service, Kubernetes uses a built-in mechanism called `kube-proxy` to load balance traffic between the pods. Due to its implementation, `kube-proxy` is a Layer 4 proxy, i.e., it load balances at a connection level. For particular types of traffic such as HTTP/2 and gRPC, this form of load balancing is particularly problematic as it can easily result in a very uneven load balancing configuration.
 
-Traffic can also be routed directly to pods, bypassing the Kubernetes service. Since pods are much more ephemeral than Kubernetes services, this approach requires an edge proxy that is optimized for this use case. In particular, the edge proxy needs to support real-time discovery of pods, and be able to dynamically update pod locations without downtime.
+Traffic can also be routed directly to pods, bypassing the Kubernetes service. Since pods are much more ephemeral than [Kubernetes services](/resources/dev-workflow-intro/), this approach requires an edge proxy that is optimized for this use case. In particular, the edge proxy needs to support real-time discovery of pods, and be able to dynamically update pod locations without downtime.
 
-$productName$ supports routing both to Kubernetes services and directly to pods.
+$productName$ supports routing both to [Kubernetes services](/resources/getting-started-with-kubernetes-for-javascript-developers/) and directly to pods.
 
 ## Further reading
 
