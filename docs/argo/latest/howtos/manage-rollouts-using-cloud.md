@@ -11,7 +11,7 @@ For managing Rollouts in your cluster using Ambassador's Cloud the following req
 
 # Managing Rollouts Using Cloud
 
-As a developer, it is always important to keep an eye on deployment metrics to ensure everything is going smoothly. Rollouts can be paused or rolled back even after completion. Ambassador's Developer Control Plane enables you to manage your deployments with the click of a button.
+As a developer, it is always important to keep an eye on deployment metrics to ensure everything is going smoothly. Rollouts can be paused or rolled back even after completion. Ambassador Cloud enables you to manage your deployments with the click of a button.
 
 ## Understanding the health of Services and Rollouts
 

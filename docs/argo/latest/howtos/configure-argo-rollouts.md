@@ -111,7 +111,7 @@ In order to configure the repository and the container registry to use with roll
 ### 5.1 GitHub
 
 Click the **Enable** button in the GitHub section.
-You will be taken to github.com and asked in which account you want to install Ambassador DCP.
+You will be taken to github.com and asked in which account you want to install Ambassador Cloud.
 Select the account in which you forked the rollouts-demo repo.
 On the new page that opens scroll down to the "Repository access" section, and click on **Only select repositories**.
 Then click on the dropdown menu directly below this option and select your forked rollouts-demo repo.
