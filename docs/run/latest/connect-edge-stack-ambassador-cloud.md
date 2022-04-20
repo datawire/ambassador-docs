@@ -5,7 +5,7 @@ description: Connect Edge Stack to Ambassador Cloud.
 
 # Connecting Edge Stack to Ambassador Cloud
 
-The Ambassador Cloud's Developer Control Plane (DCP) provides an easy way to visualize and manage your services. With Ambassador Cloud, you can monitor services and clusters, manage deployments and rollouts, create mappings, and simplify your Kubernetes delivery cycles.
+ Ambassador Cloud provides an easy way to visualize and manage your services. With Ambassador Cloud, you can monitor services and clusters, manage deployments and rollouts, create mappings, and simplify your Kubernetes delivery cycles.
 
 To connect to Ambassador Cloud:
 
@@ -17,4 +17,4 @@ To connect to Ambassador Cloud:
 
 4. Follow the prompts to install the cloud token into your cluster.
 
-Ambassador Cloud now shows your connected services in the DCP. The power of Edge Stack, especially when combined with Telepresence and Argo in your DCP, allows you to quickly and easily harness the power of Ambassador Labs' capabilities.  
+Ambassador Cloud now shows your connected services. Now you can utilize the capabilities of Edge Stack combined with Ambassador Cloud to quickly and easily harness the power of Ambassador Labs' capabilities. Here you can visualize deployments, create mappings, and track rollouts with ease.  

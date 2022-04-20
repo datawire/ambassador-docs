@@ -15,7 +15,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # Automated Configuration Analysis with Ambassador Cloud
 
-Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
+Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With Ambassador Cloud, you can quickly and easily adopt a GitOps workflow without any custom engineering.
 
 This quick start walks you through how to configure Edge Stack or Emissary-ingress with automated configuration analysis, integrating checks into your GitOps pull request workflow. The automated configuration analysis will detect and resolve configuration issues _before_ your changes go live.
 
@@ -70,7 +70,7 @@ This will create a `Deployment`, `Service`, and `Mapping` in the `gitops-demo` n
 
 2. Click the **INTEGRATIONS** button to navigate to the Integration settings, then click the **CONFIGURE** GitHub settings button.
 
-3. Click **MANAGE PERMISSIONS** button. You will be taken to github.com and asked to choose which account you want to install Ambassador DCP.
+3. Click **MANAGE PERMISSIONS** button. You will be taken to github.com and asked to choose which account you want to install Ambassador Cloud.
 
 4. Select the account which contains the forked `a8r-gitops-example` demo repository.
 

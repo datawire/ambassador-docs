@@ -11,7 +11,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # Configuring Ambassador Cloud for GitOps
 
-Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With the Ambassador Developer Control Plane, you can quickly and easily adopt a GitOps workflow without any custom engineering.
+Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With Ambassador Cloud, you can quickly and easily adopt a GitOps workflow without any custom engineering.
 
 This quick start walks through how you can configure Edge Stack or Emissary-ingress with GitHub, integrate checks into your GitOps pull request workflow, create Mapping resources without an IDE, and generate preview URLs to share unreleased changes in opened pull requests with your colleagues.
 
@@ -45,7 +45,7 @@ You can now see all running services in your cluster at <a href="https://app.get
 
 2. Click the **INTEGRATIONS** button to navigate to the Integration settings, then click the **CONFIGURE** GitHub settings button.
 
-3. Click **MANAGE PERMISSIONS** button. This takes you to github.com where you can choose which account you want to install Ambassador DCP.
+3. Click **MANAGE PERMISSIONS** button. This takes you to github.com where you can choose which account you want to install Ambassador Cloud.
 
 4. Select the account that contains the git repositories with your Kubernetes manifest files and your application code.
 
