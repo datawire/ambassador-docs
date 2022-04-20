@@ -2,7 +2,7 @@
 
 Today's cloud-native applications may consist of hundreds of services, each of which are being updated at any time. Thus, many cloud-native organizations augment regression test strategies with testing in production using progressive delivery techniques.
 
-[Progressive Delivery is an approach](/learn/kubernetes-glossary/progressive-delivery/) for releasing software to production users. In the progressive delivery model, software is released to ever growing subsets of production users. This approach reduces the blast radius in the event of a failure.
+[Progressive Delivery](/learn/kubernetes-glossary/progressive-delivery/) is an approach for releasing software to production users. In the progressive delivery model, software is released to ever growing subsets of production users. This approach reduces the blast radius in the event of a failure.
 
 ## Why test in production?
 
@@ -10,7 +10,7 @@ Modern cloud applications are continuously deployed, as different teams rapidly 
 
 ## Progressive delivery strategies
 
-There are a number of different strategies for progressive delivery. These include:
+There are a number of different strategies for [progressive delivery](/docs/argo/latest/concepts/cicd/). These include:
 
 * Feature flags, where specific features are made available to specific user groups
 * Canary releases, where a (small) percentage of traffic is routed to a new version of a service before the service is full production
