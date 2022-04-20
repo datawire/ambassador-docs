@@ -11,11 +11,11 @@ To understand how to ship safely, it is important to understand the practiced of
 
 ## What is CI/CD? 
 
-Most software developers have experience with continuous integration/continuous delivery (CI/CD) practices. CI/CD is evolving to include progressive delivery and continuous deployment, which is why the growing list of terms causes occasional confusion. The same basic CI/CD principles persist, but progressive delivery strategies and continuous deployment patterns aim to automate deployment and release and give developers faster feedback loops and safer deployments.
+Most software developers have experience with continuous integration/continuous delivery (CI/CD) practices. CI/CD is evolving to include [progressive delivery](/learn/kubernetes-glossary/progressive-delivery/) and continuous deployment, which is why the growing list of terms causes occasional confusion. The same basic CI/CD principles persist, but progressive delivery strategies and continuous deployment patterns aim to automate deployment and release and give developers faster feedback loops and safer deployments.
 
 So, how do continuous integration/continuous delivery and progressive delivery/continuous deployment differ, and why is the distinction important? 
 
-**Continuous integration/continuous delivery (CI/CD)** is a familiar pattern for getting changes to features, configuration, and bug fixes, into production safely. Once these principles are integrated into your development practices, progressive delivery and continuous deployment become the logical extensions to the delivery and deployment landscape. CI/CD form a combined practice of integrating and delivering code into a production environment smoothly and consistently. 
+**Continuous integration/continuous delivery (CI/CD)** is a familiar pattern for getting changes to features, configuration, and bug fixes, into production safely. Once these principles are integrated into your development practices, [progressive delivery](/docs/edge-stack/latest/topics/concepts/progressive-delivery/) and continuous deployment become the logical extensions to the delivery and deployment landscape. CI/CD form a combined practice of integrating and delivering code into a production environment smoothly and consistently. 
 
 **Continuous integration (CI)** is the automation process and development practice that lets teams of developers introduce code changes to an application, run test suites for quality assurance, and build software artifacts on a continuous basis. 
 

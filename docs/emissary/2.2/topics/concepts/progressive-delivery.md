@@ -2,7 +2,7 @@
 
 Today's cloud-native applications may consist of hundreds of services, each of which are being updated at any time. Thus, many cloud-native organizations augment regression test strategies with testing in production using progressive delivery techniques.
 
-Progressive Delivery is an approach for releasing software to production users. In the progressive delivery model, software is released to ever growing subsets of production users. This approach reduces the blast radius in the event of a failure.
+[Progressive Delivery is an approach](/learn/kubernetes-glossary/progressive-delivery/) for releasing software to production users. In the progressive delivery model, software is released to ever growing subsets of production users. This approach reduces the blast radius in the event of a failure.
 
 ## Why test in production?
 

@@ -41,7 +41,7 @@ The self-service, continuous delivery model is critical for ensuring that edge o
 
 ## Continuous delivery, GitOps, and $productName$
 
-Adopting a continuous delivery workflow with $productName$ via GitOps provides several advantages:
+Adopting a continuous delivery workflow with $productName$ via [GitOps](/docs/argo/latest/concepts/gitops/) provides several advantages:
 
 1. **Reduced deployment risk**: By immediately deploying approved configuration into production, configuration issues can be rapidly identified. Resolving any issue is as simple as rolling back the change in source control.
 2. **Auditability**: Understanding the specific configuration of $productName$ is as simple as reviewing the configuration in the source control repository. Moreover, any changes made to the configuration will also be recorded, providing context on previous configurations.
@@ -57,8 +57,8 @@ In a typical $productName$ GitOps workflow:
 
 * Each service has its own $productName$ policy. This policy consists of one or more $productName$ custom resource definitions, specified in YAML.
 * This policy is stored in the same repository as the service, and managed by the service team.
-* Changes to the policy follow the GitOps workflow discussed above (e.g., pull request, approval, and continuous delivery).
-* Global configuration that is managed by operations are stored in a central repository alongside other cluster configuration. This repository is also set up for continuous delivery with a GitOps workflow.
+* Changes to the policy follow the [GitOps](/learn/kubernetes-glossary/gitops/) workflow discussed above (e.g., pull request, approval, and continuous delivery).
+* Global configuration that is managed by operations are stored in a central repository alongside other cluster configuration. This repository is also set up for continuous delivery with a [GitOps](/resources/cloud-native-workflow-gitops-and-kubernetes/) workflow.
 
 ## Further reading
 
