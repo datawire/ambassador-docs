@@ -8,7 +8,7 @@ import { FaqsSigIn, FaqsGoToCloud } from '../../../../../src/components/Docs/Clo
 
 **How can I see Service Catalog in action?**
 
-Check out our [demo video](https://www.youtube.com/watch?v=Osedx_ksD7Q)!
+Check out our [demo video](https://youtu.be/oUj6aWqP7jU)!
 
 **Why Service Catalog?**
 
