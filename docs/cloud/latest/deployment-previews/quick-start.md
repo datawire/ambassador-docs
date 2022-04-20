@@ -19,6 +19,18 @@ environments, deployment previews can handle as many development streams as you 
 
 <Alert severity="info"> The deployment previews are a licensed feature in Ambassador Cloud. For more information, refer to <a href="../../../../../editions/">Ambassador Labs' various service plans.</a> </Alert>
 
+## Deploy Preview Prerequisites
+
+* An application that can be deployed to K8s that is set up for GitOps:
+  * A repo that has all of the application code
+  * A declarative deployment configuration for that application (it could be in a second repo, or in the same one. In this tutorial, we use a second repo)
+* A cluster connected to Ambassador Cloud (and be running Edge Stack 2.2.x+)
+* Ambassador Cloud GitOps integration enabled on the repo containing the application code
+* Argo CD set up to sync the deployment configuration into the cluster
+* A container registry that has read/write permissions (we're using docker in this tutorial, but it could be any)
+
+**Does your environment look different?** We're actively working on making deployment previews more useful for more environments. Please let us know what your environment looks like. If you're an existing customer, please [create a ticket](https://support.datawire.io/); all other users please contact us [here](https://getambassador.io/deployment-preview-support).
+
 ## Setup
 
 To use deployment previews, you need to configure CI, Ambassador Cloud, and ArgoCD to work
