@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 Configuring $productName$ Communications
 ========================================
 
-For $productName$ to do its job of managing network communications for your services, it first needs to know how its own communications should be set up. This is handled by a combination of resources: the `Listener`, the `Host`, and the `TLSContext`.
+For [$productName$](../../about/alternatives/) to do its job of managing network communications for your services, it first needs to know how its own communications should be set up. This is handled by a combination of resources: the `Listener`, the `Host`, and the `TLSContext`.
 
 - `Listener`: defines where, and how, $productName$ should listen for requests from the network.
 - `Host`: defines which hostnames $productName$ should care about, and how to handle different kinds of requests for those hosts. `Host`s can be associated with one or more `Listener`s.
@@ -38,7 +38,7 @@ A Note on TLS
 -------------
 
 [TLS] can appear intractable if you haven't set up [certificates] correctly. If you're
-having trouble with TLS, always [check the logs] of your $productName$ Pods and look for
+having trouble with TLS, always [check the logs] of your [$productName$](../../topics/running/environment/) Pods and look for
 certificate errors.
 
 [TLS]: ../../topics/running/tls
@@ -240,7 +240,7 @@ This scenario uses TLS without ACME. Each of our two `Host`s uses a distinct TLS
 traffic to either`foo.example.com` or `bar.example.com` is routed, but this time `foo.example.com` will redirect
 HTTP requests, while `bar.example.com` will route them.
 
-Since this example does not use ACME, it is supported in $productName$ as well as $AESproductName$.
+Since this example does not use ACME, it is supported in [$productName$](/products/api-gateway/) as well as $AESproductName$.
 
 For demonstration purposes, we show this example listening for HTTPS on port 4848, using `X-Forwarded-Proto`.
 

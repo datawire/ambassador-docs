@@ -8,7 +8,7 @@ import Alert from '@material-ui/lab/Alert';
   This guide applies to $OSSproductName$, use of this guide with $AESproductName$ is not supported.  $AESproductName$ does <a href="/docs/edge-stack/latest/topics/using/filters/external/">authentication using the Filter resource</a> instead of the AuthService resource as described below.
 </Alert>
 
-$productName$ can authenticate incoming requests before routing them to a backing
+[$productName$](/products/api-gateway/) can authenticate incoming requests before routing them to a backing
 service. In this tutorial, we'll configure $productName$ to use an external third
 party authentication service. We're assuming also that you are running the
 quote application in your cluster as described in the
@@ -18,7 +18,7 @@ quote application in your cluster as described in the
 
 This tutorial assumes you have already followed the $productName$ [Installation](../../topics/install/) guide. If you haven't done that already, you should do so now.
 
-Once complete, you'll have a Kubernetes cluster running $productName$. Let's walk through adding authentication to this setup.
+Once complete, you'll have a Kubernetes cluster running [$productName$](../../topics/running/environment/). Let's walk through adding authentication to this setup.
 
 ## 1. Deploy the authentication service
 
@@ -30,7 +30,7 @@ $productName$ delegates the actual authentication logic to a third party authent
 - accepts only user `username`, password `password`; and
 - makes sure that the `x-qotm-session` header is present, generating a new one if needed.
 
-$productName$ routes _all_ requests through the authentication service: it relies on the auth service to distinguish between requests that need authentication and those that do not. If $productName$ cannot contact the auth service, it will return a 503 for the request; as such, **it is very important to have the auth service running before configuring $productName$ to use it.**
+[$productName$](/docs/emissary/) routes _all_ requests through the authentication service: it relies on the auth service to distinguish between requests that need authentication and those that do not. If $productName$ cannot contact the auth service, it will return a 503 for the request; as such, **it is very important to have the auth service running before configuring [$productName$](../../topics/running/) to use it.**
 
 Here's the YAML we'll start with:
 
@@ -116,7 +116,7 @@ spec:
   - "x-qotm-session"
 ```
 
-This configuration tells $productName$ about the auth service, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_*_headers` are optional.
+This configuration tells [$productName$](../../tutorials/getting-started/) about the auth service, notably that it needs the `/extauth` prefix, and that it's OK for it to pass back the `x-qotm-session` header. Note that `path_prefix` and `allowed_*_headers` are optional.
 
 If the auth service uses a framework like [Gorilla Toolkit](http://www.gorillatoolkit.org) which enforces strict slashes as HTTP path separators, it is possible to end up with an infinite redirect where the auth service's framework redirects any request with non-conformant slashing. This would arise if the above example had `path_prefix: "/extauth/"`, the auth service would see a request for `/extauth//backend/get-quote/` which would then be redirected to `/extauth/backend/get-quote/` rather than actually be handled by the authentication handler. For this reason, remember that the full path of the incoming request including the leading slash, will be appended to `path_prefix` regardless of non-conformant slashing.
 
