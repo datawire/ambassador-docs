@@ -19,7 +19,7 @@ environments, deployment previews can handle as many development streams as you 
 
 <Alert severity="info"> The deployment previews are a licensed feature in Ambassador Cloud. For more information, refer to <a href="../../../../../editions/">Ambassador Labs' various service plans.</a> </Alert>
 
-## Deployment Preview Prerequisites
+## Prerequisites
 
 * An application that can be deployed to K8s that is set up for GitOps:
   * A repo that has all of the application code
