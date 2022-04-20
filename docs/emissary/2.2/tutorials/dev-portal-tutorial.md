@@ -1,6 +1,6 @@
 # Dev Portal tutorial
 
-In this tutorial, you will access and explore some of the key features of the Dev Portal.
+In this tutorial, you will access and explore some of the key features of the [Dev Portal](/products/edge-stack/developer-portal/).
 
 ## Prerequisites
 

@@ -17,11 +17,11 @@ import Alert from '@material-ui/lab/Alert';
 
 </div>
 
-An Ingress resource is a popular way to expose Kubernetes services to the Internet. In order to use Ingress resources, you need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/). $productName$ can function as a fully-fledged Ingress controller, making it easy to work with other Ingress-oriented tools within the Kubernetes ecosystem.
+An Ingress resource is a popular way to expose Kubernetes services to the Internet. In order to use Ingress resources, you need to install an [ingress controller](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/). $productName$ can function as a fully-fledged [Ingress controller](/products/edge-stack/api-gateway/kubernetes-ingress-controller/), making it easy to work with other Ingress-oriented tools within the Kubernetes ecosystem.
 
 ## When and how to use the Ingress resource
 
-If you're new to $productName$ and to Kubernetes, we'd recommend you start with our [quickstart](../../../tutorials/getting-started/) instead of this Ingress guide. If you're a power user and need to integrate with other software that leverages the Ingress resource, read on. The Ingress specification is very basic and does not support many of the features of $productName$, so you'll be using both the Ingress resource and $productName$'s Mapping resource to manage your Kubernetes services.
+If you're new to $productName$ and to Kubernetes, we'd recommend you start with our [quickstart](../../../tutorials/getting-started/) instead of this Ingress guide. If you're a power user and need to integrate with other software that leverages the [Ingress](/learn/kubernetes-ingress/) resource, read on. The Ingress specification is very basic and does not support many of the features of $productName$, so you'll be using both the Ingress resource and $productName$'s Mapping resource to manage your Kubernetes services.
 
 ### What is required to use the Ingress resource?
 
@@ -60,7 +60,7 @@ If you're new to $productName$ and to Kubernetes, we'd recommend you start with 
     This is included by default in all $productName$ installations.
   </Alert>
 
-- You must create your Ingress resource with the correct `ingress.class`.
+- You must create your [Ingress](/use-case/kubernetes-ingress/) resource with the correct `ingress.class`.
 
   $productName$ will automatically read Ingress resources with the annotation
   `kubernetes.io/ingress.class: ambassador`.
@@ -188,7 +188,7 @@ spec:
 
 ### The minimal Ingress
 
-An Ingress resource must provide at least some routes or a [default backend](https://kubernetes.io/docs/concepts/services-networking/ingress/#default-backend). The default backend provides for a simple way to direct all traffic to some upstream service:
+An [Ingress](/learn/kubernetes-ingress/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers/) resource must provide at least some routes or a [default backend](https://kubernetes.io/docs/concepts/services-networking/ingress/#default-backend). The default backend provides for a simple way to direct all traffic to some upstream service:
 
 ```yaml
 ---

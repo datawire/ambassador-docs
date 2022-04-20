@@ -16,11 +16,11 @@ Author: [Matt Klein](https://blog.envoyproxy.io/@mattklein123?source=post_page--
 
 </div>
 
-There’s a dearth of introductory educational material available about modern network load balancing and proxying. Which doesn’t necessarily make much sense, since load balancing is one of the core concepts required for building reliable distributed systems. 
+There’s a dearth of introductory educational material available about modern network [load balancing](/learn/kubernetes-glossary/load-balancer/) and proxying. Which doesn’t necessarily make much sense, since load balancing is one of the core concepts required for building reliable distributed systems. 
 
 To illustrate: A quick [Google search for load balancing](https://www.google.com/search?q=load+balancing) primarily turns up vendor pages that are heavy on buzzwords and light on details. While the Wikipedia articles on [load balancing](https://en.wikipedia.org/wiki/Load_balancing_(computing)) and [proxy servers](https://en.wikipedia.org/wiki/Proxy_server) contain overviews of some concepts, there hasn’t really been a fluid treatment of the subject available anywhere—especially as it pertains to modern microservice architectures. 
 
-This piece attempts to rectify the lack of information by providing a gentle introduction to modern network load balancing and proxying. 
+This piece attempts to rectify the lack of information by providing a gentle introduction to modern network [load balancing](/learn/kubernetes-ingress/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers/) and proxying.
 
 
 ## What is network load balancing and proxying?
@@ -29,7 +29,7 @@ Wikipedia [defines](https://en.wikipedia.org/wiki/Load_balancing_(computing)) lo
 
 > In computing, load balancing improves the distribution of workloads across multiple computing resources, such as computers, a computer cluster, network links, central processing units, or disk drives. Load balancing aims to optimize resource use, maximize throughput, minimize response time, and avoid overload of any single resource. Using multiple components with load balancing instead of a single component may increase reliability and availability through redundancy. Load balancing usually involves dedicated software or hardware, such as a multilayer switch or a Domain Name System server process.
 
-The above definition applies to all aspects of computing—not just networks. Operating systems use load balancing to schedule tasks across physical processors. Container orchestrators, such as Kubernetes, use load balancing to schedule tasks across a compute cluster. And network load balancers use load balancing to schedule network tasks across available backends. 
+The above definition applies to all aspects of computing—not just networks. Operating systems use [load balancing](/learn/service-mesh/resilience-for-distributed-systems/) to schedule tasks across physical processors. Container orchestrators, such as Kubernetes, use load balancing to schedule tasks across a compute cluster. And network load balancers use load balancing to schedule network tasks across available backends. 
 
 The remainder of this post will cover network load balancing only.
 
