@@ -17,7 +17,7 @@ In this guide we'll give you everything you need to perform a canary rollout in 
 * [Prerequisites](#prerequisites)
 * [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
 * [2. Install Argo CD & Argo Rollouts](#2-install-argo-cd--argo-rollouts)
-* [3. Update the service manifests with the proper git repo and branch](#3-get-a-manifests-folder-in-your-repository)
+* [3. Update the service manifests with the proper git repo and branch](#3-create-a-manifests-folder-in-your-repository)
 * [4. Apply the manifests in your cluster](#4-apply-the-manifests-in-your-cluster)
 * [5. Configure Your Repository And Container Registry](#5-configure-your-repository-and-container-registry)
 * [6. Configure Argo CD](#6-configure-argo-cd)
