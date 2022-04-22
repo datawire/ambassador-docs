@@ -134,7 +134,7 @@ Now you're able to share your fix in your local environment with your team!
 </Alert>
 
 <Alert severity="info">
-    To get more information regarding Preview URLs and intercepts, visit the <DCPLink>Developer Control Plane </DCPLink>.
+    To get more information regarding Preview URLs and intercepts, visit  <DCPLink>Ambassador Cloud</DCPLink>.
 </Alert>
 
 </div>

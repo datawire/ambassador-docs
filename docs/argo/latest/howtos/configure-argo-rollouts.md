@@ -17,7 +17,7 @@ In this guide we'll give you everything you need to perform a canary rollout in 
 * [Prerequisites](#prerequisites)
 * [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
 * [2. Install Argo CD & Argo Rollouts](#2-install-argo-cd--argo-rollouts)
-* [3. Update the service manifests with the proper git repo and branch](#3-get-a-manifests-folder-in-your-repository)
+* [3. Update the service manifests with the proper git repo and branch](#3-create-a-manifests-folder-in-your-repository)
 * [4. Apply the manifests in your cluster](#4-apply-the-manifests-in-your-cluster)
 * [5. Configure Your Repository And Container Registry](#5-configure-your-repository-and-container-registry)
 * [6. Configure Argo CD](#6-configure-argo-cd)
@@ -82,7 +82,7 @@ metadata:
     a8r.io/description: Demo service to try the rollout feature
     a8r.io/owner: Ambassador Labs
     a8r.io/documentation: https://www.getambassador.io/docs/cloud/latest/service-catalog/howtos/rollout/
-    a8r.io/repository: git@github.com:<YOUR_ORG>/<YOUR_REPO>.git
+    a8r.io/repository: git@github.com:<YOUR_ORG>/<YOUR_REPO>.git    
     a8r.io/support: http://a8r.io/slack
     a8r.io/rollouts.scm.path: manifests
     a8r.io/rollouts.scm.branch: main
@@ -113,7 +113,7 @@ In order to configure the repository and the container registry to use with roll
 ### 5.1 GitHub
 
 Click the **Enable** button in the GitHub section.
-You will be taken to github.com and asked in which account you want to install Ambassador DCP.
+You will be taken to github.com and asked in which account you want to install Ambassador Cloud.
 Select the account in which you forked the rollouts-demo repo.
 On the new page that opens scroll down to the "Repository access" section, and click on **Only select repositories**.
 Then click on the dropdown menu directly below this option and select your forked rollouts-demo repo.

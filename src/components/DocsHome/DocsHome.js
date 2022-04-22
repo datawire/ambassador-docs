@@ -74,6 +74,7 @@ const DocsHome = () => {
           getStarted={goToCodeDocs}
           docDescription={'Advanced Telepresence documentation'}
           docImage={Telepresence}
+          docLink={'/docs/telepresence/'}
         />
         <Product
           title={'Ship with Argo'}
@@ -84,6 +85,7 @@ const DocsHome = () => {
           getStarted={goToShipDocs}
           docDescription={'Advanced Argo documentation'}
           docImage={Argo}
+          docLink={'/docs/argo/'}
         />
         <Product
           title={'Run with Edge Stack'}
@@ -94,6 +96,7 @@ const DocsHome = () => {
           getStarted={goToRunDocs}
           docDescription={'Advanced Edge Stack documentation'}
           docImage={EdgeStack}
+          docLink={'/docs/edge-stack/'}
         />
       </div>
     </div>

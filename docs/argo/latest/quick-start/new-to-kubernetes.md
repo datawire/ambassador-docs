@@ -53,7 +53,7 @@ Make sure to sign in to Ambassador Cloud <strong>with your GitHub username</stro
 
 1. In Ambassador Cloud, go to the <a href="https://app.getambassador.io/cloud/demo-cluster-rollouts?step=integration" target="_blank">Teams Settings page</a> and click the **Integrations** button for your current team.
 1. Click the **Enable** button in the GitHub section, or the **Configure** button in case that you already have the app installed.
-1. You will be taken to github.com and asked in which account you want to install Ambassador DCP.
+1. You will be taken to github.com and asked in which account you want to install Ambassador Cloud.
 1. Select your personal account. The personal account is the one that has the same name as your GitHub username.
 1. Select the **All repositories** option. Full access is required in order to fork a repo on your behalf for the demo application.
 1. Click **Install** and you will be taken back to the Ambassador Cloud.

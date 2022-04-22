@@ -3,7 +3,7 @@ import { LogInText } from '../../../../../../src/components/Docs/LogInText';
 
 # Manage my Cells
 
-The Developer Control Plane (DCP) associates Kubernetes clusters with Cells.
+Ambassador Cloud associates Kubernetes clusters with Cells.
 
 When you first generate an API key for a cluster, and you added that key to your cluster, the cluster will start reporting the services, we will create as many Cells as namespaces you have in your Cluster, the cell names will be the same as the namespaces, If you do not like the names, do not worry you will be able to rename it.
 
