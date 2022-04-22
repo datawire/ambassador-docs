@@ -18,7 +18,7 @@ import GettingStartedEmissary21Tabs from './gs-tabs'
 
 ## 1. Installation
 
-We'll start by installing $productName$ into your cluster.
+We'll start by installing [$productName$](/products/api-gateway/) into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
@@ -42,7 +42,7 @@ Now is a great moment to connect your new installation to Ambassador Cloud in or
 
 ## 2. Routing traffic from the edge
 
-$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells $productName$ what port to listen on, and the `Mapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
+[$productName$](../../howtos/basic-auth/) uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells $productName$ what port to listen on, and the `Mapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
 
 1. Start by creating a `Listener` resource for HTTP on port 8080:
 
@@ -79,7 +79,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
-3. Generate the YAML for a `Mapping` to tell $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
+3. Generate the YAML for a `Mapping` to tell [$productName$](../quickstart-demo/) to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
   In this step, we'll be using the Mapping Editor, which you can find in the service details view of your [Ambassador Cloud connected installation](#connecting-your-installation-to-ambassador-cloud).
   Open your browser to https://app.getambassador.io/cloud/services/quote/details and click on **New Mapping**.

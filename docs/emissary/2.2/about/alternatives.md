@@ -1,6 +1,6 @@
 # $productName$ vs. other software
 
-Alternatives to $productName$ fall into three basic categories:
+Alternatives to [$productName$](/products/api-gateway/) fall into three basic categories:
 
 * Hosted API gateways, such as the [Amazon API gateway](https://aws.amazon.com/api-gateway/).
 * Traditional API gateways, such as [Kong](https://konghq.org/).

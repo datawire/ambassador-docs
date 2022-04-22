@@ -11,7 +11,7 @@ $productName$ is a specialized [control plane for Envoy Proxy](https://blog.geta
 1. The service owner defines configuration in Kubernetes manifests.
 2. When the manifest is applied to the cluster, the Kubernetes API notifies $productName$ of the change.
 3. $productName$ parses the change and transforms the configuration into a semantic intermediate representation. Envoy configuration is generated from this IR.
-4. The new configuration is passed to Envoy via the gRPC-based Aggregated Discovery Service (ADS) API.
+4. The new configuration is passed to Envoy via the [gRPC](../../../howtos/grpc/)-based Aggregated Discovery Service (ADS) API.
 5. Traffic flows through the reconfigured Envoy, without dropping any connections.
 
 ## Scaling and availability
@@ -20,8 +20,8 @@ $productName$ relies on Kubernetes for scaling, high availability, and persisten
 
 ### Stateless architecture
 
-By design, $productName$ is an entirely stateless architecture. Each individual $productName$ instance operates independently of other instances. These $productName$ instances rely on Kubernetes to coordinate the configuration between the different $productName$ instances. This enables $productName$ to sidestep the need to engineer a safe, highly available centralized control plane (and if you don't think that this is hard, check out [Jepsen](https://jepsen.io)). By contrast, other control plane architectures rely on a single centralized control plane to manage multiple instances of the data plane. This means that these control plane architectures must engineer resilience and availability into their central control plane.
+By design, $productName$ is an entirely stateless architecture. Each individual $productName$ instance operates independently of other instances. These $productName$ instances rely on Kubernetes to coordinate the configuration between the different $productName$ instances. This enables [$productName$](../../../tutorials/getting-started/) to sidestep the need to engineer a safe, highly available centralized [control plane](/developer-control-plane/) (and if you don't think that this is hard, check out [Jepsen](https://jepsen.io)). By contrast, other control plane architectures rely on a single centralized control plane to manage multiple instances of the data plane. This means that these control plane architectures must engineer resilience and availability into their central control plane.
 
 ## Envoy Proxy
 
-$productName$ closely tracks Envoy Proxy releases. A stable branch of Envoy Proxy is maintained that enables the team to cherry-pick specific fixes into $productName$.
+$productName$ closely tracks Envoy Proxy releases. A stable branch of [Envoy Proxy](/resources/getting-started-envoyproxy-microservices-resilience/) is maintained that enables the team to cherry-pick specific fixes into $productName$.

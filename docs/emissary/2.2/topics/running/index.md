@@ -1,6 +1,6 @@
 # Running $productName$ in production
 
-This section of the documentation is designed for operators and site reliability engineers who are managing the deployment of $productName$. Learn more below:
+This section of the documentation is designed for operators and site reliability engineers who are managing the deployment of [$productName$](/products/api-gateway/). Learn more below:
 
 * *Global Configuration:* The [Ambassador module](ambassador) is used to set system-wide configuration.
 * *Exposing $productName$ to the Internet:* The [`Listener` CRD](listener) defines which ports are exposed, including their protocols and security models. The [`Host` CRD](host-crd) defines how $productName$ manages TLS, domains, and such.
@@ -12,5 +12,5 @@ This section of the documentation is designed for operators and site reliability
 * *Extending $productName$* $productName$ can be extended with custom plug-ins that connect via HTTP/gRPC interfaces. [Custom Authentication](services/auth-service) | [The External Auth protocol](services/ext_authz) | [Custom Logging](services/log-service) | [Rate Limiting](services/rate-limit-service) | [Distributed Tracing](services/tracing-service)
 * *Troubleshooting:* [Diagnostics](diagnostics) | [Debugging](debugging)
 * *Scaling $productName$:* [Scaling $productName$](scaling)
-* *Ingress:* $productName$ can function as an [Ingress Controller](ingress-controller)
+* *Ingress:* [$productName$](scaling) can function as an [Ingress Controller](ingress-controller)
 * *Error Response Overrides:* $productName$ can override 4xx and 5xx responses with [custom response bodies](custom-error-responses)

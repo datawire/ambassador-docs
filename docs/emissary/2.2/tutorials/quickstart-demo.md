@@ -1,6 +1,6 @@
 # $productName$ Tutorial
 
-In this article, you will explore some of the key features of $productName$ by walking through an example workflow and exploring the
+In this article, you will explore some of the key features of [$productName$](/products/api-gateway/) by walking through an example workflow and exploring the
 Edge Policy Console.
 
 ## Prerequisites
@@ -11,7 +11,7 @@ Kubernetes cluster.
 ## Routing Traffic from the Edge
 
 Like any other Kubernetes object, Custom Resource Definitions (CRDs) are used to
-declaratively define $productName$’s desired state. The workflow you are going to
+declaratively define [$productName$](../../topics/running/)’s desired state. The workflow you are going to
 build uses a sample deployment and the `Mapping` CRD, which is the core resource
 that you will use with $productName$ to manage your edge. It enables you to route
 requests by host and URL path from the edge of your cluster to Kubernetes services.
@@ -63,7 +63,7 @@ the `quote` deployment and a service to expose that deployment on port 80.
 1. Apply the configuration to the cluster with the command `kubectl apply -f quote.yaml`.
 
 1. Copy the configuration below and save it to a file called `quote-backend.yaml`
-so that you can create a `Mapping` on your cluster. This `Mapping` tells $productName$ to route all traffic inbound to the `/backend/` path, on any host that can be used to reach $productName$, to the `quote` service.
+so that you can create a `Mapping` on your cluster. This `Mapping` tells [$productName$](../../howtos/basic-auth/) to route all traffic inbound to the `/backend/` path, on any host that can be used to reach $productName$, to the `quote` service.
 
   ```yaml
   ---
@@ -100,7 +100,7 @@ balancer.
   }
   ```
 
-Success, you have created your first $productName$ `Mapping`, routing a
+Success, you have created your first [$productName$](../../topics/running/scaling/) `Mapping`, routing a
 request from your cluster's edge to a service!
 
 Since the `Mapping` you just created controls how requests are routed,
