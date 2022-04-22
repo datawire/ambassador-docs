@@ -85,7 +85,7 @@ If `domain` is not specified (which is the situation here), the default is `amba
 
 ## 2. Configure $productName$ Mappings
 
-$productName$ only validates requests on `Mapping`s which set labels to use for [rate limiting](../../topics/using/rate-limits/rate-limits/),
+$productName$ only validates requests on `Mapping`s which set labels to use for [rate limiting](../../topics/running/services/rate-limit-service/),
 so you'll need to apply `labels` to your `Mapping`s to enable rate limiting. For more information
 on the labelling process, see the [Rate Limits configuration documentation](../../topics/using/rate-limits/).
 

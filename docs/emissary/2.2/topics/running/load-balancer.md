@@ -93,7 +93,7 @@ Configuring sticky sessions makes $productName$ route requests to a specific pod
 - Header
 - Source IP
 
-**NOTE:** $productName$ supports sticky sessions using two [load balancing](../../concepts/modernlb/) policies, `ring_hash` and `maglev`.
+**NOTE:** $productName$ supports sticky sessions using two [load balancing](../../../../../envoy/latest/concepts/modernlb) policies, `ring_hash` and `maglev`.
 
 ### Cookie
 

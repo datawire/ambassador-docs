@@ -235,7 +235,7 @@ A middle proxy is also often a black box that makes operations difficult. Is an 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 5: Edge proxy load balancing topology</strong>
 
-The edge proxy topology shown in Figure 5 is really just a variant of the middle proxy topology in which the load balancer is accessible via the internet. In this scenario, the load balancer typically must provide additional “API gateway” features such as [TLS termination](../../howtos/tls-termination/), rate limiting, authentication, and sophisticated traffic routing. 
+The edge proxy topology shown in Figure 5 is really just a variant of the middle proxy topology in which the load balancer is accessible via the internet. In this scenario, the load balancer typically must provide additional “API gateway” features such as [TLS termination](../../../../edge-stack/latest/howtos/tls-termination), rate limiting, authentication, and sophisticated traffic routing. 
 
 The pros and cons of the edge proxy are the same as the middle proxy. A caveat is that it is typically unavoidable to deploy a dedicated edge proxy in a large internet-facing distributed system. Clients typically need to access the system over DNS using arbitrary network libraries that the service owner does not control (making the embedded client library or sidecar proxy topologies described in the following sections impractical to run directly on the client). 
 
