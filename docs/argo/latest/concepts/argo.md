@@ -17,6 +17,6 @@
 
 **[Argo Rollouts](../../quick-start/)** is a progressive delivery controller created for Kubernetes. Argo Rollouts facilitates progressive deployment techniques for rolling updates, including canary deployments, blue/green deployments, A/B tests, and more. 
 
-Within a GitOps context, Argo makes application deployment and lifecycle management easier, particularly as the line between developers and operators disappears, because it automates deployment, makes rollbacks easier and is auditable for easier troubleshooting.
+Within a [GitOps](/learn/kubernetes-glossary/gitops/) context, Argo makes application deployment and lifecycle management easier, particularly as the line between developers and operators disappears, because it automates deployment, makes rollbacks easier and is auditable for easier troubleshooting.
 
 
