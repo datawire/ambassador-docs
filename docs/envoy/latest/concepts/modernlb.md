@@ -96,7 +96,7 @@ In the previous scenario, _the backend selected to handle client A will be handl
 
 This is a large problem and generally defeats the purpose of load balancing in the first place. It’s also worth noting that this problem happens for any _multiplexing, kept-alive_ protocol. (Multiplexing means sending concurrent application requests over a single L4 connection, and kept-alive means not closing the connection when there are no active requests.)
 
-All modern protocols are evolving to be both multiplexing and kept-alive for efficiency reasons (e.g., it is generally expensive to create connections—especially when the connections are encrypted using TLS). That being the case, the L4 load balancer impedance mismatch is becoming more pronounced over time. 
+All modern protocols are evolving to be both multiplexing and kept-alive for efficiency reasons (e.g., it is generally expensive to create connections—especially when the connections are encrypted using [TLS](/docs/edge-stack/latest/topics/running/tls/)). That being the case, the L4 load balancer impedance mismatch is becoming more pronounced over time. 
 
 This problem is fixed by the L7 load balancer.
 
@@ -119,7 +119,7 @@ For example, for HTTP traffic, consider the following sublayers:
 
 
 
-*   Optional Transport Layer Security (TLS). (Note that networking people argue about which OSI layer TLS falls into. For the sake of this discussion we will consider TLS L7.)
+*   Optional [Transport Layer Security (TLS)](/learn/kubernetes-glossary/tls/). (Note that networking people argue about which OSI layer TLS falls into. For the sake of this discussion we will consider TLS L7.)
 *   Physical HTTP protocol (HTTP/1 or HTTP/2).
 *   Logical HTTP protocol (e.g., headers, body data, and trailers).
 *   Messaging protocol (gRPC, REST, etc.).
@@ -235,7 +235,7 @@ A middle proxy is also often a black box that makes operations difficult. Is an 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 5: Edge proxy load balancing topology</strong>
 
-The edge proxy topology shown in Figure 5 is really just a variant of the middle proxy topology in which the load balancer is accessible via the internet. In this scenario, the load balancer typically must provide additional “API gateway” features such as TLS termination, rate limiting, authentication, and sophisticated traffic routing. 
+The edge proxy topology shown in Figure 5 is really just a variant of the middle proxy topology in which the load balancer is accessible via the internet. In this scenario, the load balancer typically must provide additional “API gateway” features such as [TLS termination](../../howtos/tls-termination/), rate limiting, authentication, and sophisticated traffic routing. 
 
 The pros and cons of the edge proxy are the same as the middle proxy. A caveat is that it is typically unavoidable to deploy a dedicated edge proxy in a large internet-facing distributed system. Clients typically need to access the system over DNS using arbitrary network libraries that the service owner does not control (making the embedded client library or sidecar proxy topologies described in the following sections impractical to run directly on the client). 
 
@@ -561,7 +561,7 @@ To summarize, the key takeaways of this post are:
 *   Both L4 and L7 load balancers are relevant in modern architectures.
 *   L4 load balancers are moving towards horizontally scalable distributed consistent hashing solutions.
 *   L7 load balancers are being heavily invested in recently due to the proliferation of dynamic microservice architectures.
-*   Global load balancing and a split between the control plane and the data plane is the future of load balancing and where the majority of future innovation and commercial opportunities will be found.
+*   Global load balancing and a split between the [control plane](/developer-control-plane/) and the data plane is the future of load balancing and where the majority of future innovation and commercial opportunities will be found.
 *   The industry is aggressively moving toward commodity OSS hardware and software for networking solutions. It appears as though traditional load balancing vendors like F5 will be displaced first by open source software and cloud vendors. Traditional router/switch vendors—such as Arista and Cumulus—have a larger runway in on-prem deployments but ultimately will also be displaced by the public cloud vendors and their homegrown physical networks.
 
 Overall, this is a fascinating time in computer networking! 

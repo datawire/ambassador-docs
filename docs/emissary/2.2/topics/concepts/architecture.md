@@ -24,4 +24,4 @@ By design, $productName$ is an entirely stateless architecture. Each individual 
 
 ## Envoy Proxy
 
-$productName$ closely tracks Envoy Proxy releases. A stable branch of Envoy Proxy is maintained that enables the team to cherry-pick specific fixes into $productName$.
+$productName$ closely tracks Envoy Proxy releases. A stable branch of [Envoy Proxy](/resources/getting-started-envoyproxy-microservices-resilience/) is maintained that enables the team to cherry-pick specific fixes into $productName$.

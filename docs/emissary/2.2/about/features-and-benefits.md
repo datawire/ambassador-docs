@@ -24,11 +24,11 @@ $productName$ uses [Envoy](https://www.envoyproxy.io) for all traffic routing an
 
 ## gRPC and HTTP/2 support
 
-$productName$ fully supports gRPC and HTTP/2 routing, thanks to Envoy's extensive capabilities in this area. See [gRPC and $productName$](../../howtos/grpc) for more information.
+$productName$ fully supports [gRPC](../../howtos/grpc/) and HTTP/2 routing, thanks to Envoy's extensive capabilities in this area. See [gRPC and $productName$](../../howtos/grpc) for more information.
 
 ## Istio Integration
 
-$productName$ integrates with the [Istio](https://istio.io) service mesh as the edge proxy. In this configuration, $productName$ routes external traffic to the internal Istio service mesh. See [Istio and $productName$](../../howtos/istio) for details.
+$productName$ integrates with the [Istio](https://istio.io) service mesh as the edge proxy. In this configuration, $productName$ routes external traffic to the internal Istio [service mesh](/learn/service-mesh/). See [Istio and $productName$](../../howtos/istio) for details.
 
 ## Authentication
 
@@ -36,7 +36,7 @@ $productName$ supports authenticating incoming requests using a custom authentic
 
 ## Rate limiting
 
-$productName$ supports rate limiting incoming requests. When configured, the $productName$ will check with a third party rate limit service prior to routing an incoming request. For more information, see the [rate limiting guide](../../topics/using/rate-limits/).
+$productName$ supports [rate limiting](../../topics/running/services/rate-limit-service/) incoming requests. When configured, the $productName$ will check with a third party rate limit service prior to routing an incoming request. For more information, see the [rate limiting guide](../../topics/using/rate-limits/).
 
 ## Integrated UI
 

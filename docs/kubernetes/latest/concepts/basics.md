@@ -2,14 +2,14 @@
 
 [Kubernetes](../../../../edge-stack/latest/topics/concepts/kubernetes-network-architecture/) (or K8s) is an open-source platform for managing containerized workloads and services. Containers hold the entire runtime environment, that is, an application and all of its dependencies, libraries and configuration files. This makes them portable and predictable across different computing environments.
 
-Experienced developers will at least be familiar with the concepts of cloud-native application development, containers and Kubernetes, but may not know a lot more than that if it hasn’t been part of their work. Cloud native and containerization form a different way of approaching software development, but developers have led the charge in adopting this approach because of its speed and flexibility. Kubernetes in particular has become the de facto standard for cloud-native application development and orchestration largely because of its speed and modularity.
+Experienced developers will at least be familiar with the concepts of cloud-native application development, containers and Kubernetes, but may not know a lot more than that if it hasn’t been part of their work. [Cloud native](/learn/kubernetes-glossary/cloud-native/) and containerization form a different way of approaching software development, but developers have led the charge in adopting this approach because of its speed and flexibility. Kubernetes in particular has become the de facto standard for cloud-native application development and orchestration largely because of its speed and modularity.
 
 Developers benefit from having at least a basic understanding of Kubernetes as the development landscape shifts to embrace:
 
 *   Containerized workloads and increased automation
 *   The write-once, run-everywhere concept and the elimination of complex dependencies or incompatibilities in or across different systems
 *   Shared responsibility for managing deployments (operational activities become developer responsibilities)
-*   Easier deployment through fully automated rollouts and rollbacks with fine-grained observability and no downtime/minimal end-user disruption
+*   Easier deployment through fully automated [rollouts](/docs/argo/latest/reference/rolloutcrd/) and rollbacks with fine-grained observability and no downtime/minimal end-user disruption
 *   Faster feedback: Continuous code deployment and near-instant feedback
 
 Kubernetes also offers developers potential solutions to issues with standard development practices, enabling:

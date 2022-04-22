@@ -36,6 +36,6 @@ Continuous monitoring and syncing helps to eliminate the common problem of confi
 *   Increased speed of delivery 
 *   Reduced deployment complexity
 
-Progressive delivery relies on automated rollouts to incrementally and iteratively release features and easily roll back if needed. This is designed to make the process safe and reduce the blast radius of any problems. Making the progressive delivery process easier, or more developer friendly, is where GitOps shines. Using GitOps means that everything is defined as code, which lives in Git. 
+[Progressive delivery](../cicd/) relies on automated [rollouts](../../howtos/configure-argo-rollouts/) to incrementally and iteratively release features and easily roll back if needed. This is designed to make the process safe and reduce the blast radius of any problems. Making the progressive delivery process easier, or more developer friendly, is where GitOps shines. Using GitOps means that everything is defined as code, which lives in Git. 
 
 Argo is the unifying factor, as it enables applying [GitOps](https://www.getambassador.io/docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/) workflows to progressive delivery techniques, such as [canary deployments](https://blog.argoproj.io/deploying-argo-rollouts-with-ambassador-for-canary-releases-on-kubernetes-f5910ed1fd61).

@@ -20,7 +20,7 @@ Each of the components in this topology is discussed in further detail below.
 
 The load balancer is deployed outside of the Kubernetes cluster. Typically, the load balancer also has one or more static IP addresses assigned to it. A DNS entry is then created to map a domain name (e.g., example.com) to the static IP address.
 
-Cloud infrastructure providers such as Amazon Web Services, Azure, Digital Ocean, and Google make it easy to create these load balancers directly from Kubernetes. This is done by creating a Kubernetes service of `type: LoadBalancer`. When this service is created, the cloud provider will use the metadata contained in the Kubernetes service definition to provision a load balancer.
+Cloud infrastructure providers such as Amazon Web Services, Azure, Digital Ocean, and Google make it easy to create these [load balancers](/learn/kubernetes-glossary/load-balancer/) directly from Kubernetes. This is done by creating a Kubernetes service of `type: LoadBalancer`. When this service is created, the cloud provider will use the metadata contained in the Kubernetes service definition to provision a load balancer.
 
 If the Kubernetes cluster is deployed in a private data center, an external load balancer is still generally used. Provisioning of this load balancer usually requires the involvement of the data center operations team.
 
@@ -28,7 +28,7 @@ In both the private data center and cloud infrastructure case, the external load
 
 ### Edge Proxy / ingress controller
 
-The Edge Proxy is typically a Layer 7 proxy that is deployed directly in the cluster. The core function of the edge proxy is to accept incoming traffic from the external load balancer and route the traffic to Kubernetes services. The edge proxy should be configured using Kubernetes manifests. This enables a common management workflow for both the edge proxy and Kubernetes services.
+The Edge Proxy is typically a [Layer 7](/learn/kubernetes-glossary/layer-7/) proxy that is deployed directly in the cluster. The core function of the edge proxy is to accept incoming traffic from the external load balancer and route the traffic to Kubernetes services. The edge proxy should be configured using Kubernetes manifests. This enables a common management workflow for both the edge proxy and Kubernetes services.
 
 The most popular approach to configuring edge proxies is with the Kubernetes ingress resource. When an edge proxy can process ingress resources, it is called an ingress controller. Not all edge proxies are ingress controllers (because they can't process ingress resources), but all ingress controllers are edge proxies.
 
