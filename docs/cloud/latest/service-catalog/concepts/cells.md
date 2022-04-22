@@ -1,6 +1,6 @@
 # Cells
 
-Most SaaS businesses often have a variety of environments for the various stages of their development process. This includes environments for development, integration and QA testing, and multiple production environments. With Developer Control Plane (DCP) Cells, Ambassador Labs offers a clearer way to visualize and manage the application lifecycle.
+Most SaaS businesses often have a variety of environments for the various stages of their development process. This includes environments for development, integration and QA testing, and multiple production environments. With Developer [Control Plane](/developer-control-plane/) (DCP) Cells, Ambassador Labs offers a clearer way to visualize and manage the application lifecycle.
 
 In DCP, a Cell is a complete, independent instance of the entire application. With Cells your applications are not limited to the standard Development, Staging and Production lifecycle. Cells give you the freedom to configure the lifecycle what works best for your application.
 

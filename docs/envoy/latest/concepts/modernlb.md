@@ -64,7 +64,7 @@ The types of load balancer topologies are discussed in detail below, but this po
 
 ### L4 (connection/session) load balancing
 
-When discussing load balancing across the industry today, solutions are often bucketed into two categories: L4 and L7. These categories refer to layer 4 and layer 7 of the [OSI model](https://en.wikipedia.org/wiki/OSI_model). For reasons that will become obvious when discussing L7 load balancing below, it’s unfortunate that these are the terms that are used. 
+When discussing load balancing across the industry today, solutions are often bucketed into two categories: L4 and L7. These categories refer to layer 4 and [layer 7](/learn/kubernetes-glossary/layer-7/) of the [OSI model](https://en.wikipedia.org/wiki/OSI_model). For reasons that will become obvious when discussing L7 load balancing below, it’s unfortunate that these are the terms that are used. 
 
 The OSI model is a very poor approximation of the complexity of load balancing solutions that include traditional layer 4 protocols, such as TCP and UDP, but often end up including bits and pieces of protocols at a variety of different OSI layers. 
 

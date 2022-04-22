@@ -30,7 +30,7 @@ In both the private data center and cloud infrastructure case, the external load
 
 The Edge Proxy is typically a [Layer 7](/learn/kubernetes-glossary/layer-7/) proxy that is deployed directly in the cluster. The core function of the edge proxy is to accept incoming traffic from the external load balancer and route the traffic to [Kubernetes services](/docs/cloud/latest/service-catalog/quick-start/). The edge proxy should be configured using Kubernetes manifests. This enables a common management workflow for both the edge proxy and Kubernetes services.
 
-The most popular approach to configuring edge proxies is with the Kubernetes ingress resource. When an edge proxy can process ingress resources, it is called an ingress controller. Not all edge proxies are ingress controllers (because they can't process ingress resources), but all ingress controllers are edge proxies.
+The most popular approach to configuring edge proxies is with the [Kubernetes ingress](/learn/kubernetes-ingress/) resource. When an edge proxy can process ingress resources, it is called an ingress controller. Not all edge proxies are ingress controllers (because they can't process ingress resources), but all ingress controllers are edge proxies.
 
 The ingress resource is a Kubernetes standard. As such, it is a lowest common denominator resource. In practice, users find that the ingress resource is insufficient in scope to address the requirements for edge routing. Semantics such as TLS termination, redirecting to [TLS](../../../topics/running/tls/), timeouts, [rate limiting](../../../topics/using/rate-limits/), and authentication are all beyond the scope of the ingress resource.
 

@@ -40,7 +40,7 @@ A **cluster** is a set of nodes for running containerized apps.
 
 **Nodes** are VMs or physical servers where Kubernetes runs containers. There are two types:
 
-_Master nodes_ are home to ‘control plane’ functions and services and where the desired state of a cluster is maintained by managing the scheduling of pods across various worker nodes.
+_Master nodes_ are home to ‘[control plane](/developer-control-plane/)’ functions and services and where the desired state of a cluster is maintained by managing the scheduling of pods across various worker nodes.
 
 _Worker nodes_ are where an application actually runs.
 
