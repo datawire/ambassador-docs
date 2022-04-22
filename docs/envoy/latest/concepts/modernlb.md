@@ -48,7 +48,7 @@ Proper use of load balancing in a distributed system provides several benefits:
 
 
 
-*   **Naming abstraction:** Instead of every client needing to know about every backend (i.e., service discovery), the client can address the load balancer via a predefined mechanism and then the act of name resolution can be delegated to the load balancer. The predefined mechanisms include built-in libraries and well-known DNS/IP/port locations and will be discussed in more detail below.
+*   **Naming abstraction:** Instead of every client needing to know about every backend (i.e., [service discovery](/resources/service-discovery-microservices/)), the client can address the load balancer via a predefined mechanism and then the act of name resolution can be delegated to the load balancer. The predefined mechanisms include built-in libraries and well-known DNS/IP/port locations and will be discussed in more detail below.
 *   **Fault tolerance:** A load balancer can effectively route around a bad or overloaded backend via health checking and various algorithmic techniques. This means that an operator can typically fix a bad backend at their leisure—which is much more preferable to doing so during an emergency.
 *   **Cost and performance benefits:** Distributed system networks are rarely homogenous. The system is likely to span multiple network zones and regions. Within a zone, networks are often built in a relatively undersubscribed way. Between zones, oversubscription becomes the norm. In this context, over- and under-subscription refers to the amount of bandwidth consumable via network interface controllers (NICs) as a percentage of bandwidth available between routers. Intelligent load balancing can keep request traffic within zones as much as possible, which increases performance (less latency) and reduces overall system cost (less bandwidth and fiber required between zones).
 
@@ -192,7 +192,7 @@ It’s worth noting that enhanced observability is not free; the load balancer h
 
 ### Security and DoS mitigation
 
-Especially in the edge deployment topology (see below), load balancers often implement various security features—including rate limiting, authentication, and DoS mitigation (e.g., IP address tagging and identification, [tarpitting](https://en.wikipedia.org/wiki/Tarpit_(networking)), and more).
+Especially in the edge deployment topology (see below), load balancers often implement various security features—including [rate limiting](/docs/edge-stack/latest/topics/using/rate-limits/), authentication, and DoS mitigation (e.g., IP address tagging and identification, [tarpitting](https://en.wikipedia.org/wiki/Tarpit_(networking)), and more).
 
 
 ### Configuration and control plane
@@ -296,7 +296,7 @@ Does this mean that L4 load balancers are no longer relevant? No!
 
 Although it appears that L7 load balancers will ultimately completely replace L4 load balancers for service-to-service communication, L4 load balancers are still extremely relevant at the edge because almost all modern large distributed architectures use a two-tiered L4/L7 load balancing architecture for internet traffic. 
 
-The benefits of placing dedicated L4 load balancers before L7 load balancers in an edge deployment are as follows:
+The benefits of placing dedicated L4 [load balancers](/learn/kubernetes-glossary/load-balancer/) before L7 load balancers in an edge deployment are as follows:
 
 
 

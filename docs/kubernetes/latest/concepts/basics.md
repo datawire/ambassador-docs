@@ -18,7 +18,7 @@ Kubernetes also offers developers potential solutions to issues with standard de
 *   Use of tools they are already familiar with
 *   Better end-user experiences — applications are more resilient and highly available; even frequent changes don’t disrupt the user experience
 *   Better automation and monitoring: Automatic rollbacks when things go wrong, fewer manual processes, automatic health checks, etc.
-*   The ability to use almost identical development and production environments with continuous deployment/progressive delivery to get a better understanding of how software will behave with real users and traffic
+*   The ability to use almost identical development and production environments with continuous deployment/[progressive delivery](/docs/argo/latest/concepts/cicd/) to get a better understanding of how software will behave with real users and traffic
 
 Kubernetes offers developers the possibility to code and release faster and more predictably. Once the different steps involved in containerizing code and deploying it via Kubernetes are broken down, K8s’s benefits, such as its cloud-agnosticism, zero-downtime deployment, health checks, autoscaling, and tooling, become clearer. Development becomes simpler, and developers maintain flexibility and control.
 

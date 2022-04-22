@@ -6,7 +6,7 @@ Each Kubernetes cluster provides its own isolated network namespace. This approa
 
 ## Routing traffic to your Kubernetes cluster
 
-While there are a number of techniques for routing traffic to a Kubernetes cluster, by far the most common and popular method involves deploying an in-cluster edge proxy / ingress controller along with an external load balancer. In this architecture, the network topology looks like this:
+While there are a number of techniques for routing traffic to a Kubernetes cluster, by far the most common and popular method involves deploying an in-cluster edge proxy / [ingress controller](/learn/kubernetes-glossary/ingress-controller/) along with an external load balancer. In this architecture, the network topology looks like this:
 
 <div class="docs-diagram-wrapper">
 
@@ -28,13 +28,13 @@ In both the private data center and cloud infrastructure case, the external load
 
 ### Edge Proxy / ingress controller
 
-The Edge Proxy is typically a [Layer 7](/learn/kubernetes-glossary/layer-7/) proxy that is deployed directly in the cluster. The core function of the edge proxy is to accept incoming traffic from the external load balancer and route the traffic to Kubernetes services. The edge proxy should be configured using Kubernetes manifests. This enables a common management workflow for both the edge proxy and Kubernetes services.
+The Edge Proxy is typically a [Layer 7](/learn/kubernetes-glossary/layer-7/) proxy that is deployed directly in the cluster. The core function of the edge proxy is to accept incoming traffic from the external load balancer and route the traffic to [Kubernetes services](/docs/cloud/latest/service-catalog/quick-start/). The edge proxy should be configured using Kubernetes manifests. This enables a common management workflow for both the edge proxy and Kubernetes services.
 
 The most popular approach to configuring edge proxies is with the Kubernetes ingress resource. When an edge proxy can process ingress resources, it is called an ingress controller. Not all edge proxies are ingress controllers (because they can't process ingress resources), but all ingress controllers are edge proxies.
 
-The ingress resource is a Kubernetes standard. As such, it is a lowest common denominator resource. In practice, users find that the ingress resource is insufficient in scope to address the requirements for edge routing. Semantics such as TLS termination, redirecting to TLS, timeouts, rate limiting, and authentication are all beyond the scope of the ingress resource.
+The ingress resource is a Kubernetes standard. As such, it is a lowest common denominator resource. In practice, users find that the ingress resource is insufficient in scope to address the requirements for edge routing. Semantics such as TLS termination, redirecting to [TLS](../../../topics/running/tls/), timeouts, [rate limiting](../../../topics/using/rate-limits/), and authentication are all beyond the scope of the ingress resource.
 
-$productName$ can function as an ingress controller (i.e., it reads ingress resources), although it also includes many other capabilities that are beyond the scope of the ingress specification. Most $productName$ users find that the various additional capabilities of $productName$ are essential, and end up using $productName$'s extensions to the ingress resource, instead of using ingress resources themselves.
+$productName$ can function as an ingress controller (i.e., it reads ingress resources), although it also includes many other capabilities that are beyond the scope of the ingress specification. Most [$productName$](../../../tutorials/getting-started/) users find that the various additional capabilities of $productName$ are essential, and end up using $productName$'s extensions to the ingress resource, instead of using ingress resources themselves.
 
 ### Kubernetes services and Pods
 

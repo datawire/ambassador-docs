@@ -30,7 +30,7 @@ A **CI/CD pipeline** is a process specifying steps that must be taken to deliver
 
 The terminology around CI/CD and progressive delivery is tricky when you define the different phases of the software shipping cycle. These terms are _not_ interchangeable. 
 
-**Deployment** refers to a version of software is which is running somewhere within the production environment. This software is ready to handle production traffic, though it isn't receiving that traffic yet. Deployment is nearly risk-free in that end users are not exposed to the new version of the service. The deployment phase can introduce risk mitigation in the form of progressive delivery techniques, such as canary releasing, for safer, incremental rollouts. 
+**Deployment** refers to a version of software is which is running somewhere within the production environment. This software is ready to handle production traffic, though it isn't receiving that traffic yet. Deployment is nearly risk-free in that end users are not exposed to the new version of the service. The deployment phase can introduce risk mitigation in the form of progressive delivery techniques, such as canary releasing, for safer, incremental [rollouts](../..//reference/rolloutcrd/).
 
 **Release** refers to the process of moving your production traffic to the new version of the software where users can access it. 
 
