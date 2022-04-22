@@ -727,6 +727,15 @@ body {
       align-items: flex-end;
       gap: 16px;
       margin-top: 16px;
+      @media (max-width: 768px) {
+        .hubspot-form form {
+          margin: -1.5rem;
+        }
+      }
+      @media (max-width: 610px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
       .btn-m-ctaPurple {
         height: 55px;
         color: @color-white-2;
