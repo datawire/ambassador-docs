@@ -26,7 +26,7 @@ We'll start by installing $productName$ into your cluster.
 
 ### Connecting your installation to Ambassador Cloud
 
-Now is a great moment to connect your new installation to Ambassador Cloud in order to fully leverage the power of $productName$ and the Developer Control Plane (DCP).
+Now is a great time to enhance your $productName$ experience and take advantage of Ambassador Cloud's advanced capabilities. 
 
 1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/services/) with GitHub, GitLab or Google and select your team account.
 
@@ -36,7 +36,7 @@ Now is a great moment to connect your new installation to Ambassador Cloud in or
 
 4. Follow the prompts to install the cloud token into your cluster.
 
-5. When the token installation completes, your services will be listed in the DCP.
+5. When the token installation is completed, your services are listed in Ambassador Cloud.
 
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
