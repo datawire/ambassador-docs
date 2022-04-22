@@ -39,7 +39,7 @@ const Product = ({
     </Button>
     <h3 className="product__container-docs--title">Ambassador Products</h3>
     <div className="product__container-docs">
-      <img className="product__container-docs--image" src={docImage} />
+      <img className="product__container-docs--image" src={docImage} alt={docDescription} />
       <Link className="product__container-docs--description" to={docLink}>
         {docDescription}
       </Link>

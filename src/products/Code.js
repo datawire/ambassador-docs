@@ -18,6 +18,7 @@ const props = {
   titleFirstWord: 'Code',
   titleRest: 'with Telepresence',
   heroImg: CodeHeroImg,
+  heroImgDescription: 'Code easy and efficient',
   overview:
     ' This guide provides an overview of the key ideas behind Telepresence, as well as the instructions you need to get Telepresence up and running in your environment quickly.',
   getStartedLink: goToCodeDocsQuickStart,

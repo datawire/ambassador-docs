@@ -5,7 +5,7 @@ import Icon from '../../../src/components/Icon';
 
 const Card = ({ img, title, description, link }) => (
   <div className="docs__quickStart-card">
-    <img src={img} className="docs__quickStart-card--img" />
+    <img src={img} className="docs__quickStart-card--img" alt={title} />
     <h2 className="docs__quickStart-card--title">
       <a href={link}>{title}</a>
     </h2>
@@ -24,6 +24,7 @@ const ProductTemplate = ({
   titleRest,
   heroDescription,
   heroImg,
+  heroImgDescription='Image description',
   overview,
   cards,
   getStartedLink,
@@ -41,7 +42,7 @@ const ProductTemplate = ({
           <p className="docs__quickStart-description">{heroDescription}</p>
         </div>
         <div className="docs__quickStart-img--container">
-          <img className="docs__quickStart-img" src={heroImg} />
+          <img className="docs__quickStart-img" src={heroImg} alt={heroImgDescription } />
         </div>
       </div>
       <div className="docs__quickStart-button-get-started">
