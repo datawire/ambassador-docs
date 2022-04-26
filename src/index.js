@@ -65,8 +65,6 @@ const index = ({ data, location, pageContext }) => {
       : (pageContext.canonical.latest ? siteUrl : getSiteUrl()) +
         pageContext.canonical.url;
 
-  console.log('here', canonicalUrl);
-
   const initialVersion = !isProductHome
     ? tempVersion
     : initialProduct.version.filter((v) => v.id === 'latest')[0];
