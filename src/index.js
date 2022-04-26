@@ -59,8 +59,13 @@ const index = ({ data, location, pageContext }) => {
   const isProduct = initialProduct.slug !== products[0].slug;
   const isProductHome = isProduct && !isArchivedVersions && !!!tempVersion.id;
   const canonicalUrl =
-    (pageContext.canonical.latest ? siteUrl : getSiteUrl()) +
-    pageContext.canonical.url;
+    pageContext.canonical.url === '/docs/code/latest/telepresence-intercept/'
+      ? (pageContext.canonical.latest ? siteUrl : getSiteUrl()) +
+        '/docs/telepresence/latest/howtos/intercepts/'
+      : (pageContext.canonical.latest ? siteUrl : getSiteUrl()) +
+        pageContext.canonical.url;
+
+  console.log('here', canonicalUrl);
 
   const initialVersion = !isProductHome
     ? tempVersion
