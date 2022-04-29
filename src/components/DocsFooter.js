@@ -18,10 +18,8 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
     : '';
 
   // Don't produce an edit link for generated files.
-  if (restOfFilePath === "licenses.md") {
-    return (
-      <footer className="docs__footer"></footer>
-    );
+  if (restOfFilePath === 'licenses.md') {
+    return <footer className="docs__footer"></footer>;
   }
 
   let dstUrl;
@@ -42,20 +40,25 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       break;
     case 'code':
     case 'ship':
-    case 'run': 
-      dstUrl = 'https://github.com/datawire/ambassador-docs/blob/master/docs'
-      break; 
+    case 'run':
+      dstUrl = 'https://github.com/datawire/ambassador-docs/blob/master/docs';
+      break;
     default:
       dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${product}/${version}/${restOfFilePath}`;
       break;
   }
 
+  const includesWords =
+    dstUrl.includes('release') && dstUrl.includes('extension');
+
   return (
     <footer className="docs__footer">
-      <a href={dstUrl} target="_blank" rel="noreferrer">
-        <GithubIcon />
-        Edit this page on GitHub
-      </a>
+      {!includesWords && (
+        <a href={dstUrl} target="_blank" rel="noreferrer">
+          <GithubIcon />
+          Edit this page on GitHub
+        </a>
+      )}
     </footer>
   );
 };
