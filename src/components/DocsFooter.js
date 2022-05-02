@@ -63,8 +63,6 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       break;
   }
 
-  console.log('here', page.parent.relativePath);
-
   return (
     <footer className="docs__footer">
       <a href={dstUrl} target="_blank" rel="noreferrer">
