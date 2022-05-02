@@ -48,17 +48,29 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       break;
   }
 
-  const includesWords =
-    dstUrl.includes('release') && dstUrl.includes('extension');
+  switch (page.parent.relativePath) {
+    case 'docs/telepresence/latest/extension/intro.md':
+      dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
+      break;
+    case 'docs/telepresence/latest/extension/install.md':
+      dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
+      break;
+    case 'docs/telepresence/latest/extension/intercept.md':
+      dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
+      break;
+    case 'docs/telepresence/latest/extension/troubleshooting.md':
+      dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
+      break;
+  }
+
+  console.log('here', page.parent.relativePath);
 
   return (
     <footer className="docs__footer">
-      {!includesWords && (
-        <a href={dstUrl} target="_blank" rel="noreferrer">
-          <GithubIcon />
-          Edit this page on GitHub
-        </a>
-      )}
+      <a href={dstUrl} target="_blank" rel="noreferrer">
+        <GithubIcon />
+        Edit this page on GitHub
+      </a>
     </footer>
   );
 };
