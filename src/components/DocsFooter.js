@@ -22,6 +22,7 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
     return <footer className="docs__footer"></footer>;
   }
 
+  const teleDoc = page?.parent?.relativePath
   let dstUrl;
   switch (product) {
     case 'telepresence':
@@ -48,7 +49,7 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       break;
   }
 
-  switch (page.parent.relativePath) {
+  switch (teleDoc) {
     case 'docs/telepresence/latest/extension/intro.md':
       dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
       break;
