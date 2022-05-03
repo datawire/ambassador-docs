@@ -22,7 +22,7 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
     return <footer className="docs__footer"></footer>;
   }
 
-  const teleDoc = page?.parent?.relativePath
+  const teleDoc = page?.parent?.relativePath;
   let dstUrl;
   switch (product) {
     case 'telepresence':
@@ -51,15 +51,13 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
 
   switch (teleDoc) {
     case 'docs/telepresence/latest/extension/intro.md':
-      dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
-      break;
     case 'docs/telepresence/latest/extension/install.md':
-      dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
-      break;
     case 'docs/telepresence/latest/extension/intercept.md':
-      dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
-      break;
     case 'docs/telepresence/latest/extension/troubleshooting.md':
+    case 'docs/telepresence/2.5/extension/intro.md':
+    case 'docs/telepresence/2.5/extension/install.md':
+    case 'docs/telepresence/2.5/extension/intercept.md':
+    case 'docs/telepresence/2.5/extension/troubleshooting.md':
       dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
       break;
   }
