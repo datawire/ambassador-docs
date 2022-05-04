@@ -67,7 +67,7 @@ together, using a [GitOps workflow](../../../../edge-stack/latest/topics/concept
    cluster must have RBAC configured for the deployment preview daemon container:
 
    ```bash
-   kubectl apply -f https://datawire-static-files.s3.amazonaws.com/yaml/pod-daemon/deploy-previews-rbac.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/pod-daemon/deploy-previews-rbac.yaml
    ```
 
    <Alert severity="info">
