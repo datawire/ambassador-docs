@@ -34,8 +34,8 @@ kubectl apply -f - <<EOF
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
-  name: $productDeploymentName$-listener-8080
-  namespace: $productNamespace$
+  name: $edgeStackName$-listener-8080
+  namespace: $companyName$
 spec:
   port: 8080
   protocol: HTTP
@@ -47,8 +47,8 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
-  name: $productDeploymentName$-listener-8443
-  namespace: $productNamespace$
+  name: $edgeStackName$-listener-8443
+  namespace: $companyName$
 spec:
   port: 8443
   protocol: HTTPS
@@ -89,7 +89,7 @@ EOF
 4. Store the Edge Stack load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
   ```
-  export LB_ENDPOINT=$(kubectl -n $productNamespace$ get svc  $productDeploymentName$ \
+  export LB_ENDPOINT=$(kubectl -n $companyName$ get svc  $edgeStackName$ \
     -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
   ```
 

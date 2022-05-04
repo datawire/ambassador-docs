@@ -1,5 +1,5 @@
-version: "1.0"
-dlVersion: "latest"
-docsVersion: "1.0"
-branch: release/v2
+# branch info
+branch: release/v2.2
 productName: "Run"
+edgeStackProductNamespace: ambassador
+edgeStackProductDeploymentName: edge-stack
