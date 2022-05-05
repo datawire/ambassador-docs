@@ -21,7 +21,7 @@ A really interesting tool that can help with the “talk to each other” bit is
 
 ## Why use Envoy?
 
-Envoy Proxy is a modern, high performance, small footprint edge and service proxy. Envoy adds resilience and observability to your services, and it does so in a way that’s transparent to your service implementation. 
+[Envoy Proxy is a modern](/learn/envoy-proxy/), high performance, small footprint edge and service proxy. Envoy adds resilience and observability to your services, and it does so in a way that’s transparent to your service implementation. 
 
 Here’s some of what’s interesting about Envoy:
 
@@ -35,7 +35,7 @@ Here’s some of what’s interesting about Envoy:
 
 Being able to proxy any TCP protocol is a pretty big deal. Want to proxy Websockets? Postgres? Raw TCP? Go for it. Also note that Envoy can both accept and originate SSL connections, which can be handy at times: you can let Envoy do client certificate validation, but still have an SSL connection to your service from Envoy.
 
-Overall, Envoy can support many of your needs with just a single piece of software, rather than needing to mix and match things. One final note: Envoy Proxy is an official, graduated CNCF project, with a huge community. So unlike HAProxy and NGINX, which are controlled by a vendor, Envoy has vendor-neutral governance which is an [important consideration for many projects](https://blog.getambassador.io/envoy-vs-nginx-vs-haproxy-why-the-open-source-ambassador-api-gateway-chose-envoy-23826aed79ef).
+Overall, Envoy can support many of your needs with just a single piece of software, rather than needing to mix and match things. One final note: [Envoy Proxy](/docs/argo/latest/concepts/gitops/) is an official, graduated CNCF project, with a huge community. So unlike HAProxy and NGINX, which are controlled by a vendor, Envoy has vendor-neutral governance which is an [important consideration for many projects](https://blog.getambassador.io/envoy-vs-nginx-vs-haproxy-why-the-open-source-ambassador-api-gateway-chose-envoy-23826aed79ef).
 
 ## Envoy and the network stack
 

@@ -10,7 +10,7 @@ For an even more robust installation, consider using a [local registry as a pull
 
 ## Environment variables
 
-Use the following variables for the environment of your $productName$ container:
+Use the following variables for the environment of your [$productName$](/products/api-gateway/) container:
 
 | Purpose                           | Variable                                                                                 | Default value                                       | Value type |
 |-----------------------------------|----------------------------------------------------------------------------------------- |-----------------------------------------------------|-------------------------------------------------------------------------------|
@@ -41,7 +41,7 @@ verbose, valid log levels are `error`, `warn`/`warning`, `info`,
 
 ## Port assignments
 
-$productName$ uses the following ports to listen for HTTP/HTTPS traffic automatically via TCP:
+[$productName$](/docs/emissary/) uses the following ports to listen for HTTP/HTTPS traffic automatically via TCP:
 
 | Port | Process  | Function                                                |
 |------|----------|---------------------------------------------------------|

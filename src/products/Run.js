@@ -19,6 +19,7 @@ const props = {
   titleFirstWord: 'Run',
   titleRest: 'with Edge Stack',
   heroImg: RunHeroImg,
+  heroImgDescription: 'Keeps you in control of how you run your Kubernetes services',
   overview:
     'This guide provides an overview of the key ideas that Edge Stack is built to solve.',
   getStartedLink: goToRunDocsQuickStart,

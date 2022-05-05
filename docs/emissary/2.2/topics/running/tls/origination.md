@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # TLS origination
 
-Sometimes you may want traffic from $productName$ to your services to be encrypted. For the cases where terminating TLS at the ingress is not enough, $productName$ can be configured to originate TLS connections to your upstream services.
+Sometimes you may want traffic from $productName$ to your services to be encrypted. For the cases where terminating [TLS](/learn/kubernetes-glossary/tls/) at the ingress is not enough, $productName$ can be configured to originate TLS connections to your upstream services.
 
 ## Basic configuration
 

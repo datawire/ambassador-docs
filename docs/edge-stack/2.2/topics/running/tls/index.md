@@ -76,6 +76,8 @@ spec:
 $AESproductName$ will now request a certificate from the CA and store it in a Secret
 in the same namespace as the `Host`.
 
+Please note an HTTP `Listener` on port 8080 is also required for ACME
+
 **If you use ACME for multiple Hosts, add a wildcard Host too.**
 This is required to manage a known issue. This issue will be resolved in a future Ambassador Edge Stack release.
 

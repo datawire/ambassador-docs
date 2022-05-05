@@ -50,7 +50,7 @@ spec:
     policy: round_robin
 ```
 
-Note that load balancing may not appear to be "even" due to Envoy's threading model. For more details, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/faq/load_balancing/concurrency_lb).
+Note that [load balancing](/learn/kubernetes-glossary/load-balancer/) may not appear to be "even" due to Envoy's threading model. For more details, see the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/faq/load_balancing/concurrency_lb).
 
 ## Least request
 
@@ -93,7 +93,7 @@ Configuring sticky sessions makes $productName$ route requests to a specific pod
 - Header
 - Source IP
 
-**NOTE:** $productName$ supports sticky sessions using two load balancing policies, `ring_hash` and `maglev`.
+**NOTE:** $productName$ supports sticky sessions using two [load balancing](../../../../../envoy/latest/concepts/modernlb) policies, `ring_hash` and `maglev`.
 
 ### Cookie
 
@@ -177,7 +177,7 @@ spec:
     source_ip: true
 ```
 
-Load balancing can be configured both globally, and overridden on a per mapping basis. The following example configures the default load balancing policy to be round robin, while using header-based session affinity for requests to the `/backend/` endpoint of the quote application:
+[Load balancing](/learn/kubernetes-ingress/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers/) can be configured both globally, and overridden on a per mapping basis. The following example configures the default load balancing policy to be round robin, while using header-based session affinity for requests to the `/backend/` endpoint of the quote application:
 
 Load balancing can be configured both globally, and overridden on a per mapping basis.
 

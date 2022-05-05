@@ -18,6 +18,7 @@ const props = {
   titleFirstWord: 'Ship',
   titleRest: 'with Argo',
   heroImg: ShipHeroImg,
+  heroImgDescription: 'Ship your products and monitor your rollouts easily',
   overview:
     'This guide provides an overview of the key ideas behind Argo, as well as the instructions you need to get Argo up and running in your environment quickly.',
   getStartedLink: goToShipDocsQuickStart,

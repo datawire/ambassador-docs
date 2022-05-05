@@ -18,7 +18,7 @@ We'll start by installing Edge Stack into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GettingStartedEdgeStack21Tabs version="$version$" />
+<GettingStartedEdgeStack21Tabs version="latest" />
 
 <Alert severity="success"><b>Success!</b> At this point, you have installed Edge Stack. Now let's get some traffic flowing to your services.</Alert>
 
@@ -34,8 +34,8 @@ kubectl apply -f - <<EOF
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
-  name: $productDeploymentName$-listener-8080
-  namespace: $productNamespace$
+  name: $edgeStackName$-listener-8080
+  namespace: $companyName$
 spec:
   port: 8080
   protocol: HTTP
@@ -47,8 +47,8 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
-  name: $productDeploymentName$-listener-8443
-  namespace: $productNamespace$
+  name: $edgeStackName$-listener-8443
+  namespace: $companyName$
 spec:
   port: 8443
   protocol: HTTPS
@@ -62,7 +62,7 @@ EOF
 2. Apply the YAML for the “Quote of the Moment" service.
 
   ```
-  kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/quickstart/qotm.yaml
+  kubectl apply -f https://app.getambassador.io/yaml/v2-docs/latest/quickstart/qotm.yaml
   ```
 
   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
@@ -89,7 +89,7 @@ EOF
 4. Store the Edge Stack load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
   ```
-  export LB_ENDPOINT=$(kubectl -n $productNamespace$ get svc  $productDeploymentName$ \
+  export LB_ENDPOINT=$(kubectl -n $companyName$ get svc  $edgeStackName$ \
     -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
   ```
 

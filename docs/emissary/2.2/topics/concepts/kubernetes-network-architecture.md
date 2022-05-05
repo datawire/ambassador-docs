@@ -6,7 +6,7 @@ Each Kubernetes cluster provides its own isolated network namespace. This approa
 
 ## Routing traffic to your Kubernetes cluster
 
-While there are a number of techniques for routing traffic to a Kubernetes cluster, by far the most common and popular method involves deploying an in-cluster edge proxy / ingress controller along with an external load balancer. In this architecture, the network topology looks like this:
+While there are a number of techniques for routing traffic to a Kubernetes cluster, by far the most common and popular method involves deploying an in-cluster edge proxy / [ingress controller](/learn/kubernetes-glossary/ingress-controller/) along with an external load balancer. In this architecture, the network topology looks like this:
 
 <div class="docs-diagram-wrapper">
 
@@ -20,7 +20,7 @@ Each of the components in this topology is discussed in further detail below.
 
 The load balancer is deployed outside of the Kubernetes cluster. Typically, the load balancer also has one or more static IP addresses assigned to it. A DNS entry is then created to map a domain name (e.g., example.com) to the static IP address.
 
-Cloud infrastructure providers such as Amazon Web Services, Azure, Digital Ocean, and Google make it easy to create these load balancers directly from Kubernetes. This is done by creating a Kubernetes service of `type: LoadBalancer`. When this service is created, the cloud provider will use the metadata contained in the Kubernetes service definition to provision a load balancer.
+Cloud infrastructure providers such as Amazon Web Services, Azure, Digital Ocean, and Google make it easy to create these [load balancers](/learn/kubernetes-glossary/load-balancer/) directly from Kubernetes. This is done by creating a Kubernetes service of `type: LoadBalancer`. When this service is created, the cloud provider will use the metadata contained in the Kubernetes service definition to provision a load balancer.
 
 If the Kubernetes cluster is deployed in a private data center, an external load balancer is still generally used. Provisioning of this load balancer usually requires the involvement of the data center operations team.
 
@@ -28,13 +28,13 @@ In both the private data center and cloud infrastructure case, the external load
 
 ### Edge Proxy / ingress controller
 
-The Edge Proxy is typically a Layer 7 proxy that is deployed directly in the cluster. The core function of the edge proxy is to accept incoming traffic from the external load balancer and route the traffic to Kubernetes services. The edge proxy should be configured using Kubernetes manifests. This enables a common management workflow for both the edge proxy and Kubernetes services.
+The Edge Proxy is typically a [Layer 7](/learn/kubernetes-glossary/layer-7/) proxy that is deployed directly in the cluster. The core function of the edge proxy is to accept incoming traffic from the external load balancer and route the traffic to [Kubernetes services](/docs/cloud/latest/service-catalog/quick-start/). The edge proxy should be configured using Kubernetes manifests. This enables a common management workflow for both the edge proxy and Kubernetes services.
 
-The most popular approach to configuring edge proxies is with the Kubernetes ingress resource. When an edge proxy can process ingress resources, it is called an ingress controller. Not all edge proxies are ingress controllers (because they can't process ingress resources), but all ingress controllers are edge proxies.
+The most popular approach to configuring edge proxies is with the [Kubernetes ingress](/learn/kubernetes-ingress/) resource. When an edge proxy can process ingress resources, it is called an ingress controller. Not all edge proxies are ingress controllers (because they can't process ingress resources), but all ingress controllers are edge proxies.
 
-The ingress resource is a Kubernetes standard. As such, it is a lowest common denominator resource. In practice, users find that the ingress resource is insufficient in scope to address the requirements for edge routing. Semantics such as TLS termination, redirecting to TLS, timeouts, rate limiting, and authentication are all beyond the scope of the ingress resource.
+The ingress resource is a Kubernetes standard. As such, it is a lowest common denominator resource. In practice, users find that the ingress resource is insufficient in scope to address the requirements for edge routing. Semantics such as TLS termination, redirecting to [TLS](../../../topics/running/tls/), timeouts, [rate limiting](../../../topics/using/rate-limits/), and authentication are all beyond the scope of the ingress resource.
 
-$productName$ can function as an ingress controller (i.e., it reads ingress resources), although it also includes many other capabilities that are beyond the scope of the ingress specification. Most $productName$ users find that the various additional capabilities of $productName$ are essential, and end up using $productName$'s extensions to the ingress resource, instead of using ingress resources themselves.
+$productName$ can function as an ingress controller (i.e., it reads ingress resources), although it also includes many other capabilities that are beyond the scope of the ingress specification. Most [$productName$](../../../tutorials/getting-started/) users find that the various additional capabilities of $productName$ are essential, and end up using $productName$'s extensions to the ingress resource, instead of using ingress resources themselves.
 
 ### Kubernetes services and Pods
 
@@ -42,9 +42,9 @@ Each instance of your application is deployed in a Kubernetes pod. As the worklo
 
 When traffic is routed to the pods via a Kubernetes service, Kubernetes uses a built-in mechanism called `kube-proxy` to load balance traffic between the pods. Due to its implementation, `kube-proxy` is a Layer 4 proxy, i.e., it load balances at a connection level. For particular types of traffic such as HTTP/2 and gRPC, this form of load balancing is particularly problematic as it can easily result in a very uneven load balancing configuration.
 
-Traffic can also be routed directly to pods, bypassing the Kubernetes service. Since pods are much more ephemeral than Kubernetes services, this approach requires an edge proxy that is optimized for this use case. In particular, the edge proxy needs to support real-time discovery of pods, and be able to dynamically update pod locations without downtime.
+Traffic can also be routed directly to pods, bypassing the Kubernetes service. Since pods are much more ephemeral than [Kubernetes services](/resources/dev-workflow-intro/), this approach requires an edge proxy that is optimized for this use case. In particular, the edge proxy needs to support real-time discovery of pods, and be able to dynamically update pod locations without downtime.
 
-$productName$ supports routing both to Kubernetes services and directly to pods.
+$productName$ supports routing both to [Kubernetes services](/resources/getting-started-with-kubernetes-for-javascript-developers/) and directly to pods.
 
 ## Further reading
 

@@ -20,7 +20,7 @@ helm repo update
  
 # Create Namespace and Install:
 kubectl create namespace ambassador && \
-kubectl apply -f https://app.getambassador.io/yaml/edge-stack/2.2.1/aes-crds.yaml
+kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml
 kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
 helm install edge-stack --namespace ambassador datawire/edge-stack && \
 kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
@@ -31,8 +31,8 @@ kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lprod
 Enter the following in your CLI to install Edge Stack manually:
 
 ```
-kubectl apply -f https://app.getambassador.io/yaml/edge-stack/2.2.1/aes-crds.yaml && \
+kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes-crds.yaml && \
 kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
-kubectl apply -f https://app.getambassador.io/yaml/edge-stack/2.2.1/aes.yaml && \
+kubectl apply -f https://app.getambassador.io/yaml/edge-stack/latest/aes.yaml && \
 kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
 ```
