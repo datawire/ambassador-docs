@@ -30,7 +30,7 @@ $ kubectl get componentstatus
   etcd-0               Healthy   {"health":"true"}
 ```
 
-A issue with any of those components can cause issues across your entire cluster.  Cluster components can fail for many reasons, from a failed VM to network issues between nodes to corrupt [etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/) data.  The [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-cluster/#a-general-overview-of-cluster-failure-modes) does a good job covering these issues and possible mitigations.
+A issue with any of those components can cause issues across your entire cluster.  Cluster components can fail for many reasons, from a failed VM to network issues between nodes to corrupt [etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/) data.  The [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug/debug-cluster/#cluster-failure-modes) does a good job covering these issues and possible mitigations.
 
 ## Basic Deployment and Pod status checks
 
