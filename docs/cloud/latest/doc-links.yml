@@ -21,7 +21,7 @@
     - title: Organize the service catalog
       link: /service-catalog/howtos/organize-service-catalog
     - title: Manage my subscriptions
-      link: /service-catalog/howtos/manage-my-subscriptions
+      link: /subscriptions/howtos/manage-my-subscriptions
 - title: Core concepts
   items:
     - title: Using a service catalog
