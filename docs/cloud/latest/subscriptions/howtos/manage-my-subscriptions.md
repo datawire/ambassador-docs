@@ -29,4 +29,5 @@ It will open the following page:
 
  **Buy** the plan you want to be automatically redirected to the checkout page.
 
+If neither of these plans meet your needs, you can **contact sales** by clicking on the button in the enterprise plan column.
 
