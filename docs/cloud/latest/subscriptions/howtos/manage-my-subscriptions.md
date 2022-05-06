@@ -1,11 +1,16 @@
-
+---
+title: "Ambassador Labs subscriptions"
+description: "Check out your subscription details or shop for different subscription editions. Depending on your needs, Ambassador Labs has plans for all sizes of companies and applications."
+---
 # Manage my subscriptions
+
+Ambassador Labs provides a variety of different subscription options depending on your needs. Whether you're working with a small team with a few developers or a company with a large number of services and active namespaces, Ambassador Labs has flexible subscription options for you to chose from. 
 
 ## Check or upgrade your subscription
 
-In user settings, go to the **Subcriptions** section.
+In user settings, go to the **Subscriptions** section.
 
-You might need to change your subscription to upgrade your experience. This is where you can monitor your current plan & quotas. If you've met some of your plan limits you can adjust it.
+Here you can change your subscription to upgrade your experience. This is where you can monitor your current plan & quotas. If you've met some of your plan limits, you can upgrade here.
 
   <p align="center">
     <img src="../../../images/team-subscriptions.png" width="800"/>
@@ -19,9 +24,9 @@ For example, the following team member quota is indicating that you have up to 1
 
 ## Upgrade your plan
 
-If one of the quota doesn't seem to be enough, you can clic on **upgrade** to increase your quotas.
+If one of the quota doesn't seem to be enough, click **upgrade** to increase your quotas.
 
-It will open the following page:
+This opens the following page:
 
   <p align="center">
     <img src="../../../images/team-subscription-plans.png" width="800"/>
@@ -29,5 +34,5 @@ It will open the following page:
 
  **Buy** the plan you want to be automatically redirected to the checkout page.
 
-If neither of these plans meet your needs, you can **contact sales** by clicking on the button in the enterprise plan column.
+If neither of these plans meet your needs, click **Learn more** in the Enterprise subscription column to contact sales about Enterprise edition subscription details.
 
