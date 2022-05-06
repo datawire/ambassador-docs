@@ -29,10 +29,10 @@ If one of the quota doesn't seem to be enough, click **upgrade** to increase you
 This opens the following page:
 
   <p align="center">
-    <img src="../../../images/team-subscription-plans.png" width="800"/>
+    <img src="../../../images/team-subscription-plans.png" width="1000"/>
   </p>
 
  **Buy** the plan you want to be automatically redirected to the checkout page.
 
-If neither of these plans meet your needs, click **Learn more** in the Enterprise subscription column to contact sales about Enterprise edition subscription details.
+If neither of these plans meet your needs, click **contact sales** in the Enterprise subscription column to contact sales about Enterprise edition subscription details.
 
