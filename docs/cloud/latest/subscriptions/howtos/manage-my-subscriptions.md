@@ -24,7 +24,7 @@ If one of the quota doesn't seem to be enough, you can clic on **upgrade** to in
 It will open the following page:
 
   <p align="center">
-    <img src="../../../images/team-subscription-plans.png" width="600"/>
+    <img src="../../../images/team-subscription-plans.png" width="800"/>
   </p>
 
  **Buy** the plan you want to be automatically redirected to the checkout page.
