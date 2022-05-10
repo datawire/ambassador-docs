@@ -19,7 +19,7 @@ import KubeGSTabs from './gs-tabs.js'
 * [5. Create a Deployment, Service, and Mapping in Kubernetes](#5-create-a-deployment-service-and-mapping-in-kubernetes)
 * [6. Deploy app and test](#6-deploy-app-and-test)
 * [7. Setup a Host and SSL (optional)](#7-setup-a-host-and-ssl-optional)
-* [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
+* [What's next?](#img-classos-logo-srcimageslogopng-alttelepresence-logo--whats-next)
 
 </div>
 
