@@ -214,7 +214,7 @@ You can check the certificate's status with `kubectl describe host nodebb-host`.
 
 Finally, go to your domain in the browser and you should see the app with a valid SSL certificate installed.
 
-## <img class="os-logo" src="../../../../../images/logo.png"/> What's next?
+## <img class="os-logo" src="../../../../../images/logo.png" alt="Telepresence Logo" /> What's next?
 
 YAML files used to deploy Kubernetes resources are generally kept under version control.  You can automate deploying and updating resources as changes are committed to your code repositories using a CI/CD system like Argo!  [Check out our guide on getting started with Argo](../../../../argo/latest/quick-start/).
 
