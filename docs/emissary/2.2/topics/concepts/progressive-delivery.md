@@ -2,7 +2,7 @@
 
 Today's cloud-native applications may consist of hundreds of services, each of which are being updated at any time. Thus, many cloud-native organizations augment regression test strategies with testing in production using progressive delivery techniques.
 
-Progressive Delivery is an approach for releasing software to production users. In the progressive delivery model, software is released to ever growing subsets of production users. This approach reduces the blast radius in the event of a failure.
+[Progressive Delivery](/learn/kubernetes-glossary/progressive-delivery/) is an approach for releasing software to production users. In the progressive delivery model, software is released to ever growing subsets of production users. This approach reduces the blast radius in the event of a failure.
 
 ## Why test in production?
 
@@ -10,15 +10,15 @@ Modern cloud applications are continuously deployed, as different teams rapidly 
 
 ## Progressive delivery strategies
 
-There are a number of different strategies for progressive delivery. These include:
+There are a number of different strategies for [progressive delivery](/docs/argo/latest/concepts/cicd/). These include:
 
 * Feature flags, where specific features are made available to specific user groups
 * Canary releases, where a (small) percentage of traffic is routed to a new version of a service before the service is full production
 * Traffic shadowing, where real user traffic is copied, or shadowed, from production to the service under test
 
-Observability is a critical requirement for testing in production. Regardless of progressive delivery strategy, collecting key metrics around latency, traffic, errors, and saturation (the [“Four Golden Signals of Monitoring”](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/#xref_monitoring_golden-signals)) provides valuable insight into the stability and performance of a new version of the service. Moreover, application developers can compare the metrics (e.g., latency) between the production version and an updated version. If the metrics are similar, then updates can proceed with much greater confidence.
+Observability is a critical requirement for testing in production. Regardless of [progressive delivery](/docs/argo/latest/concepts/cicd/) strategy, collecting key metrics around latency, traffic, errors, and saturation (the [“Four Golden Signals of Monitoring”](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/#xref_monitoring_golden-signals)) provides valuable insight into the stability and performance of a new version of the service. Moreover, application developers can compare the metrics (e.g., latency) between the production version and an updated version. If the metrics are similar, then updates can proceed with much greater confidence.
 
-$productName$ supports a variety of strategies for progressive delivery. These strategies are discussed in further detail below.
+[$productName$](../../../topics/concepts/architecture/) supports a variety of strategies for progressive delivery. These strategies are discussed in further detail below.
 
 ### Canary releases
 

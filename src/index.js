@@ -43,6 +43,7 @@ import Telepresence from './products/Telepresence';
 import './style.less';
 import getDocsActiveVersion from './utils/getDocsActiveVersion';
 import getPrevNext from './utils/getPrevNext';
+import { canonicalUrls } from './utils/getValueCanonicals';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -58,9 +59,11 @@ const index = ({ data, location, pageContext }) => {
       : initialProduct.version.filter((v) => v.id === slug[3])[0] || {};
   const isProduct = initialProduct.slug !== products[0].slug;
   const isProductHome = isProduct && !isArchivedVersions && !!!tempVersion.id;
-  const canonicalUrl =
-    (pageContext.canonical.latest ? siteUrl : getSiteUrl()) +
-    pageContext.canonical.url;
+  const realCanonicals = canonicalUrls[pageContext.canonical.url];
+  let canonicalUrl = realCanonicals
+    ? (pageContext.canonical.latest ? siteUrl : getSiteUrl()) + realCanonicals
+    : (pageContext.canonical.latest ? siteUrl : getSiteUrl()) +
+      pageContext.canonical.url;
 
   const initialVersion = !isProductHome
     ? tempVersion

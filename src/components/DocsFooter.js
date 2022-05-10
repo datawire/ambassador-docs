@@ -18,12 +18,11 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
     : '';
 
   // Don't produce an edit link for generated files.
-  if (restOfFilePath === "licenses.md") {
-    return (
-      <footer className="docs__footer"></footer>
-    );
+  if (restOfFilePath === 'licenses.md') {
+    return <footer className="docs__footer"></footer>;
   }
 
+  const teleDoc = page?.parent?.relativePath;
   let dstUrl;
   switch (product) {
     case 'telepresence':
@@ -42,11 +41,24 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       break;
     case 'code':
     case 'ship':
-    case 'run': 
-      dstUrl = 'https://github.com/datawire/ambassador-docs/blob/master/docs'
-      break; 
+    case 'run':
+      dstUrl = 'https://github.com/datawire/ambassador-docs/blob/master/docs';
+      break;
     default:
       dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${product}/${version}/${restOfFilePath}`;
+      break;
+  }
+
+  switch (teleDoc) {
+    case 'docs/telepresence/latest/extension/intro.md':
+    case 'docs/telepresence/latest/extension/install.md':
+    case 'docs/telepresence/latest/extension/intercept.md':
+    case 'docs/telepresence/latest/extension/troubleshooting.md':
+    case 'docs/telepresence/2.5/extension/intro.md':
+    case 'docs/telepresence/2.5/extension/install.md':
+    case 'docs/telepresence/2.5/extension/intercept.md':
+    case 'docs/telepresence/2.5/extension/troubleshooting.md':
+      dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
       break;
   }
 

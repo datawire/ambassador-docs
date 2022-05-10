@@ -1,6 +1,6 @@
 # Rollouts CRD
 
-The Rollout CRD is installed to your cluster when you install Argo Rollouts.  This is similar to a Deployment, but it adds a rollout strategy section that defines how the rollout will incrementally happen once started. In the example below, it will route 30% of traffic to the new service for 30 seconds, followed by 60% of the traffic for another 30 seconds, then 100% of the traffic.
+The Rollout [CRD](/learn/kubernetes-glossary/custom-resource-definition/) is installed to your cluster when you install Argo Rollouts.  This is similar to a Deployment, but it adds a rollout strategy section that defines how the rollout will incrementally happen once started. In the example below, it will route 30% of traffic to the new service for 30 seconds, followed by 60% of the traffic for another 30 seconds, then 100% of the traffic.
 Example YAML:
 
 ```yaml

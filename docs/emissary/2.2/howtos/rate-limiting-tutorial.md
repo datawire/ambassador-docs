@@ -5,7 +5,7 @@ import Alert from '@material-ui/lab/Alert';
 <Alert severity="info">This guide applies to $OSSproductName$. It will not work correctly
 on $AESproductName$.</Alert>
 
-$productName$ can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure $productName$ to use a simple third party rate limit service. (If you don't want to implement your own rate limiting service, $AESproductName$ integrates a [powerful, flexible rate limiting service](/docs/edge-stack/latest/topics/using/rate-limits/rate-limits/).)
+$productName$ can validate incoming requests before routing them to a backing service. In this tutorial, we'll configure $productName$ to use a simple third party rate limit service. (If you don't want to implement your own [rate limiting](/learn/kubernetes-glossary/rate-limiting/) service, $AESproductName$ integrates a [powerful, flexible rate limiting service](/docs/edge-stack/latest/topics/using/rate-limits/rate-limits/).)
 
 ## Before you get started
 
@@ -85,7 +85,7 @@ If `domain` is not specified (which is the situation here), the default is `amba
 
 ## 2. Configure $productName$ Mappings
 
-$productName$ only validates requests on `Mapping`s which set labels to use for rate limiting,
+$productName$ only validates requests on `Mapping`s which set labels to use for [rate limiting](../../topics/running/services/rate-limit-service/),
 so you'll need to apply `labels` to your `Mapping`s to enable rate limiting. For more information
 on the labelling process, see the [Rate Limits configuration documentation](../../topics/using/rate-limits/).
 
@@ -132,7 +132,7 @@ spec:
 
 <!-- If multiple `labels` are supplied for a single `Mapping`, $productName$ would also perform multiple requests to `example-rate-limit:5000` if we had defined multiple `rate_limits` rules on the mapping. -->
 
-Note that the `key` could be anything you like, but our example rate limiting service expects it to
+Note that the `key` could be anything you like, but our example [rate limiting](../../topics/running/services/rate-limit-service/) service expects it to
 match the name of the header. Also note that since our `RateLimitService` expects to use labels in the
 `ambassador` domain, our `Mapping` must match.
 

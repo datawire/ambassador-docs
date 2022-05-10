@@ -16,7 +16,7 @@ In a microservices organization, small teams of developers work independently fr
 
 The team needs to do all of this *without* requiring assistance from another operations or platform team--as soon as a services team requires another team, they're no longer working independently, and this can lead to bottlenecks.
 
-For service publication, a microservices API gateway provides a static address for consumers, and dynamically route requests to the appropriate service address. In addition, providing authentication and TLS termination for security are typical considerations in exposing a service to other consumers.
+For service publication, a microservices API gateway provides a static address for consumers, and dynamically route requests to the appropriate service address. In addition, providing authentication and [TLS](../../../topics/running/tls/) termination for security are typical considerations in exposing a service to other consumers.
 
 Understanding the end-user experience of a service is crucial to improving the service. For example, a software update could inadvertently impact the latency of certain requests. A microservices API gateway is well situated to collect key observability metrics on end-user traffic as it routes traffic to the end service.
 

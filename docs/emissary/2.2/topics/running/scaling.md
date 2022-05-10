@@ -5,7 +5,7 @@ reflects common issues, tips, and tricks that come up frequently.
 
 ## Performance dimensions
 
-The performance of $productName$'s control plane can be characterized along a number of
+The performance of [$productName$](/products/api-gateway/)'s control plane can be characterized along a number of
 different dimensions:
 
  - The number of `TLSContext` resources.
@@ -19,7 +19,7 @@ find yourself in need of some of the content in this section.
 ## Mysterious pod restarts (aka pushing the edge of the envelope)
 
 Whether your application is growing organically or whether you are deliberately scale testing, it's
-helpful to recognize how $productName$ behaves as it reaches the edge of its performance
+helpful to recognize how [$productName$](../) behaves as it reaches the edge of its performance
 envelope along any of these dimensions.
 
 As $productName$ approaches the edge of its performance envelope, it will often manifest as
@@ -32,7 +32,7 @@ sections for more on how to cope with these situations.
 
 ## Memory limits
 
-$productName$ can grow in memory usage and be killed by Kubernetes if it exceeds the limits
+[$productName$](../../../tutorials/quickstart-demo/) can grow in memory usage and be killed by Kubernetes if it exceeds the limits
 defined in its pod spec. When this happens it is confusing and difficult to catch because the only
 indication that this has occurred is the pod transitioning momentarily into the `OOMKilled`
 state. The only way to actually observe this is if you are lucky enough to be running the following
@@ -42,7 +42,7 @@ command (or have similar monitoring configured) when $productName$ gets `OOMKill
     kubectl get pods -n ambassador -w
 ```
 
-In order to take the luck out of the equation, $productName$ will periodically log its
+In order to take the luck out of the equation, [$productName$](../ambassador-with-gke) will periodically log its
 memory usage so you can see in the logs if memory limits might be a problem and require adjustment:
 
 ```

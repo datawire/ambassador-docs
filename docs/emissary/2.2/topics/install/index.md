@@ -6,7 +6,7 @@ import './index.less'
 ## <img class="os-logo" src="../../images/helm-navy.png"/> Install with Helm
 
 Helm, the package manager for Kubernetes, is the recommended way to install
-$productName$. Full details are in the [Helm instructions.](helm/)
+[$productName$](../../tutorials/getting-started/). Full details are in the [Helm instructions.](helm/)
 
 ## <img class="os-logo" src="../../images/kubernetes.png"/> Install with Kubernetes YAML
 
@@ -41,7 +41,7 @@ your production needs for $AESproductName$ or $OSSproductName$. Read more about
 
 # What’s Next?
 
-$productName$ has a comprehensive range of [features](/features/) to
+[$productName$](../../about/alternatives/) has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice. To learn more about how $productName$ works, along with use cases, best practices, and more,
 check out the [Welcome page](../../tutorials/getting-started) or read the [$productName$
 Story](../../about/why-ambassador).

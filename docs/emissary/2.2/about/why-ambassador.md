@@ -1,6 +1,6 @@
 # Why $productName$?
 
-$productName$ gives platform engineers a comprehensive, self-service edge stack for managing the boundary between end-users and Kubernetes. Built on the [Envoy Proxy](https://www.envoyproxy.io) and fully Kubernetes-native, $productName$ is made to support multiple, independent teams that need to rapidly publish, monitor, and update services for end-users. A true edge stack, $productName$ can also be used to handle the functions of an API Gateway, a Kubernetes ingress controller, and a layer 7 load balancer (for more, see [this blog post](https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d)).
+$productName$ gives platform engineers a comprehensive, self-service edge stack for managing the boundary between end-users and Kubernetes. Built on the [Envoy Proxy](https://www.envoyproxy.io) and fully Kubernetes-native, $productName$ is made to support multiple, independent teams that need to rapidly publish, monitor, and update services for end-users. A true edge stack, $productName$ can also be used to handle the functions of an API Gateway, a [Kubernetes ingress](/learn/kubernetes-ingress/) controller, and a [layer 7](/learn/kubernetes-glossary/layer-7/) load balancer (for more, see [this blog post](https://blog.getambassador.io/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers-6e29f1c44f2d)).
 
 ## How Does $productName$ work?
 
@@ -18,8 +18,8 @@ Traditional cloud applications were built using a monolithic approach. These app
 
 $productName$ is commonly used to route traffic to a wide variety of services. It supports:
 
-* configuration on a *per-service* basis, enabling fine-grained control of timeouts, rate limiting, authentication policies, and more.
-* a wide range of L7 protocols natively, including HTTP, HTTP/2, gRPC, gRPC-Web, and WebSockets.
+* configuration on a *per-service* basis, enabling fine-grained control of timeouts, [rate limiting](../../topics/using/rate-limits/), authentication policies, and more.
+* a wide range of L7 protocols natively, including HTTP, HTTP/2, [gRPC](../../howtos/grpc/), gRPC-Web, and WebSockets.
 * Can route raw TCP for services that use protocols not directly supported by $productName$.
 
 ### Dynamic services
@@ -34,7 +34,7 @@ Service updates result in a constantly changing application. The dynamic nature 
 
 Independent teams can create their own workflows for developing and releasing functionality that are optimized for their specific service(s). With $productName$, teams can:
 
-* Leverage a [declarative configuration model](../../topics/concepts/gitops-continuous-delivery), making it easy to understand the canonical configuration and implement GitOps-style best practices.
+* Leverage a [declarative configuration model](../../topics/concepts/gitops-continuous-delivery), making it easy to understand the canonical configuration and implement [GitOps](/learn/kubernetes-glossary/gitops/)-style best practices.
 * Independently configure different aspects of $productName$, eliminating the need to request configuration changes through a centralized operations team.
 
 ## $productName$ is engineered for Kubernetes

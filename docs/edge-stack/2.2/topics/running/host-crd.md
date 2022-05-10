@@ -253,6 +253,7 @@ acmeProvider:
   - The `hostname` must be reachable from the internet so the CA can check
     `POST` to an endpoint in $AESproductName$.
   - Wildcard domains are not supported.
+  - An HTTP `Listener` on port 8080 is required for ACME
 
 ### `tlsSecret` enables TLS termination
 

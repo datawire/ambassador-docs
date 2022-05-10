@@ -1,6 +1,6 @@
 # TLS termination and enabling HTTPS
 
-TLS encryption is one of the basic requirements of having a secure system.
+[TLS](/learn/kubernetes-glossary/tls/) encryption is one of the basic requirements of having a secure system.
 $AESproductName$ [automatically enables TLS termination/HTTPs
 ](../../topics/running/host-crd#tls-settings), making TLS encryption
 easy and centralizing TLS termination for all of your services in Kubernetes.
@@ -9,7 +9,7 @@ While this automatic certificate management in $AESproductName$ helps
 simply TLS configuration in your cluster, the Open-Source $OSSproductName$
 still requires you provide your own certificate to enable TLS.
 
-The following will walk you through the process of enabling TLS with a
+The following will walk you through the process of enabling [TLS](../../topics/running/tls/) with a
 self-signed certificate created with the `openssl` utility.
 
 **Note** these instructions also work if you would like to provide your own
@@ -54,7 +54,7 @@ termination.
 
 ## Store the certificate and key in a Kubernetes Secret
 
-$productName$ dynamically loads TLS certificates by reading them from
+$productName$ dynamically loads [TLS](../../howtos/tls-termination/) certificates by reading them from
 Kubernetes secrets. Use `kubectl` to create a `tls` secret to hold the pem
 files we created above.
 
@@ -166,7 +166,7 @@ While a self-signed certificate is a simple and quick way to get $productName$ t
 
 With $productName$, this can be simply done by requesting a
 certificate using the built in [ACME support
-](../../topics/running/host-crd#acme-support)
+](../../../../edge-stack/latest/topics/running/host-crd#acme-support)
 
 For the Open-Source API Gateway, Jetstack's `cert-manager` provides a simple
 way to manage certificates from Let's Encrypt. See our documentation for more

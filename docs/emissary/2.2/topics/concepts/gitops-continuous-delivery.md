@@ -6,7 +6,7 @@ Containerized applications deployed in Kubernetes generally follow the microserv
 
 $productName$ configuration is built on the concept of _policies_. A policy is a statement of intent and codified in a declarative configuration file. $productName$ takes advantage of Kubernetes Custom Resource Definitions (CRDs) to provide a declarative configuration workflow that is idiomatic with Kubernetes.
 
-Both operators and application developers can write policies. Typically, operators are responsible for global policies that affect all microservices. Common examples of these types of policies include TLS configuration and metrics. Application development teams will want to own the policies that affect their specific service, as these settings will vary from service to service. Examples of these types of service-specific settings include protocols (e.g., HTTP, gRPC, TCP, WebSockets), timeouts, and cross-origin resource sharing settings.
+Both operators and application developers can write policies. Typically, operators are responsible for global policies that affect all microservices. Common examples of these types of policies include [TLS](../../../topics/running/tls/) configuration and metrics. Application development teams will want to own the policies that affect their specific service, as these settings will vary from service to service. Examples of these types of service-specific settings include protocols (e.g., HTTP, [gRPC](../../../howtos/grpc/), TCP, WebSockets), timeouts, and cross-origin resource sharing settings.
 
 Because many different teams may need to write policies, $productName$ supports a decentralized configuration model. Individual policies are written in different files. $productName$ aggregates all policies into one master policy configuration for the edge.
 
@@ -14,7 +14,7 @@ Because many different teams may need to write policies, $productName$ supports 
 
 Code cannot provide value to end-users until it is running in production. [Continuous Delivery](https://continuousdelivery.com/) is the ability to get changes of all types -- including new features, configuration changes, bug fixes, and experiments -- into production, and in front of customers safely and quickly in a sustainable way.
 
-[GitOps](https://www.weave.works/technologies/gitops/) is an approach to continuous delivery that relies on using a source control system as a single source of truth for all infrastructure and configuration. **In the GitOps model, configuration changes go through a specific workflow:**
+[GitOps](https://www.weave.works/technologies/gitops/) is an approach to continuous delivery that relies on using a source control system as a single source of truth for all infrastructure and configuration. **In the [GitOps model](../../../topics/concepts/gitops-continuous-delivery/), configuration changes go through a specific workflow:**
 
 1. All configuration is stored in source control.
 2. A configuration change is made via pull request.
@@ -41,7 +41,7 @@ The self-service, continuous delivery model is critical for ensuring that edge o
 
 ## Continuous delivery, GitOps, and $productName$
 
-Adopting a continuous delivery workflow with $productName$ via GitOps provides several advantages:
+Adopting a continuous delivery workflow with [$productName$](../../../topics/concepts/architecture/) via [GitOps](/docs/argo/latest/concepts/gitops/) provides several advantages:
 
 1. **Reduced deployment risk**: By immediately deploying approved configuration into production, configuration issues can be rapidly identified. Resolving any issue is as simple as rolling back the change in source control.
 2. **Auditability**: Understanding the specific configuration of $productName$ is as simple as reviewing the configuration in the source control repository. Moreover, any changes made to the configuration will also be recorded, providing context on previous configurations.
@@ -57,8 +57,8 @@ In a typical $productName$ GitOps workflow:
 
 * Each service has its own $productName$ policy. This policy consists of one or more $productName$ custom resource definitions, specified in YAML.
 * This policy is stored in the same repository as the service, and managed by the service team.
-* Changes to the policy follow the GitOps workflow discussed above (e.g., pull request, approval, and continuous delivery).
-* Global configuration that is managed by operations are stored in a central repository alongside other cluster configuration. This repository is also set up for continuous delivery with a GitOps workflow.
+* Changes to the policy follow the [GitOps](/learn/kubernetes-glossary/gitops/) workflow discussed above (e.g., pull request, approval, and continuous delivery).
+* Global configuration that is managed by operations are stored in a central repository alongside other cluster configuration. This repository is also set up for continuous delivery with a [GitOps](/resources/cloud-native-workflow-gitops-and-kubernetes/) workflow.
 
 ## Further reading
 

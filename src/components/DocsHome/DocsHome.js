@@ -39,7 +39,7 @@ const Product = ({
     </Button>
     <h3 className="product__container-docs--title">Ambassador Products</h3>
     <div className="product__container-docs">
-      <img className="product__container-docs--image" src={docImage} />
+      <img className="product__container-docs--image" src={docImage} alt={docDescription} />
       <Link className="product__container-docs--description" to={docLink}>
         {docDescription}
       </Link>
@@ -74,6 +74,7 @@ const DocsHome = () => {
           getStarted={goToCodeDocs}
           docDescription={'Advanced Telepresence documentation'}
           docImage={Telepresence}
+          docLink={'/docs/telepresence/'}
         />
         <Product
           title={'Ship with Argo'}
@@ -84,6 +85,7 @@ const DocsHome = () => {
           getStarted={goToShipDocs}
           docDescription={'Advanced Argo documentation'}
           docImage={Argo}
+          docLink={'/docs/argo/'}
         />
         <Product
           title={'Run with Edge Stack'}
@@ -94,6 +96,7 @@ const DocsHome = () => {
           getStarted={goToRunDocs}
           docDescription={'Advanced Edge Stack documentation'}
           docImage={EdgeStack}
+          docLink={'/docs/edge-stack/'}
         />
       </div>
     </div>

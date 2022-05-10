@@ -16,13 +16,13 @@ In the GitOps model, configuration changes go through a specific pull-based work
 *   The pull request is approved and merged into the production branch.
 *   Automated systems (e.g., a build pipeline or Kubernetes Operator) ensure the configuration of the production branch is in full sync with actual production systems.
 
-Changes are automated via the source control system; GitOps enables Kubernetes clusters themselves to "pull" updates from source control manifests. The entire GitOps workflow is also self-service; an operations team does not need to be directly involved in managing the change process (except in the review/approval process). 
+Changes are automated via the source control system; [GitOps](/resources/cloud-native-workflow-gitops-and-kubernetes/) enables Kubernetes clusters themselves to "pull" updates from source control manifests. The entire GitOps workflow is also self-service; an operations team does not need to be directly involved in managing the change process (except in the review/approval process). 
 
 ## Why GitOps for progressive delivery?
 
 GitOps offers developers a way to manage operational workflows, particularly for Kubernetes, that relies on familiar processes like pull requests, which developers already use to merge code. These same processes and tools can be used to push Kubernetes resources into production. 
 
-The idea of GitOps for developers is to allow for ease of use: a developer writes code, sends a pull request via a version control system, it's reviewed by another person, and from there, there is no further human interaction. Humans don't need full access to production environments. Compliance and change audits become trivial. The rollout is automated in a GitOps workflow, in the form, for example, of a canary deployment using a tool like Argo.
+The idea of GitOps for developers is to allow for ease of use: a developer writes code, sends a pull request via a version control system, it's reviewed by another person, and from there, there is no further human interaction. Humans don't need full access to production environments. Compliance and change audits become trivial. The rollout is automated in a [GitOps](/podcasts/katie-gamanji-on-kubernetes-tooling-dx-gitops-and-the-cluster-api/) workflow, in the form, for example, of a canary deployment using a tool like Argo.
 
 ## Why Argo for applying GitOps-based progressive delivery?
 
@@ -36,6 +36,6 @@ Continuous monitoring and syncing helps to eliminate the common problem of confi
 *   Increased speed of delivery 
 *   Reduced deployment complexity
 
-Progressive delivery relies on automated rollouts to incrementally and iteratively release features and easily roll back if needed. This is designed to make the process safe and reduce the blast radius of any problems. Making the progressive delivery process easier, or more developer friendly, is where GitOps shines. Using GitOps means that everything is defined as code, which lives in Git. 
+[Progressive delivery](../cicd/) relies on automated [rollouts](../../howtos/configure-argo-rollouts/) to incrementally and iteratively release features and easily roll back if needed. This is designed to make the process safe and reduce the blast radius of any problems. Making the progressive delivery process easier, or more developer friendly, is where GitOps shines. Using GitOps means that everything is defined as code, which lives in Git. 
 
-Argo is the unifying factor, as it enables applying GitOps workflows to progressive delivery techniques, such as [canary deployments](https://blog.argoproj.io/deploying-argo-rollouts-with-ambassador-for-canary-releases-on-kubernetes-f5910ed1fd61).
+Argo is the unifying factor, as it enables applying [GitOps](https://www.getambassador.io/docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/) workflows to progressive delivery techniques, such as [canary deployments](https://blog.argoproj.io/deploying-argo-rollouts-with-ambassador-for-canary-releases-on-kubernetes-f5910ed1fd61).

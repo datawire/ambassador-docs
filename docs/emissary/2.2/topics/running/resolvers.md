@@ -1,6 +1,6 @@
 # Service discovery and resolvers
 
-Service discovery is how cloud applications and their microservices are located on the network. In a cloud environment, services are ephemeral, existing only as long as they are needed and in use, so a real-time service discovery mechanism is required. $productName$ uses information from service discovery to determine where to route incoming requests.
+[Service discovery](/resources/service-discovery-microservices/) is how cloud applications and their microservices are located on the network. In a cloud environment, services are ephemeral, existing only as long as they are needed and in use, so a real-time [service discovery](/learn/kubernetes-glossary/service-discovery/) mechanism is required. $productName$ uses information from service discovery to determine where to route incoming requests.
 
 ## $productName$ support for service discovery
 

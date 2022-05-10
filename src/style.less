@@ -84,7 +84,7 @@ body {
       width: 100%;
       @media (min-width: 1000px) {
         display: none;
-      }  
+      }
     }
   }
 
@@ -133,7 +133,7 @@ body {
         color: inherit;
         fill: @gray500;
         padding: 0 10px;
-        
+
         & > label {
           color: inherit;
           font-weight: normal;
@@ -145,7 +145,6 @@ body {
           fill: inherit;
           width: 20px;
           height: 20px;
-         
         }
 
         & > select {
@@ -722,6 +721,62 @@ body {
     width: 100%;
     margin: 0 auto;
 
+    .cloud-qs-form {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 16px;
+      margin-top: 16px;
+      @media (max-width: 768px) {
+        .hubspot-form form {
+          margin: -1.5rem;
+        }
+      }
+      @media (max-width: 610px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .btn-m-ctaPurple {
+        height: 55px;
+        color: @color-white-2;
+        &:hover {
+          color: @purple-45;
+        }
+      }
+      .hubspot-form {
+        margin: unset;
+        width: 300px;
+        & form {
+          display: flex;
+          align-items: flex-end;
+          gap: 16px;
+          & div {
+            margin: unset;
+          }
+          input.hs-button {
+            height: 55px;
+            color: @purple-1;
+            border-color: #795cec;
+            border: 2px solid;
+            border-radius: 5px;
+            background-color: transparent;
+            &:hover {
+              color: @purple-45;
+              border-color: @purple-2;
+              background: @purple-2;
+            }
+          }
+          & ul {
+            margin: 0;
+            padding: 0;
+            & > li {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
     a.docs__next-previous__button {
       color: @grey-surface;
       text-decoration: none;
@@ -1110,6 +1165,7 @@ body {
   height: 100%;
 
   &__sidebar {
+    position: fixed;
     margin-left: 20px;
     border-right: 1px solid @grey-separator;
   }
@@ -1404,16 +1460,15 @@ body {
     &--button-get-started {
       margin-top: auto;
     }
-   
   }
   &-Code {
     color: #db210f;
   }
   &-Ship {
-    color: #03A076;
+    color: #03a076;
   }
   &-Run {
-    color: #008CC3;
+    color: #008cc3;
   }
   @media (max-width: 1200px) {
     &-container {

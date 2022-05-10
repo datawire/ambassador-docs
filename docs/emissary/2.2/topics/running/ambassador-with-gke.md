@@ -2,7 +2,7 @@
 
 Google offers a [L7 load balancer](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress) to
 leverage network services such as managed SSL certificates, SSL offloading or the Google content delivery network.
-A L7 load balancer in front of $productName$ can be configured by hand or by using the Ingress-GCE resource. Using the
+A L7 load balancer in front of [$productName$](/products/api-gateway/) can be configured by hand or by using the Ingress-GCE resource. Using the
 Ingress resource also allows you to create Google-managed SSL certificates through Kubernetes.
 
 With this setup, HTTPS will be terminated at the Google load balancer. The load balancer will be created and configured by
@@ -13,7 +13,7 @@ In this setup, the ingress resource creates two forwarding rules, one for HTTP a
 forwarding rule has the SSL certificates attached. Also, one backend service will be created to point to
 a list of instance groups at a static port. This will be the NodePort of the $productName$ service.
 
-With this setup, the load balancer terminates HTTPS and then directs the traffic to the $productName$ service
+With this setup, the load balancer terminates HTTPS and then directs the traffic to the [$productName$](../../../howtos/basic-auth/) service
 via the `NodePort`. $productName$ is then doing all the routing to the other internal/external services.
 
 # Overview of steps
@@ -29,7 +29,7 @@ via the `NodePort`. $productName$ is then doing all the routing to the other int
 
 ## 0. $productName$
 
-This guide will install $OSSproductName$. You can also install $AESproductName$. Please note:
+This guide will install [$OSSproductName$](../../../tutorials/quickstart-demo/). You can also install $AESproductName$. Please note:
 - The ingress and the `ambassador` service need to run in the same namespace
 - The `ambassador` service needs to be of type `NodePort` and not `LoadBalancer`. Also remove the line with `externalTrafficPolicy: Local`
 - Ambassador-Admin needs to be of type `NodePort` instead of `ClusterIP` since it needs to be available for health checks
@@ -180,7 +180,7 @@ spec:
 
 ## 6. Configure $productName$ to do HTTP -> HTTPS redirection
 
-Configure $productName$ to [redirect traffic from HTTP to HTTPS](../tls/cleartext-redirection/#http-https-redirection). You will need to restart $productName$ to effect the changes with `kubectl rollout restart deployment ambassador`.
+Configure $productName$ to [redirect traffic from HTTP to HTTPS](../tls/cleartext-redirection/#http-https-redirection). You will need to restart [$productName$](/docs/emissary/) to effect the changes with `kubectl rollout restart deployment ambassador`.
 
 The result should be that `http://www.example.com` will redirect to `https://www.example.com`.
 

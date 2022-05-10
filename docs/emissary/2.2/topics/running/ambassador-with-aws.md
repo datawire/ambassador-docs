@@ -1,12 +1,12 @@
 # $productName$ with AWS
 
-$productName$ is a platform agnostic Kubernetes API gateway. It will run in any distribution of Kubernetes whether it is managed by a cloud provider or on homegrown bare-metal servers.
+[$productName$](/products/api-gateway/) is a platform agnostic Kubernetes API gateway. It will run in any distribution of Kubernetes whether it is managed by a cloud provider or on homegrown bare-metal servers.
 
 This document serves as a reference for different configuration options available when running Kubernetes in AWS. See [Installing $productName$](../../install) for the various installation methods available.
 
 ## Recommended configuration
 
-There are lot of configuration options available to you when running $productName$ in AWS. While you should read this entire document to understand what is best for you, the following is the recommended configuration when running $productName$ in AWS:
+There are lot of configuration options available to you when running [$productName$](../../../tutorials/quickstart-demo/) in AWS. While you should read this entire document to understand what is best for you, the following is the recommended configuration when running $productName$ in AWS:
 
 It is recommended to terminate TLS at $productName$ so you can take advantage of all the TLS configuration options available in $productName$ including setting the allowed TLS versions, setting `alpn_protocol` options, enforcing HTTP -> HTTPS redirection, and [automatic certificate management](../host-crd) in the $productName$.
 

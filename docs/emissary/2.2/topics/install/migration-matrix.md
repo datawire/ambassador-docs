@@ -6,11 +6,11 @@ import Alert from '@material-ui/lab/Alert';
   <b>Read the instructions below</b> before making any changes to your cluster!
 </Alert>
 
-There are currently multiple paths for upgrading $productName$, depending on what version you're currently
+There are currently multiple paths for upgrading [$productName$](/products/api-gateway/), depending on what version you're currently
 running, what you want to be running, and whether you installed $productName$ using [Helm](../helm) or
 YAML.
 
-(To check out if you installed $productName$ using Helm, run `helm list --all` and see if
+(To check out if you installed [$productName$](../../../tutorials/quickstart-demo/) using Helm, run `helm list --all` and see if
 $productName$ is listed. If so, you installed using Helm.)
 
 <Alert severity="warning">
