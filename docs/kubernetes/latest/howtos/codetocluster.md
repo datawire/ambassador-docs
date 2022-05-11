@@ -19,7 +19,7 @@ import KubeGSTabs from './gs-tabs.js'
 * [5. Create a Deployment, Service, and Mapping in Kubernetes](#5-create-a-deployment-service-and-mapping-in-kubernetes)
 * [6. Deploy app and test](#6-deploy-app-and-test)
 * [7. Setup a Host and SSL (optional)](#7-setup-a-host-and-ssl-optional)
-* [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
+* [What's next?](#img-classos-logo-srcimageslogopng-alttelepresence-logo--whats-next)
 
 </div>
 
@@ -214,7 +214,7 @@ You can check the certificate's status with `kubectl describe host nodebb-host`.
 
 Finally, go to your domain in the browser and you should see the app with a valid SSL certificate installed.
 
-## <img class="os-logo" src="../../../../../images/logo.png"/> What's next?
+## <img class="os-logo" src="../../../../../images/logo.png" alt="Telepresence Logo" /> What's next?
 
 YAML files used to deploy Kubernetes resources are generally kept under version control.  You can automate deploying and updating resources as changes are committed to your code repositories using a CI/CD system like Argo!  [Check out our guide on getting started with Argo](../../../../argo/latest/quick-start/).
 
