@@ -8,4 +8,4 @@ A Kubernetes service is an exposed application running on a workload (pods). It 
 
 An Ambassador service in the Service Catalog is a collection of Kubernetes services across your [cells](/docs/cloud/latest/service-catalog/concepts/cells).
 
-![The services interactions](../../../images/service-ambassador.png)
+![The services interactions](../../images/service-ambassador.png)
