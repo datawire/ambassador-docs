@@ -88,7 +88,7 @@ Now is a great moment to connect your new installation to Ambassador Cloud in or
     - **Path Matching**: `/backend/`
     - **OpenAPI Docs**: `/.ambassador-internal/openapi-docs`
 
-    ## <img src="../../images/mapping-editor.png" alt="Mapping editor form" />
+    ## <img src="../images/mapping-editor.png" alt="Mapping editor form" />
 
   Whether you decide to automatically push the change to Git for this newly create Mapping resource or not, the resulting Mapping should be similar to the example below.
 
@@ -138,7 +138,7 @@ Now is a great moment to connect your new installation to Ambassador Cloud in or
 
 <Alert severity="success"><b>Victory!</b> You have created your first $productName$ <code>Listener</code> and <code>Mapping</code>, routing a request from your cluster's edge to a service!</Alert>
 
-## <img class="os-logo" src="../../images/logo.png" alt="Telepresence Logo" /> What's next?
+## <img class="os-logo" src="../images/logo.png" alt="Telepresence Logo" /> What's next?
 
 Explore some of the popular tutorials on $productName$:
 

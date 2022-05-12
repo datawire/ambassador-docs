@@ -33,7 +33,7 @@ The above definition applies to all aspects of computing—not just networks. Op
 
 The remainder of this post will cover network load balancing only.
 
-![Figure 1: Network load balancing overview](../../images/modern-lb-and-proxying/1.png)
+![Figure 1: Network load balancing overview](../images/modern-lb-and-proxying/1.png)
 
 <strong style="font-weight: normal; font-size: 12px">Figure 1: Network load balancing overview</strong>
 
@@ -71,7 +71,7 @@ The OSI model is a very poor approximation of the complexity of load balancing s
 For example, if a L4 TCP load balancer also supports TLS termination, is it now an L7 load balancer? 
 
 
-![Figure 2: TCP L4 termination load balancing](../../images/modern-lb-and-proxying/2.png)
+![Figure 2: TCP L4 termination load balancing](../images/modern-lb-and-proxying/2.png)
 
 <strong style="font-weight: normal; font-size: 12px">Figure 2: TCP L4 termination load balancing</strong>
 
@@ -101,7 +101,7 @@ All modern protocols are evolving to be both multiplexing and kept-alive for eff
 This problem is fixed by the L7 load balancer.
 
 
-![Figure 3: HTTP/2 L7 termination load balancing](../../images/modern-lb-and-proxying/3.png)
+![Figure 3: HTTP/2 L7 termination load balancing](../images/modern-lb-and-proxying/3.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 3: HTTP/2 L7 termination load balancing</strong>
@@ -215,7 +215,7 @@ To this point, this piece has provided  a high-level definition of what a load b
 ### Middle proxy
 
 
-![Figure 4: Middle proxy load balancing topology](../../images/modern-lb-and-proxying/4.png)
+![Figure 4: Middle proxy load balancing topology](../images/modern-lb-and-proxying/4.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 4: Middle proxy load balancing topology</strong>
@@ -230,7 +230,7 @@ A middle proxy is also often a black box that makes operations difficult. Is an 
 ### Edge proxy
 
 
-![Figure 5: Edge proxy load balancing topology](../../images/modern-lb-and-proxying/5.png)
+![Figure 5: Edge proxy load balancing topology](../images/modern-lb-and-proxying/5.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 5: Edge proxy load balancing topology</strong>
@@ -244,7 +244,7 @@ Additionally, for security reasons, it is desirable to have a single gateway by 
 
 ### Embed
 
-![Figure 6: Load balancing via embedded client library](../../images/modern-lb-and-proxying/6.png)
+![Figure 6: Load balancing via embedded client library](../images/modern-lb-and-proxying/6.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 6: Load balancing via embedded client library</strong>
@@ -261,7 +261,7 @@ With all of that said, the libraries mentioned above have been successful for co
 ### Sidecar proxy
 
 
-![Figure 7: Load balancing via sidecar proxy](../../images/modern-lb-and-proxying/7.png)
+![Figure 7: Load balancing via sidecar proxy](../images/modern-lb-and-proxying/7.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 7: Load balancing via sidecar proxy</strong>
@@ -309,7 +309,7 @@ The following sections will describe several different designs for middle/edge p
 ### TCP/UDP termination load balancers
 
 
-![Figure 8: L4 termination load balancer](../../images/modern-lb-and-proxying/8.png)
+![Figure 8: L4 termination load balancer](../images/modern-lb-and-proxying/8.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 8: L4 termination load balancer</strong>
@@ -326,7 +326,7 @@ L4 termination load balancers are still used for two reasons:
 
 ### TCP/UDP passthrough load balancers
 
-![Figure 9: L4 passthrough load balancer](../../images/modern-lb-and-proxying/9.png)
+![Figure 9: L4 passthrough load balancer](../images/modern-lb-and-proxying/9.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 9: L4 passthrough load balancer</strong>
@@ -355,7 +355,7 @@ Why would this type of load balancer be used in place of the termination load ba
 
 ### Direct server return (DSR)
 
-![Figure 10: L4 Direct server return (DSR)](../../images/modern-lb-and-proxying/10.png)
+![Figure 10: L4 Direct server return (DSR)](../images/modern-lb-and-proxying/10.png)
 
 <strong style="font-weight: normal; font-size: 12px">Figure 10: L4 Direct server return (DSR)</strong>
 
@@ -375,7 +375,7 @@ Note that in both the passthrough load balancer and DSR load balancer designs, t
 ### Fault tolerance via high availability pairs
 
 
-![Figure 11: L4 fault tolerance via HA pairs and connection tracking](../../images/modern-lb-and-proxying/11.png)
+![Figure 11: L4 fault tolerance via HA pairs and connection tracking](../images/modern-lb-and-proxying/11.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 11: L4 fault tolerance via HA pairs and connection tracking</strong>
@@ -406,7 +406,7 @@ The above setup is how many high-traffic internet applications are still served 
 ### Fault tolerance and scaling via clusters with distributed consistent hashing
 
 
-![Figure 12: L4 fault tolerance and scaling via clustered load balancers and consistent hashing](../../images/modern-lb-and-proxying/12.png)
+![Figure 12: L4 fault tolerance and scaling via clustered load balancers and consistent hashing](../images/modern-lb-and-proxying/12.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 12: L4 fault tolerance and scaling via clustered load balancers and consistent hashing</strong>
@@ -447,7 +447,7 @@ There weren’t any open source load balancers that implemented this design unti
 
 ## Current state of the art in L7 load balancing
 
-![tweet1](../../images/modern-lb-and-proxying/13.png)
+![tweet1](../images/modern-lb-and-proxying/13.png)
 
 Yes, indeed. The last several years have seen a resurgence in L7 load balancer/proxy development. This tracks very well with the continued push towards microservice architectures in distributed systems. 
 
@@ -506,7 +506,7 @@ L7 load balancers are evolving at a staggering pace. For an example of what Envo
 ## Global load balancing and the centralized control plane
 
 
-![Figure 13: Global load balancing](../../images/modern-lb-and-proxying/14.png)
+![Figure 13: Global load balancing](../images/modern-lb-and-proxying/14.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 13: Global load balancing</strong>
@@ -538,7 +538,7 @@ Please see posts on [Envoy’s universal data plane API](https://medium.com/@mat
 
 So far, this post has only briefly mentioned hardware and software considerations, primarily in the context of the historical L4 load balancer HA pair. What are the industry trends in this area?
 
-![tweet2](../../images/modern-lb-and-proxying/15.png)
+![tweet2](../images/modern-lb-and-proxying/15.png)
 
 The previous tweet is a humorous exaggeration but still sums up pretty well the trends, which are as follows:
 
