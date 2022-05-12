@@ -214,9 +214,11 @@ const index = ({ data, location, pageContext }) => {
       metaTitle = metaName + ' | Ambassador';
 
       const slugFiltered = slug.filter((item) => item);
+      console.log('slug', `${slugFiltered.join('/')}/`);
 
       if (metaData[`${slugFiltered.join('/')}/`]) {
         metaDescription = metaData[`${slugFiltered.join('/')}/`].description;
+        console.log('metaDescription', metaDescription);
       } else {
         metaDescription =
           page.frontmatter && page.frontmatter.description
