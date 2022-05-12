@@ -1,7 +1,6 @@
-import Table from "../../../../../src/components/CommunityTable";
 # Integration in community projects
 
-
+import Table from "../../../../../src/components/CommunityTable";
 
 **$AESproductName$ is now available and includes additional functionality beyond the current $OSSproductName$.**
 These features include automatic HTTPS, OAuth/OpenID Connect authentication support, integrated rate
