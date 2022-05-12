@@ -26,7 +26,7 @@ is currently available out-of-the-box in some Kubernetes installers and local en
     <tr>
       <td style="text-align:center">
         <a href="https://kind.sigs.k8s.io/" target="_blank">
-          <img width="75" src="https://raw.githubusercontent.com/kubernetes-sigs/kind/main/logo/logo.png"></img>
+          ![Kubernetes Sigs](https://raw.githubusercontent.com/kubernetes-sigs/kind/main/logo/logo.png)
         </a>
       </td>
       <td>
@@ -36,7 +36,7 @@ is currently available out-of-the-box in some Kubernetes installers and local en
     <tr>
       <td style="text-align:center">
         <a href="https://kubespray.io" target="_blank">
-          <img width="75" src="https://kubespray.io/logo/logo-clear.png"></img>
+          ![Kubespray](https://kubespray.io/logo/logo-clear.png)
         </a>
       </td>
       <td>
@@ -46,7 +46,7 @@ is currently available out-of-the-box in some Kubernetes installers and local en
     <tr>
       <td style="text-align:center">
         <a href="https://kops.sigs.k8s.io" target="_blank">
-          <img width="75" src="https://github.com/kubernetes/kops/raw/master/docs/img/logo-notext.png"></img>
+          ![Kubernates-notext](https://github.com/kubernetes/kops/raw/master/docs/img/logo-notext.png)
         </a>
       </td>
       <td>
@@ -56,7 +56,7 @@ is currently available out-of-the-box in some Kubernetes installers and local en
     <tr>
       <td style="text-align:center">
         <a href="https://minikube.sigs.k8s.io" target="_blank">
-          <img width="75" src="https://raw.githubusercontent.com/kubernetes/minikube/master/images/logo/logo.png"></img>
+          ![Minikube](https://raw.githubusercontent.com/kubernetes/minikube/master/images/logo/logo.png)
         </a>
       </td>
       <td>
@@ -66,7 +66,7 @@ is currently available out-of-the-box in some Kubernetes installers and local en
     <tr>
       <td style="text-align:center">
         <a href="https://microk8s.io/" target="_blank">
-          <img width="75" src="https://ubuntu.com/wp-content/uploads/305a/microk8s-sticker.png"></img>
+          ![Microk8s](https://ubuntu.com/wp-content/uploads/305a/microk8s-sticker.png)
         </a>
       </td>
       <td>
