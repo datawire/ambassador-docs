@@ -17,7 +17,7 @@ Because changes are rolled out incrementally at set intervals until rolled out t
 
 A canary release diverts a small amount of traffic, for example 1% or 5%, to the new version of a service while still routing the majority of traffic to the old version. This incremental rollout lets you observe how a change will work in practice and roll back if you detect signs of trouble. 
 
-![Canary release diagram](../../images/canary.png)
+![Canary release diagram](../images/canary.png)
 
 ## When should I use a canary deployment strategy?
 
