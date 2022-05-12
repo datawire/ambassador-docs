@@ -212,10 +212,18 @@ const index = ({ data, location, pageContext }) => {
       metaName =
         page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
       metaTitle = metaName + ' | Ambassador';
-      metaDescription =
-        page.frontmatter && page.frontmatter.description
-          ? page.frontmatter.description
-          : page.excerpt;
+
+      const slugFiltered = slug.filter((item) => item);
+
+      if (metaData[`${slugFiltered.join('/')}/`]) {
+        metaDescription = metaData[`${slugFiltered.join('/')}/`].description;
+      } else {
+        metaDescription =
+          page.frontmatter && page.frontmatter.description
+            ? page.frontmatter.description
+            : page.excerpt;
+      }
+
       metaRobots =
         page.frontmatter && page.frontmatter.indexable === false
           ? 'noindex,nofollow'

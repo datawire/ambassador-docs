@@ -261,6 +261,50 @@ export const metaData = {
     description:
       'Ambassador Cloud is your central dashboard for all Ambassador tools. Get started with Service Catalog.',
   },
+  'docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/': {
+    description:
+      'GitOps and continuous delivery. Ambassador Edge Stack supports a decentralized configuration model. Individual policies are written in different files',
+  },
+  'docs/edge-stack/latest/howtos/client-cert-validation/': {
+    description:
+      'Client certificate validation - for security or authentication purposes, you want the server to validate the client before establishing an encrypted connection',
+  },
+  'docs/edge-stack/latest/topics/running/resolvers/': {
+    description:
+      'Ambassador Edge Stack uses information from service discovery to determine where to route incoming requests. The API Gateway supports the following mechanisms',
+  },
+  'docs/edge-stack/latest/topics/running/services/ext_authz/': {
+    description:
+      'ExtAuth protocol. The ExtAuth service receives info about every request through Ambassador and must indicate whether the request is to be allowed or not',
+  },
+  'docs/edge-stack/latest/topics/running/services/tracing-service/': {
+    description:
+      'Ambassador Edge Stack - Tracing service. Distributed tracing is a powerful tool to debug and analyze your system in addition to request logging and metrics',
+  },
+  'docs/edge-stack/latest/topics/using/authservice/': {
+    description:
+      'An AuthService can be disabled for a specific Mapping using bypass_auth attribute. This tells Ambassador Edge Stack to allow requests for that Mapping through',
+  },
+  'docs/edge-stack/latest/topics/using/canary/': {
+    description:
+      'Ambassador Edge Stack API Gateway supports fine-grained canary releases. It uses a weighted round-robin scheme to route traffic between multiple services',
+  },
+  'docs/edge-stack/latest/topics/using/circuit-breakers/': {
+    description:
+      'A default circuit breaking config can be set for Ambassador Edge Stack resources. Set to a different value on a per-resource basis for Mappings, AuthServices...',
+  },
+  'docs/edge-stack/latest/topics/using/defaults/': {
+    description:
+      'Using ambassador Module defaults. Currently, only the Mapping resource uses the defaults mechanism. Mapping looks first for defaultable resources in...',
+  },
+  'docs/edge-stack/latest/topics/using/keepalive/': {
+    description:
+      'Keepalive configuration can be set for all Ambassador Edge Stack mappings in the ambassador Module or set per Mapping. The following fields are supported...',
+  },
+  'docs/edge-stack/latest/tutorials/dev-portal-tutorial/': {
+    description:
+      'Dev Portal. This tutorial assumes you have connected your cluster to Ambassador Cloud and deployed the quote app with the Mapping from Ambassador Edge Stack',
+  },
 };
 
 export const learningJourneys = [
