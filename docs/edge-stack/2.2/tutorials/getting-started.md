@@ -12,7 +12,7 @@ import GettingStartedEdgeStack21Tabs from './gs-tabs'
 
 * [1. Installation](#1-installation)
 * [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
-* [What's Next?](#img-classos-logo-srcimageslogopng-whats-next)
+* [What's Next?](#img-classos-logo-srcimageslogopng-alttelepresence-logo--whats-next)
 
 </div>
 
@@ -94,7 +94,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
     - **Path Matching**: `/backend/`
     - **OpenAPI Docs**: `/.ambassador-internal/openapi-docs`
 
-    ![](../../images/mapping-editor.png)
+    ## <img src="../../images/mapping-editor.png" alt="Ambassador mapping editor" />
 
   Whether you decide to automatically push the change to Git for this newly create Mapping resource or not, the resulting Mapping should be similar to the example below.
 
@@ -144,7 +144,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
 <Alert severity="success"><b>Victory!</b> You have created your first $productName$ Mapping, routing a request from your cluster's edge to a service!</Alert>
 
-## <img class="os-logo" src="../../images/logo.png"/> What's next?
+## <img class="os-logo" src="../../images/logo.png" alt="Telepresence logo" /> What's next?
 
 Explore some of the popular tutorials on $productName$:
 
