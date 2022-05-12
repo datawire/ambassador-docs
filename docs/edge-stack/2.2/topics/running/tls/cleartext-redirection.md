@@ -1,3 +1,7 @@
+---
+description: Supporting cleartext communications is important. Ambassador Edge Stack supports forcing automatic redirection to HTTPS & Serving Cleartext traffic on a Host
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Cleartext support

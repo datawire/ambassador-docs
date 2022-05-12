@@ -1,3 +1,7 @@
+---
+description: This guide will focus on deploying Prometheus and Grafana alongside Emissary-ingress in Kubernetes using the Prometheus Operator
+---
+
 # Monitoring with Prometheus and Grafana
 
 Prometheus is an open-source monitoring and alerting system.  When used

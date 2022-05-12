@@ -239,7 +239,7 @@ export const metaData = {
   'edge-stack': {
     title: 'Edge Stack Docs | Ambassador Labs',
     description:
-      'Route and secure traffic to your cluster with a Kubernetes-native API Gateway built on the Envoy Proxy.',
+      'Ambassador Edge Stack Documentation. Route and secure traffic to your cluster with a Kubernetes-native API Gateway built on the Envoy Proxy.',
   },
   emissary: {
     title: 'Emissary-ingress Docs | Ambassador Labs',
