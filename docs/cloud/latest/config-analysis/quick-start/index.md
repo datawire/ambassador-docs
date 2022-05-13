@@ -74,7 +74,7 @@ This will create a `Deployment`, `Service`, and `Mapping` in the `gitops-demo` n
 
 4. Select the account which contains the forked `a8r-gitops-example` demo repository.
 
-    ![Git Account](../../images/gitops-quickstart-x1.png)
+    <img src="../../images/gitops-quickstart-x1.png" alt="Git Account"/>
 
     Configure the installation for the demo repository:
 
