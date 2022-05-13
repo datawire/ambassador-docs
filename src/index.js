@@ -44,6 +44,7 @@ import './style.less';
 import getDocsActiveVersion from './utils/getDocsActiveVersion';
 import getPrevNext from './utils/getPrevNext';
 import { canonicalUrls } from './utils/getValueCanonicals';
+import getSpecialTitles from './utils/getSpecialTitles'
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -768,7 +769,7 @@ const index = ({ data, location, pageContext }) => {
       customAnnouncementClass="docs-announcement-container"
     >
       <SEO
-        title={metadata.metaTitle}
+        title={getSpecialTitles(metadata.metaTitle, canonicalUrl)}
         type="article"
         canonicalUrl={canonicalUrl}
         description={metadata.metaDescription}
