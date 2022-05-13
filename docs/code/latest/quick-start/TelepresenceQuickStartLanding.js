@@ -1,9 +1,15 @@
 import { Link } from 'gatsby';
-import React from 'react';
+import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+
+
 
 import Icon from '../../../../../src/components/Icon';
 
+
+
 import './telepresence-quickstart-landing.less';
+
 
 /** @type React.FC<React.SVGProps<SVGSVGElement>> */
 const RightArrow = (props) => (
@@ -12,75 +18,103 @@ const RightArrow = (props) => (
   </svg>
 );
 
-const TelepresenceQuickStartLanding = () => (
-  <div className="telepresence-quickstart-landing">
-    <h1>
-      <Icon name="telepresence-icon" /> Telepresence
-    </h1>
-    <p>
-      Set up your ideal development environment for Kubernetes in seconds.
-      Accelerate your inner development loop with hot reload using your existing
-      IDE, and workflow.
-    </p>
+const TelepresenceQuickStartLanding = () => {
+  const [getStartedUrl, setGetStartedUrl] = useState(
+    'https://app.getambassador.io/cloud/welcome?docs_source=telepresence-quick-start',
+  );
 
-    <div className="demo-cluster-container">
-      <div>
-        <div className="box-container">
-          <h2>
-            <strong>Set Up Telepresence with Ambassador Cloud</strong>
-          </h2>
-          <p>
-            Seamlessly integrate Telepresence into your existing Kubernetes
-            environment by following our 3-step setup guide.
-          </p>
-          <Link
-            to="https://app.getambassador.io/cloud/welcome?docs_source=telepresence-quick-start"
-            className="docs__button-secondary blue "
-          >
-            Get Started
-          </Link>
-        </div>
-      </div>
+  const getUrlFromQueryParams = () => {
+    const { docs_source, docs_campaign } = queryString.parse(
+      window.location.search,
+    );
+
+    if (docs_source === 'cloud-quickstart-ad' && docs_campaign === 'loops') {
+      setGetStartedUrl(
+        'https://app.getambassador.io/cloud/welcome?docs_source=cloud-quickstart-ad&docs_campaign=loops',
+      );
+    } else if (
+      docs_source === 'cloud-quickstart-ad' &&
+      docs_campaign === 'environments'
+    ) {
+      setGetStartedUrl(
+        'https://app.getambassador.io/cloud/welcome?docs_source=cloud-quickstart-ad&docs_campaign=environments',
+      );
+    }
+  };
+
+  useEffect(() => {
+    getUrlFromQueryParams();
+  }, []);
+
+  return (
+    <div className="telepresence-quickstart-landing">
+      <h1>
+        <Icon name="telepresence-icon" /> Telepresence
+      </h1>
       <p>
-        <Link
-          className="get-started blue inline"
-          to="/docs/telepresence/latest/howtos/intercepts/"
-        >
-          Do it Yourself:
-        </Link>{' '}
-        install Telepresence and manually connect to your Kubernetes workloads.
+        Set up your ideal development environment for Kubernetes in seconds.
+        Accelerate your inner development loop with hot reload using your
+        existing IDE, and workflow.
       </p>
-    </div>
 
-    <div className="telepresence-video">
-      <div className="video-section">
+      <div className="demo-cluster-container">
         <div>
-          <h2 className="telepresence-video-title">
-            What Can Telepresence Do for You?
-          </h2>
-          <p>Telepresence gives Kubernetes application developers:</p>
-          <ul>
-            <li>Instant feedback loops</li>
-            <li>Remote development environments</li>
-            <li>Access to your favorite local tools</li>
-            <li>Easy collaborative development with teammates</li>
-          </ul>
-          <Link className="learn-more blue" to="/products/telepresence">
-            LEARN MORE <RightArrow width={24} height={24} fill="currentColor" />
-          </Link>
+          <div className="box-container">
+            <h2>
+              <strong>Set Up Telepresence with Ambassador Cloud</strong>
+            </h2>
+            <p>
+              Seamlessly integrate Telepresence into your existing Kubernetes
+              environment by following our 3-step setup guide.
+            </p>
+            <Link to={getStartedUrl} className="docs__button-secondary blue">
+              Get Started
+            </Link>
+          </div>
         </div>
-        <div className="video-container">
-          <iframe
-            title="Telepresence Demo"
-            src="https://www.youtube.com/embed/pfLtYyrWUg0"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+        <p>
+          <Link
+            className="get-started blue inline"
+            to="/docs/telepresence/latest/howtos/intercepts/"
+          >
+            Do it Yourself:
+          </Link>{' '}
+          install Telepresence and manually connect to your Kubernetes
+          workloads.
+        </p>
+      </div>
+
+      <div className="telepresence-video">
+        <div className="video-section">
+          <div>
+            <h2 className="telepresence-video-title">
+              What Can Telepresence Do for You?
+            </h2>
+            <p>Telepresence gives Kubernetes application developers:</p>
+            <ul>
+              <li>Instant feedback loops</li>
+              <li>Remote development environments</li>
+              <li>Access to your favorite local tools</li>
+              <li>Easy collaborative development with teammates</li>
+            </ul>
+            <Link className="learn-more blue" to="/products/telepresence">
+              LEARN MORE{' '}
+              <RightArrow width={24} height={24} fill="currentColor" />
+            </Link>
+          </div>
+          <div className="video-container">
+            <iframe
+              title="Telepresence Demo"
+              src="https://www.youtube.com/embed/pfLtYyrWUg0"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default TelepresenceQuickStartLanding;
