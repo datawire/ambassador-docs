@@ -1,3 +1,6 @@
+---
+description: Emissary-ingress can be configured to use a provided CA certificate to validate certificates sent from your clients. This allows for client-side mTLS where...
+---
 # Client certificate validation
 
 [//]: # (+FIX+ link to "TLS and client certs" concept)
