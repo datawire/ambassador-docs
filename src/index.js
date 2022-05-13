@@ -753,7 +753,10 @@ const index = ({ data, location, pageContext }) => {
     }
   }
 
-  const edgeStackTitle = metadata.metaTitle + ' ' + 'Edge Stack';
+  const edgeStackTitle = metadata.metaTitle.replace(
+    '| Ambassador',
+    '| Edge Stack',
+  );
 
   return (
     <Layout
@@ -762,7 +765,11 @@ const index = ({ data, location, pageContext }) => {
       customAnnouncementClass="docs-announcement-container"
     >
       <SEO
-        title={canonicalUrl.includes('edge-stack') ? edgeStackTitle : metadata.metaTitle}
+        title={
+          canonicalUrl.includes('edge-stack')
+            ? edgeStackTitle
+            : metadata.metaTitle
+        }
         type="article"
         canonicalUrl={canonicalUrl}
         description={metadata.metaDescription}
