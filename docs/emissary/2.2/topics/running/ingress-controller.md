@@ -1,3 +1,7 @@
+---
+description: An Ingress resource is a popular way to expose Kubernetes services to the Internet. Emissary-ingress can function as a fully-fledged Ingress controller
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Ingress controller
