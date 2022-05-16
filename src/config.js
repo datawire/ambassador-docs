@@ -306,6 +306,10 @@ export const metaData = {
     description:
       'Dev Portal. This tutorial assumes you have connected your cluster to Ambassador Cloud and deployed the quote app with the Mapping from Ambassador Edge Stack',
   },
+  'docs/emissary/latest/howtos/cert-manager/': {
+    description:
+      "If you're running Emissary-ingress, or if you require more flexible certificate management (such as using ACME's dns-01 challenge, or using a non-ACME...",
+  },
 };
 
 export const learningJourneys = [
