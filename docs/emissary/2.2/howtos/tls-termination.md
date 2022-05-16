@@ -1,3 +1,6 @@
+---
+description: TLS encryption is one of the basic requirements of having a secure system. Ambassador Edge Stack automatically enables TLS termination/HTTPs, making...
+---
 # TLS termination and enabling HTTPS
 
 [TLS](/learn/kubernetes-glossary/tls/) encryption is one of the basic requirements of having a secure system.
