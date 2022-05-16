@@ -310,6 +310,26 @@ export const metaData = {
     description:
       "If you're running Emissary-ingress, or if you require more flexible certificate management (such as using ACME's dns-01 challenge, or using a non-ACME...",
   },
+  'docs/edge-stack/latest/howtos/prometheus/': {
+    description:
+      'This guide focus on deploying Prometheus and Grafana alongside Edge Stack in Kubernetes using the Prometheus Operator. Both can be deployed as standalone apps',
+  },
+  'docs/edge-stack/latest/topics/running/ingress-controller/': {
+    description:
+      'Edge Stack can function as a fully-fledged Ingress controller, making it easy to work with other Ingress-oriented tools within the Kubernetes ecosystem',
+  },
+  'docs/edge-stack/latest/topics/running/tls/mtls/': {
+    description:
+      'Ambassador Edge Stack and Mutual TLS (mTLS). Since Ambassador Edge Stack is a reverse proxy acting as the entry point to your cluster...',
+  },
+  'docs/edge-stack/latest/topics/using/cors/': {
+    description:
+      'CORS configuration can be set for all Edge Stack mappings in the ambassador Module, or set per Mapping. Cross-Origin resource sharing lets users request...',
+  },
+  'docs/edge-stack/latest/topics/using/shadowing/': {
+    description:
+      'Edge Stack - Traffic shadowing is a deployment pattern where production traffic is asynchronously copied to a non-production service for testing',
+  },
 };
 
 export const learningJourneys = [
