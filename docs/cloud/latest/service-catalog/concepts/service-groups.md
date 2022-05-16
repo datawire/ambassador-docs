@@ -4,7 +4,7 @@ Service Groups allow you to organize [services](/docs/cloud/latest/service-catal
 
 The service catalogue allows you to see all of the important details for each of your [services](/docs/cloud/latest/service-catalog/concepts/services) and service groups.
 
-![Groups in service catalog](../../../images/service-catalog-explanation.png)
+![Groups in service catalog](../../images/service-catalog-explanation.png)
 
 1. Each of these two lines are service groups (with the first collapsed and the second expanded). Click on a service group to expand it and show the list of services grouped within.
 2. This shows the number of services contained by the groups `edge-group` and `Argo`.

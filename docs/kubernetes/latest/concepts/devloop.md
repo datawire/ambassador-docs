@@ -8,11 +8,11 @@ This may appear trivial at first glance, but this has a large impact on developm
 
 If a typical developer codes for 360 minutes (6 hours) a day, with a traditional local iterative development loop of 5 minutes -- 3 coding, 1 building i.e. compiling/deploying/reloading, 1 testing inspecting, and 10-20 seconds for committing code -- they can expect to make ~70 iterations of their code per day. Any one of these iterations could be a release candidate. The only “developer tax” being paid here is for the commit process, which is negligible.
 
-![Traditional Inner Dev Loop](../../images/trad-inner-dev-loop.png)
+![Traditional Inner Dev Loop](../images/trad-inner-dev-loop.png)
 
 If the build time is incremented to 5 minutes — not atypical with a standard container build, registry upload, and deploy — then the number of possible development iterations per day drops to ~40. At the extreme that’s a 40% decrease in potential new features being released. This new container build step is a hidden tax, which is quite expensive.
 
-![Container Inner Dev Loop](../../images/container-inner-dev-loop.png)
+![Container Inner Dev Loop](../images/container-inner-dev-loop.png)
 
 Many development teams began using custom proxies to either automatically and continually sync their local development code base with a remote surrogate (enabling “live reload” in a remote cluster), or route all remote service traffic to their local services for testing. The former approach had limited value for compiled languages, and the latter often did not support collaboration within teams where multiple users wanted to work on the same services.
 
