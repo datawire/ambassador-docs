@@ -86,6 +86,17 @@ body {
         display: none;
       }
     }
+
+    span.gatsby-resp-image-wrapper {
+      display: inline-block !important;
+      width: -moz-available;
+      width: -webkit-fill-available;
+      width: fill-available;
+    }
+
+    [id*='os-logo'] .gatsby-resp-image-wrapper {
+      max-width: 30px !important;
+    }
   }
 
   &__links-content {

@@ -2,7 +2,7 @@
 
 Containerized applications deployed in Kubernetes generally follow the microservices design pattern. That is, an application is made up of many (possibly hundreds) services that need to communicate with each other. In this new microservices architecture, the most effective way for independent application developers and teams to develop productively and ship quickly is to move from _just writing code_ to managing the full lifecycle: **code - ship - run**. 
 
-![Code Ship Run](../../images/codeshiprun.png)
+![Code Ship Run](../images/codeshiprun.png)
 
 Full lifecycle development and workflows, given the added complexity of potentially hundreds of decoupled microservices, require a more complete understanding of each stage of software release, including coding/development, testing, deployment and running. 
 
