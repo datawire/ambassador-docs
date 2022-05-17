@@ -241,7 +241,7 @@ If you want to configure authentication in another language, [gRPC provides exam
 
 #### Originating TLS with gRPC service
 
-## <img src="-../images/gRPC-TLS-Originate.png" alt="Cert chain private key" />
+## <img src="../images/gRPC-TLS-Originate.png" alt="Cert chain private key" />
 
 $productName$ can originate TLS with your gRPC service so the entire RPC channel is encrypted. To configure this, first get some TLS certificates and configure the server to open a secure channel with them. Using self-signed certs this can be done with OpenSSL and adding a couple of lines to the server code.
 
