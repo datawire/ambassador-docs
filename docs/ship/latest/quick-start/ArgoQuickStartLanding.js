@@ -40,7 +40,7 @@ class ArgoQuickStartLanding extends Component {
             </ol>
             <GatsbyLink
               id="tp-demo-option-a"
-              to="./new-to-kubernetes"
+              to="/docs/ship/latest/quick-start/new-to-kubernetes"
               className="get-started-button"
             >
               Get Started
