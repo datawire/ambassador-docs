@@ -39,7 +39,7 @@ class ArgoQuickStartLanding extends Component {
             </ol>
             <a
               id="tp-demo-option-a"
-              href="/docs/argo/latest/quick-start/new-to-kubernetes/new-to-kubernetes"
+              href="/docs/argo/latest/quick-start/new-to-kubernetes"
               className="get-started-button"
             >
               Get Started TEST
