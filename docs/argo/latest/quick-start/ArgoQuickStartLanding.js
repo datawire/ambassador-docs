@@ -1,3 +1,4 @@
+import { Link as GatsbyLink } from 'gatsby';
 import React, { Component } from 'react';
 
 import ArgoImage from '../../../../../src/assets/images/argo.svg';
