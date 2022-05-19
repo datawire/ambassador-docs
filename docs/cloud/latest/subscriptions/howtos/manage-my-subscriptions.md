@@ -22,6 +22,25 @@ For example, the following team member quota is indicating that you have up to 1
     <img src="../../../images/team-members-quota.png" width="600"/>
   </p>
 
+## Unlock new features
+
+You can unlock active services and clusters by adding team members to your org.
+just click on the 'INVITE' button and follow the steps to add new members
+
+  <p align="center">
+    <img src="../../../images/unnlock-features.jpeg" width="600"/>
+  </p>
+
+## Quota limits
+
+Some plans come with limits that can be removed by unlocking new features others must be by incressing the plan to a heigher tier.
+if this happen you will ran into some actions been blocked and a notice for this.
+
+  <p align="center">
+    <img src="../../../images/active-user-limit.jpeg" width="600"/>
+  </p>
+
+
 ## Upgrade your plan
 
 If one of the quota doesn't seem to be enough, click **upgrade** to increase your quotas.
