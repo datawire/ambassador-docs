@@ -44,7 +44,7 @@ export default function SearchBox(props) {
           src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"
         ></script>
       </Helmet>
-      <SearchIcon />
+      <SearchIcon loading='lazy'/>
       <input
         name="search"
         type="text"

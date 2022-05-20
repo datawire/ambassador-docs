@@ -17,6 +17,7 @@ const Argo = () => (
         alt="Argo"
         width="197"
         height="250"
+        loading='lazy'
       />{' '}
       Argo
     </h1>

@@ -514,7 +514,7 @@ const index = ({ data, location, pageContext }) => {
                   )}
                 </div>
                 <div className="docs__next-previous__learning-journey">
-                  <img src={LearningJourneyImg} alt="Learning Journey" />
+                  <img src={LearningJourneyImg} alt="Learning Journey" loading='lazy'/>
                 </div>
                 <div className="docs__next-previous__next">
                   {nextLearning && (
