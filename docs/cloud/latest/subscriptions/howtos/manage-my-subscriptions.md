@@ -32,7 +32,7 @@ In some plans you might be able to unlock additional active services and cluster
 
 ## Quota limits
 
-If you already reached the limits, you might need to upgrade your plan. If that’s the case, you’ll run into a message like the one below while performing certain actions.
+If you already have reached the limits, you might need to upgrade your plan. If that’s the case, you’ll run into a message like the one below while performing certain actions.
 
   <p align="center">
     <img src="../../../images/active-user-limit.jpeg" width="600"/>
