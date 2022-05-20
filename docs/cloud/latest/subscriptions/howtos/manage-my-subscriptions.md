@@ -24,7 +24,7 @@ For example, the following team member quota is indicating that you have up to 1
 
 ## Unlock new features
 
-In some plans you might be able to unlock additional active services and clusters, by adding team members to your organization. If you see the message to unlock in your subscription page, just click on the ‘INVITE’ button and follow the steps that will be displayed.
+In some plans you might be able to unlock additional active services and clusters, by adding team members to your organization. If you see the message to unlock the increase in your subscription page, just click on the ‘INVITE’ button and follow the steps that will be displayed.
 
   <p align="center">
     <img src="../../../images/unnlock-features.jpeg" width="600"/>
