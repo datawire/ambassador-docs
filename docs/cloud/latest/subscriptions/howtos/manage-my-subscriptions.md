@@ -24,8 +24,7 @@ For example, the following team member quota is indicating that you have up to 1
 
 ## Unlock new features
 
-You can unlock active services and clusters by adding team members to your org.
-just click on the 'INVITE' button and follow the steps to add new members
+In some plans you might be able to unlock additional active services and clusters, by adding team members to your organization. If you see the message to unlock in your subscription page, just click on the ‘INVITE’ button and follow the steps that will be displayed.
 
   <p align="center">
     <img src="../../../images/unnlock-features.jpeg" width="600"/>
@@ -33,8 +32,7 @@ just click on the 'INVITE' button and follow the steps to add new members
 
 ## Quota limits
 
-Some plans come with limits that can be removed by unlocking new features others must be by incressing the plan to a heigher tier.
-if this happen you will ran into some actions been blocked and a notice for this.
+If you already reached the limits, you might need to upgrade your plan. If that’s the case, you’ll run into a message like the one below while performing certain actions.
 
   <p align="center">
     <img src="../../../images/active-user-limit.jpeg" width="600"/>
