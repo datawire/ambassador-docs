@@ -15,6 +15,7 @@ class ArgoQuickStartLanding extends Component {
             alt="Argo"
             width="197"
             height="250"
+            loading='lazy'
           />
           Argo quick start
         </h1>

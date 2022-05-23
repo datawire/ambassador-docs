@@ -32,7 +32,7 @@ export const heading = (n) => {
             aria-label={props.id.split('-').join(' ')}
             className="anchor before"
           >
-            <Icon />
+            <Icon loading='lazy'/>
           </Link>
           {children}
         </Tag>

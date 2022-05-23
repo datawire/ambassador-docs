@@ -30,7 +30,7 @@ export function Animation(props) {
     }, el);
     return (
         <div ref={el} style="text-align: center">
-            <InterceptAnimationSVG style="max-width: 700px" {...props} />
+            <InterceptAnimationSVG style="max-width: 700px" {...props} loading='lazy'/>
         </div>
     );
 };

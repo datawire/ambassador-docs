@@ -65,7 +65,7 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
   return (
     <footer className="docs__footer">
       <a href={dstUrl} target="_blank" rel="noreferrer">
-        <GithubIcon />
+        <GithubIcon loading='lazy'/>
         Edit this page on GitHub
       </a>
     </footer>
