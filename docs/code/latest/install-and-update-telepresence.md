@@ -51,12 +51,12 @@ sudo chmod a+x /usr/local/bin/telepresence
 <Platform.WindowsTab>
 
 ```powershell
-# To install Telepresence, run the following Powershell commands
-# with an account that has Administrator privileges.
+# To install Telepresence, run the following commands
+# from PowerShell as Administrator.
 
 # 1. Download the latest windows zip file
 # This contains telepresence.exe and its dependencies (~50 MB):
-Invoke-WebRequest https://app.getambassador.io/download/tel2/windows/amd64/latest/telepresence.zip -OutFile telepresence.zip
+Invoke-WebRequest https://app.getambassador.io/download/tel2/windows/amd64/$dlVersion$/telepresence.zip -OutFile telepresence.zip
 
 # 2. Extract the zip file to your desired directory, then delete the zip file:
 Expand-Archive -Path telepresence.zip -DestinationPath telepresenceInstaller/telepresence
@@ -64,15 +64,13 @@ Remove-Item 'telepresence.zip'
 cd telepresenceInstaller/telepresence
 
 # 3. Run install-telepresence.ps1 to install telepresence's dependencies:
-Set-ExecutionPolicy Bypass -Scope Process
-.\install-telepresence.ps1
+powershell.exe -ExecutionPolicy bypass -c " . '.\install-telepresence.ps1';"
 
 # 4. Remove the unzipped directory:
 cd ../..
-Remove-Item telepresenceInstaller
+Remove-Item telepresenceInstaller -Recurse -Confirm:$false -Force
 
-# 5. Close the Powershell window, then open a new instance of it.
-# Telepresence is now usable as telepresence.exe.
+# 5. Telepresence is now installed and you can use telepresence commands in PowerShell.
 ```
 
 </Platform.WindowsTab>
@@ -168,25 +166,26 @@ sudo chmod a+x /usr/local/bin/telepresence
 <Platform.WindowsTab>
 
 ```powershell
-# Windows is in Developer Preview, here is how you can install it:
-# Make sure you run the following from Powershell as Administrator
-# 1. Download the latest windows zip containing telepresence.exe and its dependencies (~50 MB):
-curl -fL https://app.getambassador.io/download/tel2/windows/amd64/$dlVersion$/telepresence.zip -o telepresence.zip
+# To install Telepresence, run the following commands
+# from PowerShell as Administrator.
 
-# 2. Unzip the zip file to a suitable directory + cleanup zip
-Expand-Archive -Path telepresence.zip
+# 1. Download the latest windows zip containing telepresence.exe and its dependencies (~50 MB):
+Invoke-WebRequest https://app.getambassador.io/download/tel2/windows/amd64/$dlVersion$/telepresence.zip -OutFile telepresence.zip
+
+# 2. Unzip the telepresence.zip file to the desired directory, then remove the zip file:
+Expand-Archive -Path telepresence.zip -DestinationPath telepresenceInstaller/telepresence
 Remove-Item 'telepresence.zip'
-cd telepresence
+cd telepresenceInstaller/telepresence
 
 # 3. Run the install-telepresence.ps1 to install telepresence's dependencies. It will install telepresence to
 # C:\telepresence by default, but you can specify a custom path by passing in -Path C:\my\custom\path
-Set-ExecutionPolicy Bypass -Scope Process
-.\install-telepresence.ps1
+powershell.exe -ExecutionPolicy bypass -c " . '.\install-telepresence.ps1';"
 
 # 4. Remove the unzipped directory
-cd ..
-Remove-Item telepresence
-# 5. Close your current Powershell and open a new one. Telepresence should now be usable as telepresence.exe
+cd ../..
+Remove-Item telepresenceInstaller -Recurse -Confirm:$false -Force
+
+# 5. Telepresence is now installed and you can use telepresence commands in PowerShell.
 ```
 
 </Platform.WindowsTab>
