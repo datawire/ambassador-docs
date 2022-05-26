@@ -10,21 +10,16 @@ Ambassador Labs provides a variety of different subscription options depending o
 
 In user settings, go to the **Subscriptions** section.
 
-Here you can change your subscription to upgrade your experience. This is where you can monitor your current plan & quotas. If you've met some of your plan limits, you can upgrade here.
+The subscription page allows you to see your current utilization of Ambassador Cloud and the limits of your plan. You can also access the details of your current payment and your payment history (for Teams Edition subscriber only). If you’re nearing any of the quota limits you can also upgrade your subscription tier on this page - see the [upgrade your plan section](#upgrade-your-plan) on this page.
 
   <p align="center">
     <img src="../../../images/team-subscriptions.png" width="800"/>
   </p>
 
-For example, the following team member quota is indicating that you have up to 10 spots available. If you reach the limit, you can either release one, or **upgrade** your plan to increase the limit.
+## Extend your quotas by adding more users
 
-  <p align="center">
-    <img src="../../../images/team-members-quota.png" width="600"/>
-  </p>
+On the Free subscription tier, you can unlock additional quotas by adding more team members to your organization. On the subcription page, click the INVITE button and follow the listed steps to invite new team members and gain access to additional clusters and services for free.
 
-## Unlock new features
-
-In some plans you might be able to unlock additional active services and clusters, by adding team members to your organization. If you see the message to unlock the increase in your subscription page, just click on the ‘INVITE’ button and follow the steps that will be displayed.
 
   <p align="center">
     <img src="../../../images/unnlock-features.jpeg" width="600"/>
@@ -32,7 +27,7 @@ In some plans you might be able to unlock additional active services and cluster
 
 ## Quota limits
 
-If you already have reached the limits, you might need to upgrade your plan. If that’s the case, you’ll run into a message like the one below while performing certain actions.
+Once you've reached a quota limit, you need to upgrade your plan to add more clusters, services, or team members. When the quota limit is reached, the following message is displayed:
 
   <p align="center">
     <img src="../../../images/active-user-limit.jpeg" width="600"/>
@@ -41,7 +36,7 @@ If you already have reached the limits, you might need to upgrade your plan. If 
 
 ## Upgrade your plan
 
-If one of the quota doesn't seem to be enough, click **upgrade** to increase your quotas.
+If a quota does not fit your requirements, click **upgrade** to increase your quotas.
 
 This opens the following page:
 
@@ -49,7 +44,12 @@ This opens the following page:
     <img src="../../../images/team-subscription-plans.png" width="1000"/>
   </p>
 
- **Buy** the plan you want to be automatically redirected to the checkout page.
+Once you have identified a more suitable subscription plan, click on **Buy Now** to be redirected to the checkout page, or **Contact Sales** to talk to us about the details of the Enterprise plan.
 
-If neither of these plans meet your needs, click **contact sales** in the Enterprise subscription column to contact sales about Enterprise edition subscription details.
+### Example
 
+For example, on the subscription page the team member quota indicates that you have up to 10 seats available. If you reach the limit, you can either release one seat, or **upgrade** your plan to increase the limit.
+
+  <p align="center">
+    <img src="../../../images/team-members-quota.png" width="600"/>
+  </p>
