@@ -1,3 +1,6 @@
+---
+description: Emissary-ingress lets you easily shadow traffic to a given endpoint. In Emissary-ingress, only requests are shadowed; responses from a service are dropped
+---
 # Traffic shadowing
 
 Traffic shadowing is a deployment pattern where production traffic is asynchronously copied to a non-production service for testing. Shadowing is a close cousin to two other commonly known deployment patterns, [canary releases](../canary) and blue/green deployments. Shadowing traffic has several important benefits over blue/green and canary testing:
@@ -12,7 +15,7 @@ Traffic shadowing is a deployment pattern where production traffic is asynchrono
 
 $productName$ lets you easily shadow traffic to a given endpoint. In $productName$, only requests are shadowed; responses from a service are dropped. All normal metrics are collected for the shadow services. This makes it easy to compare the performance of the shadow service versus the production service on the same data set. $productName$ also prioritizes the production path, i.e., it will return responses from the production service without waiting for any responses from the shadow service.
 
-![Shadowing](../../../images/shadowing.png)
+![Shadowing](../../images/shadowing.png)
 
 ## The `shadow` Mapping
 

@@ -44,6 +44,7 @@ import './style.less';
 import getDocsActiveVersion from './utils/getDocsActiveVersion';
 import getPrevNext from './utils/getPrevNext';
 import { canonicalUrls } from './utils/getValueCanonicals';
+import getSpecialTitles from './utils/getSpecialTitles'
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -212,10 +213,18 @@ const index = ({ data, location, pageContext }) => {
       metaName =
         page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
       metaTitle = metaName + ' | Ambassador';
-      metaDescription =
-        page.frontmatter && page.frontmatter.description
-          ? page.frontmatter.description
-          : page.excerpt;
+
+      const slugFiltered = slug.filter((item) => item);
+
+      if (metaData[`${slugFiltered.join('/')}/`]) {
+        metaDescription = metaData[`${slugFiltered.join('/')}/`].description;
+      } else {
+        metaDescription =
+          page.frontmatter && page.frontmatter.description
+            ? page.frontmatter.description
+            : page.excerpt;
+      }
+
       metaRobots =
         page.frontmatter && page.frontmatter.indexable === false
           ? 'noindex,nofollow'
@@ -505,7 +514,7 @@ const index = ({ data, location, pageContext }) => {
                   )}
                 </div>
                 <div className="docs__next-previous__learning-journey">
-                  <img src={LearningJourneyImg} alt="Learning Journey" />
+                  <img src={LearningJourneyImg} alt="Learning Journey" loading='lazy'/>
                 </div>
                 <div className="docs__next-previous__next">
                   {nextLearning && (
@@ -760,7 +769,7 @@ const index = ({ data, location, pageContext }) => {
       customAnnouncementClass="docs-announcement-container"
     >
       <SEO
-        title={metadata.metaTitle}
+        title={getSpecialTitles(metadata.metaTitle, canonicalUrl)}
         type="article"
         canonicalUrl={canonicalUrl}
         description={metadata.metaDescription}

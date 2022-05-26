@@ -25,7 +25,7 @@ const Product = ({
 }) => (
   <div className="product__container">
     <div className="product__container-wrapper">
-      <img className="product__container-image" src={image} alt={title} />
+      <img className="product__container-image" src={image} alt={title} loading='lazy'/>
       <h2 className="product__container-title">{title}</h2>
       <p className="product__container-description">{description}</p>
     </div>
@@ -39,7 +39,7 @@ const Product = ({
     </Button>
     <h3 className="product__container-docs--title">Ambassador Products</h3>
     <div className="product__container-docs">
-      <img className="product__container-docs--image" src={docImage} alt={docDescription} />
+      <img className="product__container-docs--image" src={docImage} alt={docDescription} loading='lazy'/>
       <Link className="product__container-docs--description" to={docLink}>
         {docDescription}
       </Link>
@@ -61,7 +61,7 @@ const DocsHome = () => {
             range of products to keep your team on top of the loop.
           </span>
         </div>
-        <img className="docs__hero-img" src={DocsHero} alt="hero" />
+        <img className="docs__hero-img" src={DocsHero} alt="hero" loading='lazy'/>
       </div>
       <hr className="docs__separator docs__container docs__homePage-separator" />
       <div className="docs__home-product">

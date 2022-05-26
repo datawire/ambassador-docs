@@ -1,3 +1,7 @@
+---
+description: CORS configuration can be set for all Emissary-ingress mappings in the ambassador Module, or set per Mapping. When the CORS attribute is set at either...
+---
+
 # Cross-Origin Resource Sharing (CORS)
 
 Cross-Origin resource sharing lets users request resources (e.g., images, fonts, videos) from domains outside the original domain.

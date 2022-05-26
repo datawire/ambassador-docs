@@ -73,13 +73,13 @@ export default function GettingStartedEmissaryTabs(props) {
           aria-label="simple tabs example"
         >
           <Tab
-            icon={<HelmIcon />}
+            icon={<HelmIcon loading='lazy'/>}
             label="Helm 3"
             {...a11yProps(0)}
             style={{ minWidth: '10%', textTransform: 'none' }}
           />
           <Tab
-            icon={<KubernetesIcon />}
+            icon={<KubernetesIcon loading='lazy'/>}
             label="Kubernetes YAML"
             {...a11yProps(1)}
             style={{ minWidth: '10%', textTransform: 'none' }}

@@ -201,7 +201,7 @@ $ curl -Lv -u username:password $AMBASSADORURL/backend/get-quote/
 }
 ```
 
-## <img class="os-logo" src="../../images/logo.png"/> What's next?
+## <img class="os-logo" src="../images/logo.png" alt="Telepresence Logo" /> What's next?
 
 * Get started with authentication by [installing $AESproductName$](../../tutorials/getting-started/).
 

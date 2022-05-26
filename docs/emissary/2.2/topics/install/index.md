@@ -3,18 +3,18 @@ import './index.less'
 
 # Installing $productName$
 
-## <img class="os-logo" src="../../images/helm-navy.png"/> Install with Helm
+## <img class="os-logo" src="../../images/helm-navy.png" alt="Helm logo" /> Install with Helm
 
 Helm, the package manager for Kubernetes, is the recommended way to install
-[$productName$](../../../tutorials/quickstart-demo/). Full details are in the [Helm instructions.](helm/)
+[$productName$](../../tutorials/getting-started/). Full details are in the [Helm instructions.](helm/)
 
-## <img class="os-logo" src="../../images/kubernetes.png"/> Install with Kubernetes YAML
+## <img class="os-logo" src="../../images/kubernetes.png" alt="Kebernetes logo" /> Install with Kubernetes YAML
 
 Another way to install $productName$ if you are unable to use Helm is to
 directly apply Kubernetes YAML. See details in the
 [manual YAML installation instructions.](yaml-install).
 
-## <img class="os-logo" src="../../images/docker.png"/> Try the demo with Docker
+## <img class="os-logo" src="../../images/docker.png" alt="Docker logo" /> Try the demo with Docker
 
 The Docker install will let you try the $productName$ locally in seconds,
 but is not supported for production workloads. [Try $productName$ on Docker.](docker/)
@@ -41,7 +41,7 @@ your production needs for $AESproductName$ or $OSSproductName$. Read more about
 
 # What’s Next?
 
-[$productName$](../../../about/alternatives/) has a comprehensive range of [features](/features/) to
+[$productName$](../../about/alternatives/) has a comprehensive range of [features](/features/) to
 support the requirements of any edge microservice. To learn more about how $productName$ works, along with use cases, best practices, and more,
 check out the [Welcome page](../../tutorials/getting-started) or read the [$productName$
 Story](../../about/why-ambassador).

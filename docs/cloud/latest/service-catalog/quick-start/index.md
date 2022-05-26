@@ -12,7 +12,7 @@ import { QuickStartServiceCatalogAlert } from '../../../../../../src/components/
 * [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
 * [2. Claim ownership of a service](#2-claim-ownership-of-a-service)
 * [3. Add additional metadata via YAML](#3-add-additional-metadata-via-yaml)
-* [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
+* [What's next?](#img-classos-logo-srcimageslogopng-alttelepresence-logo--whats-next)
 
 </div>
 
@@ -128,7 +128,7 @@ Open the YAML config file of one of your services.  If you applied our `quote` s
 
 <Alert severity="success"><b>Fantastic!</b> You should see the Git repo metadata change for your service in the catalog! Now any of your teammates can quickly find the repo for the service.</Alert>
 
-## <img class="os-logo" src="../../images/logo.png"/> What's next?
+## <img class="os-logo" src="../../images/logo.png" alt="Telepresence Logo" /> What's next?
 
 You've updated the owner and repo URL, but Service Catalog supports many more annotations! See the full list [here](../reference/annotations/).
 

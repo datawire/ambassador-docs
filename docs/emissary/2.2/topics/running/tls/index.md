@@ -8,7 +8,7 @@ for many different TLS use cases, using the [`Host`](#host) and
 
 ## Certificates and Secrets
 
-Properly-functioning [TLS](../../../../topics/running/tls/) requires the use of [TLS certificates] to prove that the
+Properly-functioning [TLS](/learn/kubernetes-glossary/tls/) requires the use of [TLS certificates] to prove that the
 various systems communicating are who they say they are. At minimum, $productName$
 must have a server certificate that identifies it to clients; when [mTLS] or
 [client certificate authentication] are in use, additional certificates are needed.
@@ -34,7 +34,7 @@ includes disabling cleartext communication for such a `Host`.
 
 ## `Host`
 
-A `Host` represents a domain in $productName$ and defines how the domain manages [TLS](../../../../topics/running/tls/). For more information on the Host resource, see [The Host CRD reference documentation](../host-crd).
+A `Host` represents a domain in $productName$ and defines how the domain manages [TLS](/learn/kubernetes-glossary/tls/). For more information on the Host resource, see [The Host CRD reference documentation](../host-crd).
 
 **If no `Host`s are present**, $productName$ synthesizes a `Host` that
 allows only cleartext routing. You will need to explictly define `Host`s to enable
@@ -50,7 +50,7 @@ TLS termination.
 ### Bring your own certificate
 
 The `Host` can read a certificate from a Kubernetes Secret and use that certificate
-to terminate [TLS](../../../../howtos/tls-termination/) on a domain.
+to terminate [TLS](../../../howtos/tls-termination/) on a domain.
 
 The following example shows the certificate contained in the Kubernetes Secret named
 `host-secret` configured to have $productName$ terminate TLS on the `host.example.com`
