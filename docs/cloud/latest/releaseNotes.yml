@@ -36,7 +36,7 @@ items:
       - title: 'Role-Based Access Control'
         body: "With Role-Based Access Control (RBAC) it is now easier for Ambassador Cloud account administrators to manage access, control subscriptions and invite teammates to collaborate."
         image: './rbac.png'
-        # docs: TODO: Create a page reference on how to manage and invite users to your account.
+        docs: './service-catalog/reference/access/'
         type: feature
   - date: '2022-04-11'
     notes:
