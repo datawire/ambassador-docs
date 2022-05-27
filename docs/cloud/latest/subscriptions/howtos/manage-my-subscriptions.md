@@ -16,6 +16,27 @@ The subscription page allows you to see your current utilization of Ambassador C
     <img src="../../../images/team-subscriptions.png" width="800"/>
   </p>
 
+## Quota types
+
+### Team Members
+
+Ambassador Cloud users who have accepted an invitation sent by you through the Members page in your account settings.
+
+### Active Services
+
+A service you have performed an action (intercept, rollout, etc.) on in the last 28 days is considered an active service.
+
+### Connected Clusters
+
+The Kubernetes clusters you have connected to the Ambassador Cloud app.
+
+### Requests per Second
+
+RPS is the **maximum usage** in the cluster between Rate Limited Traffic and Authenticated Traffic.
+With multiple clusters, RPS is the **sum** of the maximum usage of each cluster.
+
+RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
+
 ## Extend your quotas by adding more users
 
 On the Free subscription tier, you can unlock additional quotas by adding more team members to your organization. On the subcription page, click the INVITE button and follow the listed steps to invite new team members and gain access to additional clusters and services for free.
