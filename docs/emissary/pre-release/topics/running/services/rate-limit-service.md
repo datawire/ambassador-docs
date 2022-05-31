@@ -31,12 +31,12 @@ for how to labels under different domains.
 ## External rate limit service
 
 In order for $productName$ to rate limit, you need to implement a
-gRPC `RateLimitService`, as defined in [Envoy's `v2/rls.proto`]
+gRPC `RateLimitService`, as defined in [Envoy's `v3/rls.proto`]
 interface. If you do not have the time or resources to implement your own rate
 limit service, $AESproductName$ integrates a high-performance rate
 limiting service.
 
-[envoy's `v2/rls.proto`]: https://github.com/emissary-ingress/emissary/tree/master/api/envoy/service/ratelimit/v2/rls.proto
+[envoy's `v3/rls.proto`]: https://github.com/emissary-ingress/emissary/tree/master/api/envoy/service/ratelimit/v3/rls.proto
 
 $productName$ generates a gRPC request to the external rate limit
 service and provides a list of labels on which the rate limit service can base
@@ -83,11 +83,11 @@ metadata:
   name: ratelimit
 spec:
   service: 'example-rate-limit.default:5000'
-  protocol_version: oneOf[v2, v3] # optional; default is v2
+  protocol_version: # optional; default is v3, if upgrading from 2.x then v2 will be ignored and V3 will be used
 ```
 
 - `service` gives the URL of the rate limit service. If using a Kubernetes service, this should be the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services) of that service.
-- `protocol_version` (optional) gRPC service name used to communicate with the `RateLimitService`. Allowed values are `v2` which will use the `envoy.service.ratelimit.v2.RateLimitService`, and `v3` which will use the `envoy.service.ratelimit.v3.RateLimitService` service name. Note that `v3` requires $productName$ to run in Envoy v3 mode by setting the AMBASSADOR_ENVOY_API_VERSION=V3 environment variable.
+- `protocol_version` (optional) protocol used by the gRPC service to communicate with the `RateLimitService`. Allowed values are `v3` which will use the `envoy.service.ratelimit.v3.RateLimitService`. Note that `v2` is no longer suppored and will be ignored.
 
 You may only use a single `RateLimitService` manifest.
 

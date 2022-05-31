@@ -13,7 +13,7 @@ report its access logs to a remote service, in addition to the usual
 The remote access log service (or ALS) must implement the
 `AccessLogService` gRPC interface, defined in [Envoy's `als.proto`][als.proto].
 
-[als.proto]: https://github.com/emissary-ingress/emissary/blob/master/api/envoy/service/accesslog/v2/als.proto
+[als.proto]: https://github.com/emissary-ingress/emissary/blob/master/api/envoy/service/accesslog/v3/als.proto
 
 ```yaml
 ---
@@ -89,7 +89,7 @@ spec:
   service: "als.default:3000"
   driver: http
   driver_config: {}  # NB: driver_config must be set, even if it's empty
-  grpc: true         # NB: grpc must be true
+  grpc: true         # NB: grpc must be true and it will use the V3 transport protocol
 ```
 
 ## Transport Protocol Migration
