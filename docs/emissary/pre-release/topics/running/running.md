@@ -221,13 +221,6 @@ Setting `AMBASSADOR_FAST_RECONFIGURE` to "true" enables incremental reconfigurat
 
 **`AMBASSADOR_FAST_RECONFIGURE` is not supported when `AMBASSADOR_LEGACY_MODE` is active.**
 
-## `AMBASSADOR_ENVOY_API_VERSION`
-
-By default, $productName$ will configure Envoy using the Envoy V3 API. Setting `AMBASSADOR_ENVOY_API_VERSION` to `V2` tells Ambassador to use the Envoy V2 API instead. Since the Envoy V2 API is deprecated in the upstream Envoy project, we strongly recommend using V3 and, as always, providing feedback and bug reports in the $productName$ GitHub repo!
-
-Support for the Envoy V2 API and the `AMBASSADOR_ENVOY_API_VERSION` environment variable will
-be removed in $productName$ 2.2.0.
-
 ## Configuration from the filesystem
 
 If desired, $productName$ can be configured from YAML files in the directory `$AMBASSADOR_CONFIG_BASE_DIR/ambassador-config` (by default, `/ambassador/ambassador-config`, which is empty in the images built by Datawire). You could volume mount an external configuration directory here, for example, or use a custom Dockerfile to build configuration directly into a Docker image.

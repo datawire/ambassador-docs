@@ -177,8 +177,7 @@ There are 5 types of label specifiers in $productName$:
     ```
 
     Sets the label `«mykey»=«myval»`. Note that supplying a `key` is supported only
-    with the Envoy V3 API: if you are using Envoy V2, the `key` will always be the
-    constant `generic_key`.
+    with the Envoy V3 API.
 
 ## Rate limiting requests based on their labels
 

@@ -57,8 +57,8 @@ spec:
     code: 403
   failure_mode_allow: false
 
-  # proto: grpc only
-  protocol_version: v2
+  # proto: grpc only, ony v3 is supported and other versions will be ignored
+  protocol_version: v3
 
   # proto: http only
   path_prefix: "/path"
@@ -95,7 +95,7 @@ ignored if `proto` is `http`.
 
 | Attribute          | Default value | Description                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `protocol_version` | `v2`          | Controls the gRPC service name used to communicate with the `AuthService`.  Allowed values are `v2`, which uses the `envoy.service.auth.v2.Authorization` service name; and `v3`, which uses the `envoy.service.auth.v3.Authorization` service name.  `v3` cannot be used with [the `AMBASSADOR_ENVOY_API_VERSION=V2` environment variable](../../running/#ambassador_envoy_api_version). |
+| `protocol_version` | `v3`          | Controls the gRPC protocol_version used by the `AuthService`.  Allowed values are `v3`, which uses the `envoy.service.auth.v3.Authorization` service name.  `v2` support was removed and will be ignored. Future versions of CRD's will deprecate it. |
 
 The following fields are only used if `proto` is set to `http`.  They
 are ignored if `proto` is `grpc`.

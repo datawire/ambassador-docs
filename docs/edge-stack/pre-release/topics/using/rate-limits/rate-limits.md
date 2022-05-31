@@ -228,7 +228,7 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
        * `.RateLimitResponse.OverallCode` → `int` : `1` for OK, `2` for
          OVER_LIMIT.
        * `.RateLimitResponse.Statuses` →
-         [`[]*RateLimitResponse_DescriptorStatus]`]`v2.RateLimitResponse_DescriptorStatus`
+         [`[]*RateLimitResponse_DescriptorStatus]`]`v3.RateLimitResponse_DescriptorStatus`
          The itemized status codes for each limit that was selected for
          this request.
        * `.RetryAfter` → `time.Duration` the amount of time until all of
