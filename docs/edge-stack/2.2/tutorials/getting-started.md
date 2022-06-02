@@ -40,7 +40,8 @@ Now is a great time to enhance your $productName$ experience and take advantage 
 
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
-<Alert severity="info">$productName$ is subject to the Ambassador Cloud connected clusters quota, you can see that and other quotas [here](../../../cloud/latest/subscriptions/howtos/manage-my-subscriptions.md)</Alert>
+<Alert severity="info">$productName$ is subject to the Ambassador Cloud connected clusters quota, you can see that and other quotas 
+<a href="../../../cloud/latest/subscriptions/howtos/manage-my-subscriptions.md">here</a></Alert>
 
 ## 2. Routing traffic from the edge
 
