@@ -10,7 +10,7 @@ Ambassador Labs provides a variety of different subscription options depending o
 
 In user settings, go to the **Subscriptions** section.
 
-The subscription page allows you to see your current utilization of Ambassador Cloud and the limits of your plan. You can also access the details of your current payment and your payment history (for Teams Edition subscriber only). If you’re nearing any of the quota limits you can also upgrade your subscription tier on this page - see the [upgrade your plan section](#upgrade-your-plan) on this page.
+The subscription page allows you to see your current utilization of Ambassador Cloud and the limits of your plan. You can also access the details of your current payment and your payment history (for Teams Edition subscriber only). If you’re nearing any of the quota limits, you can also upgrade your subscription tier on this page - see the [upgrade your plan section](#upgrade-your-plan) on this page.
 
   <p align="center">
     <img src="../../../images/team-subscriptions.png" width="800"/>
@@ -51,7 +51,7 @@ On the Free subscription tier, you can unlock additional quotas by adding more t
 Once you've reached a quota limit, you need to upgrade your plan to add more clusters, services, or team members. When the quota limit is reached, the following message is displayed:
 
   <p align="center">
-    <img src="../../../images/active-user-limit.jpeg" width="600"/>
+    <img src="../../../images/active-user-limit.png" width="600"/>
   </p>
 
 
