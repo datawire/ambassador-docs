@@ -7,7 +7,6 @@ exports.onCreateWebpackConfig = ({ actions, stage, getConfig }) => {
         '@src': path.resolve(__dirname),
       },
     },
-    devtool: 'eval-source-map',
   });
 
   if (stage === 'build-javascript' || stage === 'develop') {
