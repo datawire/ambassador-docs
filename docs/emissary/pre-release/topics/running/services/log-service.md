@@ -37,6 +37,7 @@ spec:
   flush_interval_time: int-seconds  # optional; default is 1
   flush_interval_byte_size: integer # optional; default is 16384
   grpc: boolean                     # optional; default is false
+  protocol_version: enum            # optional; default is v2
 ```
 
  - `service` is where to route the access log gRPC requests to
@@ -74,6 +75,8 @@ spec:
 [buffer_flush_interval]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/access_loggers/grpc/v3/als.proto.html#extensions-access-loggers-grpc-v3-commongrpcaccesslogconfig
 [buffer_size_bytes]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/access_loggers/grpc/v3/als.proto.html#extensions-access-loggers-grpc-v3-commongrpcaccesslogconfig
 
+ - `protocol_version` Controls the gRPC service name used to communicate with the `LogService`.  Allowed values are `v2`, which uses the `envoy.service.auth.v2.Authorization` service name; and `v3`, which uses the `envoy.service.auth.v3.Authorization` service name.  `v3` cannot be used with [the `AMBASSADOR_ENVOY_API_VERSION=V2` environment variable](../../running/#ambassador_envoy_api_version).
+
 ## Example
 
 ```yaml
@@ -87,4 +90,28 @@ spec:
   driver: http
   driver_config: {}  # NB: driver_config must be set, even if it's empty
   grpc: true         # NB: grpc must be true
+```
+
+
+## Transport Protocol Migration
+
+
+> **Note:** The following information is only applicable to `AuthServices` using `proto: grpc`
+As of $productName$ version 2.3, the `v2` transport protocol is deprecated and any AuthServices making use
+of it should migrate to `v3` before support for `v2` is removed in a future release.
+
+The following imports simply need to be updated to migrate an AuthService
+
+`v2` Imports:
+```
+	envoyCoreV2 "github.com/datawire/ambassador/pkg/api/envoy/api/v2/core"
+	envoyAuthV2 "github.com/datawire/ambassador/pkg/api/envoy/service/auth/v2"
+	envoyType "github.com/datawire/ambassador/pkg/api/envoy/type"
+```
+
+`v3` Imports:
+```
+	envoyCoreV3 "github.com/datawire/ambassador/v2/pkg/api/envoy/config/core/v3"
+	envoyAuthV3 "github.com/datawire/ambassador/v2/pkg/api/envoy/service/auth/v3"
+	envoyType "github.com/datawire/ambassador/v2/pkg/api/envoy/type/v3"
 ```

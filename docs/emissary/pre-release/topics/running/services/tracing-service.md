@@ -27,6 +27,11 @@ spec:
 - `driver` provides the driver information that handles communicating with the `service`. Supported values are `lightstep`, `zipkin`, and `datadog`.
 - `config` provides additional configuration options for the selected `driver`.
 - `tag_headers` (optional) if present, specifies a list of other HTTP request headers which will be used as tags in the trace's span.
+- `propagation_modes` (optional) if present, specifies a list of the propogation modes to be used. Possible values:
+  - `ENVOY`
+  - `LIGHTSTEP`
+  - `B3`
+  - `TRACE_CONTEXT`
 - `sampling` (optional) if present, specifies some target percentages of requests that will be traced.
   - `client`: percentage of requests that will be force traced if the `x-client-trace-id` header is set. Defaults to 100.
   - `random`: percentage of requests that will be randomly traced. Defaults to 100.

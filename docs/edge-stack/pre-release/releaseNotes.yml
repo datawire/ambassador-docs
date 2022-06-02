@@ -32,6 +32,92 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 2.3.0
+    date: '2022-06-06'
+    notes:
+      - title: Remove unused packages
+        type: security
+        body: >-
+          Completely remove <code>gdbm</code>, <code>pip</code>, <code>smtplib</code>, and <code>sqlite</code> packages, as they are unused.
+
+      - title: CORS now happens before auth
+        type: bugfix
+        body: >-
+          When CORS is specified (either in a <code>Mapping</code> or in the <code>Ambassador</code>
+          <code>Module</code>), CORS processing will happen before authentication. This corrects a
+          problem where XHR to authenticated endpoints would fail.
+
+      - title: Correctly handle caching of Mappings with the same name in different namespaces
+        type: bugfix
+        body: >-
+          In 2.x releases of $productName$ when there are multiple <code>Mapping</code>s that have the same
+          <code>metadata.name</code> across multiple namespaces, their old config would not properly be removed
+          from the cache when their config was updated. This resulted in an inability to update configuration
+          for groups of <code>Mapping</code>s that share the same name until the $productName$ pods restarted.
+
+      - title: Fix support for Zipkin API-v1 with Envoy xDS-v3
+        type: bugfix
+        body: >-
+          It is now possible for a <code>TracingService</code> to specify
+          <code>collector_endpoint_version: HTTP_JSON_V1</code> when using xDS v3 to configure Envoy
+          (which has been the default since $productName$ 1.14.0).  The <code>HTTP_JSON_V1</code>
+          value configures Envoy to speak to Zipkin using Zipkin's old API-v1, while the
+          <code>HTTP_JSON</code> value configures Envoy to speak to Zipkin using Zipkin's new
+          API-v2. In previous versions of $productName$ it was only possible to use
+          <code>HTTP_JSON_V1</code> when explicitly setting the
+          <code>AMBASSADOR_ENVOY_API_VERSION=V2</code> environment variable to force use of xDS v2
+          to configure Envoy.
+        docs: topics/running/services/tracing-service/
+
+      - title: Added Support for transport protocol v3 in External Filters
+        type: feature
+        body: >-
+          External Filters can now make use of the v3 transport protocol. In addtion to the support for the v3 transport protocol, the default <code>AuthService</code> installed with $productName$ will now only operate with transport protocol v3. In order to support existing External Filters using v2, $productName$ will automatically translate
+          v2 to the new default of v3. Any External Filters will be assumed to be using transport protocol v2 and will use the automatic conversion to v3 unless the new <code>protocol_version</code> field on the External Filter is explicitly set to <code>v3</code>.
+        docs: topics/using/filters/external
+
+      - title: Allow setting propagation modes for Lightstep tracing
+        type: feature
+        body: >-
+          It is now possible to set <code>propagation_modes</code> in the
+          <code>TracingService</code> config when using lightstep as the driver.
+          (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
+        docs: topics/running/services/tracing-service/
+        github:
+          - title: "#4179"
+            link: https://github.com/emissary-ingress/emissary/pull/4179
+
+      - title: Added Support for Certificate Revocation Lists
+        type: feature
+        body: >-
+          $productName$ now supports <a href="https://www.envoyproxy.io/docs/envoy/v1.17.4/api-v3/extensions/transport_sockets/tls/v3/common.proto.html?highlight=crl">Envoy's Certificate Revocation lists.</a>
+          This allows users to specify a list of certificates that $productName$ should reject even if the certificate itself is otherwise valid.
+        docs: topics/running/tls
+
+      - title: Added support for the LogService v3 transport protocol
+        type: feature
+        body: >-
+          Previously, a <code>LogService</code> would always have $productName$ communicate with the
+          external log service using the <code>envoy.service.accesslog.v2.AccessLogService</code>
+          API. It is now possible for the <code>LogService</code> to specify
+          <code>protocol_version: v3</code> to use the newer
+          <code>envoy.service.accesslog.v3.AccessLogService</code> API instead.  This functionality
+          is not available if you set the <code>AMBASSADOR_ENVOY_API_VERSION=V2</code> environment
+          variable.
+        docs: topics/running/services/log-service/
+
+      - title: Improved performance processing OAuth2 Filters
+        type: change
+        body: >-
+          When each OAuth2 Filter that references a Kubernetes secret is loaded, $productName$ previously needed to communicate with the API server to request and validate that secret before loading the next Filter. To improve performance, $productName$ will now load and validate all secrets required by OAuth2 Filters at once prior to loading the filters.
+
+      - title: Deprecated v2 transport protocol for External Filters and AuthServices
+        type: change
+        body: >-
+          A future release of $productName$ will remove support for the now deprecated v2 transport protocol in both AuthServices as well as External Filters. Migrating Existing External Filters from v2 to v3
+          is simple and and example can be found on the External Filter page. This change only impacts gRPC External Filters. HTTP External Filters are unaffected by this change.
+        docs: topics/using/filters/external
+
   - version: 2.2.2
     date: '2022-02-25'
     notes:
@@ -51,7 +137,7 @@ items:
           - title: 4134
             link: https://github.com/emissary-ingress/emissary/issues/4134
         docs: topics/running/tls#certificates-and-secrets
-  
+
   - version: 2.2.1
     date: '2022-02-22'
     notes:

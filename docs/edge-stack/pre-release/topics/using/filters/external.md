@@ -64,6 +64,7 @@ exceptions:
 | `include_body.allow_partial` | (none; a value is required if `include_body` is not `null`) | Controls what happens to requests with bodies larger than `max_bytes`.  If `allow_partial` is `true`, the first `max_bytes` of the body are sent to the external auth service.  If `false`, the message is rejected with HTTP 413 ("Payload Too Large").                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `status_on_error.code`       | `403`                                                       | Controls the status code returned when unable to communicate with external auth service.  This is ignored if `failure_mode_allow: true`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | `failure_mode_allow`         | `false`                                                     | Controls whether to allow or reject requests when there is an error communicating with the external auth service; a value of `true` allows the request through to the upstream backend service, a value of `false` returns a `status_on_error.code` response to the client.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `protocol_version` | `v2` | Indicates the version of the transport protocol that the External Filter is using. This is only applicable to External Filters using `proto: grpc`. When left unset or set to `v2` $productName$ will automatically convert between the `v2` protocol used by the External Filter and the `v3` protocol that us used by the `AuthService` that ships with $productName$. When this field is set to `v3` then no conversion between $productName$ and the AuthService will take place as it can speak `v3` natively with $produceName$'s `AuthService`. |
 
 The following fields are only used if `proto` is set to `http`.  They
 are ignored if `proto` is `grpc`.
@@ -74,3 +75,38 @@ are ignored if `proto` is `grpc`.
 | `allowed_request_headers`       | `[]`          | Lists the headers (case-insensitive) that are copied from the incoming request to the request made to the external auth service.  In addition to the headers listed in this field, the following headers are always included: `Authorization`, `Cookie`, `From`, `Proxy-Authorization`, `User-Agent`, `X-Forwarded-For`, `X-Forwarded-Host`, and `X-Forwarded-Proto`.                                                                                   |
 | `allowed_authorization_headers` | `[]`          | Lists the headers (case-insensitive) that are copied from the response from the external auth service to the request sent to the upstream backend service (if the external auth service indicates that the request to the upstream backend service should be allowed).  In addition to the headers listed in this field, the following headers are always included: `Authorization`, `Location`, `Proxy-Authenticate`, `Set-cookie`, `WWW-Authenticate` |
 | `add_linkerd_headers`           | `false`       | When true, in the request to the external auth service, adds an `l5d-dst-override` HTTP header that is set to the hostname and port number of the external auth service.                                                                                                                                                                                                                                                                                |
+
+
+The following fields are only used if `proto` is set to `grpc`.  They
+are ignored if `proto` is `http`.
+
+
+| Attribute                       | Default value | Description                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|---------------------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `protocol_version`                   | `v2`          | Indicates the version of the transport protocol that the External Filter is using. This is only applicable to External Filters using `proto: grpc`. When left unset or set to `v2` $productName$ will automatically convert between the `v2` protocol used by the External Filter and the `v3` protocol that is used by the `AuthService` that ships with $productName$. When this field is set to `v3` then no conversion between $productName$ and the `AuthService` will take place as it can speak `v3` natively with $produceName$'s `AuthService`.                                                                                                                              |
+
+
+## Transport Protocol Migration
+
+> **Note:** The following information is only applicable to External Filters using `proto: grpc`
+As of $productName$ version 2.3, the `v2` transport protocol is deprecated and any External Filters making use
+of it should migrate to `v3` before support for `v2` is removed in a future release.
+
+The following imports simply need to be updated to migrate an External Filter
+
+`v2` Imports:
+```
+	envoyCoreV2 "github.com/datawire/ambassador/pkg/api/envoy/api/v2/core"
+	envoyAuthV2 "github.com/datawire/ambassador/pkg/api/envoy/service/auth/v2"
+	envoyType "github.com/datawire/ambassador/pkg/api/envoy/type"
+```
+
+`v3` Imports:
+```
+	envoyCoreV3 "github.com/datawire/ambassador/v2/pkg/api/envoy/config/core/v3"
+	envoyAuthV3 "github.com/datawire/ambassador/v2/pkg/api/envoy/service/auth/v3"
+	envoyType "github.com/datawire/ambassador/v2/pkg/api/envoy/type/v3"
+```
+
+In the [datawire/sample-external-service repository](https://github.com/datawire/Sample-External-Service), you can find examples of an External Filter using both the
+`v2` transport protocol as well as `v3` along with deployment instructions for reference. The External Filter in this repo does not perform any authorization and is instead meant to serve as a reference for the operations that an External can make use of.

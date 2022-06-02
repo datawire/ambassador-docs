@@ -123,3 +123,28 @@ An `AuthService` can be disabled for a `Mapping` by setting
 `bypass_auth` to `true`.  This will tell $productName$ to allow all
 requests for that `Mapping` through without interacting with the
 external auth service.
+
+
+
+## Transport Protocol Migration
+
+
+> **Note:** The following information is only applicable to `AuthServices` using `proto: grpc`
+As of $productName$ version 2.3, the `v2` transport protocol is deprecated and any AuthServices making use
+of it should migrate to `v3` before support for `v2` is removed in a future release.
+
+The following imports simply need to be updated to migrate an AuthService
+
+`v2` Imports:
+```
+	envoyCoreV2 "github.com/datawire/ambassador/pkg/api/envoy/api/v2/core"
+	envoyAuthV2 "github.com/datawire/ambassador/pkg/api/envoy/service/auth/v2"
+	envoyType "github.com/datawire/ambassador/pkg/api/envoy/type"
+```
+
+`v3` Imports:
+```
+	envoyCoreV3 "github.com/datawire/ambassador/v2/pkg/api/envoy/config/core/v3"
+	envoyAuthV3 "github.com/datawire/ambassador/v2/pkg/api/envoy/service/auth/v3"
+	envoyType "github.com/datawire/ambassador/v2/pkg/api/envoy/type/v3"
+```

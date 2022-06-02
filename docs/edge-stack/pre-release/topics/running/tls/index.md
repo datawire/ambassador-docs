@@ -143,17 +143,18 @@ The following fields are accepted in the `tls` field:
 
 ```yaml
 tls:
-  cert_chain_file: # string
-  private_key_file: # string
-  ca_secret: # string
-  cacert_chain_file: # string
-  alpn_protocols: # string
-  cert_required: # bool
-  min_tls_version: # string
-  max_tls_version: # string
-  cipher_suites: # array of strings
-  ecdh_curves: # array of strings
-  sni: # string
+  cert_chain_file:    # string
+  private_key_file:   # string
+  ca_secret:          # string
+  cacert_chain_file:  # string
+  alpn_protocols:     # string
+  cert_required:      # bool
+  min_tls_version:    # string
+  max_tls_version:    # string
+  cipher_suites:      # array of strings
+  ecdh_curves:        # array of strings
+  sni:                # string
+  crl_secret:         # string
 ```
 
 These fields have the same function as in the [`TLSContext`](#tlscontext) resource,
@@ -463,4 +464,35 @@ spec:
   ecdh_curves:
     - X25519
     - P-256
+```
+
+The `crl_secret` field allows you to reference a Kubernetes Secret that contains a certificate revocation list.
+If specified, $productName$ will verify that the presented peer certificate has not been revoked by this CRL even if they are otherwise valid. This provides a way to reject certificates before they expire or if they become compromised.
+The `crl_secret` field takes a PEM-formatted [Certificate Revocation List](https://en.wikipedia.org/wiki/Certificate_revocation_list) in a `crl.pem` entry.
+
+Note that if a CRL is provided for any certificate authority in a trust chain, a CRL must be provided for all certificate authorities in that chain. Failure to do so will result in verification failure for both revoked and unrevoked certificates from that chain.
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  TLSContext
+metadata:
+  name:  tls-crl
+spec:
+  hosts: ["*"]
+  secret: ambassador-certs
+  min_tls_version: v1.0
+  max_tls_version: v1.3
+  crl_secret: 'ambassador-crl'
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ambassador-crl
+  namespace: ambassador
+type: Opaque
+data:
+  crl.pem: |
+    {BASE64 CRL CONTENTS}
+---
 ```
