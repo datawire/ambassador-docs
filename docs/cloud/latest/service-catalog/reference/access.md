@@ -11,8 +11,10 @@ import Alert from '@material-ui/lab/Alert';
 
 ## RBAC
 
-Ambassador Cloud supports Role-Based Access Control (RBAC) to enforce permissions granted to members of a team.
+Ambassador Cloud features Role-Based Access Control (RBAC) to regulate user permissions.
 
-Using roles, you can limit team members in their ability to perform certain actions. For example, only Administrators are allowed to change or cancel a team's paid subscription or grant roles to other team members.
+Roles are accessible in the [Settings section of Ambassador Cloud](https://app.getambassador.io/cloud/settings) on the Members page. Only members with Administrator roles can change other members' roles.
 
-You can easily access your team and member settings, as well as other personal options, under the [Settings section of Ambassador Cloud](https://app.getambassador.io/cloud/settings)
+Members can be assigned one of the following roles:
+* Administrator - grants member access to all functions in Ambassador Cloud.
+* User - restricts the member's ability to make changes to [payment plans](https://www.getambassador.io/editions/) or manage other member's accounts. A User role has access to all other functions in Ambassador Cloud.
