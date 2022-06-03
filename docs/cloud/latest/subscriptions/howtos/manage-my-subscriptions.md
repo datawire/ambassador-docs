@@ -4,7 +4,7 @@ description: "Check out your subscription details or shop for different subscrip
 ---
 # Manage my subscriptions
 
-Ambassador Labs provides a variety of different subscription options depending on your needs. Whether you're working with a small team with a few developers or a company with a large number of services and active namespaces, Ambassador Labs has flexible subscription options for you to chose from. 
+Ambassador Labs provides a variety of different subscription options depending on your needs. Whether you're working with a small team with a few developers or a company with a large number of services, Ambassador Labs has flexible subscription options for you to chose from. 
 
 ## Check or upgrade your subscription
 
@@ -43,7 +43,7 @@ On the Free subscription tier, you can unlock additional quotas by adding more t
 
 
   <p align="center">
-    <img src="../../../images/unnlock-features.jpeg" width="600"/>
+    <img src="../../../images/unlock-features.png" width="600"/>
   </p>
 
 ## Quota limits
