@@ -17,4 +17,4 @@ Roles are accessible in the [Settings section of Ambassador Cloud](https://app.g
 
 Members can be assigned one of the following roles:
 * Administrator - grants member access to all functions in Ambassador Cloud.
-* User - restricts the member's ability to make changes to [payment plans](https://www.getambassador.io/editions/) or manage other member's accounts. A User role has access to all other functions in Ambassador Cloud.
+* User - has access to all functions in Ambassador Cloud except for the ability to manage other member's accounts or change the [payment plans](https://www.getambassador.io/editions/).
