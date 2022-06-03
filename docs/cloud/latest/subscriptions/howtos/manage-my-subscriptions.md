@@ -10,7 +10,7 @@ Ambassador Labs provides a variety of different subscription options depending o
 
 In user settings, go to the **Subscriptions** section.
 
-The subscription page allows you to see your current utilization of Ambassador Cloud and the limits of your plan. You can also access the details of your current payment and your payment history (for Teams Edition subscriber only). If you’re nearing any of the quota limits, you can also upgrade your subscription tier on this page - see the [upgrade your plan section](#upgrade-your-plan) on this page.
+The Subscription section of the Settings page shows your current utilization of Ambassador Cloud and the limits of your plan. Teams Edition subscribers can see their payment history here as well. If you’re nearing any of the quota limits, you can upgrade your subscription tier on this page. To learn more about the upgrade process, see the [upgrade your plan section](#upgrade-your-plan) below.
 
   <p align="center">
     <img src="../../../images/team-subscriptions.png" width="800"/>
@@ -24,7 +24,7 @@ Ambassador Cloud users who have accepted an invitation sent by you through the M
 
 ### Active Services
 
-A service you have performed an action (intercept, rollout, etc.) on in the last 28 days is considered an active service.
+Active services are those which have had an action performed on them within the last 28 days. Actions include intercepts, rollouts, and mappings.
 
 ### Connected Clusters
 
@@ -32,7 +32,7 @@ The Kubernetes clusters you have connected to the Ambassador Cloud app.
 
 ### Requests per Second
 
-RPS is the **maximum usage** in the cluster between Rate Limited Traffic and Authenticated Traffic.
+(Request per second) RPS is the **maximum usage** in the cluster between Rate Limited Traffic and Authenticated Traffic.
 With multiple clusters, RPS is the **sum** of the maximum usage of each cluster.
 
 RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
