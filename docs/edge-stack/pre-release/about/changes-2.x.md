@@ -206,10 +206,7 @@ In $productName$ 2.0, ACME will be disabled if a `Host` does not set `acmeProvid
 ### Envoy V3 API by Default
 
 By default, $productName$ 2.X will configure Envoy using the
-[V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api). In $productName$
-$version$, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION`
-environment variable to "V2"; in $productName$ 2.2.0, support for the Envoy V2 API (and
-the `AMBASSADOR_ENVOY_API_VERSION` environment variable) will be removed.
+[V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api).
 
 ### More Performant Reconfiguration by Default
 

@@ -92,7 +92,6 @@ spec:
   grpc: true         # NB: grpc must be true
 ```
 
-
 ## Transport Protocol Migration
 
 
