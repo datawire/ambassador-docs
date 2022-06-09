@@ -42,6 +42,8 @@
       link: /service-catalog/reference/annotations/
     - title: Automated Configuration Analysis
       link: /config-analysis/reference
+    - title: Access management
+      link: /service-catalog/reference/access/
     - title: FAQs
       link: /service-catalog/faqs/
 - title: Visualize Your APIs
