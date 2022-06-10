@@ -24,7 +24,7 @@ const ProductTemplate = ({
   titleRest,
   heroDescription,
   heroImg,
-  heroImgDescription='Image description',
+  heroImgDescription = 'Image description',
   overview,
   cards,
   getStartedLink,
@@ -42,7 +42,11 @@ const ProductTemplate = ({
           <p className="docs__quickStart-description">{heroDescription}</p>
         </div>
         <div className="docs__quickStart-img--container">
-          <img className="docs__quickStart-img" src={heroImg} alt={heroImgDescription } />
+          <img
+            className="docs__quickStart-img"
+            src={heroImg}
+            alt={heroImgDescription}
+          />
         </div>
       </div>
       <div className="docs__quickStart-button-get-started">
@@ -51,7 +55,11 @@ const ProductTemplate = ({
           className="docs__button-secondary docs__m-bottom-50"
         >
           Get Started{' '}
-          <Icon name="right-arrow" className="docs__button-secondary--arrow" />
+          <Icon
+            name="right-arrow"
+            mask={true}
+            className="docs__button-secondary--arrow"
+          />
         </Link>
       </div>
       <hr className="docs__separator docs__quickStart-separator" />

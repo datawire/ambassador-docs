@@ -43,8 +43,8 @@ import Telepresence from './products/Telepresence';
 import './style.less';
 import getDocsActiveVersion from './utils/getDocsActiveVersion';
 import getPrevNext from './utils/getPrevNext';
+import getSpecialTitles from './utils/getSpecialTitles';
 import { canonicalUrls } from './utils/getValueCanonicals';
-import getSpecialTitles from './utils/getSpecialTitles'
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
@@ -505,7 +505,7 @@ const index = ({ data, location, pageContext }) => {
                         to={`/docs/${prevLearning.link}${learningPath}`}
                         className="docs__next-previous__button"
                       >
-                        <Icon name="right-arrow" /> Previous
+                        <Icon name="right-arrow" mask={true} /> Previous
                       </Link>
                       <span className="docs__next-previous__text">
                         {prevLearning.title}
@@ -514,7 +514,11 @@ const index = ({ data, location, pageContext }) => {
                   )}
                 </div>
                 <div className="docs__next-previous__learning-journey">
-                  <img src={LearningJourneyImg} alt="Learning Journey" loading='lazy'/>
+                  <img
+                    src={LearningJourneyImg}
+                    alt="Learning Journey"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="docs__next-previous__next">
                   {nextLearning && (
@@ -523,7 +527,7 @@ const index = ({ data, location, pageContext }) => {
                         to={`/docs/${nextLearning.link}${learningPath}`}
                         className="docs__next-previous__button"
                       >
-                        Next <Icon name="right-arrow" />
+                        Next <Icon name="right-arrow" mask={true} />
                       </Link>
                       <span className="docs__next-previous__text">
                         {nextLearning.title}
