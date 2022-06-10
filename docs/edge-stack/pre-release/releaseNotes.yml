@@ -41,9 +41,7 @@ items:
           A regression was introduced in 2.3.0 that leaked zipkin default config fields into the configuration
           for the other drivers (lightstep, etc...). This caused $productName$ to crash on startup. This issue has been resolved
           to ensure that the defaults are only applied when driver is <code>zipkin</code>
-        github:
-          - title: "#4267"
-            link: https://github.com/emissary-ingress/emissary/issues/4267
+        docs: https://github.com/emissary-ingress/emissary/issues/4267
 
       - title: Envoy security updates
         type: security
