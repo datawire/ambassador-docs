@@ -33,7 +33,7 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 2.3.1
-    date: '2022-06-09'
+    date: '2022-06-10'
     notes:
       - title: Fix regression in tracing service config
         type: bugfix
