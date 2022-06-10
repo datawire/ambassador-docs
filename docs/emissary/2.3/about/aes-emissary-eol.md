@@ -1,0 +1,66 @@
+# Ambassador Edge Stack and Emmissary-ingress End of Life Policy
+
+This document describes the End of Life policy and maintenance windows for  Ambassador Edge Stack, and to the open source project Emmissary Ingress.
+
+## Supported Versions
+
+Ambassador Edge Stack and Emmissary-ingress versions are expressed as **x.y.z**, where **x** is the major version, **y** is the minor version, and **z** is the patch version, following [Semantic Versioning](https://semver.org/) terminology.
+
+**X-series (Major Versions)**
+
+- **1.y**: 1.0 GA on January 2020
+- **2.y**: 2.0.4 GA on October 2021, and 2.1.0 in December 2021.
+
+**Y-release (Minor versions)**
+
+- For 1.y, that is **1.14.z**
+- For 2.y, that is **2.3.z**
+
+In this document, Current refers to the latest X-series release.
+
+Maintenance refers to the previous X-series release, including security and Sev1 defect patches.
+
+## CNCF Ecosystem Considerations
+
+- Envoy releases a major version every 3 months and supports its previous releases for 12 months. Envoy does not support any release longer than 12 months.
+- Kubernetes 1.19 and newer receive 12 months of patch support (The [Kubernetes Yearly Support Period](https://github.com/kubernetes/enhancements/blob/master/keps/sig-release/1498-kubernetes-yearly-support-period/README.md)).
+- The version of Envoy used in Ambassador Edge Stack and Emmissary in 1.14 is out of support, meaning we currently backport security patches on behalf of Envoy to the 1.14 series as an Extended Maintenance window.
+
+# The Policy
+
+> We will offer a 6 months maintenance window for the latest Y-release of an X-series after a new X-series goes GA and becomes the current release. For example, we will support 2.3 for severity 1 and defect patches for six months after 3.0 is released.
+> 
+
+> During the maintenance window, Y-releases will only receive security and Sev1 defect patches. Users desiring new features or bug fixes for lower severity defects will need to upgrade to the current X-series.
+> 
+
+> The current X-series will receive as many Y-releases as necessary and as often as we have new features or patches to release.
+> 
+
+> We will always offer a no-downtime migration path for users transitioning from a maintenance Y-release to the current X-series. Releases outside of the maintenance window cannot guarantee a no-downtime migration path.
+> 
+
+> Artifacts of releases outside of the maintenance window will be frozen and will remain available publicly for download with the best effort. These artifacts include Docker images, application binaries, Helm charts, etc.
+> 
+
+### When we say support with “defect patches”, what do we mean?
+
+- We will fix security issues in our Emmissary-ingress and Ambassador Edge Stack code
+- We will pick up security fixes from dependencies as they are made
+available
+- We will not maintain forks of our major dependencies
+- We will not attempt our own back ports of critical fixes to dependencies which are out of support from their own communities
+
+## Further considerations
+
+Given this policy, we should have dropped maintenance for 1.14 in March 2022, however we recognize that a few customers have had some challenges upgrading. For this reason, we do offer an "extended maintenance" window for 1.14 until the end of September 2022, 3 months after the latest 2.3 release, addressing any migration issues. Please note that this extended maintenance window will not apply to customers using Kubernetes 1.22 and above, and this extended maintenance will also not provide a no-downtime migration path from 1.14 to 3.0. 
+
+After September 2022, the current series will be 3.x, and the maintenance series will be 2.y. 
+
+## Visual timeline representation
+
+![Timeline](../images/timeline.png)
+
+### References
+
+- [Ambassador Labs Long Term Support (LTS) Policy Draft from May 2021](https://docs.google.com/document/d/1bsJVHz8nBlbehhIKeBy53yUc-oPHlTAj5hK9Pruto7I/edit)
