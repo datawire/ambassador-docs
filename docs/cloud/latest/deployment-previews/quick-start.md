@@ -59,7 +59,7 @@ together, using a [GitOps workflow](../../../../edge-stack/latest/topics/concept
    </Alert>
 
 2. ArgoCD must be configured to sync manifests from a GitHub or GitLab repository into your
-   cluster. This is the _infrastructure repository_; it may or may not be the same code respiratory. Confirm how your repository is configured before proceeding.
+   cluster. This is the _infrastructure repository_; it may or may not be the same code repository. Confirm how your repository is configured before proceeding.
 
    If you haven't configured how manifests are synced from your GitLab or GitHub repository yet, follow the [ArgoCD quick start](../../../../argo/latest/quick-start/) to complete this process.
 
