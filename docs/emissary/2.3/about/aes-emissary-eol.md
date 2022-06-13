@@ -24,7 +24,6 @@ Maintenance refers to the previous X-series release, including security and Sev1
 
 - Envoy releases a major version every 3 months and supports its previous releases for 12 months. Envoy does not support any release longer than 12 months.
 - Kubernetes 1.19 and newer receive 12 months of patch support (The [Kubernetes Yearly Support Period](https://github.com/kubernetes/enhancements/blob/master/keps/sig-release/1498-kubernetes-yearly-support-period/README.md)).
-- The version of Envoy used in Ambassador Edge Stack and Emissary in 1.14 is out of support, meaning we currently backport security patches on behalf of Envoy to the 1.14 series as an Extended Maintenance window.
 
 # The Policy
 
@@ -37,7 +36,7 @@ Maintenance refers to the previous X-series release, including security and Sev1
 > The current X-series will receive as many Y-releases as necessary and as often as we have new features or patches to release.
 > 
 
-> We will always offer a no-downtime migration path for users transitioning from a maintenance Y-release to the current X-series. Releases outside of the maintenance window cannot guarantee a no-downtime migration path.
+> Ambassador Labs offers no-downtime migration to current versions from maintenance releases. Migration from releases that are outside of the maintenance window may be subject to downtime.
 > 
 
 > Artifacts of releases outside of the maintenance window will be frozen and will remain available publicly for download with the best effort. These artifacts include Docker images, application binaries, Helm charts, etc.
@@ -52,12 +51,10 @@ Maintenance refers to the previous X-series release, including security and Sev1
 
 ## Further considerations
 
-Given this policy, we should have dropped maintenance for 1.14 in March 2022, however we recognize that a few customers have had some challenges upgrading. For this reason, we do offer an "extended maintenance" window for 1.14 until the end of September 2022, 3 months after the latest 2.3 release, addressing any migration issues. Please note that this extended maintenance window will not apply to customers using Kubernetes 1.22 and above, and this extended maintenance will also not provide a no-downtime migration path from 1.14 to 3.0. 
+Given this policy, we should have dropped maintenance for 1.14 in March 2022, however we recognize that upgrading could prove bothersome. For this reason, we offer an "extended maintenance" window for 1.14 until the end of September 2022, 3 months after the latest 2.3 release, addressing any migration issues. Please note that this extended maintenance window will not apply to customers using Kubernetes 1.22 and above, and this extended maintenance will also not provide a no-downtime migration path from 1.14 to 3.0.
 
 After September 2022, the current series will be 3.x, and the maintenance series will be 2.y. 
 
 ## Visual timeline representation
 
 ![Timeline](../images/timeline.png)
-
-- [Ambassador Labs Long Term Support (LTS) Policy Draft from May 2021](https://docs.google.com/document/d/1bsJVHz8nBlbehhIKeBy53yUc-oPHlTAj5hK9Pruto7I/edit)
