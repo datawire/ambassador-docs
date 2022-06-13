@@ -49,7 +49,7 @@ Maintenance refers to the previous X-series release, including security and Sev1
 - We will not maintain forks of our major dependencies
 - We will not attempt our own back ports of critical fixes to dependencies which are out of support from their own communities
 
-## Further considerations
+## Extended Maintenance for 1.14
 
 Given this policy, we should have dropped maintenance for 1.14 in March 2022, however we recognize that the introduction of an EOL policy necessitates a longer maintenance window. For this reason, we do offer an "extended maintenance" window for 1.14 until the end of September 2022, 3 months after the latest 2.3 release. Please note that this extended maintenance window will not apply to customers using Kubernetes 1.22 and above, and this extended maintenance will also not provide a no-downtime migration path from 1.14 to 3.0.
 
