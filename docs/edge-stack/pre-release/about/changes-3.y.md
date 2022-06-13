@@ -11,22 +11,22 @@ $productName$ 3 is functionally compatible with $productName$ 2.x, but with any 
 
 ## 1. Envoy Upgraded to 1.22
 
-$productName$ 3.0 has been upgraded to from Envoy 1.17.X to Envoy **1.22** which keeps $productName$ up-to-date with
+$productName$ 3.0 has been upgraded from Envoy 1.17.X to Envoy **1.22** which keeps $productName$ up-to-date with
 the latest security fixes, bug fixes, performance improvements and feature enhancements provided by Envoy Proxy. Most of the changes are under the hood but the most notable change to developers is the removal of support for Envoy V2 Transport Protocol. This means all external filters must be updated to use the V3 Protocol.
 
-The following set of runtime bootstrap flags have been removed:
+This also means some of the v2 runtime bootstrap flags have been removed as well:
 
 ```yaml
-# no longer necessary because this was remvoed from Envoy
+# No longer necessary because this was remvoed from Envoy
 # Emissary already was converted to use the compressor API
 # https://www.envoyproxy.io/docs/envoy/v1.22.0/configuration/http/http_filters/compressor_filter#config-http-filters-compressor
 "envoy.deprecated_features.allow_deprecated_gzip_http_filter": true,
 
-# upgraded to v3 with the removal of the V2 Transport Protocol
+# Upgraded to v3, all support for V2 Transport Protocol removed
 "envoy.deprecated_features:envoy.api.v2.route.HeaderMatcher.regex_match": true,
 "envoy.deprecated_features:envoy.api.v2.route.RouteMatch.regex": true,
 
-# Developer will need to upgrade to V3 protocol which no longer supports HTTP_JSON_V1
+# Developer will need to upgrade TracingService to V3 protocol which no longer supports HTTP_JSON_V1
 "envoy.deprecated_features:envoy.config.trace.v2.ZipkinConfig.HTTP_JSON_V1": true,
 
 # V2 protocol removed so flag no longer necessary
@@ -39,7 +39,7 @@ The following set of runtime bootstrap flags have been removed:
 
 ## 2. Envoy V2 Protocol Support Removed 
 
-With the upgrade to Envoy **1.22**, the V2 Envoy API is no longer supported.
+With the upgrade to Envoy **1.22**, the V2 Envoy Transport Portocol is no longer supported.
 $produceName$ 3.0 **only** supports [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api).
 
 <Alert severity="warn">
@@ -50,7 +50,3 @@ of changing the transport protocol.
 <Alert severity="warn">
 The setting of `transport_protocol` to `v2` is no longer supported within CRDS (AuthService, etc...). An error will now be logged and $productName$ will not configure envoy correctly. You should remove this field from your CRD's or convert it to `v3` the only supported version at this time.
 <Alert>
-
-## 3. Downstream HTTP/3 Support
-
-Support for HTTP/3 has been added to $productName$ 3.0 as an initial implementation with limited configuration support. You can read more about that in our docs on [HTTP/3]("../topics/running/http3.md").

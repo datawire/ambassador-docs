@@ -54,7 +54,7 @@ items:
           With the upgrade to Envoy, $productName$ is now able to provide downstream support for HTTP/3. The initial implementation supports exposing http/3 endpoints on port `443`. Future version of $productName$ will seek to provide additional configuration to support more scenarios.
 
           HTTP/3 uses the Quic protocol over UDP. Changes to your cloud provider provisioned Load Balancer will be required to support UDP traffic if using HTTP/3. External Load Balancers must serve traffic on port <code>443</code> because the <code>alt-svc</code> header is not configurable in the initial release of the feature.
-        docs: topics/running/http3.md
+        docs: topics/running/http3
 
   - version: 2.3.1
     date: '2022-06-10'
