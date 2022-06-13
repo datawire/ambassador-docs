@@ -123,6 +123,8 @@
        items:
          - title: Gateway API
            link: /topics/using/gateway-api
+     - title: HTTP3
+       link: /topics/running/http3
      - title: Ingress and load balancing
        items:
          - title: The Mapping resource
@@ -210,6 +212,8 @@
                link: /howtos/client-cert-validation
  - title: Changes in $productName$ 2.X
    link: /about/changes-2.x
+ - title: Changes in $productName$ 2.Y
+   link: /about/changes-2.y
  - title: Known issues
    link: /about/known-issues
  - title: FAQs
