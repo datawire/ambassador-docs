@@ -1,10 +1,10 @@
-# Ambassador Edge Stack and Emmissary-ingress End of Life Policy
+# Ambassador Edge Stack and Emissary-ingress End of Life Policy
 
-This document describes the End of Life policy and maintenance windows for  Ambassador Edge Stack, and to the open source project Emmissary Ingress.
+This document describes the End of Life policy and maintenance windows for Ambassador Edge Stack, and to the open source project Emissary Ingress.
 
 ## Supported Versions
 
-Ambassador Edge Stack and Emmissary-ingress versions are expressed as **x.y.z**, where **x** is the major version, **y** is the minor version, and **z** is the patch version, following [Semantic Versioning](https://semver.org/) terminology.
+Ambassador Edge Stack and Emissary-ingress versions are expressed as **x.y.z**, where **x** is the major version, **y** is the minor version, and **z** is the patch version, following [Semantic Versioning](https://semver.org/) terminology.
 
 **X-series (Major Versions)**
 
@@ -16,7 +16,7 @@ Ambassador Edge Stack and Emmissary-ingress versions are expressed as **x.y.z**,
 - For 1.y, that is **1.14.z**
 - For 2.y, that is **2.3.z**
 
-In this document, Current refers to the latest X-series release.
+In this document, **Current** refers to the latest X-series release.
 
 Maintenance refers to the previous X-series release, including security and Sev1 defect patches.
 
@@ -24,7 +24,7 @@ Maintenance refers to the previous X-series release, including security and Sev1
 
 - Envoy releases a major version every 3 months and supports its previous releases for 12 months. Envoy does not support any release longer than 12 months.
 - Kubernetes 1.19 and newer receive 12 months of patch support (The [Kubernetes Yearly Support Period](https://github.com/kubernetes/enhancements/blob/master/keps/sig-release/1498-kubernetes-yearly-support-period/README.md)).
-- The version of Envoy used in Ambassador Edge Stack and Emmissary in 1.14 is out of support, meaning we currently backport security patches on behalf of Envoy to the 1.14 series as an Extended Maintenance window.
+- The version of Envoy used in Ambassador Edge Stack and Emissary in 1.14 is out of support, meaning we currently backport security patches on behalf of Envoy to the 1.14 series as an Extended Maintenance window.
 
 # The Policy
 
@@ -45,9 +45,8 @@ Maintenance refers to the previous X-series release, including security and Sev1
 
 ### When we say support with “defect patches”, what do we mean?
 
-- We will fix security issues in our Emmissary-ingress and Ambassador Edge Stack code
-- We will pick up security fixes from dependencies as they are made
-available
+- We will fix security issues in our Emissary-ingress and Ambassador Edge Stack code
+- We will pick up security fixes from dependencies as they are made available
 - We will not maintain forks of our major dependencies
 - We will not attempt our own back ports of critical fixes to dependencies which are out of support from their own communities
 
@@ -60,7 +59,5 @@ After September 2022, the current series will be 3.x, and the maintenance series
 ## Visual timeline representation
 
 ![Timeline](../images/timeline.png)
-
-### References
 
 - [Ambassador Labs Long Term Support (LTS) Policy Draft from May 2021](https://docs.google.com/document/d/1bsJVHz8nBlbehhIKeBy53yUc-oPHlTAj5hK9Pruto7I/edit)
