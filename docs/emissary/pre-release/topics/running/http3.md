@@ -22,7 +22,7 @@ To make $productName$ listen for HTTP/3 connections over the QUIC network protoc
 
 <Alert severity="info">
 The order of the elements within the `protocolStack` is important and should be configured as <code>["TLS", "HTTP", "UDP"]</code>.
-<Alert>
+</Alert>
 
 The `Listener` configured for HTTP/3 can be bound to the same address and port (<code>0.0.0.0:8443</code>) as the `Listener` that supports HTTP/2 and HTTP/1.1. This is not required but it allows $productName$ to inject the default `alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400` header into the responses returned over the TCP connection with no additional configuration needed.
 
@@ -82,7 +82,7 @@ spec:
     email: emissary@emissary.io
     authority: https://acme-v02.api.letsencrypt.org/directory
   tls:
-    # QUIC requires a minimum TLS version. 
+    # QUIC requires a minimum TLS version.
     min_tls_version: v1.3
     # Either protocol can be upgraded, but it's best to leverage http/2 when possible.
     alpn_protocols: h2,http/1.1
