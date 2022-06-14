@@ -159,7 +159,7 @@ items:
         body: >-
           Kubernetes Secrets that should contain an EC (Elliptic Curve) TLS Private Key are now properly validated.
         github:
-          - title: 4134
+          - title: '#4134'
             link: https://github.com/emissary-ingress/emissary/issues/4134
         docs: topics/running/tls#certificates-and-secrets
 
