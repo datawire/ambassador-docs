@@ -23,16 +23,17 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
 
 1. In your terminal, run the following command:
 
-    ```
-    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml && \
-    kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \
-    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml && \
-    kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
-    ```
+  <!-- TODO: fix the 1.14.4 use instead of $version$. The version variable is not properly expanded. -->
+  ```shell
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/1.14.4/aes-crds.yaml && \
+  kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/1.14.4/aes.yaml && \
+  kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
+  ```
 
 2. Determine the IP address or hostname of your cluster by running the following command:
 
-    ```
+    ```shell
     kubectl get -n ambassador service ambassador -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}"
     ```
 
@@ -96,7 +97,7 @@ In a typical configuration workflow, Custom Resource Definitions (CRDs) are used
 
 1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
-  ```
+  ```shell
   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/quickstart/qotm.yaml
   ```
 

@@ -40,6 +40,9 @@ Now is a great time to enhance your $productName$ experience and take advantage 
 
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
+<Alert severity="info">$productName$ is subject to the Ambassador Cloud connected clusters quota. To learn more about quota limits, see the 
+<a href="../../../cloud/latest/subscriptions/howtos/manage-my-subscriptions"> subscription management page</a></Alert>.
+
 ## 2. Routing traffic from the edge
 
 $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells $productName$ what port to listen on, and the `Mapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
