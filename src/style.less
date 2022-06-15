@@ -172,6 +172,10 @@ body {
           color: @blue;
           fill: @blue;
           text-decoration: none;
+
+          div {
+            background-color: @blue;
+          }
         }
       }
 
@@ -186,6 +190,10 @@ body {
         border-color: @blue;
         color: @blue;
         fill: @blue;
+
+        div {
+          background-color: @blue;
+        }
       }
     }
   }
@@ -284,6 +292,8 @@ body {
 
         &.docs__kubernetes-icon,
         &.docs__emissary-icon {
+          height: 70px;
+          width: 70px;
           margin-right: 10px;
         }
       }
@@ -597,11 +607,13 @@ body {
     &__version-icon {
       margin-right: 7px;
       fill: @grey-primary;
+      background-color: @grey-primary;
     }
 
     &__chevron-icon {
       margin-left: 8px;
       fill: @grey-primary;
+      background-color: @grey-primary;
       width: 20px;
       height: 20px;
     }
@@ -610,6 +622,7 @@ body {
       color: @blue;
       .docs__version-title__version-icon,
       .docs__version-title__chevron-icon {
+        background-color: @blue;
         fill: @blue;
       }
 
