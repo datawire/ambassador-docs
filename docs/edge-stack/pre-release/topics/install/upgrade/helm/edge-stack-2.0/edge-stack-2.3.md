@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/edge-stack-2.0/edge-stack-2.2">YAML-based
+  If you did not install with Helm, see the <a href="../../../yaml/edge-stack-2.0/edge-stack-2.3">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -70,7 +70,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
    helm repo add datawire https://app.getambassador.io
    helm repo update
    ```
-   
+
    Then, install $productName$ in the `$productNamespace$` namespace. If necessary for
    your installation (e.g. if you were running with `AMBASSADOR_SINGLE_NAMESPACE` set),
    you can choose a different namespace.

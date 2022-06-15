@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 1.14.X to $productName$ $version$ (Helm)
+# Upgrade $productName$ 1.14.X to $productName$ $version$ (YAML)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 1.14.X to $productName$ $version$. If
@@ -9,8 +9,8 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/edge-stack-1.14/edge-stack-2.2">YAML-based
+  This guide is written for upgrading an installation made without using Helm.
+  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-1.14/edge-stack-2.3">Helm-based
   upgrade instructions</a>.
 </Alert>
 
@@ -90,10 +90,9 @@ important caveats:
    running simultaneously, Ambassador Cloud could see conflicting information
    about your cluster.
 
-   The best way to avoid multiple agents when installing with Helm is to use
-   `--set emissary-ingress.agent.enabled=false` to tell Helm not to install a
-   new Agent with productName$ $version$. Once testing is done, you can switch
-   Agents safely.
+   The migration YAML used below to install $productName$ $version$ will not
+   install a duplicate agent. If you are building your own YAML, make sure not
+   to include a duplicate agent.
 
 6. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
 
@@ -175,51 +174,41 @@ Migration is an eight-step process:
    **in the same namespace as your existing $productName$ 1.14 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   <Alert severity="warning">
-     <b>Make sure that you set the <code>AES_ACME_LEADER_DISABLE</code> flag.</b> This prevents
-     $productName$ $version$ from trying to manage ACME, so that $productName$ 1.14 can
-     do it instead.
-   </Alert>
+   We publish three manifests for different namespaces. Use only the one that
+   matches the namespace into which you installed $productName$ 1.14:
 
-   Start by making sure that your `datawire` Helm repo is set correctly:
+   - [`aes-emissaryns-migration.yaml`] for the `emissary` namespace;
+   - [`aes-defaultns-migration.yaml`] for the `default` namespace; and
+   - [`aes-ambassadorns-migration.yaml`] for the `ambassador` namespace.
 
-   ```bash
-   helm repo delete datawire
-   helm repo add datawire https://app.getambassador.io
-   helm repo update
+   All three files are set up as follows:
+
+   - They set the `AES_ACME_LEADER_DISABLE` environment variable to prevent $productName$ $version$
+     from trying to manage ACME (leaving $productName$ 1.14 to do it instead).
+   - They do NOT set `AMBASSADOR_LABEL_SELECTOR`.
+   - They do NOT install the Ambassador Agent.
+   - They do NOT create an `AuthService` or a `RateLimitService`. It is very important that $productName$
+     $version$ not attempt to create these resources, as they are already provided for your $productName$
+     1.14 installation.
+
+   If any of these do not match your situation, download [`aes-ambassadorns-migration.yaml`] and edit it
+   as needed.
+
+   [`aes-emissaryns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml
+   [`aes-defaultns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-defaultns-migration.yaml
+   [`aes-ambassadorns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-migration.yaml
+
+   Assuming you're using the `ambassador` namespace, as was typical for $productName$ 1.14:
+
+   ```
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-migration.yaml && \
+   kubectl rollout status -n ambassador deployment/aes -w
    ```
 
-   Typically, $productName$ 1.14 was installed in the `ambassador` namespace. If you installed
-   $productName$ 1.14 in a different namespace, change the namespace in the commands below.
-
-   - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
-
-      ```bash
-      helm install -n ambassador \
-           --set emissary-ingress.agent.enabled=false \
-           --set rateLimit.create=false \
-           --set authService.create=false \
-           --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
-           edge-stack datawire/edge-stack && \
-      kubectl rollout status  -n ambassador deployment/edge-stack -w
-      ```
-
-   - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
-
-      ```bash
-      helm install -n ambassador \
-           --set emissary-ingress.agent.enabled=false \
-           --set rateLimit.create=false \
-           --set authService.create=false \
-           --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
-           --set emissary-ingress.env.AMBASSADOR_LABEL_SELECTOR="version-two=true" \
-           edge-stack datawire/edge-stack && \
-      kubectl rollout status -n ambassador deployment/edge-stack -w
-      ```
-
    <Alert severity="warning">
-    You must use the <a href="https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$"><code>$productHelmName$</code> Helm chart</a> for $productName$ $version$.
-    Do not use the <a href="https://artifacthub.io/packages/helm/datawire/ambassador/6.9.3"><code>ambassador</code> Helm chart</a>.
+     Make sure that <b>at most one</b> installation of $productName$ is running without setting
+     the <code>AES_ACME_LEADER_DISABLE</code> flag. This prevents collisions in trying to manage
+     ACME.
    </Alert>
 
 4. **Install `Listener`s and `Host`s as needed.**
@@ -306,7 +295,7 @@ Migration is an eight-step process:
 
    When you're ready to have $productName$ $version$ handle traffic on its own, switch
    your original $productName$ 1.14 Service to point to $productName$ $version$. Use
-   `kubectl edit service ambassador` and change the `selectors` to:
+   `kubectl edit -n ambassador service ambassador` and change the `selectors` to:
 
    ```
    app.kubernetes.io/instance: edge-stack
@@ -314,7 +303,7 @@ Migration is an eight-step process:
    profile: main
    ```
 
-   Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
+   Repeat using `kubectl edit -n ambassador service ambassador-admin` for the `ambassador-admin`
    Service.
 
 7. **Install the $productName$ $version$ Ambassador Agent.**
@@ -325,17 +314,11 @@ Migration is an eight-step process:
    kubectl scale -n ambassador deployment/ambassador-agent --replicas=0
    ```
 
-   Once that's done, install the new Agent. **Note that if you needed to set
-   `AMBASSADOR_LABEL_SELECTOR`, you must add that to this `helm upgrade` command.**
+   Once that's done, install the new Agent:
 
-   ```bash
-   helm upgrade -n ambassador \
-        --set emissary-ingress.agent.enabled=true \
-        --set rateLimit.create=false \
-        --set authService.create=false \
-        --set emissary-ingress.env.AES_ACME_LEADER_DISABLE=true \
-      $productHelmName$ datawire/$productHelmName$ && \
-   kubectl rollout status -n ambassador deployment/edge-stack -w
+   ```
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-agent.yaml && \
+   kubectl rollout status -n ambassador deployment/edge-stack-agent -w
    ```
 
 8. **Finally, enable ACME in $productName$ $version$.**
@@ -343,25 +326,18 @@ Migration is an eight-step process:
    First, scale the 1.14 Ambassador to 0:
 
    ```
-   kubectl scale -n ambassador deployment/ambassador --replicas=0
+   kubectl scale -n ambassador deployment/ambassador --replicase=0
    ```
 
-   Once that's done, enable ACME in $productName$ $version$. **Note that if you
-   needed to set `AMBASSADOR_LABEL_SELECTOR`, you must add that to this
-   `helm upgrade` command.**
+   Once that's done, enable ACME in $productName$ $version$:
 
    ```bash
-   helm upgrade -n ambassador \
-        --set emissary-ingress.agent.enabled=true \
-        --set rateLimit.create=false \
-        --set authService.create=false \
-        --set emissary-ingress.env.AES_ACME_LEADER_DISABLE= \
-      $productHelmName$ datawire/$productHelmName$ && \
-   kubectl rollout status -n ambassador deployment/edge-stack -w
+   kubectl set env -n ambassador deployment/aes AES_ACME_LEADER_DISABLE-
+   kubectl rollout status -n ambassador deployment/aes -w
    ````
 
 Congratulations! At this point, $productName$ $version$ is fully running, and
-it's safe to remove the old `ambassador` and `ambassador-agent` Deployments:
+it's safe to remove the `ambassador` and `ambassador-agent` Deployments:
 
 ```
 kubectl delete -n ambassador deployment/ambassador deployment/ambassador-agent
