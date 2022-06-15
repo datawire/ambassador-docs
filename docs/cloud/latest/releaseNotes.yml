@@ -38,6 +38,12 @@ items:
         image: './rbac.png'
         docs: './service-catalog/reference/access/'
         type: feature
+  - date: '2022-06-06'
+    notes: 
+      - title: 'Subscriptions'
+        body: "Monitor your teams current utilization of Ambassador Cloud.
+              Adjust your subscription according to your needs to get the best
+              Kubernetes developer experience."
   - date: '2022-04-11'
     notes:
       - title: 'Deployment Previews'
@@ -135,3 +141,4 @@ items:
         image: ./cloud-rollouts-beta.png
         docs: ../../argo/latest/quick-start/
         type: feature
+
