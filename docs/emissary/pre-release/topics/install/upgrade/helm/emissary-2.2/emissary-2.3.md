@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.1.X to $productName$ $version$ (YAML)
+# Upgrade $productName$ 2.2.X to $productName$ $version$ (Helm)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.1.0 or 2.1.1 to $productName$ $version$. If
+  This guide covers migrating from $productName$ 2.2.0 or 2.2.2 to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/emissary-2.1/emissary-2.2">Helm-based
+  This guide is written for upgrading an installation originally made using Helm.
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.2/emissary-2.3">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -22,7 +22,7 @@ Migration is a two-step process:
 1. **Install new CRDs.**
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
-   your cluster. This is mandatory during any upgrade of $productName$.
+   your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
@@ -45,16 +45,26 @@ Migration is a two-step process:
 
 2. **Install $productName$ $version$.**
 
-   After installing the new CRDs, upgrade $productName$ $version$.
-
-   <Alert severity="info">
-     Our <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml"><code>emissary-emissaryns.yaml</code></a> file
-     uses the `emissary` namespace, since this is the default for $productName$.
-     We also publish <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml"><code>emissary-defaultns.yaml</code></a> for the 
-     `default` namespace. For any other namespace, you should download one of these files and edit the namespaces manually.
-   </Alert>
+   After installing the new CRDs, use Helm to install $productName$ $version$. Start by
+   making sure that your `datawire` Helm repo is set correctly:
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml && \
-   kubectl rollout status  -n emissary deployment/emissary-ingress -w
+   helm repo delete datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
    ```
+
+   Then, update your $productName$ installation in the `$productNamespace$` namespace.
+   If necessary for your installation (e.g. if you were running with
+   `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
+
+   ```bash
+   helm upgrade -n $productNamespace$ \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status  -n $productNamespace$ deployment/emissary-ingress -w
+   ```
+
+   <Alert severity="warning">
+    You must use the <a href="https://artifacthub.io/packages/helm/datawire/emissary-ingress/$ossChartVersion$"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.
+    Do not use the <a href="https://artifacthub.io/packages/helm/datawire/ambassador/6.9.3"><code>ambassador</code> Helm chart</a>.
+   </Alert>

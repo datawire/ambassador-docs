@@ -25,18 +25,18 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$oss
 
 | If you're running.               | You can upgrade to                                                           |
 |----------------------------------|------------------------------------------------------------------------------|
-| $AESproductName$ 2.1.X           | [$AESproductName$ $version$](../upgrade/helm/edge-stack-2.1/edge-stack-2.2)  |
-| $AESproductName$ 2.0.X           | [$AESproductName$ $version$](../upgrade/helm/edge-stack-2.0/edge-stack-2.2)  |
-| $AESproductName$ 1.14.X          | [$AESproductName$ $version$](../upgrade/helm/edge-stack-1.14/edge-stack-2.2) |
+| $AESproductName$ 2.2.X           | [$AESproductName$ $version$](../upgrade/helm/edge-stack-2.2/edge-stack-2.3)  |
+| $AESproductName$ 2.0.X           | [$AESproductName$ $version$](../upgrade/helm/edge-stack-2.0/edge-stack-2.3)  |
+| $AESproductName$ 1.14.X          | [$AESproductName$ $version$](../upgrade/helm/edge-stack-1.14/edge-stack-2.3) |
 | $AESproductName$ prior to 1.14.X | [$AESproductName$ 1.14.X](../../../../1.14/topics/install/upgrading)         |
-| $OSSproductName$ $ossVersion$    | [$AESproductName$ $version$](../upgrade/helm/emissary-2.2/edge-stack-2.2)    |
+| $OSSproductName$ $ossVersion$    | [$AESproductName$ $version$](../upgrade/helm/emissary-2.3/edge-stack-2.3)    |
 
 ## If you installed $AESproductName$ manually by applying YAML
 
 | If you're running.               | You can upgrade to                                                           |
 |----------------------------------|------------------------------------------------------------------------------|
-| $AESproductName$ 2.1.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.1/edge-stack-2.2)  |
-| $AESproductName$ 2.0.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.0/edge-stack-2.2)  |
-| $AESproductName$ 1.14.X          | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-1.14/edge-stack-2.2) |
+| $AESproductName$ 2.2.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.2/edge-stack-2.3)  |
+| $AESproductName$ 2.0.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.0/edge-stack-2.3)  |
+| $AESproductName$ 1.14.X          | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-1.14/edge-stack-2.3) |
 | $AESproductName$ prior to 1.14.X | [$AESproductName$ 1.14.X](../../../../1.14/topics/install/upgrading)         |
-| $OSSproductName$ $ossVersion$    | [$AESproductName$ $version$](../upgrade/yaml/emissary-2.2/edge-stack-2.2)    |
+| $OSSproductName$ $ossVersion$    | [$AESproductName$ $version$](../upgrade/yaml/emissary-2.3/edge-stack-2.3)    |
