@@ -182,6 +182,60 @@ Based on the above example, GKE generates two `LoadBalancer`s, one for UDP and t
 
 GKE will generate two `LoadBalancers` for each service. One LoadBalancer for UDP and one that for TCP traffic.
 
+### Configuring an External Load Balancer for AKS
+
+To configure an External Load Balancer for Azure Kubernetes Service (AKS), one can use the following setup:
+
+1. Reserve a public static IP address.
+2. Create two services of type `LoadBalancer`, one for TCP and one for UDP.
+3. Assign the `loadBalancer` IP of the two services to the public static IP address.
+
+An example of the two load balancer services described above:
+
+```yaml
+# selectors and labels removed for clarity
+apiVersion: v1
+kind: Service
+metadata:
+  name: emissary-ingress
+  namespace: emissary
+spec:
+  type: LoadBalancer
+  loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 8443
+      protocol: TCP
+  ---
+  apiVersion: v1
+kind: Service
+metadata:
+  name: emissary-ingress-udp
+  namespace: emissary
+spec:
+  type: LoadBalancer
+  loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
+  ports:
+    - name: http3
+      port: 443  # Default support for HTTP/3 requires you to use 443 for the external client-facing port.
+      targetPort: 8443
+      protocol: UDP
+
+```
+
+Based on the above example, AKS generates two `LoadBalancer`s, one for UDP and the other for TCP.
+
+AKS will generate two `LoadBalancers` with the public IP addresss assigned to each. One LoadBalancer for UDP and one for TCP traffic.
+
+<Alert severity="info">
+Depending on how you create your AKS cluster you need to make sure that the Managed Identity or Serivce Principal has permissions to assign the IP address to the newly created LoadBalancers. See [Azure Docs - Managed Identity](https://docs.microsoft.com/en-us/azure/aks/use-managed-identity) for more information.
+</Alert>
+
 #### Alternate external load balancer setup
 
 ​
