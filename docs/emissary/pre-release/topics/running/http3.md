@@ -1,10 +1,10 @@
-# HTTP/3
+# HTTP/3 Overview in $productName$
 
 HTTP/3 is the third version of the Hypertext Transfer Protocol (HTTP). It is built on the [QUIC](https://www.chromium.org/quic/) network protocol rather than Transmission Control Protocol (TCP) like previous versions.
 
 ## The changes and challenges of HTTP/3
 
-Since QUIC network protocol is built on UDP it requires $productName$ to advertise its support for HTTP/3 using the `alt-svc` response header. This header is returned on the initial HTTP/2 and HTTP/1.1 responses. When a client sees the `alt-svc` it can choose to upgrade to HTTP/3 and connect to $productName$ using the QUIC protocol.
+Since the QUIC network protocol is built on UDP, it requires $productName$ to advertise its support for HTTP/3 using the `alt-svc` response header. This header is returned on the initial HTTP/2 and HTTP/1.1 responses. When a client sees the `alt-svc` it can choose to upgrade to HTTP/3 and connect to $productName$ using the QUIC protocol.
 
 QUIC requires Transport Layer Security (TLS) version 1.3 to communicate. Otherwise, the client will fall back to HTTP/2 or HTTP/1.1, which support other TLS versions. Due to this restriction, some clients will also require valid certificates, which causes problems when you use self-signed certs. For example, in Chrome it will not upgrade to http/3 traffic unless a valid certificate is present.
 ## Setting up HTTP/3 with $productName$
@@ -32,8 +32,8 @@ The `Listener` configured for HTTP/3 can be bound to the same address and port (
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
-  name: emissary-ingress-listener-8443
-  namespace: emissary
+  name: $productDeploymentName$-https-listener
+  namespace: $productNamespace$
 spec:
   port: 8443
   protocol: HTTPS
@@ -42,13 +42,13 @@ spec:
     namespace:
       from: ALL
 ---
-# This is a Listener that leverages UDP and HTTP to serve QUIC and HTTP/3 traffic.
+# This is a Listener that leverages UDP and HTTP to serve HTTP/3 traffic.
 # NOTE: Raw UDP traffic is not supported. UDP and HTTP must be used together.
 apiVersion: getambassador.io/v3alpha1
 kind: Listener
 metadata:
-  name: emissary-ingress-listener-udp-8443
-  namespace: emissary
+  name: $productDeploymentName$-https-listener-udp
+  namespace: $productNamespace$
 spec:
   port: 8443
   # Order is important here. UDP must be the last item, and HTTP is required.
@@ -76,10 +76,10 @@ kind: Host
 metadata:
   name: my-domain-host
 spec:
-  hostname: "emissary-ingress.isawesome.com"
+  hostname: your-hostname
   # acme isn't required but just shown as an example of how to manage a valid TLS cert
   acmeProvider:
-    email: emissary@emissary.io
+    email: your-email@example.com
     authority: https://acme-v02.api.letsencrypt.org/directory
   tls:
     # QUIC requires a minimum TLS version.
@@ -111,8 +111,8 @@ A typical `LoadBalancer` configuration is:
 apiVersion: v1
 kind: Service
 metadata:
-  name: emissary-ingress
-  namespace: emissary
+  name: $productDeploymentName$
+  namespace: $productNamespace$
 spec:
   ports:
     - name: http
@@ -147,8 +147,8 @@ An example of the two load balancer services described above:
 apiVersion: v1
 kind: Service
 metadata:
-  name: emissary-ingress
-  namespace: emissary
+  name: $productDeploymentName$
+  namespace: $productNamespace$
 spec:
   type: LoadBalancer
   loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
@@ -165,8 +165,8 @@ spec:
   apiVersion: v1
 kind: Service
 metadata:
-  name: emissary-ingress-udp
-  namespace: emissary
+  name: $productDeploymentName$-udp
+  namespace: $productNamespace$
 spec:
   type: LoadBalancer
   loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
@@ -197,8 +197,8 @@ An example of the two load balancer services described above:
 apiVersion: v1
 kind: Service
 metadata:
-  name: emissary-ingress
-  namespace: emissary
+  name: $productDeploymentName$
+  namespace: $productNamespace$
 spec:
   type: LoadBalancer
   loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
@@ -215,8 +215,8 @@ spec:
   apiVersion: v1
 kind: Service
 metadata:
-  name: emissary-ingress-udp
-  namespace: emissary
+  name: $productDeploymentName$-udp
+  namespace: $productNamespace$
 spec:
   type: LoadBalancer
   loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
@@ -247,14 +247,12 @@ Another option that doesn’t require you to pay for additional `LoadBalancer`s 
 apiVersion: v1
 kind: Service
 metadata:
-  name: emissary-ingress
-  namespace: emissary
+  name: $productDeploymentName$
+  namespace: $productNamespace$
 spec:
   type: NodePort
   ports:
     - name: http
-      port: 80
-      targetPort: 8080
       nodePort: 30080
       protocol: TCP
     - name: https
