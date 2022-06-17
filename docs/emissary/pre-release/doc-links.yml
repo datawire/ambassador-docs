@@ -83,6 +83,10 @@
                link: /howtos/istio
              - title: Linkerd 2 integration
                link: /howtos/linkerd2
+     - title: Set up support for HTTP/3
+       items:
+         - title: HTTP/3 with AWS
+           link: /howtos/http3/http3-aws
  - title: Technical reference
    items:
      - title: Custom resources
