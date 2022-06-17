@@ -17,7 +17,7 @@ const Argo = () => (
         alt="Argo"
         width="197"
         height="250"
-        loading='lazy'
+        loading="lazy"
       />{' '}
       Argo
     </h1>
@@ -27,7 +27,11 @@ const Argo = () => (
       className="docs__button-secondary docs__m-bottom-50"
     >
       Get Started{' '}
-      <Icon name="right-arrow" className="docs__button-secondary--arrow" />
+      <Icon
+        name="right-arrow"
+        mask={true}
+        className="docs__button-secondary--arrow"
+      />
     </Link>
     <div className="docs__cards">
       {ArgoCards.map((c) => (

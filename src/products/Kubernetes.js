@@ -22,7 +22,11 @@ const Kubernetes = () => (
       className="docs__button-secondary docs__m-bottom-50"
     >
       Get Started{' '}
-      <Icon name="right-arrow" className="docs__button-secondary--arrow" />
+      <Icon
+        name="right-arrow"
+        mask={true}
+        className="docs__button-secondary--arrow"
+      />
     </Link>
     <div className="docs__cards">
       {KubernetesCards.map((c) => (

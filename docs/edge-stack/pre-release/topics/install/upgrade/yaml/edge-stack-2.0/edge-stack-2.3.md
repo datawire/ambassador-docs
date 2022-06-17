@@ -1,23 +1,26 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.1.X to $productName$ $version$ (YAML)
+# Upgrade $productName$ 2.0.5 to $productName$ $version$ (YAML)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.1.0 or 2.1.1 to $productName$ $version$. If
+  This guide covers migrating from $productName$ 2.0.5 to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-2.1/edge-stack-2.2">Helm-based
+  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-2.0/edge-stack-2.3">Helm-based
   upgrade instructions</a>.
 </Alert>
 
-Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between minor
-versions is straightforward.
+<Alert severity="warning">
+  <b>Upgrading from $productName$ 2.0.5 to $productName$ $version$ typically requires downtime.</b>
+  In some situations, Ambassador Labs Support may be able to assist with a zero-downtime migration;
+  contact support with questions.
+</Alert>
 
-Migration is a two-step process:
+Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step process:
 
 1. **Install new CRDs.**
 
@@ -43,11 +46,28 @@ Migration is a two-step process:
      the <code>$productDeploymentName$-apiext</code> Deployment.
    </Alert>
 
-2. **Install $productName$ $version$.**
+2. **Delete $productName$ 2.0.5 Deployment.**
 
-   After installing the new CRDs, upgrade $productName$ $version$:
+   <Alert severity="warning">
+     Delete <b>only</b> the Deployment for $productName$ 2.0.5 in order to preserve all of
+     your existing configuration.
+   </Alert>
 
-   ```bash
+   Use `kubectl` to delete the Deployment for $productName$ 2.0.5. Typically, this will be found
+   in the `ambassador` namespace.
+
+   ```
+   kubectl delete -n ambassador deployment edge-stack
+   ```
+
+3. **Install $productName$ $version$.**
+
+   After installing the new CRDs, use Helm to install $productName$ $version$. This will install
+   in the `$productNamespace$` namespace. If necessary for your installation (e.g. if you were
+   running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can download `aes.yaml` and edit as
+   needed.
+
+   ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes.yaml && \
    kubectl rollout status -n $productNamespace$ deployment/edge-stack -w
    ```

@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.1.X to $productName$ $version$ (Helm)
+# Upgrade $productName$ 2.2.X to $productName$ $version$ (Helm)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.1.0 or 2.1.1 to $productName$ $version$. If
+  This guide covers migrating from $productName$ 2.2.0 or 2.2.2 to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation made using Helm.
-  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-2.1/edge-stack-2.2">YAML-based
+  This guide is written for upgrading an installation originally made using Helm.
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.2/emissary-2.3">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -25,7 +25,7 @@ Migration is a two-step process:
    your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
@@ -61,10 +61,10 @@ Migration is a two-step process:
    ```bash
    helm upgrade -n $productNamespace$ \
         $productHelmName$ datawire/$productHelmName$ && \
-   kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+   kubectl rollout status  -n $productNamespace$ deployment/emissary-ingress -w
    ```
 
    <Alert severity="warning">
-     You must use the <a href="https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
-     Do not use the <a href="https://artifacthub.io/packages/helm/datawire/ambassador/6.9.3"><code>ambassador</code> Helm chart</a>.
+    You must use the <a href="https://artifacthub.io/packages/helm/datawire/emissary-ingress/$ossChartVersion$"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.
+    Do not use the <a href="https://artifacthub.io/packages/helm/datawire/ambassador/6.9.3"><code>ambassador</code> Helm chart</a>.
    </Alert>
