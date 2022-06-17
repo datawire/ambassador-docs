@@ -6,9 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
+import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
 import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock';
-import HelmIcon from '../../../../../static/images/icons/helm.inline.svg';
-import KubernetesIcon from '../../../../../static/images/icons/kubernetes.inline.svg';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
