@@ -8,7 +8,7 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
 1. Create a network load balancer (NLB).
    The virtual private cloud (VPC) for your load balancer needs one public subnet in each availability zone where you have targets. You need the public subnets for where you want to add the network load balancer.
    ```shell
-   SUBNET_IDS={your-subnet1-id} {your-subnet2-id} {your-subnet3-id}
+   SUBNET_IDS=(<your-subnet1-id> <your-subnet2-id> <your-subnet3-id>)
 
    aws elbv2 create-load-balancer \
      --name ${CLUSTER_NAME}-nlb \
@@ -46,8 +46,8 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
 
 3. Run the following command, making sure to set the variables for your VPC ID and cluster name.
    ```shell
-   VPC_ID={your-vpc-id}
-   CLUSTER_NAME={your-cluster-name}
+   VPC_ID=<your-vpc-id>
+   CLUSTER_NAME=<your-cluster-name>
 
    aws elbv2 create-target-group --name ${CLUSTER_NAME}-tcp-tg \
      --protocol TCP --port 30080 --vpc-id ${VPC_ID} \
@@ -76,20 +76,20 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
    TCP_UDP_TG_NAME=${CLUSTER_NAME}-tcp-udp-tg-name
 
    aws elbv2 describe-target-groups \
-       --query 'TargetGroups[?TargetGroupName==`${TCP_TG_NAME}`].TargetGroupArn' \
+       --query 'TargetGroups[?TargetGroupName==`'${TCP_TG_NAME}'`].TargetGroupArn' \
        --output text
    aws elbv2 describe-target-groups \
-       --query 'TargetGroups[?TargetGroupName==`${TCP_UDP_TG_NAME}`].TargetGroupArn' \
+       --query 'TargetGroups[?TargetGroupName==`'${TCP_UDP_TG_NAME}'`].TargetGroupArn' \
        --output text
    ```
 
 6. Register the instances with the target groups and load balancer using the instance IDs and ARNs from the previous steps.
    ```shell
    # from Step - 4
-   INSTANCE_IDS={Id=i-07826.....} {Id=i-082fd....}
+   INSTANCE_IDS=(<Id=i-07826...> <Id=i-082fd...>)
    # from Step - 5
-   TCP_TG_ARN=arn:aws:elasticloadbalancing:{region}:079.....:targetgroup/{tg-name}/...
-   TCP_UDP_TG_ARN=arn:aws:elasticloadbalancing:{region}:079.....:targetgroup/{tg-name}/...
+   TCP_TG_ARN=arn:aws:elasticloadbalancing:<region>:079.....:targetgroup/<tg-name>/...
+   TCP_UDP_TG_ARN=arn:aws:elasticloadbalancing:<region>:079.....:targetgroup/<tg-name>/...
 
    aws elbv2 register-targets --target-group-arn ${TCP_TG_ARN} --targets ${INSTANCE_IDS}
    aws elbv2 register-targets --target-group-arn ${TCP_UDP_TG_ARN} --targets ${INSTANCE_IDS}
@@ -104,14 +104,14 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
      --output text
    ```
 
-   Create a TCP listener on port 80 that will forward to the TargetGroup {tcp-target-group}:
+   Create a TCP listener on port 80 that will forward to the TargetGroup `TCP_TG_ARN`:
    ```shell
    aws elbv2 create-listener --load-balancer-arn ${LB_ARN} \
      --protocol TCP --port 80 \
      --default-actions Type=forward,TargetGroupArn=${TCP_TG_ARN}
    ```
 
-   Create a TCP_UDP listener on port 443 that will forward to the TargetGroup {tcp-udp-target-group}:
+   Create a TCP_UDP listener on port 443 that will forward to the TargetGroup `TCP_UDP_TG_ARN`:
    ```shell
    aws elbv2 create-listener --load-balancer-arn ${LB_ARN} \
      --protocol TCP_UDP --port 443 \
@@ -188,9 +188,9 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
      name: $productDeploymentName$-aws-host
      namespace: $productNamespace$
    spec:
-     hostname: "your-hostname"
+     hostname: <your-hostname>
      acmeProvider:
-       email: "your-email@example.com"
+       email: <your-email>
        authority: https://acme-v02.api.letsencrypt.org/directory
      tls:
        min_tls_version: v1.3
@@ -219,7 +219,7 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
 
 13. Verify the connection to the quote of the moment service.
    ```shell
-   $ curl -i http://{your-hostname}/backend/
+   $ curl -i http://<your-hostname>/backend/
    ```
 
    Your domain now shows that it is being served with HTTP/3.
