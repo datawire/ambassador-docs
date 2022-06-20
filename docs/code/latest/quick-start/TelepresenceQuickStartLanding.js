@@ -1,15 +1,8 @@
-import { Link } from 'gatsby';
-import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
-
-
-
+import queryString from 'query-string';
+import Link from '../../../../../src/components/Link';
 import Icon from '../../../../../src/components/Icon';
-
-
-
 import './telepresence-quickstart-landing.less';
-
 
 /** @type React.FC<React.SVGProps<SVGSVGElement>> */
 const RightArrow = (props) => (

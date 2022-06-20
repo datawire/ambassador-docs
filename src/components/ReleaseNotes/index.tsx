@@ -1,6 +1,6 @@
-import { Link } from 'gatsby';
 import React, { useMemo } from 'react';
 
+import Link from '../../../../src/components/Link';
 import Release from './Release';
 
 const ReleaseNotes = ({
