@@ -34,11 +34,7 @@ const EdgeStack = () => {
         className="docs__button-secondary docs__m-bottom-50"
       >
         Get Started{' '}
-        <Icon
-          name="right-arrow"
-          mask={true}
-          className="docs__button-secondary--arrow"
-        />
+        <Icon name="right-arrow" className="docs__button-secondary--arrow" />
       </Link>
       <nav>
         <div className="docs__section-nav-content">

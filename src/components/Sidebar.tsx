@@ -99,13 +99,11 @@ const Sidebar: React.FC<ISidebarProps> = ({
             <Icon
               name="version-icon"
               className="docs__version-title__version-icon"
-              mask
             />
             Version: {version.name}
             <Icon
               name="chevron-down"
               className="docs__version-title__chevron-icon"
-              mask
             />
           </label>
           {isVersionOpen && (
