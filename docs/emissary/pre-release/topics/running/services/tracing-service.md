@@ -52,8 +52,8 @@ Please note that you must use the HTTP/2 pseudo-header names. For example:
 
 ### Zipkin driver configurations
 
-- `collector_endpoint` gives the API endpoint of the Zipkin service where the spans will be sent. The default value is `/api/v1/spans`
-- `collector_endpoint_version` gives the API version Envoy will use when sending data to your Zipkin collector. The default value is `HTTP_JSON_V1`
+- `collector_endpoint` gives the API endpoint of the Zipkin service where the spans will be sent. The default value is `/api/v2/spans`
+- `collector_endpoint_version` gives the transport version used when sending data to your Zipkin collector. The default value is `HTTP_JSON` and it must be one of `HTTP_JSON` or `HTTP_PROTO`.
 - `collector_endpoint_hostname` sets the hostname Envoy will use when sending data to your Zipkin collector. The default value is the name of the underlying Envoy cluster.
 - `trace_id_128bit` whether a 128-bit `trace id` will be used when creating a new trace instance. Defaults to `true`. Setting to `false` will result in a 64-bit trace id being used.
 - `shared_span_context` whether client and server spans will share the same `span id`. The default value is `true`.

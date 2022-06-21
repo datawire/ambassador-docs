@@ -38,24 +38,28 @@ items:
       - title: Upgrade to Envoy 1.22
         type: change
         body: >-
-          $productName$ has been upgraded to Envoy 1.22 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.22.0/version_history/current">Envoy Proxy 1.22.0 Release Notes</a>
+          $productName$ has been upgraded to the latest Envoy 1.22 patch release which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.22.0/version_history/current">Envoy Proxy 1.22.0 Release Notes</a>
 
-          This is a major jump in Envoy versions from the current of 1.17 in EdgeStack 2.X. Most of the changes are under the hood and allow  $productName$ to adopt new features in the future. However, one major change that will effect users is the removal of V2 Transport Protocol support. You can find a transition guide here:  <a href=""></a>
-
-      - title: Envoy V2 Transport Protocol API Support Removed
+          This is a major jump in Envoy versions from the current of 1.17 in EdgeStack 2.X. Most of the changes are under the hood and allow  $productName$ to adopt new features in the future. However, one major change that will effect users is the removal of V2 xDS Transport Protocol support. See below for additional information.
+      - title: Envoy V2 xDS Transport Protocol Support Removed
         type: change
         body: >-
-          Envoy removed support for V2 Transport Protocol which means $productName$ now only supports the Envoy V3 Transport Protocol. All AuthServices and LogServices will needed to be upgraded to V3.
+          Envoy removed support for V2 xDS Transport Protocol which means $productName$ now only supports the Envoy V3 xDS Transport Protocol. 
+          
+          User should first upgrade to $productName$ 2.3 prior to ensure that the `AuthService`s, `LogService`s and `RatelimitService`s are working properly by setting <code>protocol_version: "v3"</code>.
         docs: topics/running/services/auth-service/
-
-      - title: Initial HTTP/3 Downstream Support
+      - title: HTTP/3 Downstream Support
         type: feature
         body: >-
-          With the upgrade to Envoy, $productName$ is now able to provide downstream support for HTTP/3. The initial implementation supports exposing http/3 endpoints on port `443`. Future version of $productName$ will seek to provide additional configuration to support more scenarios.
+          With the upgrade to Envoy, $productName$ is now able to provide downstream support for HTTP/3.
 
-          HTTP/3 uses the Quic protocol over UDP. Changes to your cloud provider provisioned Load Balancer will be required to support UDP traffic if using HTTP/3. External Load Balancers must serve traffic on port <code>443</code> because the <code>alt-svc</code> header is not configurable in the initial release of the feature.
+          HTTP/3 is built on the QUIC protocol which communicates using the UDP network protocol. QUIC requires TLS v1.3 be used when communicating between client and server.
         docs: topics/running/http3
-
+      - title: Zipkin driver for TracingService removed support for HTTP_JSON_V1
+        type: change
+        body: >-
+          When using the <code>zipkin</code> driver for the TracingService. The <code>collector_endpoint_version</code> no longer accepts `HTTP_JSON_V1` due to the Envoy upgrade. The new default value is `HTTP_JSON`.
+        docs: topics/running/services/tracing-service/
   - version: 2.3.1
     date: '2022-06-10'
     notes:
