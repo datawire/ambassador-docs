@@ -98,9 +98,7 @@ To get your ARNs, enter the following command:
 
 Register the instances with the target groups and load balancer using the instance IDs and ARNs you retrieved.
    ```shell
-   # from Step - 4
    INSTANCE_IDS=(<Id=i-07826...> <Id=i-082fd...>)
-   # from Step - 5
    REGION=<your-region>
    TG_NAME=<your-tg-name>
    TCP_TG_ARN=arn:aws:elasticloadbalancing:${REGION}:079.....:targetgroup/${TG_NAME}/...
@@ -112,7 +110,6 @@ Register the instances with the target groups and load balancer using the instan
 
 ## Create listeners in AWS.
 
-Register your cluster's instance with the the instance IDs and ARNs. 
 
 To get the load balancer's ARN, enter the following command:
    ```shell
@@ -162,7 +159,6 @@ Enter the following command to get the DNS name for your load balancers and crea
 
 ## Create Listener resources 
 
-Now you need to create the `Listener` resources for $productName$. The first `Listener` in the example below handles traffic for HTTP/1.1 and HTTP/2, while the second listener handles all HTTP/3 traffic.
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -190,7 +186,6 @@ Now you need to create the `Listener` resources for $productName$. The first `Li
      namespace: $productNamespace$
    spec:
      port: 8443
-     # Order is important here. UDP must be the last item, and HTTP is required.
      protocolStack:
        - TLS
        - HTTP
@@ -204,7 +199,6 @@ Now you need to create the `Listener` resources for $productName$. The first `Li
 
 ## Create a Host resource
 
-Create a `Host` resources for your domain name.
    ```yaml
    kubectl apply -f - <<EOF
    apiVersion: getambassador.io/v3alpha1
