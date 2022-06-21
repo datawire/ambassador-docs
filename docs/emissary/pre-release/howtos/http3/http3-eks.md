@@ -110,6 +110,7 @@ Register the instances with the target groups and load balancer using the instan
 
 ## Create listeners in AWS.
 
+Register your cluster's instance with the instance IDs and ARNs. 
 
 To get the load balancer's ARN, enter the following command:
    ```shell
@@ -159,6 +160,7 @@ Enter the following command to get the DNS name for your load balancers and crea
 
 ## Create Listener resources 
 
+Now you need to create the `Listener` resources for $productName$. The first `Listener` in the example below handles traffic for HTTP/1.1 and HTTP/2, while the second `Listener` handles all HTTP/3 traffic.
 
    ```yaml
    kubectl apply -f - <<EOF
@@ -186,6 +188,7 @@ Enter the following command to get the DNS name for your load balancers and crea
      namespace: $productNamespace$
    spec:
      port: 8443
+     # Order is important here. UDP must be last item. HTTP is required.
      protocolStack:
        - TLS
        - HTTP
@@ -199,6 +202,7 @@ Enter the following command to get the DNS name for your load balancers and crea
 
 ## Create a Host resource
 
+Create a `Host` resource for your domain name.
    ```yaml
    kubectl apply -f - <<EOF
    apiVersion: getambassador.io/v3alpha1
