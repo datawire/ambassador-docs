@@ -44,9 +44,12 @@ items:
       - title: Envoy V2 xDS Transport Protocol Support Removed
         type: change
         body: >-
-          Envoy removed support for V2 xDS Transport Protocol which means $productName$ now only supports the Envoy V3 xDS Transport Protocol. 
-          
-          User should first upgrade to $productName$ 2.3 prior to ensure that the `AuthService`s, `LogService`s and `RatelimitService`s are working properly by setting <code>protocol_version: "v3"</code>.
+          Envoy removed support for V2 xDS Transport Protocol which means $productName$ now only supports the Envoy V3 xDS Transport Protocol.
+
+          User should first upgrade to $productName$ 2.3 prior to ensure that the <code>AuthService</code>s, <code>LogService</code>s and <code>RatelimitService</code>s are working properly by setting <code>protocol_version: "v3"</code>.
+
+          If <code>protocol_version</code> is not specified in 3.Y, the default  value of <code>v2</code> will cause an error to be posted and a static response will be returned. Therefore, you must set it to <code>protocol_version: v3</code>. If upgrading from a previous version, you will want  to set it to <code>v3</code> and ensure it is working before upgrading to Emissary-ingress 3.Y. The default value for <code>protocol_version</code> remains <code>v2</code> in the <code>getambassador.io/v3alpha1</code> CRD specifications to avoid making breaking changes outside of a CRD version change. Future versions of CRD's will deprecate it.
+
         docs: topics/running/services/auth-service/
       - title: HTTP/3 Downstream Support
         type: feature
