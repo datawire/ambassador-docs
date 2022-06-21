@@ -16,6 +16,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   Make sure that you have converted your External Filters to `protocol_version: "v3"` before upgrading.
+  If not set or set to `v2` then an error will be posted and a static response will be returned in $productName$ 3.Y.
 </Alert>
 
 Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between

@@ -75,7 +75,7 @@ spec:
 [buffer_flush_interval]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/access_loggers/grpc/v3/als.proto.html#extensions-access-loggers-grpc-v3-commongrpcaccesslogconfig
 [buffer_size_bytes]: https://www.envoyproxy.io/docs/envoy/latest/api-v3/extensions/access_loggers/grpc/v3/als.proto.html#extensions-access-loggers-grpc-v3-commongrpcaccesslogconfig
 
- - `protocol_version` Controls the gRPC service name used to communicate with the `LogService`.  Allowed values are `v2`, which uses the `envoy.service.auth.v2.Authorization` service name; and `v3`, which uses the `envoy.service.auth.v3.Authorization` service name.  `v3` cannot be used with [the `AMBASSADOR_ENVOY_API_VERSION=V2` environment variable](../../running/#ambassador_envoy_api_version).
+ - `protocol_version` was used in previous versions of $productName$ to control the gRPC service name used to communicate with the `LogService`. $productName$ 3.x is running an updated version of Envoy that has dropped support for the `v2` protocol, so starting in 3.x, if `protocol_version` is not specified, the default  value of `v2` will cause an error to be posted and a static response will be returned. Therefore, you must set it to `protocol_version: v3`. If upgrading from a previous version, you will want  to set it to `v3` and ensure it is working before upgrading to Emissary-ingress 3.Y. The default value for `protocol_version` remains `v2` in the `getambassador.io/v3alpha1` CRD specifications to avoid making breaking changes outside of a CRD version change. Future versions of CRD's will deprecate it.
 
 ## Example
 
