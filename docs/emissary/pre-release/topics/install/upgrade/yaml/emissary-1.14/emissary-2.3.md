@@ -264,33 +264,6 @@ Migration is a seven-step process:
    Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
    Service.
 
-7. **Finally, install the $productName$ $version$ Ambassador Agent.**
-
-   First, scale the 1.14 agent to 0:
-
-   ```
-   kubectl scale -n default deployment/ambassador-agent --replicas=0
-   ```
-
-   Once that's done, install the new Agent into the same namespace as your
-   Emissary deployment. Again, we supply two files for two different
-   namespaces: use only the one that matches the namespace into which you
-   installed $productName$ 1.14.
-
-   - [`emissary-emissaryns-agent.yaml`] for the `emissary` namespace; or
-   - [`emissary-defaultns-agent.yaml`] for the `default` namespace.
-
-   If you installed $productName$ 1.14 into some other namespace, you'll need to
-   download one of the files and edit it to match your namespace.
-
-   [`emissary-emissaryns-agent.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns-agent.yaml
-   [`emissary-defaultns-agent.yaml`]: https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns-agent.yaml
-
-   Assuming that you're using the `default` namespace:
-
-   ```
-   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns-agent.yaml
-   ```
 
 Congratulations! At this point, $productName$ $version$ is fully running and it's safe to remove the `ambassador` and `ambassador-agent` Deployments:
 
