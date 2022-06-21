@@ -85,8 +85,14 @@
                link: /howtos/linkerd2
      - title: Set up support for HTTP/3
        items:
+         - title: HTTP3 setup in $productName$
+           link: /topics/running/http3
+         - title: HTTP/3 with AKS
+           link: /howtos/http3/http3-aks
          - title: HTTP/3 with AWS
-           link: /howtos/http3/http3-aws
+           link: /howtos/http3/http3-eks
+         - title: HTTP/3 with GKE
+           link: /howtos/http3/http3-gke
  - title: Technical reference
    items:
      - title: Custom resources
@@ -127,8 +133,6 @@
        items:
          - title: Gateway API
            link: /topics/using/gateway-api
-     - title: HTTP3
-       link: /topics/running/http3
      - title: Ingress and load balancing
        items:
          - title: The Mapping resource
