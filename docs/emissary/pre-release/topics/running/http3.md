@@ -6,28 +6,24 @@ HTTP/3 is the third version of the Hypertext Transfer Protocol (HTTP). It is bui
 
 Since the QUIC network protocol is built on UDP, most clients will require $productName$ to advertise its support for HTTP/3 using the `alt-svc` response header. This header is added to the response of the HTTP/2 and HTTP/1.1 connections. When the client sees the `alt-svc` it can choose to upgrade to HTTP/3 and connect to $productName$ using the QUIC protocol.
 
-QUIC requires Transport Layer Security (TLS) version 1.3 to communicate. Otherwise, the $productName$ will fall back to HTTP/2 or HTTP/1.1, which support other TLS versions if client does not support TLS v1.3. Due to this restriction, some clients will also require valid certificates, which causes problems when you use self-signed certificates. For example, in Chrome it will not upgrade to http/3 traffic unless a valid certificate is present.
+
+Because HTTP/3 adoption is still growing and and changing, the $productName$ team will continue update this documentation as features change and mature.
+
 ## Setting up HTTP/3 with $productName$
 
-To configure $productName$ for HTTP/3 you will need to do the following:
 
-1. Configure `Listener`s.
 2. Configure a `Host`.
 3. Have a valid certificate.
 4. Setup an external load balancer.
 
-### Configure `Listener`s
 
 To make $productName$ listen for HTTP/3 connections over the QUIC network protocol, you need to configure a `Listener` with `TLS`, `HTTP`, and `UDP` configured within `protocolStack`.
 
 <Alert severity="info">
-The order of the elements within the `protocolStack` is important and should be configured as <code>["TLS", "HTTP", "UDP"]</code>.
 </Alert>
 
-The `Listener` configured for HTTP/3 can be bound to the same address and port (<code>0.0.0.0:8443</code>) as the `Listener` that supports HTTP/2 and HTTP/1.1. This is not required but it allows $productName$ to inject the default `alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400` header into the responses returned over the TCP connection with no additional configuration needed. **Most clients such as browsers will require the alt-svc header to upgrade to HTTP/3**.
 
 <Alert severity="info">
-The current default of `alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400` means that the external load balancer must be configured to accept traffic on port `:443` for the client to be able to upgrade the request.</code>.
 </Alert>
 
 ```yaml
@@ -55,7 +51,6 @@ metadata:
   namespace: $productNamespace$
 spec:
   port: 8443
-  # Order is important here. UDP must be the last item, and HTTP is required.
   protocolStack:
     - TLS
     - HTTP
@@ -66,13 +61,9 @@ spec:
       from: ALL
 ```
 
-### Configure a `Host`
 
-Because the QUIC network requires TLS, the certificate needs to be valid so that the client can upgrade a connection to HTTP/3. See the [Host documentation](./host-crd.md) for more information on how to configure TLS for a `Host`.
 
 ### Certificate verification
-​
-Clients can only upgrade to a HTTP/3 connection with a valid certificate. If the client won’t upgrade to HTTP/3, verify that you have a valid TLS certificate and that your client can speak **TLS v1.3**. An example `Host`:
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
@@ -86,14 +77,10 @@ spec:
     email: your-email@example.com
     authority: https://acme-v02.api.letsencrypt.org/directory
   tls:
-    # QUIC requires TLS v1.3 version, verify your client supports it.
     min_tls_version: v1.3
-    # Either protocol can be upgraded, but http/2 is recommended
     alpn_protocols: h2,http/1.1
 ```
 
-### External Load Balancers
-​
 The two most common service types to expose traffic outside of a Kubernetes cluster are:
 
 - `LoadBalancer`: A load balancer controller generates and manages the cloud provider-specific external load balancer.
@@ -101,15 +88,7 @@ The two most common service types to expose traffic outside of a Kubernetes clus
 
 #### LoadBalancer setup
 
-The desired setup would be to configure a single service of type `LoadBalancer`, but this comes with some current restrictions.
 
-First, you need a recent version of Kubernetes with the [`MixedProtocolLBService` feature enabled](https://kubernetes.io/docs/concepts/services-networking/service/#load-balancers-with-mixed-protocol-types).
-​
-Second, your cloud service provider needs to support the creation of an external load balancer with mixed protocol types (TCP/UDP), port reuse and port forwarding. Support for Kubernetes feature flags may vary between cloud service providers. Refer to your provider’s documentation to see if they support this scenario.
-
-<Alert severity="info"> The $productName$ team will continue to track and document Kubernetes and Cloud Provider support for these features as they mature.</Alert>
-
-An ideal `LoadBalancer` configuration is:
 
 ```yaml
 
@@ -136,146 +115,5 @@ spec:
   type: LoadBalancer
 ```
 
-If your on an older version Kubernetes or your cloud provider doesn't support this setup then see below for alternative setups.
 
-### Configuring an External Load Balancer for GKE
 
-Currently, Google Kubernetes Engine (GKE) only supports adding feature flags to `alpha` clusters and doesn't support creating mixed protocol service's of type `LoadBalancer`. To configure an External Load Balancer for GKE, one can use the following setup:
-
-1. Reserve a public static IP address.
-2. Create two LoadBalancer services, one for TCP and one for UDP.
-3. Assign both services the `loadBalancer` IP of the static IP Address from step 1
-
-An example of the two load balancer services described above:
-
-```yaml
-# selectors and labels removed for clarity
-apiVersion: v1
-kind: Service
-metadata:
-  name: $productDeploymentName$
-  namespace: $productNamespace$
-spec:
-  type: LoadBalancer
-  loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-      protocol: TCP
-    - name: https
-      port: 443
-      targetPort: 8443
-      protocol: TCP
-  ---
-  apiVersion: v1
-kind: Service
-metadata:
-  name: $productDeploymentName$-udp
-  namespace: $productNamespace$
-spec:
-  type: LoadBalancer
-  loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
-  ports:
-    - name: http3
-      port: 443  # Default support for HTTP/3 requires you to use 443 for the external client-facing port.
-      targetPort: 8443
-      protocol: UDP
-
-```
-
-GKE will generate two `LoadBalancers` for each service. One LoadBalancer for UDP and one that for TCP traffic.
-
-### Configuring an External Load Balancer for AKS
-
-To configure an External Load Balancer for Azure Kubernetes Service (AKS), one can use the following setup:
-
-1. Reserve a public static IP address.
-2. Create two services of type `LoadBalancer`, one for TCP and one for UDP.
-3. Assign the `loadBalancer` IP of the two services to the public static IP address.
-
-An example of the two load balancer services described above:
-
-```yaml
-# selectors and labels removed for clarity
-apiVersion: v1
-kind: Service
-metadata:
-  name: $productDeploymentName$
-  namespace: $productNamespace$
-spec:
-  type: LoadBalancer
-  loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-      protocol: TCP
-    - name: https
-      port: 443
-      targetPort: 8443
-      protocol: TCP
-  ---
-  apiVersion: v1
-kind: Service
-metadata:
-  name: $productDeploymentName$-udp
-  namespace: $productNamespace$
-spec:
-  type: LoadBalancer
-  loadBalancerIP: xx.xx.xx.xx # Enter your public static IP address here.
-  ports:
-    - name: http3
-      port: 443  # Default support for HTTP/3 requires you to use 443 for the external client-facing port.
-      targetPort: 8443
-      protocol: UDP
-
-```
-
-AKS will generate two `LoadBalancers` with the public IP addresss assigned to each. One LoadBalancer for UDP and one for TCP traffic.
-
-<Alert severity="info">
-Depending on how you create your AKS cluster you need to make sure that the Managed Identity or Serivce Principal has permissions to assign the IP address to the newly created LoadBalancers. See [Azure Docs - Managed Identity](https://docs.microsoft.com/en-us/azure/aks/use-managed-identity) for more information.
-</Alert>
-
-#### Alternate external load balancer setup
-
-Another option that doesn’t require two cloud providers load balancers is to use a `NodePort` service as follows:
-​
-
-```yaml
-# Selectors and labels removed for clarity.
-apiVersion: v1
-kind: Service
-metadata:
-  name: $productDeploymentName$
-  namespace: $productNamespace$
-spec:
-  type: NodePort
-  ports:
-    - name: http
-      nodePort: 30080
-      protocol: TCP
-    - name: https
-      port: 443
-      targetPort: 8443
-      nodePort: 30443
-      protocol: TCP
-    - name: http3
-      port: 443
-      targetPort: 8443
-      nodePort: 30443
-      protocol: UDP
-```
-
-This exposes the traffic on a static port for each node in the cluster.
-​
-Now a platform administrator can configure an external load balancer. The following would need to be configured:
-​
-
-1. Create an external load balancer that sends UDP and TCP traffic
-2. Ensure client port is forwarded to exposed NodePort (`80:30080` and `443:30443`)
-3. Configure firewall rules to allow traffic between load balancer and cluster nodes
-4. Configure health checks between the external load balancer and Nodes in the `NodePort`.
-
-An example of doing this in AWS can be found here: [How-to setup HTTP/3 in AWS]("howtos/http3/http3-aws/").

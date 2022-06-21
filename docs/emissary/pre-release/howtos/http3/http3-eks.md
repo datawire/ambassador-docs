@@ -1,12 +1,15 @@
+---
+description: "How to configure HTTP/3 support for Amazon Elastic Kubernetes Service (EKS). This guide shows how to setup the LoadBalancer service for EKS to support both TCP and UDP communications."
+---
 
-# HTTP/3 in $productName$ 3.x with AWS
+# Amazon Elastic Kubernetes Service HTTP/3 configuration
 
-This guide outlines the steps required to configure Amazon Elastic Kubernetes Service for HTTP/3 using an existing installation of $productName$.
-For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3 Overview in $productName$](../../../topics/running/http3)
+TThis guide shows how to setup HTTP/3 support for Amazon Elastic Kubernetes Service (EKS) The instructions provided in this page are a continuation of the [HTTP/3 in $productName$](../../../topics/running/http3) documentation.
 
+## Create a network load balancer (NLB)
 
-1. Create a network load balancer (NLB).
-   The virtual private cloud (VPC) for your load balancer needs one public subnet in each availability zone where you have targets. You need the public subnets for where you want to add the network load balancer.
+ The virtual private cloud (VPC) for your load balancer needs one public subnet in each availability zone where you have targets. 
+
    ```shell
    SUBNET_IDS=(<your-subnet1-id> <your-subnet2-id> <your-subnet3-id>)
 
@@ -16,7 +19,9 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
      --subnets ${SUBNET_IDS}
    ```
 
-2. Create a new `NodePort` service for your $productName$ installation with two entries using `port: 443` in order to support TCP and UDP traffic.
+## Create a NodePort service 
+
+Now create a `NodePort` service for $productName$ installation with two entries. Use `port: 443` to include support for both TCP and UDP traffic.
    ```yaml
    # Selectors and labels removed for clarity.
    apiVersion: v1
@@ -44,7 +49,10 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
        nodePort: 30443
    ```
 
-3. Run the following command, making sure to set the variables for your VPC ID  and cluster name.
+## Create target groups
+
+Run the following command with the variables for your VPC ID and cluster name:
+
    ```shell
    VPC_ID=<your-vpc-id>
    CLUSTER_NAME=<your-cluster-name>
@@ -62,7 +70,11 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
      --target-type instance
    ```
 
-4. Get the cluster's instance IDs.
+## Register your instances
+
+Next, register your cluster's instance with the the instance IDs and Amazon Resource Names (ARN). 
+
+To get your cluster's instance IDs, enter the following command:
    ```shell
    aws ec2 describe-instances \
      --filters Name=tag:eks:cluster-name,Values=${CLUSTER_NAME} \
@@ -70,7 +82,7 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
      --query 'Reservations[*].Instances[*].InstanceId' \
    ```
 
-5. Get the new target groups' ARNs.
+To get your ARNs, enter the following command:
    ```shell
    TCP_TG_NAME=${CLUSTER_NAME}-tcp-tg-name
    TCP_UDP_TG_NAME=${CLUSTER_NAME}-tcp-udp-tg-name
@@ -83,7 +95,7 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
        --output text
    ```
 
-6. Register the instances with the target groups and load balancer using the instance IDs and ARNs from the previous steps.
+Register the instances with the target groups and load balancer using the instance IDs and ARNs you retrieved.
    ```shell
    # from Step - 4
    INSTANCE_IDS=(<Id=i-07826...> <Id=i-082fd...>)
@@ -97,36 +109,39 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
    aws elbv2 register-targets --target-group-arn ${TCP_UDP_TG_ARN} --targets ${INSTANCE_IDS}
    ```
 
-7. Create listeners in AWS.
+## Create listeners in AWS.
 
-   Get the load balancer's arn:
+Register your cluster's instance with the the instance IDs and ARNs. 
+
+To get the load balancer's ARN, enter the following command:
    ```shell
    aws elbv2 describe-load-balancers --name ${CLUSTER_NAME}-nlb \
      --query 'LoadBalancers[0].LoadBalancerArn' \
      --output text
    ```
 
-   Create a TCP listener on port 80 that will forward to the TargetGroup {TCP_TG_ARN}:
+Create a TCP listener on port 80 that that forwards to the TargetGroup {TCP_TG_ARN}.
    ```shell
    aws elbv2 create-listener --load-balancer-arn ${LB_ARN} \
      --protocol TCP --port 80 \
      --default-actions Type=forward,TargetGroupArn=${TCP_TG_ARN}
    ```
 
-   Create a TCP_UDP listener on port 443 that will forward to the TargetGroup {TCP_UDP_TG_ARN}:
+   Create a TCP_UDP listener on port 443 that forwards to the TargetGroup {TCP_UDP_TG_ARN}.
    ```shell
    aws elbv2 create-listener --load-balancer-arn ${LB_ARN} \
      --protocol TCP_UDP --port 443 \
      --default-actions Type=forward,TargetGroupArn=${TCP_UDP_TG_ARN}
    ```
 
-8. Update the security groups to receive traffic.
-   this security group is created by eksctl and covers all the node groups attached to the eks cluster.
+## Update the security groups 
+
+Now you need to update your security groups to receive traffic. This security group covers all node groups attached to the EKS cluster:
    ```shell
    aws eks describe-cluster --name ${CLUSTER_NAME} | grep clusterSecurityGroupId
    ```
 
-   Use the cluster security group in this step to allow internet traffic:
+Now authorize the cluster security group to allow internet traffic:
    ```shell
    for x in ${CLUSTER_SG}; do \
      aws ec2 authorize-security-group-ingress --group-id $$x --protocol tcp --port 30080 --cidr 0.0.0.0/0; \
@@ -135,14 +150,19 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
    done
    ```
 
-9. Get the DNS name for the load balancers and create a CNAME record at your domain provider.
+## Get the DNS name for the load balancers
+
+Enter the following command to get the DNS name for your load balancers and create a CNAME record at your domain provider:
    ```shell
    aws elbv2 describe-load-balancers --name ${CLUSTER_NAME}-nlb \
      --query 'LoadBalancers[0].DNSName' \
      --output text
    ```
 
-10. Create `Listeners` for $productName$.
+## Create Listener resources 
+
+Now you need to create the `Listener` resources for $productName$. The first `Listener` in the example below handles traffic for HTTP/1.1 and HTTP/2, while the second listener handles all HTTP/3 traffic.
+
    ```yaml
    kubectl apply -f - <<EOF
    # This is a standard Listener that leverages TCP to serve HTTP/2 and HTTP/1.1 traffic.
@@ -181,7 +201,9 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
    EOF
    ```
 
-11. Create a `Host` for your domain name.
+## Create a Host resource
+
+Create a `Host` resources for your domain name.
    ```yaml
    kubectl apply -f - <<EOF
    apiVersion: getambassador.io/v3alpha1
@@ -202,7 +224,10 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
    EOF
    ```
 
-12. Apply the quote service and a `Mapping` to test the HTTP/3 configuration.
+## Apply the quote service and a Mapping to test the HTTP/3 configuration.
+
+Finally, apply the quote service to a $productName$ `Mapping`.
+
    ```shell
    kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$version$/quickstart/qotm.yaml
    kubectl apply -f - <<EOF
@@ -220,9 +245,9 @@ For an overview of HTTP/3 support in $productName$ and requirements, see [HTTP/3
    EOF
    ```
 
-13. Verify the connection to the quote of the moment service.
+Now verify the connection:
+
    ```shell
    $ curl -i http://<your-hostname>/backend/
    ```
-
-   Your domain now shows that it is being served with HTTP/3.
+Your domain now shows that it is being served with HTTP/3.
