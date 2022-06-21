@@ -40,18 +40,23 @@ items:
         body: >-
           $productName$ has been upgraded to Envoy 1.22 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.22.0/version_history/current">Envoy Proxy 1.22.0 Release Notes</a>
 
-          This is a major jump in Envoy versions from the current of 1.17 in EdgeStack 2.X. Most of the changes are under the hood and allow  $productName$ to adopt new features in the future. However, one major change that will effect users is the removal of V2 Transport Protocol support. You can find a transition guide here:  <a href=""></a>
+          This is a major jump in Envoy versions from the current of 1.17 in EdgeStack 2.X. Most of the changes are under the hood and allow  $productName$ to adopt new features in the future.
+        docs: /about/changes-3.y
 
-      - title: Envoy V2 Transport Protocol API Support Removed
+      - title: Envoy V2 xDS Transport Protocol Support Removed
         type: change
         body: >-
-          Envoy removed support for V2 Transport Protocol which means $productName$ now only supports the Envoy V3 Transport Protocol. All external filters and LogServices will needed to be upgraded to V3.
-        docs: topics/using/filters/external
+          With the ugprade to Envoy 1.22, support for the V2 xDS Transport Protocol was removed which means $productName$ now only supports the Envoy V3 xDS Transport Protocol.
+
+          Users should first upgrade to $productName$ 2.3 to ensure that the <code>LogService</code>s and External <code>Filter</code>s are working properly by setting <code>protocol_version: v3</code>.
+
+          The <code>AuthService</code>, <code>LogService</code>, <code>RateLimitService</code>, and External <code>Filter</code> will only support the <code>v3</code> protocol version. If <code>protocol_version</code> is not specified, the default value of <code>v2</code> will cause an error to be posted. Therefore, you will need to set it to <code>protocol_version: v3</code>. If upgrading from a previous version you will want to set it to <code>v3</code> and ensure it is working before upgrading to $productName$ 3.Y. Future versions of CRD's will deprecate it.
+        docs: /about/changes-3.y
 
       - title: Initial HTTP/3 Downstream Support
         type: feature
         body: >-
-          With the upgrade to Envoy, $productName$ is now able to provide downstream support for HTTP/3. The initial implementation supports exposing http/3 endpoints on port `443`. Future version of $productName$ will seek to provide additional configuration to support more scenarios.
+          With the upgrade to Envoy, $productName$ is now able to provide downstream support for HTTP/3. The initial implementation supports exposing http/3 endpoints on port <code>443</code>. Future version of $productName$ will seek to provide additional configuration to support more scenarios.
 
           HTTP/3 uses the Quic protocol over UDP. Changes to your cloud provider provisioned Load Balancer will be required to support UDP traffic if using HTTP/3. External Load Balancers must serve traffic on port <code>443</code> because the <code>alt-svc</code> header is not configurable in the initial release of the feature.
         docs: topics/running/http3

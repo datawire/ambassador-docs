@@ -15,8 +15,8 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  Make sure that you have updated any `AuthService`s, `LogService`s and `RateLimitService`s to use
-  `protocol_version: "v3"` or else they will no longer work properly in $version$.
+  Make sure that you have updated any <code>AuthService</code>s, <code>LogService</code>s and <code>RateLimitService</code>s to use
+  <code>protocol_version: "v3"</code> or else an error will be posted and a static response will be returned in $version$.
 </Alert>
 
 Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between minor

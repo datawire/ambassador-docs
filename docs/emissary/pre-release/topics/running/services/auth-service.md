@@ -57,7 +57,7 @@ spec:
     code: 403
   failure_mode_allow: false
 
-  # proto: grpc only, ony v3 is supported and other versions will be ignored
+  # proto: grpc only, default is v2. If upgrading from 2.x then you must set this to v3.
   protocol_version: v3
 
   # proto: http only
@@ -95,7 +95,7 @@ ignored if `proto` is `http`.
 
 | Attribute          | Default value | Description                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `protocol_version` | `v3`          | Controls the gRPC protocol_version used by the `AuthService`.  Allowed values are `v3`, which uses the `envoy.service.auth.v3.Authorization` service name.  `v2` support was removed and will be ignored. Future versions of CRD's will deprecate it. |
+| `protocol_version` | `v3`          | Allowed values are `v3` and `v2`(defualt). `protocol_version` was used in previous versions of $productName$ to control the protocol used by the gRPC service. $productName$ 3.x is running an updated version of Envoy that has dropped support for the `v2` protocol, so starting in 3.x, if `protocol_version` is not specified, the default  value of `v2` will cause an error to be posted and a static response will be returned. Therefore, you must set it to `protocol_version: v3`. If upgrading from a previous version, you will want  to set it to `v3` and ensure it is working before upgrading to Emissary-ingress 3.Y. The default value for `protocol_version` remains `v2` in the `getambassador.io/v3alpha1` CRD specifications to avoid making breaking changes outside of a CRD version change. Future versions of CRD's will deprecate it. |
 
 The following fields are only used if `proto` is set to `http`.  They
 are ignored if `proto` is `grpc`.
