@@ -5,7 +5,7 @@ description: "How to configure HTTP/3 support for Amazon Elastic Kubernetes Serv
 
 # Amazon Elastic Kubernetes Service HTTP/3 configuration
 
-TThis guide shows how to setup HTTP/3 support for Amazon Elastic Kubernetes Service (EKS) The instructions provided in this page are a continuation of the [HTTP/3 in $productName$](../../../topics/running/http3) documentation.
+This guide shows how to setup HTTP/3 support for Amazon Elastic Kubernetes Service (EKS) The instructions provided in this page are a continuation of the [HTTP/3 in $productName$](../../../topics/running/http3) documentation.
 
 ## Create a network load balancer (NLB)
 
