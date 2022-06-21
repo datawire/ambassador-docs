@@ -1,4 +1,9 @@
-# HTTP/3 Overview in $productName$
+---
+title: "HTTP/3 configuration in $productName$"
+description: "Configure HTTP/3 support with $productName$. Create services to handle UDP and TCP traffic and setup HTTP/3 with your cloud service provider."
+---
+
+# HTTP/3 in $productName$
 
 HTTP/3 is the third version of the Hypertext Transfer Protocol (HTTP). It is built on the [QUIC](https://www.chromium.org/quic/) network protocol rather than Transmission Control Protocol (TCP) like previous versions.
 
@@ -6,24 +11,31 @@ HTTP/3 is the third version of the Hypertext Transfer Protocol (HTTP). It is bui
 
 Since the QUIC network protocol is built on UDP, most clients will require $productName$ to advertise its support for HTTP/3 using the `alt-svc` response header. This header is added to the response of the HTTP/2 and HTTP/1.1 connections. When the client sees the `alt-svc` it can choose to upgrade to HTTP/3 and connect to $productName$ using the QUIC protocol.
 
+QUIC requires Transport Layer Security (TLS) version 1.3 to communicate. Otherwise, $productName$ will fall back to HTTP/2 or HTTP/1.1, both of which support other TLS versions if client does not support TLS v1.3. Due to this restriction, some clients also require valid certificatesand will not upgrade to HTTP/3 traffic with self-signed certificates.
 
 Because HTTP/3 adoption is still growing and and changing, the $productName$ team will continue update this documentation as features change and mature.
 
 ## Setting up HTTP/3 with $productName$
 
+To configure $productName$ for HTTP/3 you need to do the following:
 
+1. Configure `Listener` resources.
 2. Configure a `Host`.
 3. Have a valid certificate.
 4. Setup an external load balancer.
 
+### Configuring the Listener resources
 
 To make $productName$ listen for HTTP/3 connections over the QUIC network protocol, you need to configure a `Listener` with `TLS`, `HTTP`, and `UDP` configured within `protocolStack`.
 
 <Alert severity="info">
+The <code>protocolStack</code> elements need to be entered in the specific order of <code>TLS, HTTP, UDP.</code>
 </Alert>
 
+The `Listener` configured for HTTP/3 can be bound to the same address and port (`0.0.0.0:8443`) as the `Listener` that supports HTTP/2 and HTTP/1.1. This is not required, but it allows $productName$ to inject the default `alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400` header into the responses returned over the TCP connection with no additional configuration needed. **Most clients such as browsers require the `alt-svc` header to upgrade to HTTP/3**.
 
 <Alert severity="info">
+The current default of `alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400` means that the external load balancer must be configured to accept traffic on port `:443` for the client to upgrade the request.</code>.
 </Alert>
 
 ```yaml
@@ -51,6 +63,7 @@ metadata:
   namespace: $productNamespace$
 spec:
   port: 8443
+  # Order is important here. HTTP is required.
   protocolStack:
     - TLS
     - HTTP
@@ -61,9 +74,13 @@ spec:
       from: ALL
 ```
 
+### Configuring the Host resource
 
+Because the QUIC network requires TLS, the certificate needs to be valid so the client can upgrade a connection to HTTP/3. See the [Host documentation](./host-crd.md) for more information on how to configure TLS for a `Host`.
 
 ### Certificate verification
+
+Clients can only upgrade to an HTTP/3 connection with a valid certificate. If the client won’t upgrade to HTTP/3, verify that you have a valid TLS certificate and that your client can speak **TLS v1.3**. Your `Host` resource should be configured similar to the following:
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
@@ -77,9 +94,13 @@ spec:
     email: your-email@example.com
     authority: https://acme-v02.api.letsencrypt.org/directory
   tls:
+    # QUIC requires TLS v1.3 version. Verify your client supports it.
     min_tls_version: v1.3
+    # Either protocol can be upgraded, but http/2 is recommended.
     alpn_protocols: h2,http/1.1
 ```
+
+### External load balancers
 
 The two most common service types to expose traffic outside of a Kubernetes cluster are:
 
@@ -88,7 +109,11 @@ The two most common service types to expose traffic outside of a Kubernetes clus
 
 #### LoadBalancer setup
 
+The ideal setup would be to configure a single service of type `LoadBalancer`, but this comes with some current restrictions:
+- You need version 1.24 or later of Kubernetes with the [`MixedProtocolLBService` feature enabled](https://kubernetes.io/docs/concepts/services-networking/service/#load-balancers-with-mixed-protocol-types).
+- Your cloud service provider needs to support the creation of an external load balancer with mixed protocol types (TCP/UDP), port reuse, and port forwarding. Support for Kubernetes feature flags may vary between cloud service providers. Refer to your provider’s documentation to see if they support this scenario.
 
+An example `LoadBalancer` configuration that fits the criteria listed above:
 
 ```yaml
 
@@ -115,5 +140,10 @@ spec:
   type: LoadBalancer
 ```
 
+## Cloud service provider setup
 
+Once you've completed the steps above, you need to configure HTTP/3 support through your cloud service provider. The configuration processes for each provider can be found here:
 
+- HTTP/3 setup for [Amazon Elastic Kubernetes Service (EKS)](../../../howtos/http3/http3-eks)
+- HTTP/3 setup for [Azure Kubernetes Service (AKS)](../../../howtos/http3/http3-aks)
+- HTTP/3 setup for [Google Kubernetes Engine (GKE)](../../../howtos/http3/http3-gke)
