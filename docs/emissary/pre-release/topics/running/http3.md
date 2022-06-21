@@ -35,7 +35,7 @@ The <code>protocolStack</code> elements need to be entered in the specific order
 The `Listener` configured for HTTP/3 can be bound to the same address and port (`0.0.0.0:8443`) as the `Listener` that supports HTTP/2 and HTTP/1.1. This is not required, but it allows $productName$ to inject the default `alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400` header into the responses returned over the TCP connection with no additional configuration needed. **Most clients such as browsers require the `alt-svc` header to upgrade to HTTP/3**.
 
 <Alert severity="info">
-The current default of `alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400` means that the external load balancer must be configured to accept traffic on port `:443` for the client to upgrade the request.</code>.
+The current default of <code>alt-svc: h3=":443"; ma=86400, h3-29=":443"; ma=86400</code> means that the external load balancer must be configured to accept traffic on port <code>:443</code> for the client to upgrade the request.
 </Alert>
 
 ```yaml
