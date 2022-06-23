@@ -332,6 +332,8 @@ const index = ({ data, location, pageContext }) => {
 
   const formatString = (title) => {
     if (title) {
+      if (!title.match("[a-zA-Z]+")) return template(title, versions);
+
       const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, '');
       return template(formatedTitle, versions);
     }
@@ -343,10 +345,12 @@ const index = ({ data, location, pageContext }) => {
     page?.contentTable?.items &&
     page.contentTable.items[0].items?.length > 1
   ) {
-    toc = page.contentTable.items[0].items.map((el) => ({
-      ...el,
-      title: formatString(el.title),
-    }));
+    toc = page.contentTable.items[0].items.reduce((items, element) => {
+      if (!element.title) return items;
+
+      const title = formatString(element.title);
+      return [...items, {...element, title}];
+    }, []);
   }
 
   const MainContainer = ({ children }) => (
