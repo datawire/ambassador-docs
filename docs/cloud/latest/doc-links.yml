@@ -22,6 +22,8 @@
       link: /service-catalog/howtos/organize-service-catalog
     - title: Manage my subscriptions
       link: /subscriptions/howtos/manage-my-subscriptions
+    - title: Developer Portal migration
+      link: /developer-portal/migration
 - title: Core concepts
   items:
     - title: Using a service catalog
@@ -36,6 +38,8 @@
       link: /service-catalog/concepts/services/
     - title: Service Groups
       link: /service-catalog/concepts/service-groups/
+    - title: Developer Portal
+      link: /developer-portal/
 - title: Reference
   items:
     - title: Annotations
