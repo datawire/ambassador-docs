@@ -38,21 +38,19 @@ items:
       - title: Upgrade to Envoy 1.22
         type: change
         body: >-
-          $productName$ has been upgraded to Envoy 1.22 which provides security, performance, and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.22.0/version_history/current">Envoy Proxy 1.22.0 Release Notes</a>
+          $productName$ has been upgraded to the latest Envoy 1.22 patch release which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.22.0/version_history/current">Envoy Proxy 1.22.0 Release Notes</a>
 
-          This is a major jump in Envoy versions from the current of 1.17 in EdgeStack 2.X. Most of the changes are under the hood and allow  $productName$ to adopt new features in the future.
-        docs: /about/changes-3.y
-
+          This is a major jump in Envoy versions from the current of 1.17 in EdgeStack 2.X. Most of the changes are under the hood and allow  $productName$ to adopt new features in the future. However, one major change that will effect users is the removal of V2 xDS Transport Protocol support. See below for additional information.
       - title: Envoy V2 xDS Transport Protocol Support Removed
         type: change
         body: >-
-          With the ugprade to Envoy 1.22, support for the V2 xDS Transport Protocol was removed which means $productName$ now only supports the Envoy V3 xDS Transport Protocol.
+          Envoy removed support for V2 xDS Transport Protocol which means $productName$ now only supports the Envoy V3 xDS Transport Protocol.
 
-          Users should first upgrade to $productName$ 2.3 to ensure that the <code>LogService</code>s and External <code>Filter</code>s are working properly by setting <code>protocol_version: v3</code>.
+          User should first upgrade to $productName$ 2.3 prior to ensure that the <code>AuthService</code>s, <code>LogService</code>s and <code>RatelimitService</code>s are working properly by setting <code>protocol_version: "v3"</code>.
 
-          The <code>AuthService</code>, <code>LogService</code>, <code>RateLimitService</code>, and External <code>Filter</code> will only support the <code>v3</code> protocol version. If <code>protocol_version</code> is not specified, the default value of <code>v2</code> will cause an error to be posted. Therefore, you will need to set it to <code>protocol_version: v3</code>. If upgrading from a previous version you will want to set it to <code>v3</code> and ensure it is working before upgrading to $productName$ 3.Y. Future versions of CRD's will deprecate it.
-        docs: /about/changes-3.y
+          If <code>protocol_version</code> is not specified in 3.Y, the default  value of <code>v2</code> will cause an error to be posted and a static response will be returned. Therefore, you must set it to <code>protocol_version: v3</code>. If upgrading from a previous version, you will want  to set it to <code>v3</code> and ensure it is working before upgrading to Emissary-ingress 3.Y. The default value for <code>protocol_version</code> remains <code>v2</code> in the <code>getambassador.io/v3alpha1</code> CRD specifications to avoid making breaking changes outside of a CRD version change. Future versions of CRD's will deprecate it.
 
+        docs: topics/running/services/auth-service/
       - title: HTTP/3 Downstream Support
         type: feature
         body: >-
@@ -60,13 +58,11 @@ items:
 
           HTTP/3 is built on the QUIC protocol which communicates using the UDP network protocol. QUIC requires TLS v1.3 be used when communicating between client and server.
         docs: topics/running/http3
-
       - title: Zipkin driver for TracingService removed support for HTTP_JSON_V1
         type: change
         body: >-
-          When using the <code>zipkin</code> driver for the TracingService. The <code>collector_endpoint_version</code> no longer accepts <code>HTTP_JSON_V1</code> due to the Envoy upgrade. The new default value is <code>HTTP_JSON</code>.
+          When using the <code>zipkin</code> driver for the TracingService. The <code>collector_endpoint_version</code> no longer accepts `HTTP_JSON_V1` due to the Envoy upgrade. The new default value is `HTTP_JSON`.
         docs: topics/running/services/tracing-service/
-
   - version: 2.3.1
     date: '2022-06-10'
     notes:

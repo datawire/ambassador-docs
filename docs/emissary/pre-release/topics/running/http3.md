@@ -9,10 +9,11 @@ HTTP/3 is the third version of the Hypertext Transfer Protocol (HTTP). It is bui
 
 ## The changes and challenges of HTTP/3
 
-Since the QUIC network protocol is built on UDP, clients that are not configured to initiate a connection by attempting to use HTTP/3 will initiate HTTP/2 and HTTP/1.1 connections before upgraded to HTTP/3. $productName$ sends a response that advertises its support for HTTP/3 using the `alt-svc` response header. This header is added to the response of the HTTP/2 and HTTP/1.1 connections. When the client recieves the `alt-svc`response header it can choose to upgrade to HTTP/3 and connect to $productName$ using the QUIC protocol or continue using HTTP/2 and HTTP/1.1.
+Since the QUIC network protocol is built on UDP, most clients will require $productName$ to advertise its support for HTTP/3 using the `alt-svc` response header. This header is added to the response of the HTTP/2 and HTTP/1.1 connections. When the client sees the `alt-svc` it can choose to upgrade to HTTP/3 and connect to $productName$ using the QUIC protocol.
 
-QUIC requires Transport Layer Security (TLS) version 1.3 to communicate. Otherwise, $productName$ will fall back to HTTP/2 or HTTP/1.1, both of which support other TLS versions if client does not support TLS v1.3. Due to this restriction, some clients also require valid certificates and will not upgrade to HTTP/3 traffic with self-signed certificates.
+QUIC requires Transport Layer Security (TLS) version 1.3 to communicate. Otherwise, $productName$ will fall back to HTTP/2 or HTTP/1.1, both of which support other TLS versions if client does not support TLS v1.3. Due to this restriction, some clients also require valid certificatesand will not upgrade to HTTP/3 traffic with self-signed certificates.
 
+Because HTTP/3 adoption is still growing and and changing, the $productName$ team will continue update this documentation as features change and mature.
 
 ## Setting up HTTP/3 with $productName$
 
