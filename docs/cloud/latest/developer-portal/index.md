@@ -25,6 +25,6 @@ The Developer have the following features:
 - Service discovery for all your services connected to Ambassador Cloud.
 - API definition of your services.
 
-## Migratin from the old Dev Portal
+## Migrating from the old Dev Portal
 
-If you have the on-prem version of the dev portal, you can follow [this guide to migrate](../migration) the Cloud Dev Portal.
+If you have the on-prem version of the dev portal, you can follow [this guide to migrate](./migration) the Cloud Dev Portal.
