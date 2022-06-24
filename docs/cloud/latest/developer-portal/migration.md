@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # Migrate your old Dev Portal to the Cloud
 
-In this guide we'll give you everything you need to perform a canary rollout in your own cluster using GitOps best practices, but without needing to write lots of YAML!
+In this guide we'll guide you on how to migrate your old Dev Portal to Ambassador Cloud.
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
@@ -13,6 +13,7 @@ In this guide we'll give you everything you need to perform a canary rollout in 
 </div>
 
 ## Prerequisites
+
 If you want migrate to the Dev Portal on the Cloud, you will need to have old on-prem Dev Portal that will be used to move all your configuration.
 
 ## Migrate your old dev portal to the Cloud
