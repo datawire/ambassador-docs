@@ -13,7 +13,11 @@ const Card = ({ img, title, description, link }) => (
     <div className="docs__quickStart-card--button-get-started">
       <Link to={link} className="docs__button-secondary docs__m-bottom-50">
         Get Started{' '}
-        <Icon name="right-arrow" className="docs__button-secondary--arrow" />
+        <Icon
+          name="right-arrow"
+          className="docs__button-secondary--arrow"
+          mask
+        />
       </Link>
     </div>
   </div>
