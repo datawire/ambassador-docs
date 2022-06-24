@@ -333,7 +333,6 @@ const index = ({ data, location, pageContext }) => {
   const formatString = (title) => {
     if (title) {
       if (!title.match("[a-zA-Z]+")) return template(title, versions);
-
       const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, '');
       return template(formatedTitle, versions);
     }
