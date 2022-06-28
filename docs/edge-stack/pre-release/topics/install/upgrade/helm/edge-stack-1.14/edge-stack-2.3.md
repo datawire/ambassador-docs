@@ -92,7 +92,7 @@ important caveats:
 
    The best way to avoid multiple agents when installing with Helm is to use
    `--set emissary-ingress.agent.enabled=false` to tell Helm not to install a
-   new Agent with productName$ $versionTwoX$. Once testing is done, you can switch
+   new Agent with $productName$ $versionTwoX$. Once testing is done, you can switch
    Agents safely.
 
 6. **If you use ACME for multiple `Host`s, add a wildcard `Host` too.**
