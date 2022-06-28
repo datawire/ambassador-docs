@@ -220,8 +220,8 @@
                link: /howtos/client-cert-validation
  - title: Changes in $productName$ 2.X
    link: /about/changes-2.x
- - title: Changes in $productName$ 2.Y
-   link: /about/changes-2.y
+ - title: Changes in $productName$ 3.X
+   link: /about/changes-3.y
  - title: Known issues
    link: /about/known-issues
  - title: FAQs
