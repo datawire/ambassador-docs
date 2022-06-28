@@ -332,6 +332,7 @@ const index = ({ data, location, pageContext }) => {
 
   const formatString = (title) => {
     if (title) {
+      if (!title.match("[a-zA-Z]+")) return template(title, versions);
       const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, '');
       return template(formatedTitle, versions);
     }
@@ -343,10 +344,12 @@ const index = ({ data, location, pageContext }) => {
     page?.contentTable?.items &&
     page.contentTable.items[0].items?.length > 1
   ) {
-    toc = page.contentTable.items[0].items.map((el) => ({
-      ...el,
-      title: formatString(el.title),
-    }));
+    toc = page.contentTable.items[0].items.reduce((items, element) => {
+      if (!element.title) return items;
+
+      const title = formatString(element.title);
+      return [...items, {...element, title}];
+    }, []);
   }
 
   const MainContainer = ({ children }) => (
@@ -374,13 +377,15 @@ const index = ({ data, location, pageContext }) => {
           <div
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1 &&
+              toc.length > 1
                 ? 'docs__doc-body-container__article docs__doc-body-container__article-toc'
                 : 'docs__doc-body-container__article-toc-none'
             }
           >
             {page?.contentTable?.items &&
-              page.contentTable.items[0].items?.length > 1 && (
+              page.contentTable.items[0].items?.length > 1 &&
+              toc.length > 1 && (
                 <div className="docs__doc-body-container__table-content">
                   <p>ON THIS PAGE</p>
                   <ContentTable items={[{ items: toc }]} />
@@ -419,7 +424,8 @@ const index = ({ data, location, pageContext }) => {
           <hr
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1
+              page.contentTable.items[0].items?.length > 1 &&
+              toc.length > 1
                 ? 'docs__separator docs__container docs__separator-footer'
                 : 'docs__separator docs__container docs__separator-footer-no-article'
             }
@@ -429,7 +435,8 @@ const index = ({ data, location, pageContext }) => {
           product={product.slug}
           page={
             page?.contentTable?.items &&
-            page.contentTable.items[0].items?.length > 1
+            page.contentTable.items[0].items?.length > 1 &&
+            toc.length > 1
           }
         />
         {!isHome && !isProductHome && isProduct && (
