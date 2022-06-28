@@ -1,9 +1,9 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.0.5 to $productName$ $version$ (YAML)
+# Upgrade $productName$ 2.0.5 to $productName$ $versionTwoX$ (YAML)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.0.5 to $productName$ $version$. If
+  This guide covers migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
@@ -15,25 +15,25 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  <b>Upgrading from $productName$ 2.0.5 to $productName$ $version$ typically requires downtime.</b>
+  <b>Upgrading from $productName$ 2.0.5 to $productName$ $versionTwoX$ typically requires downtime.</b>
   In some situations, Ambassador Labs Support may be able to assist with a zero-downtime migration;
   contact support with questions.
 </Alert>
 
-Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step process:
+Migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$ is a three-step process:
 
 1. **Install new CRDs.**
 
-   Before installing $productName$ $version$ itself, you need to update the CRDs in
+   Before installing $productName$ $versionTwoX$ itself, you need to update the CRDs in
    your cluster. This is mandatory during any upgrade of $productName$.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$versionTwoX$/aes-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
    <Alert severity="info">
-     $productName$ $version$ includes a Deployment in the `emissary-system` namespace
+     $productName$ $versionTwoX$ includes a Deployment in the `emissary-system` namespace
      called <code>$productDeploymentName$-apiext</code>. This is the APIserver extension
      that supports converting $productName$ CRDs between <code>getambassador.io/v2</code>
      and <code>getambassador.io/v3alpha1</code>. This Deployment needs to be running at
@@ -60,14 +60,14 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a three-step pr
    kubectl delete -n ambassador deployment edge-stack
    ```
 
-3. **Install $productName$ $version$.**
+3. **Install $productName$ $versionTwoX$.**
 
-   After installing the new CRDs, use Helm to install $productName$ $version$. This will install
+   After installing the new CRDs, use Helm to install $productName$ $versionTwoX$. This will install
    in the `$productNamespace$` namespace. If necessary for your installation (e.g. if you were
    running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can download `aes.yaml` and edit as
    needed.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes.yaml && \
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$versionTwoX$/aes.yaml && \
    kubectl rollout status -n $productNamespace$ deployment/edge-stack -w
    ```
