@@ -49,6 +49,7 @@ Please note that you must use the HTTP/2 pseudo-header names. For example:
 ### Lightstep driver configurations
 
 - `access_token_file` provides the location of the file containing the access token to the LightStep API.
+- `propagation_modes` sets the propagation mode(s) for the trace context. Accepts a list where the valid options are ENVOY, LIGHTSTEP, B3 and TRACE_CONTEXT. See [Envoy docs for PropagationMode](https://www.envoyproxy.io/docs/envoy/latest/api-v3/config/trace/v3/lightstep.proto#enum-config-trace-v3-lightstepconfig-propagationmode) for more details.
 
 ### Zipkin driver configurations
 
