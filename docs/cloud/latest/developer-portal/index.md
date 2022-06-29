@@ -7,14 +7,6 @@ description: "API Management by Ambassador"
 
 You will access and explore some of the key features of the Developer Portal in Ambassador Cloud.
 
-<!-- <div class="docs-article-toc">
-<h3>Contents</h3>
-
-* [Prerequisites](#what-is-the-developer-Portal?)
-* [1. Connect your cluster to Ambassador Cloud](#features)
-
-</div> -->
-
 ## What is the Ambassador Cloud Developer Portal ?
 
 The Developer Portal is a section that allows you to publish reference and API documentation about services in Ambassador Cloud. The Developer Portal consolidates the information from all your environments and all your clusters.
@@ -52,4 +44,4 @@ If you are using Edge Stack, you will soon be able to add [API Keys filter](../.
 
 ## Migrating from the Edge Stack Developer Portal
 
-If you are currently using [Edge Stack Developer Portal](../../../edge-stack/latest/topics/using/dev-portal), you can follow [this guide to migrate](../../../edge-stack/latest/topics/using/dev-portal#migrate-your-old-dev-portal-to-the-cloud) to the new Ambassador Cloud Developer Portal.
+If you are currently using [Edge Stack Developer Portal](../../../edge-stack/latest/topics/using/dev-portal), you can follow [this guide to migrate](../../../edge-stack/latest/topics/using/dev-portal#migrate-to-the-new-ambassador-cloud-developer-portal) to the new Ambassador Cloud Developer Portal.
