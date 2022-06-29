@@ -423,3 +423,24 @@ the `ambassador` `DevPortal`.
 ## Visualize your API documentation in the cloud
 
 If you haven't already done so, you may want to [connect your cluster to Ambassador Cloud](../../../tutorials/getting-started). Connected clusters will automatically report your `Mapping`s' OpenAPI documents, allowing you to host and visualize all of your services API documentation on a shared, secure and authenticated platform.
+
+# Migrate your Edge Stack Developer Portal to the Cloud
+
+In this guide we'll guide you on how to migrate your Edge Stack Developer Portal to the new Ambassador Cloud Developer Portal.
+
+<div class="docs-article-toc">
+<h3>Contents</h3>
+
+* [Prerequisites](#prerequisites)
+* [Migrate your Edge Stack Developer Portal to the Cloud](#migrate-your-edge-stack-dev-portal-to-the-cloud)`
+
+</div>
+
+## Prerequisites
+
+If you want migrate to the Developer Portal on the Cloud, you will need to have Edge Stack Developer Portal that will be used to move all your configuration.
+
+## Migrate to the new Ambassador Cloud Developer Portal
+
+1. Step 1 that will be added for migration
+2. Step 2 that will be added for migration

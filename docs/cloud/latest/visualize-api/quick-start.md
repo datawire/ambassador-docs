@@ -9,8 +9,8 @@ You can visualize and explore your service’s OpenAPI specification (formerly k
 ## Prerequisites
 
 1. You must have **Edge Stack or Emissary-ingress version 2.0+ Developer Preview** [installed and connected to Ambassador Cloud](../../service-catalog/quick-start) in your
-   Kubernetes cluster. This guide assumes you have deployed the `quote` application and resources from the Service Catalog quick start.
-2. Enable reporting the `quote` service documentation by creating, or editing, the `quote-backend` AmbassadorMapping resource with the following docs path `/.ambassador-internal/openapi-docs`
+   Kubernetes cluster. This guide assumes you have deployed the `quote` application and resources from the [Service Catalog quick start](../../service-catalog/quick-start).
+2. Enable reporting the `quote` service documentation by creating, or editing, the `quote-backend` Ambassador Mapping resource with the following docs path `/.ambassador-internal/openapi-docs`
 
    ```
    echo '---
