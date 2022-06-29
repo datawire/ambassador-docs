@@ -58,5 +58,9 @@
   items:
     - title: Quick Start
       link: /visualize-api/quick-start
+- title: Telepresence Intercept Definitions
+  items:
+    - title: Managing Intercept Definitions
+      link: /telepresence-intercept-definitions
 - title: Release Notes
   link: /release-notes/
