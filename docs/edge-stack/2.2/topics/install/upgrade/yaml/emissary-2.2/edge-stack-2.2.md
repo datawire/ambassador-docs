@@ -58,7 +58,7 @@ important notes:
 
    The best way to avoid multiple agents when installing with Helm is to use
    `--set emissary-ingress.agent.enabled=false` to tell Helm not to install a
-   new Agent with productName$ $version$. Once testing is done, you can switch
+   new Agent with $productName$ $version$. Once testing is done, you can switch
    Agents safely.
 
 4. **Be careful about label selectors on Kubernetes Services!**

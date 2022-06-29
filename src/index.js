@@ -64,7 +64,7 @@ const index = ({ data, location, pageContext }) => {
   let canonicalUrl = realCanonicals
     ? (pageContext.canonical.latest ? siteUrl : getSiteUrl()) + realCanonicals
     : (pageContext.canonical.latest ? siteUrl : getSiteUrl()) +
-      pageContext.canonical.url;
+    pageContext.canonical.url;
 
   const initialVersion = !isProductHome
     ? tempVersion
@@ -87,7 +87,7 @@ const index = ({ data, location, pageContext }) => {
       );
     }
     if (
-      newVer.id === '2.2' ||
+      newVer.id === '3.0' ||
       newVer.id === 'pre-release' ||
       newVer.id === 'latest' ||
       (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
@@ -97,7 +97,7 @@ const index = ({ data, location, pageContext }) => {
     return (
       <a
         href={`/docs/${newProduct.slug}/latest/tutorials/getting-started/`}
-      >{`${newProduct.name} 2.2 is now available!`}</a>
+      >{`${newProduct.name} 3.0 is now available!`}</a>
     );
   }
   const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(
@@ -114,11 +114,11 @@ const index = ({ data, location, pageContext }) => {
   const isInLearnings = learningJourneys.includes(learningJourneyName);
   const learningJourneyData = isInLearnings
     ? data.allLearningjourney.nodes.filter(
-        (node) =>
-          node.slug.indexOf('/') > -1 &&
-          node.slug.indexOf('.') > -1 &&
-          node.slug.split('/')[1].split('.')[0] === learningJourneyName,
-      )
+      (node) =>
+        node.slug.indexOf('/') > -1 &&
+        node.slug.indexOf('.') > -1 &&
+        node.slug.split('/')[1].split('.')[0] === learningJourneyName,
+    )
     : [];
   const {
     title: learningTitle,
@@ -134,32 +134,32 @@ const index = ({ data, location, pageContext }) => {
   const isLearning = isInLearnings && isInTopics;
   const learningParseTopics = isLearning
     ? topics.map((topic) => {
-        const items = topic.items.map((item) => {
-          const readingTimeTopic = data.allMdx.edges.filter(
-            (i) => i.node.fields.slug === `/docs/${item.link}`,
-          );
-          const { slug, readingTime } = readingTimeTopic[0]
-            ? readingTimeTopic[0].node.fields
-            : {};
-          const { reading_time_text, hide_reading_time, reading_time } =
-            readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
-          return {
-            ...item,
-            slug,
-            readingTimeMinutes: Math.ceil(
-              readingTime ? readingTime.minutes : 0,
-            ),
-            readingTimeText: reading_time_text,
-            hideReadingTime: hide_reading_time,
-            readingTimeFront: reading_time,
-          };
-        });
-
+      const items = topic.items.map((item) => {
+        const readingTimeTopic = data.allMdx.edges.filter(
+          (i) => i.node.fields.slug === `/docs/${item.link}`,
+        );
+        const { slug, readingTime } = readingTimeTopic[0]
+          ? readingTimeTopic[0].node.fields
+          : {};
+        const { reading_time_text, hide_reading_time, reading_time } =
+          readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
         return {
-          ...topic,
-          items,
+          ...item,
+          slug,
+          readingTimeMinutes: Math.ceil(
+            readingTime ? readingTime.minutes : 0,
+          ),
+          readingTimeText: reading_time_text,
+          hideReadingTime: hide_reading_time,
+          readingTimeFront: reading_time,
         };
-      })
+      });
+
+      return {
+        ...topic,
+        items,
+      };
+    })
     : [];
 
   const burgerMenuInitialState = {
@@ -521,7 +521,7 @@ const index = ({ data, location, pageContext }) => {
                   )}
                 </div>
                 <div className="docs__next-previous__learning-journey">
-                  <img src={LearningJourneyImg} alt="Learning Journey" loading='lazy'/>
+                  <img src={LearningJourneyImg} alt="Learning Journey" loading='lazy' />
                 </div>
                 <div className="docs__next-previous__next">
                   {nextLearning && (
@@ -784,9 +784,8 @@ const index = ({ data, location, pageContext }) => {
       />
 
       <div
-        className={`docs ${
-          edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
-        }`}
+        className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
+          }`}
       >
         <nav>
           <div className="docs__nav">
@@ -802,9 +801,8 @@ const index = ({ data, location, pageContext }) => {
                       );
                       return (
                         <li
-                          className={`${
-                            product.slug === item.slug ? 'docs__selected' : ''
-                          }`}
+                          className={`${product.slug === item.slug ? 'docs__selected' : ''
+                            }`}
                           key={item.name}
                           onClick={claenStorage}
                         >
@@ -815,17 +813,15 @@ const index = ({ data, location, pageContext }) => {
                   })}
 
                   <li
-                    className={`${
-                      product.isProduct ? 'docs__selected__dropdown' : ''
-                    }`}
+                    className={`${product.isProduct ? 'docs__selected__dropdown' : ''
+                      }`}
                     key="products"
                   >
                     <Dropdown
-                      label={`Products${
-                        product.name == 'Docs Home' || !product.isProduct
-                          ? ''
-                          : ' - ' + product.name
-                      }`}
+                      label={`Products${product.name == 'Docs Home' || !product.isProduct
+                        ? ''
+                        : ' - ' + product.name
+                        }`}
                       className={'docs__nav-dropdown'}
                       handleOnChange={handleProductChange}
                       value={product.slug}
@@ -842,12 +838,12 @@ const index = ({ data, location, pageContext }) => {
                   header={
                     burgerMenu.header.title
                       ? {
-                          ...burgerMenu.header,
-                          onClick: () =>
-                            onClickMenuBugerHeader({
-                              title: metadata.metaName,
-                            }),
-                        }
+                        ...burgerMenu.header,
+                        onClick: () =>
+                          onClickMenuBugerHeader({
+                            title: metadata.metaName,
+                          }),
+                      }
                       : initialHeader
                   }
                   items={
