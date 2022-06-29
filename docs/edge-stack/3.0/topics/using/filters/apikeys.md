@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # API Keys Filter
 
-The API Keys filter type performs API Keys validation present in the HTTP header. The list of authorized API Keys is defined directly in the Filter resource.
+The API Keys filter validates API Keys present in the HTTP header. The list of authorized API Keys is defined directly in the Filter resource or a secret.
 
 ## API Keys global arguments
 
@@ -19,6 +19,7 @@ spec:
     keys:
       - value: "my-api-key-not-secret" 
       - secretName: "my-secret-api-keys"
+      - secretNamespace: "example-namespace" # optional; default is active namespace
 ---
 apiVersion: v1
 kind: Secret
@@ -33,21 +34,4 @@ data:
  - `httpHeader` is the header used to do the API Keys validation.
 
  - `keys`: A list of API keys that will be used for the validation. A list of keys can be defined using a secret or you can define a standalone key directly in the filter resource.
-
-## API Keys path-specific arguments
-
-```yaml
-apiVersion: getambassador.io/v3alpha1
-kind: FilterPolicy
-metadata:
-  name: "filter-apikey"
-  namespace: ambassador
-spec:
-  rules:
-    - path: "/ac-echo-staging"
-      host: "*"
-      filters:                   
-        - name: "filter-apikey"         
-          namespace: ambassador
-```
 
