@@ -9,16 +9,16 @@ You will access and explore some of the key features of the Developer Portal in 
 
 ## What is the Ambassador Cloud Developer Portal ?
 
-The Developer Portal is a section that allows you to publish reference and API documentation about services in Ambassador Cloud. The Developer Portal consolidates the information from all your environments and all your clusters.
+The Developer Portal is a section that allows you to publish reference and API documentation about your services, it provides you a consolidated view using the information from all your environments and all your clusters.
 
 ## Features
 
-The Developer has the following features:
+The Developer Portal has the following features:
 
 - Service discovery for all your services connected to Ambassador Cloud.
-- API definition of your services.
-- Share privately and publicly your Developer Portal. (Available soon)
-- Add custom authentication using API Keys filter. (Available soon)
+- API documentation of your services.
+- Share privately and publicly your Developer Portal.
+- Add custom authentication using API Keys filter.
 
 ## Add Open API documentation to Developer Portal
 
@@ -32,16 +32,8 @@ The [Developer Portal](https://app.getambassador.io/cloud/dev-portal) is accessi
     <img src="../images/dev-portal-cloud.png" width="200"/>
   </p>
 
-All your services are aggregated by cell name, here you can explore the Open API documentation and try out the services :
+You can explore the Open API documentation of every services and try out the services :
 
   <p align="center">
     <img src="../images/dev-portal-cloud-service.png" width="200"/>
   </p>
-
-## Add API Keys authentication to your services
-
-If you are using Edge Stack, you will soon be able to add [API Keys filter](../../../edge-stack/latest/topics/using/filters/apikeys) to your service from the Developer Portal.
-
-## Migrating from the Edge Stack Developer Portal
-
-If you are currently using [Edge Stack Developer Portal](../../../edge-stack/latest/topics/using/dev-portal), you can follow [this guide to migrate](../../../edge-stack/latest/topics/using/dev-portal#migrate-to-the-new-ambassador-cloud-developer-portal) to the new Ambassador Cloud Developer Portal.
