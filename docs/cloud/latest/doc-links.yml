@@ -22,8 +22,6 @@
       link: /service-catalog/howtos/organize-service-catalog
     - title: Manage my subscriptions
       link: /subscriptions/howtos/manage-my-subscriptions
-    - title: Developer Portal migration
-      link: /developer-portal/migration
 - title: Core concepts
   items:
     - title: Using a service catalog
