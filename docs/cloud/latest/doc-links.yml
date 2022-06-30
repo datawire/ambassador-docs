@@ -22,6 +22,8 @@
       link: /service-catalog/howtos/organize-service-catalog
     - title: Manage my subscriptions
       link: /subscriptions/howtos/manage-my-subscriptions
+    - title: Create API Keys filters
+      link: /service-catalog/howtos/create-api-keys-filters
 - title: Core concepts
   items:
     - title: Using a service catalog
@@ -37,7 +39,7 @@
     - title: Service Groups
       link: /service-catalog/concepts/service-groups/
     - title: Developer Portal
-      link: /developer-portal/
+      link: /developer-portal
 - title: Reference
   items:
     - title: Annotations
