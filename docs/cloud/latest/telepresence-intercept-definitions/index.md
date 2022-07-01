@@ -4,19 +4,6 @@ To make it easier to share Telepresence intercept configuration across team memb
 definitions when [the `--save-intercept-definition-as` flag](../../../telepresence/latest/reference/intercepts#sharing-intercept-definition-with-teammates)
 is provided with the `telepresence intercept` command.
 
-## Managing intercept definitions
-
-By navigating to the [Telepresence Intercept Definitions page on Ambassador Cloud](https://app.getambassador.io/cloud/telepresence-intercept-definitions),
-you can see the list of intercept definitions created by any Ambassador team member. For each of these, you can:
-
-- inspect its author, creation date, updated date and flags
-- review the previous versions
-- delete a definition (along with all it's versions)
-- launch an instance of the definition through a connected Telepresence daemon
-
-**TODO: replace the screenshot by a real one**
-![Intercept definitions screenshot](../images/telepresence-intercept-definitions.png)
-
 ## Creating and using Intercept Definitions
 
 ### Prerequisites
@@ -51,3 +38,17 @@ telepresence intercept <intercept-definition-name>
 
 The previous command will fetch the last set of arguments used to create the intercept definition and use them to create a new intercept so you don't have to remember all the arguments
 required to intercept a service from a particular cluster.
+
+## Managing intercept definitions
+
+By navigating to the [Telepresence Intercept Definitions page on Ambassador Cloud](https://app.getambassador.io/cloud/telepresence-intercept-definitions),
+you can see the list of intercept definitions created by any Ambassador team member. For each of these, you can:
+
+- inspect its author, creation date, updated date and flags
+- review the previous versions
+- delete a definition (along with all it's versions)
+- launch an instance of the definition through a connected Telepresence daemon
+
+**TODO: replace the screenshot by a real one**
+![Intercept definitions screenshot](../images/telepresence-intercept-definitions.png)
+
