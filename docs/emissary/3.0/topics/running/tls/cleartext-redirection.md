@@ -1,3 +1,7 @@
+---
+description: "Cleartext support - Emissary-ingress supports both forcing automatic redirection to HTTPS and serving cleartext traffic on a Host."
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Cleartext support
