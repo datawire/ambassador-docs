@@ -2,7 +2,7 @@
 Title: Argo Installation
 description: Install and configure Argo
 ---
-test
+
 # Installing Argo
 
 To install Argo, you need the current version of Edge Stack installed in your cluster. Follow the [Edge Stack installation guide](../../../run/latest/install-edge-stack) to set this up in your environment.
