@@ -12,7 +12,8 @@ Traffic shadowing is a deployment pattern where production traffic is asynchrono
 
 $productName$ lets you easily shadow traffic to a given endpoint. In $productName$, only requests are shadowed; responses from a service are dropped. All normal metrics are collected for the shadow services. This makes it easy to compare the performance of the shadow service versus the production service on the same data set. $productName$ also prioritizes the production path, i.e., it will return responses from the production service without waiting for any responses from the shadow service.
 
-![Shadowing](../../../images/shadowing.png)
+<br />
+<img src="../../images/shadowing.png" alt="Shadowing"/>
 
 ## The `shadow` Mapping
 
