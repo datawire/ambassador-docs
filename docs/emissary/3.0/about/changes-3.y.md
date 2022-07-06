@@ -39,7 +39,7 @@ This also means some of the v2 runtime bootstrap flags have been removed as well
 
 ## 2. Envoy V2 Protocol Support Removed
 
-With the upgrade to Envoy **1.22**, the V2 Envoy Transport Portocol is no longer supported.
+With the upgrade to Envoy **1.22**, the V2 Envoy Transport Protocol is no longer supported.
 $productName$ 3.0 **only** supports [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api).
 
 <Alert severity="warn">

@@ -332,8 +332,9 @@ const index = ({ data, location, pageContext }) => {
 
   const formatString = (title) => {
     if (title) {
-      if (!title.match("[a-zA-Z]+")) return template(title, versions);
-      const formatedTitle = title.replace(/<\/?[^>]+(>|$)|\d../g, '');
+      if (!title.match("[a-zA-Z]+")) return template(title, versions)
+
+      const formatedTitle = title.replace(/((\d+. ))(.*)/, '$3')?.replace(/<\/?[^>]+(>|$)/g, '')
       return template(formatedTitle, versions);
     }
   };
@@ -348,7 +349,7 @@ const index = ({ data, location, pageContext }) => {
       if (!element.title) return items;
 
       const title = formatString(element.title);
-      return [...items, {...element, title}];
+      return [...items, { ...element, title }];
     }, []);
   }
 
@@ -377,8 +378,8 @@ const index = ({ data, location, pageContext }) => {
           <div
             className={
               page?.contentTable?.items &&
-              page.contentTable.items[0].items?.length > 1 &&
-              toc.length > 1
+                page.contentTable.items[0].items?.length > 1 &&
+                toc.length > 1
                 ? 'docs__doc-body-container__article docs__doc-body-container__article-toc'
                 : 'docs__doc-body-container__article-toc-none'
             }
@@ -424,8 +425,8 @@ const index = ({ data, location, pageContext }) => {
           <hr
             className={
               page?.contentTable?.items &&
-              page.contentTable.items[0].items?.length > 1 &&
-              toc.length > 1
+                page.contentTable.items[0].items?.length > 1 &&
+                toc.length > 1
                 ? 'docs__separator docs__container docs__separator-footer'
                 : 'docs__separator docs__container docs__separator-footer-no-article'
             }

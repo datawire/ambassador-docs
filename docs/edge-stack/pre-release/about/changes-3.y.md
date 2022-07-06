@@ -39,7 +39,7 @@ This also means some of the v2 runtime bootstrap flags have been removed as well
 
 ## 2. Envoy V2 xDS Transport Protocol Support Removed
 
-With the upgrade to Envoy **1.22**, the V2 Envoy Transport Portocol is no longer supported and has been removed.
+With the upgrade to Envoy **1.22**, the V2 Envoy Transport Protocol is no longer supported and has been removed.
 $productName$ 3.0 **only** supports [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api).
 
 The `AuthService`, `RatelimitService`, `LogService` and `ExternalFilters` that use the `grpc` protocol will now need to explicilty set `protocol_version: "v3"`. If not set or set to `v2` then an error will be posted and a static response will be returned.
