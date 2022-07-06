@@ -20,7 +20,8 @@ $productName$ displays the health of your services on the Dashboard of your Edge
 * Green is used when the success rate is > 90%.
 * Grey is used when a service is "waiting". This means the success rate cannot be determined because the service has not recieved any requests yet.
 
-![](../../../images/diagnostics-example.png)
+  <img src="../../../images/diagnostics-example.png" alt="Health status" />
+
 
 The LEFT image shows what a list of services under the `Debugging tab` in the Edge Policy Consul will look like for each level of health.
 
