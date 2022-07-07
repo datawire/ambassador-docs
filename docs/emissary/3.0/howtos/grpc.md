@@ -202,7 +202,7 @@ Greeter client received: Hello, you!
 
 There is some extra configuration required to connect to a gRPC service through $productName$ over an encrypted channel. Currently, the gRPC call is being sent over cleartext to $productName$ which proxies it to the gRPC application.
 
-  <img src="../../images/grpc-tls.png" alt="gRPC and TLS" />
+  <img src="../images/grpc-tls.png" alt="gRPC and TLS" />
 
 If you want to add TLS encryption to your gRPC calls, first you need to tell $productName$ to add [ALPN protocols](../../topics/running/tls) which are required by HTTP/2 to do TLS.
 
@@ -235,15 +235,13 @@ Next, you need to change the client code slightly and tell it to open a secure R
 
 $productName$ is now terminating TLS from the gRPC client and proxying the call to the application over cleartext.
 
-
-  <img src="../../images/gRPC-TLS-Ambassador.png" alt="cert chain public key flow" />
+  <img src="../images/gRPC-TLS-Ambassador.png" alt="cert chain public key flow" />
 
 If you want to configure authentication in another language, [gRPC provides examples](https://grpc.io/docs/guides/auth.html) with proper syntax for other languages.
 
 #### Originating TLS with gRPC service
 
-
-  <img src="../../images/gRPC-TLS-Originate.png" alt="cert chain private key flow" />
+  <img src="../images/gRPC-TLS-Originate.png" alt="cert chain private key flow" />
 
 $productName$ can originate TLS with your gRPC service so the entire RPC channel is encrypted. To configure this, first get some TLS certificates and configure the server to open a secure channel with them. Using self-signed certs this can be done with OpenSSL and adding a couple of lines to the server code.
 
