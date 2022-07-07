@@ -86,7 +86,7 @@ As the number of microservices and annotations proliferate, running `kubectl des
 
 Recently, service catalogs have provided greater visibility in the Kubernetes ecosystem. Popularized by tools such as [Shopify's ServicesDB](https://shopify.engineering/scaling-mobile-development-by-treating-apps-as-services) and [Spotify's System Z](https://dzone.com/articles/modeling-microservices-at-spotify-with-petter-mari), service catalogs are internally-facing developer portals that present critical information about microservices.
 
-Note that these service catalogs should not be confused with the [Kubernetes Service Catalog project](https://kubernetes.io/docs/concepts/extend-kubernetes/service-catalog/). Built on the Open Service Broker API, the Kubernetes Service Catalog enables Kubernetes operators to plug different services (e.g., databases) into their cluster.
+Note that these service catalogs should not be confused with the [Kubernetes Service Catalog project](../../howtos/organize-service-catalog/). Built on the Open Service Broker API, the Kubernetes Service Catalog enables Kubernetes operators to plug different services (e.g., databases) into their cluster.
 
 ## Annotate your services now and thank yourself later
 

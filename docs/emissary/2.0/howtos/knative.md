@@ -15,8 +15,9 @@ Ambassador can watch for changes in Knative configuration in your Kubernetes clu
 
 ### Prerequisites
 
-- Knative now requires Kubernetes v1.14, as well as a [compatible kubectl](https://knative.dev/v1.1-docs/install/operator/knative-with-operators/#installing-knative-serving-with-different-networking-layers)
-- `kubectl` v1.10 is also required. This guide assumes that you’ve already created a Kubernetes cluster that you’re comfortable installing alpha software on.
+- Knative requires Kubernetes version v1.14 or later.
+- The `kubectl` command-line tool, v1.10 or later, is also required. 
+- This guide assumes that you’ve already created a Kubernetes cluster that you’re comfortable installing alpha software on.
 
 ### Installation
 
