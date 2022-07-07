@@ -27,11 +27,11 @@ With Auth0 as your IdP, you will need to create an `Application` to handle authe
 
 Update the Auth0 `Filter` and `FilterPolicy`. You can get the `ClientID` and `secret` from your application settings:
 
-  ## <img src="../../images/Auth0_secret.png" alt="Auth0 Managment API" />
+  <img src="../../../images/Auth0_secret.png" alt="Auth0 Managment API" />
 
    The `audience` is the API Audience of your Auth0 Management API:
 
-  ## <img src="../../images/Auth0_audience.png" alt="Auth0 Managment API audience" />
+  <img src="../../../images/Auth0_audience.png" alt="Auth0 Managment API audience" />
 
    The `authorizationURL` is your Auth0 tenant URL.
 
