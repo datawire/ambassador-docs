@@ -35,10 +35,10 @@ items:
   - version: 3.1.0
     date: 'TBD'
     notes:
-      - title: $productName$ now forces <code>protocol_version: "v3"</code> on RateLimitServices
+      - title: $productName$ now forces protocol_version on RateLimitServices
         type: change
         body: >-
-          In the 3.0.0 release, $productName$ would automatically set the required <code>protocol_version: "v3"</code> field on its own AuthService to reduce migration friction. This same change is not also included for RateLimitServices to ensure that they continue to work as expected through the migration from 2.x to 3.x even if the required field is missing.
+          Starting with the release of version 3.0.0, $productName$ automatically sets the required <code>protocol_version: "v3"</code> field on its own <code>AuthService</code> to reduce migration friction. This same change is now also included for <code>RateLimitServices</code> to ensure that they continue to work as expected through the migration from 2.x to 3.x even if the required field is missing.
 
       - title: Fix 503s after secret rotation
         type: bugfix
