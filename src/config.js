@@ -318,11 +318,27 @@ export const metaData = {
     description:
       'This guide focus on deploying Prometheus and Grafana alongside Edge Stack in Kubernetes using the Prometheus Operator. Both can be deployed as standalone apps',
   },
+  'docs/edge-stack/latest/topics/running/': {
+    description:
+      "This section is designed for operators and site reliability engineers managing Ambassador Edge Stack's deployment. Learn more about Global Configuration...",
+  },
   'docs/edge-stack/latest/topics/running/ingress-controller/': {
     description:
-      'Edge Stack can function as a fully-fledged Ingress controller, making it easy to work with other Ingress-oriented tools within the Kubernetes ecosystem',
+      'Ambassador Edge Stack can function as a fully-fledged Ingress controller, making it easy to work with other Ingress-oriented tools within the K8s ecosystem.',
+  },
+  'docs/edge-stack/latest/topics/running/tls/sni/': {
+    description:
+      'How to set up a local Kubernetes cluster on Windows Home to test applications easily. As Windows Developers, we need a proper Kubernetes environment to test..',
+  },
+  'docs/edge-stack/latest/howtos/istio/': {
+    description:
+      'Learn how to take advantage of both Ambassador Edge Stack and Istio to have complete control & observability over how requests are made in your cluster',
   },
   'docs/edge-stack/latest/topics/running/tls/mtls/': {
+    description:
+      'Ambassador Edge Stack and Mutual TLS (mTLS). Since Ambassador Edge Stack is a reverse proxy acting as the entry point to your cluster...',
+  },
+  'docs/edge-stack/latest/topics/using/intro-mappings': {
     description:
       'Ambassador Edge Stack and Mutual TLS (mTLS). Since Ambassador Edge Stack is a reverse proxy acting as the entry point to your cluster...',
   },
