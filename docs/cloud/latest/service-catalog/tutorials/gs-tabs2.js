@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import CodeBlock from '../../../../../../src/components/CodeBlock/index.js';
+import CodeBlock from '../../../../../../src/components/CodeBlock';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

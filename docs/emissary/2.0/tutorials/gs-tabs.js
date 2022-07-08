@@ -8,7 +8,7 @@ import React from 'react';
 
 import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
 import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
-import CodeBlock from '../../../../../src/components/CodeBlock/index.js';
+import CodeBlock from '../../../../../src/components/CodeBlock';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
