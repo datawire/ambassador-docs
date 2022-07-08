@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # API Keys Filter
 
-The API Keys filter validates API Keys present in the HTTP header. The list of authorized API Keys is defined directly in the Filter resource or a secret.
+The API Keys filter validates API Keys present in the HTTP header. The list of authorized API Keys is defined directly in a secret.
 
 ## API Keys global arguments
 
@@ -17,9 +17,8 @@ spec:
   APIKey:
     httpHeader: "x-my-api-key-header" # optional; default is X-API-Key
     keys:
-      - value: "my-api-key-not-secret" 
       - secretName: "my-secret-api-keys"
-      - secretNamespace: "example-namespace" # optional; default is active namespace
+        secretNamespace: "example-namespace" # optional; default is the namespace the filter is created in.
 ---
 apiVersion: v1
 kind: Secret

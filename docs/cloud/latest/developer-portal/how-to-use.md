@@ -28,11 +28,11 @@ Before exploring the Developer Portal, you first need to report your API docs us
 The Developer Portal is accessible in the [Cloud](https://app.getambassador.io/cloud/dev-portal) using the side navigation menu.
 
   <p align="center">
-    <img src="../images/dev-portal-cloud.png" width="200"/>
+    <img src="./../../images/dev-portal-cloud.png" width="800"/>
   </p>
 
 All your services are aggregated by [cell name](../service-catalog/concepts/cells), here you can explore the Open API documentation and try out the services :
 
   <p align="center">
-    <img src="../images/dev-portal-cloud-service.png" width="200"/>
+    <img src="./../../images/dev-portal-cloud-service.png" width="800"/>
   </p>
