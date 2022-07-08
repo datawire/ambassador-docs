@@ -9,7 +9,7 @@ import React from 'react';
 import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
 import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
 import TerminalIcon from '../../../../../src/assets/icons/terminal.inline.svg';
-import CodeBlock from '../../../../../src/components/CodeBlock/CodeBlock';
+import CodeBlock from '../../../../../src/components/CodeBlock/index.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,25 +73,25 @@ export default function SimpleTabs() {
           aria-label="simple tabs example"
         >
           <Tab
-            icon={<HelmIcon loading='lazy'/>}
+            icon={<HelmIcon loading="lazy" />}
             label="Helm 3"
             {...a11yProps(0)}
             style={{ minWidth: '10%', textTransform: 'none' }}
           />
           <Tab
-            icon={<HelmIcon loading='lazy'/>}
+            icon={<HelmIcon loading="lazy" />}
             label="Helm 2"
             {...a11yProps(1)}
             style={{ minWidth: '10%', textTransform: 'none' }}
           />
           <Tab
-            icon={<KubernetesIcon loading='lazy'/>}
+            icon={<KubernetesIcon loading="lazy" />}
             label="Kubernetes YAML"
             {...a11yProps(2)}
             style={{ minWidth: '10%', textTransform: 'none' }}
           />
           <Tab
-            icon={<TerminalIcon loading='lazy'/>}
+            icon={<TerminalIcon loading="lazy" />}
             label="Quick CLI Install"
             {...a11yProps(3)}
             style={{ minWidth: '10%', textTransform: 'none' }}
