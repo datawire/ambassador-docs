@@ -22,8 +22,32 @@
       link: /service-catalog/howtos/organize-service-catalog
     - title: Manage my subscriptions
       link: /subscriptions/howtos/manage-my-subscriptions
-    - title: Create API Keys filters
-      link: /service-catalog/howtos/create-api-keys-filters
+
+- title: Security
+  link: /security/
+  items:
+    - title: API Keys
+      items:
+        - title: Introduction
+          link: /security/api-keys/introduction/
+
+        - title: Create filter
+          link: /security/api-keys/create-filter/
+
+        - title: Manage your keys
+          link: /security/api-keys/manage-keys/
+
+        - title: Use a key
+          link: /security/api-keys/use-a-key/
+
+- title: Developer Portal
+  items:
+    - title: Usage
+      link: /developer-portal/how-to-use/
+
+    - title: Custom endpoint
+      link: /developer-portal/custom-endpoint/
+
 - title: Core concepts
   items:
     - title: Using a service catalog
@@ -38,8 +62,6 @@
       link: /service-catalog/concepts/services/
     - title: Service Groups
       link: /service-catalog/concepts/service-groups/
-    - title: Developer Portal
-      link: /developer-portal
 - title: Reference
   items:
     - title: Annotations
