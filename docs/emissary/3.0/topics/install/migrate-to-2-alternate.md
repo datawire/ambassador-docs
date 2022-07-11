@@ -1,3 +1,7 @@
+---
+    Title: Migrate to $productName$ $versionTwoX$
+    description: "Instructions for how to upgrade Ambassador Labs' $productName$ to $versionTwoX$. Transfer your current configuration of $AESproductName$ or $OSSproductName$ to $versionTwoX$."
+---
 import Alert from '@material-ui/lab/Alert';
 
 # Upgrading $productName$ with a separate cluster
@@ -9,21 +13,21 @@ certain that each installation cannot affect the other: it is extremely safe,
 but is also significantly more effort.
 
 For example, to upgrade from some other version of $AESproductName$ or
-$OSSproductName$ to $productName$ $version$:
+$OSSproductName$ to $productName$ $versionTwoX$:
 
-1. Install $productName$ $version$ in a completely new cluster.
+1. Install $productName$ $versionTwoX$ in a completely new cluster.
 
-2. **Create `Listener`s for $productName$ $version$.**
+2. **Create `Listener`s for $productName$ $versionTwoX$.**
 
-   When $productName$ $version$ starts, it will not have any `Listener`s, and it will not
-   create any. You must create `Listener` resources by hand, or $productName$ $version$
+   When $productName$ $versionTwoX$ starts, it will not have any `Listener`s, and it will not
+   create any. You must create `Listener` resources by hand, or $productName$ $versionTwoX$
    will not listen on any ports.
 
 3. Copy the entire configuration from the $productName$ 1.X cluster to the $productName$
-   $version$ cluster. This is most simply done with `kubectl get -o yaml | kubectl apply -f -`.
+   $versionTwoX$ cluster. This is most simply done with `kubectl get -o yaml | kubectl apply -f -`.
 
-   This will create `getambassador.io/v2` resources in the $productName$ $version$ cluster.
-   $productName$ $version$ will translate them internally to `getambassador.io/v3alpha1`
+   This will create `getambassador.io/v2` resources in the $productName$ $versionTwoX$ cluster.
+   $productName$ $versionTwoX$ will translate them internally to `getambassador.io/v3alpha1`
    resources.
 
 4. Each $productName$ instance has its own cluster, so you can test the new
@@ -33,4 +37,4 @@ $OSSproductName$ to $productName$ $version$:
    resource you're changing to `getambassador.io/v3alpha1` by using `kubectl edit`.
 
 6. Once everything is working with both versions, transfer incoming traffic to the $productName$
-   $version$ cluster.
+   $versionTwoX$ cluster.
