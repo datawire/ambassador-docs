@@ -1,3 +1,7 @@
+---
+  indexable: false
+---
+
 > **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](/docs/telepresence/latest/faqs) or [go to the quick start guide](/docs/telepresence/latest/quick-start/).**
 
 # Introduction to Service Preview

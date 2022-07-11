@@ -1,3 +1,7 @@
+---
+  indexable: false
+---
+
 # Install $OSSproductName$
 
 **The $AESproductName$ is now available and includes additional functionality beyond the current $OSSproductName$.**
