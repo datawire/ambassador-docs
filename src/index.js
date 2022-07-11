@@ -216,7 +216,7 @@ const index = ({ data, location, pageContext }) => {
 
       const slugFiltered = slug.filter((item) => item);
 
-      if (metaData[`${slugFiltered.join('/')}/`]) {
+      if (metaData[`${slugFiltered.join('/')}/`]?.description ) {
         metaDescription = metaData[`${slugFiltered.join('/')}/`].description;
       } else {
         metaDescription =
@@ -224,9 +224,8 @@ const index = ({ data, location, pageContext }) => {
             ? page.frontmatter.description
             : page.excerpt;
       }
-
       metaRobots =
-        page.frontmatter && page.frontmatter.indexable === false
+        ((page.frontmatter && page.frontmatter.indexable === false) || metaData[`${slugFiltered.join('/')}/`]?.indexable === false)
           ? 'noindex,nofollow'
           : null;
     }

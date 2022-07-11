@@ -334,6 +334,18 @@ export const metaData = {
     description:
       'Edge Stack - Traffic shadowing is a deployment pattern where production traffic is asynchronously copied to a non-production service for testing',
   },
+  'docs/emissary/3.0/topics/install/migration-matrix/': {
+    indexable: false
+  },
+  'docs/edge-stack/3.0/topics/install/upgrade/yaml/emissary-3.0/edge-stack-3.0/': {
+    indexable: false
+  },
+  'docs/edge-stack/3.0/topics/install/upgrade/helm/emissary-3.0/edge-stack-3.0/': {
+    indexable: false
+  },
+  'docs/edge-stack/3.0/topics/install/migration-matrix/': {
+    indexable: false
+  },
 };
 
 export const learningJourneys = [
