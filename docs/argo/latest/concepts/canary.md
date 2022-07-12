@@ -1,6 +1,6 @@
 ---
     Title: Canary deployments with Argo
-    description: An overview of canary deployments in Argo
+    description: Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things
 ---
 
 # Canary deployments

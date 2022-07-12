@@ -1,6 +1,6 @@
 ---
     Title: Maximize Edge Stack's potential with GitOps 
-    description: Maximize your Ship capabilities with GitOps
+    description: GitOps offers developers a way to manage operational workflows, particularly for Kubernetes, that relies on familiar processes like pull requests...
 ---
 
 # Developer-centric GitOps-style deployment 
