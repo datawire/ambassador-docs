@@ -1,3 +1,7 @@
+---
+  indexable: false
+---
+
 # Edge Policy Console
 
 The $productName$ provides you with an easy-to-use interface that so you can create custom resource definitions, download YAML files, and visit the Developer Portal, all in one place.
