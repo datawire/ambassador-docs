@@ -7,33 +7,12 @@ import React from 'react';
 
 import Alert from '@material-ui/lab/Alert';
 import AppBar from '@material-ui/core/AppBar';
-import InterceptAnimationSVG from '@src/assets/images/intercept-animation.inline.svg'
 import Paper from '@material-ui/core/Paper';
 import Tab from '@material-ui/core/Tab';
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
-
-export function Animation(props) {
-    let el = React.useRef(null);
-    React.useEffect(() => {
-        const queueAnimation = () => {
-            setTimeout(() => {
-                el.current?.getAnimations({subtree: true})?.forEach((anim) => {
-                    anim.finish();
-                    anim.play();
-                })
-                queueAnimation();
-            }, 3000);
-        };
-        queueAnimation();
-    }, el);
-    return (
-        <div ref={el} style="text-align: center">
-            <InterceptAnimationSVG style="max-width: 700px" {...props} loading='lazy'/>
-        </div>
-    );
-};
+import Animation from '@src/components/InterceptAnimation';
 
 export function TabsContainer({ children, ...props }) {
     const [state, setState] = React.useState({curTab: "personal"});
