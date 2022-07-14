@@ -54,11 +54,10 @@ const DocsHome = () => {
         <div className="docs__hero-text">
           <h1 className="docs__hero--title">Documentation</h1>
           <span className="docs__hero--description">
-            Code, ship, run. For modern cloud-native developers, this
-            development loop defines the lifecycle of maintaining and growing
-            their product. Code new services, ship them to production, and keep
-            them running efficiently over time. Ambassador Labs provides a full
-            range of products to keep your team on top of the loop.
+            Ambassador Labs provides a full range of products to keep 
+            your team on top of the loop. Explore our documentation to 
+            learn more about our products and how they can help your team 
+            excel through every stage of your development life cycle.
           </span>
         </div>
         <img className="docs__hero-img" src={DocsHero} alt="hero" loading='lazy'/>
@@ -66,35 +65,35 @@ const DocsHome = () => {
       <hr className="docs__separator docs__container docs__homePage-separator" />
       <div className="docs__home-product">
         <Product
-          title={'Code with Telepresence'}
+          title={'Telepresence'}
           description={
             'With Telepresence, you can easily build and ship code. Telepresence enables you to configure and maintain development and testing environments without impacting performance.'
           }
           image={Code}
           getStarted={goToCodeDocs}
-          docDescription={'Advanced Telepresence documentation'}
+          docDescription={'Telepresence documentation'}
           docImage={Telepresence}
           docLink={'/docs/telepresence/'}
         />
         <Product
-          title={'Ship with Argo'}
+          title={'Argo'}
           description={
             'With Argo, you can release updates cleanly and monitor your rollouts as you do. Create canary releases of new versions of a service easily with the option to safely rollback changes when necessarily.'
           }
           image={Ship}
           getStarted={goToShipDocs}
-          docDescription={'Advanced Argo documentation'}
+          docDescription={'Argo documentation'}
           docImage={Argo}
           docLink={'/docs/argo/'}
         />
         <Product
-          title={'Run with Edge Stack'}
+          title={'Edge Stack'}
           description={
             'In a fast-paced development environment, it is essential to keep services running 24/7. Mitigate issues, monitor updates, and maintain complete control over protecting your services with Edge Stack.'
           }
           image={Run}
           getStarted={goToRunDocs}
-          docDescription={'Advanced Edge Stack documentation'}
+          docDescription={'Edge Stack documentation'}
           docImage={EdgeStack}
           docLink={'/docs/edge-stack/'}
         />
