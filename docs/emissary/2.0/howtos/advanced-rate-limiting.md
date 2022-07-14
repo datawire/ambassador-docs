@@ -1,3 +1,7 @@
+---
+  indexable: false
+---
+
 # Advanced rate limiting
 
 $AESproductName$ integrates a flexible, high-performance Rate Limit Service (RLS). Similar to $OSSproductName$, the RLS features a decentralized configuration model so that individual teams can manage their own rate limits. For example:
