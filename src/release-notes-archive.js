@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import ReleaseNotesTemplate from './components/ReleaseNotes/release-notes';
 
-const releaseNotes = ({ data, location, pageContext }) => {
+const releaseNotesArchive = ({ data, location, pageContext }) => {
   return (
     <ReleaseNotesTemplate 
       data={data}
@@ -33,7 +33,6 @@ export const query = graphql`
           title
           image
           docs
-          href
           type
         }
       }
@@ -42,4 +41,4 @@ export const query = graphql`
   }
 `;
 
-export default releaseNotes;
+export default releaseNotesArchive;

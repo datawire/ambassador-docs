@@ -16,12 +16,6 @@ export const query = graphql`
   query ($linksslug: String, $slug: String!, $learningSlugs: [String]) {
     mdx(fields: { slug: { eq: $slug } }) {
       body
-      exports {
-        metaData {
-          name
-          path
-        }
-      }
       fields {
         slug
         linksslug
