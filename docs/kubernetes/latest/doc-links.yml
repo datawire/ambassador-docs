@@ -1,4 +1,6 @@
- - title: Overview of Kubernetes 
+ - title: Quick start
+   link: /quick-start
+ - title: Core concepts
    items:
      - title: "Kubernetes basics: Kubernetes for developers"
        link: /concepts/basics
@@ -8,11 +10,9 @@
        link: /concepts/faster
      - title: Kubernetes nuts and bolts - video
        link: /concepts/nutsandbolts
- - title: Kubernetes Tutorials
+ - title: How do I...
    items:
-     - title: Creating your dev environment
-       link: /quick-start
-     - title: Get code running on your cluster
+     - title: Get code running on my cluster
        link: /howtos/codetocluster
-     - title: Debugging issues in Kubernetes
+     - title: Debug issues in Kubernetes
        link: /howtos/debug
