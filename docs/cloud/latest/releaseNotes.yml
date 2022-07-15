@@ -33,8 +33,8 @@ changelog: ''
 items:
   - date: '2022-08-08'
     notes:
-      - title: Telepresence Intercept Definitions
-        body: Share Telepresence intercept definitions with your team members
+      - title: Telepresence Saved Intercepts
+        body: Share Telepresence saved intercepts with your team members
         image: ./telepresence-intercept-definitions.png
         docs: ./telepresence-intercept-definitions/
         type: feature
