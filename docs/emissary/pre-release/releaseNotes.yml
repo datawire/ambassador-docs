@@ -38,7 +38,7 @@ items:
       - title: Add additional pprof endpoints
         type: change
         body: >-
-          Add pprof endpoints serving additional profiles including CPU profiles (<code>/debug/pprof/profile</code>) and tracing (<code>/debug/pprof/trace</code>). Also add additional endpoints serving the command line running (<code>/debug/pprof/cmdline</code>) and program counters (<code>/debug/pprof/symbol</code>).
+          Add pprof endpoints serving additional profiles including CPU profiles (<code>/debug/pprof/profile</code>) and tracing (<code>/debug/pprof/trace</code>). Also add additional endpoints serving the command line running (<code>/debug/pprof/cmdline</code>) and program counters (<code>/debug/pprof/symbol</code>) for the sake of completeness.
 
       - title: Fix 503s after secret rotation
         type: bugfix
