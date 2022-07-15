@@ -1,3 +1,8 @@
+---
+title: "Telepresence saved intercepts"
+description: "Learn how to create, use and manage saved intercepts."
+---
+
 # Telepresence Saved Intercepts
 
 To make it easier to share Telepresence intercept configuration across team members Ambassador Cloud offers the option to create Saved Intercepts
@@ -13,7 +18,7 @@ a particular service in a given environment.
 1. An account in Ambassador Cloud.
 1. Access to a Kubernetes cluster.
 
-### Creating a Saved Intercept
+### Creating and using a Saved Intercept
 
 Follow the next instructions to create a saved intercept and share it with your team memebers.
 
@@ -28,7 +33,7 @@ Follow the next instructions to create a saved intercept and share it with your 
 4. Navigate to Ambassador Cloud to the [Intercept History page](https://app.getambassador.io/saved-intercepts/history) and pick the one you just
    executed. Click on the row to see the new Saved Intercept form and give the intercept configuration a name. After saving the intercept will be available
    for all of the team members to use in their Telepresence CLI.
-![Saved Intercepts Form](../images/telepresence-saved-intercepts-form.png)
+<img src="../images/telepresence-saved-intercepts-form.png"/>
 
 **Note**: Telepresence only creates the intercept history record in version v2.6.9 (to be confirmed) or later.
    
@@ -48,14 +53,14 @@ don't have to remember all the arguments required to intercept a service from a 
 
 Screenshot TBD
 
-## Managing Saved Intercepts
+##  Managing Saved Intercepts
 
 By navigating to the [Telepresence Saved Intercepts page on Ambassador Cloud](https://app.getambassador.io/saved-intercepts/saved-intercept),
 you can see the list of saved intercepts created by any Ambassador team member. For each of these, you can:
 
-- inspect its author, creation date and flags.
+-  inspect its author, creation date and flags.
 - delete a saved intercept.
 - see the whole interept command as it would be translated in the CLI.
 
-![Saved Intercepts List](../images/telepresene-saved-intercepts-list.png)
+<img src="../images/telepresence-saved-intercepts-list.png"/>
 
