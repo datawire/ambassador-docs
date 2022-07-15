@@ -6,18 +6,26 @@ For that, we leverage the APIKey configuration of the [Filter CRD](../../../../.
 
 # Steps
 
-First, click on the **Create filter** button to create one, and provide a name.
+Click on the **Create filter** button to create one, and start by providing a name. 
+
+The UI should also ask for a route to associate this first Filter with (you will then have to provide a host and a path). Each host / 
+route you define will be secured by the api keys you'll be able to generate later.
 
 <p align="center">
-  <img src="./../../../images/security-create-filter.png" width="300"/>
+  <img src="./../../../images/security-create-filter.png" width="500"/>
 </p>
 
-If this is the first time you create one, the UI should also ask for a route to associate
-this first Filter with (you will then have to aprovide a host and a path).
+Clic on **CREATE**, and copy the YAML source which has been generated for you:
 
-Then clic on create, and paste the YAML source which has been generated for you.
+<p align="center">
+  <img src="./../../../images/security-create-filter-yaml-source.png" width="500"/>
+</p>
 
-You can then save it in your favorite GitOps tool, or apply it directly to your cluster.
+You can now paste the content into a YAML file, and synchronize it with your favorite GitOps tool, or apply it directly to your cluster using `kubectl`.
+
+```bash
+kubectl apply -f generated-filters.yaml
+```
 
 
 

@@ -24,7 +24,6 @@
       link: /subscriptions/howtos/manage-my-subscriptions
 
 - title: Security
-  link: /security/
   items:
     - title: API Keys
       items:
