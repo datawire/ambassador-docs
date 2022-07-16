@@ -18,8 +18,8 @@ a particular service in a given environment.
 1. An account in Ambassador Cloud.
 1. Access to a Kubernetes cluster.
 
-### Creating and using a Saved Intercept
 
+### Instructions
 Follow the next instructions to create a saved intercept and share it with your team memebers.
 
 1. Run `telepresence login` to authenticate yourself in Ambassador Cloud.
@@ -33,12 +33,13 @@ Follow the next instructions to create a saved intercept and share it with your 
 4. Navigate to Ambassador Cloud to the [Intercept History page](https://app.getambassador.io/saved-intercepts/history) and pick the one you just
    executed. Click on the row to see the new Saved Intercept form and give the intercept configuration a name. After saving the intercept will be available
    for all of the team members to use in their Telepresence CLI.
-<img src="../images/telepresence-saved-intercepts-form.png"/>
 
-**Note**: Telepresence only creates the intercept history record in version v2.6.9 (to be confirmed) or later.
+![saved-intercepts-form](../images/telepresence-saved-intercepts-form.png)
+
+**Note:** Telepresence only creates the intercept history record in version v2.6.9 (to be confirmed) or later.
    
 
-### Using a Saved Intercept
+## Using a Saved Intercept
 
 Once a teammate or yourself have created a saved intercept you can reuse it to create more intercepts with the same set of arguments as in the original command just by typing:
 
@@ -62,5 +63,5 @@ you can see the list of saved intercepts created by any Ambassador team member. 
 - delete a saved intercept.
 - see the whole interept command as it would be translated in the CLI.
 
-<img src="../images/telepresence-saved-intercepts-list.png"/>
+![saved-intercepts-list](../images/telepresence-saved-intercepts-list.png)
 
