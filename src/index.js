@@ -9,7 +9,6 @@ import { Breadcrumbs } from '../../src/components/Breadcrumbs/Breadcrumbs';
 import Burger from '../../src/components/Burger/Burger';
 import ContactBlock from '../../src/components/ContactBlock';
 import DatawireMetaData from '../../src/components/DatawireMetaData';
-import Dropdown from '../../src/components/Dropdown';
 import Icon from '../../src/components/Icon';
 import ReadingTime from '../../src/components/ReadingTime';
 import SEO from '../../src/components/SEO/SEO';
@@ -33,12 +32,9 @@ import {
 import LearningJourneyImg from './images/learning-journe-prev-next.svg';
 import Argo from './products/Argo';
 import Cloud from './products/Cloud';
-import Code from './products/Code';
 import EdgeStack from './products/EdgeStack';
 import Emissary from './products/Emissary';
 import Kubernetes from './products/Kubernetes';
-import Run from './products/Run';
-import Ship from './products/Ship';
 import Telepresence from './products/Telepresence';
 import './style.less';
 import getDocsActiveVersion from './utils/getDocsActiveVersion';
@@ -216,7 +212,7 @@ const index = ({ data, location, pageContext }) => {
 
       const slugFiltered = slug.filter((item) => item);
 
-      if (metaData[`${slugFiltered.join('/')}/`]?.description ) {
+      if (metaData[`${slugFiltered.join('/')}/`]?.description) {
         metaDescription = metaData[`${slugFiltered.join('/')}/`].description;
       } else {
         metaDescription =
@@ -322,9 +318,6 @@ const index = ({ data, location, pageContext }) => {
         cloud: Cloud,
         argo: Argo,
         kubernetes: Kubernetes,
-        code: Code,
-        ship: Ship,
-        run: Run,
       }[product] || EdgeStack;
     return <Product />;
   };
@@ -576,20 +569,6 @@ const index = ({ data, location, pageContext }) => {
       return;
     }
 
-    if (item.title === 'Products') {
-      const menu = {
-        header: {
-          title: 'Products',
-          backAction: true,
-        },
-        menu: item.items,
-        navigationTree: ['Products'],
-      };
-
-      setBurgerMenu(menu);
-      return;
-    }
-
     const items = getMenuContent(item.items);
 
     const menu = {
@@ -652,7 +631,7 @@ const index = ({ data, location, pageContext }) => {
           detail: !current.link,
         };
 
-        !current.isProduct && current.name !== page
+        current.name !== page
           ? previous.items.push(item)
           : previous.products.push(item);
 
@@ -694,11 +673,6 @@ const index = ({ data, location, pageContext }) => {
     if (slug === 'home') {
       return [
         ...initialItems.items,
-        {
-          title: 'Products',
-          detail: true,
-          items: initialItems.products,
-        },
       ];
     }
 
@@ -793,43 +767,22 @@ const index = ({ data, location, pageContext }) => {
               <div className="docs__links-content docs__dekstop">
                 <ul className="docs__products-list">
                   {products.map((item) => {
-                    if (!item.isProduct) {
-                      const linkContent = version.archived ? (
-                        <a href={`${siteUrl}${item.link}`}>{item.name}</a>
-                      ) : (
-                        <Link to={item.link}>{item.name}</Link>
-                      );
-                      return (
-                        <li
-                          className={`${product.slug === item.slug ? 'docs__selected' : ''
-                            }`}
-                          key={item.name}
-                          onClick={claenStorage}
-                        >
-                          {linkContent}
-                        </li>
-                      );
-                    }
+                    const linkContent = version.archived ? (
+                      <a href={`${siteUrl}${item.link}`}>{item.name}</a>
+                    ) : (
+                      <Link to={item.link}>{item.name}</Link>
+                    );
+                    return (
+                      <li
+                        className={`${product.slug === item.slug ? 'docs__selected' : ''
+                          }`}
+                        key={item.name}
+                        onClick={claenStorage}
+                      >
+                        {linkContent}
+                      </li>
+                    );
                   })}
-
-                  <li
-                    className={`${product.isProduct ? 'docs__selected__dropdown' : ''
-                      }`}
-                    key="products"
-                  >
-                    <Dropdown
-                      label={`Products${product.name == 'Docs Home' || !product.isProduct
-                        ? ''
-                        : ' - ' + product.name
-                        }`}
-                      className={'docs__nav-dropdown'}
-                      handleOnChange={handleProductChange}
-                      value={product.slug}
-                      options={products
-                        .filter((i) => i.isProduct)
-                        .map((i) => ({ id: i.slug, name: i.name }))}
-                    />
-                  </li>
                 </ul>
               </div>
               <div className={'docs__nav-burger'}>

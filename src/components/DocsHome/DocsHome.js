@@ -1,16 +1,15 @@
 import React from 'react';
 
-import Argo from '../../../../src/assets/images/home/home-argo.svg';
 import Code from '../../../../src/assets/images/home/home-code.svg';
 import DocsHero from '../../../../src/assets/images/home/home-docs-hero.svg';
-import EdgeStack from '../../../../src/assets/images/home/home-edge-stack.svg';
 import Run from '../../../../src/assets/images/home/home-run.svg';
 import Ship from '../../../../src/assets/images/home/home-ship.svg';
-import Telepresence from '../../../../src/assets/images/home/home-telepresence.svg';
 import Button from '../../../../src/components/Button';
-import { goToCodeDocs, goToShipDocs, goToRunDocs } from '../../../../src/utils/routes';
-import Link from '../../../../src/components/Link';
-import { goToDocsTelepresence } from '../../../../src/utils/routes';
+import {
+  goToDocsTelepresence,
+  goToDocsArgo,
+  goToEdgeStackDocs
+} from '../../../../src/utils/routes';
 
 import './styles.less';
 
@@ -19,13 +18,11 @@ const Product = ({
   title,
   description,
   getStarted,
-  docDescription,
-  docImage,
-  docLink,
+  buttonTitle = 'GET STARTED',
 }) => (
   <div className="product__container">
     <div className="product__container-wrapper">
-      <img className="product__container-image" src={image} alt={title} loading='lazy'/>
+      <img className="product__container-image" src={image} alt={title} loading='lazy' />
       <h2 className="product__container-title">{title}</h2>
       <p className="product__container-description">{description}</p>
     </div>
@@ -35,15 +32,8 @@ const Product = ({
       color="ctaPurple"
       to={getStarted}
     >
-      GET STARTED
+      {buttonTitle}
     </Button>
-    <h3 className="product__container-docs--title">Ambassador Products</h3>
-    <div className="product__container-docs">
-      <img className="product__container-docs--image" src={docImage} alt={docDescription} loading='lazy'/>
-      <Link className="product__container-docs--description" to={docLink}>
-        {docDescription}
-      </Link>
-    </div>
   </div>
 );
 
@@ -54,13 +44,13 @@ const DocsHome = () => {
         <div className="docs__hero-text">
           <h1 className="docs__hero--title">Documentation</h1>
           <span className="docs__hero--description">
-            Ambassador Labs provides a full range of products to keep 
-            your team on top of the loop. Explore our documentation to 
-            learn more about our products and how they can help your team 
+            Ambassador Labs provides a full range of products to keep
+            your team on top of the loop. Explore our documentation to
+            learn more about our products and how they can help your team
             excel through every stage of your development life cycle.
           </span>
         </div>
-        <img className="docs__hero-img" src={DocsHero} alt="hero" loading='lazy'/>
+        <img className="docs__hero-img" src={DocsHero} alt="hero" loading='lazy' />
       </div>
       <hr className="docs__separator docs__container docs__homePage-separator" />
       <div className="docs__home-product">
@@ -70,10 +60,8 @@ const DocsHome = () => {
             'With Telepresence, you can easily build and ship code. Telepresence enables you to configure and maintain development and testing environments without impacting performance.'
           }
           image={Code}
-          getStarted={goToCodeDocs}
-          docDescription={'Telepresence documentation'}
-          docImage={Telepresence}
-          docLink={'/docs/telepresence/'}
+          getStarted={goToDocsTelepresence}
+          buttonTitle="Telepresence documentation"
         />
         <Product
           title={'Argo'}
@@ -81,10 +69,8 @@ const DocsHome = () => {
             'With Argo, you can release updates cleanly and monitor your rollouts as you do. Create canary releases of new versions of a service easily with the option to safely rollback changes when necessarily.'
           }
           image={Ship}
-          getStarted={goToShipDocs}
-          docDescription={'Argo documentation'}
-          docImage={Argo}
-          docLink={'/docs/argo/'}
+          getStarted={goToDocsArgo}
+          buttonTitle="Argo documentation"
         />
         <Product
           title={'Edge Stack'}
@@ -92,10 +78,8 @@ const DocsHome = () => {
             'In a fast-paced development environment, it is essential to keep services running 24/7. Mitigate issues, monitor updates, and maintain complete control over protecting your services with Edge Stack.'
           }
           image={Run}
-          getStarted={goToRunDocs}
-          docDescription={'Edge Stack documentation'}
-          docImage={EdgeStack}
-          docLink={'/docs/edge-stack/'}
+          getStarted={goToEdgeStackDocs}
+          buttonTitle="Edge Stack documentation"
         />
       </div>
     </div>
