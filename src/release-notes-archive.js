@@ -9,7 +9,7 @@ const releaseNotesArchive = ({ data, location, pageContext }) => {
       location={location}
       pageContext={pageContext}
     />
-  )
+  );
 };
 
 export const query = graphql`
