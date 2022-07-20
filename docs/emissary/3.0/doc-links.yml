@@ -14,7 +14,7 @@
        link: /topics/concepts/architecture
      - title: Rate limiting at the edge
        link: /topics/concepts/rate-limiting-at-the-edge
- - title: Installation and upgrades
+ - title: Installation and updates
    link: /topics/install/
    items:
      - title: Install with Helm
