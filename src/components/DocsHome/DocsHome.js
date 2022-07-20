@@ -44,10 +44,11 @@ const DocsHome = () => {
         <div className="docs__hero-text">
           <h1 className="docs__hero--title">Documentation</h1>
           <span className="docs__hero--description">
-            Ambassador Labs provides a full range of products to keep
-            your team on top of the loop. Explore our documentation to
-            learn more about our products and how they can help your team
-            excel through every stage of your development life cycle.
+           For every stage of your Kubernetes development loop, 
+           Ambassador Labs has the cloud-native tools to ensure 
+           your team’s success. Explore our documentation to find 
+           out more about our products and learn how Ambassador 
+           Labs can simplify your workflow and safeguard your services.
           </span>
         </div>
         <img className="docs__hero-img" src={DocsHero} alt="hero" loading='lazy' />
