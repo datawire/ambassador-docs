@@ -1,16 +1,5 @@
  - title: Quick start
    link: /tutorials/getting-started
- - title: Install and update $productName$
-   link: /topics/install/
-   items:
-     - title: Install with Helm
-       link: /topics/install/helm
-     - title: Install with Kubernetes YAML
-       link: /topics/install/yaml-install
-     - title: Try the demo with Docker
-       link: /topics/install/docker
-     - title: Upgrade or migrate to a newer version
-       link: /topics/install/migration-matrix
  - title: Core concepts
    items:
      - title: Kubernetes network architecture
@@ -25,9 +14,20 @@
        link: /topics/concepts/architecture
      - title: Rate limiting at the edge
        link: /topics/concepts/rate-limiting-at-the-edge
- - title: User guide
+ - title: Installation and upgrades
+   link: /topics/install/
    items:
-     - title: $productName$ deployment
+     - title: Install with Helm
+       link: /topics/install/helm
+     - title: Install with Kubernetes YAML
+       link: /topics/install/yaml-install
+     - title: Try the demo with Docker
+       link: /topics/install/docker
+     - title: Upgrade or migrate to a newer version
+       link: /topics/install/migration-matrix
+ - title: $productName$ user guide
+   items:
+     - title: Deployment
        items:
          - title: Deployment architecture
            link: /topics/running/ambassador-deployment
@@ -43,7 +43,7 @@
            link: /topics/running/running
          - title: Performance and scaling $productName$
            link: /topics/running/scaling    
-     - title: $productName$ HTTP/3 configuration
+     - title: HTTP/3 configuration
        items:
          - title: HTTP/3 overview
            link: /topics/running/http3
@@ -139,7 +139,7 @@
            link: /topics/running/ambassador
          - title: The Mapping resource
            link: /topics/using/intro-mappings
-     - title: TLS configuration in $productName$
+     - title: TLS configuration 
        items:
          - title: TLS overview
            link: /topics/running/tls/
