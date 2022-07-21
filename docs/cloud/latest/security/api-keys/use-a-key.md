@@ -1,10 +1,10 @@
 # Use a key
 
-Once the key has been provided, the end user can use it to request your service, 
-by adding it as a header to all its requests.
+To use the key, you or your end user will need to add a header to their requests with
+the given header for each filter. 
 
-For example, with a service serving on `https://${EDGE_STACK_IP}/api/my-service`,
-the following request should respond with a `200`: 
+For example, with a endpoint running at `https://${EDGE_STACK_IP}/api/my-service`, and the default filter of `x-api-key`
+the following request will respond with HTTP status code `200`: 
 
 ```bash
 curl -H "X-API-Key: ${MY_API_KEY}" https://staging-app.datawire.io/cloud/api/service-groups
