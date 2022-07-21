@@ -9,7 +9,7 @@ You will access and explore some of the key features of the Developer Portal in 
 
 ## What is the Ambassador Cloud Developer Portal ?
 
-The Developer Portal allows you to publish reference and API documentation about your services, it provides you a consolidated view using the information from all your [cells](../service-catalog/concepts/cells) and all your clusters.
+The Developer Portal allows you to publish API documentation about your services, it provides you a consolidated view using the information from all your [cells](../service-catalog/concepts/cells) and all your clusters.
 
 ## Features
 
