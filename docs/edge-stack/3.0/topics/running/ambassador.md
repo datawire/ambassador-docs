@@ -601,7 +601,7 @@ You can override the circuit breaker settings for individual `Mapping`s. By defa
 
 * `default_labels` sets default domains and labels to apply to every request.
 
-For more on how to use the default labels, , see the [Rate Limit reference](../../using/rate-limits/#attaching-labels-to-requests).
+For more on how to use the default labels, see the [Rate Limit reference](../../using/rate-limits/#attaching-labels-to-requests).
 
 ##### Default load balancer
 
