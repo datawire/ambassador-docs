@@ -17,7 +17,7 @@ route you define will be secured by the api keys you'll be able to generate for 
 </p>
 
 <Alert severity="info">
-  Filters can only be generated in the **ambassador** namespace.
+  Filters can only be generated in the <strong>ambassador</strong> namespace.
 </Alert>
 
 Click on **CREATE**, and copy the YAML source which has been generated for you:
