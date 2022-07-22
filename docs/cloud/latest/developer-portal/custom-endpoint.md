@@ -17,7 +17,7 @@ spec:
 kind: Mapping
 metadata:
   labels:
-    hostname: proxy-ambassador
+    hostname: ambassador-dev-portal
   name: private-portal
   namespace: ambassador
 spec:
@@ -31,11 +31,62 @@ spec:
 ---
 ```
 
+But if you would like to expose the portal with DNS and a hostname, you will need you use the following spec:
+
+
+```yaml
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  labels:
+    hostname: ambassador-dev-portal
+  name: dev-portal
+  namespace: ambassador
+spec:
+  prefix: /dev-portal/
+  rewrite: /dev-portal/
+  service:https://staging-app.datawire.io
+  host_rewrite: staging-app.datawire.io
+  add_request_headers:
+    X-Staging-Authorization:
+      value: Basic <staging-secret>
+      append: False
+    x-ambassador-api-key:
+      value: <insert-api-key>
+      append: False
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: ambassador-dev-portal
+  namespace: ambassador
+spec:
+  hostname: ambassador-dev-portal.com
+  requestPolicy:
+    insecure:
+      action: Route
+  mappingSelector:
+    matchLabels:
+      hostname: ambassador-dev-portal
+  tlsSecret:
+    name: fallback-self-signed-cert
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Host
+metadata:
+  name: wildcard
+  namespace: ambassador
+spec:
+  hostname: "*"
+  tlsSecret:
+    name: fallback-self-signed-cert
+```
+
 <Alert severity="warning">
   You'll need to generate an <a href="https://app.getambassador.io/cloud/settings/api-key">API token</a>.
 </Alert>
 
-Then the developer portal will be reachable at `https://my-private-portal-ambassador.internal.com/cloud/dev-portal/standalone`
+Then the developer portal will be reachable at `https://ambassador-dev-portal.internal.com/dev-portal/`
 
 Since this is a mapping, you can add authentication service on top of it, leveraging filters, or use it with a private
 IP to avoid any public exposure.

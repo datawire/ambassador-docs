@@ -36,3 +36,12 @@ All your services are aggregated by [cell name](../service-catalog/concepts/cell
   <p align="center">
     <img src="./../../images/dev-portal-cloud-service.png" width="800"/>
   </p>
+
+  ## Using the spec within the Developer Portal
+
+  Often times your users will want to try out some of the requests directly from the Developer Portal.
+
+  There may be some caveates when doing so:
+
+  1. If you've added your basepath in your swagger specification, or the full path to the URL Edge Stack will add it when parsing the contract. 
+  1. You may need to set CORS on the mappings for your routes to `https://app.getambassador.io`
