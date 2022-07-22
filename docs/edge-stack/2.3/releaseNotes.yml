@@ -35,6 +35,11 @@ items:
   - version: 2.3.2
     date: 'TBD'
     notes:
+      - title: Correctly handle CORS and CORs preflight request within the OAuth2 Fitler known endpoints
+        type: bugfix
+        body: >-
+          CORS preflight request were previously treated like any other CORS request and would trigger Filter's to be executed. Typically this request doesn't have a token attached so this would cause a redirect. The <code>OAuth2Filter</code> will now properly return a response with the correct CORs headers attached.
+
       - title: Fix 503s after secret rotation
         type: bugfix
         body: >-
@@ -44,6 +49,11 @@ items:
         type: bugfix
         body: >-
           When an <code>OAuth2Filter</code> is configured with multiple <code>protectedOrigins</code> it would incorrectly redirect the browser to the last origin listed, rather than redirecting back to the original URL. This has been fixed.
+
+      - title: Correct cookies for mixed HTTP/HTTPS OAuth2 origins
+        type: bugfix
+        body: >-
+          When an <code>OAuth2</code> filter sets cookies for a <code>protectedOrigin</code>, it should set a cookie's "Secure" flag to true for <code>https://</code> origins and false for <code>http://</code> origins. However, for filters with multiple origins, it set the cookie's flag based on the first origin listen in the Filter, rather than the origin that the cookie is actually for. This has been fixed
 
   - version: 2.3.1
     date: '2022-06-10'

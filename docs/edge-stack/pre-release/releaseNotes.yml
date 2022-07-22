@@ -35,11 +35,6 @@ items:
   - version: 3.1.0
     date: 'TBD'
     notes:
-      - title: Force protocol_version on RateLimitServices to v3
-        type: change
-        body: >-
-          Starting with the release of version 3.0.0, $productName$ automatically sets the required <code>protocol_version: "v3"</code> field on its own <code>AuthService</code> to reduce migration friction. This same change is now also included for <code>RateLimitServices</code> to ensure that they continue to work as expected through the migration from 2.x to 3.x even if the required field is missing.
-
       - title: Add additional pprof endpoints
         type: change
         body: >-
@@ -104,7 +99,7 @@ items:
         type: bugfix
         body: >-
           CORS preflight request were previously treated like any other CORS request and would trigger Filter's to be executed. Typically this request doesn't have a token attached so this would cause a redirect. The <code>OAuth2Filter</code> will now properly return a response with the correct CORs headers attached.
-      
+
       - title: Fix 503s after secret rotation
         type: bugfix
         body: >-
@@ -118,11 +113,7 @@ items:
       - title: Correct cookies for mixed HTTP/HTTPS OAuth2 origins
         type: bugfix
         body: >-
-          When an <code>OAuth2</code> filter sets cookies for a <code>protectedOrigin</code>, it
-          should set a cookie's "Secure" flag to true for <code>https://</code> origins and false
-          for <code>http://</code> origins.  However, for filters with multiple origins, it set the
-          cookie's flag based on the first origin listen in the Filter, rather than the origin that
-          the cookie is actually for. This has been fixed
+          When an <code>OAuth2</code> filter sets cookies for a <code>protectedOrigin</code>, it should set a cookie's "Secure" flag to true for <code>https://</code> origins and false for <code>http://</code> origins. However, for filters with multiple origins, it set the cookie's flag based on the first origin listen in the Filter, rather than the origin that the cookie is actually for. This has been fixed
 
   - version: 2.3.1
     date: '2022-06-10'
