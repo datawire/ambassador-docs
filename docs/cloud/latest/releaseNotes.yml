@@ -34,9 +34,9 @@ items:
   - date: '2022-08-08'
     notes:
       - title: Telepresence Saved Intercepts
-        body: Share Telepresence saved intercepts with your team members
-        image: ./telepresence-intercept-definitions.png
-        docs: ./telepresence-intercept-definitions/
+        body: Share Telepresence Saved Intercepts with your team members
+        image: ./telepresence-saved-intercepts.png
+        docs: ./telepresence-saved-intercepts/
         type: feature
   - date: '2022-08-02'
     notes:

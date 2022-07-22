@@ -34,6 +34,7 @@ Follow the next instructions to create a saved intercept and share it with your 
    executed. Click on the row to see the new Saved Intercept form and give the intercept configuration a name. After saving the intercept will be available
    for all of the team members to use in their Telepresence CLI.
 
+![saved-intercepts-form](../images/telepresence-intercept-history.png)
 ![saved-intercepts-form](../images/telepresence-saved-intercepts-form.png)
 
 **Note:** Telepresence only creates the intercept history record in version v2.6.9 (to be confirmed) or later.
@@ -47,8 +48,8 @@ Once a teammate or yourself have created a saved intercept you can reuse it to c
 telepresence intercept <saved-intercept-name>
 ```
 
-The previous command will fetch the intercpet configuration used to create the saved intercept and use it to run a new intercept so you
-don't have to remember all the arguments required to intercept a service from a particular cluster.
+The previous command will fetch the intercpet configuration used to create the saved intercept and use it to run a new intercept so users
+don't have to remember all the arguments required to intercept a service in a particular cluster.
 
 **Note**: This feature is only available in Telepresence CLI version v2.6.9 (to be confirmed)
 
