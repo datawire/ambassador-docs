@@ -25,7 +25,7 @@
        link: /topics/install/docker
      - title: Upgrade or migrate to a newer version
        link: /topics/install/migration-matrix
- - title: $productName$ user guide
+ - title: Edge Stack user guide
    items:
      - title: Deployment
        items:
