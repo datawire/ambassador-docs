@@ -21,8 +21,8 @@ metadata:
   name: private-portal
   namespace: ambassador
 spec:
-  prefix: /cloud/
-  rewrite: /cloud/
+  prefix: /dev-portal/
+  rewrite: /dev-portal/
   service: https://app.getambassador.io
   host_rewrite: app.getambassador.io
   hostname: my-private-portal-ambassador.internal.com
@@ -40,20 +40,16 @@ kind: Mapping
 metadata:
   labels:
     hostname: ambassador-dev-portal
-  name: dev-portal
+  name: private-portal
   namespace: ambassador
 spec:
   prefix: /dev-portal/
   rewrite: /dev-portal/
-  service:https://staging-app.datawire.io
-  host_rewrite: staging-app.datawire.io
+  service: https://app.getambassador.io
+  host_rewrite: app.getambassador.io
   add_request_headers:
-    X-Staging-Authorization:
-      value: Basic <staging-secret>
-      append: False
     x-ambassador-api-key:
       value: <insert-api-key>
-      append: False
 ---
 apiVersion: getambassador.io/v3alpha1
 kind: Host
