@@ -1,5 +1,6 @@
 ---
-description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
+title: "Getting Started with $productName$"
+description: "Learn how to install $productName$ with either Helm or kubectl to get started routing traffic from the edge of your Kubernetes cluster to your services..."
 ---
 
 import Alert from '@material-ui/lab/Alert';

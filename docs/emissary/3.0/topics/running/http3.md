@@ -144,6 +144,6 @@ spec:
 
 Once you've completed the steps above, you need to configure HTTP/3 support through your cloud service provider. The configuration processes for each provider can be found here:
 
-- HTTP/3 setup for [Amazon Elastic Kubernetes Service (EKS)](../../../howtos/http3/http3-eks)
-- HTTP/3 setup for [Azure Kubernetes Service (AKS)](../../../howtos/http3/http3-aks)
-- HTTP/3 setup for [Google Kubernetes Engine (GKE)](../../../howtos/http3/http3-gke)
+- HTTP/3 setup for [Amazon Elastic Kubernetes Service (EKS)](../../../howtos/http3-eks)
+- HTTP/3 setup for [Azure Kubernetes Service (AKS)](../../../howtos/http3-aks)
+- HTTP/3 setup for [Google Kubernetes Engine (GKE)](../../../howtos/http3-gke)

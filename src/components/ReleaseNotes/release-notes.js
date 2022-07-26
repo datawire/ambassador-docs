@@ -256,42 +256,23 @@ const releaseNotes = ({ data, location, pageContext }) => {
               <div className="docs__links-content docs__dekstop">
                 <ul className="docs__products-list">
                   {products.map((item) => {
-                    if (!item.isProduct) {
-                      const linkContent = version.archived ? (
-                        <a href={`${siteUrl}${item.link}`}>{item.name}</a>
-                      ) : (
-                        <Link to={item.link}>{item.name}</Link>
-                      );
-                      return (
-                        <li
-                          className={`${product.slug === item.slug ? 'docs__selected' : ''
-                            }`}
-                          key={item.name}
-                          onClick={claenStorage}
-                        >
-                          {linkContent}
-                        </li>
-                      );
-                    }
-                  })}
-                  <li
-                    className={`${product.isProduct ? 'docs__selected__dropdown' : ''
-                      }`}
-                    key="products"
-                  >
-                    <Dropdown
-                      label={`Products${product.name == 'Docs Home' || !product.isProduct
-                        ? ''
-                        : ' - ' + product.name
-                        }`}
-                      className={'docs__nav-dropdown'}
-                      handleOnChange={handleProductChange}
-                      value={product.slug}
-                      options={products
-                        .filter((i) => i.isProduct)
-                        .map((i) => ({ id: i.slug, name: i.name }))}
-                    />
-                  </li>
+                    const linkContent = version.archived ? (
+                      <a href={`${siteUrl}${item.link}`}>{item.name}</a>
+                    ) : (
+                      <Link to={item.link}>{item.name}</Link>
+                    );
+                    return (
+                      <li
+                        className={`${product.slug === item.slug ? 'docs__selected' : ''
+                          }`}
+                        key={item.name}
+                        onClick={claenStorage}
+                      >
+                        {linkContent}
+                      </li>
+                    );
+                  }
+                  )}
                 </ul>
               </div>
               <div
