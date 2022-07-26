@@ -180,42 +180,15 @@ $productName$ exposes endpoints at `localhost:8877/debug/pprof` to run Golang pr
 
 The following are the different types of profiles you can run:
 
-### `/debug/pprof/allocs`
-
-Returns a sampling of all past memory allocations.
-
-### `/debug/pprof/block`
-
-Returns stack traces of goroutines that led to blocking on sychronization primitives.
-
-### `/debug/pprof/cmdline`
-
-Returns the command line that was invoked by the current program.
-
-### `/debug/pprof/goroutine`
-
-Returns stack traces of all current goroutines.
-
-### `/debug/pprof/heap` 
-
-Returns a sampling of memory allocations of live objects.
-
-### `/debug/pprof/mutex`
-
-Returns stack traces of goroutines holding contended mutexes.
-
-### `/debug/pprof/profile`
-
-Returns pprof-formatted cpu profile. You can specify the duration using the seconds `GET` parameter. The default duration is 30 seconds.
-
-### `/debug/pprof/symbol`
-
-Returns the program counters listed in the request.
-
-### `/debug/pprof/threadcreate`
-
-Returns stack traces that led to creation of new OS threads.
-
-### `/debug/pprof/trace`
-
-Returns the execution trace in binary form. You can specify the duration using the seconds `GET` parameter. The default duration is 1 second.
+| Profile | Function |
+| :------- | :-------- |
+| /debug/pprof/allocs | Returns a sampling of all past memory allocations. |
+| /debug/pprof/block | Returns stack traces of goroutines that led to blocking on sychronization primitives. |
+| /debug/pprof/cmdline | Returns the command line that was invoked by the current program. |
+| /debug/pprof/goroutine | Returns stack traces of all current goroutines. |
+| /debug/pprof/heap | Returns a sampling of memory allocations of live objects. |
+| /debug/pprof/mutex | Returns stack traces of goroutines holding contended mutexes. |
+| /debug/pprof/profile | Returns pprof-formatted cpu profile. You can specify the duration using the seconds `GET` parameter. The default duration is 30 seconds. |
+| /debug/pprof/symbol | Returns the program counters listed in the request. |
+| /debug/pprof/threadcreate | Returns stack traces that led to creation of new OS threads. |
+| /debug/pprof/trace | Returns the execution trace in binary form. You can specify the duration using the seconds `GET` parameter. The default duration is 1 second. |

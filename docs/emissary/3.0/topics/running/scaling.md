@@ -189,4 +189,3 @@ The following are the different types of profiles you can run:
 | /debug/pprof/mutex | Returns stack traces of goroutines holding contended mutexes. |
 | /debug/pprof/symbol | Returns the program counters listed in the request. |
 | /debug/pprof/threadcreate | Returns stack traces that led to creation of new OS threads. |
-
