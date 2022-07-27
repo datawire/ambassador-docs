@@ -33,17 +33,90 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.1.0
-    date: 'TBD'
+    date: '2022-08-01'
     notes:
+      - title: Correct cookies for mixed HTTP/HTTPS OAuth2 origins
+        type: bugfix
+        body: >-
+          When an <code>OAuth2</code> filter sets cookies for a <code>protectedOrigin</code>, it
+          should set a cookie's "Secure" flag to true for <code>https://</code> origins and false
+          for <code>http://</code> origins.  However, for filters with multiple origins, it set the
+          cookie's flag based on the first origin listen in the Filter, rather than the origin that
+          the cookie is actually for.
+
+      - title: Correctly handle refresh tokens for OAuth2 filters with multiple origins
+        type: bugfix
+        body: >-
+          When an <code>OAuth2</code> filter with multiple <code>protectedOrigins</code> needs to
+          adjust the cookies for an active login (which only happens when using a refresh token), it
+          would erroneously redirect the web browser to the last origin listed, rather than
+          returning to the original URL.  This has been fixed.
+
+      - title: Correctly handle CORS and CORS preflight request within the OAuth2 Fitler known endpoints
+        type: bugfix
+        body: >-
+          Previously, the <code>OAuth2</code> filter's known endpoints <code>/.ambassador/oauth2/logout</code>
+          and <code>/.ambassador/oauth2/multicookie</code> did not understand CORS or CORS preflight request
+          which would cause the browser to reject the request. This has now been fixed and these endpoints will
+          attach the appropriate CORS headers to the response.
+
+      - title: Fix regression in the agent for the metrics transfer
+        type: bugfix
+        body: >-
+          A regression was introduced in 2.3.0 causing the agent to miss some of the metrics coming from
+          emissary ingress before sending them to Ambassador cloud. This issue has been resolved to ensure
+          that all the nodes composing the emissary ingress cluster are reporting properly.
+
       - title: Add additional pprof endpoints
         type: change
         body: >-
           Add pprof endpoints serving additional profiles including CPU profiles (<code>/debug/pprof/profile</code>) and tracing (<code>/debug/pprof/trace</code>). Also add additional endpoints serving the command line running (<code>/debug/pprof/cmdline</code>) and program counters (<code>/debug/pprof/symbol</code>) for the sake of completeness.
 
-      - title: Fix 503s after secret rotation
-        type: bugfix
+      - title: Default YAML enables the diagnostics interface from non-local clients on the admin service port
+        type: change
         body: >-
-          $productName$ would ocasionally start returning 503s on all new requests to the upstream service when a TLS certificate was rotated/renewed while there was active load on the upstream service. These 503s would persist between a few hours to a few days until one of the $productName$ pod was restarted. This bug was encountered most frequently when using Consul and was previously mitigated by the no longer supported legacy mode.
+          In the standard published <code>.yaml</code> files, the <code>Module</code> resource enables serving
+          remote client requests to the <code>:8877/ambassador/v0/diag/</code> endpoint.
+          The associated Helm chart release also now enables it by default.
+
+      - title: Add support for OpenAPI 2 contracts
+        type: feature
+        body: >-
+          The agent is now able to parse api contracts using swagger 2, and to convert them to OpenAPI 3, making them
+          available for use in the dev portal.
+
+      - title: Add support for secrets sync
+        type: feature
+        body: >-
+          Adds a new command to the agent directive service to manage secrets. This allows
+          a third party product to manage CRDs that depend upon a secret.
+
+      - title: Update Golang to 1.17.12
+        type: security
+        body: >-
+          Updated Golang to 1.17.12 to address the CVEs: CVE-2022-23806, CVE-2022-28327, CVE-2022-24675,
+          CVE-2022-24921, CVE-2022-23772.
+
+      - title: Update Curl to 7.80.0-r2
+        type: security
+        body: >-
+          Updated Curl to 7.80.0-r2 to address the CVEs: CVE-2022-32207, CVE-2022-27782, CVE-2022-27781,
+          CVE-2022-27780.
+
+      - title: Update openSSL-dev to 1.1.1q-r0
+        type: security
+        body: >-
+          Updated openSSL-dev to 1.1.1q-r0 to address CVE-2022-2097.
+
+      - title: Update ncurses to 1.1.1q-r0
+        type: security
+        body: >-
+          Updated ncurses to 1.1.1q-r0 to address CVE-2022-29458
+
+      - title: Upgrade jwt-go
+        type: security
+        body: >-
+          Upgrade jwt-go to latest commit to resolve CVE-2020-26160.
 
   - version: 3.0.0
     date: '2022-06-28'
