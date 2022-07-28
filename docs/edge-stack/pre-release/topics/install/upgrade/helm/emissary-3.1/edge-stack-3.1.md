@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-3.0/edge-stack-3.0">YAML-based
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-3.1/edge-stack-3.1">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -63,9 +63,9 @@ important notes:
 
 4. **Be careful about label selectors on Kubernetes Services!**
 
-   If you have services in $OSSproductName$ 3.0 that use selectors that will match
+   If you have services in $OSSproductName$ 3.X that use selectors that will match
    Pods from $AESproductName$ $version$, traffic will be erroneously split between
-   $OSSproductName$ 3.0 and $AESproductName$ $version$. The labels used by $AESproductName$
+   $OSSproductName$ 3.X and $AESproductName$ $version$. The labels used by $AESproductName$
    $version$ include:
 
    ```yaml

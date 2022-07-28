@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.3.Z to $productName$ $version$ (YAML)
+# Upgrade $productName$ 2.3.X to $productName$ $version$ (Helm)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 2.3.Z to $productName$ $version$. If
@@ -9,8 +9,8 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-2.3/edge-stack-3.0">Helm-based
+  This guide is written for upgrading an installation made using Helm.
+  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-2.3/edge-stack-3.1">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -26,7 +26,7 @@ $productName$ 3 is functionally compatible with $productName$ 2.x, but with any 
 
 ### Resources to check before migrating to $version$.
 
-$productName$ 3.0 has been upgraded from Envoy 1.17.X to Envoy 1.22 which removed support for the Envoy V2 Transport Protocol. This means all `AuthService`, `RatelimitService`, `LogServices`, and External `Filters` must be updated to use the V3 Protocol. Additionally support for some of the runtime bootstrap flags has been removed.
+$productName$ 3.X has been upgraded from Envoy 1.17.X to Envoy 1.22 which removed support for the Envoy V2 Transport Protocol. This means all `AuthService`, `RatelimitService`, `LogServices`, and External `Filters` must be updated to use the V3 Protocol. Additionally support for some of the runtime bootstrap flags has been removed.
 
 You can refer to the [Major changes in $productName$ 3.x](../../../../../../about/changes-3.y/) guide for an overview of the changes.
 
@@ -79,7 +79,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
    in previous version of $productName$ and does not require the complex migration steps that the migration from 1.x tto 2.x required.
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
-   your cluster. This is mandatory during any upgrade of $productName$.
+   your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
@@ -102,9 +102,25 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
 
 4. **Install $productName$ $version$.**
 
-   After installing the new CRDs, upgrade $productName$ $version$:
+   After installing the new CRDs, use Helm to install $productName$ $version$. Start by
+   making sure that your `datawire` Helm repo is set correctly:
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes.yaml && \
-   kubectl rollout status -n $productNamespace$ deployment/edge-stack -w
+   helm repo delete datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
    ```
+
+   Then, update your $productName$ installation in the `$productNamespace$` namespace.
+   If necessary for your installation (e.g. if you were running with
+   `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
+
+   ```bash
+   helm upgrade -n $productNamespace$ \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+   ```
+
+   <Alert severity="warning">
+     You must use the <a href="https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 3.X.
+   </Alert>

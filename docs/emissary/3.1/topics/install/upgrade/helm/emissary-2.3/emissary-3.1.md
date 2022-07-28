@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.3.Z to $productName$ $version$ (YAML)
+# Upgrade $productName$ 2.3.Z to $productName$ $version$ (Helm)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 2.3.Z to $productName$ $version$. If
@@ -9,8 +9,8 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/emissary-2.3/emissary-3.0">Helm-based
+  This guide is written for upgrading an installation originally made using Helm.
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.2/emissary-2.3">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -19,14 +19,14 @@ import Alert from '@material-ui/lab/Alert';
   <code>protocol_version: "v3"</code> or else an error will be posted and a static response will be returned in $version$.
 </Alert>
 
-Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading
-between versions is straightforward.
+Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between minor
+versions is straightforward.
 
 $productName$ 3 is functionally compatible with $productName$ 2.x, but with any major upgrade there are some changes to consider. Such as, Envoy removing support for V2 Transport Protocol features. Below we will outline some of these changes and things to consider when upgrading.
 
 ### Resources to check before migrating to $version$.
 
-$productName$ 3.0 has been upgraded from Envoy 1.17.X to Envoy 1.22 which removed support for the Envoy V2 Transport Protocol. This means all `AuthService`, `RatelimitService`, and `LogServices` must be updated to use the V3 Protocol. Additionally support for some of the runtime bootstrap flags has been removed.
+$productName$ 3.X has been upgraded from Envoy 1.17.X to Envoy 1.22 which removed support for the Envoy V2 Transport Protocol. This means all `AuthService`, `RatelimitService`, and `LogServices` must be updated to use the V3 Protocol. Additionally support for some of the runtime bootstrap flags has been removed.
 
 You can refer to the [Major changes in $productName$ 3.x](../../../../../../about/changes-3.y/) guide for an overview of the changes.
 
@@ -102,16 +102,25 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
 
 4. **Install $productName$ $version$.**
 
-   After installing the new CRDs, upgrade $productName$ $version$.
-
-   <Alert severity="info">
-     Our <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml"><code>emissary-emissaryns.yaml</code></a> file
-     uses the `emissary` namespace, since this is the default for $productName$.
-     We also publish <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml"><code>emissary-defaultns.yaml</code></a> for the
-     `default` namespace. For any other namespace, you should download one of these files and edit the namespaces manually.
-   </Alert>
+   After installing the new CRDs, use Helm to install $productName$ $version$. Start by
+   making sure that your `datawire` Helm repo is set correctly:
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml && \
-   kubectl rollout status  -n emissary deployment/emissary-ingress -w
+   helm repo delete datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
    ```
+
+   Then, update your $productName$ installation in the `$productNamespace$` namespace.
+   If necessary for your installation (e.g. if you were running with
+   `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
+
+   ```bash
+   helm upgrade -n $productNamespace$ \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status  -n $productNamespace$ deployment/emissary-ingress -w
+   ```
+
+   <Alert severity="warning">
+    You must use the <a href="https://artifacthub.io/packages/helm/datawire/emissary-ingress/$ossChartVersion$"><code>$productHelmName$</code> Helm chart</a> for $productName$ 3.Y.
+   </Alert>

@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.3.Z to $productName$ $version$ (Helm)
+# Upgrade $productName$ 2.3.Z to $productName$ $version$ (YAML)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 2.3.Z to $productName$ $version$. If
@@ -9,30 +9,30 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.2/emissary-2.3">YAML-based
+  This guide is written for upgrading an installation made without using Helm.
+  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-2.3/edge-stack-3.1">Helm-based
   upgrade instructions</a>.
 </Alert>
 
 <Alert severity="warning">
-  Make sure that you have updated any <code>AuthService</code>s, <code>LogService</code>s and <code>RateLimitService</code>s to use
-  <code>protocol_version: "v3"</code> or else an error will be posted and a static response will be returned in $version$.
+  Make sure that you have converted your External Filters to `protocol_version: "v3"` before upgrading.
+  If not set or set to `v2` then an error will be posted and a static response will be returned in $productName$ 3.Y.
 </Alert>
 
-Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between minor
+Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between
 versions is straightforward.
 
 $productName$ 3 is functionally compatible with $productName$ 2.x, but with any major upgrade there are some changes to consider. Such as, Envoy removing support for V2 Transport Protocol features. Below we will outline some of these changes and things to consider when upgrading.
 
 ### Resources to check before migrating to $version$.
 
-$productName$ 3.0 has been upgraded from Envoy 1.17.X to Envoy 1.22 which removed support for the Envoy V2 Transport Protocol. This means all `AuthService`, `RatelimitService`, and `LogServices` must be updated to use the V3 Protocol. Additionally support for some of the runtime bootstrap flags has been removed.
+$productName$ 3.X has been upgraded from Envoy 1.17.X to Envoy 1.22 which removed support for the Envoy V2 Transport Protocol. This means all `AuthService`, `RatelimitService`, `LogServices`, and External `Filters` must be updated to use the V3 Protocol. Additionally support for some of the runtime bootstrap flags has been removed.
 
 You can refer to the [Major changes in $productName$ 3.x](../../../../../../about/changes-3.y/) guide for an overview of the changes.
 
 1. Check Transport Protocol usage on all resources before migrating.
 
-    The `AuthService`, `RatelimitService`, and `LogServices` that use the `grpc` protocol will now need to explicilty set `protocol_version: "v3"`. If not set or set to `v2` then an error will be posted and a static response will be returned.
+    The `AuthService`, `RatelimitService`, `LogServices`, and External `Filters` that use the `grpc` protocol will now need to explicilty set `protocol_version: "v3"`. If not set or set to `v2` then an error will be posted and a static response will be returned.
 
     `protocol_version` should be updated to `v3` for all of the above resources while still running $productName$ $versionTwoX$. As of version `2.3.z`+, support for `protocol_version` `v2` and `v3` is supported in order to allow migration from `protocol_version` `v2` to `v3` before upgrading to $productName$ $version$ where support for `v2` is removed.
 
@@ -82,7 +82,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
    your cluster. This is mandatory during any upgrade of $productName$.
 
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
@@ -102,25 +102,9 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
 
 4. **Install $productName$ $version$.**
 
-   After installing the new CRDs, use Helm to install $productName$ $version$. Start by
-   making sure that your `datawire` Helm repo is set correctly:
+   After installing the new CRDs, upgrade $productName$ $version$:
 
    ```bash
-   helm repo delete datawire
-   helm repo add datawire https://app.getambassador.io
-   helm repo update
+   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes.yaml && \
+   kubectl rollout status -n $productNamespace$ deployment/edge-stack -w
    ```
-
-   Then, update your $productName$ installation in the `$productNamespace$` namespace.
-   If necessary for your installation (e.g. if you were running with
-   `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
-
-   ```bash
-   helm upgrade -n $productNamespace$ \
-        $productHelmName$ datawire/$productHelmName$ && \
-   kubectl rollout status  -n $productNamespace$ deployment/emissary-ingress -w
-   ```
-
-   <Alert severity="warning">
-    You must use the <a href="https://artifacthub.io/packages/helm/datawire/emissary-ingress/$ossChartVersion$"><code>$productHelmName$</code> Helm chart</a> for $productName$ 3.Y.
-   </Alert>

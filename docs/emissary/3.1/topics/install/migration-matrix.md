@@ -25,8 +25,8 @@ See the [instructions on updating $AESproductName$](../../../../../edge-stack/$a
 
 | If you're running.               | You can upgrade to                                                                                                         |
 |----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| $OSSproductName$ $version$       | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/helm/emissary-3.0/edge-stack-3.0) |
-| $OSSproductName$ $versionTwoX$           | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.3/emissary-3.0)                                                    |
+| $OSSproductName$ $version$       | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/helm/emissary-3.1/edge-stack-3.1) |
+| $OSSproductName$ $versionTwoX$           | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.3/emissary-3.1)                                                    |
 | $OSSproductName$ 2.2.X           | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-2.2/emissary-2.3)                                                    |
 | $OSSproductName$ 2.0.5           | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-2.0/emissary-2.3)                                                    |
 | $OSSproductName$ $versionOneX$          | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-1.14/emissary-2.3)                                                   |
@@ -36,8 +36,8 @@ See the [instructions on updating $AESproductName$](../../../../../edge-stack/$a
 
 | If you're running.               | You can upgrade to                                                                                                         |
 |----------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| $OSSproductName$ $version$       | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/yaml/emissary-3.0/edge-stack-3.0) |
-| $OSSproductName$ $versionTwoX$           | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.3/emissary-3.0)                                                    |
+| $OSSproductName$ $version$       | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/yaml/emissary-3.1/edge-stack-3.1) |
+| $OSSproductName$ $versionTwoX$           | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.3/emissary-3.1)                                                    |
 | $OSSproductName$ 2.2.X           | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-2.2/emissary-2.3)                                                    |
 | $OSSproductName$ 2.0.5           | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-2.0/emissary-2.3)                                                    |
 | $OSSproductName$ $versionOneX$          | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-1.14/emissary-2.3)                                                   |

@@ -11,7 +11,7 @@ $productName$ 3 is functionally compatible with $productName$ 2.x, but with any 
 
 ## 1. Envoy Upgraded to 1.22
 
-$productName$ 3.0 has been upgraded from Envoy 1.17.X to Envoy **1.22** which keeps $productName$ up-to-date with
+$productName$ 3.X has been upgraded from Envoy 1.17.X to Envoy **1.22** which keeps $productName$ up-to-date with
 the latest security fixes, bug fixes, performance improvements and feature enhancements provided by Envoy Proxy. Most of the changes are under the hood but the most notable change to developers is the removal of support for Envoy V2 Transport Protocol. This means all AuthServices and LogServices must be updated to use the V3 Protocol.
 
 This also means some of the v2 runtime bootstrap flags have been removed as well:
@@ -40,7 +40,7 @@ This also means some of the v2 runtime bootstrap flags have been removed as well
 ## 2. Envoy V2 Protocol Support Removed
 
 With the upgrade to Envoy **1.22**, the V2 Envoy Transport Protocol is no longer supported.
-$productName$ 3.0 **only** supports [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api).
+$productName$ 3.X **only** supports [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api).
 
 <Alert severity="warn">
 The environment variable <code>AMBASSADOR_ENVOY_API_VERSION</code> has been removed and will no longer have the affect
