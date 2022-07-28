@@ -47,6 +47,9 @@
     - title: Custom endpoint
       link: /developer-portal/custom-endpoint/
 
+    - title: Troubleshooting
+      link: /developer-portal/troubleshooting/
+
 - title: Core concepts
   items:
     - title: Using a service catalog

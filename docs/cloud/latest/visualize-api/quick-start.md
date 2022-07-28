@@ -12,10 +12,16 @@ You can visualize and explore your service’s OpenAPI specification (formerly k
    Kubernetes cluster. This guide assumes you have deployed the `quote` application and resources from the [Service Catalog quick start](../../service-catalog/quick-start).
 2. Enable reporting the `quote` service documentation by creating, or editing, the `quote-backend` Ambassador Mapping resource with the following docs path `/.ambassador-internal/openapi-docs`
 
-   ```
-   echo '---
-   apiVersion: x.getambassador.io/v3alpha1
-   kind: AmbassadorMapping
+<Alert severity="warning">
+  In the below example, the hostname is wildcard but you should specify your own hostname, otherwise you will need to enter it manually in the Ambassador Cloud Dev Portal when you will want to try out your APIs directly in the UI.
+</Alert>
+
+
+   ```bash
+   kubectl apply -f - <<EOF
+   ---
+   apiVersion: getambassador.io/v3alpha1
+   kind: Mapping
    metadata:
      name: quote-backend
    spec:
@@ -24,7 +30,8 @@ You can visualize and explore your service’s OpenAPI specification (formerly k
      service: quote
      docs:
        path: "/.ambassador-internal/openapi-docs"
-   ' | kubectl apply -f -
+   ...
+   EOF
    ```
 
 ## Visualize the API Documentation
