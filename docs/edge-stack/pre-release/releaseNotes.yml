@@ -35,56 +35,73 @@ items:
   - version: 3.1.0
     date: '2022-08-01'
     notes:
-
-      - title: Correctly handle CORS and CORs preflight request within the OAuth2 Fitler known endpoints
-        type: bugfix
+      - title: Add new Filter to support authenticating APIKey's
+        type: feature
         body: >-
-          CORS preflight request were previously treated like any other CORS request and would trigger Filter's to be executed. Typically this request doesn't have a token attached so this would cause a redirect. The <code>OAuth2Filter</code> will now properly return a response with the correct CORs headers attached.
-
-      - title: Properly handle OAuth2Filter redirects with multiple origins
-        type: bugfix
+          A new <code>Fitler</code> has been added to support validating APIKey's on incoming requests.The new <code>APIKeyFilter</code> when applied with a <code>FilterPolicy</code> will check to
+          see if the incoming requests has a valid API Key in the request header. $productName$ uses Kubernetes <code>Secret</code>'s to lookup valid keys for authorizing requests.
+      - title: Add support to watch for secrets with APIKey's
+        type: feature
         body: >-
-          When an <code>OAuth2Filter</code> is configured with multiple <code>protectedOrigins</code> it would incorrectly redirect the browser to the last origin listed, rather than redirecting back to the original URL. This has been fixed.
-
-      - title: Correct cookies for mixed HTTP/HTTPS OAuth2 origins
-        type: bugfix
+          Emissary-ingress has been taught to watch for APIKey secrets when $productName$ is running and
+          makes them available to be used with the new <code>APIKeyFilter</code>.
+      - title: A new experimental Redis driver for use with the OAuth2 Filter
+        type: feature
         body: >-
-          When an <code>OAuth2</code> filter sets cookies for a <code>protectedOrigin</code>, it
-          should set a cookie's "Secure" flag to true for <code>https://</code> origins and false
-          for <code>http://</code> origins.  However, for filters with multiple origins, it set the
-          cookie's flag based on the first origin listen in the Filter, rather than the origin that
-          the cookie is actually for. This has been fixed
+          A new opt-in feature flag has been added that allows $productName$ to use a new Redis driver when storing state between requests for the OAuth2 Filter. The new driver has better connection pool handling, shares connections and supports the Redis RESP3 protocol.
 
-      - title: Fix regression in the agent for the metrics transfer
-        type: bugfix
+          Set <code>AES_REDIS_EXPERIMENTAL_DRIVER_ENABLED=true</code> to enable the experimental feature. Most of the standard Redis configuration fields (e.g.<code>REDIS_*</code>) can be used with the driver.
+          However, due to the drivers better connection handling the new driver no longer supports setting <code>REDIS_SURGE_LIMIT_INTERVAL</code>, <code>REDIS_SURGE_LIMIT_AFTER</code>, <code>REDIS_SURGE_POOL_SIZE</code>, <code>REDIS_SURGE_POOL_DRAIN_INTERVAL</code> and these will be ignored.
+
+          Note: Other $productName$ features such as the <code>RateLimitService</code> will continue to use the current
+          Redis driver and in future releases we plan to roll out the new driver for those features as well.
+      - title: Add support for injecting a valid synthetic RateLimitService
+        type: change
         body: >-
-          A regression was introduced in 2.3.0 causing the agent to miss some of the metrics coming from
-          emissary ingress before sending them to Ambassador cloud. This issue has been resolved to ensure
-          that all the nodes composing the emissary ingress cluster are reporting properly.
+          If $productName$ is running then Emissary-ingress ensures that only a single RateLimitService is active. If a user doesn't provide one or provides an invalid one then a synthetic RateLimitService will be
+          injected. If the <code>protocol_version</code> field is not set or set to an invalid value then it will automatically get upgraded <code>protocol_version: v3</code>.
 
+          This matches the existing behavior that was introduced in $productName$ v3.0.0 for the <code>AuthService</code>. For new installs a valid <code>RateLimitService</code> will be added but this
+          change ensures a smooth upgrade from $productName$ to v2.3.Z to v3.Y for users who use the manifest in a GitOps scenario.
+      - title: Add Agent support for OpenAPI 2 contracts
+        type: feature
+        body: >-
+          The agent is now able to parse api contracts using swagger 2, and to convert them to OpenAPI 3, making them available for use in the dev portal.
+      - title: Default YAML enables the diagnostics interface from non-local clients on the admin service port
+        type: change
+        body: >-
+          In the standard published <code>.yaml</code> files, the <code>Module</code> resource enables serving remote client requests to the <code>:8877/ambassador/v0/diag/</code> endpoint.The associated Helm chart release also now enables it by default.
       - title: Add additional pprof endpoints
         type: change
         body: >-
           Add pprof endpoints serving additional profiles including CPU profiles (<code>/debug/pprof/profile</code>) and tracing (<code>/debug/pprof/trace</code>). Also add additional endpoints serving the command line running (<code>/debug/pprof/cmdline</code>) and program counters (<code>/debug/pprof/symbol</code>) for the sake of completeness.
-
-      - title: Default YAML enables the diagnostics interface from non-local clients on the admin service port
-        type: change
+      - title: Correct cookies for mixed HTTP/HTTPS OAuth2 origins
+        type: bugfix
         body: >-
-          In the standard published <code>.yaml</code> files, the <code>Module</code> resource enables serving
-          remote client requests to the <code>:8877/ambassador/v0/diag/</code> endpoint.
-          The associated Helm chart release also now enables it by default.
-
-      - title: Add support for OpenAPI 2 contracts
-        type: feature
+          When an <code>OAuth2</code> filter sets cookies for a <code>protectedOrigin</code>, it should set a cookie's "Secure" flag to true for <code>https://</code> origins and false for <code>http://</code> origins.  However, for filters with multiple origins, it set the cookie's flag based on the first origin listen in the Filter, rather than the origin that the cookie is actually for.
+      - title: Correctly handle refresh tokens for OAuth2 filters with multiple origins
+        type: bugfix
         body: >-
-          The agent is now able to parse api contracts using swagger 2, and to convert them to OpenAPI 3, making them
-          available for use in the dev portal.
-
-      - title: Add support for secrets sync
-        type: feature
+          When an <code>OAuth2</code> filter with multiple <code>protectedOrigins</code> needs to adjust the cookies for an active login (which only happens when using a refresh token), it
+          would erroneously redirect the web browser to the last origin listed, rather than returning to the original URL.  This has been fixed.
+      - title: Correctly handle CORS and CORs preflight request within the OAuth2 Fitler known endpoints
+        type: bugfix
         body: >-
-          Adds a new command to the agent directive service to manage secrets. This allows
-          a third party product to manage CRDs that depend upon a secret.
+          Previously, the <code>OAuth2</code> filter's known endpoints <code>/.ambassador/oauth2/logout</code> and <code>/.ambassador/oauth2/multicookie</code> did not understand CORS or CORS preflight request
+          which would cause the browser to reject the request. This has now been fixed and these endpoints will attach the appropriate CORS headers to the response.
+      - title: Fix regression in the agent for the metrics transfer.
+        type: bugfix
+        body: >-
+          A regression was introduced in 2.3.0 causing the agent to miss some of the metrics coming from emissary ingress before sending them to Ambassador cloud. This issue has been resolved to ensure that all the nodes composing the emissary ingress cluster are reporting properly.
+      - title: Handle long cluster names for injected acme-challenge route.
+        type: bugfix
+        body: >-
+          Previously, we would inject an upstream route for acme-challenge that was targeting the localhost auth service cluster. This route is injected to make Envoy configuration happy and the AuthService
+          that is shipped with $productName$ will handle it properly. However, if the cluster name is longer than 60 characters due to a long namespace, etc... then $productName$ will truncate it and make
+          sure it is unique. When this happens the name of the cluster assigned to the acme-challenge route would get out-of-sync and would introduce invalid Envoy configuration.
+
+          To avoid this $productName$ will now inject a route that returns a direct <code>404</code> response rather than pointing at an arbitrary cluster. This matches existing behavior and is a transparent
+          change to the user.
 
       - title: Update Golang to 1.17.12
         type: security
