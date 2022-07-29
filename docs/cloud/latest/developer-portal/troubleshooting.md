@@ -7,7 +7,11 @@ description: "API Management by Ambassador"
 
 ## The URL displayed in the Developer Portal does not contain the hostname
 
-The hostname must be set in your `Mapping` resource.
+The hostname or host must be set in your `Mapping` resource depending on your apiVersion.
+
+<Alert severity="warning">
+  If you are using getambassador.io/v3alpha1 apiVersion and beyond, you must use hostname.
+</Alert>
 
    ```yaml
    ---
@@ -17,6 +21,25 @@ The hostname must be set in your `Mapping` resource.
      name: quote-backend
    spec:
      hostname: my-awesome-company.com
+     prefix: /backend/
+     service: quote
+     docs:
+       path: "/.ambassador-internal/openapi-docs"
+   ...
+   ```
+
+<Alert severity="warning">
+  If you are using getambassador.io/v2 apiVersion, you must use host instead.
+</Alert>
+
+  ```yaml
+   ---
+   apiVersion: getambassador.io/v2
+   kind: Mapping
+   metadata:
+     name: quote-backend
+   spec:
+     host: my-awesome-company.com
      prefix: /backend/
      service: quote
      docs:
