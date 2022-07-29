@@ -45,15 +45,13 @@ Follow the next instructions to create a saved intercept and share it with your 
 Once a teammate or yourself have created a saved intercept you can reuse it to create more intercepts with the same set of arguments as in the original command just by typing:
 
 ```bash
-telepresence --use-saved-intercept <saved-intercept-name>
+telepresence intercept --use-saved-intercept <saved-intercept-name>
 ```
 
 The previous command will fetch the intercpet configuration in the saved intercept and use it to run a new intercept so users
 don't have to remember all the arguments required to intercept a service in a particular cluster.
 
 **Note**: This feature is only available in Telepresence CLI version v2.7.0 or later.
-
-Screenshot TBD
 
 ##  Managing Saved Intercepts
 
