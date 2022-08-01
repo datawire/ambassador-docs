@@ -6,7 +6,6 @@ For that, we leverage the API Key configuration of the [Filter CRD](../../../../
 
 # Steps
 
-To create a filter, Click on the **Create Filter** button. 
 Click on the **Create filter** button to create one, and start by providing a name. 
 
 You will be asked for a host and path to associate the Filter. Each host / 

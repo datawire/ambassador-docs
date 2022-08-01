@@ -2,11 +2,11 @@ import Alert from '@material-ui/lab/Alert';
 
 # Manage API keys
 
-This page will display all filters associated to your cluster, and give you the ability to create and revoke keys amongst those filters.
+This page will display all API Keys filters associated to your cluster, and give you the ability to create and revoke keys amongst those filters.
 
 # Steps
 
-Browse through the different filters and unfurl the one you want to manage by clicking on it.
+Browse through the different API Keys filters and unfurl the one you want to manage by clicking on it.
 
 <p align="center">
   <img src="./../../../images/security-filters-api-keys-unfold.png" width="1000"/>

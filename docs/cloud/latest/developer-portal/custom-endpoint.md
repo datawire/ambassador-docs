@@ -84,5 +84,5 @@ spec:
 
 Then the developer portal will be reachable at `https://ambassador-dev-portal.internal.com/dev-portal/`
 
-Since this is a mapping, you can add authentication service on top of it, leveraging filters, or use it with a private
+Since this is a mapping, you can add an authentication service on top of it, leveraging filters, or use it with a private
 IP to avoid any public exposure.
