@@ -42,7 +42,7 @@ You can visualize and explore your service’s OpenAPI specification (formerly k
 
 3. Click on the API tab to access the rendered OpenAPI documentation.
 
-4. You can also see all your API documentation by clicking on the **Dev Portal** button in the side bar, documented [here](../../developer-portal/how-to-use/).
+4. You can also see all your API documentation by clicking on the **Dev Portal** button in the side bar, documented [here](../../developer-portal/developer-portal/).
 
 ## <img class="os-logo" src="../../images/logo.png" alt="Telepresence Logo" /> What's next?
 
