@@ -14,7 +14,7 @@ Before you explore the Developer Portal, you first need to report your API docs 
 
 To expose the Developer Portal in Ambassador Cloud, you need to add a `Mapping` resource to your Edge Stack cluster using one of the examples below. 
 
-For the `x-ambassador-api-key` field in the `Mapping` resources shown below, you need to generate an [API key](https://app.getambassador.io/cloud/settings/api-key) in Ambassador Cloud and add that API token as the value for that field. Because these are standard Edge Stack `Mapping` resources, you can add additional security to the resource as you would with any other [Edge Stack `Mapping` resource](/edge-stack/latest/topics/using/intro-mappings/).
+For the `x-ambassador-api-key` field in the `Mapping` resources shown below, you need to generate an [API key](https://app.getambassador.io/cloud/settings/api-key) in Ambassador Cloud and add that API token as the value for that field. Because these are standard Edge Stack `Mapping` resources, you can add additional security to the resource as you would with any other [Edge Stack `Mapping` resource](../../../edge-stack/latest/topics/using/intro-mappings/).
 
 To expose the Developer Portal with an internal DNS entry, create a `Mapping` resource similar to the following: 
 
@@ -85,7 +85,4 @@ spec:
     name: fallback-self-signed-cert
 ```
 
-Once you've added the `Mapping` resources to your cluster, the developer portal is available at `https://ambassador-dev-portal.internal.com/dev-portal/`
-
-
-`
+Once you've added the `Mapping` resources to your cluster, the developer portal is available at `https://ambassador-dev-portal.internal.com/dev-portal/`.
