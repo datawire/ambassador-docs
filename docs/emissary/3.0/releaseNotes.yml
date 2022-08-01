@@ -33,7 +33,7 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.0.0
-    date: 'TBD'
+    date: '2022-06-28'
     notes:
       - title: Upgrade to Envoy 1.22
         type: change

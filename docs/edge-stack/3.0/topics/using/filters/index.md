@@ -100,7 +100,6 @@ When multiple Filters are specified in a rule:
  * `onDeny` identifies what to do when the filter returns an "HTTP response":
    * `"break"`: End processing, and return the response directly to
      the requesting HTTP client.  Later filters are not called.  The request is not forwarded to the upstream service.
-   * `"continue"`: Continue processing.  The request is passed to the next filter listed; or if at the end of the list, it is forwarded
    * `"continue"`: Continue processing.  The request is passed to the
      next filter listed; or if at the end of the list, it is forwarded to the upstream service.  The HTTP response returned from the filter is discarded.
  * `onAllow` identifies what to do when the filter returns a
