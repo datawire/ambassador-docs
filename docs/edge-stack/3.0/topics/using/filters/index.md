@@ -14,7 +14,6 @@ Edge Stack supports the following filter types:
 * [OAuth2](oauth2) - performs OAuth2 authorization against an identity provider implementing [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html).
 * [Plugin](plugin) - allows users to write custom Filters in Go that run as part of the Edge Stack container
 * [External](external) - allows users to call out to other services for request processing. This can include both custom services (in any language) or third party services.
-* [API Keys](apikeys) - validates API Keys present in a custom HTTP header
 
 ## Managing Filters
 
