@@ -1,33 +1,5 @@
 - title: Quick Start
   link: /service-catalog/quick-start/
-- title: How do I...
-  items:
-    - title: Create a local K8s Dev Environment
-      link: service-catalog/howtos/qs-java-advanced/
-    - title: Annotate a service
-      link: /service-catalog/howtos/annotate/
-    - title: Intercept a service
-      link: /service-catalog/howtos/intercept/
-    - title: Manage my cells
-      link: /service-catalog/howtos/cells/
-    - title: Filter my service view
-      link: /service-catalog/howtos/favorites/
-    - title: Enable GitOps workflows
-      link: /gitops/quick-start
-    - title: Configure Automated Configuration Analysis
-      link: /config-analysis/quick-start
-    - title: Use Deployment Previews
-      link: /deployment-previews/quick-start
-    - title: Organize the service catalog
-      link: /service-catalog/howtos/organize-service-catalog
-    - title: Manage my subscriptions
-      link: /subscriptions/howtos/manage-my-subscriptions
-    - title: Developer Portal migration
-      link: /developer-portal/migration
-    - title: Secure your Services
-      link: /security/security/
-    - title: Developer Portal
-      link: /developer-portal/developer-portal/
 - title: Core concepts
   items:
     - title: Using a service catalog
@@ -42,7 +14,33 @@
       link: /service-catalog/concepts/services/
     - title: Service Groups
       link: /service-catalog/concepts/service-groups/
-- title: Reference
+- title: User Guide
+  items:
+    - title: Create a local K8s Dev Environment
+      link: service-catalog/howtos/qs-java-advanced/
+    - title: Annotating services
+      link: /service-catalog/howtos/annotate/
+    - title: Intercepting service
+      link: /service-catalog/howtos/intercept/
+    - title: Managing cells
+      link: /service-catalog/howtos/cells/
+    - title: Filtering the service view
+      link: /service-catalog/howtos/favorites/
+    - title: Enabling GitOps workflows
+      link: /gitops/quick-start
+    - title: Configuring automated configuration analysis
+      link: /config-analysis/quick-start
+    - title: Using Deployment Previews
+      link: /deployment-previews/quick-start
+    - title: Organizing the service catalog
+      link: /service-catalog/howtos/organize-service-catalog
+    - title: Managing subscriptions
+      link: /subscriptions/howtos/manage-my-subscriptions
+    - title: Securing your services
+      link: /security/security/
+    - title: Using the Developer Portal
+      link: /developer-portal/developer-portal/
+- title: Technical Reference
   items:
     - title: Annotations
       link: /service-catalog/reference/annotations/
