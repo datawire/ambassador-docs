@@ -26,7 +26,7 @@
       link: /developer-portal/migration
     - title: Secure your Services
       link: /security/security/
-    - title: Developer Portal
+    - title: Using the Developer Portal 
       link: /developer-portal/developer-portal/
 - title: Core concepts
   items:
@@ -51,7 +51,7 @@
     - title: Access management
       link: /service-catalog/reference/access/
     - title: Developer Portal migration
-      link: /developer-portal/migrating/
+      link: /developer-portal/migration/
     - title: Developer Portal troubleshooting
       link: /developer-portal/troubleshooting/
     - title: FAQs
