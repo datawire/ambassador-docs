@@ -18,7 +18,7 @@ Once you have added the `FilterPolicy` and `Filter` resources to your cluster, A
 
 ### Creating filters
 
-Before you create API keys, you need to create a `FilterPolicy` resource and a `Filter` [resource](../../../../../edge-stack/latest/topics/using/filters/apikeys/).
+Before you create API keys, you need to create a `FilterPolicy` resource and a `Filter` [resource](../../../../edge-stack/latest/topics/using/filters/apikeys/).
 
 To create these filter resources: 
 
