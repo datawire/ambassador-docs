@@ -41,7 +41,6 @@ spec:
 
 To expose the Developer Portal with DNS and a hostname, create a `Mapping` resource similar to the following: 
 
-
 ```yaml
 apiVersion: getambassador.io/v2
 kind: Mapping
