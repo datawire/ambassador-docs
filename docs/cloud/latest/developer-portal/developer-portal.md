@@ -1,6 +1,6 @@
 ---
 title: "Ambassador Cloud Developer Portal"
-description: "API Management by Ambassador"
+description: "The Ambassador Cloud Developer Portal allows you to manage your services and their API. Learn how to expose the API with the Mapping custom resource."
 ---
 
 # Ambassador Cloud Developer Portal overview
