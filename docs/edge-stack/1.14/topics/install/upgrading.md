@@ -1,3 +1,7 @@
+---
+  indexable: false
+---
+
 # Upgrading Ambassador Edge Stack
 
 Since Ambassador Edge Stack's configuration is entirely stored in Kubernetes resources, no special process

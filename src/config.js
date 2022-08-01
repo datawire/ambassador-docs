@@ -16,33 +16,34 @@ export const products = [
     version: [],
   },
   {
-    slug: 'code',
-    name: 'Code',
-    link: '/docs/code',
-    id: Math.random().toString(),
-    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
-  },
-  {
-    slug: 'ship',
-    name: 'Ship',
-    link: '/docs/ship',
-    id: Math.random().toString(),
-    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
-  },
-  {
-    slug: 'run',
-    name: 'Run',
-    link: '/docs/run',
-    version: [],
-    id: Math.random().toString(),
-    version: [{ id: 'latest', name: 'Latest', link: 'latest/getting-started' }],
-  },
-  {
-    slug: 'kubernetes',
-    name: 'Kubernetes (K8s)',
+    slug: 'telepresence',
+    name: 'Telepresence',
     isProduct: true,
-    link: '/docs/kubernetes',
-    to: goToKubernetesDocs,
+    link: '/docs/telepresence',
+    to: goToDocsTelepresence,
+    id: Math.random().toString(),
+    version: [
+      {
+        id: 'pre-release',
+        name: 'Pre-Release',
+        link: 'pre-release/quick-start',
+      },
+      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
+      { id: '2.6', name: '2.6', link: '2.6/quick-start' },
+      { id: '2.5', name: '2.5', link: '2.5/quick-start' },
+      { id: '2.4', name: '2.4', link: '2.4/quick-start' },
+      { id: '2.3', name: '2.3', link: '2.3/quick-start', archived: true },
+      { id: '2.2', name: '2.2', link: '2.2/quick-start', archived: true },
+      { id: '2.1', name: '2.1', link: '2.1/quick-start', archived: true },
+      { id: '2.0', name: '2.0', link: '2.0/quick-start', archived: true },
+    ],
+  },
+  {
+    slug: 'argo',
+    name: 'Argo',
+    isProduct: true,
+    link: '/docs/argo',
+    to: goToDocsArgo,
     id: Math.random().toString(),
     version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
   },
@@ -64,6 +65,7 @@ export const products = [
         name: 'Latest',
         link: 'latest/tutorials/getting-started',
       },
+      { id: '3.0', name: '3.0', link: '3.0/tutorials/getting-started' },
       { id: '2.3', name: '2.3', link: '2.3/tutorials/getting-started' },
       { id: '2.2', name: '2.2', link: '2.2/tutorials/getting-started' },
       { id: '2.1', name: '2.1', link: '2.1/tutorials/getting-started' },
@@ -150,6 +152,7 @@ export const products = [
         name: 'Latest',
         link: 'latest/tutorials/getting-started',
       },
+      { id: '3.0', name: '3.0', link: '3.0/tutorials/getting-started' },
       { id: '2.3', name: '2.3', link: '2.3/tutorials/getting-started' },
       { id: '2.2', name: '2.2', link: '2.2/tutorials/getting-started' },
       { id: '2.1', name: '2.1', link: '2.1/tutorials/getting-started' },
@@ -159,40 +162,8 @@ export const products = [
     ],
   },
   {
-    slug: 'telepresence',
-    name: 'Telepresence',
-    isProduct: true,
-    link: '/docs/telepresence',
-    to: goToDocsTelepresence,
-    id: Math.random().toString(),
-    version: [
-      {
-        id: 'pre-release',
-        name: 'Pre-Release',
-        link: 'pre-release/quick-start',
-      },
-      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
-      { id: '2.6', name: '2.6', link: '2.6/quick-start' },
-      { id: '2.5', name: '2.5', link: '2.5/quick-start' },
-      { id: '2.4', name: '2.4', link: '2.4/quick-start' },
-      { id: '2.3', name: '2.3', link: '2.3/quick-start', archived: true },
-      { id: '2.2', name: '2.2', link: '2.2/quick-start', archived: true },
-      { id: '2.1', name: '2.1', link: '2.1/quick-start', archived: true },
-      { id: '2.0', name: '2.0', link: '2.0/quick-start', archived: true },
-    ],
-  },
-  {
-    slug: 'argo',
-    name: 'Argo',
-    isProduct: true,
-    link: '/docs/argo',
-    to: goToDocsArgo,
-    id: Math.random().toString(),
-    version: [{ id: 'latest', name: 'Latest', link: 'latest/quick-start' }],
-  },
-  {
     slug: 'cloud',
-    name: 'Cloud',
+    name: 'Ambassador Cloud',
     isProduct: true,
     link: '/docs/cloud',
     to: goToCloudDocs,
@@ -204,16 +175,7 @@ export const products = [
         link: 'latest/service-catalog/quick-start',
       },
     ],
-  },
-  {
-    slug: 'envoy',
-    name: 'Envoy',
-    isProduct: true,
-    link: '/docs/envoy/latest/concepts/cloudnative',
-    to: goToEnvoy,
-    id: Math.random().toString(),
-    version: [{ id: 'latest', name: 'Latest', link: 'latest' }],
-  },
+  }
 ];
 
 export const metaData = {
@@ -221,18 +183,6 @@ export const metaData = {
     title: 'Docs Home | Ambassador Labs',
     description:
       'Concepts, guides, and examples to using Ambassador Cloud, Edge Stack, Telepresence, Kubernetes and Argo.',
-  },
-  code: {
-    title: 'Code | Ambassador Labs',
-    description: 'Code tutorials using Telepresence',
-  },
-  ship: {
-    title: 'Ship | Ambassador Labs',
-    description: 'Ship tutorials using Argo',
-  },
-  run: {
-    title: 'Run | Ambassador Labs',
-    description: 'Run tutorials using Edge Stack',
   },
   kubernetes: {
     title: 'Kubernetes (K8s) Docs | Ambassador Labs',
@@ -316,11 +266,27 @@ export const metaData = {
     description:
       'This guide focus on deploying Prometheus and Grafana alongside Edge Stack in Kubernetes using the Prometheus Operator. Both can be deployed as standalone apps',
   },
+  'docs/edge-stack/latest/topics/running/': {
+    description:
+      "This section is designed for operators and site reliability engineers managing Ambassador Edge Stack's deployment. Learn more about Global Configuration...",
+  },
   'docs/edge-stack/latest/topics/running/ingress-controller/': {
     description:
-      'Edge Stack can function as a fully-fledged Ingress controller, making it easy to work with other Ingress-oriented tools within the Kubernetes ecosystem',
+      'Ambassador Edge Stack can function as a fully-fledged Ingress controller, making it easy to work with other Ingress-oriented tools within the K8s ecosystem.',
+  },
+  'docs/edge-stack/latest/topics/running/tls/sni/': {
+    description:
+      'How to set up a local Kubernetes cluster on Windows Home to test applications easily. As Windows Developers, we need a proper Kubernetes environment to test..',
+  },
+  'docs/edge-stack/latest/howtos/istio/': {
+    description:
+      'Learn how to take advantage of both Ambassador Edge Stack and Istio to have complete control & observability over how requests are made in your cluster',
   },
   'docs/edge-stack/latest/topics/running/tls/mtls/': {
+    description:
+      'Ambassador Edge Stack and Mutual TLS (mTLS). Since Ambassador Edge Stack is a reverse proxy acting as the entry point to your cluster...',
+  },
+  'docs/edge-stack/latest/topics/using/intro-mappings': {
     description:
       'Ambassador Edge Stack and Mutual TLS (mTLS). Since Ambassador Edge Stack is a reverse proxy acting as the entry point to your cluster...',
   },
@@ -331,6 +297,18 @@ export const metaData = {
   'docs/edge-stack/latest/topics/using/shadowing/': {
     description:
       'Edge Stack - Traffic shadowing is a deployment pattern where production traffic is asynchronously copied to a non-production service for testing',
+  },
+  'docs/emissary/3.0/topics/install/migration-matrix/': {
+    indexable: false
+  },
+  'docs/edge-stack/3.0/topics/install/upgrade/yaml/emissary-3.0/edge-stack-3.0/': {
+    indexable: false
+  },
+  'docs/edge-stack/3.0/topics/install/upgrade/helm/emissary-3.0/edge-stack-3.0/': {
+    indexable: false
+  },
+  'docs/edge-stack/3.0/topics/install/migration-matrix/': {
+    indexable: false
   },
 };
 

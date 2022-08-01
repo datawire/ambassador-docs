@@ -23,7 +23,7 @@ There are two variants of the ExtAuth: gRPC and plain HTTP.
 
 ### The gRPC protocol
 
-When `proto: grpc` is set, the ExtAuth service must implement the `Authorization` gRPC interface, defined in [Envoy's `external_auth.proto`](https://github.com/emissary-ingress/emissary/blob/master/api/envoy/service/auth/v2/external_auth.proto).
+When `proto: grpc` is set, the ExtAuth service must implement the `Authorization` gRPC interface, defined in [Envoy's `external_auth.proto`](https://github.com/emissary-ingress/emissary/blob/master/api/envoy/service/auth/v3/external_auth.proto).
 
 ### The HTTP protocol
 

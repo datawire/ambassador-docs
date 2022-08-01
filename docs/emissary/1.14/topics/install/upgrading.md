@@ -1,3 +1,7 @@
+---
+  indexable: false
+---
+
 # Upgrading $productName$
 
 Since $productName$'s configuration is entirely stored in Kubernetes resources, no special process

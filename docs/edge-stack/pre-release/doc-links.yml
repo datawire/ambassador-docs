@@ -109,6 +109,16 @@
                link: /howtos/istio
              - title: Linkerd 2 integration
                link: /howtos/linkerd2
+     - title: Set up support for HTTP/3
+       items:
+         - title: HTTP3 setup in $productName$
+           link: /topics/running/http3
+         - title: HTTP/3 with AKS
+           link: /howtos/http3/http3-aks
+         - title: HTTP/3 with EKS
+           link: /howtos/http3/http3-eks
+         - title: HTTP/3 with GKE
+           link: /howtos/http3/http3-gke
  - title: Technical reference
    items:
      - title: Custom resources
@@ -165,6 +175,8 @@
            link: /topics/using/filters/external
          - title: Plugin Filter
            link: /topics/using/filters/plugin
+     - title: HTTP3
+       link: /topics/running/http3
      - title: Ingress and load balancing
        items:
          - title: The Mapping resource
@@ -258,6 +270,8 @@
    link: /topics/using/dev-portal
  - title: Changes in $productName$ 2.X
    link: /about/changes-2.x
+ - title: Changes in $productName$ 3.X
+   link: /about/changes-3.y
  - title: Known issues
    link: /about/known-issues
  - title: FAQs
