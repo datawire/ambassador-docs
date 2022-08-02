@@ -18,7 +18,6 @@ spec:
     httpHeader: "x-my-api-key-header" # optional; default is X-API-Key
     keys:
       - secretName: "my-secret-api-keys"
-        secretNamespace: "example-namespace" # optional; default is the namespace the filter is created in.
 ---
 apiVersion: v1
 kind: Secret
