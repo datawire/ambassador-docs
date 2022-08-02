@@ -1,0 +1,35 @@
+# branch info
+branch: release/v2.2
+
+# self
+version: 3.1.0
+productName: "Emissary-ingress"
+productNamePlural: "Emissary-ingresses"
+productNamespace: emissary
+productDeploymentName: emissary-ingress
+productHelmName: emissary-ingress
+
+# OSS (self)
+ossVersion: 3.1.0
+ossDocsVersion: "3.1"
+ossChartVersion: 8.1.0
+OSSproductName: "Emissary-ingress"
+OSSproductNamePlural: "Emissary-ingresses"
+
+# AES (not self)
+aesVersion: 3.1.0
+aesDocsVersion: "3.1"
+aesChartVersion: 8.1.0
+AESproductName: "Ambassador Edge Stack"
+AESproductNamePlural: "Ambassador Edge Stacks"
+
+# other products
+qotmVersion: 1.7
+quoteVersion: 0.5.0
+
+# Most recent version from previous major versions
+# This is mostly to ensure that the migration matrix stays up-to-date
+versionTwoX: 2.3.2
+chartVersionTwoX: 7.4.2
+versionOneX: 1.14.4
+chartVersionOneX: 6.9.5

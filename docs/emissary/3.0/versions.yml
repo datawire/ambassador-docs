@@ -29,7 +29,7 @@ quoteVersion: 0.5.0
 
 # Most recent version from previous major versions
 # This is mostly to ensure that the migration matrix stays up-to-date
-versionTwoX: 2.3.1
-chartVersionTwoX: 7.4.1
+versionTwoX: 2.3.2
+chartVersionTwoX: 7.4.2
 versionOneX: 1.14.4
 chartVersionOneX: 6.9.5
