@@ -8,11 +8,17 @@ import Alert from '@material-ui/lab/Alert';
 
 The [Ambassador Cloud Security page](https://app.getambassador.io/cloud/security/api-keys) allows you to create and manage API keys for Edge Stack through the online Ambassador Cloud interface. 
 
-API key management is only available for clusters running Edge Stack version 3.1 or later.
+   <Alert severity="info">
+      API key management is only available for clusters running Edge Stack version 3.1 or later.
+   </Alert>
 
 ## API keys and filters 
 
-API keys in Ambassador Cloud are managed by the `FilterPolicy` and `Filter` resources in your cluster. When you click the **Generate Filter** button in Ambassador Cloud to open the slideout to create the `FilterPolicy` and `Filter` resources for your API keys. The `FilterPolicy` resource is used by all the filters created in the Ambassador Cloud Security page. The `Filter` resource contains the secret for all API Keys created within the designated Ambassador Cloud filter group.
+API keys in Ambassador Cloud are managed by the `FilterPolicy` and `Filter` resources in your cluster.
+
+When you click the **Generate Filter** button in Ambassador Cloud, it opens the slideout to create the `FilterPolicy` and `Filter` resources for your API keys. 
+
+The `FilterPolicy` resource is used by all the filters created in the Ambassador Cloud Security page. The `Filter` resource references the secret for all API Keys created within the designated Ambassador Cloud filter group.
 
 Once you have added the `FilterPolicy` and `Filter` resources to your cluster, Ambassador Cloud will display any `Filter` resources you created in the UI with a **Generate an API Key** button to the right of the Filter name.
 
@@ -32,19 +38,20 @@ To create these filter resources:
 kubectl apply -f generated-filters.yaml
 ```
 
-When you reload the Security page in Ambassador Cloud, your your filter displays on the page. Now you can create API keys to use with this filter.
+When you reload the Security page in Ambassador Cloud, your filter displays on the page. Now you can create API keys to use with this filter.
 
 ### Creating API keys
 
-Once you've created the `FilterPolicy` and `Filter` resource and add them to your cluster, you can create API keys in Ambassador Cloud. API keys are a special token that are added to HTTP headers.
+Once you've created the `FilterPolicy` and `Filter` resource and added them to your cluster, you can create API keys in Ambassador Cloud. API keys are a special token that are added to HTTP headers.
 
 To create a key: 
 
-1. Locate the filter you want to create the API key for and click **Generate an API key** to open the API key slideout.
+1. Locate the filter you want to create the API key for, and click **Generate an API key** to open the API key slideout.
 2. Enter a name and description for the API key, then click **Generate**. 
    The slideout displays the API key. Be sure to copy this key down; this is the only time the key is displayed.
-3.  Pass the API key with cURL. 
+3. Pass the API key with cURL. 
    For example, for the endpoint at `https://${EDGE_STACK_IP}/api/my-service` with the HTTP header `x-api-key`, the following request will respond with HTTP status code `200`: 
+
 ```bash
 curl -H "X-API-Key: ${MY_API_KEY}" https://staging-app.datawire.io/cloud/api/service-groups
 ```
