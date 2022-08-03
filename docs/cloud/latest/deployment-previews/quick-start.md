@@ -144,7 +144,7 @@ ServiceAccount:
        #   [...]
        # Inject the preview-daemon container
        - name: pod-daemon
-         image: docker.io/datawire/tel2:2.5.6-podd.0
+         image: docker.io/datawire/tel2:$telepresenceVersion$
          ports:
            - name: http
              containerPort: 80
@@ -185,5 +185,9 @@ In the manifest, several things must be customized:
   arguments.
 - If your Telepresence traffic-manager is not running in the `ambassador` namespace, edit the
   `MANAGER_NAMESPACE` environment variable.
+- If you are running an different version of Telepresence, you may
+  wish to change the version number from $telepresenceVersion$ to the
+  version that you use.  Deploy previews require Telepresence
+  2.6.9-BOGUS-WE-WILL-FILL-IN-THIS-VERSION-ONCE-WE-HAVE-IT or later.
 
 For an example of CI editing the manifest, see the [deployment previews demo GitHub repo](https://github.com/AliceProxy/test-app).

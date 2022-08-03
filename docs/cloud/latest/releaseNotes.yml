@@ -31,6 +31,18 @@
 
 changelog: ''
 items:
+  - date: '2022-08-02'
+    notes:
+      - title: 'Developer Portal'
+        body: "Consolidate your OpenAPI specifications! With this new edition to Ambassador Cloud you will be able to consolidate all of your services API specs into one manageable place to be shared amongst your team, or even expose it to the web and share it with your non Cloud users!"
+        docs: './developer-portal/how-to-use'
+        type: feature
+  - date: '2022-08-02'
+    notes: 
+      - title: 'API Key Management'
+        body: 'With our new API Key Management system it will now be easier for you to restrict access to your individual services. You will be able to create Filters specific to routes of your own choosing and create API keys to distribute for each individual filter.'
+        docs: './security/api-keys/introduction'
+        type: feature
   - date: '2022-06-06'
     notes:
       - title: 'Role-Based Access Control'
