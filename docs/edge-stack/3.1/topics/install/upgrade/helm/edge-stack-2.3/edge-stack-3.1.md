@@ -106,7 +106,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
    making sure that your `datawire` Helm repo is set correctly:
 
    ```bash
-   helm repo delete datawire
+   helm repo remove datawire
    helm repo add datawire https://app.getambassador.io
    helm repo update
    ```

@@ -49,7 +49,7 @@ Migration is a two-step process:
    making sure that your `datawire` Helm repo is set correctly:
 
    ```bash
-   helm repo delete datawire
+   helm repo remove datawire
    helm repo add datawire https://app.getambassador.io
    helm repo update
    ```
