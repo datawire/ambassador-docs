@@ -27,20 +27,20 @@ Maintenance refers to the previous X-series release, including security and Sev1
 
 # The Policy
 
-> We will offer a 6 months maintenance window for the latest Y-release of an X-series after a new X-series goes GA and becomes the current release. For example, we will support 2.3 for severity 1 and defect patches for six months after 3.0 is released.
-> 
+> We will offer a 6 mont maintenance window for the latest Y-release of an X-series after a new X-series goes GA and becomes the current release. For example, we will support 2.3 for severity 1 and defect patches for six months after 3.0 is released.
+>
 
 > During the maintenance window, Y-releases will only receive security and Sev1 defect patches. Users desiring new features or bug fixes for lower severity defects will need to upgrade to the current X-series.
-> 
+>
 
 > The current X-series will receive as many Y-releases as necessary and as often as we have new features or patches to release.
-> 
+>
 
 > Ambassador Labs offers no-downtime migration to current versions from maintenance releases. Migration from releases that are outside of the maintenance window may be subject to downtime.
-> 
+>
 
 > Artifacts of releases outside of the maintenance window will be frozen and will remain available publicly for download with the best effort. These artifacts include Docker images, application binaries, Helm charts, etc.
-> 
+>
 
 ### When we say support with “defect patches”, what do we mean?
 
@@ -53,7 +53,7 @@ Maintenance refers to the previous X-series release, including security and Sev1
 
 Given this policy, we should have dropped maintenance for 1.14 in March 2022, however we recognize that the introduction of an EOL policy necessitates a longer maintenance window. For this reason, we do offer an "extended maintenance" window for 1.14 until the end of September 2022, 3 months after the latest 2.3 release. Please note that this extended maintenance window will not apply to customers using Kubernetes 1.22 and above, and this extended maintenance will also not provide a no-downtime migration path from 1.14 to 3.0.
 
-After September 2022, the current series will be 3.x, and the maintenance series will be 2.y. 
+After September 2022, the current series will be 3.x, and the maintenance series will be 2.y.
 
 ## Visual timeline representation
 
