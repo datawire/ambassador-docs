@@ -1,66 +1,58 @@
 ---
 title: "Telepresence saved intercepts"
-description: "Learn how to create, use and manage saved intercepts."
+description: "Learn how to create, use and manage saved Telepresence intercepts in Ambassador Cloud to streamline your development cycle and collaborate more easily."
 ---
 
-# Telepresence Saved Intercepts
+# Saved Telepresence intercepts
 
-To make it easier to share Telepresence intercept configuration across team members Ambassador Cloud offers the option to create Saved Intercepts
-in which you can pick an intercept command from your team's intercept history and give it a name. Later in the CLI you can reference the saved intercept
-by the name you chose and run intercepts with the same arguments set, that way you don't have to remember all the configuration parameters used to intercept
-a particular service in a given environment.
+The Ambassador Cloud Intercepts page gives you access to your intercept history and allows save previous intercept configurations. Saved intercepts can be shared with other team members to streamline your development cycle and collaborate more easily.
 
-## Creating a Saved Intercept 
+## Prerequisites
 
-### Prerequisites
+To use the saved intercepts feature, you need:
 
-1. Telepresence installed locally. [See the installation instructions](../../../telepresence/latest/install/index.md).
-1. An account in Ambassador Cloud.
+1. A [local installation](../../../telepresence/latest/install/index). of Telepresence version 2.7.0 or later.
+1. An Ambassador Cloud account.
 1. Access to a Kubernetes cluster.
 
+Telepresence releases prior to version 2.7.0 don’t support the saved intercepts feature. If you are using an older version of Telepresence, visit the [upgrade page](../../../telepresence/latest/install/upgrade) to learn how to update to the current version.
 
-### Instructions
-Follow the next instructions to create a saved intercept and share it with your team memebers.
+## Creating and saving intercepts
+
+Intercept configurations are automatically saved in the Intercept History tab on the Intercepts page. To save an intercept and share it with team members, follow the steps below.
 
 1. Run `telepresence login` to authenticate yourself in Ambassador Cloud.
-2. Run `telepresence connect`
-3. Intercept traffic to a service running in your Kubernetes cluster by creating an intercept. For example:
+1. Run `telepresence connect` to connect Telepresence.
+1. Intercept traffic to a service running in your Kubernetes cluster by creating an intercept. For example:
    ```bash
    telepresence intercept voting --port 8081:8080 --namespace emojivoto --http-header x-telepresence-intercept-id=test-user-1
    ```
-   When you execute intercept commands the Telepresence user daemon will create a history of all of them in Ambassador Cloud
-   so you can view them and use them as a source of configuration to create Saved Intercepts.
-4. Navigate to Ambassador Cloud to the [Intercept History page](https://app.getambassador.io/saved-intercepts/history) and pick the one you just
-   executed. Click on the row to see the new Saved Intercept form and give the intercept configuration a name. After saving the intercept will be available
-   for all of the team members to use in their Telepresence CLI.
+   Each time you create an intercept like this, it is logged in Ambassador Cloud's Intercept History.
+1. Go to the Ambassador Cloud [Intercept History page](https://app.getambassador.io/saved-intercepts/history) and click on the intercept you just created. 
+   Enter a name for the intercept and click **Create**.
+1. The incercept is now available in the [Saved Intercepts page](https://app.getambassador.io/saved-intercepts/saved-intercept)
 
 ![saved-intercepts-form](../images/telepresence-intercept-history.png)
 ![saved-intercepts-form](../images/telepresence-saved-intercepts-form.png)
 
-**Note:** Telepresence only creates the intercept history records in version v2.7.0 or later.
-   
+## Using saved intercepts
 
-## Using a Saved Intercept
-
-Once a teammate or yourself have created a saved intercept you can reuse it to create more intercepts with the same set of arguments as in the original command just by typing:
+Once an intercept has been saved, you can reuse it and share it with team members. You can also create more intercepts with the same set of arguments as in the original saved intercepts by with the following command:
 
 ```bash
 telepresence intercept --use-saved-intercept <saved-intercept-name>
 ```
 
-The previous command will fetch the intercpet configuration in the saved intercept and use it to run a new intercept so users
-don't have to remember all the arguments required to intercept a service in a particular cluster.
-
-**Note**: This feature is only available in Telepresence CLI version v2.7.0 or later.
+This command fetches the intercpet configuration of the saved intercept and uses it to run a new intercept. This way, you don't need to remember all the arguments required to intercept a service in a particular cluster.
+sence CLI version v2.7.0 or later.
 
 ##  Managing Saved Intercepts
 
-By navigating to the [Telepresence Saved Intercepts page on Ambassador Cloud](https://app.getambassador.io/saved-intercepts/saved-intercept),
-you can see the list of saved intercepts created by any Ambassador team member. For each of these, you can:
+In the [Telepresence Saved Intercepts page on Ambassador Cloud](https://app.getambassador.io/saved-intercepts/saved-intercept), you can see the list of saved intercepts created by any Ambassador team member. For each of these intercepts, you can:
 
 - inspect its author, creation date and flags.
-- delete a saved intercept.
-- see the whole interept command as it would be translated in the CLI.
+- delete the saved intercept.
+- see the command as it would be entered in the CLI.
 
 ![saved-intercepts-list](../images/telepresence-saved-intercepts-list.png)
 
