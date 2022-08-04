@@ -47,6 +47,10 @@ spec:
 
 We now have two `Host`s with two different certificates.
 
+<Alert severity="info">
+  A minimum version of TLS 1.1 is required to properly use SNI. When setting up your TLS configuration, be sure you are not using TLS 1.0 or older.
+</Alert>
+
 ## Configuring routes
 
 Now that we have two domains behind $productName$, we can create routes for either
