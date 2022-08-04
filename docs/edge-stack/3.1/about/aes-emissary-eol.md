@@ -27,7 +27,7 @@ Maintenance refers to the previous X-series release, including security and Sev1
 
 # The Policy
 
-> We will offer a 6 month maintenance window for the latest Y-release of an X-series after a new X-series goes GA and becomes the current release. For example, we will support 2.3 for severity 1 and defect patches for six months after 3.0 is released.
+> We will offer a 6 mont maintenance window for the latest Y-release of an X-series after a new X-series goes GA and becomes the current release. For example, we will support 2.3 for severity 1 and defect patches for six months after 3.0 is released.
 >
 
 > During the maintenance window, Y-releases will only receive security and Sev1 defect patches. Users desiring new features or bug fixes for lower severity defects will need to upgrade to the current X-series.
@@ -57,4 +57,4 @@ After September 2022, the current series will be 3.x, and the maintenance series
 
 ## Visual timeline representation
 
-<img alt="Timeline" src="/images/documentation/timeline.png"/>
+![Timeline](../images/timeline.png)

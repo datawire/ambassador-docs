@@ -254,6 +254,8 @@
                link: /howtos/cert-manager
              - title: Client certificate validation
                link: /howtos/client-cert-validation
+ - title: End of Life Policy
+   link: /about/aes-emissary-eol
  - title: Developer Portal
    link: /topics/using/dev-portal
  - title: Changes in $productName$ 2.X
