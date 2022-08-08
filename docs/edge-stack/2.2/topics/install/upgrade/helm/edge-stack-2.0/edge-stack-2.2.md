@@ -66,11 +66,11 @@ Migrating from $productName$ 2.0.5 to $productName$ $version$ is a four-step pro
    making sure that your `datawire` Helm repo is set correctly:
 
    ```bash
-   helm repo delete datawire
+   helm repo remove datawire
    helm repo add datawire https://app.getambassador.io
    helm repo update
    ```
-   
+
    Then, install $productName$ in the `$productNamespace$` namespace. If necessary for
    your installation (e.g. if you were running with `AMBASSADOR_SINGLE_NAMESPACE` set),
    you can choose a different namespace.

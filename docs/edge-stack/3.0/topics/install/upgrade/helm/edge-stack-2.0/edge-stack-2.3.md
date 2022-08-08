@@ -66,7 +66,7 @@ Migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$ is a four-step
    making sure that your `datawire` Helm repo is set correctly:
 
    ```bash
-   helm repo delete datawire
+   helm repo remove datawire
    helm repo add datawire https://app.getambassador.io
    helm repo update
    ```
