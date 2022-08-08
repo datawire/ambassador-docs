@@ -195,8 +195,6 @@
            link: /topics/running/services/ext_authz
          - title: Log service
            link: /topics/running/services/log-service
-         - title: Rate limit service
-           link: /topics/running/services/rate-limit-service
          - title: Tracing service
            link: /topics/running/services/tracing-service 
      - title: Traffic management
