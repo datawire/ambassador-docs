@@ -1,4 +1,4 @@
-- title: Quick start
+ - title: Quick start
    link: /tutorials/getting-started
  - title: Core concepts
    items:
@@ -25,7 +25,7 @@
        link: /topics/install/docker
      - title: Upgrade or migrate to a newer version
        link: /topics/install/migration-matrix
-- title: Edge Stack user guide
+ - title: Edge Stack user guide
    items:
      - title: Deployment
        items:
@@ -65,7 +65,7 @@
            link: /howtos/grpc
          - title: WebSocket connections
            link: /howtos/websockets
-    - title: Authentication 
+     - title: Authentication 
        items:
          - title: Basic authentication
            link: /howtos/ext-filters
@@ -249,27 +249,27 @@
            link: /topics/running/custom-error-responses
          - title: Gzip compression
            link: /topics/running/gzip
-    - title: API
-      items:
-        - title: Gateway API
-          link: /topics/using/gateway-api
-        - title: Developer Portal
-          link: /topics/using/dev-portal
-  - title: FAQs
-    link: /about/faq
-  - title: Troubleshooting
-    link: /topics/running/debugging
-  - title: Known issues
-    link: /about/known-issues
-  - title: Changes in $productName$ 2.X
-    link: /about/changes-2.x
-  - title: Changes in $productName$ 3.X
-    link: /about/changes-3.y
-  - title: Release Notes
-    link: /release-notes
-- title: Community
-  link: /community
-- title: End of Life Policy
-  link: /about/aes-emissary-eol
-- title: Licenses
-  link: licenses
+     - title: API
+       items:
+         - title: Gateway API
+           link: /topics/using/gateway-api
+         - title: Developer Portal
+           link: /topics/using/dev-portal
+     - title: FAQs
+       link: /about/faq
+     - title: Troubleshooting
+       link: /topics/running/debugging
+     - title: Known issues
+       link: /about/known-issues
+     - title: Changes in $productName$ 2.X
+       link: /about/changes-2.x
+     - title: Changes in $productName$ 3.X
+       link: /about/changes-3.y
+     - title: Release Notes
+       link: /release-notes
+ - title: Community
+   link: /community
+ - title: End of Life Policy
+   link: /about/aes-emissary-eol
+ - title: Licenses
+   link: licenses
