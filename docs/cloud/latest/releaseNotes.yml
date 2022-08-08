@@ -31,6 +31,13 @@
 
 changelog: ''
 items:
+  - date: '2022-08-08'
+    notes:
+      - title: Telepresence Saved Intercepts
+        body: Share Telepresence Saved Intercepts with your team members
+        image: ./telepresence-saved-intercepts.png
+        docs: ./telepresence-saved-intercepts/
+        type: feature
   - date: '2022-08-02'
     notes:
       - title: 'Developer Portal'
@@ -51,7 +58,7 @@ items:
         docs: './service-catalog/reference/access/'
         type: feature
   - date: '2022-06-06'
-    notes: 
+    notes:
       - title: 'Subscriptions'
         body: "Monitor your teams current utilization of Ambassador Cloud.
               Adjust your subscription according to your needs to get the best
