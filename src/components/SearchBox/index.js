@@ -33,6 +33,11 @@ export default function SearchBox(props) {
 
   return (
     <div className="docs__search-box">
+      <Script
+        id="doc-search-id"
+        strategy={ScriptStrategy.idle}
+        src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"
+      />
       <Helmet>
         <link
           rel="stylesheet"
@@ -40,10 +45,6 @@ export default function SearchBox(props) {
           type="text/css"
           media="print"
           onload="this.media='all'"
-        />
-        <Script
-          strategy={ScriptStrategy.idle}
-          src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"
         />
       </Helmet>
       <SearchIcon loading="lazy" />
