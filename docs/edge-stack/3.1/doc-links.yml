@@ -114,11 +114,11 @@
         - title: HTTP3 setup in $productName$
           link: /topics/running/http3
         - title: HTTP/3 with AKS
-          link: /howtos/http3/http3-aks
+          link: /howtos/http3-aks
         - title: HTTP/3 with EKS
-          link: /howtos/http3/http3-eks
+          link: /howtos/http3-eks
         - title: HTTP/3 with GKE
-          link: /howtos/http3/http3-gke
+          link: /howtos/http3-gke
 - title: Technical reference
   items:
     - title: Custom resources

@@ -58,5 +58,9 @@
   items:
     - title: Quick Start
       link: /visualize-api/quick-start
+- title: Telepresence Saved Intercepts
+  items:
+    - title: Managing Saved Intercepts
+      link: /telepresence-saved-intercepts
 - title: Release Notes
   link: /release-notes/
