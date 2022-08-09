@@ -53,18 +53,18 @@
            link: /howtos/http3-eks
          - title: HTTP/3 with GKE
            link: /howtos/http3-gke
-      - title: Service routing and communication
-        items:
-          - title: Configuring $productName$ to communicate
-            link: /howtos/configure-communications
-          - title: Get traffic from the edge
-            link: /howtos/route
-          - title: TCP connections
-            link: /topics/using/tcpmappings
-          - title: gRPC connections
-            link: /howtos/grpc
-          - title: WebSocket connections
-            link: /howtos/websockets
+     - title: Service routing and communication
+       items:
+         - title: Configuring $productName$ to communicate
+           link: /howtos/configure-communications
+         - title: Get traffic from the edge
+           link: /howtos/route
+         - title: TCP connections
+           link: /topics/using/tcpmappings
+         - title: gRPC connections
+           link: /howtos/grpc
+         - title: WebSocket connections
+           link: /howtos/websockets
      - title: Authentication 
        items:
          - title: Basic authentication
