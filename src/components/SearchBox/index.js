@@ -1,10 +1,11 @@
+import { Script, ScriptStrategy } from 'gatsby';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import SearchIcon from './search.inline.svg';
 
 export default function SearchBox(props) {
-  const inputSelector = props.selector || "doc-search";
+  const inputSelector = props.selector || 'doc-search';
 
   const isMobile = React.useMemo(() => {
     return typeof window !== 'undefined' ? window.innerWidth <= 800 : true;
@@ -32,19 +33,21 @@ export default function SearchBox(props) {
 
   return (
     <div className="docs__search-box">
+      <Script
+        id="doc-search-id"
+        strategy={ScriptStrategy.idle}
+        src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"
+      />
       <Helmet>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css"
           type="text/css"
-          media="all"
+          media="print"
+          onload="this.media='all'"
         />
-        <script
-          defer
-          src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"
-        ></script>
       </Helmet>
-      <SearchIcon loading='lazy'/>
+      <SearchIcon loading="lazy" />
       <input
         name="search"
         type="text"
