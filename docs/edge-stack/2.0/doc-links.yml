@@ -13,8 +13,6 @@
        link: /topics/install/docker
      - title: Install manually
        link: /topics/install/yaml-install
-     - title: The Ambassador Operator
-       link: /topics/install/operator
  - title: Core concepts
    link: /topics/concepts/
    items:
