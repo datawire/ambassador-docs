@@ -33,13 +33,13 @@ const ContentTable = ({ items, location }) => {
 
   const selectProductUrl = (contentElement) => {
     if (contentElement.url.includes('productname')) {
-      if (location.pathname.includes('edge-stack')) {
+      if (location?.pathname.includes('edge-stack')) {
         contentElement.url = contentElement.url.replace(
           'productname',
           'ambassador-edge-stack',
         );
       }
-      if (location.pathname.includes('emissary')) {
+      if (location?.pathname.includes('emissary')) {
         contentElement.url = contentElement.url.replace(
           'productname',
           'emissary-ingress',
