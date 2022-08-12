@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Scrollspy from 'react-scrollspy';
 
-const ContentTable = ({ items }) => {
+const ContentTable = ({ items, location }) => {
   const rootElement = '.docs__doc-body-container';
   const [active, setActive] = useState('');
   let content = items && items[0].items ? items[0].items : [];
