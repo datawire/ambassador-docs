@@ -47,7 +47,6 @@ const ContentTable = ({ items, location }) => {
           );
         }
       }
-      console.log('here', contentElement.url);
       return (
         <li
           key={contentElement.url}
