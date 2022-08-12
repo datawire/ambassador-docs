@@ -17,13 +17,13 @@ const ContentTable = ({ items }) => {
     const target = document.getElementById(frag);
     if (target) {
       ev.preventDefault();
-      const position = target.getBoundingClientRect()
-      const body = document.body.getBoundingClientRect()
+      const position = target.getBoundingClientRect();
+      const body = document.body.getBoundingClientRect();
 
       window.scroll({
         top: position.top - body.top - 140,
-        behavior: 'smooth'
-      })
+        behavior: 'smooth',
+      });
 
       if (window.location.hash !== ev.target.id) {
         window.history.pushState(null, '', ev.target.id);
@@ -31,15 +31,43 @@ const ContentTable = ({ items }) => {
     }
   };
 
-  return (
-    <ScrollSpyWrapper items={ids} rootEl={rootElement} onUpdate={onActive}>
-      {content.map((contentElement) => (
-        <li key={contentElement.url} className={active === contentElement.url ? 'current' : undefined}>
-          <a href={contentElement.url} id={contentElement.url} onClick={onClick}>
+  const ContentMap = ({ content }) => {
+    return content.map((contentElement) => {
+      if (contentElement.url.includes('productname')) {
+        if (location.pathname.includes('edge-stack')) {
+          contentElement.url = contentElement.url.replace(
+            'productname',
+            'ambassador-edge-stack',
+          );
+        }
+        if (location.pathname.includes('emissary')) {
+          contentElement.url = contentElement.url.replace(
+            'productname',
+            'emissary-ingress',
+          );
+        }
+      }
+      console.log('here', contentElement.url);
+      return (
+        <li
+          key={contentElement.url}
+          className={active === contentElement.url ? 'current' : undefined}
+        >
+          <a
+            href={contentElement.url}
+            id={contentElement.url}
+            onClick={onClick}
+          >
             {contentElement.title}
           </a>
         </li>
-      ))}
+      );
+    });
+  };
+
+  return (
+    <ScrollSpyWrapper items={ids} rootEl={rootElement} onUpdate={onActive}>
+      <ContentMap content={content} />
     </ScrollSpyWrapper>
   );
 };
