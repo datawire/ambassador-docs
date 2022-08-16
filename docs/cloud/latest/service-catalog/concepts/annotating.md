@@ -1,3 +1,7 @@
+---
+description: ""
+title: ""
+---
 # Annotating Kubernetes Services for humans
 
 Have you ever been asked to troubleshoot a failing Kubernetes service and struggled to find basic information about it such as the source repository and owner?

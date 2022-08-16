@@ -7,13 +7,11 @@
 
 - title: User Guide
   items:
-
-    - title: Services
-      link: /service-catalog/concepts/services/
-    - title: Service Groups
+    - title: Services and Service Groups
       link: /service-catalog/concepts/service-groups/
     - title: Organizing the service catalog
-      link: /service-catalog/howtos/organize-service-catalog      
+      link: /service-catalog/howtos/organize-service-catalog    
+        
     - title: Filtering the service view
       link: /service-catalog/howtos/favorites/
     - title: Enabling GitOps workflows
