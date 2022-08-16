@@ -113,7 +113,7 @@ A common use case for Telepresence is to connect your local development environm
 1. From your Docker container, create an intercept, which will tell Telepresence to send traffic to the service in your container instead of the service in the cluster:
    `telepresence intercept web --port 8080`
 
-    When prompted for ingress configuration, all default values should be correct as displayed below.
+    When prompted for ingress configuration, you need to enter <strong>edge-stack.ambassador</strong> as your DNS for the first and last questions. For the remaining questions, the default values are correct.
 
     <UserInterceptCommand/>
 
