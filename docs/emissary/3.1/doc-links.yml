@@ -71,8 +71,8 @@
            link: /howtos/basic-auth
      - title: Rate limiting
        items:
-         - title: Rate limiting overview
-           link: /howtos/rate-limiting-tutorial  
+         - title: Rate limiting service
+           link: /topics/running/services/rate-limit-service/  
          - title: Advanced rate limiting
            link: /topics/using/rate-limits/
      - title: Service monitoring
