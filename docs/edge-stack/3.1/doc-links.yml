@@ -89,8 +89,6 @@
            link: /howtos/sso/salesforce
          - title: Single Sign-On with UAA
            link: /howtos/sso/uaa
-         - title: Kubernetes SSO with OIDC and Keycloak
-           link: /howtos/auth-kubectl-keycloak
          - title: Authentication extension
            link: /topics/running/aes-extensions/authentication           
      - title: Rate limiting
