@@ -71,12 +71,12 @@
            link: /howtos/ext-filters
          - title: Using the OAuth2 filter for SSO
            link: /howtos/oauth-oidc-auth
-         - title: Kubernetes SSO with OIDC and Keycloak
-           link: /howtos/auth-kubectl-keycloak
          - title: Single Sign-On with Google
            link: /howtos/sso/google
          - title: Single Sign-On with Keycloak
            link: /howtos/sso/keycloak
+         - title: Kubernetes SSO with OIDC and Keycloak
+           link: /howtos/auth-kubectl-keycloak
          - title: Single Sign-On with Okta
            link: /howtos/sso/okta
          - title: Single Sign-On with Auth0
