@@ -175,7 +175,7 @@ Preview URLs allows you to safely share your development environment. With this 
 
   <LoginCommand />
 
-3. Create an intercept, which will tell Telepresence to send traffic to the service in our container instead of the service in the cluster. When prompted for ingress configuration, you need to enter <strong>edge-stack.ambassador</strong> as your DNS for the first question. For the remaining questions, the default values are correct.
+3. Create an intercept, which will tell Telepresence to send traffic to the service in our container instead of the service in the cluster. When prompted for ingress configuration, you need to enter <strong>edge-stack.ambassador</strong> as your DNS for the first and last question. For the remaining questions, the default values are correct.
 
   <UserInterceptCommand language="go" />
 
