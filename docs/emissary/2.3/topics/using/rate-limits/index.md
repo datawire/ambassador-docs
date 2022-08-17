@@ -189,11 +189,7 @@ There are 5 types of label specifiers in $productName$:
 
 ## Rate limiting requests based on their labels
 
-This is determined by your `RateLimitService` implementation. See the
-[Basic Rate Limiting tutorial](../../../howtos/rate-limiting-tutorial) for an
-example `RateLimitService` implementation for $productName$.
-
-If you'd rather not write your own `RateLimitService` implementation,
+This is determined by your `RateLimitService` implementation. If you'd rather not write your own `RateLimitService` implementation,
 $AESproductName$ provides a `RateLimitService` implementation that is
 configured by a `RateLimit` custom resource. See the
 [$AESproductName$ RateLimit Reference](/docs/edge-stack/latest/topics/using/rate-limits/rate-limits/)
