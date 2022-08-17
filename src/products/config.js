@@ -315,7 +315,7 @@ export const ArgoCards = [
       'How this practice can help deliver code to production safe and reliably.',
     link: goToArgoCICD,
     linkText: 'Learn How',
-    icon: 'cicd',
+    icon: 'cicd-icon',
   },
   {
     title: 'Canary Deployments',
