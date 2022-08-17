@@ -73,7 +73,7 @@
        items:
          - title: Rate limiting service
            link: /topics/running/services/rate-limit-service/  
-         - title: Advanced rate limiting
+         - title: Basic rate limiting
            link: /topics/using/rate-limits/
      - title: Service monitoring
        items:
