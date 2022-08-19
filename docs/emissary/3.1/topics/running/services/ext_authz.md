@@ -81,4 +81,4 @@ Content-Length: 0
 
  - Any HTTP status code other than 200 or 5XX from the ExtAuth service tells $productName$ to **not** allow the request to continue to the upstream backend service, but that the ExtAuth service is instead intercepting the request.  The entire HTTP response from the ExtAuth service--including the status code, the headers, and the body--is handed back to the client verbatim. This gives the ExtAuth service **complete** control over the entire response presented to the client.
 
-   The big limitation here is that you cannot directly return a 200 or 5XX response.  Intercepting with a 200 of 5XX response requires instead using `proto: grpc`.
+   The big limitation here is that you cannot directly return a 200 or 5XX response.  Intercepting with a 200 or 5XX response requires instead using `proto: grpc`.
