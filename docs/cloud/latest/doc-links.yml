@@ -16,6 +16,8 @@
       link: /service-catalog/concepts/service-groups/
     - title: Diagnostics Overview
       link: /diagnostics-ui/view-diagnostics/
+    - title: Authenticating to Ambassador Cloud
+      link: /authenticating/
 - title: User Guide
   items:
     - title: Create a local K8s Dev Environment

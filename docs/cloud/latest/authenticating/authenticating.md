@@ -18,7 +18,7 @@ When creating your organization you will be asked to upload your company log and
 
 <!-- TODO: add an image of organization setup page -->
 
-Once you've created your organization you'll be able to continue your login process and proceed to the Team creation steps.
+Once you've created your organization you'll be able to continue your login process and proceed to the [Team](#creating-a-team) creation steps.
 
 <Alert severity="info">
   Organizations will only work with custom email domains.
@@ -26,9 +26,9 @@ Once you've created your organization you'll be able to continue your login proc
 
 # Joining an already existing Organization
 
-Once an organization has been created for your email domain, any user that signs in with the same domain will be automatically prompted to the account selection page. 
+Once an organization has been created for your email domain, any user that signs in with the same domain will be automatically prompted to the team selection page. 
 
-<!-- TODO: add an image of account selection screen -->
+<!-- TODO: add an image of team selection screen -->
 
 There, you will be able to choose which Team to join and start using Ambassador Cloud. 
 
@@ -53,3 +53,12 @@ You will be redirected back to our login service where you will be prompted with
 <Alert severity="warning">
   Each Team within Ambassador Cloud is subject to it's own Licenses. See  <a href="../subscriptions">Subscriptions</a> for more information.
 </Alert>
+
+# Creating a Team
+
+Teams are how you will navigate Ambassador Cloud. A Team is where users will sign in within your Organization, clusters will be connected, and give you the ability to use all the features of Ambassador Cloud. 
+
+At first login after you've created an Organization, a Team will be automatically created for you if you've elected to sign in with Google as your identity provider. 
+
+If you elected to use GitHub or GitLab, you will need to select which organization you want to use for your Ambassador Cloud team. 
+This organization will be an extra source of truth for granting access to your Ambassador Cloud team.
