@@ -51,7 +51,7 @@ You will be redirected back to our login service where you will be prompted with
 <!-- TODO: Add screenshot of create new team page -->
 
 <Alert severity="warning">
-  Each Team within Ambassador Cloud is subject to it's own Licenses. See  <a href="../subscriptions">Subscriptions</a> for more information.
+  Each Team within Ambassador Cloud is subject to it's own Licenses. See  <a href="../../subscriptions/howtos">Subscriptions</a> for more information.
 </Alert>
 
 # Creating a Team
