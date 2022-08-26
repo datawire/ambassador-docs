@@ -68,6 +68,28 @@ spec:
     name: host-secret
 ```
 
+By default, `tlsSecret` will only look for the named secret in the same namespace as the `Host`.
+In the above example, the secret `host-secret` will need to exist within the `default` namespace
+since that is the namespace of the `Host`.
+
+To reference a secret that is in a different namespace from the `Host`, the `namespace` field is required.
+The below example will configure the `Host` to use the `host-secret` secret from the `example` namespace.
+
+```yaml
+---
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: example-host
+spec:
+  hostname: host.example.com
+  acmeProvider:
+    authority: none
+  tlsSecret:
+    name: host-secret
+    namespace: example
+```
+
 <Alert severity="warning">
 
   The Kubernetes Secret named by <code>tlsSecret</code> must contain a valid TLS certificate.
