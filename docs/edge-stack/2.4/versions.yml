@@ -1,0 +1,28 @@
+# branch info
+branch: release/v2.3
+
+# self
+version: 2.4.0
+productName: "Ambassador Edge Stack"
+productNamePlural: "Ambassador Edge Stacks"
+productNamespace: ambassador
+productDeploymentName: edge-stack
+productHelmName: edge-stack
+
+# OSS (not self)
+ossVersion: 2.4.0
+ossDocsVersion: "2.3"
+ossChartVersion: 7.5.0
+OSSproductName: "Emissary-ingress"
+OSSproductNamePlural: "Emissary-ingresses"
+
+# AES (self)
+aesVersion: 2.4.0
+aesDocsVersion: "2.3"
+aesChartVersion: 7.5.0
+AESproductName: "Ambassador Edge Stack"
+AESproductNamePlural: "Ambassador Edge Stacks"
+
+# other products
+qotmVersion: 1.7
+quoteVersion: 0.5.0
