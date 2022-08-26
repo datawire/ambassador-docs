@@ -158,8 +158,25 @@ items:
           HTTP/3 uses the Quic protocol over UDP. Changes to your cloud provider provisioned Load Balancer will be required to support UDP traffic if using HTTP/3. External Load Balancers must serve traffic on port <code>443</code> because the <code>alt-svc</code> header is not configurable in the initial release of the feature.
         docs: topics/running/http3
 
+  - version: 2.4.0
+    date: 'TBD'
+    notes:
+      - title: Add support for Host resources using secrets from different namespaces
+        type: feature
+        body: >-
+          Previously the <code>Host</code> resource could only use secrets that are in the namespace as the
+          Host. The <code>tlsSecret</code> field in the Host has a new subfield <code>namespace</code> that will allow
+          the use of secrets from different namespaces.
+
+      - title: Allow bypassing of EDS for manual endpoint insertion
+        type: change
+        body: >-
+          Set `AMBASSADOR_EDS_BYPASS` to `true` to bypass EDS handling of endpoints and have endpoints be
+          inserted to clusters manually. This can help resolve with `503 UH` caused by certification rotation relating to
+          a delay between EDS + CDS. The default is `false`.
+
   - version: 2.3.2
-    date: '2022-08-1'
+    date: '2022-08-01'
     notes:
       - title: Correct cookies for mixed HTTP/HTTPS OAuth2 origins
         type: bugfix
