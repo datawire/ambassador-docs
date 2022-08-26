@@ -14,9 +14,21 @@ Once you've selected your provider, if this is your first ever login, you will b
 Organizations are based on the domain of the email address of the account you choose to sign in with. 
 So, if I'm a new user and sign in with `sally@datawire.io`, you will be prompted to create a new Organization for `datawire.io` unless one already exists. 
 
+<br />
+<p style="max-width:600px;margin:0 auto;">
+  <img src="../images/authenticating-create-org.png" alt="Create Org"/>
+</p>
+
 When creating your organization you will be asked to upload your company log and enter your company URL so we can customize your experience across Ambassador Cloud. 
 
-<!-- TODO: add an image of organization setup page -->
+<br />
+<p style="max-width:600px;margin:0 auto;">
+  <img src="../images/authenticating-new-org-form.png" alt="New Org"/>
+</p>
+
+If you are using GitHub or GitLab, you will be asked to define which provider organization we should trust.
+
+<!-- TODO: add an image of organization idp setup page for GitHub/Gitlab -->
 
 Once you've created your organization you'll be able to continue your login process and proceed to the [Team](#creating-a-team) creation steps.
 
