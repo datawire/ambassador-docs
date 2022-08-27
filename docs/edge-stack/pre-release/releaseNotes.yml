@@ -49,6 +49,12 @@ items:
           the use of secrets from different namespaces.
         docs: topics/running/tls/#bring-your-own-certificate
 
+      - title: New caching feature and CRD
+        type: feature
+        body: >-
+          $productName$ now has a configurable HTTP cache. Caching can be used to improve performance when responding to requests for resources that do not change very often. The cache can be configured with the new <code>Cache</code> and <code>CachePolicy</code> CRDs.
+        docs: topics/using/caching
+
       - title: Allow bypassing of EDS for manual endpoint insertion
         type: change
         body: >-

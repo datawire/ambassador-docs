@@ -49,6 +49,7 @@ items:
           Set `AMBASSADOR_EDS_BYPASS` to `true` to bypass EDS handling of endpoints and have endpoints be
           inserted to clusters manually. This can help resolve with `503 UH` caused by certification rotation relating to
           a delay between EDS + CDS. The default is `false`.
+        docs: topics/running/environment
 
   - version: 2.3.2
     date: '2022-08-01'
