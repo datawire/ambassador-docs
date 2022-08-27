@@ -35,7 +35,7 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$oss
 
 | If you're running.               | You can upgrade to                                                           |
 |----------------------------------|------------------------------------------------------------------------------|
-| $AESproductName$ 2.3.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.2/edge-stack-2.4)  |
+| $AESproductName$ 2.3.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.3/edge-stack-2.4)  |
 | $AESproductName$ 2.0.X           | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-2.0/edge-stack-2.4)  |
 | $AESproductName$ 1.14.X          | [$AESproductName$ $version$](../upgrade/yaml/edge-stack-1.14/edge-stack-2.4) |
 | $AESproductName$ prior to 1.14.X | [$AESproductName$ 1.14.X](../../../../1.14/topics/install/upgrading)         |
