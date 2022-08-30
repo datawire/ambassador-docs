@@ -208,7 +208,7 @@ const index = ({ data, location, pageContext }) => {
       metaName =
         page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
       metaTitle = metaName + ' | Ambassador';
-
+      metaTitle = page?.frontmatter?.title ?? metaTitle;
       const slugFiltered = slug.filter((item) => item);
 
       if (metaData[`${slugFiltered.join('/')}/`]?.description) {

@@ -1,15 +1,10 @@
-import React from 'react';
 import { graphql } from 'gatsby';
-import Home from './components/Home'
+import React from 'react';
+
+import Home from './components/Home';
 
 const index = ({ data, location, pageContext }) => {
-  return (
-    <Home
-      data={data}
-      location={location}
-      pageContext={pageContext}
-    />
-  )
+  return <Home data={data} location={location} pageContext={pageContext} />;
 };
 
 export const query = graphql`
@@ -35,6 +30,7 @@ export const query = graphql`
       }
       contentTable: tableOfContents
       frontmatter {
+        title
         description
         reading_time
         hide_reading_time
