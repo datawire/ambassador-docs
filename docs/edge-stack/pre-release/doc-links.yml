@@ -31,7 +31,7 @@
        items:
          - title: Deployment architecture
            link: /topics/running/ambassador-deployment
-         - title: The $productName$ container environment
+         - title: $productName$ environment variables and ports
            link: /topics/running/environment
          - title: $productName$ and Redis
            link: /topics/running/aes-redis
