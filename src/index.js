@@ -36,6 +36,7 @@ export const query = graphql`
         hide_reading_time
         reading_time_text
         indexable
+        title
       }
       parent {
         ... on File {

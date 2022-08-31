@@ -1,5 +1,9 @@
 export default function (data, canonicalUrl) {
-  const edgeStackTitle = data.replace('| Ambassador', '| Edge Stack');
+  console.log('AQUI=>2', data);
+  const edgeStackTitle = data
+    .replaceAll('Ambassador Edge Stack', 'Edge Stack')
+    .replace('| Ambassador', '| Edge Stack');
+  console.log('AQUI=>21', edgeStackTitle);
   const telepresenceTitle = data.concat(' Telepresence');
   const argoTitle = data.concat(' Argo');
   const cloudTitle1 = data.replace(
