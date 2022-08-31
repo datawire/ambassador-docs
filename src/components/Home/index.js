@@ -43,6 +43,7 @@ import SidebarContent from '../SidebarContent';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
+
   const slug = page.fields.slug.split('/');
   const isHome = page.fields.slug === '/docs/';
   const initialProduct = isHome
@@ -225,7 +226,6 @@ const index = ({ data, location, pageContext }) => {
           ? 'noindex,nofollow'
           : null;
     }
-
     return {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
