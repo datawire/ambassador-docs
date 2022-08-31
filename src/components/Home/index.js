@@ -43,7 +43,6 @@ import SidebarContent from '../SidebarContent';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
-
   const slug = page.fields.slug.split('/');
   const isHome = page.fields.slug === '/docs/';
   const initialProduct = isHome
@@ -214,7 +213,6 @@ const index = ({ data, location, pageContext }) => {
         page?.frontmatter?.title?.length > 3
           ? page.frontmatter.title
           : metaTitle;
-      console.log('AQUI=>2 original', metaTitle);
       const slugFiltered = slug.filter((item) => item);
 
       if (metaData[`${slugFiltered.join('/')}/`]?.description) {
