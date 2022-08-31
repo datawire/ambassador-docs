@@ -15,7 +15,7 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 ## Prerequisites
 
 - Admin access to the Okta tenant for your organization.
-- Ambassadour Cloud Subscription/License level XXX (what's the dump truck of money level subscription called?)
+- Ambassador Cloud Subscription/License level XXX (what's the dump truck of money level subscription called?)
 - Your unique company ID provided by Ambassador Support.
 
 ## Step 1: Create an Okta Application
@@ -44,7 +44,7 @@ XXX: each of these steps should have a screen shot that calls out the required a
 2. The "Identity Provider Issuer"
 3. The "X.509 Certificate"
 
-Alternatively, you can cut & paste the IDP metadata XML at the bottom of the page, which includes
+Alternatively, you can cut & paste the IdP metadata XML at the bottom of the page, which includes
 all three of the above items.
 
 ## Step 2: Assign your Application Integration to People/Groups
@@ -79,7 +79,7 @@ with clean state by creating a new incognito session for each test.
    page.)
 2. You should see the Ambassador Cloud application on your dashboard. If you do not then make sure
    your user is added to the Application Integration as described in Step 2.
-3. Click on the Ambassador Cloud application. You should end up at the ambassador cloud web site and
+3. Click on the Ambassador Cloud application. You should end up at the Ambassador Cloud website and
    already be logged in.
 
 ### Testing Service Provider initiated Sign On
@@ -88,6 +88,6 @@ XXX: each of these steps should have a screen shot that calls out the required a
 
 1. Go to https://app.getambassador.io
 2. At the login page click on the SSO link.
-3. Enter your company-id .
+3. Enter your company ID.
 4. You should be prompted for your Okta login credentials.
 5. Upon entering the correct credentials, you should be logged into the Ambassador Cloud app.
