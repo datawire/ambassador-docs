@@ -1,3 +1,6 @@
+---
+title: Upgrade $productName$ 2.0.5 to $versionTwoX$ (Helm) | Ambassador
+---
 import Alert from '@material-ui/lab/Alert';
 
 # Upgrade $productName$ 2.0.5 to $productName$ $versionTwoX$ (Helm)
