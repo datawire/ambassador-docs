@@ -1,5 +1,5 @@
 ---
-title: Upgrade $productName$ 1.14.X to 2.3.1 (Helm) | $productName$
+title: Upgrade $productName$ 1.14.X to $versionTwoX$ (Helm) | $productName$ 
 ---
 
 import Alert from '@material-ui/lab/Alert';
