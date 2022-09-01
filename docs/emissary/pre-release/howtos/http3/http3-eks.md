@@ -1,5 +1,5 @@
 ---
-title: "$productName$ - HTTP/3 support for Amazon Elastic Kubernetes Service (EKS)"
+title: "HTTP/3 with Amazon Elastic Kubernetes Service (EKS) | $productName$"
 description: "How to configure HTTP/3 support for Amazon Elastic Kubernetes Service (EKS). This guide shows how to setup the LoadBalancer service for EKS to support both TCP and UDP communications."
 ---
 
