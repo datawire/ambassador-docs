@@ -6,7 +6,7 @@ title: "Authentication Overview"
 <!-- We may need to add SAML to this list if it releases at the same time or prior to our release. -->
 Authenticating with Ambassador Cloud is simple! Choose to authenticate via Google, GitHub or GitLab to get started. 
 
-Once you've selected your provider, if this is your first ever login, you will be prompted to create a new Organization. 
+Once you've selected your provider(GitHub, GitLab or Google), if this is your first ever login, you will be prompted to create a new Organization. 
 
 
 # Setting up an Organization
@@ -40,15 +40,17 @@ Once you've created your organization you'll be able to continue your login proc
 
 Once an organization has been created for your email domain, any user that signs in with the same domain will be automatically prompted to the team selection page. 
 
-<!-- TODO: add an image of team selection screen -->
+<br />
+<p style="max-width:600px;margin:0 auto;">
+  <img src="../images/select-team.png" alt="Select Team"/>
+</p>
+<br />
 
 There, you will be able to choose which Team to join and start using Ambassador Cloud. 
 
 Administrators can setup the teams to require an additional acceptance to join, once a user selects the team, the administrators will recieve a notification to either accept or deny entry.
 
-When joining an Organization you can still use GitHub or GitLab as your authentication providor but, the primary email on your account must match the domain of the Organization you are trying to join, you will also need to be a member of the GitHub organization.
-
-If you do not want to change the primary email of your GitHub or GitLab account, you will need to sign in with Google using your company email account, or be invited by an administrator.
+You can join an Organization using GitHub, GitLab or Google:
 
 # Adding a new Team to an already existing Organization
 
@@ -66,11 +68,19 @@ You will be redirected back to our login service where you will be prompted with
   Each Team within Ambassador Cloud is subject to it's own Licenses. See  <a href="../../subscriptions/howtos/manage-my-subscriptions/">Subscriptions</a> for more information.
 </Alert>
 
-# Creating a Team
+# Create Teams
 
 Teams are how you will navigate Ambassador Cloud. A Team is where users will sign in within your Organization, clusters will be connected, and give you the ability to use all the features of Ambassador Cloud. 
 
-At first login after you've created an Organization, a Team will be automatically created for you if you've elected to sign in with Google as your identity provider. 
+## GitHub and GitLab as provider
 
-If you elected to use GitHub or GitLab, you will need to select which organization you want to use for your Ambassador Cloud team. 
+The primary email on your GitHub or Gitlab account must match the domain of the Organization you are trying to join, you will also need to be a member of the GitHub organization.
+
+you will need to select which organization you want to use for your Ambassador Cloud team. 
 This organization will be an extra source of truth for granting access to your Ambassador Cloud team.
+
+## Google as provider
+
+This method will not require the primary email to match your domain and you will need to sign in with Google or be invited by an administrator.
+
+A Team will be automatically created for you if you've elected to sign in with Google as your identity provider. 
