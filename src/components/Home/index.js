@@ -43,7 +43,6 @@ import SidebarContent from '../SidebarContent';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
-  console.log('AQUI=>12');
   const slug = page.fields.slug.split('/');
   const isHome = page.fields.slug === '/docs/';
   const initialProduct = isHome
