@@ -15,7 +15,6 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 ## Prerequisites
 
 - Admin access to the Okta tenant for your organization.
-- Ambassador Cloud Subscription/License level XXX (what's the dump truck of money level subscription called?)
 - Your unique company ID provided by Ambassador Support.
 
 ## Step 1: Create an Okta Application
@@ -28,7 +27,7 @@ XXX: each of these steps should have a screen shot that calls out the required a
 4. Choose "SAML 2.0" and click "Next".
 5. Enter "Ambassador Cloud" as the app name, enter a logo if desired, and click "Next".
 6. Enter "https://app.getambassador.io" for the audience restriction.
-7. Enter "https://app.getambassador.io/auth/realms/production/broker/&lt;company-id&gt;/endpoint/clients/&lt;company-id&gt;". (For staging enter "https://staging-app.datawire.io/auth/realms/staging/broker/&lt;company-id&gt;/endpoint/clients/&lt;company-id&gt;".)
+7. Enter "https://app.getambassador.io/auth/realms/production/broker/&lt;company-id&gt;/endpoint/clients/&lt;company-id&gt;".
 8. Click Next and then Finish in order to create your Application Integration.
 
 When your app is created you should be in the "Sign On" tab of your Okta App Integration. If for
