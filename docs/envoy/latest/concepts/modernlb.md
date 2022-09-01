@@ -1,3 +1,6 @@
+---
+title: "Introduction to Network Load Balancing and Proxying"
+---
 # Introduction to Modern Network Load Balancing and Proxying
 
 Author: [Matt Klein](https://blog.envoyproxy.io/@mattklein123?source=post_page-----a57f6ff80236----------------------)
