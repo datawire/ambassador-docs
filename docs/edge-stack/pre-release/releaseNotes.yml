@@ -83,6 +83,7 @@ items:
         body: >-
           A new <code>Filter</code> has been added to support validating APIKey's on incoming requests.The new <code>APIKeyFilter</code> when applied with a <code>FilterPolicy</code> will check to
           see if the incoming requests has a valid API Key in the request header. $productName$ uses Kubernetes <code>Secret</code>'s to lookup valid keys for authorizing requests.
+        docs: topics/using/filters/apikeys
       - title: Add support to watch for secrets with APIKey's
         type: feature
         body: >-
