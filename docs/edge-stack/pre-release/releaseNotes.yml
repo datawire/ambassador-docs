@@ -221,10 +221,16 @@ items:
       - title: Allow bypassing of EDS for manual endpoint insertion
         type: change
         body: >-
-          Set `AMBASSADOR_EDS_BYPASS` to `true` to bypass EDS handling of endpoints and have endpoints be
-          inserted to clusters manually. This can help resolve with `503 UH` caused by certification rotation relating to
-          a delay between EDS + CDS. The default is `false`.
+          Set <code>AMBASSADOR_EDS_BYPASS</code> to <code>true</code> to bypass EDS handling of endpoints and have endpoints be
+          inserted to clusters manually. This can help resolve with <code>503 UH</code> caused by certification rotation relating to
+          a delay between EDS + CDS. The default is <code>false</code>.
+        docs: topics/running/environment/#ambassador_eds_bypass
 
+      - title: Properly convert FilterPolicy and ExternalFilter between CRD versions
+        type: bugfix
+        body: >-
+          Previously, $productName$ would incorrectly include empty fields when converting a FilterPolicy or ExternalFilter between versions. This would cause undesired state to be persisted in k8s which would lead to validation issues when trying to kubectl apply the custom resource. This fixes these issues to ensure the correct data is being persisted and roundtripped properly between CRD versions.
+    
   - version: 2.3.2
     date: '2022-08-01'
     notes:
