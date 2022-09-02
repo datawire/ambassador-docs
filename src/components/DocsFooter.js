@@ -64,10 +64,12 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
 
   return (
     <footer className="docs__footer">
-      <a href={dstUrl} target="_blank" rel="noreferrer">
-        <GithubIcon loading='lazy'/>
-        Edit this page on GitHub
-      </a>
+      {product == 'telepresence' && Number(version) >= 2.7 ? null : (
+        <a href={dstUrl} target="_blank" rel="noreferrer">
+          <GithubIcon loading="lazy" />
+          Edit this page on GitHub
+        </a>
+      )}
     </footer>
   );
 };
