@@ -35,10 +35,10 @@ items:
   - version: 3.2.0
     date: 'TBD'
     notes:
-      - title: Envoy upgraded to 1.23
+      - title: Envoy upgraded to 1.23.0
         type: change
         body: >-
-          The envoy version included in $productName$ has been upgraded from 1.22 to that latest release of 1.23. This provides $productName$ with the latest security patches, performances enhancments,and features offered by the envoy proxy.
+          The envoy version included in $productName$ has been upgraded from 1.22 to that latest release of 1.23.0. This provides $productName$ with the latest security patches, performances enhancments,and features offered by the envoy proxy.
         docs: https://www.envoyproxy.io/docs/envoy/latest/version_history/v1.23/v1.23.0
 
       - title: Add support for Host resources using secrets from different namespaces
@@ -74,6 +74,11 @@ items:
           deny traffic when it is unable to communicate to the RateLimitService 
           returning a 500.
         docs: topics/running/services/rate-limit-service/
+
+      - title: Properly convert FilterPolicy and ExternalFilter between CRD versions
+        type: bugfix
+        body: >-
+          Previously, $productName$ would incorrectly include empty fields when converting a FilterPolicy or ExternalFilter between versions. This would cause undesired state to be persisted in k8s which would lead to validation issues when trying to kubectl apply the custom resource. This fixes these issues to ensure the correct data is being persisted and roundtripped properly between CRD versions.
 
   - version: 3.1.0
     date: '2022-08-01'

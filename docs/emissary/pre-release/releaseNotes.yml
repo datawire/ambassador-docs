@@ -35,10 +35,10 @@ items:
   - version: 3.2.0
     date: 'TBD'
     notes:
-      - title: Envoy upgraded to 1.23
+      - title: Envoy upgraded to 1.23.0
         type: change
         body: >-
-          The envoy version included in $productName$ has been upgraded from 1.22 to that latest release of 1.23. This provides $productName$ with the latest security patches, performances enhancments,and features offered by the envoy proxy.
+          The envoy version included in $productName$ has been upgraded from 1.22 to that latest release of 1.23.0. This provides $productName$ with the latest security patches, performances enhancments,and features offered by the envoy proxy.
         docs: https://www.envoyproxy.io/docs/envoy/latest/version_history/v1.23/v1.23.0
 
       - title: Add support for Host resources using secrets from different namespaces
@@ -68,6 +68,14 @@ items:
           deny traffic when it is unable to communicate to the RateLimitService 
           returning a 500.
         docs: topics/running/services/rate-limit-service/
+      
+      - title: Correctly manage cluster names when service names are very long
+        type: bugfix
+        body: >-
+          Distinct services with names that are the same in the first forty characters will no longer be incorrectly mapped to the same cluster.
+        github:
+        - title: "#4354"
+          link: https://github.com/emissary-ingress/emissary/issues/4354
 
   - version: 3.1.0
     date: '2022-08-01'
