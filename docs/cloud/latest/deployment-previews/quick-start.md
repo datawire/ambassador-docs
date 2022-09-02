@@ -1,3 +1,8 @@
+---
+title: "Ambassador Cloud Deployment Previews"
+description: "Check out your subscription details or shop for different subscription editions. Depending on your needs, Ambassador Labs has plans for all sizes of companies and applications."
+---
+
 import Alert from '@material-ui/lab/Alert';
 import HubspotForm from "../../../../../src/components/HubspotForm";
 import Button from '../../../../../src/components/Button';
@@ -13,32 +18,18 @@ import Button from '../../../../../src/components/Button';
 
 # Deployment Previews with Ambassador Cloud
 
-Deployment previews are a clean, simple mechanism to easily provide access to a development
-version of a service while it is still a pull request, _before_ merging the new code. This
-reduces development time by making it significantly faster to iterate on new features or
-bugfixes. This means you no longer need to manually coordinate deployments to staging or test
-environments, deployment previews can handle as many development streams as you need for you.
+Deployment previews are a clean, simple mechanism to easily provide access to a development version of a service while it is still a pull request, _before_ merging the new code. This reduces development time by making it significantly faster to iterate on new features or bugfixes. This means you no longer need to manually coordinate deployments to staging or test environments, deployment previews can handle as many development streams as you need for you.
 
 <Alert severity="info"> The deployment previews are a licensed feature in Ambassador Cloud. For more information, refer to <a href="../../../../../editions/">Ambassador Labs' various service plans.</a> </Alert>
 
 ## Prerequisites
 
-* An application that can be deployed to K8s that is set up for GitOps:
-  * A repo that has all of the application code
-  * A declarative deployment configuration for that application (it could be in a second repo, or in the same one. In this tutorial, we use a second repo)
-* A cluster connected to Ambassador Cloud (and be running Edge Stack 2.2.x+)
-* Ambassador Cloud GitOps integration enabled on the repo containing the application code
-* Argo CD set up to sync the deployment configuration into the cluster
-* A container registry that has read/write permissions (we're using Docker in this tutorial, but it could be any)
+* An application that can be deployed to K8s that is set up for GitOps. This includes a repo that has all of the application code, as well as a declarative deployment configuration for that application. The it could be in two repos or in the same one. The following example uses a two repo approach.
+* A cluster connected to Ambassador Cloud with Edge Stack version of 2.2.x or later installed on it.
+* Ambassador Cloud GitOps integration enabled on the repo containing the application code.
+* Argo CD set up to sync the deployment configuration into the cluster,
+* A container registry that has read/write permissions. The following example uses Docker.
 
-**Does your environment look different?** We're actively working on making deployment previews more useful for more environments. Please let us know what your environment looks like. If you're an existing customer, please create a ticket; all other users please submit your email below.
-
-<div class="cloud-qs-form">
-  <Button  size="m" color="ctaPurple" to="https://support.datawire.io" >
-    Create a ticket
-  </Button>
-  <HubspotForm formId="8b2da809-eda8-436c-b057-13fa318ab34b" />
-</div>
 
 ## Setup
 

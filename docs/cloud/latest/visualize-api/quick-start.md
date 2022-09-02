@@ -1,10 +1,12 @@
+---
+title: "Visualize the API information of your services"
+description: "Visualize and explore your service’s OpenAPI specification (formerly known as Swagger) docs within Ambassador Cloud using the Edge Stack Mapping resource."
+---
 import Alert from '@material-ui/lab/Alert';
 
-# Quick start
+# Visualize your services' API
 
-## OpenAPI
-
-You can visualize and explore your service’s OpenAPI specification (formerly known as Swagger) documentation from within Ambassador Cloud.
+You can visualize and explore your service’s OpenAPI specification documentation from within Ambassador Cloud.
 
 ## Prerequisites
 
