@@ -1,3 +1,6 @@
+---
+title: "Cloud-native development as full lifecycle development."
+---
 # Why is cloud-native development full lifecycle development?
 
 Containerized applications deployed in Kubernetes generally follow the microservices design pattern. That is, an application is made up of many (possibly hundreds) services that need to communicate with each other. In this new microservices architecture, the most effective way for independent application developers and teams to develop productively and ship quickly is to move from _just writing code_ to managing the full lifecycle: **code - ship - run**. 

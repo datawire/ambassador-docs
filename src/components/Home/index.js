@@ -209,6 +209,10 @@ const index = ({ data, location, pageContext }) => {
         page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
       metaTitle = metaName + ' | Ambassador';
 
+      metaTitle =
+        page?.frontmatter?.title?.length > 3
+          ? page.frontmatter.title
+          : metaTitle;
       const slugFiltered = slug.filter((item) => item);
 
       if (metaData[`${slugFiltered.join('/')}/`]?.description) {
@@ -225,7 +229,6 @@ const index = ({ data, location, pageContext }) => {
           ? 'noindex,nofollow'
           : null;
     }
-
     return {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
