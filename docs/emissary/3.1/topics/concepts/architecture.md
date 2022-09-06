@@ -6,6 +6,8 @@ $productName$ is a specialized [control plane for Envoy Proxy](https://blog.geta
 
 <img src="../../images/ambassador-arch.png" alt="Architecture" />
 
+![Kubernetes Network Architecture](../../../images/ambassador-arch.png)
+
 ## Details
 
 1. The service owner defines configuration in Kubernetes manifests.
