@@ -55,7 +55,9 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
     <img src="../images/sso-okta-admin-apps-create-2.png" />
   </p>
 
-7. Enter "https://app.getambassador.io" for the "Audience URI (SP Entity ID)" field:
+7. Enter "app.getambassador.io" for the "Audience URI (SP Entity ID)" field:
+
+   XXX: need new snapshot
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-2.png" />
