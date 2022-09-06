@@ -19,3 +19,4 @@ Many data centers include services that are running outside of Kubernetes on vir
 The diagram below details a common network architecture for a hybrid on-premise data center. Traffic flows from core routers to MetalLB, which routes to $productName$ running in Kubernetes. $productName$ routes traffic to individual services running on both Kubernetes and VMs. Consul tracks the real-time network location of the services, which $productName$ uses to route to the given services.
 
 ![Architecture](../../../images/consul-ambassador.png)
+![Architecture](../../images/consul-ambassador.png)
