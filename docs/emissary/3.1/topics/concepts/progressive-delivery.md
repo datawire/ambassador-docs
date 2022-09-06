@@ -32,7 +32,7 @@ Canary tests can be automated, and are typically run after testing in a pre-prod
 
 <img src="../../../images/canary-release-overview.png" alt="Canary release process overview" />
 
-![Kubernetes Network Architecture](../../images/xkcd.png)
+![Kubernetes Network Architecture](../images/xkcd.png)
 
 Canary releases are not a panacea. In particular, many services may not receive sufficient traffic in order for canary releases to provide useful information in an actionable timeframe.
 
