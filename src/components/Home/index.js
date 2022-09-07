@@ -43,8 +43,8 @@ import SidebarContent from '../SidebarContent';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
-  const slug = page.fields.slug.split('/');
-  const isHome = page.fields.slug === '/docs/';
+  const slug = page.fields?.slug?.split('/');
+  const isHome = page.fields?.slug === '/docs/';
   const initialProduct = isHome
     ? products[0]
     : products.filter((p) => p.slug === slug[2])[0] || products[0];
