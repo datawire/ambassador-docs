@@ -26,7 +26,7 @@ When creating your organization you will be asked to upload your company log and
   <img src="../images/authenticating-new-org-form.png" alt="New Org"/>
 </p>
 
-If you are using GitHub or GitLab, you will be asked to define which provider organization we should trust.
+If you are using GitHub or GitLab, you will be asked to define which provider organization we should trust. If your GitHub organization isn't listed there might be an issue with [GitHub settings](#your-github-organization-isnt-listed).
 
 <!-- TODO: add an image of organization idp setup page for GitHub/Gitlab -->
 
@@ -83,4 +83,31 @@ This organization will be an extra source of truth for granting access to your A
 
 This method will not require the primary email to match your domain and you will need to sign in with Google or be invited by an administrator.
 
-A Team will be automatically created for you if you've elected to sign in with Google as your identity provider. 
+# Troubleshooting
+
+## Your GitHub organization isn't listed
+Ambassador Cloud needs access granted to your GitHub organization as a third-party OAuth app.  If an organization isn't listed during login then the correct access has not been granted.
+
+The quickest way to resolve this is to go to the **Github menu** → **Settings** → **Applications** → **Authorized OAuth Apps** → **Ambassador Labs**.  An organization owner will have a **Grant** button, anyone not an owner will have **Request** which sends an email to the owner.  If an access request has been denied in the past the user will not see the **Request** button, they will have to reach out to the owner.
+
+Once access is granted, log out of Ambassador Cloud and log back in; you should see the GitHub organization listed.
+
+The organization owner can go to the **GitHub menu** → **Your organizations** → **[org name]** → **Settings** → **Third-party access** to see if Ambassador Labs has access already or authorize a request for access (only owners will see **Settings** on the organization page).  Clicking the pencil icon will show the permissions that were granted.
+
+GitHub's documentation provides more detail about [managing access granted to third-party applications](https://docs.github.com/en/github/authenticating-to-github/connecting-with-third-party-applications) and [approving access to apps](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/approving-oauth-apps-for-your-organization).
+
+### Granting or requesting access on initial login
+
+When using GitHub as your identity provider, the first time you log in to Ambassador Cloud GitHub will ask to authorize Ambassador Labs to access your organizations and certain user data.
+
+<br />
+<p style="max-width:600px;margin:0 auto;">
+  <img src="../images/github-login-authorize.png" alt="Authorize Ambassador labs form"/>
+</p>
+<br />
+
+Any listed organization with a green check has already granted access to Ambassador Labs (you still need to authorize to allow Ambassador Labs to read your user data and organization membership).
+
+Any organization with a red "X" requires access to be granted to Ambassador Labs.  Owners of the organization will see a **Grant** button.  Anyone who is not an owner will see a **Request** button. This will send an email to the organization owner requesting approval to access the organization.  If an access request has been denied in the past the user will not see the **Request** button, they will have to reach out to the owner.
+
+Once approval is granted, you will have to log out of Ambassador Cloud then back in to select the organization.
