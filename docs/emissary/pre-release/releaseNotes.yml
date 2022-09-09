@@ -76,6 +76,14 @@ items:
         github:
         - title: "#4354"
           link: https://github.com/emissary-ingress/emissary/issues/4354
+      
+      - title: Properly populate alt_state_name for Tracing, Auth and RateLimit Services
+        type: bugfix
+        body: >-
+          Previously, setting the <code>stats_name</code> for the <code>TracingService</code>, <code>RateLimitService</code> 
+          or the <code>AuthService</code> would have no affect because it was not being properly passed to the Envoy cluster
+          config. This has been fixed and the <code>alt_stats_name</code> field in the cluster config is now set correctly.
+          (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
 
   - version: 3.1.0
     date: '2022-08-01'
@@ -170,6 +178,14 @@ items:
           Set `AMBASSADOR_EDS_BYPASS` to `true` to bypass EDS handling of endpoints and have endpoints be
           inserted to clusters manually. This can help resolve with `503 UH` caused by certification rotation relating to
           a delay between EDS + CDS. The default is `false`.
+
+      - title: Properly populate alt_state_name for Tracing, Auth and RateLimit Services
+        type: bugfix
+        body: >-
+          Previously, setting the <code>stats_name</code> for the <code>TracingService</code>, <code>RateLimitService</code> 
+          or the <code>AuthService</code> would have no affect because it was not being properly passed to the Envoy cluster
+          config. This has been fixed and the <code>alt_stats_name</code> field in the cluster config is now set correctly.
+          (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
 
   - version: 2.3.2
     date: '2022-08-01'

@@ -50,10 +50,19 @@ items:
           inserted to clusters manually. This can help resolve with <code>503 UH</code> caused by certification rotation relating to
           a delay between EDS + CDS. The default is <code>false</code>.
         docs: topics/running/environment/#ambassador_eds_bypass
+      
       - title: Properly convert FilterPolicy and ExternalFilter between CRD versions
         type: bugfix
         body: >-
           Previously, $productName$ would incorrectly include empty fields when converting a FilterPolicy or ExternalFilter between versions. This would cause undesired state to be persisted in k8s which would lead to validation issues when trying to kubectl apply the custom resource. This fixes these issues to ensure the correct data is being persisted and roundtripped properly between CRD versions.
+      
+      - title: Properly populate alt_state_name for Tracing, Auth and RateLimit Services
+        type: bugfix
+        body: >-
+          Previously, setting the <code>stats_name</code> for the <code>TracingService</code>, <code>RateLimitService</code> 
+          or the <code>AuthService</code> would have no affect because it was not being properly passed to the Envoy cluster
+          config. This has been fixed and the <code>alt_stats_name</code> field in the cluster config is now set correctly.
+          (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
 
   - version: 2.3.2
     date: '2022-08-01'
