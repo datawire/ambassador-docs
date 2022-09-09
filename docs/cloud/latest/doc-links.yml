@@ -14,8 +14,6 @@
       link: /service-catalog/concepts/services/
     - title: Service Groups
       link: /service-catalog/concepts/service-groups/
-    - title: Single Sign On
-      link: /sso/
 - title: User Guide
   items:
     - title: Create a local K8s Dev Environment
@@ -42,6 +40,8 @@
       link: /security/security/
     - title: Using the Developer Portal
       link: /developer-portal/developer-portal/
+    - title: Single Sign On
+      link: /sso/
 - title: Technical Reference
   items:
     - title: Annotations

@@ -2,10 +2,10 @@
 title: "Single Sign On"
 ---
 
-# Single Sign On Overview
+import NewSsoUrl from './SsoUrl.js'
+import NewCopy from './Copy.js';
 
-XXX: It may make sense to combine this and the Ship team docs under a single section, but for the
-moment to avoid merge conflicts this will be a separate section.
+# Single Sign On Overview
 
 Ambassador Cloud supports Single Sign on via SAML 2.0. In order to configure Single Sign On you will
 need to contact a member of the <a href="/about-us/support">Ambassador Support team</a>.
@@ -16,7 +16,7 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 
 - Ambassador Cloud Enterprise Subscription.
 - Admin access to the Okta tenant for your organization.
-- Your unique company ID provided by Ambassador Support.
+- Your unique case sensitive company ID provided by Ambassador Support.
 
 ## Step 1: Create an Okta Application
 
@@ -35,7 +35,7 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 3. Click "Create App Integration":
 
   <p align="center">
-    <img src="../images/sso-okta-admin-apps-open.png" />
+    <img src="../images/sso-okta-admin-apps-tab.png" />
   </p>
 
 4. Choose "SAML 2.0" and click "Next":
@@ -44,33 +44,34 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
     <img src="../images/sso-okta-admin-apps-create-saml.png" />
   </p>
 
-5. Enter "Ambassador Cloud" as the app name, enter a logo if desired, and click "Next":
+5. Enter <NewCopy content="Ambassador Cloud"/> as the app name, enter a logo if desired, and click "Next":
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-1.png" />
   </p>
 
-6. Enter "https://app.getambassador.io/auth/realms/production/broker/&lt;company-id&gt;/endpoint/clients/&lt;company-id&gt;" for the "Single Sign On URL" field:
+6. <NewSsoUrl/>
+
+7. Enter the above URL (after inputting your case sensitive company ID) into the "Single Sign On
+   URL" field:
 
   <p align="center">
-    <img src="../images/sso-okta-admin-apps-create-2.png" />
+    <img src="../images/sso-okta-admin-apps-create-2-url.png" />
   </p>
 
-7. Enter "app.getambassador.io" for the "Audience URI (SP Entity ID)" field:
-
-   XXX: need new snapshot
+8. Enter <NewCopy content="app.getambassador.io"/> for the "Audience URI (SP Entity ID)" field:
 
   <p align="center">
-    <img src="../images/sso-okta-admin-apps-create-2.png" />
+    <img src="../images/sso-okta-admin-apps-create-2-sp.png" />
   </p>
 
-8. Click Next to continue:
+9. Click Next to continue:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-2-next.png" />
   </p>
 
-9. Click Finish to create the Application Integration:
+10. Click Finish to create the Application Integration:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-3.png" />
@@ -103,8 +104,9 @@ Ambassador Support contact:
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-sign-on-saml-setup-values.png" />
   </p>
 
-Alternatively, you can cut & paste the "IDP metadata XML" at the bottom of the page, which includes
-all three of the above items:
+Alternatively, instead of supplying each of the above 3 items to your support contact individually,
+you can cut & paste the "IDP metadata XML" at the bottom of the page, which includes all three of
+the above items, and supply this XML to your Ambassador Support contact:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-sign-on-saml-setup-metadata.png" />
@@ -178,10 +180,8 @@ with clean state by creating a new incognito session for each test.
 
 ### Testing Service Provider initiated Sign On
 
-XXX: each of these steps should have a screen shot that calls out the required action
-
 1. Go to https://app.getambassador.io
 2. At the login page click on the SSO link.
-3. Enter your company ID.
+3. Enter your case sensitive company ID.
 4. You should be prompted for your Okta login credentials.
 5. Upon entering the correct credentials, you should be logged into the Ambassador Cloud app.
