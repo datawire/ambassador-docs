@@ -93,10 +93,10 @@ Once you've created your Ambassador Cloud organization, you can at any point in 
 
 <!-- TODO: Add screenshot of Organization new settings page -->
 
-If you had a new link, the slideout will ask your organization identifier in the IDP selected :
+If you need to create a new link, the slideout will ask your organization identifier based on the IDP you've selected :
 - GitHub : You can find your GitHub Organization identifier by replacing organizationName in this endpoint https://api.github.com/orgs/{organizationName} (You must be logged to GitHub to complete this action)
 - GitLab : GitLab use groups instead of organizations but it's the same. Once logged in GitLab, use this endpoint https://gitlab.com/api/v4/groups
-- Google: Use directly the domain name.
+- Google: Use the [primary domain](https://support.google.com/a/answer/182080) defined in your Google Workspace (example: if your email is you@yourbusiness.com, the identifier is yourbusiness.com)
 
 # Troubleshooting
 
