@@ -14,6 +14,7 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 
 ## Prerequisites
 
+- Ambassador Cloud Enterprise Subscription.
 - Admin access to the Okta tenant for your organization.
 - Your unique company ID provided by Ambassador Support.
 
