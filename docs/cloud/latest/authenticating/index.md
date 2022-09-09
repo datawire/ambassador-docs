@@ -87,6 +87,17 @@ This organization will be an extra source of truth for granting access to your A
 
 This method will not require the primary email to match your domain and you will need to sign in with Google or be invited by an administrator.
 
+# Manage IDPs linked to your Ambassador Cloud organization
+
+Once you've created your Ambassador Cloud organization, you can at any point in time manage IDPs linked to it, navigate to your `Settings` Page in Ambassador Cloud, select `Organization`.
+
+<!-- TODO: Add screenshot of Organization new settings page -->
+
+If you had a new link, the slideout will ask your organization identifier in the IDP selected :
+- GitHub : You can find your GitHub Organization identifier by replacing organizationName in this endpoint https://api.github.com/orgs/{organizationName} (You must be logged to GitHub to complete this action)
+- GitLab : GitLab use groups instead of organizations but it's the same. Once logged in GitLab, use this endpoint https://gitlab.com/api/v4/groups
+- Google: Use directly the domain name.
+
 # Troubleshooting
 
 ## Your GitHub organization isn't listed while creating an Ambassador Cloud organization
