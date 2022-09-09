@@ -65,13 +65,25 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
     <img src="../images/sso-okta-admin-apps-create-2-sp.png" />
   </p>
 
-9. Click Next to continue:
+9. Choose "EmailAddress" for the "Name ID format" field:
+
+  <p align="center">
+    <img src="../images/sso-okta-admin-apps-create-2-format.png" />
+  </p>
+
+10. Choose "Email" for the "Application Username" field:
+
+  <p align="center">
+    <img src="../images/sso-okta-admin-apps-create-2-username.png" />
+  </p>
+
+11. Click Next to continue:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-2-next.png" />
   </p>
 
-10. Click Finish to create the Application Integration:
+12. Click Finish to create the Application Integration:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-3.png" />
