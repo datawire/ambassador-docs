@@ -26,9 +26,13 @@ When creating your organization you will be asked to upload your company log and
   <img src="../images/authenticating-new-org-form.png" alt="New Org"/>
 </p>
 
-If you are using GitHub or GitLab, you will be asked to define which provider organization we should trust. If your GitHub organization isn't listed there might be an issue with [GitHub settings](#your-github-organization-isnt-listed).
+If you are using GitHub or GitLab, you will be asked to define which provider organization we should trust. If your GitHub organization isn't listed there might be an issue with [GitHub settings](#your-github-organization-isnt-listed-while-creating-an-ambassador-cloud-organization).
 
-<!-- TODO: add an image of organization idp setup page for GitHub/Gitlab -->
+<br />
+<p style="max-width:600px;margin:0 auto;">
+  <img src="../images/authenticating-link-idp-org.png" alt="Choose your provider org"/>
+</p>
+<br />
 
 Once you've created your organization you'll be able to continue your login process and proceed to the [Team](#creating-a-team) creation steps.
 
@@ -85,7 +89,8 @@ This method will not require the primary email to match your domain and you will
 
 # Troubleshooting
 
-## Your GitHub organization isn't listed
+## Your GitHub organization isn't listed while creating an Ambassador Cloud organization
+
 Ambassador Cloud needs access granted to your GitHub organization as a third-party OAuth app.  If an organization isn't listed during login then the correct access has not been granted.
 
 The quickest way to resolve this is to go to the **Github menu** → **Settings** → **Applications** → **Authorized OAuth Apps** → **Ambassador Labs**.  An organization owner will have a **Grant** button, anyone not an owner will have **Request** which sends an email to the owner.  If an access request has been denied in the past the user will not see the **Request** button, they will have to reach out to the owner.
