@@ -6,12 +6,26 @@ title: "Authentication Overview"
 <!-- We may need to add SAML to this list if it releases at the same time or prior to our release. -->
 Authenticating with Ambassador Cloud is simple! Choose to authenticate via Google, GitHub or GitLab to get started. 
 
-Once you've selected your provider(GitHub, GitLab or Google), if this is your first ever login, you will be prompted to create a new Organization. 
+Once you've selected your provider(GitHub, GitLab or Google), if this is your first ever login, you will be prompted to create a new Organization.
+
+# Concepts
+
+## Organization
+
+An Ambassador Cloud organization is a space where multiple development teams can collaborate on Ambassador Cloud. Organizations serve as a container for all your [Ambassador Cloud Teams](#ambassador-cloud-team). You use organizations to manage one or more related projects or teams at the same time.
+
+## Team
+
+An Ambassador Cloud Team is a dedicated space for your team to enjoy Ambassador Cloud features. If the user is part of Ambassador Cloud Organization, it has access to all the Ambassador Cloud Teams. If you want to invite external users you can still invite manually user from the `Settings` page of the Ambassador Cloud Team. 
+
+## IDPs
+
+An identity provider (IdP) is a service that stores and manages digital identities. Ambassador Cloud Organization can be linked to the following IDPs: GitHub, GitLab, Google and SAML.
 
 
 # Setting up an Organization
 
-Organizations are based on the domain of the email address of the account you choose to sign in with. 
+[Organizations](#ambassador-cloud-organization) are based on the domain of the email address of the account you choose to sign in with. 
 So, if I'm a new user and sign in with `sally@datawire.io`, you will be prompted to create a new Organization for `datawire.io` unless one already exists. 
 
 <br />
@@ -19,14 +33,18 @@ So, if I'm a new user and sign in with `sally@datawire.io`, you will be prompted
   <img src="../images/authenticating-create-org.png" alt="Create Org"/>
 </p>
 
-When creating your organization you will be asked to upload your company log and enter your company URL so we can customize your experience across Ambassador Cloud. 
+When creating your organization you will be asked to upload your Organization/Company logo and enter your Organization/Company URL so we can customize your experience across Ambassador Cloud. 
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
   <img src="../images/authenticating-new-org-form.png" alt="New Org"/>
 </p>
 
-If you are using GitHub or GitLab, you will be asked to define which provider organization we should trust. If your GitHub organization isn't listed there might be an issue with [GitHub settings](#your-github-organization-isnt-listed-while-creating-an-ambassador-cloud-organization).
+If you are using a provider like GitHub or GitLab, you will be asked to define which provider organization we should trust. If your GitHub organization isn't listed there might be an issue with [GitHub settings](#your-github-organization-isnt-listed-while-creating-an-ambassador-cloud-organization).
+
+<Alert severity="info">
+  An Organization can be linked to multiple IDPs. If you link your GitHub organization to your Ambassador Cloud organization, all the users from the GitHub organization will be able to join any teams under your Ambassador Cloud organization.
+</Alert>
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
@@ -35,10 +53,6 @@ If you are using GitHub or GitLab, you will be asked to define which provider or
 <br />
 
 Once you've created your organization you'll be able to continue your login process and proceed to the [Team](#creating-a-team) creation steps.
-
-<Alert severity="info">
-  Organizations will only work with custom email domains.
-</Alert>
 
 # Joining an already existing Organization
 
@@ -58,7 +72,7 @@ You can join an Organization using GitHub, GitLab or Google:
 
 # Adding a new Team to an already existing Organization
 
-Ambassador Cloud allows you to have many Teams within an Organization.
+Ambassador Cloud allows you to have many [Teams](#ambassador-cloud-team) within an [Organization](#ambassador-cloud-organization).
 
 To add a new team Navigate to your `Settings` Page in Ambassador Cloud, select `Account` and choose the `Create Team` option. 
 
@@ -74,7 +88,7 @@ You will be redirected back to our login service where you will be prompted with
 
 # Create Teams
 
-Teams are how you will navigate Ambassador Cloud. A Team is where users will sign in within your Organization, clusters will be connected, and give you the ability to use all the features of Ambassador Cloud. 
+A [Team](#ambassador-cloud-team) is where users will sign in within your Organization, clusters will be connected, and give you the ability to use all the features of Ambassador Cloud. 
 
 ## GitHub and GitLab as provider
 
