@@ -141,7 +141,7 @@ The bug is present in the `voting-svc` service, you'll run that service locally.
 Run the following command inside the container:
 
   ```
-  $ telepresence intercept voting --port 8081:8080 --ingress-port 80 --ingress-host edge-stack.ambassador --ingress-l5 edge-stack.ambassador --mechanism tcp
+  $ telepresence intercept voting --port 8081:8080
 
     Using Deployment voting
     intercepted
