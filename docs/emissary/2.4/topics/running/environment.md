@@ -19,6 +19,7 @@ Use the following variables for the environment of your $productName$ container:
 | [`AMBASSADOR_JSON_LOGGING`](#ambassador_json_logging)                                                      | `false`                                             | Boolean; non-empty=true, empty=false |
 | [`AMBASSADOR_LABEL_SELECTOR`](#ambassador_label_selector)                                                  | Empty                                               | String (label=value) |
 | [`AMBASSADOR_NAMESPACE`](#ambassador_namespace)                                                            | `default` ([^1])                                    | Kubernetes namespace |
+| [`AMBASSADOR_RECONFIG_MAX_DELAY`](#ambassador_reconfig_max_delay)                                          | `1`                                                 | Integer
 | [`AMBASSADOR_SINGLE_NAMESPACE`](#ambassador_single_namespace)                                              | Empty                                               | Boolean; non-empty=true, empty=false |
 | [`AMBASSADOR_SNAPSHOT_COUNT`](#ambassador_snapshot_count)                                                  | `4`                                                 | Integer |
 | [`AMBASSADOR_VERIFY_SSL_FALSE`](#ambassador_verify_ssl_false)                                              | `false`                                             | Boolean; `true`=true, any other value=false |
@@ -150,6 +151,11 @@ Resources without the specified label will be ignored.
 Controls namespace configuration for Amabssador.
 
 [More information](../../running/running#namespaces)
+
+### `AMBASSADOR_RECONFIG_MAX_DELAY`
+
+Controls up to how long Ambassador will wait to receive changes before doing an Envoy reconfiguration. The unit is
+in seconds and must be > 0.
 
 ### `AMBASSADOR_SINGLE_NAMESPACE`
 
