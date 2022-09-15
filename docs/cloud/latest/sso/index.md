@@ -44,7 +44,7 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
     <img src="../images/sso-okta-admin-apps-create-saml.png" />
   </p>
 
-5. Enter <NewCopy content="Ambassador Cloud"/> as the app name, enter a logo if desired, and click "Next":
+5. Enter <NewCopy content="Ambassador Cloud"/> as the app name, upload the <a href="../images/ambassador_420_120.png">Ambassador Logo</a>, and click "Next":
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-1.png" />
@@ -65,16 +65,21 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
     <img src="../images/sso-okta-admin-apps-create-2-sp.png" />
   </p>
 
-9. Choose "EmailAddress" for the "Name ID format" field:
-
-  <p align="center">
-    <img src="../images/sso-okta-admin-apps-create-2-format.png" />
-  </p>
-
-10. Choose "Email" for the "Application Username" field:
+9. Choose "EmailAddress" for the "Name ID format" field and "Email" for the "Application Username" field:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-2-username.png" />
+  </p>
+  
+10. Add the following Attribute Statements:
+
+  <ul>
+    <li>Attribute <NewCopy content="firstName"/>, format Unspecified, with a value of <NewCopy content="user.firstName"/></li>
+    <li>Attribute <NewCopy content="lastName"/>, format Unspecified, with a value of <NewCopy content="user.lastName"/></li>
+  </ul>
+
+  <p align="center">
+    <img src="../images/sso-okta-admin-apps-create-2-attributes.png" />
   </p>
 
 11. Click Next to continue:

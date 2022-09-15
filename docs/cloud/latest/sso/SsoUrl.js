@@ -20,12 +20,19 @@ class SsoUrl extends React.Component {
     this.setState({company: event.target.value});
   }
 
+  checkInput(content) {
+    if (this.state.company === "") {
+      return "Please supply your case sensitive company ID in the input above to get a correct URL.";
+    }
+  }
+
   render() {
     return (
       <div className="sso-url">
-        Enter your case sensitive company ID to compute the "Single Sign On URL":
-        <input type="text" size="10" defaultValue={this.state.company} name="company" placeholder="<company-id>" onInput={this.handleInput.bind(this)}/>
-        <div style={{margin: "1em", "margin-left": "2em"}}><Copy content={makeSsoUrl(this.state.company)}/></div>
+        Enter your case sensitive company ID here <input type="text" size="10" defaultValue={this.state.company} name="company" placeholder="<company-id>" onInput={this.handleInput.bind(this)}/> and then copy this URL to use in step 7:
+        
+        <div style={{margin: "1em", "margin-left": "2em"}}><Copy content={makeSsoUrl(this.state.company)}
+                                                                 validator={this.checkInput.bind(this)}/></div>
       </div>
     );
   }
