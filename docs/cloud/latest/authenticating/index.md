@@ -33,7 +33,7 @@ So, if I'm a new user and sign in with `sally@datawire.io`, you will be prompted
   <img src="../images/authenticating-create-org.png" alt="Create Org"/>
 </p>
 
-When creating your organization you will be asked to upload your Organization/Company logo and enter your Organization/Company URL so we can customize your experience across Ambassador Cloud. 
+When creating your organization you will be asked to upload your Organization/Company logo so we can customize your experience across Ambassador Cloud. 
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
