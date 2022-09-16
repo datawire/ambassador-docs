@@ -18,8 +18,12 @@
       link: /diagnostics-ui/view-diagnostics/
     - title: Authenticating to Ambassador Cloud
       link: /authenticating/
+    - title: Organization
+      link: /organization/
 - title: User Guide
   items:
+    - title: Authenticating to Ambassador Cloud
+      link: /authenticating/
     - title: Create a local K8s Dev Environment
       link: service-catalog/howtos/qs-java-advanced/
     - title: Annotating services
