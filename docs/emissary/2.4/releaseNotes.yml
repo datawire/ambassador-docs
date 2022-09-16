@@ -65,6 +65,31 @@ items:
           The <code>AMBASSADOR_RECONFIG_MAX_DELAY</code> env var can be optionally set to batch changes for the specified 
           non-negative window period in seconds before doing an Envoy reconfiguration. Default is "1" if not set.
 
+      - title: TCPMappings use correct SNI configuration
+        type: bugfix
+        body: >-
+          $productName$ 2.0.0 introduced a bug where a <code>TCPMapping</code> that uses SNI,
+          instead of using the hostname glob in the <code>TCPMapping</code>, uses the hostname glob
+          in the <code>Host</code> that the TLS termination configuration comes from.
+
+      - title: TCPMappings configure TLS termination without a Host resource
+        type: bugfix
+        body: >-
+          $productName$ 2.0.0 introduced a bug where a <code>TCPMapping</code> that terminates TLS
+          must have a corresponding <code>Host</code> that it can take the TLS configuration from.
+          This was semi-intentional, but didn't make much sense.  You can now use a
+          <code>TLSContext</code> without a <code>Host</code>as in $productName$ 1.y releases, or a
+          <code>Host</code> with or without a <code>TLSContext</code> as in prior 2.y releases.
+
+      - title: TCPMappings and HTTP Hosts can coexist on Listeners that terminate TLS
+        type: bugfix
+        body: >-
+          Prior releases of $productName$ had the arbitrary limitation that a
+          <code>TCPMapping</code> cannot be used on the same port that HTTP is served on, even if
+          TLS+SNI would make this possible.  $productName$ now allows <code>TCPMappings</code> to be
+          used on the same <code>Listener</code> port as HTTP <code>Hosts</code>, as long as that
+          <code>Listener</code> terminates TLS.
+
   - version: 2.3.2
     date: '2022-08-01'
     notes:
