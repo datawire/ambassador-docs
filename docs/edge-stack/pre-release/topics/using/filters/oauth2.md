@@ -93,6 +93,7 @@ spec:
         valueRegex: "regex"                # optional; default is any non-empty string
     extraAuthorizationParameters:      # optional; default is {}
       "string": "string"
+    postLogoutRedirectURI: "url"       # optional; default is empty string
 
     ## OAuth Client settings: grantType=="AuthorizationCode" or "Password" #####
     clientID:               "string"   # required
@@ -307,6 +308,8 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
    - origin: clientURL-value
      internalOrigin: "*://*"
    ```
+
+ - `postLogoutRedirectURI`: Setting this field to a valid url will allow your idP to redirect to the given URL upon a successfull logout. You will need to register the following endpoint as the Post Logout Redirect `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`. This will have your idP redirect back to this endpoint which will then handle the redirect to your supplied value in `postLogoutRedirectURI`. Note: this will only work if your idP supports Post Logout Redirect URI.
 
  - `extraAuthorizationParameters`: Extra (non-standard or extension) OAuth authorization parameters to use.  It is not valid to specify a parameter used by OAuth itself ("response_type", "client_id", "redirect_uri", "scope", or "state").
 
