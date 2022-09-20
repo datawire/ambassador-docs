@@ -31,7 +31,7 @@
        items:
          - title: Deployment architecture
            link: /topics/running/ambassador-deployment
-         - title: The $productName$ container environment
+         - title: $productName$ environment variables and ports
            link: /topics/running/environment
          - title: $productName$ and Redis
            link: /topics/running/aes-redis
@@ -253,6 +253,12 @@
            link: /topics/using/gateway-api
          - title: Developer Portal
            link: /topics/using/dev-portal
+     - title: Caching
+       items:
+         - title: Cache and Cache policies
+           link: /topics/using/caching/
+         - title: In-Memory Cache
+           link: /topics/using/caching/in-memory
      - title: FAQs
        link: /about/faq
      - title: Troubleshooting
