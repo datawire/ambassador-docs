@@ -19,6 +19,7 @@ Use the following variables for the environment of your $productName$ container:
 | [`AMBASSADOR_JSON_LOGGING`](#ambassador_json_logging)                                                      | `false`                                             | Boolean; non-empty=true, empty=false |
 | [`AMBASSADOR_LABEL_SELECTOR`](#ambassador_label_selector)                                                  | Empty                                               | String (label=value) |
 | [`AMBASSADOR_NAMESPACE`](#ambassador_namespace)                                                            | `default` ([^1])                                    | Kubernetes namespace |
+| [`AMBASSADOR_RECONFIG_MAX_DELAY`](#ambassador_reconfig_max_delay)                                          | `1`                                                 | Integer |
 | [`AMBASSADOR_SINGLE_NAMESPACE`](#ambassador_single_namespace)                                              | Empty                                               | Boolean; non-empty=true, empty=false |
 | [`AMBASSADOR_SNAPSHOT_COUNT`](#ambassador_snapshot_count)                                                  | `4`                                                 | Integer |
 | [`AMBASSADOR_VERIFY_SSL_FALSE`](#ambassador_verify_ssl_false)                                              | `false`                                             | Boolean; `true`=true, any other value=false |
@@ -144,7 +145,7 @@ to reveal the namespace name nor $productName$ ID itself. $productName$ needs RB
 if not granted this permission it will generate a UUID based only on the $productName$ ID. To disable cluster ID generation entirely, set the environment variable
 `AMBASSADOR_CLUSTER_ID` to a UUID that will be used for the cluster ID.
 
-[More information](../../running/running#emissary-ingress-update-checks-scout)
+[More information](../../running/running#ambassador-edge-stack-update-checks-scout)
 
 ### `AMBASSADOR_CONFIG_BASE_DIR`
 
@@ -156,7 +157,7 @@ Controls where $productName$ will store snapshots. By default, the latest config
 
 To completely disable feature reporting, set the environment variable `AMBASSADOR_DISABLE_FEATURES` to any non-empty value.
 
-[More information](../../running/running/#emissary-ingress-update-checks-scout)
+[More information](../../running/running/#ambassador-edge-stack-update-checks-scout)
 
 ### `AMBASSADOR_DRAIN_TIME`
 
@@ -205,6 +206,11 @@ Controls namespace configuration for Amabssador.
 
 [More information](../../running/running#namespaces)
 
+### `AMBASSADOR_RECONFIG_MAX_DELAY`
+
+Controls up to how long Ambassador will wait to receive changes before doing an Envoy reconfiguration. The unit is
+in seconds and must be > 0.
+
 ### `AMBASSADOR_SINGLE_NAMESPACE`
 
 When set, configures $productName$ to only work within a single namespace.
@@ -246,7 +252,7 @@ run regardless of the status of Scout.
 We do not recommend you disable Scout, since we use this mechanism to notify users of new releases (including critical fixes and security issues). This check can be disabled by setting
 the environment variable `SCOUT_DISABLE` to `1` in your $productName$ deployment.
 
-[More information](../../running/running#emissary-ingress-update-checks-scout)
+[More information](../../running/running#ambassador-edge-stack-update-checks-scout)
 
 ### `STATSD_ENABLED`
 
