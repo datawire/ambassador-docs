@@ -13,7 +13,7 @@ This is different from most OAuth implementations where the Authorization Server
 
 This is what the authentication process looks like at a high level when using Ambassador Edge Stack with an external identity provider. The use case is an end-user accessing a secured app service.
 
-![Ambassador Authentication OAuth/OIDC](../../../../images/ambassador_oidc_flow.jpg)
+![Ambassador Authentication OAuth/OIDC](../../../images/ambassador_oidc_flow.jpg)
 
 ### Some basic authentication terms
 
