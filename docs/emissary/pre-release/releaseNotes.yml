@@ -68,6 +68,15 @@ items:
         body: >-
           The <code>AMBASSADOR_RECONFIG_MAX_DELAY</code> env var can be optionally set to batch changes for the specified
           non-negative window period in seconds before doing an Envoy reconfiguration. Default is "1" if not set.
+          
+      - title: Allow setting custom_tags for traces
+        type: feature
+        body: >-
+          It is now possible to set <code>custom_tags</code> in the
+          <code>TracingService</code>. Trace tags can be set based on
+          literal values, environment variables, or request headers. The existing <code>tag_headers</code> field is now deperacated. If both <code>tag_headers</code> and <code>custom_tags</code> are set then <code>tag_headers</code> will be ignored.
+          (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
+        docs: topics/running/services/tracing-service/
 
       - title: Fixed <code>mappingSelector</code> associating <code>Hosts</code> with <code>Mappings</code>
         type: change
