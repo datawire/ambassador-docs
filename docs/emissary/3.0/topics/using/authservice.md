@@ -12,7 +12,7 @@ bypass_auth: true
 
 ## Context extensions (gRPC only)
 
-The `auth_context_extensions` attribute will pass the given values along to the AuthService when authentication happens. This is only supported when the `proto` of the AuthService is `grpc`, which is a restriction of the underlying envoy implementation.
+The `auth_context_extensions` attribute will pass the given values along to the AuthService when authentication happens. This is only supported when the `proto` of the AuthService is `grpc`, which is a restriction of the underlying Envoy implementation.
 The values are arbitrary key value pairs formatted as strings.
 
 ```yaml
