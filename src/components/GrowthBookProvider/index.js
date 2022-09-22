@@ -10,16 +10,7 @@ import {
 } from '../../../../src/context';
 
 const growthbook = new GrowthBook({
-  trackingCallback: (experiment, result) => {
-    dataLayer.push({
-      event: 'experiment_viewed',
-      event_category: 'experiment',
-      event_label: result.variationId,
-      event_action: experiment.key,
-      dimension1: experiment.key + ':' + result.variationId,
-    });
-    console.log('AQUI=>12334', dataLayer);
-  },
+  trackingCallback: (experiment, result) => {},
 });
 
 const allowedPathNames = ['/'];
