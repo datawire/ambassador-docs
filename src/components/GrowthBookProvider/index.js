@@ -13,13 +13,13 @@ const growthbook = new GrowthBook({
   trackingCallback: (experiment, result) => {},
 });
 
-const allowedPathNames = ['/'];
+const allowedPathNames = ['/', '/contact-us/'];
 
 const GrowthBookProviderWrapper = ({ userId, children }) => {
   const dispatch = useAppDispatch();
   const DAYS_TO_EXPIRE = 30;
   const fetchFeatures = () => {
-    fetch('https://cdn.growthbook.io/api/features/key_prod_6bfe1855be94f2e5')
+    fetch(process.env.GATSBY_GROWTHBOOK_URL)
       .then((res) => res.json())
       .then((json) => {
         growthbook.setFeatures(json.features);
