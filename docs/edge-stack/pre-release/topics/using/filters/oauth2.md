@@ -309,7 +309,11 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
      internalOrigin: "*://*"
    ```
 
- - `postLogoutRedirectURI`: Setting this field to a valid url will allow your idP to redirect to the given URL upon a successfull logout. You will need to register the following endpoint as the Post Logout Redirect `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`. This will have your idP redirect back to this endpoint which will then handle the redirect to your supplied value in `postLogoutRedirectURI`. Note: this will only work if your idP supports Post Logout Redirect URI.
+- `postLogoutRedirectURI`: Setting this field to a valid URL will allow $productName$ to redirect to this location upon a successful logout. You must register the following endpoint with your IDP as the Post Logout Redirect `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`. This will inform your IDP that it must redirect back to $productName$ once they have cleared their session data. Once IDP has redirected back to $productName$, this will clear out session information on the application side. Before finally redirecting to the supplied value in `postLogoutRedirectURI`.
+
+    * If Post Logout Redirect is configured in your IDP to `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`, then after a successful logout, a redirect will be issued to the URL configured in `postLogoutRedirectURI`.
+    * If `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` has been configured as the Post Logout Redirect in your IDP but `postLogoutRedirectURI` is not configured in $productName$ then your IDP will error out as it will be expecting specific instructions for the post logout behavior.
+    * Refer to the documentation for your specific IDP to check if it supports configuring a Post Logout Redirect.
 
  - `extraAuthorizationParameters`: Extra (non-standard or extension) OAuth authorization parameters to use.  It is not valid to specify a parameter used by OAuth itself ("response_type", "client_id", "redirect_uri", "scope", or "state").
 
