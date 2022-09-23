@@ -7,17 +7,15 @@ import Alert from '@material-ui/lab/Alert';
 
 # Diagnostics Overview
 
-[Emisasry-ingress](https://www.getambassador.io/docs/emissary/) offers cluster [Diagnostics](https://www.getambassador.io/docs/emissary/latest/topics/install/docker/#2-emissary-ingresss-diagnostics), available through the `/ambassador/v0/diag/` endpoint.
-
-Now you are able to see this information using the Diagnostics Overview page, inside Ambassador Cloud. 
+[Emisasry-ingress](https://www.getambassador.io/docs/emissary/) publishes cluster [Diagnostics](https://www.getambassador.io/docs/emissary/latest/topics/install/docker/#2-emissary-ingresss-diagnostics).
 
 <Alert severity="warning">
-    In order to use diagnostics, you need the latest version of <a href="https://www.getambassador.io/docs/edge-stack/latest/topics/install/migration-matrix/" target="_blank">Edge Stack</a> running inside your cluster
+    In order to use diagnostics, you need <a href="https://www.getambassador.io/docs/edge-stack/latest/topics/install/migration-matrix/" target="_blank">Edge Stack</a> or <a href="https://www.getambassador.io/docs/emissary/latest/topics/install/migration-matrix/" target="_blank">Emissary-ingress</a> version 3.1 or greater running in your cluster.
 </Alert>
 
 ## Accessing Diagnostics Overview Page
 
-Inside the [clusters page](https://app.getambassador.io/cloud/clusters), on each cluster card displayed, there is an orange button. Clicking it will take you to the diagnostics overview page.
+Inside the [clusters page](https://app.getambassador.io/cloud/clusters), on each cluster card displayed, there is a 'Diagnostics' button. Clicking it will take you to the diagnostics overview page.
 
   <p align="center">
     <img src="../../images/diag-button.png" width="300"/>
@@ -59,6 +57,7 @@ spec:
 ```
 
 <Alert severity="info">
-    Still not getting back diagnostics information? This could mean that your diagnostics interface is <a href="https://www.getambassador.io/docs/emissary/latest/howtos/protecting-diag-access/" target="_blank">protected</a> or only the <a href="https://www.getambassador.io/docs/emissary/latest/topics/running/ambassador/#observability" target="_blank">local pod</a> can access it.
+    Still not getting back diagnostics information? This could mean that your diagnostics interface is <a href="https://www.getambassador.io/docs/emissary/latest/howtos/protecting-diag-access/" target="_blank">protected</a> or only the <a href="https://www.getambassador.io/docs/emissary/latest/topics/running/ambassador/#observability" target="_blank">local pod</a> can access it. 
+    Also, check the this <a href="https://www.getambassador.io/docs/emissary/latest/howtos/protecting-diag-access/" target="_blank">emissary flag</a>, it needs to be enabled!
 </Alert>
  
