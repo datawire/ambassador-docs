@@ -74,7 +74,11 @@ numbers of `Mapping`s.
 If the `Host` specifies `mappingSelector` _and_ the `Mapping` specifies `hostname`, both must match
 for the association to happen.
 
-The `selector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
+The `mappingSelector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta). For a `Mapping` to be associated with a `Host` that uses `mappingSelector`, then **all** labels
+required by the `mappingSelector` must be present on the `Mapping` in order for it to be associated with the `Host`.
+A `Mapping` may have additional labels other than those required by the `mappingSelector` so long as the required labels are present.
+
+**in 2.0, only `matchLabels` is supported**, for example:
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
@@ -168,6 +172,16 @@ spec:                          # and if the Host specifies mappingSelector AND t
 ```
 
 Future versions of $productName$ will support `matchExpressions` as well.
+
+> **Note:** In $productName$ version `3.2`, a bug with how `Hosts` are associated with `Mappings` was fixed. The `mappingSelector` field in `Hosts` was not
+properly being enforced in prior versions. If any single label from the selector was matched then the `Host` would be associated with the `Mapping` instead
+of requiring all labels in the selector to be present. Additonally, if the `hostname` of the `Mapping` matched the `hostname` of the `Host` then they would be associated
+regardless of the configuration of `mappingSelector`.
+In version `3.2` this bug was fixed and a `Host` will only be associated with a `Mapping` if **all** labels required by the selector are present.
+This brings the `mappingSelector` field in-line with how label selectors are used throughout Kubernetes. To avoid unexpected behaviour after the upgrade,
+add all labels that `Hosts` have in their `mappingSelector` to `Mappings` you want to associate with the `Host`. You can opt-out of this fix and return to the old
+`Mapping`/`Host` association behaviour by setting the environment variable `DISABLE_STRICT_LABEL_SELECTORS` to `"true"` (default: `"false"`). A future version of
+$productName$ may remove the ability to opt-out of this bugfix.
 
 ## Secure and insecure requests
 

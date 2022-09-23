@@ -57,6 +57,20 @@ items:
           The <code>AMBASSADOR_RECONFIG_MAX_DELAY</code> env var can be optionally set to batch changes for the specified
           non-negative window period in seconds before doing an Envoy reconfiguration. Default is "1" if not set
 
+      - title: Fixed <code>mappingSelector</code> associating <code>Hosts</code> with <code>Mappings</code>
+        type: change
+        body: >-
+          Changes to label matching will change how <code>Hosts</code> are associated with <code>Mappings</code>. There was a bug with label
+          selectors that was causing <code>Hosts</code> to be incorrectly being associated with more <code>Mappings</code> than intended.
+          If any single label from the selector was matched then the <code>Host</code> would be associated with the <code>Mapping</code>.
+          Now it has been updated to correctly only associate a <code>Host</code> with a <code>Mapping</code> if <b>all</b> labels required by
+          the selector are present. This brings the <code>mappingSelector</code> field in-line with how label selectors are used
+          in Kubernetes. To avoid unexpected behaviour after the upgrade, add all labels that Hosts have in their
+          <code>mappingSelector</code> to <code>Mappings</code> you want to associate with the <code>Host</code>. You can opt-out of the new behaviour
+          by setting the environment variable <code>DISABLE_STRICT_LABEL_SELECTORS</code> to <code>"true"</code> (default: <code>"false"</code>).
+          (Thanks to <a href="https://github.com/f-herceg">Filip Herceg</a> and <a href="https://github.com/dynajoe">Joe Andaverde</a>!).
+        docs: topics/running/environment/#disable_strict_label_selectors
+
       - title: Envoy upgraded to 1.23.0
         type: change
         body: >-

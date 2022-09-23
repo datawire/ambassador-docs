@@ -102,7 +102,7 @@ Use the following variables for the environment of your $productName$ container:
 | [`AMBASSADOR_KNATIVE_SUPPORT`](#ambassador_knative_support)                              | `false`                                             | Boolean; non-empty=true, empty=false |
 | [`AMBASSADOR_UPDATE_MAPPING_STATUS`](#ambassador_update_mapping_status)                  | `false`                                             | Boolean; `true`=true, any other value=false |
 | [`ENVOY_CONCURRENCY`](#envoy_concurrency)                                                | Empty                                               | Integer |
-
+| [`DISABLE_STRICT_LABEL_SELECTORS`](#disable_strict_label_selectors)                      | `false`                                             | Boolean: `true`=true, any other value=false |
 
 ### `AMBASSADOR_ID`
 
@@ -676,6 +676,21 @@ The default is `false`. We recommend leaving `AMBASSADOR_UPDATE_MAPPING_STATUS` 
 
 Configures the optional [--concurrency](https://www.envoyproxy.io/docs/envoy/latest/operations/cli#cmdoption-concurrency) command line option when launching Envoy.
 This controls the number of worker threads used to serve requests and can be used to fine-tune system resource usage.
+
+### `DISABLE_STRICT_LABEL_SELECTORS`
+
+In $productName$ version `3.2`, a bug with how `Hosts` are associated with `Mappings` was fixed. The `mappingSelector` field in `Hosts` was not
+properly being enforced in prior versions. If any single label from the selector was matched then the `Host` would be associated with the `Mapping` instead
+of requiring all labels in the selector to be present. Additonally, if the `hostname` of the `Mapping` matched the `hostname` of the `Host` then they would be associated
+regardless of the configuration of `mappingSelector`.
+
+In version `3.2` this bug was fixed and a `Host` will only be associated with a `Mapping` if **all** labels required by the selector are present.
+This brings the `mappingSelector` field in-line with how label selectors are used throughout Kubernetes. To avoid unexpected behaviour after the upgrade,
+add all labels that `Hosts` have in their `mappingSelector` to `Mappings` you want to associate with the `Host`. You can opt-out of this fix and return to the old
+`Mapping`/`Host` association behaviour by setting the environment variable `DISABLE_STRICT_LABEL_SELECTORS` to `"true"` (default: `"false"`). A future version of
+$productName$ may remove the ability to opt-out of this bugfix.
+
+See The [Host documentation](../../running/host-crd#controlling-association-with-mappings) for more information about `Host` / `Mapping` association.
 
 ## Port assignments
 
