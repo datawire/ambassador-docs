@@ -309,11 +309,11 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
      internalOrigin: "*://*"
    ```
 
-- `postLogoutRedirectURI`: Setting this field to a valid URL will allow $productName$ to redirect to this location upon a successful logout. You must register the following endpoint with your IDP as the Post Logout Redirect `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`. This will inform your IDP that it must redirect back to $productName$ once they have cleared their session data. Once IDP has redirected back to $productName$, this will clear out session information on the application side. Before finally redirecting to the supplied value in `postLogoutRedirectURI`.
-
-    * If Post Logout Redirect is configured in your IDP to `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`, then after a successful logout, a redirect will be issued to the URL configured in `postLogoutRedirectURI`.
-    * If `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` has been configured as the Post Logout Redirect in your IDP but `postLogoutRedirectURI` is not configured in $productName$ then your IDP will error out as it will be expecting specific instructions for the post logout behavior.
-    * Refer to the documentation for your specific IDP to check if it supports configuring a Post Logout Redirect.
+- `postLogoutRedirectURI`: Set this field to a valid URL to have $productName$ redirect there upon a successful logout. You must register the following endpoint with your IDP as the Post Logout Redirect `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`. This informs your IDP to redirect back to $productName$ once the IDP has cleared the session data. Once the IDP has redirected back to $productName$, this clears the local $productName$ session information before redirecting to the destination specified by the `postLogoutRedirectURI` value.
+    * If Post Logout Redirect is configured in your IDP to `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` then, after a successful logout, a redirect is issued to the URL configured in `postLogoutRedirectURI`.
+    * If `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` is configured as the Post Logout Redirect in your IDP, but `postLogoutRedirectURI` is not configured in $productName$, then your IDP will error out as it will be expecting specific instructions for the post logout behavior.
+      Refer to your IDP’s documentation to verify if it supports Post Logout Redirects.
+      For more information on `post_logout_redirect_uri functionality`, refer to the [OpenID Connect RP-Initiated Logout 1.0 specs](https://openid.net/specs/openid-connect-rpinitiated-1_0.html).
 
  - `extraAuthorizationParameters`: Extra (non-standard or extension) OAuth authorization parameters to use.  It is not valid to specify a parameter used by OAuth itself ("response_type", "client_id", "redirect_uri", "scope", or "state").
 
