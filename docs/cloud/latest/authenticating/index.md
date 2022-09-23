@@ -16,7 +16,7 @@ Once you select your identity provider, you're either prompted to create a new A
 
 An [Organization](/docs/cloud/latest/organization/#Organization) represents your tenant in Ambassador Cloud. 
 
-The first thing we'll ask you is to create one:
+The first thing we'll ask you to do is create one:
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
@@ -24,11 +24,11 @@ The first thing we'll ask you is to create one:
 </p>
 
 
-When creating your organization you will be asked to set a name for it.
+When creating your organization you will be asked to set a name.
 
 You can also upload your Organization / Company logo so we can customize your experience across Ambassador Cloud.
 
-Moreover, you can enable the automatic join, leveraging an [identity provider (Idp)](/docs/cloud/latest/organization/#identity-providers) like GitHub or GitLab. Any user part of it will be
+Moreover, you can enable the automatic join, leveraging an [identity provider (IDP)](/docs/cloud/latest/organization/#identity-providers) such as GitHub or GitLab. Any user part of it will be
 able to join the Organization without being explicitly invited.
 
 <br />
@@ -37,16 +37,16 @@ able to join the Organization without being explicitly invited.
 </p>
 
 
-If using GitHub, and that you're Organization isn't listed, you may want to update the permissions in the [GitHub settings](#your-github-organization-isnt-listed-while-creating-an-ambassador-cloud-organization).
+If you're using GitHub, and your Organization is not listed, you will need to update the permissions in the [GitHub settings](#your-github-organization-isnt-listed-while-creating-an-ambassador-cloud-organization).
 
 
-If you want to add more than one Idp to the organization, or are not ready to set one, don't worry, you'll be able to define that later in the user settings.
+If you want to link more than one IDP to the organization, or are not ready to set one, don't worry, you'll be able to define that later in the organization settings.
 
-Once you've created your organization you'll be able to continue your login process and proceed to the [Team](#joining-an-already-existing-organization) selection steps.
+Once you've created your Organization a [Team](/docs/cloud/latest/organization/#Team) will automatically be created for you, and you will be redirected to Ambassador Cloud. You will be able to [manage](#manage-teams-in-an-already-existing-organization) this team directly from Ambassador Cloud.
 
 ## Joining an already existing Organization
 
-Once an organization has been created, any user that signs in using an [identity provider](/docs/cloud/latest/organization/#identity-providers) configured for the auto-join, or who's been invited by email, will be able to connect.
+Once an organization has been created, any user that signs in using an [identity provider](/docs/cloud/latest/organization/#identity-providers) configured with the auto-join feature, or who's been invited by email, will be able to connect.
 
 <br />
 <p style="max-width:550px;margin:0 auto;">
@@ -54,7 +54,7 @@ Once an organization has been created, any user that signs in using an [identity
 </p>
 <br />
 
-If your organization has more than one team, you'll also see an extra screen to select it:
+If your organization has more than one team, you'll see a screen to select which team to join:
 
 <br />
 <p style="max-width:540px;margin:0 auto;">
@@ -64,9 +64,9 @@ If your organization has more than one team, you'll also see an extra screen to 
 
 Otherwise, you'll be immediately redirected to the Cloud App.
 
-## Manage IDPs resources authorized to join the organization
+## Manage IDP resources authorized to join the organization
 
-Once you've created your Ambassador Cloud organization, you can at any point in time manage IDPs linked to it.
+Once you've created your Ambassador Cloud organization, you can manage which identity providers are linked to it.
 
 Navigate to your `Settings` Page in Ambassador Cloud and select `Organization`.
 
@@ -77,16 +77,16 @@ Navigate to your `Settings` Page in Ambassador Cloud and select `Organization`.
 <br />
 
 
-If you need to create a new link, the slideout will ask your organization identifier based on the IDP you've selected :
-- **GitHub** : You can find your GitHub Organization identifier by replacing organizationName in this endpoint https://api.github.com/orgs/{organizationName} (You must be logged to GitHub to complete this action)
-- **GitLab** : GitLab use groups instead of organizations but it's the same. Once logged in GitLab, use this endpoint https://gitlab.com/api/v4/groups
+If you need to create a new link, the slideout will ask your organization identifier based on the provider you've selected:
+- **GitHub** : You can find your GitHub Organization identifier by replacing organizationName in this endpoint `https://api.github.com/orgs/{organizationName}` (You must be logged to GitHub to complete this action)
+- **GitLab** : GitLab uses groups instead of organizations but it's one in the same. Once you've logged in to GitLab, use this endpoint `https://gitlab.com/api/v4/groups`
 - **Google**: Use the [primary domain](https://support.google.com/a/answer/182080) defined in your Google Workspace (example: if your email is you@yourbusiness.com, the identifier is yourbusiness.com)
 
-For example, if you add a GitHub organization, all the users who are part of it will be able to join the Ambassador Cloud Organization without any extra work.
+For example, if you add a GitHub organization, all the users who are part of the organization will be able to join your Ambassador Cloud Organization just by signing in.
 
 ## Manage Teams in an already existing Organization
 
-Ambassador Cloud allows you to have many [Team](/docs/cloud/latest/organization/#Team) within an [Organization](/docs/cloud/latest/organization/#Organization).
+Ambassador Cloud allows you to have many [Teams](/docs/cloud/latest/organization/#Team) within an [Organization](/docs/cloud/latest/organization/#Organization).
 
 To add a new team, navigate to your `Settings` Page in Ambassador Cloud, select `Account` and choose the `Create Team` option. 
 
@@ -101,7 +101,7 @@ To add a new team, navigate to your `Settings` Page in Ambassador Cloud, select 
 </Alert>
 
 
-A [Team](/docs/cloud/latest/organization/#Team) is a group that users can join within your Organization. Clusters will be connected to the team, and give you the ability to use all the features of Ambassador Cloud. 
+A [Team](/docs/cloud/latest/organization/#Team) is a group that users can join within your Organization where clusters will be connected, and give you the ability to use all the features of Ambassador Cloud. 
 
 ## Troubleshooting
 
@@ -126,9 +126,3 @@ When using GitHub as your identity provider, the first time you log in to Ambass
   <img src="../images/github-login-authorize.png" alt="Authorize Ambassador labs form"/>
 </p>
 <br />
-
-Any listed organization with a green check has already granted access to Ambassador Labs (you still need to authorize to allow Ambassador Labs to read your user data and organization membership).
-
-Any organization with a red "X" requires access to be granted to Ambassador Labs.  Owners of the organization will see a **Grant** button.  Anyone who is not an owner will see a **Request** button. This will send an email to the organization owner requesting approval to access the organization.  If an access request has been denied in the past the user will not see the **Request** button, they will have to reach out to the owner.
-
-Once approval is granted, you will have to log out of Ambassador Cloud then back in to select the organization.
