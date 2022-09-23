@@ -6,7 +6,6 @@ import Alert from '@material-ui/lab/Alert';
 
 
 # Authentication Overview
-<!-- We may need to add SAML to this list if it releases at the same time or prior to our release. -->
 Authenticating with Ambassador Cloud is simple: connect with Google, GitHub or GitLab to get started. 
 
 Once you select your identity provider, you're either prompted to create a new Ambassador Cloud organization or asked to join an existing one.
@@ -24,9 +23,7 @@ The first thing we'll ask you to do is create one:
 </p>
 
 
-When creating your organization you will be asked to set a name.
-
-You can also upload your Organization / Company logo so we can customize your experience across Ambassador Cloud.
+When creating your organization, you are asked to give it a name. You will also be able to upload your own logo as well.
 
 Moreover, you can enable the automatic join, leveraging an [identity provider (IDP)](/docs/cloud/latest/organization/#identity-providers) such as GitHub or GitLab. Any user part of it will be
 able to join the Organization without being explicitly invited.
