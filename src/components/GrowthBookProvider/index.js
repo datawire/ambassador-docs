@@ -3,11 +3,7 @@ import { useLocation } from '@reach/router';
 import { nanoid } from 'nanoid';
 import React, { useEffect } from 'react';
 
-import {
-  useAppState,
-  useAppDispatch,
-  setFeatureFlags,
-} from '../../../../src/context';
+import { useAppDispatch, setFeatureFlags } from '../../../../src/context';
 
 const growthbook = new GrowthBook({
   trackingCallback: (experiment, result) => {},
