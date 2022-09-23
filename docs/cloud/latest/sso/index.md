@@ -35,7 +35,7 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 3. Click "Create App Integration":
 
   <p align="center">
-    <img src="../images/sso-okta-admin-apps-tab.png" />
+    <img src="../images/sso-okta-admin-apps-create.png" />
   </p>
 
 4. Choose "SAML 2.0" and click "Next":
