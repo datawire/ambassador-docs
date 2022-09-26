@@ -5,8 +5,20 @@ import React, { useEffect } from 'react';
 
 import { useAppDispatch, setFeatureFlags } from '../../../../src/context';
 
+const sendEvent = ({ label, action, location }) => {
+  dataLayer.push({
+    event: 'experiment',
+    event_category: 'experiment',
+    event_label: label,
+    event_action: action,
+    location,
+  });
+};
+
 const growthbook = new GrowthBook({
-  trackingCallback: (experiment, result) => {},
+  trackingCallback: (experiment, result) => {
+    //Custom tracking events
+  },
 });
 
 const allowedPathNames = ['/', '/contact-us/'];
@@ -73,5 +85,5 @@ const GrowthBookProviderWrapper = ({ userId, children }) => {
     <GrowthBookProvider growthbook={growthbook}>{children}</GrowthBookProvider>
   );
 };
-export { allowedPathNames };
+export { sendEvent };
 export default GrowthBookProviderWrapper;
