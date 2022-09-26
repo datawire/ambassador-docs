@@ -7,8 +7,6 @@ import Alert from '@material-ui/lab/Alert';
 
 # Diagnostics Overview
 
-<!-- [Emisasry-ingress](https://www.getambassador.io/docs/emissary/) publishes cluster [Diagnostics](https://www.getambassador.io/docs/emissary/latest/topics/install/docker/#2-emissary-ingresss-diagnostics). -->
-
 Ambassador Edge Stack and Emissary-ingress provide cluster diagnostics information, and now it can be accessed using Ambassador Cloud.
 
 <Alert severity="warning">
