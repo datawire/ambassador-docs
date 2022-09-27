@@ -13,7 +13,7 @@ This is different from most OAuth implementations where the Authorization Server
 
 This is what the authentication process looks like at a high level when using Ambassador Edge Stack with an external identity provider. The use case is an end-user accessing a secured app service.
 
-![Ambassador Authentication OAuth/OIDC](../../../../images/ambassador_oidc_flow.jpg)
+![Ambassador Authentication OAuth/OIDC](../../../images/ambassador_oidc_flow.jpg)
 
 ### Some basic authentication terms
 
@@ -93,6 +93,7 @@ spec:
         valueRegex: "regex"                # optional; default is any non-empty string
     extraAuthorizationParameters:      # optional; default is {}
       "string": "string"
+    postLogoutRedirectURI: "url"       # optional; default is empty string
 
     ## OAuth Client settings: grantType=="AuthorizationCode" or "Password" #####
     clientID:               "string"   # required
@@ -307,6 +308,12 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
    - origin: clientURL-value
      internalOrigin: "*://*"
    ```
+
+- `postLogoutRedirectURI`: Set this field to a valid URL to have $productName$ redirect there upon a successful logout. You must register the following endpoint with your IDP as the Post Logout Redirect `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`. This informs your IDP to redirect back to $productName$ once the IDP has cleared the session data. Once the IDP has redirected back to $productName$, this clears the local $productName$ session information before redirecting to the destination specified by the `postLogoutRedirectURI` value.
+    * If Post Logout Redirect is configured in your IDP to `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` then, after a successful logout, a redirect is issued to the URL configured in `postLogoutRedirectURI`.
+    * If `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` is configured as the Post Logout Redirect in your IDP, but `postLogoutRedirectURI` is not configured in $productName$, then your IDP will error out as it will be expecting specific instructions for the post logout behavior.
+      Refer to your IDP’s documentation to verify if it supports Post Logout Redirects.
+      For more information on `post_logout_redirect_uri functionality`, refer to the [OpenID Connect RP-Initiated Logout 1.0 specs](https://openid.net/specs/openid-connect-rpinitiated-1_0.html).
 
  - `extraAuthorizationParameters`: Extra (non-standard or extension) OAuth authorization parameters to use.  It is not valid to specify a parameter used by OAuth itself ("response_type", "client_id", "redirect_uri", "scope", or "state").
 
