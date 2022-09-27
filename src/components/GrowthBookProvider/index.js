@@ -27,7 +27,6 @@ const GrowthBookProviderWrapper = ({ userId, children }) => {
   const dispatch = useAppDispatch();
   const DAYS_TO_EXPIRE = 30;
   const fetchFeatures = () => {
-    console.log('Here fetchFeatures', process.env.GATSBY_GROWTHBOOK_URL);
     fetch(process.env.GATSBY_GROWTHBOOK_URL)
       .then((res) => res.json())
       .then((json) => {
@@ -75,7 +74,6 @@ const GrowthBookProviderWrapper = ({ userId, children }) => {
 
   useEffect(() => {
     const isValidPath = allowedPathNames.includes(pathname);
-    console.log('Here useEffect', isValidPath, pathname);
     if (isValidPath) {
       fetchFeatures();
     } else {
