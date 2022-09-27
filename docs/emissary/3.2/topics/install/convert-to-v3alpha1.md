@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Convert Configuration Resources to `getambassador.io/v3alpha1`
+# Convert Configuration to `getambassador.io/v3alpha1`
 
 Once your $productName$ $version$ installation is running, it is **strongly recommended** that
 you convert your existing configuration resources from `getambassador.io/v2` to
