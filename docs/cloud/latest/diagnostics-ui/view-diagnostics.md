@@ -23,7 +23,7 @@ Inside the [clusters page](https://app.getambassador.io/cloud/clusters), on each
 
 Inside, you will be able to see two navigation tabs, containing the following:
 
-1. **Ambassador Routes** : Information about your Emissary-ingress [mapping resources](https://www.getambassador.io/docs/emissary/latest/topics/using/intro-mappings/) gets displayed, alongside service name, weigth, and success rate.
+1. **Ambassador Routes** : Information about your Emissary-ingress [mapping resources](https://www.getambassador.io/docs/emissary/latest/topics/using/intro-mappings/) gets displayed, alongside the service name, weigth, and success rate.
 
   <p align="center">
     <img src="../../images/cluster-diag-routes-table.png" width="800"/>
@@ -37,13 +37,14 @@ Inside, you will be able to see two navigation tabs, containing the following:
 
 ## No Diagnostics Found?
 
-Seeing a warning message on the Diagnostics Overview page means that there are no diagnostics information for that particular cluster.
+Seeing a warning message on the Diagnostics Overview page means that the cluster has no diagnostics information to report, that diagnostics reporting has been disabled, or that there is an issue with the deployment of the [Agent](https://www.getambassador.io/docs/edge-stack/) in this cluster, preventing it from reporting diagnostic in.
+
 
   <p align="center">
     <img src="../../images/cluster-diag-warning-message.png" width="800"/>
   </p>
 
-Be sure to have diagnostics enabled for your ambassador module.
+Create an Ambassador `Module` if one does not already exist and add the following config to enable diagnostics data.
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
@@ -56,7 +57,7 @@ spec:
       enabled: true
 ```
 
-Next, enable the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment flag.
+Next, In the deployment for Edge Stack / Emissary-ingress set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
 
   ```bash
   # Namespace and deployment name depends on your current install
@@ -64,16 +65,10 @@ Next, enable the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment flag.
   kubectl set env deployment/edge-stack-agent -n ambassador AES_REPORT_DIAGNOSTICS_TO_CLOUD="true"
   ```
 
-And set the following environment flag to the agent 
+Finally, set the `AES_DIAGNOSTICS_URL` environment variable to `"http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
 
   ```bash
   # Namespace, deployment name, and pod url/port depends on your current install
 
   kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
   ```
-
-<Alert severity="info">
-    Still not getting back diagnostics information? This could mean that your diagnostics interface is <a href="https://www.getambassador.io/docs/emissary/latest/howtos/protecting-diag-access/" target="_blank">protected</a> or only the <a href="https://www.getambassador.io/docs/emissary/latest/topics/running/ambassador/#observability" target="_blank">local pod</a> can access it. 
-    Also, check this <a href="https://www.getambassador.io/docs/edge-stack/pre-release/topics/running/environment/#aes_report_diagnostics_to_cloud" target="_blank">emissary flag</a>, it needs to be enabled!
-</Alert>
- 
