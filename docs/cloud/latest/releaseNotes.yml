@@ -28,9 +28,14 @@
 #         - docs: The path to the documentation page where additional information can be found.
 #         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
 
-
 changelog: ''
 items:
+  - date: '2022-09-27'
+    notes:
+      - title: 'Diagnostics Overview'
+        body: Check your cluster diagnostics, now without leaving Ambassador Cloud
+        docs: './diagnostics-ui/view-diagnostics'
+        type: feature
   - date: '2022-08-08'
     notes:
       - title: Telepresence Saved Intercepts
@@ -41,11 +46,11 @@ items:
   - date: '2022-08-02'
     notes:
       - title: 'Developer Portal'
-        body: "Consolidate your OpenAPI specifications! With this new edition to Ambassador Cloud you will be able to consolidate all of your services API specs into one manageable place to be shared amongst your team, or even expose it to the web and share it with your non Cloud users!"
+        body: 'Consolidate your OpenAPI specifications! With this new edition to Ambassador Cloud you will be able to consolidate all of your services API specs into one manageable place to be shared amongst your team, or even expose it to the web and share it with your non Cloud users!'
         docs: './developer-portal/how-to-use'
         type: feature
   - date: '2022-08-02'
-    notes: 
+    notes:
       - title: 'API Key Management'
         body: 'With our new API Key Management system it will now be easier for you to restrict access to your individual services. You will be able to create Filters specific to routes of your own choosing and create API keys to distribute for each individual filter.'
         docs: './security/api-keys/introduction'
@@ -53,20 +58,20 @@ items:
   - date: '2022-06-06'
     notes:
       - title: 'Role-Based Access Control'
-        body: "With Role-Based Access Control (RBAC) it is now easier for Ambassador Cloud account administrators to manage access, control subscriptions and invite teammates to collaborate."
+        body: 'With Role-Based Access Control (RBAC) it is now easier for Ambassador Cloud account administrators to manage access, control subscriptions and invite teammates to collaborate.'
         image: './rbac.png'
         docs: './service-catalog/reference/access/'
         type: feature
   - date: '2022-06-06'
     notes:
       - title: 'Subscriptions'
-        body: "Monitor your teams current utilization of Ambassador Cloud.
-              Adjust your subscription according to your needs to get the best
-              Kubernetes developer experience."
+        body: 'Monitor your teams current utilization of Ambassador Cloud.
+          Adjust your subscription according to your needs to get the best
+          Kubernetes developer experience.'
   - date: '2022-04-11'
     notes:
       - title: 'Deployment Previews'
-        body: "Connecting Ambassador Cloud to your GitHub pull request workflow allows you to easily setup preview URLs and share unreleased changes with your teammates."
+        body: 'Connecting Ambassador Cloud to your GitHub pull request workflow allows you to easily setup preview URLs and share unreleased changes with your teammates.'
         image: './deployment-previews.png'
         docs: deployment-previews/quick-start/
         type: feature
@@ -80,7 +85,7 @@ items:
   - date: '2022-02-21'
     notes:
       - title: 'Mapping Editor'
-        body: "The new Ambassador Cloud Mapping Editor lets you craft Mapping resources following best practices to easily expose services to the internet. Get started with Edge Stack 2.2 and follow our guide to set up your first Mapping."
+        body: 'The new Ambassador Cloud Mapping Editor lets you craft Mapping resources following best practices to easily expose services to the internet. Get started with Edge Stack 2.2 and follow our guide to set up your first Mapping.'
         image: './mapping-editor.png'
         docs: '../../edge-stack/latest/tutorials/getting-started/'
         type: feature
@@ -160,4 +165,3 @@ items:
         image: ./cloud-rollouts-beta.png
         docs: ../../argo/latest/quick-start/
         type: feature
-
