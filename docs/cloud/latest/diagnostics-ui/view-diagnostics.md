@@ -67,8 +67,8 @@ Next, enable the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment flag.
 And set the following environment flag to the agent 
 
   ```bash
-  # Namespace, deployment name and port depends on your current install
-  
+  # Namespace, deployment name, and pod url/port depends on your current install
+
   kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
   ```
 
