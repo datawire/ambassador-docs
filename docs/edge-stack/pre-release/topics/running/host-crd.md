@@ -71,6 +71,9 @@ A `Mapping` will not be associated with a `Host` unless at least one of the foll
 - The `Mapping` specifies a `hostname` attribute that matches the `Host` in question.
 - The `Host` specifies a `mappingSelector` that matches the `Mapping`'s Kubernetes `label`s.
 
+> **Note:** The `mappingSelector` field is only configurable on `v3alpha1` CRDs. In the `v2` CRDs the equivalent field is `selector`.
+either `selector` or `mappingSelector` may be configured in the `v3alpha1` CRDs, but `selector` has been deprecated in favour of `mappingSelector`.
+
 If neither of the above is true, the `Mapping` will not be associated with the `Host` in
 question. This is intended to help manage memory consumption with large numbers of `Host`s and large
 numbers of `Mapping`s.
