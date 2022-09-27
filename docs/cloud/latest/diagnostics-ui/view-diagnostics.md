@@ -56,6 +56,30 @@ spec:
       enabled: true
 ```
 
+And enable the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment flag.
+
+  ```bash
+  kubectl set env deployment/edge-stack-agent -n ambassador AES_REPORT_DIAGNOSTICS_TO_CLOUD="true"
+  ```
+
+## Can't access the diagnostics interface ?
+
+If you are unable to hit your diagnostics interface using your Emissary-ingress admin port, this means that your access to the diagnostics interface is protected, thus, you won't be able to see the diagnostics overview in Ambassador Cloud. 
+
+You will need to re-enable the <code>/ambassador/v0/diag</code> mapping, and and allow non local access to the Emissary-ingress pod.
+
+```yaml
+apiVersion: getambassador.io/v3alpha1
+kind: Module
+metadata:
+  name: ambassador
+spec:
+  config:
+    diagnostics:
+      enabled: true
+      allow_non_local: true
+```
+
 <Alert severity="info">
     Still not getting back diagnostics information? This could mean that your diagnostics interface is <a href="https://www.getambassador.io/docs/emissary/latest/howtos/protecting-diag-access/" target="_blank">protected</a> or only the <a href="https://www.getambassador.io/docs/emissary/latest/topics/running/ambassador/#observability" target="_blank">local pod</a> can access it. 
     Also, check this <a href="https://www.getambassador.io/docs/edge-stack/pre-release/topics/running/environment/#aes_report_diagnostics_to_cloud" target="_blank">emissary flag</a>, it needs to be enabled!
