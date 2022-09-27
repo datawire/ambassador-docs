@@ -9,7 +9,7 @@ import Alert from '@material-ui/lab/Alert';
 
 </div>
 
-## RBAC
+## Does Ambassador cloud have RBAC functionality?
 
 Ambassador Cloud features Role-Based Access Control (RBAC) to regulate user permissions.
 

@@ -1,5 +1,5 @@
 ---
-title: "Ambassador Labs subscriptions"
+title: "Managing Ambassador Labs subscriptions | Ambassador Cloud"
 description: "Check out your subscription details or shop for different subscription editions. Depending on your needs, Ambassador Labs has plans for all sizes of companies and applications."
 ---
 

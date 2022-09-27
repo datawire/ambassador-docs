@@ -1,3 +1,7 @@
+---
+title: "Frequently Asked Questions | Ambassador Cloud"
+description: "Frequently asked question about Ambassador Cloud, the service catalog, and more."
+---
 import { FaqsSigIn, FaqsGoToCloud } from '../../../../../src/components/Docs/Cloud';
 
 # Service Catalog FAQs
@@ -86,6 +90,18 @@ Please check the following:
 
 The standard [Edge Stack Services](../../../../edge-stack/1.13/topics/install/) get installed within your cluster. The Edge Stack components are responsible for synchronizing the list of Services within your cluster with the list displayed within the Service Catalog.
 
+**Does Ambassador cloud have RBAC functionality?**
+
+Ambassador Cloud features Role-Based Access Control (RBAC) to regulate user permissions.
+
+Roles are accessible in the [Settings section of Ambassador Cloud](https://app.getambassador.io/cloud/settings) on the Members page. Only members with Administrator roles can change other members' roles.
+
+Members can be assigned one of the following roles:
+* Administrator - grants member access to all functions in Ambassador Cloud.
+* User - has access to all functions in Ambassador Cloud except for the ability to manage other member's accounts or change the [payment plans](https://www.getambassador.io/editions/).
+
 **How do I share my feedback on Ambassador Cloud and Service Catalog?**
 
 Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../../feedback), or you can join our [Slack channel](http://a8r.io/slack) to share your thoughts.
+
+

@@ -1,7 +1,3 @@
----
-description: ""
-title: ""
----
 # Cells
 
 Most SaaS businesses often have a variety of environments for the various stages of their development process. This includes environments for development, integration and QA testing, and multiple production environments. With Ambassador Cloud's Cells, Ambassador Labs offers a clearer way to visualize and manage the application lifecycle.

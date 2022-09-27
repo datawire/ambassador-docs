@@ -1,22 +1,12 @@
 ---
-title: "Ambassador Cloud Deployment Previews"
+title: "Using Deployment Previews | Ambassador Cloud"
 description: "Check out your subscription details or shop for different subscription editions. Depending on your needs, Ambassador Labs has plans for all sizes of companies and applications."
 ---
-
 import Alert from '@material-ui/lab/Alert';
 import HubspotForm from "../../../../../src/components/HubspotForm";
 import Button from '../../../../../src/components/Button';
 
-<div class="docs-article-toc">
-<h3>Contents</h3>
-
-* [Setup](#setup)
-* [Usage](#usage)
-* [Manifest Requirements](#manifest-requirements)
-
-</div>
-
-# Deployment Previews with Ambassador Cloud
+# Using Deployment Previews with Ambassador Cloud
 
 Deployment previews are a clean, simple mechanism to easily provide access to a development version of a service while it is still a pull request, _before_ merging the new code. This reduces development time by making it significantly faster to iterate on new features or bugfixes. This means you no longer need to manually coordinate deployments to staging or test environments, deployment previews can handle as many development streams as you need for you.
 

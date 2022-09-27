@@ -1,56 +1,43 @@
 - title: Quick Start
   link: /service-catalog/quick-start/
-
-
-
-
-
 - title: User Guide
   items:
     - title: Services and Service Groups
-      link: /service-catalog/concepts/service-groups/
-    - title: Organizing the service catalog
+      link: /service-catalog/concepts/services/
+    - title: Organizing the Service Catalog
       link: /service-catalog/howtos/organize-service-catalog    
-        
-    - title: Filtering the service view
+    - title: Favoriting and Filtering services
       link: /service-catalog/howtos/favorites/
+    - title: Managing cells
+      link: /service-catalog/howtos/cells/
     - title: Enabling GitOps workflows
       link: /gitops/quick-start
-    - title: Annotating Kubernetes Services for humans
+    - title: Annotations Overview
       link: /service-catalog/concepts/annotating/    
-    - title: Annotations
-      link: /service-catalog/reference/annotations/        
     - title: Annotating services
       link: /service-catalog/howtos/annotate/
     - title: Intercepting service
       link: /service-catalog/howtos/intercept/
     - title: Managing Saved Intercepts
       link: /telepresence-saved-intercepts
-    - title: Cells
-      link: /service-catalog/concepts/cells/
-    - title: Managing cells
-      link: /service-catalog/howtos/cells/
     - title: Using Deployment Previews
       link: /deployment-previews/quick-start
-    - title: Access management
-      link: /service-catalog/reference/access/
-    - title: Managing subscriptions
-      link: /subscriptions/howtos/manage-my-subscriptions
     - title: Securing your services
       link: /security/security/
     - title: Adding API documentation
       link: /visualize-api/quick-start
     - title: Using the Developer Portal
       link: /developer-portal/
-
+    - title: Managing subscriptions
+      link: /subscriptions/howtos/manage-my-subscriptions
 - title: Reference
   items:
-    - title: Configuring automated configuration analysis
-      link: /config-analysis/quick-start
-    - title: Automated Configuration Analysis
-      link: /config-analysis/reference
     - title: Create a local K8s Dev Environment
       link: service-catalog/howtos/qs-java-advanced/
+    - title: Automated configuration analysis overview
+      link: /config-analysis/reference
+    - title: Automated configuration analysis configuration
+      link: /config-analysis/quick-start
     - title: Incident response in the cloud-native world
       link: /service-catalog/concepts/ir
     - title: Developer Portal migration
