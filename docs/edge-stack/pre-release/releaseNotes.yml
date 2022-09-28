@@ -33,8 +33,22 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.2.0
-    date: 'TBD'
+    date: '2022-09-27'
     notes:
+      - title: Update Golang to 1.19.1
+        type: security
+        body: >-
+          Updated Golang to 1.19.1 to address the CVEs: CVE-2022-27664, CVE-2022-32190.
+
+      - title: Add Post Logout Redirect URI support for Oauth2 Filter
+        type: feature
+        body: >- 
+          You may now define (on supported IDPs) a <code>postLogoutRedirectURI</code> to your <code>Oauth2</code> filter. 
+          This will allow you to redirect to a specific URI upon logging out. However, in order to achieve this you must 
+          define your IDP logout URL to <code>https:{{host}}/.ambassador/oauth2/post-logout-redirect</code>. Upon logout 
+          $productName$ will redirect to the custom URI which will then redirect to the URI you have defined in <code>postLogoutRedirectURI</code>.
+        docs: topics/using/filters/oauth2
+
       - title: Add support for Host resources using secrets from different namespaces
         type: feature
         body: >-
@@ -65,21 +79,32 @@ items:
           literal values, environment variables, or request headers. The existing <code>tag_headers</code> field is now deperacated. If both <code>tag_headers</code> and <code>custom_tags</code> are set then <code>tag_headers</code> will be ignored.
           (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
         docs: topics/running/services/tracing-service/
+      
+      - title: Add failure_mode_deny option to the RateLimitService
+        type: feature
+        body: >-
+          By default, when Envoy is unable to communicate with the configured
+          RateLimitService then it will allow traffic through. The
+          <code>RateLimitService</code> resource now exposes the
+          <a href="https://www.envoyproxy.io/docs/envoy/v1.23.0/configuration/http/http_filters/rate_limit_filter">failure_mode_deny</a>
+          option. Set <code>failure_mode_deny: true</code>, then Envoy will
+          deny traffic when it is unable to communicate to the RateLimitService
+          returning a 500.
         
-      - title: Fixed <code>mappingSelector</code> associating <code>Hosts</code> with <code>Mappings</code>
+      - title: Fixed mappingSelector associating Hosts with Mappings
         type: change
         body: >-
           Changes to label matching will change how <code>Hosts</code> are associated with <code>Mappings</code>. There was a bug with label
           selectors that was causing <code>Hosts</code> to be incorrectly being associated with more <code>Mappings</code> than intended.
           If any single label from the selector was matched then the <code>Host</code> would be associated with the <code>Mapping</code>.
           Now it has been updated to correctly only associate a <code>Host</code> with a <code>Mapping</code> if <b>all</b> labels required by
-          the selector are present. This brings the <code>mappingSelector</code> field in-line with how label selectors are used
+          the selector are present. This brings the <code>mappingSelector</code>/<code>selector</code> fields in-line with how label selectors are used
           in Kubernetes. To avoid unexpected behaviour after the upgrade, add all labels that Hosts have in their
-          <code>mappingSelector</code> to <code>Mappings</code> you want to associate with the <code>Host</code>. You can opt-out of the new behaviour
+          <code>mappingSelector</code>/<code>selector</code> to <code>Mappings</code> you want to associate with the <code>Host</code>. You can opt-out of the new behaviour
           by setting the environment variable <code>DISABLE_STRICT_LABEL_SELECTORS</code> to <code>"true"</code> (default: <code>"false"</code>).
           (Thanks to <a href="https://github.com/f-herceg">Filip Herceg</a> and <a href="https://github.com/dynajoe">Joe Andaverde</a>!).
         docs: topics/running/environment/#disable_strict_label_selectors
-        
+
       - title: Envoy upgraded to 1.23.0
         type: change
         body: >-
@@ -99,13 +124,46 @@ items:
         - title: "#4354"
           link: https://github.com/emissary-ingress/emissary/issues/4354
 
-      - title: Properly populate alt_state_name for Tracing, Auth and RateLimit Services
+      - title: Properly populate alt_stats_name for Tracing, Auth and RateLimit Services
         type: bugfix
         body: >-
           Previously, setting the <code>stats_name</code> for the <code>TracingService</code>, <code>RateLimitService</code>
           or the <code>AuthService</code> would have no affect because it was not being properly passed to the Envoy cluster
           config. This has been fixed and the <code>alt_stats_name</code> field in the cluster config is now set correctly.
           (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!).
+      
+      - title: Diagnostics stats properly handles parsing envoy metrics with colons
+        type: bugfix
+        body: >-
+          If a <code>Host</code> or <code>TLSContext</code> contained a hostname with a <code>:</code> when using the
+          diagnostics endpoints <code>ambassador/v0/diagd</code> then an error would be thrown due to the parsing logic not
+          being able to handle the extra colon. This has been fixed and $productName$ will not throw an error when parsing
+          envoy metrics for the diagnostics user interface.
+      
+      - title: TCPMappings use correct SNI configuration
+        type: bugfix
+        body: >-
+          $productName$ 2.0.0 introduced a bug where a <code>TCPMapping</code> that uses SNI,
+          instead of using the hostname glob in the <code>TCPMapping</code>, uses the hostname glob
+          in the <code>Host</code> that the TLS termination configuration comes from.
+      
+      - title: TCPMappings configure TLS termination without a Host resource
+        type: bugfix
+        body: >-
+          $productName$ 2.0.0 introduced a bug where a <code>TCPMapping</code> that terminates TLS
+          must have a corresponding <code>Host</code> that it can take the TLS configuration from.
+          This was semi-intentional, but didn't make much sense.  You can now use a
+          <code>TLSContext</code> without a <code>Host</code>as in $productName$ 1.y releases, or a
+          <code>Host</code> with or without a <code>TLSContext</code> as in prior 2.y releases.
+      
+      - title: TCPMappings and HTTP Hosts can coexist on Listeners that terminate TLS
+        type: bugfix
+        body: >-
+          Prior releases of $productName$ had the arbitrary limitation that a
+          <code>TCPMapping</code> cannot be used on the same port that HTTP is served on, even if
+          TLS+SNI would make this possible.  $productName$ now allows <code>TCPMappings</code> to be
+          used on the same <code>Listener</code> port as HTTP <code>Hosts</code>, as long as that
+          <code>Listener</code> terminates TLS.
 
   - version: 3.1.0
     date: '2022-08-01'
@@ -233,9 +291,17 @@ items:
 
           HTTP/3 uses the Quic protocol over UDP. Changes to your cloud provider provisioned Load Balancer will be required to support UDP traffic if using HTTP/3. External Load Balancers must serve traffic on port <code>443</code> because the <code>alt-svc</code> header is not configurable in the initial release of the feature.
         docs: topics/running/http3
+        
+  - version: 2.4.1
+    date: '2022-09-27'
+    notes:
+      - title: Addressing release issue with 2.4.0
+        type: bugfix
+        body: >-
+          During the $productName$ 2.4.0 release process there was an issue with the Emissary binary. This has been patched and resolved.
 
   - version: 2.4.0
-    date: 'TBD'
+    date: '2022-09-19'
     notes:
       - title: Add support for Host resources using secrets from different namespaces
         type: feature
@@ -258,13 +324,46 @@ items:
         body: >-
           Previously, $productName$ would incorrectly include empty fields when converting a FilterPolicy or ExternalFilter between versions. This would cause undesired state to be persisted in k8s which would lead to validation issues when trying to kubectl apply the custom resource. This fixes these issues to ensure the correct data is being persisted and roundtripped properly between CRD versions.
 
-      - title: Properly populate alt_state_name for Tracing, Auth and RateLimit Services
+      - title: Properly populate alt_stats_name for Tracing, Auth and RateLimit Services
         type: bugfix
         body: >-
           Previously, setting the <code>stats_name</code> for the <code>TracingService</code>, <code>RateLimitService</code>
           or the <code>AuthService</code> would have no affect because it was not being properly passed to the Envoy cluster
           config. This has been fixed and the <code>alt_stats_name</code> field in the cluster config is now set correctly.
           (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
+
+      - title: Diagnostics stats properly handles parsing envoy metrics with colons
+        type: bugfix
+        body: >-
+          If a <code>Host</code> or <code>TLSContext</code> contained a hostname with a <code>:</code> when using the
+          diagnostics endpoints <code>ambassador/v0/diagd</code> then an error would be thrown due to the parsing logic not
+          being able to handle the extra colon. This has been fixed and $productName$ will not throw an error when parsing
+          envoy metrics for the diagnostics user interface.
+      
+      - title: TCPMappings use correct SNI configuration
+        type: bugfix
+        body: >-
+          $productName$ 2.0.0 introduced a bug where a <code>TCPMapping</code> that uses SNI,
+          instead of using the hostname glob in the <code>TCPMapping</code>, uses the hostname glob
+          in the <code>Host</code> that the TLS termination configuration comes from.
+      
+      - title: TCPMappings configure TLS termination without a Host resource
+        type: bugfix
+        body: >-
+          $productName$ 2.0.0 introduced a bug where a <code>TCPMapping</code> that terminates TLS
+          must have a corresponding <code>Host</code> that it can take the TLS configuration from.
+          This was semi-intentional, but didn't make much sense.  You can now use a
+          <code>TLSContext</code> without a <code>Host</code>as in $productName$ 1.y releases, or a
+          <code>Host</code> with or without a <code>TLSContext</code> as in prior 2.y releases.
+      
+      - title: TCPMappings and HTTP Hosts can coexist on Listeners that terminate TLS
+        type: bugfix
+        body: >-
+          Prior releases of $productName$ had the arbitrary limitation that a
+          <code>TCPMapping</code> cannot be used on the same port that HTTP is served on, even if
+          TLS+SNI would make this possible.  $productName$ now allows <code>TCPMappings</code> to be
+          used on the same <code>Listener</code> port as HTTP <code>Hosts</code>, as long as that
+          <code>Listener</code> terminates TLS.
 
   - version: 2.3.2
     date: '2022-08-01'

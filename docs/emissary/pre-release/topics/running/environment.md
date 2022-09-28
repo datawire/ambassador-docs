@@ -310,6 +310,9 @@ add all labels that `Hosts` have in their `mappingSelector` to `Mappings` you wa
 `Mapping`/`Host` association behaviour by setting the environment variable `DISABLE_STRICT_LABEL_SELECTORS` to `"true"` (default: `"false"`). A future version of
 $productName$ may remove the ability to opt-out of this bugfix.
 
+> **Note:** The `mappingSelector` field is only configurable on `v3alpha1` CRDs. In the `v2` CRDs the equivalent field is `selector`.
+either `selector` or `mappingSelector` may be configured in the `v3alpha1` CRDs, but `selector` has been deprecated in favour of `mappingSelector`.
+
 See The [Host documentation](../../running/host-crd#controlling-association-with-mappings) for more information about `Host` / `Mapping` association.
 
 ## Port assignments
