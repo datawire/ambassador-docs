@@ -1,9 +1,9 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.3.X to $productName$ $versionTwoX$ (YAML)
+# Upgrade $productName$ 2.3.Z (YAML)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.2.0 or 2.2.2 to $productName$ $versionTwoX$. If
+  This guide covers migrating from $productName$ 2.3.Z to $productName$ $versionTwoX$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
