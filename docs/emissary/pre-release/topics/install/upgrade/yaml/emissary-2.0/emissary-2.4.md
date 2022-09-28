@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.0.5 to $productName$ $versionTwoX$ (YAML)
+# Upgrade $productName$ 2.0.5 (YAML)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$. If

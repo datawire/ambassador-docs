@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 1.14.X to $productName$ $versionTwoX$ (Helm)
+# Upgrade $productName$ 1.14.X (Helm)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 1.14.X to $productName$ $versionTwoX$. If

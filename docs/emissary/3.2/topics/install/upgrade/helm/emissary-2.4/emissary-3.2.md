@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.4.Z to $productName$ $version$ (Helm)
+# Upgrade $productName$ 2.4.Z (Helm)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 2.4.Z to $productName$ $version$. If

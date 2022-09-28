@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.0.5 to $productName$ $versionTwoX$ (Helm)
+# Upgrade $productName$ 2.0.5 (Helm)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$. If
