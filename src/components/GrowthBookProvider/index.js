@@ -73,7 +73,9 @@ const GrowthBookProviderWrapper = ({ userId, children }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const isValidPath = allowedPathNames.includes(pathname);
+    const isValidPath = allowedPathNames.includes(
+      pathname.endsWith('/') ? pathname : pathname + '/',
+    );
     if (isValidPath) {
       fetchFeatures();
     } else {
