@@ -8,7 +8,7 @@ title: "Learn how to manage your service catalog to easily view all of your serv
 
 The service catalog allows you to view all of your services and group them so that they are organized and accessible in a single place. 
 
-This guide describes how to use [service groups](/docs/cloud/latest/service-catalog/concepts/service-groups) to help you to visualize and manage your environments.
+This guide describes how to use [service groups](/docs/cloud/latest/service-catalog/concepts/services) to help you to visualize and manage your environments.
 
 ## Identify the services you want to group together
 

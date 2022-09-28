@@ -5,7 +5,7 @@ description: "The Ambassador Cloud Developer Portal allows you to manage your se
 
 # Ambassador Cloud Developer Portal overview
 
-The Ambassador Cloud [Developer Portal](https://app.getambassador.io/cloud/dev-portal) provides a consolidated view of your [cells](../../service-catalog/concepts/cells), clusters, and API documentation of your services.  Once the Developer Portal is configured for a service, you can try out API requests for the service directly in your browser.
+The Ambassador Cloud [Developer Portal](https://app.getambassador.io/cloud/dev-portal) provides a consolidated view of your [cells](../../service-catalog/howtos/cells), clusters, and API documentation of your services.  Once the Developer Portal is configured for a service, you can try out API requests for the service directly in your browser.
 
 Before you explore the Developer Portal, you first need to report your API docs using Mapping resources. To learn more about how to expose your services API, try the [API visualization quick start](../../visualize-api/quick-start).
 

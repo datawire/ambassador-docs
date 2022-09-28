@@ -34,7 +34,7 @@ Please find the entire list of supported annotations [here](/docs/cloud/latest/s
 
 **How can I *add* metadata to a service within the catalog?**
 
-Please find instructions on annotating services [here](../reference/annotations/#annotate-via-kubectl).
+Please find instructions on annotating services [here](/docs/cloud/latest/service-catalog/concepts/annotating).
 
 **How do I *update* metadata on a service within the catalog?**
 
