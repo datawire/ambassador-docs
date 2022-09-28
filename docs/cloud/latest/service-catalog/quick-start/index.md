@@ -83,7 +83,7 @@ The metadata for each service is determined by annotations included within your 
 
 <Alert severity="info">It may take up to 30 seconds for Service Catalog to sync with your cluster and your annotation to appear.</Alert>
 
-<Alert severity="success"><b>Great!</b> You should see the owner change for your service in the catalog! Now any of your teammates can quickly find who the owner of the service is. You've updated the owner, but <b>Service Catalog supports many more annotations!</b>  See the full list <a href="../reference/annotations/">here</a>.</Alert>
+<Alert severity="success"><b>Great!</b> You should see the owner change for your service in the catalog! Now any of your teammates can quickly find who the owner of the service is. You've updated the owner, but <b>Service Catalog supports many more annotations!</b>  See the full list <a href="/docs/cloud/latest/service-catalog/concepts/annotating">here</a>.</Alert>
 
 Modifying the annotations via `kubectl` is quick and easy, but the changes made to the annotations will not remain if a new deployment of the service is made.
 
@@ -130,5 +130,5 @@ Open the YAML config file of one of your services.  If you applied our `quote` s
 
 ## <img class="os-logo" src="../../images/logo.png" alt="Telepresence Logo" /> What's next?
 
-You've updated the owner and repo URL, but Service Catalog supports many more annotations! See the full list [here](../reference/annotations/).
+You've updated the owner and repo URL, but Service Catalog supports many more annotations! See the full list [here](/docs/cloud/latest/service-catalog/concepts/annotating).
 

@@ -62,8 +62,6 @@ kubectl annotate svc <service name> --namespace <namespace> a8r.io/owner="<your 
 
 While this is a quick and effective way to set a single annotation on a service, it doesn't scale well to setting multiple annotations.  It also doesn't follow GitOps best practices; resource updates should be stored in version control and applied through a deployment pipeline. To accomplish this, you can add annotations to your YAML directly.
 
-<Alert severity="info">The full list of supported annotations is available <a href="../../reference/annotations/">here</a>.</Alert>
-
 ## Annotating YAML config files directly
 
 Open the YAML config file of one of your services.

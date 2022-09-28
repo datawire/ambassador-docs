@@ -30,14 +30,16 @@
       link: /developer-portal/
     - title: Managing subscriptions
       link: /subscriptions/howtos/manage-my-subscriptions
-- title: Reference
-  items:
-    - title: Create a local K8s Dev Environment
-      link: service-catalog/howtos/qs-java-advanced/
+    - title: Diagnostics Overview
+      link: /diagnostics-ui/view-diagnostics/
     - title: Automated configuration analysis overview
       link: /config-analysis/reference
     - title: Automated configuration analysis configuration
       link: /config-analysis/quick-start
+- title: Reference
+  items:
+    - title: Create a local K8s Dev Environment
+      link: service-catalog/howtos/qs-java-advanced/
     - title: Incident response in the cloud-native world
       link: /service-catalog/concepts/ir
     - title: Developer Portal migration

@@ -18,7 +18,7 @@ Check out our [demo video](https://youtu.be/oUj6aWqP7jU)!
 
 Service Catalog provides a comprehensive view of all services deployed across your cluster.
 
-Service Catalog also supports [a set of annotations](../reference/annotations#supported-annotations) that you can add to your services to provide critical human-visible metadata: the owner of the service, a link to the GitHub repo, and more.
+Service Catalog also supports [a set of annotations](/docs/cloud/latest/service-catalog/concepts/annotating) that you can add to your services to provide critical human-visible metadata: the owner of the service, a link to the GitHub repo, and more.
 
 Having this type of service metadata easily available in a single location is invaluable when reacting to a production incident.
 
@@ -30,7 +30,7 @@ When you connect your Edge Stack to Ambassador Cloud all of the Services within 
 
 **What type of metadata can be added to each service in the catalog?**
 
-Please find the entire list of supported annotations [here](../reference/annotations#supported-annotations).
+Please find the entire list of supported annotations [here](/docs/cloud/latest/service-catalog/concepts/annotating).
 
 **How can I *add* metadata to a service within the catalog?**
 

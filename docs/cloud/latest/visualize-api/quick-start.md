@@ -48,4 +48,4 @@ You can visualize and explore your service’s OpenAPI specification documentati
 
 ## <img class="os-logo" src="../images/logo.png" alt="Telepresence Logo" /> What's next?
 
-You've published your service documentation on Ambassador Cloud to enable collaboration with other teams and members of your organization, but you can extend your services AmbassadorMapping with [other Developer Portal docs options](../../../../edge-stack/latest/topics/using/dev-portal/#docs-attribute-in-mappings), and **Service Catalog annotations!**  See the full list of service annotations [here](../../service-catalog/reference/annotations/).
+You've published your service documentation on Ambassador Cloud to enable collaboration with other teams and members of your organization, but you can extend your services AmbassadorMapping with [other Developer Portal docs options](../../../../edge-stack/latest/topics/using/dev-portal/#docs-attribute-in-mappings), and **Service Catalog annotations!**  See the full list of service annotations [here](/docs/cloud/latest/service-catalog/concepts/annotating).

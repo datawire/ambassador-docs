@@ -4,8 +4,6 @@ title: "Incident response is important any time a system or application does not
 ---
 # Incident response in the cloud-native world
 
-## Who owns incident response?
-
 Traditional incident response has been an operational responsibility. Developers haven't usually been involved in the on-call duties that make up a standard approach to incident response. In [cloud-native](/products/ambassador-cloud/), microservices architectures, developers have to take on a broader range of operational responsibilities as part of the full software life cycle. Incident response is, in part, fast becoming one such responsibility.
 
 ## What is incident response, and why is it important?
