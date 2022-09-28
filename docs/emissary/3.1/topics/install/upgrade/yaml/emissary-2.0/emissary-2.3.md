@@ -1,3 +1,7 @@
+---
+title: Upgrade $productName$ 2.0.5 to $versionTwoX$ (YAML) | Ambassador
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Upgrade $productName$ 2.0.5 to $productName$ $versionTwoX$ (YAML)

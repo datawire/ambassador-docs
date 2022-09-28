@@ -13,14 +13,6 @@ import Icon from '../../../../src/components/Icon';
 import ReadingTime from '../../../../src/components/ReadingTime';
 import SEO from '../../../../src/components/SEO/SEO';
 import template from '../../../../src/utils/template';
-
-import AllVersions from '../AllVersions';
-import ContentTable from '../ContentTable';
-import DocsFooter from '../DocsFooter';
-import DocsHome from '../DocsHome/DocsHome';
-import SearchBox from '../SearchBox';
-import IsAesPage from '../ShowAesPage';
-import SidebarContent from '../SidebarContent';
 import {
   products,
   metaData,
@@ -39,13 +31,20 @@ import Telepresence from '../../products/Telepresence';
 import '../../style.less';
 import getDocsActiveVersion from '../../utils/getDocsActiveVersion';
 import getPrevNext from '../../utils/getPrevNext';
+import getSpecialTitles from '../../utils/getSpecialTitles';
 import { canonicalUrls } from '../../utils/getValueCanonicals';
-import getSpecialTitles from '../../utils/getSpecialTitles'
+import AllVersions from '../AllVersions';
+import ContentTable from '../ContentTable';
+import DocsFooter from '../DocsFooter';
+import DocsHome from '../DocsHome/DocsHome';
+import SearchBox from '../SearchBox';
+import IsAesPage from '../ShowAesPage';
+import SidebarContent from '../SidebarContent';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
-  const slug = page.fields.slug.split('/');
-  const isHome = page.fields.slug === '/docs/';
+  const slug = page.fields?.slug?.split('/');
+  const isHome = page.fields?.slug === '/docs/';
   const initialProduct = isHome
     ? products[0]
     : products.filter((p) => p.slug === slug[2])[0] || products[0];
@@ -60,7 +59,7 @@ const index = ({ data, location, pageContext }) => {
   let canonicalUrl = realCanonicals
     ? (pageContext.canonical.latest ? siteUrl : getSiteUrl()) + realCanonicals
     : (pageContext.canonical.latest ? siteUrl : getSiteUrl()) +
-    pageContext.canonical.url;
+      pageContext.canonical.url;
 
   const initialVersion = !isProductHome
     ? tempVersion
@@ -110,11 +109,11 @@ const index = ({ data, location, pageContext }) => {
   const isInLearnings = learningJourneys.includes(learningJourneyName);
   const learningJourneyData = isInLearnings
     ? data.allLearningjourney.nodes.filter(
-      (node) =>
-        node.slug.indexOf('/') > -1 &&
-        node.slug.indexOf('.') > -1 &&
-        node.slug.split('/')[1].split('.')[0] === learningJourneyName,
-    )
+        (node) =>
+          node.slug.indexOf('/') > -1 &&
+          node.slug.indexOf('.') > -1 &&
+          node.slug.split('/')[1].split('.')[0] === learningJourneyName,
+      )
     : [];
   const {
     title: learningTitle,
@@ -130,32 +129,32 @@ const index = ({ data, location, pageContext }) => {
   const isLearning = isInLearnings && isInTopics;
   const learningParseTopics = isLearning
     ? topics.map((topic) => {
-      const items = topic.items.map((item) => {
-        const readingTimeTopic = data.allMdx.edges.filter(
-          (i) => i.node.fields.slug === `/docs/${item.link}`,
-        );
-        const { slug, readingTime } = readingTimeTopic[0]
-          ? readingTimeTopic[0].node.fields
-          : {};
-        const { reading_time_text, hide_reading_time, reading_time } =
-          readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
-        return {
-          ...item,
-          slug,
-          readingTimeMinutes: Math.ceil(
-            readingTime ? readingTime.minutes : 0,
-          ),
-          readingTimeText: reading_time_text,
-          hideReadingTime: hide_reading_time,
-          readingTimeFront: reading_time,
-        };
-      });
+        const items = topic.items.map((item) => {
+          const readingTimeTopic = data.allMdx.edges.filter(
+            (i) => i.node.fields.slug === `/docs/${item.link}`,
+          );
+          const { slug, readingTime } = readingTimeTopic[0]
+            ? readingTimeTopic[0].node.fields
+            : {};
+          const { reading_time_text, hide_reading_time, reading_time } =
+            readingTimeTopic[0] ? readingTimeTopic[0].node.frontmatter : {};
+          return {
+            ...item,
+            slug,
+            readingTimeMinutes: Math.ceil(
+              readingTime ? readingTime.minutes : 0,
+            ),
+            readingTimeText: reading_time_text,
+            hideReadingTime: hide_reading_time,
+            readingTimeFront: reading_time,
+          };
+        });
 
-      return {
-        ...topic,
-        items,
-      };
-    })
+        return {
+          ...topic,
+          items,
+        };
+      })
     : [];
 
   const burgerMenuInitialState = {
@@ -210,6 +209,10 @@ const index = ({ data, location, pageContext }) => {
         page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
       metaTitle = metaName + ' | Ambassador';
 
+      metaTitle =
+        page?.frontmatter?.title?.length > 3
+          ? page.frontmatter.title
+          : metaTitle;
       const slugFiltered = slug.filter((item) => item);
 
       if (metaData[`${slugFiltered.join('/')}/`]?.description) {
@@ -221,11 +224,11 @@ const index = ({ data, location, pageContext }) => {
             : page.excerpt;
       }
       metaRobots =
-        ((page.frontmatter && page.frontmatter.indexable === false) || metaData[`${slugFiltered.join('/')}/`]?.indexable === false)
+        (page.frontmatter && page.frontmatter.indexable === false) ||
+        metaData[`${slugFiltered.join('/')}/`]?.indexable === false
           ? 'noindex,nofollow'
           : null;
     }
-
     return {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
@@ -285,7 +288,9 @@ const index = ({ data, location, pageContext }) => {
       setEdgissaryDPMessage(newEdgissaryAnnouncement);
 
       const newVersionLinksContent = (
-        await import(`../../../docs/${product.slug}/${newVersion.id}/doc-links.yml`)
+        await import(
+          `../../../docs/${product.slug}/${newVersion.id}/doc-links.yml`
+        )
       ).default;
       const links = [];
 
@@ -324,9 +329,11 @@ const index = ({ data, location, pageContext }) => {
 
   const formatString = (title) => {
     if (title) {
-      if (!title.match("[a-zA-Z]+")) return template(title, versions)
+      if (!title.match('[a-zA-Z]+')) return template(title, versions);
 
-      const formatedTitle = title.replace(/((\d+. ))(.*)/, '$3')?.replace(/<\/?[^>]+(>|$)/g, '')
+      const formatedTitle = title
+        .replace(/((\d+. ))(.*)/, '$3')
+        ?.replace(/<\/?[^>]+(>|$)/g, '');
       return template(formatedTitle, versions);
     }
   };
@@ -370,8 +377,8 @@ const index = ({ data, location, pageContext }) => {
           <div
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1 &&
-                toc.length > 1
+              page.contentTable.items[0].items?.length > 1 &&
+              toc.length > 1
                 ? 'docs__doc-body-container__article docs__doc-body-container__article-toc'
                 : 'docs__doc-body-container__article-toc-none'
             }
@@ -381,7 +388,7 @@ const index = ({ data, location, pageContext }) => {
               toc.length > 1 && (
                 <div className="docs__doc-body-container__table-content">
                   <p>ON THIS PAGE</p>
-                  <ContentTable items={[{ items: toc }]} />
+                  <ContentTable items={[{ items: toc }]} location={location} />
                 </div>
               )}
           </div>
@@ -417,8 +424,8 @@ const index = ({ data, location, pageContext }) => {
           <hr
             className={
               page?.contentTable?.items &&
-                page.contentTable.items[0].items?.length > 1 &&
-                toc.length > 1
+              page.contentTable.items[0].items?.length > 1 &&
+              toc.length > 1
                 ? 'docs__separator docs__container docs__separator-footer'
                 : 'docs__separator docs__container docs__separator-footer-no-article'
             }
@@ -514,7 +521,11 @@ const index = ({ data, location, pageContext }) => {
                   )}
                 </div>
                 <div className="docs__next-previous__learning-journey">
-                  <img src={LearningJourneyImg} alt="Learning Journey" loading='lazy' />
+                  <img
+                    src={LearningJourneyImg}
+                    alt="Learning Journey"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="docs__next-previous__next">
                   {nextLearning && (
@@ -671,9 +682,7 @@ const index = ({ data, location, pageContext }) => {
 
   const getBurgerMenuItems = (slug) => {
     if (slug === 'home') {
-      return [
-        ...initialItems.items,
-      ];
+      return [...initialItems.items];
     }
 
     if (products.find((item) => item.slug === slug)) {
@@ -758,8 +767,9 @@ const index = ({ data, location, pageContext }) => {
       />
 
       <div
-        className={`docs ${edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
-          }`}
+        className={`docs ${
+          edgissaryDPMessage ? 'docs-margin-top-announcement' : ''
+        }`}
       >
         <nav>
           <div className="docs__nav">
@@ -774,8 +784,9 @@ const index = ({ data, location, pageContext }) => {
                     );
                     return (
                       <li
-                        className={`${product.slug === item.slug ? 'docs__selected' : ''
-                          }`}
+                        className={`${
+                          product.slug === item.slug ? 'docs__selected' : ''
+                        }`}
                         key={item.name}
                         onClick={claenStorage}
                       >
@@ -791,12 +802,12 @@ const index = ({ data, location, pageContext }) => {
                   header={
                     burgerMenu.header.title
                       ? {
-                        ...burgerMenu.header,
-                        onClick: () =>
-                          onClickMenuBugerHeader({
-                            title: metadata.metaName,
-                          }),
-                      }
+                          ...burgerMenu.header,
+                          onClick: () =>
+                            onClickMenuBugerHeader({
+                              title: metadata.metaName,
+                            }),
+                        }
                       : initialHeader
                   }
                   items={

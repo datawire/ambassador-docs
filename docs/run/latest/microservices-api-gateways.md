@@ -1,4 +1,5 @@
 ---
+title: "Microservice API vs. Traditional Enterprise API Gateways"
 description: Microservice API gateways in Edge Stack versus traditional enterprise API gateways 
 ---
 

@@ -1,3 +1,6 @@
+---
+title: "It's a layer 7 world: Why does an edge proxy matter?"
+---
 # It's a layer 7 world: Why does an edge proxy matter for developers?
 
 Intra-microservice communication happens over [layer 7](/learn/kubernetes-glossary/layer-7/) (L7) protocols. And because a developer wants to create _highly available and scalable_ distributed applications, it's important to be aware of the assumptions, and fallacies, that underpin distributed computing. In standard programming, maybe a developer does not need to care about network reliability or security, bandwidth, latency or transport costs (just as a start). Yet, all of these factors come into play with a distributed system, meaning a developer needs to understand traffic management to some degree and potentially code with these considerations in mind. 

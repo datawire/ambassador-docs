@@ -26,7 +26,7 @@ deploy $productName$ in Kubernetes with a custom configuration.
 By default, $productName$ uses a demo configuration to show some of its basic features. Get it running with Docker, and expose $productName$ on port 8080:
 
 ```
-docker run -it -p 8080:8080 --name=$productDeploymentName$ --rm docker.io/datawire/emissary:$version$ --demo
+docker run -it -p 8080:8080 --name=$productDeploymentName$ --rm docker.io/emissaryingress/emissary:$version$ --demo
 ```
 
 ## 2. $productName$'s diagnostics

@@ -46,6 +46,6 @@ You can visualize and explore your service’s OpenAPI specification documentati
 
 4. You can also see all your API documentation by clicking on the **Dev Portal** button in the side bar, documented [here](../../developer-portal/developer-portal/).
 
-## <img class="os-logo" src="../../images/logo.png" alt="Telepresence Logo" /> What's next?
+## <img class="os-logo" src="../images/logo.png" alt="Telepresence Logo" /> What's next?
 
 You've published your service documentation on Ambassador Cloud to enable collaboration with other teams and members of your organization, but you can extend your services AmbassadorMapping with [other Developer Portal docs options](../../../../edge-stack/latest/topics/using/dev-portal/#docs-attribute-in-mappings), and **Service Catalog annotations!**  See the full list of service annotations [here](../../service-catalog/reference/annotations/).

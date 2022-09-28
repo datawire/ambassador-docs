@@ -1,3 +1,7 @@
+---
+title: Upgrade $productName$ 2.3.Z to $version$ (YAML) | Ambassador
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Upgrade $productName$ 2.3.Z to $productName$ $version$ (YAML)

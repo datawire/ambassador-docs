@@ -63,6 +63,56 @@ items:
         body: >-
           When using the <code>zipkin</code> driver for the TracingService. The <code>collector_endpoint_version</code> no longer accepts `HTTP_JSON_V1` due to the Envoy upgrade. The new default value is `HTTP_JSON`.
         docs: topics/running/services/tracing-service/
+
+  - version: 2.4.0
+    date: 'TBD'
+    notes:
+      - title: Add support for Host resources using secrets from different namespaces
+        type: feature
+        body: >-
+          Previously the <code>Host</code> resource could only use secrets that are in the namespace as the
+          Host. The <code>tlsSecret</code> field in the Host has a new subfield <code>namespace</code> that will allow
+          the use of secrets from different namespaces.
+
+      - title: Allow bypassing of EDS for manual endpoint insertion
+        type: change
+        body: >-
+          Set <code>AMBASSADOR_EDS_BYPASS</code> to <code>true</code> to bypass EDS handling of endpoints and have endpoints be
+          inserted to clusters manually. This can help resolve with <code>503 UH</code> caused by certification rotation relating to
+          a delay between EDS + CDS. The default is <code>false</code>.
+
+  - version: 2.3.2
+    date: '2022-08-01'
+    notes:
+      - title: Fix regression in the agent for the metrics transfer.
+        type: bugfix
+        body: >-
+          A regression was introduced in 2.3.0 causing the agent to miss some of the metrics coming from
+          emissary ingress before sending them to Ambassador cloud. This issue has been resolved to ensure
+          that all the nodes composing the emissary ingress cluster are reporting properly.
+
+      - title: Update Golang to 1.17.12
+        type: security
+        body: >-
+          Updated Golang to 1.17.12 to address the CVEs: CVE-2022-23806, CVE-2022-28327, CVE-2022-24675,
+          CVE-2022-24921, CVE-2022-23772.
+
+      - title: Update Curl to 7.80.0-r2
+        type: security
+        body: >-
+          Updated Curl to 7.80.0-r2 to address the CVEs: CVE-2022-32207, CVE-2022-27782, CVE-2022-27781,
+          CVE-2022-27780.
+
+      - title: Update openSSL-dev to 1.1.1q-r0
+        type: security
+        body: >-
+          Updated openSSL-dev to 1.1.1q-r0 to address CVE-2022-2097.
+
+      - title: Update ncurses to 1.1.1q-r0
+        type: security
+        body: >-
+          Updated ncurses to 1.1.1q-r0 to address CVE-2022-29458
+
   - version: 2.3.1
     date: '2022-06-10'
     notes:

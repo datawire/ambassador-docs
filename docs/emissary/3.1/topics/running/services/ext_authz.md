@@ -17,7 +17,8 @@ Giving the ExtAuth service the ability to control the response allows many diffe
 
 - The ExtAuth service can simply return an error page with an HTTP 401 response.
 - The ExtAuth service can choose to include a `WWW-Authenticate` header in the 401 response, to ask the client to perform HTTP Basic Auth.
-- The ExtAuth service can issue a 301 `Redirect` to divert the client into an OAuth or OIDC authentication sequence.  The control flow of this is shown below.  ![Authentication flow](../../../../images/auth-flow.png)
+- The ExtAuth service can issue a 301 `Redirect` to divert the client into an OAuth or OIDC authentication sequence.  The control flow of this is shown below.
+<img src="../../../images/auth-flow.png" alt="Authentication flow" />
 
 There are two variants of the ExtAuth: gRPC and plain HTTP.
 
@@ -80,4 +81,4 @@ Content-Length: 0
 
  - Any HTTP status code other than 200 or 5XX from the ExtAuth service tells $productName$ to **not** allow the request to continue to the upstream backend service, but that the ExtAuth service is instead intercepting the request.  The entire HTTP response from the ExtAuth service--including the status code, the headers, and the body--is handed back to the client verbatim. This gives the ExtAuth service **complete** control over the entire response presented to the client.
 
-   The big limitation here is that you cannot directly return a 200 or 5XX response.  Intercepting with a 200 of 5XX response requires instead using `proto: grpc`.
+   The big limitation here is that you cannot directly return a 200 or 5XX response.  Intercepting with a 200 or 5XX response requires instead using `proto: grpc`.

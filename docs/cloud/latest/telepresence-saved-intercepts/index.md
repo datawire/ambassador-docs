@@ -28,9 +28,9 @@ Intercept configurations are automatically saved in the Intercept History tab on
    telepresence intercept voting --port 8081:8080 --namespace emojivoto --http-header x-telepresence-intercept-id=test-user-1
    ```
    Each time you create an intercept like this, it is logged in Ambassador Cloud's Intercept History.
-1. Go to the Ambassador Cloud [Intercept History page](https://app.getambassador.io/saved-intercepts/history) and click on the intercept you just created. 
+1. Go to the Ambassador Cloud [Intercept History page](https://app.getambassador.io/cloud/saved-intercepts/history) and click on the intercept you just created. 
    Enter a name for the intercept and click **Create**.
-1. The incercept is now available in the [Saved Intercepts page](https://app.getambassador.io/saved-intercepts/saved-intercept)
+1. The incercept is now available in the [Saved Intercepts page](https://app.getambassador.io/cloud/saved-intercepts/saved-intercept)
 
 ![saved-intercepts-form](../images/telepresence-intercept-history.png)
 ![saved-intercepts-form](../images/telepresence-saved-intercepts-form.png)
@@ -48,7 +48,7 @@ sence CLI version v2.7.0 or later.
 
 ##  Managing Saved Intercepts
 
-In the [Telepresence Saved Intercepts page on Ambassador Cloud](https://app.getambassador.io/saved-intercepts/saved-intercept), you can see the list of saved intercepts created by any Ambassador team member. For each of these intercepts, you can:
+In the [Telepresence Saved Intercepts page on Ambassador Cloud](https://app.getambassador.io/cloud/saved-intercepts/saved-intercept), you can see the list of saved intercepts created by any Ambassador team member. For each of these intercepts, you can:
 
 - inspect its author, creation date and flags.
 - delete the saved intercept.
