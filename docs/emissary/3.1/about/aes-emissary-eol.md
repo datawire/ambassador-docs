@@ -1,3 +1,7 @@
+---
+title: "Edge Stack and Emissary-ingress End of Life Policy | Ambassador"
+---
+
 # Ambassador Edge Stack and Emissary-ingress End of Life Policy
 
 This document describes the End of Life policy and maintenance windows for Ambassador Edge Stack, and to the open source project Emissary Ingress.

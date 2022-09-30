@@ -14,6 +14,8 @@
       link: /service-catalog/concepts/services/
     - title: Service Groups
       link: /service-catalog/concepts/service-groups/
+    - title: Diagnostics Overview
+      link: /diagnostics-ui/view-diagnostics/
 - title: User Guide
   items:
     - title: Create a local K8s Dev Environment

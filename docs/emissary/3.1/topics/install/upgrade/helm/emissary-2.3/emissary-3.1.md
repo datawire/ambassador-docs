@@ -1,3 +1,7 @@
+---
+title: Upgrade $productName$ 2.3.X to $version$ (Helm) | Ambassador
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Upgrade $productName$ 2.3.Z to $productName$ $version$ (Helm)

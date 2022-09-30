@@ -43,8 +43,8 @@ import SidebarContent from '../SidebarContent';
 
 const index = ({ data, location, pageContext }) => {
   const page = data.mdx || {};
-  const slug = page.fields.slug.split('/');
-  const isHome = page.fields.slug === '/docs/';
+  const slug = page.fields?.slug?.split('/');
+  const isHome = page.fields?.slug === '/docs/';
   const initialProduct = isHome
     ? products[0]
     : products.filter((p) => p.slug === slug[2])[0] || products[0];
@@ -82,7 +82,7 @@ const index = ({ data, location, pageContext }) => {
       );
     }
     if (
-      newVer.id === '3.1' ||
+      newVer.id === '3.2' ||
       newVer.id === 'pre-release' ||
       newVer.id === 'latest' ||
       (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
@@ -92,7 +92,7 @@ const index = ({ data, location, pageContext }) => {
     return (
       <a
         href={`/docs/${newProduct.slug}/latest/tutorials/getting-started/`}
-      >{`${newProduct.name} 3.1 is now available!`}</a>
+      >{`${newProduct.name} 3.2 is now available!`}</a>
     );
   }
   const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(
@@ -209,6 +209,10 @@ const index = ({ data, location, pageContext }) => {
         page.headings && page.headings[0] ? page.headings[0].value : 'Docs';
       metaTitle = metaName + ' | Ambassador';
 
+      metaTitle =
+        page?.frontmatter?.title?.length > 3
+          ? page.frontmatter.title
+          : metaTitle;
       const slugFiltered = slug.filter((item) => item);
 
       if (metaData[`${slugFiltered.join('/')}/`]?.description) {
@@ -225,7 +229,6 @@ const index = ({ data, location, pageContext }) => {
           ? 'noindex,nofollow'
           : null;
     }
-
     return {
       metaDescription: template(metaDescription, versions),
       metaTitle: template(metaTitle, versions),
