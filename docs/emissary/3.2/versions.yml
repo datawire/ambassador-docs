@@ -18,7 +18,7 @@ OSSproductNamePlural: "Emissary-ingresses"
 
 # AES (not self)
 aesVersion: 3.2.0
-aesDocsVersion: "pre-release"
+aesDocsVersion: "3.2"
 aesChartVersion: 8.2.0
 AESproductName: "Ambassador Edge Stack"
 AESproductNamePlural: "Ambassador Edge Stacks"
