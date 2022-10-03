@@ -74,7 +74,7 @@ This section contains:
 
 1. **Ambassador Routes** : All the routes inside the cluster gets displayed. The information shown for each route will tell if the route is an internal one, their precedence vaule, service name color coded, and the weight of that route. Clicking on a route will take you to to that route diagnostics page, where you are able to see the active Envoy [Routes](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/route/route.proto) and [Clusters](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/cds.proto) that the route is currently using, alongside the `YAML` documents that Ambassador uses to read its configuration
 
-2. **Ambassador TCP Mappings** : $productName$ can manage [TCP](../tcpmappings) Connections, and those will get asssociated with upstream services. All your TCP mappings get displayed here. 
+2. **Ambassador TCP Mappings** : $productName$ can manage [TCPMappings](../../using/tcpmappings/), and those will get asssociated with upstream services. All your TCP mappings get displayed here. 
 
 3. **Color Legend**: $productName$ assigns a color code to each service name displayed on this page. This color is based on the success rate for each service, and we get this value by computing `successful requests` / `total requests` and express that as a percentage. The "total requests" value comes from Envoy `upstream_rq_pending_total` stat. "successful requests" is calculated by substracting `upstream_rq_4xx` and `upstream_rq_5xx` from the total.
 
@@ -88,7 +88,7 @@ This section contains:
 
 ### Can't access $productName$ Diagnostics Overview?
 
-Create an Ambassador `Module` if one does not already exist and add the following config to enable diagnostics data. $productName$ will pick the new module and add the new configuration. 
+Create an Ambassador `Module` if one does not already exist, and add the following config to enable diagnostics data. $productName$ will pick the new module and add the new configuration. 
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
