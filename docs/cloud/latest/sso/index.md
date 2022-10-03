@@ -1,5 +1,6 @@
 ---
 title: "Single Sign On"
+description: "Ambassador Cloud supports Single Sign on via SAML 2.0. Learn how to quickly and efficiently setup SSO in your environment with this guide."
 ---
 
 import NewSsoUrl from './SsoUrl.js'
@@ -20,31 +21,31 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 
 ## Step 1: Create an Okta Application
 
-1. Go to the Okta Admin console for your Okta tenant:
+1. Go to the Okta Admin console for your Okta tenant.
 
   <p align="center">
     <img src="../images/sso-okta-admin.png" />
   </p>
 
-2. Click on the "Applications" link:
+2. Click on **Applications** in the left nav bar.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-open.png" />
   </p>
 
-3. Click "Create App Integration":
+3. Click **Create App Integration**.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create.png" />
   </p>
 
-4. Choose "SAML 2.0" and click "Next":
+4. Select SAML 2.0 and then click **Next**.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-saml.png" />
   </p>
 
-5. Enter <NewCopy content="Ambassador Cloud"/> as the app name, upload the <a href="../images/ambassador_420_120.png">Ambassador Logo</a>, and click "Next":
+5. Enter <NewCopy content="Ambassador Cloud"/> as the app name, upload the <a href="../images/ambassador_420_120.png">Ambassador Logo</a>, and click **Next**.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-1.png" />
@@ -52,20 +53,20 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 
 6. <NewSsoUrl/>
 
-7. Enter the above URL (after inputting your case sensitive company ID) into the "Single Sign On
-   URL" field:
+7. Enter the above URL (after inputting your case sensitive company ID) into the Single Sign On
+   URL field.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-2-url.png" />
   </p>
 
-8. Enter <NewCopy content="app.getambassador.io"/> for the "Audience URI (SP Entity ID)" field:
+8. In the Audience URI (SP Entity ID) field, enter <NewCopy content="app.getambassador.io"/>.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-2-sp.png" />
   </p>
 
-9. Choose "EmailAddress" for the "Name ID format" field and "Email" for the "Application Username" field:
+9. In the Name ID format dropdown menu, select **EmailAddress**, and in the Application Username dropdown menu, select **Email**.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-2-username.png" />
@@ -82,48 +83,46 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
     <img src="../images/sso-okta-admin-apps-create-2-attributes.png" />
   </p>
 
-11. Click Next to continue:
+11. Click **Next** to continue.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-2-next.png" />
   </p>
 
-12. Click Finish to create the Application Integration:
+12. Click **Finish** to create the Application Integration.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-create-3.png" />
   </p>
 
-When your Application Integration is created you should be in the "Sign On" tab of your Okta App
-Integration. If for some reason you aren't there, you can navigate back there by clicking on the
-"Applications" tab in the Okta Admin console and then clicking on the Application Integration named
-"Ambassador Cloud", and then clicking on the "Sign On" tab:
+When your Application Integration is created you should be in the Sign On tab of your Okta App
+Integration. If for some reason you aren't there, you can navigate back there by clicking the
+**Applications** tab in the Okta Admin console. From there, click the Application Integration named
+**Ambassador Cloud**, then click the **Sign On** tab.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-sign-on.png" />
   </p>
 
-From the Sign-On tab click "View SAML setup instructions". You may need to scroll down to see the
-"View SAML setup instructions" button:
+From the Sign-On tab click **View SAML setup instructions**. You may need to scroll down to see this button.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-sign-on-saml-setup.png" />
   </p>
 
-Once you are on the "SAML setup instructions" page, please provide the following items to your
+Once you are on the SAML setup instructions page, please provide the following items to your
 Ambassador Support contact:
 
-1. The "Identity Provider Single Sign-On URL"
-2. The "Identity Provider Issuer"
-3. The "X.509 Certificate"
+1. The Identity Provider Single Sign-On URL
+2. The Identity Provider Issuer
+3. The X.509 Certificate
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-sign-on-saml-setup-values.png" />
   </p>
 
 Alternatively, instead of supplying each of the above 3 items to your support contact individually,
-you can cut & paste the "IDP metadata XML" at the bottom of the page, which includes all three of
-the above items, and supply this XML to your Ambassador Support contact:
+you can cut & paste the contents of the IDP metadata XML text field at the bottom of the page, which includes all three of the above items, and supply this XML to your Ambassador Support contact.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-sign-on-saml-setup-metadata.png" />
@@ -139,7 +138,7 @@ In order to do this, you need to add a Person or Group to the app integration:
     <img src="../images/sso-okta-admin.png" />
   </p>
 
-2. Click on the "Applications" link:
+2. Click on the "Applications link:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-open.png" />
@@ -151,14 +150,13 @@ In order to do this, you need to add a Person or Group to the app integration:
     <img src="../images/sso-okta-admin-apps-tab-with-ambassador-cloud.png" />
   </p>
 
-4. Click on the "Assignments" tab:
+4. Click on **Applications** in the left nav bar.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-assignments.png" />
   </p>
 
-5. Click on the "Assign" button and choose either "Assign to People" or "Assign to Group". This will
-   determine who is permitted to login to the Ambassador Cloud application.
+5. Click the **Assign** button and choose either **Assign to People** or **Assign to Group** from the dropdown. This determines who is permitted to login to the Ambassador Cloud application.
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-assignments-assign-dropdown.png" />
