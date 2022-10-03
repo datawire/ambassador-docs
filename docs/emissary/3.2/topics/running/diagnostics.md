@@ -103,7 +103,7 @@ spec:
 Next, In the deployment for Edge Stack / Emissary-ingress set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
 
   ```bash
-  # Namespace and deployment name depends on your current install
+  # Namespace and deployment name depend on your current install
 
   kubectl set env deployment/edge-stack-agent -n ambassador AES_REPORT_DIAGNOSTICS_TO_CLOUD="true"
   ```
@@ -111,7 +111,7 @@ Next, In the deployment for Edge Stack / Emissary-ingress set the <code>AES_REPO
 Finally, set the `AES_DIAGNOSTICS_URL` environment variable to `"http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"`
 
   ```bash
-  # Namespace, deployment name, and pod url/port depends on your current install
+  # Namespace, deployment name, and pod url/port depend on your current install
 
   kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
   ```
@@ -123,7 +123,7 @@ After setting up `AES_DIAGNOSTICS_URL`, you can access diagnostics information b
 Do a port forward on your $productName$ pod
 
   ```bash
-  # Namespace, deployment name, and pod url/port depends on your current install
+  # Namespace, deployment name, and pod url/port depend on your current install
 
   kubectl port-forward edge-stack-76f785767-n2l2v -n ambassador 8877
   ```
