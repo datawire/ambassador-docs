@@ -57,7 +57,7 @@ spec:
       enabled: true
 ```
 
-Next, In the deployment for Edge Stack / Emissary-ingress set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
+Next, in the deployment for Edge Stack / Emissary-ingress set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
 
   ```bash
   # Namespace and deployment name depends on your current install
