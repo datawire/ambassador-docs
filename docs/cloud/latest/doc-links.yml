@@ -14,12 +14,10 @@
       link: /service-catalog/concepts/services/
     - title: Service Groups
       link: /service-catalog/concepts/service-groups/
-    - title: Diagnostics Overview
-      link: /diagnostics-ui/view-diagnostics/
-    - title: Authenticating to Ambassador Cloud
-      link: /authenticating/
     - title: Organization
       link: /organization/
+    - title: Diagnostics Overview
+      link: /diagnostics-ui/view-diagnostics/
 - title: User Guide
   items:
     - title: Authenticating to Ambassador Cloud
