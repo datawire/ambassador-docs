@@ -1,0 +1,738 @@
+@import './vars.less';
+
+.docs_telepresence_archive {
+    font-family: @InterFont;
+    -moz-osx-font-smoothing: grayscale;
+
+    &__sidebar {
+        border-right: 1px solid @grey-separator;
+        padding-bottom: 10px;
+        overflow: hidden;
+        padding: 1em;
+
+        &_version {
+            height: 50px;
+            border-bottom: 1px solid @grey-separator;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            position: relative;
+
+            color: @grey-primary;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        &_toc li {
+            font-size: 14px;
+            line-height: 24px;
+            margin-left: 23px;
+            margin-bottom: 10px;
+            font-weight: normal;
+
+            button {
+                background: transparent;
+                border: none;
+                text-align: left;
+                cursor: pointer;
+
+                &:hover {
+                    color: @blue;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            a {
+                color: @black;
+                text-decoration: none;
+
+                &:hover {
+                    color: @blue;
+                }
+            }
+        }
+    }
+
+    &__main {
+        margin: 0 20px 0 20px;
+        display: flex;
+        flex-direction: column;
+
+        @media screen and (max-width: 1199px) {
+            margin: 0 0 0 20px;
+        }
+
+        @media screen and (max-width: 1010px) {
+            margin: 0;
+        }
+
+        a {
+            color: @blue;
+            text-decoration: underline;
+            transition: color 200ms linear 0ms;
+            transition-property: background-color, color;
+
+            &:hover {
+                color: @blue-dark;
+                text-decoration: none;
+            }
+
+            &[class=''] {
+                color: inherit;
+                text-decoration: none;
+                transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+                border-bottom: 1px solid #f9634e;
+                box-shadow: inset 0 -2px 0px 0px #f9634e;
+                font-weight: bold;
+            }
+
+            &[class='']:hover {
+                background: #f9634e;
+                color: white;
+            }
+
+            >img {
+                background: white;
+                display: block;
+                margin: 0 auto;
+            }
+
+            &.anchor {
+                &.before {
+                    transform: translate3d(-100%, 100%, 0)
+                }
+            }
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: @black;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 0.25px;
+            margin: 0;
+
+            code {
+                font-size: inherit;
+            }
+        }
+
+        h1 {
+            color: @blue-dark;
+            font-size: 33px;
+            font-weight: 400;
+            line-height: 40px;
+
+            &:first-of-type {
+                order: -1;
+            }
+
+            svg {
+                vertical-align: text-bottom;
+            }
+
+            &:nth-of-type(n+2) {
+                padding: 32px 0 0;
+            }
+        }
+
+        h2 {
+            font-size: 23px;
+            line-height: 32px;
+            padding: 32px 0 0;
+
+            .highlight-mark {
+                background: transparent;
+                color: @blue-dark;
+                background: -moz-linear-gradient(top, transparent 0%, transparent 60%, fade(@blue-electric, 15%) 60%, fade(@blue-electric, 15%) 100%);
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, transparent), color-stop(60%, transparent), color-stop(60%, fade(@blue-electric, 15%)), color-stop(100%, fade(@blue-electric, 15%)));
+                background: -webkit-linear-gradient(top, transparent 0%, transparent 60%, fade(@blue-electric, 15%) 60%, fade(@blue-electric, 15%) 100%);
+                background: -o-linear-gradient(top, transparent 0%, transparent 60%, fade(@blue-electric, 15%) 60%, fade(@blue-electric, 15%) 100%);
+                background: -ms-linear-gradient(top, transparent 0%, transparent 60%, fade(@blue-electric, 15%) 60%, fade(@blue-electric, 15%) 100%);
+                background: linear-gradient(to bottom, transparent 0%, transparent 60%, fade(@blue-electric, 15%) 60%, fade(@blue-electric, 15%) 100%);
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='transparent', endColorstr='fade(@blue-electric, 15%)', GradientType=0);
+                padding: 0 3px;
+                margin: 0 .1em 0 0;
+            }
+        }
+
+        h3 {
+            font-size: 18px;
+            padding-top: 20px;
+        }
+
+        h4 {
+            font-size: 17px;
+            padding-top: 20px;
+        }
+
+        p {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 26px;
+            letter-spacing: 0.5px;
+            padding: 12px 24px 0;
+        }
+
+        ul,
+        ol {
+
+            /* In some situations, the MDX markdown engine decides to wrap a list
+             * item's contents in a <p>, but usually it doesn't.  So get rid of
+             * the extra <p> spacing when it's inside of a list; otherwise it just
+             * looks weird with some list items having a margin and some list
+             * items not.  */
+            li>p {
+                padding-top: 0;
+            }
+
+            /* But still have padding between paragraphs when there are multiple
+             * paragraphs in one list item.  */
+            li>p+p {
+                padding-top: 12px;
+            }
+
+            li {
+                .MuiAlert-root {
+                    margin-right: 20px;
+                }
+            }
+        }
+
+        ul:not(.module) {
+            list-style: none;
+            padding-top: 12px;
+            font-size: 16px;
+            line-height: 26px;
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.05rem;
+
+            li {
+                padding: 0 0 0 20px;
+                position: relative;
+                margin: 4px 0;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    width: 6px;
+                    height: 6px;
+                    left: 8px;
+                    top: 10px;
+                    border-radius: 50%;
+                    background: @grey-electric;
+                }
+
+                >ul {
+                    padding-top: 0;
+                }
+            }
+        }
+
+        ol {
+            list-style: none;
+            counter-reset: docs-awesome-counter;
+            padding: 12px 0 20px 20px;
+
+            li {
+                counter-increment: docs-awesome-counter;
+                padding: 0 0 0 32px;
+                line-height: 26px;
+                margin: 0 0 10px;
+                position: relative;
+
+                &::before {
+                    content: counter(docs-awesome-counter);
+                    background: @grey-separator;
+                    color: @black;
+                    font-size: 12px;
+                    font-weight: 600;
+                    line-height: 2em;
+                    text-align: center;
+                    height: 2em;
+                    width: 2em;
+                    border-radius: 100%;
+                    position: absolute;
+                    left: 0;
+                    top: .1em;
+                }
+
+                ul {
+                    counter-reset: docs-awesome-counter-2;
+
+                    li {
+                        counter-increment: docs-awesome-counter-2;
+                        padding: 0 0 0 20px;
+
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            width: 6px;
+                            height: 6px;
+                            left: 8px;
+                            top: 10px;
+                            border-radius: 50%;
+                            background: @grey-electric;
+                        }
+                    }
+                }
+            }
+        }
+
+        .docs-language-toc {
+            ul {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                list-style: none;
+                margin: 0 0 10px;
+                padding: 0;
+
+                li {
+                    display: inline-block;
+                    margin: 0 8px 0 0;
+                    padding: 0;
+
+                    &::before {
+                        display: none;
+                    }
+
+                    a {
+                        border: 1.5px solid @grey-separator;
+                        border-radius: 4px;
+                        color: @black;
+                        cursor: pointer;
+                        display: block;
+                        font-size: 14px;
+                        padding: 2px 8px;
+                        text-decoration: none;
+                        transition: color 200ms linear 0ms;
+                        transition-property: border-color, color, border-color;
+
+                        &:hover {
+                            color: @blue;
+                            text-decoration: none;
+                        }
+
+                        &.active {
+                            border-color: @blue;
+                            font-style: normal;
+                            font-weight: 600;
+                            color: @blue;
+                        }
+                    }
+                }
+            }
+        }
+
+        .docs-article-toc {
+            display: inline-block;
+            border: 1px solid @grey-separator;
+            border-radius: 4px;
+            margin: 20px 0 0 0;
+            padding: 10px 16px;
+
+            h3 {
+                font-size: 12px;
+                color: @grey-primary;
+                letter-spacing: 0.49px;
+                text-transform: uppercase;
+                font-weight: 600;
+                padding: 0 0 0 5px;
+            }
+
+            ul {
+                margin: 0;
+
+                li {
+                    font-size: 14px;
+                    margin: 0;
+
+                    &::before {
+                        height: 4px;
+                        width: 4px;
+                    }
+                }
+            }
+        }
+
+        .docs-diagram-wrapper {
+            margin: 20px auto;
+            max-width: 70%;
+            width: 740px;
+        }
+
+        .doc-tags {
+            .doc-tag {
+                color: white;
+                font-weight: bold;
+                border-radius: 3px;
+                padding: 4px 8px;
+                font-size: 13px;
+                margin-right: 10px;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: none;
+                }
+
+                &.aes {
+                    background: #5f3eff;
+
+                    &:hover {
+                        background: darken(#5f3eff, 10%);
+                    }
+                }
+
+                &.api {
+                    background: #f9634e;
+
+                    &:hover {
+                        background: darken(#f9634e, 10%);
+                    }
+                }
+            }
+        }
+
+        blockquote {
+            background-color: fade(@orange, 3%);
+            border-left: solid 0.2em @orange;
+            border-radius: 4px;
+            margin: 20px 0;
+            padding: 0.5em 1.5em 1em;
+        }
+
+        .MuiTab-root {
+            .MuiTab-wrapper {
+                flex-direction: row;
+                align-items: flex-start;
+
+                svg {
+                    height: 24px;
+                    margin: 0 3px 0 0;
+                    width: 24px;
+                }
+            }
+
+            &.Mui-selected {
+                .MuiTab-wrapper {
+                    color: @blue-dark;
+
+                    svg {
+                        fill: @blue;
+                    }
+                }
+            }
+        }
+
+        .MuiBox-root {
+            padding: 0;
+        }
+
+        .MuiAlert-root {
+            box-shadow: 0 0 0 1px @grey-separator;
+            margin: 20px 0;
+
+            &.MuiAlert-standardInfo {
+                .MuiAlert-message {
+                    line-height: 24px;
+                }
+            }
+
+            &.MuiAlert-standardSuccess {
+                font-size: 17px;
+
+                .MuiAlert-message {
+                    line-height: 26px;
+                }
+            }
+
+            +p {
+                padding-top: 0;
+            }
+        }
+
+        ol+.MuiAlert-root {
+            margin: 0 0 20px;
+        }
+
+        table {
+            background-color: #fff;
+            margin: 16px 0 8px 0;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+
+            thead {
+                tr {
+                    th {
+                        font-weight: 600;
+                        font-size: 13px;
+                        color: @grey-primary;
+                        text-transform: uppercase;
+                        text-align: left;
+                        padding: 0 16px 8px 16px;
+                    }
+                }
+            }
+
+            tbody {
+                font-size: 14px;
+                line-height: 20px;
+                vertical-align: top;
+                padding-top: 0;
+
+                tr {
+                    border-top: 1px solid #ccc;
+
+                    &:first-child {
+                        >td {
+                            border-top-width: 1px;
+
+                            &:first-child {
+                                border-top-left-radius: 4px;
+                            }
+
+                            &:last-child {
+                                border-top-right-radius: 4px;
+                            }
+                        }
+                    }
+
+                    &:last-child {
+                        >td {
+                            &:first-child {
+                                border-bottom-left-radius: 4px;
+                            }
+
+                            &:last-child {
+                                border-bottom-right-radius: 4px;
+                            }
+                        }
+                    }
+
+                    &:nth-child(2n+1) td {
+                        background: @grey-surface;
+                    }
+
+                    td:first-child,
+                    td[rowspan]+td {
+                        border-left-width: 1px;
+                    }
+
+                    td:last-child,
+                    td[rowspan]+td {
+                        border-right-width: 1px;
+                    }
+                }
+
+                td {
+                    padding: 12px 16px;
+                    border-color: @grey-separator;
+                    border-style: solid;
+                    border-bottom-width: 1px;
+
+                    >* {
+                        font-size: 14px;
+                        line-height: 20px;
+                        vertical-align: top;
+                        padding-top: 0;
+                    }
+                }
+            }
+        }
+
+        /* This is for inline code blocks. */
+        :not(pre)>code {
+            padding: 0.15em 0.3em;
+            border-radius: 0.3em;
+            white-space: normal;
+            font-size: 13px;
+            letter-spacing: 0.2px;
+            color: @grey-dark;
+            background: darken(@grey-surface, 2%);
+            display: inline-block;
+            font-family: Menlo, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
+            text-align: left;
+            word-spacing: normal;
+            word-break: normal;
+            word-wrap: normal;
+            line-height: 1.5;
+            tab-size: 4;
+            hyphens: none;
+            border: 1px solid darken(@grey-separator, 10%);
+        }
+
+        .markdown-section table {
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            overflow: auto;
+        }
+
+        .docs-hubspot-formwrapper {
+            background-color: @grey-surface;
+            border: solid 1px @grey-separator;
+            border-radius: 5px;
+            margin: 20px 0;
+            padding: 10px;
+
+            p {
+                font-size: 14px;
+            }
+
+            .docs-hubspot-form {
+                max-width: 400px;
+                padding: 20px 0 0;
+            }
+        }
+
+        .anchor.before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(-100%);
+            padding-right: 4px;
+        }
+
+        .anchor.after {
+            display: inline-block;
+            padding-left: 4px;
+        }
+
+        h1 .anchor svg,
+        h2 .anchor svg,
+        h3 .anchor svg,
+        h4 .anchor svg,
+        h5 .anchor svg,
+        h6 .anchor svg {
+            visibility: hidden;
+        }
+
+        h1:hover .anchor svg,
+        h2:hover .anchor svg,
+        h3:hover .anchor svg,
+        h4:hover .anchor svg,
+        h5:hover .anchor svg,
+        h6:hover .anchor svg,
+        h1 .anchor:focus svg,
+        h2 .anchor:focus svg,
+        h3 .anchor:focus svg,
+        h4 .anchor:focus svg,
+        h5 .anchor:focus svg,
+        h6 .anchor:focus svg {
+            visibility: visible;
+        }
+
+        /* Having to repeat the .btn stuff from layout.less/home.css is a
+         * hack, but I don't have time to address the real issue.  */
+        .btn {
+            padding: 15px 30px;
+            text-transform: uppercase;
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn:hover {
+            text-decoration: none;
+            opacity: 0.9;
+            color: #fff;
+            /* also a hack: repeat this from the non-:hover */
+        }
+
+        .btn-black {
+            background-color: #2b2f3e;
+        }
+
+        .btn-blue {
+            background-color: #68c2d6;
+        }
+
+        .btn-red {
+            background-color: #f9634e;
+        }
+
+        .btn-outline {
+            border: 1px solid #2b2f3e;
+            background: transparent;
+            color: #2b2f3e;
+        }
+
+        /* Not having a generic tab component is also a hack that I intend to
+         * get around to.  */
+        .TabGroup {
+            flex-grow: 1;
+            background-color: transparent;
+
+            .TabBar {
+                background: transparent;
+                color: black;
+                border-bottom: 1px solid #e8e8e8;
+
+                .TabHead {
+                    min-width: 10%;
+                    text-transform: none;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        border-top: 1px solid @grey-separator;
+        font-size: 14px;
+        align-items: center;
+        padding-right: 40px;
+
+        a {
+            color: @grey-primary;
+            transition: color 200ms linear;
+            text-decoration: underline;
+            display: flex;
+
+            svg {
+                margin-right: 6px;
+                width: 24px;
+                height: 24px;
+                display: inline-block;
+                fill: @grey-primary;
+                transition: fill 200ms linear;
+                vertical-align: middle;
+            }
+
+            &:hover {
+                color: @black;
+                text-decoration: none;
+
+                svg {
+                    fill: @black
+                }
+            }
+        }
+
+        /* This is special CSS to make the .github element
+         * look correct.  Eventually we should just have their styling
+         * match what comes from our other docs, but for now this
+         * works */
+        .github {
+            display: flex;
+            justify-content: flex-end;
+            text-decoration: underline;
+        }
+    }
+}

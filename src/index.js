@@ -2,8 +2,10 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import Home from './components/Home';
+import DocPage from './components/Telepresence/doc-page';
 
 const index = ({ data, location, pageContext }) => {
+  if (data.mdx.fields.linksslug === '/telepresence/1.0/') return <DocPage location={location} data={data} pageContext={pageContext} />
   return <Home data={data} location={location} pageContext={pageContext} />;
 };
 
