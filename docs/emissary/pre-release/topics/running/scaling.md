@@ -65,6 +65,10 @@ $productName$'s exact memory usage depends on (among other things) how many `Hos
 `Mapping` resources are defined in your cluster. If this number has grown over time, you may need to
 increase the memory limit defined in your deployment.
 
+**Note**: On big clusters you may want to limit what resources $productName$ can see and work with.
+  This can be achived by defining [AMBASSADOR_WATCHER_FIELD_SELECTOR](../environment/#ambassador_watcher_field_selector) and/or [AMBASSADOR_WATCHER_LABEL_SELECTOR](../environment/#ambassador_watcher_label_selector).
+  Defininig specific selectors can drastically reduce the memory footprint and CPU cycles used to generate the envoy configuration as long as not the entire resource set is required.
+
 ## Liveness probes
 
 $productName$ defines the `/ambassador/v0/check_alive` endpoint on port `8877` for use with Kubernetes

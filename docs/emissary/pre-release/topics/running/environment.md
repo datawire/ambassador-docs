@@ -17,7 +17,10 @@ Use the following variables for the environment of your $productName$ container:
 | [`AMBASSADOR_GRPC_METRICS_SINK`](#ambassador_grpc_metrics_sink)                                            | Empty                                               | String (address:port) |
 | [`AMBASSADOR_ISTIO_SECRET_DIR`](#ambassador_istio_secret_dir)                                              | `/etc/istio-certs`                                  | String |
 | [`AMBASSADOR_JSON_LOGGING`](#ambassador_json_logging)                                                      | `false`                                             | Boolean; non-empty=true, empty=false |
+| [`AMBASSADOR_FIELD_SELECTOR`](#ambassador_field selector)                                                  | Empty                                               | String (label=value) |
 | [`AMBASSADOR_LABEL_SELECTOR`](#ambassador_label_selector)                                                  | Empty                                               | String (label=value) |
+| [`AMBASSADOR_WATCHER_FIELD_SELECTOR`](#ambassador_watcher_field_selector)                                  | Empty                                               | String ([resourcegroup.v1:]spec.field=value[;]) |
+| [`AMBASSADOR_WATCHER_LABEL_SELECTOR`](#ambassador_watcher_label_selector)                                  | Empty                                               | String ([resourcegroup.v1:]label1=value1,label2=value2[;]) |
 | [`AMBASSADOR_NAMESPACE`](#ambassador_namespace)                                                            | `default` ([^1])                                    | Kubernetes namespace |
 | [`AMBASSADOR_RECONFIG_MAX_DELAY`](#ambassador_reconfig_max_delay)                                          | `1`                                                 | Integer |
 | [`AMBASSADOR_SINGLE_NAMESPACE`](#ambassador_single_namespace)                                              | Empty                                               | Boolean; non-empty=true, empty=false |
@@ -141,11 +144,49 @@ Some (but few) logs from `gunicorn` and the Kubernetes `client-go` package will 
 
 [More information](../../running/running#log-format)
 
+### `AMBASSADOR_FIELD_SELECTOR`
+
+**DEPRECATED**: See [AMBASSADOR_WATCHER_FIELD_SELECTOR](#ambassador_watcher_field_selector)
+
+Restricts $productName$'s configuration to only the matching fields. For example, you could have a field `spec.myField` present accross all resources.
+Then set `AMBASSADOR_FIELD_SELECTOR=spec.myField` in the  $productName$ Deployment.
+Resources without the specified label will be ignored.
+
 ### `AMBASSADOR_LABEL_SELECTOR`
+
+**DEPRECATED**: See [AMBASSADOR_WATCHER_LABEL_SELECTOR](#ambassador_watcher_label_selector)
 
 Restricts $productName$'s configuration to only the labelled resources. For example, you could apply a `version-two: true` label
 to all resources that should be visible to $productName$, then set `AMBASSADOR_LABEL_SELECTOR=version-two=true` in its Deployment.
 Resources without the specified label will be ignored.
+
+### `AMBASSADOR_WATCHER_FIELD_SELECTOR`
+
+Restricts $productName$'s configuration to only the matching fields. For example, you could have a field `spec.myField` present accross resources.
+Then set `AMBASSADOR_WATCHER_FIELD_SELECTOR=spec.myField` in the  $productName$ Deployment.
+Resources without the specified label will be ignored.
+
+You may also specify this on a per-resourcegroup basis. For example to specify a field selector to only fetch secrets of type tls you may use:
+`AMBASSADOR_WATCHER_FIELD_SELECTOR=secrets.v1:type=kubernetes.io/tls`
+
+You may specify multiple fields delimited by `,` and multiple group selectors delimited by `;`
+
+Example: 
+`AMBASSADOR_WATCHER_FIELD_SELECTOR=secrets.v1:type=kubernetes.io/tls;mappings.v3alpha1:metadata.name=dummy`
+
+### `AMBASSADOR_WATCHER_LABEL_SELECTOR`
+
+Restricts $productName$'s configuration to only the labelled resources. For example, you could apply a `version-two: true` label
+to all resources that should be visible to $productName$, then set `AMBASSADOR_WATCHER_LABEL_SELECTOR=version-two=true` in its Deployment.
+Resources without the specified label will be ignored.
+
+You may also specify this on a per-resourcegroup basis. For example to specify a label selector to only fetch mappings with the label `version-three: true`:
+`AMBASSADOR_WATCHER_LABEL_SELECTOR=mappings.v3alpha1:version-three=true`
+
+You may specify multiple fields delimited by `,` and multiple group selectors delimited by `;`
+
+Example: 
+`AMBASSADOR_WATCHER_LABEL_SELECTOR=secrets.v1:ambassador-secret=true,ambassador-version=v3;mappings.v3alpha1:ambassador-version=v3`
 
 ### `AMBASSADOR_NAMESPACE`
 
