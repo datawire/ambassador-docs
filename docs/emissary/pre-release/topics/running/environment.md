@@ -167,12 +167,12 @@ Then set `AMBASSADOR_WATCHER_FIELD_SELECTOR=spec.myField` in the  $productName$ 
 Resources without the specified label will be ignored.
 
 You may also specify this on a per-resourcegroup basis. For example to specify a field selector to only fetch secrets of type tls you may use:
-`AMBASSADOR_WATCHER_FIELD_SELECTOR=secrets.v1:type=kubernetes.io/tls`
+`AMBASSADOR_WATCHER_FIELD_SELECTOR=secrets.v1.:type=kubernetes.io/tls`
 
 You may specify multiple fields delimited by `,` and multiple group selectors delimited by `;`
 
 Example: 
-`AMBASSADOR_WATCHER_FIELD_SELECTOR=secrets.v1:type=kubernetes.io/tls;mappings.v3alpha1:metadata.name=dummy`
+`AMBASSADOR_WATCHER_FIELD_SELECTOR=secrets.v1.:type=kubernetes.io/tls;mappings.v3alpha1:metadata.name=dummy`
 
 ### `AMBASSADOR_WATCHER_LABEL_SELECTOR`
 
@@ -186,7 +186,7 @@ You may also specify this on a per-resourcegroup basis. For example to specify a
 You may specify multiple fields delimited by `,` and multiple group selectors delimited by `;`
 
 Example: 
-`AMBASSADOR_WATCHER_LABEL_SELECTOR=secrets.v1:ambassador-secret=true,ambassador-version=v3;mappings.v3alpha1:ambassador-version=v3`
+`AMBASSADOR_WATCHER_LABEL_SELECTOR=secrets.v1.:ambassador-secret=true,ambassador-version=v3;mappings.v3alpha1:ambassador-version=v3`
 
 ### `AMBASSADOR_NAMESPACE`
 
