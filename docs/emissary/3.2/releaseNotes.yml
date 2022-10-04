@@ -83,7 +83,7 @@ items:
           (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
         docs: topics/running/services/tracing-service/
 
-      - title: Fixed selector/mappingSelector associating Hosts with Mappings
+      - title: Change to behaviour for associating Hosts with Mappings
         type: change
         body: >-
           Changes to label matching will change how <code>Hosts</code> are associated with <code>Mappings</code>. There was a bug with label
@@ -118,7 +118,7 @@ items:
           or the <code>AuthService</code> would have no affect because it was not being properly passed to the Envoy cluster
           config. This has been fixed and the <code>alt_stats_name</code> field in the cluster config is now set correctly.
           (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
-      
+
       - title: Diagnostics stats properly handles parsing envoy metrics with colons
         type: bugfix
         body: >-

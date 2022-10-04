@@ -42,10 +42,10 @@ items:
 
       - title: Add Post Logout Redirect URI support for Oauth2 Filter
         type: feature
-        body: >- 
-          You may now define (on supported IDPs) a <code>postLogoutRedirectURI</code> to your <code>Oauth2</code> filter. 
-          This will allow you to redirect to a specific URI upon logging out. However, in order to achieve this you must 
-          define your IDP logout URL to <code>https:{{host}}/.ambassador/oauth2/post-logout-redirect</code>. Upon logout 
+        body: >-
+          You may now define (on supported IDPs) a <code>postLogoutRedirectURI</code> to your <code>Oauth2</code> filter.
+          This will allow you to redirect to a specific URI upon logging out. However, in order to achieve this you must
+          define your IDP logout URL to <code>https:{{host}}/.ambassador/oauth2/post-logout-redirect</code>. Upon logout
           $productName$ will redirect to the custom URI which will then redirect to the URI you have defined in <code>postLogoutRedirectURI</code>.
         docs: topics/using/filters/oauth2
 
@@ -79,7 +79,7 @@ items:
           literal values, environment variables, or request headers. The existing <code>tag_headers</code> field is now deperacated. If both <code>tag_headers</code> and <code>custom_tags</code> are set then <code>tag_headers</code> will be ignored.
           (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
         docs: topics/running/services/tracing-service/
-      
+
       - title: Add failure_mode_deny option to the RateLimitService
         type: feature
         body: >-
@@ -90,8 +90,8 @@ items:
           option. Set <code>failure_mode_deny: true</code>, then Envoy will
           deny traffic when it is unable to communicate to the RateLimitService
           returning a 500.
-        
-      - title: Fixed mappingSelector associating Hosts with Mappings
+
+      - title: Change to behaviour for associating Hosts with Mappings
         type: change
         body: >-
           Changes to label matching will change how <code>Hosts</code> are associated with <code>Mappings</code>. There was a bug with label
@@ -131,7 +131,7 @@ items:
           or the <code>AuthService</code> would have no affect because it was not being properly passed to the Envoy cluster
           config. This has been fixed and the <code>alt_stats_name</code> field in the cluster config is now set correctly.
           (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!).
-      
+
       - title: Diagnostics stats properly handles parsing envoy metrics with colons
         type: bugfix
         body: >-
@@ -139,14 +139,14 @@ items:
           diagnostics endpoints <code>ambassador/v0/diagd</code> then an error would be thrown due to the parsing logic not
           being able to handle the extra colon. This has been fixed and $productName$ will not throw an error when parsing
           envoy metrics for the diagnostics user interface.
-      
+
       - title: TCPMappings use correct SNI configuration
         type: bugfix
         body: >-
           $productName$ 2.0.0 introduced a bug where a <code>TCPMapping</code> that uses SNI,
           instead of using the hostname glob in the <code>TCPMapping</code>, uses the hostname glob
           in the <code>Host</code> that the TLS termination configuration comes from.
-      
+
       - title: TCPMappings configure TLS termination without a Host resource
         type: bugfix
         body: >-
@@ -155,7 +155,7 @@ items:
           This was semi-intentional, but didn't make much sense.  You can now use a
           <code>TLSContext</code> without a <code>Host</code>as in $productName$ 1.y releases, or a
           <code>Host</code> with or without a <code>TLSContext</code> as in prior 2.y releases.
-      
+
       - title: TCPMappings and HTTP Hosts can coexist on Listeners that terminate TLS
         type: bugfix
         body: >-
@@ -291,7 +291,7 @@ items:
 
           HTTP/3 uses the Quic protocol over UDP. Changes to your cloud provider provisioned Load Balancer will be required to support UDP traffic if using HTTP/3. External Load Balancers must serve traffic on port <code>443</code> because the <code>alt-svc</code> header is not configurable in the initial release of the feature.
         docs: topics/running/http3
-        
+
   - version: 2.4.1
     date: '2022-09-27'
     notes:
@@ -339,14 +339,14 @@ items:
           diagnostics endpoints <code>ambassador/v0/diagd</code> then an error would be thrown due to the parsing logic not
           being able to handle the extra colon. This has been fixed and $productName$ will not throw an error when parsing
           envoy metrics for the diagnostics user interface.
-      
+
       - title: TCPMappings use correct SNI configuration
         type: bugfix
         body: >-
           $productName$ 2.0.0 introduced a bug where a <code>TCPMapping</code> that uses SNI,
           instead of using the hostname glob in the <code>TCPMapping</code>, uses the hostname glob
           in the <code>Host</code> that the TLS termination configuration comes from.
-      
+
       - title: TCPMappings configure TLS termination without a Host resource
         type: bugfix
         body: >-
@@ -355,7 +355,7 @@ items:
           This was semi-intentional, but didn't make much sense.  You can now use a
           <code>TLSContext</code> without a <code>Host</code>as in $productName$ 1.y releases, or a
           <code>Host</code> with or without a <code>TLSContext</code> as in prior 2.y releases.
-      
+
       - title: TCPMappings and HTTP Hosts can coexist on Listeners that terminate TLS
         type: bugfix
         body: >-
