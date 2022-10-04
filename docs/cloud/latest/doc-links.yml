@@ -46,6 +46,8 @@
       link: /security/security/
     - title: Using the Developer Portal
       link: /developer-portal/developer-portal/
+    - title: Single Sign On
+      link: /sso/
 - title: Technical Reference
   items:
     - title: Annotations
