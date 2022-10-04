@@ -130,6 +130,11 @@ Do a port forward on your $productName$ pod
 
 You will be able to access the diagnostics overview page by going to `http://localhost:8877/ambassador/v0/diag/`
 
-### $productName$ not routing your services as expected ?
+### $productName$ not routing your services as expected?
 
 You will need to examine the logs and $productName$ pod status. See [Debugging](../debugging) for more information.
+
+
+### Need more help ?
+
+If you need additional help, feel free to join our [Slack channel](http://a8r.io/slack), bring your pod logs information (along with your Kubernetes manifest).
