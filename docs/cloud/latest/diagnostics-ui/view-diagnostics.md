@@ -72,3 +72,7 @@ Finally, set the `AES_DIAGNOSTICS_URL` environment variable to `"http://emissary
 
   kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
   ```
+
+### Need more help ?
+
+If you need additional help, feel free to join our [Slack channel](http://a8r.io/slack), bring your pod logs information (along with your Kubernetes manifest).
