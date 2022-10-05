@@ -1,5 +1,3 @@
-This page
-
 # The metrics endpoint
 
 > For an overview of other options for gathering statistics on
