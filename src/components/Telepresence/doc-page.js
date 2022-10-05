@@ -10,35 +10,24 @@ import Layout from './Layout';
 import Release from './ReleaseNotes/Release';
 import GithubIcon from './images/github-icon.inline.svg';
 import { components } from './Markdown';
+import template from '../../../../src/utils/template';
+import Link from '../../../../src/components/Link';
 
 import './doc-page.less';
 
-// Given a content string and a dict of variables, expand $variables$ in the string.
-//
-// https://github.com/gatsbyjs/gatsby/issues/10174#issuecomment-442513501
-const template = (content, vars) => {
-  return content.replace(/\$(\S+)\$/g, (match, key) => {
-    const value = vars[key];
-    if (typeof value !== 'undefined') {
-      return value;
-    }
-    return match; // guards against some unintentional prefix
-  });
-}
-
 const LinkList = ({ rooturl, items, className }) => {
-  if (!items) {
-    return null;
-  }
+  console.log('items ---->', items)
+  if (!items) return null;
+
   return (
     <ul className={className}>
       {
-        items.map((item, i) => (
+        items.length ? items.map((item, i) => (
           <li key={i}>
-            {item.link ? <a href={url.resolve(rooturl, item.link)}>{item.title}</a> : item.title}
-            <LinkList rooturl={rooturl} items={item.items} />
+            {item.link ? <Link to={url.resolve(rooturl, item.link)}>{item.title}</Link> : item.title}
+            {item.items && <LinkList rooturl={rooturl} items={item.items} />}
           </li>
-        ))
+        )) : items.link ? <Link to={url.resolve(rooturl, items.link)}>{items.title}</Link> : items.title
       }
     </ul>
   )
@@ -59,7 +48,7 @@ const MarkdownContent = ({
     mdxNode.fields.readingTime.text;
 
   const showReadingTime = maybeShowReadingTime &&
-    !mdxNode.frontmatter.frontmatter.hide_reading_time;
+    !mdxNode.frontmatter.hide_reading_time;
 
   return (
     <>
@@ -68,7 +57,7 @@ const MarkdownContent = ({
         <meta name="og:title" content={title + " | " + siteTitle} />
         <meta name="description" content={description} />
       </Helmet>
-      {showReadingTime ? <span className="docs__reading-time">{readingTime}</span> : ''}
+      {showReadingTime ? <span className="docs_telepresence_archive__reading-time">{readingTime}</span> : ''}
       <MDXProvider components={components}>
         <MDXRenderer>
           {template(mdxNode.body, variables)}
@@ -108,15 +97,14 @@ const ReleaseNotesContent = ({
   );
 };
 
-const handleVersionChange = (event) => {
-  if (event.target.value) {
-    navigate(event.target.value);
-  }
-};
-
 export default function DocPage({ location, data, pageContext }) {
-  //  const variables = jsYAML.safeLoad(data.variablesFile.internal.content);
+  const page = data.mdx || {};
   const canonicalUrl = pageContext.canonical.url;
+  const rawVersions = data.versions?.content;
+  const rawLinks = data.linkentries?.content;
+  const versions = JSON.parse(rawVersions);
+  const linkItems = JSON.parse(template(rawLinks, versions));
+  const slug = page.fields.slug;
 
   return (
     <Layout location={location}>
@@ -124,6 +112,38 @@ export default function DocPage({ location, data, pageContext }) {
         <link rel="canonical" href={canonicalUrl} />
         <meta name="og:type" content="article" />
       </Helmet>
+      <div className="docs_telepresence_archive">
+        <nav className="docs_telepresence_archive__sidebar">
+          <LinkList
+            className="docs_telepresence_archive__sidebar_toc"
+            rooturl='/docs/telepresence/1.0/'
+            items={linkItems}
+          />
+        </nav>
+        <main className="docs_telepresence_archive__main">
+          {
+            page
+              ? <MarkdownContent
+                mdxNode={page}
+                variables={versions}
+                siteTitle={'A TITLE'}
+                maybeShowReadingTime={page.frontmatter.hide_reading_time}
+              />
+              : <></>
+          }
+        </main>
+        <footer className="docs_telepresence_archive__footer">
+          <a
+            href={`https://github.com/telepresenceio/telepresence.io/tree/master/docs/v1`}
+            className="github"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GithubIcon />
+            Edit this page on GitHub
+          </a>
+        </footer>
+      </div>
     </Layout>
   )
 }

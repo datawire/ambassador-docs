@@ -16,7 +16,6 @@ export default function Layout({ location, children }) {
     <Platform.Provider>
       <Helmet>
         <meta name="keywords" content="Telepresence, Kubernetes, microservices" />
-        <link rel="shortcut icon" href="/favicon.ico" />
       </Helmet>
 
       <header className="white-bg">
