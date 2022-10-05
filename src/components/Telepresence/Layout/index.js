@@ -26,16 +26,16 @@ export default function Layout({ location, children }) {
           </a>
           <ul className="main-navigation">
             <li>
-              <a href="/docs/latest/">Docs</a>
+              <a href="https://www.getambassador.io/docs/telepresence/">Docs</a>
             </li>
             <li>
-              <a href="/case-studies">Case Studies</a>
+              <a href="https://www.telepresence.io/case-studies/">Case Studies</a>
             </li>
             <li>
-              <a href="/community">Community</a>
+              <a href="https://www.telepresence.io/community">Community</a>
             </li>
             <li>
-              <a href="/about">About</a>
+              <a href="https://www.telepresence.io/about">About</a>
             </li>
             <li>
               <a target="_blank" rel="noreferrer" href="https://github.com/telepresenceio/telepresence">GitHub</a>
@@ -58,7 +58,7 @@ export default function Layout({ location, children }) {
 
       <section className="banner">
         <div className="banner__text">
-          <a href="/announcing-telepresence-2/" className="banner__link">
+          <a href="https://www.telepresence.io/announcing-telepresence-2/" className="banner__link">
             Telepresence 2 is now the default version of Telepresence.
             Learn about the switch from Telepresence v1 to v2
             <img alt="" className="banner__icon" src={ImgArrow} />
@@ -71,13 +71,13 @@ export default function Layout({ location, children }) {
       <footer className="white-bg">
         <ul className="main-navigation flex-center">
           <li>
-            <a href="/docs/latest">Docs</a>
+            <a href="https://www.getambassador.io/docs/telepresence/">Docs</a>
           </li>
           <li>
-            <a href="/case-studies">Case Studies</a>
+            <a href="https://www.telepresence.io/case-studies/">Case Studies</a>
           </li>
           <li>
-            <a href="/about">About</a>
+            <a href="https://www.telepresence.io/about">About</a>
           </li>
           <li>
             <a target="_blank" rel="noreferrer" href="https://github.com/telepresenceio/telepresence">GitHub</a>
