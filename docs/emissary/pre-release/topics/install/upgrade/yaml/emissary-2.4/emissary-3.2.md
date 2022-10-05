@@ -36,7 +36,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
    Before upgrading, review your Ambassador resources, and if you make use of the selectors, ensure that every other resource you want it to be associated with contains all the required labels.
 
    The environment variable `DISABLE_STRICT_LABEL_SELECTORS` can be set to `"true"` on the $productName$ deployment to revert to the
-   old incorrect behaviour to help prevent any configuration issues after upgrading in the event that not all manifests making use of the selectors have been corrected yet.
+   old incorrect behavior to help prevent any configuration issues after upgrading in the event that not all manifests making use of the selectors have been corrected yet.
 
    For more information on `DISABLE_STRICT_LABEL_SELECTORS` see the [Environment Variables page](../../../../../running/environment#disable_strict_label_selectors).
 

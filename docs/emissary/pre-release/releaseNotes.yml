@@ -83,7 +83,7 @@ items:
           (Thanks to <a href="https://github.com/psalaberria002">Paul</a>!)
         docs: topics/running/services/tracing-service/
 
-      - title: Change to behaviour for associating Hosts with Mappings and Listeners with Hosts
+      - title: Change to behavior for associating Hosts with Mappings and Listeners with Hosts
         type: change
         body: >-
           Changes to label matching will change how <code>Hosts</code> are associated with <code>Mappings</code> and how <code>Listeners</code> are associated with <code>Hosts</code>. There was a bug with label
@@ -91,8 +91,8 @@ items:
           If any single label from the selector was matched then the resources would be associated.
           Now it has been updated to correctly only associate these resources if <b>all</b> labels required by
           their selector are present. This brings the <code>mappingSelector</code>/<code>selector</code> fields in-line with how label selectors are used
-          in Kubernetes. To avoid unexpected behaviour after the upgrade, add all labels that <code>Hosts</code>/<code>Listeners</code> have in their
-          <code>mappingSelector</code>/<code>selector</code> to <code>Mappings</code>/<code>Hosts</code> you want to associate with them. You can opt-out of the new behaviour
+          in Kubernetes. To avoid unexpected behavior after the upgrade, add all labels that <code>Hosts</code>/<code>Listeners</code> have in their
+          <code>mappingSelector</code>/<code>selector</code> to <code>Mappings</code>/<code>Hosts</code> you want to associate with them. You can opt-out of the new behavior
           by setting the environment variable <code>DISABLE_STRICT_LABEL_SELECTORS</code> to <code>"true"</code> (default: <code>"false"</code>).
           (Thanks to <a href="https://github.com/f-herceg">Filip Herceg</a> and <a href="https://github.com/dynajoe">Joe Andaverde</a>!).
         docs: topics/running/environment/#disable_strict_label_selectors
