@@ -680,7 +680,7 @@ This controls the number of worker threads used to serve requests and can be use
 ### `DISABLE_STRICT_LABEL_SELECTORS`
 
 In $productName$ version `3.2`, a bug with how `Hosts` are associated with `Mappings` was fixed and with how `Listeners` are assocaited with `Hosts`. The `mappingSelector`\\`selector` fields in `Hosts` and `Listeners` were not
-properly being enforced in prior versions. If any single label from the selector was matched then the resources would be associated with eachother instead
+properly being enforced in prior versions. If any single label from the selector was matched then the resources would be associated with each other instead
 of requiring all labels in the selector to be present. Additonally, if the `hostname` of a `Mapping` matched the `hostname` of a `Host` then they would be associated
 regardless of the configuration of `mappingSelector`\\`selector`.
 
