@@ -114,11 +114,6 @@ export default function DocPage({ location, data, pageContext }) {
       </Helmet>
       <div className="docs_telepresence_archive">
         <nav className="docs_telepresence_archive__sidebar">
-          <LinkList
-            className="docs_telepresence_archive__sidebar_toc"
-            rooturl='/docs/telepresence/1.0/'
-            items={linkItems}
-          />
         </nav>
         <main className="docs_telepresence_archive__main">
           {
