@@ -64,4 +64,4 @@ that displays information collected by Prometheus from the
 `:8877/metrics` endpoint.
 
 
-![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../../images/grafana.png)
+![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../images/grafana.png)
