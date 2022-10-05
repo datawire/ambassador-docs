@@ -1,3 +1,5 @@
+This page
+
 # The metrics endpoint
 
 > For an overview of other options for gathering statistics on
@@ -25,7 +27,7 @@ make the file self-documenting as to what specific statistics mean.
 -->
 
 - `envoy_*`: See the [Envoy documentation][`GET /stats/prometheus`].
-- `ambassador_*` (new in 1.7.0):
+- `ambassador_*`:
   - `ambassador_edge_stack_*` (not present in $OSSproductName$):
     - `ambassador_edge_stack_go_*`: See [`promethus.NewGoCollector()`][].
     - `ambassador_edge_stack_promhttp_*` See [`promhttp.Handler()`][].
@@ -41,7 +43,7 @@ make the file self-documenting as to what specific statistics mean.
     labels; the value of the Gauge is always "1".
   - `ambassador_process_*`: See [`prometheus_client.ProcessCollector`][].
 
-[`GET /stats/prometheus`]: https://www.envoyproxy.io/docs/envoy/v1.15.0/operations/admin.html#get--stats-prometheus
+[`GET /stats/prometheus`]: https://www.envoyproxy.io/docs/envoy/v1.23.0/operations/admin.html#get--stats-prometheus
 [`prometheus.NewProcessCollector`]: https://godoc.org/github.com/prometheus/client_golang/prometheus#NewProcessCollector
 [`prometheus.NewGoCollector`]: https://godoc.org/github.com/prometheus/client_golang/prometheus#NewGoCollector
 [`promhttp.Handler()`]: https://godoc.org/github.com/prometheus/client_golang/prometheus/promhttp#Handler
@@ -57,23 +59,9 @@ with Prometheus and Grafana](../../../../howtos/prometheus).
 
 #### Sample dashboard
 
-We provide a [sample Grafana dashboard](https://grafana.com/dashboards/13758)
+We provide a [sample Grafana dashboard](https://grafana.com/dashboards/4698)
 that displays information collected by Prometheus from the
 `:8877/metrics` endpoint.
 
 
-#### Just Envoy information
-
 ![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../../images/grafana.png)
-
-[Alex Gervais][] has written a template [$productName$ dashboard for
-Grafana][] that displays information collected by Prometheus either
-from the `:8877/metrics` endpoint, or from [Envoy over
-StatsD][envoy-statsd-prometheus].  Because it is designed to work with
-the Envoy StatsD set up, it does not include any of the `ambassador_*`
-statistics; because of this, we recommend using the other sample
-dashboard above.
-
-[Alex Gervais]: https://twitter.com/alex_gervais
-[$productName$ dashboard for Grafana]: https://grafana.com/dashboards/4698
-[envoy-statsd-prometheus]: ../envoy-statsd#using-prometheus-statsd-exporter-as-the-statsd-sink

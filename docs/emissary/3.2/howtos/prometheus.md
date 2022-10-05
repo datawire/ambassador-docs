@@ -23,11 +23,6 @@ into your Kubernetes cluster, and that it is possible for you to
 modify the global configuration of the $productName$
 deployment.
 
-Starting with $productName$ `0.71.0`, Prometheus can scrape stats/metrics
-directly from Envoy's `/metrics` endpoint, removing the need to
-[configure $productName$ to output stats to
-StatsD](#statsd-exporter-output-statistics-to-productname).
-
 The `/metrics` endpoint can be accessed internally via the $productName$ admin port (default 8877):
 
 ```
@@ -80,17 +75,6 @@ standard YAML files.  Alternatively, you can install it with
 
     ```
     kubectl create -f https://raw.githubusercontent.com/coreos/prometheus-operator/master/bundle.yaml
-    ```
-
-    **Note:** The YAML assumes Kubernetes 1.16 and above.  If running a
-    lower version, you will need to run the following command to
-    install the CRDs with the right API version:
-
-    ```
-    curl -sL https://raw.githubusercontent.com/coreos/prometheus-operator/master/bundle.yaml \
-      | sed 's|apiVersion: apiextensions.k8s.io/v1|apiVersion: apiextensions.k8s.io/v1beta1|' \
-      | sed 's|jsonPath|JSONPath|' \
-      | kubectl apply -f -
     ```
 
 2. Deploy Prometheus by creating a `Prometheus` CRD
@@ -151,8 +135,7 @@ standard YAML files.  Alternatively, you can install it with
    YAML to a file called `ambassador-monitor.yaml`, and apply it with
    `kubectl`.
 
-    If you are running an $productName$ version higher than 0.71.0 and
-    want to scrape metrics directly from the `/metrics` endpoint of
+    Scrape metrics directly from the `/metrics` endpoint of
     $productName$ running in the `ambassador` namespace:
 
     ```yaml
@@ -194,9 +177,8 @@ documentation.
 
 1. Install the Prometheus Operator from the helm chart
 
-    ```
-    helm install -n prometheus stable/prometheus-operator
-    ```
+    Follow the most up-to-date instructions on the
+    [kube-prometheus-stack official repository](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)
 
 2. Create a `ServiceMonitor`
 
@@ -204,8 +186,7 @@ documentation.
     that is looking for `ServiceMonitor`s with `label:
     release=prometheus`.
 
-    If you are running an $productName$ version higher than 0.71.0 and
-    want to scrape metrics directly from the `/metrics` endpoint of
+    Scrape metrics directly from the `/metrics` endpoint of
     $productName$ running in the `default` namespace:
 
     ```yaml
@@ -226,28 +207,6 @@ documentation.
           service: ambassador-admin
       endpoints:
       - port: ambassador-admin
-    ```
-
-    If you are scraping metrics from a `statsd-sink` deployment:
-
-    ```yaml
-    ---
-    apiVersion: monitoring.coreos.com/v1
-    kind: ServiceMonitor
-    metadata:
-      name: statsd-monitor
-      namespace: monitoring
-      labels:
-        release: prometheus
-    spec:
-      namespaceSelector:
-        matchNames:
-        - default
-      selector:
-        matchLabels:
-          service: statsd-sink
-      endpoints:
-      - port: prometheus-metrics
     ```
 
 Prometheus is now configured to gather metrics from $productName$.
@@ -275,10 +234,8 @@ points.  Grafana allows you to create dynamic dashboards for monitoring
 your ingress traffic stats collected from Prometheus.
 
 We have published a [sample
-dashboard](https://grafana.com/grafana/dashboards/13758) you can use
-for monitoring your ingress traffic.  Since the stats from the
-`/metrics` and `/stats` endpoints are different, you will see a
-section in the dashboard for each use case.
+dashboard](https://grafana.com/grafana/dashboards/4698) you can use
+for monitoring your ingress traffic and control plane operations.
 
 **Note:** If you deployed the Prometheus Operator via the Helm Chart,
 a Grafana dashboard is created by default.  You can use this dashboard
@@ -397,8 +354,8 @@ We deployed prometheus to the default namespace in our example, but if you
 deployed it to a different namespace, make sure to replace `default` with your
 namespace. Press `Save & Test` to confirm that the data source works.
 
-Import the [provided dashboard](https://grafana.com/grafana/dashboards/13758)
-by clicking the plus sign in the left side-bar, clicking `Import` in the top left, and entering the dashboard ID(13758).
+Import the [provided dashboard](https://grafana.com/grafana/dashboards/4698)
+by clicking the plus sign in the left side-bar, clicking `Import` in the top left, and entering the dashboard ID(4698).
 
 From here, select the Prometheus data source we created from the `Prometheus` drop
 down menu, and select import to finish adding the dashboard.
@@ -419,7 +376,7 @@ credentials above.
 
 The example dashboard you installed above displays 'top line'
 statistics about the API response codes, number of connections,
-connection length, and number of registered services.
+connection length, number of registered services, etc.
 
 To view the full set of stats available to Prometheus you can access
 the Prometheus UI by running:
@@ -440,72 +397,3 @@ documentation](https://prometheus.io/docs/concepts/data_model/) for a
 full reference on how to work with this data model.
 
 ----
-
-## Additional install options
-
-### StatsD Exporter: Output statistics to $productName$
-
-If running a pre-`0.71.0` version of $productName$, you will need to
-configure Envoy to output stats to a separate collector before being
-scraped by Prometheus.  You will use the [Prometheus StatsD
-Exporter](https://github.com/prometheus/statsd_exporter) to do this.
-
-1. Deploy the StatsD Exporter in the `default` namespace
-
-    ```
-    kubectl apply -f https://app.getambassador.io/yaml/v2-docs/$ossVersion$/monitoring/statsd-sink.yaml
-    ```
-
-2. Configure $productName$ to output statistics to `statsd`
-
-    In the $productName$ deployment, add the `STATSD_ENABLED`
-    and `STATSD_HOST` environment variables to tell $productName$ where to output stats.
-
-    ```yaml
-    ...
-            env:
-            - name: AMBASSADOR_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-            - name: STATSD_ENABLED
-              value: "true"
-            - name: STATSD_HOST
-              value: "statsd-sink.default.svc.cluster.local"
-    ...
-    ```
-
-$productName$ is now configured to output statistics to the
-Prometheus StatsD exporter.
-
-#### ServiceMonitor
-
-If you are scraping metrics from a `statsd-sink` deployment, you will
-configure the `ServiceMonitor` to scrape from that deployment.
-
-```yaml
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: statsd-monitor
-  labels:
-    app: ambassador
-spec:
-  namespaceSelector:
-    matchNames:
-    - default
-  selector:
-    matchLabels:
-      service: statsd-sink
-  endpoints:
-  - port: prometheus-metrics
-```
-
-#### Dashboard
-
-Now that you have metrics scraping from StatsD You can use [this version of
-the dashboard](https://grafana.com/grafana/dashboards/4698) (ID: 4698) configured to work
-with metrics scraped from StatsD or the metrics Endpoint. You can configure it the
-same way as the previous dashboard. Adding the prometheus data source is also required,
-so if you did not add that yet, make sure to configure it before adding the dashboard.
