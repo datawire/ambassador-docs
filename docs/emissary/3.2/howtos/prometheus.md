@@ -177,10 +177,17 @@ documentation.
 
 1. Install the Prometheus Operator from the helm chart
 
-    Follow the most up-to-date instructions on the
-    [kube-prometheus-stack official repository](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack)
+    Following the most up-to-date instructions on the
+    [kube-prometheus-stack official repository](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack),
+    you should install the Prometheus Operator in a similar way:
 
-2. Create a `ServiceMonitor`
+    ```
+    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+    helm repo update
+    helm install prometheus prometheus-community/kube-prometheus-stack
+    ```
+
+3. Create a `ServiceMonitor`
 
     The Prometheus Operator Helm chart creates a Prometheus instance
     that is looking for `ServiceMonitor`s with `label:
@@ -195,13 +202,12 @@ documentation.
     kind: ServiceMonitor
     metadata:
       name: ambassador-monitor
-      namespace: monitoring
       labels:
         release: prometheus
     spec:
       namespaceSelector:
         matchNames:
-        - default
+        - ambassador
       selector:
         matchLabels:
           service: ambassador-admin
@@ -349,7 +355,8 @@ in with `username: admin` : `password: admin`.
 
 Before you can import the $productName$ dashboard. You need to add a data source.
 From the Grafana home page, select `Add your first data source`. Now,
-select 'Prometheus'. In the URL section, type in `http://prometheus.default:9090`.
+select 'Prometheus'. In the URL section, type in `http://prometheus.default:9090`,
+or `http://prometheus-operated.default:9090` if you installed Prometheus with Helm.
 We deployed prometheus to the default namespace in our example, but if you
 deployed it to a different namespace, make sure to replace `default` with your
 namespace. Press `Save & Test` to confirm that the data source works.
@@ -360,8 +367,8 @@ by clicking `+ Import` while hovering the Dashboards menu in the left side-bar, 
 From here, select the Prometheus data source we created from the `Prometheus` drop
 down menu, and select import to finish adding the dashboard.
 
-In the dashboard we just added, you should now be able to view graphs in the
-`$productName$ Metrics Endpoint` tab.
+In the dashboard we just added, you should now be able to view graphs with
+$productName$ metrics.
 
 
 ## Viewing stats/metrics
