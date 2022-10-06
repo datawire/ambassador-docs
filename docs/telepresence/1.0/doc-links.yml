@@ -1,10 +1,79 @@
+ - title: Getting started
+   items:
+    - title: Introduction to Telepresence
+      link: discussion/overview
+    - title: Why Telepresence?
+      link: discussion/why-telepresence
+    - title: Installing Telepresence
+      link: reference/install
+    - title: Fast dev workflow with Docker/K8S
+      link: tutorials/docker
+
  - title: Tutorials
    items:
+    - title: Debug a Kubernetes service locally
+      link: tutorials/kubernetes
+    - title: Connect to a remote Kubernetes cluster
+      link: tutorials/kubernetes-client
+    - title: Rapid development with Kubernetes
+      link: tutorials/kubernetes-rapid
+    - title: Get started with OpenShift
+      link: tutorials/openshift
+    - title: Minikube VPN access
+      link: tutorials/minikube-vpn
+    - title: Using a Kubernetes Client Library
+      link: tutorials/kubernetes-client-libs
     - title: Using Telepresence with Golang
       link: howto/golang
+    - title: Local Java development
+      link: tutorials/java
+    - title: Using Telepresence with IntelliJ
+      link: tutorials/intellij
+    - title: Using Telepresence with PHP
+      link: tutorials/php
+
  - title: Reference
    items:
+    - title: Connecting to the cluster
+      link: reference/connecting
+    - title: Proxying methods
       link: reference/methods
       items:
+       - title: What gets proxied
+         link: reference/proxying
        - title: Volume access
          link: howto/volumes
+    - title: Running local processes
+      link: reference/running
+    - title: Generic limitations & workarounds
+      link: reference/limitations
+    - title: Windows support
+      link: reference/windows
+    - title: Usage Reporting
+      link: reference/usage_reporting
+    - title: How it works
+      link: discussion/how-it-works
+    - title: Upgrading Telepresence
+      link: reference/upgrade
+
+ - title: Community
+   items:
+    - title: Development Guide
+      link: reference/developing
+    - title: Community
+      link: /community
+    - title: Related Projects
+      link: /related-projects
+    - title: Case Studies
+      link: /case-studies
+    - title: Changelog
+      link: reference/changelog
+
+ - title: Need Help?
+   items:
+    - title: Ask on Slack
+      link: https://a8r.io/slack
+    - title: File a GitHub Issue
+      link: https://github.com/telepresenceio/telepresence/issues/new
+    - title: Visit Ambassador Labs
+      link: https://www.getambassador.io

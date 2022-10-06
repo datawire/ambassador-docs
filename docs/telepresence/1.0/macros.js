@@ -1,25 +1,25 @@
 import React from 'react';
 
-import Markdown from '@src/components/Markdown';
+import Markdown from '../../../../src/components/Markdown';
 
-export function Install({install, command, cluster, location}) {
+export function Install({ install, command, cluster, location }) {
   return (
     <details>
       <summary>Install Telepresence with Homebrew/apt/dnf</summary>
 
       <p>You will need the following available on your machine:</p>
       <ul>
-        <li><code>{ command }</code> command line tool (here's the <a target="_blank" rel="noopener noreferrer" href={ install }>installation instructions</a>).</li>
-        <li>Access to your { cluster } cluster, with local credentials on your machine. You can test this by running <code>{ command } get pod</code> - if this works you're all set.</li>
+        <li><code>{command}</code> command line tool (here's the <a target="_blank" rel="noopener noreferrer" href={install}>installation instructions</a>).</li>
+        <li>Access to your {cluster} cluster, with local credentials on your machine. You can test this by running <code>{command} get pod</code> - if this works you're all set.</li>
       </ul>
 
-      <InstallSpecific location={location}/>
+      <InstallSpecific location={location} />
 
     </details>
   );
 }
 
-export function InstallSpecific({location}) {
+export function InstallSpecific({ location }) {
   return (
     <Markdown>{`
 #### OS X
@@ -89,7 +89,7 @@ Don't see your favorite platform? [Let us know](https://github.com/telepresencei
   );
 }
 
-export function GettingStartedPart1({cluster}) {
+export function GettingStartedPart1({ cluster }) {
   return (
     <Markdown>{`
 ### Debugging a service locally with Telepresence
@@ -99,12 +99,12 @@ In order to figure out the problem you want to run the service locally... but th
 
 In this tutorial you'll see how Telepresence allows you to debug your service locally.
 We'll use the \`telepresence\` command line tool to swap out the version running in the staging cluster for a debug version under your control running on your local machine.
-Telepresence will then forward traffic from ${ cluster } to the local process.
+Telepresence will then forward traffic from ${cluster} to the local process.
 `}</Markdown>
   );
 }
 
-export function GettingStartedPart2({deployment, command, cluster}) {
+export function GettingStartedPart2({ deployment, command, cluster }) {
   return (
     <Markdown>{`
 Once you know the address you can store its value (don't forget to replace this with the real address!):
@@ -122,7 +122,7 @@ Hello, world!
 
 #### Swapping your deployment with Telepresence
 
-**Important:** Starting \`telepresence\` the first time may take a little while, since ${ cluster } needs to download the server-side image.
+**Important:** Starting \`telepresence\` the first time may take a little while, since ${cluster} needs to download the server-side image.
 
 At this point you want to switch to developing the service locally, replace the version running on your cluster with a custom version running on your laptop.
 To simplify the example we'll just use a simple HTTP server that will run locally on your laptop:
@@ -138,7 +138,7 @@ hello from your laptop
 $ kill %1
 \`\`\`
 
-We want to expose this local process so that it gets traffic from ${ cluster }, replacing the existing \`hello-world\` deployment.
+We want to expose this local process so that it gets traffic from ${cluster}, replacing the existing \`hello-world\` deployment.
 
 **Important:** you're about to expose a web server on your laptop to the Internet.
 This is pretty cool, but also pretty dangerous!
@@ -158,12 +158,12 @@ This does three things:
 * \`--swap-deployment\` tells Telepresence to replace the existing \`hello-world\` pod with one running the Telepresence proxy. On exit, the old pod will be restored.
 * \`--run\` tells Telepresence to run the local web server and hook it up to the networking proxy.
 
-As long as you leave the HTTP server running inside \`telepresence\` it will be accessible from inside the ${ cluster } cluster.
+As long as you leave the HTTP server running inside \`telepresence\` it will be accessible from inside the ${cluster} cluster.
 You've gone from this...
 
 \`\`\`mermaid
 graph RL
-subgraph ${ cluster } in Cloud
+subgraph ${cluster} in Cloud
 server["datawire/hello-world server on port 8000"]
 end
 \`\`\`
@@ -175,7 +175,7 @@ graph RL
 subgraph Laptop
 code["python HTTP server on port 8000"]---client[Telepresence client]
 end
-subgraph ${ cluster } in Cloud
+subgraph ${cluster} in Cloud
 client-.-proxy["Telepresence proxy, listening on port 8000"]
 end
 \`\`\`
@@ -184,7 +184,7 @@ We can now send queries via the public address of the \`Service\` we created, an
 Wait a few seconds for the Telepresence proxy to startup; you can check its status by doing:
 
 \`\`\`console
-$ ${ command } get pod | grep hello-world
+$ ${command} get pod | grep hello-world
 hello-world-2169952455-874dd   1/1       Running       0          1m
 hello-world-3842688117-0bzzv   1/1       Terminating   0          4m
 \`\`\`
@@ -209,7 +209,7 @@ Now if we wait a few seconds the old code will be swapped back in.
 Again, you can check status of swap back by running:
 
 \`\`\`console
-$ ${ command } get pod | grep hello-world
+$ ${command} get pod | grep hello-world
 \`\`\`
 
 When the new pod is back to \`Running\` state you can see that everything is back to normal:
@@ -231,9 +231,9 @@ Now it's time to clean up the service:
   );
 }
 
-export function TutorialFooter({title, path, baseUrl}) {
+export function TutorialFooter({ title, path, baseUrl }) {
   return (
-      <Markdown>{`
+    <Markdown>{`
 **Still have questions? Ask in our [Slack chatroom](https://a8r.io/slack) or [file an issue on GitHub](https://github.com/telepresenceio/telepresence/issues/new).**
 `}</Markdown>
   );

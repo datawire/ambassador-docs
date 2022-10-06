@@ -29,6 +29,7 @@ export const products = [
         link: 'pre-release/quick-start',
       },
       { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
+      { id: '1.0', name: '1.0', link: '1.0/discussion/overview' },
       { id: '2.7', name: '2.7', link: '2.7/quick-start' },
       { id: '2.6', name: '2.6', link: '2.6/quick-start' },
       { id: '2.5', name: '2.5', link: '2.5/quick-start' },
@@ -37,6 +38,7 @@ export const products = [
       { id: '2.2', name: '2.2', link: '2.2/quick-start', archived: true },
       { id: '2.1', name: '2.1', link: '2.1/quick-start', archived: true },
       { id: '2.0', name: '2.0', link: '2.0/quick-start', archived: true },
+      { id: '2.0', name: '1.0', link: '1.0/discussion/overview', archived: true },
     ],
   },
   {
