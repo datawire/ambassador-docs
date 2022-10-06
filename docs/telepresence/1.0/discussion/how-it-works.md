@@ -12,7 +12,7 @@ Our goals for Telepresence are:
 4. **Compatibility:** works with any program.
 
 Achieving all these goals at the same time is not always possible.
-We've therefore chosen to support more than one method of proxying, with the different methods each having its own [benefits and limitations](/reference/methods.html).
+We've therefore chosen to support more than one method of proxying, with the different methods each having its own [benefits and limitations](../../reference/methods).
 
 ### How it works
 

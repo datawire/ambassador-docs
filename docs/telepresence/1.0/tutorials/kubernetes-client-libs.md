@@ -35,7 +35,7 @@ So our `telepresense.sh` file would look like that
 >
 > ```
 
-For more details about the `mount` command check the [documentation](/howto/volumes.html)
+For more details about the `mount` command check the [documentation](../../howto/volumes)
 
 ### Python Kubernetes Client
 
@@ -58,4 +58,4 @@ The example is an API which returns list of pods in the desired namespace(*if se
 
 The container is running on your laptop and gets serviceaccount information like it is on the Kubernetes cluster. Afterwards if authorized, get list of the pods and returns with their status as JSON.
 
-For more details about the `mount` command check the [documentation](/howto/volumes.html)
+For more details about the `mount` command check the [documentation](../../howto/volumes)

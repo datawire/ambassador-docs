@@ -3,7 +3,7 @@
 <!--- towncrier start line -->
 
 #### Announcement: Telepresence 2 is now Available
-Telepresence 2 is open source and available to [use now](/docs/latest/). Rewritten in Go to be faster and more resilient, Telepresence 2 has a [new architecture](/docs/latest/reference/architecture/) to better serve Kubernetes development teams with multiple users. [Try it today](/docs/latest/quick-start/) and [share your feedback](https://a8r.io/slack) with the team.
+Telepresence 2 is open source and available to [use now](/docs/latest/). Rewritten in Go to be faster and more resilient, Telepresence 2 has a [new architecture](../../../latest/reference/architecture/) to better serve Kubernetes development teams with multiple users. [Try it today](/../../../latest/quick-start/) and [share your feedback](https://a8r.io/slack) with the team.
 
 #### 0.109 (January 25, 2021)
 
@@ -648,7 +648,7 @@ Bug fixes:
 
 Misc
 
-* [Telepresence documentation](../../) uses GitBook.
+* [Telepresence documentation](../../discussion/overview/) uses GitBook.
 
 #### 0.67 (September 21, 2017)
 

@@ -34,7 +34,7 @@ You can also interact with the Kubernetes API - change the URL to `https://kuber
 ### Kubernetes talks to a Go program
 
 You can also run a Go program as a local server and have requests to your Kubernetes `Deployment` forwarded to that process.
-This is just the same as the example covered in [the tutorial](/tutorials/kubernetes) except that you use `--method vpn-tcp`, and run a Go process instead of a Python process.
+This is just the same as the example covered in [the tutorial](../../tutorials/kubernetes) except that you use `--method vpn-tcp`, and run a Go process instead of a Python process.
 
 For example, if you have a `Deployment` called `myservice` running in Kubernetes and listening on port 8080, you can temporarily swap it out for a local process and have traffic forwarded to your laptop:
 
@@ -45,4 +45,4 @@ $ telepresence --swap-deployment myservice --expose 8080 \
 
 Now requests to that remote `Deployment` will be routed to the `yourgoserver` process running on your machine.
 
-You can learn more about the differences between `--new-deployment` and `--swap-deployment` in the relevant [reference documentation](/reference/connecting).
+You can learn more about the differences between `--new-deployment` and `--swap-deployment` in the relevant [reference documentation](../../reference/connecting).

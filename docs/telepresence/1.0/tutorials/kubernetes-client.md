@@ -41,7 +41,7 @@ What's going on:
 3. The DNS lookup and HTTP request done by `curl` get routed through the proxy and transparently access the cluster... even though `curl` is running locally.
 4. When `curl` exits the new `Deployment` will be cleaned up.
 
-To learn more about what Telepresence proxies you can read the relevant [reference documentation](/reference/proxying.html).
+To learn more about what Telepresence proxies you can read the relevant [reference documentation](../../reference/proxying).
 
 <Macros.Install
     install="https://kubernetes.io/docs/tasks/tools/install-kubectl/"
