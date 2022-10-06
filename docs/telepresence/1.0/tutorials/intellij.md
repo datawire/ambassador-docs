@@ -36,9 +36,8 @@ You’ll notice that I have specified the `env-json` argument with a filename, w
 
 In order to load the generated Env File into IntelliJ, you will need to install the [Env File plugin](https://plugins.jetbrains.com/plugin/7861-env-file). This can be downloaded and installed via the JetBrains website, or you can also install it via the “Preferences -> Plugins” configuration of the IDE itself.
 
-With the plugin installed, you can now clone the [Ambassador Java Rate Limiter](https://github.com/danielbryantuk/ambassador-java-rate-limiter) Java code from GitHub and open this in IntelliJ. The video shows exactly how to configure IntelliJ IDEA, but the primary task is to modify the Run/Debug Configuration to load the Env File that was generated during the Telepresence `swap-deployment` command:
+With the plugin installed, you can now clone the [Ambassador Java Rate Limiter](https://github.com/danielbryantuk/ambassador-java-rate-limiter) Java code from GitHub and open this in IntelliJ. The video shows exactly how to configure IntelliJ IDEA, but the primary task is to modify the Run/Debug Configuration to load the Env File that was generated during the Telepresence `swap-deployment` command.
 
-![intelliJ-tutorial](https://www.datawire.io/wp-content/uploads/2018/07/intelliJ-tutorial.png)
 
 With the configuration updated, you can now start the local instance of the `RateLimiter` service in debug mode, and make a request against the remote Kubernetes cluster Shopfront endpoint. Once the request is made then the first breakpoint you have set should be triggered! From here you can debug the locally running service as if it was running within the remote Kubernetes cluster.
 
