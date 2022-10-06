@@ -277,7 +277,7 @@ spec:
           emptyDir: {}
       containers:
         - name: grafana
-          image: 'grafana/grafana:6.4.3'
+          image: 'grafana/grafana:9.1.7'
           ports:
             - containerPort: 3000
               protocol: TCP
@@ -348,14 +348,14 @@ Now, access Grafana by going to `{AMBASSADOR_IP}/grafana/` and logging
 in with `username: admin` : `password: admin`.
 
 Before you can import the $productName$ dashboard. You need to add a data source.
-From the Grafana home page, select `Create your first data source`. Now,
+From the Grafana home page, select `Add your first data source`. Now,
 select 'Prometheus'. In the URL section, type in `http://prometheus.default:9090`.
 We deployed prometheus to the default namespace in our example, but if you
 deployed it to a different namespace, make sure to replace `default` with your
 namespace. Press `Save & Test` to confirm that the data source works.
 
 Import the [provided dashboard](https://grafana.com/grafana/dashboards/4698)
-by clicking the plus sign in the left side-bar, clicking `Import` in the top left, and entering the dashboard ID(4698).
+by clicking `+ Import` while hovering the Dashboards menu in the left side-bar, and entering the dashboard ID `4698`.
 
 From here, select the Prometheus data source we created from the `Prometheus` drop
 down menu, and select import to finish adding the dashboard.
@@ -387,8 +387,9 @@ kubectl port-forward service/prometheus 9090
 
 and going to `http://localhost:9090/` from a web browser
 
-In the UI, click the dropdown and see all of the stats Prometheus is
-able to scrape from $productName$.
+In the UI, discover all the stats Prometheus is
+able to scrape from $productName$ by searching for expressions
+starting with `envoy` and `ambassador`.
 
 The Prometheus data model is, at its core, time-series
 based.  Therefore, it makes it easy to represent rates, averages,

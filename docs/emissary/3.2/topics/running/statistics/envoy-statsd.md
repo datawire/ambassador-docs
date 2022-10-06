@@ -34,11 +34,11 @@ the statistics to a different StatsD server by setting the
 `STATSD_HOST` environment variable.  This can be useful if you have an
 existing StatsD sink available in your cluster.
 
-We have included a few example configurations in the
-[`statsd-sink/`] directory to help you get started.  Clone the
-repository to get local, editable copies.
-
-[`statsd-sink/`]: https://github.com/emissary-ingress/emissary/tree/master/deployments/statsd-sink
+We have included a few example configurations in
+[the `statsd-sink/` directory](https://github.com/emissary-ingress/emissary/tree/master/deployments/statsd-sink)
+to help you get started.  Clone or download the
+repository to get local, editable copies and open a terminal
+window in the `emissary/deployments/` folder.
 
 ## Using Graphite as the StatsD sink
 
