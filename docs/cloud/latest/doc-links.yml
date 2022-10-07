@@ -16,7 +16,7 @@
       link: /service-catalog/concepts/annotating/    
     - title: Annotating services
       link: /service-catalog/howtos/annotate/
-    - title: Intercepting service
+    - title: Creating intercepts
       link: /service-catalog/howtos/intercept/
     - title: Managing Saved Intercepts
       link: /telepresence-saved-intercepts
@@ -28,6 +28,8 @@
       link: /visualize-api/quick-start
     - title: Using the Developer Portal
       link: /developer-portal/
+    - title: Configuring single sign-on
+      link: /sso/
     - title: Managing subscriptions
       link: /subscriptions/howtos/manage-my-subscriptions
     - title: Diagnostics Overview
