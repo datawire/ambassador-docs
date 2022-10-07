@@ -1,6 +1,6 @@
 # Diagnostics
 
-With $productName$ Diagnostics, you get a summary of the current status and mappingws of your cluster and it's services. To enter this view, you will need to navigate to 
+With $productName$ Diagnostics, you get a summary of the current status and Mappings of your cluster and it's services. To enter this view, you will need to navigate to 
 `http://localhost:8877/ambassador/v0/diag/`, inside your $productName$ pod. 
 
 Can't access this page? Head to [troubleshooting](#troubleshooting). 
@@ -13,7 +13,7 @@ The main $productName$ Diagnostics Overview page is comprised of :
 
 The information displayed here contains :
 
-* Cluster system information (Ambassador module version, Pod hostname, and Cluster ID)
+* Cluster system information ($productName$ version, Pod hostname, and Cluster ID)
 * Snapshot information (When the last status report was made by envoy)
 * Configuration information
 * Log information level (Changed by turning debug on/off)
@@ -48,7 +48,7 @@ List of the ambassador services that the cluster is currently using.
     <img src="../../../images/diag-servicecs-in-use.png"/>
   </p>
 
-By clicking on the link displayed next to the service type will take you to that services own $productName$ Diagnostics page, where you are able to see the active Envoy [Routes](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/route/route.proto) and [Clusters](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/cds.proto) that the service is currently using, alongside the `YAML` documents that Ambassador uses to read its configuration
+Clicking on the link displayed next to the service type will take you to that service's own $productName$ Diagnostics page, where you are able to see the active Envoy [Routes](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/route/route.proto) and [Clusters](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/cds.proto) that the service is currently using, alongside the `YAML` documents that Ambassador has for it's configuration
 
   <p align="center">
     <img src="../../../images/diag-service-diag-overview.png" height="600"/>
@@ -72,23 +72,23 @@ Main section of the overview page.
 
 This section contains:
 
-1. **Ambassador Routes** : All the routes inside the cluster gets displayed. The information shown for each route will tell if the route is an internal one, their precedence vaule, service name color coded, and the weight of that route. Clicking on a route will take you to to that route diagnostics page, where you are able to see the active Envoy [Routes](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/route/route.proto) and [Clusters](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/cds.proto) that the route is currently using, alongside the `YAML` documents that Ambassador uses to read its configuration
+1. **Ambassador Routes** : All the routes inside the cluster are displayed. The information for each route contains, the precedence value of the route, the service name in a color corresponding to the legend for the percentage of successful requests to the service, if the route is an internal one, and the weight of the route. Clicking on a route will take you to that route's diagnostics, where you are able to see the active Envoy [Routes](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/route/route.proto) and [Clusters](https://www.envoyproxy.io/docs/envoy/v1.8.0/api-v2/api/v2/cds.proto) that the route is currently using, alongside the `YAML` documents that Ambassador uses to read its configuration
 
-2. **Ambassador TCP Mappings** : $productName$ can manage [TCPMappings](../../using/tcpmappings/), and those will get asssociated with upstream services. All your TCP mappings get displayed here. 
+2. **Ambassador TCP Mappings** : $productName$ can manage [TCPMappings](../../using/tcpmappings/), and which will be asssociated with upstream services. All your TCP mappings get displayed here. 
 
-3. **Color Legend**: $productName$ assigns a color code to each service name displayed on this page. This color is based on the success rate for each service, and we get this value by computing `successful requests` / `total requests` and express that as a percentage. The "total requests" value comes from Envoy `upstream_rq_pending_total` stat. "successful requests" is calculated by substracting `upstream_rq_4xx` and `upstream_rq_5xx` from the total.
+3. **Color Legend**: $productName$ assigns a color code to each service name displayed on this page. This color is based on the success rate for each service, and we get this value by computing `successful requests` / `total requests` and converting it to a percentage. The "total requests" value comes from Envoy's `upstream_rq_pending_total` stat. "successful requests" is calculated by substracting `upstream_rq_4xx` and `upstream_rq_5xx` from the total.
 
       * Red is used when the success rate ranges from 0% - 70%.
       * Yellow is used when the success rate ranges from 70% - 90%.
       * Green is used when the success rate is > 90%.
       * Grey is used when a service is "waiting". This means the success rate cannot be determined because the service has not recieved any requests yet.
-      * Orange is used the service just started, and remains in a `unknown status`
+      * Orange is used when the service just started, and remains in a `unknown status`
 
 ## Troubleshooting
 
 ### Can't access $productName$ Diagnostics Overview?
 
-Create an Ambassador `Module` if one does not already exist, and add the following config to enable diagnostics data. $productName$ will pick the new module and add the new configuration. 
+Create an Ambassador `Module` if one does not already exist, and add the following config to enable diagnostics data.
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1
