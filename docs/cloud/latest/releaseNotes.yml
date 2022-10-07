@@ -30,6 +30,13 @@
 
 changelog: ''
 items:
+  - date: '2022-10-04'
+    notes:
+      - title: 'Single Sign On'
+        body: Sign into Ambassador Cloud using your own SAML 2.0 Identity Provider.
+        image: './sso.png'
+        docs: './sso'
+        type: feature
   - date: '2022-09-27'
     notes:
       - title: 'Diagnostics Overview'
