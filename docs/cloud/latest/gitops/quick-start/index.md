@@ -2,7 +2,7 @@
 title: "GitOps Configuration | Ambassador Cloud"
 description: "This guide walks through how you can configure GitOps with Ambassador Cloud using Edge Stack or Emissary-ingress with GitHub."
 ---
-
+import Alert from '@material-ui/lab/Alert';
 
 # Configuring Ambassador Cloud for GitOps
 
