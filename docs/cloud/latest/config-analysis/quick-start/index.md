@@ -1,6 +1,6 @@
 ---
-description: "Automated Configuration Analysis Guide | Ambassador Cloud"
-title: "This guide walks you through how to configure Edge Stack or Emissary-ingress with automated configuration analysis."
+title: "Automated Configuration Analysis Guide | Ambassador Cloud"
+description: "This guide walks you through how to configure Edge Stack or Emissary-ingress with automated configuration analysis."
 ---
 
 import Alert from '@material-ui/lab/Alert';

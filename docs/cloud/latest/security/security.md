@@ -1,5 +1,5 @@
 ---
-    Title: "Security controls | Ambassador Cloud"
+    title: "Security controls | Ambassador Cloud"
     description: "An overview of Ambassador Cloud's security page. Create API keys and Edge Stack filter resources, and learn how to manage secure access to your cluster." 
 ---
 import Alert from '@material-ui/lab/Alert';

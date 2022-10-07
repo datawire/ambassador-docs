@@ -1,6 +1,6 @@
 ---
-description: "GitOps Configuration | Ambassador Cloud"
-title: "This guide walks through how you can configure GitOps with Ambassador Cloud using Edge Stack or Emissary-ingress with GitHub."
+title: "GitOps Configuration | Ambassador Cloud"
+description: "This guide walks through how you can configure GitOps with Ambassador Cloud using Edge Stack or Emissary-ingress with GitHub."
 ---
 
 

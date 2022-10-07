@@ -1,5 +1,5 @@
 ---
-title: "Single sign-on configuration"
+title: "Single sign-on configuration | Ambassador Cloud"
 description: "Ambassador Cloud supports Single Sign on via SAML 2.0. Learn how to quickly and efficiently setup SSO in your environment with this guide."
 ---
 

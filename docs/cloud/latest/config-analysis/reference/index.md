@@ -1,6 +1,6 @@
 ---
-description: "Automated Configuration Analysis | Ambassador Cloud"
-title: "Automated configuration analysis provides visibility into Edge Stack and Emissary-ingress configuration changes."
+title: "Automated Configuration Analysis | Ambassador Cloud"
+description: "Automated configuration analysis provides visibility into Edge Stack and Emissary-ingress configuration changes."
 ---
 
 import Alert from '@material-ui/lab/Alert';
