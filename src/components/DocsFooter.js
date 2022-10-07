@@ -29,15 +29,16 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       if (version === 'pre-release') {
         version = '2';
       }
+
+      if (version === '0.109') version = '1';
       dstUrl = `https://github.com/telepresenceio/docs/blob/release/v${version}/${restOfFilePath}`;
       break;
     case 'edge-stack':
       const isValid = edgeStackLinks?.includes(
         `${product}/${version}/${restOfFilePath}`,
       );
-      dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${
-        isValid ? product : 'emissary'
-      }/${version}/${restOfFilePath}`;
+      dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${isValid ? product : 'emissary'
+        }/${version}/${restOfFilePath}`;
       break;
     case 'code':
     case 'ship':
