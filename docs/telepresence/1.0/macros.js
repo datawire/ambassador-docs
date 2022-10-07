@@ -71,7 +71,7 @@ export function InstallSpecific({ location }) {
       </p>
       <h4>Windows</h4>
       <p>
-        See the <a href="/reference/windows.html">Windows support documentation.</a>
+        See the <a href="../../reference/windows">Windows support documentation.</a>
       </p>
       <h4>Install from source</h4>
       <p>
@@ -83,7 +83,7 @@ export function InstallSpecific({ location }) {
         }
       </CodeBlock>
       <p>
-        Install the software from the <a href="/reference/install.html#dependencies">list of dependencies</a> to finish.
+        Install the software from the <a href="../../reference/install/#dependencies">list of dependencies</a> to finish.
       </p>
       <p>
         Install into arbitrary locations by setting other environment variables before calling the install script. <a href="https://github.com/telepresenceio/telepresence/blob/master/install.sh">See the install script</a> for more information. After installation you can safely delete the source code.
