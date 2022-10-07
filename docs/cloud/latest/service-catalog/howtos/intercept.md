@@ -2,12 +2,11 @@
 description: "Intercept services | Ambassador Cloud"
 title: "Learn how to intercept services in Ambassador Cloud. Once you have created an intercept, you can code and debug the intercepted service locally."
 ---
-
 import Alert from '@material-ui/lab/Alert';
 
 # Intercept a service
 
-In Ambassador Cloud, it's easy to [intercept]((/docs/telepresence/latest/concepts/intercepts/) a service. Once you've intercepted your service, you can code and debug the intercepted service locally.
+In Ambassador Cloud, it's easy to [intercept](/docs/telepresence/latest/concepts/intercepts/) a service. Once you've intercepted your service, you can code and debug the intercepted service locally.
 
 Intercepts are created through the Telepresence Daemon. If you don't have Telepresence v2.5.0 or later already installed, follow [these instructions](/docs/telepresence/latest/install/) to install the latest version of Telepresence.
 
@@ -17,9 +16,9 @@ Intercepts are created through the Telepresence Daemon. If you don't have Telepr
 1. The Ambassador Cloud header displays your connection status. If it reads **not connected**, click the connection dropdown and click **connect computer**.
    A slideout displays with instructions on how to connect to Ambassador Cloud.
 1. Once you are connected, click the the **connected** dropdown, select your connected computer, and click the "Intercept" button.
-   ![Connected computer view's Intercept button](../../../images/connected-view-intercept-button.png)
+   ![Connected computer view's Intercept button](../../images/connected-view-intercept-button.png)
 1. In the intercept slideout, you can see the list of services available to intercept for that namespace, and a dropdown to change namespaces.
-   ![Intercept Slideout](../../../images/intercept-slideout-service-list.png)
+   ![Intercept Slideout](../../images/intercept-slideout-service-list.png)
 1. Click the service you want to intercept.
 1. [Fill out the form to complete the intercept.](#fill-out-the-form-to-complete-the-intercept)
 
@@ -56,4 +55,4 @@ Intercepts are created through the Telepresence Daemon. If you don't have Telepr
    1. Specify the `Host` header that should be passed along with the request. If you have a Mapping that routes requests to your services based a specific hostname, that is the value you should specify here.
 1. Click `Intercept`.
 
-   ![Intercept settings form](../../../images/intercept-slideout-settings-confirmation.png)
+   ![Intercept settings form](../../images/intercept-slideout-settings-confirmation.png)
