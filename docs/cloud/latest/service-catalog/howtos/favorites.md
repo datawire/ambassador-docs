@@ -35,7 +35,7 @@ You can filter your view by favorites service and cells. At the top of the Servi
 
 ## Favoriting a cell
 
-On the[Cells](/service-catalog/howtos/cells/) page:
+On the[Cells](../cells) page:
 
 1. Locate the `cell` you want to add to your favorites.
 

@@ -1,6 +1,6 @@
 ---
-description: "Intercept services | Ambassador Cloud"
-title: "Learn how to intercept services in Ambassador Cloud. Once you have created an intercept, you can code and debug the intercepted service locally."
+title: "Intercept services | Ambassador Cloud"
+description: "Learn how to intercept services in Ambassador Cloud. Once you have created an intercept, you can code and debug the intercepted service locally."
 ---
 import Alert from '@material-ui/lab/Alert';
 
