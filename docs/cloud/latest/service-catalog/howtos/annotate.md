@@ -1,6 +1,6 @@
 ---
-description: "Annotating services | Ambassador Cloud"
-title: "Learn how to add service annotations with Ambassador Cloud. Find out how to use kubectl and YAML to annotate services."
+titel: "Annotating services | Ambassador Cloud"
+description: "Learn how to add service annotations with Ambassador Cloud. Find out how to use kubectl and YAML to annotate services."
 ---
 
 import Alert from '@material-ui/lab/Alert';

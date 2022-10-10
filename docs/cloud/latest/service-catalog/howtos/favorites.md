@@ -1,6 +1,6 @@
 ---
-description: "Filters and Favorites | Ambassador Cloud"
-title: "Learn how to take advantage of Ambassador Cloud's favorites and filtering options to personalize your view and improve your team's workflow."
+title: "Filters and Favorites | Ambassador Cloud"
+description: "Learn how to take advantage of Ambassador Cloud's favorites and filtering options to personalize your view and improve your team's workflow."
 ---
 
 import Alert from '@material-ui/lab/Alert';

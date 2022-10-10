@@ -1,6 +1,6 @@
 ---
-description: "Manage your Service Groups | Ambassador Cloud"
-title: "Learn how to manage your service catalog to easily view all of your services and group them so that they are organized and accessible in a single place."
+title: "Manage your Service Groups | Ambassador Cloud"
+description: "Learn how to manage your service catalog to easily view all of your services and group them so that they are organized and accessible in a single place."
 ---
 
 

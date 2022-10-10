@@ -1,6 +1,6 @@
 ---
-description: "Services and Service Groups | Ambassador Cloud"
-title: "Learn how to manage and view details about your services in Ambassador Cloud. Create service groups and manage the services across your environments."
+title: "Services and Service Groups | Ambassador Cloud"
+description: "Learn how to manage and view details about your services in Ambassador Cloud. Create service groups and manage the services across your environments."
 ---
 
 # Service Catalog
