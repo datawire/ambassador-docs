@@ -185,9 +185,9 @@ properly being enforced in prior versions. If any single label from the selector
 of requiring all labels in the selector to be present. Additonally, if the `hostname` of the `Mapping` matched the `hostname` of the `Host` then they would be associated
 regardless of the configuration of `mappingSelector`.
 In version `3.2` this bug was fixed and a `Host` will only be associated with a `Mapping` if **all** labels required by the selector are present.
-This brings the `mappingSelector` field in-line with how label selectors are used throughout Kubernetes. To avoid unexpected behaviour after the upgrade,
+This brings the `mappingSelector` field in-line with how label selectors are used throughout Kubernetes. To avoid unexpected behavior after the upgrade,
 add all labels that `Hosts` have in their `mappingSelector` to `Mappings` you want to associate with the `Host`. You can opt-out of this fix and return to the old
-`Mapping`/`Host` association behaviour by setting the environment variable `DISABLE_STRICT_LABEL_SELECTORS` to `"true"` (default: `"false"`). A future version of
+`Mapping`/`Host` association behavior by setting the environment variable `DISABLE_STRICT_LABEL_SELECTORS` to `"true"` (default: `"false"`). A future version of
 $productName$ may remove the ability to opt-out of this bugfix.
 
 ## Secure and insecure requests
