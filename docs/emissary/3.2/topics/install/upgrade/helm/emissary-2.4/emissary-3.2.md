@@ -30,7 +30,17 @@ $productName$ 3.X has been upgraded from Envoy 1.17.X to Envoy 1.22 which remove
 
 You can refer to the [Major changes in $productName$ 3.x](../../../../../../about/changes-3.y/) guide for an overview of the changes.
 
-1. Check Transport Protocol usage on all resources before migrating.
+1. $productName$ 3.2 fixed a bug with `Host.spec.selector\mappingSelector` and `Listener.spec.selector` not being properly enforced.
+   In previous versions, if only a single label from the selector was present on the resource then they would be associated. Additionally, when associating `Hosts` with `Mappings`, if the `Mapping` configured a `hostname` that matched the `hostname` of the `Host` then they would be associated regardless of the configuration of the `selector\mappingSelector` on the `Host`.
+
+   Before upgrading, review your Ambassador resources, and if you make use of the selectors, ensure that every other resource you want it to be associated with contains all the required labels.
+
+   The environment variable `DISABLE_STRICT_LABEL_SELECTORS` can be set to `"true"` on the $productName$ deployment to revert to the
+   old incorrect behavior to help prevent any configuration issues after upgrading in the event that not all manifests making use of the selectors have been corrected yet.
+
+   For more information on `DISABLE_STRICT_LABEL_SELECTORS` see the [Environment Variables page](../../../../../running/environment).
+
+2. Check Transport Protocol usage on all resources before migrating.
 
     The `AuthService`, `RatelimitService`, and `LogServices` that use the `grpc` protocol will now need to explicilty set `protocol_version: "v3"`. If not set or set to `v2` then an error will be posted and a static response will be returned.
 
@@ -54,7 +64,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
 	    envoyType "github.com/datawire/ambassador/v2/pkg/api/envoy/type/v3"
     ```
 
-2. Check removed runtime changes
+3. Check removed runtime changes
 
    ```
    # No longer necessary because this was removed from Envoy
@@ -73,7 +83,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
    "envoy.reloadable_features.enable_deprecated_v2_api": true,
    ```
 
-3. **Install new CRDs.**
+4. **Install new CRDs.**
 
    After reviewing the changes in 3.x and confirming that you are ready to upgrade, the process is the same as upgrading minor versions
    in previous version of $productName$ and does not require the complex migration steps that the migration from 1.x tto 2.x required.
@@ -100,7 +110,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
      the <code>$productDeploymentName$-apiext</code> Deployment.
    </Alert>
 
-4. **Install $productName$ $version$.**
+5. **Install $productName$ $version$.**
 
    After installing the new CRDs, use Helm to install $productName$ $version$. Start by
    making sure that your `datawire` Helm repo is set correctly:
