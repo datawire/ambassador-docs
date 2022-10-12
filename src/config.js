@@ -37,6 +37,7 @@ export const products = [
       { id: '2.2', name: '2.2', link: '2.2/quick-start', archived: true },
       { id: '2.1', name: '2.1', link: '2.1/quick-start', archived: true },
       { id: '2.0', name: '2.0', link: '2.0/quick-start', archived: true },
+      { id: '1.0', name: '1.0', link: '1.0/discussion/overview', archived: true },
     ],
   },
   {
