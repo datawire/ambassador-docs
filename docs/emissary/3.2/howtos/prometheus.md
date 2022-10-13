@@ -165,7 +165,7 @@ Helm.  Alternatively, you can install it with [kubectl
 YAML](#prometheus-operator-with-standard-yaml) if you prefer.
 
 The default [Helm
-Chart](https://github.com/helm/charts/tree/master/stable/prometheus-operator)
+Chart](https://github.com/prometheus-community/helm-charts)
 will install Prometheus and configure it to monitor your Kubernetes
 cluster.
 
@@ -229,8 +229,8 @@ Definitions (CRDs) for managing Prometheus in Kubernetes.
 | `Prometheus` | Creates a Prometheus instance.  |
 | `ServiceMonitor` | Tells Prometheus where to scrape metrics from.  |
 
-CoreOS has published a full [API
-reference](https://coreos.com/operators/prometheus/docs/latest/api.html)
+The prometheus-operator project published a full [API
+reference](https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md)
 to these different CRDs.
 
 ### Grafana
