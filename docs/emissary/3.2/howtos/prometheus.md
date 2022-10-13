@@ -125,7 +125,6 @@ standard YAML files.  Alternatively, you can install it with
     kubectl apply -f prometheus.yaml
     ```
 
-
 3. Create a `ServiceMonitor`
 
    Finally, we need to tell Prometheus where to scrape metrics
@@ -187,14 +186,15 @@ documentation.
     helm install prometheus prometheus-community/kube-prometheus-stack
     ```
 
-3. Create a `ServiceMonitor`
+2. Create a `ServiceMonitor`
 
     The Prometheus Operator Helm chart creates a Prometheus instance
     that is looking for `ServiceMonitor`s with `label:
     release=prometheus`.
 
     Scrape metrics directly from the `/metrics` endpoint of
-    $productName$ running in the `default` namespace:
+    $productName$ running in the `ambassador` namespace. You may
+    want to adjust namespace and label selectors to match your installation:
 
     ```yaml
     ---
