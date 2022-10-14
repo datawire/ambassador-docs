@@ -190,4 +190,4 @@ In the manifest, several things must be customized:
   version that you use.  Deploy previews require Telepresence
   2.6.9-BOGUS-WE-WILL-FILL-IN-THIS-VERSION-ONCE-WE-HAVE-IT or later.
 
-For an example of CI editing the manifest, see the [deployment previews demo GitHub repo](https://github.com/AliceProxy/test-app).
+For an example of CI editing the manifest, see the [deployment previews demo GitHub repo](https://github.com/AliceProxy/test-app).a
