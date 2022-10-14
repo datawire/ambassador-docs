@@ -1,6 +1,6 @@
 ---
 title: "Managing Ambassador Labs subscriptions | Ambassador Cloud"
-description: "Check out your subscription details or shop for different subscription editions. Depending on your needs, Ambassador Labs has plans for all sizes of companies and applications."
+description: "Depending on your needs, Ambassador Labs has subscription plans for all sizes of companies and applications. Find the plan that works best for your team."
 ---
 
 # Manage my subscriptions

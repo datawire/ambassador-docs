@@ -1,6 +1,6 @@
 ---
 title: "Using Deployment Previews | Ambassador Cloud"
-description: "Check out your subscription details or shop for different subscription editions. Depending on your needs, Ambassador Labs has plans for all sizes of companies and applications."
+description: "Take advantage of your GitOps integration and use CI, Ambassador Cloud, and ArgoCD to configure deployment previews using your connected GitHub repository."
 ---
 import Alert from '@material-ui/lab/Alert';
 import HubspotForm from "../../../../../src/components/HubspotForm";
