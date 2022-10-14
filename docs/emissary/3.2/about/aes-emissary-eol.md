@@ -57,4 +57,4 @@ After September 2022, the current series will be 3.x, and the maintenance series
 
 ## Visual timeline representation
 
-![Timeline](../images/timeline.png)add something
+![Timeline](../images/timeline.png)
