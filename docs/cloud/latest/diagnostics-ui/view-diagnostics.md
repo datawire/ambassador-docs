@@ -23,7 +23,7 @@ Inside the [clusters page](https://app.getambassador.io/cloud/clusters), on each
 
 Inside, you will be able to see two navigation tabs, containing the following:
 
-1. **Ambassador Routes** : Information about your Emissary-ingress [mapping resources](https://www.getambassador.io/docs/emissary/latest/topics/using/intro-mappings/) gets displayed, alongside the service name, weigth, and success rate.
+1. **Ambassador Routes** : Information about your Emissary-ingress [mapping resources](https://www.getambassador.io/docs/emissary/latest/topics/using/intro-mappings/) gets displayed, alongside the service name, weight, and success rate.
 
   <p align="center">
     <img src="../../images/cluster-diag-routes-table.png" width="800"/>
