@@ -64,7 +64,7 @@ const Item: React.FC<IItemProp> = ({ item, slug, version, scrollView, refs, pare
                 result = true;
             }
             !result &&
-                item.items &&
+                item?.items?.length &&
                 item.items.forEach((i) => {
                     checkChildActive(i);
                 });

@@ -679,15 +679,15 @@ This controls the number of worker threads used to serve requests and can be use
 
 ### `DISABLE_STRICT_LABEL_SELECTORS`
 
-In $productName$ version `3.2`, a bug with how `Hosts` are associated with `Mappings` was fixed. The `mappingSelector` field in `Hosts` was not
-properly being enforced in prior versions. If any single label from the selector was matched then the `Host` would be associated with the `Mapping` instead
-of requiring all labels in the selector to be present. Additonally, if the `hostname` of the `Mapping` matched the `hostname` of the `Host` then they would be associated
-regardless of the configuration of `mappingSelector`.
+In $productName$ version `3.2`, a bug with how `Hosts` are associated with `Mappings` was fixed and with how `Listeners` are assocaited with `Hosts`. The `mappingSelector`\\`selector` fields in `Hosts` and `Listeners` were not
+properly being enforced in prior versions. If any single label from the selector was matched then the resources would be associated with each other instead
+of requiring all labels in the selector to be present. Additonally, if the `hostname` of a `Mapping` matched the `hostname` of a `Host` then they would be associated
+regardless of the configuration of `mappingSelector`\\`selector`.
 
-In version `3.2` this bug was fixed and a `Host` will only be associated with a `Mapping` if **all** labels required by the selector are present.
-This brings the `mappingSelector` field in-line with how label selectors are used throughout Kubernetes. To avoid unexpected behaviour after the upgrade,
-add all labels that `Hosts` have in their `mappingSelector` to `Mappings` you want to associate with the `Host`. You can opt-out of this fix and return to the old
-`Mapping`/`Host` association behaviour by setting the environment variable `DISABLE_STRICT_LABEL_SELECTORS` to `"true"` (default: `"false"`). A future version of
+In version `3.2` this bug was fixed and resources that configure a selector will only be associated if **all** labels required by the selector are present.
+This brings the `mappingSelector` and `selector` fields in-line with how label selectors are used throughout Kubernetes. To avoid unexpected behavior after the upgrade,
+add all labels that configured in any `mappingSelector`\\`selector` to `Mappings` you want to associate with the `Host` or the `Hosts` you want to be associated with the `Listener`. You can opt-out of this fix and return to the old
+association behavior by setting the environment variable `DISABLE_STRICT_LABEL_SELECTORS` to `"true"` (default: `"false"`). A future version of
 $productName$ may remove the ability to opt-out of this bugfix.
 
 > **Note:** The `mappingSelector` field is only configurable on `v3alpha1` CRDs. In the `v2` CRDs the equivalent field is `selector`.

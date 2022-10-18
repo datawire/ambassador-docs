@@ -85,7 +85,7 @@ limiting service.
 >   name.
 >
 > In the meantime, implementations of `RateLimitService` are encouraged to
-> respond to both names--they are simply aliases of eachother, registering the
+> respond to both names--they are simply aliases of each other, registering the
 > service under both names is usually a simple 1-or-2-line addition.  For
 > example, in Go the change to support both names is:
 >
