@@ -44,8 +44,6 @@
       link: service-catalog/howtos/qs-java-advanced/
     - title: Incident response in the cloud-native world
       link: /service-catalog/concepts/ir
-    - title: Developer Portal migration
-      link: /developer-portal/migration/
     - title: Developer Portal troubleshooting
       link: /developer-portal/troubleshooting/
     - title: FAQs
