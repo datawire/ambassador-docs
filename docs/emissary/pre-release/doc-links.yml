@@ -33,8 +33,6 @@
            link: /topics/running/ambassador-deployment
          - title: $productName$ environment variables and ports
            link: /topics/running/environment
-         - title: $productName$ and Redis
-           link: /topics/running/aes-redis
          - title: $productName$ with AWS
            link: /topics/running/ambassador-with-aws
          - title: $productName$ with GKE
