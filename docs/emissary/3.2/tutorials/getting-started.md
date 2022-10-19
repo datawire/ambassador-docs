@@ -89,7 +89,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
     - **Path Matching**: `/backend/`
     - **OpenAPI Docs**: `/.ambassador-internal/openapi-docs`
 
-    ![](../../images/mapping-editor.png)
+    ![](../images/mapping-editor.png)
 
   Whether you decide to automatically push the change to Git for this newly create Mapping resource or not, the resulting Mapping should be similar to the example below.
 
@@ -139,7 +139,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
 <Alert severity="success"><b>Victory!</b> You have created your first $productName$ <code>Listener</code> and <code>Mapping</code>, routing a request from your cluster's edge to a service!</Alert>
 
-## <img class="os-logo" src="../../images/logo.png"/> What's next?
+## <img class="os-logo" src="../images/logo.png"/> What's next?
 
 Explore some of the popular tutorials on $productName$:
 
