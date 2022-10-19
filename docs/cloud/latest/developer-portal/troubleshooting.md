@@ -1,6 +1,6 @@
 ---
-title: "Developer Portal | Ambassador Cloud"
-description: "API Management by Ambassador"
+title: "Troubleshooting  |  Ambassador Cloud Developer Portal"
+description: "Common troubleshooting tips for the Ambassador Cloud Developer Portal."
 ---
 
 # Troubleshooting
