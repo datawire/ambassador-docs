@@ -1,7 +1,16 @@
+---
+title: "Managing your cells | Ambassador Cloud "
+description: "Cells are complete, independent instances of entire application in Ambassador Cloud. They represent the application across Development, Staging and Production."
+---
+
 import Alert from '@material-ui/lab/Alert';
 import { LogInText } from '../../../../../../src/components/Docs/LogInText';
 
-# Manage my Cells
+# Cells
+
+Cells are complete, independent instances of entire application in Ambassador Cloud. With Cells, your applications are not limited to the standard Development, Staging, and Production lifecycle. Cells give you the freedom to configure the lifecycle what works best for your application.
+
+## Managing your Cells
 
 Ambassador Cloud associates Kubernetes clusters with Cells.
 

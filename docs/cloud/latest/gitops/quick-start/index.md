@@ -1,19 +1,14 @@
+---
+title: "GitOps Configuration | Ambassador Cloud"
+description: "This guide walks through how you can configure GitOps with Ambassador Cloud using Edge Stack or Emissary-ingress with GitHub."
+---
 import Alert from '@material-ui/lab/Alert';
-
-<div class="docs-article-toc">
-<h3>Contents</h3>
-
-* [1. Connect your cluster to Ambassador Cloud](#1-connect-your-cluster-to-ambassador-cloud)
-* [2. Configure the GitHub integration](#2-configure-the-github-integration)
-* [What's Next?](#whats-next)
-
-</div>
 
 # Configuring Ambassador Cloud for GitOps
 
 Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With Ambassador Cloud, you can quickly and easily adopt a GitOps workflow without any custom engineering.
 
-This quick start walks through how you can configure Edge Stack or Emissary-ingress with GitHub, integrate checks into your GitOps pull request workflow, create Mapping resources without an IDE, and generate preview URLs to share unreleased changes in opened pull requests with your colleagues.
+This guide walks through how you can configure Edge Stack or Emissary-ingress with GitHub, integrate checks into your GitOps pull request workflow, create Mapping resources without an IDE, and generate preview URLs to share unreleased changes in opened pull requests with your colleagues.
 
 ## 1. Connect your cluster to Ambassador Cloud
 

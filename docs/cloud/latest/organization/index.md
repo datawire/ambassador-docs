@@ -1,5 +1,5 @@
 ---
-title: "Organization"
+title: "Organization | Ambassador Cloud"
 description: "This section describes how an organization works in Ambassador Cloud, and the different underlying concepts."
 ---
 import Alert from '@material-ui/lab/Alert';

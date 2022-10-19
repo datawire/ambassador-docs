@@ -1,7 +1,8 @@
 ---
-title: "Ambassador Labs subscriptions"
-description: "Check out your subscription details or shop for different subscription editions. Depending on your needs, Ambassador Labs has plans for all sizes of companies and applications."
+title: "Managing Ambassador Labs subscriptions | Ambassador Cloud"
+description: "Depending on your needs, Ambassador Labs has subscription plans for all sizes of companies and applications. Find the plan that works best for your team."
 ---
+
 # Manage my subscriptions
 
 Ambassador Labs provides a variety of different subscription options depending on your needs. Whether you're working with a small team with a few developers or a company with a large number of services, Ambassador Labs has flexible subscription options for you to chose from. 
@@ -18,24 +19,12 @@ The Subscription section of the Settings page shows your current utilization of 
 
 ## Quota types
 
-### Team Members
+There are four quota limits that pertain to subscriptions:
 
-Ambassador Cloud users who have accepted an invitation sent by you through the Members page in your account settings.
-
-### Active Services
-
-Active services are those which have had an action performed on them within the last 28 days. Actions include intercepts, rollouts, and mappings.
-
-### Connected Clusters
-
-The Kubernetes clusters you have connected to the Ambassador Cloud app.
-
-### Requests per Second
-
-(Request per second) RPS is the **maximum usage** in the cluster between Rate Limited Traffic and Authenticated Traffic.
-With multiple clusters, RPS is the **sum** of the maximum usage of each cluster.
-
-RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
+- Team Members: Ambassador Cloud users who have accepted an invitation sent by you through the Members page in your account settings.
+- Active Services: Active services are those which have had an action performed on them within the last 28 days. Actions include intercepts, rollouts, and mappings.
+- Connected Clusters: The Kubernetes clusters you have connected to the Ambassador Cloud app.
+- Requests per Second: Requests per second (RPS) is the maximum usage in the cluster between Rate Limited Traffic and Authenticated Traffic. For multiple clusters, RPS is the sum of the maximum usage of each cluster. RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
 
 ## Extend your quotas by adding more users
 
