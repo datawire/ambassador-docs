@@ -19,7 +19,7 @@ spec:
     diagnostics:
       enabled: true
 ```
-Next, In the deployment for $productName$ set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
+Next, ensure that the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable is set to `"true"` on the Agent deployment to allow diagnostics information to be reported to the cloud.
 
   ```bash
   # Namespace and deployment name depend on your current install

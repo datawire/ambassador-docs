@@ -1,223 +1,225 @@
- - title: Quick start
-   link: /tutorials/getting-started
- - title: Core concepts
-   items:
-     - title: Kubernetes network architecture
-       link: /topics/concepts/kubernetes-network-architecture
-     - title: "The Ambassador operating model: GitOps and continuous delivery"
-       link: /topics/concepts/gitops-continuous-delivery
-     - title: Progressive delivery
-       link: /topics/concepts/progressive-delivery
-     - title: Microservices API gateways
-       link: /topics/concepts/microservices-api-gateways
-     - title: $productName$ architecture
-       link: /topics/concepts/architecture
-     - title: Rate limiting at the edge
-       link: /topics/concepts/rate-limiting-at-the-edge
- - title: Installation and updates
-   link: /topics/install/
-   items:
-     - title: Install with Helm
-       link: /topics/install/helm
-     - title: Install with Kubernetes YAML
-       link: /topics/install/yaml-install
-     - title: Try the demo with Docker
-       link: /topics/install/docker
-     - title: Upgrade or migrate to a newer version
-       link: /topics/install/migration-matrix
- - title: $productName$ user guide
-   items:
-     - title: Deployment
-       items:
-         - title: Deployment architecture
-           link: /topics/running/ambassador-deployment
-         - title: $productName$ environment variables and ports
-           link: /topics/running/environment
-         - title: $productName$ and Redis
-           link: /topics/running/aes-redis
-         - title: $productName$ with AWS
-           link: /topics/running/ambassador-with-aws
-         - title: $productName$ with GKE
-           link: /topics/running/ambassador-with-gke
-         - title: Advanced deployment configuration
-           link: /topics/running/running
-         - title: Performance and scaling $productName$
-           link: /topics/running/scaling    
-     - title: HTTP/3 configuration
-       items:
-         - title: HTTP3 setup in $productName$
-           link: /topics/running/http3
-         - title: HTTP/3 with AKS
-           link: /howtos/http3-aks
-         - title: HTTP/3 with EKS
-           link: /howtos/http3-eks
-         - title: HTTP/3 with GKE
-           link: /howtos/http3-gke
-     - title: Service routing and communication
-       items:
-         - title: Configuring $productName$ to communicate
-           link: /howtos/configure-communications
-         - title: Get traffic from the edge
-           link: /howtos/route
-         - title: TCP connections
-           link: /topics/using/tcpmappings
-         - title: gRPC connections
-           link: /howtos/grpc
-         - title: WebSocket connections
-           link: /howtos/websockets
-     - title: Authentication 
-       items:
-         - title: Basic authentication
-           link: /howtos/basic-auth
-     - title: Rate limiting
-       items:
-         - title: Rate limiting service
-           link: /topics/running/services/rate-limit-service/  
-         - title: Basic rate limiting
-           link: /topics/using/rate-limits/
-     - title: Service monitoring
-       items:
-         - title: Explore distributed tracing and Kubernetes monitoring
-           link: /howtos/dist-tracing
-         - title: Distributed tracing with Datadog
-           link: /howtos/tracing-datadog
-         - title: Distributed tracing with Zipkin
-           link: /howtos/tracing-zipkin
-         - title: Monitoring with Prometheus and Grafana
-           link: /howtos/prometheus
-         - title: Statistics
-           link: /topics/running/statistics
-         - title: Envoy statistics with StatsD
-           link: /topics/running/statistics/envoy-statsd
-         - title: The metrics endpoint
-           link: /topics/running/statistics/8877-metrics
-     - title: $productName$ integrations
-       items:
-         - title: Knative Serverless Framework
-           link: /howtos/knative
-         - title: ExternalDNS integration
-           link: /howtos/external-dns
-         - title: Consul integration
-           link: /howtos/consul
-         - title: Istio integration
-           link: /howtos/istio
-         - title: Linkerd 2 integration
-           link: /howtos/linkerd2
- - title: Technical reference
-   items:
-     - title: Custom resources
-       items:
-         - title: The Host resource
-           link: /topics/running/host-crd
-         - title: The Listener resource
-           link: /topics/running/listener
-         - title: The Module resource
-           link: /topics/running/ambassador
-         - title: The Mapping resource
-           link: /topics/using/intro-mappings
-         - title: Advanced Mapping configuration
-           link: /topics/using/mappings
-     - title: TLS configuration 
-       items:
-         - title: TLS overview
-           link: /topics/running/tls/
-         - title: Cleartext support
-           link: /topics/running/tls/cleartext-redirection
-         - title: Mutual TLS (mTLS)
-           link: /topics/running/tls/mtls
-         - title: Server Name Indication (SNI)
-           link: /topics/running/tls/sni
-         - title: TLS origination
-           link: /topics/running/tls/origination
-         - title: TLS termination and enabling HTTPS
-           link: /howtos/tls-termination
-         - title: Using cert-manager
-           link: /howtos/cert-manager
-         - title: Client certificate validation
-           link: /howtos/client-cert-validation  
-     - title: Ingress and load balancing
-       items:
-         - title: AuthService settings
-           link: /topics/using/authservice
-         - title: Automatic retries
-           link: /topics/using/retries
-         - title: Canary releases
-           link: /topics/using/canary
-         - title: Circuit Breakers
-           link: /topics/using/circuit-breakers
-         - title: Cross-Origin Resource Sharing (CORS)
-           link: /topics/using/cors
-         - title: Ingress controller
-           link: /topics/running/ingress-controller
-         - title: Load balancing
-           link: /topics/running/load-balancer
-         - title: Service discovery and resolvers
-           link: /topics/running/resolvers    
-     - title: Headers
-       items:
-         - title: Headers overview
-           link: /topics/using/headers/headers
-         - title: Add request headers
-           link: /topics/using/headers/add_request_headers
-         - title: Remove request headers
-           link: /topics/using/headers/remove_request_headers
-         - title: Add response headers
-           link: /topics/using/headers/add_response_headers
-         - title: Remove response headers
-           link: /topics/using/headers/remove_response_headers
-         - title: Header-based routing
-           link: /topics/using/headers/headers
-         - title: Host header
-           link: /topics/using/headers/host
-     - title: Routing
-       items:
-         - title: Keepalive
-           link: /topics/using/keepalive
-         - title: Method-based routing
-           link: /topics/using/method
-         - title: Prefix regex
-           link: /topics/using/prefix_regex
-         - title: Query parameter-based routing
-           link: /topics/using/query_parameters/
-         - title: Redirects
-           link: /topics/using/redirects
-         - title: Rewrites
-           link: /topics/using/rewrites
-         - title: Timeouts
-           link: /topics/using/timeouts
-         - title: Traffic shadowing
-           link: /topics/using/shadowing
-     - title: Plug-in services
-       items:
-         - title: Authentication service
-           link: /topics/running/services/auth-service
-         - title: ExtAuth protocol
-           link: /topics/running/services/ext_authz
-         - title: Log service
-           link: /topics/running/services/log-service
-         - title: Tracing service
-           link: /topics/running/services/tracing-service 
-     - title: Traffic management
-       items:
-         - title: Custom error responses
-           link: /topics/running/custom-error-responses
-         - title: Gzip compression
-           link: /topics/running/gzip
-     - title: FAQs
-       link: /about/faq
-     - title: Troubleshooting
-       link: /topics/running/debugging
-     - title: Known issues
-       link: /about/known-issues
-     - title: Changes in $productName$ 2.X
-       link: /about/changes-2.x
-     - title: Changes in $productName$ 3.X
-       link: /about/changes-3.y
-     - title: Release Notes
-       link: /release-notes
- - title: Community
-   link: /community
- - title: End of Life Policy
-   link: /about/aes-emissary-eol   
- - title: Licenses
-   link: licenses
+- title: Quick start
+  link: /tutorials/getting-started
+- title: Core concepts
+  items:
+    - title: Kubernetes network architecture
+      link: /topics/concepts/kubernetes-network-architecture
+    - title: 'The Ambassador operating model: GitOps and continuous delivery'
+      link: /topics/concepts/gitops-continuous-delivery
+    - title: Progressive delivery
+      link: /topics/concepts/progressive-delivery
+    - title: Microservices API gateways
+      link: /topics/concepts/microservices-api-gateways
+    - title: $productName$ architecture
+      link: /topics/concepts/architecture
+    - title: Rate limiting at the edge
+      link: /topics/concepts/rate-limiting-at-the-edge
+- title: Installation and updates
+  link: /topics/install/
+  items:
+    - title: Install with Helm
+      link: /topics/install/helm
+    - title: Install with Kubernetes YAML
+      link: /topics/install/yaml-install
+    - title: Try the demo with Docker
+      link: /topics/install/docker
+    - title: Upgrade or migrate to a newer version
+      link: /topics/install/migration-matrix
+- title: $productName$ user guide
+  items:
+    - title: Deployment
+      items:
+        - title: Deployment architecture
+          link: /topics/running/ambassador-deployment
+        - title: $productName$ environment variables and ports
+          link: /topics/running/environment
+        - title: $productName$ and Redis
+          link: /topics/running/aes-redis
+        - title: $productName$ with AWS
+          link: /topics/running/ambassador-with-aws
+        - title: $productName$ with GKE
+          link: /topics/running/ambassador-with-gke
+        - title: Advanced deployment configuration
+          link: /topics/running/running
+        - title: Performance and scaling $productName$
+          link: /topics/running/scaling
+    - title: HTTP/3 configuration
+      items:
+        - title: HTTP3 setup in $productName$
+          link: /topics/running/http3
+        - title: HTTP/3 with AKS
+          link: /howtos/http3-aks
+        - title: HTTP/3 with EKS
+          link: /howtos/http3-eks
+        - title: HTTP/3 with GKE
+          link: /howtos/http3-gke
+    - title: Service routing and communication
+      items:
+        - title: Configuring $productName$ to communicate
+          link: /howtos/configure-communications
+        - title: Get traffic from the edge
+          link: /howtos/route
+        - title: TCP connections
+          link: /topics/using/tcpmappings
+        - title: gRPC connections
+          link: /howtos/grpc
+        - title: WebSocket connections
+          link: /howtos/websockets
+    - title: Authentication
+      items:
+        - title: Basic authentication
+          link: /howtos/basic-auth
+    - title: Rate limiting
+      items:
+        - title: Rate limiting service
+          link: /topics/running/services/rate-limit-service/
+        - title: Basic rate limiting
+          link: /topics/using/rate-limits/
+    - title: Service monitoring
+      items:
+        - title: Explore distributed tracing and Kubernetes monitoring
+          link: /howtos/dist-tracing
+        - title: Distributed tracing with Datadog
+          link: /howtos/tracing-datadog
+        - title: Distributed tracing with Zipkin
+          link: /howtos/tracing-zipkin
+        - title: Monitoring with Prometheus and Grafana
+          link: /howtos/prometheus
+        - title: Statistics
+          link: /topics/running/statistics
+        - title: Envoy statistics with StatsD
+          link: /topics/running/statistics/envoy-statsd
+        - title: The metrics endpoint
+          link: /topics/running/statistics/8877-metrics
+    - title: $productName$ integrations
+      items:
+        - title: Knative Serverless Framework
+          link: /howtos/knative
+        - title: ExternalDNS integration
+          link: /howtos/external-dns
+        - title: Consul integration
+          link: /howtos/consul
+        - title: Istio integration
+          link: /howtos/istio
+        - title: Linkerd 2 integration
+          link: /howtos/linkerd2
+- title: Technical reference
+  items:
+    - title: Custom resources
+      items:
+        - title: The Host resource
+          link: /topics/running/host-crd
+        - title: The Listener resource
+          link: /topics/running/listener
+        - title: The Module resource
+          link: /topics/running/ambassador
+        - title: The Mapping resource
+          link: /topics/using/intro-mappings
+        - title: Advanced Mapping configuration
+          link: /topics/using/mappings
+    - title: TLS configuration
+      items:
+        - title: TLS overview
+          link: /topics/running/tls/
+        - title: Cleartext support
+          link: /topics/running/tls/cleartext-redirection
+        - title: Mutual TLS (mTLS)
+          link: /topics/running/tls/mtls
+        - title: Server Name Indication (SNI)
+          link: /topics/running/tls/sni
+        - title: TLS origination
+          link: /topics/running/tls/origination
+        - title: TLS termination and enabling HTTPS
+          link: /howtos/tls-termination
+        - title: Using cert-manager
+          link: /howtos/cert-manager
+        - title: Client certificate validation
+          link: /howtos/client-cert-validation
+    - title: Ingress and load balancing
+      items:
+        - title: AuthService settings
+          link: /topics/using/authservice
+        - title: Automatic retries
+          link: /topics/using/retries
+        - title: Canary releases
+          link: /topics/using/canary
+        - title: Circuit Breakers
+          link: /topics/using/circuit-breakers
+        - title: Cross-Origin Resource Sharing (CORS)
+          link: /topics/using/cors
+        - title: Ingress controller
+          link: /topics/running/ingress-controller
+        - title: Load balancing
+          link: /topics/running/load-balancer
+        - title: Service discovery and resolvers
+          link: /topics/running/resolvers
+    - title: Headers
+      items:
+        - title: Headers overview
+          link: /topics/using/headers/headers
+        - title: Add request headers
+          link: /topics/using/headers/add_request_headers
+        - title: Remove request headers
+          link: /topics/using/headers/remove_request_headers
+        - title: Add response headers
+          link: /topics/using/headers/add_response_headers
+        - title: Remove response headers
+          link: /topics/using/headers/remove_response_headers
+        - title: Header-based routing
+          link: /topics/using/headers/headers
+        - title: Host header
+          link: /topics/using/headers/host
+    - title: Routing
+      items:
+        - title: Keepalive
+          link: /topics/using/keepalive
+        - title: Method-based routing
+          link: /topics/using/method
+        - title: Prefix regex
+          link: /topics/using/prefix_regex
+        - title: Query parameter-based routing
+          link: /topics/using/query_parameters/
+        - title: Redirects
+          link: /topics/using/redirects
+        - title: Rewrites
+          link: /topics/using/rewrites
+        - title: Timeouts
+          link: /topics/using/timeouts
+        - title: Traffic shadowing
+          link: /topics/using/shadowing
+    - title: Plug-in services
+      items:
+        - title: Authentication service
+          link: /topics/running/services/auth-service
+        - title: ExtAuth protocol
+          link: /topics/running/services/ext_authz
+        - title: Log service
+          link: /topics/running/services/log-service
+        - title: Tracing service
+          link: /topics/running/services/tracing-service
+    - title: Traffic management
+      items:
+        - title: Custom error responses
+          link: /topics/running/custom-error-responses
+        - title: Gzip compression
+          link: /topics/running/gzip
+    - title: Diagnostics
+      link: /topics/running/diagnostics
+    - title: FAQs
+      link: /about/faq
+    - title: Troubleshooting
+      link: /topics/running/debugging
+    - title: Known issues
+      link: /about/known-issues
+    - title: Changes in $productName$ 2.X
+      link: /about/changes-2.x
+    - title: Changes in $productName$ 3.X
+      link: /about/changes-3.y
+    - title: Release Notes
+      link: /release-notes
+- title: Community
+  link: /community
+- title: End of Life Policy
+  link: /about/aes-emissary-eol
+- title: Licenses
+  link: licenses
