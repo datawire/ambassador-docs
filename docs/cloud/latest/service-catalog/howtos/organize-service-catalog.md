@@ -1,7 +1,14 @@
+---
+title: "Manage your Service Groups | Ambassador Cloud"
+description: "Learn how to manage your service catalog to easily view all of your services and group them so that they are organized and accessible in a single place."
+---
 
-# Organize the service catalog
 
-Microservice applications may span many namespaces or environments making them difficult to visualise and manage. The service catalog allows you to list all of your services so that they are organised and accessible in a single place. This guide describes how to use [service groups](/docs/cloud/latest/service-catalog/concepts/service-groups) to help you to visualize and manage your environments.
+# Service Group Management
+
+The service catalog allows you to view all of your services and group them so that they are organized and accessible in a single place. 
+
+This guide describes how to use [service groups](/docs/cloud/latest/service-catalog/concepts/services) to help you to visualize and manage your environments.
 
 ## Identify the services you want to group together
 
