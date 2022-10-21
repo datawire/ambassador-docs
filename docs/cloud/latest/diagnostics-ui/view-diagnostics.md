@@ -4,6 +4,39 @@ description: "A Cloud option to view Emissary-Ingress Cluster Diagnostics"
 ---
 
 import Alert from '@material-ui/lab/Alert';
+import Tab from '@material-ui/core/Tab';
+import TabContext from '@material-ui/lab/TabContext';
+import TabList from '@material-ui/lab/TabList';
+import TabPanel from '@material-ui/lab/TabPanel';
+
+export function TabsContainer({ children, ...props }) {
+    const [state, setState] = React.useState({curTab: "edgestack"});
+    React.useEffect(() => {
+        const query = new URLSearchParams(window.location.search);
+        var interceptType = query.get('installType') || "edgestack";
+        if (state.curTab != interceptType) {
+            setState({curTab: interceptType});
+        }
+    }, [state, setState])
+    var setURL = function(newTab) {
+        history.replaceState(null,null,
+            `?installType=${newTab}${window.location.hash}`,
+        );
+    };
+    return (
+        <div class="TabGroup">
+            <TabContext value={state.curTab}>
+                <AppBar class="TabBar" elevation={0} position="static">
+                    <TabList onChange={(ev, newTab) => {setState({curTab: newTab}); setURL(newTab)}} aria-label="intercept types">
+                        <Tab class="TabHead" value="edgestack" label="Edge Stack"/>
+                        <Tab class="TabHead" value="emissary" label="Emissary"/>
+                    </TabList>
+                </AppBar>
+                {children}
+            </TabContext>
+        </div>
+    );
+};
 
 # Diagnostics Overview
 
@@ -42,20 +75,27 @@ A warning message on the Diagnostics Overview page means either that the cluster
     <img src="../../images/cluster-diag-warning-message.png" width="800"/>
   </p>
 
-Add the following config fields to your associated [`Module` resource](/docs/edge-stack/latest/topics/running/ambassador/) to enable diagnostics data. If you don't have a `Module` resource, create one with the following fields and values:
+<TabsContainer>
+<TabPanel class="TabBody" value="edgestack">
 
-```yaml
+Add the following config fields to your associated `Module` [resource](/docs/edge-stack/latest/topics/running/ambassador/) to enable diagnostics data. If you don't have one, create it with the following fields and values:
+
+```shell
+
+$ kubectl apply -f - <<EOF
 apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
   name: ambassador
+  namespace: ambassador
 spec:
   config:
     diagnostics:
       enabled: true
+EOF
 ```
 
-Next, in the deployment for Edge Stack / Emissary-ingress set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
+Next, in your deployment for Edge Stack or Emissary-ingress, set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
 
   ```shell
   # Namespace and deployment name depends on your current install
@@ -63,9 +103,47 @@ Next, in the deployment for Edge Stack / Emissary-ingress set the <code>AES_REPO
   kubectl set env deployment/edge-stack-agent -n ambassador AES_REPORT_DIAGNOSTICS_TO_CLOUD="true"
   ```
 
-Finally, set the `AES_DIAGNOSTICS_URL` environment variable to `"http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"`.
+Finally, set the `AES_DIAGNOSTICS_URL` environment variable
   ```shell
   # Namespace, deployment name, and pod url/port depends on your current install
 
-  kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
+  kubectl set env deployment/edge-stack-agent -n ambasador AES_DIAGNOSTICS_URL="http://edge-stack-admin:8877/ambassador/v0/diag/?json=true"
   ```
+
+</TabPanel>
+<TabPanel class="TabBody" value="emissary">
+
+Add the following config fields to your associated `Module` [resource](/docs/emissary/latest/topics/running/ambassador/) to enable diagnostics data. If you don't have one, create it with the following fields and values:
+
+```shell
+
+$ kubectl apply -f - <<EOF
+apiVersion: getambassador.io/v3alpha1
+kind: Module
+metadata:
+  name: ambassador
+  namespace: emissary
+spec:
+  config:
+    diagnostics:
+      enabled: true
+EOF
+```
+
+Next, in your deployment for Edge Stack or Emissary-ingress, set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
+
+  ```shell
+  # Namespace and deployment name depends on your current install
+
+  kubectl set env deployment/emissary-ingress-agent -n emissary AES_REPORT_DIAGNOSTICS_TO_CLOUD="true"
+  ```
+
+Finally, set the `AES_DIAGNOSTICS_URL` environment variable
+  ```shell
+  # Namespace, deployment name, and pod url/port depends on your current install
+
+  kubectl set env deployment/emissary-ingress-agent -n emissary AES_DIAGNOSTICS_URL="http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
+  ```
+</TabPanel>
+</TabsContainer>
+
