@@ -44,7 +44,10 @@ A warning message on the Diagnostics Overview page means either that the cluster
 
 Add the following config fields to your associated [`Module` resource](/docs/edge-stack/latest/topics/running/ambassador/) to enable diagnostics data. If you don't have a `Module` resource, create one with the following fields and values:
 
-```yaml
+```shell
+# If Emissary-ingress was instaled, change the module name to emissary
+
+$ kubectl apply -f - <<EOF
 apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
@@ -53,19 +56,21 @@ spec:
   config:
     diagnostics:
       enabled: true
+EOF
 ```
 
 Next, In your deployment for Edge Stack or Emissary-ingress, set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
 
-  ```bash
+  ```shell
   # Namespace and deployment name depends on your current install
 
   kubectl set env deployment/edge-stack-agent -n ambassador AES_REPORT_DIAGNOSTICS_TO_CLOUD="true"
   ```
 
-Finally, set the `AES_DIAGNOSTICS_URL` environment variable to `"http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"`.
-  ```bash
+Finally, set the `AES_DIAGNOSTICS_URL` environment variable
+  ```shell
   # Namespace, deployment name, and pod url/port depends on your current install
+  # If Emissary-ingress was installed, change the flag value to "http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
 
-  kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://emissary-ingress-admin:8877/ambassador/v0/diag/?json=true"
+  kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://edge-stack-admin:8877/ambassador/v0/diag/?json=true"
   ```
