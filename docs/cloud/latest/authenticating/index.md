@@ -1,5 +1,5 @@
 ---
-title: "Authentication Overview"
+title: "Authentication Overview | Ambassador Cloud"
 description: "With Ambassador Cloud, authentication is easy for you and your organization. You can authenticate with Google, GitHub or GitLab account."
 ---
 import Alert from '@material-ui/lab/Alert';

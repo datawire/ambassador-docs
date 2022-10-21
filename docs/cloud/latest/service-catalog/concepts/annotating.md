@@ -1,4 +1,9 @@
-# Annotating Kubernetes Services for humans
+---
+title: "Annotations overview | Ambassador Cloud"
+description: "Often overlooked, Kubernetes annotations are designed to add metadata to Kubernetes objects. Learn best practices for annotations for your environments."
+---
+
+# Annotatons Overview
 
 Have you ever been asked to troubleshoot a failing Kubernetes service and struggled to find basic information about it such as the source repository and owner?
 
@@ -10,7 +15,7 @@ Troubleshooting always begins with information gathering. While much attention h
 
 ## Kubernetes annotations
 
-Kubernetes annotations are designed to solve exactly this problem. Often overlooked, Kubernetes annotations are designed to add metadata to Kubernetes objects. The [Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) says annotations can “attach arbitrary non-identifying metadata to objects.” This means that annotations should be used for attaching metadata that is external to Kubernetes.  As such, annotations can contain any type of data.
+Often overlooked, Kubernetes annotations are designed to add metadata to Kubernetes objects. The [Kubernetes documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/) says annotations can “attach arbitrary non-identifying metadata to objects.” This means that annotations should be used for attaching metadata that is external to Kubernetes.  As such, annotations can contain any type of data.
 
 This is in contrast to labels, which are designed for uses internal to Kubernetes. Label structure and values are [constrained](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#syntax-and-character-set) so they can be efficiently used by Kubernetes.
 
@@ -58,27 +63,6 @@ spec:
       port: 80
       targetPort: 8080
 ```
-
-## A Convention for Annotations
-
-Adopting a common convention for annotations ensures consistency and understandability. Typically, you’ll want to attach the annotation to the Service object, as Services are the high-level resource that maps most clearly to a team’s responsibility. Namespacing your annotations is also very important. Here is one set of conventions, also documented at [a8r.io](https://a8r.io/):
-
-|Annotation | Description|
-|--- | ---|
-|a8r.io/description | Unstructured text description of the service for humans.|
-|a8r.io/owner | SSO username (GitHub), email address (linked to GitHub account), or unstructured owner description.|
-|a8r.io/chat | Slack channel, or link to external chat system.|
-|a8r.io/bugs | Link to external bug tracker.|
-|a8r.io/logs | Link to external log viewer.|
-|a8r.io/documentation | Link to external project documentation.|
-|a8r.io/repository | Link to external VCS repository.|
-|a8r.io/support | Link to external support center.|
-|a8r.io/runbook | Link to external project runbook.|
-|a8r.io/incidents | Link to external incident dashboard.|
-|a8r.io/uptime | Link to external uptime dashboard.|
-|a8r.io/performance | Link to external performance dashboard.|
-|a8r.io/dependencies | Unstructured text describing the service dependencies for humans.|
-|a8r.io/ignore | When present with any value, prevent the service from appearing in the Service Catalog.|
 
 ## Visualizing annotations: Service catalogs
 

@@ -1,25 +1,23 @@
 ---
-title: "Single Sign On"
+title: "Single sign-on configuration | Ambassador Cloud"
 description: "Ambassador Cloud supports Single Sign on via SAML 2.0. Learn how to quickly and efficiently setup SSO in your environment with this guide."
 ---
 
 import NewSsoUrl from './SsoUrl.js'
 import NewCopy from './Copy.js';
 
-# Single Sign On Overview
+# Single sign-on setup
 
-Ambassador Cloud supports Single Sign on via SAML 2.0. In order to configure Single Sign On you will
+Ambassador Cloud supports single sign-on via SAML 2.0. In order to configure single sign-on you will
 need to contact a member of the <a href="/about-us/support">Ambassador Support team</a>.
 
-# Setting up Single Sign on with Okta
-
-## Prerequisites
+## Single sign-on with Okta prerequisites
 
 - Ambassador Cloud Enterprise Subscription.
 - Admin access to the Okta tenant for your organization.
 - Your unique case sensitive company ID provided by Ambassador Support.
 
-## Step 1: Create an Okta Application
+## Step 1: Create an Okta application
 
 1. Go to the Okta Admin console for your Okta tenant.
 
@@ -53,7 +51,7 @@ need to contact a member of the <a href="/about-us/support">Ambassador Support t
 
 6. <NewSsoUrl/>
 
-7. Enter the above URL (after inputting your case sensitive company ID) into the Single Sign On
+7. Enter the above URL (after inputting your case sensitive company ID) into the single sign-on
    URL field.
 
   <p align="center">
@@ -128,9 +126,9 @@ you can cut & paste the contents of the IDP metadata XML text field at the botto
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-sign-on-saml-setup-metadata.png" />
   </p>
 
-## Step 2: Assign your Application Integration to People/Groups
+## Step 2: Assign your application integration to people or groups
 
-In order to do this, you need to add a Person or Group to the app integration:
+In order to do this, you need to add a person or group to the app integration:
 
 1. Go to the Okta Admin console for your Okta tenant:
 
@@ -138,13 +136,13 @@ In order to do this, you need to add a Person or Group to the app integration:
     <img src="../images/sso-okta-admin.png" />
   </p>
 
-2. Click on the "Applications link:
+2. Click the **Applications** link:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-open.png" />
   </p>
 
-3. Click on the "Ambassador Cloud" integration:
+3. Click Ambassador Cloud integration:
 
   <p align="center">
     <img src="../images/sso-okta-admin-apps-tab-with-ambassador-cloud.png" />
@@ -162,7 +160,7 @@ In order to do this, you need to add a Person or Group to the app integration:
     <img src="../images/sso-okta-admin-apps-ambassador-cloud-assignments-assign-dropdown.png" />
   </p>
 
-## Step 3: Test your Application Integration
+## Step 3: Test your application integration
 
 Once your support contact has notified you that your SSO integration has been activated, you will
 want to test it to ensure that it is working properly. If either of these tests do not proceed as
@@ -172,7 +170,7 @@ There are two cases to test, both Identity Provider initiated Sign On and Servic
 Sign On. For testing each case you should ensure that you are starting from a logged out browser
 with clean state by creating a new incognito session for each test.
 
-### Testing IdP initiated Sign On
+### Testing IdP initiated sign-on
 
 1. Go to your user's end user dashboard. If you are on the Okta Admin Console you can reach this by
    clicking on the 4 little squares next to your username in the upper right hand corner of the
@@ -193,7 +191,7 @@ with clean state by creating a new incognito session for each test.
 3. Click on the Ambassador Cloud application. You should end up at the Ambassador Cloud website and
    already be logged in.
 
-### Testing Service Provider initiated Sign On
+### Testing service Provider initiated sign-on
 
 1. Go to https://app.getambassador.io
 2. At the login page click on the SSO link.

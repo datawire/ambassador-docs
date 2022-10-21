@@ -1,3 +1,8 @@
+---
+title: "Automated Configuration Analysis Guide | Ambassador Cloud"
+description: "This guide walks you through how to configure Edge Stack or Emissary-ingress with automated configuration analysis."
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 <div class="docs-article-toc">
@@ -17,7 +22,7 @@ import Alert from '@material-ui/lab/Alert';
 
 Edge Stack and Emissary-ingress are managed declaratively. This approach lends itself well to a [GitOps workflow](../../../../../docs/edge-stack/latest/topics/concepts/gitops-continuous-delivery/). Traditionally, adopting a GitOps workflow requires an extensive amount of engineering. With Ambassador Cloud, you can quickly and easily adopt a GitOps workflow without any custom engineering.
 
-This quick start walks you through how to configure Edge Stack or Emissary-ingress with automated configuration analysis, integrating checks into your GitOps pull request workflow. The automated configuration analysis will detect and resolve configuration issues _before_ your changes go live.
+This guide walks you through how to configure Edge Stack or Emissary-ingress with automated configuration analysis, integrating checks into your GitOps pull request workflow. The automated configuration analysis will detect and resolve configuration issues _before_ your changes go live.
 
 <Alert severity="warning">
   You must use Edge Stack or Emissary-ingress 2.2 or later to enable automated configuration analysis.
@@ -60,7 +65,7 @@ kubectl create namespace gitops-demo && \
 kubectl apply -n gitops-demo -f ./manifests
 ```
 
-This will create a `Deployment`, `Service`, and `Mapping` in the `gitops-demo` namespace in your cluster. All resources applied in this guide can be removed by running `kubectl delete namespace gitops-demo` when you're done with the quickstart.
+This will create a `Deployment`, `Service`, and `Mapping` in the `gitops-demo` namespace in your cluster. All resources applied in this guide can be removed by running `kubectl delete namespace gitops-demo` when you're done with the guide.
 
 <Alert severity="info">The <a href="https://app.getambassador.io/cloud/services" target="_blank">Service Catalog</a> should display information about the quote service!</Alert>
 

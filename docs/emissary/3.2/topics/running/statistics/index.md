@@ -2,21 +2,21 @@
 
 $productName$ collects many statistics internally, and makes it easy to
 direct this information to a statistics and monitoring tool of your
-choice.  As an example, for a given service `usersvc`, here are some
-interesting statistics to investigate:
+choice.
 
-- `envoy.cluster.usersvc.upstream_rq_total` is the total
-  number of requests that `usersvc` has received via $productName$.  The rate of change of this value is one basic measure of
+As an example, here are some interesting statistics to investigate:
+
+- `upstream_rq_total` is the total
+  number of requests that a particular service has received via $productName$.  The rate of change of this value is one basic measure of
   service utilization, i.e. requests per second.
-- `envoy.cluster.usersvc.upstream_rq_2xx` is the total number
-  of requests to which `usersvc` responded with an HTTP response
-  indicating success.  This value divided by the prior one, taken on
-  an rolling window basis, represents the recent success rate of the
-  service.  There are corresponding `4xx` and `5xx` counters that can
-  help clarify the nature of unsuccessful requests.
-- `envoy.cluster.usersvc.upstream_rq_time` is a StatsD timer
-  that tracks the latency in milliseconds of `usersvc` from $productName$'s perspective.  StatsD timers include information about
-  means, standard deviations, and decile values.
+- `upstream_rq_xx` is the total number
+  of requests to which a service responded with a given status code.
+  This value divided by the prior one, taken on
+  a rolling window basis, represents the recent response rate of the
+  service.  There are corresponding classes for `2xx`, `3xx`, `4xx` and `5xx` counters that can
+  help clarify the nature of responses.
+- `upstream_rq_time` is a Prometheus histogram or StatsD timer
+  that tracks the latency in milliseconds of a given service from $productName$'s perspective.
 
 ## Overriding Statistics Names
 
@@ -51,11 +51,10 @@ There are several ways to get different statistics out of $productName$:
 
 - [The `:8877/metrics` endpoint](./8877-metrics) can be polled for
   aggregated statistics (in a Prometheus-compatible format).  This is
-  our recommended method.
+  our recommended method as both Envoy metrics and $productName$ control plane
+  metrics are collected.
 - $productName$ can push [Envoy statistics](./envoy-statsd) over the
   StatsD or DogStatsD protocol.
-- $productName$ can push [RateLimiting
-  statistics](../environment) over the StatsD protocol.
 
 ## The Four Golden Signals
 
@@ -64,16 +63,22 @@ that are important to monitor for good information about service health:
 
 ### Latency
 
-The time it takes to service a request. `cluster.$name.upstream_rq_time` is a histogram of time taken by individual requests, which can be an effective latency metric.
+The time it takes to service a request as a histogram of time taken by individual requests, which can be an effective latency metric.
+In StatsD, this stat would be expressed as `cluster.$name.upstream_rq_time`.
+While in Prometheus format, this metric would be expressed as `envoy_cluster_upstream_rq_time_bucket{envoy_cluster_name="$name"}`.
 
 ### Traffic
 
-The amount of demand being placed on your system. `cluster.$name.upstream_rq_active` is a gauge that shows the number of active outstanding requests, which can be a good proxy for traffic.
+The amount of demand being placed on your system as a gauge that shows the number of active outstanding requests, which can be a good proxy for traffic.
+In StatsD, this stat would be expressed as `cluster.$name.upstream_rq_active`.
+While in Prometheus format, this metric would be expressed as `envoy_cluster_upstream_rq_active{envoy_cluster_name="$name"}`.
 
 ### Errors
 
-The number of failing requests. Some errors (e.g. a request succeeds, but gives the wrong answer) can only be detected by application-specific monitoring; however, many errors can be spotted simply by looking at the HTTP status code of requests. `cluster.$name.upstream_rq_5xx` is a counter of HTTP `5xx` responses, so monitoring it over time can show error rates. (Likewise, `cluster.$name.upstream_rq_4xx` exists.)
+The number of failing requests. Some errors (e.g. a request succeeds, but gives the wrong answer) can only be detected by application-specific monitoring; however, many errors can be spotted simply by looking at the HTTP status code of requests. Monitoring it over time can show error rates.
+In StatsD, `cluster.$name.upstream_rq_5xx` is a counter of HTTP `5xx` responses.
+While in Prometheus, `envoy_cluster_upstream_rq_xx{envoy_response_code_class="5", envoy_cluster_name="$name"}` is a counter of HTTP `5xx` responses.
 
 ### Saturation
 
-The hardest metric to measure, saturation describes how much of the total capability of the system to respond to requests is being used. Fully measuring saturation often requires application-specific monitoring, but looking at the 99th percentile of latency over a short window - perhaps a a minute - can often give an early indication of saturation problems.
+The hardest metric to measure, saturation describes how much of the total capability of the system to respond to requests is being used. Fully measuring saturation often requires application-specific monitoring, but looking at the 99th percentile of latency over a short window - perhaps a minute - can often give an early indication of saturation problems.
