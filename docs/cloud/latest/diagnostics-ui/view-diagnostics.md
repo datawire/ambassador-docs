@@ -59,7 +59,7 @@ spec:
 EOF
 ```
 
-Next, In your deployment for Edge Stack or Emissary-ingress, set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
+Next, in your deployment for Edge Stack or Emissary-ingress, set the <code>AES_REPORT_DIAGNOSTICS_TO_CLOUD</code> environment variable to `"true"` to allow diagnostics information to be reported to the cloud.
 
   ```shell
   # Namespace and deployment name depends on your current install
