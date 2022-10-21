@@ -107,7 +107,7 @@ Finally, set the `AES_DIAGNOSTICS_URL` environment variable
   ```shell
   # Namespace, deployment name, and pod url/port depends on your current install
 
-  kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://edge-stack-admin:8877/ambassador/v0/diag/?json=true"
+  kubectl set env deployment/edge-stack-agent -n emissary AES_DIAGNOSTICS_URL="http://edge-stack-admin:8877/ambassador/v0/diag/?json=true"
   ```
 
 </TabPanel>
