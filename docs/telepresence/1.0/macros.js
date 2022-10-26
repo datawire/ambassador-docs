@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CodeBlock from '../../../../src/components/CodeBlock/CodeBlock';
+import CodeBlock from '../../../../src/components/CodeBlock';
 
 export function Install({ install, command, cluster, location }) {
   return (

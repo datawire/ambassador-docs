@@ -91,7 +91,7 @@ metadata:
 spec:
   config:
     diagnostics:
-      enabled: true
+      allow_non_local: true
 EOF
 ```
 
@@ -126,7 +126,7 @@ metadata:
 spec:
   config:
     diagnostics:
-      enabled: true
+      allow_non_local: true
 EOF
 ```
 
