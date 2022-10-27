@@ -96,6 +96,15 @@ To add a new team, navigate to your `Settings` Page in Ambassador Cloud, and cho
 
 A [Team](/docs/cloud/latest/organization/#Team) is a group that users can join within your Organization where clusters will be connected, and give you the ability to use all the features of Ambassador Cloud. 
 
+To delete a Team you can simply select the `DELETE` button. You will see a popup that asks you to confirm. To delete a Team from your Organization, all clusters must be disconnected, and it cannot be the last remaining team within your Organization.
+
+<br />
+<p style="max-width:600px;margin:0 auto;">
+  <img src="../images/authentication-delete-team-popup.png" alt="Delete team"/>
+</p>
+<br />
+
+
 ## Troubleshooting
 
 ### Your GitHub organization isn't listed while creating an Ambassador Cloud organization
