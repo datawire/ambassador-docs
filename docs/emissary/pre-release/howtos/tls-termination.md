@@ -28,6 +28,24 @@ This guide requires you have the following installed:
 
 [Install $productName$ in Kubernetes](../../topics/install).
 
+## Create a listener listening on the correct port and protocol
+We first need to create a listener to tell Emissary which port will be using the HTTPS protocol
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Listener
+metadata:
+  name: emissary-ingress-listener-8443
+spec:
+  port: 8443
+  protocol: HTTPS
+  securityModel: XFP
+  hostBinding:
+    namespace:
+      from: ALL
+```
+
 ## Create a self-signed certificate
 
 OpenSSL is a tool that allows us to create self-signed certificates for opening
@@ -84,9 +102,6 @@ spec:
     authority: none
   tlsSecret:
     name: tls-cert
-  selector:
-    matchLabels:
-      hostname: wildcard-host
 ```
 
 **Note:** If running multiple instances of $productName$ in one cluster remember to include the `ambassador_id` property in the `spec`, e.g.:
