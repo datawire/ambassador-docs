@@ -2,24 +2,21 @@
 
 #### OS X
 On OS X you can upgrade Telepresence by running the following:
-<button data-system="osx" data-location="upgrade" class="button fa-pull-right copy-to-clipboard" data-clipboard-text="brew upgrade datawire/blackbird/telepresence-legacy">Copy to clipboard</button>
-```shell
-brew upgrade datawire/blackbird/telepresence-legacy
+```
+$ brew upgrade datawire/blackbird/telepresence-legacy
 ```
 
 #### Ubuntu
 Run the following to upgrade Telepresence:
-<button data-system="ubuntu" data-location="upgrade" class="button fa-pull-right copy-to-clipboard" data-clipboard-text="sudo apt update&#xa;sudo apt install --no-install-recommends telepresence">Copy to clipboard</button>
-```shell
-sudo apt update
-sudo apt install --no-install-recommends telepresence
+```
+$ sudo apt update
+$ sudo apt install --no-install-recommends telepresence
 ```
 
 #### Fedora
 Run the following to upgrade Telepresence:
-<button data-system="fedora" data-location="upgrade" class="button fa-pull-right copy-to-clipboard" data-clipboard-text="sudo dnf upgrade telepresence">Copy to clipboard</button>
-```shell
-sudo dnf upgrade telepresence
+```
+$ sudo dnf upgrade telepresence
 ```
 
 ### Telepresence 2 for Teams
