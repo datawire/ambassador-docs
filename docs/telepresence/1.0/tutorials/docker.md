@@ -124,10 +124,9 @@ index 04f15e2..7fffeb1 100644
 
 Rerun the `curl` command from your remote pod:
 
-```console
-/ # curl http://hello-world:8000
+```
+$ curl http://hello-world:8000
 Greetings, world!
-/ #
 ```
 
 Notice how the output has updated in realtime. Congratulations! You've now:
