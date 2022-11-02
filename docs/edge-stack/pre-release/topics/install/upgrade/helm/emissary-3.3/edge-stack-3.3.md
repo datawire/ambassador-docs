@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $OSSproductName$ $version$ to $AESproductName$ $version$ (YAML)
+# Upgrade $OSSproductName$ $version$ to $AESproductName$ $version$ (Helm)
 
 <Alert severity="info">
   This guide covers migrating from $OSSproductName$ $version$ to $AESproductName$ $version$. If
@@ -9,8 +9,8 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/emissary-3.2/edge-stack-3.2">Helm-based
+  This guide is written for upgrading an installation originally made using Helm.
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-3.3/edge-stack-3.3">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -65,7 +65,7 @@ important notes:
 
    If you have services in $OSSproductName$ 3.X that use selectors that will match
    Pods from $AESproductName$ $version$, traffic will be erroneously split between
-   $OSSproductName$ 2.4 and $AESproductName$ $version$. The labels used by $AESproductName$
+   $OSSproductName$ 3.X and $AESproductName$ $version$. The labels used by $AESproductName$
    $version$ include:
 
    ```yaml
@@ -88,7 +88,7 @@ Migration is a six-step process:
 1. **Install new CRDs.**
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
-   your cluster. This is mandatory during any upgrade of $productName$.
+   your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \
@@ -115,39 +115,45 @@ Migration is a six-step process:
    **in the same namespace as your existing $OSSproductName$ $version$ installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   We publish three manifests for different namespaces. Use only the one that
-   matches the namespace into which you installed $OSSproductName$ $version$:
-
-   - [`aes-emissaryns-migration.yaml`] for the `emissary` namespace;
-   - [`aes-defaultns-migration.yaml`] for the `default` namespace; and
-   - [`aes-ambassadorns-migration.yaml`] for the `ambassador` namespace.
-
-   All three files are set up as follows:
-
-   - They set the `AES_ACME_LEADER_DISABLE` environment variable; you'll enable ACME towards the end of
-     the migration.
-   - They do NOT create any `AuthService` or a `RateLimitService`, since your $OSSproductName$ may have
-     these defined. Again, you'll manage these at the end of migration.
-   - They do NOT set `AMBASSADOR_LABEL_SELECTOR`.
-   - They do NOT install the Ambassador Agent, since there is already an Ambassador Agent running for
+   <Alert severity="warning">
+     <b>Make sure that you set the various `create` flags when running Helm.</b> This prevents
+     $AESproductName$ $version$ from trying to configure filters that will adversely affect
      $OSSproductName$ $version$.
+   </Alert>
 
-   If any of these do not match your situation, download [`aes-emissaryns-migration.yaml`] and edit it
-   as needed.
+   Start by making sure that your `datawire` Helm repo is set correctly:
 
-   [`aes-emissaryns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml
-   [`aes-defaultns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-defaultns-migration.yaml
-   [`aes-ambassadorns-migration.yaml`]: https://app.getambassador.io/yaml/edge-stack/$version$/aes-ambassadorns-migration.yaml
-
-   Assuming you're using the `emissary` namespace, as was typical for $OSSproductName$ $version$:
-
-   **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, download `aes-emissaryns-migration.yaml` and edit it to
-   do so.
-
+   ```bash
+   helm repo remove datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-migration.yaml && \
-   kubectl rollout status -n emissary deployment/aes -w
-   ```
+
+   Typically, $OSSproductName$ $version$ was installed in the `emissary` namespace. If you installed
+   $OSSproductName$ $version$ in a different namespace, change the namespace in the commands below.
+
+   - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
+
+      ```bash
+      helm install -n emissary \
+           --set emissary-ingress.agent.enabled=false \
+           edge-stack datawire/edge-stack && \
+      kubectl rollout status  -n emissary deployment/edge-stack -w
+      ```
+
+   - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
+
+      ```bash
+      helm install -n emissary \
+           --set emissary-ingress.agent.enabled=false \
+           --set emissary-ingress.env.AMBASSADOR_LABEL_SELECTOR="version-two=true" \
+           edge-stack datawire/edge-stack && \
+      kubectl rollout status -n emissary deployment/edge-stack -w
+      ```
+
+   <Alert severity="warning">
+     You must use the <a href="https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$"><code>$productHelmName$</code> Helm chart</a> to install $AESproductName$ $version$.
+   </Alert>
 
 3. **Test!**
 
@@ -184,56 +190,33 @@ Migration is a six-step process:
    First, scale the $OSSproductName$ agent to 0:
 
    ```
-   kubectl scale -n emissary deployment/emissary-ingress-agent --replicas=0
+   kubectl scale -n emissary deployment/emissary-agent --replicas=0
    ```
 
    Once that's done, install the new Agent:
 
-   ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-emissaryns-agent.yaml && \
-   kubectl rollout status -n emissary deployment/edge-stack-agent -w
+   ```bash
+   helm upgrade -n emissary \
+        --set emissary-ingress.agent.enabled=true \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status -n emissary-ingress deployment/edge-stack -w
    ```
 
 6. **Finally, enable ACME and filtering in $productName$ $version$.**
 
-   <Alert severity="warning">
-      Enabling filtering correctly in $productName$ $version$ <i>requires</i> that no
-      <code>AuthService</code> or <code>RateLimitService</code> resources be present; see
-      below for more.
-   </Alert>
+   First, scale the $OSSproductName$ Deployment to 0:
 
-   First, make sure that no `AuthService` or `RateLimitService` resources are present; delete
-   these if necessary.
-
-   - If you are currently using an external authentication service that provides functionality
-     you'll still require, turn it into an [`External` `Filter`] (with a [`FilterPolicy`] to
-     direct requests that need it correctly).
-
-   - If you are currently using a `RateLimitService`, you can set up
-     [Edge Stack Rate Limiting] instead.
-
-   [`External` `Filter`]: ../../../../../../howtos/ext-filters#2-configure-aesproductname-authentication
-   [`FilterPolicy`]: ../../../../../../howtos/ext-filters#2-configure-aesproductname-authentication
-   [Edge Stack Rate Limiting]: ../../../../../using/rate-limits
-
-   After making sure no `AuthService` or `RateLimitService` resources are present, scale the
-   $OSSproductName$ Deployment to 0:
-
-   ```bash
-   kubectl scale -n emissary deployment/emissary-ingress --replicase=0
+   ```
+   kubectl scale -n emissary deployment/emissary --replicase=0
    ```
 
-   Once that's done, apply resources specific to $AESproductName$:
+   Once that's done, enable ACME and filtering in $productName$ $version$:
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/resources-migration.yaml
-   ```
-
-   Then, finally, enable ACME and filtering in $productName$ $version$:
-
-   ```bash
-   kubectl set env -n emissary deployment/aes AES_ACME_LEADER_DISABLE-
-   kubectl rollout status -n emissary deployment/aes -w
+   helm upgrade -n emissary \
+        --set emissary-ingress.agent.enabled=true
+        edge-stack datawire/edge-stack && \
+   kubectl rollout status -n emissary deployment/edge-stack -w
    ````
 
 Congratulations! At this point, $productName$ $version$ is fully running, and

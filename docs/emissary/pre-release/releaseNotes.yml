@@ -33,7 +33,7 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.3.0
-    date: 'TBD'
+    date: '2022-11-02'
     notes:
       - title: Update Golang to 1.19.2
         type: security

@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.4/emissary-3.2">YAML-based
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-2.4/emissary-3.3">YAML-based
   upgrade instructions</a>.
 </Alert>
 
