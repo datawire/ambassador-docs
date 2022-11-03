@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 1.14.X (Helm)
+# Upgrade $productName$ 1.14.X (YAML)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 1.14.X to $productName$ $versionTwoX$. If
@@ -9,8 +9,8 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-1.14/emissary-2.4">YAML-based
+  This guide is written for upgrading an installation made without using Helm.
+  If you originally installed with Helm, see the <a href="../../../helm/emissary-1.14/emissary-2.X">Helm-based
   upgrade instructions</a>.
 </Alert>
 
@@ -75,9 +75,9 @@ important caveats:
    running simultaneously, Ambassador Cloud could see conflicting information
    about your cluster.
 
-   The best way to avoid multiple agents when installing with Helm is to use
-   `--set agent.enabled=false` to tell Helm not to install a new Agent with
-   $productName$ $versionTwoX$. Once testing is done, you can switch Agents safely.
+   The migration YAML used below to install $productName$ $versionTwoX$ will not
+   install a duplicate agent. If you are building your own YAML, make sure not
+   to include a duplicate agent.
 
 You can also migrate by [installing $productName$ $versionTwoX$ in a separate cluster](../../../../migrate-to-2-alternate).
 This permits absolute certainty that your $productName$ 1.14 configuration will not be
@@ -138,40 +138,27 @@ Migration is a seven-step process:
    **in the same namespace as your existing $productName$ 1.14 installation**. It's important
    to use the same namespace so that the two installations can see the same secrets, etc.
 
-   Start by making sure that your `emissary` Helm repo is set correctly:
+   We publish two manifests for different namespaces. Use only the one that
+   matches the namespace into which you installed $productName$ 1.14:
 
-   ```bash
-   helm repo remove datawire
-   helm repo add datawire https://app.getambassador.io
-   helm repo update
+   - [`emissary-emissaryns.yaml`] for the `emissary` namespace; or
+   - [`emissary-defaultns.yaml`] for the `default` namespace.
+
+   If you installed $productName$ 1.14 into some other namespace, you'll need to
+   download one of the files and edit it to match your namespace.
+
+   [`emissary-emissaryns.yaml`]: https://app.getambassador.io/yaml/emissary/$versionTwoX$/emissary-emissaryns.yaml
+   [`emissary-defaultns.yaml`]: https://app.getambassador.io/yaml/emissary/$versionTwoX$/emissary-defaultns.yaml
+
+   **If you need to set `AMBASSADOR_LABEL_SELECTOR`**, you'll need to download
+   your chosen file and and edit it to do so.
+
+   Assuming that you're using the `default` namespace:
+
    ```
-
-   Typically, $productName$ 1.14 was installed in the `ambassador` namespace. If you installed
-   $productName$ 1.14 in a different namespace, change the namespace in the commands below.
-
-   - If you do not need to set `AMBASSADOR_LABEL_SELECTOR`:
-
-      ```bash
-      helm install -n ambassador \
-           --set agent.enabled=false \
-           $productHelmName$ datawire/$productHelmName$ && \
-      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-      ```
-
-   - If you do need to set `AMBASSADOR_LABEL_SELECTOR`, use `--set`, for example:
-
-      ```bash
-      helm install -n ambassador \
-           --set agent.enabled=false \
-           --set env.AMBASSADOR_LABEL_SELECTOR="version-two=true" \
-           $productHelmName$ datawire/$productHelmName$ && \
-      kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-      ```
-
-   <Alert severity="warning">
-    You must use the <a href="https://artifacthub.io/packages/helm/datawire/emissary-ingress/$ossChartVersion$"><code>$productHelmName$</code> Helm chart</a> for $productName$ 2.X.
-    Do not use the <a href="https://artifacthub.io/packages/helm/datawire/ambassador/6.9.3"><code>ambassador</code> Helm chart</a>.
-   </Alert>
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$versionTwoX$/emissary-defaultns.yaml && \
+   kubectl rollout status -n default deployment/edge-stack -w
+   ```
 
    <Alert severity="info">
      $productName$ $versionTwoX$ includes a Deployment in the $productNamespace$ namespace
@@ -277,23 +264,6 @@ Migration is a seven-step process:
    Repeat using `kubectl edit service ambassador-admin` for the `ambassador-admin`
    Service.
 
-7. **Finally, install the $productName$ $versionTwoX$ Ambassador Agent.**
-
-   First, scale the 1.14 agent to 0:
-
-   ```
-   kubectl scale -n ambassador deployment/ambassador-agent --replicas=0
-   ```
-
-   Once that's done, install the new Agent. **Note that if you needed to set
-   `AMBASSADOR_LABEL_SELECTOR`, you must add that to this `helm upgrade` command.**
-
-   ```bash
-   helm upgrade -n ambassador \
-        --set agent.enabled=true \
-        $productHelmName$ datawire/$productHelmName$ \
-   kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
-   ```
 
 Congratulations! At this point, $productName$ $versionTwoX$ is fully running and it's safe to remove the `ambassador` and `ambassador-agent` Deployments:
 
