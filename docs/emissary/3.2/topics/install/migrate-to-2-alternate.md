@@ -1,5 +1,5 @@
 ---
-    title: Upgrade $productName$ with a separate cluster
+    title: Upgrade $productName$ with a separate cluster | Ambassador
     description: "Instructions for how to upgrade $productName$ to $versionTwoX$. Transfer your current configuration of $AESproductName$ or $OSSproductName$ to $versionTwoX$."
 ---
 import Alert from '@material-ui/lab/Alert';
