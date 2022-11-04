@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.0.5 to $productName$ $versionTwoX$ (YAML)
+# Upgrade $productName$ 2.0.5 to $productName$ $versionTwoX$ (Helm)
 
 <Alert severity="info">
   This guide covers migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$. If
@@ -9,8 +9,8 @@ import Alert from '@material-ui/lab/Alert';
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-2.0/edge-stack-2.4">Helm-based
+  This guide is written for upgrading an installation originally made using Helm.
+  If you did not install with Helm, see the <a href="../../../yaml/edge-stack-2.0/edge-stack-2.X">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -20,12 +20,12 @@ import Alert from '@material-ui/lab/Alert';
   contact support with questions.
 </Alert>
 
-Migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$ is a three-step process:
+Migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$ is a four-step process:
 
 1. **Install new CRDs.**
 
    Before installing $productName$ $versionTwoX$ itself, you need to update the CRDs in
-   your cluster. This is mandatory during any upgrade of $productName$.
+   your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
    ```
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$versionTwoX$/aes-crds.yaml
@@ -62,12 +62,26 @@ Migrating from $productName$ 2.0.5 to $productName$ $versionTwoX$ is a three-ste
 
 3. **Install $productName$ $versionTwoX$.**
 
-   After installing the new CRDs, use Helm to install $productName$ $versionTwoX$. This will install
-   in the `$productNamespace$` namespace. If necessary for your installation (e.g. if you were
-   running with `AMBASSADOR_SINGLE_NAMESPACE` set), you can download `aes.yaml` and edit as
-   needed.
+   After installing the new CRDs, use Helm to install $productName$ $versionTwoX$. Start by
+   making sure that your `datawire` Helm repo is set correctly:
 
+   ```bash
+   helm repo remove datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
    ```
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$versionTwoX$/aes.yaml && \
-   kubectl rollout status -n $productNamespace$ deployment/edge-stack -w
+
+   Then, install $productName$ in the `$productNamespace$` namespace. If necessary for
+   your installation (e.g. if you were running with `AMBASSADOR_SINGLE_NAMESPACE` set),
+   you can choose a different namespace.
+
+   ```bash
+   helm install -n $productNamespace$ \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
    ```
+
+   <Alert severity="warning">
+     You must use the <a href="https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 2.X.
+     Do not use the <a href="https://artifacthub.io/packages/helm/datawire/ambassador/6.9.3"><code>ambassador</code> Helm chart</a>.
+   </Alert>

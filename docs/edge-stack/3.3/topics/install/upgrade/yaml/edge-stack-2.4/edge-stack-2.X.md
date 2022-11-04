@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.3.X to $productName$ $versionTwoX$ (Helm)
+# Upgrade $productName$ 2.4.X to $productName$ $versionTwoX$ (Helm)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.3 to $productName$ $versionTwoX$. If
+  This guide covers migrating from $productName$ 2.4 to $productName$ $versionTwoX$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made using Helm.
-  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-2.3/edge-stack-2.4">YAML-based
+  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-2.4/edge-stack-2.X">YAML-based
   upgrade instructions</a>.
 </Alert>
 
