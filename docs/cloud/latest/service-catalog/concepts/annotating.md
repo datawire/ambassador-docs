@@ -3,7 +3,7 @@ title: "Annotations overview | Ambassador Cloud"
 description: "Often overlooked, Kubernetes annotations are designed to add metadata to Kubernetes objects. Learn best practices for annotations for your environments."
 ---
 
-# Annotatons Overview
+# Annotations Overview
 
 Have you ever been asked to troubleshoot a failing Kubernetes service and struggled to find basic information about it such as the source repository and owner?
 
