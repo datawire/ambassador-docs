@@ -360,6 +360,32 @@ items:
           HTTP/3 uses the Quic protocol over UDP. Changes to your cloud provider provisioned Load Balancer will be required to support UDP traffic if using HTTP/3. External Load Balancers must serve traffic on port <code>443</code> because the <code>alt-svc</code> header is not configurable in the initial release of the feature.
         docs: topics/running/http3
 
+  - version: 2.5.0
+    date: '2022-11-03'
+    notes:
+      - title: Propagate trace headers to http external filter
+        type: change
+        body: >-
+          Previously, tracing headers were not propagated to an ExternalFilter configured with
+          `proto: http`. Now, adding supported tracing headers (b3, etc...) to the
+          `spec.allowed_request_headers` will propagate them to the configured service.
+        github:
+        - title: "#3078"
+          link: https://github.com/datawire/apro/issues/3078
+
+      - title: Diagnostics stats properly handles parsing envoy metrics with colons
+        type: bugfix
+        body: >-
+          If a <code>Host</code> or <code>TLSContext</code> contained a hostname with a <code>:</code> then when using the
+          diagnostics endpoints <code>ambassador/v0/diagd</code> then an error would be thrown due to the parsing logic not
+          being able to handle the extra colon. This has been fixed and $productName$ will not throw an error when parsing
+          envoy metrics for the diagnostics user interface.
+
+      - title: Bump Golang to 1.19.2
+        type: security
+        body: >-
+          Bump Go from 1.17.12 to 1.19.2. This is to keep the Go version current.
+
   - version: 2.4.2
     date: '2022-10-10'
     notes:
