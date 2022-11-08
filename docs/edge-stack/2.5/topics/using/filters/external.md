@@ -85,6 +85,29 @@ are ignored if `proto` is `http`.
 |---------------------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `protocol_version`                   | `v2`          | Indicates the version of the transport protocol that the External Filter is using. This is only applicable to External Filters using `proto: grpc`. When left unset or set to `v2` $productName$ will automatically convert between the `v2` protocol used by the External Filter and the `v3` protocol that is used by the `AuthService` that ships with $productName$. When this field is set to `v3` then no conversion between $productName$ and the `AuthService` will take place as it can speak `v3` natively with $productName$'s `AuthService`.                                                                                                                              |
 
+## Tracing Header Propagation
+
+If $productName$ is configured to use a `TraceService`, Envoy will send tracing information as gRPC Metadata. Add the trace headers to the `allowed_request_headers` field to propagate the trace headers when using an ExternalFilter configured with `proto:http`. For example, if using **Zipkin** with **B3 Propagation** headers you can configure your External Filter like this:
+
+```yaml
+apiVersion: getambassador.io/v3alpha1
+kind: AuthService
+metadata:
+  name: my-ext-filter
+  namespace: my-namespace
+spec:
+  auth_service: "https://example-auth:3000"
+  proto: http
+  path_prefix: /check_request
+  allowed_request_headers:
+  - X-B3-Parentspanid
+  - X-B3-Sampled
+  - X-B3-Spanid
+  - X-B3-Traceid
+  - X-Envoy-Expected-Rq-Timeout-Ms
+  - X-Envoy-Internal
+  - X-Request-Id
+```
 
 ## Transport Protocol Migration
 
