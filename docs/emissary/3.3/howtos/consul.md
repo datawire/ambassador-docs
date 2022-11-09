@@ -40,7 +40,7 @@ Consul agent or API.  When you send a request through $productName$,
 $productName$ sends the request to an endpoint based on the data in
 Consul.
 
-![ambassador-consul](../images/consul-ambassador-test-bl.png)
+![ambassador-consul](../images/consul-ambassador.png)
 
 This guide first instructs you on registering a service with Consul
 and using $productName$ to dynamically route requests to that service

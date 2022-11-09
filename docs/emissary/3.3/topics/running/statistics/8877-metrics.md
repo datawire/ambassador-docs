@@ -64,7 +64,7 @@ that displays information collected by Prometheus from the
 
 #### Just Envoy information
 
-![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../images/grafana-test-bl.png)
+![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../images/grafana.png)
 
 [Alex Gervais][] has written a template [$productName$ dashboard for
 Grafana][] that displays information collected by Prometheus either
