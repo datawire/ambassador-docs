@@ -5,7 +5,7 @@
     - title: Services and Service Groups
       link: /service-catalog/concepts/services/
     - title: Organizing the Service Catalog
-      link: /service-catalog/howtos/organize-service-catalog    
+      link: /service-catalog/howtos/organize-service-catalog
     - title: Favoriting and Filtering services
       link: /service-catalog/howtos/favorites/
     - title: Managing cells
@@ -13,7 +13,7 @@
     - title: Enabling GitOps workflows
       link: /gitops/quick-start
     - title: Annotations Overview
-      link: /service-catalog/concepts/annotating/    
+      link: /service-catalog/concepts/annotating/
     - title: Annotating services
       link: /service-catalog/howtos/annotate/
     - title: Creating intercepts
@@ -38,6 +38,8 @@
       link: /config-analysis/reference
     - title: Automated configuration analysis configuration
       link: /config-analysis/quick-start
+    - title: Authenticating to Ambassador Cloud
+      link: /authenticating/
 - title: Reference
   items:
     - title: Create a local K8s Dev Environment
@@ -50,4 +52,3 @@
       link: /service-catalog/faqs/
     - title: Release Notes
       link: /release-notes/
-

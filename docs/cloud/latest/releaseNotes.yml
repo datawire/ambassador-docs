@@ -30,8 +30,18 @@
 
 changelog: ''
 items:
+  - date: '2022-11-07'
+    notes:
+      - title: 'Subscriptions grouped by organization'
+        body: The subscription model moves from a team-centric model, to an organization one.
+        docs: './subscriptions/howtos/manage-my-subscriptions'
+        type: feature
   - date: '2022-10-04'
     notes:
+      - title: 'Organizations'
+        body: Group all the teams in your company under one organization
+        docs: './organization '
+        type: feature
       - title: 'Single Sign On'
         body: Sign into Ambassador Cloud using your own SAML 2.0 Identity Provider.
         image: './sso.png'
