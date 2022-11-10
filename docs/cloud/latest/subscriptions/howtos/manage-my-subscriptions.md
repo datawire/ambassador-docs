@@ -2,10 +2,15 @@
 title: "Managing Ambassador Labs subscriptions | Ambassador Cloud"
 description: "Depending on your needs, Ambassador Labs has subscription plans for all sizes of companies and applications. Find the plan that works best for your team."
 ---
+import Alert from '@material-ui/lab/Alert';
 
 # Manage my subscriptions
 
 Ambassador Labs provides a variety of different subscription options depending on your needs. Whether you're working with a small team with a few developers or a company with a large number of services, Ambassador Labs has flexible subscription options for you to chose from. 
+
+<Alert severity="info">
+  A subscription is valid for the entire organization, and all the teams which are part of it.
+</Alert>
 
 ## Check or upgrade your subscription
 

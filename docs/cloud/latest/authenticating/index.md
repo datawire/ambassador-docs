@@ -65,7 +65,7 @@ Otherwise, you'll be immediately redirected to the Cloud App.
 
 Once you've created your Ambassador Cloud organization, you can manage which identity providers are linked to it.
 
-Navigate to your `Settings` Page in Ambassador Cloud and select `Organization`.
+Navigate to your `Settings` Page in Ambassador Cloud and select `Organization's settings.`
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
@@ -85,7 +85,7 @@ For example, if you add a GitHub organization, all the users who are part of the
 
 Ambassador Cloud allows you to have many [Teams](/docs/cloud/latest/organization/#Team) within an [Organization](/docs/cloud/latest/organization/#Organization).
 
-To add a new team, navigate to your `Settings` Page in Ambassador Cloud, select `Account` and choose the `Create Team` option. 
+To add a new team, navigate to your `Settings` Page in Ambassador Cloud, and choose the `Organization's settings`.
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
@@ -93,12 +93,21 @@ To add a new team, navigate to your `Settings` Page in Ambassador Cloud, select 
 </p>
 <br />
 
-<Alert severity="warning">
-  Each Team within Ambassador Cloud is subject to it's own Licenses. See  <a href="../../subscriptions/howtos/manage-my-subscriptions/">Subscriptions</a> for more information.
-</Alert>
-
 
 A [Team](/docs/cloud/latest/organization/#Team) is a group that users can join within your Organization where clusters will be connected, and give you the ability to use all the features of Ambassador Cloud. 
+
+To delete a Team you can simply select the `DELETE` button. You will see a popup that asks you to confirm.
+
+<Alert severity="info">
+  To delete a Team from your Organization, all clusters must be disconnected, and it cannot be the last remaining team within your Organization.
+</Alert>
+
+<br />
+<p style="max-width:600px;margin:0 auto;">
+  <img src="../images/authentication-delete-team-popup.png" alt="Delete team"/>
+</p>
+<br />
+
 
 ## Troubleshooting
 
