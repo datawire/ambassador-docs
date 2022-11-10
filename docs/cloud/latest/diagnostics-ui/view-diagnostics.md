@@ -82,7 +82,7 @@ Add the following config fields to your associated `Module` [resource](/docs/edg
 
 ```shell
 
-$ kubectl apply -f - <<EOF
+kubectl apply -f - <<EOF
 apiVersion: getambassador.io/v3alpha1
 kind: Module
 metadata:
@@ -107,7 +107,7 @@ Finally, set the `AES_DIAGNOSTICS_URL` environment variable
   ```shell
   # Namespace, deployment name, and pod url/port depends on your current install
 
-  kubectl set env deployment/edge-stack-agent -n ambasador AES_DIAGNOSTICS_URL="http://edge-stack-admin:8877/ambassador/v0/diag/?json=true"
+  kubectl set env deployment/edge-stack-agent -n ambassador AES_DIAGNOSTICS_URL="http://edge-stack-admin:8877/ambassador/v0/diag/?json=true"
   ```
 
 </TabPanel>
