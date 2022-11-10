@@ -38,9 +38,8 @@ items:
       - title: Propagate trace headers to http external filter
         type: change
         body: >-
-          Previously, tracing headers were not propagated to an ExternalFilter configured with
-          `proto: http`. Now, adding supported tracing headers (b3, etc...) to the
-          `spec.allowed_request_headers` will propagate them to the configured service.
+          Previously, tracing headers were not propagated to an ExternalFilter configured with <code>proto: http</code>. Now, adding supported tracing headers (b3, etc...) to the <code>spec.allowed_request_headers</code> will propagate them to the configured service.
+        docs: topics/using/filters/external/#tracing-header-propagation
         github:
         - title: "#3078"
           link: https://github.com/datawire/apro/issues/3078
