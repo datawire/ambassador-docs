@@ -27,10 +27,10 @@ See the [instructions on updating $AESproductName$](/docs/edge-stack/$aesDocsVer
 |-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | $OSSproductName$ $version$              | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/helm/emissary-3.3/edge-stack-3.3/) |
 | $OSSproductName$ $versionTwoX$          | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.5/emissary-3.3)                                                     |
-| $OSSproductName$ 2.4.X                  | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.4/emissary-3.3)                                                     |
-| $OSSproductName$ 2.3.X                  | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-2.3/emissary-2.4)                                                 |
-| $OSSproductName$ 2.0.5                  | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-2.0/emissary-2.4)                                                 |
-| $OSSproductName$ $versionOneX$          | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-1.14/emissary-2.4)                                                |
+| $OSSproductName$ 2.4.X                  | [$OSSproductName$ $version$](../upgrade/helm/emissary-2.4/emissary-2.X)                                                     |
+| $OSSproductName$ 2.3.X                  | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-2.3/emissary-2.X)                                                 |
+| $OSSproductName$ 2.0.5                  | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-2.0/emissary-2.X)                                                 |
+| $OSSproductName$ $versionOneX$          | [$OSSproductName$ $versionTwoX$](../upgrade/helm/emissary-1.14/emissary-2.X)                                                |
 | $OSSproductName$ prior to $versionOneX$ | [$OSSproductName$ $versionOneX$](../../../../1.14/topics/install/upgrading)                                                 |
 
 ## If you installed $OSSproductName$ manually by applying YAML
@@ -39,8 +39,8 @@ See the [instructions on updating $AESproductName$](/docs/edge-stack/$aesDocsVer
 |-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | $OSSproductName$ $version$              | [$AESproductName$ $aesVersion$](/docs/edge-stack/$aesDocsVersion$/topics/install/upgrade/yaml/emissary-3.3/edge-stack-3.3/) |
 | $OSSproductName$ $versionTwoX$          | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.5/emissary-3.3)                                                     |
-| $OSSproductName$ 2.4.X                  | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.4/emissary-3.3)                                                     |
-| $OSSproductName$ 2.3.X                  | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-2.3/emissary-2.4)                                                 |
-| $OSSproductName$ 2.0.5                  | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-2.0/emissary-2.4)                                                 |
-| $OSSproductName$ $versionOneX$          | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-1.14/emissary-2.4)                                                |
+| $OSSproductName$ 2.4.X                  | [$OSSproductName$ $version$](../upgrade/yaml/emissary-2.4/emissary-2.X)                                                     |
+| $OSSproductName$ 2.3.X                  | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-2.3/emissary-2.X)                                                 |
+| $OSSproductName$ 2.0.5                  | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-2.0/emissary-2.X)                                                 |
+| $OSSproductName$ $versionOneX$          | [$OSSproductName$ $versionTwoX$](../upgrade/yaml/emissary-1.14/emissary-2.X)                                                |
 | $OSSproductName$ prior to $versionOneX$ | [$OSSproductName$ $versionOneX$](../../../../1.14/topics/install/upgrading)                                                 |
