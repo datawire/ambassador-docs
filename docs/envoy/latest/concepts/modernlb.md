@@ -358,7 +358,7 @@ Why would this type of load balancer be used in place of the termination load ba
 
 ### Direct server return (DSR)
 
-![Figure 10: L4 Direct server return (DSR)](../images/modern-lb-and-proxying/10.png)
+![Figure 10: L4 Direct server return - DSR](../images/modern-lb-and-proxying/10.png)
 
 <strong style="font-weight: normal; font-size: 12px">Figure 10: L4 Direct server return (DSR)</strong>
 
