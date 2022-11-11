@@ -1,7 +1,5 @@
 # Add request headers
 
-test-redirects
-
 $productName$ can add a dictionary of HTTP headers that can be added to each request that is passed to a service.
 
 ## The `add_request_headers` attribute

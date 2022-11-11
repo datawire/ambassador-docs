@@ -1,5 +1,4 @@
 # Rate limit service
-test-redirects
 
 Rate limiting is a powerful technique to improve the [availability and
 resilience of your

@@ -1,7 +1,5 @@
 # Remove response headers
 
-test-redirects
-
 $productName$ can remove a list of HTTP headers that would be sent to the client in the response (e.g. default `x-envoy-upstream-service-time`).
 
 ## The `remove_response_headers` attribute

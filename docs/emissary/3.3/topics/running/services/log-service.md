@@ -1,5 +1,4 @@
 # Log service
-test-redirects
 
 By default, $productName$ puts the access logs on stdout; such
 that the can be read using `kubectl logs`.  The format of those logs,
