@@ -1,5 +1,7 @@
 # Query parameter-based routing
 
+test-redirects
+
 $productName$ can route to target services based on HTTP query parameters with the `query_parameters` and `regex_query_parameters` specifications. Multiple mappings with different annotations can be applied to construct more complex routing rules.
 
 ## The `query_parameters` annotation

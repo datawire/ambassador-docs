@@ -1,5 +1,7 @@
 # Remove request headers
 
+test-redirects
+
 $productName$ can remove a list of HTTP headers that would be sent to the upstream from the request.
 
 ## The `remove_request_headers` attribute
