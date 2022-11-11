@@ -27,7 +27,7 @@ const Table = () => {
           </td>
           <td>
             <a
-              href="https://kind.sigs.k8s.io/docs/user/ingress/#ambassador"
+              href="https://kind.sigs.k8s.io/docs/user/ingress/"
               target="_blank"
             >
               KIND

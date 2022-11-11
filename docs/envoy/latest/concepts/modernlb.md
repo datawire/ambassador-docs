@@ -145,7 +145,7 @@ Service discovery is the process by which a load balancer determines the set of 
 
 *   Static configuration file
 *   DNS
-*   [Zookeeper](https://zookeeper.apache.org/), [Etcd](https://coreos.com/etcd/), [Consul](https://www.consul.io/), etc.
+*   [Zookeeper](https://zookeeper.apache.org/), [Etcd](https://github.com/etcd-io/etcd), [Consul](https://www.consul.io/), etc.
 *   Envoy’s [universal data plane API](https://medium.com/@mattklein123/the-universal-data-plane-api-d15cec7a)
 
 
