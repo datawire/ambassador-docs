@@ -263,9 +263,7 @@ Definitions (CRDs) for managing Prometheus in Kubernetes.
 | `Prometheus` | Creates a Prometheus instance.  |
 | `ServiceMonitor` | Tells Prometheus where to scrape metrics from.  |
 
-CoreOS has published a full [API
-reference](https://coreos.com/operators/prometheus/docs/latest/api.html)
-to these different CRDs.
+CoreOS has published a full API reference to these different CRDs.
 
 ### Grafana
 
