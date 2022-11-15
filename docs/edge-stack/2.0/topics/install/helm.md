@@ -57,7 +57,7 @@ When you run the Helm chart, it installs $productName$.
   </Alert>
 
 For more advanced configuration and details about helm values,
-[please see the helm chart.](https://github.com/datawire/edge-stack/tree/main/charts/edge-stack/README.md)
+[please see the helm chart.](https://github.com/datawire/edge-stack/blob/release/v2.0/charts/edge-stack/README.md)
 
 ## Upgrading an existing installation
 

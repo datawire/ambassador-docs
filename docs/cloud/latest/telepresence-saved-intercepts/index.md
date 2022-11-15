@@ -11,7 +11,7 @@ The Ambassador Cloud Intercepts page gives you access to your intercept history 
 
 To use the saved intercepts feature, you need:
 
-1. A [local installation](../../../telepresence/latest/install/index). of Telepresence version 2.7.0 or later.
+1. A [local installation](../../../telepresence/latest/install/). of Telepresence version 2.7.0 or later.
 1. An Ambassador Cloud account.
 1. Access to a Kubernetes cluster.
 
