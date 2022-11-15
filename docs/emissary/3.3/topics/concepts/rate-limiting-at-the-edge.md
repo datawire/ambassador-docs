@@ -28,8 +28,6 @@ The table below outlines several scenarios where rate limiting and load shedding
 
 One of the core features of $productName$ is the decentralization of configuration, allowing operations and development teams to independently control $productName$, as well as individual application development teams to minimize collaboration when configuring independently deployable services. This same approach applies to rate limiting configuration.
 
-The $productName$ rate limiting configuration allows centralized operations teams to define and implement global rate limiting and load shedding policies to protect the system, while still allowing individual application teams to define rate limiting policies that enforce business rules, for example, around paying and non-paying customers (perhaps implementing the so-called “freemium” model). See [Advanced Rate Limiting](../../../howtos/advanced-rate-limiting) documentation for examples.
-
 ## Benefits of applying a rate limiter to the edge
 
 Modern applications and APIs can experience floods of traffic over a short time period (e.g. from achieving a HackerNews front page link), and increasingly bad actors and cyber criminals are targeting public-facing services.
