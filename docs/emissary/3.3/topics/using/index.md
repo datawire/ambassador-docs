@@ -11,16 +11,16 @@ Application development teams use $productName$ to manage edge policies associat
   * HTTP Headers
     * [Header-based Routing](headers/headers)
     * [Host Header](headers/host)
-    * [Adding Request Headers](headers/add_request_headers)
-    * [Adding Response Headers](headers/add_response_headers)
-    * [Removing Request Headers](headers/remove_request_headers)
-    * [Remove Response Headers](headers/remove_response_headers)
-  * [Query Parameter Based Routing](query_parameters)
+    * [Adding Request Headers](headers/add-request-headers)
+    * [Adding Response Headers](headers/add-response-headers)
+    * [Removing Request Headers](headers/remove-request-headers)
+    * [Remove Response Headers](headers/remove-response-headers)
+  * [Query Parameter Based Routing](query-parameters)
   * [Keepalive](keepalive)
   * Protocols
     * [TCP](tcpmappings)
     * gRPC, HTTP/1.0, gRPC-Web, WebSockets
-  * [RegEx-based Routing](prefix_regex)
+  * [RegEx-based Routing](prefix-regex)
   * [Redirects](redirects)
   * [Rewrites](rewrites)
   * [Timeouts](timeouts)

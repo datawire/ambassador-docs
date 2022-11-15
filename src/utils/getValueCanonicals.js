@@ -21,8 +21,8 @@ export const canonicalUrls = {
     '/docs/edge-stack/latest/topics/running/gzip/',
   '/docs/emissary/latest/topics/running/services/auth-service/':
     '/docs/edge-stack/latest/topics/running/services/auth-service/',
-  '/docs/emissary/latest/topics/using/headers/add_request_headers/':
-    '/docs/edge-stack/latest/topics/using/headers/add_request_headers/',
-  '/docs/emissary/latest/topics/using/headers/add_response_headers/':
-    '/docs/edge-stack/latest/topics/using/headers/add_response_headers/',
+  '/docs/emissary/latest/topics/using/headers/add-request-headers/':
+    '/docs/edge-stack/latest/topics/using/headers/add-request-headers/',
+  '/docs/emissary/latest/topics/using/headers/add-response-headers/':
+    '/docs/edge-stack/latest/topics/using/headers/add-response-headers/',
 };
