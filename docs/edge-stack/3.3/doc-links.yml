@@ -218,7 +218,7 @@
          - title: Method-based routing
            link: /topics/using/method
          - title: Prefix regex
-           link: /topics/using/prefix_regex
+           link: /topics/using/prefix-regex
          - title: Query parameter-based routing
            link: /topics/using/query-parameters/
          - title: Redirects
