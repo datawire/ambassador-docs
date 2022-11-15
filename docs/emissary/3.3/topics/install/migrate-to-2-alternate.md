@@ -1,10 +1,10 @@
 ---
-    Title: Migrate to $productName$ $versionTwoX$
+    title: Migrate to $productName$ $versionTwoX$
     description: "Instructions for how to upgrade $productName$ to $versionTwoX$. Transfer your current configuration of $AESproductName$ or $OSSproductName$ to $versionTwoX$."
 ---
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrading $productName$ with a separate cluster
+# Migrating $productName$ with a separate cluster
 
 You can upgrade from any version of $AESproductName$ or $OSSproductName$ to
 any version of either by installing the new version in a new Kubernetes cluster,
