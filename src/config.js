@@ -240,7 +240,7 @@ export const metaData = {
     description:
       'Ambassador Edge Stack uses information from service discovery to determine where to route incoming requests. The API Gateway supports the following mechanisms',
   },
-  'docs/edge-stack/latest/topics/running/services/ext_authz/': {
+  'docs/edge-stack/latest/topics/running/services/ext-authz/': {
     description:
       'ExtAuth protocol. The ExtAuth service receives info about every request through Ambassador and must indicate whether the request is to be allowed or not',
   },

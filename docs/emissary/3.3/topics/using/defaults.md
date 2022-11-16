@@ -26,7 +26,7 @@ spec:
 
 Currently, only the `Mapping` resource uses the `defaults` mechanism. `Mapping` looks first for defaultable resources in the `httpmapping` class, including:
 
-- [`add_request_headers`](../../using/headers/add_request_headers)
-- [`add_response_headers`](../../using/headers/add_response_headers)
-- [`remove_request_headers`](../../using/headers/remove_request_headers)
-- [`remove_response_headers`](../../using/headers/remove_response_headers)
+- [`add_request_headers`](../../using/headers/add-request-headers)
+- [`add_response_headers`](../../using/headers/add-response-headers)
+- [`remove_request_headers`](../../using/headers/remove-request-headers)
+- [`remove_response_headers`](../../using/headers/remove-response-headers)
