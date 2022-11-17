@@ -6,8 +6,8 @@
 - /docs/dev-guide/canary-release-concepts
 - /docs/dev-guide/test-in-prod
 - /docs/guides/
-- /reference/add_request_headers
-- /reference/add_response_headers
+- /reference/add-request-headers
+- /reference/add-response-headers
 - /reference/ambassador-with-aws
 - /reference/canary
 - /reference/circuit-breakers
@@ -26,11 +26,11 @@
 - /reference/host-crd
 - /reference/ambassadormappings
 - /reference/modules
-- /reference/prefix_regex
+- /reference/prefix-regex
 - /reference/rate-limits
 - /reference/redirects
-- /reference/remove_request_headers
-- /reference/remove_response_headers
+- /reference/remove-request-headers
+- /reference/remove-response-headers
 - /reference/retries
 - /reference/rewrites
 - /reference/running
