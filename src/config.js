@@ -29,6 +29,7 @@ export const products = [
         link: 'pre-release/quick-start',
       },
       { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
+      { id: '2.9', name: '2.9', link: '2.9/quick-start' },
       { id: '2.8', name: '2.8', link: '2.8/quick-start' },
       { id: '2.7', name: '2.7', link: '2.7/quick-start' },
       { id: '2.6', name: '2.6', link: '2.6/quick-start' },
@@ -239,7 +240,7 @@ export const metaData = {
     description:
       'Ambassador Edge Stack uses information from service discovery to determine where to route incoming requests. The API Gateway supports the following mechanisms',
   },
-  'docs/edge-stack/latest/topics/running/services/ext_authz/': {
+  'docs/edge-stack/latest/topics/running/services/ext-authz/': {
     description:
       'ExtAuth protocol. The ExtAuth service receives info about every request through Ambassador and must indicate whether the request is to be allowed or not',
   },

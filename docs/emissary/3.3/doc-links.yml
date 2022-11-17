@@ -158,13 +158,13 @@
          - title: Headers overview
            link: /topics/using/headers/headers
          - title: Add request headers
-           link: /topics/using/headers/add_request_headers
+           link: /topics/using/headers/add-request-headers
          - title: Remove request headers
-           link: /topics/using/headers/remove_request_headers
+           link: /topics/using/headers/remove-request-headers
          - title: Add response headers
-           link: /topics/using/headers/add_response_headers
+           link: /topics/using/headers/add-response-headers
          - title: Remove response headers
-           link: /topics/using/headers/remove_response_headers
+           link: /topics/using/headers/remove-response-headers
          - title: Header-based routing
            link: /topics/using/headers/headers
          - title: Host header
@@ -176,9 +176,9 @@
          - title: Method-based routing
            link: /topics/using/method
          - title: Prefix regex
-           link: /topics/using/prefix_regex
+           link: /topics/using/prefix-regex
          - title: Query parameter-based routing
-           link: /topics/using/query_parameters/
+           link: /topics/using/query-parameters/
          - title: Redirects
            link: /topics/using/redirects
          - title: Rewrites
@@ -192,7 +192,7 @@
          - title: Authentication service
            link: /topics/running/services/auth-service
          - title: ExtAuth protocol
-           link: /topics/running/services/ext_authz
+           link: /topics/running/services/ext-authz
          - title: Log service
            link: /topics/running/services/log-service
          - title: Tracing service
