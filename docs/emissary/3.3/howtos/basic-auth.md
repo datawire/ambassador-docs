@@ -1,7 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
 # Basic authentication (for $productName$)
-# Basic authentication (for $productName$)
 
 [//]: # (+FIX+ link to "authentication and authorization" concept)
 
