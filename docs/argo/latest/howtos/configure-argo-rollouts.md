@@ -2,7 +2,6 @@ import Alert from '@material-ui/lab/Alert';
 import {getBaseUIUrl} from '../../../../../src/utils/getBaseUrl';
 import InstallArgoTabs from './InstallArgoTabs';
 
-# Configure Canary Rollout in your Cluster
 
 
 In this guide we'll give you everything you need to perform a canary rollout in your own cluster using GitOps best practices, but without needing to write lots of YAML!

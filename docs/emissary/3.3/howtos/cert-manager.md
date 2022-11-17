@@ -1,4 +1,4 @@
-# Using cert-manager
+
 
 [//]: # (+FIX+ link to "TLS and certificates" concept)
 
