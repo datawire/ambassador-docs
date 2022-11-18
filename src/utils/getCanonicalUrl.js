@@ -1,3 +1,5 @@
+// import { trimLastSlash } from './urls';
+const { trimLastSlash } = require('./urls');
 /* 
   You need to add the URL in exceptions object without the version as a key and the value with the desired canonical URL
 */
@@ -32,6 +34,9 @@ const getCanonicalUrl = (slugs, currentSlug) => {
       canonicalSlug = match[1] + '/latest' + match[2];
     }
   }
+
+  canonicalSlug = trimLastSlash(canonicalSlug);
+
   return { url: canonicalSlug, latest };
 };
 
