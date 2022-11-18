@@ -5,7 +5,7 @@ import url from 'url';
 
 import Layout from '../../../../src/components/Layout';
 
-import { Breadcrumbs } from '../../../../src/components/Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '../../../../src/components/Breadcrumbs/Breadcrumbs';
 import Burger from '../../../../src/components/Burger/Burger';
 import ContactBlock from '../../../../src/components/ContactBlock';
 import DatawireMetaData from '../../../../src/components/DatawireMetaData';
