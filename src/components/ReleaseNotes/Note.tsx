@@ -1,3 +1,4 @@
+import { useLocation } from '@reach/router';
 import React, { useMemo } from 'react';
 
 import Button from '../../../../src/components/Button/Button';
@@ -22,6 +23,8 @@ const typeIcon = {
 };
 
 const Note = ({ note, onViewMore, versions }) => {
+  const { pathname } = useLocation();
+
   const title = useMemo(() => {
     if (titlePrefix[note.type] && note.image) {
       return `${titlePrefix[note.type]}: ${note.title}`;
@@ -58,7 +61,8 @@ const Note = ({ note, onViewMore, versions }) => {
               alt={note.title}
               height="172"
               width="207"
-              src={(isBrowser ? window.location : '') + '/' + note.image}
+              src={`${pathname}/${note.image}`}
+              loading="lazy"
             />
           </div>
         )}
@@ -66,10 +70,11 @@ const Note = ({ note, onViewMore, versions }) => {
       {note.image && (
         <div className={styles.note__image}>
           <img
-            src={(isBrowser ? window.location : '') + '/' + note.image}
+            src={`${pathname}/${note.image}`}
             alt={note.title}
             height="172"
             width="207"
+            loading="lazy"
           />
         </div>
       )}
