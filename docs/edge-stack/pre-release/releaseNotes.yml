@@ -32,6 +32,10 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.4.0
+    date: 'TBD'
+    notes: []
+    
   - version: 3.3.1
     date: '2022-12-08'
     notes:
