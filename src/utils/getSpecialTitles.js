@@ -26,15 +26,15 @@ export default function (data, canonicalUrl) {
 
   if (
     canonicalUrl.includes('edge-stack') &&
-    canonicalUrl.includes('/concepts/gitops-continuous-delivery/')
+    canonicalUrl.includes('/concepts/gitops-continuous-delivery')
   )
     return specialTitleEdgeStack;
-  
-  if (canonicalUrl.includes('/emissary/latest/howtos/rate-limiting-tutorial/')) return specialTitleEmissary2;
 
-  if (canonicalUrl.includes('/edge-stack/latest/howtos/rate-limiting-tutorial/')) return specialTitleEdgeStack2;
+  if (canonicalUrl.includes('/emissary/latest/howtos/rate-limiting-tutorial')) return specialTitleEmissary2;
 
-  if (canonicalUrl.includes('/edge-stack/latest/topics/using/rate-limits/')) return specialTitleEdgeStack3;
+  if (canonicalUrl.includes('/edge-stack/latest/howtos/rate-limiting-tutorial')) return specialTitleEdgeStack2;
+
+  if (canonicalUrl.includes('/edge-stack/latest/topics/using/rate-limits')) return specialTitleEdgeStack3;
 
   if (canonicalUrl.includes('edge-stack')) return edgeStackTitle;
 
@@ -51,7 +51,7 @@ export default function (data, canonicalUrl) {
   )
     return cloudTitle2;
 
-  if (canonicalUrl.includes('/concepts/gitops-continuous-delivery/'))
+  if (canonicalUrl.includes('/concepts/gitops-continuous-delivery'))
     return specialTitleEmissary;
 
   return data;
