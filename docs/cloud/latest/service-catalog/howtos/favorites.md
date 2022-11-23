@@ -20,7 +20,7 @@ On the main Service Catalog view, in the service listing:
 3. Click the star icon.
 
 <p align="center">
-  <img src="../../../images/add-service-to-favorites.png" width="300" alt="Service flyout buttons"/>
+  <img src="../../images/add-service-to-favorites.png" width="300" alt="Service flyout buttons"/>
 </p>
 
 Favorited services are displayed with a star icon next to the service name.
@@ -30,7 +30,7 @@ Favorited services are displayed with a star icon next to the service name.
 You can filter your view by favorites service and cells. At the top of the Service Catalog you can select either the Cells of Services dropdown and click **Favorites** to show your favorited services or cells:
 
 <p align="center">
-  <img src="../../../images/service-groups-favorite-services-filter.png"/>
+  <img src="../../images/service-groups-favorite-services-filter.png"/>
 </p>
 
 ## Favoriting a cell

@@ -50,7 +50,7 @@ In order to use diagnostics, you need to have version 3.1 or greater of [EdgeSta
 Inside the [clusters page](https://app.getambassador.io/cloud/clusters), on each cluster card displayed, there is a 'Diagnostics' button. Clicking it will take you to the diagnostics overview page.
 
   <p align="center">
-    <img src="../../images/diag-button.png" width="300"/>
+    <img src="../images/diag-button.png" width="300"/>
   </p>
 
 Inside, you will be able to see two navigation tabs:
@@ -58,13 +58,13 @@ Inside, you will be able to see two navigation tabs:
 1. **Ambassador Routes** : Information about your Emissary-ingress [mapping resources](https://www.getambassador.io/docs/emissary/latest/topics/using/intro-mappings/) gets displayed, alongside the service name, weight, and success rate.
 
   <p align="center">
-    <img src="../../images/cluster-diag-routes-table.png" width="800"/>
+    <img src="../images/cluster-diag-routes-table.png" width="800"/>
   </p>
 
 2. **Notices** : Provides configuration errors and notices coming from your cluster.
 
   <p align="center">
-    <img src="../../images/cluster-diag-notices-table.png" width="800"/>
+    <img src="../images/cluster-diag-notices-table.png" width="800"/>
   </p>
 
 ## No Diagnostics Found?
@@ -72,7 +72,7 @@ Inside, you will be able to see two navigation tabs:
 A warning message on the Diagnostics Overview page means either that the cluster has no diagnostics information to report, that diagnostics reporting has been disabled, or that there is an issue with the deployment of the [Agent](https://www.getambassador.io/docs/edge-stack/) in this cluster.
 
   <p align="center">
-    <img src="../../images/cluster-diag-warning-message.png" width="800"/>
+    <img src="../images/cluster-diag-warning-message.png" width="800"/>
   </p>
 
 <TabsContainer>

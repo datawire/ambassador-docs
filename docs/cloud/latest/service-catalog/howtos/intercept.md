@@ -33,7 +33,7 @@ Intercepts are created through the Telepresence Daemon. If you don't have Telepr
 1. [Fill out the form to complete the intercept.](#fill-out-the-form-to-complete-the-intercept)
 
 <p align="center">
-   <img width="300" alt="Intercept this service" src="../../../images/intercept-this-service.png" />
+   <img width="300" alt="Intercept this service" src="../../images/intercept-this-service.png" />
 </p>
 
 ## Intercept from the Service Details view
