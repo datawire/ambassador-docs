@@ -133,4 +133,4 @@ When using GitHub as your identity provider, the first time you log in to Ambass
 </p>
 <br />
 
-[This is just a test](https://www.getambassador.io/)
+[This is just a test](../../authenticating/)

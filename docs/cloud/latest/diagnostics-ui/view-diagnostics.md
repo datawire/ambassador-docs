@@ -147,5 +147,5 @@ Finally, set the `AES_DIAGNOSTICS_URL` environment variable
 </TabPanel>
 </TabsContainer>
 
-[This is just a test](https://www.getambassador.io/)
+[This is just a test](../../authenticating/)
 

@@ -38,4 +38,4 @@ The following schema summarizes how these resources interact with each other:
 
 To setup your organization, see the [dedicated section of our user guide](/docs/cloud/latest/authenticating).
 
-[This is just a test](https://www.getambassador.io/)
+[This is just a test](../../authenticating/)

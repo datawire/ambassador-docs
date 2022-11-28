@@ -56,4 +56,4 @@ We are working on a long-term solution to fix this issue, in the mean time there
 - Remove the [base path](https://swagger.io/docs/specification/2-0/api-host-and-base-path/) in your API documentation
 - Keep the same API documentation but alter the endpoint where the mapping gets the API documentation
 
-[This is just a test](https://www.getambassador.io/)
+[This is just a test](../../authenticating/)
