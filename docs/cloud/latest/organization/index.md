@@ -37,3 +37,5 @@ The following schema summarizes how these resources interact with each other:
 <br />
 
 To setup your organization, see the [dedicated section of our user guide](/docs/cloud/latest/authenticating).
+
+[This is just a test](https://www.getambassador.io/)

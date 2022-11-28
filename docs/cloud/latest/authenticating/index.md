@@ -132,3 +132,5 @@ When using GitHub as your identity provider, the first time you log in to Ambass
   <img src="../images/github-login-authorize.png" alt="Authorize Ambassador labs form"/>
 </p>
 <br />
+
+[This is just a test](https://www.getambassador.io/)
