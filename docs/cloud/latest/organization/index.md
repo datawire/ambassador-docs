@@ -40,4 +40,4 @@ To setup your organization, see the [dedicated section of our user guide](/docs/
 
 [This is just a test](.../authenticating/)
 
-<img src=".../images/organizations-global-view.png" alt="The organization model"/>
+<img src=".../images/organizations-global-view.png" alt="The organization model" />
