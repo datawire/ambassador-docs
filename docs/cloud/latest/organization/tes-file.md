@@ -1,5 +1,5 @@
 ---
-title: "Organization | Ambassador Clou Organization | Ambassador Clou Organization | Ambassador Cloud"
+title: "Organization | Ambassador Cloud"
 description: "This section describes how an organization works in Ambassador Cloud, and the different underlying concepts."
 ---
 
