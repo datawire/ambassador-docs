@@ -173,4 +173,4 @@ In the manifest, several things must be customized:
 
 For an example of CI editing the manifest, see the [deployment previews demo GitHub repo](https://github.com/AliceProxy/test-app).
 
-[This is just a test](../../authenticating/)
+[This is just a test](.../authenticating/)
