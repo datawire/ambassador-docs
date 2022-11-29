@@ -43,6 +43,8 @@
           link: /topics/running/running
         - title: Performance and scaling $productName$
           link: /topics/running/scaling
+    - title: Active health checking configuration
+      link: /howtos/active-health-checking
     - title: HTTP/3 configuration
       items:
         - title: HTTP3 setup in $productName$
