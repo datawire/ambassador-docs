@@ -59,5 +59,3 @@ curl -H "X-API-Key: ${MY_API_KEY}" https://staging-app.datawire.io/cloud/api/ser
 #### Revoke an API key
 
 To revoke a key, click on the filter in Ambassador Cloud to expand the list of all keys associated with the filter. Find the key you want to revoke access for and click **REVOKE**.
-
-[This is just a test](.../authenticating/)

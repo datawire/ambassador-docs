@@ -86,5 +86,3 @@ spec:
 ```
 
 Once you've added the `Mapping` resources to your cluster, the developer portal is available at `https://ambassador-dev-portal.internal.com/dev-portal/`.
-
-[This is just a test](.../authenticating/)
