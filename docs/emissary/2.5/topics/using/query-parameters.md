@@ -26,32 +26,6 @@ spec:
 
 This will allow requests to /backend/ to succeed only if the `quote-mode` query parameter has the value `backend` and the `random-query-parameter` has the value `datawire`.
 
-### A conditional example
-
-```yaml
----
-apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
-metadata:
-  name:  quote-mode
-spec:
-  prefix: /backend/
-  service: quote-mode
-  query_parameters:
-    quote-mode: true
-
----
-apiVersion: getambassador.io/v3alpha1
-kind:  Mapping
-metadata:
-  name:  quote-regular
-spec:
-  prefix: /backend/
-  service: quote-regular
-```
-
-This will send requests that contain the `quote-mode` query parameter to the `quote-mode` target, while routing all other requests to the `quote-regular` target.
-
 ## `regex_query_parameters`
 
 The following mapping will route requests with the `quote-mode` header that contain values that match the regex.
@@ -68,3 +42,28 @@ spec:
   prefix: /backend/
   service: quote
 ```
+
+### A conditional example
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  quote-mode
+spec:
+  prefix: /backend/
+  service: quote-mode
+  regex_query_parameters:
+    quote-mode: .*
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Mapping
+metadata:
+  name:  quote-regular
+spec:
+  prefix: /backend/
+  service: quote-regular
+```
+
+This will send requests that contain the `quote-mode` query parameter (with any value) to the `quote-mode` target, while routing all other requests to the `quote-regular` target.
