@@ -247,6 +247,31 @@ See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/ext
 
 This only applies if the port matches the underlying Envoy listener port.
 
+If the underlying port does not match (for example, if Envoy is listening on 8443, but your service listens on 3000), you can solve this with a Lua script on the module. This will strip the port even when it does not match:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Module
+metadata:
+  name:  ambassador
+  namespace: ambassador
+spec:
+  config:
+    lua_scripts: |
+      function envoy_on_request(request_handle)
+        local authority = request_handle:headers():get(":authority")
+        if(string.find(authority, ":") ~= nil)
+        then
+          local authority_index = string.find(authority, ":")
+          local stripped_authority = string.sub(authority, 1, authority_index - 1)
+          request_handle:headers():replace(":authority", stripped_authority)
+        end
+      end
+```
+
+You can learn more about Lua scripts [below](#lua-scripts).
+
 ---
 
 ## Miscellaneous
