@@ -239,6 +239,35 @@ $productName$ is now terminating TLS from the gRPC client and proxying the call 
 
 If you want to configure authentication in another language, [gRPC provides examples](https://grpc.io/docs/guides/auth.html) with proper syntax for other languages.
 
+#### Issue with Host header including the port
+
+Some gRPC clients automatically include the port in the Host header. This is a problem when using TLS because the certificate will match `myurl.com` but the Host header will be `myurl.com:443`, resulting in the error `rpc error: code = Unimplemented desc =`. If you run into this issue, there are two ways to solve it depending on your use case, both using the Module resource.
+
+The first is to set the `strip_matching_host_port` [property](../topics/running/ambassador.md#strip-matching-host-port) to `true`. However, this only works if the port in the header matches the port that Envoy listens on (8443 by default). In the default installation of $productName$, the public port is 443, which then maps internally to 8443, so this only works for custom installations where the public service port matches the port in the Listener resource.
+
+The second solution is to use the following [Lua script](../topics/running/ambassador.md#lua-scripts), which always strips the port:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  Module
+metadata:
+  name:  ambassador
+  namespace: ambassador
+spec:
+  config:
+    lua_scripts: |
+      function envoy_on_request(request_handle)
+        local authority = request_handle:headers():get(":authority")
+        if(string.find(authority, ":") ~= nil)
+        then
+          local authority_index = string.find(authority, ":")
+          local stripped_authority = string.sub(authority, 1, authority_index - 1)
+          request_handle:headers():replace(":authority", stripped_authority)
+        end
+      end
+```
+
 #### Originating TLS with gRPC service
 
 ![](../../images/gRPC-TLS-Originate.png)
