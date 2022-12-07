@@ -245,32 +245,7 @@ See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/ext
 
 * `strip_matching_host_port: true` will tell $productName$ to strip any port number from the host/authority header before processing and routing the request. The default is `false`, which will preserve any port number.
 
-This only applies if the port matches the underlying Envoy listener port.
-
-If the underlying port does not match (for example, if Envoy is listening on 8443, but your service listens on 3000), you can solve this with a Lua script on the module. This will strip the port even when it does not match:
-
-```yaml
----
-apiVersion: getambassador.io/v3alpha1
-kind:  Module
-metadata:
-  name:  ambassador
-  namespace: ambassador
-spec:
-  config:
-    lua_scripts: |
-      function envoy_on_request(request_handle)
-        local authority = request_handle:headers():get(":authority")
-        if(string.find(authority, ":") ~= nil)
-        then
-          local authority_index = string.find(authority, ":")
-          local stripped_authority = string.sub(authority, 1, authority_index - 1)
-          request_handle:headers():replace(":authority", stripped_authority)
-        end
-      end
-```
-
-You can learn more about Lua scripts [below](#lua-scripts).
+This only applies if the port matches the underlying Envoy listener port (8443 in the default installation). The most common reason to need this property is if you are using gRPC with TLS and your client library appends the port to the Host header (i.e. `myurl.com:443`). If your public port does not match the Envoy listener port (for example, your public port is 443), we have an alternative solution in our [gRPC guide](../../howtos/grpc.md#issue-with-host-header-including-the-port).
 
 ---
 
