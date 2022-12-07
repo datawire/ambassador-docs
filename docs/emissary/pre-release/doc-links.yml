@@ -4,7 +4,7 @@
   items:
     - title: Kubernetes network architecture
       link: /topics/concepts/kubernetes-network-architecture
-    - title: 'The Ambassador operating model: GitOps and continuous delivery'
+    - title: "The Ambassador operating model: GitOps and continuous delivery"
       link: /topics/concepts/gitops-continuous-delivery
     - title: Progressive delivery
       link: /topics/concepts/progressive-delivery
@@ -85,6 +85,8 @@
           link: /howtos/tracing-datadog
         - title: Distributed tracing with Zipkin
           link: /howtos/tracing-zipkin
+        - title: Distrubuted tracing with LightStep
+          link: /howtos/tracing-lightstep
         - title: Monitoring with Prometheus and Grafana
           link: /howtos/prometheus
         - title: Statistics

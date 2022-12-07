@@ -113,6 +113,8 @@
            link: /howtos/tracing-datadog
          - title: Distributed tracing with Zipkin
            link: /howtos/tracing-zipkin
+         - title: Distrubuted tracing with LightStep
+           link: /howtos/tracing-lightstep
          - title: Monitoring with Prometheus and Grafana
            link: /howtos/prometheus
          - title: Statistics
