@@ -259,7 +259,7 @@ See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/ext
 
 ##### Strip matching host port
 
-* `strip_matching_host_port: true` will tell $productName$ to strip any port number from the host/authority header before processing and routing the request. The default is `false`, which will preserve any port number.
+* `strip_matching_host_port: true` will tell $productName$ to strip any port number from the host/authority header before processing and routing the request if that port number matches the port number of Envoy's listener. The default is `false`, which will preserve any port number.
 
 In the default installation of $productName$ the public port is 443, which then maps internally to 8443, so this only works in custom installations where the public Service port and Envoy listener port match.
 
