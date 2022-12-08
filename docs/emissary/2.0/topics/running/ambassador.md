@@ -246,7 +246,9 @@ See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/ext
 
 * `strip_matching_host_port: true` will tell $productName$ to strip any port number from the host/authority header before processing and routing the request. The default is `false`, which will preserve any port number.
 
-This only applies if the port matches the underlying Envoy listener port.
+In the default installation of $productName$ the public port is 443, which then maps internally to 8443, so this only works in custom installations where the public Service port and Envoy listener port match.
+
+A common reason to try using this property is if you are using gRPC with TLS and your client library appends the port to the Host header (i.e. `myurl.com:443`). We have an alternative solution in our [gRPC guide](../../../howtos/grpc#working-with-host-headers-that-include-the-port) that uses a [Lua script](#lua-scripts) to remove all ports from every Host header for that use case.
 
 ---
 
