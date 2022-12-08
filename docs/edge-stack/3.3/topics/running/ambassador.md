@@ -263,7 +263,7 @@ See [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/api-v3/ext
 
 In the default installation of $productName$ the public port is 443, which then maps internally to 8443, so this only works in custom installations where the public Service port and Envoy listener port match.
 
-A common reason to try using this property is if you are using gRPC with TLS and your client library appends the port to the Host header (i.e. `myurl.com:443`). We have an alternative solution in our [gRPC guide](../../../../emissary/3.3/howtos/grpc#working-with-host-headers-that-include-the-port) that uses a [Lua script](#lua-scripts) to remove all ports from every Host header for that use case.
+A common reason to try using this property is if you are using gRPC with TLS and your client library appends the port to the Host header (i.e. `myurl.com:443`). We have an alternative solution in our [gRPC guide](../../../../../emissary/3.3/howtos/grpc#working-with-host-headers-that-include-the-port) that uses a [Lua script](#lua-scripts) to remove all ports from every Host header for that use case.
 
 ---
 
