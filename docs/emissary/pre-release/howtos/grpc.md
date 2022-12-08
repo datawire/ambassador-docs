@@ -239,7 +239,7 @@ $productName$ is now terminating TLS from the gRPC client and proxying the call 
 
 If you want to configure authentication in another language, [gRPC provides examples](https://grpc.io/docs/guides/auth.html) with proper syntax for other languages.
 
-#### Issue with Host header including the port
+#### Working with Host headers that include the port
 
 Some gRPC clients automatically include the port in the Host header. This is a problem when using TLS because the certificate will match `myurl.com` but the Host header will be `myurl.com:443`, resulting in the error `rpc error: code = Unimplemented desc =`. If you run into this issue, there are two ways to solve it depending on your use case, both using the Module resource.
 
