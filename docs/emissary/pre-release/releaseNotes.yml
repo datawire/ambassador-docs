@@ -32,6 +32,16 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.3.1
+    date: '2022-12-08'
+    notes:
+      - title: Update Golang to 1.19.4
+        type: security
+        body: >-
+          Updated Golang to latest 1.19.4 patch release which contained two CVEs: CVE-2022-41720, CVE-2022-41717.
+
+          CVE-2022-41720 only affects Windows and $productName$ only ships on Linux. CVE-2022-41717 affects HTTP/2 servers that are exposed to external clients. $productName$ does not expose any of these golang servers to external clients directly.
+
   - version: 3.3.0
     date: '2022-11-02'
     notes:
@@ -269,6 +279,16 @@ items:
           When using the <code>zipkin</code> driver for the TracingService. The <code>collector_endpoint_version</code> no longer accepts `HTTP_JSON_V1` due to the Envoy upgrade. The new default value is `HTTP_JSON`.
         docs: topics/running/services/tracing-service/
 
+  - version: 2.5.1
+    date: '2022-12-08'
+    notes:
+      - title: Update Golang to 1.19.4
+        type: security
+        body: >-
+          Updated Golang to latest 1.19.4 patch release which contained two CVEs: CVE-2022-41720, CVE-2022-41717.
+
+          CVE-2022-41720 only affects Windows and $productName$ only ships on Linux. CVE-2022-41717 affects HTTP/2 servers that are exposed to external clients. $productName$ does not expose any of these golang servers to external clients directly.
+          
   - version: 2.5.0
     date: '2022-11-03'
     notes:

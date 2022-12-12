@@ -32,6 +32,16 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.3.1
+    date: '2022-12-08'
+    notes:
+      - title: Update Golang to 1.19.4
+        type: security
+        body: >-
+          Updated Golang to latest 1.19.4 patch release which contained two CVEs: CVE-2022-41720, CVE-2022-41717.
+
+          CVE-2022-41720 only affects Windows and $productName$ only ships on Linux. CVE-2022-41717 affects HTTP/2 servers that are exposed to external clients. By default, $productName$ exposes the endpoints for DevPortal, Authentication Service, and RateLimitService via Envoy. Envoy enforces a limit on request header size which mitigates the vulnerability.
+
   - version: 3.3.0
     date: '2022-11-02'
     notes:
@@ -358,6 +368,16 @@ items:
 
           HTTP/3 uses the Quic protocol over UDP. Changes to your cloud provider provisioned Load Balancer will be required to support UDP traffic if using HTTP/3. External Load Balancers must serve traffic on port <code>443</code> because the <code>alt-svc</code> header is not configurable in the initial release of the feature.
         docs: topics/running/http3
+
+  - version: 2.5.1
+    date: '2022-12-08'
+    notes:
+      - title: Update Golang to 1.19.4
+        type: security
+        body: >-
+          Updated Golang to latest 1.19.4 patch release which contained two CVEs: CVE-2022-41720, CVE-2022-41717.
+
+          CVE-2022-41720 only affects Windows and $productName$ only ships on Linux. CVE-2022-41717 affects HTTP/2 servers that are exposed to external clients. By default, $productName$ exposes the endpoints for DevPortal, Authentication Service, and RateLimitService via Envoy. Envoy enforces a limit on request header size which mitigates the vulnerability.
 
   - version: 2.5.0
     date: '2022-11-03'
