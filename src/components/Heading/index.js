@@ -58,6 +58,7 @@ export const heading = (n) => {
               aria-label={props.id.split('-').join(' ')}
               className="anchor before"
               onClick={() => this.copyToClipboard('#' + props.id)}
+              disableScroll={true}
             >
               <Icon loading="lazy" />
             </Link>
