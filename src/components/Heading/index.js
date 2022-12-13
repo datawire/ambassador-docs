@@ -5,6 +5,10 @@ import Link from '../../../../src/components/Link';
 
 import Icon from './icon.inline.svg';
 
+const LinkRef = React.forwardRef((props, ref) => (
+  <span ref={ref}>{props.children}</span>
+));
+
 // heading(n) takes an integer n in the range 1-6, and returns a React
 // component for a heading of that level.
 export const heading = (n) => {
@@ -46,22 +50,18 @@ export const heading = (n) => {
       }
       return (
         <Tag {...props}>
-          <Tooltip
-            PopperProps={{
-              disablePortal: true,
-            }}
-            open={this.state.open}
-            title="Link copied"
-          >
-            <Link
-              to={'#' + props.id}
-              aria-label={props.id.split('-').join(' ')}
-              className="anchor before"
-              onClick={() => this.copyToClipboard('#' + props.id)}
-              disableScroll={true}
-            >
-              <Icon loading="lazy" />
-            </Link>
+          <Tooltip open={this.state.open} title="Link copied">
+            <LinkRef>
+              <Link
+                to={'#' + props.id}
+                aria-label={props.id.split('-').join(' ')}
+                className="anchor before"
+                onClick={() => this.copyToClipboard('#' + props.id)}
+                disableScroll={true}
+              >
+                <Icon loading="lazy" />
+              </Link>
+            </LinkRef>
           </Tooltip>
           {children}
         </Tag>
