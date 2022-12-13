@@ -1,6 +1,10 @@
 # Distributed Tracing with OpenTelemetry and Lightstep
 
-In this tutorial, we'll configure [$productName$](https://www.getambassador.io/products/edge-stack/api-gateway) to initiate a trace on some sample requests, collect them with the OpenTelemetry collector and use Lightstep to visualize them.
+In this tutorial, we'll configure [$productName$](https://www.getambassador.io/products/edge-stack/api-gateway) to initiate a trace on some sample requests, collect them with the OpenTelemetry Collector and use Lightstep to visualize them.
+
+<Alert severity="warning">
+  Please note that Distributed Tracing with the Lightstep tracing driver will no longer be supported as of $productName$ version 3.4.0. If you are currently using the Lightstep tracing driver, please refer to the bottom of the page on how to migrate. 
+</Alert>
 
 ## Before you get started
 
@@ -8,17 +12,13 @@ This tutorial assumes you have already followed the $productName$ [Getting Start
 
 After completing the Getting Started guide you will have a Kubernetes cluster running $productName$ and the Quote service. Let's walk through adding tracing to this setup.
 
-<Alert severity="warning">
-  Please note that Distributed Tracing with the Lightstep tracing driver will no longer be supported as of $productName$ version 3.4.0. If you are currently using the Lightstep tracing driver, please refer to the bottom of the page on how to migrate. 
-</Alert>
-
 ## 1. Setup Lightstep
 
 If you don't already have a Lightstep account be sure to create one [here](https://lightstep.com/). Then create a Project and be sure to create and save the Access Token information. You can find your Access Token information under the Project settings. 
 
 ## 2. Deploy the OpenTelemetry Collector
 
-The next step is to deploy the OpenTelemetry Collector. The purpose of the OpenTelemetry collector is to receive the requested trace data and then export it to Lightstep. 
+The next step is to deploy the OpenTelemetry Collector. The purpose of the OpenTelemetry Collector is to receive the requested trace data and then export it to Lightstep. 
 
 For the purposes of this tutorial, we are going to create and use the `monitoring` namespace. This can be done with the following command.
 
@@ -26,7 +26,7 @@ For the purposes of this tutorial, we are going to create and use the `monitorin
   kubectl create namespace monitoring
 ```
 
-Next we are going to setup our configuration for the OpenTelemetry collector. First, we use a Kubernetes secret to store our Lightstep Access Token that we saved in step one. It is important for us to encode the secret in Base64. How you want to do this securely is up to you, for the purposes of this tutorial, I would recommend an online tool like [Base64Encode.org](https://www.base64encode.org/). Once the secret is encoded, please apply the following YAML and be sure to update the value of the `lightstep_access_token` with your encoded token. 
+Next we are going to setup our configuration for the OpenTelemetry Collector. First, we use a Kubernetes secret to store our Lightstep Access Token that we saved in step one. It is important for us to encode the secret in Base64. How you want to do this securely is up to you, for the purposes of this tutorial we will use the online tool [Base64Encode.org](https://www.base64encode.org/). Once the secret is encoded, please apply the following YAML and be sure to update the value of the `lightstep_access_token` with your encoded token. 
 
 ```yaml
 apiVersion: v1
@@ -43,6 +43,7 @@ Next, please add the following YAML to a file named `opentelemetry.yaml`. This c
 
 ```yaml
 ---
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -54,26 +55,7 @@ metadata:
 data:
   otel-collector-config: |
     receivers:
-      otlp:
-        protocols:
-          grpc:
-          http:
-      prometheus:
-        config:
-          scrape_configs:
-            - job_name: "otel-collector"
-              scrape_interval: 10s
-              static_configs:
-                - targets: ["localhost:8888"]
-              metric_relabel_configs:
-                - source_labels: [ __name__ ]
-                  regex: ".*grpc_io.*"
-                  action: drop
       zipkin: {}
-      jaeger:
-        protocols:
-          grpc:
-          thrift_http:
     processors:
       batch:
       memory_limiter:
@@ -89,9 +71,6 @@ data:
       health_check: {}
       zpages: {}
     exporters:
-      prometheus:
-        endpoint: "0.0.0.0:8889"
-      
       otlp:
         endpoint: ingest.lightstep.com:443
         headers: {"lightstep-access-token":"${LIGHTSTEP_ACCESS_TOKEN}"}
@@ -99,15 +78,10 @@ data:
       extensions: [health_check, zpages]
       pipelines:
         traces:
-          receivers: [otlp, zipkin, jaeger]
+          receivers: [zipkin]
           processors: [memory_limiter, batch, queued_retry]
           exporters:
-            
             - otlp
-        metrics:
-          receivers: [prometheus]
-          processors: [memory_limiter, batch]
-          exporters: [prometheus]
 ---
 apiVersion: v1
 kind: Service
@@ -121,14 +95,8 @@ spec:
   ports:
     - name: otlp # Default endpoint for OpenTelemetry receiver.
       port: 55680
-    - name: jaeger-grpc # Default endpoing for Jaeger gRPC receiver
-      port: 14250
-    - name: jaeger-thrift-http # Default endpoint for Jaeger HTTP receiver.
-      port: 14268
     - name: zipkin # Default endpoint for Zipkin trace receiver.
       port: 9411
-    - name: metrics # Default endpoint for the Collector metrics.
-      port: 8888
   selector:
     component: otel-collector
 ---
@@ -169,12 +137,8 @@ spec:
               cpu: 200m
               memory: 400Mi
           ports:
-            - containerPort: 55679 # Default endpoint for ZPages.
             - containerPort: 55680 # Default endpoint for OpenTelemetry receiver.
-            - containerPort: 14250 # Default endpoint for Jaeger HTTP receiver.
-            - containerPort: 14268 # Default endpoint for Jaeger HTTP receiver.
             - containerPort: 9411  # Default endpoint for Zipkin receiver.
-            - containerPort: 8888  # Default endpoint for querying metrics.
           env:
             - name: LIGHTSTEP_ACCESS_TOKEN
               valueFrom:
@@ -206,7 +170,7 @@ Be sure to apply this configuration with the following command:
   kubectl apply -f opentelemetry.yaml
 ```
 
-At this point, the OpenTelemetry collector should be setup properly and ready to send data to Lightstep. 
+At this point, the OpenTelemetry Collector should be setup properly and ready to send data to Lightstep. 
 
 ## 3. Configure the TracingService
 
@@ -238,14 +202,18 @@ As a final step we want to restart $productName$ as this is necessary to add the
 Finally, we are going to test our Distributed Tracing. Use `curl` to generate a few requests to an existing $productName$ `Mapping`. You may need to perform many requests since only a subset of random requests are sampled and instrumented with traces.
 
 ```
-  curl -L $AMBASSADOR_IP/backend/
+  curl -Li http://$LB_ENDPOINT/backend/
 ```
 
 At this point, we should be able to view and check our traces on the [Lightstep app](https://app.lightstep.com/). You can do so by clicking on the Explorer tab and searching for a trace. 
 
 ## Migrating from the Lightstep Tracing Driver
 
-As of $productName$ versions 3.4.0, the Lightstep tracing driver will no longer be supported. This is due to the upgrade to [Envoy](https://www.getambassador.io/learn/envoy-proxy) version 1.24. Luckily for us, we can follow similar steps to the above tutorial to continue to use Lightstep and upgrade the $productName$ TracingService. 
+<Alert severity="warning">
+  Please be sure to follow these steps prior to upgrading to $productName$ version 3.4.0. 
+</Alert>
+
+As of $productName$ version 3.4.0, the Lightstep tracing driver will no longer be supported. This is due to the upgrade to [Envoy](https://www.getambassador.io/learn/envoy-proxy) version 1.24, where the team at LightStep has completely removed support for the LightStep Tracing driver in favor of using the OpenTelemetry Collector. In order to continue to use Lightstep to visualize our traces, we can follow similar steps to the above tutorial. 
 
 First, make sure that the OpenTelemetry Collector is installed. This can be done by following the same commands as step 2 of this page. Please be sure to create/update the Kubernetes secret to include your Lightstep Access Token. 
 
@@ -253,4 +221,7 @@ Then, we simply need to edit our TracingService to point to the OpenTelemetry Co
 
 If you were using the Lightstep tracing driver, you may have your Lightstep Access Token information set in your TracingService config. Using a Kubernetes Secret, we no longer need to reference the token here. 
 
-Once our TracingService configuration has been updated, a restart of $productName$ may be necessary for Lightstep to recieve our Distributed Tracing information. 
+Once our TracingService configuration has been updated, a restart of $productName$ is necessary for Lightstep to recieve our Distributed Tracing information. This can be done with the following command:
+```
+  kubectl -n ambassador rollout restart deploy
+```
