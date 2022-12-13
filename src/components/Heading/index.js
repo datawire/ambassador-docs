@@ -1,3 +1,4 @@
+import Tooltip from '@mui/material/Tooltip';
 import React from 'react';
 
 import Link from '../../../../src/components/Link';
@@ -18,11 +19,19 @@ export const heading = (n) => {
   //
   // [1]: https://reactjs.org/docs/hooks-rules.html
   class Heading extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { open: false };
+    }
     copyToClipboard(anchor) {
       if (window?.location?.href) {
         const { origin, pathname } = window?.location;
         try {
           navigator?.clipboard?.writeText(`${origin}${pathname}${anchor}`);
+          this.setState({ open: true });
+          setTimeout(() => {
+            this.setState({ open: false });
+          }, 1000);
         } catch (e) {
           console.error('Failed to copy', e);
         }
@@ -37,14 +46,22 @@ export const heading = (n) => {
       }
       return (
         <Tag {...props}>
-          <Link
-            to={'#' + props.id}
-            aria-label={props.id.split('-').join(' ')}
-            className="anchor before"
-            onClick={() => this.copyToClipboard('#' + props.id)}
+          <Tooltip
+            PopperProps={{
+              disablePortal: true,
+            }}
+            open={open}
+            title="Link copied"
           >
-            <Icon loading="lazy" />
-          </Link>
+            <Link
+              to={'#' + props.id}
+              aria-label={props.id.split('-').join(' ')}
+              className="anchor before"
+              onClick={() => this.copyToClipboard('#' + props.id)}
+            >
+              <Icon loading="lazy" />
+            </Link>
+          </Tooltip>
           {children}
         </Tag>
       );
