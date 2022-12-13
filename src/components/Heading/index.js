@@ -18,21 +18,32 @@ export const heading = (n) => {
   //
   // [1]: https://reactjs.org/docs/hooks-rules.html
   class Heading extends React.Component {
+    copyToClipboard(anchor) {
+      if (window?.location?.href) {
+        const { origin, pathname } = window?.location;
+        try {
+          navigator?.clipboard?.writeText(`${origin}${pathname}${anchor}`);
+        } catch (e) {
+          console.error('Failed to copy', e);
+        }
+      }
+    }
+
     render() {
       let { children, ...props } = this.props;
 
       if (!props.id) {
         return <Tag {...props}>{children}</Tag>;
       }
-
       return (
         <Tag {...props}>
           <Link
             to={'#' + props.id}
             aria-label={props.id.split('-').join(' ')}
             className="anchor before"
+            onClick={() => this.copyToClipboard('#' + props.id)}
           >
-            <Icon loading='lazy'/>
+            <Icon loading="lazy" />
           </Link>
           {children}
         </Tag>
