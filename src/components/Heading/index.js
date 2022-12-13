@@ -50,7 +50,7 @@ export const heading = (n) => {
             PopperProps={{
               disablePortal: true,
             }}
-            open={open}
+            open={this.state.open}
             title="Link copied"
           >
             <Link
