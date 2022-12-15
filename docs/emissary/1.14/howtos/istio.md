@@ -580,7 +580,7 @@ Istio defaults to PERMISSIVE mTLS that does not require authentication between c
 
 The Istio [Grafana addon](https://istio.io/docs/tasks/observability/metrics/using-istio-dashboard/) integrates a Grafana dashboard with the Istio Prometheus deployment to visualize the metrics collected there.
 
-The metrics $productName$ adds to the list will appear in the Istio dashboard but we can add an $productName$ dashboard as well. We're going to use the $productName$ dashboard on [Grafana's](https://grafana.com/) website under entry [4689](https://grafana.com/dashboards/4698) as a starting point.
+The metrics $productName$ adds to the list will appear in the Istio dashboard but we can add an $productName$ dashboard as well. We're going to use the $productName$ dashboard on [Grafana's](https://grafana.com/) website under entry [4689](https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/) as a starting point.
 
 First, let's start the port-forwarding for Istio's Grafana service:
 

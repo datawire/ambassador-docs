@@ -207,7 +207,7 @@ metrics exposed by the Prometheus StatsD Exporter, or by [the
 `:8877/metrics` endpoint][].
 
 [Alex Gervais]: https://twitter.com/alex_gervais
-[$productName$ dashboard for Grafana]: https://grafana.com/dashboards/4698
+[$productName$ dashboard for Grafana]: https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/
 
 ## Using Datadog DogStatsD as the StatsD sink
 
