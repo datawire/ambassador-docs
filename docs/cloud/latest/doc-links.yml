@@ -1,9 +1,9 @@
 - title: Quick Start
   link: /service-catalog/quick-start/
-- title: Onboarding dashboard
-  link: /onboarding-dashboard/
 - title: User Guide
   items:
+    - title: Onboarding dashboard
+      link: /onboarding-dashboard/
     - title: Services and Service Groups
       link: /service-catalog/concepts/services/
     - title: Organizing the Service Catalog
