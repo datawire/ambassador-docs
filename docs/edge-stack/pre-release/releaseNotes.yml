@@ -35,20 +35,6 @@ items:
   - version: 3.4.0
     date: 'TBD'
     notes:
-      - title: Update Golang to 1.19.4
-        type: security
-        body: >-
-          Updated Golang to latest 1.19.4 patch release which contained two CVEs: CVE-2022-41720, CVE-2022-41717.
-
-          CVE-2022-41720 only affects Windows and $productName$ only ships on Linux. CVE-2022-41717 affects HTTP/2 servers that are exposed to external clients. By default, $productName$ exposes the endpoints for DevPortal, Authentication Service, and RateLimitService via Envoy. Envoy enforces a limit on request header size which mitigates the vulnerability.
-
-      - title: Update Golang to 1.19.3
-        type: security
-        body: >-
-          Updated Golang to the latest z patch. We are not vulnerable to the CVE-2022-3602 that was released in 1.19.3 and you can read more about it here: <https://medium.com/ambassador-api-gateway/ambassador-labs-security-impact-assessment-of-nov-1-openssl-golang-vulnerabilities-f11b5ec37a7e>.
-          Updating to the latest z patch as part of our normal dependency update process and this will help reduce the noise of security scanners.
-        docs: https://medium.com/ambassador-api-gateway/ambassador-labs-security-impact-assessment-of-nov-1-openssl-golang-vulnerabilities-f11b5ec37a7e
-
       - title: Re-add support for getambassador.io/v1
         type: feature
         body: >-
@@ -85,7 +71,15 @@ items:
           $productName$ now tracks metrics for responses approved/denied by External Filters as well as the response codes they return as well as configuration and connection errors.
         docs: topics/using/filters/external/#metrics
 
-      - title: updated redis client to improve performance with Redis
+      - title: Allow setting the OAuth2 client's session max idle time
+        type: feature
+        body: >-
+          When using the OAuth2 Filter, $productName$ creates a new session when submitting requests to the upstream backend server and sets a cookie containing the sessionID. This session has a limited lifetime before it expires or extended, prompting the user to log back in.
+
+          This session idle length can now be controlled under a new field in the OAuth2 Filter, <code>clientSessionMaxIdle</code>, which controls how long the session will be active without activity before it is expired.
+        docs: https://www.getambassador.io/docs/edge-stack/pre-release/topics/using/filters/oauth2
+
+      - title: Updated redis client to improve performance with Redis
         type: change
         body: >-
           We have updated the client library used to communicate with Redis. The new client provides support for better connection handling and sharing and improved overall performance. As part of our update to
