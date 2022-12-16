@@ -109,6 +109,55 @@ spec:
   - X-Request-Id
 ```
 
+## Metrics
+
+As of $productName$ 3.4.0, the following metrics for External Filters are available via the [metrics endpoint](../../../running/statistics/8877-metrics)
+
+| Metric                                            | Type                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|---------------------------------------------------|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ambassador_edge_stack_external_filter_allowed`   | Counter               | Number of requests that were allowed by Ambassador Edge Stack External Filters. Includes requests that are allowed by failure_mode_allow when unable to connect to the External Filter.                                                                                                          |
+| `ambassador_edge_stack_external_filter_denied`    | Counter               | Number of requests that were denied by Ambassador Edge Stack External Filters. Includes requests that are denied by an inability to connect to the External Filter or due to a Filter config error.                                                                                              |
+| `ambassador_edge_stack_external_filter_error`     | Counter               | Number of errors returned directly from Ambassador Edge Stack External Filters and errors from an inability to connect to the External Filter                                                                                                                                                    |
+| `ambassador_edge_stack_external_handler_error`    | Counter               | Number of errors caused by Ambassador Edge Stack encountering invalid Filter config or an error while parsing the config. \nThese errors will always result in a HTTP 500 response being returned to the client and do not count towards metrics that track response codes from external filters.|
+| `ambassador_edge_stack_external_filter_rq_class`  | Counter (with labels) | Aggregated counter of response code classes returned to downstream clients from Ambassador Edge Stack External Filters.  Includes requests that are denied by an inability to connect to the External Filter.                                                                                    |
+| `ambassador_edge_stack_external_filter_rq_status` | Counter (with labels) | Counter of response codes returned to downstream clients from Ambassador Edge Stack External Filters. Includes requests that are denied by an inability to connect to the External Filter.                                                                                                       |
+
+
+An example of what the metrics may look like can be seen below
+
+```
+# HELP ambassador_edge_stack_external_filter_allowed Number of requests that were allowed by Ambassador Edge Stack External Filters. Includes requests that are allowed by failure_mode_allow when unable to connect to the External Filter.
+# TYPE ambassador_edge_stack_external_filter_allowed counter
+ambassador_edge_stack_external_filter_allowed 2
+
+# HELP ambassador_edge_stack_external_filter_denied Number of requests that were denied by Ambassador Edge Stack External Filters. Includes requests that are denied by an inability to connect to the External Filter or due to a Filter config error.
+# TYPE ambassador_edge_stack_external_filter_denied counter
+ambassador_edge_stack_external_filter_denied 12
+
+# HELP ambassador_edge_stack_external_filter_error Number of errors returned directly from Ambassador Edge Stack External Filters and errors from an inability to connect to the External Filter
+# TYPE ambassador_edge_stack_external_filter_error counter
+ambassador_edge_stack_external_filter_error 2
+
+# HELP ambassador_edge_stack_external_filter_rq_class Aggregated counter of response code classes returned to downstream clients from Ambassador Edge Stack External Filters.  Includes requests that are denied by an inability to connect to the External Filter.
+# TYPE ambassador_edge_stack_external_filter_rq_class counter
+ambassador_edge_stack_external_filter_rq_class{class="2xx"} 2
+ambassador_edge_stack_external_filter_rq_class{class="4xx"} 5
+ambassador_edge_stack_external_filter_rq_class{class="5xx"} 7
+
+# HELP ambassador_edge_stack_external_filter_rq_status Counter of response codes returned to downstream clients from Ambassador Edge Stack External Filters. Includes requests that are denied by an inability to connect to the External Filter.
+# TYPE ambassador_edge_stack_external_filter_rq_status counter
+ambassador_edge_stack_external_filter_rq_status{status="200"} 2
+ambassador_edge_stack_external_filter_rq_status{status="401"} 3
+ambassador_edge_stack_external_filter_rq_status{status="403"} 2
+ambassador_edge_stack_external_filter_rq_status{status="500"} 2
+ambassador_edge_stack_external_filter_rq_status{status="501"} 5
+
+# HELP ambassador_edge_stack_external_handler_error Number of errors caused by Ambassador Edge Stack encountering invalid Filter config or an error while parsing the config. \nThese errors will always result in a HTTP 500 response being returned to the client and do not count towards metrics that track response codes from external filters.
+# TYPE ambassador_edge_stack_external_handler_error counter
+ambassador_edge_stack_external_handler_error 0
+```
+
+
 ## Transport Protocol Migration
 
 > **Note:** The following information is only applicable to External Filters using `proto: grpc`

@@ -53,7 +53,7 @@ items:
         type: feature
         body: >-
           Support for the <code>getambassador.io/v1</code> apiVersion has been re-introduced, in order to facilitate smoother migrations from $productName$ 1.y.  Previously, in order to make migrations possible, an "unserved" <code>v1</code> version was declared to Kubernetes, but was unsupported by $productName$.  That unserved <code>v1</code> could
-          cause an excess of errors to be logged by the Kubernetes Nodes (regardless of whether the installation was migrated from 1.y or was a fresh 2.y install). 
+          cause an excess of errors to be logged by the Kubernetes Nodes (regardless of whether the installation was migrated from 1.y or was a fresh 2.y install).
 
           It is still recommeded that `v3alpha1` be used but fully supporting <code>v1</code> again should resolve these errors.
         docs: https://github.com/emissary-ingress/emissary/pull/4055
@@ -79,10 +79,16 @@ items:
           This allows the healthcheck server to be configured to use IPv6-only k8s environments. (Thanks to <a href="https://github.com/TimonOmsk">Dmitry Golushko</a>!).
         docs: https://www.getambassador.io/docs/emissary/pre-release/topics/running/environment/
 
+      - title: Added metrics for External Filters to the /metrics endpoint
+        type: feature
+        body: >-
+          $productName$ now tracks metrics for responses approved/denied by External Filters as well as the response codes they return as well as configuration and connection errors.
+        docs: topics/using/filters/external/#metrics
+
       - title: updated redis client to improve performance with Redis
         type: change
         body: >-
-          We have updated the client library used to communicate with Redis. The new client provides support for better connection handling and sharing and improved overall performance. As part of our update to 
+          We have updated the client library used to communicate with Redis. The new client provides support for better connection handling and sharing and improved overall performance. As part of our update to
           the new driver we reduced chattiness with Redis by taking advantage
           of Pipelinig and Scripting features of Redis.
 
