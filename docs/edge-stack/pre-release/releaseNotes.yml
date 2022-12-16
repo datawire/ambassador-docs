@@ -35,6 +35,13 @@ items:
   - version: 3.4.0
     date: 'TBD'
     notes:
+      - title: Update Golang to 1.19.4
+        type: security
+        body: >-
+          Updated Golang to latest 1.19.4 patch release which contained two CVEs: CVE-2022-41720, CVE-2022-41717.
+
+          CVE-2022-41720 only affects Windows and $productName$ only ships on Linux. CVE-2022-41717 affects HTTP/2 servers that are exposed to external clients. By default, $productName$ exposes the endpoints for DevPortal, Authentication Service, and RateLimitService via Envoy. Envoy enforces a limit on request header size which mitigates the vulnerability.
+
       - title: Update Golang to 1.19.3
         type: security
         body: >-
@@ -46,7 +53,9 @@ items:
         type: feature
         body: >-
           Support for the <code>getambassador.io/v1</code> apiVersion has been re-introduced, in order to facilitate smoother migrations from $productName$ 1.y.  Previously, in order to make migrations possible, an "unserved" <code>v1</code> version was declared to Kubernetes, but was unsupported by $productName$.  That unserved <code>v1</code> could
-          cause an excess of errors to be logged by the Kubernetes Nodes (regardless of whether the installation was migrated from 1.y or was a fresh 2.y install); fully supporting <code>v1</code> again should resolve these errors.
+          cause an excess of errors to be logged by the Kubernetes Nodes (regardless of whether the installation was migrated from 1.y or was a fresh 2.y install). 
+
+          It is still recommeded that `v3alpha1` be used but fully supporting <code>v1</code> again should resolve these errors.
         docs: https://github.com/emissary-ingress/emissary/pull/4055
 
       - title: Add support for active health checking configuration.
@@ -73,9 +82,11 @@ items:
       - title: updated redis client to improve performance with Redis
         type: change
         body: >-
-          We have updated the client library used to communicate with Redis. The new client provides support for RESP3, better connection handling and sharing and improved implicit pipeling which will help improve performance.
+          We have updated the client library used to communicate with Redis. The new client provides support for better connection handling and sharing and improved overall performance. As part of our update to 
+          the new driver we reduced chattiness with Redis by taking advantage
+          of Pipelinig and Scripting features of Redis.
 
-          This means the <code>AES_REDIS_EXPERIMENTAL_DRIVER_ENABLED</code> flag is no longer needed and can be safely removed.
+          This means the <code>AES_REDIS_EXPERIMENTAL_DRIVER_ENABLED</code> flag is now a no-op and can be safely removed.
 
   - version: 3.3.1
     date: '2022-12-08'
