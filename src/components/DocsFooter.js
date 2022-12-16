@@ -1,5 +1,5 @@
 import React from 'react';
-
+import getEditOnPageUrls from '../utils/getEditOnpageUrls';
 import GithubIcon from '../images/github-icon.inline.svg';
 
 const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
@@ -62,6 +62,9 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       dstUrl = `https://github.com/telepresenceio/telepresence.io/blob/master/docs/v${version}/${restOfFilePath}`;
       break;
   }
+
+  const customLink = getEditOnPageUrls[page?.fields?.slug];
+  dstUrl = customLink ? customLink : dstUrl;
 
   return (
     <footer className="docs__footer">

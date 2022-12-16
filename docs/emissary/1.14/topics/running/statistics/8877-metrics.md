@@ -57,14 +57,14 @@ with Prometheus and Grafana](../../../../howtos/prometheus).
 
 #### Sample dashboard
 
-We provide a [sample Grafana dashboard](https://grafana.com/dashboards/13758)
+We provide a [sample Grafana dashboard](https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/)
 that displays information collected by Prometheus from the
 `:8877/metrics` endpoint.
 
 
 #### Just Envoy information
 
-![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../../images/grafana.png)
+![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../images/grafana.png)
 
 [Alex Gervais][] has written a template [$productName$ dashboard for
 Grafana][] that displays information collected by Prometheus either
@@ -75,5 +75,5 @@ statistics; because of this, we recommend using the other sample
 dashboard above.
 
 [Alex Gervais]: https://twitter.com/alex_gervais
-[$productName$ dashboard for Grafana]: https://grafana.com/dashboards/4698
+[$productName$ dashboard for Grafana]: https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/
 [envoy-statsd-prometheus]: ../envoy-statsd#using-prometheus-statsd-exporter-as-the-statsd-sink

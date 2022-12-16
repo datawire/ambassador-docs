@@ -199,7 +199,7 @@ kubectl port-forward prometheus-prometheus-0 9090
 
 ### Using Grafana to visualize statistics gathered by Prometheus
 
-![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../../images/grafana.png)
+![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../images/grafana.png)
 
 If you're using Grafana, [Alex Gervais][] has written a template
 [$productName$ dashboard for Grafana][] that works with either the
@@ -207,7 +207,7 @@ metrics exposed by the Prometheus StatsD Exporter, or by [the
 `:8877/metrics` endpoint][].
 
 [Alex Gervais]: https://twitter.com/alex_gervais
-[$productName$ dashboard for Grafana]: https://grafana.com/dashboards/4698
+[$productName$ dashboard for Grafana]: https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/
 
 ## Using Datadog DogStatsD as the StatsD sink
 
