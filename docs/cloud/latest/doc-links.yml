@@ -40,6 +40,8 @@
       link: /config-analysis/quick-start
     - title: Authenticating to Ambassador Cloud
       link: /authenticating/
+    - title: Onboarding dashboard
+      link: /onboarding-dashboard/
 - title: Reference
   items:
     - title: Create a local K8s Dev Environment
