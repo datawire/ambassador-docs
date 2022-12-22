@@ -38,9 +38,9 @@ items:
       - title: Upgrade to Envoy 1.24.1
         type: feature
         body: >-
-          This upgrades $productName$ to be built on Envoy v1.24.1. Two notable changes were introduced.
+          This upgrades $productName$ to be built on Envoy v1.24.1. Two notable changes were introduced.<br/>
           
-          First, the team at LightStep and the Envoy Maintainers have decided to no longer support the native *LightStep* tracing driver in favor of using the Open Telemetry driver. The code for the native Enovy LightStep driver has been removed from the Envoy code base. This means $productName$ will no longer support LightStep in the <code>TracingService</code>. The recommended upgrade path is to leverage a supported Tracing driver such as `Zipkin` and use the [Open Telemetry Collector](https://opentelemetry.io/docs/collector/) to collect and forward Observabity data to LightStep. A guide for this can be found here: [Distributed Tracing with Open Telemetry and LightStep](howtos/tracing-lightstep/).
+          First, the team at LightStep and the Envoy Maintainers have decided to no longer support the native <b>LightStep</b> tracing driver in favor of using the Open Telemetry driver. The code for the native Enovy LightStep driver has been removed from the Envoy code base. This means $productName$ will no longer support LightStep in the <code>TracingService</code>. The recommended upgrade path is to leverage a supported Tracing driver such as <code>Zipkin</code> and use the <a href="https://opentelemetry.io/docs/collector/">Open Telemetry Collector</a> to collect and forward Observabity data to LightStep. A guide for this can be found here: <a href="howtos/tracing-lightstep/">Distributed Tracing with Open Telemetry and LightStep</a>.<br/>
 
           Second, a bug was fixed in Envoy 1.24 that changes how the upstream clusters distributed tracing <code>span</code> is named. Prior to Envoy 1.24 it would always set the span name to the <code>cluster.name</code>. The expected behavior from Envoy was that if provided an <code>alt_stat_name</code> then use it else fallback to <code>cluster.name</code>.
 
@@ -108,7 +108,7 @@ items:
       - title: Fix Filters not properly caching large jwks responses
         type: bugfix
         body: >-
-          In some cases, a <code>Filter</code> would fail to properly cache the response from the jwks endpoint due to the response being too large to cache. This would hurt performance and cause $productName$ to be rate-limited by the iDP. This has been fixed to accomodate iDP's that are configured to support multiple key sets thus returning a response that is larger than the typical default respoonse from the major iDP's. 
+          In some cases, a <code>Filter</code> would fail to properly cache the response from the jwks endpoint due to the response being too large to cache. This would hurt performance and cause $productName$ to be rate-limited by the iDP. This has been fixed to accomodate iDP's that are configured to support multiple key sets thus returning a response that is larger than the typical default response from most iDP's. 
 
   - version: 3.3.1
     date: '2022-12-08'
