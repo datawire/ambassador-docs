@@ -38,9 +38,9 @@ items:
       - title: Upgrade to Envoy 1.24.1
         type: feature
         body: >-
-          This upgrades $productName$ to be built on Envoy v1.24.1. Two notable changes were introduced.<br/>
+          This upgrades $productName$ to be built on Envoy v1.24.1. Two notable changes were introduced:<br/><br/>
           
-          First, the team at LightStep and the Envoy Maintainers have decided to no longer support the native <b>LightStep</b> tracing driver in favor of using the Open Telemetry driver. The code for the native Enovy LightStep driver has been removed from the Envoy code base. This means $productName$ will no longer support LightStep in the <code>TracingService</code>. The recommended upgrade path is to leverage a supported Tracing driver such as <code>Zipkin</code> and use the <a href="https://opentelemetry.io/docs/collector/">Open Telemetry Collector</a> to collect and forward Observabity data to LightStep. A guide for this can be found here: <a href="howtos/tracing-lightstep/">Distributed Tracing with Open Telemetry and LightStep</a>.<br/>
+          First, the team at LightStep and the Envoy Maintainers have decided to no longer support the native <b>LightStep</b> tracing driver in favor of using the Open Telemetry driver. The code for the native Enovy LightStep driver has been removed from the Envoy code base. This means $productName$ will no longer support LightStep in the <code>TracingService</code>. The recommended upgrade path is to leverage a supported Tracing driver such as <code>Zipkin</code> and use the <a href="https://opentelemetry.io/docs/collector/">Open Telemetry Collector</a> to collect and forward Observabity data to LightStep. A guide for this can be found here: <a href="howtos/tracing-lightstep/">Distributed Tracing with Open Telemetry and LightStep</a>.<br/><br/>
 
           Second, a bug was fixed in Envoy 1.24 that changes how the upstream clusters distributed tracing <code>span</code> is named. Prior to Envoy 1.24 it would always set the span name to the <code>cluster.name</code>. The expected behavior from Envoy was that if provided an <code>alt_stat_name</code> then use it else fallback to <code>cluster.name</code>.
 
@@ -63,13 +63,13 @@ items:
       - title: Add environment variables to the healthcheck server.
         type: feature
         body: >-
-          The healthcheck server's bind address, bind port and IP family can now be configured using environment variables:
+          The healthcheck server's bind address, bind port and IP family can now be configured using environment variables:<br/><br/>
 
-          - <code>AMBASSADOR_HEALTHCHECK_BIND_ADDRESS</code>: The address to bind the healthcheck server to.
+          <code>AMBASSADOR_HEALTHCHECK_BIND_ADDRESS</code>: The address to bind the healthcheck server to.<br/><br/>
 
-          - <code>AMBASSADOR_HEALTHCHECK_BIND_PORT</code>: The port to bind the healthcheck server to.
+          <code>AMBASSADOR_HEALTHCHECK_BIND_PORT</code>: The port to bind the healthcheck server to.<br/><br/>
 
-          - <code>AMBASSADOR_HEALTHCHECK_IP_FAMILY</code>: The IP family to use for the healthcheck server.
+          <code>AMBASSADOR_HEALTHCHECK_IP_FAMILY</code>: The IP family to use for the healthcheck server.<br/><br/>
 
           This allows the healthcheck server to be configured to use IPv6-only k8s environments. (Thanks to <a href="https://github.com/TimonOmsk">Dmitry Golushko</a>!).
         docs: https://www.getambassador.io/docs/emissary/pre-release/topics/running/environment/

@@ -215,7 +215,7 @@ At this point, we should be able to view and check our traces on the [Lightstep 
   Please be sure to follow these steps prior to upgrading to $productName$ version 3.4.0.
 </Alert>
 
-As of $productName$ version 3.4.0, the Lightstep tracing driver will no longer be supported. This is due to the upgrade to [Envoy](https://www.getambassador.io/learn/envoy-proxy) version 1.24, where the team at LightStep has completely removed support for the LightStep Tracing driver in favor of using the OpenTelemetry Collector. In order to continue to use Lightstep to visualize our traces, we can follow similar steps to the above tutorial.
+As of $productName$ version 3.4.0, the Lightstep tracing driver will no longer be supported. This is due to the upgrade to Envoy version 1.24, where the team at LightStep has completely removed support for the LightStep Tracing driver in favor of using the OpenTelemetry Collector. In order to continue to use Lightstep to visualize our traces, we can follow similar steps to the above tutorial.
 
 First, make sure that the OpenTelemetry Collector is installed. This can be done by following the same commands as step 2 of this page. Please be sure to create/update the Kubernetes secret to include your Lightstep Access Token.
 
