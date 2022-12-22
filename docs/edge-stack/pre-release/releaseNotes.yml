@@ -33,8 +33,19 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.4.0
-    date: 'TBD'
+    date: '2023-01-03'
     notes:
+      - title: Upgrade to Envoy 1.24.1
+        type: feature
+        body: >-
+          This upgrades $productName$ to be built on Envoy v1.24.1. Two notable changes were introduced.
+          
+          First, the team at LightStep and the Envoy Maintainers have decided to no longer support the native *LightStep* tracing driver in favor of using the Open Telemetry driver. The code for the native Enovy LightStep driver has been removed from the Envoy code base. This means $productName$ will no longer support LightStep in the <code>TracingService</code>. The recommended upgrade path is to leverage a supported Tracing driver such as `Zipkin` and use the [Open Telemetry Collector](https://opentelemetry.io/docs/collector/) to collect and forward Observabity data to LightStep. A guide for this can be found here: [Distributed Tracing with Open Telemetry and LightStep](howtos/tracing-lightstep/).
+
+          Second, a bug was fixed in Envoy 1.24 that changes how the upstream clusters distributed tracing <code>span</code> is named. Prior to Envoy 1.24 it would always set the span name to the <code>cluster.name</code>. The expected behavior from Envoy was that if provided an <code>alt_stat_name</code> then use it else fallback to <code>cluster.name</code>.
+
+        docs: https://www.envoyproxy.io/docs/envoy/latest/version_history/v1.24/v1.24
+
       - title: Re-add support for getambassador.io/v1
         type: feature
         body: >-
@@ -68,13 +79,13 @@ items:
       - title: Added metrics for External Filters to the /metrics endpoint
         type: feature
         body: >-
-          $productName$ now tracks metrics for responses approved/denied by External Filters as well as the response codes they return as well as configuration and connection errors.
+          $productName$ now tracks metrics for External Filters which includes responses approved/denied, the response codes returned as well as configuration and connection errors.
         docs: topics/using/filters/external/#metrics
 
       - title: Allow setting the OAuth2 client's session max idle time
         type: feature
         body: >-
-          When using the OAuth2 Filter, $productName$ creates a new session when submitting requests to the upstream backend server and sets a cookie containing the sessionID. This session has a limited lifetime before it expires or extended, prompting the user to log back in.
+          When using the OAuth2 Filter, $productName$ creates a new session when submitting requests to the upstream backend server and sets a cookie containing the sessionID. This session has a limited lifetime before it expires or is extended, prompting the user to log back in.
 
           This session idle length can now be controlled under a new field in the OAuth2 Filter, <code>clientSessionMaxIdle</code>, which controls how long the session will be active without activity before it is expired.
         docs: https://www.getambassador.io/docs/edge-stack/pre-release/topics/using/filters/oauth2
@@ -87,6 +98,11 @@ items:
           of Pipelinig and Scripting features of Redis.
 
           This means the <code>AES_REDIS_EXPERIMENTAL_DRIVER_ENABLED</code> flag is now a no-op and can be safely removed.
+
+      - title: Fix Filters not properly caching large jwks responses
+        type: bugfix
+        body: >-
+          In some cases, a <code>Filter</code> would fail to properly cache the response from the jwks endpoint due to the response being too large to cache. This would hurt performance and cause $productName$ to be rate-limited by the iDP. This has been fixed to accomodate iDP's that are configured to support multiple key sets thus returning a response that is larger than the typical default respoonse from the major iDP's. 
 
   - version: 3.3.1
     date: '2022-12-08'
