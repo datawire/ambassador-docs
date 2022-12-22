@@ -33,7 +33,7 @@ There are four quota limits that pertain to subscriptions:
 
 ### Active Services
 
-Active services can be listed by clicking **view actives services** in the Active services panel. If you delete your service and recreate it with the same name and in the same namespace, it will still count as 1 active service. If it's not in the same namespace, it will count as 2.
+You can see which of your services are counting against your subscription by clicking **view actives services** in the Active services panel. If you delete your service and recreate it with the same name and in the same namespace, it will still count as 1 active service.
 
 The active services list shows the services that have had intercepts, rollouts, or mappings in your organization for the last 28 days.
 
