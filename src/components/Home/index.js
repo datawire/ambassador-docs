@@ -28,7 +28,6 @@ import EdgeStack from '../../products/EdgeStack';
 import Emissary from '../../products/Emissary';
 import Kubernetes from '../../products/Kubernetes';
 import Telepresence from '../../products/Telepresence';
-import '../../style.less';
 import getDocsActiveVersion from '../../utils/getDocsActiveVersion';
 import getPrevNext from '../../utils/getPrevNext';
 import getSpecialTitles from '../../utils/getSpecialTitles';
