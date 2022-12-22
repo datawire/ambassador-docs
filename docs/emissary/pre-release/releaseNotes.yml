@@ -33,8 +33,19 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.4.0
-    date: 'TBD'
+    date: '2023-01-03'
     notes:
+      - title: Upgrade to Envoy 1.24.1
+        type: feature
+        body: >-
+          This upgrades $productName$ to be built on Envoy v1.24.1. Two notable changes were introduced.
+          
+          First, the team at LightStep and the Envoy Maintainers have decided to no longer support the native *LightStep* tracing driver in favor of using the Open Telemetry driver. The code for the native Enovy LightStep driver has been removed from the Envoy code base. This means $productName$ will no longer support LightStep in the <code>TracingService</code>. The recommended upgrade path is to leverage a supported Tracing driver such as `Zipkin` and use the [Open Telemetry Collector](https://opentelemetry.io/docs/collector/) to collect and forward Observabity data to LightStep. A guide for this can be found here: [Distributed Tracing with Open Telemetry and LightStep](howtos/tracing-lightstep/).
+
+          Second, a bug was fixed in Envoy 1.24 that changes how the upstream clusters distributed tracing <code>span</code> is named. Prior to Envoy 1.24 it would always set the span name to the <code>cluster.name</code>. The expected behavior from Envoy was that if provided an <code>alt_stat_name</code> then use it else fallback to <code>cluster.name</code>.
+
+        docs: https://www.envoyproxy.io/docs/envoy/latest/version_history/v1.24/v1.24
+
       - title: Re-add support for getambassador.io/v1
         type: feature
         body: >-
@@ -45,7 +56,7 @@ items:
       - title: Add support for active health checking configuration.
         type: feature
         body: >-
-          It is now possible to configure active healhchecking for upstreams within a <code>Mapping</code>. If the upstream fails its configured health check then Envoy will mark the upstream as unhealthy and no longer send traffic to that upstream. Single pods within a group may can be marked as unhealthy. The healthy pods will continue to receive
+          It is now possible to configure active healhchecking for upstreams within a <code>Mapping</code>. If the upstream fails its configured health check then Envoy will mark the upstream as unhealthy and no longer send traffic to that upstream. Single pods within a group can be marked as unhealthy. The healthy pods will continue to receive
           traffic normally while the unhealthy pods will not receive any traffic until they recover by passing the health check.
         docs: howtos/active-health-checking/
 
