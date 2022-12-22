@@ -99,6 +99,12 @@ items:
 
           This means the <code>AES_REDIS_EXPERIMENTAL_DRIVER_ENABLED</code> flag is now a no-op and can be safely removed.
 
+      - title: Adopt stand alone Ambassador Agent
+        type: change
+        body: >-
+          Previously, the Agent used for communicating with Ambassador Cloud was bundled into $productName$. This tied it to the same release schedule as $productName$ and made it difficult to iterate on its feature set. It has now been extracted into its own repository and has its own release process and schedule.
+        docs: https://github.com/datawire/ambassador-agent
+        
       - title: Fix Filters not properly caching large jwks responses
         type: bugfix
         body: >-

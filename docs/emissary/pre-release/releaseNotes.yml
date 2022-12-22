@@ -74,6 +74,12 @@ items:
           This allows the healthcheck server to be configured to use IPv6-only k8s environments. (Thanks to <a href="https://github.com/TimonOmsk">Dmitry Golushko</a>!).
         docs: https://www.getambassador.io/docs/emissary/pre-release/topics/running/environment/
 
+      - title: Adopt stand alone Ambassador Agent
+        type: change
+        body: >-
+          Previously, the Agent used for communicating with Ambassador Cloud was bundled into $productName$. This tied it to the same release schedule as $productName$ and made it difficult to iterate on its feature set. It has now been extracted into its own repository and has its own release process and schedule.
+        docs: https://github.com/datawire/ambassador-agent
+
   - version: 3.3.1
     date: '2022-12-08'
     notes:
