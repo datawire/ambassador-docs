@@ -1,15 +1,15 @@
 ---
 title: "Onboarding Dashboard | Ambassador Cloud"
-description: "In this section, you can see the ambassador onboarding procces of your company"
+description: "In this section, you can see the ambassador onboarding procces of your organization"
 ---
 
 # Onboarding Dashboard
 
-Invite and onboard all your developers to get started with intercept services and see their current process with the intercepts. See who from the company has done some progress on intercepts before.
+A central location to see the status of your developers, and the services within your Organization.
 
 ## Onboarding Overview
 
-See all your onboarded developers and those who do not have yet intercepts.
+As an organization adminstrator you will be able to see, how many of your developers have onboarded, who's still left to onboard, invite more of your developers, and see which services are currently being used across your Organization.
 
 <p align="center">
   <img src="../images/onboarding-dashboard.png" width="600" alt="Onboarding dashboard" />
@@ -19,7 +19,7 @@ See all your onboarded developers and those who do not have yet intercepts.
   <img src="../images/onboarding-active-services.png" width="600" alt="Active services" />
 </p>
 
-- **Invite more people:** Invite your colleagues to collaborate, send an email invitation link to start the ambassador cloud experience
+- **Invite more people:** Invite your colleagues to collaborate, send an email invitation link to start the Ambassador Cloud experience
 - **Developers onboarded:** See the number of people that have created or initialized an intercept.
-- **Need to be onboarded:** List of people who don't have interacted with any intercept.
-- **Active services:** All your company's active services are shown here. Also, you can see the creation date and how the service was activated.
+- **Need to be onboarded:** List of people who have not created any intercept.
+- **Active services:** Your services that are currently flagged as `active`, how they were activated, and the last seen date.
