@@ -3,7 +3,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
 import url from 'url';
 
-import Layout from '../../../../src/components/Layout';
+import Layout from '../../../../src/components/Layout/DocLayout';
 
 import Breadcrumbs from '../../../../src/components/Breadcrumbs/Breadcrumbs';
 import Burger from '../../../../src/components/Burger/Burger';
