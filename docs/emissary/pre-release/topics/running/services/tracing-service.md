@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert';
 
 Applications that consist of multiple services can be difficult to debug, as a single request can span multiple services. Distributed tracing tells the story of your request as it is processed through your system. Distributed tracing is a powerful tool to debug and analyze your system in addition to request logging and metrics.
 
-When enabled, the `TracingService` will instruct $productName$ to initiate a trace on requests by generating and populating an `x-request-id` HTTP header. Services can make use of this `x-request-id` header in logging and forward it in downstream requests for tracing. $productName$ also integrates with external trace visualization services, including [LightStep](https://lightstep.com/) and Zipkin-compatible APIs such as [Zipkin](https://zipkin.io/) and [Jaeger](https://github.com/jaegertracing/) to allow you to store and visualize traces. You can read further on [Envoy's Tracing capabilities](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/observability/tracing).
+When enabled, the `TracingService` will instruct $productName$ to initiate a trace on requests by generating and populating an `x-request-id` HTTP header. Services can make use of this `x-request-id` header in logging and forward it in downstream requests for tracing. $productName$ also integrates with external trace visualization services, including Zipkin-compatible APIs such as [Zipkin](https://zipkin.io/) and [Jaeger](https://github.com/jaegertracing/) to allow you to store and visualize traces. You can read further on [Envoy's Tracing capabilities](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/observability/tracing).
 
 A `TracingService` manifest configures $productName$ to use an external trace visualization service:
 
@@ -34,17 +34,34 @@ spec:
 | Field     | Description | values |
 | --------- | ----------- | ------------- |
 | `service` | gives the URL of the external HTTP trace service. | ex. `example-zipkin:9411` |
-| `driver`  | provides the driver information that handles communicating with the service | enum:<br/>`lightstep`<br/>`zipkin`<br/>`datadog` |
+| `driver`  | provides the driver information that handles communicating with the service | enum:<br/>`zipkin`<br/>`datadog` |
 | `config` | provides additional configuration options for the selected `driver`. Supported configuration for each driver is found below. | |
 | `tag_headers` | **Deprecated** - it is recommend that you switch to using `custom_tags`| |
 | `custom_tags` | configure tags to attach to traces. See section below for more details. | |
-| `propagation_modes` | (optional) if present, specifies a list of the propogation modes to be used | enum: <br/>`ENVOY`<br/>`LIGHTSTEP`<br/>`B3`<br/>`TRACE_CONTEXT` |
+| `propagation_modes` | (optional) if present, specifies a list of the propogation modes to be used | enum: <br/>`ENVOY`<br/>`B3`<br/>`TRACE_CONTEXT` |
 | `sampling` | (optional) if present, specifies some target percentages of requests that will be traced. | |
 
 Please note that you must use the HTTP/2 pseudo-header names. For example:
 
 - the `host` header should be specified as the `:authority` header; and
 - the `method` header should be specified as the `:method` header.
+
+
+<Alert severity="info">
+The <code>TraceService</code> is configured globally during Envoy bootstrap, therefore $productName$ must be restarted for changes to take affect.
+</Alert>
+
+
+## Supported Tracing Drivers
+
+The `TraceService` currently supports the following drivers:
+
+- `zipkin`
+- `datadog`
+
+<Alert severity="warning">
+In Envoy 1.24, support for the <code>LightStep</code> driver was removed. As of $produceName$ 3.4.0, the <code>TracingService</code> no longer supports the <code>lightstep</code> tracing driver. If you are currently using the native Lightstep tracing driver, please refer to <a href="../../../../howtos/tracing-lightstep/">Distributed Tracing with Open Telemetry and LightStep</a>
+</Alert>
 
 ## Sampling
 
@@ -95,10 +112,6 @@ custom_tags:
       name: SERVER_ID
       default_value: "unknown"  # optional
 ```
-
-### Lightstep driver configurations
-
-- `access_token_file` provides the location of the file containing the access token to the LightStep API.
 
 ### Zipkin driver configurations
 

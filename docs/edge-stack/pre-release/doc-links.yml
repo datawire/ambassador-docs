@@ -4,7 +4,7 @@
    items:
      - title: Kubernetes network architecture
        link: /topics/concepts/kubernetes-network-architecture
-     - title: "The Ambassador operating model: GitOps and continuous delivery"
+     - title: 'The Ambassador operating model: GitOps and continuous delivery'
        link: /topics/concepts/gitops-continuous-delivery
      - title: Progressive delivery
        link: /topics/concepts/progressive-delivery
@@ -42,7 +42,9 @@
          - title: Advanced deployment configuration
            link: /topics/running/running
          - title: Performance and scaling $productName$
-           link: /topics/running/scaling    
+           link: /topics/running/scaling
+     - title: Active health checking configuration
+       link: /howtos/active-health-checking
      - title: HTTP/3 configuration
        items:
          - title: HTTP3 setup in $productName$
@@ -65,7 +67,7 @@
            link: /howtos/grpc
          - title: WebSocket connections
            link: /howtos/websockets
-     - title: Authentication 
+     - title: Authentication
        items:
          - title: Basic authentication
            link: /howtos/ext-filters
@@ -90,7 +92,7 @@
          - title: Single Sign-On with UAA
            link: /howtos/sso/uaa
          - title: Authentication extension
-           link: /topics/running/aes-extensions/authentication           
+           link: /topics/running/aes-extensions/authentication
      - title: Rate limiting
        items:
          - title: Rate limiting in $productName$
@@ -111,6 +113,8 @@
            link: /howtos/tracing-datadog
          - title: Distributed tracing with Zipkin
            link: /howtos/tracing-zipkin
+         - title: Distributed tracing with LightStep
+           link: /howtos/tracing-lightstep
          - title: Monitoring with Prometheus and Grafana
            link: /howtos/prometheus
          - title: Statistics
@@ -145,7 +149,7 @@
            link: /topics/using/intro-mappings
          - title: Advanced Mapping configuration
            link: /topics/using/mappings
-     - title: TLS configuration 
+     - title: TLS configuration
        items:
          - title: TLS overview
            link: /topics/running/tls/
@@ -162,8 +166,8 @@
          - title: Using cert-manager
            link: /howtos/cert-manager
          - title: Client certificate validation
-           link: /howtos/client-cert-validation  
-     - title: Filters 
+           link: /howtos/client-cert-validation
+     - title: Filters
        items:
          - title: Filters and Filter policies
            link: /topics/using/filters/
@@ -194,7 +198,7 @@
          - title: Load balancing
            link: /topics/running/load-balancer
          - title: Service discovery and resolvers
-           link: /topics/running/resolvers    
+           link: /topics/running/resolvers
      - title: Headers
        items:
          - title: Headers overview
