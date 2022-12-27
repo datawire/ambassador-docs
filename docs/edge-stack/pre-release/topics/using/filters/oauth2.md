@@ -7,7 +7,7 @@ The OAuth2 filter type performs OAuth2 authorization against an identity provide
 * An OAuth Client, which fetches resources from the Resource Server on the user's behalf.
 * Half of a Resource Server, validating the Access Token before allowing the request through to the upstream service, which implements the other half of the Resource Server.
 
-This is different from most OAuth implementations where the Authorization Server and the Resource Server are in the same security domain. With the Ambassador Edge Stack, the Client and the Resource Server are in the same security domain, and there is an independent Authorization Server.
+This is different from most OAuth implementations where the Authorization Server and the Resource Server are in the same security domain. With Ambassador Edge Stack, the Client and the Resource Server are in the same security domain, and there is an independent Authorization Server.
 
 ## The Ambassador authentication flow
 
@@ -91,9 +91,10 @@ spec:
         # It is invalid to specify both "value" and "valueRegex".
         value: "string"                    # optional; default is any non-empty string
         valueRegex: "regex"                # optional; default is any non-empty string
+    clientSessionMaxIdle:   "duration" # optional; default is to use the access token lifetime or 14 days if a refresh token is present
     extraAuthorizationParameters:      # optional; default is {}
       "string": "string"
-    postLogoutRedirectURI: "url"       # optional; default is empty string
+    postLogoutRedirectURI:   "url"     # optional; default is empty string
 
     ## OAuth Client settings: grantType=="AuthorizationCode" or "Password" #####
     clientID:               "string"   # required
@@ -317,6 +318,11 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
 
  - `extraAuthorizationParameters`: Extra (non-standard or extension) OAuth authorization parameters to use.  It is not valid to specify a parameter used by OAuth itself ("response_type", "client_id", "redirect_uri", "scope", or "state").
 
+ - `clientSessionMaxIdle`: Control how long the session held by Ambassador Edge Stack's OAuth client will last until we automatically expire it.
+    * Ambassador Edge Stack creates a new session when submitting requests to the upstream backend server and sets a cookie containing the sessionID. When a user makes a request to a backend service protected by the OAuth2 Filter, the OAuth Client in Ambassador Edge Stack will use the sessionID contained in the cookie to fetch the access token (and optional refresh token) for the current session so that it can be used when submitting a request to the upstream backend service. This session has a limited lifetime before it expires or extended, prompting the user to log back in.
+    * Setting a `clientSessionMaxIdle` duration is useful when your IdP is configured to return a refresh token along with an access token from your IdP's authorization server. `clientSessionMaxIdle` can be set to match Ambassador Edge Stack OAuth client's session lifetime to the lifetime of the refresh token configured within the IdP.
+    * If this is not set, then we tie the OAuth client's session lifetime to the lifetime of the access token received from the IdP's authorization server when no refresh token is also provided. If there is a refresh token, then by default we set it to be 14 days.
+
  - By default, any cookies set by the Ambassador Edge Stack will be
    set to expire when the session expires naturally.  The
    `useSessionCookies` setting may be used to cause session cookies to
@@ -332,7 +338,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
       user-perceived behavior, depending on the behavior of the
       identity provider.
     * Any cookies persisting longer will not affect behavior of the
-      system; the Ambassador Edge Stack validates whether the session
+      system; Ambassador Edge Stack validates whether the session
       is expired when considering the cookie.
 
    If `useSessionCookies` is non-`null`, then:

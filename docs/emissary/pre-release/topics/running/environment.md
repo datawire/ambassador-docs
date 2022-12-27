@@ -15,6 +15,9 @@ Use the following variables for the environment of your $productName$ container:
 | [`AMBASSADOR_DRAIN_TIME`](#ambassador_drain_time)                                                          | `600`                                               | Integer |
 | [`AMBASSADOR_ENVOY_API_VERSION`](#ambassador_envoy_api_version)                                            | `V3`                                                | String Enum; `V3` or `V2` |
 | [`AMBASSADOR_GRPC_METRICS_SINK`](#ambassador_grpc_metrics_sink)                                            | Empty                                               | String (address:port) |
+| [`AMBASSADOR_HEALTHCHECK_BIND_ADDRESS`](#ambassador_healthcheck_bind_address)| `0.0.0.0`        | String   |
+| [`AMBASSADOR_HEALTHCHECK_BIND_PORT`](#ambassador_healthcheck_bind_port)| `8877`                  | Integer |
+| [`AMBASSADOR_HEALTHCHECK_IP_FAMILY`](#ambassador_healthcheck_ip_family)| `ANY`        | String Enum; `IPV4_ONLY` or `IPV6_ONLY`|
 | [`AMBASSADOR_ISTIO_SECRET_DIR`](#ambassador_istio_secret_dir)                                              | `/etc/istio-certs`                                  | String |
 | [`AMBASSADOR_JSON_LOGGING`](#ambassador_json_logging)                                                      | `false`                                             | Boolean; non-empty=true, empty=false |
 | [`AMBASSADOR_LABEL_SELECTOR`](#ambassador_label_selector)                                                  | Empty                                               | String (label=value) |
@@ -123,9 +126,19 @@ be used when introducing new API versions that are not yet available in $product
 
 ### `AMBASSADOR_GRPC_METRICS_SINK`
 
-Configures Edgissary (envoy) to send metrics to the Agent which are then relayed to the Cloud. If not set then we don’t configure envoy to send
-metrics to the agent. If set with a bad address:port then we log an error message. In either scenario, it just stops metrics from being sent to the
-Agent which has no negative effect on general routing or Edgissary uptime.
+Configures Edgissary (envoy) to send metrics to the Agent which are then relayed to the Cloud. If not set then we don’t configure envoy to send metrics to the agent. If set with a bad address:port then we log an error message. In either scenario, it just stops metrics from being sent to the Agent which has no negative effect on general routing or Edgissary uptime.
+
+### `AMBASSADOR_HEALTHCHECK_BIND_ADDRESS`
+
+Configures $productName$ to bind its health check server to the provided address. If not set $productName$ will bind to all addresses (`0.0.0.0`).
+
+### `AMBASSADOR_HEALTHCHECK_BIND_PORT`
+
+Configures $productName$ to bind its health check server to the provided port. If not set $productName$ will listen on the admin port(`8877`).
+
+### `AMBASSADOR_HEALTHCHECK_IP_FAMILY`
+
+Allows the IP Family used by health check server to be overriden. By default, the health check server will listen for both IPV4 and IPV6 addresses. In some clusters you may want to force `IPV4_ONLY` or `IPV6_ONLY`.
 
 ### `AMBASSADOR_ISTIO_SECRET_DIR`
 
