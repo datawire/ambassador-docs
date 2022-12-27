@@ -1,6 +1,7 @@
 import React from 'react';
+
+import Icon from '../../../src/components/Icon';
 import getEditOnPageUrls from '../utils/getEditOnpageUrls';
-import GithubIcon from '../images/github-icon.inline.svg';
 
 const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
   // `page` is the `mdx` GraphQL node for this page.  I am not sure
@@ -37,8 +38,9 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       const isValid = edgeStackLinks?.includes(
         `${product}/${version}/${restOfFilePath}`,
       );
-      dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${isValid ? product : 'emissary'
-        }/${version}/${restOfFilePath}`;
+      dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${
+        isValid ? product : 'emissary'
+      }/${version}/${restOfFilePath}`;
       break;
     case 'code':
     case 'ship':
@@ -70,7 +72,7 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
     <footer className="docs__footer">
       {product == 'telepresence' && Number(version) >= 2.7 ? null : (
         <a href={dstUrl} target="_blank" rel="noreferrer">
-          <GithubIcon loading="lazy" />
+          <Icon name="github" />
           Edit this page on GitHub
         </a>
       )}
