@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/emissary-3.3/edge-stack-3.3">Helm-based
+  If you originally installed with Helm, see the <a href="../../../helm/emissary-3.4/edge-stack-3.X">Helm-based
   upgrade instructions</a>.
 </Alert>
 

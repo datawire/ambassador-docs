@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation originally made using Helm.
-  If you did not install with Helm, see the <a href="../../../yaml/emissary-3.3/edge-stack-3.3">YAML-based
+  If you did not install with Helm, see the <a href="../../../yaml/emissary-3.4/edge-stack-3.X">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -90,7 +90,7 @@ Migration is a six-step process:
    Before installing $productName$ $version$ itself, you need to update the CRDs in
    your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
-   ```
+   ```bash
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml && \
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
@@ -189,7 +189,7 @@ Migration is a six-step process:
 
    First, scale the $OSSproductName$ agent to 0:
 
-   ```
+   ```bash
    kubectl scale -n emissary deployment/emissary-agent --replicas=0
    ```
 
@@ -206,7 +206,7 @@ Migration is a six-step process:
 
    First, scale the $OSSproductName$ Deployment to 0:
 
-   ```
+   ```bash
    kubectl scale -n emissary deployment/emissary --replicase=0
    ```
 
@@ -222,7 +222,7 @@ Migration is a six-step process:
 Congratulations! At this point, $productName$ $version$ is fully running, and
 it's safe to remove the old `emissary` and `emissary-agent` Deployments:
 
-```
+```bash
 kubectl delete -n emissary deployment/emissary deployment/emissary-agent
 ```
 

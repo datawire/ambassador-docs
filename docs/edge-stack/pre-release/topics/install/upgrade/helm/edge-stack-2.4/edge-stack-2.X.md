@@ -24,7 +24,7 @@ Migration is a two-step process:
    Before installing $productName$ $versionTwoX$ itself, you need to update the CRDs in
    your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
-   ```
+   ```bash
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$versionTwoX$/aes-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```

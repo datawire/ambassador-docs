@@ -10,12 +10,14 @@ import Alert from '@material-ui/lab/Alert';
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/emissary-2.3/emissary-2.X">Helm-based
+  If you originally installed with Helm, see the <a href="../../../helm/emissary-2.4/emissary-2.X">Helm-based
   upgrade instructions</a>.
 </Alert>
 
 Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between minor
 versions is straightforward.
+
+## Migration Steps
 
 Migration is a two-step process:
 
@@ -24,7 +26,7 @@ Migration is a two-step process:
    Before installing $productName$ $versionTwoX$ itself, you need to update the CRDs in
    your cluster. This is mandatory during any upgrade of $productName$.
 
-   ```
+   ```bash
    kubectl apply -f https://app.getambassador.io/yaml/emissary/$versionTwoX$/emissary-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
