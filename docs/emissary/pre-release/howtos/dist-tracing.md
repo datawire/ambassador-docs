@@ -28,7 +28,7 @@ As we installed the Ambassador Edge Stack as our ingress controller for Kubernet
 
 Simply by visiting this URL on our installation, we are able to visualize the generated and collected trace information emitted by our Ambassador installation:
 
-![Jaeger screenshot](../../images/jaeger.png)
+![Jaeger screenshot](../images/jaeger.png)
 
 ## Tracing the Future: OpenTelemetry
 
@@ -39,7 +39,7 @@ The [OpenTelemetry project](https://opentelemetry.io/) was created with the inte
 
 It’s at this point in the conversation that someone inevitably mentions that XKCD...
 
-![XKCD #927](../../images/xkcd.png)
+![XKCD #927](../images/xkcd.png)
 
 OpenTelemetry ultimately supports multiple formats in its [OpenTelemetry-Collector](https://github.com/open-telemetry/opentelemetry-collector), easing the transition from one technology to another when installed as a middleware and translator to relay trace data to other collectors. Along with many of its long-awaited features, it supports multiple trace exporters for Jaeger, Zipkin and proprietary APIs.
 

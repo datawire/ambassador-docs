@@ -87,7 +87,7 @@ items:
           When using the OAuth2 Filter, $productName$ creates a new session when submitting requests to the upstream backend server and sets a cookie containing the sessionID. This session has a limited lifetime before it expires or is extended, prompting the user to log back in.
 
           This session idle length can now be controlled under a new field in the OAuth2 Filter, <code>clientSessionMaxIdle</code>, which controls how long the session will be active without activity before it is expired.
-        docs: https://www.getambassador.io/docs/edge-stack/pre-release/topics/using/filters/oauth2
+        docs: topics/using/filters/oauth2
 
       - title: Updated redis client to improve performance with Redis
         type: change
