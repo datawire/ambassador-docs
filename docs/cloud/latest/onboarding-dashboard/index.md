@@ -5,11 +5,11 @@ description: "In this section, you can see the ambassador onboarding procces of 
 
 # Onboarding Dashboard
 
-A central location to see the status of your developers, and the services within your Organization.
+A central location to see the status of your developers, and the services within your organization.
 
 ## Onboarding Overview
 
-As an organization adminstrator you will be able to see, how many of your developers have onboarded, who's still left to onboard, invite more of your developers, and see which services are currently being used across your Organization.
+Organization administrators can look at the onboarding dashboard to see which invited developers haven't onboarded and which have. You can also invite new developers here, or see which services are in use across your organization.
 
 <p align="center">
   <img src="../images/onboarding-dashboard.png" width="600" alt="Onboarding dashboard" />
