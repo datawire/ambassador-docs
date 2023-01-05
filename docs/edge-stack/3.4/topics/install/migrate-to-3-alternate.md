@@ -1,3 +1,7 @@
+---
+title: "Upgrade from any version of Ambassador Edge Stack or Emissary"
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Upgrading $productName$ with a separate cluster

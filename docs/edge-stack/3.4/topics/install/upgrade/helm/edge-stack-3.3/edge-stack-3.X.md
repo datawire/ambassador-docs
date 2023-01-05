@@ -1,3 +1,8 @@
+---
+title: "Upgrade Edge Stack 2.5.X to 3.4.0 (Helm) | Edge Stack"
+description: "Upgrade Ambassador Edge Stack 2.5.X to 3.4.0 (Helm). The new version is compatible with 2.x, but with any major upgrade, there are some changes to consider..."
+---
+
 import Alert from '@material-ui/lab/Alert';
 
 # Upgrade $productName$ 2.5.X to $productName$ $version$ (Helm)

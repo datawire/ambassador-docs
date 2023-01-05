@@ -30,6 +30,7 @@ import Kubernetes from '../../products/Kubernetes';
 import Telepresence from '../../products/Telepresence';
 import getDocsActiveVersion from '../../utils/getDocsActiveVersion';
 import getPrevNext from '../../utils/getPrevNext';
+import getSpecialDescriptions from '../../utils/getSpecialDescriptions';
 import getSpecialTitles from '../../utils/getSpecialTitles';
 import { canonicalUrls } from '../../utils/getValueCanonicals';
 import AllVersions from '../AllVersions';
@@ -761,7 +762,10 @@ const index = ({ data, location, pageContext }) => {
         title={getSpecialTitles(metadata.metaTitle, canonicalUrl)}
         type="article"
         canonicalUrl={canonicalUrl}
-        description={metadata.metaDescription}
+        description={getSpecialDescriptions(
+          metadata.metaDescription,
+          canonicalUrl,
+        )}
         robots={metadata.metaRobots}
       />
 
