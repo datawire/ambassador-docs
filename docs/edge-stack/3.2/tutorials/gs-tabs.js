@@ -6,8 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
-import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
+import Icon from '../../../../../src/components/Icon';
 import CodeBlock from '../../../../../src/components/CodeBlock';
 
 function TabPanel(props) {
@@ -73,13 +72,13 @@ export default function GettingStartedEdgeStack21Tabs(props) {
           aria-label="simple tabs example"
         >
           <Tab
-            icon={<HelmIcon />}
+            icon={<Icon name="helm" />}
             label="Helm 3"
             {...a11yProps(0)}
             style={{ minWidth: '10%', textTransform: 'none' }}
           />
           <Tab
-            icon={<KubernetesIcon />}
+            icon={<Icon name="kubernetes" />}
             label="Kubernetes YAML"
             {...a11yProps(1)}
             style={{ minWidth: '10%', textTransform: 'none' }}

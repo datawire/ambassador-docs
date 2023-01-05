@@ -6,9 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import HelmIcon from '../../../../../src/assets/icons/helm.inline.svg';
-import KubernetesIcon from '../../../../../src/assets/icons/kubernetes.inline.svg';
 import CodeBlock from '../../../../../src/components/CodeBlock';
+import Icon from '../../../../../src/components/Icon';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,19 +71,19 @@ export default function SimpleTabs() {
           aria-label="simple tabs example"
         >
           <Tab
-            icon={<HelmIcon loading="lazy" />}
+            icon={<Icon name="helm" />}
             label="Helm 3"
             {...a11yProps(0)}
             style={{ minWidth: '10%', textTransform: 'none' }}
           />
           <Tab
-            icon={<HelmIcon loading="lazy" />}
+            icon={<Icon name="helm" />}
             label="Helm 2"
             {...a11yProps(1)}
             style={{ minWidth: '10%', textTransform: 'none' }}
           />
           <Tab
-            icon={<KubernetesIcon loading="lazy" />}
+            icon={<Icon name="kubernetes" />}
             label="Kubernetes YAML"
             {...a11yProps(2)}
             style={{ minWidth: '10%', textTransform: 'none' }}

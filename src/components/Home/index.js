@@ -3,7 +3,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
 import url from 'url';
 
-import Layout from '../../../../src/components/Layout';
+import Layout from '../../../../src/components/Layout/DocLayout';
 
 import Breadcrumbs from '../../../../src/components/Breadcrumbs/Breadcrumbs';
 import Burger from '../../../../src/components/Burger/Burger';
@@ -28,7 +28,6 @@ import EdgeStack from '../../products/EdgeStack';
 import Emissary from '../../products/Emissary';
 import Kubernetes from '../../products/Kubernetes';
 import Telepresence from '../../products/Telepresence';
-import '../../style.less';
 import getDocsActiveVersion from '../../utils/getDocsActiveVersion';
 import getPrevNext from '../../utils/getPrevNext';
 import getSpecialTitles from '../../utils/getSpecialTitles';
