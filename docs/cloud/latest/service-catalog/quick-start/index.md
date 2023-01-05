@@ -33,6 +33,7 @@ If you already have Edge Stack or Emissary-ingress installed, **check your versi
 ```
 kubectl get deploy -A -l app.kubernetes.io/name=edge-stack -o jsonpath='{.items[].spec.template.spec.containers[0].image}'
 ```
+
 [Upgrade Edge Stack to the latest version](../../../../edge-stack/latest/topics/install/upgrading/) if needed.
 
 ## 1. Connect your cluster to Ambassador Cloud
@@ -62,8 +63,6 @@ kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/latest/quicks
 Then refresh your Service Catalog page and you should see the `quote` service listed.
 
 <Alert severity="success"><b>Success!</b> You can now see services in your Ambassador Cloud account!</Alert>
-
-
 
 <Alert severity="info">If you follow <a href="../../../../edge-stack/latest/topics/concepts/gitops-continuous-delivery/#continuous-delivery-and-gitops"><b>GitOps practices</b></a> please follow your organization's best practices to add the token to your configuration.</Alert>
 
@@ -131,4 +130,3 @@ Open the YAML config file of one of your services.  If you applied our `quote` s
 ## <img class="os-logo" src="../../images/logo.png" alt="Telepresence Logo" /> What's next?
 
 You've updated the owner and repo URL, but Service Catalog supports many more annotations! See the full list [here](/docs/cloud/latest/service-catalog/concepts/annotating).
-

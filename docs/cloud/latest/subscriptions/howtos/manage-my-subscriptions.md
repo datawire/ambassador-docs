@@ -31,6 +31,16 @@ There are four quota limits that pertain to subscriptions:
 - Connected Clusters: The Kubernetes clusters you have connected to the Ambassador Cloud app.
 - Requests per Second: Requests per second (RPS) is the maximum usage in the cluster between Rate Limited Traffic and Authenticated Traffic. For multiple clusters, RPS is the sum of the maximum usage of each cluster. RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
 
+### Active Services
+
+You can see which of your services are counting against your subscription by clicking **view actives services** in the Active Services panel. If you delete your service and recreate it with the same name and in the same namespace, it will still count as 1 active service.
+
+The active services list shows the services that have had intercepts, rollouts, or mappings in your organization for the last 28 days.
+
+  <p align="center">
+    <img src="../../images/active-services-list.png" width="400" alt="List your active services"/>
+  </p>
+
 ## Extend your quotas by adding more users
 
 On the Free subscription tier, you can unlock additional quotas by adding more team members to your organization. On the subcription page, click the INVITE button and follow the listed steps to invite new team members and gain access to additional clusters and services for free.
