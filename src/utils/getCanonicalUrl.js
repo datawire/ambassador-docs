@@ -6,6 +6,8 @@ const { trimLastSlash } = require('../../../src/utils/trimUrl');
 const exceptions = {
   '/docs/cloud/service-catalog/howtos/complete-k8s/':
     '/docs/telepresence/latest/service-catalog/howtos/complete-k8s/',
+  '/docs/edge-stack/latest/topics/install/upgrade/helm/edge-stack-2.5/edge-stack-3.X':
+    '/docs/edge-stack/latest/topics/install/upgrade/helm/edge-stack-3.3/edge-stack-3.X ',
 };
 
 const getCanonicalUrl = (slugs, currentSlug) => {
