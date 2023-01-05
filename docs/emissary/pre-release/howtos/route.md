@@ -10,7 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 <h3>Contents</h3>
 
 * [Examples](#examples)
-* [Applying a Mapping Resource](#applying-a-mapping-resouce)
+* [Applying a Mapping Resource](#applying-a-mapping-resource)
 * [Resources](#resources)
 * [Services](#services)
 * [Extending Mappings](#extending-mappings)

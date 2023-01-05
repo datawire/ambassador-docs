@@ -30,6 +30,12 @@
 
 changelog: ''
 items:
+  - date: '2023-01-03'
+    notes:
+      - title: 'Active service view'
+        body: You can now view which of your services are counting against your quota, how they were considered active, and the last time they were used.
+        docs: '/.subscriptions/howtos/manage-my-subscriptions'
+        type: feature
   - date: '2022-11-07'
     notes:
       - title: 'Subscriptions grouped by organization'

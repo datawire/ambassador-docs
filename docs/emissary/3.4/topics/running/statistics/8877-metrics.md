@@ -57,6 +57,8 @@ with Prometheus and Grafana](../../../../howtos/prometheus).
 
 #### Sample dashboard
 
-We have a sample Grafana dashboard that displays information collected by Prometheus from the `:8877/metrics` endpoint.
+We provide a [sample Grafana dashboard](https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/)
+that displays information collected by Prometheus from the
+`:8877/metrics` endpoint.
 
 ![Screenshot of a Grafana dashboard that displays just information from Envoy](../../../images/grafana.png)

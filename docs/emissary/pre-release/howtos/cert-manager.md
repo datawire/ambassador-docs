@@ -9,7 +9,7 @@ $OSSproductName$, or if you require more flexible certificate management (such a
 `dns-01` challenge, or using a non-ACME certificate source), external certificate management
 tools are also supported.
 
-[using ACME]: ../../topics/running/host-crd/#acme-support
+[using ACME]: ../../topics/running/host-crd
 
 One such tool is Jetstack's [cert-manager](https://github.com/jetstack/cert-manager), which is a general-purpose tool
 for managing certificates in Kubernetes.  Cert-manager will automatically create and renew TLS certificates and store
