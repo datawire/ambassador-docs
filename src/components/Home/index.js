@@ -3,7 +3,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useState, useMemo, useCallback } from 'react';
 import url from 'url';
 
-import Layout from '../../../../src/components/Layout';
+import Layout from '../../../../src/components/Layout/DocLayout';
 
 import Breadcrumbs from '../../../../src/components/Breadcrumbs/Breadcrumbs';
 import Burger from '../../../../src/components/Burger/Burger';
@@ -28,9 +28,9 @@ import EdgeStack from '../../products/EdgeStack';
 import Emissary from '../../products/Emissary';
 import Kubernetes from '../../products/Kubernetes';
 import Telepresence from '../../products/Telepresence';
-import '../../style.less';
 import getDocsActiveVersion from '../../utils/getDocsActiveVersion';
 import getPrevNext from '../../utils/getPrevNext';
+import getSpecialDescriptions from '../../utils/getSpecialDescriptions';
 import getSpecialTitles from '../../utils/getSpecialTitles';
 import { canonicalUrls } from '../../utils/getValueCanonicals';
 import AllVersions from '../AllVersions';
@@ -762,7 +762,10 @@ const index = ({ data, location, pageContext }) => {
         title={getSpecialTitles(metadata.metaTitle, canonicalUrl)}
         type="article"
         canonicalUrl={canonicalUrl}
-        description={metadata.metaDescription}
+        description={getSpecialDescriptions(
+          metadata.metaDescription,
+          canonicalUrl,
+        )}
         robots={metadata.metaRobots}
       />
 

@@ -139,7 +139,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
 <Alert severity="success"><b>Victory!</b> You have created your first $productName$ <code>Listener</code> and <code>Mapping</code>, routing a request from your cluster's edge to a service!</Alert>
 
-## <img class="os-logo" src="../../images/logo.png"/> What's next?
+## <img class="os-logo" src="/images/logo.png"/> What's next?
 
 Explore some of the popular tutorials on $productName$:
 

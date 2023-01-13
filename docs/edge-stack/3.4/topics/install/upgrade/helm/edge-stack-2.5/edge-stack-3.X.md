@@ -1,3 +1,9 @@
+---
+title: "Upgrade Edge Stack 2.5.X to 3.4.0 (Helm) | Edge Stack"
+description: "Upgrade Ambassador Edge Stack 2.5.X to 3.4.0 (Helm) Since the configuration is stored in Kubernetes resources, upgrading between versions is straightforward"
+---
+
+
 import Alert from '@material-ui/lab/Alert';
 
 # Upgrade $productName$ 2.5.X to $productName$ $version$ (Helm)
