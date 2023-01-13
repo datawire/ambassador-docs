@@ -1,5 +1,5 @@
 ---
-title: Upgrade $productName$ 1.14.X to $versionTwoX$ (Helm) | $productName$ 
+title: Upgrade $productName$ 1.14.X to $versionTwoX$ (Helm) | $productName$
 ---
 
 import Alert from '@material-ui/lab/Alert';
@@ -18,6 +18,11 @@ import Alert from '@material-ui/lab/Alert';
   If you did not install with Helm, see the <a href="../../../yaml/edge-stack-1.14/edge-stack-2.3">YAML-based
   upgrade instructions</a>.
 </Alert>
+
+   <Alert severity="warning">
+    There is a known issue with the <code>$productDeploymentName$-apiext</code> service that impacts all $productName$ 2.x and 3.x users. Specifically, the TLS certificate used by apiext expires one year after creation and does not auto-renew. All users who are running $productName$/$ossProductName$ 2.x or 3.x with the apiext service should proactively renew their certificate as soon as practical.
+    This will create a new certificate with a one year expiration. We will issue a software patch to address this issue well before the one year expiration. Note that certificate renewal will not cause any downtime.
+   </Alert>
 
 We're pleased to introduce $productName$ $versionTwoX$! The 2.X family introduces a number of
 changes to allow $productName$ to more gracefully handle larger installations (including
@@ -172,6 +177,11 @@ Migration is an eight-step process:
      If the <code>$productDeploymentName$-apiext</code> Deployment's Pods all stop running,
      you will not be able to use <code>getambassador.io/v3alpha1</code> CRDs until restarting
      the <code>$productDeploymentName$-apiext</code> Deployment.
+   </Alert>
+
+   <Alert severity="warning">
+    There is a known issue with the <code>emissary-apiext</code> service that impacts all $productName$ 2.x and 3.x users. Specifically, the TLS certificate used by apiext expires one year after creation and does not auto-renew. All users who are running $productName$/$OSSproductName$ 2.x or 3.x with the apiext service should proactively renew their certificate as soon as practical by running <code>kubectl delete --all secrets --namespace=emissary-system</code> to delete the existing certificate, and then restart the <code>emissary-apiext</code> deployment with <code>kubectl rollout restart deploy/emissary-apiext -n emissary-system</code>.
+    This will create a new certificate with a one year expiration. We will issue a software patch to address this issue well before the one year expiration. Note that certificate renewal will not cause any downtime.
    </Alert>
 
 3. **Install $productName$ $versionTwoX$.**
