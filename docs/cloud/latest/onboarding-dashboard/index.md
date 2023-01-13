@@ -20,7 +20,7 @@ All the members of your organization can look at the onboarding dashboard to see
 </p>
 
 <p align="center">
-  <img src="../images/onboarding-lastest-intercepts.png" width="600" alt="Onboarding dashboard" />
+  <img src="../images/onboarding-latest-intercepts.png" width="600" alt="Latest intercepts" />
 </p>
 
 - **Invite more people:** Invite your colleagues to collaborate, send an email invitation link to start the Ambassador Cloud experience.
