@@ -11,9 +11,10 @@ import GettingStartedEmissary21Tabs from './gs-tabs'
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [1. Installation](#1-installation)
-* [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
-* [What's Next?](#img-classos-logo-srcimageslogopng-altlogo--whats-next)
+- [1. Installation](#1-installation)
+  - [Connecting your installation to Ambassador Cloud](#connecting-your-installation-to-ambassador-cloud)
+- [2. Routing traffic from the edge](#2-routing-traffic-from-the-edge)
+- [ What's next?](#-whats-next)
 
 </div>
 

@@ -99,16 +99,16 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
 
    <Alert severity="info">
      $productName$ $version$ includes a Deployment in the `emissary-system` namespace
-     called <code>$productDeploymentName$-apiext</code>. This is the APIserver extension
+     called <code>emissary-apiext</code>. This is the APIserver extension
      that supports converting $productName$ CRDs between <code>getambassador.io/v2</code>
      and <code>getambassador.io/v3alpha1</code>. This Deployment needs to be running at
      all times.
    </Alert>
 
    <Alert severity="warning">
-     If the <code>$productDeploymentName$-apiext</code> Deployment's Pods all stop running,
+     If the <code>emissary-apiext</code> Deployment's Pods all stop running,
      you will not be able to use <code>getambassador.io/v3alpha1</code> CRDs until restarting
-     the <code>$productDeploymentName$-apiext</code> Deployment.
+     the <code>emissary-apiext</code> Deployment.
    </Alert>
 
    <Alert severity="warning">
