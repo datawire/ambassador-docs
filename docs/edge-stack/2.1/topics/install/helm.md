@@ -94,7 +94,7 @@ When you run the Helm chart, it installs $productName$.
    </Alert>
 
 For more advanced configuration and details about helm values,
-[please see the helm chart.](https://github.com/datawire/edge-stack/tree/main/charts/edge-stack/README.md)
+[please see the helm chart.](https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$)
 
 ## Upgrading an existing installation
 
