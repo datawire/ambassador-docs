@@ -89,7 +89,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
     - **Path Matching**: `/backend/`
     - **OpenAPI Docs**: `/.ambassador-internal/openapi-docs`
 
-    ![](../../images/mapping-editor.png)
+    ## <img src="../images/mapping-editor.png" alt="Mapping editor" />
 
   Whether you decide to automatically push the change to Git for this newly create Mapping resource or not, the resulting Mapping should be similar to the example below.
 
