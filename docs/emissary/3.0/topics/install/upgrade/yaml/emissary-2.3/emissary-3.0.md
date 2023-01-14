@@ -100,6 +100,11 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
      the <code>$productDeploymentName$-apiext</code> Deployment.
    </Alert>
 
+   <Alert severity="warning">
+    There is a known issue with the <code>emissary-apiext</code> service that impacts all $productName$ 2.x and 3.x users. Specifically, the TLS certificate used by apiext expires one year after creation and does not auto-renew. All users who are running $productName$/$AESproductName$ 2.x or 3.x with the apiext service should proactively renew their certificate as soon as practical by running <code>kubectl delete --all secrets --namespace=emissary-system</code> to delete the existing certificate, and then restart the <code>emissary-apiext</code> deployment with <code>kubectl rollout restart deploy/emissary-apiext -n emissary-system</code>.
+    This will create a new certificate with a one year expiration. We will issue a software patch to address this issue well before the one year expiration. Note that certificate renewal will not cause any downtime.
+   </Alert>
+
 4. **Install $productName$ $version$.**
 
    After installing the new CRDs, upgrade $productName$ $version$.
