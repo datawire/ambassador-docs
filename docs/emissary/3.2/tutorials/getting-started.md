@@ -14,7 +14,7 @@ import GettingStartedEmissary21Tabs from './gs-tabs'
 - [1. Installation](#1-installation)
   - [Connecting your installation to Ambassador Cloud](#connecting-your-installation-to-ambassador-cloud)
 - [2. Routing traffic from the edge](#2-routing-traffic-from-the-edge)
-- [ What's next?](#-whats-next)
+- [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
 
 </div>
 
@@ -140,7 +140,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
 <Alert severity="success"><b>Victory!</b> You have created your first $productName$ <code>Listener</code> and <code>Mapping</code>, routing a request from your cluster's edge to a service!</Alert>
 
-## <img class="os-logo" src="../images/logo.png" alt="Logo" /> What's next?
+## <img class="os-logo" src="/images/logo.png"/> What's next?
 
 Explore some of the popular tutorials on $productName$:
 

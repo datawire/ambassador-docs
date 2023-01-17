@@ -14,7 +14,7 @@ import GettingStartedEmissary21Tabs from './gs-tabs'
 - [1. Installation](#1-installation)
   - [Connecting your installation to Ambassador Cloud](#connecting-your-installation-to-ambassador-cloud)
 - [2. Routing traffic from the edge](#2-routing-traffic-from-the-edge)
-- [ What's next?](#-whats-next)
+- [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
 
 </div>
 
