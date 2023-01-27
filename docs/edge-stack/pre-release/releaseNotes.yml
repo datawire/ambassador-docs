@@ -32,6 +32,17 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.5.0
+    date: 'TBD'
+    notes:
+      - title: Fix envoy config generation when including port in Host.hostname
+        type: bugfix
+        body: >-
+          When wanting to expose traffic to clients on ports other than 80/443, users will set a port in the Host.hostname (eg.<code>Host.hostname=example.com:8500</code>. The config generated allowed matching on the :authority header. This worked in v1.Y series due to the way emissary was generating Envoy configuration under a single wild-card virtual_host and matching on :authority.<br/><br/>
+          
+          In v2.Y/v3.Y+, the way emissary generates Envoy configuration changed to address memory pressure and improve route lookup speed in Envoy. However, when including a port in the hostname, an incorrect configuration  was generated with an sni match including the port. This has been fixed and the correct envoy configuration is
+          being generated which restores existing behavior.
+
   - version: 3.4.1
     date: '2023-02-07'
     notes:
@@ -44,7 +55,7 @@ items:
           - Updates c-ares dependency to address issue with cname wildcard dns resolution for upstream clusters<br/><br/>
 
           Users that are using $productName$ with Certificate Revocation List and allow external users to provide input should upgrade to ensure they are not vulnerable to CVE-2023-0286.
-
+  
   - version: 3.4.0
     date: '2023-01-03'
     notes:
