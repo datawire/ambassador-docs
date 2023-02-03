@@ -55,6 +55,16 @@ items:
         - title: "#4809"
           link: https://github.com/emissary-ingress/emissary/pull/4809
 
+      - title: Shipped Helm chart v8.5.0
+        type: change
+        body: >-
+          Here are a list of changes to the new helm chart:<br/><br/>
+          - Update default image to Ambassador Edge Stack v3.5.0
+          - Added new securityContext fields to the Redis and Agent helm charts, allowing users to further manage privilege and access control settings which can be used for tools such as PodSecurityPolicy.
+          - Adds support for configuring <code>startupProbes</code> on the edge stack deployment.
+        
+        docs: https://github.com/datawire/edge-stack/blob/rel/v3.4.0/charts/edge-stack/CHANGELOG.md
+
   - version: 3.4.1
     date: '2023-02-07'
     notes:
@@ -67,7 +77,7 @@ items:
           - Updates c-ares dependency to address issue with cname wildcard dns resolution for upstream clusters<br/><br/>
 
           Users that are using $productName$ with Certificate Revocation List and allow external users to provide input should upgrade to ensure they are not vulnerable to CVE-2023-0286.
-  
+
   - version: 3.4.0
     date: '2023-01-03'
     notes:

@@ -54,6 +54,16 @@ items:
         github:
         - title: "#4809"
           link: https://github.com/emissary-ingress/emissary/pull/4809
+      
+      - title: Shipped Helm chart v8.5.0
+        type: change
+        body: >-
+          Here are a list of changes to the new helm chart:<br/><br/>
+          - Update default image to Emissary-ingress v3.5.0
+          - Add support for configuring <code>startupProbes</code> on the emissary-ingress deployment.
+
+        docs: https://github.com/datawire/edge-stack/blob/rel/v3.4.0/charts/edge-stack/CHANGELOG.md
+        
 
   - version: 3.4.1
     date: '2023-02-07'
