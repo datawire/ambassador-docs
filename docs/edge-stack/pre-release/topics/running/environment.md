@@ -20,6 +20,8 @@ Use the following variables for the environment of your $productName$ container:
 | [`AMBASSADOR_HEALTHCHECK_IP_FAMILY`](#ambassador_healthcheck_ip_family)| `ANY`        | String Enum; `IPV4_ONLY` or `IPV6_ONLY`|
 | [`AMBASSADOR_ISTIO_SECRET_DIR`](#ambassador_istio_secret_dir)                                              | `/etc/istio-certs`                                  | String |
 | [`AMBASSADOR_JSON_LOGGING`](#ambassador_json_logging)                                                      | `false`                                             | Boolean; non-empty=true, empty=false |
+| [`AMBASSADOR_READY_PORT`](#ambassador_ready_port)                                                          | `8006`                                              | Integer |
+| [`AMBASSADOR_READY_LOG`](#ambassador_ready_log)                                                            | `false`                                             | Boolean; [Go `strconv.ParseBool`] |
 | [`AMBASSADOR_LABEL_SELECTOR`](#ambassador_label_selector)                                                  | Empty                                               | String (label=value) |
 | [`AMBASSADOR_NAMESPACE`](#ambassador_namespace)                                                            | `default` ([^1])                                    | Kubernetes namespace |
 | [`AMBASSADOR_RECONFIG_MAX_DELAY`](#ambassador_reconfig_max_delay)                                          | `1`                                                 | Integer |
@@ -207,6 +209,17 @@ When `AMBASSADOR_JSON_LOGGING` is set to `true`, JSON format will be used for mo
 Some (but few) logs from `gunicorn` and the Kubernetes `client-go` package will still be in text only format.
 
 [More information](../../running/running#log-format)
+
+### `AMBASSADOR_READY_PORT`
+
+A dedicated Listener is created for non-blocking readiness checks. By default, the Listener will listen on the loopback address
+and port `8006`. `8006` is part of the reserved ports dedicated to $productName$. If their is a conflict then setting
+`AMBASSADOR_READY_PORT` to a valid port will configure Envoy to Listen on that port.
+
+### `AMBASSADOR_READY_LOG`
+
+When `AMBASSADOR_READY_LOG` is set to `true`, the envoy `/ready` endpoint will be logged. It will honor format
+provided in the `Module` resource or default to the standard log line format.
 
 ### `AMBASSADOR_LABEL_SELECTOR`
 
