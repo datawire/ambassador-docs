@@ -51,7 +51,7 @@ items:
 
           Configure the listener port using <code>AMBASSADOR_READY_PORT</code> and enable access log using <code>AMBASSADOR_READY_LOG</code> environment variables.
       
-          docs: https://www.getambassador.io/docs/edge-stack/latest/topics/running/environment/
+        docs: https://www.getambassador.io/docs/edge-stack/latest/topics/running/environment/
 
       - title: Fix envoy config generated when including port in Host.hostname
         type: bugfix
@@ -64,9 +64,9 @@ items:
       - title: Fix GRPC TLS support with ExternalFilter
         type: bugfix
         body: >-
-          Configuring an <code>ExternalFilter</code> to communicate using gRPC with TLS would fail due to $productName$ trying to connect via cleartext. This has been fixed so that setting `ExternalFilter.spec.tls=true` $productName$ will talk to the external filter using TLS. <br/><br/>
+          Configuring an <code>ExternalFilter</code> to communicate using gRPC with TLS would fail due to $productName$ trying to connect via cleartext. This has been fixed so that setting <code>ExternalFilter.spec.tls=true</code> $productName$ will talk to the external filter using TLS. <br/><br/>
 
-          If using self-signed certs see <a href="https://www.getambassador.io/docs/edge-stack/latest/topics/using/filters#installing-self-signed-certificates"> on how to include it into the $productName$ deployment.
+          If using self-signed certs see <a href="https://www.getambassador.io/docs/edge-stack/latest/topics/using/filters#installing-self-signed-certificates">installing self-signed certificates</a> on how to include it into the $productName$ deployment.
 
       - title: Add support for resolving port names in Ingress resource
         type: change
@@ -97,8 +97,6 @@ items:
       - title: Shipped Helm chart v8.5.0
         type: change
         body: >-
-          Here are a list of changes to the helm chart:<br/><br/>
-
           - Update default image to $productName$ v3.5.0.<br/>
 
           - Add support for configuring <code>startupProbes</code> on the $productName$ deployment.<br/>
@@ -109,7 +107,7 @@ items:
 
           - Added deprecation notice in the values.yaml file for  <code>podSecurityPolicy</code> value because support has been removed in Kubernetes 1.25.
 
-          docs: https://github.com/datawire/edge-stack/blob/rel/v3.4.0/charts/edge-stack/CHANGELOG.md
+        docs: https://github.com/datawire/edge-stack
 
   - version: 3.4.1
     date: '2023-02-07'
