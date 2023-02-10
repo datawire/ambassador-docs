@@ -34,7 +34,7 @@ spec:
 | Field     | Description | values |
 | --------- | ----------- | ------------- |
 | `service` | gives the URL of the external HTTP trace service. | ex. `example-zipkin:9411` |
-| `driver`  | provides the driver information that handles communicating with the service | enum:<br/>`zipkin`<br/>`datadog` |
+| `driver`  | provides the driver information that handles communicating with the service | enum:<br/>`zipkin`<br/>`datadog`<br/>`opentelemetry` |
 | `config` | provides additional configuration options for the selected `driver`. Supported configuration for each driver is found below. | |
 | `tag_headers` | **Deprecated** - it is recommend that you switch to using `custom_tags`| |
 | `custom_tags` | configure tags to attach to traces. See section below for more details. | |
@@ -54,13 +54,18 @@ The <code>TraceService</code> is configured globally during Envoy bootstrap, the
 
 ## Supported Tracing Drivers
 
-The `TraceService` currently supports the following drivers:
+The `TracingService` currently supports the following drivers:
 
 - `zipkin`
 - `datadog`
+- `opentelemetry`
 
 <Alert severity="warning">
 In Envoy 1.24, support for the <code>LightStep</code> driver was removed. As of $produceName$ 3.4.0, the <code>TracingService</code> no longer supports the <code>lightstep</code> tracing driver. If you are currently using the native Lightstep tracing driver, please refer to <a href="../../../../howtos/tracing-lightstep/">Distributed Tracing with Open Telemetry and LightStep</a>
+</Alert>
+
+<Alert severity="info">
+In $productName$ 3.5.0, support for Envoy's native OpenTelemetry driver was added to the <code>TracingService</code>. Envoy still considers this driver experimental.
 </Alert>
 
 ## Sampling
