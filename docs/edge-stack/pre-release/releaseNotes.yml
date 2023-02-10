@@ -35,35 +35,81 @@ items:
   - version: 3.5.0
     date: 'TBD'
     notes:
-      - title: Fix envoy config generation when including port in Host.hostname
+      - title: TracingService support for native OpenTelemetry driver
+        type: feature
+        body: >-
+          In Envoy 1.24, experimental support for a native OpenTelemetry tracing driver was introduced that allows exporting spans in the otlp format. Many observability platforms accept that format and is the recommended replacement for the LightStep driver. $productName$ now supports setting the <code>TracingService.spec.driver=opentelemetry</code> to export traces in the otlp format.<br/><br/>
+
+          Thanks to <a href="https://github.com/psalaberria002">Paul</a> for helping us get this tested and over the finish line!
+
+      - title: Switch to a non-blocking readiness check
+        type: feature
+        body: >-
+          The <code>/ready</code> endpoint used by $productName$ was using the Envoy admin port (8001 by default).This generates a problem during config reloads with large configs as the admin thread is blocking so the /ready endpoint can be very slow to answer (in the order of several seconds, even more).<br/><br/>
+
+          $productName$ will now use a specific envoy listener that can answer /ready calls from an Envoy worker thread so the endpoint is always fast and it does not suffer from single threaded admin thread slowness on config reloads and other slow endpoints handled by the admin thread.<br/><br/>
+
+          Configure the listener port using <code>AMBASSADOR_READY_PORT</code> and enable access log using <code>AMBASSADOR_READY_LOG</code> environment variables.
+      
+          docs: https://www.getambassador.io/docs/edge-stack/latest/topics/running/environment/
+
+      - title: Fix envoy config generated when including port in Host.hostname
         type: bugfix
         body: >-
-          When wanting to expose traffic to clients on ports other than 80/443, users will set a port in the Host.hostname (eg.<code>Host.hostname=example.com:8500</code>). The config generated allowed matching on the :authority header. This worked in v1.Y series due to the way emissary was generating Envoy configuration under a single wild-card virtual_host and matching on :authority.<br/><br/>
+          When wanting to expose traffic to clients on ports other than 80/443, users will set a port in the Host.hostname (eg.<code>Host.hostname=example.com:8500</code>). The config generated allowed matching on the :authority header. This worked in v1.Y series due to the way $productName$ was generating Envoy configuration under a single wild-card virtual_host and matching on :authority.<br/><br/>
           
-          In v2.Y/v3.Y+, the way emissary generates Envoy configuration changed to address memory pressure and improve route lookup speed in Envoy. However, when including a port in the hostname, an incorrect configuration  was generated with an sni match including the port. This has been fixed and the correct envoy configuration is
+          In v2.Y/v3.Y+, the way $productName$ generates Envoy configuration changed to address memory pressure and improve route lookup speed in Envoy. However, when including a port in the hostname, an incorrect configuration was generated with an sni match including the port. This caused incoming request to never match causing a 404 Not Found.This has been fixed and the correct envoy configuration is
           being generated which restores existing behavior.
+      
+      - title: Fix GRPC TLS support with ExternalFilter
+        type: bugfix
+        body: >-
+          Configuring an <code>ExternalFilter</code> to communicate using gRPC with TLS would fail due to $productName$ trying to connect via cleartext. This has been fixed so that setting `ExternalFilter.spec.tls=true` $productName$ will talk to the external filter using TLS. <br/><br/>
+
+          If using self-signed certs see <a href="https://www.getambassador.io/docs/edge-stack/latest/topics/using/filters#installing-self-signed-certificates"> on how to include it into the $productName$ deployment.
 
       - title: Add support for resolving port names in Ingress resource
         type: change
         body: >-
-          Previously, specifying backend ports by name in Ingress was not supported and would result in defaulting
-          to port 80. This allows emissary-ingress to now resolve port names for backend services. If the port number
-          cannot be resolved by the name (e.g named port in the Service doesn't exist) then it defaults back
-          to the original behavior.
-          (Thanks to <a href="https://github.com/antonu17">Anton Ustyuzhanin</a>!).
+          Previously, specifying backend ports by name in Ingress was not supported and would result in defaulting to port 80. This allows $productName$ to now resolve port names for backend services. If the port number cannot be resolved by the name (e.g named port in the Service doesn't exist) then it will continue to default back
+          to port 80. <br/><br/>
+
+          Thanks to <a href="https://github.com/antonu17">Anton Ustyuzhanin</a>!.
         github:
         - title: "#4809"
           link: https://github.com/emissary-ingress/emissary/pull/4809
 
+      - title: Upgraded to golang 1.20
+        type: change
+        body: >-
+          Upgraded to the latest release of our continued investement in keeping dependencies updated. 
+      
+      - title: Upgraded to Python 3.10
+        type: change
+        body: >-
+          Upgraded to Python 3.10 as part of continued investment in keeping dependencies updated.
+      
+      - title: Upgraded base image to alpine-3.17
+        type: change
+        body: >-
+          Upgraded base image to alpine-3.17 as part of continued investment in keeping dependencies updated.
+      
       - title: Shipped Helm chart v8.5.0
         type: change
         body: >-
-          Here are a list of changes to the new helm chart:<br/><br/>
-          - Update default image to Ambassador Edge Stack v3.5.0<br/>
+          Here are a list of changes to the helm chart:<br/><br/>
+
+          - Update default image to $productName$ v3.5.0.<br/>
+
+          - Add support for configuring <code>startupProbes</code> on the $productName$ deployment.<br/>
+
+          - Allow setting pod and container security settings on the Ambassador Agent.<br/>
+
           - Added new securityContext fields to the Redis and Agent helm charts, allowing users to further manage privilege and access control settings which can be used for tools such as PodSecurityPolicy.<br/>
-          - Adds support for configuring <code>startupProbes</code> on the edge stack deployment.
-        
-        docs: https://github.com/datawire/edge-stack/blob/rel/v3.4.0/charts/edge-stack/CHANGELOG.md
+
+          - Added deprecation notice in the values.yaml file for  <code>podSecurityPolicy</code> value because support has been removed in Kubernetes 1.25.
+
+          docs: https://github.com/datawire/edge-stack/blob/rel/v3.4.0/charts/edge-stack/CHANGELOG.md
 
   - version: 3.4.1
     date: '2023-02-07'
