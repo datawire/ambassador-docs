@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Tracing service
+# Tracing Service
 
 Applications that consist of multiple services can be difficult to debug, as a single request can span multiple services. Distributed tracing tells the story of your request as it is processed through your system. Distributed tracing is a powerful tool to debug and analyze your system in addition to request logging and metrics.
 
@@ -46,11 +46,11 @@ Please note that you must use the HTTP/2 pseudo-header names. For example:
 - the `host` header should be specified as the `:authority` header; and
 - the `method` header should be specified as the `:method` header.
 
-
 <Alert severity="info">
-The <code>TraceService</code> is configured globally during Envoy bootstrap, therefore $productName$ must be restarted for changes to take affect.
+$productName$ supports a single Global <code>TracingService</code> which is configured during Envoy bootstrap. $productName$ must be restarted for changes to the
+<code>TracingService</code> manifest to take affect. If you have multiple instances of $productName$ in your cluster, ensure [ambassador_id](../../running#ambassador_id)
+is set correctly in the <code>TracingService</code> manifest.
 </Alert>
-
 
 ## Supported Tracing Drivers
 
@@ -118,7 +118,7 @@ custom_tags:
       default_value: "unknown"  # optional
 ```
 
-### Zipkin driver configurations
+## Zipkin Driver Configurations
 
 - `collector_endpoint` gives the API endpoint of the Zipkin service where the spans will be sent. The default value is `/api/v2/spans`
 - `collector_endpoint_version` gives the transport version used when sending data to your Zipkin collector. The default value is `HTTP_JSON` and it must be one of `HTTP_JSON` or `HTTP_PROTO`.
@@ -126,11 +126,13 @@ custom_tags:
 - `trace_id_128bit` whether a 128-bit `trace id` will be used when creating a new trace instance. Defaults to `true`. Setting to `false` will result in a 64-bit trace id being used.
 - `shared_span_context` whether client and server spans will share the same `span id`. The default value is `true`.
 
-### Datadog Driver Configurations
+## Datadog Driver Configurations
 
 - `service_name` the name of the service which is attached to the traces. The default value is `ambassador`.
 
-You may only use a single `TracingService` manifest per $productName$ deployment. Ensure [ambassador_id](../../running#ambassador_id) is set correctly in the `TracingService` manifest.
+## OpenTelemetry Driver Configurations
+
+- `service_name` the name of the service which is attached to traces. The default value is `ambassador`.
 
 ## Example
 
