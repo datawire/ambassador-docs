@@ -61,7 +61,7 @@ The `TracingService` currently supports the following drivers:
 - `opentelemetry`
 
 <Alert severity="warning">
-In Envoy 1.24, support for the <code>LightStep</code> driver was removed. As of $produceName$ 3.4.0, the <code>TracingService</code> no longer supports the <code>lightstep</code> tracing driver. If you are currently using the native Lightstep tracing driver, please refer to <a href="../../../../howtos/tracing-lightstep/">Distributed Tracing with Open Telemetry and LightStep</a>
+In Envoy 1.24, support for the <code>LightStep</code> driver was removed. As of $productName$ 3.4.0, the <code>TracingService</code> no longer supports the <code>lightstep</code> tracing driver. If you are currently using the native Lightstep tracing driver, please refer to <a href="../../../../howtos/tracing-lightstep/">Distributed Tracing with Open Telemetry and LightStep</a>
 </Alert>
 
 <Alert severity="info">
