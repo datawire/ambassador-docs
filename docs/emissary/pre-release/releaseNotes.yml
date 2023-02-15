@@ -33,8 +33,13 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.5.0
-    date: 'TBD'
+    date: '2023-02-15'
     notes:
+      - title: Upgraded to golang 1.20.1
+        type: security
+        body: >-
+          Upgraded to the latest release of Golang as part of our general dependency upgrade process. This includes
+          security fixes for CVE-2022-41725, CVE-2022-41723.
       - title: TracingService support for native OpenTelemetry driver
         type: feature
         body: >-
@@ -77,11 +82,6 @@ items:
         body: >-
           The <code>emissary-apiext</code> server is a Kubernetes Conversion Webhook that converts between the $productName$ CRD versions. On startup, it ensures that a self-signed cert is available so that K8s API Server can talk to the conversion webhook (*TLS is required by K8s*). We have introduced a startupProbe to ensure that emissary-apiext server has enough time to configure the webhooks before running liveness and readiness probes. This is to ensure 
           slow first-time startup doesn't cause K8s to needlessly restart the pod.
-
-      - title: Upgraded to golang 1.20
-        type: change
-        body: >-
-          Upgraded to the latest release of our continued investement in keeping dependencies updated. 
 
       - title: Upgraded to Python 3.10
         type: change

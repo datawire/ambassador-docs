@@ -1,21 +1,21 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 3.3.Z to $productName$ $version$ (YAML)
+# Upgrade $productName$ 3.4.Z (YAML)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 3.3.Z to $productName$ $version$. If
+  This guide covers migrating from $productName$ 3.4.Z to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-3.3/edge-stack-3.X">Helm-based
+  If you originally installed with Helm, see the <a href="../../../helm/emissary-3.4/emissary-3.X">Helm-based
   upgrade instructions</a>.
 </Alert>
 
-Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading between
-versions is straightforward.
+Since $productName$'s configuration is entirely stored in Kubernetes resources, upgrading
+between versions is straightforward.
 
 ### Resources to check before migrating to $version$.
 
@@ -31,14 +31,11 @@ Migration is a two-step process:
 
 1. **Install new CRDs.**
 
-   After reviewing the changes in 3.x and confirming that you are ready to upgrade, the process is the same as upgrading minor versions
-   in previous version of $productName$ and does not require the complex migration steps that the migration from 1.x tto 2.x required.
-
    Before installing $productName$ $version$ itself, you need to update the CRDs in
    your cluster. This is mandatory during any upgrade of $productName$.
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
 
@@ -57,15 +54,22 @@ Migration is a two-step process:
    </Alert>
 
    <Alert severity="warning">
-    There is a known issue with the <code>emissary-apiext</code> service that impacts all $productName$ 2.x and 3.x users. Specifically, the TLS certificate used by apiext expires one year after creation and does not auto-renew. All users who are running $productName$/$OSSproductName$ 2.x or 3.x with the apiext service should proactively renew their certificate as soon as practical by running <code>kubectl delete --all secrets --namespace=emissary-system</code> to delete the existing certificate, and then restart the <code>emissary-apiext</code> deployment with <code>kubectl rollout restart deploy/emissary-apiext -n emissary-system</code>.
+    There is a known issue with the <code>emissary-apiext</code> service that impacts all $productName$ 2.x and 3.x users. Specifically, the TLS certificate used by apiext expires one year after creation and does not auto-renew. All users who are running $productName$/$AESproductName$ 2.x or 3.x with the apiext service should proactively renew their certificate as soon as practical by running <code>kubectl delete --all secrets --namespace=emissary-system</code> to delete the existing certificate, and then restart the <code>emissary-apiext</code> deployment with <code>kubectl rollout restart deploy/emissary-apiext -n emissary-system</code>.
     This will create a new certificate with a one year expiration. We will issue a software patch to address this issue well before the one year expiration. Note that certificate renewal will not cause any downtime.
    </Alert>
 
 2. **Install $productName$ $version$.**
 
-   After installing the new CRDs, upgrade $productName$ $version$:
+   After installing the new CRDs, upgrade $productName$ $version$.
+
+   <Alert severity="info">
+     Our <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml"><code>emissary-emissaryns.yaml</code></a> file
+     uses the `emissary` namespace, since this is the default for $productName$.
+     We also publish <a href="https://app.getambassador.io/yaml/emissary/$version$/emissary-defaultns.yaml"><code>emissary-defaultns.yaml</code></a> for the
+     `default` namespace. For any other namespace, you should download one of these files and edit the namespaces manually.
+   </Alert>
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes.yaml && \
-   kubectl rollout status -n $productNamespace$ deployment/edge-stack -w
+   kubectl apply -f https://app.getambassador.io/yaml/emissary/$version$/emissary-emissaryns.yaml && \
+   kubectl rollout status  -n emissary deployment/emissary-ingress -w
    ```

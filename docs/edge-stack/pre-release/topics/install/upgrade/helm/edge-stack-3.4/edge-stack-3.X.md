@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.5.X to $productName$ $version$ (Helm)
+# Upgrade $productName$ 3.4.X to $productName$ $version$ (Helm)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.5.Z to $productName$ $version$. If
+  This guide covers migrating from $productName$ 3.4.Z to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made using Helm.
-  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-3.3/edge-stack-3.X">YAML-based
+  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-3.4/edge-stack-3.X">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -97,7 +97,7 @@ $productName$ 3.4 is based on Envoy 1.24.1 which removed support for the `LightS
 1. **Install new CRDs.**
 
    After reviewing the changes in 3.x and confirming that you are ready to upgrade, the process is the same as upgrading minor versions
-   in previous version of $productName$ and does not require the complex migration steps that the migration from 1.x tto 2.x required.
+   in previous version of $productName$ and does not require the complex migration steps that the migration from 1.x to 2.x required.
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
    your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.

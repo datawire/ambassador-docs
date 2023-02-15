@@ -33,8 +33,14 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.5.0
-    date: 'TBD'
+    date: '2023-02-15'
     notes:
+      - title: Upgraded to golang 1.20.1
+        type: security
+        body: >-
+          Upgraded to the latest release of Golang as part of our general dependency upgrade process. This includes
+          security fixes for CVE-2022-41725, CVE-2022-41723.
+
       - title: TracingService support for native OpenTelemetry driver
         type: feature
         body: >-
@@ -79,11 +85,6 @@ items:
         - title: "#4809"
           link: https://github.com/emissary-ingress/emissary/pull/4809
 
-      - title: Upgraded to golang 1.20
-        type: change
-        body: >-
-          Upgraded to the latest release of our continued investement in keeping dependencies updated. 
-      
       - title: Upgraded to Python 3.10
         type: change
         body: >-
