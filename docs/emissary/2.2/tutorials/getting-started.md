@@ -10,9 +10,10 @@ import GettingStartedEmissary21Tabs from './gs-tabs'
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [1. Installation](#1-installation)
-* [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
-* [What's Next?](#img-classos-logo-srcimageslogopng-alttelepresence-logo--whats-next)
+- [1. Installation](#1-installation)
+  - [Connecting your installation to Ambassador Cloud](#connecting-your-installation-to-ambassador-cloud)
+- [2. Routing traffic from the edge](#2-routing-traffic-from-the-edge)
+- [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
 
 </div>
 
@@ -138,7 +139,7 @@ Now is a great moment to connect your new installation to Ambassador Cloud in or
 
 <Alert severity="success"><b>Victory!</b> You have created your first $productName$ <code>Listener</code> and <code>Mapping</code>, routing a request from your cluster's edge to a service!</Alert>
 
-## <img class="os-logo" src="../images/logo.png" alt="Telepresence Logo" /> What's next?
+## <img class="os-logo" src="/images/logo.png"/> What's next?
 
 Explore some of the popular tutorials on $productName$:
 

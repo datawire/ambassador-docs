@@ -199,8 +199,8 @@ for compatibility with Kubernetes 1.22.
 
 By default, $productName$ 2.X will configure Envoy using the
 [V3 Envoy API](https://www.envoyproxy.io/docs/envoy/latest/api-v3/api). In $productName$
-$version$, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION`
-environment variable to "V2"; in $productName$ 2.2.0, support for the Envoy V2 API (and
+2.X, you may switch back to Envoy V2 by setting the `AMBASSADOR_ENVOY_API_VERSION`
+environment variable to "V2"; in $productName$ 3.X, support for the Envoy V2 API (and
 the `AMBASSADOR_ENVOY_API_VERSION` environment variable) will be removed.
 
 ### More Performant Reconfiguration by Default

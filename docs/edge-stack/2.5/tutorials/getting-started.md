@@ -10,9 +10,10 @@ import GettingStartedEdgeStack21Tabs from './gs-tabs'
 <div class="docs-article-toc">
 <h3>Contents</h3>
 
-* [1. Installation](#1-installation)
-* [2. Routing Traffic from the Edge](#2-routing-traffic-from-the-edge)
-* [What's Next?](#img-classos-logo-srcimageslogopng-whats-next)
+- [1. Installation](#1-installation)
+  - [Connecting your installation to Ambassador Cloud](#connecting-your-installation-to-ambassador-cloud)
+- [2. Routing traffic from the edge](#2-routing-traffic-from-the-edge)
+- [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
 
 </div>
 
@@ -94,7 +95,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
     - **Path Matching**: `/backend/`
     - **OpenAPI Docs**: `/.ambassador-internal/openapi-docs`
 
-    ![](../../images/mapping-editor.png)
+    ## <img src="../images/mapping-editor.png" alt="Mapping editor" />
 
   Whether you decide to automatically push the change to Git for this newly create Mapping resource or not, the resulting Mapping should be similar to the example below.
 
@@ -144,7 +145,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
 <Alert severity="success"><b>Victory!</b> You have created your first $productName$ Mapping, routing a request from your cluster's edge to a service!</Alert>
 
-## <img class="os-logo" src="../../images/logo.png"/> What's next?
+## <img class="os-logo" src="/images/logo.png"/> What's next?
 
 Explore some of the popular tutorials on $productName$:
 

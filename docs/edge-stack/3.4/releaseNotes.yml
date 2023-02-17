@@ -32,6 +32,19 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.4.1
+    date: '2023-02-07'
+    notes:
+      - title: Upgrade to Envoy 1.24.2
+        type: security
+        body: >-
+          This upgrades $productName$ to be built on Envoy v1.24.2. This update addresses the folowing notable items:<br/><br/>
+          
+          - Updates boringssl to address High CVE-2023-0286<br/>
+          - Updates c-ares dependency to address issue with cname wildcard dns resolution for upstream clusters<br/><br/>
+
+          Users that are using $productName$ with Certificate Revocation List and allow external users to provide input should upgrade to ensure they are not vulnerable to CVE-2023-0286.
+
   - version: 3.4.0
     date: '2023-01-03'
     notes:
