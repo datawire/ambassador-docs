@@ -30,7 +30,7 @@
 
 changelog: ''
 items:
-  - date: '2023-02-03'
+  - date: '2023-02-21'
     notes:
       - title: 'Organization dashboard'
         body: Now all users in your organization can see who is onboarded, the most recent intercepts, active services, saved intercepts, all in one place. This will give you a sense of what is happening in your organization and also speed up the onboarding process with your development tools.
