@@ -30,11 +30,18 @@
 
 changelog: ''
 items:
+  - date: '2023-02-22'
+    notes:
+      - title: 'Organization dashboard'
+        body: Now all users in your organization can see who is onboarded, the most recent intercepts, active services, saved intercepts, all in one place. This will give you a sense of what is happening in your organization and also speed up the onboarding process with your development tools.
+        docs: './onboarding-dashboard'
+        image: './onboarding-dashboard.png'
+        type: feature
   - date: '2023-01-03'
     notes:
       - title: 'Active service view'
         body: You can now view which of your services are counting against your quota, how they were considered active, and the last time they were used.
-        docs: '/.subscriptions/howtos/manage-my-subscriptions'
+        docs: './subscriptions/howtos/manage-my-subscriptions'
         type: feature
   - date: '2022-11-07'
     notes:
