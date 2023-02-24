@@ -32,6 +32,18 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.5.1
+    date: '2023-02-24'
+    notes:
+      - title: Shipped Helm chart v8.5.1
+        type: bugfix
+        body: >-
+          Fix regression where the <code>Module</code> resource fails validation when setting the <code>ambassador_id</code> after upgrading to <code>getambassador.io/v3alpha1</code>.<br/><br/>
+          
+          Thanks to <a href="https://github.com/pie-r">Pier</a>.
+
+        docs: https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/CHANGELOG.md
+
   - version: 3.5.0
     date: '2023-02-15'
     notes:

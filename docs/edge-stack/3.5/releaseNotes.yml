@@ -32,6 +32,23 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.5.1
+    date: '2023-02-24'
+    notes:
+      - title: Fix regression with ExternalFilter parsing port incorrectly
+        type: bugfix
+        body: >-
+          A regression with parsing the <code>authService</code> field of the ExternalFilter has been fixed. This would cause the ExternalFilter to fail without sending a request to the service causing a 403 response.
+
+      - title: Shipped Helm chart v8.5.1
+        type: bugfix
+        body: >-
+          Fix regression where the <code>Module</code> resource fails validation when setting the <code>ambassador_id</code> after upgrading to <code>getambassador.io/v3alpha1</code>.<br/><br/>
+          
+          Thanks to <a href="https://github.com/pie-r">Pier</a>.
+
+        docs: https://github.com/datawire/edge-stack
+
   - version: 3.5.0
     date: '2023-02-15'
     notes:
