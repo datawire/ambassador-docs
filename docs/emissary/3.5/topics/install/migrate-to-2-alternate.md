@@ -4,7 +4,7 @@
 ---
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrading $productName$ with a separate cluster
+# Upgrading $productName$ $versionTwoX$ with a separate cluster
 
 You can upgrade from any version of $AESproductName$ or $OSSproductName$ to
 any version of either by installing the new version in a new Kubernetes cluster,

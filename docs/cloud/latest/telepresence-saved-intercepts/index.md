@@ -28,9 +28,9 @@ Intercept configurations are automatically saved in the Intercept History tab on
    telepresence intercept voting --port 8081:8080 --namespace emojivoto --http-header x-telepresence-intercept-id=test-user-1
    ```
    Each time you create an intercept like this, it is logged in Ambassador Cloud's Intercept History.
-1. Go to the Ambassador Cloud [Intercept History page](https://app.getambassador.io/cloud/saved-intercepts/history) and click on the intercept you just created. 
+1. Go to the Ambassador Cloud [Intercept page](https://app.getambassador.io/cloud/saved-intercepts), in the right side you will see a list called `Intercept History` now click on the intercept you just created. 
    Enter a name for the intercept and click **Create**.
-1. The incercept is now available in the [Saved Intercepts page](https://app.getambassador.io/cloud/saved-intercepts/saved-intercept)
+1. The incercept is now available in the [Intercepts page](https://app.getambassador.io/cloud/saved-intercepts) in the left side of the page, you will see a list called `Saved Intercepts`.
 
 ![saved-intercepts-form](../images/telepresence-intercept-history.png)
 ![saved-intercepts-form](../images/telepresence-saved-intercepts-form.png)
