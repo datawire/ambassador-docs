@@ -1426,6 +1426,8 @@ body {
   align-items: flex-start;
   letter-spacing: 0.4px;
   font-feature-settings: 'ss02' on;
+  max-height: 70vh;
+
   @media (max-width: 1200px) {
     display: none;
   }
@@ -1437,9 +1439,12 @@ body {
     margin-bottom: 5px;
     margin-left: -17px;
   }
-
   ul {
     width: 100%;
+  }
+  & > ul {
+    max-height: calc(100% - 100px);
+    overflow-y: auto;
   }
 
   li {
