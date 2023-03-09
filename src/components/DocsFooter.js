@@ -70,7 +70,7 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
 
   const showGitHubLink = (version)=>{
     const isGreaterThan = version.localeCompare("2.7", undefined, { numeric: true, sensitivity: 'base' });
-    return  isGreaterThan>= 0;
+    return isGreaterThan >= 0;
   }
 
   return (
