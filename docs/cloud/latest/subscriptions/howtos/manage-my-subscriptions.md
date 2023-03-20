@@ -73,7 +73,7 @@ Once you have identified a more suitable subscription plan, click on **Buy Now**
 
 ### Example
 
-For example, on the subscription page the team member quota indicates that you have up to 10 seats available. If you reach the limit, you can either release one seat, or **upgrade** your plan to increase the limit.
+For example, on the subscription page the team member quota indicates that you have up to 5 seats available. If you reach the limit, you can either release one seat, or **upgrade** your plan to increase the limit.
 
   <p align="center">
     <img src="../../images/team-members-quota.png" width="600" alt="Upgrade team members" />
