@@ -30,6 +30,13 @@
 
 changelog: ''
 items:
+  - date: '2023-03-22'
+    notes:
+      - title: 'Sign in with Docker'
+        body: Now you can sign in into Ambassador Cloud using Docker as identity provider.
+        docs: https://app.getambassador.io/cloud/
+        image: './docker-login.png'
+        type: feature
   - date: '2023-02-22'
     notes:
       - title: 'Organization dashboard'

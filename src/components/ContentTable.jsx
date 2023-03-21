@@ -77,7 +77,7 @@ const ContentTable = ({ items, location }) => {
 
 const ScrollSpyWrapper = ({ children, onUpdate, ...rest }) => {
   return (
-    <ul>
+    <ul tabindex="0">
       <Scrollspy
         {...rest}
         onUpdate={(e) => e && onUpdate(e.getAttributeNode('id').value)}

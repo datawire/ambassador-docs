@@ -68,9 +68,14 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
   const customLink = getEditOnPageUrls[page?.fields?.slug];
   dstUrl = customLink ? customLink : dstUrl;
 
+  const showGitHubLink = (version)=>{
+    const isGreaterThan = version.localeCompare("2.7", undefined, { numeric: true, sensitivity: 'base' });
+    return isGreaterThan >= 0;
+  }
+
   return (
     <footer className="docs__footer">
-      {product == 'telepresence' && Number(version) >= 2.7 ? null : (
+      {product == 'telepresence' && showGitHubLink(version) ? null : (
         <a href={dstUrl} target="_blank" rel="noreferrer">
           <Icon name="github" />
           Edit this page on GitHub

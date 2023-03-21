@@ -6,6 +6,16 @@ body {
   font-family: @InterFont;
 }
 
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
 @supports (font-variation-settings: normal) {
   html,
   body {
@@ -1426,6 +1436,8 @@ body {
   align-items: flex-start;
   letter-spacing: 0.4px;
   font-feature-settings: 'ss02' on;
+  max-height: 70vh;
+
   @media (max-width: 1200px) {
     display: none;
   }
@@ -1437,9 +1449,9 @@ body {
     margin-bottom: 5px;
     margin-left: -17px;
   }
-
   ul {
     width: 100%;
+    overflow-y: auto;
   }
 
   li {
