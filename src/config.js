@@ -29,6 +29,7 @@ export const products = [
         link: 'pre-release/quick-start',
       },
       { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
+      { id: '2.13', name: '2.13', link: '2.13/quick-start' },
       { id: '2.12', name: '2.12', link: '2.12/quick-start' },
       { id: '2.11', name: '2.11', link: '2.11/quick-start' },
       { id: '2.10', name: '2.10', link: '2.10/quick-start' },
