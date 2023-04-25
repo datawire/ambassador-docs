@@ -113,18 +113,18 @@ The following configuration is an example configuring $productName$ - ExternalDN
 
 After applying the above configuration, ExternalDNS is ready to use. Configure a `Host` with the following annotation to allow ExternalDNS to get the IP address of your $productName$'s LoadBalancer and register it with your DNS provider.
 
-  ```yaml
-    apiVersion: getambassador.io/v2
-    kind: Host
-    metadata:
-	    name: your-hostname
-      annotations:
-	      external-dns.ambassador-service: ambassador.default
-    spec:
-	    acmeProvider:
-	      authority: none
-	    hostname: your-hostname.example.com
-  ```
+```yaml
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: your-hostname
+  annotations:
+    external-dns.ambassador-service: ambassador.default
+spec:
+  acmeProvider:
+    authority: none
+  hostname: your-hostname.example.com
+```
 
 
 <Alert severity="success"><b>Victory!</b> ExternalDNS is now running and configured to report $productName$'s IP and hostname with your DNS provider.</Alert>
