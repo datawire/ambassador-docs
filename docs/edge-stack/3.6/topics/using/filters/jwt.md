@@ -65,7 +65,7 @@ spec:
  - `leewayForIssuedAt` allows tokens issued this much in the future to
    be used; to account for clock skew between the HTTP client and
    the Ambassador Edge Stack.
- - `maxStale` How long to keep stale cached OIDC replies for. This sets the `max-stale` Cache-Control directive on requests, and also ignores the `no-store` and `no-cache` Cache-Control directives on responses. This is useful for maintaining good performance when working with identity providers with misconfigured Cache-Control.
+ - `maxStale` How long to keep stale cached OIDC replies for. This sets the `max-stale` Cache-Control directive on requests, and also ignores the `no-store` and `no-cache` Cache-Control directives on responses. This is useful for maintaining good performance when working with identity providers with misconfigured Cache-Control. Note that if you are reusing the same `authorizationURL` and `jwksURI` across different OAuth and JWT filters respectively, then you MUST set `maxStale` as a consistent value on each filter to get predictable caching behavior.
  - `injectRequestHeaders` injects HTTP header fields in to the request before sending it to the upstream service; where the header value can be set based on the JWT value.  The value is specified as a [Go `text/template`][] string, with the following data made available to it:
 
     * `.token.Raw` → `string` the raw JWT
