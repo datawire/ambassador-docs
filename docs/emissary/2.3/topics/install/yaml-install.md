@@ -70,7 +70,7 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 
 3. Next Steps
 
-   $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources.
+   $productName$ should now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources.
 
    - [The `Listener` Resource](../../running/listener/) is required to configure which ports the $productName$ pods listen on so that they can begin responding to requests.
    - [The `Mapping` Resouce](../../using/intro-mappings/) is used to configure routing requests to services in your cluster.
