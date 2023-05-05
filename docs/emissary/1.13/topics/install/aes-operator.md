@@ -26,7 +26,7 @@ Start by installing the operator:
 
 1. Create the Operator Custom Resource schema with the following command:
    `kubectl apply -f https://github.com/datawire/ambassador-operator/releases/latest/download/ambassador-operator-crds.yaml`
-2. To install the Ambassador Operator CRD. To change the namespace for the isntall, you can specify it in `NS` and then run the following command. We recommend using the `default` namespace if you are installing $productName$ and the `ambassador` namespace if you are installing $AESproductName$:
+2. To install the Ambassador Operator CRD. To change the namespace for the install, you can specify it in `NS` and then run the following command. We recommend using the `default` namespace if you are installing $productName$ and the `ambassador` namespace if you are installing $AESproductName$:
 
     ```
     $ NS="default"
