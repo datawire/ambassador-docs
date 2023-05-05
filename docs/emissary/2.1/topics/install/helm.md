@@ -72,7 +72,7 @@ When you run the Helm chart, it installs $productName$.
 
    - [The `Listener` Resource](../../running/listener/) is required to configure which ports the $productName$ pods listen on so that they can begin responding to requests.
    - [The `Mapping` Resouce](../../using/intro-mappings/) is used to configure routing requests to services in your cluster.
-   - [The `Host` Resource](../../running/host-crd/) configures TLS termination for enablin HTTPS communication.
+   - [The `Host` Resource](../../running/host-crd/) configures TLS termination for enabling HTTPS communication.
    - Explore how $productName$ [configures communication with clients](../../../howtos/configure-communications)
 
   <Alert severity="info">
