@@ -32,23 +32,33 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.7.0
+    date: 'TBD'
+    notes:
+      - title: Configurable Web Application Firewall
+        type: feature
+        body: >-
+          $productName$ now provides a configurable Web Application Firewall (WAF) that can be used to add additional security to your services by blocking dangerous requests. It can be configured globally or route by route. We have also published a ready to use set of rules to get you started and protected against the OWASP Top 10 vulnerabilities.
+          The published rule set will be updated and maintained regularly. For more info click here for the documentation.
+        docs: howtos/waf/
+
   - version: 3.6.0
     date: '2023-04-17'
     notes:
       - title: Deprecation of insteadOfRedirect.filters argument in FilterPolicy
         type: change
         body: >-
-           The <code> insteadOfRedirect.filters </code> field within the OAuth2 path-specific arguments has been deprecated and it will be fully removed in a future version of $productName$. Similiar behavior can
-           be accomplished using <code>onDeny=continue</code> and chaining a 
-           fallback Filter to run. 
+          The <code> insteadOfRedirect.filters </code> field within the OAuth2 path-specific arguments has been deprecated and it will be fully removed in a future version of $productName$. Similiar behavior can
+          be accomplished using <code>onDeny=continue</code> and chaining a
+          fallback Filter to run.
         docs: topics/using/filters/oauth2#oauth2-path-specific-arguments
-      
+
       - title: Upgrade to Envoy 1.25.4
         type: feature
         body: >-
           This upgrades $productName$ to be built on Envoy v1.25.4 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.25.4/version_history/v1.25/v1.25">Envoy Proxy 1.25.4 Release Notes</a>
         docs: https://www.envoyproxy.io/docs/envoy/v1.25.4/version_history/v1.25/v1.25
-           
+
       - title: Shipped Helm chart v8.6.0
         type: change
         body: >-
@@ -88,7 +98,7 @@ items:
         type: bugfix
         body: >-
           Fix regression where the <code>Module</code> resource fails validation when setting the <code>ambassador_id</code> after upgrading to <code>getambassador.io/v3alpha1</code>.<br/><br/>
-          
+
           Thanks to <a href="https://github.com/pie-r">Pier</a>.
 
         docs: https://github.com/datawire/edge-stack
@@ -117,17 +127,17 @@ items:
           $productName$ will now use a specific envoy listener that can answer /ready calls from an Envoy worker thread so the endpoint is always fast and it does not suffer from single threaded admin thread slowness on config reloads and other slow endpoints handled by the admin thread.<br/><br/>
 
           Configure the listener port using <code>AMBASSADOR_READY_PORT</code> and enable access log using <code>AMBASSADOR_READY_LOG</code> environment variables.
-      
+
         docs: https://www.getambassador.io/docs/edge-stack/latest/topics/running/environment/
 
       - title: Fix envoy config generated when including port in Host.hostname
         type: bugfix
         body: >-
           When wanting to expose traffic to clients on ports other than 80/443, users will set a port in the Host.hostname (eg.<code>Host.hostname=example.com:8500</code>). The config generated allowed matching on the :authority header. This worked in v1.Y series due to the way $productName$ was generating Envoy configuration under a single wild-card virtual_host and matching on :authority.<br/><br/>
-          
+
           In v2.Y/v3.Y+, the way $productName$ generates Envoy configuration changed to address memory pressure and improve route lookup speed in Envoy. However, when including a port in the hostname, an incorrect configuration was generated with an sni match including the port. This caused incoming request to never match causing a 404 Not Found.This has been fixed and the correct envoy configuration is
           being generated which restores existing behavior.
-      
+
       - title: Fix GRPC TLS support with ExternalFilter
         type: bugfix
         body: >-
@@ -150,12 +160,12 @@ items:
         type: change
         body: >-
           Upgraded to Python 3.10 as part of continued investment in keeping dependencies updated.
-      
+
       - title: Upgraded base image to alpine-3.17
         type: change
         body: >-
           Upgraded base image to alpine-3.17 as part of continued investment in keeping dependencies updated.
-      
+
       - title: Shipped Helm chart v8.5.0
         type: change
         body: >-
@@ -178,7 +188,7 @@ items:
         type: security
         body: >-
           This upgrades $productName$ to be built on Envoy v1.24.2. This update addresses the folowing notable items:<br/><br/>
-          
+
           - Updates boringssl to address High CVE-2023-0286<br/>
           - Updates c-ares dependency to address issue with cname wildcard dns resolution for upstream clusters<br/><br/>
 
@@ -191,7 +201,7 @@ items:
         type: feature
         body: >-
           This upgrades $productName$ to be built on Envoy v1.24.1. Two notable changes were introduced:<br/><br/>
-          
+
           First, the team at LightStep and the Envoy Maintainers have decided to no longer support the native <b>LightStep</b> tracing driver in favor of using the Open Telemetry driver. The code for the native Enovy LightStep driver has been removed from the Envoy code base. This means $productName$ will no longer support LightStep in the <code>TracingService</code>. The recommended upgrade path is to leverage a supported Tracing driver such as <code>Zipkin</code> and use the <a href="https://opentelemetry.io/docs/collector/">Open Telemetry Collector</a> to collect and forward Observabity data to LightStep. A guide for this can be found here: <a href="howtos/tracing-lightstep/">Distributed Tracing with Open Telemetry and LightStep</a>.<br/><br/>
 
           Second, a bug was fixed in Envoy 1.24 that changes how the upstream clusters distributed tracing <code>span</code> is named. Prior to Envoy 1.24 it would always set the span name to the <code>cluster.name</code>. The expected behavior from Envoy was that if provided an <code>alt_stat_name</code> then use it else fallback to <code>cluster.name</code>.
@@ -255,11 +265,11 @@ items:
         body: >-
           Previously, the Agent used for communicating with Ambassador Cloud was bundled into $productName$. This tied it to the same release schedule as $productName$ and made it difficult to iterate on its feature set. It has now been extracted into its own repository and has its own release process and schedule.
         docs: https://github.com/datawire/ambassador-agent
-        
+
       - title: Fix Filters not properly caching large jwks responses
         type: bugfix
         body: >-
-          In some cases, a <code>Filter</code> would fail to properly cache the response from the jwks endpoint due to the response being too large to cache. This would hurt performance and cause $productName$ to be rate-limited by the iDP. This has been fixed to accomodate iDP's that are configured to support multiple key sets thus returning a response that is larger than the typical default response from most iDP's. 
+          In some cases, a <code>Filter</code> would fail to properly cache the response from the jwks endpoint due to the response being too large to cache. This would hurt performance and cause $productName$ to be rate-limited by the iDP. This has been fixed to accomodate iDP's that are configured to support multiple key sets thus returning a response that is larger than the typical default response from most iDP's.
 
   - version: 3.3.1
     date: '2022-12-08'
