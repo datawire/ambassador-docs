@@ -39,8 +39,14 @@ items:
         type: feature
         body: >-
           $productName$ now provides a configurable Web Application Firewall (WAF) that can be used to add additional security to your services by blocking dangerous requests. It can be configured globally or route by route. We have also published a ready to use set of rules to get you started and protected against the OWASP Top 10 vulnerabilities.
-          The published rule set will be updated and maintained regularly. For more info click here for the documentation.
+          The published rule set will be updated and maintained regularly. For more info <a href="howtos/waf/">click here for the documentation</a>.
         docs: howtos/waf/
+
+      - title: Upgrade to Envoy 1.26.1
+        type: feature
+        body: >-
+          This upgrades $productName$ to be built on Envoy v1.26.1 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.26.1/version_history/v1.26/v1.26">Envoy Proxy 1.26.1 Release Notes</a>
+        docs: https://www.envoyproxy.io/docs/envoy/v1.26.1/version_history/v1.26/v1.26
 
   - version: 3.6.0
     date: '2023-04-17'
