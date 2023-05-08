@@ -53,12 +53,12 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
 
     Note that this simple command automatically enables mTLS by default and registers the AutoInject Webhook with your Kubernetes API Server. You now have a production-ready Linkerd 2 setup rolled out into your cluster!
 
-3. Deploy $productName$. This howto assumes you have already followed the $productName$ [Getting Started](../../tutorials/getting-started) guide. If you haven't done that already, you should do that now.
+3. Deploy $productName$ if you have not already, by following the $productName$ [Getting Started](../../tutorials/getting-started) guide. 
 
 4. Configure $productName$ to add it to the Linkerd 2 service mesh.
 
     ```
-    kubectl -n emissary get deploy emissary-ingress -o yaml | \
+    kubectl -n $namespace get deploy $deployment -o yaml | \
     linkerd inject \
     --skip-inbound-ports 80,443 - | \
     kubectl apply -f -
@@ -82,7 +82,7 @@ You'll now register a demo application with Linkerd 2, and show how $productName
 
     Save the above to a file called `namespace.yaml` and run `kubectl apply -f namespace.yaml`. This will enable the namespace to be handled by the AutoInjection Webhook of Linkerd 2. Every time something is deployed to that namespace, the deployment is passed to the AutoInject Controller and injected with the Linkerd 2 proxy sidecar automatically.
 
-2. Deploy the QOTM demo application. You may have already done this as part of the getting started guide, if so, restart the application using the rollout restart command provided below.
+2. Deploy the QOTM demo application. 
 
     ```yaml
     ---
@@ -122,20 +122,20 @@ You'll now register a demo application with Linkerd 2, and show how $productName
               limits:
                 cpu: "0.1"
                 memory: 100Mi
-      ---
-      apiVersion: v1
-      kind: Service
-      metadata:
-        name: qotm-linkerd2
-        namespace: default
-      spec:
-        ports:
-        - name: http
-          port: 80
-          targetPort: 5000
-        selector:
-          app: qotm
-      ---
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: qotm-linkerd2
+      namespace: default
+    spec:
+      ports:
+      - name: http
+        port: 80
+        targetPort: 5000
+      selector:
+        app: qotm
+    ---
     ```
 
     Save the above to a file called `qotm.yaml` and deploy it with
@@ -144,18 +144,10 @@ You'll now register a demo application with Linkerd 2, and show how $productName
     kubectl apply -f qotm.yaml
     ```
 
-    If you already had qotm deployed please restart it with
-
-    ```
-    kubectl rollout restart deploy qotm -n default
-    ```
-
-    Watch via `kubectl get pod -w` as the Pod is created. Note that it starts with `0/2` containers automatically, as it has been auto-injected by the Linkerd 2 Webhook.
-
 3. Verify the QOTM pod has been registered with Linkerd 2. You can verify the QOTM pod is registered correctly by accessing the Linkerd 2 Dashboard.
 
    ```
-   linkerd dashboard
+   linkerd viz dashboard
    ```
 
    Your browser should automatically open the correct URL. Otherwise, note the output from the above command and open that in a browser of your choice.
@@ -183,7 +175,7 @@ You'll now register a demo application with Linkerd 2, and show how $productName
 1. Send a request to the `qotm-Linkerd2` API.
 
    ```
-   curl -L http://$AMBASSADOR_IP/qotm-Linkerd2/
+   curl -Lki http://$LB_ENDPOINT/qotm-linkerd2/
 
    {"hostname":"qotm-749c675c6c-hq58f","ok":true,"quote":"The last sentence you read is often sensible nonsense.","time":"2019-03-29T22:21:42.197663","version":"1.7"}
    ```
