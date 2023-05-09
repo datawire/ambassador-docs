@@ -18,7 +18,7 @@ export default function SearchBox(props) {
       // If that happens, just back off and try again.
       try {
         window.docsearch({
-          apiKey: '2d9b93b7b8cd30ed7cdb18683b8c5150',
+          apiKey: process.env.GATSBY_ALGOLIA_API_KEY,
           appId: 'HEP1UCV302',
           indexName: 'getambassador',
           inputSelector: `#${inputSelector}`,
