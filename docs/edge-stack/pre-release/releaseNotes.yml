@@ -35,12 +35,12 @@ items:
   - version: 3.7.0
     date: 'TBD'
     notes:
-      - title: Configurable Web Application Firewall
+      - title: Configurable Web Application Firewalls
         type: feature
         body: >-
-          $productName$ now provides a configurable Web Application Firewall (WAF) that can be used to add additional security to your services by blocking dangerous requests. It can be configured globally or route by route. We have also published a ready to use set of rules to get you started and protected against the OWASP Top 10 vulnerabilities.
-          The published rule set will be updated and maintained regularly. For more info <a href="howtos/waf/">click here for the documentation</a>.
-        docs: howtos/waf/
+          $productName$ now provides configurable Web Application Firewalls (WAFs) that can be used to add additional security to your services by blocking dangerous requests. They can be configured globally or route by route. We have also published a ready to use set of rules to get you started and protected against the OWASP Top 10 vulnerabilities.
+          The published rule set will be updated and maintained regularly. For more info <a href="howtos/web-application-firewalls/">click here for the documentation</a>.
+        docs: howtos/web-application-firewalls/
 
       - title: Upgrade to Envoy 1.26.1
         type: feature
