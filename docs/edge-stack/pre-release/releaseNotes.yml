@@ -48,6 +48,12 @@ items:
           This upgrades $productName$ to be built on Envoy v1.26.1 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.26.1/version_history/v1.26/v1.26">Envoy Proxy 1.26.1 Release Notes</a>
         docs: https://www.envoyproxy.io/docs/envoy/v1.26.1/version_history/v1.26/v1.26
 
+      - title: ExternalFilter - Add support for configuring TLS Settings
+        type: feature
+        body: >-
+          The <code>ExternalFilter</code> now supports configuring a CA certificate and/or client certificate via the new <code>tlsConfig</code> attribute. This allows $productName$ to communicate with the configured AuthService using custom TLS certificates provided as Kubernetes Secrets.
+        docs: topics/using/filters/external/#configuring-tls-settings
+
   - version: 3.6.0
     date: '2023-04-17'
     notes:
