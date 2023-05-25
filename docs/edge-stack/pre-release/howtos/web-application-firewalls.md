@@ -25,27 +25,29 @@ metadata:
   name: "example-waf"
   namespace: "example-namespace"
 spec:
-  rules:                          # required; One of configMapRef;file;url must be set below
-    sourceType: "enum"            # required; allowed values are file;configmap;url
+  firewallRules:                          # required; One of configMapRef;file;http must be set below
+    sourceType: "enum"            # required; allowed values are file;configmap;http
     configMapRef:                 # optional
       name: "string"              # required
       namespace: "string"         # optional; defaults to the namespace of the WebApplicationFirewall
       key: "string"               # required
     file: "string"                # optional
-    url: "string"                 # optional; must be a valid URL.
+    http:                         # optional
+      url: "string"               # required; must be a valid URL.
 status:                           # set and updated by application
   conditions: []metav1.Condition
 ```
 
-`rules`: Defines the rules to be used for the Web Application Firewall
+`firewallRules`: Defines the rules to be used for the Web Application Firewall
 
-- `sourceType`: Identifies which method is being used to load the firewall rules. Value must be one of `configMapRef`;`file`;`url`. The value corresponds to the following fields for configuring the selected method.
+- `sourceType`: Identifies which method is being used to load the firewall rules. Value must be one of `configMapRef`;`file`;`http`. The value corresponds to the following fields for configuring the selected method.
 - `configMapRef`: Defines a reference to a `ConfigMap` in the Kubernetes cluster to load firewall rules from.
   - `name`: Name of the `ConfigMap`.
   - `namespace`: Namespace of the `ConfigMap`. This field is optional and when left unset, the `ConfigMap` is assumed to be in the same namespace as the `WebApplicationFirewall` resource. It must be a RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
   - `key`: The key in the `ConfigMap` to pull the rules data from.
 - `file`: Location of a file on disk to load the firewall rules from. Example: `"/ambassador/firewall/waf.conf`.
-- `url`: URL to fetch firewall rules from. The rules will only be downloaded once when the `WebApplicationFirewall` is loaded. The rules will then be cached in-memory until a restart of $productName$ occurs or the `url` is changed.
+- `http`: Configuration for downloading firewall rules from the internet. The rules will only be downloaded once when the `WebApplicationFirewall` is loaded. The rules will then be cached in-memory until a restart of $productName$ occurs or the `WebApplicationFirewall` is modified.
+  - `url`: URL to fetch firewall rules from.
 
 `status`: This field is automatically set to reflect the status of the `WebApplicationFirewall`.
 
@@ -122,9 +124,10 @@ status:                           # set and updated by application
    metadata:
      name: "example-waf"
    spec:
-     rules:
-       sourceType: "url"
-       url: "https://app.getambassador.io/yaml/waf-rules/v1-20230430.conf"  # TODO: this is a placeholder URL, the final URL is subject to change.
+     firewallRules:
+       sourceType: "http"
+       http:
+         url: "https://app.getambassador.io/yaml/waf-rules/v1-20230430.conf"  # TODO: this is a placeholder URL, the final URL is subject to change.
    EOF
    ```
 
@@ -173,8 +176,8 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 ### Logging
 
   $productName$ will log information about requests approved and denied by any `WebApplicationFirewalls` along with the reason why the request was denied.
-
-  // TODO: specifics about the log lines and log levels that are output will be added soon
+  You can configure the logging policies in the `WebApplicationFirewall` configuration files to control where logs are sent to and how much information is logged.
+  The Ambassador Labs default ruleset sends the WAF logs to stdout so they show up in the container logs.
 
 ### Metrics
 
