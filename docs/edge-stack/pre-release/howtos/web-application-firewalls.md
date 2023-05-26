@@ -47,7 +47,7 @@ status:                           # set and updated by application
   - `key`: The key in the `ConfigMap` to pull the rules data from.
 - `file`: Location of a file on disk to load the firewall rules from. Example: `"/ambassador/firewall/waf.conf`.
 - `http`: Configuration for downloading firewall rules from the internet. The rules will only be downloaded once when the `WebApplicationFirewall` is loaded. The rules will then be cached in-memory until a restart of $productName$ occurs or the `WebApplicationFirewall` is modified.
-  - `url`: URL to fetch firewall rules from.
+  - `url`: URL to fetch firewall rules from. If the rules are unable to be downloaded/parsed from the provided url for whatever reason, the requests matched to this `WebApplicationFirewall` will be allowed/denied based on the configuration of the `onError`
 
 `status`: This field is automatically set to reflect the status of the `WebApplicationFirewall`.
 
@@ -65,7 +65,8 @@ metadata:
   name: "example-waf-policy"
   namespace: "example-namespace"
 spec:
-  ambassadorIds: []string         # optional
+  ambassadorSelector:             # optional; default = {ambassadorIds: ["default"]}
+    ambassadorIds: []string       # optional; default = ["default"]
   rules:                          # required
   - host: "string"                # optional; default = * (runs on all hosts)
     path: "string"                # optional; default = * (runs on all paths)
@@ -77,6 +78,8 @@ spec:
     wafRef:                       # required
       name: "string"              # required
       namespace: "string"         # optional
+    onError:                      # optional; min=400, max=599
+      statusCode: int             # required
     precedence: int               # optional
 status:                           # set and updated by application
   conditions: []metav1.Condition
@@ -89,7 +92,8 @@ status:                           # set and updated by application
 
 `spec`: Defines which requests to match on and which `WebApplicationFirewall` to be used against those requests.
 
-- `ambassadorIds`: This optional field allows you to limit which instances of $productName$ can watch and use this resource. This allows for the separation of resources when running multiple instances of $productName$ in the same Kubernetes cluster. Additional documentation on [configuring Ambassador IDs can be found here][]. By default all instances of $productName$ will be able to watch and use this resource.
+- `ambassadorSelector` Configures how this resource is allowed to be watched/used by instances of Edge Stack
+  - `ambassadorIds`: This optional field allows you to limit which instances of $productName$ can watch and use this resource. This allows for the separation of resources when running multiple instances of $productName$ in the same Kubernetes cluster. Additional documentation on [configuring Ambassador IDs can be found here][]. By default all instances of $productName$ will be able to watch and use this resource.
 - `rules`: This object configures matching requests and executes `WebApplicationFirewall`s on them.
   - `host`: Host is a "glob-string" that matches on the `:authority` header of the incoming request. If not set, it will match on all incoming requests.
   - `path`: Path is a "glob-string" that matches on the request path. If not provided, then it will match on all incoming requests.
@@ -101,6 +105,8 @@ status:                           # set and updated by application
   - `wafRef`: A reference to a `WebApplicationFirewall` to be applied against the request.
     - `name`: Identifies the `WebApplicationFirewall`
     - `namespace`: Namespace of the `WebApplicationFirewall`. This field is optional and when left unset, the `WebApplicationFirewall` is assumed to be in the same namespace as the `WebApplicationFirewallPolicy` resource. It must be a RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters, and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
+  - `onError`: provides a way to configure how requests are handled when a request matches the rule but there is a configuration or runtime error. By default requests are allowed on error if this field is not configured. This covers runtime errors such as those caused by networking/request parsing as well as configuration errors such as if the `WebApplicationFirewall` that is referenced is misconfigured, cannot be found, or when its configuration cannot be loaded properly.
+    - `statusCode`: The status code to return to downstream clients when an error occurs.
   - `precedence`: Allows forcing a precedence ordering on the rules. By default the rules are evaluated in the order they are in the `WebApplicationFirewallPolicy.spec.rules` field. However, multiple `WebApplicationFirewallPolicys` can be applied to a cluster. `precedence` can optionally be used to ensure that a specific ordering is enforced.
 
 `status`: This field is automatically set to reflect the status of the `WebApplicationFirewallPolicy`.
@@ -185,18 +191,16 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 
 | Metric                        | Type                  | Description                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 |-------------------------------|-----------------------|-----------------------------------------------------------------------------------------------|
-| `waf_total_denied_requests`   | Counter               | Number of requests denied by any web application firewall                                     |
-| `waf_total_denied_responses`  | Counter               | Number of responses denied by any web application firewall                                    |
-| `waf_total_allowed_requests`  | Counter               | Number of requests allowed by any web application firewall                                    |
-| `waf_total_allowed_responses` | Counter               | Number of responses allowed by any web application firewall                                   |
+| `waf_created_wafs`            | Counter               | Number of created web application firewall                                                    |
+| `waf_managed_wafs`            | Counter               | Number of managed web application firewalls                                                   |
+| `waf_added_latency_ms`        | Histogram             | Added latency in milliseconds                                                                 |
+| `waf_total_denied_requests`   | Counter (with labels) | Number of requests denied by any web application firewall                                     |
+| `waf_total_denied_responses`  | Counter (with labels) | Number of responses denied by any web application firewall                                    |
 | `waf_denied_breakdown`        | Counter (with labels) | Breakdown of requests/responses denied and the web application firewall that denied them      |
+| `waf_total_allowed_requests`  | Counter (with labels) | Number of requests allowed by any web application firewall                                    |
+| `waf_total_allowed_responses` | Counter (with labels) | Number of responses allowed by any web application firewall                                   |
 | `waf_allowed_breakdown`       | Counter (with labels) | Breakdown of requests/responses allowed and the web application firewall that allowed them    |
 | `waf_errors`                  | Counter (with labels) | Tracker for any errors encountered by web application firewalls and the reason for the error  |
-| `waf_added_request_ms`        | Histogram             | Keeps track of latency added by each waf when processing requests                             |
-| `waf_added_response_ms`       | Histogram             | Keeps track of latency added by each waf when processing responses                            |
-| `loaded_wafs`                 | Gauge                 | Number of currently loaded web application firewalls                                          |
-| `waf_active_requests`         | Gauge                 | Number of requests currently being processed by a web application firewall                    |
-| `waf_active_responses`        | Gauge                 | Number of responses currently being processed by a web application firewall                   |
 
 ### Grafana Dashboard
 
