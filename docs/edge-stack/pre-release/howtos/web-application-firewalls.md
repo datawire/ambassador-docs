@@ -25,7 +25,7 @@ metadata:
   name: "example-waf"
   namespace: "example-namespace"
 spec:
-  firewallRules:                          # required; One of configMapRef;file;http must be set below
+  firewallRules:                  # required; One of configMapRef;file;http must be set below
     sourceType: "enum"            # required; allowed values are file;configmap;http
     configMapRef:                 # optional
       name: "string"              # required
@@ -191,7 +191,7 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 
 | Metric                        | Type                  | Description                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 |-------------------------------|-----------------------|-----------------------------------------------------------------------------------------------|
-| `waf_created_wafs`            | Counter               | Number of created web application firewall                                                    |
+| `waf_created_wafs`            | Gauge                 | Number of created web application firewall                                                    |
 | `waf_managed_wafs`            | Counter               | Number of managed web application firewalls                                                   |
 | `waf_added_latency_ms`        | Histogram             | Added latency in milliseconds                                                                 |
 | `waf_total_denied_requests`   | Counter (with labels) | Number of requests denied by any web application firewall                                     |
