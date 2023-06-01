@@ -3,9 +3,9 @@
 The Ambassador Labs Web Application Firewall ruleset can be downloaded with these commands:
 
 ```bash
-wget https://app.getambassador.io/download/waf/v1%2B20230601/aes-waf.conf -O aes-waf.conf
-wget https://app.getambassador.io/download/waf/v1%2B20230601/crs-setup.conf -O crs-setup.conf
-wget https://app.getambassador.io/download/waf/v1%2B20230601/waf-rules.conf -O waf-rules.conf
+wget https://app.getambassador.io/download/waf/v1%2B20230601/aes-waf.conf
+wget https://app.getambassador.io/download/waf/v1%2B20230601/crs-setup.conf
+wget https://app.getambassador.io/download/waf/v1%2B20230601/waf-rules.conf
 ```
 
 Each file must be imported into $productName$'s Web Application Firewall in the following order:
