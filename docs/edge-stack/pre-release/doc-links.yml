@@ -56,7 +56,11 @@
          - title: HTTP/3 with GKE
            link: /howtos/http3-gke
      - title: Web Application Firewalls
-       link: /howtos/web-application-firewalls
+       items:
+       - title: $productName$'s Web Application Firewall
+         link: /howtos/web-application-firewalls
+       - title: Configuring the Web Application Firewall rules
+         link: /howtos/web-application-firewall-configuration
      - title: Service routing and communication
        items:
          - title: Configuring $productName$ to communicate

@@ -165,13 +165,9 @@ Since the [Coraza Web Application Firewall library][] $productName$'s Web Applic
 
 Ambassador Labs publishes and maintains a list of rules to be used with the Web Application Firewall that should be a good solution for most users and [Coraza also provides their own ruleset][] based on the [OWASP][] core rule set.
 
+See [Configuring $productName$'s Web Application Firewall rules](web-application-firewall-configuration.md) for more information about installing Ambassador Labs rules.
+
 For specific information about rule configuration, please refer to [Coraza's Seclang documentation][]
-
-The Ambassador Labs Web Application Firewall ruleset can be downloaded from the following link with this command:
-
-```bash
-wget https://app.getambassador.io/yaml/waf-rules/v1-20230430.conf -O v1-20230430.conf
-```
 
 // TODO: Add a statement about our support policy for the rules we publish
 
