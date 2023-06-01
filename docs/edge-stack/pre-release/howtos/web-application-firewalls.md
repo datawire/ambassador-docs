@@ -165,7 +165,7 @@ Since the [Coraza Web Application Firewall library][] $productName$'s Web Applic
 
 Ambassador Labs publishes and maintains a list of rules to be used with the Web Application Firewall that should be a good solution for most users and [Coraza also provides their own ruleset][] based on the [OWASP][] core rule set.
 
-See [Configuring $productName$'s Web Application Firewall rules](web-application-firewall-configuration.md) for more information about installing Ambassador Labs rules.
+See [Configuring $productName$'s Web Application Firewall rules][] for more information about installing Ambassador Labs rules.
 
 For specific information about rule configuration, please refer to [Coraza's Seclang documentation][]
 
@@ -216,3 +216,4 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 [configuring Ambassador IDs can be found here]: ../../topics/running/running#ambassador_id
 [$productName$]: https://www.getambassador.io/products/edge-stack/api-gateway
 [Ambassador labs]: https://www.getambassador.io/
+[Configuring $productName$'s Web Application Firewall rules](web-application-firewall-configuration)
