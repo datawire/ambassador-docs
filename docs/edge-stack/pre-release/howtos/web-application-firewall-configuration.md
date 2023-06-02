@@ -26,7 +26,7 @@ To install any of the rules below, import all the files for the desired version 
 
 Initial version of $productName$'s Web Application Firewall rules.
 
-Rules files:
+Files:
 - [aes-waf.conf](https://app.getambassador.io/download/waf/v1-20230602/aes-waf.conf)
 - [crs-setup.conf](https://app.getambassador.io/download/waf/v1-20230602/crs-setup.conf)
 - [waf-rules.conf](https://app.getambassador.io/download/waf/v1-20230602/waf-rules.conf)
