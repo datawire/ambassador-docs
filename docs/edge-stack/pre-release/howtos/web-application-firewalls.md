@@ -131,15 +131,22 @@ status:                           # set and updated by application
      name: "example-waf"
    spec:
      firewallRules:
-       sourceType: "http"
-       http:
-         url: "https://app.getambassador.io/yaml/waf-rules/v1-20230430.conf"  # TODO: this is a placeholder URL, the final URL is subject to change.
+       - sourceType: "http"
+         http:
+           url: "https://app.getambassador.io/download/waf/v1-20230602/aes-waf.conf"
+       - sourceType: "http"
+         http:
+           url: "https://app.getambassador.io/download/waf/v1-20230602/crs-setup.conf"
+       - sourceType: "http"
+         http:
+           url: "https://app.getambassador.io/download/waf/v1-20230602/waf-rules.conf"
    EOF
    ```
 
 2. Next create a `WebApplicationFirewallPolicy` to control which requests the firewall should run on. The example will run the firewall on all requests, but you can customize the policy to only run for specific requests.
 
    ```yaml
+   kubectl apply -f -<<EOF
    ---
    apiVersion: gateway.getambassador.io/v1alpha1
    kind: WebApplicationFirewallPolicy
@@ -149,9 +156,14 @@ status:                           # set and updated by application
      rules:
      - wafRef: # This rule will be executed on all paths and hostnames
          name: "example-waf"
+   EOF
    ```
 
-// TODO: add a curl command here that will violate our provided ruleset and cause the request to be rejected.
+3. Finally, send a request that will be blocked by the Web Application Firewall
+
+  ```console
+  $ curl https://<HOSTNAME>/test -H 'User-Agent: Arachni/0.2.1'
+  ```
 
 Congratulations, you've successfully set up a Web Application Firewall to secure all requests coming into $productName$.
 
