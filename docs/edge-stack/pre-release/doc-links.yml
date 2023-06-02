@@ -61,8 +61,6 @@
          link: /howtos/web-application-firewalls
        - title: Configuring the Web Application Firewall rules
          link: /howtos/web-application-firewall-configuration
-       - title: Ambassador Labs ruleset release notes
-         link: /howtos/web-application-firewall-release-notes.md
      - title: Service routing and communication
        items:
          - title: Configuring $productName$ to communicate
