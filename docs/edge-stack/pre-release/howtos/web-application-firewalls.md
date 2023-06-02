@@ -161,9 +161,9 @@ status:                           # set and updated by application
 
 3. Finally, send a request that will be blocked by the Web Application Firewall
 
-  ```console
-  $ curl https://<HOSTNAME>/test -H 'User-Agent: Arachni/0.2.1'
-  ```
+   ```console
+   $ curl https://<HOSTNAME>/test -H 'User-Agent: Arachni/0.2.1'
+   ```
 
 Congratulations, you've successfully set up a Web Application Firewall to secure all requests coming into $productName$.
 
