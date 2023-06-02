@@ -1,6 +1,6 @@
 # Configuring the Web Application Firewall rules in $productName$
 
-The Ambassador Labs Web Application Firewall ruleset can be downloaded with these commands:
+The latest version of the Ambassador Labs Web Application Firewall ruleset can be downloaded with these commands:
 
 ```bash
 wget https://app.getambassador.io/download/waf/v1-20230602/aes-waf.conf
