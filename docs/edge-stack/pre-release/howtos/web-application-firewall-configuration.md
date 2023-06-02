@@ -24,7 +24,7 @@ To install any of the rules below, import all the files for the desired version 
 
 ### Version v1-20230602
 
-Initial version of $productName$ Web Application Firewall rules.
+Initial version of $productName$'s Web Application Firewall rules.
 
 Rules files:
 - [aes-waf.conf](https://app.getambassador.io/download/waf/v1-20230602/aes-waf.conf)
