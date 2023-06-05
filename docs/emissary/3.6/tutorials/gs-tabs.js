@@ -128,7 +128,7 @@ export default function GettingStartedEmissary21Tabs(props) {
       </TabPanel>
       <img referrerPolicy="no-referrer-when-downgrade"
            src="https://static.scarf.sh/a.png?x-pxid=a6dee6ae-7a66-47cb-ab70-2e576b24e521" alt=""
-           style="display: none;" />
+           style={{ display: 'none' }} />
     </div>
   );
 }
