@@ -38,7 +38,8 @@ items:
       - title: Configurable Web Application Firewalls
         type: feature
         body: >-
-          $productName$ now provides configurable Web Application Firewalls (WAFs) that can be used to add additional security to your services by blocking dangerous requests. They can be configured globally or route by route. We have also published a ready to use set of rules to get you started and protected against the OWASP Top 10 vulnerabilities.
+          $productName$ now provides configurable Web Application Firewalls (WAFs) that can be used to add additional security to your services by blocking dangerous requests. They can be configured globally or route by route. We have also published a ready to use set of rules to get you started and protected against the OWASP Top 10
+          vulnerabilities and adheres to PCI 6.6 requirements.
           The published rule set will be updated and maintained regularly.
         docs: howtos/web-application-firewalls/
 

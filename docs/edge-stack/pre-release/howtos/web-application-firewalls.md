@@ -105,7 +105,7 @@ status:                           # set and updated by application
   - `wafRef`: A reference to a `WebApplicationFirewall` to be applied against the request.
     - `name`: Identifies the `WebApplicationFirewall`
     - `namespace`: Namespace of the `WebApplicationFirewall`. This field is optional and when left unset, the `WebApplicationFirewall` is assumed to be in the same namespace as the `WebApplicationFirewallPolicy` resource. It must be a RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters, and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
-  - `onError`: provides a way to configure how requests are handled when a request matches the rule but there is a configuration or runtime error. By default requests are allowed on error if this field is not configured. This covers runtime errors such as those caused by networking/request parsing as well as configuration errors such as if the `WebApplicationFirewall` that is referenced is misconfigured, cannot be found, or when its configuration cannot be loaded properly.
+  - `onError`: provides a way to configure how requests are handled when a request matches the rule but there is a configuration or runtime error. By default requests are allowed on error if this field is not configured. This covers runtime errors such as those caused by networking/request parsing as well as configuration errors such as if the `WebApplicationFirewall` that is referenced is misconfigured, cannot be found, or when its configuration cannot be loaded properly. Details about the errors can be found either in the `WebApplicationFirewall` status or container logs.
     - `statusCode`: The status code to return to downstream clients when an error occurs.
   - `precedence`: Allows forcing a precedence ordering on the rules. By default the rules are evaluated in the order they are in the `WebApplicationFirewallPolicy.spec.rules` field. However, multiple `WebApplicationFirewallPolicys` can be applied to a cluster. `precedence` can optionally be used to ensure that a specific ordering is enforced.
 
@@ -175,7 +175,8 @@ Congratulations, you've successfully set up a Web Application Firewall to secure
 
 Since the [Coraza Web Application Firewall library][] $productName$'s Web Application Firewall implementation, the firewall rules configuration uses [Coraza's Seclang syntax][] which is compatible with the OWASP Core Rule Set.
 
-Ambassador Labs publishes and maintains a list of rules to be used with the Web Application Firewall that should be a good solution for most users and [Coraza also provides their own ruleset][] based on the [OWASP][] core rule set.
+Ambassador Labs publishes and maintains a list of rules to be used with the Web Application Firewall that should be a good solution for most users and [Coraza also provides their own ruleset][] based on the [OWASP][] core rule set. It also
+satisifies [PCI 6.6][] compliance requirements.
 
 See [Configuring $productName$'s Web Application Firewall rules][] for more information about installing Ambassador Labs rules.
 
@@ -190,8 +191,8 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 ### Logging
 
   $productName$ will log information about requests approved and denied by any `WebApplicationFirewalls` along with the reason why the request was denied.
-  You can configure the logging policies in the `WebApplicationFirewall` configuration files to control where logs are sent to and how much information is logged.
-  The Ambassador Labs default ruleset sends the WAF logs to stdout so they show up in the container logs.
+  You can configure the logging policies in the [coraza rules configuration][] where logs are sent to and how much information is logged.
+  Ambassador Labs' default ruleset sends the WAF logs to stdout so they show up in the container logs.
 
 ### Metrics
 
@@ -221,6 +222,7 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 [Coraza also provides their own ruleset]: https://coraza.io/docs/tutorials/coreruleset/
 [Coraza's Seclang documentation]: https://coraza.io/docs/seclang/
 [OWASP]: https://owasp.org/
+[PCI 6.6]: https://listings.pcisecuritystandards.org/documents/information_supplement_6.6.pdf
 [Grafana dashboard]: https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/
 [Grafana]: https://grafana.com/
 [Prometheus]: https://prometheus.io/docs/introduction/overview/
@@ -229,3 +231,4 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 [$productName$]: https://www.getambassador.io/products/edge-stack/api-gateway
 [Ambassador labs]: https://www.getambassador.io/
 [Configuring $productName$'s Web Application Firewall rules]: ../web-application-firewall-configuration
+[coraza rules configuration]: https://coraza.io/docs/seclang/directives/#secauditlog
