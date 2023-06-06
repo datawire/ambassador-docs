@@ -133,13 +133,13 @@ status:                           # set and updated by application
      firewallRules:
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230602/aes-waf.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230606/aes-waf.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230602/crs-setup.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230606/crs-setup.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230602/waf-rules.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230606/waf-rules.conf"
    EOF
    ```
 
