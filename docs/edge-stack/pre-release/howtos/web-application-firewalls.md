@@ -178,6 +178,11 @@ Since the [Coraza Web Application Firewall library][] $productName$'s Web Applic
 Ambassador Labs publishes and maintains a list of rules to be used with the Web Application Firewall that should be a good solution for most users and [Coraza also provides their own ruleset][] based on the [OWASP][] core rule set. It also
 satisifies [PCI 6.6][] compliance requirements.
 
+Ambassador Labs rules differ from the OWASP Core ruleset in the following areas:
+
+- WAF engine is enabled by default.
+- A more comprehensive set of rules is enabled, including rules related to compliance with PCI DSS 6.5 and 12.1 requirements.
+
 See [Configuring $productName$'s Web Application Firewall rules][] for more information about installing Ambassador Labs rules.
 
 For specific information about rule configuration, please refer to [Coraza's Seclang documentation][]
