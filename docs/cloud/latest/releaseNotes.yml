@@ -33,7 +33,7 @@ items:
   - date: '2023-06-05'
     notes:
       - title: 'Air-gapped for Telepresence'
-        body: Air-gapped license generation for Telepresence through the account settings exclusively available to user of our Business and Enterprise plans.
+        body: Air-gapped license generation for Telepresence through the account settings is now exclusively available to users of our Business and Enterprise plans.
         docs: ../../telepresence/latest/reference/cluster-config#air-gapped-cluster
         type: change
   - date: '2023-03-22'
