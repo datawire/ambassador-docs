@@ -166,7 +166,7 @@ status:                           # set and updated by application
 
    ```console
    $ curl https://<HOSTNAME>/test -H 'User-Agent: Arachni/0.2.1'
-   `Sate Ofit``
+   ```
 
 Congratulations, you've successfully set up a Web Application Firewall to secure all requests coming into $productName$.
 
