@@ -28,6 +28,7 @@ import EdgeStack from '../../products/EdgeStack';
 import Emissary from '../../products/Emissary';
 import Kubernetes from '../../products/Kubernetes';
 import Telepresence from '../../products/Telepresence';
+import TelepresenceOss from '../../products/Telepresence-oss';
 import getDocsActiveVersion from '../../utils/getDocsActiveVersion';
 import getPrevNext from '../../utils/getPrevNext';
 import getSpecialDescriptions from '../../utils/getSpecialDescriptions';
@@ -319,6 +320,7 @@ const index = ({ data, location, pageContext }) => {
       {
         'edge-stack': EdgeStack,
         emissary: Emissary,
+        'telepresence-oss': TelepresenceOss,
         telepresence: Telepresence,
         cloud: Cloud,
         argo: Argo,

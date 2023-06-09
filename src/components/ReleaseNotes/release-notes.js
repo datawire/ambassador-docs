@@ -33,7 +33,8 @@ const releaseNotes = ({ data, location, pageContext }) => {
     [initialProduct, slug],
   );
 
-  const canonicalUrl = `https://www.getambassador.io/docs/${slug[PRODUCT_NAME]}/latest/release-notes`;
+  const canonicalProduct = slug[PRODUCT_NAME] === "telepresence-oss" ? "telepresence" : slug[PRODUCT_NAME];
+  const canonicalUrl = `https://www.getambassador.io/docs/${canonicalProduct}/latest/release-notes`;
 
   const [product, setProduct] = useState(initialProduct);
   const [version, setVersion] = useState(initialVersion);

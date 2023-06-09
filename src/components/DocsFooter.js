@@ -32,7 +32,7 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
       }
 
       if (version === '0.109') version = '1';
-      dstUrl = `https://github.com/telepresenceio/docs/blob/release/v${version}/${restOfFilePath}`;
+      dstUrl = `https://github.com/datawire/ambassador-docs/blob/master/docs/${product}/${version}/${restOfFilePath}`;
       break;
     case 'edge-stack':
       const isValid = edgeStackLinks?.includes(
@@ -75,12 +75,10 @@ const DocsFooter = ({ page, product, version, edgeStackLinks }) => {
 
   return (
     <footer className="docs__footer">
-      {product == 'telepresence' && showGitHubLink(version) ? null : (
         <a href={dstUrl} target="_blank" rel="noreferrer">
           <Icon name="github" />
           Edit this page on GitHub
         </a>
-      )}
     </footer>
   );
 };
