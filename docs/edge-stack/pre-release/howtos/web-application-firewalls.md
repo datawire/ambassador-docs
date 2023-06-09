@@ -133,13 +133,13 @@ status:                           # set and updated by application
      firewallRules:
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230606/aes-waf.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230609/aes-waf.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230606/crs-setup.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230609/crs-setup.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230606/waf-rules.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230609/waf-rules.conf"
    EOF
    ```
 
@@ -163,7 +163,7 @@ status:                           # set and updated by application
 
    ```console
    $ curl https://<HOSTNAME>/test -H 'User-Agent: Arachni/0.2.1'
-   ```
+   `Sate Ofit``
 
 Congratulations, you've successfully set up a Web Application Firewall to secure all requests coming into $productName$.
 
