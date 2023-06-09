@@ -129,6 +129,7 @@ status:                           # set and updated by application
    kind: WebApplicationFirewall
    metadata:
      name: "example-waf"
+     namespace: "default"
    spec:
      firewallRules:
        - sourceType: "http"
@@ -152,10 +153,12 @@ status:                           # set and updated by application
    kind: WebApplicationFirewallPolicy
    metadata:
      name: "example-waf-policy"
+     namespace: "default"
    spec:
      rules:
      - wafRef: # This rule will be executed on all paths and hostnames
          name: "example-waf"
+         namespace: "default"
    EOF
    ```
 
