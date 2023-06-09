@@ -43,7 +43,7 @@ status:                           # set and updated by application
 - `sourceType`: Identifies which method is being used to load the firewall rules. Value must be one of `configMapRef`;`file`;`http`. The value corresponds to the following fields for configuring the selected method.
 - `configMapRef`: Defines a reference to a `ConfigMap` in the Kubernetes cluster to load firewall rules from.
   - `name`: Name of the `ConfigMap`.
-  - `namespace`: Namespace of the `ConfigMap`. This field is optional and when left unset, the `ConfigMap` is assumed to be in the same namespace as the `WebApplicationFirewall` resource. It must be a RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
+  - `namespace`: Namespace of the `ConfigMap`. This field is optional and when left unset, the `ConfigMap` is assumed to be in the same namespace as the `WebApplicationFirewall` resource. It must be an RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
   - `key`: The key in the `ConfigMap` to pull the rules data from.
 - `file`: Location of a file on disk to load the firewall rules from. Example: `"/ambassador/firewall/waf.conf`.
 - `http`: Configuration for downloading firewall rules from the internet. The rules will only be downloaded once when the `WebApplicationFirewall` is loaded. The rules will then be cached in-memory until a restart of $productName$ occurs or the `WebApplicationFirewall` is modified.
@@ -93,19 +93,19 @@ status:                           # set and updated by application
 `spec`: Defines which requests to match on and which `WebApplicationFirewall` to be used against those requests.
 
 - `ambassadorSelector` Configures how this resource is allowed to be watched/used by instances of Edge Stack
-  - `ambassadorIds`: This optional field allows you to limit which instances of $productName$ can watch and use this resource. This allows for the separation of resources when running multiple instances of $productName$ in the same Kubernetes cluster. Additional documentation on [configuring Ambassador IDs can be found here][]. By default all instances of $productName$ will be able to watch and use this resource.
+  - `ambassadorIds`: This optional field allows you to limit which instances of $productName$ can watch and use this resource. This allows for the separation of resources when running multiple instances of $productName$ in the same Kubernetes cluster. Additional documentation on [configuring Ambassador IDs can be found here][]. By default, all instances of $productName$ will be able to watch and use this resource.
 - `rules`: This object configures matching requests and executes `WebApplicationFirewall`s on them.
   - `host`: Host is a "glob-string" that matches on the `:authority` header of the incoming request. If not set, it will match on all incoming requests.
   - `path`: Path is a "glob-string" that matches on the request path. If not provided, then it will match on all incoming requests.
   - `ifRequestHeader`: Checks if exact or regular expression matches a value in a request header to determine if the `WebApplicationFirewall` is executed or not.
     - `type`: Specifies how to match against the value of the header. Allowed values are `Exact`;`RegularExpression`
-    - `name`: Name of the HTTP Header to be matched. Name matching MUST be case insensitive. (See <https://tools.ietf.org/html/rfc7230#section-3.2>)
+    - `name`: Name of the HTTP Header to be matched. Name matching MUST be case-insensitive. (See <https://tools.ietf.org/html/rfc7230#section-3.2>)
     - `value`: Value of HTTP Header to be matched. If type is `RegularExpression`, then this must be a valid regex with a length of at least 1.
     - `negate`: Allows the match criteria to be negated or flipped.
   - `wafRef`: A reference to a `WebApplicationFirewall` to be applied against the request.
     - `name`: Identifies the `WebApplicationFirewall`
     - `namespace`: Namespace of the `WebApplicationFirewall`. This field is required. It must be a RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters, and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
-  - `onError`: provides a way to configure how requests are handled when a request matches the rule but there is a configuration or runtime error. By default requests are allowed on error if this field is not configured. This covers runtime errors such as those caused by networking/request parsing as well as configuration errors such as if the `WebApplicationFirewall` that is referenced is misconfigured, cannot be found, or when its configuration cannot be loaded properly. Details about the errors can be found either in the `WebApplicationFirewall` status or container logs.
+  - `onError`: provides a way to configure how requests are handled when a request matches the rule but there is a configuration or runtime error. By default, requests are allowed on error if this field is not configured. This covers runtime errors such as those caused by networking/request parsing as well as configuration errors such as if the `WebApplicationFirewall` that is referenced is misconfigured, cannot be found, or when its configuration cannot be loaded properly. Details about the errors can be found either in the `WebApplicationFirewall` status or container logs.
     - `statusCode`: The status code to return to downstream clients when an error occurs.
   - `precedence`: Allows forcing a precedence ordering on the rules. By default the rules are evaluated in the order they are in the `WebApplicationFirewallPolicy.spec.rules` field. However, multiple `WebApplicationFirewallPolicys` can be applied to a cluster. `precedence` can optionally be used to ensure that a specific ordering is enforced.
 
