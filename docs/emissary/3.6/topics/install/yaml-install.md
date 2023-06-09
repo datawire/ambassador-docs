@@ -85,3 +85,5 @@ $productName$ is typically deployed to Kubernetes from the command line. If you 
 
 See the [migration matrix](../migration-matrix) for instructions about upgrading
 $productName$.
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=a6dee6ae-7a66-47cb-ab70-2e576b24e521" alt="" style="display: none;"/>
