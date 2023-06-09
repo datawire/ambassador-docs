@@ -48,7 +48,7 @@ sence CLI version v2.7.0 or later.
 
 ##  Managing Saved Intercepts
 
-In the [Telepresence Saved Intercepts page on Ambassador Cloud](https://app.getambassador.io/cloud/saved-intercepts/saved-intercept), you can see the list of saved intercepts created by any Ambassador team member. For each of these intercepts, you can:
+In the [Telepresence Saved Intercepts page on Ambassador Cloud](https://app.getambassador.io/cloud/saved-intercepts), you can see the list of saved intercepts created by any Ambassador team member. For each of these intercepts, you can:
 
 - inspect its author, creation date and flags.
 - delete the saved intercept.

@@ -19,7 +19,7 @@ The first thing we'll ask you to do is create one:
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
-  <img src="../images/authenticating-get-started.png" alt="Create Org"/>
+  <img src="/images/cloud/authenticating-get-started.png" alt="Create Org"/>
 </p>
 
 
@@ -30,7 +30,7 @@ able to join the Organization without being explicitly invited.
 
 <br />
 <p style="max-width:550px;margin:0 auto;">
-  <img src="../images/authenticating-create-org.png" alt="Create Org"/>
+  <img src="/images/cloud/authenticating-create-org.png" alt="Create Org"/>
 </p>
 
 
@@ -47,7 +47,7 @@ Once an organization has been created, any user that signs in using an [identity
 
 <br />
 <p style="max-width:550px;margin:0 auto;">
-  <img src="../images/authenticating-select-organization.png" alt="Select Team"/>
+  <img src="/images/cloud/authenticating-select-organization.png" alt="Select Team"/>
 </p>
 <br />
 
@@ -55,7 +55,7 @@ If your organization has more than one team, you'll see a screen to select which
 
 <br />
 <p style="max-width:540px;margin:0 auto;">
-  <img src="../images/organization-select-team.png" alt="Select Team"/>
+  <img src="/images/cloud/organization-select-team.png" alt="Select Team"/>
 </p>
 <br />
 
