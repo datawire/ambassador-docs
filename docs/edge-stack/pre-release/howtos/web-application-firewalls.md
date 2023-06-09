@@ -77,7 +77,7 @@ spec:
       negate: bool                # optional; default: false
     wafRef:                       # required
       name: "string"              # required
-      namespace: "string"         # optional
+      namespace: "string"         # required
     onError:                      # optional; min=400, max=599
       statusCode: int             # required
     precedence: int               # optional
@@ -104,7 +104,7 @@ status:                           # set and updated by application
     - `negate`: Allows the match criteria to be negated or flipped.
   - `wafRef`: A reference to a `WebApplicationFirewall` to be applied against the request.
     - `name`: Identifies the `WebApplicationFirewall`
-    - `namespace`: Namespace of the `WebApplicationFirewall`. This field is optional and when left unset, the `WebApplicationFirewall` is assumed to be in the same namespace as the `WebApplicationFirewallPolicy` resource. It must be a RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters, and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
+    - `namespace`: Namespace of the `WebApplicationFirewall`. This field is required. It must be a RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters, and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
   - `onError`: provides a way to configure how requests are handled when a request matches the rule but there is a configuration or runtime error. By default requests are allowed on error if this field is not configured. This covers runtime errors such as those caused by networking/request parsing as well as configuration errors such as if the `WebApplicationFirewall` that is referenced is misconfigured, cannot be found, or when its configuration cannot be loaded properly. Details about the errors can be found either in the `WebApplicationFirewall` status or container logs.
     - `statusCode`: The status code to return to downstream clients when an error occurs.
   - `precedence`: Allows forcing a precedence ordering on the rules. By default the rules are evaluated in the order they are in the `WebApplicationFirewallPolicy.spec.rules` field. However, multiple `WebApplicationFirewallPolicys` can be applied to a cluster. `precedence` can optionally be used to ensure that a specific ordering is enforced.
