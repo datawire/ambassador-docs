@@ -29,13 +29,13 @@ customize the rules:
      firewallRules:
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/aes-waf.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/aes-waf.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/crs-setup.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/crs-setup.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/waf-rules.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/waf-rules.conf"
        - configMapRef:
            key: waf-overrides.conf
            name: waf-configuration
@@ -89,13 +89,13 @@ The second part is to load this configuration after `waf-rules.conf`:
      firewallRules:
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/aes-waf.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/aes-waf.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/crs-setup.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/crs-setup.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/waf-rules.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/waf-rules.conf"
        - configMapRef:
            key: disabled-rules.conf
            name: waf-configuration
@@ -135,17 +135,17 @@ The following example shows how to disable all rules tagged `attack-sqli` only w
      firewallRules:
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/aes-waf.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/aes-waf.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/crs-setup.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/crs-setup.conf"
        - configMapRef:
            key: website-rules.conf
            name: waf-configuration
          sourceType: configmap
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230609/waf-rules.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230612/waf-rules.conf"
    ---
    EOF
    ```
