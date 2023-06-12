@@ -61,6 +61,8 @@
          link: /howtos/web-application-firewalls
        - title: Configuring the Web Application Firewall rules
          link: /howtos/web-application-firewall-configuration
+       - title: Enabling Web Application Firewall in Production
+         link: /howtos/enabling-web-application-firewalls-in-production
      - title: Service routing and communication
        items:
          - title: Configuring $productName$ to communicate
