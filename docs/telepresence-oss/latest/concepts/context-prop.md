@@ -1,1 +1,0 @@
-../../../telepresence/2.13/concepts/context-prop.md
