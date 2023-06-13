@@ -52,7 +52,7 @@ items:
       - title: ExternalFilter - Add support for configuring TLS Settings
         type: feature
         body: >-
-          The <code>ExternalFilter</code> now supports configuring a CA certificate and/or client certificate via the new <code>tlsConfig</code> attribute. This allows $productName$ to communicate with the configured AuthService using custom TLS certificates provided as Kubernetes Secrets.
+          The <code>ExternalFilter</code> now supports configuring a CA certificate and/or client certificate via the new <code>tlsConfig</code> attribute. This allows $productName$ to communicate with the configured AuthService using custom TLS certificates signed by a different CA. It also allows the ExternalFilter to originate mTLS and have $productName$ present mTLS client certificates to the AuthService. Custom TLS certificates are provided as Kubernetes Secrets.
         docs: topics/using/filters/external/#configuring-tls-settings
 
   - version: 3.6.0
