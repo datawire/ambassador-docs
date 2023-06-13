@@ -113,11 +113,13 @@ spec:
 
 ## Configuring TLS Settings
 
-When an `ExternalFilter` has the `auth_service` field configured with a URL that starts with `https://` then $productName$ will attempt to communicate with the AuthService over a TLS connection. The following scenarios are supported:
+When an `ExternalFilter` has the `auth_service` field configured with a URL that starts with `https://` then $productName$ will attempt to communicate with the AuthService over a TLS connection. The following configurations are supported:
 
 1. Verify server certificate with host CA Certificates - *default when `tls: true`*
 2. Verify server certificate with provided CA Certificate
-3. Mutual TLS (mTLS) between client and server
+3. Mutual TLS between client and server
+
+Overall, these new configuration options enhance the security of the communications between $productName$ and your `ExternalFilter` by providing a way to verify the server's certificate, allowing customization of the trust verification process, and enabling mutual TLS (mTLS) between $productName$ and the `ExternalFilter` service. By employing these security measures, users can have greater confidence in the authenticity, integrity, and confidentiality of their filter's actions, especially if it interacts with any sensitive information.
 
 The following settings are provided for configuring the `tlsConfig`:
 

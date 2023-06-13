@@ -1,5 +1,14 @@
 # Configuring the Web Application Firewall rules in $productName$
 
+When writing your own firewall rules it's important to first take note of a few ways that $productName$'s `WebApplicationFirewalls` work.
+
+1. Requests are either denied or allowed, redirects and dropped requests are not supported
+2. If you have a rule in your firewall configuration that specifies the `deny` action and you do not specify a `status`, then we will default to
+using status code `403`.
+
+## Ambassador Labs Firewall Ruleset
+
+Ambassador Labs publishes and maintains a set of firewall rules that are ready to use.
 The latest version of the Ambassador Labs Web Application Firewall ruleset can be downloaded with these commands:
 
 ```bash

@@ -25,29 +25,38 @@ metadata:
   name: "example-waf"
   namespace: "example-namespace"
 spec:
+  ambassadorSelector:             # optional; default = {ambassadorIds: ["default"]}
+    ambassadorIds: []string       # optional; default = ["default"]
   firewallRules:                  # required; One of configMapRef;file;http must be set below
     sourceType: "enum"            # required; allowed values are file;configmap;http
     configMapRef:                 # optional
       name: "string"              # required
-      namespace: "string"         # optional; defaults to the namespace of the WebApplicationFirewall
+      namespace: "string"         # required
       key: "string"               # required
     file: "string"                # optional
     http:                         # optional
       url: "string"               # required; must be a valid URL.
+  logging:                        # optional
+    onInterrupt:                  # required
+      enabled: bool               # required
 status:                           # set and updated by application
   conditions: []metav1.Condition
 ```
 
-`firewallRules`: Defines the rules to be used for the Web Application Firewall
-
-- `sourceType`: Identifies which method is being used to load the firewall rules. Value must be one of `configMapRef`;`file`;`http`. The value corresponds to the following fields for configuring the selected method.
-- `configMapRef`: Defines a reference to a `ConfigMap` in the Kubernetes cluster to load firewall rules from.
-  - `name`: Name of the `ConfigMap`.
-  - `namespace`: Namespace of the `ConfigMap`. This field is optional and when left unset, the `ConfigMap` is assumed to be in the same namespace as the `WebApplicationFirewall` resource. It must be an RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
-  - `key`: The key in the `ConfigMap` to pull the rules data from.
-- `file`: Location of a file on disk to load the firewall rules from. Example: `"/ambassador/firewall/waf.conf`.
-- `http`: Configuration for downloading firewall rules from the internet. The rules will only be downloaded once when the `WebApplicationFirewall` is loaded. The rules will then be cached in-memory until a restart of $productName$ occurs or the `WebApplicationFirewall` is modified.
+- `ambassadorSelector` Configures how this resource is allowed to be watched/used by instances of Edge Stack
+  - `ambassadorIds`: This optional field allows you to limit which instances of $productName$ can watch and use this resource. This allows for the separation of resources when running multiple instances of $productName$ in the same Kubernetes cluster. Additional documentation on [configuring Ambassador IDs can be found here][]. By default, all instances of $productName$ will be able to watch and use this resource.
+- `firewallRules`: Defines the rules to be used for the Web Application Firewall
+  - `sourceType`: Identifies which method is being used to load the firewall rules. Value must be one of `configMapRef`;`file`;`http`. The value corresponds to the following fields for configuring the selected method.
+  - `configMapRef`: Defines a reference to a `ConfigMap` in the Kubernetes cluster to load firewall rules from.
+    - `name`: Name of the `ConfigMap`.
+    - `namespace`: Namespace of the `ConfigMap`. It must be an RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
+    - `key`: The key in the `ConfigMap` to pull the rules data from.
+  - `file`: Location of a file on disk to load the firewall rules from. Example: `"/ambassador/firewall/waf.conf`.
+  - `http`: Configuration for downloading firewall rules from the internet. The rules will only be downloaded once when the `WebApplicationFirewall` is loaded. The rules will then be cached in-memory until a restart of $productName$ occurs or the `WebApplicationFirewall` is modified.
   - `url`: URL to fetch firewall rules from. If the rules are unable to be downloaded/parsed from the provided url for whatever reason, the requests matched to this `WebApplicationFirewall` will be allowed/denied based on the configuration of the `onError`
+- `logging`: Provides a way to configure additional logging in the $productName$ pods for the `WebApplicationFirewall`. This is in addition to the logging config that is available via the firewall configuration files. The following logs will always be output to the container logs when enabled.
+  - `onInterrupt`: Controls logging behavior when the WebApplicationFirewall interrupts a request.
+    - `enabled`: Configures whether the container should output logs.
 
 `status`: This field is automatically set to reflect the status of the `WebApplicationFirewall`.
 
@@ -120,7 +129,7 @@ status:                           # set and updated by application
 
 ## Quickstart
 
-1. First, start by creating your firewall configuration. The example will download the firewall rules published by [Ambassador labs][], but you are free to write your own or use the published rules as a reference.
+1. First, start by creating your firewall configuration. The example will download [the firewall rules][] published by [Ambassador Labs][], but you are free to write your own or use the published rules as a reference.
 
    ```yaml
    kubectl apply -f -<<EOF
@@ -190,8 +199,6 @@ See [Configuring $productName$'s Web Application Firewall rules][] for more info
 
 For specific information about rule configuration, please refer to [Coraza's Seclang documentation][]
 
-// TODO: Add a statement about our support policy for the rules we publish
-
 ## Observability
 
 To make using $productName$'s Web Application Firewall system easier and to enable automated workflows and alerts, there are three main methods of observability for Web Application Firewall behavior.
@@ -237,6 +244,7 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 [Prometheus and Grafana documentation]:../prometheus
 [configuring Ambassador IDs can be found here]: ../../topics/running/running#ambassador_id
 [$productName$]: https://www.getambassador.io/products/edge-stack/api-gateway
-[Ambassador labs]: https://www.getambassador.io/
+[Ambassador Labs]: https://www.getambassador.io/
 [Configuring $productName$'s Web Application Firewall rules]: ../web-application-firewall-configuration
 [coraza rules configuration]: https://coraza.io/docs/seclang/directives/#secauditlog
+[the firewall rules]: ../web-application-firewall-configuration
