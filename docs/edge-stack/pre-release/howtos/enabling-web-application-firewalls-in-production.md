@@ -7,8 +7,8 @@ to identify potential issues.
 The following procedure can be followed to deploy $productName$'s Web Application Firewall in detection only mode and
 customize the rules:
 
-1. Enable Detection Only mode. This is done by setting the Directive [SecRuleEngine][] to `DetectionOnly`.  You can
-   override the default rules by applying a ConfigMap like this:
+1. Enable Detection Only mode. This is done by setting the Directive [SecRuleEngine][] to `DetectionOnly`. In addition,
+   enable debug logs, which is necessary to identify false positives. Both settings can be updated like this:
 
    ```yaml
    kubectl apply -f -<<EOF
@@ -20,6 +20,8 @@ customize the rules:
    data:
      waf-overrides.conf: |
        SecRuleEngine DetectionOnly
+       SecDebugLogLevel 4
+
    ---
    apiVersion: gateway.getambassador.io/v1alpha1
    kind: WebApplicationFirewall
@@ -44,9 +46,12 @@ customize the rules:
    EOF
    ```
 
-2. Identify false positives. TODO. This step will depend on what information is in the logs and how to enable them
+2. Identify which rules are matching requests.  Go to AES logs and find entries that contains text `Rule matched`.
 
-3. Update problematic rules. See the next section for more details.
+   Rules in the range 900000 to 901999 define variables, and can be ignored. For other rules, go over the logs, and check
+   why did the rule match.
+
+  If you identify rules that should not be matching, updated them as explained in the next section.
 
 ## Customizing Ambassador Labs rules
 
