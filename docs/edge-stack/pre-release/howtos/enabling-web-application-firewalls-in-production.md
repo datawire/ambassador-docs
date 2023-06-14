@@ -5,10 +5,10 @@ first deployed in a production environment, it is recommended to set it in a non
 to identify potential issues.
 
 The following procedure can be followed to deploy $productName$'s Web Application Firewall in detection-only mode and
-customize the rules:
+customize the rules.
 
 1. Enable Detection Only mode. Detection Only mode will run all rules, but won't execute any disruptive actions.
-   This is configured by the directive [SecRuleEngine][].
+   This is configured using the directive [SecRuleEngine][].
 
    You also want to enable debug logs, which are necessary to identify false positives. You can them in the
    `WebApplicationFirewall` resource as described in the [documentation][].
@@ -54,7 +54,7 @@ customize the rules:
          enabled: true
    ```
 
-2. Identify potential false positives. $productName$'s container logs will have one or more entries indicating which rules
+2. Identify false positives. $productName$'s container logs will have one or more entries indicating which rules
    were applied to a request and why.
 
    For example, the following entry shows that a request to `https://34.123.92.3/backend/` was blocked by rule 920350 because
@@ -64,7 +64,7 @@ customize the rules:
    2023-06-14T17:37:29.145Z	INFO	waf/manager.go:73	request interrupted by waf: default/example-waf	{"message": "Host header is a numeric IP address", "data": "34.123.92.3", "uri": "https://34.123.92.3/backend/", "disruptive": true, "matchedDatas": [{"Variable_":54,"Key_":"Host","Value_":"34.123.92.3","Message_":"Host header is a numeric IP address","Data_":"34.123.92.3","ChainLevel_":0}], "rule": {"ID_":920350,"File_":"","Line_":9892,"Rev_":"","Severity_":4,"Version_":"OWASP_CRS/4.0.0-rc1","Tags_":["application-multi","language-multi","platform-multi","attack-protocol","paranoia-level/1","OWASP_CRS","capec/1000/210/272","PCI/6.5.10"],"Maturity_":0,"Accuracy_":0,"Operator_":"","Phase_":1,"Raw_":"SecRule REQUEST_HEADERS:Host \"@rx (?:^([\\d.]+|\\[[\\da-f:]+\\]|[\\da-f:]+)(:[\\d]+)?$)\" \"id:920350,phase:1,block,t:none,msg:'Host header is a numeric IP address',logdata:'%{MATCHED_VAR}',tag:'application-multi',tag:'language-multi',tag:'platform-multi',tag:'attack-protocol',tag:'paranoia-level/1',tag:'OWASP_CRS',tag:'capec/1000/210/272',tag:'PCI/6.5.10',ver:'OWASP_CRS/4.0.0-rc1',severity:'WARNING',setvar:'tx.inbound_anomaly_score_pl1=+%{tx.warning_anomaly_score}'\"","SecMark_":""}}
    ```
 
-   As mentioned above, Coraza debug logs are very verbose. You can use the rule ID to identify entries that are not important as follows:
+   If you enabled Coraza debug logs, use the rule ID to identify entries that are not important as follows:
 
    - Rules in the range 900000 to 901999 define some Coraza behaviors and can be ignored.
 
