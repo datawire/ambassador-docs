@@ -90,7 +90,7 @@ data:
    SecRuleRemoveById 913110
 ```
 
-The second part is to load this configuration after `waf-rules.conf`:
+And then load it after `waf-rules.conf`:
 
 ```yaml
 apiVersion: gateway.getambassador.io/v1alpha1
@@ -116,8 +116,8 @@ spec:
 
 ### Applying a rule to some requests
 
-To apply a rule only to some requests, update it as described in [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example][],
-save that configuration as a ConfigMap (see the previous section), and load it before `waf-rules.conf`.
+To apply a rule only to some requests, update it as described in [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example][] and
+load the new settings before `waf-rules.conf`.
 
 The following example shows how to disable all rules tagged `attack-sqli` when the URI does not start with '/api/':
 
