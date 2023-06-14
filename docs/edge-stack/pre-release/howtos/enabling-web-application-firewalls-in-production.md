@@ -7,10 +7,16 @@ to identify potential issues.
 The following procedure can be followed to deploy $productName$'s Web Application Firewall in detection-only mode and
 customize the rules:
 
-1. Enable Detection Only mode. Detection Only mode will run all rules, but not execute any disruptive actions. In addition,
-   you want to enable debug logs, which is necessary to identify false positives.
+1. Enable Detection Only mode. Detection Only mode will run all rules, but not execute any disruptive actions.
+   This is configured by the directive [SecRuleEngine][].
 
-   To enable Detection Only mode, update directives [SecRuleEngine][] and [SecDebugLogLevel][] as follows:
+   You also want to enable debug logs, which are necessary to identify false positives. You can them in the
+   `WebApplicationFirewall` resource as described in the [documentation][].
+
+   Optionally, Coraza debug logs can be enabled by setting the directive [SecDebugLogLevel][]. These logs are very verbose
+   but can help identify issues when the `WebApplicationFirewall` logs don't show enough information.
+
+   The following example illustrates this:
 
    ```yaml
    apiVersion: v1
@@ -43,29 +49,36 @@ customize the rules:
        - sourceType: "http"
          http:
            url: "https://app.getambassador.io/download/waf/v1-20230613/waf-rules.conf"
+   logging:
+     onInterrupt:
+       enabled: true
    ```
 
-2. Identify potential false positives. Go to $productName$'s logs and find entries that contains text `Rule matched`, like this:
+2. Identify potential false positives. $productName$'s container logs will have one or more entries indicating which rules
+   were applied to a request and why.
+
+   For example, the following entry shows that a request to https://34.123.92.3/backend/ was blocked by rule 920350 because
+   the Host header contains an IP address.
 
    ```text
-   2023/06/14 14:55:13 [DEBUG] Rule matched tx_id="816309a5-71d7-46e6-92df-96274a363a42" rule_id=913100
+   2023-06-14T17:37:29.145Z	INFO	waf/manager.go:73	request interrupted by waf: default/example-waf	{"message": "Host header is a numeric IP address", "data": "34.123.92.3", "uri": "https://34.123.92.3/backend/", "disruptive": true, "matchedDatas": [{"Variable_":54,"Key_":"Host","Value_":"34.123.92.3","Message_":"Host header is a numeric IP address","Data_":"34.123.92.3","ChainLevel_":0}], "rule": {"ID_":920350,"File_":"","Line_":9892,"Rev_":"","Severity_":4,"Version_":"OWASP_CRS/4.0.0-rc1","Tags_":["application-multi","language-multi","platform-multi","attack-protocol","paranoia-level/1","OWASP_CRS","capec/1000/210/272","PCI/6.5.10"],"Maturity_":0,"Accuracy_":0,"Operator_":"","Phase_":1,"Raw_":"SecRule REQUEST_HEADERS:Host \"@rx (?:^([\\d.]+|\\[[\\da-f:]+\\]|[\\da-f:]+)(:[\\d]+)?$)\" \"id:920350,phase:1,block,t:none,msg:'Host header is a numeric IP address',logdata:'%{MATCHED_VAR}',tag:'application-multi',tag:'language-multi',tag:'platform-multi',tag:'attack-protocol',tag:'paranoia-level/1',tag:'OWASP_CRS',tag:'capec/1000/210/272',tag:'PCI/6.5.10',ver:'OWASP_CRS/4.0.0-rc1',severity:'WARNING',setvar:'tx.inbound_anomaly_score_pl1=+%{tx.warning_anomaly_score}'\"","SecMark_":""}}
    ```
 
-   Rules in the range 900000 to 901999 configure some Coraza behaviors and can be ignored.
+   As mentioned above, Coraza debug logs are very verbose. You can use the rule ID to identify entries that are not important as follows:
 
-   Some rules like the one below, are used to skip other blocks of rules and can be ignored as well.
+   - Rules in the range 900000 to 901999 define some Coraza behaviors and can be ignored.
 
-   ```text
-   SecRule TX:DETECTION_PARANOIA_LEVEL "@lt 1" "id:911012,phase:2,pass,nolog,skipAfter:END-REQUEST-911-METHOD-ENFORCEMENT"
-   ```
+   - Rules like the one below are used to skip other rules and can be ignored as well.
 
-   For other rules, go over the logs and check why the rule matched. Once you identify a rule that is causing false positives,
-   updated it as explained in the next section.
+     ```text
+      SecRule TX:DETECTION_PARANOIA_LEVEL "@lt 1" "id:911012,phase:2,pass,nolog,skipAfter:END-REQUEST-911-METHOD-ENFORCEMENT"
+     ```
 
    <Alert severity="info">
-       Each configuration file has rules in different ranges as follows: Rules in the range 900000 to 900999 are in crs-setup.conf,
-       rules IDs 901000 to 999999 are in waf-rules.conf, and all other rules are in aes-waf.conf.
+       Each Web Application Firewall configuration file has rules in predefined ranges as follows: Rules in the range
+       900000 to 900999 are in crs-setup.conf, rules IDs 901000 to 999999 are in waf-rules.conf, and all other rules are in aes-waf.conf.
    </Alert>
+
 
 ## Customizing Ambassador Labs rules
 
@@ -162,3 +175,4 @@ spec:
 [SecDebugLogLevel]: https://coraza.io/docs/seclang/directives/#secdebugloglevel
 [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example]: https://github.com/coreruleset/coreruleset/blob/v4.0/dev/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example
 [RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example]: https://github.com/coreruleset/coreruleset/blob/v4.0/dev/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example
+[documentation]: ../web-application-firewalls
