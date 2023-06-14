@@ -7,7 +7,7 @@ to identify potential issues.
 The following procedure can be followed to deploy $productName$'s Web Application Firewall in detection-only mode and
 customize the rules:
 
-1. Enable Detection Only mode. Detection Only mode will run all rules, but not execute any disruptive actions.
+1. Enable Detection Only mode. Detection Only mode will run all rules, but won't execute any disruptive actions.
    This is configured by the directive [SecRuleEngine][].
 
    You also want to enable debug logs, which are necessary to identify false positives. You can them in the
