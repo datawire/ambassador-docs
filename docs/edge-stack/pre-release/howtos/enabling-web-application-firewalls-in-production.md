@@ -9,6 +9,7 @@ customize the rules:
 
 1. Enable Detection Only mode. Detection Only mode will run all rules, but not execute any disruptive actions. In addition,
    you want to enable debug logs, which is necessary to identify false positives.
+
    To enable Detection Only mode, update directives [SecRuleEngine][] and [SecDebugLogLevel][] as follows:
 
    ```yaml
@@ -62,9 +63,8 @@ customize the rules:
    updated it as explained in the next section.
 
    <Alert severity="info">
-       Each configuration file has rules in different ranges as follows:
-       Rules in the range 900000 to 900999 are in crs-setup.conf. Rules in the range 901000 to 999999 are in waf-rules.conf.
-       All other rules are in aes-waf.conf.
+       Each configuration file has rules in different ranges as follows: Rules in the range 900000 to 900999 are in crs-setup.conf,
+       rules IDs 901000 to 999999 are in waf-rules.conf, and all other rules are in aes-waf.conf.
    </Alert>
 
 ## Customizing Ambassador Labs rules
