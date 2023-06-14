@@ -1,10 +1,10 @@
 # Enabling $productName$'s Web Application Firewall in production
 
 By default, Ambassador Labs rules are configured to block malicious requests. However, when a Web Application Firewall is
-first deployed in a production environment, it is recommended to set it in a non-blocking mode, and monitor its behaviour
+first deployed in a production environment, it is recommended to set it in a non-blocking mode and monitor its behavior
 to identify potential issues.
 
-The following procedure can be followed to deploy $productName$'s Web Application Firewall in detection only mode and
+The following procedure can be followed to deploy $productName$'s Web Application Firewall in detection-only mode and
 customize the rules:
 
 1. Enable Detection Only mode. Detection Only mode will run all rules, but not execute any disruptive actions. In addition,
@@ -50,15 +50,15 @@ customize the rules:
    2023/06/14 14:55:13 [DEBUG] Rule matched tx_id="816309a5-71d7-46e6-92df-96274a363a42" rule_id=913100
    ```
 
-   Rules in the range 900000 to 901999 configure some Coraza behaviours and can be ignored.
+   Rules in the range 900000 to 901999 configure some Coraza behaviors and can be ignored.
 
-   Some rules like the one below, are used to skip other blocks of rules, and can be ignored as well.
+   Some rules like the one below, are used to skip other blocks of rules and can be ignored as well.
 
    ```text
    SecRule TX:DETECTION_PARANOIA_LEVEL "@lt 1" "id:911012,phase:2,pass,nolog,skipAfter:END-REQUEST-911-METHOD-ENFORCEMENT"
    ```
 
-   For other rules, go over the logs and check why did the rule match. Once you identify a rule that is causing false positives,
+   For other rules, go over the logs and check why the rule matched. Once you identify a rule that is causing false positives,
    updated it as explained in the next section.
 
    ```
@@ -80,7 +80,7 @@ There are several options to configure if/when a rule runs:
 To disable a rule, follow the instructions in [RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example][], save the
 configuration as a ConfigMap, and load it after `waf-rules.conf`.
 
-For example, let's say that we want to disable rule with ID `913110`. The first step is to create the configuration:
+For example, let's say that we want to disable the rule with ID `913110`. The first step is to create the configuration:
 
 ```yaml
 apiVersion: v1
@@ -118,8 +118,8 @@ spec:
 
 ### Applying a rule to some requests
 
-To configure a rule to apply only to some requests, update it as described in [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example][],
-save that configuration as a ConfigMap (see the previous section), and load if before `waf-rules.conf`.
+To apply a rule only to some requests, update it as described in [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example][],
+save that configuration as a ConfigMap (see the previous section), and load it before `waf-rules.conf`.
 
 The following example shows how to disable all rules tagged `attack-sqli` when the URI does not start with '/api/':
 
