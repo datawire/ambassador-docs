@@ -44,20 +44,22 @@ customize the rules:
            url: "https://app.getambassador.io/download/waf/v1-20230613/waf-rules.conf"
    ```
 
-2. Identify potential false positives. Go to AES logs and find entries that contains text `Rule matched`.
+2. Identify potential false positives. Go to $productName$'s logs and find entries that contains text `Rule matched`, like this:
 
-   Rules in the range 900000 to 901999 configure some Coraza behaviours and can be ignored. For other rules, go over the
-   logs, and check why did the rule match.
+   ```text
+   2023/06/14 14:55:13 [DEBUG] Rule matched tx_id="816309a5-71d7-46e6-92df-96274a363a42" rule_id=913100
+   ```
 
-   Some rules are used to skip other blocks of rules, like this one:
+   Rules in the range 900000 to 901999 configure some Coraza behaviours and can be ignored.
+
+   Some rules like the one below, are used to skip other blocks of rules, and can be ignored as well.
 
    ```text
    SecRule TX:DETECTION_PARANOIA_LEVEL "@lt 1" "id:911012,phase:2,pass,nolog,skipAfter:END-REQUEST-911-METHOD-ENFORCEMENT"
    ```
 
-   Usually you can skip these rules as well.
-
-   Once you identify a rule that is causing false positives, updated it as explained in the next section.
+   For other rules, go over the logs and check why did the rule match. Once you identify a rule that is causing false positives,
+   updated it as explained in the next section.
 
    ```
    <Alert severity="info">
