@@ -111,7 +111,7 @@ customize the rules.
    - Rules like the one below are used to skip other rules and can be ignored as well.
 
      ```text
-      SecRule TX:DETECTION_PARANOIA_LEVEL "@lt 1" "id:911012,phase:2,pass,nolog,skipAfter:END-REQUEST-911-METHOD-ENFORCEMENT"
+     SecRule TX:DETECTION_PARANOIA_LEVEL "@lt 1" "id:911012,phase:2,pass,nolog,skipAfter:END-REQUEST-911-METHOD-ENFORCEMENT"
      ```
 
    <Alert severity="info">
