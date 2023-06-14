@@ -7,12 +7,11 @@ to identify potential issues.
 The following procedure can be followed to deploy $productName$'s Web Application Firewall in detection only mode and
 customize the rules:
 
-1. Enable Detection Only mode. This is done by setting the Directive [SecRuleEngine][] to `DetectionOnly`. In addition,
-   enable debug logs, which is necessary to identify false positives. Both settings can be updated like this:
+1. Enable Detection Only mode. Detection Only mode will run all rules, but not execute any disruptive actions. In addition,
+   you want to enable debug logs, which is necessary to identify false positives.
+   To enable Detection Only mode, update directives [SecRuleEngine][] and [SecDebugLogLevel][] as follows:
 
    ```yaml
-   kubectl apply -f -<<EOF
-   ---
    apiVersion: v1
    kind: ConfigMap
    metadata:
@@ -23,6 +22,7 @@ customize the rules:
        SecDebugLogLevel 4
 
    ---
+
    apiVersion: gateway.getambassador.io/v1alpha1
    kind: WebApplicationFirewall
    metadata:
@@ -32,26 +32,32 @@ customize the rules:
        - sourceType: "http"
          http:
            url: "https://app.getambassador.io/download/waf/v1-20230613/aes-waf.conf"
+       - configMapRef:
+           key: waf-overrides.conf
+           name: waf-configuration
+         sourceType: configmap
        - sourceType: "http"
          http:
            url: "https://app.getambassador.io/download/waf/v1-20230613/crs-setup.conf"
        - sourceType: "http"
          http:
            url: "https://app.getambassador.io/download/waf/v1-20230613/waf-rules.conf"
-       - configMapRef:
-           key: waf-overrides.conf
-           name: waf-configuration
-         sourceType: configmap
-   ---
-   EOF
    ```
 
-2. Identify which rules are matching requests.  Go to AES logs and find entries that contains text `Rule matched`.
+2. Identify potential false positives. Go to AES logs and find entries that contains text `Rule matched`.
 
-   Rules in the range 900000 to 901999 define variables, and can be ignored. For other rules, go over the logs, and check
-   why did the rule match.
+   Rules in the range 900000 to 901999 configure some Coraza behaviours and can be ignored. For other rules, go over the
+   logs, and check why did the rule match.
 
-  If you identify rules that should not be matching, updated them as explained in the next section.
+   Some rules are used to skip other blocks of rules, like this one:
+
+   ```text
+   SecRule TX:DETECTION_PARANOIA_LEVEL "@lt 1" "id:911012,phase:2,pass,nolog,skipAfter:END-REQUEST-911-METHOD-ENFORCEMENT"
+   ```
+
+   Usually you can skip these rules as well.
+
+   Once you identify a rule that is causing false positives, updated it as explained in the next section.
 
 ## Customizing Ambassador Labs rules
 
@@ -154,3 +160,6 @@ The following example shows how to disable all rules tagged `attack-sqli` only w
    ---
    EOF
    ```
+
+[SecRuleEngine]: https://coraza.io/docs/seclang/directives/#secruleengine
+[SecDebugLogLevel]: https://coraza.io/docs/seclang/directives/#secdebugloglevel
