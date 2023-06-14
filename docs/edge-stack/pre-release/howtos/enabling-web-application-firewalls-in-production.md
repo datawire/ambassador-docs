@@ -59,6 +59,14 @@ customize the rules:
 
    Once you identify a rule that is causing false positives, updated it as explained in the next section.
 
+   ```
+   <Alert severity="info">
+       Each configuration file has rules in different ranges as follows:
+       Rules in the range 900000 to 900999 are in crs-setup.conf. Rules in the range 901000 to 999999 are in waf-rules.conf.
+       All other rules are in aes-waf.conf.
+   </Alert>
+   ```
+
 ## Customizing Ambassador Labs rules
 
 There are several options to configure if/when a rule runs:
