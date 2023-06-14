@@ -160,3 +160,5 @@ spec:
 
 [SecRuleEngine]: https://coraza.io/docs/seclang/directives/#secruleengine
 [SecDebugLogLevel]: https://coraza.io/docs/seclang/directives/#secdebugloglevel
+[REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example]: https://github.com/coreruleset/coreruleset/blob/v4.0/dev/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example
+[RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example]: https://github.com/coreruleset/coreruleset/blob/v4.0/dev/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example
