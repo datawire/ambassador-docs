@@ -57,7 +57,7 @@ customize the rules:
 2. Identify potential false positives. $productName$'s container logs will have one or more entries indicating which rules
    were applied to a request and why.
 
-   For example, the following entry shows that a request to https://34.123.92.3/backend/ was blocked by rule 920350 because
+   For example, the following entry shows that a request to `https://34.123.92.3/backend/` was blocked by rule 920350 because
    the Host header contains an IP address.
 
    ```text
