@@ -114,7 +114,7 @@ spec:
      sourceType: configmap
 ```
 
-### Apply a rule to some requests
+### Applying a rule to some requests
 
 To configure a rule to apply only to some requests, update it as described in [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example][],
 save that configuration as a ConfigMap (see the previous section), and load if before `waf-rules.conf`.
