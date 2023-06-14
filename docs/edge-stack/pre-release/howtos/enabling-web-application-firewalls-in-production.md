@@ -57,11 +57,51 @@ customize the rules.
 2. Identify false positives. $productName$'s container logs will have one or more entries indicating which rules
    were applied to a request and why.
 
-   For example, the following entry shows that a request to `https://34.123.92.3/backend/` was blocked by rule 920350 because
-   the Host header contains an IP address.
+   For example, the following log entry (formatted for readability) shows that a request to `https://34.123.92.3/backend/` was
+   blocked by rule 920350 because the Host header contains an IP address.
 
    ```text
-   2023-06-14T17:37:29.145Z	INFO	waf/manager.go:73	request interrupted by waf: default/example-waf	{"message": "Host header is a numeric IP address", "data": "34.123.92.3", "uri": "https://34.123.92.3/backend/", "disruptive": true, "matchedDatas": [{"Variable_":54,"Key_":"Host","Value_":"34.123.92.3","Message_":"Host header is a numeric IP address","Data_":"34.123.92.3","ChainLevel_":0}], "rule": {"ID_":920350,"File_":"","Line_":9892,"Rev_":"","Severity_":4,"Version_":"OWASP_CRS/4.0.0-rc1","Tags_":["application-multi","language-multi","platform-multi","attack-protocol","paranoia-level/1","OWASP_CRS","capec/1000/210/272","PCI/6.5.10"],"Maturity_":0,"Accuracy_":0,"Operator_":"","Phase_":1,"Raw_":"SecRule REQUEST_HEADERS:Host \"@rx (?:^([\\d.]+|\\[[\\da-f:]+\\]|[\\da-f:]+)(:[\\d]+)?$)\" \"id:920350,phase:1,block,t:none,msg:'Host header is a numeric IP address',logdata:'%{MATCHED_VAR}',tag:'application-multi',tag:'language-multi',tag:'platform-multi',tag:'attack-protocol',tag:'paranoia-level/1',tag:'OWASP_CRS',tag:'capec/1000/210/272',tag:'PCI/6.5.10',ver:'OWASP_CRS/4.0.0-rc1',severity:'WARNING',setvar:'tx.inbound_anomaly_score_pl1=+%{tx.warning_anomaly_score}'\"","SecMark_":""}}
+   2023-06-14T17:37:29.145Z	INFO	waf/manager.go:73	request interrupted by waf: default/example-waf
+     {
+         "message": "Host header is a numeric IP address",
+         "data": "34.123.92.3",
+         "uri": "https://34.123.92.3/backend/",
+         "disruptive": true,
+         "matchedDatas": [
+             {
+                 "Variable_": 54,
+                 "Key_": "Host",
+                 "Value_": "34.123.92.3",
+                 "Message_": "Host header is a numeric IP address",
+                 "Data_": "34.123.92.3",
+                 "ChainLevel_": 0
+             }
+         ],
+         "rule": {
+             "ID_": 920350,
+             "File_": "",
+             "Line_": 9892,
+             "Rev_": "",
+             "Severity_": 4,
+             "Version_": "OWASP_CRS/4.0.0-rc1",
+             "Tags_": [
+                 "application-multi",
+                 "language-multi",
+                 "platform-multi",
+                 "attack-protocol",
+                 "paranoia-level/1",
+                 "OWASP_CRS",
+                 "capec/1000/210/272",
+                 "PCI/6.5.10"
+             ],
+             "Maturity_": 0,
+             "Accuracy_": 0,
+             "Operator_": "",
+             "Phase_": 1,
+             "Raw_": "SecRule REQUEST_HEADERS:Host \"@rx (?:^([\\d.]+|\\[[\\da-f:]+\\]|[\\da-f:]+)(:[\\d]+)?$)\" \"id:920350,phase:1,block,t:none,msg:'Host header is a numeric IP address',logdata:'%{MATCHED_VAR}',tag:'application-multi',tag:'language-multi',tag:'platform-multi',tag:'attack-protocol',tag:'paranoia-level/1',tag:'OWASP_CRS',tag:'capec/1000/210/272',tag:'PCI/6.5.10',ver:'OWASP_CRS/4.0.0-rc1',severity:'WARNING',setvar:'tx.inbound_anomaly_score_pl1=+%{tx.warning_anomaly_score}'\"",
+             "SecMark_": ""
+         }
+     }
    ```
 
    If you enabled Coraza debug logs, use the rule ID to identify entries that are not important as follows:
