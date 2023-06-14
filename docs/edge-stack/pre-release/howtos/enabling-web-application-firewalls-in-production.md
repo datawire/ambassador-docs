@@ -49,9 +49,9 @@ customize the rules:
        - sourceType: "http"
          http:
            url: "https://app.getambassador.io/download/waf/v1-20230613/waf-rules.conf"
-   logging:
-     onInterrupt:
-       enabled: true
+     logging:
+       onInterrupt:
+         enabled: true
    ```
 
 2. Identify potential false positives. $productName$'s container logs will have one or more entries indicating which rules
