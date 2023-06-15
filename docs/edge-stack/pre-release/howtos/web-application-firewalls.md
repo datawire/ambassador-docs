@@ -213,18 +213,18 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 
   $productName$ also outputs metrics about the Web Application Firewall, including the number of requests approved and denied, and performance information.
 
-| Metric                        | Type                  | Description                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-|-------------------------------|-----------------------|-----------------------------------------------------------------------------------------------|
-| `waf_created_wafs`            | Gauge                 | Number of created web application firewall                                                    |
-| `waf_managed_wafs`            | Counter               | Number of managed web application firewalls                                                   |
-| `waf_added_latency_ms`        | Histogram             | Added latency in milliseconds                                                                 |
-| `waf_total_denied_requests`   | Counter (with labels) | Number of requests denied by any web application firewall                                     |
-| `waf_total_denied_responses`  | Counter (with labels) | Number of responses denied by any web application firewall                                    |
-| `waf_denied_breakdown`        | Counter (with labels) | Breakdown of requests/responses denied and the web application firewall that denied them      |
-| `waf_total_allowed_requests`  | Counter (with labels) | Number of requests allowed by any web application firewall                                    |
-| `waf_total_allowed_responses` | Counter (with labels) | Number of responses allowed by any web application firewall                                   |
-| `waf_allowed_breakdown`       | Counter (with labels) | Breakdown of requests/responses allowed and the web application firewall that allowed them    |
-| `waf_errors`                  | Counter (with labels) | Tracker for any errors encountered by web application firewalls and the reason for the error  |
+| Metric                              | Type                  | Description                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|-------------------------------------|-----------------------|-----------------------------------------------------------------------------------------------|
+| `waf_created_wafs`                  | Gauge                 | Number of created web application firewall                                                    |
+| `waf_managed_wafs_total`            | Counter               | Number of managed web application firewalls                                                   |
+| `waf_added_latency_ms`              | Histogram             | Added latency in milliseconds                                                                 |
+| `waf_total_denied_requests_total`   | Counter (with labels) | Number of requests denied by any web application firewall                                     |
+| `waf_total_denied_responses_total`  | Counter (with labels) | Number of responses denied by any web application firewall                                    |
+| `waf_denied_breakdown_total`        | Counter (with labels) | Breakdown of requests/responses denied and the web application firewall that denied them      |
+| `waf_total_allowed_requests_total`  | Counter (with labels) | Number of requests allowed by any web application firewall                                    |
+| `waf_total_allowed_responses_total` | Counter (with labels) | Number of responses allowed by any web application firewall                                   |
+| `waf_allowed_breakdown_total`       | Counter (with labels) | Breakdown of requests/responses allowed and the web application firewall that allowed them    |
+| `waf_errors`                        | Counter (with labels) | Tracker for any errors encountered by web application firewalls and the reason for the error  |
 
 ### Grafana Dashboard
 
