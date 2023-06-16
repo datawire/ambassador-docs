@@ -12,7 +12,7 @@ Telepresence is an open source tool that enables you to set up remote developmen
 
 ## Prerequisites
 
-   - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), the Kubernetes command-line tool, or the OpenShift Container Platform command-line interface, [oc](https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-installing-cli_cli-developer-commands). 
+   - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), the Kubernetes command-line tool, or the OpenShift Container Platform command-line interface, [oc](https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-installing-cli_cli-developer-commands).
    - A Kubernetes Deployment and Service.
 
    <Alert severity="info">
@@ -173,3 +173,5 @@ Now, with Telepresence, you can:
 
 ## What’s Next?
 - [Learn about the Telepresence architecture.](../reference/architecture)
+
+<img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=d842651a-2e4d-465a-98e1-4808722c01ab" alt="" style="max-width:1px;"/>
