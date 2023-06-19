@@ -5,6 +5,8 @@ When writing your own firewall rules it's important to first take note of a few 
 1. Requests are either denied or allowed, redirects and dropped requests are not supported
 2. If you have a rule in your firewall configuration that specifies the `deny` action and you do not specify a `status`, then we will default to
 using status code `403`.
+3. State is not preserved across the different phases of proceeing a request. For this reason it is advised to use early blocking mode
+rather than anamoly scoring mode and to avoid creating any firewall rules that require state or information created by rules in a different phase. For more information about waf phases refer to the [Coraza Seclang Execution Flow docs][].
 
 ## Ambassador Labs Firewall Ruleset
 
@@ -42,3 +44,4 @@ Files:
 
 [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example]: https://github.com/coreruleset/coreruleset/blob/v4.0/dev/rules/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example
 [RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example]: https://github.com/coreruleset/coreruleset/blob/v4.0/dev/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example
+[Coraza Seclang Execution Flow docs]: https://coraza.io/docs/seclang/execution-flow/
