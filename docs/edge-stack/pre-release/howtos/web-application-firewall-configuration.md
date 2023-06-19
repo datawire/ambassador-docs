@@ -25,7 +25,13 @@ Each file must be imported into $productName$'s Web Application Firewall in the 
 2. crs-setup.conf
 3. waf-rules.conf
 
-If you'd like to customize Ambassador Labs default rules, you can load your own files before or after waf-rules.conf.  See files [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example][] and [RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example][] for more information.
+The Ambassador Labs ruleset largely focuses on incoming requests and by default it does not perform processing on response bodies from upstream services to minimize the request round-trip latency.
+
+If processing of responses is desired, then you can create your own custom rule set or add additional rules to be loaded after the Ambassador Labs ruleset to add custom validation of responses from upstream services.
+
+If you are adding rules to process response bodies after the Ambassador Labs ruleset, then you will need to set `SecResponseBodyAccess On` in your rules to enable access to the response body.
+
+If you'd like to customize the Ambassador Labs default ruleset, you can load your own files before or after waf-rules.conf. Keep in mind that the `WebApplicationFirewall` resource loads firewall configurations via a list of rules sources, and sources lower in the list can overwrite rules and settings from sources higher in the list. See files [REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf.example][] and [RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example][] for more information.
 
 ## Web Application Firewall Rules Release Notes
 
@@ -38,6 +44,7 @@ To install any of the rules below, import all the files for the desired version 
 Initial version of $productName$'s Web Application Firewall rules.
 
 Files:
+
 - [aes-waf.conf](https://app.getambassador.io/download/waf/v1-20230613/aes-waf.conf)
 - [crs-setup.conf](https://app.getambassador.io/download/waf/v1-20230613/crs-setup.conf)
 - [waf-rules.conf](https://app.getambassador.io/download/waf/v1-20230613/waf-rules.conf)
