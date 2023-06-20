@@ -38,17 +38,17 @@ customize the rules.
      firewallRules:
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230613/aes-waf.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230620/aes-waf.conf"
        - configMapRef:
            key: waf-overrides.conf
            name: waf-configuration
          sourceType: configmap
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230613/crs-setup.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230620/crs-setup.conf"
        - sourceType: "http"
          http:
-           url: "https://app.getambassador.io/download/waf/v1-20230613/waf-rules.conf"
+           url: "https://app.getambassador.io/download/waf/v1-20230620/waf-rules.conf"
      logging:
        onInterrupt:
          enabled: true
@@ -154,13 +154,13 @@ spec:
  firewallRules:
    - sourceType: "http"
      http:
-       url: "https://app.getambassador.io/download/waf/v1-20230613/aes-waf.conf"
+       url: "https://app.getambassador.io/download/waf/v1-20230620/aes-waf.conf"
    - sourceType: "http"
      http:
-       url: "https://app.getambassador.io/download/waf/v1-20230613/crs-setup.conf"
+       url: "https://app.getambassador.io/download/waf/v1-20230620/crs-setup.conf"
    - sourceType: "http"
      http:
-       url: "https://app.getambassador.io/download/waf/v1-20230613/waf-rules.conf"
+       url: "https://app.getambassador.io/download/waf/v1-20230620/waf-rules.conf"
    - configMapRef:
        key: disabled-rules.conf
        name: waf-configuration
@@ -198,17 +198,17 @@ spec:
  firewallRules:
    - sourceType: "http"
      http:
-       url: "https://app.getambassador.io/download/waf/v1-20230613/aes-waf.conf"
+       url: "https://app.getambassador.io/download/waf/v1-20230620/aes-waf.conf"
    - sourceType: "http"
      http:
-       url: "https://app.getambassador.io/download/waf/v1-20230613/crs-setup.conf"
+       url: "https://app.getambassador.io/download/waf/v1-20230620/crs-setup.conf"
    - configMapRef:
        key: website-rules.conf
        name: waf-configuration
      sourceType: configmap
    - sourceType: "http"
      http:
-       url: "https://app.getambassador.io/download/waf/v1-20230613/waf-rules.conf"
+       url: "https://app.getambassador.io/download/waf/v1-20230620/waf-rules.conf"
 ```
 
 [SecRuleEngine]: https://coraza.io/docs/seclang/directives/#secruleengine
