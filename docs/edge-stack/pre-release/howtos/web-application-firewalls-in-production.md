@@ -1,4 +1,9 @@
-# Enabling $productName$'s Web Application Firewall in production
+---
+    Title: Using Web Application Firewalls in production
+    description: Learn about best practices for enabling Edge Stack's Web Application Firewalls in production environments
+---
+
+# Using Web Application Firewall in production
 
 By default, Ambassador Labs rules are configured to block malicious requests. However, when a Web Application Firewall is
 first deployed in a production environment, it is recommended to set it in a non-blocking mode and monitor its behavior

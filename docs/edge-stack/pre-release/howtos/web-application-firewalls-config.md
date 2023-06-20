@@ -1,4 +1,9 @@
-# Configuring the Web Application Firewall rules in $productName$
+---
+    Title: Configuring Web Application Firewall rules in Edge Stack
+    description: Get Web Application Firewalls quickly setup with Edge Stack and create custom firewall rules.
+---
+
+# Configuring Web Application Firewall rules in $productName$
 
 When writing your own firewall rules it's important to first take note of a few ways that $productName$'s `WebApplicationFirewalls` work.
 

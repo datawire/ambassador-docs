@@ -78,7 +78,7 @@ numbers of `Mapping`s.
 If the `Host` specifies `mappingSelector` _and_ the `Mapping` specifies `hostname`, both must match
 for the association to happen.
 
-The `mappingSelector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
+The `mappingSelector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#labelselector-v1-meta), but **in 2.0, only `matchLabels` is supported**, for example:
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1

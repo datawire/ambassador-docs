@@ -245,6 +245,6 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 [configuring Ambassador IDs can be found here]: ../../topics/running/running#ambassador_id
 [$productName$]: https://www.getambassador.io/products/edge-stack/api-gateway
 [Ambassador Labs]: https://www.getambassador.io/
-[Configuring $productName$'s Web Application Firewall rules]: ../web-application-firewall-configuration
+[Configuring $productName$'s Web Application Firewall rules]: ../web-application-firewalls-config
 [coraza rules configuration]: https://coraza.io/docs/seclang/directives/#secauditlog
-[the firewall rules]: ../web-application-firewall-configuration
+[the firewall rules]: ../web-application-firewalls-config
