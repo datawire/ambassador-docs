@@ -373,27 +373,6 @@ export const TelepresenceCards = [
   },
 ];
 
-export const TelepresenceOssCards = [
-  {
-    title: 'Accelerate Your Inner Dev Loop',
-    description:
-      "Kubernetes was supposed to make your team faster, but now everytime you make a code change you have to wait for containers to build, be pushed to registry, and deployed. With Telepresence, you can make changes to your service as if you're developing locally, without having to run all the dependencies on your local machine.",
-    icon: 'loop',
-  },
-  {
-    title: 'Shift Testing Left',
-    description:
-      'You want to catch errors before they get shipped to production, but to do that you need a realistic development environment and with Kubernetes, those can be expensive. Telepresence lets you connect the copy of your service locally to your remote dependencies, so you can test like your laptop is in your cluster.',
-    icon: 'left_arrow',
-  },
-  {
-    title: 'Use Your Existing Workflow',
-    description:
-      "Missing your favorite code editor, debugger, or profiler? Anything that runs on your laptop works with Telepresence - even when you're working on a service running in Kubernetes.",
-    icon: 'wrench',
-  },
-];
-
 export const KubernetesCards = [
   {
     title: 'Kubernetes Basics',
