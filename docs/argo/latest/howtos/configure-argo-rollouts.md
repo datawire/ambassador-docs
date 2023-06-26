@@ -98,6 +98,7 @@ metadata:
 ## 4. Apply the manifests in your cluster
 
 From the root of your locally forked [rollouts-demo](https://github.com/datawire/rollouts-demo) repository, update the a8r.io/repository annotation from `git@github.com:datawire/rollouts-demo.git` to `git@gthub.com:<org>/<repo>.git`, then apply the Kubernetes manifests to your cluster with the command:
+
 ```
 kubectl apply -f ./manifests --namespace <YOUR_NAMESPACE>
 ```

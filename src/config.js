@@ -3,7 +3,6 @@ import {
   goToEdgeStackDocs,
   goToEmissaryDocs,
   goToDocsTelepresence,
-  goToDocsTelepresenceOss,
   goToDocsArgo,
   goToCloudDocs,
   goToEnvoy,
@@ -30,7 +29,6 @@ export const products = [
         link: 'pre-release/quick-start',
       },
       { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
-      { id: '2.14', name: '2.14', link: '2.14/quick-start' },
       { id: '2.13', name: '2.13', link: '2.13/quick-start' },
       { id: '2.12', name: '2.12', link: '2.12/quick-start' },
       { id: '2.11', name: '2.11', link: '2.11/quick-start' },
@@ -46,24 +44,6 @@ export const products = [
       { id: '2.1', name: '2.1', link: '2.1/quick-start', archived: true },
       { id: '2.0', name: '2.0', link: '2.0/quick-start', archived: true },
       { id: '1.0', name: '1.0', link: '1.0/discussion/overview', archived: true },
-    ],
-  },
-  {
-    slug: 'telepresence-oss',
-    name: 'Telepresence OSS',
-    isProduct: true,
-    link: '/docs/telepresence-oss',
-    to: goToDocsTelepresenceOss,
-    id: Math.random().toString(),
-    version: [
-      {
-        id: 'pre-release',
-        name: 'Pre-Release',
-        link: 'pre-release/quick-start',
-      },
-      { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
-      { id: '2.14', name: '2.14', link: '2.14/quick-start' },
-      { id: '2.13', name: '2.13', link: '2.13/quick-start' },
     ],
   },
   {
@@ -247,11 +227,6 @@ export const metaData = {
   },
   telepresence: {
     title: 'Telepresence Docs | Ambassador Labs',
-    description:
-      'Code and test microservices locally against a remote Kubernetes cluster with Telepresence for sharing dev environments and accelerating the inner dev loop.',
-  },
-  ["telepresence-oss"]: {
-    title: 'Telepresence OSS Docs | Ambassador Labs',
     description:
       'Code and test microservices locally against a remote Kubernetes cluster with Telepresence for sharing dev environments and accelerating the inner dev loop.',
   },
