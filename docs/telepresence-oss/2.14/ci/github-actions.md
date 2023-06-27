@@ -1,1 +1,1 @@
-../../../telepresence/latest/ci/github-actions.md
+../../../telepresence/2.14/ci/github-actions.md
