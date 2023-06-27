@@ -1,0 +1,35 @@
+# branch info
+branch: release/v3.6
+
+# self
+version: 3.7.0
+productName: "Ambassador Edge Stack"
+productNamePlural: "Ambassador Edge Stacks"
+productNamespace: ambassador
+productDeploymentName: edge-stack
+productHelmName: edge-stack
+
+# OSS (not self)
+ossVersion: 3.7.0
+ossDocsVersion: "pre-release"
+ossChartVersion: 8.7.0
+OSSproductName: "Emissary-ingress"
+OSSproductNamePlural: "Emissary-ingresses"
+
+# AES (self)
+aesVersion: 3.7.0
+aesDocsVersion: "pre-release"
+aesChartVersion: 8.7.0
+AESproductName: "Ambassador Edge Stack"
+AESproductNamePlural: "Ambassador Edge Stacks"
+
+# other products
+qotmVersion: 1.7
+quoteVersion: 0.5.0
+
+# Most recent version from previous major versions
+# This is mostly to ensure that the migration matrix stays up-to-date
+versionTwoX: 2.5.1
+chartVersionTwoX: 7.6.1
+versionOneX: 1.14.4
+chartVersionOneX: 6.9.5

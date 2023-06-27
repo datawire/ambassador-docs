@@ -80,7 +80,7 @@ liveness probes are too sensitive they can take out Ambassador instances that ar
 normally. This is more prone to happen as the number of Ambassador inputs increase. The
 `timeoutSeconds` and `failureThreshold` fields of the Ambassador deployment's liveness Probe
 determines how tolerant Kubernetes is with its probes. If you observe pod restarts along with
-`Unhealthy` events, try tuning these fields upwards from their default values. See the Kubernetes documentation for more details on [tuning probes](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#probe-v1-core).
+`Unhealthy` events, try tuning these fields upwards from their default values. See the Kubernetes documentation for more details on [tuning probes](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#probe-v1-core).
 
 Note that whatever changes you make to Ambassador's liveness probes should most likely be made to
 its readiness probes also.

@@ -77,7 +77,7 @@ numbers of `Mapping`s.
 If the `Host` specifies `mappingSelector` _and_ the `Mapping` specifies `hostname`, both must match
 for the association to happen.
 
-The `mappingSelector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta). For a `Mapping` to be associated with a `Host` that uses `mappingSelector`, then **all** labels
+The `mappingSelector` is a Kubernetes [label selector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.25/#labelselector-v1-meta). For a `Mapping` to be associated with a `Host` that uses `mappingSelector`, then **all** labels
 required by the `mappingSelector` must be present on the `Mapping` in order for it to be associated with the `Host`.
 A `Mapping` may have additional labels other than those required by the `mappingSelector` so long as the required labels are present.
 
