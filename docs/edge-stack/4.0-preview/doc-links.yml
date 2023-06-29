@@ -83,7 +83,7 @@
    - title: HTTP routing
      link: /guides/routing/http
    - title: TCP routing
-     link: /guides/routing/http
+     link: /guides/routing/tcp
    - title: UDP routing
      link: /guides/routing/udp
    - title: gRPC routing
@@ -155,7 +155,7 @@
          - title: Single Sign-On with Keycloak
            link: /guides/sso/keycloak
          - title: Kubernetes SSO with OIDC and Keycloak
-           link: /guides/kubectl-keycloak
+           link: /guides/sso/kubectl-keycloak
          - title: Single Sign-On with OneLogin
            link: /guides/sso/onelogin
          - title: Single Sign-On with Salesforce
@@ -192,7 +192,7 @@
  - title: Custom Resources
    items:
    - title: Filter
-     link: /custom-resources/aes/filter
+     link: /custom-resources/filter
      items:
      - title: The OAuth2 Filter type
        link: /custom-resources/filter-oauth2
@@ -211,7 +211,7 @@
    - title: WebApplicationFirewallPolicy
      link: /custom-resources/webapplicationfirewallpolicy
    - title: Envoy Gateway resources
-     link: /custom-resources/eg/index
+     link: /custom-resources/eg
      items:
      - title: EnvoyGateway
        link: /custom-resources/eg/envoygateway
@@ -220,7 +220,7 @@
      - title: RateLimitFilter
        link: /custom-resources/eg/ratelimitfilter
    - title: Gateway API resources
-     link: /custom-resources/gateway-api/index
+     link: /custom-resources/gateway-api
      items:
      - title: GatewayClass
        link: /custom-resources/gateway-api/gatewayclass
@@ -272,7 +272,7 @@
  - title: FAQs
    link: /about/faq
  - title: About $productName$ 4.x
-   link: /about/aes-4x.md
+   link: /about/aes-4x
  - title: Release Notes
    link: /release-notes
  # - title: End of Life Policy

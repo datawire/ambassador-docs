@@ -1,4 +1,4 @@
 
-# ExternalDNS with $productName$
+# ExternalDNS with Integration
 
 Under Construction
