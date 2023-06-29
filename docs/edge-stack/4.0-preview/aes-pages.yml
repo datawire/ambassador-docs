@@ -1,0 +1,44 @@
+# AES pages should be represented in a yaml array with the pathnames as the value
+# Ex:
+# - /docs
+# - /reference
+#
+
+/custom-resources/filter-apikeys
+/custom-resources/filter-external
+/custom-resources/filter-jwt
+/custom-resources/filter-plugin
+/custom-resources/filterpolicy
+/custom-resources/filter
+/custom-resources/webapplicationfirewall
+/custom-resources/webapplicationfirewallpolicy
+/design/filters
+/design/redis
+/design/web-application-firewalls
+/guides/aes/debugging
+/guides/aes/deployment-config
+/guides/aes/env-vars
+/guides/aes/module
+/guides/aes/redis-config
+/guides/aes/scaling
+/guides/auth/apikeys
+/guides/auth/basic-auth
+/guides/auth/jwt
+/guides/auth/oauth2
+/guides/custom-filters/external
+/guides/custom-filters/plugin
+/guides/observability/metrics-endpoint
+/guides/observability/prometheus-grafana
+/guides/sso/auth0
+/guides/sso/azure
+/guides/sso/google
+/guides/sso/keycloak
+/guides/sso/kubectl-keycloak
+/guides/sso/oauth2-sso
+/guides/sso/okta
+/guides/sso/onelogin
+/guides/sso/salesforce
+/guides/sso/uaa
+/guides/web-application-firewalls/setup
+/guides/web-application-firewalls/production
+/guides/web-application-firewalls/rules

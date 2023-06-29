@@ -1,0 +1,283 @@
+ - title: Quick start
+ # TODO: needs updated to install Envoy Gateway and not
+   link: /install/quickstart
+ - title: Installation and updates
+   items:
+     - title: Install with Helm
+       link: /install/helm
+     - title: Install with Kubernetes YAML
+       link: /install/yaml
+    # TODO: add the below page until we're shipping GA
+    # - title: Upgrade or migrate
+    #   link: /install/upgrade
+     - title: Installing with AWS
+       link: /install/edge-stack-with-aws
+     - title: Installing with GKE
+       link: /install/edge-stack-with-gke
+     # TODO: installing with AKS?
+ - title: Arcitecture and design
+   items:
+   # TODO: needs updated to show the new arcitecture and contrast from 3.x architecture
+   - title: $productName$ system architecture
+     link: /design/system
+   - title: Deployment overview
+     link: /design/deployment
+   - title: Redis config
+     link: /design/redis
+   - title: Web application firewalls
+     link: /design/web-application-firewalls
+   - title: Filters
+     link: /design/filters
+   - title: Rate Limiting
+     link: /design/rate-limiting
+   - title: Request flow
+     link: /design/request-flow
+ - title: $productName$ configuration
+   items:
+   - title: Customizing $productName$
+     link: /guides/aes/deployment-config
+   - title: Environment variables
+     link: /guides/aes/env-vars
+   - title: Performance and scaling
+     link: /guides/aes/scaling
+ - title: Envoy Gateway configuration
+   items:
+   - title: Customizing Envoy Gateway
+     link: /guides/eg/envoy-gateway-config
+   - title: Customizing Envoy Proxy
+     link: /guides/eg/envoy-config
+   # - title: Environment variables
+   #   link: /guides/eg/env-vars
+   - title: Performance and scaling
+     link: /guides/eg/scaling
+ - title: Ingress and traffic management
+   items:
+   - title: Listening for requests
+     link: /ingress/listening
+  #   - title: AuthService settings
+  #     link:
+  #   - title: Automatic retries
+  #     link:
+  #   - title: Canary releases
+  #     link:
+  #   - title: Circuit Breakers
+  #     link:
+  #   - title: Cross-Origin Resource Sharing (CORS)
+  #     link:
+  #   - title: Ingress controller
+  #     link:
+  #   - title: Load balancing
+  #     link:
+  #   - title: Service discovery and resolvers
+  #     link:
+  #   - title: Gzip compression
+  #     link:
+  #   - title: Keepalive
+  #     link:
+ - title: Routing and processing traffic
+   items:
+  #   - title: Configuring $productName$ to communicate
+  #     link:
+  #   - title: Get traffic from the edge
+  #     link:
+   - title: HTTP routing
+     link: /guides/routing/http
+   - title: TCP routing
+     link: /guides/routing/http
+   - title: UDP routing
+     link: /guides/routing/udp
+   - title: gRPC routing
+     link: /guides/routing/grpc
+   - title: WebSocket connections
+     link: /guides/routing/websockets
+   - title: Redirects
+     link: /guides/routing/redirects
+   - title: Rewrites
+     link: /guides/routing/rewrites
+   - title: Headers
+     link: /guides/routing/headers
+   - title: Traffic mirroring / shadowing
+     link: /guides/routing/mirroring
+   - title: Customizing 404s
+     link: /guides/routing/404s
+  #   - title: Timeouts
+  #     link:
+  #   - title: Host header
+  #     link:
+ - title: TLS configuration
+   items:
+   - title: TLS Termination
+     link: /guides/tls/termination
+   - title: TLS Passthrough
+     link: /guides/tls/passthrough
+  #   - title: TLS overview
+  #     link: /topics/running/tls/
+  #   - title: Cleartext support
+  #     link: /topics/running/tls/cleartext-redirection
+  #   - title: Mutual TLS (mTLS)
+  #     link: /topics/running/tls/mtls
+  #   - title: Server Name Indication (SNI)
+  #     link: /topics/running/tls/sni
+  #   - title: TLS origination
+  #     link: /topics/running/tls/origination
+  #   - title: TLS termination and enabling HTTPS
+  #     link: /howtos/tls-termination
+  #   - title: Using cert-manager
+  #     link: /howtos/cert-manager
+  #   - title: Client certificate validation
+  #     link: /howtos/client-cert-validation
+   - title: Web Application Firewalls
+     items:
+     - title: Using Web Application Firewalls
+       link: /guides/web-application-firewalls/setup
+     - title: Rules for Web Application Firewalls
+       link: /guides/web-application-firewalls/rules
+     - title: Web Application Firewalls in Production
+       link: /guides/web-application-firewalls/production
+   - title: Authentication
+     items:
+       - title: Basic authentication
+         link: /guides/auth/basic-auth
+       - title: JWT processing
+         link: /guides/auth/jwt
+       - title: Single Sign On
+         items:
+         - title: Using the OAuth2 filter for SSO
+           link: /guides/sso/oauth2-sso
+         - title: Single Sign-On with Google
+           link: /guides/sso/google
+         - title: Single Sign-On with Azure AD
+           link: /guides/sso/azure
+         - title: Single Sign-On with Okta
+           link: /guides/sso/okta
+         - title: Single Sign-On with Auth0
+           link: /guides/sso/auth0
+         - title: Single Sign-On with Keycloak
+           link: /guides/sso/keycloak
+         - title: Kubernetes SSO with OIDC and Keycloak
+           link: /guides/kubectl-keycloak
+         - title: Single Sign-On with OneLogin
+           link: /guides/sso/onelogin
+         - title: Single Sign-On with Salesforce
+           link: /guides/sso/salesforce
+         - title: Single Sign-On with UAA
+           link: /guides/sso/uaa
+   - title: Custom filtering and processing
+     items:
+     - title: Using external filters
+       link: /guides/custom-filters/external
+     - title: Using plugin filters
+       link: /guides/custom-filters/plugin
+   - title: Rate limiting
+     items:
+     - title: Rate limiting setup
+       link: /guides/rate-limiting/setup
+     # basic rate limiting
+     # advanced rate limiting
+     # rate limiting token claims
+   - title: ExternalDNS integration
+     link: /guides/eg/external-dns
+   - title: Observability
+     items:
+     - title: Prometheus and Grafana
+       link: /guides/observability/prometheus-grafana
+     - title: Metrics endpoint
+       link: /guides/observability/metrics-endpoint
+     # - title: Distributed tracing
+     #   link: /howtos/dist-tracing
+     # - title: Statistics
+     #   link: /topics/running/statistics
+     # - title: Envoy statistics with StatsD
+     #   link: /topics/running/statistics/envoy-statsd
+ - title: Custom Resources
+   items:
+   - title: Filter
+     link: /custom-resources/aes/filter
+     items:
+     - title: The OAuth2 Filter type
+       link: /custom-resources/filter-oauth2
+     - title: The JWT Filter type
+       link: /custom-resources/filter-jwt
+     - title: The External Filter type
+       link: /custom-resources/filter-external
+     - title: The APIKeys Filter type
+       link: /custom-resources/filter-apikeys
+     - title: The Plugin Filter type
+       link: /custom-resources/filter-plugin
+   - title: FilterPolicy
+     link: /custom-resources/filterpolicy
+   - title: WebApplicationFirewall
+     link: /custom-resources/webapplicationfirewall
+   - title: WebApplicationFirewallPolicy
+     link: /custom-resources/webapplicationfirewallpolicy
+   - title: Envoy Gateway resources
+     link: /custom-resources/eg/index
+     items:
+     - title: EnvoyGateway
+       link: /custom-resources/eg/envoygateway
+     - title: EnvoyProxy
+       link: /custom-resources/eg/envoyproxy
+     - title: RateLimitFilter
+       link: /custom-resources/eg/ratelimitfilter
+   - title: Gateway API resources
+     link: /custom-resources/gateway-api/index
+     items:
+     - title: GatewayClass
+       link: /custom-resources/gateway-api/gatewayclass
+     - title: Gateway
+       link: /custom-resources/gateway-api/gateway
+     - title: HTTPRoute
+       link: /custom-resources/gateway-api/httproute
+     - title: GRPCRoute
+       link: /custom-resources/gateway-api/grpcroute
+     - title: TCPRoute
+       link: /custom-resources/gateway-api/tcproute
+     - title: UDPRoute
+       link: /custom-resources/gateway-api/udproute
+     - title: ReferenceGrant
+       link: /custom-resources/gateway-api/referencegrant
+     # - title: Plug-in services
+     #   items:
+     #     - title: Authentication service
+     #       link: /topics/running/services/auth-service
+     #     - title: ExtAuth protocol
+     #       link: /topics/running/services/ext_authz
+     #     - title: Log service
+     #       link: /topics/running/services/log-service
+     #     - title: Rate limit service
+     #       link: /topics/running/services/rate-limit-service
+     #     - title: Tracing service
+     #       link: /topics/running/services/tracing-service
+   # TODO: make this a full section, could use multiple pages for more detail
+ - title: Troubleshooting
+   link: /guides/aes/debugging
+     #- title: Known issues
+     #  link: /about/known-issues
+ - title: Core concepts
+   items:
+     # add authentication?
+     # add JWT Validation?
+     # add WAF?
+     # add CRDs?
+     - title: Kubernetes network architecture
+       link: /concepts/kubernetes-network-architecture
+     - title: 'The Ambassador operating model: GitOps and continuous delivery'
+       link: /concepts/gitops-continuous-delivery
+     - title: Progressive delivery
+       link: /concepts/progressive-delivery
+     - title: Microservices API gateways
+       link: /concepts/api-gateways
+     - title: Rate limiting at the edge
+       link: /concepts/rate-limiting-at-the-edge
+ - title: FAQs
+   link: /about/faq
+ - title: About $productName$ 4.x
+   link: /about/aes-4x.md
+ - title: Release Notes
+   link: /release-notes
+ # - title: End of Life Policy
+ #   link: /about/aes-emissary-eol
+ - title: Community
+   link: /community
+ #- title: Licenses
+ #  link: licenses

@@ -1,0 +1,30 @@
+# branch info
+branch: release/v3.7
+
+# self
+version: 4.0.0-preview
+productName: "Ambassador Edge Stack"
+productNamePlural: "Ambassador Edge Stacks"
+productNamespace: ambassador
+productDeploymentName: edge-stack
+productHelmName: edge-stack
+
+# Alice TODO: this isn't really needed
+
+# OSS (not self)
+#ossVersion: 3.7.0
+#ossDocsVersion: "pre-release"
+#ossChartVersion: 8.7.0
+#OSSproductName: "Emissary-ingress"
+#OSSproductNamePlural: "Emissary-ingresses"
+
+# AES (self)
+aesVersion: 4.0.0-preview.1
+aesDocsVersion: "4.0.0-preview"
+aesChartVersion: 9.0.0-preview.1
+AESproductName: "Ambassador Edge Stack"
+AESproductNamePlural: "Ambassador Edge Stacks"
+
+# other products
+qotmVersion: 1.7
+quoteVersion: 0.5.0
