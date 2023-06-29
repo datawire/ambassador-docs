@@ -549,7 +549,7 @@ Configures the [REDIS_SURGE_POOL_DRAIN_INTERVAL](#redis_surge_pool_drain_interva
 
 [More information](../aes-redis#surge_pool_drain_interval)
 
-### `REDIS_PERSECOND_TYPE``
+### `REDIS_PERSECOND_TYPE`
 
 Configures the [REDIS_TYPE](#redis_type) for the second [REDIS_PERSECOND](#redis_persecond) connection pool.
 
