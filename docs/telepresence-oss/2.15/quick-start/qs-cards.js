@@ -1,0 +1,1 @@
+../../../telepresence/2.15/quick-start/qs-cards.js
