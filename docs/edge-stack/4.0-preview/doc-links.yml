@@ -32,28 +32,30 @@
      link: /design/rate-limiting
    - title: Request flow
      link: /design/request-flow
- - title: $productName$ configuration
+ - title: Configuration
    items:
-   - title: Customizing $productName$
-     link: /guides/aes/deployment-config
-   - title: Environment variables
-     link: /guides/aes/env-vars
-   - title: Performance and scaling
-     link: /guides/aes/scaling
- - title: Envoy Gateway configuration
-   items:
-   - title: Customizing Envoy Gateway
-     link: /guides/eg/envoy-gateway-config
-   - title: Customizing Envoy Proxy
-     link: /guides/eg/envoy-config
-   # - title: Environment variables
-   #   link: /guides/eg/env-vars
-   - title: Performance and scaling
-     link: /guides/eg/scaling
+   - title: $productName$ configuration
+     items:
+     - title: Customizing $productName$
+       link: /guides/aes/deployment-config
+     - title: Environment variables
+       link: /guides/aes/env-vars
+     - title: Performance and scaling
+       link: /guides/aes/scaling
+   - title: Envoy Gateway configuration
+     items:
+     - title: Customizing Envoy Gateway
+       link: /guides/eg/envoy-gateway-config
+     - title: Customizing Envoy Proxy
+       link: /guides/eg/envoy-config
+     # - title: Environment variables
+     #   link: /guides/eg/env-vars
+     - title: Performance and scaling
+       link: /guides/eg/scaling
  - title: Ingress and traffic management
    items:
    - title: Listening for requests
-     link: /ingress/listening
+     link: /guides/ingress/listening
   #   - title: AuthService settings
   #     link:
   #   - title: Automatic retries

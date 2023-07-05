@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GettingStartedEdgeStack21Tabs(props) {
+export default function GettingStartedEdgeStack4PreviewTabs(props) {
   const version = props.version;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -91,21 +91,17 @@ export default function GettingStartedEdgeStack21Tabs(props) {
         <CodeBlock>
           {'# Add the Repo:' +
             '\n' +
-            'helm repo add datawire https://app.getambassador.io' +
+            'helm repo add ambassador https://app.getambassador.io' +
             '\n' +
             'helm repo update' +
             '\n \n' +
-            '# Create Namespace and Install:' +
-            '\n' +
             'kubectl create namespace ambassador && \\' +
             '\n' +
-            `kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes-crds.yaml` +
+            'helm install edge-stack-crds --namespace ambassador ambassador/eg-edge-stack-crds && \\' +
             '\n' +
-            'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
+            'helm install edge-stack --namespace ambassador ambassador/eg-edge-stack --devel --version 4.0.0-preview.dev.1 && \\' +
             '\n' +
-            'helm install edge-stack --namespace ambassador datawire/edge-stack && \\' +
-            '\n' +
-            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes'}
+            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -l control-plane=envoy-gateway'}
         </CodeBlock>
       </TabPanel>
 
@@ -115,11 +111,9 @@ export default function GettingStartedEdgeStack21Tabs(props) {
         <CodeBlock>
           {`kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes-crds.yaml && \\` +
             '\n' +
-            'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
-            '\n' +
             `kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes.yaml && \\` +
             '\n' +
-            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes' +
+            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -l control-plane=envoy-gateway' +
             '\n'}
         </CodeBlock>
       </TabPanel>
