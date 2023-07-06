@@ -15,6 +15,8 @@ import GettingStartedEdgeStack4PreviewTabs from './gs-tabs'
 - [2. Routing traffic from the edge][]
 - [What's next?][]
 
+$productName$ is a [Kubernetes][]-native API Gateway that delivers scalability, security, and simplicity for some of the world's largest Kubernetes installations. It is designed to make it easy to get traffic to your applications and services and to safeguard them with protection systems including automatic TLS, comprehensive authentication options (OAuth2, OIDC, JWT, Single Sign On, etc), rate limiting, IP allow/deny listing, Web Application Firewalls, and fine-grained access control.
+
 </div>
 
 ## 1. Installation
@@ -23,7 +25,7 @@ We'll start by installing $productName$ into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GettingStartedEdgeStack4PreviewTabs version="$version$", chartVersion="$chartVersion$" />
+<GettingStartedEdgeStack4PreviewTabs version="$version$" chartVersion="$chartVersion$" />
 
 ## 2. Routing traffic from the edge
 
@@ -146,6 +148,7 @@ support the requirements of any edge microservice.
 
 To learn more about how $productName$ works, read the [$productName$ Story][].
 
+[Kubernetes]: https://kubernetes.io/
 [1. Installation]: #1-installation
 [2. Routing traffic from the edge]: #2-routing-traffic-from-the-edge
 [What's next?]: #img-classos-logo-srcimageslogopng-whats-next

@@ -83,8 +83,8 @@ const index = ({ data, location, pageContext }) => {
       );
     }
     if (
-      newVer.id === '4.0-preview'
-      (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
+      newVer.id === '4.0-preview' &&
+      newProduct.slug === 'edge-stack'
     ) {
         return (
           <p>{`This version of ${newProduct.name} is a developer preview and is subject to change before the official release`}</p>
@@ -690,6 +690,7 @@ const index = ({ data, location, pageContext }) => {
     return url.resolve(`${path}`, cleanLink);
   };
 
+  // Alice TODO: hide version here
   const getBurgerMenuItems = (slug) => {
     if (slug === 'home') {
       return [...initialItems.items];
@@ -702,6 +703,7 @@ const index = ({ data, location, pageContext }) => {
     return [];
   };
 
+  // Alice TODO: hide version here
   const initialItems = getBurgerMenuInitialItems(products, product.name);
   const initialHeader = {
     title: product.name,
@@ -716,6 +718,7 @@ const index = ({ data, location, pageContext }) => {
   if (hasMultipleVersions) {
     const versionsToShow = getDocsActiveVersion(versionList);
     const versionBurgerMenu = {
+      // Alice TODO: hide version here
       title: `Version: ${version.name}`,
       detail: true,
       items: versionsToShow.map((version) => ({

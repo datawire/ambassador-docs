@@ -90,7 +90,7 @@ export default function GettingStartedEdgeStack4PreviewTabs(props) {
         {/*Helm 3 install instructions*/}
 
         <CodeBlock>
-          {`helm repo add ambassador https://app.getambassador.io` +
+          {`helm repo add aes-rc https://s3.amazonaws.com/datawire-static-files/charts-dev` +
             `\n` +
             `helm repo update` +
             `\n \n` +

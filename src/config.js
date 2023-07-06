@@ -93,6 +93,7 @@ export const products = [
         name: 'Latest',
         link: 'latest/tutorials/getting-started',
       },
+      { id: '4.0-preview', name: '4.0-preview', link: '4.0-preview/install/quickstart' },
       { id: '3.7', name: '3.7', link: '3.7/tutorials/getting-started' },
       { id: '3.6', name: '3.6', link: '3.6/tutorials/getting-started' },
       { id: '3.5', name: '3.5', link: '3.5/tutorials/getting-started' },
@@ -169,7 +170,6 @@ export const products = [
         link: '1.3/tutorials/getting-started',
         archived: true,
       },
-      { id: '4.0-preview', name: '4.0-preview', link: '4.0-preview/install/quickstart' },
     ],
   },
   {
