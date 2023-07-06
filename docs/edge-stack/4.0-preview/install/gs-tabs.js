@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GettingStartedEdgeStack4PreviewTabs(props) {
   const version = props.version;
+  const chartVersion = props.chartVersion;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -89,19 +90,17 @@ export default function GettingStartedEdgeStack4PreviewTabs(props) {
         {/*Helm 3 install instructions*/}
 
         <CodeBlock>
-          {'# Add the Repo:' +
-            '\n' +
-            'helm repo add ambassador https://app.getambassador.io' +
-            '\n' +
-            'helm repo update' +
-            '\n \n' +
-            'kubectl create namespace ambassador && \\' +
-            '\n' +
-            'helm install edge-stack-crds --namespace ambassador ambassador/eg-edge-stack-crds && \\' +
-            '\n' +
-            'helm install edge-stack --namespace ambassador ambassador/eg-edge-stack --devel --version 4.0.0-preview.dev.1 && \\' +
-            '\n' +
-            'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -l control-plane=envoy-gateway'}
+          {`helm repo add ambassador https://app.getambassador.io` +
+            `\n` +
+            `helm repo update` +
+            `\n \n` +
+            `kubectl create namespace ambassador && \\` +
+            `\n` +
+            `helm install edge-stack-crds --namespace ambassador ambassador/eg-edge-stack-crds && \\` +
+            `\n` +
+            `helm install edge-stack --namespace ambassador ambassador/eg-edge-stack --devel --version ${chartVersion} && \\` +
+            `\n` +
+            `kubectl -n ambassador wait --for condition=available --timeout=90s deploy -l control-plane=envoy-gateway`}
         </CodeBlock>
       </TabPanel>
 

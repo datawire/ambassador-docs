@@ -1,6 +1,6 @@
-
 ---
-description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
+title: "Getting Started with $productName$"
+description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services"
 ---
 
 import Alert from '@material-ui/lab/Alert';
@@ -23,108 +23,108 @@ We'll start by installing $productName$ into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GettingStartedEdgeStack4PreviewTabs version="$version$" />
+<GettingStartedEdgeStack4PreviewTabs version="$version$", chartVersion="$chartVersion$" />
 
 ## 2. Routing traffic from the edge
 
-$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a **`Listener` CRD**, and a **`Mapping` CRD**. The `Listener` CRD tells $productName$ what port to listen on, and the `Mapping` CRD tells $productName$ how to route incoming requests by host and URL path from the edge of your cluster to Kubernetes services.
+$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a `GatewayClass`, a `Gateway`, and an `HTTPRoute` resource.
 
 1. Start by creating a [GatewayClass][] and [Gateway][]:
 
-  **Apply this YAML to your target cluster now.**
+   **Apply this YAML to your target cluster now.**
 
-  ```yaml
-  kubectl apply -f - <<EOF
-  apiVersion: gateway.networking.k8s.io/v1beta1
-  kind: GatewayClass
-  metadata:
-    name: edge-stack-gwc
-  spec:
-    controllerName: gateway.envoyproxy.io/gatewayclass-controller
-  ---
-  apiVersion: gateway.networking.k8s.io/v1beta1
-  kind: Gateway
-  metadata:
-    name: edge-stack-gw
-  spec:
-    gatewayClassName: edge-stack-gwc
-    listeners:
-    - name: http
-      protocol: HTTP
-      port: 80
-  EOF
-  ```
+   ```yaml
+   kubectl apply -f - <<EOF
+   apiVersion: gateway.networking.k8s.io/v1beta1
+   kind: GatewayClass
+   metadata:
+     name: edge-stack-gwc
+   spec:
+     controllerName: gateway.envoyproxy.io/gatewayclass-controller
+   ---
+   apiVersion: gateway.networking.k8s.io/v1beta1
+   kind: Gateway
+   metadata:
+     name: edge-stack-gw
+   spec:
+     gatewayClassName: edge-stack-gwc
+     listeners:
+     - name: http
+       protocol: HTTP
+       port: 80
+   EOF
+   ```
 
-The `GatewayClass` is similar to an [IngressClass][] resrouce in that it helps to isolate
-which controller is responsible for using any configuration that is tied to the `GatewayClass`.
+   The `GatewayClass` is similar to an [IngressClass][] resrouce in that it helps to isolate
+   which controller is responsible for using any configuration that is tied to the `GatewayClass`.
 
-When the `Gateway` is created, it will cause a managed deployment of [Envoy Proxy][] to be created
-and tied to the `Gateway`. Deleting the `Gateway` will also cause the Envoy Proxy deployment to be removed.
+   When the `Gateway` is created, it will cause a managed deployment of [Envoy Proxy][] to be created
+   and tied to the `Gateway`. Deleting the `Gateway` will also cause the Envoy Proxy deployment to be removed.
 
 2. Apply the YAML for the "Quote" service.
 
-  ```
-  kubectl apply -f https://app.getambassador.io/yaml/v2-docs/3.7.0/quickstart/qotm.yaml
-  ```
+   ```shell
+   kubectl apply -f https://app.getambassador.io/yaml/v2-docs/3.7.0/quickstart/qotm.yaml
+   ```
 
-  <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
+   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use  <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
 3. Create an [HTTPRoute][] to tell $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
-  **Apply this YAML to your target cluster now.**
+   **Apply this YAML to your target cluster now.**
 
-  ```yaml
-  kubectl apply -f - <<EOF
-  ---
-  apiVersion: gateway.networking.k8s.io/v1beta1
-  kind: HTTPRoute
-  metadata:
-    name: backend
-  spec:
-    parentRefs:
-    - name: edge-stack-gw
-    hostnames:
-    - "*"
-    rules:
-    - backendRefs:
-      - group: ""
-        kind: Service
-        name: quote
-        port: 80
-        weight: 1
-      matches:
-      - path:
-          type: PathPrefix
-          value: /backend/
-  EOF
-  ```
+   ```yaml
+   kubectl apply -f - <<EOF
+   ---
+   apiVersion: gateway.networking.k8s.io/v1beta1
+   kind: HTTPRoute
+   metadata:
+     name: backend
+   spec:
+     parentRefs:
+     - name: edge-stack-gw
+     hostnames:
+     - "*"
+     rules:
+     - backendRefs:
+       - group: ""
+         kind: Service
+         name: quote
+         port: 80
+         weight: 1
+       matches:
+       - path:
+           type: PathPrefix
+           value: /backend/
+   EOF
+   ```
 
 4. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
-  ```shell
-  export ENVOY_SERVICE=$(kubectl get svc -n ambassador --selector=gateway.envoyproxy.io/owning-gateway-namespace=default,gateway.envoyproxy.io/owning-gateway-name=edge-stack-gw \
-  -o jsonpath='{.items[0].metadata.name}') && \
-  export GATEWAY_HOST=$(kubectl get svc/${ENVOY_SERVICE} -n ambassador -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-  ```
+   ```shell
+   export ENVOY_SERVICE=$(kubectl get svc -n ambassador --selector=gateway.envoyproxy.io/owning-gateway-namespace=default,gateway.envoyproxy.io/owning-gateway-name=edge-stack-gw \
+   -o jsonpath='{.items[0].metadata.name}') && \
+   export GATEWAY_HOST=$(kubectl get svc/${ENVOY_SERVICE} -n ambassador -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+   ```
 
 5. Test the configuration by accessing the service through the $productName$ load balancer:
 
-  ```console
-  $ curl -Lki https://$LB_ENDPOINT/backend/
+   ```console
+   $ curl -Lki https://$LB_ENDPOINT/backend/
 
-    HTTP/1.1 200 OK
-    content-type: application/json
-    date: Wed, 23 Jun 2021 16:49:46 GMT
-    content-length: 163
-    x-envoy-upstream-service-time: 0
-    server: envoy
+     HTTP/1.1 200 OK
+     content-type: application/json
+     date: Wed, 23 Jun 2021 16:49:46 GMT
+     content-length: 163
+     x-envoy-upstream-service-time: 0
+     server: envoy
 
-    {
-        "server": "serene-grapefruit-gjd4yodo",
-        "quote": "The last sentence you read is often sensible nonsense.",
-        "time": "2021-06-23T16:49:46.613322198Z"
-    }
-  ```
+     {
+         "server": "serene-grapefruit-gjd4yodo",
+         "quote": "The last sentence you read is often sensible nonsense.",
+         "time": "2021-06-23T16:49:46.613322198Z"
+     }
+   ```
 
 <Alert severity="success"><b>Victory!</b> You have created your first <code>HTTPRoute</code>, routing a request from your cluster's edge to a service!</Alert>
 
@@ -148,11 +148,11 @@ To learn more about how $productName$ works, read the [$productName$ Story][].
 
 [1. Installation]: #1-installation
 [2. Routing traffic from the edge]: #2-routing-traffic-from-the-edge
-[2. Filtering Traffic]: #2-filtering-traffic
 [What's next?]: #img-classos-logo-srcimageslogopng-whats-next
 [GatewayClass]: ../../custom-resources/gateway-api/gatewayclass
 [Gateway]: ../../custom-resources/gateway-api/gateway
 [IngressClass]: https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class
+[Envoy Proxy]: https://www.envoyproxy.io/
 [HTTPRoute]: ../../custom-resources/gateway-api/httproute
 [$productName$ system architecture]: ../../design/system/
 [Listening for requests]: ../../guides/ingress/listening
