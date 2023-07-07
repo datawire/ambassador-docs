@@ -30,6 +30,13 @@
 
 changelog: ''
 items:
+  - date: '2023-08-07'
+    notes:
+      - title: 'New subscription plans'
+        body: Upon signing up, you will receive a 30-day trial to evaluate the product's capabilities. This will give you a better idea of which plan best suits your needs.
+        image: './pricing-v2.png'
+        href: '/editions-v2'
+        type: feature
   - date: '2023-06-05'
     notes:
       - title: 'Air-gapped for Telepresence'
