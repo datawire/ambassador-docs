@@ -90,15 +90,17 @@ export default function GettingStartedEdgeStack4PreviewTabs(props) {
         {/*Helm 3 install instructions*/}
 
         <CodeBlock>
-          {`helm repo add aes-rc https://s3.amazonaws.com/datawire-static-files/charts-dev` +
+          {`helm repo add ambassador-dev https://s3.amazonaws.com/datawire-static-files/charts-dev` +
             `\n` +
             `helm repo update` +
             `\n \n` +
+            `version=$(helm show chart --devel ambassador-dev/eg-edge-stack | grep version | sed 's/version: //')` +
+            `\n \n` +
             `kubectl create namespace ambassador && \\` +
             `\n` +
-            `helm install edge-stack-crds --namespace ambassador ambassador/eg-edge-stack-crds && \\` +
+            `helm install edge-stack-crds --namespace ambassador ambassador-dev/eg-edge-stack-crds --devel --version $version && \\` +
             `\n` +
-            `helm install edge-stack --namespace ambassador ambassador/eg-edge-stack --devel --version ${chartVersion} && \\` +
+            `helm install edge-stack --namespace ambassador ambassador-dev/eg-edge-stack --devel --version $version && \\` +
             `\n` +
             `kubectl -n ambassador wait --for condition=available --timeout=90s deploy -l control-plane=envoy-gateway`}
         </CodeBlock>
