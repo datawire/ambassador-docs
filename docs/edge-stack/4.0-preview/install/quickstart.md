@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with $productName$"
-description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services"
+description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services"ck
 ---
 
 import Alert from '@material-ui/lab/Alert';
@@ -85,8 +85,6 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
    spec:
      parentRefs:
      - name: edge-stack-gw
-     hostnames:
-     - "*"
      rules:
      - backendRefs:
        - group: ""
@@ -94,6 +92,12 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
          name: quote
          port: 80
          weight: 1
+       filters:
+         - type: URLRewrite
+           urlRewrite:
+             path:
+               type: ReplacePrefixMatch
+               replacePrefixMatch: /
        matches:
        - path:
            type: PathPrefix
@@ -112,19 +116,19 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 5. Test the configuration by accessing the service through the $productName$ load balancer:
 
    ```console
-   $ curl -Lki https://$LB_ENDPOINT/backend/
+   $ curl -ki http://$GATEWAY_HOST/backend/
 
      HTTP/1.1 200 OK
      content-type: application/json
-     date: Wed, 23 Jun 2021 16:49:46 GMT
-     content-length: 163
-     x-envoy-upstream-service-time: 0
+     date: Fri, 07 Jul 2023 22:36:42 GMT
+     content-length: 144
+     x-envoy-upstream-service-time: 1
      server: envoy
 
      {
-         "server": "serene-grapefruit-gjd4yodo",
-         "quote": "The last sentence you read is often sensible nonsense.",
-         "time": "2021-06-23T16:49:46.613322198Z"
+         "server": "adept-pineapple-78a2ywzv",
+         "quote": "A late night does not make any sense.",
+         "time": "2023-07-07T22:36:42.818676921Z"
      }
    ```
 
