@@ -148,7 +148,7 @@ Explore some of the popular tutorials on $productName$:
 - [Prometheus and Grafana][]: Setup observability using prometheus and Grafana to import a dashboard that monitors metrics from $productName$.
 
 [Envoy Gateway]: https://github.com/envoyproxy/gateway
-[Emissary-ingress]: git@github.com:emissary-ingress/emissary.git
+[Emissary-ingress]: https://github.com/emissary-ingress/emissary
 [Kubernetes]: https://kubernetes.io/
 [1. Installation]: #1-installation
 [Helm install]: ../helm
