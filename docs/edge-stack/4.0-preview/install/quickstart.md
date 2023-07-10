@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with $productName$"
-description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services"ck
+description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
 ---
 
 import Alert from '@material-ui/lab/Alert';
@@ -10,18 +10,16 @@ import GettingStartedEdgeStack4PreviewTabs from './gs-tabs'
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
-
 - [1. Installation][]
 - [2. Routing traffic from the edge][]
 - [What's next?][]
-
-$productName$ is a [Kubernetes][]-native API Gateway that delivers scalability, security, and simplicity for some of the world's largest Kubernetes installations. It is designed to make it easy to get traffic to your applications and services and to safeguard them with protection systems including automatic TLS, comprehensive authentication options (OAuth2, OIDC, JWT, Single Sign On, etc), rate limiting, IP allow/deny listing, Web Application Firewalls, and fine-grained access control.
-
 </div>
+
+Get up and running swiftly with $productName$ and [Envoy Gateway][] through this comprehensive quick start guide. $productName$, an innovative extension of Envoy Gateway, enhances its [Kubernetes][]-native API Gateway capabilities by providing advanced security and protection features. Trusted by some of the largest Kubernetes deployments worldwide, $productName$ simplifies the process of ensuring the safety of your services with systems including Web Application Firewalls and a wide array of authentication options (OAuth2, OIDC, JWT, Single Sign-On, etc.). Envoy Gateway is used as the core for $productName$ much like [Emissary-ingress][] was in prior versions to handle directing traffic to your applications and services while supporting many different traffic types and routing options.
 
 ## 1. Installation
 
-We'll start by installing $productName$ into your cluster.
+We'll start by installing $productName$ into your cluster. This will install both $productName$ and [Envoy Gateway][] into your cluster. For more information about installation options you can refer to the [Helm install][] and [manual install][] pages.
 
 **We recommend using Helm** but there are other options below to choose from.
 
@@ -29,7 +27,7 @@ We'll start by installing $productName$ into your cluster.
 
 ## 2. Routing traffic from the edge
 
-$productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a `GatewayClass`, a `Gateway`, and an `HTTPRoute` resource.
+$productName$ uses a combination of native Kubernetes resources and Custom Resource Definitions (CRDs) to declaratively define its desired state. The workflow you are going to build uses a simple demo app, a `GatewayClass`, a `Gateway`, and an `HTTPRoute` resource.
 
 1. Start by creating a [GatewayClass][] and [Gateway][]:
 
@@ -60,8 +58,8 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
    The `GatewayClass` is similar to an [IngressClass][] resrouce in that it helps to isolate
    which controller is responsible for using any configuration that is tied to the `GatewayClass`.
 
-   When the `Gateway` is created, it will cause a managed deployment of [Envoy Proxy][] to be created
-   and tied to the `Gateway`. Deleting the `Gateway` will also cause the Envoy Proxy deployment to be removed.
+   When the `Gateway` is created, it will trigger Envoy Gateway to create a managed deployment of [Envoy Proxy][]
+   tied to the `Gateway` along with a corresponding `LoadBalancer` type `Service`. Deleting the `Gateway` will also cause the Envoy Proxy deployment and `Service` to be removed.
 
 2. Apply the YAML for the "Quote" service.
 
@@ -93,17 +91,19 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
          port: 80
          weight: 1
        filters:
-         - type: URLRewrite
-           urlRewrite:
-             path:
-               type: ReplacePrefixMatch
-               replacePrefixMatch: /
+       - type: URLRewrite
+         urlRewrite:
+           path:
+             type: ReplacePrefixMatch
+             replacePrefixMatch: /
        matches:
        - path:
            type: PathPrefix
            value: /backend/
    EOF
    ```
+
+   The `HTTPRoute` is responsible for directing traffic to the appropriate microservice using specific matching criteria.  This example instructs all traffic with the path `/backend/` to be directed to the Quote `Service` while also removing the `/backend/` prefix.
 
 4. Store the $productName$ load balancer IP address to a local environment variable. You will use this variable to test access to your service.
 
@@ -147,13 +147,12 @@ Explore some of the popular tutorials on $productName$:
 - [Rate Limiting][]: Limit the number of requests that can be made to your services.
 - [Prometheus and Grafana][]: Setup observability using prometheus and Grafana to import a dashboard that monitors metrics from $productName$.
 
-$productName$ has a comprehensive range of [features][] to
-support the requirements of any edge microservice.
-
-To learn more about how $productName$ works, read the [$productName$ Story][].
-
+[Envoy Gateway]: https://github.com/envoyproxy/gateway
+[Emissary-ingress]: git@github.com:emissary-ingress/emissary.git
 [Kubernetes]: https://kubernetes.io/
 [1. Installation]: #1-installation
+[Helm install]: ../helm
+[manual install]: ../yaml
 [2. Routing traffic from the edge]: #2-routing-traffic-from-the-edge
 [What's next?]: #img-classos-logo-srcimageslogopng-whats-next
 [GatewayClass]: ../../custom-resources/gateway-api/gatewayclass
@@ -169,5 +168,4 @@ To learn more about how $productName$ works, read the [$productName$ Story][].
 [Configure Single Sign On]: ../../guides/sso/oauth2-sso
 [Rate Limiting]: ../../guides/rate-limiting/setup
 [Prometheus and Grafana]: ../../guides/observability/prometheus-grafana
-[features]: /features/
-[$productName$ Story]: ../../about/why-ambassador
+
