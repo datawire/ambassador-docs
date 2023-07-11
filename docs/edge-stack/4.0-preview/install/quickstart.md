@@ -4,9 +4,12 @@ description: "A simple three step guide to installing $productName$ and quickly 
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import GettingStartedEdgeStack4PreviewTabs from './gs-tabs'
+import GettingStartedEdgeStack4PreviewTabs from './gs-tabs';
+import UserInterestForm from './user-interest';
 
 # $productName$ 4.0 Developer Preview Quick Start
+
+<UserInterestForm />
 
 <div class="docs-article-toc">
 <h3>Contents</h3>
