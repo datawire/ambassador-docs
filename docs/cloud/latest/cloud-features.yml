@@ -1,0 +1,14 @@
+# Cloud features should be represented as objects, path always starting with '/' and ending without '/'.
+
+- {
+    path: /docs/cloud/latest/onboarding-dashboard,
+    feature: Team collaboration,
+  }
+- {
+    path: /docs/cloud/latest/service-catalog/howtos/intercept,
+    feature: Telepresence,
+  }
+- {
+    path: /docs/cloud/latest/security/security,
+    feature: Ambassador Edge Stack,
+  }
