@@ -2,7 +2,7 @@
 branch: release/v3.7
 
 # self
-version: 3.7.0
+version: 3.7.1
 productName: "Ambassador Edge Stack"
 productNamePlural: "Ambassador Edge Stacks"
 productNamespace: ambassador
@@ -10,16 +10,16 @@ productDeploymentName: edge-stack
 productHelmName: edge-stack
 
 # OSS (not self)
-ossVersion: 3.7.0
+ossVersion: 3.7.1
 ossDocsVersion: "pre-release"
-ossChartVersion: 8.7.0
+ossChartVersion: 8.7.1
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
 
 # AES (self)
-aesVersion: 3.7.0
+aesVersion: 3.7.1
 aesDocsVersion: "pre-release"
-aesChartVersion: 8.7.0
+aesChartVersion: 8.7.1
 AESproductName: "Ambassador Edge Stack"
 AESproductNamePlural: "Ambassador Edge Stacks"
 
