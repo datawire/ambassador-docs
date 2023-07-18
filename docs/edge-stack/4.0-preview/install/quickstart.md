@@ -15,7 +15,7 @@ import GettingStartedEdgeStack4PreviewTabs from './gs-tabs'
 - [What's next?][]
 </div>
 
-Get up and running swiftly with $productName$ and [Envoy Gateway][] through this comprehensive quick start guide. $productName$, an innovative extension of Envoy Gateway, enhances its [Kubernetes][]-native API Gateway capabilities by providing advanced security and protection features. Trusted by some of the largest Kubernetes deployments worldwide, $productName$ simplifies the process of ensuring the safety of your services with systems including Web Application Firewalls and a wide array of authentication options (OAuth2, OIDC, JWT, Single Sign-On, etc.). Envoy Gateway is used as the core for $productName$ much like [Emissary-ingress][] was in prior versions to handle directing traffic to your applications and services while supporting many different traffic types and routing options.
+Get up and running swiftly with $productName$ through this comprehensive quick start guide. $productName$, is built on [Envoy Gateway][] and enhances its [Kubernetes][]-native API Gateway capabilities by providing advanced security and protection features. Trusted by some of the largest Kubernetes deployments worldwide, $productName$ simplifies the process of ensuring the safety of your services with systems including Web Application Firewalls and a wide array of authentication options (OAuth2, OIDC, JWT, Single Sign-On, etc.). Envoy Gateway is used as the core for $productName$ much like [Emissary-ingress][] was in prior versions to handle directing traffic to your applications and services while supporting many different traffic types and routing options.
 
 ## 1. Installation
 
