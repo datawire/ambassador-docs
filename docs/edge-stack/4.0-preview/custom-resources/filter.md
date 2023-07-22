@@ -3,9 +3,37 @@ import Alert from '@material-ui/lab/Alert';
 
 # The **Filter** Resource
 
-The `Filter` custom resource works in conjunction with the [FilterPolicy custom resource][] to define how and when $productName$ will modify or intercept incoming requests before sending to your upstream Service. `Filters` define what actions to take on a request, while `FilterPolicies` define the matching criteria for requests such as the headers, hostname, and path, and supply references to one or more `Filters` to execute on those requests. Filters are largely used to add built-in authentication and security, but $productName$ also supports developing custom filters to add your own processing and logic.
+The `Filter` custom resource works in conjunction with the [FilterPolicy custom resource][] to define how and when $productName$ will
+modify or intercept incoming requests before sending to your upstream Service. `Filters` define what actions to take on a request,
+while `FilterPolicies` define the matching criteria for requests such as the headers, hostname, and path, and supply references to
+one or more `Filters` to execute on those requests. Filters are largely used to add built-in authentication and security, but
+$productName$ also supports developing custom filters to add your own processing and logic.
 
-**Note**: Filtering actions are only ever executed on incoming requests and not on responses from your upstream Services.
+<Alert severity="info">
+    Filtering actions of all types in $productName$ are only ever executed on incoming requests and not on responses from your upstream Services.
+</Alert>
+
+## Filter Usage Guides
+
+The following guides will help you get started using the different types of `Filters`
+
+- [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
+- [Using Oauth2 Filters][] - Use the OAuth2 Filter for authentication to protect access to services
+  - [SSO with Oauth2][] - Use OAuth2 Filters for single sign on
+  - [SSO with Auth0][] - Setup single sign on with Auth0
+  - [SSO with Azure][] - Setup single sign on with Azure
+  - [SSO with Google][] - Setup single sign on with Google
+  - [SSO with Keycloak][] - Setup single sign on with Keycloak
+  - [SSO with Okta][] - Setup single sign on with Okta
+  - [SSO with OneLogin][] - Setup single sign on with OneLogin
+  - [SSO with Salesforce][] - Setup single sign on with Salesforce
+  - [SSO with UAA][] - Setup single sign on with UAA
+  - [Kubectl SSO with Keycloak][] - Restrict [kubectl][] access with Keycloak single sign on
+- [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
+- [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
+- [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
+  - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
+- [Using Plugin Filters][] - Compile your own custom filtering plugin on top of $productName$
 
 ## Filter API Reference
 
@@ -28,7 +56,7 @@ spec:
 status:      []metav1.Condition # field managed by controller
 ```
 
-**FilterSpec**:
+### FilterSpec
 
 | **Field**  | **Type**                                                     | **Description**                                                                       |
 |------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------|
@@ -39,7 +67,7 @@ status:      []metav1.Condition # field managed by controller
 | `external` | [ExternalFilter][]                                           | Provides configuration for the External Filter type  |
 | `plugin`   | [PluginFilter][]                                             | Provides configuration for the Plugin Filter type  |
 
-**FilterStatus**:
+### FilterStatus
 
 This field is set automatically by $productName$ to provide info about the status of the `Filter`.
 
@@ -51,32 +79,10 @@ This field is set automatically by $productName$ to provide info about the statu
   The short name for <code>Filter</code> is <code>fil</code>, so you can get filters using <code>kubectl get filter</code> or <code>kubectl get fil</code>.
 </Alert>
 
-## Filter Usage Guides
-
-The following guides will help you get started using the different types of `Filters`
-
-- [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
-- [Using Oauth2 Filters][] - Use the OAuth2 Filter for authentication to protect access to services
-  - [SSO with Oauth2][] - Use OAuth2 Filters for single sign on
-  - [SSO with Auth0][] - Setup single sign on with Auth0
-  - [SSO with Azure][] - Setup single sign on with Azure
-  - [SSO with Google][] - Setup single sign on with Google
-  - [SSO with Keycloak][] - Setup single sign on with Keycloak
-  - [SSO with Okta][] - Setup single sign on with Okta
-  - [SSO with OneLogin][] - Setup single sign on with OneLogin
-  - [SSO with Salesforce][] - Setup single sign on with Salesforce
-  - [SSO with UAA][] - Setup single sign on with UAA
-  - [Kubectl SSO with Keycloak][] - Restrict [kubectl][] access with Keycloak single sign on
-- [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
-- [Using APIKeys Filters][] - Use the APIKeys Filter to validate API Keys present in the HTTP header
-- [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
-  - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
-- [Using Plugin Filters][] - Compile your own custom filtering plugin on top of $productName$
-
 [FilterPolicy custom resource]: ../filterpolicy
 [JWTFilter]: ../filter-jwt
 [OAuth2Filter]: ../filter-oauth2
-[APIKeyFilter]:  ../filter-apikeys
+[APIKeyFilter]:  ../filter-apikey
 [ExternalFilter]: ../filter-external
 [PluginFilter]: ../filter-plugin
 [metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Condition
@@ -93,7 +99,7 @@ The following guides will help you get started using the different types of `Fil
 [SSO with Salesforce]: ../../guides/sso/salesforce
 [SSO with UAA]: ../../guides/sso/uaa
 [Chaining Oauth2 and JWT Filters]: ../../guides/auth/oauth2-and-jwt
-[Using APIKeys Filters]: ../../guides/apikeys
+[Using APIKey Filters]: ../../guides/apikey
 [Using External Filters]: ../../guides/custom-filters/external
 [Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [Using Plugin Filters]: ../../guides/custom-filters/plugin

@@ -167,11 +167,13 @@
          - title: Single Sign-On with UAA
            link: /guides/sso/uaa
        - title: Processing APIKeys
-         link: /guides/auth/apikeys
+         link: /guides/auth/apikey
    - title: Custom filtering and processing
      items:
      - title: Using external filters
        link: /guides/custom-filters/external
+     - title: The Ext_Authz Protocol
+       link: /guides/custom-filters/ext-authz
      - title: Using plugin filters
        link: /guides/custom-filters/plugin
    - title: Rate limiting
@@ -206,8 +208,8 @@
        link: /custom-resources/filter-jwt
      - title: The External Filter type
        link: /custom-resources/filter-external
-     - title: The APIKeys Filter type
-       link: /custom-resources/filter-apikeys
+     - title: The APIKey Filter type
+       link: /custom-resources/filter-apikey
      - title: The Plugin Filter type
        link: /custom-resources/filter-plugin
    - title: FilterPolicy
