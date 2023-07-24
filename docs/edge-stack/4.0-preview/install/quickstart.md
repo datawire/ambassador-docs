@@ -65,7 +65,7 @@ $productName$ uses a combination of native Kubernetes resources and Custom Resou
 
    The `GatewayClass` is similar to an [IngressClass][] resource in that it helps to isolate
    which controller is responsible for using any configuration that is tied to the `GatewayClass`.
-   Here, we are referencing the `EnvoyProxy`[] resource `edge-stack-proxy` that contains the configuration that Envoy Gatewway will use for [Envoy Proxy][] deployments.
+   Here, we are referencing the [EnvoyProxy][] resource `edge-stack-proxy` that contains the configuration that Envoy Gateway will use for [Envoy Proxy][] deployments.
 
    When the `Gateway` is created, it will trigger Envoy Gateway to create a managed deployment of Envoy Proxy.
    tied to the `Gateway` along with a corresponding `LoadBalancer` type `Service`. Deleting the `Gateway` will also cause the Envoy Proxy deployment and `Service` to be removed.
