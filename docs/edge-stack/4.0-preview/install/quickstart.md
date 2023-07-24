@@ -44,6 +44,11 @@ $productName$ uses a combination of native Kubernetes resources and Custom Resou
      name: edge-stack-gwc
    spec:
      controllerName: gateway.envoyproxy.io/gatewayclass-controller
+     parametersRef:
+      group: config.gateway.envoyproxy.io
+      kind: EnvoyProxy
+      name: edge-stack-proxy
+      namespace: default
    ---
    apiVersion: gateway.networking.k8s.io/v1beta1
    kind: Gateway
@@ -58,10 +63,11 @@ $productName$ uses a combination of native Kubernetes resources and Custom Resou
    EOF
    ```
 
-   The `GatewayClass` is similar to an [IngressClass][] resrouce in that it helps to isolate
+   The `GatewayClass` is similar to an [IngressClass][] resource in that it helps to isolate
    which controller is responsible for using any configuration that is tied to the `GatewayClass`.
+   Here, we are referencing the `EnvoyProxy`[] resource `edge-stack-proxy` that contains the configuration that Envoy Gatewway will use for [Envoy Proxy][] deployments.
 
-   When the `Gateway` is created, it will trigger Envoy Gateway to create a managed deployment of [Envoy Proxy][]
+   When the `Gateway` is created, it will trigger Envoy Gateway to create a managed deployment of Envoy Proxy.
    tied to the `Gateway` along with a corresponding `LoadBalancer` type `Service`. Deleting the `Gateway` will also cause the Envoy Proxy deployment and `Service` to be removed.
 
 2. Apply the YAML for the "Quote" service.
@@ -161,6 +167,7 @@ Explore some of the popular tutorials on $productName$:
 [GatewayClass]: ../../custom-resources/gateway-api/gatewayclass
 [Gateway]: ../../custom-resources/gateway-api/gateway
 [IngressClass]: https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class
+[EnvoyProxy]: https://gateway.envoyproxy.io/v0.4.0/user/customize-envoyproxy.html
 [Envoy Proxy]: https://www.envoyproxy.io/
 [HTTPRoute]: ../../custom-resources/gateway-api/httproute
 [$productName$ system architecture]: ../../design/system/
@@ -171,4 +178,3 @@ Explore some of the popular tutorials on $productName$:
 [Configure Single Sign On]: ../../guides/sso/oauth2-sso
 [Rate Limiting]: ../../guides/rate-limiting/setup
 [Prometheus and Grafana]: ../../guides/observability/prometheus-grafana
-
