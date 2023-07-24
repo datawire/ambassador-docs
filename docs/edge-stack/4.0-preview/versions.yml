@@ -2,7 +2,7 @@
 branch: release/v3.7
 
 # self
-version: 4.0.0-preview.1.dev.2
+version: v4.0.0-preview.1.dev.2
 chartVersion: 0.0.1-preview.1.dev.3
 productName: "Ambassador Edge Stack"
 productNamePlural: "Ambassador Edge Stacks"
