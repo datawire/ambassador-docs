@@ -48,7 +48,7 @@ $productName$ uses a combination of native Kubernetes resources and Custom Resou
       group: config.gateway.envoyproxy.io
       kind: EnvoyProxy
       name: edge-stack-proxy
-      namespace: default
+      namespace: ambassador
    ---
    apiVersion: gateway.networking.k8s.io/v1beta1
    kind: Gateway
