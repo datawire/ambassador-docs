@@ -39,6 +39,43 @@ docDescription: >-
 changelog: https://github.com/telepresenceio/telepresence/blob/$branch$/CHANGELOG.md
 
 items:
+  - version: 2.14.2
+    date: "2023-07-26"
+    notes:
+      - type: bugfix
+        title: Telepresence now uses the OSS agent in its latest version by default.
+        body: >-
+          The traffic manager admin was forced to set it manually during the chart installation.
+        docs: https://github.com/telepresenceio/telepresence/issues/3271
+  - version: 2.14.1
+    date: "2023-07-07"
+    notes:
+      - type: feature
+        title: Envoy's http idle timout is now configurable.
+        body: >-
+          A new <code>agent.helm.httpIdleTimeout</code> setting was added to the Helm chart that controls
+          the proprietary Traffic agent's http idle timeout. The default of one hour, which in some situations
+          would cause a lot of resource consuming and lingering connections, was changed to 70 seconds.
+      - type: feature
+        title: Add more gauges to the Traffic manager's Prometheus client.
+        body: >-
+          Several gauges were added to the Prometheus client to make it easier to monitor
+          what the Traffic manager spends resources on.
+      - type: feature
+        title: Agent Pull Policy
+        body: >-
+          Add option to set traffic agent pull policy in helm chart.
+      - type: bugfix
+        title: Resource leak in the Traffic manager.
+        body: >-
+          Fixes a resource leak in the Traffic manager caused by lingering tunnels between the clients and
+          Traffic agents. The tunnels are now closed correctly when terminated from the side that created them.
+      - type: bugfix
+        title: Fixed problem setting traffic manager namespace using the kubeconfig extension.
+        body: >-
+          Fixes a regression introduced in version 2.10.5, making it impossible to set the traffic-manager namespace
+          using the telepresence.io kubeconfig extension.
+        docs: https://www.getambassador.io/docs/telepresence/latest/reference/config#manager
   - version: 2.14.0
     date: "2023-06-12"
     notes:
