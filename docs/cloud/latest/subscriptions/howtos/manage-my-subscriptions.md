@@ -26,7 +26,7 @@ The Subscription section of the Settings page shows your current utilization of 
 
 There are three quota limits that pertain to subscriptions:
 
-- Telepresence Connect:  Rime you are connected with Telepresence to your cluster.
+- Telepresence Connect: Time you are connected with Telepresence to your cluster.
 - Connected Clusters: The Kubernetes clusters you have connected to the Ambassador Cloud app.
 - Requests per Second: Requests per second (RPS) is the maximum usage in the cluster between Rate Limited Traffic and Authenticated Traffic. For multiple clusters, RPS is the sum of the maximum usage of each cluster. RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
 
@@ -58,12 +58,12 @@ This opens the following page:
     <img src="/images/cloud/subscription_cloud_page.png" width="1000" alt="Upgrade your plan" />
   </p>
 
-Once you have identified a more suitable subscription plan, click on **Buy Now** to be redirected to the checkout page, or **Contact Sales** to talk to us about the details of the Enterprise plan.
+Once you have identified a more suitable subscription plan, click on **Buy Now** to be redirected to the checkout page, or **Contact Us** to talk to us about the details of the Enterprise plan.
 
 ### Example
 
-For example, on the subscription page the team member quota indicates that you have up to 5 seats available. If you reach the limit, you can either release one seat, or **upgrade** your plan to increase the limit.
+For instance, the subscription page indicates a request per second quota, allowing up to 5 rps. When you reach this limit, you have two options: release one rps or upgrade your plan to raise the quota.
 
   <p align="center">
-    <img src="../../images/team-members-quota.png" width="600" alt="Upgrade team members" />
+    <img src="/images/cloud/rps_quota.png" width="600" alt="Rps quota" />
   </p>
