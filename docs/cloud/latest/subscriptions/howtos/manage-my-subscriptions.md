@@ -53,7 +53,7 @@ On the Free subscription tier, you can unlock additional quotas by adding more t
 
 ## Quota limits
 
-Once you've reached a quota limit, you need to upgrade your plan to add more clusters, services, or extend your connect time. When the quota limit is reached, the following message is displayed:
+Once you've reached a quota limit, you need to upgrade your plan to add more clusters or extend your connect time. When the quota limit is reached, the following message is displayed:
 
   <p align="center">
     <img src="../../images/active-member-limit.png" width="600" alt="Quota limits" />
