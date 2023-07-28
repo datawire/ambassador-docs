@@ -19,7 +19,7 @@ In user settings, go to the **Subscriptions** section.
 The Subscription section of the Settings page shows your current utilization of Ambassador Cloud and the limits of your plan. Teams Edition subscribers can see their payment history here as well. If you’re nearing any of the quota limits, you can upgrade your subscription tier on this page. To learn more about the upgrade process, see the [upgrade your plan section](#upgrade-your-plan) below.
 
   <p align="center">
-    <img src="../../images/team-subscriptions.png" width="800" alt="Check or upgrade your subscription"/>
+    <img src="/images/cloud/quota_limits.png" width="800" alt="Check or upgrade your subscription"/>
   </p>
 
 ## Quota types
@@ -62,8 +62,8 @@ Once you have identified a more suitable subscription plan, click on **Buy Now**
 
 ### Example
 
-For instance, the subscription page indicates a request per second quota, allowing up to 5 rps. When you reach this limit, you have two options: release one rps or upgrade your plan to raise the quota.
+For example, on the subscription page the team member quota indicates that you have up to 5 seats available. If you reach the limit, you can either release one seat, or **upgrade** your plan to increase the limit.
 
   <p align="center">
-    <img src="/images/cloud/rps_quota.png" width="600" alt="Rps quota" />
+    <img src="/images/cloud/images/team-members-quota.png" width="600" alt="Upgrade team members" />
   </p>
