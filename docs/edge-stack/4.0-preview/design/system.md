@@ -25,7 +25,7 @@ that Envoy Proxy communicates with to provide logic and functionality not availa
 
 <div class="docs-diagram-wrapper">
 
-![Kubernetes Network Architecture](/../../images/documentation/EdgeStackArchitecture.inline.svg)
+![Kubernetes Network Architecture](/../../images/documentation/EdgeStack4Architecture.inline.svg)
 
 </div>
 
@@ -56,6 +56,12 @@ The Auth Service watches [Filter][] and [FilterPolicy][] custom resources to pro
 users to configure custom filtering and processing on incoming requests.
 
 TODO: docs pages for auth
+
+The following docs will help you get started with the features provided by the Auth Service:
+
+- [Single Sign On with OAuth2 Filters][] - Use the OAuth2 `Filter` to setup single sign on and protect your applications
+- [Custom Logic with External Filters][] - Defer filtering logic to your own application/service for added control
+- [Check JWTs with the JWT Filter][] - Make sure that incoming requests have a JWT and then make sure it is valid
 
 ### WAF Service
 
