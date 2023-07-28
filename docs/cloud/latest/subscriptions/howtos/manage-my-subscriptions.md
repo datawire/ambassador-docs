@@ -24,22 +24,11 @@ The Subscription section of the Settings page shows your current utilization of 
 
 ## Quota types
 
-There are four quota limits that pertain to subscriptions:
+There are three quota limits that pertain to subscriptions:
 
-- Team Members: Ambassador Cloud users who have accepted an invitation sent by you through the Members page in your account settings.
-- Active Services: Active services are those which have had an action performed on them within the last 28 days. Actions include intercepts, rollouts, and mappings.
+- Telepresence Connect:  Rime you are connected with Telepresence to your cluster.
 - Connected Clusters: The Kubernetes clusters you have connected to the Ambassador Cloud app.
 - Requests per Second: Requests per second (RPS) is the maximum usage in the cluster between Rate Limited Traffic and Authenticated Traffic. For multiple clusters, RPS is the sum of the maximum usage of each cluster. RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
-
-### Active Services
-
-You can see which of your services are counting against your subscription by clicking **view actives services** in the Active Services panel. If you delete your service and recreate it with the same name and in the same namespace, it will still count as 1 active service.
-
-The active services list shows the services that have had intercepts, rollouts, or mappings in your organization for the last 28 days.
-
-  <p align="center">
-    <img src="../../images/active-services-list.png" width="400" alt="List your active services"/>
-  </p>
 
 ## Extend your quotas by adding more users
 
@@ -47,12 +36,12 @@ On the Free subscription tier, you can unlock additional quotas by adding more t
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
-  <img src="../../images/unlock-features.png" alt="Extend your quotas by adding more users" />
+  <img src="/images/cloud/unlock-features.png" alt="Extend your quotas by adding more users" />
 </p>
 
 ## Quota limits
 
-Once you've reached a quota limit, you need to upgrade your plan to add more clusters, services, or team members. When the quota limit is reached, the following message is displayed:
+Once you've reached a quota limit, you need to upgrade your plan to add more clusters, services, or extend your connect time. When the quota limit is reached, the following message is displayed:
 
   <p align="center">
     <img src="../../images/active-member-limit.png" width="600" alt="Quota limits" />
@@ -66,7 +55,7 @@ If a quota does not fit your requirements, click **upgrade** to increase your qu
 This opens the following page:
 
   <p align="center">
-    <img src="../../images/team-subscription-plans.png" width="1000" alt="Upgrade your plan" />
+    <img src="/images/cloud/subscription_cloud_page.png" width="1000" alt="Upgrade your plan" />
   </p>
 
 Once you have identified a more suitable subscription plan, click on **Buy Now** to be redirected to the checkout page, or **Contact Sales** to talk to us about the details of the Enterprise plan.
