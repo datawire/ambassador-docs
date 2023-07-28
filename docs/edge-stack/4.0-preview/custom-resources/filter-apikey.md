@@ -43,4 +43,11 @@ status:      []metav1.Condition    # field managed by controller
 |--------------------|---------------------|------------------|
 | `secretName`       | `string`            | Defines how to resolve the values of the keys. Currently the only supported way to resolve a key is via a local secret. APIKeys cannot use shared secrets in a different namespace than the `APIKey Filter` resource. |
 
+## APIKey Filter Usage Guide
+
+The following guide will help you get started using APIKey Filters
+
+- [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
+
 [FilterPolicy Resource]: ../filterpolicy
+[Using APIKey Filters]: ../../guides/apikey

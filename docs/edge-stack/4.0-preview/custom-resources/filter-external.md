@@ -9,11 +9,8 @@ The external service is free to perform any logic it likes before responding to 
 processing on incoming requests. The `External Filter` may be used along with any of the other Filter types. For more information about
 how requests are matched to `Filter` resources and the order in which `Filters` are executed, please refer to the [FilterPolicy Resource][] documentation.
 
-## External Filter Usage Guides
-
-- [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
-  - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
-  - [The Ext_Authz Protocol][] - Learn about how the ext_authz protocol works
+This doc is an overview of all the fields on the External `Filter` Custom Resource with descriptions of the purpose, type, and default values of those fields.
+Tutorials and guides for the External `Filter` Resource can be found in the [usage guides section][]
 
 ## External Filter API Reference
 
@@ -34,7 +31,7 @@ spec:
     authServiceURL: string                  # required, must be an absolute url
     statusOnError: int                      # optional, default: `403`
     failureModeAllow: bool                  # optional, default: `false`
-    timeout: metav1.Duration                # optional, default: `"5s"`
+    timeout: Duration                       # optional, default: `"5s"`
     httpSettings: HTTPSettings              # optional, can only be set when `protocol: "http"`
       pathPrefix: string                    # optional
       allowedRequestHeaders: []string       # optional
@@ -56,20 +53,26 @@ status: []metav1.Condition                  # field managed by controller
 | `authServiceURL`   | `string`                    | The URL of the service performing the authorization / filtering logic. Must be an absolute URL. |
 | `statusOnError`    | `int`                       | Allows overriding the status code returned when the External Service returns a non 200 response code for `protocol: "http"` or [DeniedHttpResponse][] for `protocol: "grpc"` |
 | `failureModeAllow` | `bool`                      | Determines what happens when $productName$ cannot communicate with the External Service due to network issues, or the service not being available. By default, the ExternalFilter will reject the request if it is unable to communicate. This can be overriden by setting this setting to `"true"` so that it fails open, allowing the request through to the upstream service. |
-| `timeout`          | [metav1.Duration][]         | The amount of time $productName$ will wait before erring on a timeout. **Note**: this value cannot be larger than the overall Auth Service timeout that is configured in Envoy or else it would effectively not have any timeout. |
+| `timeout`          | [Duration][]                | The amount of time $productName$ will wait before erring on a timeout. **Note**: this value cannot be larger than the overall Auth Service timeout that is configured in Envoy or else it would effectively not have any timeout. |
 | `httpSettings`     | [HTTPSettings][]            | Settings specific to the http protocol. This can only be set when `protocol: "http"`. |
 | `grpcSettings`     | [GRPCSettings][]            | Settings specific to the grpc protocol. This can only be set when `protocol: "grpc"`. |
 | `include_body`     | [IncludeBody][]             | Configures passing along the request body to the External Service. If not set then a blank body is sent over to the External Service. |
 
-Fields listed as `metav1.Duration` accept a string that will be parsed as a sequence of decimal numbers, each with optional fraction
+<Alert severity="warning">
+  The overall Auth Service timeout that is configured in Envoy, mentioned in the <code>timeout</code> field is set to `5 Seconds` and is not currently configurable but will be made so for the official release of $productName$ 4.x.
+</Alert>
+
+### Duration
+
+**Appears On**: [ExternalFilter][]
+Duration is a field that accepts a string that will be parsed as a sequence of decimal numbers ([metav1.Duration][]), each with optional fraction
 and a unit suffix, such as `"300ms"`, `"1.5h"` or `"2h45m"`. Valid time units are `"ns"`, `"us"` (or `"µs"`), `"ms"`, `"s"`,
 `"m"`, `"h"`. See [Go time.ParseDuration][].
 
-<Alert severity="warning">
-  The overall Auth Service timeout that is configured in Envoy, mentioned in the <code>timeout</code> field is set to `6 Seconds` and is not currently configurable but will be made so for the official release of $productName$ 4.x.
-</Alert>
-
 ### HTTPSettings
+
+**Appears On**:
+Settings specific to the http protocol. This can only be set when `protocol: "http"`.
 
 | **Field**                     | **Type**     | **Description**                                                                                                                                                  |
 |-------------------------------|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -80,26 +83,41 @@ and a unit suffix, such as `"300ms"`, `"1.5h"` or `"2h45m"`. Valid time units ar
 
 ### GRPCSettings
 
+**Appears On**: [ExternalFilter][]
+Settings specific to the http protocol. This can only be set when `protocol: "grpc"`.
+
 | **Field**          | **Type**        | **Description**                                                                                                                                                  |
 |--------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `protocolVersion`  | `Enum` (`"v3"`) | Indicates the version of the transport protocol that the External Filter is using. This is only applicable to External Filters using `protocol: "grpc"`. Currently the only supported version is `"v3"`, so this field exists to provide compatability for future verions of ext_authz. |
 
 ### IncludeBody
 
+**Appears On**: [ExternalFilter][]
+Configures passing along the request body to the External Service. If not set then a blank body is sent over to the External Service.
+
 | **Field**        | **Type**  | **Description**                                                                                                                                                  |
 |------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `maxBytes`       | `int`     | Sets the number of bytes of the request body to buffer over to the External Service |
 | `allowPartial`   | `bool`    | Indicates whether the included body can be a partially buffered body or if the complete buffered body is expected. If not partial then a 413 http error is returned by Envoy. |
 
+## External Filter Usage Guides
+
+- [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
+  - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
+  - [The Ext_Authz Protocol][] - Learn about how the ext_authz protocol works
+
+[Duration]: #duration
+[HTTPSettings]: #httpsettings
+[ExternalFilter]: #externalfilter
+[GRPCSettings]: #grpcsettings
+[IncludeBody]: #includebody
+[usage guides section]: #external-filter-usage-guides
 [ext_authz protocol]: ../../guides/custom-filters/ext-authz
 [The Ext_Authz Protocol]: ../../guides/custom-filters/ext-authz
 [FilterPolicy Resource]: ../filterpolicy
 [Using External Filters]: ../../guides/custom-filters/external
 [Basic Auth using External Filters]: ../../guides/auth/basic-auth
+[LinkerD]: https://linkerd.io/
 [metav1.Duration]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration
 [DeniedHttpResponse]: https://github.com/envoyproxy/envoy/blob/1230c6cfba3791e4544b4ca23cacdbfc20a6fbaa/api/envoy/service/auth/v3/external_auth.proto#L43
-[HTTPSettings]: #httpsettings
-[GRPCSettings]: #grpcsettings
-[IncludeBody]: #includebody
-[LinkerD]: https://linkerd.io/
 [Go time.ParseDuration]: https://pkg.go.dev/time#ParseDuration

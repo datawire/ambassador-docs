@@ -9,31 +9,12 @@ while `FilterPolicies` define the matching criteria for requests such as the hea
 one or more `Filters` to execute on those requests. Filters are largely used to add built-in authentication and security, but
 $productName$ also supports developing custom filters to add your own processing and logic.
 
+This doc is an overview of all the fields on the `Filter` Custom Resource with descriptions of the purpose, type, and default values of those fields.
+Tutorials and guides for the `Filter` Resource can be found in the [usage guides section][]
+
 <Alert severity="info">
     Filtering actions of all types in $productName$ are only ever executed on incoming requests and not on responses from your upstream Services.
 </Alert>
-
-## Filter Usage Guides
-
-The following guides will help you get started using the different types of `Filters`
-
-- [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
-- [Using Oauth2 Filters][] - Use the OAuth2 Filter for authentication to protect access to services
-  - [SSO with Oauth2][] - Use OAuth2 Filters for single sign on
-  - [SSO with Auth0][] - Setup single sign on with Auth0
-  - [SSO with Azure][] - Setup single sign on with Azure
-  - [SSO with Google][] - Setup single sign on with Google
-  - [SSO with Keycloak][] - Setup single sign on with Keycloak
-  - [SSO with Okta][] - Setup single sign on with Okta
-  - [SSO with OneLogin][] - Setup single sign on with OneLogin
-  - [SSO with Salesforce][] - Setup single sign on with Salesforce
-  - [SSO with UAA][] - Setup single sign on with UAA
-  - [Kubectl SSO with Keycloak][] - Restrict [kubectl][] access with Keycloak single sign on
-- [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
-- [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
-- [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
-  - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
-- [Using Plugin Filters][] - Compile your own custom filtering plugin on top of $productName$
 
 ## Filter API Reference
 
@@ -79,13 +60,35 @@ This field is set automatically by $productName$ to provide info about the statu
   The short name for <code>Filter</code> is <code>fil</code>, so you can get filters using <code>kubectl get filter</code> or <code>kubectl get fil</code>.
 </Alert>
 
+## Filter Usage Guides
+
+The following guides will help you get started using the different types of `Filters`
+
+- [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
+- [Using Oauth2 Filters][] - Use the OAuth2 Filter for authentication to protect access to services
+  - [SSO with Oauth2][] - Use OAuth2 Filters for single sign on
+  - [SSO with Auth0][] - Setup single sign on with Auth0
+  - [SSO with Azure][] - Setup single sign on with Azure
+  - [SSO with Google][] - Setup single sign on with Google
+  - [SSO with Keycloak][] - Setup single sign on with Keycloak
+  - [SSO with Okta][] - Setup single sign on with Okta
+  - [SSO with OneLogin][] - Setup single sign on with OneLogin
+  - [SSO with Salesforce][] - Setup single sign on with Salesforce
+  - [SSO with UAA][] - Setup single sign on with UAA
+  - [Kubectl SSO with Keycloak][] - Restrict [kubectl][] access with Keycloak single sign on
+- [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
+- [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
+- [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
+  - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
+- [Using Plugin Filters][] - Compile your own custom filtering plugin on top of $productName$
+
+[usage guides section]: #filter-usage-guides
 [FilterPolicy custom resource]: ../filterpolicy
 [JWTFilter]: ../filter-jwt
 [OAuth2Filter]: ../filter-oauth2
 [APIKeyFilter]:  ../filter-apikey
 [ExternalFilter]: ../filter-external
 [PluginFilter]: ../filter-plugin
-[metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Condition
 [Using JWT Filters]: ../../guides/auth/jwt
 [Using Oauth2 Filters]: ../../guides/auth/oauth2
 [SSO with Auth0]: ../../guides/sso/auth0
@@ -104,3 +107,4 @@ This field is set automatically by $productName$ to provide info about the statu
 [Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [Using Plugin Filters]: ../../guides/custom-filters/plugin
 [kubectl]: https://kubernetes.io/docs/tasks/tools/
+[metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Condition
