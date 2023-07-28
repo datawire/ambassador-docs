@@ -20,8 +20,6 @@
    # TODO: needs updated to show the new arcitecture and contrast from 3.x architecture
    - title: $productName$ system architecture
      link: /design/system
-   - title: Deployment overview
-     link: /design/deployment
    - title: Redis config
      link: /design/redis
    - title: Web application firewalls
@@ -275,6 +273,8 @@
        link: /concepts/progressive-delivery
      - title: Microservices API gateways
        link: /concepts/api-gateways
+     - title: Web application firewalls
+       link: /design/web-application-firewalls
      - title: Rate limiting at the edge
        link: /concepts/rate-limiting-at-the-edge
  - title: FAQs

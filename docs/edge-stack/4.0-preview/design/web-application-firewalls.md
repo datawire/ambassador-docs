@@ -1,4 +1,2 @@
 
-# Web Application Firewalls in $productName$
-
-Under Construction
+# Web Application Firewalls Design in $productName$
