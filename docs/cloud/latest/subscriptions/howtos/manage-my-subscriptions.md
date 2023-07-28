@@ -32,7 +32,7 @@ There are three quota limits that pertain to subscriptions:
 
 ## Extend your quotas by adding more users
 
-On the Free subscription tier, you can unlock additional quotas by adding more team members to your organization. On the subcription page, click the INVITE button and follow the listed steps to invite new team members and gain access to additional clusters and services for free.
+On the Free subscription tier, you can unlock additional quotas by adding more team members to your organization. On the subcription page, click the INVITE button and follow the listed steps to invite new team members and gain access to additional clusters for free.
 
 <br />
 <p style="max-width:600px;margin:0 auto;">
@@ -65,5 +65,5 @@ Once you have identified a more suitable subscription plan, click on **Buy Now**
 For example, on the subscription page the team member quota indicates that you have up to 5 seats available. If you reach the limit, you can either release one seat, or **upgrade** your plan to increase the limit.
 
   <p align="center">
-    <img src="/images/cloud/images/team-members-quota.png" width="600" alt="Upgrade team members" />
+    <img src="/images/cloud/team-members-quota.png" width="600" alt="Upgrade team members" />
   </p>
