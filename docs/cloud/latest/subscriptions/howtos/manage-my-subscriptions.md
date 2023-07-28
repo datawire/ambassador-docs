@@ -24,11 +24,23 @@ The Subscription section of the Settings page shows your current utilization of 
 
 ## Quota types
 
-There are three quota limits that pertain to subscriptions:
+Quota limits are applicable to subscriptions:
 
 - Telepresence Connect: Time you are connected with Telepresence to your cluster.
 - Connected Clusters: The Kubernetes clusters you have connected to the Ambassador Cloud app.
 - Requests per Second: Requests per second (RPS) is the maximum usage in the cluster between Rate Limited Traffic and Authenticated Traffic. For multiple clusters, RPS is the sum of the maximum usage of each cluster. RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
+- Team Members: Ambassador Cloud users who have accepted an invitation sent by you through the Members page in your account settings.**(Legacy Subscriptions)**
+- Active Services: Active services are those which have had an action performed on them within the last 28 days. Actions include intercepts, rollouts, and mappings.**(Legacy Subscriptions)**
+
+### Active Services **- Legacy Subscriptions**
+
+You can see which of your services are counting against your subscription by clicking **view actives services** in the Active Services panel. If you delete your service and recreate it with the same name and in the same namespace, it will still count as 1 active service.
+
+The active services list shows the services that have had intercepts, rollouts, or mappings in your organization for the last 28 days.
+
+  <p align="center">
+    <img src="../../images/active-services-list.png" width="400" alt="List your active services"/>
+  </p>
 
 ## Extend your quotas by adding more users
 
@@ -62,8 +74,8 @@ Once you have identified a more suitable subscription plan, click on **Buy Now**
 
 ### Example
 
-For example, on the subscription page the team member quota indicates that you have up to 5 seats available. If you reach the limit, you can either release one seat, or **upgrade** your plan to increase the limit.
+For instance, the subscription page indicates a request per second quota, allowing up to 5 rps. When you reach this limit, you have to upgrade your plan to raise the quota.
 
   <p align="center">
-    <img src="/images/cloud/team-members-quota.png" width="600" alt="Upgrade team members" />
+    <img src="/images/cloud/rps_quota.png" width="600" alt="Rps quota" />
   </p>
