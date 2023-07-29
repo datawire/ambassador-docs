@@ -102,7 +102,7 @@ The following guides will help you get started using the different types of `Fil
 [SSO with Salesforce]: ../../guides/sso/salesforce
 [SSO with UAA]: ../../guides/sso/uaa
 [Chaining Oauth2 and JWT Filters]: ../../guides/auth/oauth2-and-jwt
-[Using APIKey Filters]: ../../guides/apikey
+[Using APIKey Filters]: ../../guides/auth/apikey
 [Using External Filters]: ../../guides/custom-filters/external
 [Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [Using Plugin Filters]: ../../guides/custom-filters/plugin

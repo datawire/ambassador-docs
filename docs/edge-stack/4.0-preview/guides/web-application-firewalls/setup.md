@@ -209,14 +209,14 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 [WebApplicationFirewall]: ../../../custom-resources/webapplicationfirewall
 [WebApplicationFirewallPolicy]: ../../../custom-resources/webapplicationfirewallpolicy
 [WebApplicationFirewall API Reference]: ../../../custom-resources/webapplicationfirewall
-[WebApplicationFirewallPolicy API Reference]: ../../../custom-resources/webapplication
+[WebApplicationFirewallPolicy API Reference]: ../../../custom-resources/webapplicationfirewallpolicy
 [Rules for Web Application Firewalls]: ../rules
 [Web Application Firewalls in Production]: ../production
 [Grafana dashboard]: https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/
 [Grafana]: https://grafana.com/
 [Ambassador Labs]: https://www.getambassador.io/
 [Coraza Web Application Firewall library]: https://coraza.io/docs/tutorials/introduction/
-[coraza rules configuration]: https://coraza.io/docs/seclang/directives/#secauditlog
+[coraza rules configuration]: https://coraza.io/docs/seclang/directives
 [Kuberntes ConfigMap]: https://kubernetes.io/docs/concepts/configuration/configmap/
 [Envoy Gateway]: https://github.com/envoyproxy/gateway
 [Volume Mount]: https://kubernetes.io/docs/concepts/storage/volumes/

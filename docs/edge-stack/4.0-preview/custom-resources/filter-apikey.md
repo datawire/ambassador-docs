@@ -50,4 +50,4 @@ The following guide will help you get started using APIKey Filters
 - [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
 
 [FilterPolicy Resource]: ../filterpolicy
-[Using APIKey Filters]: ../../guides/apikey
+[Using APIKey Filters]: ../../guides/auth/apikey

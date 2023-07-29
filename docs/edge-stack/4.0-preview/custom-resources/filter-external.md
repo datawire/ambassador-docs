@@ -119,5 +119,5 @@ Configures passing along the request body to the External Service. If not set th
 [Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [LinkerD]: https://linkerd.io/
 [metav1.Duration]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration
-[DeniedHttpResponse]: https://github.com/envoyproxy/envoy/blob/1230c6cfba3791e4544b4ca23cacdbfc20a6fbaa/api/envoy/service/auth/v3/external_auth.proto#L43
+[DeniedHttpResponse]: https://github.com/envoyproxy/envoy/blob/1230c6cfba3791e4544b4ca23cacdbfc20a6fbaa/api/envoy/service/auth/v3/external_auth.proto
 [Go time.ParseDuration]: https://pkg.go.dev/time#ParseDuration

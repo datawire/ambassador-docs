@@ -67,10 +67,10 @@ When an `External Filter` is executed against an incoming request, a similar req
 - If $productName$ cannot reach the External Service at all, if the External Service does not return a valid response, or if the response has an HTTP status code in the `5XX` range, then the communication with the External Service is considered to have failed, and the behavior specified by the `statusOnError` or `failureModeAllow` field of the `External Filter` is triggered.
 
 [Envoy's external_auth.proto]: https://github.com/emissary-ingress/emissary/blob/master/api/envoy/service/auth/v3/external_auth.proto
-[External Filters]: ../filter-external
-[Oauth2 Filter Resource]: ../filter-oauth2
-[see a sample guide]: ../../guides/auth/basic-auth
-[OAuth2 Filter]:  ../filter-oauth2
-[JWT Filter]:  ../filter-jwt
-[APIKey Filter]: ../filter-apikey
-[Web Application Firewalls]: ../webapplicationfirewall
+[see a sample guide]: ../../auth/basic-auth
+[External Filters]: ../external
+[Oauth2 Filter Resource]: ../../../custom-resources/filter-oauth2
+[OAuth2 Filter]:  ../../auth/oauth2
+[JWT Filter]:  ../../auth/jwt
+[APIKey Filter]: ../../auth/apikey
+[Web Application Firewalls]: ../../web-application-firewalls/setup
