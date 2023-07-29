@@ -280,7 +280,7 @@ The following guides will help you get started using OAuth2 Filters
 [SSO with Google]: ../../guides/sso/google
 [SSO with Keycloak]: ../../guides/sso/keycloak
 [Kubectl SSO with Keycloak]: ../../guides/sso/kubectl-keycloak
-[SSO with Oauth2]: ../../guides/sso/oauth2
+[SSO with Oauth2]: ../../guides/sso/oauth2-sso
 [SSO with Okta]: ../../guides/sso/okta
 [SSO with OneLogin]: ../../guides/sso/onelogin
 [SSO with Salesforce]: ../../guides/sso/salesforce
