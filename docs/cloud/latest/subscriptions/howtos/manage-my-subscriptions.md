@@ -8,10 +8,6 @@ import Alert from '@material-ui/lab/Alert';
 
 Ambassador Labs provides a variety of different subscription options depending on your needs. Whether you're working with a small team with a few developers or a company with a large number of services, Ambassador Labs has flexible subscription options for you to chose from. 
 
-<Alert severity="info">
-  A subscription is valid for the entire organization, and all the teams which are part of it.
-</Alert>
-
 ## Check or upgrade your subscription
 
 In user settings, go to the **Subscriptions** section.
@@ -29,10 +25,10 @@ Quota limits are applicable to subscriptions:
 - Telepresence Connect: Time you are connected with Telepresence to your cluster.
 - Connected Clusters: The Kubernetes clusters you have connected to the Ambassador Cloud app.
 - Requests per Second: Requests per second (RPS) is the maximum usage in the cluster between Rate Limited Traffic and Authenticated Traffic. For multiple clusters, RPS is the sum of the maximum usage of each cluster. RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
-- Team Members: Ambassador Cloud users who have accepted an invitation sent by you through the Members page in your account settings.**(Legacy)**
-- Active Services: Active services are those which have had an action performed on them within the last 28 days. Actions include intercepts, rollouts, and mappings.**(Legacy)**
+- Team Members: Ambassador Cloud users who have accepted an invitation sent by you through the Members page in your account settings.<span class="basic_badge">Legacy</span>
+- Active Services: Active services are those which have had an action performed on them within the last 28 days. Actions include intercepts, rollouts, and mappings.<span class="basic_badge">Legacy</span>
 
-### Active Services **- Legacy**
+### Active Services <span class="basic_badge">Legacy</span>
 
 You can see which of your services are counting against your subscription by clicking **view actives services** in the Active Services panel. If you delete your service and recreate it with the same name and in the same namespace, it will still count as 1 active service.
 
