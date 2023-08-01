@@ -110,17 +110,17 @@ export default function GettingStartedEdgeStack4PreviewTabs(props) {
         {/*YAML install instructions*/}
 
         <CodeBlock>
-          {`kubectl create namespace ambassador && \\` +
-            `\n \n` +
-            `helm repo add ambassador-dev https://s3.amazonaws.com/datawire-static-files/charts-dev` +
+          {`helm repo add ambassador-dev https://s3.amazonaws.com/datawire-static-files/charts-dev` +
             `\n` +
             `helm repo update` +
             `\n` +
             `version=$(helm show chart --devel ambassador-dev/eg-edge-stack | grep appVersion | sed 's/appVersion: //')` +
             `\n \n` +
-            `kubectl apply -f https://app.getambassador.io/download/static/yaml/edge-stack/${version}/eg-edge-stack-crds.yaml && \\` +
+            `kubectl create namespace ambassador && \\` +
+            `\n` +
+            `kubectl apply -f https://app.getambassador.io/download/static/yaml/edge-stack/$version/eg-edge-stack-crds.yaml && \\` +
             '\n' +
-            `kubectl apply -f https://app.getambassador.io/download/static/yaml/edge-stack/${version}/eg-edge-stack.yaml && \\` +
+            `kubectl apply -f https://app.getambassador.io/download/static/yaml/edge-stack/$version/eg-edge-stack.yaml && \\` +
             '\n' +
             `kubectl -n ambassador wait --for condition=available --timeout=90s deploy -l control-plane=envoy-gateway` +
             '\n'}
