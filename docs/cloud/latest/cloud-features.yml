@@ -54,6 +54,10 @@
     feature: Ambassador Edge Stack,
   }
 - {
+    path: /docs/cloud/latest/sso,
+    feature: Team collaboration,
+  }
+- {
     path:  /docs/cloud/latest/service-catalog/concepts/annotating,
     feature: Ambassador Edge Stack,
   }
