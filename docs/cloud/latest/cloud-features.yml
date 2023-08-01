@@ -5,6 +5,27 @@
     feature: Team collaboration,
   }
 - {
+    path: /docs/cloud/latest/service-catalog/concepts/services,
+    feature: Team collaboration,
+  }
+- {
+    path: /docs/cloud/latest/service-catalog/howtos/organize-service-catalog,
+    feature: Team collaboration,
+  }
+- {
+    path: /docs/cloud/latest/service-catalog/howtos/favorites,
+    feature: Team collaboration,
+  }
+- {
+    path: /docs/cloud/latest/service-catalog/howtos/cells,
+    feature: Team collaboration,
+  }
+- {
+    path: /docs/cloud/latest/onboarding-dashboard,
+    feature: Team collaboration,
+  }
+
+- {
     path: /docs/cloud/latest/service-catalog/howtos/intercept,
     feature: Telepresence,
   }
@@ -12,3 +33,53 @@
     path: /docs/cloud/latest/security/security,
     feature: Ambassador Edge Stack,
   }
+- {
+    path: /docs/cloud/latest/gitops/quick-start,
+    feature: Ambassador Edge Stack,
+  }
+- {
+    path: /docs/cloud/latest/service-catalog/howtos/intercept,
+    feature: Telepresence,
+  }
+- {
+    path: /docs/cloud/latest/telepresence-saved-intercepts,
+    feature: Telepresence,
+  }
+- {
+    path: /docs/cloud/latest/visualize-api/quick-start,
+    feature: Ambassador Edge Stack,
+  }
+- {
+    path: /docs/cloud/latest/developer-portal/developer-portal,
+    feature: Ambassador Edge Stack,
+  }
+- {
+    path: /docs/cloud/latest/sso,
+    feature: Team collaboration,
+  }
+- {
+    path:  /docs/cloud/latest/service-catalog/concepts/annotating,
+    feature: Ambassador Edge Stack,
+  }
+- {
+    path: /docs/cloud/latest/service-catalog/howtos/annotate,
+    feature: Ambassador Edge Stack,
+  }
+- {
+    path: /docs/cloud/latest/diagnostics-ui/view-diagnostics,
+    feature: Ambassador Edge Stack,
+  }
+- {
+    path: /docs/cloud/latest/config-analysis/reference,
+    feature:  Ambassador Edge Stack,
+  }
+- {
+    path: /docs/cloud/latest/config-analysis/quick-start,
+    feature:  Ambassador Edge Stack,
+  }
+- {
+    path:  /docs/cloud/latest/authenticating,
+    feature: Team collaboration,
+  }
+
+ 
