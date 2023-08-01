@@ -49,7 +49,7 @@ spec:
       headers: []AddHeaderTemplate              # optional, max 16 items
       - name: string                            # required
         value: string (GoLang Template)         # required
-status: []metav1.Condition                      # field managed by controller
+status: []metav1.Condition                      # field managed by controller, max items: 8
 ```
 
 ### JWTFilter

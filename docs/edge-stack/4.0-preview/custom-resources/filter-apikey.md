@@ -27,7 +27,7 @@ spec:
     httpHeader: string             # optional, default: `x-api-key`
     keys: []APIKeyItem             # required, min items: 1
     - secretName: string           # required
-status:      []metav1.Condition    # field managed by controller
+status:      []metav1.Condition    # field managed by controller, max items: 8
 ```
 
 ### APIKeyFilter

@@ -42,7 +42,7 @@ spec:
     include_body: IncludeBody               # optional
       maxBytes: int                         # required, default: `4096`
       allowPartial: bool                    # required, default `true`
-status: []metav1.Condition                  # field managed by controller
+status: []metav1.Condition                  # field managed by controller, max items: 8
 ```
 
 ### ExternalFilter

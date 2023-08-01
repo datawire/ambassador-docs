@@ -76,7 +76,7 @@ spec:
       clientID: string                                     # required
       clientSecret: string                                 # optional
       clientSecretRef: SecretReference                     # optional
-status: []metav1.Condition                                 # field managed by controller
+status: []metav1.Condition                                 # field managed by controller, max items: 8
 ```
 
 ### OAuth2Filter

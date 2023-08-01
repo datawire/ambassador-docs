@@ -1,4 +1,4 @@
 
-# Configuring Redis for $productName$
+# Configuring $productName$'s Redis
 
 Under Construction

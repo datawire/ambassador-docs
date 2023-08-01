@@ -29,19 +29,19 @@ metadata:
   namespace: "example-namespace"
 spec:
   type:      Enum               # required
-  jwt:       JWTFilter          # optional; omit unless `type: jwt`
-  oauth2:    OAuth2Filter       # optional; omit unless `type: oauth2`
-  apikey:    APIKeyFilter       # optional; omit unless `type: apikey`
-  external:  ExternalFilter     # optional; omit unless `type: external`
-  plugin:    PluginFilter       # optional; omit unless `type: plugin`
-status:      []metav1.Condition # field managed by controller
+  jwt:       JWTFilter          # optional, required when `type: "jwt"`
+  oauth2:    OAuth2Filter       # optional, required when `type: "oauth2"`
+  apikey:    APIKeyFilter       # optional, required when `type: "apikey"`
+  external:  ExternalFilter     # optional, required when `type: "external"`
+  plugin:    PluginFilter       # optional, required when `type: "plugin"`
+status:      []metav1.Condition # field managed by controller, max items: 8
 ```
 
 ### FilterSpec
 
 | **Field**  | **Type**                                                     | **Description**                                                                       |
 |------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| `type`     | Enum (`"jwt"`/`"oauth2"`/`"apikey"`/`"external"`/`"plugin"`) | Required field that identifies the type of the Filter that is configured to be executed on a request. |
+| `type`     | `Enum` (`"jwt"`/`"oauth2"`/`"apikey"`/`"external"`/`"plugin"`) | Required field that identifies the type of the Filter that is configured to be executed on a request. |
 | `jwt`      | [JWTFilter][]                                                | Provides configuration for the JWT Filter type                   |
 | `oauth2`   | [OAuth2Filter][]                                             | Provides configuration for the OAuth2 Filter type         |
 | `apikey`   | [APIKeyFilter][]                                             | Provides configuration for the APIKey Filter type      |

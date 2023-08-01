@@ -1,12 +1,12 @@
  - title: Quick start
- # TODO: needs updated to install Envoy Gateway and not
    link: /install/quickstart
  - title: Installation and updates
    items:
-     - title: Install with Helm
-       link: /install/helm
-     - title: Install with Kubernetes YAML
-       link: /install/yaml
+    # TODO: provide separate installation pages that show how to bring your own Envoy Gateway and EG/GWAPI CRDs
+    # - title: Install with Helm
+    #   link: /install/helm
+    # - title: Install with Kubernetes YAML
+    #   link: /install/yaml
     # TODO: add the below page until we're shipping GA
     # - title: Upgrade or migrate
     #   link: /install/upgrade
@@ -17,15 +17,10 @@
      # TODO: installing with AKS?
  - title: Arcitecture and design
    items:
-   # TODO: needs updated to show the new arcitecture and contrast from 3.x architecture
    - title: $productName$ system architecture
      link: /design/system
-   - title: Redis config
-     link: /design/redis
    - title: Web application firewalls
      link: /design/web-application-firewalls
-   - title: Filters
-     link: /design/filters
    - title: Rate Limiting
      link: /design/rate-limiting
    - title: Request flow
@@ -34,10 +29,10 @@
    items:
    - title: $productName$ configuration
      items:
-     - title: Customizing $productName$
+     - title: $productName$ deployment config
        link: /guides/aes/deployment-config
-     - title: Environment variables
-       link: /guides/aes/env-vars
+     - title: Redis config
+       link: /guides/aes/redis-config
      - title: Performance and scaling
        link: /guides/aes/scaling
    - title: Envoy Gateway configuration
@@ -46,8 +41,6 @@
        link: /guides/eg/envoy-gateway-config
      - title: Customizing Envoy Proxy
        link: /guides/eg/envoy-config
-     # - title: Environment variables
-     #   link: /guides/eg/env-vars
      - title: Performance and scaling
        link: /guides/eg/scaling
  - title: Ingress and traffic management
@@ -181,14 +174,15 @@
    # basic rate limiting
    # advanced rate limiting
    # rate limiting token claims
- - title: ExternalDNS integration
-   link: /guides/eg/external-dns
+ # TODO: Envoy Gateway has an externaldns integration
+ # - title: ExternalDNS integration
+ #   link: /guides/eg/external-dns
  - title: Observability
    items:
    - title: Prometheus and Grafana
      link: /guides/observability/prometheus-grafana
-   - title: Metrics endpoint
-     link: /guides/observability/metrics-endpoint
+   - title: $productName$ Metrics
+     link: /guides/observability/metrics
    # - title: Distributed tracing
    #   link: /howtos/dist-tracing
    # - title: Statistics
@@ -254,17 +248,12 @@
      #       link: /topics/running/services/rate-limit-service
      #     - title: Tracing service
      #       link: /topics/running/services/tracing-service
-   # TODO: make this a full section, could use multiple pages for more detail
  - title: Troubleshooting
    link: /guides/aes/debugging
      #- title: Known issues
      #  link: /about/known-issues
  - title: Core concepts
    items:
-     # add authentication?
-     # add JWT Validation?
-     # add WAF?
-     # add CRDs?
      - title: Kubernetes network architecture
        link: /concepts/kubernetes-network-architecture
      - title: 'The Ambassador operating model: GitOps and continuous delivery'
