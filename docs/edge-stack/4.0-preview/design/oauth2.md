@@ -22,7 +22,7 @@ If you want to jump straight into configuring OAuth2, the [usage guides section]
 This is what the authentication process looks like at a high level when using $productName$ with an external identity provider.
 The use case is an end-user accessing a secured app service.
 
-![Edge Stacl Authentication OAuth/OIDC](../../images/ambassador_oidc_flow.jpg)
+![Edge Stack Authentication OAuth/OIDC](../images/ambassador_oidc_flow.jpg)
 
 ### Basic Authentication Terms
 
