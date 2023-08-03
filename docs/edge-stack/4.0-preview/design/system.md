@@ -67,7 +67,6 @@ not to use it when securing applications and services that are very sensitive to
 
 The following docs will help you get started with the features provided by the WAF Service:
 
-- [Web Application Firewalls design][] - Learn about the design of the Web Application Firewalls implementation in $productName$
 - [Using Web Application Firewalls][] - Get started using `WebApplicationFirealls` quickly
 - [Rules for Web Application Firewalls][] - Info about creating and configuring firewall rules
 - [Web Application Firewalls in Production][] - Recommendations and info for creating and running `WebApplicationFirewalls` in a production environment
@@ -159,7 +158,6 @@ Should the request remain unimpeded by Web Application Firewalls or Filters, the
 [Configuring the Envoy Gateway Deployment]: ../../guides/eg/envoy-gateway-config
 [Filter]: ../../custom-resources/filter
 [FilterPolicy]: ../../custom-resources/filterpolicy
-[Web Application Firewalls design]: ../web-application-firewalls
 [WebApplicationFirewall]: ../../custom-resources/webapplicationfirewall
 [WebApplicationFirewallPolicy]: ../../custom-resources/webapplicationfirewallpolicy
 [RateLimitFilter]: ../../custom-resources/eg/ratelimitfilter

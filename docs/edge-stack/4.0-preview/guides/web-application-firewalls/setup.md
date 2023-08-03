@@ -207,7 +207,7 @@ about the metrics that are available.
 - [WebApplicationFirewallPolicy API Reference][] - Full reference for all the fields supported by the `WebApplicationFirewallPolicy` resource
 
 [Filters]: ../../../custom-resources/filter
-[Rate Limiting]: ../../../design/rate-limiting
+[Rate Limiting]: ../../rate-limiting/setup
 [RateLimitFilters]: ../../../custom-resources/eg/ratelimitfilter
 [WebApplicationFirewall]: ../../../custom-resources/webapplicationfirewall
 [WebApplicationFirewallPolicy]: ../../../custom-resources/webapplicationfirewallpolicy
@@ -215,8 +215,8 @@ about the metrics that are available.
 [WebApplicationFirewallPolicy API Reference]: ../../../custom-resources/webapplicationfirewallpolicy
 [Rules for Web Application Firewalls]: ../rules
 [Web Application Firewalls in Production]: ../production
-[WAF Service]: ../../../design/architecture#waf-service
-[metrics documentation]: ../../../observability/metrics#waf-service-metrics
+[WAF Service]: ../../../design/architecture
+[metrics documentation]: ../../../observability/metrics
 [Ambassador Labs]: https://www.getambassador.io/
 [Coraza Web Application Firewall library]: https://coraza.io/docs/tutorials/introduction/
 [coraza rules configuration]: https://coraza.io/docs/seclang/directives
