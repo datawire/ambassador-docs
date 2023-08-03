@@ -3,16 +3,14 @@
  - title: Installation and updates
    items:
     # TODO: provide separate installation pages that show how to bring your own Envoy Gateway and EG/GWAPI CRDs
-    # - title: Install with Helm
-    #   link: /install/helm
-    # - title: Install with Kubernetes YAML
-    #   link: /install/yaml
     # TODO: add the below page until we're shipping GA
     # - title: Upgrade or migrate
     #   link: /install/upgrade
-     - title: Installing with AWS
+     - title: Installing and updatating
+       link: /install/install-and-update
+     - title: Installing on AWS
        link: /install/edge-stack-with-aws
-     - title: Installing with GKE
+     - title: Installing on GKE
        link: /install/edge-stack-with-gke
      # TODO: installing with AKS?
  - title: Arcitecture and design
@@ -266,8 +264,8 @@
      - title: Rate limiting at the edge
        link: /concepts/rate-limiting-at-the-edge
  # TODO: we will have FAQs at some point for 4.x, but it is too early to know what they are
- # - title: FAQs
- #   link: /about/faq
+ - title: FAQs
+   link: /about/faq
  - title: About $productName$ 4.x
    link: /about/aes-4x
  - title: Release Notes
