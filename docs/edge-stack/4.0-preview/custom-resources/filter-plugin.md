@@ -2,7 +2,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # The **Plugin Filter** Type
 
-The Plugin filter type allows you to plug in your own custom code. This code is compiled to a .so file,
+The Plugin filter type allows you to plug in your own custom code. This code is compiled into a .so file,
 which you load into the Envoy Proxy container at `/etc/ambassador-plugins/${NAME}.so`. For more information about how requests are
 matched to `Filter` resources and the order in which `Filters` are executed, please refer to the [FilterPolicy Resource][] documentation.
 
@@ -10,8 +10,7 @@ The [Plugin Filter usage guide][] contains a tutorial on developing and building
 
 ## Plugin Filter API Reference
 
-To create an Plugin Filter, the `spec.type` must be set to `plugin`, and the `plugin` field must contain configuration for your
-Plugin Filter.
+To create a Plugin Filter, the `spec.type` must be set to `plugin`, and the `plugin` field must contain the configuration for your Plugin Filter.
 
 ```yaml
 ---

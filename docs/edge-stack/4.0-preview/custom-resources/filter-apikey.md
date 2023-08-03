@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # The **APIKey Filter** Type
 
-The `APIKey Filter` validates API Keys present in HTTP headers. The list of authorized API Keys is defined directly in a secret.
+The `APIKey Filter` validates API Keys present in HTTP headers. The list of authorized API Keys is defined directly in a Secret.
 If an incoming request does not have the header specified by the `APIKey Filter` or it does not contain one of the key values
 configured by the `Filter` then the request is denied.
 For more information about how requests are matched to `Filter` resources and the order in which `Filters` are executed, please
@@ -11,7 +11,7 @@ refer to the [FilterPolicy Resource][] documentation.
 
 ## APIKey Filter API Reference
 
-To create an APIKey Filter, the `spec.type` must be set to `apikey`, and the `apikey` field must contain configuration for your
+To create an APIKey Filter, the `spec.type` must be set to `apikey`, and the `apikey` field must contain the configuration for your
 APIKey Filter.
 
 ```yaml
@@ -47,7 +47,7 @@ status:      []metav1.Condition    # field managed by controller, max items: 8
 
 The following guide will help you get started using APIKey Filters
 
-- [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
+- [Using APIKey Filters][]: Use the APIKey Filter to validate API Keys present in the HTTP header
 
 [FilterPolicy Resource]: ../filterpolicy
 [Using APIKey Filters]: ../../guides/auth/apikey

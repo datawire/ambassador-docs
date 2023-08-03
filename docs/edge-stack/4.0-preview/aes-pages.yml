@@ -15,6 +15,7 @@
 /custom-resources/webapplicationfirewallpolicy
 /design/filters
 /design/redis
+/guides/design/oauth2
 /design/web-application-firewalls
 /guides/aes/debugging
 /guides/aes/deployment-config
@@ -25,7 +26,6 @@
 /guides/auth/apikey
 /guides/auth/basic-auth
 /guides/auth/jwt
-/guides/auth/oauth2
 /guides/custom-filters/external
 /guides/custom-filters/plugin
 /guides/observability/metrics-endpoint

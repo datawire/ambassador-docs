@@ -123,7 +123,7 @@ In $productName$, the following process occurs when a downstream client initiate
    incoming request.
    - If any Web Application Firewalls block the request, then the process ends here, and Envoy sends the response configured by your `WebApplicationFirewall` to the client.
 
-2. Next, Encoy Proxy executes the [ext_authz filter][] added by $productName$.
+2. Next, Envoy Proxy executes the [ext_authz filter][] added by $productName$.
    - The ext_authz filter causes Envoy to make a request to $productName$'s [auth service][] for processing.
    - If any `Filter`/`FilterPolicy` resources are configured, they run according to the configuration of your `FilterPolicies`.
    - If any of your `Filters` block the request, then the process ends here, and Envoy sends the response configured by your `Filter` to the client
@@ -141,8 +141,6 @@ In $productName$, the following process occurs when a downstream client initiate
 
 7. Envoy proxies the response to the downstream client
 
-Should the request remain unimpeded by Web Application Firewalls or Filters, the system proceeds to consider rate-limiting configurations. If rate-limiting is indeed configured, a rate-limit filter is employed to assess and potentially restrict the request. This sequential approach ensures comprehensive request evaluation and handling within the {Product Name} ecosystem.
-
 <div class="docs-diagram-wrapper">
 
 ![Edge Stack Request Flow](/../../images/documentation/EdgeStack4RequestFlow.inline.svg)
@@ -152,7 +150,7 @@ Should the request remain unimpeded by Web Application Firewalls or Filters, the
 [waf service]: #waf-service
 [auth service]: #auth-service
 [Web Application Firewall]: ../../guides/web-application-firewalls/setup
-[Authentication]: ../../guides/auth/oauth2
+[Authentication]: ../../guides/sso/oauth2-sso
 [Rate Limiting]: ../../guides/rate-limiting/setup
 [Configuring the Envoy Proxy Deployment]: ../../guides/eg/envoy-config
 [Configuring the Envoy Gateway Deployment]: ../../guides/eg/envoy-gateway-config

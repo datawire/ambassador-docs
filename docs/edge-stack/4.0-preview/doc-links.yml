@@ -19,6 +19,8 @@
    items:
    - title: $productName$ system architecture
      link: /design/system
+   - title: OAuth2 in $productName$
+     link: /design/oauth2
  - title: Deployment configuration
    items:
    - title: $productName$ configuration

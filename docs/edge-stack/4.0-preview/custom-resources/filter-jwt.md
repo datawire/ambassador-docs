@@ -12,7 +12,7 @@ Tutorials and guides for the JWT `Filter` Resource can be found in the [usage gu
 
 ## JWT Filter API Reference
 
-To create a JWT Filter, the `spec.type` must be set to `jwt`, and the `jwt` field must contain configuration for your
+To create a JWT Filter, the `spec.type` must be set to `jwt`, and the `jwt` field must contain the configuration for your
 JWT Filter.
 
 ```yaml
@@ -155,8 +155,8 @@ Also availabe to the template are [the standard functions available to Go text/t
 
 ## JWT Filter Usage Guides
 
-- [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
-- [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
+- [Using JWT Filters][]: Use the JWT Filter to validate and process JWTs on requests
+- [Chaining Oauth2 and JWT Filters][]: Learn how to combine Filters for Oauth2 and JWT processing
 
 [JWTFilter]: #jwtfilter
 [ValidAlgorithms]: #validalgorithms

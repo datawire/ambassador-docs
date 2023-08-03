@@ -14,7 +14,7 @@ Tutorials and guides for the External `Filter` Resource can be found in the [usa
 
 ## External Filter API Reference
 
-To create an External Filter, the `spec.type` must be set to `external`, and the `external` field must contain configuration for your
+To create an External Filter, the `spec.type` must be set to `external`, and the `external` field must contain the configuration for your
 external filter.
 
 ```yaml
@@ -102,9 +102,9 @@ Configures passing along the request body to the External Service. If not set th
 
 ## External Filter Usage Guides
 
-- [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
-  - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
-  - [The Ext_Authz Protocol][] - Learn about how the ext_authz protocol works
+- [Using External Filters][]: Use the External Filter to write your own service with custom processing and authentication logic
+  - [Basic Auth using External Filters][]: Setup basic authentication using an External Filter
+  - [The Ext_Authz Protocol][]: Learn about how the ext_authz protocol works
 
 [Duration]: #duration
 [HTTPSettings]: #httpsettings

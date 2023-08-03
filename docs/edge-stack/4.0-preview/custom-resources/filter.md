@@ -64,20 +64,20 @@ This field is set automatically by $productName$ to provide info about the statu
 
 The following guides will help you get started using the different types of `Filters`
 
-- [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
-- [Using Oauth2 Filters][] - Use the OAuth2 Filter for authentication to protect access to services
-  - [SSO with Oauth2][] - Use OAuth2 Filters for single sign-on
-  - [SSO with Auth0][] - Setup single sign-on with Auth0
-  - [SSO with Azure][] - Setup single sign-on with Azure
-  - [SSO with Google][] - Setup single sign-on with Google
-  - [SSO with Keycloak][] - Setup single sign-on with Keycloak
-  - [SSO with Okta][] - Setup single sign-on with Okta
-  - [SSO with OneLogin][] - Setup single sign-on with OneLogin
-  - [SSO with Salesforce][] - Setup single sign-on with Salesforce
-  - [SSO with UAA][] - Setup single sign-on with UAA
-- [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
-- [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
-- [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
+- [Using JWT Filters][]: Use the JWT Filter to validate and process JWTs on requests
+- [Using Oauth2 Filters][]: Use the OAuth2 Filter for authentication to protect access to services
+  - [Oauth2 design in $productName$][]: Learn about how the OAuth2 system works
+  - [SSO with Auth0][]: Setup single sign-on with Auth0
+  - [SSO with Azure][]: Setup single sign-on with Azure
+  - [SSO with Google][]: Setup single sign-on with Google
+  - [SSO with Keycloak][]: Setup single sign-on with Keycloak
+  - [SSO with Okta][]: Setup single sign-on with Okta
+  - [SSO with OneLogin][]: Setup single sign-on with OneLogin
+  - [SSO with Salesforce][]: Setup single sign-on with Salesforce
+  - [SSO with UAA][]: Setup single sign-on with UAA
+- [Chaining Oauth2 and JWT Filters][]: Learn how to combine Filters for Oauth2 and JWT processing
+- [Using APIKey Filters][]: Use the APIKey Filter to validate API Keys present in the HTTP header
+- [Using External Filters][]: Use the External Filter to write your own service with custom processing and authentication logic
   - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
 - [Using Plugin Filters][] - Compile your own custom filtering plugin on top of $productName$
 
@@ -89,12 +89,12 @@ The following guides will help you get started using the different types of `Fil
 [ExternalFilter]: ../filter-external
 [PluginFilter]: ../filter-plugin
 [Using JWT Filters]: ../../guides/auth/jwt
-[Using Oauth2 Filters]: ../../guides/auth/oauth2
+[Oauth2 design in $productName$]: ../../design/oauth2
+[Using Oauth2 Filters]: ../../guides/sso/oauth2-sso
 [SSO with Auth0]: ../../guides/sso/auth0
 [SSO with Azure]: ../../guides/sso/azure
 [SSO with Google]: ../../guides/sso/google
 [SSO with Keycloak]: ../../guides/sso/keycloak
-[SSO with Oauth2]: ../../guides/sso/oauth2-sso
 [SSO with Okta]: ../../guides/sso/okta
 [SSO with OneLogin]: ../../guides/sso/onelogin
 [SSO with Salesforce]: ../../guides/sso/salesforce

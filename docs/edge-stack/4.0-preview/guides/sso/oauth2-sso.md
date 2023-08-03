@@ -77,19 +77,20 @@ EOF
 
 ## Filter Usage Guides
 
+- [OAuth2 design in $productName$][]: Learn about how the OAuth2 system works
 - [The Filter Resource][]: An API reference doc for the `Filter` custom resource.
 - [The FilterPolicy Resource][]: An API reference doc for the `FilterPolicy` custom resource.
-- [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
-- [SSO with Oauth2][] - Use OAuth2 Filters for single sign-on
-- [SSO with Auth0][] - Setup single sign-on with Auth0
-- [SSO with Azure][] - Setup single sign-on with Azure
-- [SSO with Google][] - Setup single sign-on with Google
-- [SSO with Keycloak][] - Setup single sign-on with Keycloak
-- [SSO with Okta][] - Setup single sign-on with Okta
-- [SSO with OneLogin][] - Setup single sign-on with OneLogin
-- [SSO with Salesforce][] - Setup single sign-on with Salesforce
-- [SSO with UAA][] - Setup single sign-on with UAA
-- [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
+- [Using JWT Filters][]: Use the JWT Filter to validate and process JWTs on requests
+- [SSO with Oauth2][]: Use OAuth2 Filters for single sign-on
+- [SSO with Auth0][]: Setup single sign-on with Auth0
+- [SSO with Azure][]: Setup single sign-on with Azure
+- [SSO with Google][]: Setup single sign-on with Google
+- [SSO with Keycloak][]: Setup single sign-on with Keycloak
+- [SSO with Okta][]: Setup single sign-on with Okta
+- [SSO with OneLogin][]: Setup single sign-on with OneLogin
+- [SSO with Salesforce][]: Setup single sign-on with Salesforce
+- [SSO with UAA][]: Setup single sign-on with UAA
+- [Chaining Oauth2 and JWT Filters][]: Learn how to combine Filters for Oauth2 and JWT processing
 
 [the guide docs section]: #filter-usage-guides
 [OAuth2 Filter custom resource]: ../../../custom-resources/filter-oauth2
@@ -106,5 +107,6 @@ EOF
 [SSO with OneLogin]: ../onelogin
 [SSO with Salesforce]: ../salesforce
 [SSO with UAA]: ../uaa
+[OAuth2 design in $productName$]: ../../../design/oauth2
 [Chaining Oauth2 and JWT Filters]: ../../auth/oauth2-and-jwt
 [Slack]: https://a8r.io/slack
