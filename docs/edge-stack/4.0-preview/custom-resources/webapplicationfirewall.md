@@ -1,5 +1,6 @@
+import Alert from '@material-ui/lab/Alert';
 
-# The WebApplicationFirewall Resource
+# The **WebApplicationFirewall** Resource
 
 The `WebApplicationFirewall` provides the configuration for an instance of a Web Application Firewall, and the
 [WebApplicationFirewallPolicy][] resource configures the matching patterns for when `WebApplicationFirewalls` get executed against requests.
@@ -33,7 +34,7 @@ status:                                   # field managed by controller
   conditions: []metav1.Condition
 ```
 
-### WebApplicationFirewall Spec
+### WebApplicationFirewall
 
 | **Field**                      | **Type**                 | **Description**                                                                                                                                                  |
 |--------------------------------|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|

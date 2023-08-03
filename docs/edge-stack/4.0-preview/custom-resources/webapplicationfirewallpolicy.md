@@ -1,5 +1,6 @@
+import Alert from '@material-ui/lab/Alert';
 
-# The WebApplicationFirewallPolicy Resource
+# The **WebApplicationFirewallPolicy** Resource
 
 The `WebApplicationFirewallPolicy` resource configures the matching patterns for when [WebApplicationFirewalls][] get executed against requests; while the
 `WebApplicationFirewall` resource provides the configuration for an instance of a Web Application Firewall.

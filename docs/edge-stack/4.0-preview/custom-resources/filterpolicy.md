@@ -173,7 +173,6 @@ The following guides will help you get started using the different types of `Fil
   - [SSO with OneLogin][] - Setup single sign on with OneLogin
   - [SSO with Salesforce][] - Setup single sign on with Salesforce
   - [SSO with UAA][] - Setup single sign on with UAA
-  - [Kubectl SSO with Keycloak][] - Restrict [kubectl][] access with Keycloak single sign on
 - [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
 - [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
 - [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
@@ -198,7 +197,6 @@ The following guides will help you get started using the different types of `Fil
 [SSO with Azure]: ../../guides/sso/azure
 [SSO with Google]: ../../guides/sso/google
 [SSO with Keycloak]: ../../guides/sso/keycloak
-[Kubectl SSO with Keycloak]: ../../guides/sso/kubectl-keycloak
 [SSO with Oauth2]: ../../guides/sso/oauth2-sso
 [SSO with Okta]: ../../guides/sso/okta
 [SSO with OneLogin]: ../../guides/sso/onelogin
@@ -209,8 +207,7 @@ The following guides will help you get started using the different types of `Fil
 [Using External Filters]: ../../guides/custom-filters/external
 [Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [Using Plugin Filters]: ../../guides/custom-filters/plugin
-[kubectl]: https://kubernetes.io/docs/tasks/tools/
 [corresponding Kubernetes validation]: https://github.com/kubernetes/apimachinery/blob/02cfb53916346d085a6c6c7c66f882e3c6b0eca6/pkg/util/validation/validation.go#L187
 [https://tools.ietf.org/html/rfc7230#section-3.2]: https://tools.ietf.org/html/rfc7230#section-3.2
 [https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00]: https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00
-[metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Condition
+[metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1

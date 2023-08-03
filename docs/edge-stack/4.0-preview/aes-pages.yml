@@ -4,6 +4,7 @@
 # - /reference
 #
 
+/custom-resources/filter-oauth2
 /custom-resources/filter-apikey
 /custom-resources/filter-external
 /custom-resources/filter-jwt
@@ -28,12 +29,10 @@
 /guides/custom-filters/external
 /guides/custom-filters/plugin
 /guides/observability/metrics-endpoint
-/guides/observability/prometheus-grafana
 /guides/sso/auth0
 /guides/sso/azure
 /guides/sso/google
 /guides/sso/keycloak
-/guides/sso/kubectl-keycloak
 /guides/sso/oauth2-sso
 /guides/sso/okta
 /guides/sso/onelogin

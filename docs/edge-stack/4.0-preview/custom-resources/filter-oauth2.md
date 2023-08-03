@@ -95,6 +95,12 @@ status: []metav1.Condition                                 # field managed by co
 | `resourceOwnerSettings`       | [ResourceOwnerSettings][]     | Specific settings that configure the `ResourceOwner` grant type. |
 | `passwordSettings`            | [PasswordSettings][]          | Specific settings that configure the `Password` grant type. |
 
+`grantType` options:
+
+- `"AuthorizationCode"`: Authenticate by redirecting to a login page served by the identity provider.
+- `"ClientCredentials"`: Authenticate by requiring that the incoming HTTP request include as headers the credentials for Ambassador to use to authenticate to the identity provider.
+- `"Password"`: Authenticate by requiring `X-Ambassador-Username` and `X-Ambassador-Password` on all incoming requests, and use them to authenticate with the identity provider using the OAuth2 Resource Owner Password Credentials grant type.
+
 ### Duration
 
 **Appears on**: [Oauth2Filter][], [JWTAssertion][], [AuthorizationCodeSettings][]
@@ -256,7 +262,6 @@ The following guides will help you get started using OAuth2 Filters
   - [SSO with OneLogin][] - Setup single sign on with OneLogin
   - [SSO with Salesforce][] - Setup single sign on with Salesforce
   - [SSO with UAA][] - Setup single sign on with UAA
-  - [Kubectl SSO with Keycloak][] - Restrict [kubectl][] access with Keycloak single sign on
 - [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
 
 [usage guides section]: #oauth2-filter-usage-guides
@@ -279,7 +284,6 @@ The following guides will help you get started using OAuth2 Filters
 [SSO with Azure]: ../../guides/sso/azure
 [SSO with Google]: ../../guides/sso/google
 [SSO with Keycloak]: ../../guides/sso/keycloak
-[Kubectl SSO with Keycloak]: ../../guides/sso/kubectl-keycloak
 [SSO with Oauth2]: ../../guides/sso/oauth2-sso
 [SSO with Okta]: ../../guides/sso/okta
 [SSO with OneLogin]: ../../guides/sso/onelogin
@@ -288,7 +292,6 @@ The following guides will help you get started using OAuth2 Filters
 [Chaining Oauth2 and JWT Filters]: ../../guides/auth/oauth2-and-jwt
 [Go time.ParseDuration]: https://pkg.go.dev/time#ParseDuration
 [Kubernetes secret]: https://kubernetes.io/docs/concepts/configuration/secret/
-[kubectl]: https://kubernetes.io/docs/tasks/tools
 [OpenID Connect Discovery 1.0]: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig
 [metav1.Duration]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration
 [OIDC Discovery]: https://openid.net/specs/openid-connect-discovery-1_0.html

@@ -4,9 +4,9 @@ import Alert from '@material-ui/lab/Alert';
 # The **Filter** Resource
 
 The `Filter` custom resource works in conjunction with the [FilterPolicy custom resource][] to define how and when $productName$ will
-modify or intercept incoming requests before sending to your upstream Service. `Filters` define what actions to take on a request,
-while `FilterPolicies` define the matching criteria for requests such as the headers, hostname, and path, and supply references to
-one or more `Filters` to execute on those requests. Filters are largely used to add built-in authentication and security, but
+modify or intercept incoming requests before sending them to your upstream Service. `Filters` define what actions to take on a request,
+while `FilterPolicies` define the matching criteria for requests, such as the headers, hostname, and path, and supply references to
+one or more `Filters` to execute against those requests. Filters are largely used to add built-in authentication and security, but
 $productName$ also supports developing custom filters to add your own processing and logic.
 
 This doc is an overview of all the fields on the `Filter` Custom Resource with descriptions of the purpose, type, and default values of those fields.
@@ -66,16 +66,15 @@ The following guides will help you get started using the different types of `Fil
 
 - [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
 - [Using Oauth2 Filters][] - Use the OAuth2 Filter for authentication to protect access to services
-  - [SSO with Oauth2][] - Use OAuth2 Filters for single sign on
-  - [SSO with Auth0][] - Setup single sign on with Auth0
-  - [SSO with Azure][] - Setup single sign on with Azure
-  - [SSO with Google][] - Setup single sign on with Google
-  - [SSO with Keycloak][] - Setup single sign on with Keycloak
-  - [SSO with Okta][] - Setup single sign on with Okta
-  - [SSO with OneLogin][] - Setup single sign on with OneLogin
-  - [SSO with Salesforce][] - Setup single sign on with Salesforce
-  - [SSO with UAA][] - Setup single sign on with UAA
-  - [Kubectl SSO with Keycloak][] - Restrict [kubectl][] access with Keycloak single sign on
+  - [SSO with Oauth2][] - Use OAuth2 Filters for single sign-on
+  - [SSO with Auth0][] - Setup single sign-on with Auth0
+  - [SSO with Azure][] - Setup single sign-on with Azure
+  - [SSO with Google][] - Setup single sign-on with Google
+  - [SSO with Keycloak][] - Setup single sign-on with Keycloak
+  - [SSO with Okta][] - Setup single sign-on with Okta
+  - [SSO with OneLogin][] - Setup single sign-on with OneLogin
+  - [SSO with Salesforce][] - Setup single sign-on with Salesforce
+  - [SSO with UAA][] - Setup single sign-on with UAA
 - [Chaining Oauth2 and JWT Filters][] - Learn how to combine Filters for Oauth2 and JWT processing
 - [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
 - [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
@@ -95,7 +94,6 @@ The following guides will help you get started using the different types of `Fil
 [SSO with Azure]: ../../guides/sso/azure
 [SSO with Google]: ../../guides/sso/google
 [SSO with Keycloak]: ../../guides/sso/keycloak
-[Kubectl SSO with Keycloak]: ../../guides/sso/kubectl-keycloak
 [SSO with Oauth2]: ../../guides/sso/oauth2-sso
 [SSO with Okta]: ../../guides/sso/okta
 [SSO with OneLogin]: ../../guides/sso/onelogin
@@ -106,5 +104,4 @@ The following guides will help you get started using the different types of `Fil
 [Using External Filters]: ../../guides/custom-filters/external
 [Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [Using Plugin Filters]: ../../guides/custom-filters/plugin
-[kubectl]: https://kubernetes.io/docs/tasks/tools/
 [metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Condition

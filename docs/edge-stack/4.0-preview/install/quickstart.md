@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with $productName$"
-description: "A simple three step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
+description: "A simple three-step guide to installing $productName$ and quickly get started routing traffic from the edge of your Kubernetes cluster to your services."
 ---
 
 import Alert from '@material-ui/lab/Alert';
@@ -18,13 +18,13 @@ import UserInterestForm from './user-interest';
 - [What's next?][]
 </div>
 
-Get up and running swiftly with $productName$ through this comprehensive quick start guide. $productName$, is built on [Envoy Gateway][] and enhances its [Kubernetes][]-native API Gateway capabilities by providing advanced security and protection features. Trusted by some of the largest Kubernetes deployments worldwide, $productName$ simplifies the process of ensuring the safety of your services with systems including Web Application Firewalls and a wide array of authentication options (OAuth2, OIDC, JWT, Single Sign-On, etc.). Envoy Gateway is used as the core for $productName$ much like [Emissary-ingress][] was in prior versions to handle directing traffic to your applications and services while supporting many different traffic types and routing options.
+Get up and running swiftly with $productName$ through this comprehensive quick-start guide. $productName$ is built on [Envoy Gateway][] and enhances its [Kubernetes][]-native API Gateway capabilities by providing advanced security and protection features. Trusted by some of the largest Kubernetes deployments worldwide, $productName$ simplifies the process of ensuring the safety of your services with systems including Web Application Firewalls and a wide array of authentication options (OAuth2, OIDC, JWT, Single Sign-On, etc.). Envoy Gateway is used as the core for $productName$, much like [Emissary-ingress][] was in prior versions to handle directing traffic to your applications and services while supporting many different traffic types and routing options.
 
 ## 1. Installation
 
-We'll start by installing $productName$ into your cluster. This will install both $productName$ and [Envoy Gateway][] into your cluster. For more information about installation options you can refer to the [Helm install][] and [manual install][] pages.
+We'll start by installing $productName$ into your cluster. This will install both $productName$ and [Envoy Gateway][] into your cluster.
 
-**We recommend using Helm** but there are other options below to choose from.
+**We recommend using Helm**, but there are other options below to choose from.
 
 <GettingStartedEdgeStack4PreviewTabs version="$version$" chartVersion="$chartVersion$" />
 
@@ -60,6 +60,9 @@ $productName$ uses a combination of native Kubernetes resources and Custom Resou
      - name: http
        protocol: HTTP
        port: 80
+     - name: https
+       protocol: HTTPS
+       port: 443
    EOF
    ```
 
@@ -76,7 +79,7 @@ $productName$ uses a combination of native Kubernetes resources and Custom Resou
    kubectl apply -f https://app.getambassador.io/yaml/v2-docs/3.7.0/quickstart/qotm.yaml
    ```
 
-   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use  <code>kubectl get services,deployments quote</code> to see their status.</Alert>
+   <Alert severity="info">The Service and Deployment are created in your default namespace. You can use <code>kubectl get services,deployments quote</code> to see their status.</Alert>
 
 3. Create an [HTTPRoute][] to tell $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
@@ -154,14 +157,11 @@ Explore some of the popular tutorials on $productName$:
 - [Web Application Firewalls][]: Protect your services with Web Application Firewalls.
 - [Configure Single Sign On][]: Setup authentication with a variety of identity management platforms.
 - [Rate Limiting][]: Limit the number of requests that can be made to your services.
-- [Prometheus and Grafana][]: Setup observability using prometheus and Grafana to import a dashboard that monitors metrics from $productName$.
 
 [Envoy Gateway]: https://github.com/envoyproxy/gateway
 [Emissary-ingress]: https://github.com/emissary-ingress/emissary
 [Kubernetes]: https://kubernetes.io/
 [1. Installation]: #1-installation
-[Helm install]: ../helm
-[manual install]: ../yaml
 [2. Routing traffic from the edge]: #2-routing-traffic-from-the-edge
 [What's next?]: #img-classos-logo-srcimageslogopng-whats-next
 [GatewayClass]: ../../custom-resources/gateway-api/gatewayclass
@@ -177,4 +177,3 @@ Explore some of the popular tutorials on $productName$:
 [Web Application Firewalls]: ../../guides/web-application-firewalls/setup
 [Configure Single Sign On]: ../../guides/sso/oauth2-sso
 [Rate Limiting]: ../../guides/rate-limiting/setup
-[Prometheus and Grafana]: ../../guides/observability/prometheus-grafana

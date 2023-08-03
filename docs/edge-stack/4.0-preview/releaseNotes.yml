@@ -38,6 +38,8 @@ items:
       - title: Edge Stack 4.x Preview. Now built on Envoy Gateway
         type: feature
         body: >-
-          With the launch of the 4.x major version, $productName$ will now be built as an extension
-          to Envoy Gateway instead of as a standalone component based on Emissary-ingress. Ambassador Labs will continue to ship necessary updates and bugfixes for $productName$ and Emissary-ingress 3.X for some time.
+          With the launch of the 4.x major version, $productName$ will now be built on
+          to Envoy Gateway instead of Emissary-ingress.
+          Ambassador Labs will continue to ship necessary updates and bugfixes for $productName$
+          and Emissary-ingress 3.x until an end of life for these major versions is otherwise announced.
         docs: /install/quick-start

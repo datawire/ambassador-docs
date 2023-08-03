@@ -1,4 +1,11 @@
-# Web Application Firewalls in $productName$
+---
+    Title: Protect your services with Edge Stack's Web Application Firewalls
+    description: Quickly block common attacks in the OWASP Top 10 vulnerabilities like cross-site-scripting (XSS) and SQL injection with Edge Stack's self-service Web Application Firewalls (WAF)
+---
+
+import Alert from '@material-ui/lab/Alert';
+
+# Using Web Application Firewalls
 
 $productName$ comes fully equipped with a Web Application Firewall solution (commonly referred to as WAF) that is
 easy to set up and can be configured to help protect your web applications by preventing and mitigating many common
@@ -6,19 +13,21 @@ attacks. To accomplish this, the [Coraza Web Application Firewall library][] is 
 against a user-defined configuration file containing rules and settings for the firewall to determine whether to
 allow or deny incoming requests.
 
-$productName$ also has additional authentication features such as [Filters][]. [Rate Limiting][] is also
+$productName$ also has additional authentication features, such as [Filters][]. [Rate Limiting][] is also
 available since $productName$ is built on [Envoy Gateway][]. When `Filters`, `RateLimitsFilters`, and
 `WebApplicationFirewalls` are all used at the same time, the order of operations is as follows and is not currently configurable.
 
 1. `WebApplicationFirewalls` are always executed first
 2. `Filters` are executed next (so long as any configured `WebApplicationFirewalls` did not already reject the request)
-3. Lastly [RateLimitFilters][] are executed (so long as any configured `WebApplicationFirewalls` and `Filters` did not already reject the request)
+3. Lastly, [RateLimitFilters][] are executed (so long as any configured `WebApplicationFirewalls` and `Filters` did not already reject the request)
 
 ## Web Application Firewalls Quickstart
 
-Web Application Firewalls in $productName$ are configured using the [WebApplicationFirewall][] and [WebApplicationFirewallPolicy][] custom resources. You can refer to the `` and `` api docs above for a full breakdown of all the fields they support.
+Web Application Firewalls in $productName$ are configured using the [WebApplicationFirewall][] and [WebApplicationFirewallPolicy][] custom
+resources. You can refer to the `WebApplicationFirewall` and `WebApplicationFirewallPolicy` API docs above for a full breakdown of all
+the fields they support.
 
-1. First, start by creating your firewall configuration. The example uses the `http` `sourceType` to configure downloading the firewall rules from the internet. [The rules in this example][] are published by [Ambassador Labs][], but you are free to write your own or use the published rules as a reference.
+1. First, start by creating your firewall configuration.
 
    ```yaml
    kubectl apply -f -<<EOF
@@ -68,14 +77,20 @@ Web Application Firewalls in $productName$ are configured using the [WebApplicat
 
 Congratulations, you've successfully set up a Web Application Firewall to secure all requests coming into $productName$.
 
-  <Alert severity="info">
-  After applying your <code>WebApplicationFirewall</code> and <code>WebApplicationFirewall</code> resources, check their statuses to make sure that they were not rejected due to any configuration errors.
-  </Alert>
+<Alert severity="info">
+After applying your <code>WebApplicationFirewall</code> and <code>WebApplicationFirewall</code> resources, check their statuses to make sure that they were not rejected due to any configuration errors.
+</Alert>
+
+The example uses the `http` `sourceType` to configure downloading the firewall rules from the internet.
+[Ambassador Labs][] publishes and maintains the rules used in the above example, but you can write your own from scratch
+or use the posted rules as a reference.
+
+See [Configuring Web Application Firewall Rules][] for more information about the Ambassador Labs firewall rule set.
 
 ## Loading Firewall Rules from ConfigMaps or Files
 
-The quickstart example will get the rules for the firewall from the provided urls, but you can also
-configure a `WebApplicationFirewall` to load rules from a [Kuberntes ConfigMap][] or from a file on $productName$'s
+The quickstart example will get the rules for the firewall from the provided URLs, but you can also
+configure a `WebApplicationFirewall` to load rules from a [Kubernetes ConfigMap][] or from a file on $productName$'s
 Waf Service pods.
 
 1. Update the `WebApplicationFirewall` to load a simple rule from a `ConfigMap`
@@ -130,12 +145,13 @@ a request header called `deny-me` with the value `true`.
 4. Now the `WebApplicationFirewall` will load the firewall rules from files.
 
    $productName$ will try to open the `/ambassador/waf/` directory on the Waf Service pods,
-   and if the directory exists, it will load any firewall configuration files from within. Alternatively you
-   can point to a single file instead of a directory. You can mount files to the pod using a [Volume Mount][] or similar strategy.
+   and if the directory exists, it will load any firewall configuration files from within. Alternatively, you
+   can point to a single file instead of a directory. You can mount files to the pod using whichever strategy you prefer, such as a [Volume Mount][].
 
 ## Matching Requests to Firewalls
 
-The quickstart example will run the `example-waf` `WebApplicationFirewall` against all requests since there was no config to specify stricter matching criteria.
+The quickstart example will run the `example-waf` `WebApplicationFirewall` against all requests since there was no config to
+specify stricter matching criteria.
 
 1. Update the `WebApplicationFirewallPolicy` to specify some matching criteria
 
@@ -165,7 +181,7 @@ Now the `example-waf` `WebApplicationFirewall` will only be executed against req
 - The `content-type` HTTP request header is present
 - The value of the `content-type` HTTP request header is `application/json`
 - The `:authority` HTTP header is set to `example.com`
-- The path of the request url is `/foo`
+- The path of the request URL is `/foo`
 
 ## Web Application Firewalls Observability
 
@@ -173,28 +189,15 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 
 ### Logging
 
-  $productName$ will log information about requests approved and denied by any `WebApplicationFirewalls` along with the reason why the request was denied.
-  You can configure the logging policies in the [coraza rules configuration][] where logs are sent to and how much information is logged.
-  Ambassador Labs' default ruleset sends the WAF logs to stdout so they show up in the container logs of the Waf Service pods.
+$productName$ respects the logging [Coraza rules configuration][] of your `WebApplicationFirewall`. You can supply rules to configure
+logging to `std/out` and `std/err` along with the logging verbosity if you want the information about requests approved and denied by
+any `WebApplicationFirewalls` to be shown in the logs of the $productName$ [WAF Service][] pods.
+Ambassador Labs' default ruleset sends the WAF logs to stdout, so they show up in the container logs of the Waf Service pods.
 
 ### Metrics
 
-  $productName$ also outputs metrics about the Web Application Firewall, including the number of requests approved and denied, and performance information.
-  A a [Grafana dashboard][] that can be imported to [Grafana][] is also available. In addition, the dashboard has pre-built panels that help visualize the metrics that are
-  collected about Web Application Firewall activity.
-
-| Metric                              | Type                    | Description                                                                                   |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-|-------------------------------------|-------------------------|-----------------------------------------------------------------------------------------------|
-| `waf_created_wafs`                  | `Gauge`                 | Number of created web application firewall                                                    |
-| `waf_managed_wafs_total`            | `Counter`               | Number of managed web application firewalls                                                   |
-| `waf_added_latency_ms`              | `Histogram`             | Added latency in milliseconds                                                                 |
-| `waf_total_denied_requests_total`   | `Counter` (with labels) | Number of requests denied by any web application firewall                                     |
-| `waf_total_denied_responses_total`  | `Counter` (with labels) | Number of responses denied by any web application firewall                                    |
-| `waf_denied_breakdown_total`        | `Counter` (with labels) | Breakdown of requests/responses denied and the web application firewall that denied them      |
-| `waf_total_allowed_requests_total`  | `Counter` (with labels) | Number of requests allowed by any web application firewall                                    |
-| `waf_total_allowed_responses_total` | `Counter` (with labels) | Number of responses allowed by any web application firewall                                   |
-| `waf_allowed_breakdown_total`       | `Counter` (with labels) | Breakdown of requests/responses allowed and the web application firewall that allowed them    |
-| `waf_errors`                        | `Counter` (with labels) | Tracker for any errors encountered by web application firewalls and the reason for the error  |
+$productName$ outputs metrics about the operation of its Web Application Firewalls. You can refer to the [metrics documentation][] for details
+about the metrics that are available.
 
 ## Other Web Application Firewall Docs
 
@@ -212,11 +215,11 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 [WebApplicationFirewallPolicy API Reference]: ../../../custom-resources/webapplicationfirewallpolicy
 [Rules for Web Application Firewalls]: ../rules
 [Web Application Firewalls in Production]: ../production
-[Grafana dashboard]: https://grafana.com/grafana/dashboards/4698-ambassador-edge-stack/
-[Grafana]: https://grafana.com/
+[WAF Service]: ../../../design/architecture#waf-service
+[metrics documentation]: ../../../observability/metrics#waf-service-metrics
 [Ambassador Labs]: https://www.getambassador.io/
 [Coraza Web Application Firewall library]: https://coraza.io/docs/tutorials/introduction/
 [coraza rules configuration]: https://coraza.io/docs/seclang/directives
-[Kuberntes ConfigMap]: https://kubernetes.io/docs/concepts/configuration/configmap/
+[Kubernetes ConfigMap]: https://kubernetes.io/docs/concepts/configuration/configmap/
 [Envoy Gateway]: https://github.com/envoyproxy/gateway
 [Volume Mount]: https://kubernetes.io/docs/concepts/storage/volumes/
