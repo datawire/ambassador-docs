@@ -99,7 +99,7 @@ Checks if exact or regular expression matches a value in a request Header to det
 | **Field**  | **Type**                                | **Description**                                                                   |
 |------------|-----------------------------------------|-----------------------------------------------------------------------------------|
 | `type`     | `Enum`(`"Exact"`,`"RegularExpression"`) | The semantics of how HTTP header values should be evaluated |
-| `name`     | `string`                                | Name of the header to match. Matching MUST be case insensitive. (See [https://tools.ietf.org/html/rfc7230#section-3.2][]). Valid examples: `"Authorization"`/`"Set-Cookie"`. Invalid examples: `":method"` - `:` is an invalid character. This means that HTTP/2 pseudo headers are not currently supported by this type. `"/invalid"` - `/` is an invalid character. |
+| `name`     | `string`                                | Name of the header to match. Matching MUST be case insensitive. (See [https://tools.ietf.org/html/rfc7230][]). Valid examples: `"Authorization"`/`"Set-Cookie"`. Invalid examples: `":method"` - `:` is an invalid character. This means that HTTP/2 pseudo headers are not currently supported by this type. `"/invalid"` - `/` is an invalid character. |
 | `value`    | `string`                                | Value of HTTP Header to be matched. If type is RegularExpression then this must be a valid regex with length being at least 1. |
 | `negate`   | `bool`                                  | Allows the match criteria to be negated or flipped. For example, you can have a regex that checks for any non-empty string which would indicate would translate to if header exists on request then match on it. With negate turned on this would translate to match on any request that doesn't have a header. |
 
@@ -164,7 +164,6 @@ The following guides will help you get started using the different types of `Fil
 
 - [Using JWT Filters][] - Use the JWT Filter to validate and process JWTs on requests
 - [Using Oauth2 Filters][] - Use the OAuth2 Filter for authentication to protect access to services
-  - [SSO with Oauth2][] - Use OAuth2 Filters for single sign on
   - [SSO with Auth0][] - Setup single sign on with Auth0
   - [SSO with Azure][] - Setup single sign on with Azure
   - [SSO with Google][] - Setup single sign on with Google
@@ -192,12 +191,11 @@ The following guides will help you get started using the different types of `Fil
 [OAuth2 Filter]: ../filter-oauth2
 [Filter custom resource]: ../filter
 [Using JWT Filters]: ../../guides/auth/jwt
-[Using Oauth2 Filters]: ../../guides/auth/oauth2
+[Using Oauth2 Filters]: ../../guides/sso/oauth2-sso
 [SSO with Auth0]: ../../guides/sso/auth0
 [SSO with Azure]: ../../guides/sso/azure
 [SSO with Google]: ../../guides/sso/google
 [SSO with Keycloak]: ../../guides/sso/keycloak
-[SSO with Oauth2]: ../../guides/sso/oauth2-sso
 [SSO with Okta]: ../../guides/sso/okta
 [SSO with OneLogin]: ../../guides/sso/onelogin
 [SSO with Salesforce]: ../../guides/sso/salesforce
@@ -207,7 +205,7 @@ The following guides will help you get started using the different types of `Fil
 [Using External Filters]: ../../guides/custom-filters/external
 [Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [Using Plugin Filters]: ../../guides/custom-filters/plugin
-[corresponding Kubernetes validation]: https://github.com/kubernetes/apimachinery/blob/02cfb53916346d085a6c6c7c66f882e3c6b0eca6/pkg/util/validation/validation.go#L187
-[https://tools.ietf.org/html/rfc7230#section-3.2]: https://tools.ietf.org/html/rfc7230#section-3.2
+[corresponding Kubernetes validation]: https://github.com/kubernetes/apimachinery/blob/02cfb53916346d085a6c6c7c66f882e3c6b0eca6/pkg/util/validation/validation.go
+[https://tools.ietf.org/html/rfc7230]: https://tools.ietf.org/html/rfc7230
 [https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00]: https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00
 [metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1

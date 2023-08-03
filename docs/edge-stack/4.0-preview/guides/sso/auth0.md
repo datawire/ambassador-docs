@@ -17,7 +17,7 @@ With Auth0 as your IdP, you must create an `Application` to handle authenticatio
 3. Select the Auth0 Management API.
 
    - Grant any scope values you may require (you may grant none).
-   - The API is required so that an `audience` can be specified, which will result in a JWT being returned rather than opaque token. A custom API can also be used.
+   - The API is required so that an `audience` can be specified, which will result in a JWT being returned rather than an opaque token. A custom API can also be used.
 
    ![Auth0 Scopes](../../images/scopes.png)
 

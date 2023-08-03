@@ -215,8 +215,8 @@ about the metrics that are available.
 [WebApplicationFirewallPolicy API Reference]: ../../../custom-resources/webapplicationfirewallpolicy
 [Rules for Web Application Firewalls]: ../rules
 [Web Application Firewalls in Production]: ../production
-[WAF Service]: ../../../design/architecture
-[metrics documentation]: ../../../observability/metrics
+[WAF Service]: ../../../design/system
+[metrics documentation]: ../../observability/metrics
 [Ambassador Labs]: https://www.getambassador.io/
 [Coraza Web Application Firewall library]: https://coraza.io/docs/tutorials/introduction/
 [coraza rules configuration]: https://coraza.io/docs/seclang/directives

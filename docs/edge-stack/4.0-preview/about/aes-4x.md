@@ -1,6 +1,6 @@
 # Major differences between $productName$ 3.x and 4.x
 
-## Architecture
+## Architecture Changes
 
 The most significant difference that users familiar with $productName$ 1.x through 3.x will notice is that
 4.x is built on the [Envoy Gateway project][] while 1.x - 3.x were built on the [Emissary-ingress project][].

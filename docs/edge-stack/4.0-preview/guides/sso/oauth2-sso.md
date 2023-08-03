@@ -81,7 +81,6 @@ EOF
 - [The Filter Resource][]: An API reference doc for the `Filter` custom resource.
 - [The FilterPolicy Resource][]: An API reference doc for the `FilterPolicy` custom resource.
 - [Using JWT Filters][]: Use the JWT Filter to validate and process JWTs on requests
-- [SSO with Oauth2][]: Use OAuth2 Filters for single sign-on
 - [SSO with Auth0][]: Setup single sign-on with Auth0
 - [SSO with Azure][]: Setup single sign-on with Azure
 - [SSO with Google][]: Setup single sign-on with Google
@@ -102,7 +101,6 @@ EOF
 [SSO with Azure]: ../azure
 [SSO with Google]: ../google
 [SSO with Keycloak]: ../keycloak
-[SSO with Oauth2]: ../oauth2-sso
 [SSO with Okta]: ../okta
 [SSO with OneLogin]: ../onelogin
 [SSO with Salesforce]: ../salesforce

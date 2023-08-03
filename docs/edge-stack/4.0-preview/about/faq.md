@@ -53,6 +53,6 @@ $productName$ 3.x and Emissary-ingress currently do not have a planned end of li
 At this time, we do not currently plan to port the emissary-apiext tool to 4.x or to support older CRD versions from
 1.x - 3.x. This is subject to change before the official release of 4.x, and we will be providing tooling to help translate your old CRDs into the new `gateway.getambassador.io/v1alpha1`, Envoy Gateway, and Gateway API CRDs used by 4.x.
 
-[Redis docs]: ../../guides/aes/redis
+[Redis docs]: ../../guides/aes/redis-config
 [About $productName$ 4.x page]: ../aes-4x
 [our community slack channel]: https://a8r.io/slack

@@ -131,6 +131,8 @@
        link: /guides/auth/jwt
      - title: JWTs From Oauth2
        link: /guides/auth/oauth2-and-jwt
+     - title: Processing API Keys
+       link: /guides/auth/apikey
      - title: Single Sign On
        items:
        - title: Using the OAuth2 filter for SSO
@@ -154,8 +156,6 @@
          link: /guides/sso/salesforce
        - title: Single Sign-On with UAA
          link: /guides/sso/uaa
-     - title: Processing APIKeys
-       link: /guides/auth/apikey
  - title: Custom filtering and processing
    items:
    - title: Using external filters
