@@ -12,10 +12,13 @@ for most users.
 
 ### The CRDs Helm Chart
 
-The CRDs Helm chart is available to provide a convenient way to manage all of the CRDs for $productName.
+The CRDs Helm chart is available to provide a convenient way to manage all of the CRDs for $productName$.
 The chart will, by default, install the $productName$ CRDs, along with the CRDs for [Envoy Gateway][] and [Gateway API][].
-All of these CRDs are required components when running $productName$ and must be installed. You should only have one installation of the CRDs
-chart per Kubernetes cluster, even if you are running multiple installs of $productName$.
+All of these CRDs are required components when running $productName$ and must be installed.
+
+<Alert severity="info">
+You should only have one installation of the CRDs chart per Kubernetes cluster, even if you are running multiple installs of $productName$.
+</Alert>
 
 **Helm Values**:
 
@@ -118,7 +121,11 @@ redis:
 
 **Envoy Gateway**:
 
-If you do not want the chart to install and manage Envoy Gateway, then you can use the below Helm values to disable the installation of Envoy Gateway. Note that Envoy Gateway is a **required** component for $productName$, so if you disable its creation in the Helm chart, then you must provide your own installation of Envoy Gateway. See [Envoy Gateway config][] for some required Envoy Gateway config you will need to add.
+If you do not want the chart to install and manage Envoy Gateway, then you can use the below Helm values to disable the installation of Envoy Gateway. See [Envoy Gateway config][] for some required Envoy Gateway config you will need to add.
+
+<Alert severity="warning">
+Note that Envoy Gateway is a **required** component for $productName$, so if you disable its creation in the Helm chart, then you must provide your own installation of Envoy Gateway.
+</Alert>
 
 ```yaml
 # Values to configure the Envoy Gateway installation.

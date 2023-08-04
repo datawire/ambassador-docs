@@ -30,7 +30,7 @@ that Envoy Proxy communicates with to provide logic and functionality not availa
 
 </div>
 
-When Envoy Proxy is configured by Enoy Gateway and $productName$, it works as the [Data Plane][] by
+When Envoy Proxy is configured by Envoy Gateway and $productName$, it works as the [Data Plane][] by
 listening for and processing the incoming requests and then communicating with $productName$ and Envoy Gateaway for
 the added [Web Application Firewall][], [Authentication][], and [Rate Limiting][] support.
 
