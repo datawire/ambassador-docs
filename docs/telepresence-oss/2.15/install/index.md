@@ -39,12 +39,30 @@ sudo chmod a+x /usr/local/bin/telepresence
 </Platform.GNULinuxTab>
 <Platform.WindowsTab>
 
-To install Telepresence, [Click here to download the Telepresence binary](https://app.getambassador.io/download/tel2oss/releases/download/$dlVersion$/telepresence-windows-amd64.exe).
+We've developed a Powershell script to simplify the process of installing telepresence. Here are the commands you can execute:
 
-Once you have the binary downloaded you will need to do a few things:
+```powershell
+# To install Telepresence, run the following commands
+# from PowerShell as Administrator.
 
-1. Rename the binary from `telepresence-windows-amd64.exe` to `telepresence.exe`
-2. Move the binary to `C:\Program Files (x86)\$USER\Telepresence\`
+# 1. Download the latest windows zip containing telepresence.exe and its dependencies (~50 MB):
+Invoke-WebRequest https://app.getambassador.io/download/tel2oss/releases/download/$dlVersion$/telepresence.zip -OutFile telepresence.zip
+
+# 2. Unzip the telepresence.zip file to the desired directory, then remove the zip file:
+Expand-Archive -Path telepresence.zip -DestinationPath telepresenceInstaller/telepresence
+Remove-Item 'telepresence.zip'
+cd telepresenceInstaller/telepresence
+
+# 3. Run the install-telepresence.ps1 to install telepresence's dependencies. It will install telepresence to
+# C:\telepresence by default, but you can specify a custom path by passing in -Path C:\my\custom\path
+powershell.exe -ExecutionPolicy bypass -c " . '.\install-telepresence.ps1';"
+
+# 4. Remove the unzipped directory:
+cd ../..
+Remove-Item telepresenceInstaller -Recurse -Confirm:$false -Force
+
+# 5. Telepresence is now installed and you can use telepresence commands in PowerShell.
+```
 
 </Platform.WindowsTab>
 </Platform.TabGroup>
