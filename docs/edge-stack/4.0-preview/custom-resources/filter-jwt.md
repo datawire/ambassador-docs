@@ -156,7 +156,6 @@ Also availabe to the template are [the standard functions available to Go text/t
 ## JWT Filter Usage Guides
 
 - [Using JWT Filters][]: Use the JWT Filter to validate and process JWTs on requests
-- [Chaining Oauth2 and JWT Filters][]: Learn how to combine Filters for Oauth2 and JWT processing
 
 [JWTFilter]: #jwtfilter
 [ValidAlgorithms]: #validalgorithms
@@ -165,7 +164,6 @@ Also availabe to the template are [the standard functions available to Go text/t
 [usage guides section]: #jwt-filter-usage-guides
 [Duration]: #duration
 [Using JWT Filters]: ../../guides/auth/jwt
-[Chaining Oauth2 and JWT Filters]: ../../guides/auth/oauth2-and-jwt
 [bearer token]: https://datatracker.ietf.org/doc/html/rfc6750
 [Go text/template string]: https://pkg.go.dev/text/template
 [the standard functions available to Go text/templates]: https://pkg.go.dev/text/template#hdr-Functions

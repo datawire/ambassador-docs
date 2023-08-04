@@ -326,7 +326,6 @@ The following guides will help you get started using OAuth2 Filters
   - [SSO with OneLogin][]: Setup single sign on with OneLogin
   - [SSO with Salesforce][]: Setup single sign on with Salesforce
   - [SSO with UAA][]: Setup single sign on with UAA
-- [Chaining Oauth2 and JWT Filters][]: Learn how to combine Filters for Oauth2 and JWT processing
 
 [usage guides section]: #oauth2-filter-usage-guides
 [AddHeaderTemplate]: #addheadertemplate
@@ -353,7 +352,6 @@ The following guides will help you get started using OAuth2 Filters
 [SSO with OneLogin]: ../../guides/sso/onelogin
 [SSO with Salesforce]: ../../guides/sso/salesforce
 [SSO with UAA]: ../../guides/sso/uaa
-[Chaining Oauth2 and JWT Filters]: ../../guides/auth/oauth2-and-jwt
 [Go time.ParseDuration]: https://pkg.go.dev/time#ParseDuration
 [Kubernetes secret]: https://kubernetes.io/docs/concepts/configuration/secret/
 [OpenID Connect Discovery 1.0]: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig

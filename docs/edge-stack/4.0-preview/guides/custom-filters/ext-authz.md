@@ -6,7 +6,7 @@ By design, the Ext_Authz protocol used by [External Filters][] is highly flexibl
 
 - Supporting traditional SSO authentication protocols, e.g., OAuth, OpenID Connect, etc.
   - (Note that OAuth2 and OpenID Connect have out-of-the-box support via the [Oauth2 Filter Resource][])
-- Supporting HTTP basic authentication ([see a sample guide][]).
+- Supporting HTTP basic authentication
 - Adding custom business logic, processing, and authentication on incoming requests not covered by $productName$'s [OAuth2 Filter][], [JWT Filter][], [APIKey Filter][], or [Web Application Firewalls][].
 
 For each incoming request, the External Service may either:
@@ -67,7 +67,6 @@ When an `External Filter` is executed against an incoming request, a similar req
 - If $productName$ cannot reach the External Service at all, if the External Service does not return a valid response, or if the response has an HTTP status code in the `5XX` range, then the communication with the External Service is considered to have failed, and the behavior specified by the `statusOnError` or `failureModeAllow` field of the `External Filter` is triggered.
 
 [Envoy's external_auth.proto]: https://github.com/emissary-ingress/emissary/blob/master/api/envoy/service/auth/v3/external_auth.proto
-[see a sample guide]: ../../auth/basic-auth
 [External Filters]: ../external
 [Oauth2 Filter Resource]: ../../../custom-resources/filter-oauth2
 [OAuth2 Filter]:  ../../sso/oauth2-sso

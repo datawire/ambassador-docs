@@ -75,10 +75,8 @@ The following guides will help you get started using the different types of `Fil
   - [SSO with OneLogin][]: Setup single sign-on with OneLogin
   - [SSO with Salesforce][]: Setup single sign-on with Salesforce
   - [SSO with UAA][]: Setup single sign-on with UAA
-- [Chaining Oauth2 and JWT Filters][]: Learn how to combine Filters for Oauth2 and JWT processing
 - [Using APIKey Filters][]: Use the APIKey Filter to validate API Keys present in the HTTP header
 - [Using External Filters][]: Use the External Filter to write your own service with custom processing and authentication logic
-  - [Basic Auth using External Filters][] - Setup basic authentication using an External Filter
 - [Using Plugin Filters][] - Compile your own custom filtering plugin on top of $productName$
 
 [usage guides section]: #filter-usage-guides
@@ -99,9 +97,7 @@ The following guides will help you get started using the different types of `Fil
 [SSO with OneLogin]: ../../guides/sso/onelogin
 [SSO with Salesforce]: ../../guides/sso/salesforce
 [SSO with UAA]: ../../guides/sso/uaa
-[Chaining Oauth2 and JWT Filters]: ../../guides/auth/oauth2-and-jwt
 [Using APIKey Filters]: ../../guides/auth/apikey
 [Using External Filters]: ../../guides/custom-filters/external
-[Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [Using Plugin Filters]: ../../guides/custom-filters/plugin
 [metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Condition

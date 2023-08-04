@@ -24,7 +24,6 @@
 /guides/aes/redis-config
 /guides/aes/scaling
 /guides/auth/apikey
-/guides/auth/basic-auth
 /guides/auth/jwt
 /guides/custom-filters/external
 /guides/custom-filters/plugin

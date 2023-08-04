@@ -168,7 +168,6 @@ function logout(realm) {
   - [SSO with OneLogin][]: Setup single sign-on with OneLogin
   - [SSO with Salesforce][]: Setup single sign-on with Salesforce
   - [SSO with UAA][]: Setup single sign-on with UAA
-- [Chaining Oauth2 and JWT Filters][]: Learn how to combine Filters for Oauth2 and JWT processing
 
 [usage guides section]: #oauth2-usage-guides
 [Oauth2 Filter custom resource]: ../../custom-resources/filter-oauth2
@@ -181,7 +180,6 @@ function logout(realm) {
 [SSO with OneLogin]: ../../guides/sso/onelogin
 [SSO with Salesforce]: ../../guides/sso/salesforce
 [SSO with UAA]: ../../guides/sso/uaa
-[Chaining Oauth2 and JWT Filters]: ../../guides/auth/oauth2-and-jwt
 [open standard]: https://openid.net/
 [Auth0]: https://auth0.com/docs/identityproviders
 [token-based authentication and authorization]: https://oauth.net/

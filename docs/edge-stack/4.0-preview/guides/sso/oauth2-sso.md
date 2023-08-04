@@ -89,7 +89,6 @@ EOF
 - [SSO with OneLogin][]: Setup single sign-on with OneLogin
 - [SSO with Salesforce][]: Setup single sign-on with Salesforce
 - [SSO with UAA][]: Setup single sign-on with UAA
-- [Chaining Oauth2 and JWT Filters][]: Learn how to combine Filters for Oauth2 and JWT processing
 
 [the guide docs section]: #filter-usage-guides
 [OAuth2 Filter custom resource]: ../../../custom-resources/filter-oauth2
@@ -106,5 +105,4 @@ EOF
 [SSO with Salesforce]: ../salesforce
 [SSO with UAA]: ../uaa
 [OAuth2 design in $productName$]: ../../../design/oauth2
-[Chaining Oauth2 and JWT Filters]: ../../auth/oauth2-and-jwt
 [Slack]: https://a8r.io/slack

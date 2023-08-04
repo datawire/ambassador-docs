@@ -103,7 +103,6 @@ Configures passing along the request body to the External Service. If not set th
 ## External Filter Usage Guides
 
 - [Using External Filters][]: Use the External Filter to write your own service with custom processing and authentication logic
-  - [Basic Auth using External Filters][]: Setup basic authentication using an External Filter
   - [The Ext_Authz Protocol][]: Learn about how the ext_authz protocol works
 
 [Duration]: #duration
@@ -116,7 +115,6 @@ Configures passing along the request body to the External Service. If not set th
 [The Ext_Authz Protocol]: ../../guides/custom-filters/ext-authz
 [FilterPolicy Resource]: ../filterpolicy
 [Using External Filters]: ../../guides/custom-filters/external
-[Basic Auth using External Filters]: ../../guides/auth/basic-auth
 [LinkerD]: https://linkerd.io/
 [metav1.Duration]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Duration
 [DeniedHttpResponse]: https://github.com/envoyproxy/envoy/blob/1230c6cfba3791e4544b4ca23cacdbfc20a6fbaa/api/envoy/service/auth/v3/external_auth.proto
