@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Kubernetes Network architecture
 
 ## Kubernetes has its own isolated network

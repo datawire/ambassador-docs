@@ -2,16 +2,12 @@
    link: /install/quickstart
  - title: Installation and updates
    items:
-    # TODO: provide separate installation pages that show how to bring your own Envoy Gateway and EG/GWAPI CRDs
-    # TODO: add the below page until we're shipping GA
-    # - title: Upgrade or migrate
-    #   link: /install/upgrade
      - title: Installing and updatating
        link: /install/install-and-update
-     - title: Installing on AWS
-       link: /install/edge-stack-with-aws
-     - title: Installing on GKE
-       link: /install/edge-stack-with-gke
+     # - title: Installing on AWS
+     #   link: /install/edge-stack-with-aws
+     # - title: Installing on GKE
+     #   link: /install/edge-stack-with-gke
      # TODO: installing with AKS?
  - title: Arcitecture and design
    items:
@@ -23,20 +19,20 @@
    items:
    - title: $productName$ configuration
      items:
-     - title: $productName$ deployment config
+     - title: Deployment config
        link: /guides/aes/deployment-config
      - title: Redis config
        link: /guides/aes/redis-config
-     - title: Performance and scaling
-       link: /guides/aes/scaling
+     # - title: Performance and scaling
+     #   link: /guides/aes/scaling
    - title: Envoy Gateway configuration
      items:
      - title: Customizing Envoy Gateway
        link: /guides/eg/envoy-gateway-config
      - title: Customizing Envoy Proxy
        link: /guides/eg/envoy-config
-     - title: Performance and scaling
-       link: /guides/eg/scaling
+     # - title: Performance and scaling
+     #   link: /guides/eg/scaling
  - title: Ingress and traffic management
    items:
    - title: Listening for requests
@@ -160,8 +156,8 @@
      link: /guides/custom-filters/external
    - title: The Ext_Authz Protocol
      link: /guides/custom-filters/ext-authz
-   - title: Using plugin filters
-     link: /guides/custom-filters/plugin
+   # - title: Using plugin filters
+   #   link: /guides/custom-filters/plugin
  - title: Rate limiting
    items:
    - title: Rate limiting setup

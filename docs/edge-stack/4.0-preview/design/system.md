@@ -1,3 +1,4 @@
+import Alert from '@material-ui/lab/Alert';
 
 # $productName$ System Architecture
 

@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Microservices API gateways
 
 A microservices API gateway is an API gateway designed to accelerate the development workflow of independent services teams. A microservices API gateway provides all the functionality for a team to independently publish, monitor, and update a microservice.

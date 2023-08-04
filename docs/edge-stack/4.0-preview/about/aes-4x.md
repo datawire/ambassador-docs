@@ -1,3 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
+
 # Major differences between $productName$ 3.x and 4.x
 
 ## Architecture Changes

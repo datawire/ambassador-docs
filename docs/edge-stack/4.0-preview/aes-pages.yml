@@ -22,11 +22,9 @@
 /guides/aes/env-vars
 /guides/aes/module
 /guides/aes/redis-config
-/guides/aes/scaling
 /guides/auth/apikey
 /guides/auth/jwt
 /guides/custom-filters/external
-/guides/custom-filters/plugin
 /guides/observability/metrics-endpoint
 /guides/sso/auth0
 /guides/sso/azure

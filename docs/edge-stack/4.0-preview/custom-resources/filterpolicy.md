@@ -174,7 +174,6 @@ The following guides will help you get started using the different types of `Fil
   - [SSO with UAA][] - Setup single sign on with UAA
 - [Using APIKey Filters][] - Use the APIKey Filter to validate API Keys present in the HTTP header
 - [Using External Filters][] - Use the External Filter to write your own service with custom processing and authentication logic
-- [Using Plugin Filters][] - Compile your own custom filtering plugin on top of $productName$
 
 [usage guides section]: #filter-usage-guides
 [FilterPolicy]: #filterpolicy
@@ -200,7 +199,6 @@ The following guides will help you get started using the different types of `Fil
 [SSO with UAA]: ../../guides/sso/uaa
 [Using APIKey Filters]: ../../guides/auth/apikey
 [Using External Filters]: ../../guides/custom-filters/external
-[Using Plugin Filters]: ../../guides/custom-filters/plugin
 [corresponding Kubernetes validation]: https://github.com/kubernetes/apimachinery/blob/02cfb53916346d085a6c6c7c66f882e3c6b0eca6/pkg/util/validation/validation.go
 [https://tools.ietf.org/html/rfc7230]: https://tools.ietf.org/html/rfc7230
 [https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00]: https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00

@@ -77,15 +77,14 @@ The following guides will help you get started using the different types of `Fil
   - [SSO with UAA][]: Setup single sign-on with UAA
 - [Using APIKey Filters][]: Use the APIKey Filter to validate API Keys present in the HTTP header
 - [Using External Filters][]: Use the External Filter to write your own service with custom processing and authentication logic
-- [Using Plugin Filters][] - Compile your own custom filtering plugin on top of $productName$
 
 [usage guides section]: #filter-usage-guides
 [FilterPolicy custom resource]: ../filterpolicy
 [JWTFilter]: ../filter-jwt
+[PluginFilter]: ../filter-plugin
 [OAuth2Filter]: ../filter-oauth2
 [APIKeyFilter]:  ../filter-apikey
 [ExternalFilter]: ../filter-external
-[PluginFilter]: ../filter-plugin
 [Using JWT Filters]: ../../guides/auth/jwt
 [Oauth2 design in $productName$]: ../../design/oauth2
 [Using Oauth2 Filters]: ../../guides/sso/oauth2-sso
@@ -99,5 +98,4 @@ The following guides will help you get started using the different types of `Fil
 [SSO with UAA]: ../../guides/sso/uaa
 [Using APIKey Filters]: ../../guides/auth/apikey
 [Using External Filters]: ../../guides/custom-filters/external
-[Using Plugin Filters]: ../../guides/custom-filters/plugin
 [metav1.Condition]: https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1#Condition

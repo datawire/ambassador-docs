@@ -1,4 +1,5 @@
+import Alert from '@material-ui/lab/Alert';
 
-# The GatewayClass Resoruce
+# The GatewayClass Resouruce
 
 Under Construction
