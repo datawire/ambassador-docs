@@ -6,7 +6,7 @@ import Alert from '@material-ui/lab/Alert';
 
 # Manage my subscriptions
 
-Ambassador Labs provides a variety of different subscription options depending on your needs. Whether you're working with a small team with a few developers or a company with a large number of services, Ambassador Labs has flexible subscription options for you to chose from. 
+Ambassador Labs provides a variety of different subscription options depending on your needs. Whether you're working with a small team with a few developers or a company with a large number of services, Ambassador Labs has flexible subscription options, catering to the needs of both teams and individual developers, for you to choose from.
 
 ## Check or upgrade your subscription
 
