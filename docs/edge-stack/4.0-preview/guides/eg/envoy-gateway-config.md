@@ -7,7 +7,7 @@ Envoy Gateway is primarily configured using the [EnvoyGateway][] custom resource
 <Alert severity="warning">
 Modifying the Envoy Gateway Configuring is an **advanced** feature and should be used with caution. If configured improperly certain Edge Stack features may not work properly.
 
-You are welcome to add additional settings, but the `extensionManager` **MUST** have the settings seen below, and point at the `name.namespace` of your Edge Stack deployment.
+You are welcome to add additional settings, but the <code>extensionManager</code> **MUST** have the settings seen below, and point at the <code>name.namespace</code> of your Edge Stack deployment.
 
 </Alert>
 
