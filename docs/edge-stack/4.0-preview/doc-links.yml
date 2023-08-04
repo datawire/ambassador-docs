@@ -166,10 +166,6 @@
      link: /guides/custom-filters/ext-authz
    # - title: Using plugin filters
    #   link: /guides/custom-filters/plugin
- - title: Rate limiting
-   items:
-   - title: Rate limiting setup
-     link: https://gateway.envoyproxy.io/v0.5.0/user/rate-limit.html
    # basic rate limiting
    # advanced rate limiting
    # rate limiting token claims
@@ -263,8 +259,8 @@
        link: /concepts/api-gateways
      - title: Web application firewalls
        link: /concepts/web-application-firewalls
-     - title: Rate limiting at the edge
-       link: /concepts/rate-limiting-at-the-edge
+     # - title: Rate limiting at the edge
+     #   link: /concepts/rate-limiting-at-the-edge
  # TODO: we will have FAQs at some point for 4.x, but it is too early to know what they are
  - title: FAQs
    link: /about/faq

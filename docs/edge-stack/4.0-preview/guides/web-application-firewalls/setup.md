@@ -13,13 +13,12 @@ attacks. To accomplish this, the [Coraza Web Application Firewall library][] is 
 against a user-defined configuration file containing rules and settings for the firewall to determine whether to
 allow or deny incoming requests.
 
-$productName$ also has additional authentication features, such as [Filters][]. [Rate Limiting][] is also
-available since $productName$ is built on [Envoy Gateway][]. When `Filters`, `RateLimitsFilters`, and
-`WebApplicationFirewalls` are all used at the same time, the order of operations is as follows and is not currently configurable.
+$productName$ also has additional authentication features provided by [Filters][]. When `Filters` and
+`WebApplicationFirewalls` are used at the same time, the order of operations is as follows and is not currently configurable.
 
 1. `WebApplicationFirewalls` are always executed first
 2. `Filters` are executed next (so long as any configured `WebApplicationFirewalls` did not already reject the request)
-3. Lastly, [RateLimitFilters][] are executed (so long as any configured `WebApplicationFirewalls` and `Filters` did not already reject the request)
+3. Lastly, if [Envoy Gateway][]'s rate-limiting runs (if configured any configured `WebApplicationFirewalls` and `Filters` did not already reject the request)
 
 ## Web Application Firewalls Quickstart
 
@@ -207,8 +206,6 @@ about the metrics that are available.
 - [WebApplicationFirewallPolicy API Reference][] - Full reference for all the fields supported by the `WebApplicationFirewallPolicy` resource
 
 [Filters]: ../../../custom-resources/filter
-[Rate Limiting]: https://gateway.envoyproxy.io/v0.5.0/user/rate-limit.html
-[RateLimitFilters]: https://gateway.envoyproxy.io/v0.5.0/api/extension_types.html
 [WebApplicationFirewall]: ../../../custom-resources/webapplicationfirewall
 [WebApplicationFirewallPolicy]: ../../../custom-resources/webapplicationfirewallpolicy
 [WebApplicationFirewall API Reference]: ../../../custom-resources/webapplicationfirewall

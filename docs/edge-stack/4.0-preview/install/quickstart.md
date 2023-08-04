@@ -151,7 +151,6 @@ Explore some of the popular tutorials on $productName$:
 - [HTTP Routing][]: Learn more about how to configure routing HTTP traffic
 - [Web Application Firewalls][]: Protect your services with Web Application Firewalls.
 - [Configure Single Sign On][]: Setup authentication with a variety of identity management platforms.
-- [Rate Limiting][]: Limit the number of requests that can be made to your services.
 
 [Envoy Gateway]: https://github.com/envoyproxy/gateway
 [Emissary-ingress]: https://github.com/emissary-ingress/emissary
@@ -169,4 +168,3 @@ Explore some of the popular tutorials on $productName$:
 [HTTP Routing]: https://gateway-api.sigs.k8s.io/guides/http-routing/
 [Web Application Firewalls]: ../../guides/web-application-firewalls/setup
 [Configure Single Sign On]: ../../guides/sso/oauth2-sso
-[Rate Limiting]: https://gateway.envoyproxy.io/v0.5.0/user/rate-limit.html
