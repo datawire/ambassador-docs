@@ -197,8 +197,8 @@ docs for more info if you are making manual edits to the installation manifests.
 If you are updating via YAML then you can simply apply the latest YAML installation published by Ambassador Labs so long as you have not made changes to it.
 
 [quickstart guide]: ../quickstart
-[Envoy Gateway config]: ../../guides/eg/deployment-config
+[Envoy Gateway config]: ../../guides/eg/envoy-gateway-config
 [Configuring Edge Stack]: ../../guides/aes/deployment-config
-[Configuring Envoy Gateway]: ../../guides/eg/deployment-config
+[Configuring Envoy Gateway]: ../../guides/eg/envoy-gateway-config
 [Envoy Gateway]: https://github.com/envoyproxy/gateway
 [Gateway API]: https://gateway-api.sigs.k8s.io/
