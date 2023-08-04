@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 # Custom Logic With External Filters
 
 The `External` `Filter` calls out to an external service speaking the
-[`ext_authz` protocol](../../../running/services/ext-authz), providing
+[ext_authz protocol][], providing
 a highly flexible interface to plug in your own authentication,
 authorization, and filtering logic. This guide will showcase using External Filters. See the [External Filter API Reference][] for all the fields that the custom resource suports, or the [The Ext_Authz Protocol doc][] for more information about implementing ext_authz.
 
@@ -59,6 +59,7 @@ authorization, and filtering logic. This guide will showcase using External Filt
 
 In the [datawire/sample-external-service repository][], you can find examples of an External Filter. There is a directory showcasing support of an older `v2` transport protocol version as well as the most recent `v3` protocol version. The `v2` transport protocol is no longer supported, so make sure to use the `v3` libraries when building your External Filter. The External Filter in this repo does not perform any authorization and is instead meant to serve as a reference for some of the operations that an External can perform.
 
+[ext_authz protocol]: ../ext-authz
 [FilterPolicy resource]: ../../../custom-resources/filterpolicy
 [External Filter API Reference]: ../../../custom-resources/filter-external
 [External Filter]: ../../../custom-resources/filter-external
