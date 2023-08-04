@@ -33,9 +33,9 @@
        link: /guides/eg/envoy-config
      # - title: Performance and scaling
      #   link: /guides/eg/scaling
- - title: Ingress and traffic management
-   items:
-   - title: Listening for requests
+ # - title: Ingress and traffic management
+ #   items:
+ #   - title: Listening for requests
   #   link: /guides/ingress/listening
   #   - title: HTTP3 Setup
   #     link:
