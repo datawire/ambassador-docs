@@ -36,7 +36,7 @@
  - title: Ingress and traffic management
    items:
    - title: Listening for requests
-     link: /guides/ingress/listening
+  #   link: /guides/ingress/listening
   #   - title: HTTP3 Setup
   #     link:
   #   - title: AuthService settings
@@ -66,35 +66,43 @@
   #   - title: Get traffic from the edge
   #     link:
    - title: HTTP routing
-     link: /guides/routing/http
+     link: https://gateway-api.sigs.k8s.io/guides/http-routing/
    - title: TCP routing
-     link: /guides/routing/tcp
-   - title: UDP routing
-     link: /guides/routing/udp
+     link: https://gateway-api.sigs.k8s.io/guides/tcp/
+   # - title: UDP routing
+   #   link: /guides/routing/udp
    - title: gRPC routing
-     link: /guides/routing/grpc
-   - title: WebSocket connections
-     link: /guides/routing/websockets
-   - title: Redirects
-     link: /guides/routing/redirects
-   - title: Rewrites
-     link: /guides/routing/rewrites
+     link: https://gateway-api.sigs.k8s.io/guides/grpc-routing/
+   # - title: WebSocket connections
+   #   link: /guides/routing/websockets
+   # - title: Redirects
+   #   link: /guides/routing/redirects
+   # - title: Rewrites
+   #   link: /guides/routing/rewrites
+   - title: Rewrites & Redirects
+     link: https://gateway-api.sigs.k8s.io/guides/http-redirect-rewrite/
    - title: Headers
-     link: /guides/routing/headers
-   - title: Traffic mirroring / shadowing
-     link: /guides/routing/mirroring
-   - title: Customizing 404s
-     link: /guides/routing/404s
+     link: https://gateway-api.sigs.k8s.io/guides/http-header-modifier/
+   # - title: Traffic mirroring / shadowing
+   #   link: /guides/routing/mirroring
+   - title: Traffic splitting
+     link: https://gateway-api.sigs.k8s.io/guides/traffic-splitting/
+   - title: Cross namespace routing
+     link: https://gateway-api.sigs.k8s.io/guides/multiple-ns/
+   # - title: Customizing 404s
+   #   link: /guides/routing/404s
   #   - title: Timeouts
   #     link:
   #   - title: Host header
   #     link:
  - title: TLS configuration
-   items:
-   - title: TLS Termination
-     link: /guides/tls/termination
-   - title: TLS Passthrough
-     link: /guides/tls/passthrough
+   link: https://gateway-api.sigs.k8s.io/guides/tls/
+ # - title: TLS configuration
+ #   items:
+ #   - title: TLS Termination
+ #     link: /guides/tls/termination
+ #   - title: TLS Passthrough
+ #     link: /guides/tls/passthrough
   #   - title: TLS overview
   #     link: /topics/running/tls/
   #   - title: Cleartext support
@@ -161,7 +169,7 @@
  - title: Rate limiting
    items:
    - title: Rate limiting setup
-     link: /guides/rate-limiting/setup
+     link: https://gateway.envoyproxy.io/v0.5.0/user/rate-limit.html
    # basic rate limiting
    # advanced rate limiting
    # rate limiting token claims
@@ -201,32 +209,32 @@
      link: /custom-resources/webapplicationfirewall
    - title: WebApplicationFirewallPolicy
      link: /custom-resources/webapplicationfirewallpolicy
-   - title: Envoy Gateway resources
-     link: /custom-resources/eg
-     items:
-     - title: EnvoyGateway
-       link: /custom-resources/eg/envoygateway
-     - title: EnvoyProxy
-       link: /custom-resources/eg/envoyproxy
-     - title: RateLimitFilter
-       link: /custom-resources/eg/ratelimitfilter
-   - title: Gateway API resources
-     link: /custom-resources/gateway-api
-     items:
-     - title: GatewayClass
-       link: /custom-resources/gateway-api/gatewayclass
-     - title: Gateway
-       link: /custom-resources/gateway-api/gateway
-     - title: HTTPRoute
-       link: /custom-resources/gateway-api/httproute
-     - title: GRPCRoute
-       link: /custom-resources/gateway-api/grpcroute
-     - title: TCPRoute
-       link: /custom-resources/gateway-api/tcproute
-     - title: UDPRoute
-       link: /custom-resources/gateway-api/udproute
-     - title: ReferenceGrant
-       link: /custom-resources/gateway-api/referencegrant
+   # - title: Envoy Gateway resources
+   #   link: /custom-resources/eg
+   #   items:
+   #   - title: EnvoyGateway
+   #     link: /custom-resources/eg/envoygateway
+   #   - title: EnvoyProxy
+   #     link: /custom-resources/eg/envoyproxy
+   #   - title: RateLimitFilter
+   #     link: /custom-resources/eg/ratelimitfilter
+   # - title: Gateway API resources
+   #   link: /custom-resources/gateway-api
+   #   items:
+   #   - title: GatewayClass
+   #     link: /custom-resources/gateway-api/gatewayclass
+   #   - title: Gateway
+   #     link: /custom-resources/gateway-api/gateway
+   #   - title: HTTPRoute
+   #     link: /custom-resources/gateway-api/httproute
+   #   - title: GRPCRoute
+   #     link: /custom-resources/gateway-api/grpcroute
+   #   - title: TCPRoute
+   #     link: /custom-resources/gateway-api/tcproute
+   #   - title: UDPRoute
+   #     link: /custom-resources/gateway-api/udproute
+   #   - title: ReferenceGrant
+   #     link: /custom-resources/gateway-api/referencegrant
      # - title: Plug-in services
      #   items:
      #     - title: Authentication service

@@ -207,8 +207,8 @@ about the metrics that are available.
 - [WebApplicationFirewallPolicy API Reference][] - Full reference for all the fields supported by the `WebApplicationFirewallPolicy` resource
 
 [Filters]: ../../../custom-resources/filter
-[Rate Limiting]: ../../rate-limiting/setup
-[RateLimitFilters]: ../../../custom-resources/eg/ratelimitfilter
+[Rate Limiting]: https://gateway.envoyproxy.io/v0.5.0/user/rate-limit.html
+[RateLimitFilters]: https://gateway.envoyproxy.io/v0.5.0/api/extension_types.html
 [WebApplicationFirewall]: ../../../custom-resources/webapplicationfirewall
 [WebApplicationFirewallPolicy]: ../../../custom-resources/webapplicationfirewallpolicy
 [WebApplicationFirewall API Reference]: ../../../custom-resources/webapplicationfirewall

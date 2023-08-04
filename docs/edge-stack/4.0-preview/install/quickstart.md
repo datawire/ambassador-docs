@@ -148,9 +148,7 @@ $productName$ uses a combination of native Kubernetes resources and Custom Resou
 Explore some of the popular tutorials on $productName$:
 
 - [$productName$ system architecture][]: Learn about the system overview of $productName$ and its components.
-- [Listening for requests][]: Configure options for how $productName$ listens for requests.
 - [HTTP Routing][]: Learn more about how to configure routing HTTP traffic
-- [TLS Termination][]: Configure options for terminating TLS traffic.
 - [Web Application Firewalls][]: Protect your services with Web Application Firewalls.
 - [Configure Single Sign On][]: Setup authentication with a variety of identity management platforms.
 - [Rate Limiting][]: Limit the number of requests that can be made to your services.
@@ -161,16 +159,14 @@ Explore some of the popular tutorials on $productName$:
 [1. Installation]: #1-installation
 [2. Routing traffic from the edge]: #2-routing-traffic-from-the-edge
 [What's next?]: #img-classos-logo-srcimageslogopng-whats-next
-[GatewayClass]: ../../custom-resources/gateway-api/gatewayclass
-[Gateway]: ../../custom-resources/gateway-api/gateway
+[GatewayClass]: https://gateway-api.sigs.k8s.io/api-types/gatewayclass/
+[Gateway]: https://gateway-api.sigs.k8s.io/api-types/gateway/
 [IngressClass]: https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class
 [EnvoyProxy]: https://gateway.envoyproxy.io/v0.4.0/user/customize-envoyproxy.html
 [Envoy Proxy]: https://www.envoyproxy.io/
-[HTTPRoute]: ../../custom-resources/gateway-api/httproute
+[HTTPRoute]: https://gateway-api.sigs.k8s.io/api-types/httproute/
 [$productName$ system architecture]: ../../design/system/
-[Listening for requests]: ../../guides/ingress/listening
-[HTTP Routing]: ../../guides/routing/http
-[TLS Termination]: ../../guides/tls/termination
+[HTTP Routing]: https://gateway-api.sigs.k8s.io/guides/http-routing/
 [Web Application Firewalls]: ../../guides/web-application-firewalls/setup
 [Configure Single Sign On]: ../../guides/sso/oauth2-sso
-[Rate Limiting]: ../../guides/rate-limiting/setup
+[Rate Limiting]: https://gateway.envoyproxy.io/v0.5.0/user/rate-limit.html

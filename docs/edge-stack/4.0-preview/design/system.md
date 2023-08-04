@@ -152,16 +152,16 @@ In $productName$, the following process occurs when a downstream client initiate
 [auth service]: #auth-service
 [Web Application Firewall]: ../../guides/web-application-firewalls/setup
 [Authentication]: ../../guides/sso/oauth2-sso
-[Rate Limiting]: ../../guides/rate-limiting/setup
+[Rate Limiting]: https://gateway.envoyproxy.io/v0.5.0/user/rate-limit.html
 [Configuring the Envoy Proxy Deployment]: ../../guides/eg/envoy-config
 [Configuring the Envoy Gateway Deployment]: ../../guides/eg/envoy-gateway-config
 [Filter]: ../../custom-resources/filter
 [FilterPolicy]: ../../custom-resources/filterpolicy
 [WebApplicationFirewall]: ../../custom-resources/webapplicationfirewall
 [WebApplicationFirewallPolicy]: ../../custom-resources/webapplicationfirewallpolicy
-[RateLimitFilter]: ../../custom-resources/eg/ratelimitfilter
-[The EnvoyProxy API Reference]: ../../custom-resources/eg/envoyproxy
-[The EnvoyGateway API Reference]: ../../custom-resources/eg/envoygateway
+[RateLimitFilter]: https://gateway.envoyproxy.io/v0.5.0/api/extension_types.html
+[The EnvoyProxy API Reference]: https://gateway.envoyproxy.io/v0.5.0/api/config_types.html
+[The EnvoyGateway API Reference]: https://gateway.envoyproxy.io/v0.5.0/api/config_types.html
 [Single Sign-On with OAuth2 Filters]: ../../guides/sso/oauth2-sso
 [Custom Logic with External Filters]: ../../guides/custom-filters/external
 [Check JWTs with the JWT Filter]: ../../guides/auth/jwt
