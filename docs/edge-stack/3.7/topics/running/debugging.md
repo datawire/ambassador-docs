@@ -130,11 +130,11 @@ This will turn on Envoy debug logging for ten seconds, then turn it off again.
 
 #### Interpreting Response Codes
 
-Envoy default access log format includes a `%RESPONSE_FLAGS%` which provides additional information about the response or connection that can help with debugging issues.
+Envoys default access log format includes the `%RESPONSE_FLAGS%` which provides additional information about the response or connection that can help with debugging issues.
 
 For example, if a log line includes `UAEX` then this indicates that an Edge Stack Filter has denied the request. This can occur because a user was not authenticated or because of an error. Therefore, this can indicate that further investigation of the logs is needed.
 
-See Envoy's documentation for a full list of supported [%RESPONSE_FLAGS%](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#command-operators).
+See Envoy's documentation for a full list of the supported [%RESPONSE_FLAGS%](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log/usage#command-operators).
 
 ### Viewing logs
 
