@@ -1,1 +1,0 @@
-../../../telepresence/2.13/install/telepresence-pro.md
