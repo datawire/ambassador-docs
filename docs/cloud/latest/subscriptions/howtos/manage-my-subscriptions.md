@@ -22,7 +22,7 @@ The Subscription section of the Settings page shows your current utilization of 
 
 Quota limits are applicable to subscriptions:
 
-- Telepresence Connect: Time you are connected with Telepresence to your cluster.
+- Telepresence Connect Sessions: Number of telepresence connects performed to your clusters.
 - Connected Clusters: The Kubernetes clusters you have connected to the Ambassador Cloud app.
 - Requests per Second: Requests per second (RPS) is the maximum usage in the cluster between Rate Limited Traffic and Authenticated Traffic. For multiple clusters, RPS is the sum of the maximum usage of each cluster. RPS is calculated from a database snapshot sent by Edge Stack every 30 seconds.
 - Team Members: Ambassador Cloud users who have accepted an invitation sent by you through the Members page in your account settings.<span class="basic_badge">Legacy</span>
