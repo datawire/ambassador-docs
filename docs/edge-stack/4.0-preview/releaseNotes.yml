@@ -32,8 +32,8 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
-  - version: 4.0.0-preview
-    date: 'TBD'
+  - version: 4.0.0-preview.1
+    date: '2023-08-07'
     notes:
       - title: Edge Stack 4.x Preview. Now built on Envoy Gateway
         type: feature
