@@ -1,0 +1,15 @@
+# branch info
+branch: release/v3.7
+
+# self
+version: v4.0.0-preview.1
+chartVersion: 0.0.1
+productName: "Ambassador Edge Stack"
+productNamePlural: "Ambassador Edge Stacks"
+productNamespace: ambassador
+productDeploymentName: edge-stack
+productHelmName: edge-stack
+
+# other products
+qotmVersion: 1.7
+quoteVersion: 0.5.0
