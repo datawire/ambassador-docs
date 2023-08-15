@@ -253,22 +253,22 @@
        items:
          - title: Gateway API
            link: /topics/using/gateway-api
-     - title: End of Life Policy
-       link: /about/aes-emissary-eol
-     - title: Developer Portal
-       link: /topics/using/dev-portal
-     - title: Changes in $productName$ 2.X
-       link: /about/changes-2.x
-     - title: Changes in $productName$ 3.X
-       link: /about/changes-3.y
-     - title: Known issues
-       link: /about/known-issues
-     - title: FAQs
-       link: /about/faq
-     - title: Community
-       link: /community
-     - title: Troubleshooting
-       link: /topics/running/debugging
+ - title: End of Life Policy
+   link: /about/aes-emissary-eol
+ - title: Developer Portal
+   link: /topics/using/dev-portal
+ - title: Changes in $productName$ 2.X
+   link: /about/changes-2.x
+ - title: Changes in $productName$ 3.X
+   link: /about/changes-3.y
+ - title: Known issues
+   link: /about/known-issues
+ - title: FAQs
+   link: /about/faq
+ - title: Community
+   link: /community
+ - title: Troubleshooting
+   link: /topics/running/debugging
  - title: Release Notes
    link: /release-notes
  - title: Licenses
