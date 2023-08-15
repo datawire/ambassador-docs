@@ -42,7 +42,7 @@
          - title: Advanced deployment configuration
            link: /topics/running/running
          - title: Performance and scaling $productName$
-           link: /topics/running/scaling    
+           link: /topics/running/scaling
      - title: HTTP/3 configuration
        items:
          - title: HTTP3 setup in $productName$
@@ -65,14 +65,14 @@
            link: /howtos/grpc
          - title: WebSocket connections
            link: /howtos/websockets
-     - title: Authentication 
+     - title: Authentication
        items:
          - title: Basic authentication
            link: /howtos/basic-auth
      - title: Rate limiting
        items:
          - title: Rate limiting service
-           link: /topics/running/services/rate-limit-service/  
+           link: /topics/running/services/rate-limit-service/
          - title: Basic rate limiting
            link: /topics/using/rate-limits/
      - title: Service monitoring
@@ -117,7 +117,7 @@
            link: /topics/using/intro-mappings
          - title: Advanced Mapping configuration
            link: /topics/using/mappings
-     - title: TLS configuration 
+     - title: TLS configuration
        items:
          - title: TLS overview
            link: /topics/running/tls/
@@ -134,7 +134,7 @@
          - title: Using cert-manager
            link: /howtos/cert-manager
          - title: Client certificate validation
-           link: /howtos/client-cert-validation  
+           link: /howtos/client-cert-validation
      - title: Ingress and load balancing
        items:
          - title: AuthService settings
@@ -152,7 +152,7 @@
          - title: Load balancing
            link: /topics/running/load-balancer
          - title: Service discovery and resolvers
-           link: /topics/running/resolvers    
+           link: /topics/running/resolvers
      - title: Headers
        items:
          - title: Headers overview
@@ -196,28 +196,28 @@
          - title: Log service
            link: /topics/running/services/log-service
          - title: Tracing service
-           link: /topics/running/services/tracing-service 
+           link: /topics/running/services/tracing-service
      - title: Traffic management
        items:
          - title: Custom error responses
            link: /topics/running/custom-error-responses
          - title: Gzip compression
            link: /topics/running/gzip
-     - title: FAQs
-       link: /about/faq
-     - title: Troubleshooting
-       link: /topics/running/debugging
-     - title: Known issues
-       link: /about/known-issues
-     - title: Changes in $productName$ 2.X
-       link: /about/changes-2.x
-     - title: Changes in $productName$ 3.X
-       link: /about/changes-3.y
-     - title: Release Notes
-       link: /release-notes
+ - title: FAQs
+   link: /about/faq
+ - title: Troubleshooting
+   link: /topics/running/debugging
+ - title: Known issues
+   link: /about/known-issues
+ - title: Changes in $productName$ 2.X
+   link: /about/changes-2.x
+ - title: Changes in $productName$ 3.X
+   link: /about/changes-3.y
+ - title: Release Notes
+   link: /release-notes
  - title: Community
    link: /community
  - title: End of Life Policy
-   link: /about/aes-emissary-eol   
+   link: /about/aes-emissary-eol
  - title: Licenses
    link: licenses
