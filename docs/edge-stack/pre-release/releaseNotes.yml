@@ -35,6 +35,11 @@ items:
   - version: 3.8.0
     date: TBD
     notes:
+      - title: $productName$ now requires a valid license to start
+        type: change
+        body: >-
+          $productName$ will now require a valid license to run the product. If a valid license or cloud connect token is not present, then $productName$ will refuse to startup. If you already have an enterprise license then you do not need to do anything so long as it is properly applied. If you do not have an enterprise license for $productName then you can continue to use $productName$, visit <a href="https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started">the quickstart guide</a> to get setup with a free community license by signing into Ambassador cloud and connecting your installation.
+        docs: tutorials/getting-started/
       - title: Upgrade to Envoy 1.27.0
         type: feature
         body: >-

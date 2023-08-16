@@ -24,9 +24,7 @@ The core $OSSproductName$ is open source under the Apache Software License 2.0. 
 
 ### Can I use the add-on features for $AESproductName$ for free?
 
-Yes! The core functionality of the $AESproductName$ is free and has no limits whatsoever. If you wish to use one of our additional, proprietary features such as Single Sign-On, you can get a free community license for up to 5 requests per second by registering your connected $AESproductName$ installation in [Ambassador Cloud](https://app.getambassador.io/cloud/). Please contact [sales](/contact-us/) if you need more than 5 RPS.
-
-For more details on core unlimited features and premium features, see the [editions page](/editions).
+Yes! For more details please see the [$productName$ Licenses page](../../using/licenses).
 
 ### How does $productName$ use Envoy Proxy?
 
