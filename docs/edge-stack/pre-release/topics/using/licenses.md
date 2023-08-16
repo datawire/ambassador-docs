@@ -57,5 +57,5 @@ To obtain an enterprise license, you can [reach out to our sales team][] for mor
 
 [reach out to our sales team]: /contact-us/
 [enterprise license]: #enterprise-licenses
-[the quickstart guide]: ../../tutorials/getting-started
+[the quickstart guide]: ../../../tutorials/getting-started
 [Ambassador Cloud]: https://app.getambassador.io/cloud/

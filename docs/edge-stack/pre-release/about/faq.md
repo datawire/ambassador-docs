@@ -24,7 +24,7 @@ The core $OSSproductName$ is open source under the Apache Software License 2.0. 
 
 ### Can I use the add-on features for $AESproductName$ for free?
 
-Yes! For more details please see the [$productName$ Licenses page](../../using/licenses).
+Yes! For more details please see the [$productName$ Licenses page](../../topics/using/licenses).
 
 ### How does $productName$ use Envoy Proxy?
 
