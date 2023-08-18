@@ -53,7 +53,7 @@ items:
       - title: Duplication of values when using multiple Headers/QueryParameters in Mappings
         type: bugfix
         body: >-
-          In previous versions, if multiple Headers/QueryParameters where used in a <code>v3alpha1</code> mapping,
+          In previous versions, if multiple Headers/QueryParameters were used in a <code>v3alpha1</code> mapping,
           these values would duplicate and cause all the Headers/QueryParameters to have the same value.
           This is no longer the case and the expected values for unique Headers/QueryParameters will apply.
 
