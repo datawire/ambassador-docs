@@ -45,6 +45,35 @@ items:
         body: >-
           This upgrades $productName$ to be built on Envoy v1.27.0 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.27.0/version_history/v1.27/v1.27.0">Envoy Proxy 1.27.0 Release Notes</a>
         docs: https://www.envoyproxy.io/docs/envoy/v1.27.0/version_history/v1.27/v1.27
+      - title: Account for matchLabels when associating mappings with the same prefix to different Hosts
+        type: bugfix
+        body: >-
+          As of v2.2.2, if two mappings were associated with different Hosts through host
+          <code>mappingSelector</code> labels but share the same prefix, the labels were not taken into
+          account which would cause one Mapping to be correctly routed but the other not.
+
+          This change fixes this issue so that Mappings sharing the same prefix but associated
+          with different Hosts will be correctly routed.
+        docs: https://github.com/emissary-ingress/emissary/issues/4170
+      - title: Duplication of values when using multiple Headers/QueryParameters in Mappings
+        type: bugfix
+        body: >-
+          In previous versions, if multiple Headers/QueryParameters where used in a <code>v3alpha1</code> mapping,
+          these values would duplicate and cause all the Headers/QueryParameters to have the same value.
+          This is no longer the case and the expected values for unique Headers/QueryParameters will apply.
+
+          This issue was only present in <code>v3alpha1</code> Mappings. For users who may have this issue, please
+          be sure to re-apply any <code>v3alpha1</code> Mappings in order to update the stored <code>v2</code> Mapping and resolve the
+          issue.
+        docs: topics/using/headers/headers
+      - title: Ambassador Agent no longer collects Envoy metrics
+        type: change
+        body: >-
+          When the Ambassador agent is being used, it will no longer attempt to collect and report Envoy metrics.
+          In previous versions, $productName$ would always create an Envoy stats sink for the agent as long as the AMBASSADOR_GRPC_METRICS_SINK
+          environmet variable was provided. This environment variable was hardcoded on the release manifests and has now been removed
+          and an Envoy stats sink for the agent is no longer created.
+        docs: topics/running/environment#ambassador_grpc_metrics_sink
   - version: 3.7.2
     date: '2023-07-25'
     notes:

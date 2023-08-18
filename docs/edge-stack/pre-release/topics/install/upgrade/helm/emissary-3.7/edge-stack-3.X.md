@@ -117,7 +117,7 @@ Migration is a six-step process:
 2. **Install $AESproductName$ $version$.**
 
    <Alert severity="warning">
-     $productName$ requires a valid license or cloud connect token to start. You can refer to the <a href="https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started">quickstart guide</a>
+     $productName$ requires a valid license or cloud connect token to start. You can refer to the <a href="https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started">quickstart guide </a>
      for instructions on how to obtain a free community license. Copy the cloud token command from the guide in Ambassador cloud for use below. If you already have a cloud connect token or
      a valid enterprise license, then you can skip this step.
    </Alert>
