@@ -79,7 +79,7 @@ https://app.getambassador.io/download/tel2oss/releases/download/vx.y.z/teleprese
 <Platform.WindowsTab>
 
 ```
-(https://app.getambassador.io/download/tel2oss/releases/download/vx.y.z/telepresence-windows-amd64.exe
+https://app.getambassador.io/download/tel2oss/releases/download/vx.y.z/telepresence-windows-amd64.exe
 ```
 
 </Platform.WindowsTab>

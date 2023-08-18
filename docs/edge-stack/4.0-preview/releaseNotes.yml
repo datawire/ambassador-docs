@@ -1,0 +1,45 @@
+# -*- fill-column: 100 -*-
+
+# This file should be placed in the folder for the version of the
+# product that's meant to be documented. A `/release-notes` page will
+# be automatically generated and populated at build time.
+#
+# Note that an entry needs to be added to the `doc-links.yml` file in
+# order to surface the release notes in the table of contents.
+#
+# The YAML in this file should contain:
+#
+# changelog: An (optional) URL to the CHANGELOG for the product.
+# items: An array of releases with the following attributes:
+#     - version: The (optional) version number of the release, if applicable.
+#     - date: The date of the release in the format YYYY-MM-DD.
+#     - notes: An array of noteworthy changes included in the release, each having the following attributes:
+#         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
+#         - title: A short title of the noteworthy change.
+#         - body: >-
+#             Two or three sentences describing the change and why it
+#             is noteworthy.  This is HTML, not plain text or
+#             markdown.  It is handy to use YAML's ">-" feature to
+#             allow line-wrapping.
+#         - image: >-
+#             The URL of an image that visually represents the
+#             noteworthy change.  This path is relative to the
+#             `release-notes` directory; if this file is
+#             `FOO/releaseNotes.yml`, then the image paths are
+#             relative to `FOO/release-notes/`.
+#         - docs: The path to the documentation page where additional information can be found.
+#         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
+
+changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
+items:
+  - version: 4.0.0-preview.1
+    date: '2023-08-07'
+    notes:
+      - title: Edge Stack 4.x Preview. Now built on Envoy Gateway
+        type: feature
+        body: >-
+          With the launch of the 4.x major version, $productName$ will now be built on
+          to Envoy Gateway instead of Emissary-ingress.
+          Ambassador Labs will continue to ship necessary updates and bugfixes for $productName$
+          and Emissary-ingress 3.x until an end of life for these major versions is otherwise announced.
+        docs: /install/quick-start

@@ -83,6 +83,14 @@ const index = ({ data, location, pageContext }) => {
       );
     }
     if (
+      newVer.id === '4.0-preview' &&
+      newProduct.slug === 'edge-stack'
+    ) {
+        return (
+          <p>{`This version of ${newProduct.name} is a developer preview and is subject to change before the official release`}</p>
+        );
+    }
+    if (
       newVer.id === '3.7' ||
       newVer.id === 'pre-release' ||
       newVer.id === 'latest' ||

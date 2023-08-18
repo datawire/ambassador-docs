@@ -32,6 +32,21 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.7.2
+    date: '2023-07-25'
+    notes:
+      - title: Upgrade to Envoy 1.26.4
+        type: security
+        body: >-
+          This upgrades $productName$ to be built on Envoy v1.26.4 which includes a fixes for CVE-2023-35942, CVE-2023-35943, CVE-2023-35944.
+        docs: https://www.envoyproxy.io/docs/envoy/v1.26.1/version_history/v1.26/v1.26
+      
+      - title: Shipped Helm chart v8.7.2
+        type: change
+        body: >-
+          - Update default image to $productName$ v3.7.2. <br/>
+        docs: https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/CHANGELOG.md
+
   - version: 3.7.1
     date: '2023-07-13'
     notes:
