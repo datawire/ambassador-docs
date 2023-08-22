@@ -16,7 +16,7 @@ import Alert from '@material-ui/lab/Alert';
 ## Before you begin
 
 <Alert severity="warning">
-  $productName$ requires a valid license or cloud connect token to start. You can refer to the <a href="https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started">quickstart guide </a>
+   $productName$ requires a valid <a href="../../../topics/using/licenses">license</a> or cloud connect token to start. You can refer to the <a href="https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started">quickstart guide </a>
   for instructions on how to obtain a free community license and connect your installation to Ambassador cloud.
 </Alert>
 
