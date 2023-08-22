@@ -72,7 +72,7 @@ items:
         body: >-
           When the Ambassador agent is being used, it will no longer attempt to collect and report Envoy metrics.
           In previous versions, $productName$ would always create an Envoy stats sink for the agent as long as the AMBASSADOR_GRPC_METRICS_SINK
-          environmet variable was provided. This environment variable was hardcoded on the release manifests and has now been removed
+          environment variable was provided. This environment variable was hardcoded on the release manifests and has now been removed
           and an Envoy stats sink for the agent is no longer created.
         docs: topics/running/environment#ambassador_grpc_metrics_sink
   - version: 3.7.2
