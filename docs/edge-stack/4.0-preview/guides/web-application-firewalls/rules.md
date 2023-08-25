@@ -35,9 +35,9 @@ Ambassador Labs publishes and maintains a set of firewall rules that are ready t
 The latest version of the Ambassador Labs Web Application Firewall ruleset can be downloaded with these commands:
 
 ```bash
-wget https://app.getambassador.io/download/waf/v1-20230620/aes-waf.conf
-wget https://app.getambassador.io/download/waf/v1-20230620/crs-setup.conf
-wget https://app.getambassador.io/download/waf/v1-20230620/waf-rules.conf
+wget https://app.getambassador.io/download/waf/v1-20230825/aes-waf.conf
+wget https://app.getambassador.io/download/waf/v1-20230825/crs-setup.conf
+wget https://app.getambassador.io/download/waf/v1-20230825/waf-rules.conf
 ```
 
 Each file must be imported into $productName$'s Web Application Firewall in the following order:
@@ -65,15 +65,15 @@ and [RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf.example][] for more information
 To install any of the rules below, import all the files for the desired version in the order they are listed.
 </Alert>
 
-### Version v1-20230620
+### Version v1-20230825
 
 The initial version of $productName$'s Web Application Firewall rules.
 
 Files:
 
-- [aes-waf.conf](https://app.getambassador.io/download/waf/v1-20230620/aes-waf.conf)
-- [crs-setup.conf](https://app.getambassador.io/download/waf/v1-20230620/crs-setup.conf)
-- [waf-rules.conf](https://app.getambassador.io/download/waf/v1-20230620/waf-rules.conf)
+- [aes-waf.conf](https://app.getambassador.io/download/waf/v1-20230825/aes-waf.conf)
+- [crs-setup.conf](https://app.getambassador.io/download/waf/v1-20230825/crs-setup.conf)
+- [waf-rules.conf](https://app.getambassador.io/download/waf/v1-20230825/waf-rules.conf)
 
 [OWASP]: https://owasp.org/
 [Coraza's Seclang syntax]: https://coraza.io/docs/seclang/

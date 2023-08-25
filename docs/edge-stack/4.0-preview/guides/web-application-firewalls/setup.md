@@ -40,13 +40,13 @@ the fields they support.
      firewallRules:
      - sourceType: "http"
        http:
-         url: "https://app.getambassador.io/download/waf/v1-20230620/aes-waf.conf"
+         url: "https://app.getambassador.io/download/waf/v1-20230825/aes-waf.conf"
      - sourceType: "http"
        http:
-         url: "https://app.getambassador.io/download/waf/v1-20230620/crs-setup.conf"
+         url: "https://app.getambassador.io/download/waf/v1-20230825/crs-setup.conf"
      - sourceType: "http"
        http:
-         url: "https://app.getambassador.io/download/waf/v1-20230620/waf-rules.conf"
+         url: "https://app.getambassador.io/download/waf/v1-20230825/waf-rules.conf"
    EOF
    ```
 
