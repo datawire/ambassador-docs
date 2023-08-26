@@ -3,6 +3,10 @@ import React from 'react';
 import AppleIcon from '@src/assets/icons/apple.inline.svg';
 import LinuxIcon from '@src/assets/icons/linux.inline.svg';
 import WindowsIcon from '@src/assets/icons/windows.inline.svg';
+import PythonIcon from '@src/assets/icons/python.inline.svg';
+import NodeJSIcon from '@src/assets/icons/nodejs.inline.svg';
+import JavaIcon from '@src/assets/icons/java.inline.svg';
+import GolangIcon from '@src/assets/icons/golang.inline.svg';
 
 // prettier-ignore
 export class AbstractTab extends React.Component {
@@ -74,6 +78,62 @@ export class WindowsTab extends AbstractTab {
 
   static detect(window) {
     return /Win(dows|32|64|CE)/.test(window.navigator.platform);
+  }
+}
+
+// prettier-ignore
+export class PythonTab extends AbstractTab {
+  static get order() { return 1; }
+  static get priority() { return 4; }
+  static get slug() { return 'python'; }
+
+  static get icon() { return PythonIcon; }
+  static get label() { return 'Python'; }
+
+  static detect(window) {
+    return /Mac(intosh|Intel|PPC|68K)/.test(window.navigator.platform);
+  }
+}
+
+// prettier-ignore
+export class NodeTab extends AbstractTab {
+  static get order() { return 2; }
+  static get priority() { return 3; }
+  static get slug() { return 'nodejs'; }
+
+  static get icon() { return NodeJSIcon; }
+  static get label() { return 'NodeJS'; }
+
+  static detect(window) {
+    return /Mac(intosh|Intel|PPC|68K)/.test(window.navigator.platform);
+  }
+}
+
+// prettier-ignore
+export class JavaTab extends AbstractTab {
+  static get order() { return 3; }
+  static get priority() { return 2; }
+  static get slug() { return 'java'; }
+
+  static get icon() { return JavaIcon; }
+  static get label() { return 'Java'; }
+
+  static detect(window) {
+    return /Mac(intosh|Intel|PPC|68K)/.test(window.navigator.platform);
+  }
+}
+
+// prettier-ignore
+export class GolangTab extends AbstractTab {
+  static get order() { return 4; }
+  static get priority() { return 1; }
+  static get slug() { return 'golang'; }
+
+  static get icon() { return GolangIcon; }
+  static get label() { return 'Go'; }
+
+  static detect(window) {
+    return /Mac(intosh|Intel|PPC|68K)/.test(window.navigator.platform);
   }
 }
 
