@@ -35,11 +35,6 @@ items:
   - version: 3.8.0
     date: TBD
     notes:
-      - title: Upgrade to Envoy 1.27.0
-        type: feature
-        body: >-
-          This upgrades $productName$ to be built on Envoy v1.27.0 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.27.0/version_history/v1.27/v1.27.0">Envoy Proxy 1.27.0 Release Notes</a>
-        docs: https://www.envoyproxy.io/docs/envoy/v1.27.0/version_history/v1.27/v1.27
       - title: Account for matchLabels when associating mappings with the same prefix to different Hosts
         type: bugfix
         body: >-

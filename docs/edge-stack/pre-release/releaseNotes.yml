@@ -35,17 +35,12 @@ items:
   - version: 3.8.0
     date: TBD
     notes:
-      - title: Ambassador Edge Stack now requires a valid license to start
+      - title: Ambassador Edge Stack will fail to run if a valid license is not present
         type: change
         body: >-
-          $productName$ will now require a valid non-expired license to run the product. If a valid license or cloud connect token is not present, then $productName$ will refuse to startup. If you already have an enterprise license then you do not need to do anything so long as it is properly applied and not expired. Please view the <a href="/docs/edge-stack/latest/topics/using/licenses">license documentation</a> page for more information on your license.
+          $productName$ will now require a valid non-expired license to run the product. If a valid license is not present or your clusters are not connected to and showing licensed in Ambassador Cloud, then $productName$ will refuse to startup. If you already have an enterprise license then you do not need to do anything so long as it is properly applied and not expired. Please view the <a href="/docs/edge-stack/latest/topics/using/licenses">license documentation</a> page for more information on your license.
           If you do not have an enterprise license for $productName$ then you can visit <a href="https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started">the quickstart guide</a> to get setup with a free community license by signing into Ambassador Cloud and connecting your installation.
         docs: tutorials/getting-started/
-      - title: Upgrade to Envoy 1.27.0
-        type: feature
-        body: >-
-          This upgrades $productName$ to be built on Envoy v1.27.0 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.27.0/version_history/v1.27/v1.27.0">Envoy Proxy 1.27.0 Release Notes</a>
-        docs: https://www.envoyproxy.io/docs/envoy/v1.27.0/version_history/v1.27/v1.27
       - title: Account for matchLabels when associating mappings with the same prefix to different Hosts
         type: bugfix
         body: >-

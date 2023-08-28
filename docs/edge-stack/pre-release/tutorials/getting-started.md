@@ -31,6 +31,8 @@ $productName$ requires a [license](../../topics/using/licenses) to function, so 
 
 3. Either follow the installation instructions there, or copy the token out and follow along here.
 
+4. Once your cluster is connected to Ambassador Cloud, a community license is automatically applied.
+
 **We recommend using Helm** to install but there are other options below to choose from.
 
 <GettingStartedEdgeStack21Tabs version="$version$" />
