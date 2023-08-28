@@ -39,6 +39,81 @@ docDescription: >-
 changelog: https://github.com/telepresenceio/telepresence/blob/$branch$/CHANGELOG.md
 
 items:
+  - version: 2.15.0
+    date: "2023-08-28"
+    notes:
+      - type: security
+        title: Add ASLR to telepresence binaries
+        body: >-
+          ASLR hardens binary sercurity against fixed memory attacks.
+      - type: feature
+        title: Added client builds for arm64 architecture.
+        body: >-
+          Updated the release workflow files in github actions to including building and publishing the client binaries for arm64 architecture.
+        docs: https://github.com/telepresenceio/telepresence/issues/3259
+      - type: bugfix
+        title: KUBECONFIG env var can now be used with the docker mode.
+        body: >-
+          If provided, the KUBECONFIG environment variable was passed to the kubeauth-foreground service as a parameter.
+          However, since it didn't exist, the CLI was throwing an error when using <code>telepresence connect --docker</code>.
+        docs: https://github.com/telepresenceio/telepresence/pull/3300
+      - type: bugfix
+        title: Fix deadlock while watching workloads
+        body: >-
+          The <code>telepresence list --output json-stream</code> wasn't releasing the session's lock after being
+          stopped, including with a <code>telepresence quit</code>. The user could be blocked as a result.
+        docs: https://github.com/telepresenceio/telepresence/pull/3298
+      - type: bugfix
+        title: Change json output of telepresence list command
+        body: >-
+          Replace deprecated info in the JSON output of the telepresence list command.
+  - version: 2.14.4
+    date: "2023-08-21"
+    notes:
+      - type: bugfix
+        title: Nil pointer exception when upgrading the traffic-manager.
+        body: >-
+          Upgrading the traffic-manager using <code>telepresence helm upgrade</code> would sometimes
+          result in a helm error message <q>executing "telepresence/templates/intercept-env-configmap.yaml"
+          at <.Values.intercept.environment.excluded>: nil pointer evaluating interface {}.excluded"</q>
+        docs: https://github.com/telepresenceio/telepresence/issues/3313
+  - version: 2.14.2
+    date: "2023-07-26"
+    notes:
+      - type: bugfix
+        title: Telepresence now use the OSS agent in its latest version by default.
+        body: >-
+          The traffic manager admin was forced to set it manually during the chart installation.
+        docs: https://github.com/telepresenceio/telepresence/issues/3271
+  - version: 2.14.1
+    date: "2023-07-07"
+    notes:
+      - type: feature
+        title: Envoy's http idle timout is now configurable.
+        body: >-
+          A new <code>agent.helm.httpIdleTimeout</code> setting was added to the Helm chart that controls
+          the proprietary Traffic agent's http idle timeout. The default of one hour, which in some situations
+          would cause a lot of resource consuming and lingering connections, was changed to 70 seconds.
+      - type: feature
+        title: Add more gauges to the Traffic manager's Prometheus client.
+        body: >-
+          Several gauges were added to the Prometheus client to make it easier to monitor
+          what the Traffic manager spends resources on.
+      - type: feature
+        title: Agent Pull Policy
+        body: >-
+          Add option to set traffic agent pull policy in helm chart.
+      - type: bugfix
+        title: Resource leak in the Traffic manager.
+        body: >-
+          Fixes a resource leak in the Traffic manager caused by lingering tunnels between the clients and
+          Traffic agents. The tunnels are now closed correctly when terminated from the side that created them.
+      - type: bugfix
+        title: Fixed problem setting traffic manager namespace using the kubeconfig extension.
+        body: >-
+          Fixes a regression introduced in version 2.10.5, making it impossible to set the traffic-manager namespace
+          using the telepresence.io kubeconfig extension.
+        docs: https://www.getambassador.io/docs/telepresence/latest/reference/config#manager
   - version: 2.14.0
     date: "2023-06-12"
     notes:
