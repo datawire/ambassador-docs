@@ -39,7 +39,7 @@ import ContentTable from '../ContentTable';
 import DocsFooter from '../DocsFooter';
 import DocsHome from '../DocsHome/DocsHome';
 import SearchBox from '../SearchBox';
-import IsAesPage from '../ShowAesPage';
+import EditionsChip from '../EditionsChip';
 import SidebarContent from '../SidebarContent';
 
 const index = ({ data, location, pageContext }) => {
@@ -489,7 +489,7 @@ const index = ({ data, location, pageContext }) => {
       <MainContainer>
         <div className="docs__doc-body doc-body">
           <div className="doc-tags">
-            <IsAesPage
+            <EditionsChip
               initialProduct={initialProduct.slug}
               slug={slug}
               initialVersion={initialVersion.id}

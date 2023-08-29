@@ -30,6 +30,13 @@
 
 changelog: ''
 items:
+  - date: '2023-08-07'
+    notes:
+      - title: 'New subscription plans'
+        body: Sign up now and enjoy a 30-day trial to explore our product’s capabilities, helping you find the perfect plan that suits your needs.
+        image: '/images/cloud/telepresence-pricing.png'
+        href: '/editions'
+        type: feature
   - date: '2023-06-05'
     notes:
       - title: 'Air-gapped for Telepresence'
