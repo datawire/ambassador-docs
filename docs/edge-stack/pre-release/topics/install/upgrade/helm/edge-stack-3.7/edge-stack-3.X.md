@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 3.6.X to $productName$ $version$ (Helm)
+# Upgrade $productName$ 3.7.X to $productName$ $version$ (Helm)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 3.6.Z to $productName$ $version$. If
+  This guide covers migrating from $productName$ 3.7.Z to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
   This guide is written for upgrading an installation made using Helm.
-  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-3.6/edge-stack-3.X">YAML-based
+  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-3.7/edge-stack-3.X">YAML-based
   upgrade instructions</a>.
 </Alert>
 
