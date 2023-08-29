@@ -31,7 +31,7 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$oss
 | $AESproductName$ 2.0.X                  | [$AESproductName$ $versionTwoX$](../upgrade/helm/edge-stack-2.0/edge-stack-2.X)  |
 | $AESproductName$ $versionOneX$          | [$AESproductName$ $versionTwoX$](../upgrade/helm/edge-stack-1.14/edge-stack-2.X) |
 | $AESproductName$ prior to $versionOneX$ | [$AESproductName$ $versionOneX$](../../../../1.14/topics/install/upgrading)      |
-| $OSSproductName$ $ossVersion$           | [$AESproductName$ $version$](../upgrade/helm/emissary-3.7/edge-stack-3.X)        |
+| $OSSproductName$ $ossVersion$           | [$AESproductName$ $version$](../upgrade/helm/emissary-3.8/edge-stack-3.X)        |
 
 ## If you installed $AESproductName$ manually by applying YAML
 
@@ -43,4 +43,4 @@ See the [instructions on updating $OSSproductName$](../../../../../emissary/$oss
 | $AESproductName$ 2.0.X                  | [$AESproductName$ $versionTwoX$](../upgrade/yaml/edge-stack-2.0/edge-stack-2.X)  |
 | $AESproductName$ $versionOneX$          | [$AESproductName$ $versionTwoX$](../upgrade/yaml/edge-stack-1.14/edge-stack-2.X) |
 | $AESproductName$ prior to $versionOneX$ | [$AESproductName$ $versionOneX$](../../../../1.14/topics/install/upgrading)      |
-| $OSSproductName$ $ossVersion$           | [$AESproductName$ $version$](../upgrade/yaml/emissary-3.7/edge-stack-3.X)        |
+| $OSSproductName$ $ossVersion$           | [$AESproductName$ $version$](../upgrade/yaml/emissary-3.8/edge-stack-3.X)        |
