@@ -60,9 +60,9 @@ sudo chmod a+x /usr/local/bin/telepresence
 </Platform.GNULinuxTab>
 <Platform.WindowsTab>
 
-To install Telepresence, [Click here to download the Telepresence binary](https://app.getambassador.io/download/tel2oss/releases/download/$dlVersion$/telepresence-windows-amd64.exe).
+To install Telepresence, [Click here to download the Telepresence binary](https://app.getambassador.io/download/tel2oss/releases/download/$dlVersion$/telepresence-windows-amd64.zip).
 
-Once you have the binary downloaded you will need to do a few things:
+Once you have the binary downloaded and unzipped you will need to do a few things:
 
 1. Rename the binary from `telepresence-windows-amd64.exe` to `telepresence.exe`
 2. Move the binary to `C:\Program Files (x86)\$USER\Telepresence\`
