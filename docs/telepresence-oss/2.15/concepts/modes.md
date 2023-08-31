@@ -1,1 +1,0 @@
-../../../telepresence/2.15/concepts/modes.md
