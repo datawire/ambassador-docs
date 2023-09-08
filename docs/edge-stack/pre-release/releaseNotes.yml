@@ -37,7 +37,7 @@ items:
     notes:
       - title: Introduce API group gateway.getambassador.io/v1alpha1
         body: >-
-          API group <code>gateway.getambassador.io</code> starting with version <code>gateway.getambassador.io/v1alpha1</code> is introduced for configuring Filters and FilterPolicies. It is NOT backwards compatible with the <code>getambassador.io> API group.
+          API group <code>gateway.getambassador.io</code> starting with version <code>gateway.getambassador.io/v1alpha1</code> is introduced for configuring Filters and FilterPolicies. It is NOT backwards compatible with the <code>getambassador.io</code> API group.
         type: feature
       - title: Helm chart adds the Ambassador Agent chart as a sub-chart
         type: change
