@@ -35,7 +35,7 @@ items:
   - version: 3.8.1
     date: 'TBD'
     notes:
-      - title: Ensure APIExt server is available before starting $productName$ 
+      - title: Ensure APIExt server is available before starting Edge Stack
         type: bugfix
         body: >-
           The APIExt server provides CRD conversion between the stored version
