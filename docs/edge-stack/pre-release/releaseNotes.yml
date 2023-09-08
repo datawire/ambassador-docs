@@ -35,9 +35,9 @@ items:
   - version: 3.9.0
     date: 'TBD'
     notes:
-      - title: Introduce API group gateway.getambassador.io/v1alpha1
+      - title: gateway.getambassador.io/v1alpha1 Filter & FilterPolicy resources
         body: >-
-          API group <code>gateway.getambassador.io</code> starting with version <code>gateway.getambassador.io/v1alpha1</code> is introduced for configuring Filters and FilterPolicies. It is NOT backwards compatible with the <code>getambassador.io</code> API group.
+          Filter and FilterPolicy resources are now available via <code>gateway.getambassador.io/v1alpha1</code>. It is NOT backwards compatible with <code>getambassador.io/v3alpha1</code> Filter and FilterPolicy resources.
         type: feature
       - title: Helm chart adds the Ambassador Agent chart as a sub-chart
         type: change
