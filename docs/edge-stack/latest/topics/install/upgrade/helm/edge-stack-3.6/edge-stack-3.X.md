@@ -1,16 +1,16 @@
 import Alert from '@material-ui/lab/Alert';
 
-# Upgrade $productName$ 2.5.Z to $productName$ $version$ (YAML)
+# Upgrade $productName$ 3.6.X to $productName$ $version$ (Helm)
 
 <Alert severity="info">
-  This guide covers migrating from $productName$ 2.5.Z to $productName$ $version$. If
+  This guide covers migrating from $productName$ 3.6.Z to $productName$ $version$. If
   this is not your <b>exact</b> situation, see the <a href="../../../../migration-matrix">migration
   matrix</a>.
 </Alert>
 
 <Alert severity="warning">
-  This guide is written for upgrading an installation made without using Helm.
-  If you originally installed with Helm, see the <a href="../../../helm/edge-stack-2.5/edge-stack-3.3">Helm-based
+  This guide is written for upgrading an installation made using Helm.
+  If you did not originally install with Helm, see the <a href="../../../yaml/edge-stack-3.6/edge-stack-3.X">YAML-based
   upgrade instructions</a>.
 </Alert>
 
@@ -40,6 +40,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
 
    For more information on `DISABLE_STRICT_LABEL_SELECTORS` see the [Environment Variables page](../../../../../running/environment).
 
+
 2. Check Transport Protocol usage on all resources before migrating.
 
     The `AuthService`, `RatelimitService`, `LogServices`, and External `Filters` that use the `grpc` protocol will now need to explicilty set `protocol_version: "v3"`. If not set or set to `v2` then an error will be posted and a static response will be returned.
@@ -51,14 +52,14 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
     The following imports simply need to be updated to switch from Envoy's Transport Protocol `v2` to `v3`, and then the configuration for these resources can be updated to add the `protocl_version: "v3"` when the updated service is deployed.
 
     `v2` Imports:
-    ```
+    ```golang
 	    envoyCoreV2 "github.com/datawire/ambassador/pkg/api/envoy/api/v2/core"
 	    envoyAuthV2 "github.com/datawire/ambassador/pkg/api/envoy/service/auth/v2"
 	    envoyType "github.com/datawire/ambassador/pkg/api/envoy/type"
     ```
 
     `v3` Imports:
-    ```
+    ```golang
 	    envoyCoreV3 "github.com/datawire/ambassador/v2/pkg/api/envoy/config/core/v3"
 	    envoyAuthV3 "github.com/datawire/ambassador/v2/pkg/api/envoy/service/auth/v3"
 	    envoyType "github.com/datawire/ambassador/v2/pkg/api/envoy/type/v3"
@@ -66,7 +67,7 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
 
 3. Check removed runtime changes
 
-   ```
+   ```yaml
    # No longer necessary because this was removed from Envoy
    # $productName$ already was converted to use the compressor API
    # https://www.envoyproxy.io/docs/envoy/v1.22.0/configuration/http/http_filters/compressor_filter#config-http-filters-compressor
@@ -83,15 +84,25 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
    "envoy.reloadable_features.enable_deprecated_v2_api": true,
    ```
 
-4. **Install new CRDs.**
+4. Support for LightStep tracing driver removed
+
+<Alert severity="warning">
+  As of $productName$ 3.4.Z, the <code>LightStep</code> tracing driver is no longer supported. To ensure you do not drop any tracing data, be sure to read before upgrading.
+</Alert>
+
+$productName$ 3.4 is based on Envoy 1.24.1 which removed support for the `LightStep` tracing driver. The team at LightStep and the maintainers of Envoy-Proxy recommend that users instead leverage the OpenTelemetry Collector to send tracing information to LightStep. We have written a guide which can be found here <a href="/docs/emissary/3.4/howtos/tracing-lightstep">Distributed Tracing with OpenTelemetry and Lightstep</a> that outlines how to set this up. **It is important that you follow this upgrade path prior to upgrading or you will drop tracing data.**
+
+## Migration Steps
+
+1. **Install new CRDs.**
 
    After reviewing the changes in 3.x and confirming that you are ready to upgrade, the process is the same as upgrading minor versions
-   in previous version of $productName$ and does not require the complex migration steps that the migration from 1.x tto 2.x required.
+   in previous version of $productName$ and does not require the complex migration steps that the migration from 1.x to 2.x required.
 
    Before installing $productName$ $version$ itself, you need to update the CRDs in
-   your cluster. This is mandatory during any upgrade of $productName$.
+   your cluster; Helm will not do this for you. This is mandatory during any upgrade of $productName$.
 
-   ```
+   ```bash
    kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes-crds.yaml
    kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system
    ```
@@ -115,11 +126,27 @@ You can refer to the [Major changes in $productName$ 3.x](../../../../../../abou
     This will create a new certificate with a one year expiration. We will issue a software patch to address this issue well before the one year expiration. Note that certificate renewal will not cause any downtime.
    </Alert>
 
-5. **Install $productName$ $version$.**
+2. **Install $productName$ $version$.**
 
-   After installing the new CRDs, upgrade $productName$ $version$:
+   After installing the new CRDs, use Helm to install $productName$ $version$. Start by
+   making sure that your `datawire` Helm repo is set correctly:
 
    ```bash
-   kubectl apply -f https://app.getambassador.io/yaml/edge-stack/$version$/aes.yaml && \
-   kubectl rollout status -n $productNamespace$ deployment/edge-stack -w
+   helm repo remove datawire
+   helm repo add datawire https://app.getambassador.io
+   helm repo update
    ```
+
+   Then, update your $productName$ installation in the `$productNamespace$` namespace.
+   If necessary for your installation (e.g. if you were running with
+   `AMBASSADOR_SINGLE_NAMESPACE` set), you can choose a different namespace.
+
+   ```bash
+   helm upgrade -n $productNamespace$ \
+        $productHelmName$ datawire/$productHelmName$ && \
+   kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
+   ```
+
+   <Alert severity="warning">
+     You must use the <a href="https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$"><code>$productHelmName$</code> Helm chart</a> to install $productName$ 3.X.
+   </Alert>

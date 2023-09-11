@@ -119,11 +119,14 @@ protocol over that connection.
 
 More authentication mechanisms and identity provider support will be added soon. Please [let us know](https://www.getambassador.io/feedback/) which providers are the most important to you and your team in order for us to prioritize those.
 
+<<<<<<< HEAD
 ** How do I disable desktop notifications from the Telepresence CLI? **
 
 Desktop notifications for the Telepresence CLI tool can be activated/deactivated from Ambassador Cloud.
 Users can head over to their [Notifications](https://app.getambassador.io/cloud/settings/notifications) page to configure this feature.
 
+=======
+>>>>>>> origin/master
 ** Is Telepresence open source?**
 
 A large part of it is! You can find its source code on [GitHub](https://github.com/telepresenceio/telepresence).
