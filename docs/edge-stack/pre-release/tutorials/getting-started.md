@@ -11,7 +11,7 @@ import GettingStartedEdgeStack21Tabs from './gs-tabs'
 <h3>Contents</h3>
 
 - [1. Installation](#1-installation)
-  - [Connecting your installation to Ambassador Cloud](#connecting-your-installation-to-ambassador-cloud)
+- [Getting a license from Ambassador Cloud](#getting-a-license-from-ambassador-cloud)
 - [2. Routing traffic from the edge](#2-routing-traffic-from-the-edge)
 - [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
 
@@ -19,25 +19,23 @@ import GettingStartedEdgeStack21Tabs from './gs-tabs'
 
 ## 1. Installation
 
+### Getting a license from Ambassador Cloud
+
 We'll start by installing $productName$ into your cluster.
 
-**We recommend using Helm** but there are other options below to choose from.
+$productName$ requires a [license](../../topics/using/licenses) to function, so the first step is getting one to use while installing. If you are in air-gapped environment, please [contact sales](https://www.getambassador.io/contact-us).
+
+1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/edge-stack/license/existing/) with GitHub, GitLab or Google and select your team account.
+
+2. Follow the prompts to name the cluster and click **Generate Key**.
+
+3. Either follow the installation instructions there, or copy the token out and follow along here.
+
+4. Once your cluster is connected to Ambassador Cloud, a community license is automatically applied.
+
+**We recommend using Helm** to install but there are other options below to choose from.
 
 <GettingStartedEdgeStack21Tabs version="$version$" />
-
-### Connecting your installation to Ambassador Cloud
-
-Now is a great time to enhance your $productName$ experience and take advantage of Ambassador Cloud's advanced capabilities. 
-
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/services/) with GitHub, GitLab or Google and select your team account.
-
-2. At the top, click **Add Services** then click **Connection Instructions** in the "Connect your installation" section.
-
-3. Follow the prompts to name the cluster and click **Generate a Cloud Token**.
-
-4. Follow the prompts to install the cloud token into your cluster.
-
-5. When the token installation is completed, your services are listed in Ambassador Cloud.
 
 <Alert severity="success"><b>Success!</b> At this point, you have installed $productName$. Now let's get some traffic flowing to your services.</Alert>
 
@@ -88,7 +86,7 @@ $productName$ uses Kubernetes Custom Resource Definitions (CRDs) to declarativel
 
 3. Generate the YAML for a `Mapping` to tell $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
 
-  In this step, we'll be using the Mapping Editor, which you can find in the service details view of your [Ambassador Cloud connected installation](#connecting-your-installation-to-ambassador-cloud).
+  In this step, we'll be using the Mapping Editor, which you can find in the service details view of your [Ambassador Cloud connected installation](#getting-a-license-from-ambassador-cloud).
   Open your browser to https://app.getambassador.io/cloud/services/quote/details and click on **New Mapping**.
 
   Default options are automatically populated. **Enable and configure the following settings**, then click **Generate Mapping**:

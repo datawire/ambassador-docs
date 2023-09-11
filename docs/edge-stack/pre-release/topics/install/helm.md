@@ -15,11 +15,16 @@ import Alert from '@material-ui/lab/Alert';
 
 ## Before you begin
 
+<Alert severity="warning">
+   $productName$ requires a valid <a href="../../../topics/using/licenses">license</a> or cloud connect token to start. You can refer to the <a href="https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started">quickstart guide </a>
+  for instructions on how to obtain a free community license and connect your installation to Ambassador cloud.
+</Alert>
+
 The $productName$ Helm chart is hosted by Datawire and published at `https://app.getambassador.io`.
 
 Start by adding this repo to your helm client with the following command:
 
-```
+```bash
 helm repo add datawire https://app.getambassador.io
 helm repo update
 ```
@@ -68,7 +73,7 @@ When you run the Helm chart, it installs $productName$.
 
 3. Next Steps
 
-   $productName$ shold now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources.
+   $productName$ should now be successfully installed and running, but in order to get started deploying Services and test routing to them you need to configure a few more resources.
 
    - [The `Listener` Resource](../../running/listener/) is required to configure which ports the $productName$ pods listen on so that they can begin responding to requests.
    - [The `Mapping` Resouce](../../using/intro-mappings/) is used to configure routing requests to services in your cluster.

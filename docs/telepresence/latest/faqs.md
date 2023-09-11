@@ -4,6 +4,8 @@ description: "Learn how Telepresence helps with fast development and debugging i
 
 # FAQs
 
+For questions about the new account changes introduced in v2.15, please see our FAQ [specific to that topic](../faq-215).
+
 ** Why Telepresence?**
 
 Modern microservices-based applications that are deployed into Kubernetes often consist of tens or hundreds of services. The resource constraints and number of these services means that it is often difficult to impossible to run all of this on a local development machine, which makes fast development and debugging very challenging. The fast [inner development loop](../concepts/devloop/) from previous software projects is often a distant memory for cloud developers.
@@ -117,6 +119,14 @@ protocol over that connection.
 
 More authentication mechanisms and identity provider support will be added soon. Please [let us know](https://www.getambassador.io/feedback/) which providers are the most important to you and your team in order for us to prioritize those.
 
+<<<<<<< HEAD
+** How do I disable desktop notifications from the Telepresence CLI? **
+
+Desktop notifications for the Telepresence CLI tool can be activated/deactivated from Ambassador Cloud.
+Users can head over to their [Notifications](https://app.getambassador.io/cloud/settings/notifications) page to configure this feature.
+
+=======
+>>>>>>> origin/master
 ** Is Telepresence open source?**
 
 A large part of it is! You can find its source code on [GitHub](https://github.com/telepresenceio/telepresence).

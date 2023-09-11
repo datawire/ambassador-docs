@@ -347,18 +347,28 @@ You can define headers to filter the requests which should end up on your machin
 | name                      | string   | N/A                     | Name of the header                                            | N/A     |
 | value                     | string   | N/A                     | Value of the header                                           | N/A     |
 
-Telepresence specs also support dynamic headers with **variables**: 
+## Templating
+Telepresence specs also support templating of scripts, commands, arguments, environments, and intercept headers. All
+[Go Builtin](https://pkg.go.dev/text/template#hdr-Functions) and [Sprig](http://masterminds.github.io/sprig/)
+template functions can be used. In addition, Telepresence also adds **variables**: 
 
 ```yaml
 intercepts:
   - headers:
     - name: test-{{ .Telepresence.Username }}
-      value: "{{ .Telepresence.Username }}"
+      value: {{ .Telepresence.Username | quote }}
+handlers:
+  - name: my-handler
+    docker:
+    build:
+      - context: {{ env "MY_DOCKER_CONTEXT" | quote }}
 ```
 
+### Telepresence template variables
 | Options                   | Type     | Description                              |
 |---------------------------|----------|------------------------------------------|
 | Telepresence.Username     | string   | The name of the user running the spec    |
+
 
 
 ## Usage

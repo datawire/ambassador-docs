@@ -66,25 +66,6 @@ const Table = () => {
         </tr>
         <tr>
           <td style={{ textAlign: 'center' }}>
-            <a href="https://minikube.sigs.k8s.io" target="_blank">
-              <img
-                width={75}
-                src="https://raw.githubusercontent.com/kubernetes/minikube/master/images/logo/logo.png"
-              />
-            </a>
-          </td>
-          <td>
-            <a
-              href="https://minikube.sigs.k8s.io/docs/tutorials/ambassador_ingress_controller/"
-              target="_blank"
-            >
-              minikube
-            </a>{' '}
-            documentation.
-          </td>
-        </tr>
-        <tr>
-          <td style={{ textAlign: 'center' }}>
             <a href="https://microk8s.io/" target="_blank">
               <img
                 width={75}

@@ -18,7 +18,7 @@ const AllVersions = ({ product }) => {
       <h2>Recent Versions</h2>
       <ul className="docs__all-versions-list">
         {product.version
-          .filter((v) => !v.archived)
+          .filter((v) => !v.archived && !v.unlisted)
           .map((ver) => (
             <li key={ver.id}>
               <Link to={`/docs/${product.slug}/${ver.link}`}>

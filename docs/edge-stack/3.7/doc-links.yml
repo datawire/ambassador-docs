@@ -265,18 +265,18 @@
            link: /topics/using/gateway-api
          - title: Developer Portal
            link: /topics/using/dev-portal
-     - title: FAQs
-       link: /about/faq
-     - title: Troubleshooting
-       link: /topics/running/debugging
-     - title: Known issues
-       link: /about/known-issues
-     - title: Changes in $productName$ 2.X
-       link: /about/changes-2.x
-     - title: Changes in $productName$ 3.X
-       link: /about/changes-3.y
-     - title: Release Notes
-       link: /release-notes
+ - title: FAQs
+   link: /about/faq
+ - title: Troubleshooting
+   link: /topics/running/debugging
+ - title: Known issues
+   link: /about/known-issues
+ - title: Changes in $productName$ 2.X
+   link: /about/changes-2.x
+ - title: Changes in $productName$ 3.X
+   link: /about/changes-3.y
+ - title: Release Notes
+   link: /release-notes
  - title: Community
    link: /community
  - title: End of Life Policy

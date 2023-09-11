@@ -39,6 +39,57 @@ docDescription: >-
 changelog: https://github.com/telepresenceio/telepresence/blob/$branch$/CHANGELOG.md
 
 items:
+
+  - version: 2.15.0
+    date: "2023-08-28"
+    notes:
+      - type: change
+        title: When logging out you will now automatically be disconnected
+        body: >-
+          With the change of always being required to login for Telepresence commands, you will now be disconnected from
+          any existing sessions when logging out.
+      - type: feature
+        title: Add ASLR to binaries not in docker
+        body: >-
+          Addresses PEN test issue.
+        docs: https://github.com/datawire/telepresence2-proprietary/issues/315
+      - type: bugfix
+        title: Ensure that the x-telepresence-intercept-id header is read-only.
+        body: >-
+          The system assumes that the <code>x-telepresence-intercept-id</code> header contains the ID of the intercept
+          when it is present, and attempts to redefine it will now result in an error instead of causing a malfunction
+          when using preview URLs.
+      - type: bugfix
+        title: Fix parsing of multiple --http-header arguments
+        body: >-
+          An intercept using multiple header flags, e.g. <code>--http-header a=b --http-header x=y</code> would assemble
+          them incorrectly into one header as <code>--http-header a=b,x=y</code> which were then interpreted as a match
+          for the header <code>a</code> with value <code>b,x=y</code>.
+      - type: bugfix
+        title: Fixed bug in telepresence status when apikey login fails
+        body: >-
+          A bug was found when the docker-desktop extension would issue a telepresence status command with an expired or invalid apikey. This would 
+          cause the extension to get stuck in an authentication loop. This bug was addressed and resolved.
+  - version: 2.14.2
+    date: "2023-07-26"
+    notes:
+      - type: feature
+        title: Incorporation of the last version of Telepresence.
+        body: >-
+          A new version of Telepresence OSS was published.
+  - version: 2.14.1
+    date: "2023-07-07"
+    notes:
+      - type: feature
+        title: More flexible templating in the Intercept Speficiation.
+        body: >-
+          The <a href="http://masterminds.github.io/sprig/">Sprig</a> template functions can now be used
+          in many unconstrained fields of an Intercept Specification, such as environments, arguments, scripts,
+          commands, and intercept headers.
+      - type: bug
+        title: User daemon would panic during connect
+        body: >-
+          An attempt to connect on a host where no login has ever been made, could cause the user daemon to panic.
   - version: 2.14.0
     date: "2023-06-12"
     notes:

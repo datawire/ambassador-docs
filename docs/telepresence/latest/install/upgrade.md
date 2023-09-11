@@ -51,7 +51,7 @@ sudo chmod a+x /usr/local/bin/telepresence
 </Platform.GNULinuxTab>
 <Platform.WindowsTab>
 
-The [installer](https://app.getambassador.io/download/tel2/windows/amd64/$dlVersion$/telepresence-setup.exe) can upgrade Telepresence, or if you installed it with Powershell:
+The [MSI Installer](https://app.getambassador.io/download/tel2/windows/amd64/$dlVersion$/telepresence-setup.exe) can upgrade Telepresence, or if you installed it with Powershell:
 
 ```powershell
 # To install Telepresence, run the following commands

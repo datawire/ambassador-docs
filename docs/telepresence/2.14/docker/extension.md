@@ -3,7 +3,7 @@ title: "Telepresence for Docker Extension"
 description: "Learn about the Telepresence Docker Extension."
 indexable: true
 ---
-# Telepresence for Docker Exenstion
+# Telepresence for Docker Extension
 
 The [Telepresence Docker extension](../../../../../kubernetes-learning-center/telepresence-docker-extension/) is an extension that runs in Docker Desktop. This extension allows you to spin up a selection of your application and run the Telepresence daemons in that container. The Telepresence extension allows you to intercept a service and redirect cloud traffic to containers.
 

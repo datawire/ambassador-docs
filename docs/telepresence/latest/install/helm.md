@@ -2,7 +2,7 @@
 
 [Helm](https://helm.sh) is a package manager for Kubernetes that automates the release and management of software on Kubernetes. The Telepresence Traffic Manager can be installed via a Helm chart with a few simple steps.
 
-For more details on what the Helm chart installs and what can be configured, see the Helm chart [README](https://github.com/telepresenceio/telepresence/tree/release/v2/charts/telepresence).
+For more details on what the Helm chart installs and what can be configured, see the Helm chart [configuration on artifacthub](https://artifacthub.io/packages/helm/datawire/telepresence-pro).
 
 ## Before you begin
 

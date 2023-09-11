@@ -38,7 +38,7 @@ import ContentTable from '../ContentTable';
 import DocsFooter from '../DocsFooter';
 import DocsHome from '../DocsHome/DocsHome';
 import SearchBox from '../SearchBox';
-import IsAesPage from '../ShowAesPage';
+import EditionsChip from '../EditionsChip';
 import SidebarContent from '../SidebarContent';
 
 const index = ({ data, location, pageContext }) => {
@@ -82,7 +82,15 @@ const index = ({ data, location, pageContext }) => {
       );
     }
     if (
-      newVer.id === '3.7' ||
+      newVer.id === '4.0-preview' &&
+      newProduct.slug === 'edge-stack'
+    ) {
+        return (
+          <p>{`This version of ${newProduct.name} is a developer preview and is subject to change before the official release`}</p>
+        );
+    }
+    if (
+      newVer.id === '3.8' ||
       newVer.id === 'pre-release' ||
       newVer.id === 'latest' ||
       (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
@@ -92,7 +100,7 @@ const index = ({ data, location, pageContext }) => {
     return (
       <a
         href={`/docs/${newProduct.slug}/latest/tutorials/getting-started/`}
-      >{`${newProduct.name} 3.7 is now available!`}</a>
+      >{`${newProduct.name} 3.8 is now available!`}</a>
     );
   }
   const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(
@@ -479,7 +487,7 @@ const index = ({ data, location, pageContext }) => {
       <MainContainer>
         <div className="docs__doc-body doc-body">
           <div className="doc-tags">
-            <IsAesPage
+            <EditionsChip
               initialProduct={initialProduct.slug}
               slug={slug}
               initialVersion={initialVersion.id}

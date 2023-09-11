@@ -32,6 +32,8 @@ const Note = ({ note, onViewMore, versions }) => {
     return note.title;
   }, [note.title, note.type, note.image]);
 
+  const imgSrc = note?.image?.startsWith('.') ? `${pathname}/${note.image}` : note.image;
+
   return (
     <div className={styles.note}>
       <div className={styles.note__description}>
@@ -61,7 +63,7 @@ const Note = ({ note, onViewMore, versions }) => {
               alt={note.title}
               height="172"
               width="207"
-              src={`${pathname}/${note.image}`}
+              src={imgSrc}
               loading="lazy"
             />
           </div>
@@ -70,7 +72,7 @@ const Note = ({ note, onViewMore, versions }) => {
       {note.image && (
         <div className={styles.note__image}>
           <img
-            src={`${pathname}/${note.image}`}
+            src={imgSrc}
             alt={note.title}
             height="172"
             width="207"

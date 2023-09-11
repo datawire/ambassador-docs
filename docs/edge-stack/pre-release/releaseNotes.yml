@@ -32,8 +32,70 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.8.0
+    date: '2023-08-29'
+    notes:
+      - title: Ambassador Edge Stack will fail to run if a valid license is not present
+        type: change
+        body: >-
+          $productName$ will now require a valid non-expired license to run the product. If a valid license is not present or your clusters are not connected to and showing licensed in Ambassador Cloud, then $productName$ will refuse to startup. If you already have an enterprise license then you do not need to do anything so long as it is properly applied and not expired. Please view the <a href="/docs/edge-stack/latest/topics/using/licenses">license documentation</a> page for more information on your license.
+          If you do not have an enterprise license for $productName$ then you can visit <a href="https://www.getambassador.io/docs/edge-stack/latest/tutorials/getting-started">the quickstart guide</a> to get setup with a free community license by signing into Ambassador Cloud and connecting your installation.
+        docs: tutorials/getting-started/
+      - title: Account for matchLabels when associating mappings with the same prefix to different Hosts
+        type: bugfix
+        body: >-
+          As of v2.2.2, if two mappings were associated with different Hosts through host
+          <code>mappingSelector</code> labels but share the same prefix, the labels were not taken into
+          account which would cause one Mapping to be correctly routed but the other not.
+
+          This change fixes this issue so that Mappings sharing the same prefix but associated
+          with different Hosts will be correctly routed.
+        docs: https://github.com/emissary-ingress/emissary/issues/4170
+      - title: Duplication of values when using multiple Headers/QueryParameters in Mappings
+        type: bugfix
+        body: >-
+          In previous versions, if multiple Headers/QueryParameters were used in a <code>v3alpha1</code> mapping,
+          these values would duplicate and cause all the Headers/QueryParameters to have the same value.
+          This is no longer the case and the expected values for unique Headers/QueryParameters will apply.
+
+          This issue was only present in <code>v3alpha1</code> Mappings. For users who may have this issue, please
+          be sure to re-apply any <code>v3alpha1</code> Mappings in order to update the stored <code>v2</code> Mapping and resolve the
+          issue.
+        docs: topics/using/headers/headers
+      - title: Ambassador Agent no longer collects Envoy metrics
+        type: change
+        body: >-
+          When the Ambassador agent is being used, it will no longer attempt to collect and report Envoy metrics.
+          In previous versions, $productName$ would always create an Envoy stats sink for the agent as long as the AMBASSADOR_GRPC_METRICS_SINK
+          environment variable was provided. This environment variable was hardcoded on the release manifests and has now been removed
+          and an Envoy stats sink for the agent is no longer created.
+        docs: topics/running/environment#ambassador_grpc_metrics_sink
+  - version: 3.7.2
+    date: '2023-07-25'
+    notes:
+      - title: Upgrade to Envoy 1.26.4
+        type: security
+        body: >-
+          This upgrades $productName$ to be built on Envoy v1.26.4 which includes a fixes for CVE-2023-35942, CVE-2023-35943, CVE-2023-35944.
+        docs: https://www.envoyproxy.io/docs/envoy/v1.26.1/version_history/v1.26/v1.26
+
+      - title: Shipped Helm chart v8.7.2
+        type: change
+        body: >-
+          - Update default image to $productName$ v3.7.2. <br/>
+        docs: https://github.com/datawire/edge-stack/blob/rel/v3.7.2/charts/edge-stack/CHANGELOG.md
+
+  - version: 3.7.1
+    date: '2023-07-13'
+    notes:
+      - title: Upgrade to Envoy 1.26.3
+        type: security
+        body: >-
+          This upgrades $productName$ to be built on Envoy v1.26.3 which includes a fix for <a href="https://github.com/envoyproxy/envoy/security/advisories/GHSA-jfxv-29pc-x22r">CVE-2023-35945</a>.
+        docs: https://www.envoyproxy.io/docs/envoy/v1.26.1/version_history/v1.26/v1.26
+
   - version: 3.7.0
-    date: 'TBD'
+    date: '2023-06-20'
     notes:
       - title: Configurable Web Application Firewalls
         type: feature

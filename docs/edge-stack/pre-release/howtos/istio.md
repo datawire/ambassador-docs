@@ -127,40 +127,30 @@ emissary-ingress:
 
 To install $productName$ with Helm, use these values to configure Istio integration:
 
-1. Create the `$productNamespace$` Namespace:
+1. Install $productName$ if you are not already running it by [following the quickstart](../../tutorials/getting-started):
 
-    ```yaml
-    kubectl create namespace $productNamespace$
-    ```
+2. Enable Istio auto-injection for $productName$'s namespace:
 
-2. Enable Istio auto-injection for it:
-
-    ```yaml
+    ```bash
     kubectl label namespace $productNamespace$ istio-injection=enabled --overwrite
     ```
 
-3. Make sure the Helm repo is configured:
-
-    ```bash
-    helm repo add datawire https://app.getambassador.io
-    helm repo update
-    ```
+3. Use Helm to configure $productName$'s Istio integration
 
 4. Use Helm to install $productName$ in $productNamespace$:
 
     ```bash
-    helm install $productHelmName$ --namespace $productNamespace$ -f istio-integration.yaml datawire/$productHelmName$ && \
+    helm upgrade $productHelmName$ --namespace $productNamespace$ -f istio-integration.yaml datawire/$productHelmName$ && \
     kubectl -n $productNamespace$ wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=$productDeploymentName$
     ```
 
 ### Installation Using YAML
 
-To install using YAML files, you need to manually incorporate the contents of the `istio-integration.yaml`
-file shown above into your deployment YAML:
+If you are not using Helm to manage your $productName$ installation, you need to manually incorporate the contents of the `istio-integration.yaml` file shown above into your deployment YAML:
 
-* `pod-annotations` should be configured as Kubernetes `annotations` on the $productName$ Pods;
-* `volumes`, `volumeMounts`, and `env` contents should be included in the $productDeploymentName$ Deployment; and
-* you must also label the $productNamespace$ Namespace for auto-injection as described above.
+- `pod-annotations` should be configured as Kubernetes `annotations` on the $productName$ Pods;
+- `volumes`, `volumeMounts`, and `env` contents should be included in the $productDeploymentName$ Deployment; and
+- you must also label the $productNamespace$ Namespace for auto-injection as described above.
 
 ### Configuring an Existing Installation
 
@@ -168,11 +158,11 @@ If you have already installed $productName$ and want to enable Istio:
 
 1. Install Istio.
 2. Label the $productNamespace$ namespace for Istio auto-injection, as above.
-2. Edit the $productName$ Deployments to contain the `annotations`, `volumes`, `volumeMounts`, and `env` elements
+3. Edit the $productName$ Deployments to contain the `annotations`, `volumes`, `volumeMounts`, and `env` elements
    shown above.
-    * If you installed with Helm, you can use `helm upgrade` with `-f istio-integration.yaml` to modify the
+    - If you installed with Helm, you can use `helm upgrade` with `-f istio-integration.yaml` to modify the
       installation for you.
-3. Restart the $productName$ pods.
+4. Restart the $productName$ pods.
 
 ## Configure an mTLS `TLSContext`
 
@@ -191,8 +181,8 @@ $productName$:
 
 To make use of the `istio-certs` Secret, create a `TLSContext` referencing it:
 
-   ```shell
-   $ kubectl apply -f - <<EOF
+   ```yaml
+   kubectl apply -f - <<EOF
    ---
    apiVersion: getambassador.io/v3alpha1
    kind: TLSContext
@@ -207,7 +197,7 @@ To make use of the `istio-certs` Secret, create a `TLSContext` referencing it:
 
 Once the `TLSContext` is created, a `Mapping` can use it for TLS origination. An example might be:
 
-   ```
+   ```yaml
    ---
    apiVersion: getambassador.io/v3alpha1
    kind: Mapping
@@ -236,7 +226,7 @@ Upstream services must have the Istio sidecar configured. The easiest way to arr
 [Istio automatic sidecar injection](https://istio.io/docs/setup/additional-setup/sidecar-injection/#automatic-sidecar-injection)
 as discussed above.
 
-   ```
+   ```bash
    kubectl label namespace default istio-injection=enabled
    ```
 
@@ -272,7 +262,7 @@ For example, if you have installed the Quote service as described on the
    certificates and to force access on port 80:
 
    ```yaml
-   $ kubectl apply -f - <<EOF
+   kubectl apply -f - <<EOF
    apiVersion: getambassador.io/v3alpha1
    kind: Mapping
    metadata:
@@ -294,8 +284,9 @@ For example, if you have installed the Quote service as described on the
 
 The behavior of your service will not seem to change, even though mTLS is active:
 
-   ```shell
+   ```console
    $ curl -k https://{{AMBASSADOR_HOST}}/backend/
+
    {
        "server": "bewitched-acai-5jq7q81r",
        "quote": "A late night does not make any sense.",

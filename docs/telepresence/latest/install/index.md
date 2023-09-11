@@ -47,7 +47,7 @@ sudo chmod a+x /usr/local/bin/telepresence
 </Platform.GNULinuxTab>
 <Platform.WindowsTab>
 
-Download the [installer](https://app.getambassador.io/download/tel2/windows/amd64/$dlVersion$/telepresence-setup.exe) or use these Powershell commands:
+We offer an easy installation path using an [MSI Installer](https://app.getambassador.io/download/tel2/windows/amd64/$dlVersion$/telepresence-setup.exe). However if you'd like to setup Telepresence using Powershell, you can run these commands:
 
 ```powershell
 # To install Telepresence, run the following commands

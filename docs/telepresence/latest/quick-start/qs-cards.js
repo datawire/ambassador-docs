@@ -29,39 +29,36 @@ export default function CenteredGrid() {
         <Grid item xs={4}>
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
-              <GatsbyLink to="../../howtos/preview-urls/">
+              <GatsbyLink to="../howtos/personal-intercepts/">
                 <b>Collaborating</b>
               </GatsbyLink>
             </Typography>
             <Typography variant="body2" component="p">
-              Use preview URLS to collaborate with your colleagues and others
-              outside of your organization.
+              Use personal intercepts to get specific requests when working with colleagues.
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={4}>
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
-              <GatsbyLink to="../../howtos/outbound/">
+              <GatsbyLink to="../howtos/outbound/">
                 <b>Outbound Sessions</b>
               </GatsbyLink>
             </Typography>
             <Typography variant="body2" component="p">
-              While connected to the cluster, your laptop can interact with
-              services as if it was another pod in the cluster.
+              Control what your laptop can reach in the cluster while connected.
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={4}>
           <Paper variant="outlined" className={classes.paper}>
             <Typography variant="h6" component="h2">
-              <GatsbyLink to="../../faqs/">
-                <b>FAQs</b>
+              <GatsbyLink to="../docker/compose">
+                <b>Telepresence for Docker Compose</b>
               </GatsbyLink>
             </Typography>
             <Typography variant="body2" component="p">
-              Learn more about uses cases and the technical implementation of
-              Telepresence.
+              Develop in a hybrid local/cluster environment using Telepresence for Docker Compose.
             </Typography>
           </Paper>
         </Grid>
