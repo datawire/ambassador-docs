@@ -100,9 +100,9 @@ export default function GettingStartedEdgeStack21Tabs(props) {
             'kubectl create namespace ambassador && \\' +
             '\n' +
             `kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes-crds.yaml` +
-            '\n' +
+            '\n \n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
-            '\n' +
+            '\n \n' +
             'helm install edge-stack --namespace ambassador datawire/edge-stack \\' +
             '\n' +
             '  --set emissary-ingress.agent.cloudConnectToken=<your key from Ambassador Cloud> && \\' +
@@ -118,7 +118,7 @@ export default function GettingStartedEdgeStack21Tabs(props) {
           {`kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes-crds.yaml && \\` +
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
-            '\n' +
+            '\n \n' +
             `kubectl apply -f https://app.getambassador.io/yaml/edge-stack/${version}/aes.yaml && \\` +
             '\n' +
             `kubectl create configmap --namespace ambassador edge-stack-agent-cloud-token --from-literal=CLOUD_CONNECT_TOKEN=<your token from Ambassador Cloud> && \\` +
