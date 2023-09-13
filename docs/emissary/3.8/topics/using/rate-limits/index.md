@@ -7,7 +7,7 @@ Rate limiting in $productName$ is composed of two parts:
 * The [`RateLimitService`](../../running/services/rate-limit-service) resource tells $productName$ what external service
   to use for rate limiting.
 
-    <Alert severity="info">If $productName$ cannot contact the rate limit service, it will allow the request to be processed as if there were no rate limit service configuration.</Alert>
+    <Alert severity="info">If $productName$ cannot contact the rate limit service, it will either allow the request to be processed as if there were no rate limit service configuration, or deny, depending `failure_mode_deny`.</Alert>
 
 * _Labels_ that get attached to requests. A label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
