@@ -100,9 +100,9 @@ export default function GettingStartedEmissary21Tabs(props) {
             'kubectl create namespace emissary && \\' +
             '\n' +
             `kubectl apply -f https://app.getambassador.io/yaml/emissary/${version}/emissary-crds.yaml` +
-            '\n' +
+            '\n \n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
-            '\n' +
+            '\n \n' +
             'helm install emissary-ingress --namespace emissary datawire/emissary-ingress && \\' +
             '\n' +
             'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress' +
@@ -119,7 +119,7 @@ export default function GettingStartedEmissary21Tabs(props) {
             `kubectl apply -f https://app.getambassador.io/yaml/emissary/${version}/emissary-crds.yaml && \\` +
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
-            '\n' +
+            '\n \n' +
             `kubectl apply -f https://app.getambassador.io/yaml/emissary/${version}/emissary-emissaryns.yaml && \\` +
             '\n' +
             'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lproduct=aes' +
