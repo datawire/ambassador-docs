@@ -33,16 +33,13 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.8.1
-    date: 'TBD'
+    date: '2023-09-18'
     notes:
-      - title: Ensure APIExt server is available before starting Emissary
-        type: bugfix
+      - title: Upgrade Golang to 1.20.8 
+               type: security
         body: >-
-          The APIExt server provides CRD conversion between the stored version
-          v2 and the version watched for by $productName$ v3alpha1. Since this
-          component is required to operate $productName$, we have introduced
-          an init container that will ensure it is available before starting. This will help address some of the intermittent issues seen during
-          install and upgrades.
+          Upgrading to the latest release of Golang as part of our general dependency upgrade process. This includes security fixes for CVE-2023-39318, CVE-2023-39319.
+        docs: https://go.dev/doc/devel/release#go1.20.minor
  
   - version: 3.8.0
     date: '2023-08-29'
