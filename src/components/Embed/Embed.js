@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { YOUTUBE_LITE_URL } from '../../../../src/utils/urls';
+import { YOUTUBE_LITE_URL } from '../../utils/urls';
 
 import './lite-yt-embed.css';
 import * as styles from './styles.module.less';
