@@ -358,7 +358,7 @@ spec:
             - containerPort: 8080
 ```
 
-## Excluding Envrionment Variables
+## Excluding Environment Variables
 
 If your pod contains sensitive variables like a database password, or third party API Key, you may want to exclude those from being propagated through an intercept.
 Telepresence allows you to configure this through a ConfigMap that is then read and removes the sensitive variables. 
