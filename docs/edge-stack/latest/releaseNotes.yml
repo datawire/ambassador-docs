@@ -40,7 +40,6 @@ items:
         body: >-
           Upgrading to the latest release of Golang as part of our general dependency upgrade process. This includes security fixes for CVE-2023-39318, CVE-2023-39319.
         docs: https://go.dev/doc/devel/release#go1.20.minor
-
   - version: 3.8.0
     date: '2023-08-29'
     notes:
@@ -239,7 +238,6 @@ items:
         github:
           - title: '#4809'
             link: https://github.com/emissary-ingress/emissary/pull/4809
-
       - title: Upgraded to Python 3.10
         type: change
         body: >-
@@ -405,7 +403,6 @@ items:
         github:
           - title: '#4620'
             link: https://github.com/emissary-ingress/emissary/issues/4620
-
       - title: Fix regression in host_redirects with AuthService
         type: bugfix
         body: >-
@@ -422,7 +419,6 @@ items:
         github:
           - title: '#4640'
             link: https://github.com/emissary-ingress/emissary/issues/4640
-
       - title: Propagate trace headers to http external filter
         type: change
         body: >-
@@ -431,7 +427,6 @@ items:
         github:
           - title: '#3078'
             link: https://github.com/datawire/apro/issues/3078
-
   - version: 3.2.0
     date: '2022-09-27'
     notes:
@@ -523,7 +518,6 @@ items:
         github:
           - title: '#4354'
             link: https://github.com/emissary-ingress/emissary/issues/4354
-
       - title: Properly populate alt_stats_name for Tracing, Auth and RateLimit Services
         type: bugfix
         body: >-
@@ -714,7 +708,6 @@ items:
         github:
           - title: '#3078'
             link: https://github.com/datawire/apro/issues/3078
-
       - title: Diagnostics stats properly handles parsing envoy metrics with colons
         type: bugfix
         body: >-

@@ -22,6 +22,8 @@
       link: /service-catalog/howtos/intercept/
     - title: Managing Saved Intercepts
       link: /telepresence-saved-intercepts
+    - title: Using Deployment Previews
+      link: /deployment-previews/quick-start
     - title: Securing your services
       link: /security/security/
     - title: Adding API documentation
