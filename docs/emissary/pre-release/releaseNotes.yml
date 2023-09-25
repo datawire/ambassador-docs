@@ -32,6 +32,27 @@
 
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.9.0
+    date: 'TBD'
+    notes:
+      - title: Ensure APIExt server is available before starting Emissary
+        type: bugfix
+        body: >-
+          The APIExt server provides CRD conversion between the stored version
+          v2 and the version watched for by $productName$ v3alpha1. Since this
+          component is required to operate $productName$, we have introduced
+          an init container that will ensure it is available before starting. This will help address some of the intermittent issues seen during
+          install and upgrades.
+
+  - version: 3.8.1
+    date: '2023-09-18'
+    notes:
+      - title: Upgrade Golang to 1.20.8
+        type: security
+        body: >-
+          Upgrading to the latest release of Golang as part of our general dependency upgrade process. This includes security fixes for CVE-2023-39318, CVE-2023-39319.
+        docs: https://go.dev/doc/devel/release#go1.20.minor
+
   - version: 3.8.2
     date: '2023-10-11'
     notes:
@@ -45,15 +66,6 @@ items:
         type: security
         body: >-
           Upgrading to the latest release of Golang as part of our general dependency upgrade process. This update resolves CVE-2023-39323 and CVE-2023-39325.
-        docs: https://go.dev/doc/devel/release#go1.20.minor
-
-  - version: 3.8.1
-    date: '2023-09-18'
-    notes:
-      - title: Upgrade Golang to 1.20.8
-        type: security
-        body: >-
-          Upgrading to the latest release of Golang as part of our general dependency upgrade process. This includes security fixes for CVE-2023-39318, CVE-2023-39319.
         docs: https://go.dev/doc/devel/release#go1.20.minor
 
   - version: 3.8.0
@@ -88,6 +100,7 @@ items:
           environment variable was provided. This environment variable was hardcoded on the release manifests and has now been removed
           and an Envoy stats sink for the agent is no longer created.
         docs: topics/running/environment#ambassador_grpc_metrics_sink
+
   - version: 3.7.2
     date: '2023-07-25'
     notes:

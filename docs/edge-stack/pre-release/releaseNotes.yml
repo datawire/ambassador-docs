@@ -44,6 +44,14 @@ items:
         body: >-
           The Edge Stack helm chart now adds the Ambassador Agent as a sub-chart
           which can be configured using the <code>agent</code> section in values.yaml. The Ambassador Agent templates in the helm chart have been removed.
+      - title: Ensure APIExt server is available before starting Edge Stack
+        type: bugfix
+        body: >-
+          The APIExt server provides CRD conversion between the stored version
+          v2 and the version watched for by $productName$ v3alpha1. Since this
+          component is required to operate $productName$, we have introduced
+          an init container that will ensure it is available before starting. This will help address some of the intermittent issues seen during
+          install and upgrades.
 
   - version: 3.8.2
     date: '2023-10-11'
