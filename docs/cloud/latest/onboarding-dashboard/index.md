@@ -18,7 +18,7 @@ In addition to this, easy access is provided to information about your clusters,
 
 
 - **Connects:** Total telepresence connections made to your clusters.
-- **Active services:** Your services that are currently flagged as `active`, how they were activated, and the last seen date.<span class="basic_badge">Legacy</span
+- **Active services:** Your services that are currently flagged as `active`, how they were activated, and the last seen date. <span class="basic_badge">Legacy</span>
 - **Clusters:** Your clusters set up through Ambassador Cloud.
 - **Features:**  Additional functionalities that Ambassador provides for you and your organization.
 
