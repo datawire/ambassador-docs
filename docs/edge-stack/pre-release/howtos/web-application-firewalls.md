@@ -3,9 +3,11 @@
     description: Quickly block common attacks in the OWASP Top 10 vulnerabilities like cross-site-scripting (XSS) and SQL injection with Edge Stack's self-service Web Application Firewalls (WAF)
 ---
 
-# Web Application Firewalls in $productName$
+# Using Web Application Firewalls in $productName$
 
-[$productName$][] comes fully equipped with a Web Application Firewall solution (commonly referred to as WAF) that is easy to set up and can be configured to help protect your web applications by preventing and mitigating many common attacks. To accomplish this, the [Coraza Web Application Firewall library][] is used to check incoming requests against a user-defined configuration file containing rules and settings for the firewall to determine whether to allow or deny incoming requests.
+[$productName$][] comes fully equipped with a Web Application Firewall solution (commonly referred to as WAF) that is easy to set up and can be configured to help protect your web applications by preventing and mitigating many common attacks. To accomplish this, the [Coraza Web Application Firewall library][] is used to check incoming requests against a user-defined configuration file containing rules and settings for the firewall to determine whether to allow or deny incoming  requests.
+
+<br />
 
 $productName$ also has additional authentication features such as [Filters][] and [Rate Limiting][]. When `Filters`, `Ratelimits`, and `WebApplicationFirewalls` are all used at the same time, the order of operations is as follows and is not currently configurable.
 
@@ -13,121 +15,10 @@ $productName$ also has additional authentication features such as [Filters][] an
 2. `Filters` are executed next (so long as any configured `WebApplicationFirewalls` did not already reject the request)
 3. Lastly `Ratelimits` are executed (so long as any configured `WebApplicationFirewalls` and Filters did not already reject the request)
 
-## The Web Application Firewalls Resource
-
-In $productName$, the `WebApplicationFirewall` resource defines the configuration for an instance of the firewall.
-
-```yaml
----
-apiVersion: gateway.getambassador.io/v1alpha1
-kind: WebApplicationFirewall
-metadata:
-  name: "example-waf"
-  namespace: "example-namespace"
-spec:
-  ambassadorSelector:             # optional; default = {ambassadorIds: ["default"]}
-    ambassadorIds: []string       # optional; default = ["default"]
-  firewallRules:                  # required; One of configMapRef;file;http must be set below
-    sourceType: "enum"            # required; allowed values are file;configmap;http
-    configMapRef:                 # optional
-      name: "string"              # required
-      namespace: "string"         # required
-      key: "string"               # required
-    file: "string"                # optional
-    http:                         # optional
-      url: "string"               # required; must be a valid URL.
-  logging:                        # optional
-    onInterrupt:                  # required
-      enabled: bool               # required
-status:                           # set and updated by application
-  conditions: []metav1.Condition
-```
-
-- `ambassadorSelector` Configures how this resource is allowed to be watched/used by instances of Edge Stack
-  - `ambassadorIds`: This optional field allows you to limit which instances of $productName$ can watch and use this resource. This allows for the separation of resources when running multiple instances of $productName$ in the same Kubernetes cluster. Additional documentation on [configuring Ambassador IDs can be found here][]. By default, all instances of $productName$ will be able to watch and use this resource.
-- `firewallRules`: Defines the rules to be used for the Web Application Firewall
-  - `sourceType`: Identifies which method is being used to load the firewall rules. Value must be one of `configMapRef`;`file`;`http`. The value corresponds to the following fields for configuring the selected method.
-  - `configMapRef`: Defines a reference to a `ConfigMap` in the Kubernetes cluster to load firewall rules from.
-    - `name`: Name of the `ConfigMap`.
-    - `namespace`: Namespace of the `ConfigMap`. It must be an RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
-    - `key`: The key in the `ConfigMap` to pull the rules data from.
-  - `file`: Location of a file on disk to load the firewall rules from. Example: `"/ambassador/firewall/waf.conf`.
-  - `http`: Configuration for downloading firewall rules from the internet. The rules will only be downloaded once when the `WebApplicationFirewall` is loaded. The rules will then be cached in-memory until a restart of $productName$ occurs or the `WebApplicationFirewall` is modified.
-  - `url`: URL to fetch firewall rules from. If the rules are unable to be downloaded/parsed from the provided url for whatever reason, the requests matched to this `WebApplicationFirewall` will be allowed/denied based on the configuration of the `onError`
-- `logging`: Provides a way to configure additional logging in the $productName$ pods for the `WebApplicationFirewall`. This is in addition to the logging config that is available via the firewall configuration files. The following logs will always be output to the container logs when enabled.
-  - `onInterrupt`: Controls logging behavior when the WebApplicationFirewall interrupts a request.
-    - `enabled`: Configures whether the container should output logs.
-
-`status`: This field is automatically set to reflect the status of the `WebApplicationFirewall`.
-
-- `conditions`: Conditions describe the current conditions of the `WebApplicationFirewall`, known conditions are `Accepted`;`Ready`;`Rejected`.
-
-## The Web Application Firewalls Policy Resource
-
-The `WebApplicationFirewallPolicy` resource controls which requests to match on and which `WebApplicationFirewall` configuration to use. This gives users total control over the firewall configuration and when it is executed on requests. It is possible to set up multiple different firewall configurations for specific requests or a single firewall configuration that is applied to all requests.
-
-```yaml
----
-apiVersion: gateway.getambassador.io/v1alpha1
-kind: WebApplicationFirewallPolicy
-metadata:
-  name: "example-waf-policy"
-  namespace: "example-namespace"
-spec:
-  ambassadorSelector:             # optional; default = {ambassadorIds: ["default"]}
-    ambassadorIds: []string       # optional; default = ["default"]
-  rules:                          # required
-  - host: "string"                # optional; default = * (runs on all hosts)
-    path: "string"                # optional; default = * (runs on all paths)
-    ifRequestHeader:              # optional
-      type: "enum"                # optional; allowed values are Exact;RegularExpression
-      name: "string"              # required
-      value: "string"             # optional
-      negate: bool                # optional; default: false
-    wafRef:                       # required
-      name: "string"              # required
-      namespace: "string"         # required
-    onError:                      # optional; min=400, max=599
-      statusCode: int             # required
-    precedence: int               # optional
-status:                           # set and updated by application
-  conditions: []metav1.Condition
-  ruleStatuses:
-  - index: int
-    host: "string"
-    path: "string"
-    conditions: []metav1.Condition
-```
-
-`spec`: Defines which requests to match on and which `WebApplicationFirewall` to be used against those requests.
-
-- `ambassadorSelector` Configures how this resource is allowed to be watched/used by instances of Edge Stack
-  - `ambassadorIds`: This optional field allows you to limit which instances of $productName$ can watch and use this resource. This allows for the separation of resources when running multiple instances of $productName$ in the same Kubernetes cluster. Additional documentation on [configuring Ambassador IDs can be found here][]. By default, all instances of $productName$ will be able to watch and use this resource.
-- `rules`: This object configures matching requests and executes `WebApplicationFirewall`s on them.
-  - `host`: Host is a "glob-string" that matches on the `:authority` header of the incoming request. If not set, it will match on all incoming requests.
-  - `path`: Path is a "glob-string" that matches on the request path. If not provided, then it will match on all incoming requests.
-  - `ifRequestHeader`: Checks if exact or regular expression matches a value in a request header to determine if the `WebApplicationFirewall` is executed or not.
-    - `type`: Specifies how to match against the value of the header. Allowed values are `Exact`;`RegularExpression`
-    - `name`: Name of the HTTP Header to be matched. Name matching MUST be case-insensitive. (See <https://tools.ietf.org/html/rfc7230#section-3.2>)
-    - `value`: Value of HTTP Header to be matched. If type is `RegularExpression`, then this must be a valid regex with a length of at least 1.
-    - `negate`: Allows the match criteria to be negated or flipped.
-  - `wafRef`: A reference to a `WebApplicationFirewall` to be applied against the request.
-    - `name`: Identifies the `WebApplicationFirewall`
-    - `namespace`: Namespace of the `WebApplicationFirewall`. This field is required. It must be a RFC 1123 label. Valid values include: `"example"`. Invalid values include: `"example.com"` - `"."` is an invalid character. The maximum allowed length is `63` characters, and the regex pattern `^[a-z0-9]([-a-z0-9]*[a-z0-9])?$` is used for validation.
-  - `onError`: provides a way to configure how requests are handled when a request matches the rule but there is a configuration or runtime error. By default, requests are allowed on error if this field is not configured. This covers runtime errors such as those caused by networking/request parsing as well as configuration errors such as if the `WebApplicationFirewall` that is referenced is misconfigured, cannot be found, or when its configuration cannot be loaded properly. Details about the errors can be found either in the `WebApplicationFirewall` status or container logs.
-    - `statusCode`: The status code to return to downstream clients when an error occurs.
-  - `precedence`: Allows forcing a precedence ordering on the rules. By default the rules are evaluated in the order they are in the `WebApplicationFirewallPolicy.spec.rules` field. However, multiple `WebApplicationFirewallPolicys` can be applied to a cluster. `precedence` can optionally be used to ensure that a specific ordering is enforced.
-
-`status`: This field is automatically set to reflect the status of the `WebApplicationFirewallPolicy`.
-
-- `conditions`: Conditions describe the current conditions of the `WebApplicationFirewallPolicy`, known conditions are `Accepted`;`Ready`;`Rejected`. If any rules have an error then the whole `WebApplicationFirewallPolicyPolicy` will be rejected.
-- `ruleStatuses`:
-  - `index`: Provides the zero-based index in the list of Rules to help identify the rule with an error.
-  - `host`: host of the rule with the error
-  - `path`: path of the rule with the error
-  - `conditions`: Describe the current condition of this Rule. Known values are `Accepted`;`Ready`;`Rejected`. If any rules have an error then the whole `WebApplicationFirewallPolicy` will be rejected.
-
 ## Quickstart
+
+See the [WebAplicationFirewall API reference][] and [WebAplicationFirewallPolicy API reference][]
+pages for an overview of all the supported fields of the following custom resources.
 
 1. First, start by creating your firewall configuration. The example will download [the firewall rules][] published by [Ambassador Labs][], but you are free to write your own or use the published rules as a reference.
 
@@ -242,7 +133,8 @@ To make using $productName$'s Web Application Firewall system easier and to enab
 [Grafana]: https://grafana.com/
 [Prometheus]: https://prometheus.io/docs/introduction/overview/
 [Prometheus and Grafana documentation]:../prometheus
-[configuring Ambassador IDs can be found here]: ../../topics/running/running#ambassador_id
+[WebAplicationFirewall API reference]: ../../custom-resources/gateway-getambassador/v1alpha1/webapplicationfirewall
+[WebAplicationFirewallPolicy API reference]: ../../custom-resources/gateway-getambassador/v1alpha1/webapplicationfirewallpolicy
 [$productName$]: https://www.getambassador.io/products/edge-stack/api-gateway
 [Ambassador Labs]: https://www.getambassador.io/
 [Configuring $productName$'s Web Application Firewall rules]: ../web-application-firewalls-config
