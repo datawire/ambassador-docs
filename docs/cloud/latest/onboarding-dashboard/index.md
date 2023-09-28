@@ -5,7 +5,7 @@ description: "In this section, you can see the ambassador onboarding procces of 
 
 # Onboarding Dashboard
 
-A central location to check the status of your developers, along with the services within your organization, or the count of telepresence connections to your clusters, depending on your subscription type.
+A central location to check the status of your developers, or the count of telepresence connections to your clusters.
 
 ## Onboarding Overview
 
