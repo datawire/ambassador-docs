@@ -7,7 +7,7 @@ The OAuth2 Filter type performs OAuth2 authorization against an identity provide
 This doc is an overview of all the fields on the OAuth2 `Filter` Custom Resource with descriptions of the purpose, type, and default values of those fields.
 Tutorials and guides for the OAuth2 `Filter` Resource can be found in the [usage guides section][].
 
-## External Filter API Reference
+## OAuth2 Filter API Reference
 
 To create an OAuth2 Filter, the `spec.type` must be set to `oauth2`, and the `oauth2` field must contain the configuration for your
 OAuth2 filter.
