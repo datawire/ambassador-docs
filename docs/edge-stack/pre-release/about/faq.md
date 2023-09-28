@@ -76,3 +76,13 @@ $productName$ is routing by deploying a test service and seeing if the mapping
 works. Then, verify that your load balancer is properly routing requests to
 $productName$. In general, verifying each network hop between your client and
 backend service is critical to finding the source of the problem.
+
+### What is the difference between the v3alpha1 and v1alpha1 CRDs?
+
+There are two differnt CRD versions supported by $productName$.
+The first are the `getambassador.io/v3alpha1` CRDs which were introduced with
+$productName$ 2.x. These are still supported and are not deprecated. As of $productName$ $version$, the new `gateway.getambassador.io/v1alpha1` CRDs have also been introduced.
+The `v1alpha1` CRDs have not only a new version, but also a new apirgoup so that way they can
+be installed alongside the older CRDs without causing any conflicts.
+
+The `v1alpha1` CRDs are only available for the `Filter`, `FilterPolicy`, `WebApplicationFirewall`, and `WebApplicationFirewallPolicy` resources, and are the next generation of the CRDs that $productName$ will support. We are introducing them now to allow users to try them out without needing to stop using the `v3alpha1` CRDs. You can use `v3alpha1` and `v3alpha1` CRDs in the same cluster at the same time, but `FilterPolicies` are not able to reference `Filters` that do not match their CRD version.
