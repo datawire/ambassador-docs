@@ -145,7 +145,7 @@
            link: /howtos/linkerd2
  - title: Technical reference
    items:
-     - title: Custom resources
+     - title: Using Custom Resources
        items:
          - title: The Host resource
            link: /topics/running/host-crd
@@ -177,17 +177,17 @@
            link: /howtos/client-cert-validation
      - title: Filters
        items:
-         - title: Filters and Filter policies
+         - title: Using Filters and FilterPolicies
            link: /topics/using/filters/
-         - title: OAuth2 Filter
+         - title: Using OAuth2 Filters
            link: /topics/using/filters/oauth2
-         - title: JWT Filter
+         - title: Using JWT Filters
            link: /topics/using/filters/jwt
-         - title: External Filter
+         - title: Using External Filters
            link: /topics/using/filters/external
-         - title: Plugin Filter
+         - title: Using Plugin Filters
            link: /topics/using/filters/plugin
-         - title: API Keys Filter
+         - title: Using API Keys Filter
            link: /topics/using/filters/apikeys
      - title: Ingress and load balancing
        items:
@@ -265,6 +265,50 @@
            link: /topics/using/gateway-api
          - title: Developer Portal
            link: /topics/using/dev-portal
+ - title: CRD API References
+   items:
+   - title: getambassador.io/v3alpha1
+     items:
+     - title: Filter
+       link: /custom-resources/getambassador/v3alpha1/filter
+       items:
+       - title: The OAuth2 Filter type
+         link: /custom-resources/getambassador/v3alpha1/filter-oauth2
+       - title: The JWT Filter type
+         link: /custom-resources/getambassador/v3alpha1/filter-jwt
+       - title: The External Filter type
+         link: /custom-resources/getambassador/v3alpha1/filter-external
+       - title: The APIKey Filter type
+         link: /custom-resources/getambassador/v3alpha1/filter-apikey
+       - title: The Plugin Filter type
+         link: /custom-resources/getambassador/v3alpha1/filter-plugin
+     - title: FilterPolicy
+       link: /custom-resources/getambassador/v3alpha1/filterpolicy
+     - title: WebApplicationFirewall
+       link: /custom-resources/getambassador/v3alpha1/webapplicationfirewall
+     - title: WebApplicationFirewallPolicy
+       link: /custom-resources/getambassador/v3alpha1/webapplicationfirewallpolicy
+   - title: gateway.getambassador.io/v1alpha1
+     items:
+     - title: Filter
+       link: /custom-resources/gateway-getambassador/v1alpha1/filter
+       items:
+       - title: The OAuth2 Filter type
+         link: /custom-resources/gateway-getambassador/v1alpha1/filter-oauth2
+       - title: The JWT Filter type
+         link: /custom-resources/gateway-getambassador/v1alpha1/filter-jwt
+       - title: The External Filter type
+         link: /custom-resources/gateway-getambassador/v1alpha1/filter-external
+       - title: The APIKey Filter type
+         link: /custom-resources/gateway-getambassador/v1alpha1/filter-apikey
+       - title: The Plugin Filter type
+         link: /custom-resources/gateway-getambassador/v1alpha1/filter-plugin
+     - title: FilterPolicy
+       link: /custom-resources/gateway-getambassador/v1alpha1/filterpolicy
+     - title: WebApplicationFirewall
+       link: /custom-resources/gateway-getambassador/v1alpha1/webapplicationfirewall
+     - title: WebApplicationFirewallPolicy
+       link: /custom-resources/gateway-getambassador/v1alpha1/webapplicationfirewallpolicy
  - title: FAQs
    link: /about/faq
  - title: Troubleshooting
