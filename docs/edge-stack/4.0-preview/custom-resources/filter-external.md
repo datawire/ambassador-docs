@@ -42,6 +42,15 @@ spec:
     include_body: IncludeBody               # optional
       maxBytes: int                         # required, default: `4096`
       allowPartial: bool                    # required, default `true`
+    tlsConfig: TLSConfig                    # optional
+      certificate: TLSSource                # required
+        fromSecret: SecretReference         # required
+          name: string                      # required
+          namespace: string                 # optional
+      caCertificate: TLSSource              # optional
+        fromSecret: SecretReference         # required
+          name: string                      # required
+          namespace: string                 # optional
 status: []metav1.Condition                  # field managed by controller, max items: 8
 ```
 
@@ -57,6 +66,7 @@ status: []metav1.Condition                  # field managed by controller, max i
 | `httpSettings`     | [HTTPSettings][]            | Settings specific to the http protocol. This can only be set when `protocol: "http"`. |
 | `grpcSettings`     | [GRPCSettings][]            | Settings specific to the grpc protocol. This can only be set when `protocol: "grpc"`. |
 | `include_body`     | [IncludeBody][]             | Configures passing along the request body to the External Service. If not set then a blank body is sent over to the External Service. |
+| `tlsConfig`        | [TLSConfig][]               | Configures tls settings between $productName$ and the configured AuthService |
 
 <Alert severity="warning">
   The overall Auth Service timeout that is configured in Envoy, mentioned in the <code>timeout</code> field is set to `5 Seconds` and is not currently configurable but will be made so for the official release of $productName$ 4.x.
@@ -100,6 +110,16 @@ Configures passing along the request body to the External Service. If not set th
 | `maxBytes`       | `int`     | Sets the number of bytes of the request body to buffer over to the External Service |
 | `allowPartial`   | `bool`    | Indicates whether the included body can be a partially buffered body or if the complete buffered body is expected. If not partial then a 413 http error is returned by Envoy. |
 
+### TLSConfig
+
+**Appears On**: [ExternalFilter][]
+Configures passing along the request body to the External Service. If not set then a blank body is sent over to the External Service.
+
+| **Field**                   | **Type**        | **Description**                                                                                                                                                  |
+|-----------------------------|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `certificate.fromSecret`    | SecretReference | Configures $productName$ to use the provided certificate to present to the server when connecting. Provide the `name` and `namespace` (optional) of a `kubernetes.io/tls` [Kubernetes Secret][] that contains the private key and public certificate that will be presented to the AuthService. Secret namespace defaults to Filter namespace if not set |
+| `caCertificate.fromSecret`  | SecretReference | Configures $productName$ to use the provided CA certifcate to verify the server provided certificate. Provide the `name` and `namespace` (optional) of an `Opaque` [Kubernetes Secret][] that contains the `tls.crt` key with the CA Certificate. Secret namespace defaults to Filter namespace if not set |
+
 ## External Filter Usage Guides
 
 - [Using External Filters][]: Use the External Filter to write your own service with custom processing and authentication logic
@@ -110,6 +130,7 @@ Configures passing along the request body to the External Service. If not set th
 [ExternalFilter]: #externalfilter
 [GRPCSettings]: #grpcsettings
 [IncludeBody]: #includebody
+[TLSConfig]: #tlsconfig
 [usage guides section]: #external-filter-usage-guides
 [ext_authz protocol]: ../../guides/custom-filters/ext-authz
 [The Ext_Authz Protocol]: ../../guides/custom-filters/ext-authz
