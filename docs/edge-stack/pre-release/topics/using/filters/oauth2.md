@@ -1,6 +1,6 @@
 import Alert from '@material-ui/lab/Alert';
 
-# The OAuth2 Filter
+# Using The OAuth2 Filter
 
 The OAuth2 filter type performs OAuth2 authorization against an identity provider implementing [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html). The filter is both:
 
@@ -8,6 +8,10 @@ The OAuth2 filter type performs OAuth2 authorization against an identity provide
 * Half of a Resource Server, validating the Access Token before allowing the request through to the upstream service, which implements the other half of the Resource Server.
 
 This is different from most OAuth implementations where the Authorization Server and the Resource Server are in the same security domain. With Ambassador Edge Stack, the Client and the Resource Server are in the same security domain, and there is an independent Authorization Server.
+
+<br />
+
+See the [OAuth2 Filter API reference][] for an overview of all the supported fields.
 
 ## The Ambassador authentication flow
 
@@ -34,413 +38,6 @@ Using an identity hub or broker allows you to support many IdPs without having t
 An identity hub sits between your application and the IdP that authenticates your users, which not only adds a level of abstraction so that your application (and Ambassador Edge Stack) is isolated from any changes to each provider's implementation, but it also allows your users to chose which provider they use to authenticate (and you can set a default, or restrict these options).
 
 The Auth0 docs provide a guide for adding social IdP "[connections](https://auth0.com/docs/identityproviders)" to your Auth0 account, and the Keycloak docs provide a guide for adding social identity "[brokers](https://www.keycloak.org/docs/latest/server_admin/index.html#social-identity-providers)".
-
-
-## OAuth2 global arguments
-
-```yaml
----
-apiVersion: getambassador.io/v3alpha1
-kind: Filter
-metadata:
-  name: "example-oauth2-filter"
-  namespace: "example-namespace"
-spec:
-  OAuth2:
-    authorizationURL:       "url"      # required
-
-    ############################################################################
-    # OAuth Client settings                                                    #
-    ############################################################################
-
-    expirationSafetyMargin: "duration" # optional; default is "0"
-
-    # Which settings exist depends on the grantType; supported grantTypes
-    # are "AuthorizationCode", "Password", and "ClientCredentials".
-    grantType:              "enum"     # optional; default is "AuthorizationCode"
-
-    # How should Ambassador authenticate itself to the identity provider?
-    clientAuthentication:              # optional
-      method: "enum"                     # optional; default is "HeaderPassword"
-      jwtAssertion:                      # optional if method method=="JWTAssertion"; forbidden otherwise
-        setClientID:     bool              # optional; default is false
-        # the following members of jwtAssertion only apply when the
-        # grantType is NOT "ClientCredentials".
-        audience:        "string"          # optional; default is to use the token endpoint from the authorization URL
-        signingMethod:   "enum"            # optional; default is "RS256"
-        lifetime:        "duration"        # optional; default is "1m"
-        setNBF:          bool              # optional; default is false
-        nbfSafetyMargin: "duration"        # optional; default is 0s
-        setIAT:          bool              # optional; default is false
-        otherClaims:                       # optional; default is {}
-          "string": anything
-        otherHeaderParameters:             # optional; default is {}
-          "string": anything
-
-    ## OAuth Client settings: grantType=="AuthorizationCode" ###################
-    clientURL:              "string"   # deprecated; use 'protectedOrigins' instead
-    protectedOrigins:                  # required; must have at least 1 item
-    - origin: "url"                      # required
-      internalOrigin: "url"              # optional; default is to just use the 'origin' field
-      includeSubdomains: bool            # optional; default is false
-    useSessionCookies:                 # optional; default is { value: false }
-      value: bool                        # optional; default is true
-      ifRequestHeader:                   # optional; default to apply "useSessionCookies.value" to all requests
-        name: "string"                     # required
-        negate: bool                       # optional; default is false
-        # It is invalid to specify both "value" and "valueRegex".
-        value: "string"                    # optional; default is any non-empty string
-        valueRegex: "regex"                # optional; default is any non-empty string
-    clientSessionMaxIdle:   "duration" # optional; default is to use the access token lifetime or 14 days if a refresh token is present
-    extraAuthorizationParameters:      # optional; default is {}
-      "string": "string"
-    postLogoutRedirectURI:   "url"     # optional; default is empty string
-
-    ## OAuth Client settings: grantType=="AuthorizationCode" or "Password" #####
-    clientID:               "string"   # required
-    # The client secret can be specified by including the raw secret as a
-    # string in "secret", or by referencing Kubernetes secret with
-    # "secretName" (and "secretNamespace").  It is invalid to specify both
-    # "secret" and "secretName".
-    secret:                 "string"   # required (unless secretName is set)
-    secretName:             "string"   # required (unless secret is set)
-    secretNamespace:        "string"   # optional; default is the same namespace as the Filter
-
-    ## OAuth Client settings (grantType=="ClientCredentials") ##################
-    #
-    # (there are no additional client settings for
-    # grantType=="ClientCredentials")
-
-    ############################################################################
-    # OAuth Resource Server settings                                           #
-    ############################################################################
-
-    allowMalformedAccessToken: bool     # optional; default is false
-    accessTokenValidation:     "enum"   # optional; default is "auto"
-    accessTokenJWTFilter:               # optional; default is null
-      name:                "string"       # required
-      namespace:           "string"       # optional; default is the same namespace as the Filter
-      inheritScopeArgument: bool          # optional; default is false
-      stripInheritedScope:  bool          # optional; default is false
-      arguments: JWT-Filter-Arguments     # optional
-    injectRequestHeaders:               # optional; default is []
-    - name:   "header-name-string"        # required
-      value:  "go-template-string"        # required
-
-    ############################################################################
-    # HTTP client settings for talking with the identity provider              #
-    ############################################################################
-
-    insecureTLS:           bool       # optional; default is false
-    renegotiateTLS:        "enum"     # optional; default is "never"
-    maxStale:              "duration" # optional; default is "0"
-```
-
-### General settings
-
- - `authorizationURL`: Identifies where to look for the `/.well-known/openid-configuration` descriptor to figure out how to talk to the OAuth2 provider
-
-### OAuth client settings
-
-These settings configure the OAuth Client part of the filter.
-
- - `grantType`: Which type of OAuth 2.0 authorization grant to request from the identity provider.  Currently supported are:
-   * `"AuthorizationCode"`: Authenticate by redirecting to a login page served by the identity provider.
-
-   * `"ClientCredentials"`: Authenticate by requiring that the
-     incoming HTTP request include as headers the credentials for
-     Ambassador to use to authenticate to the identity provider.
-
-     The type of credentials needing to be submitted depends on the
-     `clientAuthentication.method` (below):
-     + For `"HeaderPassword"` and `"BodyPassword"`, the headers
-       `X-Ambassador-Client-ID` and `X-Ambassador-Client-Secret` must
-       be set.
-     + For `"JWTAssertion"`, the `X-Ambassador-Client-Assertion`
-       header must be set to a JWT that is signed by your client
-       secret, and conforms with the requirements in RFC 7521 section
-       5.2 and RFC 7523 section 3, as well as any additional specified
-       by your identity provider.
-
-   * `"Password"`: Authenticate by requiring `X-Ambassador-Username` and `X-Ambassador-Password` on all
-     incoming requests, and use them to authenticate with the identity provider using the OAuth2
-     `Resource Owner Password Credentials` grant type.
-
- - `expirationSafetyMargin`: Check that access tokens not expire for
-   at least this much longer; otherwise consider them to be already
-   expired.  This provides a safety margin of time for your
-   application to send it to an upstream Resource Server that grants
-   insufficient leeway to account for clock skew and
-   network/application latency.
-
- - `clientAuthentication`: Configures how Ambassador uses the
-   `clientID` and `secret` to authenticate itself to the identity
-   provider:
-   * `method`: Which method Ambassador should use to authenticate
-     itself to the identity provider.  Currently supported are:
-     + `"HeaderPassword"`: Treat the client secret (below) as a
-       password, and pack that in to an HTTP header for HTTP Basic
-       authentication.
-     + `"BodyPassword"`: Treat the client secret (below) as a
-       password, and put that in the HTTP request bodies submitted to
-       the identity provider.  This is NOT RECOMMENDED by RFC 6749,
-       and should only be used when using HeaderPassword isn't
-       possible.
-     + `"JWTAssertion"`: Treat the client secret (below) as a
-       password, and put that in the HTTP request bodies submitted to
-       the identity provider.  This is NOT RECOMMENDED by RFC 6749,
-       and should only be used when using HeaderPassword isn't
-       possible.
-   * `jwtAssertion`: Settings to use when `method: "JWTAssertion"`.
-     + `setClientID`: Whether to set the Client ID as an HTTP
-       parameter; setting it as an HTTP parameter is optional (per RFC
-       7521 §4.2) because the Client ID is also contained in the JWT
-       itself, but some identity providers document that they require
-       it to also be set as an HTTP parameter anyway.
-     + `audience` (only when `grantType` is not
-       `"ClientCredentials"`): The audience value that your identity
-       provider requires.
-     + `signingMethod` (only when `grantType` is not
-       `"ClientCredentials"`): The method to use to sign the JWT; how
-       to interpret the `secret` (below).  Supported values are:
-       - RSA: `"RS256"`, `"RS384"`, `"RS512"`: The secret must be a
-         PEM-encoded RSA private key.
-       - RSA-PSS: `"PS256"`, `"PS384"`, `"PS512"`: The secret must be
-         a PEM-encoded RSA private key.
-       - ECDSA: `"ES256"`, `"ES384"`, `"ES512"`: The secret must be a
-         PEM-encoded Eliptic Curve private key.
-       - HMAC-SHA: `"HS256"`, `"HS384"`, `"HS512"`: The secret is a
-         raw string of bytes; it can contain anything.
-     + `lifetime` (only when `grantType` is not
-       `"ClientCredentials"`): The lifetime of the generated JWT; just
-       enough time for the request to the identity provider to
-       complete (plus possibly an extra allowance for clock skew).
-     + `setNBF` (only when `grantType` is not `"ClientCredentials"`):
-       Whether to set the optional "nbf" ("Not Before") claim in the
-       generated JWT.
-     + `nbfSafetyMargin` (only `setNBF` is true): The safety margin to
-       build-in to the "nbf" claim, to allow for clock skew between
-       ambassador and the identity provider.
-     + `setIAT` (only when `grantType` is not `"ClientCredentials"`):
-       Whether to set the optional "iat" ("Issued At") claim in the
-       generated JWT.
-     + `otherClaims` (only when `grantType` is not
-       `"ClientCredentials"`): Any extra non-standard claims to
-       include in the generated JWT.
-     + `otherHeaderParameters` (only when `grantType` is not
-       `"ClientCredentials"`): Any extra JWT header parameters to
-       include in the generated JWT non-standard claims to include in
-       the generated JWT; only the "typ" and "alg" header parameters
-       are set by default.
-
-Depending on which `grantType` is used, different settings exist.
-
-Settings that are only valid when `grantType: "AuthorizationCode"` or `grantType: "Password"`:
-
- - `clientID`: The Client ID you get from your identity provider.
- - The client secret you get from your identity provider can be specified 2 different ways:
-   * As a string, in the `secret` field.
-   * As a Kubernetes `generic` Secret, named by `secretName`/`secretNamespace`.  The Kubernetes secret must of
-     the `generic` type, with the value stored under the key`oauth2-client-secret`.  If `secretNamespace` is not given, it defaults to the namespace of the Filter resource.
-   * **Note**: It is invalid to set both `secret` and `secretName`.
-
-Settings that are only valid when `grantType: "AuthorizationCode"`:
-
- - `protectedOrigins`: (You determine these, and must register them
-   with your identity provider) Identifies hostnames that can
-   appropriately set cookies for the application.  Only the scheme
-   (`https://`) and authority (`example.com:1234`) parts are used; the
-   path part of the URL is ignored.
-
-   You will need to register each origin in `protectedOrigins` as an
-   authorized callback endpoint with your identity provider. The URL
-   will look like
-   `{{ORIGIN}}/.ambassador/oauth2/redirection-endpoint`.
-   <!-- If you're looking at the above sentence and thinking "that's
-   not correct!" (as I was): Yes, it's a lie that you need to register
-   each one; you only need to register the first one, but support has
-   the strong opinion that it's much simpler to just tell people
-   register all of them.  Plus that gives us more flexibility for
-   future changes.  So leave the lie.  -->
-
-   If you provide more than one `protectedOrigin`, all share the same
-   authentication system, so that logging into one origin logs you
-   into all origins; to have multiple domains that have separate
-   logins, use separate `Filter`s.
-
-   + `internalOrigin`: This sub-field of `protectedOrigins[i]` allows
-     you to tell Ambassador that there is another gateway in front of
-     Ambassador that rewrites the `Host` header, so that on the
-     internal network between that gateway and Ambassador, the origin
-     appears to be `internalOrigin` instead of `origin`.  As a
-     special-case the scheme and/or authority of the `internalOrigin`
-     may be `*`, which matches any scheme or any domain respectively.
-     The `*` is most useful in configurations with exactly one
-     protected origin; in such a configuration, Ambassador doesn't
-     need to know what the origin looks like on the internal network,
-     just that a gateway in front of Ambassador is rewriting it.  It
-     is invalid to use `*` with `includeSubdomains: true`.
-
-     For example, if you have a gateway in front of Ambassador
-     handling traffic for `myservice.example.com`, terminating TLS
-     and routing that traffic to Ambassador with the name
-     `ambassador.internal`, you might write:
-
-         ```yaml
-         protectedOrigins:
-         - origin: https://myservice.example.com
-           internalOrigin: http://ambassador.internal
-         ```
-
-     or, to avoid being fragile to renaming `ambassador.internal` to
-     something else, since there are not multiple origins that the
-     Filter must distinguish between, you could instead write:
-
-         ```yaml
-         protectedOrigins:
-         - origin: https://myservice.example.com
-           internalOrigin: "*://*"
-         ```
-
- - `clientURL` is deprecated, and is equivalent to setting
-
-   ```yaml
-   protectedOrigins:
-   - origin: clientURL-value
-     internalOrigin: "*://*"
-   ```
-
-- `postLogoutRedirectURI`: Set this field to a valid URL to have $productName$ redirect there upon a successful logout. You must register the following endpoint with your IDP as the Post Logout Redirect `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`. This informs your IDP to redirect back to $productName$ once the IDP has cleared the session data. Once the IDP has redirected back to $productName$, this clears the local $productName$ session information before redirecting to the destination specified by the `postLogoutRedirectURI` value.
-    * If Post Logout Redirect is configured in your IDP to `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` then, after a successful logout, a redirect is issued to the URL configured in `postLogoutRedirectURI`.
-    * If `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` is configured as the Post Logout Redirect in your IDP, but `postLogoutRedirectURI` is not configured in $productName$, then your IDP will error out as it will be expecting specific instructions for the post logout behavior.
-      Refer to your IDP’s documentation to verify if it supports Post Logout Redirects.
-      For more information on `post_logout_redirect_uri functionality`, refer to the [OpenID Connect RP-Initiated Logout 1.0 specs](https://openid.net/specs/openid-connect-rpinitiated-1_0.html).
-
- - `extraAuthorizationParameters`: Extra (non-standard or extension) OAuth authorization parameters to use.  It is not valid to specify a parameter used by OAuth itself ("response_type", "client_id", "redirect_uri", "scope", or "state").
-
- - `clientSessionMaxIdle`: Control how long the session held by Ambassador Edge Stack's OAuth client will last until we automatically expire it.
-    * Ambassador Edge Stack creates a new session when submitting requests to the upstream backend server and sets a cookie containing the sessionID. When a user makes a request to a backend service protected by the OAuth2 Filter, the OAuth Client in Ambassador Edge Stack will use the sessionID contained in the cookie to fetch the access token (and optional refresh token) for the current session so that it can be used when submitting a request to the upstream backend service. This session has a limited lifetime before it expires or extended, prompting the user to log back in.
-    * Setting a `clientSessionMaxIdle` duration is useful when your IdP is configured to return a refresh token along with an access token from your IdP's authorization server. `clientSessionMaxIdle` can be set to match Ambassador Edge Stack OAuth client's session lifetime to the lifetime of the refresh token configured within the IdP.
-    * If this is not set, then we tie the OAuth client's session lifetime to the lifetime of the access token received from the IdP's authorization server when no refresh token is also provided. If there is a refresh token, then by default we set it to be 14 days.
-
- - By default, any cookies set by the Ambassador Edge Stack will be
-   set to expire when the session expires naturally.  The
-   `useSessionCookies` setting may be used to cause session cookies to
-   be used instead.
-
-    * Normally cookies are set to be deleted at a specific time;
-      session cookies are deleted whenever the user closes their web
-      browser.  This may mean that the cookies are deleted sooner than
-      normal if the user closes their web browser; conversely, it may
-      mean that cookies persist for longer than normal if the use does
-      not close their browser.
-    * The cookies being deleted sooner may or may not affect
-      user-perceived behavior, depending on the behavior of the
-      identity provider.
-    * Any cookies persisting longer will not affect behavior of the
-      system; Ambassador Edge Stack validates whether the session
-      is expired when considering the cookie.
-
-   If `useSessionCookies` is non-`null`, then:
-
-    * By default it will have the cookies for all requests be
-      session cookies or not according to the
-      `useSessionCookies.value` sub-argument.
-
-    * Setting the `useSessionCookies.ifRequestHeader` sub-argument
-      tells it to use `useSessionCookies.value` for requests that
-      match the condition, and `!useSessionCookies.value` for
-      requests don't match.
-
-      When determining if a request matches, it looks at the HTTP
-      header field named by `useSessionCookies.ifRequestHeader.name`
-      (case-insensitive), and checks if it is either set to (if
-      `useSessionCookies.ifRequestHeader.negate: false`) or not set
-      to (if `useSessionCookies.ifRequestHeader.negate: true`)...
-       + a non-empty string (if neither
-         `useSessionCookies.ifRequestHeader.value` nor
-         `useSessionCookies.ifRequestHeader.valueRegex` are set)
-       + the exact string `value` (case-sensitive) (if
-         `useSessionCookies.ifRequestHeader.value` is set)
-       + a string that matches the regular expression
-         `useSessionCookies.ifRequestHeader.valueRegex` (if
-         `valueRegex` is set).  This uses [RE2][] syntax (always, not
-         obeying [`regex_type` in the `ambassador Module`][]) but does
-         not support the `\C` escape sequence.
-       + (it is invalid to have both `value` and `valueRegex` set)
-
-### OAuth resource server settings
-
- - `allowMalformedAccessToken`: Allow any access token, even if they are not RFC 6750-compliant.
- - `injectRequestHeaders` injects HTTP header fields in to the request before sending it to the upstream service; where the header value can be set based on the JWT value.
- If an OAuth2 filter is chained with a JWT filter with `injectRequestHeaders` configured, both sets of headers will be injected.
- If the same header is injected in both filters, the OAuth2 filter will populate the value.
- The value is specified as a [Go `text/template`][] string, with the following data made available to it:
-
-    * `.token.Raw` → `string` the access token raw JWT
-    * `.token.Header` → `map[string]interface{}` the access token JWT header, as parsed JSON
-    * `.token.Claims` → `map[string]interface{}` the access token JWT claims, as parsed JSON
-    * `.token.Signature` → `string` the access token signature
-    * `.idToken.Raw` → `string` the raw id token JWT
-    * `.idToken.Header` → `map[string]interface{}` the id token JWT header, as parsed JSON
-    * `.idToken.Claims` → `map[string]interface{}` the id token JWT claims, as parsed JSON
-    * `.idToken.Signature` → `string` the id token signature
-    * `.httpRequestHeader` → [`http.Header`][] a copy of the header of the incoming HTTP request.  Any changes to `.httpRequestHeader` (such as by using using `.httpRequestHeader.Set`) have no effect.  It is recommended to use `.httpRequestHeader.Get` instead of treating it as a map, in order to handle capitalization correctly.
-
- - `accessTokenValidation`: How to verify the liveness and scope of Access Tokens issued by the identity provider.  Valid values are either `"auto"`, `"jwt"`, or `"userinfo"`.  Empty or unset is equivalent to `"auto"`.
-   * `"jwt"`: Validates the Access Token as a JWT.
-     + By default: It accepts the RS256, RS384, or RS512 signature
-       algorithms, and validates the signature against the JWKS from
-       OIDC Discovery.  It then validates the `exp`, `iat`, `nbf`,
-       `iss` (with the Issuer from OIDC Discovery), and `scope`
-       claims: if present, none of the scope values are required to be
-       present.  This relies on the identity provider using
-       non-encrypted signed JWTs as Access Tokens, and configuring the
-       signing appropriately
-     + This behavior can be modified by delegating to [`JWT`
-       Filter](../jwt/) with `accessTokenJWTFilter`:
-       - `name` and `namespace` are used to identify which JWT Filter
-         to use.  It is an error to point at a Filter that is not a
-         JWT filter.
-       - `arguments` is is the same as the `arguments` field when
-         referring to a JWT Filter from a FilterPolicy.
-       - `inheritScopeArgument` sets whether to inherit the `scope`
-         argument from the FilterPolicy rule that triggered the OAuth2
-         Filter (similarly special-casing the `offline_access` scope
-         value); if the `arguments` field also specifies a `scope`
-         argument, then the union of the two is used.
-       - `stripInheritedScope` modifies the behavior of
-         `inheritScopeArgument`.  Some identity providers use scope
-         values that are URIs when speaking OAuth, but when encoding
-         those scope values in to a JWT the provider strips the
-         leading path of the value; removing everything up to and
-         including the last "/" in the value.  Setting
-         `stripInheritedScope` mimics this when passing the required
-         scope to the JWT Filter.  It is meaningless to set
-         `stripInheritedScope` if `inheritScopeArgument` is not set.
-   * `"userinfo"`: Validates the access token by polling the OIDC UserInfo Endpoint. This means that the Ambassador Edge Stack must initiate an HTTP request to the identity provider for each authorized request to a protected resource.  This performs poorly, but functions properly with a wider range of identity providers.  It is not valid to set `accessTokenJWTFilter` if `accessTokenValidation: userinfo`.
-   * `"auto"` attempts to do `"jwt"` validation if any of these
-     conditions are true:
-
-     + `accessTokenJWTFilter` is set, or
-     + `grantType` is `"ClientCredentials"`, or
-     + the Access Token parses as a JWT and the signature is valid,
-
-     and otherwise falls back to `"userinfo"` validation.
-
-[RE2]: https://github.com/google/re2/wiki/Syntax
-[`regex_type` in the `ambassador Module`]: ../../../running/ambassador/
-
-### HTTP client
-
-These HTTP client settings are used for talking to the identity
-provider:
-
- - `maxStale`: How long to keep stale cached OIDC replies for. This sets the `max-stale` Cache-Control directive on requests, and also ignores the `no-store` and `no-cache` Cache-Control directives on responses.  This is useful for maintaining good performance when working with identity providers with misconfigured Cache-Control. Note that if you are reusing the same `authorizationURL` and `jwksURI` across different OAuth and JWT filters respectively, then you MUST set `maxStale` as a consistent value on each filter to get predictable caching behavior.
- - `insecureTLS` disables TLS verification when speaking to an identity provider with an `https://` `authorizationURL`.  This is discouraged in favor of either using plain `http://` or [installing a self-signed certificate](../#installing-self-signed-certificates).
- - `renegotiateTLS` allows a remote server to request TLS renegotiation.  Accepted values are "never", "onceAsClient", and "freelyAsClient".
-
-`"duration"` strings are parsed as a sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".  See [Go `time.ParseDuration`](https://golang.org/pkg/time/#ParseDuration).
 
 ## OAuth2 path-specific arguments
 
@@ -518,7 +115,7 @@ spec:
        + the exact string `value` (case-sensitive) (if `value` is set)
        + a string that matches the regular expression `valueRegex` (if
          `valueRegex` is set).  This uses [RE2][] syntax (always, not
-         obeying [`regex_type` in the `ambassador Module`][]) but does
+         obeying `regex_type` in the `Module`) but does
          not support the `\C` escape sequence.
     * By default, it serves an authorization-denied error page; by default HTTP 403 ("Forbidden"), but this can be configured by the `httpStatusCode` sub-argument.
     * __DEPRECATED__ Instead of serving that simple error page, it can instead be configured to call out to a list of other Filters, by setting the `filters` list. The syntax and semantics of this list are the same as `.spec.rules[].filters` in a [`FilterPolicy`](../#filterpolicy-definition). Be aware that if one of these filters modify the request rather than returning a response, then the request will be allowed through to the backend service, even though the `OAuth2` Filter denied it.
@@ -535,7 +132,7 @@ Applications using request submission formats other than HTML forms should perfo
 
 
 <Alert severity="info">
-  Prior versions of the Ambassador Edge Stack did not have an <code>ambassador_xsrf.NAME.NAMESPACE</code> cookie, and instead required you to use the <code>ambassador_session.NAME.NAMESPACE</code> cookie.  The <code>ambassador_session.NAME.NAMESPACE</code> cookie should no longer be used for XSRF-protection purposes.
+  Prior versions of Ambassador Edge Stack did not have an <code>ambassador_xsrf.NAME.NAMESPACE</code> cookie, and instead required you to use the <code>ambassador_session.NAME.NAMESPACE</code> cookie.  The <code>ambassador_session.NAME.NAMESPACE</code> cookie should no longer be used for XSRF-protection purposes.
 </Alert>
 
 ## RP-initiated logout
@@ -574,7 +171,6 @@ form-encoded values that you need to include:
   <input type="submit" value="Log out" />
 </form>
 ```
-
 
 ```html
 <form method="POST" action="/.ambassador/oauth2/logout?realm=myfilter.mynamespace" target="_blank">
@@ -624,3 +220,6 @@ The Ambassador Edge Stack relies on Redis to store short-lived authentication cr
 In this architecture, Ambassador Edge Stack is functioning as an Identity Aware Proxy in a Zero Trust Network. For more about this security architecture, read the [BeyondCorp security architecture whitepaper](https://ai.google/research/pubs/pub43231) by Google.
 
 The ["How-to" section](../../../../howtos/) has detailed tutorials on integrating Ambassador with a number of Identity Providers.
+
+[OAuth2 Filter API reference]: ../../../../custom-resources/getambassador.io/v3alpha1/filter-jwt
+[RE2]: https://github.com/google/re2/wiki/Syntax

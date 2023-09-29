@@ -1,7 +1,10 @@
-# Plugin Filter
-
+# Developing Plugin Filters
 
 The Plugin filter type allows you to plug in your own custom code. This code is compiled to a `.so` file, which you load into the Edge Stack container at `/etc/ambassador-plugins/${NAME}.so`. The [Filter Development Guide](../../../../howtos/filter-dev-guide) contains a tutorial on developing filters.
+
+<br />
+
+See the [Plugin Filter API reference][] for an overview of all the supported fields.
 
 ## The Plugin interface
 
@@ -13,7 +16,7 @@ Plugins are compiled with `go build -buildmode=plugin -trimpath` and must have a
 package main
 
 import (
-	"net/http"
+  "net/http"
 )
 
 func PluginMain(w http.ResponseWriter, r *http.Request) { … }
@@ -27,20 +30,4 @@ Finalize changes by calling `w.WriteHeader(http.StatusOK)`.
 If you call `w.WriteHeader()` with any value other than 200 (`http.StatusOK`) instead of modifying the request, the plugin has
 taken over the request, and the request will not be sent to your backend service.  You can call `w.Write()` to write the body of an error page.
 
-## Plugin global arguments
-
-```yaml
----
-apiVersion: getambassador.io/v3alpha1
-kind: Filter
-metadata:
-  name: "example-plugin-filter"
-  namespace: "example-namespace"
-spec:
-  Plugin:
-    name: "string" # required; this tells it where to look for the compiled plugin file; "/etc/ambassador-plugins/${NAME}.so"
-```
-
-## Plugin path-specific arguments
-
-Path specific arguments are not supported for Plugin filters at this time.
+[Plugin Filter API reference]: ../../../../custom-resources/getambassador.io/v3alpha1/filter-plugin
