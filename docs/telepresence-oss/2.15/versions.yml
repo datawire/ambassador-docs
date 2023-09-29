@@ -1,5 +1,5 @@
-version: "2.15.0"
-dlVersion: "latest"
+version: "2.15.1"
+dlVersion: "lastest"
 docsVersion: "2.15"
 branch: release/v2
 productName: "Telepresence OSS"
