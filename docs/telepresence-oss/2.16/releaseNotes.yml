@@ -43,6 +43,11 @@ items:
     date: (TBD)
     notes:
       - type: bugfix
+        title: Routing table race condition
+        body: ->
+          A race condition would sometimes occur when a Telepresence TUN device was deleted and another created in rapid
+          succession that caused the routing table to reference interfaces that no longer existed.
+      - type: bugfix
         title: Stop lingering daemon container
         body: >-
           When using <code>telepresence connect --docker</code>, a lingering container could be present, causing errors
@@ -81,6 +86,17 @@ items:
         body: >-
           A deprecation warning will be printed if a command other than <code>telepresence connect</code> causes an
           implicit connect to happen. Implicit connects will be removed in a future release.
+  - version: 2.15.1
+    date: "2023-09-06"
+    notes:
+      - type: security
+        title: Rebuild with go 1.21.1
+        body: >-
+          Rebuild Telepresence with go 1.21.1 to address CVEs.
+      - type: security
+        title: Set security context for traffic agent
+        body: >-
+          Openshift users reported that the traffic agent injection was failing due to a missing security context.
   - version: 2.15.0
     date: "2023-08-28"
     notes:
