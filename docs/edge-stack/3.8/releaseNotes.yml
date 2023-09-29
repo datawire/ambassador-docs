@@ -32,6 +32,15 @@
 
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
+  - version: 3.8.1
+    date: '2023-09-18'
+    notes:
+      - title: Upgrade Golang to 1.20.8
+        type: security
+        body: >-
+          Upgrading to the latest release of Golang as part of our general dependency upgrade process. This includes security fixes for CVE-2023-39318, CVE-2023-39319.
+        docs: https://go.dev/doc/devel/release#go1.20.minor
+
   - version: 3.8.0
     date: '2023-08-29'
     notes:
@@ -148,7 +157,7 @@ items:
         docs: https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/CHANGELOG.md
 
   - version: 3.5.2
-    date: "2023-04-05"
+    date: '2023-04-05'
     notes:
       - title: Upgrade to Envoy 1.24.5
         type: security
@@ -228,8 +237,8 @@ items:
 
           Thanks to <a href="https://github.com/antonu17">Anton Ustyuzhanin</a>!.
         github:
-        - title: "#4809"
-          link: https://github.com/emissary-ingress/emissary/pull/4809
+          - title: '#4809'
+            link: https://github.com/emissary-ingress/emissary/pull/4809
 
       - title: Upgraded to Python 3.10
         type: change
@@ -394,8 +403,8 @@ items:
           restores the previous behavior by disabling the ext_authz call on the
           https redirect routes.
         github:
-        - title: "#4620"
-          link: https://github.com/emissary-ingress/emissary/issues/4620
+          - title: '#4620'
+            link: https://github.com/emissary-ingress/emissary/issues/4620
 
       - title: Fix regression in host_redirects with AuthService
         type: bugfix
@@ -411,8 +420,8 @@ items:
           restores the previous behavior by disabling the ext_authz call on the
           host_redirect routes.
         github:
-        - title: "#4640"
-          link: https://github.com/emissary-ingress/emissary/issues/4640
+          - title: '#4640'
+            link: https://github.com/emissary-ingress/emissary/issues/4640
 
       - title: Propagate trace headers to http external filter
         type: change
@@ -420,8 +429,8 @@ items:
           Previously, tracing headers were not propagated to an ExternalFilter configured with <code>proto: http</code>. Now, adding supported tracing headers (b3, etc...) to the <code>spec.allowed_request_headers</code> will propagate them to the configured service.
         docs: topics/using/filters/external/#tracing-header-propagation
         github:
-        - title: "#3078"
-          link: https://github.com/datawire/apro/issues/3078
+          - title: '#3078'
+            link: https://github.com/datawire/apro/issues/3078
 
   - version: 3.2.0
     date: '2022-09-27'
@@ -512,8 +521,8 @@ items:
         body: >-
           Distinct services with names that are the same in the first forty characters will no longer be incorrectly mapped to the same cluster.
         github:
-        - title: "#4354"
-          link: https://github.com/emissary-ingress/emissary/issues/4354
+          - title: '#4354'
+            link: https://github.com/emissary-ingress/emissary/issues/4354
 
       - title: Properly populate alt_stats_name for Tracing, Auth and RateLimit Services
         type: bugfix
@@ -703,8 +712,8 @@ items:
           `proto: http`. Now, adding supported tracing headers (b3, etc...) to the
           `spec.allowed_request_headers` will propagate them to the configured service.
         github:
-        - title: "#3078"
-          link: https://github.com/datawire/apro/issues/3078
+          - title: '#3078'
+            link: https://github.com/datawire/apro/issues/3078
 
       - title: Diagnostics stats properly handles parsing envoy metrics with colons
         type: bugfix

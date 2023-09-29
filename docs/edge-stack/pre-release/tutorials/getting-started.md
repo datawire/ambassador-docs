@@ -25,7 +25,7 @@ We'll start by installing $productName$ into your cluster.
 
 $productName$ requires a [license](../../topics/using/licenses) to function, so the first step is getting one to use while installing. If you are in air-gapped environment, please [contact sales](https://www.getambassador.io/contact-us).
 
-1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/edge-stck/license/existing/) with GitHub, GitLab or Google and select your team account.
+1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/edge-stack/license/existing/) with GitHub, GitLab or Google and select your team account.
 
 2. Follow the prompts to name the cluster and click **Generate Key**.
 
@@ -33,7 +33,7 @@ $productName$ requires a [license](../../topics/using/licenses) to function, so 
 
 4. Once your cluster is connected to Ambassador Cloud, a community license is automatically applied.
 
-**We recommend using Helm** to install but there are other options below to choose from.
+**We recommend using Helm** to install but there are other options below to choose from. Please replace `<your token from Ambassador Cloud>` below with your token from Ambassador Cloud.
 
 <GettingStartedEdgeStack21Tabs version="$version$" />
 
