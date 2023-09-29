@@ -118,8 +118,8 @@ See the [API Key Filter API reference][] for an overview of all the supported fi
      <b>Success!</b> Your requests are now validated against an APIKey Filter and will be denied if they do not supply a valid API key!
    </Alert>
 
-[API Key Filter API reference]: ../../../../custom-resources/getambassador.io/v3alpha1/filter-apikey
-[APIKey Filter]: ../../../../custom-resources/getambassador.io/v3alpha1/filter-apikey
-[FilterPolicy resource]: ../../../../custom-resources/getambassador.io/v3alpha1/filterpolicy
+[API Key Filter API reference]: ../../../../custom-resources/getambassador/v3alpha1/filter-apikey
+[APIKey Filter]: ../../../../custom-resources/getambassador/v3alpha1/filter-apikey
+[FilterPolicy resource]: ../../../../custom-resources/getambassador/v3alpha1/filterpolicy
 [base64encode.org]: https://www.base64encode.org/
 [base64]: https://en.wikipedia.org/wiki/Base64

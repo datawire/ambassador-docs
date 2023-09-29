@@ -30,4 +30,4 @@ Finalize changes by calling `w.WriteHeader(http.StatusOK)`.
 If you call `w.WriteHeader()` with any value other than 200 (`http.StatusOK`) instead of modifying the request, the plugin has
 taken over the request, and the request will not be sent to your backend service.  You can call `w.Write()` to write the body of an error page.
 
-[Plugin Filter API reference]: ../../../../custom-resources/getambassador.io/v3alpha1/filter-plugin
+[Plugin Filter API reference]: ../../../../custom-resources/getambassador/v3alpha1/filter-plugin

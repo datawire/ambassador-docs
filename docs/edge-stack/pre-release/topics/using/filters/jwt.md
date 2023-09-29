@@ -153,4 +153,4 @@ spec:
       end
 ```
 
-[JWT Filter API reference]: ../../../../custom-resources/getambassador.io/v3alpha1/filter-jwt
+[JWT Filter API reference]: ../../../../custom-resources/getambassador/v3alpha1/filter-jwt

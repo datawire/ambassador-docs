@@ -39,4 +39,4 @@ For example, if `name: "example-plugin"` the .so file should be available at
 `"/etc/ambassador-plugins/example-plugin.so"` on the Envoy Proxy container.
 
 [FilterPolicy Resource]: ../filterpolicy
-[the v3alpha1 Plugin Filter api reference]: ../../../getambassador.io/v3alpha1/filter-plugin
+[the v3alpha1 Plugin Filter api reference]: ../../../getambassador/v3alpha1/filter-plugin

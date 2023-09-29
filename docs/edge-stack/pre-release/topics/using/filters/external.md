@@ -179,4 +179,4 @@ The following imports simply need to be updated to migrate an External Filter
 In the [datawire/sample-external-service repository](https://github.com/datawire/Sample-External-Service), you can find examples of an External Filter using both the
 `v2` transport protocol as well as `v3` along with deployment instructions for reference. The External Filter in this repo does not perform any authorization and is instead meant to serve as a reference for the operations that an External can make use of.
 
-[External Filter API reference]: ../../../../custom-resources/getambassador.io/v3alpha1/filter-external
+[External Filter API reference]: ../../../../custom-resources/getambassador/v3alpha1/filter-external

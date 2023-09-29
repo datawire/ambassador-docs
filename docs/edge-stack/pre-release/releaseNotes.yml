@@ -1188,7 +1188,7 @@ items:
           <code>insteadOfRedirect</code>) without a <code>value</code> or <code>valueRegex</code>
           would erroneously behave as if <code>valueRegex='^$'</code>, rather than performing a
           simple presence check.
-        docs: topics/using/filters/#filterpolicy-definition
+        docs: custom-resources/getambassador/v3alpha1/filterpolicy
 
       - title: Fix support for for v2 Mappings with CORS
         type: bugfix

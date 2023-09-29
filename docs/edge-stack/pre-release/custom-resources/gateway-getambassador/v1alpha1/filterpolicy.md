@@ -176,7 +176,7 @@ Automatically managed by the controller to reflect the state of the `FilterPolic
 [JWT Filter]: ../filter-jwt
 [OAuth2 Filter]: ../filter-oauth2
 [Filter custom resource]: ../filter
-[the v3alpha1 FilterPolicy api reference]: ../../../getambassador.io/v3alpha1/filterpolicy
+[the v3alpha1 FilterPolicy api reference]: ../../../getambassador/v3alpha1/filterpolicy
 [corresponding Kubernetes validation]: https://github.com/kubernetes/apimachinery/blob/02cfb53916346d085a6c6c7c66f882e3c6b0eca6/pkg/util/validation/validation.go
 [https://tools.ietf.org/html/rfc7230]: https://tools.ietf.org/html/rfc7230
 [https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00]: https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00

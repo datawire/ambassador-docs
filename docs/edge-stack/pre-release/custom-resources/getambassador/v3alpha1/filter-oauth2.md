@@ -357,7 +357,7 @@ Defines the input arguments that can be set for a JWTFilter.
 [ProtectedOrigin]: #protectedorigin
 [SessionCookies]: #sessioncookies
 [Duration]: #duration
-[installing a self-signed certificate]: ../../../../topics/using/filters/#installing-self-signed-certificates
+[installing a self-signed certificate]: ../../../../topics/using/filters/#filters-using-self-signed-certificates
 [JWT Filter]: ../filter-jwt
 [the v1alpha1 OAuth2 Filter api reference]: ../../../gateway-getambassador/v1alpha1/filter-oauth2
 [Go time.ParseDuration]: https://pkg.go.dev/time#ParseDuration

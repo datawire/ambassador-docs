@@ -333,7 +333,7 @@ Specific settings that configure the `Password` grant type.
 [Origin]: #origin
 [Duration]: #duration
 [JWT Filter]: ../filter-jwt
-[the v3alpha1 OAuth2 Filter api reference]: ../../../getambassador.io/v3alpha1/filter-oauth2
+[the v3alpha1 OAuth2 Filter api reference]: ../../../getambassador/v3alpha1/filter-oauth2
 [Go time.ParseDuration]: https://pkg.go.dev/time#ParseDuration
 [Kubernetes secret]: https://kubernetes.io/docs/concepts/configuration/secret/
 [OpenID Connect Discovery 1.0]: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig

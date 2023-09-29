@@ -100,10 +100,10 @@ RUN update-ca-certificates
 USER 1000
 ```
 
-[JWT]: ../jwt
-[OAuth2]: ../oauth2
-[Plugin]: ../plugin
-[External]: ../external
-[API Keys]: ../apikeys
-[FilterPolicy resources]: ../../../../custom-resources/getambassador.io/v3alpha1/filterpolicy
+[JWT]: ./jwt
+[OAuth2]: ./oauth2
+[Plugin]: ./plugin
+[External]: ./external
+[API Keys]: ./apikeys
+[FilterPolicy resources]: ../../../custom-resources/getambassador/v3alpha1/filterpolicy
 [OIDC Discovery]: https://openid.net/specs/openid-connect-discovery-1_0.html

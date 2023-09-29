@@ -118,7 +118,7 @@ spec:
          obeying `regex_type` in the `Module`) but does
          not support the `\C` escape sequence.
     * By default, it serves an authorization-denied error page; by default HTTP 403 ("Forbidden"), but this can be configured by the `httpStatusCode` sub-argument.
-    * __DEPRECATED__ Instead of serving that simple error page, it can instead be configured to call out to a list of other Filters, by setting the `filters` list. The syntax and semantics of this list are the same as `.spec.rules[].filters` in a [`FilterPolicy`](../#filterpolicy-definition). Be aware that if one of these filters modify the request rather than returning a response, then the request will be allowed through to the backend service, even though the `OAuth2` Filter denied it.
+    * __DEPRECATED__ Instead of serving that simple error page, it can instead be configured to call out to a list of other Filters, by setting the `filters` list. The syntax and semantics of this list are the same as `.spec.rules[].filters` in a `FilterPolicy`. Be aware that if one of these filters modify the request rather than returning a response, then the request will be allowed through to the backend service, even though the `OAuth2` Filter denied it.
     * It is invalid to specify both `httpStatusCode` and `filters`.
 
 ## XSRF protection
@@ -221,5 +221,5 @@ In this architecture, Ambassador Edge Stack is functioning as an Identity Aware 
 
 The ["How-to" section](../../../../howtos/) has detailed tutorials on integrating Ambassador with a number of Identity Providers.
 
-[OAuth2 Filter API reference]: ../../../../custom-resources/getambassador.io/v3alpha1/filter-jwt
+[OAuth2 Filter API reference]: ../../../../custom-resources/getambassador/v3alpha1/filter-oauth2
 [RE2]: https://github.com/google/re2/wiki/Syntax
