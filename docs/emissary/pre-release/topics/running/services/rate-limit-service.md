@@ -85,11 +85,16 @@ spec:
   service: 'example-rate-limit.default:5000'
   protocol_version: # default is v2, if upgrading from 2.x then you must set this to v3.
   failure_mode_deny: false # when set to true envoy will return 500 error when unable to communicate with RateLimitService
+  grpc:
+   use_resource_exhausted_code: true # default is false
 ```
 
 - `service` gives the URL of the rate limit service. If using a Kubernetes service, this should be the [namespace-qualified DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#namespaces-of-services) of that service.
 - `protocol_version`  Allowed values are `v3` and `v2`(default). `protocol_version` was used in previous versions of $productName$ to control the protocol used by the gRPC service to communicate with the `RateLimitService`. $productName$ 3.x is running an updated version of Envoy that has dropped support for the `v2` protocol, so starting in 3.x, if `protocol_version` is not specified, the default  value of `v2` will cause an error to be posted and a static response will be returned. Therefore, you must set it to `protocol_version: v3`. If upgrading from a previous version, you will want  to set it to `v3` and ensure it is working before upgrading to Emissary-ingress 3.Y. The default value for `protocol_version` remains `v2` in the `getambassador.io/v3alpha1` CRD specifications to avoid making breaking changes outside of a CRD version change. Future versions of CRD's will deprecate it.
 - `failure_mode_deny` By default, Envoy will fail open when unable to communicate with the service due to it becoming unvailable or due to timeouts. When this happens the upstream service that is being protected by a rate limit may be overloaded due to this behavior. When set to `true` Envoy will be configured to return a `500` status code when it is unable to communicate with the RateLimit service and will fail closed by rejecting request to the upstream service.
+- `grpc` contains settings for grpc connections
+  - `use_resource_exhausted_code` By default, $productName$ will return an `UNAVAILABLE` gRPC code when a request is rate limited.
+  When set to `true`, this field will cause $productName$ will return a `RESOURCE_EXHAUSTED` gRPC code instead.
 
 You may only use a single `RateLimitService` manifest.
 

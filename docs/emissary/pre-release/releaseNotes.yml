@@ -35,7 +35,19 @@ items:
   - version: 3.9.0
     date: 'TBD'
     notes:
-      - title: Ensure APIExt server is available before starting Emissary
+      - title: gateway.getambassador.io/v1alpha1 Filter & FilterPolicy resources
+        type: feature
+        body: >-
+          Filter and FilterPolicy resources are now available via <code>gateway.getambassador.io/v1alpha1</code>. It is NOT backwards compatible with <code>getambassador.io/v3alpha1</code> Filter and FilterPolicy resources.
+        docs: custom-resources/gateway-getambassador/v1alpha1/filter
+
+      - title: Added support for RESOURCE_EXHAUSTED responses to grpc clients when rate limited
+        type: feature
+        body: >-
+          By default, $productName$ will return an <code>UNAVAILABLE</code> code when a request using gRPC is rate limited. The <code>RateLimitService</code> resource now exposes a new <code>grpc.use_resource_exhausted_code</code> field that when set to <code>true</code>, $productName$ will return a <code>RESOURCE_EXHAUSTED</code> gRPC code instead. Thanks to <a href="https://github.com/jeromefroe">Jerome Froelich</a> for contributing this feature!
+        docs: topics/running/services/rate-limit-service
+
+      - title: Ensure APIExt server is available before starting Edge Stack
         type: bugfix
         body: >-
           The APIExt server provides CRD conversion between the stored version
@@ -43,6 +55,7 @@ items:
           component is required to operate $productName$, we have introduced
           an init container that will ensure it is available before starting. This will help address some of the intermittent issues seen during
           install and upgrades.
+        docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$
 
   - version: 3.8.1
     date: '2023-09-18'

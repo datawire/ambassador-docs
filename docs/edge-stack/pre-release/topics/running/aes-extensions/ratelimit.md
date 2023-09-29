@@ -25,7 +25,15 @@ metadata:
   namespace: ambassador
 spec:
   service: 127.0.0.1:8500
+  failure_mode_deny: false # when set to true envoy will return 500 error when unable to communicate with RateLimitService
+  grpc:
+   use_resource_exhausted_code: true # default is false
 ```
+
+- `failure_mode_deny` By default, $productName$ will fail open when unable to communicate with the service due to it becoming unvailable or due to timeouts. When this happens the upstream service that is being protected by a rate limit may be overloaded due to this behavior. When set to `true` $productName$ will be configured to return a `500` status code when it is unable to communicate with the RateLimit service and will fail closed by rejecting request to the upstream service.
+- `grpc` contains settings for grpc connections
+  - `use_resource_exhausted_code` By default, $productName$ will return an `UNAVAILABLE` gRPC code when a request is rate limited.
+  When set to `true`, this field will cause $productName$ will return a `RESOURCE_EXHAUSTED` gRPC code instead.
 
 This configures Envoy to send requests that are labeled for rate limiting to the
 extension process running on port 8500. The rate limiting extension will then
@@ -40,7 +48,7 @@ Configuration of this extension is managed via environment variables.
 variables available for configuration. This document highlights the ones used
 by the rate limiting extension.
 
-#### Redis
+### Redis
 
 The rate limiting extension relies heavily on redis for writing and reading
 counters for the different `RateLimit` patterns.
@@ -50,7 +58,7 @@ Redis.
 
 See the [Redis documentation](../../aes-redis) for information on Redis tuning.
 
-### REDIS_PERSECOND
+#### REDIS_PERSECOND
 
 If `REDIS_PERSECOND` is true, a second Redis connection pool is created (to a
 potentially different Redis instance) that is only used for per-second
@@ -65,7 +73,7 @@ preview mode.
 
 #### `LOCAL_CACHE_SIZE_IN_BYTES`
 
-* Only available if `AES_RATELIMIT_PREVIEW: "true`.
+**Only available if `AES_RATELIMIT_PREVIEW: "true`.**
 
 The AES rate limit extension can optionally cache over-the-limit keys so it does
 not need to read the redis cache again for requests with labels that are already
@@ -76,7 +84,7 @@ caching.
 
 #### `NEAR_LIMIT_RATIO`
 
-* Only available if `AES_RATELIMIT_PREVIEW: "true"`
+**Only available if `AES_RATELIMIT_PREVIEW: "true"`**
 
 Adjusts the ratio used by the `near_limit` statistic for tracking requests that
 are "near the limit".

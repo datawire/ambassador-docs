@@ -36,14 +36,24 @@ items:
     date: 'TBD'
     notes:
       - title: gateway.getambassador.io/v1alpha1 Filter & FilterPolicy resources
+        type: feature
         body: >-
           Filter and FilterPolicy resources are now available via <code>gateway.getambassador.io/v1alpha1</code>. It is NOT backwards compatible with <code>getambassador.io/v3alpha1</code> Filter and FilterPolicy resources.
+        docs: custom-resources/gateway-getambassador/v1alpha1/filter
+
+      - title: Added support for RESOURCE_EXHAUSTED responses to grpc clients when rate limited
         type: feature
+        body: >-
+          By default, $productName$ will return an <code>UNAVAILABLE</code> code when a request using gRPC is rate limited. The <code>RateLimitService</code> resource now exposes a new <code>grpc.use_resource_exhausted_code</code> field that when set to <code>true</code>, $productName$ will return a <code>RESOURCE_EXHAUSTED</code> gRPC code instead. Thanks to <a href="https://github.com/jeromefroe">Jerome Froelich</a> for contributing this feature!
+        docs: topics/using/running/aes-extensions/ratelimit
+
       - title: Helm chart adds the Ambassador Agent chart as a sub-chart
         type: change
         body: >-
           The Edge Stack helm chart now adds the Ambassador Agent as a sub-chart
           which can be configured using the <code>agent</code> section in values.yaml. The Ambassador Agent templates in the helm chart have been removed.
+        docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$
+
       - title: Ensure APIExt server is available before starting Edge Stack
         type: bugfix
         body: >-
@@ -52,6 +62,7 @@ items:
           component is required to operate $productName$, we have introduced
           an init container that will ensure it is available before starting. This will help address some of the intermittent issues seen during
           install and upgrades.
+        docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$
 
   - version: 3.8.2
     date: '2023-10-11'
