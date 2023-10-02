@@ -30,6 +30,12 @@
 
 changelog: ''
 items:
+  - date: '2023-10-02'
+    notes:
+      - title: 'Organization Dashboard redesign'
+        body: The Dashboard was redesigned to better highlight users and organization's usage of Telepresence and Edge Stack.
+        image: './new-organization-dashboard.png'
+        type: feature
   - date: '2023-08-29'
     notes:
       - title: 'New subscription plans'
