@@ -27,6 +27,7 @@
 #             relative to `FOO/release-notes/`.
 #         - docs: The path to the documentation page where additional information can be found.
 #         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
+# !!!!!!! DO NOT EDIT MANUALLY, PLEASE USE make telepresence-generate-changelog
 
 docTitle: Telepresence Release Notes
 docDescription: Release notes for Telepresence by Ambassador Labs, a CNCF project
