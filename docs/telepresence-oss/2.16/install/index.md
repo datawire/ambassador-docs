@@ -46,7 +46,7 @@ We've developed a Powershell script to simplify the process of installing telepr
 # from PowerShell as Administrator.
 
 # 1. Download the latest windows zip containing telepresence.exe and its dependencies (~50 MB):
-Invoke-WebRequest https://app.getambassador.io/download/tel2oss/releases/download/$dlVersion$/telepresence.zip -OutFile telepresence.zip
+Invoke-WebRequest https://app.getambassador.io/download/tel2oss/releases/download/$dlVersion$/telepresence-windows-amd64.zip -OutFile telepresence.zip
 
 # 2. Unzip the telepresence.zip file to the desired directory, then remove the zip file:
 Expand-Archive -Path telepresence.zip -DestinationPath telepresenceInstaller/telepresence
