@@ -1,1 +1,6 @@
-../../telepresence/2.16/redirects.yml
+- {from: "", to: "quick-start"}
+- {from: /docs/telepresence/v2.15/quick-start/qs-go, to: /docs/telepresence/v2.15/quickstart/}
+- {from: /docs/telepresence/v2.15/quick-start/qs-java, to: /docs/telepresence/v2.15/quickstart/}
+- {from: /docs/telepresence/v2.15/quick-start/qs-node, to: /docs/telepresence/v2.15/quickstart/}
+- {from: /docs/telepresence/v2.15/quick-start/qs-python, to: /docs/telepresence/v2.15/quickstart/}
+- {from: /docs/telepresence/v2.15/quick-start/qs-python-fastapi, to: /docs/telepresence/v2.15/quickstart/}
