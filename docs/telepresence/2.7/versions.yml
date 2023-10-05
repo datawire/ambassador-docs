@@ -1,0 +1,5 @@
+version: "2.7.1"
+dlVersion: "latest"
+docsVersion: "2.7"
+branch: release/v2
+productName: "Telepresence"
