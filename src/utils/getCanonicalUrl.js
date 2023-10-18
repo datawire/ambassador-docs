@@ -37,7 +37,7 @@ const getCanonicalUrl = (slugs, currentSlug) => {
   if(canonicalSlug.startsWith("/docs/telepresence-oss")) {
     canonicalSlug = canonicalSlug.replace("/docs/telepresence-oss","/docs/telepresence");
   }
-  canonicalSlug = trimLastSlash(canonicalSlug);
+  //canonicalSlug = trimLastSlash(canonicalSlug);
   return { url: canonicalSlug, latest };
 };
 
