@@ -57,15 +57,6 @@ items:
           install and upgrades.
         docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$
 
-  - version: 3.8.1
-    date: '2023-09-18'
-    notes:
-      - title: Upgrade Golang to 1.20.8
-        type: security
-        body: >-
-          Upgrading to the latest release of Golang as part of our general dependency upgrade process. This includes security fixes for CVE-2023-39318, CVE-2023-39319.
-        docs: https://go.dev/doc/devel/release#go1.20.minor
-
   - version: 3.8.2
     date: '2023-10-11'
     notes:
@@ -79,6 +70,15 @@ items:
         type: security
         body: >-
           Upgrading to the latest release of Golang as part of our general dependency upgrade process. This update resolves CVE-2023-39323 and CVE-2023-39325.
+        docs: https://go.dev/doc/devel/release#go1.20.minor
+
+  - version: 3.8.1
+    date: '2023-09-18'
+    notes:
+      - title: Upgrade Golang to 1.20.8
+        type: security
+        body: >-
+          Upgrading to the latest release of Golang as part of our general dependency upgrade process. This includes security fixes for CVE-2023-39318, CVE-2023-39319.
         docs: https://go.dev/doc/devel/release#go1.20.minor
 
   - version: 3.8.0
