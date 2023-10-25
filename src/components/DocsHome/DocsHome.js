@@ -65,15 +65,6 @@ const DocsHome = () => {
           buttonTitle="Telepresence documentation"
         />
         <Product
-          title={'Argo'}
-          description={
-            'With Argo, you can release updates cleanly and monitor your rollouts as you do. Create canary releases of new versions of a service easily with the option to safely rollback changes when necessarily.'
-          }
-          image={Ship}
-          getStarted={goToDocsArgo}
-          buttonTitle="Argo documentation"
-        />
-        <Product
           title={'Edge Stack'}
           description={
             'In a fast-paced development environment, it is essential to keep services running 24/7. Mitigate issues, monitor updates, and maintain complete control over protecting your services with Edge Stack.'

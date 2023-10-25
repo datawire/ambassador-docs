@@ -70,7 +70,8 @@ const index = ({ data, location, pageContext }) => {
       process.env.GATSBY_ARCHIVE_DOCS &&
       (newProduct.slug === 'emissary' ||
         newProduct.slug === 'edge-stack' ||
-        newProduct.slug === 'telepresence')
+        newProduct.slug === 'telepresence' ||
+        newProduct.slug === 'telepresence-oss')
     ) {
       return (
         <p>
