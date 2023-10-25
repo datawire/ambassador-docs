@@ -58,11 +58,6 @@ export const products = [
     to: goToDocsTelepresenceOss,
     id: Math.random().toString(),
     version: [
-      {
-        id: 'pre-release',
-        name: 'Pre-Release',
-        link: 'pre-release/quick-start',
-      },
       { id: 'latest', name: 'Latest', link: 'latest/quick-start' },
       { id: '2.16', name: '2.16', link: '2.16/quick-start' },
       { id: '2.15', name: '2.15', link: '2.15/quick-start', archived: true },
