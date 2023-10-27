@@ -1,5 +1,5 @@
 const { trimLastSlash } = require('../../../src/utils/trimUrl');
-/* 
+/*
   You need to add the URL in exceptions object without the version as a key and the value with the desired canonical URL
 */
 
@@ -37,7 +37,7 @@ const getCanonicalUrl = (slugs, currentSlug) => {
   if(canonicalSlug.startsWith("/docs/telepresence-oss")) {
     canonicalSlug = canonicalSlug.replace("/docs/telepresence-oss","/docs/telepresence");
   }
-  //canonicalSlug = trimLastSlash(canonicalSlug);
+  canonicalSlug = trimLastSlash(canonicalSlug);
   return { url: canonicalSlug, latest };
 };
 
