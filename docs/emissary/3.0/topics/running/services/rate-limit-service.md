@@ -105,7 +105,7 @@ If `tls` is present with a value that is not `true`, the value is assumed to be 
 The [$OSSproductName$ Rate Limiting
 Tutorial](../../../../howtos/rate-limiting-tutorial) has a simple rate limiting
 example. For a more advanced example, read the [advanced rate limiting
-tutorial](../../../../../2.0/howtos/advanced-rate-limiting), which uses the rate limit
+tutorial](../../../../../latest/howtos/advanced-rate-limiting), which uses the rate limit
 service that is integrated with $AESproductName$.
 
 ## Further reading
