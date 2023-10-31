@@ -103,7 +103,7 @@ export default function GettingStartedEmissary21Tabs(props) {
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
-            'helm install emissary-ingress --namespace emissary datawire/emissary-ingress && \\' +
+            'helm install emissary-ingress --namespace emissary datawire/emissary-ingress --version 7.6.1 && \\' +
             '\n' +
             'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress' +
             '\n'}

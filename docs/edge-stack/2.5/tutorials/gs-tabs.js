@@ -103,7 +103,7 @@ export default function GettingStartedEdgeStack21Tabs(props) {
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
-            'helm install edge-stack --namespace ambassador datawire/edge-stack && \\' +
+            'helm install edge-stack --namespace ambassador datawire/edge-stack --version 7.6.1 && \\' +
             '\n' +
             'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes'}
         </CodeBlock>
