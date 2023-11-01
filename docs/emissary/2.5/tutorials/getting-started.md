@@ -23,7 +23,7 @@ We'll start by installing $productName$ into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GettingStartedEmissary21Tabs version="$version$" />
+<GettingStartedEmissary21Tabs version="$version$" ossChartVersion="$ossChartVersion$" />
 
 ### Connecting your installation to Ambassador Cloud
 

@@ -23,11 +23,11 @@ We'll start by installing $productName$ into your cluster.
 
 **We recommend using Helm** but there are other options below to choose from.
 
-<GettingStartedEdgeStack21Tabs version="$version$" />
+<GettingStartedEdgeStack21Tabs version="$version$" aesChartVersion="$aesChartVersion$" />
 
 ### Connecting your installation to Ambassador Cloud
 
-Now is a great time to enhance your $productName$ experience and take advantage of Ambassador Cloud's advanced capabilities. 
+Now is a great time to enhance your $productName$ experience and take advantage of Ambassador Cloud's advanced capabilities.
 
 1. Log in to [Ambassador Cloud](https://app.getambassador.io/cloud/services/) with GitHub, GitLab or Google and select your team account.
 

@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GettingStartedEmissary21Tabs(props) {
   const version = props.version;
+  const ossChartVersion = props.ossChartVersion;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -103,7 +104,7 @@ export default function GettingStartedEmissary21Tabs(props) {
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
-            'helm install emissary-ingress --namespace emissary datawire/emissary-ingress --version 7.6.1 && \\' +
+            `helm install emissary-ingress --namespace emissary datawire/emissary-ingress --version ${ossChartVersion} && \\` +
             '\n' +
             'kubectl -n emissary wait --for condition=available --timeout=90s deploy -lapp.kubernetes.io/instance=emissary-ingress' +
             '\n'}

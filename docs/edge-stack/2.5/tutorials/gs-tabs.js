@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GettingStartedEdgeStack21Tabs(props) {
   const version = props.version;
+  const aesChartVersion = props.aesChartVersion;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -103,7 +104,7 @@ export default function GettingStartedEdgeStack21Tabs(props) {
             '\n' +
             'kubectl wait --timeout=90s --for=condition=available deployment emissary-apiext -n emissary-system' +
             '\n' +
-            'helm install edge-stack --namespace ambassador datawire/edge-stack --version 7.6.1 && \\' +
+            `helm install edge-stack --namespace ambassador datawire/edge-stack --version ${aesChartVersion} && \\` +
             '\n' +
             'kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes'}
         </CodeBlock>

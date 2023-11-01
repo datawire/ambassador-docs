@@ -62,7 +62,7 @@ When you run the Helm chart, it installs $productName$.
 
     ```
 	 helm install -n $productNamespace$ --create-namespace \
-		 $productHelmName$ datawire/$productHelmName$ --version 7.6.1 && \
+		 $productHelmName$ datawire/$productHelmName$ --version $aesChartVersion$ && \
 	 kubectl rollout status  -n $productNamespace$ deployment/$productDeploymentName$ -w
     ```
 
