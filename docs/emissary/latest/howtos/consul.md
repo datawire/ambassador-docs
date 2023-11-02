@@ -101,6 +101,9 @@ and skip to the next section.
 
    connectInject:
      enabled: true
+
+   client:
+     enabled: true
    ```
 
    <Alert severity="info">
