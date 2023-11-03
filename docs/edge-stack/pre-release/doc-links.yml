@@ -284,10 +284,6 @@
          link: /custom-resources/getambassador/v3alpha1/filter-plugin
      - title: FilterPolicy
        link: /custom-resources/getambassador/v3alpha1/filterpolicy
-     - title: WebApplicationFirewall
-       link: /custom-resources/getambassador/v3alpha1/webapplicationfirewall
-     - title: WebApplicationFirewallPolicy
-       link: /custom-resources/getambassador/v3alpha1/webapplicationfirewallpolicy
    - title: gateway.getambassador.io/v1alpha1
      items:
      - title: Filter
