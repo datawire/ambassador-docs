@@ -54,6 +54,12 @@ items:
           which can be configured using the <code>agent</code> section in values.yaml. The Ambassador Agent templates in the helm chart have been removed.
         docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$
 
+      - title: Update APIExt minimum TLS version
+        type: change
+        body: >-
+          APIExt would previously allow for TLS 1.0 connections. We have updated it to now only use a minimum TLS version of 1.3 to resolve security concerns.
+        docs: https://www.tenable.com/plugins/nessus/104743
+
       - title: Ensure APIExt server is available before starting Edge Stack
         type: bugfix
         body: >-
