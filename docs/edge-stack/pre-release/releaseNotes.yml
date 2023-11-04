@@ -47,6 +47,15 @@ items:
           By default, $productName$ will return an <code>UNAVAILABLE</code> code when a request using gRPC is rate limited. The <code>RateLimitService</code> resource now exposes a new <code>grpc.use_resource_exhausted_code</code> field that when set to <code>true</code>, $productName$ will return a <code>RESOURCE_EXHAUSTED</code> gRPC code instead. Thanks to <a href="https://github.com/jeromefroe">Jerome Froelich</a> for contributing this feature!
         docs: topics/using/running/aes-extensions/ratelimit
 
+      - title: Added support for setting specific Envoy runtime flags in the Module
+        type: feature
+        body: >-
+          Envoy runtime fields that were provided to mitigate the recent HTTP/2 rapid reset
+        vulnerability can now be configured via the Module resource so the configuration will
+        persist between restarts. This configuration is added to the Envoy bootstrap config, so
+        restarting Emissary is necessary after changing these fields for the configuration to take effect.
+        docs: topics/running/ambassador/#set-envoy-runtime-flags
+
       - title: Helm chart adds the Ambassador Agent chart as a sub-chart
         type: change
         body: >-

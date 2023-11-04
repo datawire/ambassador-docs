@@ -18,30 +18,6 @@ $productName$ exposes access to Envoy's admin endpoint which can be used to set 
 
 2. In a web browser, visit `http://127.0.0.1:8001/`
 
-### Apply Runtime Flags
-
-1. Visit `http://127.0.0.1:8001/runtime` to view all the active runtime flags for the pod. By default there should not be any. Note that this configuration is specific
-to the pod you are port-forwarding. If you have multiple pods then you will need to access them separately.
-
-2. Make requests to `http://127.0.0.1:19000/runtime_modify` to set runtime flags.
-  ex: `http://127.0.0.1:19000/runtime_modify?envoy.restart_features.send_goaway_for_premature_rst_streams=true`
-
-Runtime Flags:
-
-- `http.max_requests_per_io_cycle`: Sets the limit on the number of HTTP requests processed
-from a single connection in a single I/O cycle. Requests over this limit are processed in subsequent I/O cycles. This
-mitigates CPU starvation by connections that simultaneously send high number of requests by allowing requests from other
-connections to make progress. This runtime value can be set to 1 in the presence of abusive HTTP/2 or HTTP/3 connections.
-By default this limit is disabled.
-
-- `overload.premature_reset_min_stream_lifetime_seconds`: determines the interval where received stream
-    reset is considered premature (with 1 second default).
-
-- `overload.premature_reset_total_stream_count`: Determines the number of requests received from a connection before the check for premature
-    resets is applied. The connection is disconnected if more than 50% of resets are premature. The default value is 500 and is enaled by default.
-
-- `envoy.restart_features.send_goaway_for_premature_rst_streams`: Defaults to true and enables checking connections for premature resets.
-
 ### Dump the Envoy Config
 
 1. Visit `http://127.0.0.1:8001/config_dump`

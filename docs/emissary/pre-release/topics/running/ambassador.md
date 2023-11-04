@@ -295,6 +295,40 @@ By default, the Envoy that ships with $productName$ uses a defailt of 1MiB soft 
 buffer_limit_bytes: 5242880 # Sets the default buffer limit to 5 MiB
 ```
 
+##### Set Envoy Runtime Flags
+
+`runtime_flags` is a field that can be used to set the following Envoy runtime flags.
+
+- `http.max_requests_per_io_cycle`: Sets the limit on the number of HTTP requests processed
+from a single connection in a single I/O cycle. Requests over this limit are processed in subsequent I/O cycles. This
+mitigates CPU starvation by connections that simultaneously send high number of requests by allowing requests from other
+connections to make progress. This runtime value can be set to 1 in the presence of abusive HTTP/2 or HTTP/3 connections.
+By default this limit is disabled.
+
+- `overload.premature_reset_min_stream_lifetime_seconds`: determines the interval where received stream
+    reset is considered premature (with 1 second default).
+
+- `overload.premature_reset_total_stream_count`: Determines the number of requests received from a connection before the check for premature
+    resets is applied. The connection is disconnected if more than 50% of resets are premature. The default value is 500 and is enaled by default.
+
+- `envoy.restart_features.send_goaway_for_premature_rst_streams`: Defaults to true and enables checking connections for premature resets.
+
+example:
+
+```yaml
+apiVersion: getambassador.io/v3alpha1
+kind: Module
+metadata:
+  name: ambassador
+spec:
+  config:
+    runtime_flags:
+      envoy.restart_features.send_goaway_for_premature_rst_streams: false
+      http.max_requests_per_io_cycle: 1
+      overload.premature_reset_min_stream_lifetime_seconds: 2
+      overload.premature_reset_total_stream_count: 250
+```
+
 ##### Use $productName$ namespace for service resolution
 
 * `use_ambassador_namespace_for_service_resolution: true` tells $productName$ to assume that unqualified services are in the same namespace as $productName$. The default is `false`.
