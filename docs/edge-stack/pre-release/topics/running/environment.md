@@ -5,7 +5,8 @@ Use the following variables for the environment of your $productName$ container:
 | Variable                                                                                                   | Default value                                       | Value type |
 |----------------------------------------------------------------------------------------------------------- |-----------------------------------------------------|-------------------------------------------------------------------------------|
 | [`AMBASSADOR_ID`](#ambassador_id)                                                                          | `[ "default" ]`                                     | List of strings |
-| [`AES_LOG_LEVEL`](#aes_log_level)                                                                          | `warn`                                              | Log level |
+| [`AES_LOG_LEVEL`](#aes_log_level)     
+| [`AES_DISABLE_LICENSE_USAGE_REPORTING`](#aes_disable_license_usage_reporting)                              | `false`                                             | Any: `true`=true and unset is false |
 | [`AGENT_CONFIG_RESOURCE_NAME`](#agent_config_resource_name)                                                | `ambassador-agent-cloud-token`                      | String |
 | [`AMBASSADOR_AMBEX_NO_RATELIMIT`](#ambassador_ambex_no_ratelimit)                                          | `false`                                             | Boolean: `true`=true, any other value=false |
 | [`AMBASSADOR_AMBEX_SNAPSHOT_COUNT`](#ambassador_ambex_snapshot_count)                                      | `30`                                                | Integer |
@@ -122,6 +123,12 @@ Adjust the log level by setting the `AES_LOG_LEVEL` environment variable; from l
 Log level names are case-insensitive.
 
 [More information](../../running/running#log-levels-and-debugging)
+
+### `AES_DISABLE_LICENSE_USAGE_REPORTING`
+
+Usage data is collected and sent to Ambassador Labs servers on regular intervals. If you are using an in-cluster AirGapped license and wish to disable this, then setting `AES_DISABLE_LICENSE_USAGE_REPORTING` to true will prevent $productName$ from reporting license usage data. If your cluster is using a Cloud license then users are required to send this data and cannot disable it.
+
+[More license information](../../../topics/using/licenses)
 
 ### `AGENT_CONFIG_RESOURCE_NAME`
 
