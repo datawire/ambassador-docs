@@ -272,14 +272,12 @@ Because the DogStatsD protocol is slightly different than the normal StatsD prot
 
 ### `SCOUT_DISABLE`
 
-$productName$ integrates Scout, a service that periodically checks with Datawire servers to advise of available updates. Scout also sends anonymized usage
-data and the $productName$ version. This information is important to us as we prioritize test coverage, bug fixes, and feature development. Note that the $productName$ will
-run regardless of the status of Scout.
+$productName$ integrates Scout, a service that periodically checks with Ambassador Labs servers to sends anonymized usage data and the $productName$ version. This information is important to us as we prioritize test coverage, bug fixes, and feature development. Note that the $productName$ will run regardless of the status of Scout.
 
-We do not recommend you disable Scout, since we use this mechanism to notify users of new releases (including critical fixes and security issues). This check can be disabled by setting
+We do not recommend you disable Scout. This check can be disabled by setting
 the environment variable `SCOUT_DISABLE` to `1` in your $productName$ deployment.
 
-[More information](../../running/running#ambassador-edge-stack-update-checks-scout)
+[More information](../../running/running#ambassador-edge-stack-usage-telemetry-scout)
 
 ### `STATSD_ENABLED`
 

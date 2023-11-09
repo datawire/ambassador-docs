@@ -40,20 +40,24 @@ Starting with $productName$ 0.35, we support running $productName$ as non-root. 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ambassador
+  name: emissary-ingress
 spec:
   replicas: 1
   selector:
     matchLabels:
-      service: ambassador
+      app.kubernetes.io/instance: emissary-ingress
+      app.kubernetes.io/name: emissary-ingress
   template:
     metadata:
       labels:
-        service: ambassador
+        app.kubernetes.io/instance: emissary-ingress
+        app.kubernetes.io/name: emissary-ingress
+        product: emissary-ingress
+        profile: main
     spec:
       containers:
-        image: docker.io/datawire/aes:$version$
-        name: ambassador
+        image: docker.io/emissaryingress/emissary:$version$
+        name: emissary-ingresss
      restartPolicy: Always
      securityContext:
        runAsUser: 8888
@@ -268,11 +272,11 @@ env:
 
 $productName$ uses some TCP ports in the range 8000-8499 internally, as well as port 8877. Third-party software integrating with $productName$ should not use ports in this range on the $productName$ pod.
 
-## $productName$ update checks (Scout)
+## $productName$ usage telemetry (Scout)
 
-$productName$ integrates Scout, a service that periodically checks with Datawire servers to advise of available updates. Scout also sends anonymized usage data and the $productName$ version. This information is important to us as we prioritize test coverage, bug fixes, and feature development. Note that $productName$ will run regardless of the status of Scout (i.e., our uptime has zero impact on your uptime.)
+$productName$ integrates Scout, a service that periodically checks with Ambassador Labs servers to send anonymized usage data and the $productName$ version. This information is important to us as we prioritize test coverage, bug fixes, and feature development. Note that $productName$ will run regardless of the status of Scout (i.e., our uptime has zero impact on your uptime.)
 
-We do not recommend you disable Scout, since we use this mechanism to notify users of new releases (including critical fixes and security issues). This check can be disabled by setting the environment variable `SCOUT_DISABLE` to `1` in your $productName$ deployment.
+We do not recommend you disable Scout. This check can be disabled by setting the environment variable `SCOUT_DISABLE` to `1` in your $productName$ deployment.
 
 Each $productName$ installation generates a unique cluster ID based on the UID of its Kubernetes namespace and its $productName$ ID: the resulting cluster ID is a UUID which cannot be used to reveal the namespace name nor $productName$ ID itself. $productName$ needs RBAC permission to get namespaces for this purpose, as shown in the default YAML files provided by Datawire; if not granted this permission it will generate a UUID based only on the $productName$ ID. To disable cluster ID generation entirely, set the environment variable `AMBASSADOR_CLUSTER_ID` to a UUID that will be used for the cluster ID.
 
