@@ -33,13 +33,29 @@
 changelog: https://github.com/datawire/edge-stack/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.9.0
-    date: 'TBD'
+    date: '2023-11-13'
     notes:
       - title: gateway.getambassador.io/v1alpha1 Filter & FilterPolicy resources
         type: feature
         body: >-
-          Filter and FilterPolicy resources are now available via <code>gateway.getambassador.io/v1alpha1</code>. It is NOT backwards compatible with <code>getambassador.io/v3alpha1</code> Filter and FilterPolicy resources.
+          Filter and FilterPolicy resources are now available via <code>gateway.getambassador.io/v1alpha1</code>. It is NOT backwards compatible with <code>getambassador.io/v3alpha1</code> Filter and FilterPolicy resources. These are the next generation of CRD's that you can
+          progressively adopt over time. They provide stronger typings so that
+          feedback is given at apply time rather than runtime.
         docs: custom-resources/gateway-getambassador/v1alpha1/filter
+      
+      - title: getambassador.io/v3alpha1 Filter & FilterPolicy statuses
+        type: feature
+        body: >-
+          Filter and FilterPolicy resources for the getambassador.io/v3alpha1 version will now provide statuses when they are "Ready". If there are
+          configuration errors they will provide an error message with details about the configuration issues. This will help troubleshoot configuration issues.
+
+        docs: custom-resources/getambassador/v3alpha1/filter
+
+      - title: Upgrade to Envoy 1.27.2
+        type: feature
+        body: >-
+          This upgrades $productName$ to be built on Envoy v1.27.2 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.27.2/version_history/version_history">Envoy Proxy 1.27.2 Release Notes</a>
+        docs: https://www.envoyproxy.io/docs/envoy/v1.27.2/version_history/version_history
 
       - title: Added support for RESOURCE_EXHAUSTED responses to grpc clients when rate limited
         type: feature
@@ -51,23 +67,22 @@ items:
         type: feature
         body: >-
           Envoy runtime fields that were provided to mitigate the recent HTTP/2 rapid reset
-        vulnerability can now be configured via the Module resource so the configuration will
-        persist between restarts. This configuration is added to the Envoy bootstrap config, so
-        restarting Emissary is necessary after changing these fields for the configuration to take effect.
+          vulnerability can now be configured via the Module resource so the configuration will
+          persist between restarts. This configuration is added to the Envoy bootstrap config, so
+          restarting Emissary is necessary after changing these fields for the configuration to take effect.
         docs: topics/running/ambassador/#set-envoy-runtime-flags
-
-      - title: Helm chart adds the Ambassador Agent chart as a sub-chart
-        type: change
-        body: >-
-          The Edge Stack helm chart now adds the Ambassador Agent as a sub-chart
-          which can be configured using the <code>agent</code> section in values.yaml. The Ambassador Agent templates in the helm chart have been removed.
-        docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$
 
       - title: Update APIExt minimum TLS version
         type: change
         body: >-
           APIExt would previously allow for TLS 1.0 connections. We have updated it to now only use a minimum TLS version of 1.3 to resolve security concerns.
         docs: https://www.tenable.com/plugins/nessus/104743
+      
+      - title: Shipped Helm chart v8.9.0
+        type: change
+        body: >-
+          - Update default image to $productName$ v3.9.0. <br/>
+        docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$
 
       - title: Ensure APIExt server is available before starting Edge Stack
         type: bugfix

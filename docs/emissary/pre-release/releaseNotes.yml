@@ -33,13 +33,13 @@
 changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
 items:
   - version: 3.9.0
-    date: 'TBD'
+    date: '2023-11-13'
     notes:
-      - title: gateway.getambassador.io/v1alpha1 Filter & FilterPolicy resources
+      - title: Upgrade to Envoy 1.27.2
         type: feature
         body: >-
-          Filter and FilterPolicy resources are now available via <code>gateway.getambassador.io/v1alpha1</code>. It is NOT backwards compatible with <code>getambassador.io/v3alpha1</code> Filter and FilterPolicy resources.
-        docs: custom-resources/gateway-getambassador/v1alpha1/filter
+          This upgrades $productName$ to be built on Envoy v1.27.2 which provides security, performance and feature enhancements. You can read more about them here: <a href="https://www.envoyproxy.io/docs/envoy/v1.27.2/version_history/version_history">Envoy Proxy 1.27.2 Release Notes</a>
+        docs: https://www.envoyproxy.io/docs/envoy/v1.27.2/version_history/version_history
 
       - title: Added support for RESOURCE_EXHAUSTED responses to grpc clients when rate limited
         type: feature
@@ -50,13 +50,22 @@ items:
       - title: Added support for setting specific Envoy runtime flags in the Module
         type: feature
         body: >-
-          Envoy runtime fields that were provided to mitigate the recent HTTP/2 rapid reset
-        vulnerability can now be configured via the Module resource so the configuration will
-        persist between restarts. This configuration is added to the Envoy bootstrap config, so
-        restarting Emissary is necessary after changing these fields for the configuration to take effect.
+          Envoy runtime fields that were provided to mitigate the recent HTTP/2 rapid reset vulnerability can now be configured via the Module resource so the configuration will persist between restarts. This configuration is added to the Envoy bootstrap config, so restarting Emissary is necessary after changing these fields for the configuration to take effect.
         docs: topics/running/ambassador/#set-envoy-runtime-flags
 
-      - title: Ensure APIExt server is available before starting Edge Stack
+      - title: Update APIExt minimum TLS version
+        type: change
+        body: >-
+          APIExt would previously allow for TLS 1.0 connections. We have updated it to now only use a minimum TLS version of 1.3 to resolve security concerns.
+        docs: https://www.tenable.com/plugins/nessus/104743
+      
+      - title: Shipped Helm chart v8.9.0
+        type: change
+        body: >-
+          - Update default image to $productName$ v3.9.0. <br/>
+        docs: https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/CHANGELOG.md
+
+      - title: Ensure APIExt server is available before starting Emissary-ingress
         type: bugfix
         body: >-
           The APIExt server provides CRD conversion between the stored version
@@ -64,13 +73,7 @@ items:
           component is required to operate $productName$, we have introduced
           an init container that will ensure it is available before starting. This will help address some of the intermittent issues seen during
           install and upgrades.
-        docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$aesChartVersion$
-
-      - title: Update APIExt minimum TLS version
-        type: change
-        body: >-
-          APIExt would previously allow for TLS 1.0 connections. We have updated it to now only use a minimum TLS version of 1.3 to resolve security concerns.
-        docs: https://www.tenable.com/plugins/nessus/104743
+        docs: https://artifacthub.io/packages/helm/datawire/edge-stack/$emissaryChartVersion$
 
   - version: 3.8.2
     date: '2023-10-11'
@@ -185,7 +188,7 @@ items:
         docs: https://github.com/emissary-ingress/emissary/blob/master/charts/emissary-ingress/CHANGELOG.md
 
   - version: 3.5.2
-    date: "2023-04-05"
+    date: '2023-04-05'
     notes:
       - title: Upgrade to Envoy 1.24.5
         type: security
@@ -250,8 +253,8 @@ items:
 
           Thanks to <a href="https://github.com/antonu17">Anton Ustyuzhanin</a>!.
         github:
-        - title: "#4809"
-          link: https://github.com/emissary-ingress/emissary/pull/4809
+          - title: '#4809'
+            link: https://github.com/emissary-ingress/emissary/pull/4809
 
       - title: Add starupProbe to emissary-apiext server
         type: change
@@ -375,8 +378,8 @@ items:
           restores the previous behavior by disabling the ext_authz call on the
           https redirect routes.
         github:
-        - title: "#4620"
-          link: https://github.com/emissary-ingress/emissary/issues/4620
+          - title: '#4620'
+            link: https://github.com/emissary-ingress/emissary/issues/4620
 
       - title: Fix regression in host_redirects with AuthService
         type: bugfix
@@ -392,8 +395,8 @@ items:
           restores the previous behavior by disabling the ext_authz call on the
           host_redirect routes.
         github:
-        - title: "#4640"
-          link: https://github.com/emissary-ingress/emissary/issues/4640
+          - title: '#4640'
+            link: https://github.com/emissary-ingress/emissary/issues/4640
 
   - version: 3.2.0
     date: '2022-09-27'
@@ -471,8 +474,8 @@ items:
         body: >-
           Distinct services with names that are the same in the first forty characters will no longer be incorrectly mapped to the same cluster.
         github:
-        - title: "#4354"
-          link: https://github.com/emissary-ingress/emissary/issues/4354
+          - title: '#4354'
+            link: https://github.com/emissary-ingress/emissary/issues/4354
 
       - title: Properly populate alt_stats_name for Tracing, Auth and RateLimit Services
         type: bugfix
@@ -716,7 +719,6 @@ items:
         type: security
         body: >-
           Updated ncurses to 1.1.1q-r0 to address CVE-2022-29458
-
 
   - version: 2.3.1
     date: '2022-06-10'
