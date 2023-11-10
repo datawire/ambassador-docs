@@ -96,7 +96,7 @@ to reveal the namespace name nor $productName$ ID itself. $productName$ needs RB
 if not granted this permission it will generate a UUID based only on the $productName$ ID. To disable cluster ID generation entirely, set the environment variable
 `AMBASSADOR_CLUSTER_ID` to a UUID that will be used for the cluster ID.
 
-[More information](../../running/running#emissary-ingress-update-checks-scout)
+[More information](../../running/running#emissary-ingress-usage-telemetry-scout)
 
 ### `AMBASSADOR_CONFIG_BASE_DIR`
 
@@ -108,7 +108,7 @@ Controls where $productName$ will store snapshots. By default, the latest config
 
 To completely disable feature reporting, set the environment variable `AMBASSADOR_DISABLE_FEATURES` to any non-empty value.
 
-[More information](../../running/running/#emissary-ingress-update-checks-scout)
+[More information](../../running/running#emissary-ingress-usage-telemetry-scout)
 
 ### `AMBASSADOR_DRAIN_TIME`
 
