@@ -11,14 +11,14 @@ productHelmName: edge-stack
 
 # OSS (not self)
 ossVersion: 3.8.2
-ossDocsVersion: "pre-release"
+ossDocsVersion: "3.8"
 ossChartVersion: 8.8.2
 OSSproductName: "Emissary-ingress"
 OSSproductNamePlural: "Emissary-ingresses"
 
 # AES (self)
 aesVersion: 3.8.2
-aesDocsVersion: "pre-release"
+aesDocsVersion: "3.8"
 aesChartVersion: 8.8.2
 AESproductName: "Ambassador Edge Stack"
 AESproductNamePlural: "Ambassador Edge Stacks"
