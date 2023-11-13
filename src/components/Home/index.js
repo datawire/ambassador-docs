@@ -92,7 +92,7 @@ const index = ({ data, location, pageContext }) => {
         );
     }
     if (
-      newVer.id === '3.8' ||
+      newVer.id === '3.9' ||
       newVer.id === 'pre-release' ||
       newVer.id === 'latest' ||
       (newProduct.slug !== 'emissary' && newProduct.slug !== 'edge-stack')
@@ -102,7 +102,7 @@ const index = ({ data, location, pageContext }) => {
     return (
       <a
         href={`/docs/${newProduct.slug}/latest/tutorials/getting-started/`}
-      >{`${newProduct.name} 3.8 is now available!`}</a>
+      >{`${newProduct.name} 3.9 is now available!`}</a>
     );
   }
   const initialEdgissaryDPNotificationMsg = createEdgissaryDevPrevMsg(
