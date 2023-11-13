@@ -14,7 +14,7 @@ After completing the Getting Started guide you will have a Kubernetes cluster ru
 
 ## 1. Setup Lightstep
 
-If you don't already have a Lightstep account be sure to create one [here](https://www.servicenow.com/products/observability.html). Then create a Project and be sure to create and save the Access Token information. You can find your Access Token information under the Project settings.
+If you don't already have a Lightstep account be sure to check their documentation on how to obtain an account. Then create a Project and be sure to create and save the Access Token information. You can find your Access Token information under the Project settings.
 
 ## 2. Deploy the OpenTelemetry Collector
 
