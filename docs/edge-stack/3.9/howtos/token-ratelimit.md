@@ -57,7 +57,7 @@ spec:
 
 ## 1. Configure the Filter to extract the claim
 
-In order to extract the claim, we need to have the Filter use the `injectRequestHeader` config and use a golang template to pull out the exact value of the `name` claim in our access token JWT and put it in a Header for our RateLimit to catch.  Configuration is similar for both [OAuth2](../../topics/using/filters/oauth2/#oauth-resource-server-settings) and [JWT](../../topics/using/filters/jwt/).
+In order to extract the claim, we need to have the Filter use the `injectRequestHeader` config and use a golang template to pull out the exact value of the `name` claim in our access token JWT and put it in a Header for our RateLimit to catch.  Configuration is similar for both [OAuth2](../../topics/using/filters/oauth2/) and [JWT](../../topics/using/filters/jwt/).
 
 ```yaml
 apiVersion: getambassador.io/v3alpha1

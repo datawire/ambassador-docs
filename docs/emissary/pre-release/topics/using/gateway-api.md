@@ -16,4 +16,4 @@ Support is currently limited to the following fields, however this will expand i
   - `HTTPRoute.spec.rules.forwardTo.port`
   - `HTTPRoute.spec.rules.forwardTo.weight`
 
-Please see the [specification](https://gateway-api.sigs.k8s.io/v1alpha2/references/spec/) for more details.
+Please see the [specification](https://gateway-api.sigs.k8s.io/reference/spec/) for more details.

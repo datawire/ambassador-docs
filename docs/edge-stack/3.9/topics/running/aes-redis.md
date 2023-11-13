@@ -51,7 +51,7 @@ Specifies whether to skip certificate verification when
 using TLS to talk to Redis.
 
 Consider [installing the self-signed certificate for your Redis in to the
-Ambassador Edge Stack container](../../using/filters/#installing-self-signed-certificates)
+Ambassador Edge Stack container](../../using/filters/#filters-using-self-signed-certificate)
 in order to leave certificate verification on.
 
 ## Redis authentication (auth)
