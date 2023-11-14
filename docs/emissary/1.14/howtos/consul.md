@@ -64,6 +64,9 @@ In this guide, you will register a service with Consul and use $productName$ to 
 
    connectInject:
      enabled: true
+
+   client:
+     enabled: true  
    ```
 
    > Note: you are free to change the value of the `datacenter` field in the install values. This will be the name of your Consul Datacenter.

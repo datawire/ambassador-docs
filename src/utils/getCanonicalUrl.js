@@ -1,5 +1,5 @@
 const { trimLastSlash } = require('../../../src/utils/trimUrl');
-/* 
+/*
   You need to add the URL in exceptions object without the version as a key and the value with the desired canonical URL
 */
 

@@ -49,7 +49,7 @@ To enable GitHub Actions with telepresence, you need:
   ```
 
 * If Telepresence is installed, you also need to know the version of Telepresence running in the cluster. You can run the command `kubectl describe service traffic-manager -n namespace`. The version is listed in the `labels` section of the output.
-* You need a GitHub Actions secret named `TELEPRESENCE_API_KEY` in your repository that has your Telepresence API key. See [GitHub docs](https://docs.github.com/en/github-ae@latest/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) for instructions on how to create GitHub Actions secrets.
+* You need a GitHub Actions secret named `TELEPRESENCE_API_KEY` in your repository that has your Telepresence API key. See [GitHub docs](https://docs.github.com/en/github-ae@latest/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository) for instructions on how to create GitHub Actions secrets.
 * You need a GitHub Actions secret named `KUBECONFIG_FILE` in your repository with the content of your `kubeconfig.yaml`).
 
 **Does your environment look different?** We're actively working on making GitHub Actions for Telepresence more useful for more

@@ -20,7 +20,7 @@ The telepresence cli can install the traffic manager for you. The basic install 
 
 ### Customizing the Traffic Manager.
 
-For details on what the Helm chart installs and what can be configured, see the Helm chart [configuration on artifacthub](https://artifacthub.io/packages/helm/datawire/telepresence-pro).
+For details on what the Helm chart installs and what can be configured, see the Helm chart [configuration on artifacthub](https://artifacthub.io/packages/helm/datawire/telepresence).
 
 1. Create a values.yaml file with your config values.
 

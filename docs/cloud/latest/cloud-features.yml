@@ -1,10 +1,6 @@
 # Cloud features should be represented as objects, path always starting with '/' and ending without '/'.
 
 - {
-    path: /docs/cloud/latest/onboarding-dashboard,
-    feature: Team collaboration,
-  }
-- {
     path: /docs/cloud/latest/service-catalog/concepts/services,
     feature: Team collaboration,
   }
@@ -18,10 +14,6 @@
   }
 - {
     path: /docs/cloud/latest/service-catalog/howtos/cells,
-    feature: Team collaboration,
-  }
-- {
-    path: /docs/cloud/latest/onboarding-dashboard,
     feature: Team collaboration,
   }
 
