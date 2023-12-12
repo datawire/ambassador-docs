@@ -35,7 +35,7 @@ First, check to see if the Edge Policy Console is reachable. If it is successful
 3. Check that the “desired” number of Pods equals the “current” and “available” number of Pods. If they are **not** equal, check the status of the associated Pods with the following command: `kubectl get pods -n ambassador`.
 4. Use the following command for details about the history of the Deployment: `kubectl describe -n ambassador deployment ambassador`
 
-    * Look for data in the “Replicas” field near the top of the output. For example: 
+    * Look for data in the “Replicas” field near the top of the output. For example:
         `Replicas: 3 desired | 3 updated | 3 total | 3 available | 0 unavailable`
 
     * Look for data in the “Events” log field near the bottom of the output, which often displays data such as a fail image pull, RBAC issues, or a lack of cluster resources. For example:
@@ -120,7 +120,7 @@ You can examine the contents of the Ambassador Pod for issues, such as if volume
 
     In the snapshots directory, the current configuration will be stored in files with no digit suffix, and older configurations have increasing numbers. For example, `ir.json` is current, `ir-1.json` is the next oldest, then `ir-2.json`, etc.
 
-5. If something is wrong with `snapshot` or `aconf`, there is an issue with your configuration. If something is wrong with `ir` or `econf`, you should [open an issue on Github](https://github.com/datawire/ambassador/issues/new/choose).
+5. If something is wrong with `snapshot` or `aconf`, there is an issue with your configuration. If something is wrong with `ir` or `econf`, you should [open an issue on Github](https://github.com/emissary-ingress/emissary/issues/new/choose).
 6. To find the main configuration for Envoy, run: `$AMBASSADOR_CONFIG_BASE_DIR/envoy/envoy.json`.
 7. For the bootstrap configuration, which has details about Envoy statistics, logging, and auth, run: `$AMBASSADOR_CONFIG_BASE_DIR/bootstrap-ads.json`.
 8. For further details, you can print the Envoy configuration that is generated during the Ambassador configuration. The file will be titled `envoy-N.json` where N matches the number of the `ambassador-config-N` directory number. Run the following command: `# cat envoy-2.json`

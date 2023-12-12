@@ -1,3 +1,6 @@
+---
+title: "Introduction to Network Load Balancing and Proxying"
+---
 # Introduction to Modern Network Load Balancing and Proxying
 
 Author: [Matt Klein](https://blog.envoyproxy.io/@mattklein123?source=post_page-----a57f6ff80236----------------------)
@@ -16,11 +19,11 @@ Author: [Matt Klein](https://blog.envoyproxy.io/@mattklein123?source=post_page--
 
 </div>
 
-There’s a dearth of introductory educational material available about modern network load balancing and proxying. Which doesn’t necessarily make much sense, since load balancing is one of the core concepts required for building reliable distributed systems. 
+There’s a dearth of introductory educational material available about modern network [load balancing](/learn/kubernetes-glossary/load-balancer/) and proxying. Which doesn’t necessarily make much sense, since load balancing is one of the core concepts required for building reliable distributed systems. 
 
 To illustrate: A quick [Google search for load balancing](https://www.google.com/search?q=load+balancing) primarily turns up vendor pages that are heavy on buzzwords and light on details. While the Wikipedia articles on [load balancing](https://en.wikipedia.org/wiki/Load_balancing_(computing)) and [proxy servers](https://en.wikipedia.org/wiki/Proxy_server) contain overviews of some concepts, there hasn’t really been a fluid treatment of the subject available anywhere—especially as it pertains to modern microservice architectures. 
 
-This piece attempts to rectify the lack of information by providing a gentle introduction to modern network load balancing and proxying. 
+This piece attempts to rectify the lack of information by providing a gentle introduction to modern network [load balancing](/learn/kubernetes-ingress/kubernetes-ingress-nodeport-load-balancers-and-ingress-controllers/) and proxying.
 
 
 ## What is network load balancing and proxying?
@@ -29,11 +32,11 @@ Wikipedia [defines](https://en.wikipedia.org/wiki/Load_balancing_(computing)) lo
 
 > In computing, load balancing improves the distribution of workloads across multiple computing resources, such as computers, a computer cluster, network links, central processing units, or disk drives. Load balancing aims to optimize resource use, maximize throughput, minimize response time, and avoid overload of any single resource. Using multiple components with load balancing instead of a single component may increase reliability and availability through redundancy. Load balancing usually involves dedicated software or hardware, such as a multilayer switch or a Domain Name System server process.
 
-The above definition applies to all aspects of computing—not just networks. Operating systems use load balancing to schedule tasks across physical processors. Container orchestrators, such as Kubernetes, use load balancing to schedule tasks across a compute cluster. And network load balancers use load balancing to schedule network tasks across available backends. 
+The above definition applies to all aspects of computing—not just networks. Operating systems use [load balancing](/learn/service-mesh/resilience-for-distributed-systems/) to schedule tasks across physical processors. Container orchestrators, such as Kubernetes, use load balancing to schedule tasks across a compute cluster. And network load balancers use load balancing to schedule network tasks across available backends. 
 
 The remainder of this post will cover network load balancing only.
 
-![Figure 1: Network load balancing overview](../../images/modern-lb-and-proxying/1.png)
+![Figure 1: Network load balancing overview](../images/modern-lb-and-proxying/1.png)
 
 <strong style="font-weight: normal; font-size: 12px">Figure 1: Network load balancing overview</strong>
 
@@ -48,7 +51,7 @@ Proper use of load balancing in a distributed system provides several benefits:
 
 
 
-*   **Naming abstraction:** Instead of every client needing to know about every backend (i.e., service discovery), the client can address the load balancer via a predefined mechanism and then the act of name resolution can be delegated to the load balancer. The predefined mechanisms include built-in libraries and well-known DNS/IP/port locations and will be discussed in more detail below.
+*   **Naming abstraction:** Instead of every client needing to know about every backend (i.e., [service discovery](/resources/service-discovery-microservices/)), the client can address the load balancer via a predefined mechanism and then the act of name resolution can be delegated to the load balancer. The predefined mechanisms include built-in libraries and well-known DNS/IP/port locations and will be discussed in more detail below.
 *   **Fault tolerance:** A load balancer can effectively route around a bad or overloaded backend via health checking and various algorithmic techniques. This means that an operator can typically fix a bad backend at their leisure—which is much more preferable to doing so during an emergency.
 *   **Cost and performance benefits:** Distributed system networks are rarely homogenous. The system is likely to span multiple network zones and regions. Within a zone, networks are often built in a relatively undersubscribed way. Between zones, oversubscription becomes the norm. In this context, over- and under-subscription refers to the amount of bandwidth consumable via network interface controllers (NICs) as a percentage of bandwidth available between routers. Intelligent load balancing can keep request traffic within zones as much as possible, which increases performance (less latency) and reduces overall system cost (less bandwidth and fiber required between zones).
 
@@ -64,14 +67,14 @@ The types of load balancer topologies are discussed in detail below, but this po
 
 ### L4 (connection/session) load balancing
 
-When discussing load balancing across the industry today, solutions are often bucketed into two categories: L4 and L7. These categories refer to layer 4 and layer 7 of the [OSI model](https://en.wikipedia.org/wiki/OSI_model). For reasons that will become obvious when discussing L7 load balancing below, it’s unfortunate that these are the terms that are used. 
+When discussing load balancing across the industry today, solutions are often bucketed into two categories: L4 and L7. These categories refer to layer 4 and [layer 7](/learn/kubernetes-glossary/layer-7/) of the [OSI model](https://en.wikipedia.org/wiki/OSI_model). For reasons that will become obvious when discussing L7 load balancing below, it’s unfortunate that these are the terms that are used. 
 
 The OSI model is a very poor approximation of the complexity of load balancing solutions that include traditional layer 4 protocols, such as TCP and UDP, but often end up including bits and pieces of protocols at a variety of different OSI layers. 
 
 For example, if a L4 TCP load balancer also supports TLS termination, is it now an L7 load balancer? 
 
 
-![Figure 2: TCP L4 termination load balancing](../../images/modern-lb-and-proxying/2.png)
+![Figure 2: TCP L4 termination load balancing](../images/modern-lb-and-proxying/2.png)
 
 <strong style="font-weight: normal; font-size: 12px">Figure 2: TCP L4 termination load balancing</strong>
 
@@ -96,12 +99,12 @@ In the previous scenario, _the backend selected to handle client A will be handl
 
 This is a large problem and generally defeats the purpose of load balancing in the first place. It’s also worth noting that this problem happens for any _multiplexing, kept-alive_ protocol. (Multiplexing means sending concurrent application requests over a single L4 connection, and kept-alive means not closing the connection when there are no active requests.)
 
-All modern protocols are evolving to be both multiplexing and kept-alive for efficiency reasons (e.g., it is generally expensive to create connections—especially when the connections are encrypted using TLS). That being the case, the L4 load balancer impedance mismatch is becoming more pronounced over time. 
+All modern protocols are evolving to be both multiplexing and kept-alive for efficiency reasons (e.g., it is generally expensive to create connections—especially when the connections are encrypted using [TLS](/docs/edge-stack/latest/topics/running/tls/)). That being the case, the L4 load balancer impedance mismatch is becoming more pronounced over time. 
 
 This problem is fixed by the L7 load balancer.
 
 
-![Figure 3: HTTP/2 L7 termination load balancing](../../images/modern-lb-and-proxying/3.png)
+![Figure 3: HTTP/2 L7 termination load balancing](../images/modern-lb-and-proxying/3.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 3: HTTP/2 L7 termination load balancing</strong>
@@ -119,7 +122,7 @@ For example, for HTTP traffic, consider the following sublayers:
 
 
 
-*   Optional Transport Layer Security (TLS). (Note that networking people argue about which OSI layer TLS falls into. For the sake of this discussion we will consider TLS L7.)
+*   Optional [Transport Layer Security (TLS)](/learn/kubernetes-glossary/tls/). (Note that networking people argue about which OSI layer TLS falls into. For the sake of this discussion we will consider TLS L7.)
 *   Physical HTTP protocol (HTTP/1 or HTTP/2).
 *   Logical HTTP protocol (e.g., headers, body data, and trailers).
 *   Messaging protocol (gRPC, REST, etc.).
@@ -142,7 +145,7 @@ Service discovery is the process by which a load balancer determines the set of 
 
 *   Static configuration file
 *   DNS
-*   [Zookeeper](https://zookeeper.apache.org/), [Etcd](https://coreos.com/etcd/), [Consul](https://www.consul.io/), etc.
+*   [Zookeeper](https://zookeeper.apache.org/), [Etcd](https://github.com/etcd-io/etcd), [Consul](https://www.consul.io/), etc.
 *   Envoy’s [universal data plane API](https://medium.com/@mattklein123/the-universal-data-plane-api-d15cec7a)
 
 
@@ -192,7 +195,7 @@ It’s worth noting that enhanced observability is not free; the load balancer h
 
 ### Security and DoS mitigation
 
-Especially in the edge deployment topology (see below), load balancers often implement various security features—including rate limiting, authentication, and DoS mitigation (e.g., IP address tagging and identification, [tarpitting](https://en.wikipedia.org/wiki/Tarpit_(networking)), and more).
+Especially in the edge deployment topology (see below), load balancers often implement various security features—including [rate limiting](/docs/edge-stack/latest/topics/using/rate-limits/), authentication, and DoS mitigation (e.g., IP address tagging and identification, [tarpitting](https://en.wikipedia.org/wiki/Tarpit_(networking)), and more).
 
 
 ### Configuration and control plane
@@ -215,7 +218,7 @@ To this point, this piece has provided  a high-level definition of what a load b
 ### Middle proxy
 
 
-![Figure 4: Middle proxy load balancing topology](../../images/modern-lb-and-proxying/4.png)
+![Figure 4: Middle proxy load balancing topology](../images/modern-lb-and-proxying/4.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 4: Middle proxy load balancing topology</strong>
@@ -230,12 +233,12 @@ A middle proxy is also often a black box that makes operations difficult. Is an 
 ### Edge proxy
 
 
-![Figure 5: Edge proxy load balancing topology](../../images/modern-lb-and-proxying/5.png)
+![Figure 5: Edge proxy load balancing topology](../images/modern-lb-and-proxying/5.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 5: Edge proxy load balancing topology</strong>
 
-The edge proxy topology shown in Figure 5 is really just a variant of the middle proxy topology in which the load balancer is accessible via the internet. In this scenario, the load balancer typically must provide additional “API gateway” features such as TLS termination, rate limiting, authentication, and sophisticated traffic routing. 
+The edge proxy topology shown in Figure 5 is really just a variant of the middle proxy topology in which the load balancer is accessible via the internet. In this scenario, the load balancer typically must provide additional “API gateway” features such as [TLS termination](../../../../edge-stack/latest/howtos/tls-termination), rate limiting, authentication, and sophisticated traffic routing. 
 
 The pros and cons of the edge proxy are the same as the middle proxy. A caveat is that it is typically unavoidable to deploy a dedicated edge proxy in a large internet-facing distributed system. Clients typically need to access the system over DNS using arbitrary network libraries that the service owner does not control (making the embedded client library or sidecar proxy topologies described in the following sections impractical to run directly on the client). 
 
@@ -244,7 +247,7 @@ Additionally, for security reasons, it is desirable to have a single gateway by 
 
 ### Embed
 
-![Figure 6: Load balancing via embedded client library](../../images/modern-lb-and-proxying/6.png)
+![Figure 6: Load balancing via embedded client library](../images/modern-lb-and-proxying/6.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 6: Load balancing via embedded client library</strong>
@@ -261,7 +264,7 @@ With all of that said, the libraries mentioned above have been successful for co
 ### Sidecar proxy
 
 
-![Figure 7: Load balancing via sidecar proxy](../../images/modern-lb-and-proxying/7.png)
+![Figure 7: Load balancing via sidecar proxy](../images/modern-lb-and-proxying/7.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 7: Load balancing via sidecar proxy</strong>
@@ -296,7 +299,7 @@ Does this mean that L4 load balancers are no longer relevant? No!
 
 Although it appears that L7 load balancers will ultimately completely replace L4 load balancers for service-to-service communication, L4 load balancers are still extremely relevant at the edge because almost all modern large distributed architectures use a two-tiered L4/L7 load balancing architecture for internet traffic. 
 
-The benefits of placing dedicated L4 load balancers before L7 load balancers in an edge deployment are as follows:
+The benefits of placing dedicated L4 [load balancers](/learn/kubernetes-glossary/load-balancer/) before L7 load balancers in an edge deployment are as follows:
 
 
 
@@ -309,7 +312,7 @@ The following sections will describe several different designs for middle/edge p
 ### TCP/UDP termination load balancers
 
 
-![Figure 8: L4 termination load balancer](../../images/modern-lb-and-proxying/8.png)
+![Figure 8: L4 termination load balancer](../images/modern-lb-and-proxying/8.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 8: L4 termination load balancer</strong>
@@ -326,7 +329,7 @@ L4 termination load balancers are still used for two reasons:
 
 ### TCP/UDP passthrough load balancers
 
-![Figure 9: L4 passthrough load balancer](../../images/modern-lb-and-proxying/9.png)
+![Figure 9: L4 passthrough load balancer](../images/modern-lb-and-proxying/9.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 9: L4 passthrough load balancer</strong>
@@ -355,7 +358,7 @@ Why would this type of load balancer be used in place of the termination load ba
 
 ### Direct server return (DSR)
 
-![Figure 10: L4 Direct server return (DSR)](../../images/modern-lb-and-proxying/10.png)
+![Figure 10: L4 Direct server return (DSR)](../images/modern-lb-and-proxying/10.png)
 
 <strong style="font-weight: normal; font-size: 12px">Figure 10: L4 Direct server return (DSR)</strong>
 
@@ -375,7 +378,7 @@ Note that in both the passthrough load balancer and DSR load balancer designs, t
 ### Fault tolerance via high availability pairs
 
 
-![Figure 11: L4 fault tolerance via HA pairs and connection tracking](../../images/modern-lb-and-proxying/11.png)
+![Figure 11: L4 fault tolerance via HA pairs and connection tracking](../images/modern-lb-and-proxying/11.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 11: L4 fault tolerance via HA pairs and connection tracking</strong>
@@ -406,7 +409,7 @@ The above setup is how many high-traffic internet applications are still served 
 ### Fault tolerance and scaling via clusters with distributed consistent hashing
 
 
-![Figure 12: L4 fault tolerance and scaling via clustered load balancers and consistent hashing](../../images/modern-lb-and-proxying/12.png)
+![Figure 12: L4 fault tolerance and scaling via clustered load balancers and consistent hashing](../images/modern-lb-and-proxying/12.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 12: L4 fault tolerance and scaling via clustered load balancers and consistent hashing</strong>
@@ -447,7 +450,7 @@ There weren’t any open source load balancers that implemented this design unti
 
 ## Current state of the art in L7 load balancing
 
-![tweet1](../../images/modern-lb-and-proxying/13.png)
+![tweet1](../images/modern-lb-and-proxying/13.png)
 
 Yes, indeed. The last several years have seen a resurgence in L7 load balancer/proxy development. This tracks very well with the continued push towards microservice architectures in distributed systems. 
 
@@ -506,7 +509,7 @@ L7 load balancers are evolving at a staggering pace. For an example of what Envo
 ## Global load balancing and the centralized control plane
 
 
-![Figure 13: Global load balancing](../../images/modern-lb-and-proxying/14.png)
+![Figure 13: Global load balancing](../images/modern-lb-and-proxying/14.png)
 
 
 <strong style="font-weight: normal; font-size: 12px">Figure 13: Global load balancing</strong>
@@ -538,7 +541,7 @@ Please see posts on [Envoy’s universal data plane API](https://medium.com/@mat
 
 So far, this post has only briefly mentioned hardware and software considerations, primarily in the context of the historical L4 load balancer HA pair. What are the industry trends in this area?
 
-![tweet2](../../images/modern-lb-and-proxying/15.png)
+![tweet2](../images/modern-lb-and-proxying/15.png)
 
 The previous tweet is a humorous exaggeration but still sums up pretty well the trends, which are as follows:
 
@@ -561,7 +564,7 @@ To summarize, the key takeaways of this post are:
 *   Both L4 and L7 load balancers are relevant in modern architectures.
 *   L4 load balancers are moving towards horizontally scalable distributed consistent hashing solutions.
 *   L7 load balancers are being heavily invested in recently due to the proliferation of dynamic microservice architectures.
-*   Global load balancing and a split between the control plane and the data plane is the future of load balancing and where the majority of future innovation and commercial opportunities will be found.
+*   Global load balancing and a split between the [control plane](/developer-control-plane/) and the data plane is the future of load balancing and where the majority of future innovation and commercial opportunities will be found.
 *   The industry is aggressively moving toward commodity OSS hardware and software for networking solutions. It appears as though traditional load balancing vendors like F5 will be displaced first by open source software and cloud vendors. Traditional router/switch vendors—such as Arista and Cumulus—have a larger runway in on-prem deployments but ultimately will also be displaced by the public cloud vendors and their homegrown physical networks.
 
 Overall, this is a fascinating time in computer networking! 

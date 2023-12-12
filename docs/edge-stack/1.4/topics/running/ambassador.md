@@ -40,7 +40,7 @@ spec:
 | `regex_type` | Set which regular expression engine to use. See the "Regular Expressions" section below. | `regex_type: safe` |
 | `server_name: envoy` | By default Envoy sets server_name response header to `envoy`. Override it with this variable |  |
 | `service_port: 8080` | If present, service_port will be the port Ambassador listens on for microservice access. If not present, Ambassador will use 8443 if TLS is configured, 8080 otherwise. |  |
-| `statsd` | Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. For more information, see the [Statistics reference](../statistics#exposing-statistics-via-statsd). |  |
+| `statsd` | Configures Ambassador statistics. These values can be set in the Ambassador module or in an environment variable. For more information, see the [Statistics reference](../statistics). |  |
 | `use_proxy_proto` | Controls whether Envoy will honor the PROXY protocol on incoming requests. | `use_proxy_proto: false` |
 | `use_remote_address` | Controls whether Envoy will trust the remote address of incoming connections or rely exclusively on the X-Forwarded_For header. | `use_remote_address: true` |
 | `use_ambassador_namespace_for_service_resolution` | Controls whether Ambassador will resolve upstream services assuming they are in the same namespace as the element referring to them, e.g. a Mapping in namespace `foo` will look for its service in namespace `foo`. If `true`, Ambassador will resolve the upstream services assuming they are in the same namespace as Ambassador, unless the service explicitly mentions a different namespace. | `use_ambassador_namespace_for_service_resolution: false` |
@@ -72,7 +72,7 @@ cors:
 - Both the API Gateway and the Edge Stack provide low-level diagnostics at `/ambassador/v0/diag/`.
 - The Ambassador Edge Stack also provides the higher-level Edge Policy Console at `/edge_stack/admin/`.
 
-By default, both services are enabled: 
+By default, both services are enabled:
 
 ```
 diagnostics:
@@ -119,7 +119,7 @@ readiness_probe:
   enabled: true
 ```
 
-`retry_policy` lets you add resilience to your services in case of request failures by performing automatic retries. 
+`retry_policy` lets you add resilience to your services in case of request failures by performing automatic retries.
 ```
 retry_policy:
   retry_on: "5xx"
@@ -187,7 +187,7 @@ If set, `cluster_idle_timeout_ms` specifies the timeout (in milliseconds) after 
 
 ### gRPC HTTP/1.1 bridge (`enable_grpc_http11_bridge`)
 
-Ambassador supports bridging HTTP/1.1 clients to backend gRPC servers. When an HTTP/1.1 connection is opened and the request content type is `application/grpc`, Ambassador will buffer the response and translate into gRPC requests. For more details on the translation process, see the [Envoy gRPC HTTP/1.1 bridge documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_filters/grpc_http1_bridge_filter.html). This setting can be enabled by setting `enable_grpc_http11_bridge: true`. 
+Ambassador supports bridging HTTP/1.1 clients to backend gRPC servers. When an HTTP/1.1 connection is opened and the request content type is `application/grpc`, Ambassador will buffer the response and translate into gRPC requests. For more details on the translation process, see the [Envoy gRPC HTTP/1.1 bridge documentation](https://www.envoyproxy.io/docs/envoy/v1.11.2/configuration/http_filters/grpc_http1_bridge_filter.html). This setting can be enabled by setting `enable_grpc_http11_bridge: true`.
 
 ### gRPC-Web (`enable_grpc_web`)
 

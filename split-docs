@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# This script is a utility script for use by LukeShu during the
+# migration to per-product/version subtrees.  It isn't something that
+# is meant to be run during normal work.  If you would like to run
+# this script, and therefore would like to be involved in that
+# migration, then you should probably have a chat involving Luke about
+# the migration plan.
+
+set -euEx
+
+PUSH_BRANCH=${PUSH_BRANCH:-${USER}/from-website-$(date +%Y-%m-%d)}
+
+for dir in $(printf '%s\n' docs/*/* | sort --version-sort --reverse)
+do
+	# Ignore non-directories (including symlinks-to-directories).
+	if test -h "$dir" || ! test -d "$dir"
+	then
+		continue
+	fi
+
+	# Extract the product-name from the dir-name.
+	product=${dir#docs/}; product=${product%%/*}
+
+	# Extract the branch-version from the dir-name.
+	case "${dir#docs/*/}" in
+		latest|pre-release) version=master;;
+		*) version="v${dir#docs/*/}";;
+	esac
+
+	time git subtree split --prefix="$dir" \
+	    --rejoin --squash \
+	    --branch="${PUSH_BRANCH}/products/${product}/${version}"
+done

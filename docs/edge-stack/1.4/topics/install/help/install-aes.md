@@ -4,4 +4,4 @@ The installer received an error when installing Ambassador Edge Stack to your Ku
 
 ## What's next?
 
-Please get in touch on [Slack](https://a8r.io/Slack).
+Please get in touch on [Slack](http://a8r.io/slack).

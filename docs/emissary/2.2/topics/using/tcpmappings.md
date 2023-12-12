@@ -1,0 +1,225 @@
+# TCP connections
+
+In addition to managing HTTP, GRPC, and Websockets at layer 7, $productName$ can also manage TCP connections at layer 4. The core abstraction used to support TCP connections is the `TCPMapping`.
+
+## TCPMapping
+
+An $productName$ `TCPMapping` associates TCP connections with Kubernetes _services_. Cleartext TCP connections are defined by destination IP address and/or destination TCP port; TLS TCP connections can also be defined by the hostname presented using SNI. A service is exactly the same as in Kubernetes.
+
+## TCPMapping configuration
+
+$productName$ supports a number of attributes to configure and customize mappings.
+
+| Attribute                 | Description               |
+| :------------------------ | :------------------------ |
+| `address`         | (optional) the IP address on which $productName$ should listen for connections for this Mapping -- if not present, $productName$ will listen on all addresses )
+| `port`            | (required) the TCP port on which $productName$ should listen for connections for this Mapping |
+| `idle_timeout_ms` | (optional) the timeout, in milliseconds, after which the connection will be terminated if no traffic is seen -- if not present, no timeout is applied |
+| `enable_ipv4` | (optional) if true, enables IPv4 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](../../running/ambassador)) |
+| `enable_ipv6` | (optional) if true, enables IPv6 DNS lookups for this mapping's service (the default is set by the [`ambassador Module`](../../running/ambassador)) |
+| `circuit_breakers` | (optional) circuit breakers, as for [`HTTP mapping`](../circuit-breakers) (the default is set by the [`ambassador Module`](../../running/ambassador)) |
+
+If both `enable_ipv4` and `enable_ipv6` are set, $productName$ will prefer IPv6 to IPv4. See the [`ambassador Module`](../../running/ambassador) documentation for more information.
+
+$productName$ can manage TCP connections using TLS:
+
+| Attribute                 | Description               |
+| :------------------------ | :------------------------ |
+| [`host`](../headers/host) | (optional) enables TLS _termination_ and specifies the hostname that must be presented using SNI for this `TCPMapping` to match -- **FORCES TLS TERMINATION**, see below |
+| [`service`](#tcpmapping-and-tls)   | An `https://` prefix will enable TLS _origination_ |
+| [`tls`](#tcpmapping-and-tls)       | (optional) configures TLS _origination_ by specifying the name of a `TLSContext` that will determine the certificate to offer to the upstream service |
+
+$productName$ supports multiple deployment patterns for your services. These patterns are designed to let you safely release new versions of your service while minimizing its impact on production users.
+
+| Attribute                 | Description               |
+| :------------------------ | :------------------------ |
+| [`weight`](../canary)        | (optional) specifies the (integer) percentage of traffic for this resource that will be routed using this mapping |
+
+The name of the mapping must be unique.
+
+### `TCPMapping` and TLS
+
+The `host` attribute of a `TCPMapping` determines whether $productName$ will terminate TLS when a client connects. The `service` prefix (if any) and the `tls` attribute work together to determine whether $productName$ will _originate_ TLS. The two are independent.
+
+This leaves four cases:
+
+#### `host` is not set, and the `service` does not state `https://`
+
+In this case, $productName$ simply proxies bytes between the client and the upstream. TLS may or may not be involved, and $productName$ doesn't care. You should specify the port to use for the upstream connection; if you don't, $productName$ will guess port 80.
+
+Examples:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name:  ssh
+spec:
+  port: 2222
+  service: upstream:22
+```
+
+could be used to relay an SSH connection on port 2222, or
+
+
+```yaml
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name:  cockroach
+spec:
+  port: 26257
+  service: cockroach:26257
+```
+
+could proxy a CockroachDB connection.
+
+#### `host` is set, but the `service` has no `https://` prefix
+
+In this case, $productName$ will terminate the TLS connection, require that the host offered with SNI match the `host` attribute, and then make a **cleartext** connection to the upstream host. You should specify the port to use for the upstream connection; if you don't, $productName$ will guess port **80**.
+
+This can be useful for doing host-based TLS proxying of arbitrary protocols, allowing the upstream to not have to care about TLS.
+
+Note that this case **requires** that you have created a termination `TLSContext`, and that the termination `TLSContext` has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
+
+Example:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  TLSContext
+metadata:
+  name:  my-context
+spec:
+  hosts:
+  - my-host-1
+  - my-host-2
+  secret: supersecret
+---
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name:  my-host-1
+spec:
+  port: 2222
+  host: my-host-1
+  service: upstream-host-1:9999
+---
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name:  my-host-2
+spec:
+  port: 2222
+  host: my-host-2
+  service: upstream-host-2:9999
+```
+
+The example above will accept a TLS connection with SNI on port 2222. If the client requests SNI host `my-host-1`, the decrypted traffic will be relayed to `upstream-host-1`, port 9999. If the client requests SNI host `my-host-2`, the decrypted traffic will be relayed to `upstream-host-2`, port 9999. Any other SNI host will cause the TLS handshake to fail.
+
+#### `host` is set, and `service` has an `https://` prefix
+
+In this case, $productName$ will terminate the incoming TLS connection, require that the host offered with SNI match the `host` attribute, and then make a **TLS** connection to the upstream host. If `tls` is also set, $productName$ will use to determine the certificate offered to the upstream service. You should specify the port to use for the upstream connection; if you don't, $productName$ will guess port **443**.
+
+This is useful for doing host routing while maintaining end-to-end encryption.
+
+Note that this case **requires** that you have created a termination `TLSContext`, and that the termination `TLSContext` has a `host` that matches the `host` in the `TCPMapping`. (This is the same rule as TLS termination with SNI in an HTTP `Mapping`.)
+
+Example:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  TLSContext
+metadata:
+  name:  my-context
+spec:
+  hosts:
+  - my-host-1
+  - my-host-2
+  secret: supersecret
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  TLSContext
+metadata:
+  name:  origination-context
+spec:
+  secret: othersecret
+---
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name:  test-1
+spec:
+  port: 2222
+  host: my-host-1
+  service: https://upstream-host-1:9999
+---
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name:  test-2
+spec:
+  port: 2222
+  host: my-host-2
+  tls: origination-context
+  service: https://upstream-host-2:9999
+```
+
+The example above will accept a TLS connection with SNI on port 2222.
+
+If the client requests SNI host `my-host-1`, the traffic will be relayed over a TLS connection to `upstream-host-1`, port 9999. No client certificate will be offered for this connection.
+
+If the client requests SNI host `my-host-2`, the decrypted traffic will be relayed to `upstream-host-2`, port 9999. The client certificate from `origination-context` will be offered for this connection.
+
+Any other SNI host will cause the TLS handshake to fail.
+
+#### `host` is not set, but `service` has an `https://` prefix
+
+Here, $productName$ will accept the connection **without terminating TLS**, then relay traffic over a **TLS** connection upstream. This is probably useful only to accept unencrypted traffic and force it to be encrypted when it leaves $productName$.
+
+Example:
+
+```yaml
+---
+apiVersion: getambassador.io/v3alpha1
+kind:  TLSContext
+metadata:
+  name:  origination-context
+spec:
+  secret: othersecret
+---
+apiVersion: getambassador.io/v3alpha1
+kind: TCPMapping
+metadata:
+  name:  test
+spec:
+  port: 2222
+  service: https://upstream-host:9999
+```
+
+The example above will accept **any** connection to port 2222 and relay it over a **TLS** connection to `upstream-host` port 9999. No client certificate will be offered.
+
+#### Summary
+
+- To get a `TCPMapping` to terminate TLS, configure $productName$ with a termination `TLSContext` and list a `host` in the `TCPMapping`.
+
+- To get a `TCPMapping` to originate TLS, use an `http://` prefix for the `TCPMapping`'s `service`. Use the `tls` attribute as well if you want to offer a certificate to the upstream service.
+
+- You can mix and match as long as you think about how the protocols interact.
+
+#### Required attributes for `TCPMapping`s
+
+- `name` is a string identifying the `Mapping` (e.g. in diagnostics)
+- `port` is an integer specifying which port to listen on for connections
+- `service` is the name of the service handling the resource; must include the namespace (e.g. `myservice.othernamespace`) if the service is in a different namespace than $productName$
+
+Note that the `service` in a `TCPMapping` should include a port number, and may include a scheme of `https`.
+
+## Namespaces and Mappings
+
+Given that `AMBASSADOR_NAMESPACE` is correctly set, $productName$ can map to services in other namespaces by taking advantage of Kubernetes DNS:
+
+- `service: servicename` will route to a service in the same namespace as $productName$, and
+- `service: servicename.namespace` will route to a service in a different namespace.

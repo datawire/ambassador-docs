@@ -66,7 +66,7 @@ acmeProvider:
 * If the authority is not supplied, the Let’s Encrypt production environment is assumed.
 
 * In general, `email-of-registrant` is mandatory when using ACME: it should be
-a valid email address that will reach someone responsible for certificate 
+a valid email address that will reach someone responsible for certificate
 management.
 
 * ACME stores certificates in Kubernetes secrets. The name of the secret can be
@@ -126,11 +126,11 @@ requestPolicy:
     additionalPort: insecure-port
 ```
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
-> 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
-> 
-> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
+> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config.
+>
+> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources.
+>
+> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`.
 
 The `insecure-action` can be one of:
 
@@ -295,7 +295,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
     requestPolicy:
       insecure:
         action: Route
-  ```  
+  ```
 
   In this case, the Host resource explicitly requests no ACME handling and no TLS, then states that insecure requests must be routed instead of redirected.
 
@@ -335,7 +335,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 ### L7 LB
 
-  In general, L7 load balancers will be expected to provide a correct `X-Forwarded-Proto` header, and will require `xff_num_trusted_hops` set to the depth of the L7 LB stack in front of Ambassador. 
+  In general, L7 load balancers will be expected to provide a correct `X-Forwarded-Proto` header, and will require `xff_num_trusted_hops` set to the depth of the L7 LB stack in front of Ambassador.
 
   - `client -> L7 LB -> Ambassador` would require `xff_num_trusted_hops: 1`
   - `client -> L7 LB -> L7 LB -> Ambassador` would require `xff_num_trusted_hops: 2`
@@ -373,4 +373,4 @@ The Host CRD defines how Ambassador will be visible to the outside world. A mini
 
 ### CRD Specification
 
-The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/datawire/ambassador/blob/master/api/getambassador.io/v2/Host.proto).
+The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v2/Host.proto).

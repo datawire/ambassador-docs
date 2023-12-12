@@ -38,12 +38,12 @@ for the same service.
 > will not try to obtain documentation unless a `docs` attribute is specified.
 > Users should set `docs.path` to `/.ambassador-internal/openapi-docs` in their `Mapping`s
 > in order to keep the previous behavior.
-> 
+>
 >
 > The `docs` field of Mappings was not introduced until `Ambassador Edge Stack` version 1.9 because Ambassador was automatically searching for docs on `/.ambassador-internal/openapi-docs`
 > Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of Ambassador.
 ```yaml
- `kubectl apply -f https://getambassador.io/yaml/aes-crds.yaml`
+ `kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml`
 ```
 
 > If you are on an earlier version of Ambassador, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`
@@ -266,13 +266,13 @@ Check out a local copy of your content repo and from within run the following do
 
 ```
 docker run -it --rm --volume $PWD:/content --publish 8877:8877 \
-  docker.io/datawire/ambassador_pro:local-devportal-$aproVersion$
+  docker.io/datawire/ambassador_pro:local-devportal-$localDevPortalVersion$
 ```
 
 and open `http://localhost:8877` in your browser. Any changes made locally to
 devportal content will be reflected immediately on page refresh.
 
-## <a href="#global-config"></a>Default Configuration
+## Default Configuration
 
 The _Dev Portal_ supports some default configuration in some environment variables
 (for backwards compatibility).

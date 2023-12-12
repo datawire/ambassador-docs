@@ -1,4 +1,4 @@
-> **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](../../../../../telepresence/latest/faqs) or [go to the quick start guide](../../../../../telepresence/latest/quick-start/).**
+> **Service Preview has been replaced by Telepresence, these docs will remain as a historical reference. [Learn more about Telepresence](/docs/telepresence/latest/faqs) or [go to the quick start guide](/docs/telepresence/latest/quick-start/).**
 
 # Introduction to Service Preview
 
@@ -18,7 +18,7 @@ Service Preview runs on Mac OS X, Linux, and Windows via WSL2.
 
 There are three main components to Service Preview:
 
-1. The [Traffic Agent](service-preview-reference#traffic-agent), which controls routing to the microservice. The Traffic Agent is deployed as a sidecar on the same pod as your microservice (behind the scenes, it's a special configuration of the basic Ambassador Edge Stack image). The Traffic Agent sidecar can be manually configured or [automatically injected by the Ambassador Injector](service-preview-reference#automatic-traffic-agent-sidecar-injection-with-ambassador-injector) in any pod with a specific annotation.
+1. The [Traffic Agent](service-preview-reference#traffic-agent), which controls routing to the microservice. The Traffic Agent is deployed as a sidecar on the same pod as your microservice (behind the scenes, it's a special configuration of the basic $productName$ image). The Traffic Agent sidecar can be manually configured or [automatically injected by the Ambassador Injector](service-preview-reference#automatic-traffic-agent-sidecar-injection-with-ambassador-injector) in any pod with a specific annotation.
 
 2. The [Traffic Manager](service-preview-reference#traffic-manager), which manages the different instances of the Traffic Agent, and is deployed in the cluster.
 

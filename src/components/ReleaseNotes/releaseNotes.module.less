@@ -1,7 +1,7 @@
 @import '../../../../src/less/_colors.less';
 
 .note {
-  margin: 5px 0;
+  margin: 2px 0 10px;
 
   &__body {
     padding: 8px 0;
@@ -9,20 +9,25 @@
 
   &__description {
     padding: 0;
+    margin-top: -15px;
   }
 
-  &__more {
-    margin: 8px 0 0 28px;
+  &__image,
+  &__image_xs {
+    img {
+      border: solid 1px @color-white-1;
+      border-radius: 4px;
+      height: auto;
+      margin-bottom: 10px;
+      object-fit: contain;
+      padding: 10px;
+      width: 100%;
+    }
   }
 
   &__image {
     display: none;
     padding: 0 0 0 10px;
-
-    img {
-      object-fit: contain;
-      width: 100%;
-    }
   }
 
   &__image_xs {
@@ -38,17 +43,33 @@
 
   &__title {
     display: grid;
+    width: fit-content;
     grid-template-columns: 20px auto;
+    text-decoration: none;
+
     span {
-      padding: 0 0 0 10px;
+      padding: 0 0 0 15px;
+    }
+    &:hover {
+      text-decoration: underline;
+      color: @color-blue-dark;
+    }
+
+    &_no_link {
+      display: grid;
+      grid-template-columns: 20px auto;
+      text-decoration: none;
+
+      span {
+        padding: 0 0 0 15px;
+      }
     }
   }
 }
 
 .release {
-  &:not(:last-child) {
-    border-bottom: 1px solid @color-white-1;
-  }
+  padding-bottom: 16px;
+  border-bottom: 1px solid @color-white-1;
 
   &__date {
     font-size: 16px;
@@ -57,11 +78,10 @@
 
 @media screen and (min-width: 500px) {
   .note {
-    display: grid;
-    grid-template-columns: 65% 35%;
+    display: flex;
 
     &__body {
-      padding: 8px 0 8px 28px;
+      padding: 8px 0 4px 35px;
     }
     &__description {
       padding: 0 10px 0 0;
@@ -69,7 +89,9 @@
     &__image {
       align-items: center;
       display: flex;
+      flex-shrink: 0;
       justify-content: center;
+      width: 35%;
     }
 
     &__image_xs {
@@ -77,10 +99,19 @@
     }
 
     &__title {
+      cursor: pointer;
       span {
         display: inline-block;
         padding-top: 5px;
         vertical-align: top;
+      }
+
+      &_no_link {
+        span {
+          display: inline-block;
+          padding-top: 5px;
+          vertical-align: top;
+        }
       }
     }
   }

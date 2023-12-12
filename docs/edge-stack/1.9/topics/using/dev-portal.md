@@ -250,13 +250,13 @@ Check out a local copy of your content repo and from within run the following do
 
 ```command-line
 docker run -it --rm --volume $PWD:/content --publish 8877:8877 \
-  docker.io/datawire/ambassador_pro:local-devportal-$aproVersion$
+  docker.io/datawire/ambassador_pro:local-devportal-$localDevPortalVersion$
 ```
 
 and open `http://localhost:8877` in your browser. Any changes made locally to
 devportal content will be reflected immediately on page refresh.
 
-## <a href="#global-config"></a>Default Configuration
+## Default Configuration
 
 The _Dev Portal_ supports some default configuration in some environment variables
 (for backwards compatibility).

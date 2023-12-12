@@ -44,9 +44,9 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
    **Note:** If this is your first time deploying Ambassador Edge Stack, reviewing the Ambassador Edge Stack [getting started](../../tutorials/getting-started) is strongly recommended.
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml
    ```
-   
+
    If you're on GKE, or haven't previously created the Ambassador Edge Stack service, please see [the quick start guide](../../tutorials/getting-started).
 
 4. Configure Ambassador Edge Stack to add Linkerd 2 Headers to requests.
@@ -62,7 +62,7 @@ Setting up Linkerd 2 requires to install three components. The first is the CLI 
         add_linkerd_headers: true
     ```
 
-    This will tell Ambassador Edge Stack to add additional headers to each request forwarded to Linkerd 2 with information about where to route this request to. This is a general setting. You can also set `add_linkerd_headers` per [Mapping](../../topics/using/mappings#mapping-configuration).
+    This will tell Ambassador Edge Stack to add additional headers to each request forwarded to Linkerd 2 with information about where to route this request to. This is a general setting. You can also set `add_linkerd_headers` per [Mapping](../../topics/using/mappings).
 
 ## Routing to Linkerd 2 Services
 
@@ -152,7 +152,7 @@ You'll now register a demo application with Linkerd 2, and show how Ambassador E
 Save the above YAML to a file named `qotm-mapping.yaml`, and apply it with:
 ```
 kubectl apply -f qotm-mapping.yaml
-``` 
+```
 to apply this configuration to your Kubernetes cluster. Note that in the above config there is nothing special to make it work with Linkerd 2. The general config for Ambassador Edge Stack already adds Linkerd Headers when forwarding requests to the service mesh.
 
 1. Send a request to the `qotm-Linkerd2` API.

@@ -6,7 +6,7 @@ If you need help deploying Ambassador at your organization, there are several di
 
 ### Ambassador Edge Stack Community Support
 
-If you are running the Ambassador API Gateway or the Ambassador Edge Stack with free, community licenses, [join our Slack channel](https://a8r.io/Slack) to talk with other users in the community and get your questions answered.
+If you are running the Ambassador API Gateway or the Ambassador Edge Stack with free, community licenses, [join our Slack channel](http://a8r.io/slack) to talk with other users in the community and get your questions answered.
 
 If you can’t find an answer there, [contact us](/contact-us) to learn more about the support options available with Ambassador Edge Stack Enterprise.
 
@@ -20,7 +20,7 @@ With Ambassador Edge Stack Enterprise, you have access to deployment and product
 
 ## File a Github Issue
 
-If you see a bug you want to fix, see room for documentation improvements, or have something else you want to change, you can [file an issue on github](https://github.com/datawire/ambassador/issues/new).
+If you see a bug you want to fix, see room for documentation improvements, or have something else you want to change, you can [file an issue on github](https://github.com/emissary-ingress/emissary/issues/new).
 
 ## Pricing
 

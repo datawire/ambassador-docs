@@ -230,9 +230,9 @@ The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traf
 
 [^1]: This may change in a future release to reflect the Pods's
       namespace if deployed to a namespace other than `default`.
-      https://github.com/datawire/ambassador/issues/1583
+      https://github.com/emissary-ingress/emissary/issues/1583
 
 [Go `net.Dial`]: https://golang.org/pkg/net/#Dial
 [Go `strconv.ParseBool`]: https://golang.org/pkg/strconv/#ParseBool
-[Go `time.ParseDuration`]: https://golang.org/pkg/strconv/#ParseDuration
+[Go `time.ParseDuration`]: https://pkg.go.dev/time#ParseDuration
 [Redis 6 ACL]: https://redis.io/topics/acl

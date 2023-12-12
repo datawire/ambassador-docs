@@ -1,15 +1,20 @@
 import React, { useMemo } from 'react';
-import { Link } from 'gatsby';
+
+import Link from '../../../../src/components/Link';
 import Release from './Release';
 
 const ReleaseNotes = ({
   releases,
-  images,
   product,
   handleViewMore,
   changelog: changelogURL,
+  versions,
 }) => {
   const title = useMemo(() => {
+    if (versions.productName) {
+      return `${versions.productName} Release Notes`;
+    }
+
     switch (product) {
       case 'edge-stack':
         return 'Edge Stack Release Notes';
@@ -25,8 +30,8 @@ const ReleaseNotes = ({
   }, [product]);
 
   const changelog = useMemo(() => {
-    const commonText = `For a detailed list of all the changes in these releases, please consult the`;
-    
+    const commonText = `For a detailed list of all the changes in past releases, please consult the`;
+
     if (changelogURL) {
       return (
         <>
@@ -41,17 +46,17 @@ const ReleaseNotes = ({
   return (
     <>
       <h1>{title}</h1>
-      <p>{changelog}</p>
       <div>
         {releases.map((release) => (
           <Release
             key={release.version}
             release={release}
-            images={images}
             handleViewMore={handleViewMore}
+            versions={versions}
           />
         ))}
       </div>
+      <p>{changelog}</p>
     </>
   );
 };

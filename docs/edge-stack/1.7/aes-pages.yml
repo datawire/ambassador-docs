@@ -2,7 +2,7 @@
 # Ex:
 # - /docs
 # - /reference
-# 
+#
 
 
 - /topics/using/filters/
@@ -20,4 +20,3 @@
 - /topics/using/edge-policy-console
 - /topics/using/rate-limits/rate-limits/
 - /topics/using/rate-limit-speedometers
-

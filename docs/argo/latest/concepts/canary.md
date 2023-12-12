@@ -1,9 +1,11 @@
+---
+    Title: Canary deployments with Argo
+    description: Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things
+---
+
 # Canary deployments
 
-
-## What is a canary deployment?
-
-A **[canary deployment](/docs/edge-stack/latest/topics/using/canary/)** is designed to make sure that a "simple fix" or change to code won't kill your application. Like the proverbial canary being sent into the coal mine, only a small subset of users will be exposed to new code to test what happens. Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things, i.e. keeping the canary alive.
+A canary deployment is designed to make sure that a "simple fix" or change to code won't kill your application. Like the proverbial canary being sent into the coal mine, only a small subset of users will be exposed to new code to test what happens. Canary releasing is a feature-rollout strategy that is used to test the viability of a new version of software aimed at rapid delivery without breaking things, i.e. keeping the canary alive.
 
 ## How do canary releases limit risk when rolling out software changes?
 
@@ -15,7 +17,7 @@ Because changes are rolled out incrementally at set intervals until rolled out t
 
 A canary release diverts a small amount of traffic, for example 1% or 5%, to the new version of a service while still routing the majority of traffic to the old version. This incremental rollout lets you observe how a change will work in practice and roll back if you detect signs of trouble. 
 
-![Canary release diagram](../../images/canary.png)
+![Canary release diagram](../images/canary.png)
 
 ## When should I use a canary deployment strategy?
 
@@ -54,7 +56,7 @@ Canary releases don't fit every case. For example, mission or life-critical case
 
 To get started with canary releasing, you'll need:
 
-*   an [API Gateway](/docs/edge-stack/latest/topics/install/install-ambassador-oss/#the-ambassador-api-gateway) to manage the flow of traffic to your services, e.g. Ambassador Edge Stack
+*   an [API Gateway](/docs/edge-stack/1.13/topics/install/install-ambassador-oss/) to manage the flow of traffic to your services, e.g. Ambassador Edge Stack
 *   a CI/CD pipeline integrated with a continuous deployment workflow, e.g., Argo
 *   an observability system
 

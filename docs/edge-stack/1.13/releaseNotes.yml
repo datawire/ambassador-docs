@@ -1,0 +1,128 @@
+# This file should be placed in the folder for the version of the
+# product that's meant to be documented. A `/release-notes` page will
+# be automatically generated and populated at build time.
+#
+# Note that an entry needs to be added to the `doc-links.yml` file in
+# order to surface the release notes in the table of contents.
+#
+# The YAML in this file should contain:
+#
+# changelog: An (optional) URL to the CHANGELOG for the product.
+# items: An array of releases with the following attributes:
+#     - version: The (optional) version number of the release, if applicable.
+#     - date: The date of the release in the format YYYY-MM-DD.
+#     - notes: An array of noteworthy changes included in the release, each having the following attributes:
+#         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
+#         - title: A short title of the noteworthy change.
+#         - body: >-
+#             Two or three sentences describing the change and why it
+#             is noteworthy.  This is HTML, not plain text or
+#             markdown.  It is handy to use YAML's ">-" feature to
+#             allow line-wrapping.
+#         - image: >-
+#             The URL of an image that visually represents the
+#             noteworthy change.  This path is relative to the
+#             `release-notes` directory; if this file is
+#             `FOO/releaseNotes.yml`, then the image paths are
+#             relative to `FOO/release-notes/`.
+#         - docs: The path to the documentation page where additional information can be found.
+#         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
+
+changelog: https://github.com/emissary-ingress/emissary/blob/$branch$/CHANGELOG.md
+items:
+  - version: 1.13.10
+    date: '2021-07-27'
+    notes:
+      - title: Fix for CORS origins configuration on the Mapping resource
+        type: bugfix
+        body: >-
+          Fixed a regression when specifying a comma separated string for <code>cors.origins</code>
+          on the <code>Mapping</code> resource.
+          ([#3609](https://github.com/emissary-ingress/emissary/issues/3609))
+        docs: topics/using/cors
+        image: ../images/emissary-1.13.10-cors-origin.png
+
+      - title: New Envoy-configuration snapshots for debugging
+        body: "Envoy-configuration snapshots get saved (as <code>ambex-#.json</code>) in <code>/ambassador/snapshots</code>. The number of snapshots is controlled by the <code>AMBASSADOR_AMBEX_SNAPSHOT_COUNT</code> environment variable; set it to 0 to disable. The default is 30."
+        type: change
+        docs: topics/running/environment/
+
+      - title: Optionally remove ratelimiting for Envoy reconfiguration
+        body: >-
+          Set <code>AMBASSADOR_AMBEX_NO_RATELIMIT</code> to <code>true</code> to completely disable
+          ratelimiting Envoy reconfiguration under memory pressure. This can help performance with
+          the endpoint or Consul resolvers, but could make OOMkills more likely with large
+          configurations. The default is <code>false</code>, meaning that the rate limiter is
+          active.
+        type: change
+        docs: topics/running/environment/
+
+      - title: Mappings support configuring the DevPortal fetch timeout
+        type: bugfix
+        body: >-
+          The <code>Mapping</code> resource can now specify <code>docs.timeout_ms</code> to set the
+          timeout when the Dev Portal is fetching API specifications.
+        docs: topics/using/dev-portal
+        image: ../images/edge-stack-1.13.10-docs-timeout.png
+
+      - title: Dev Portal will strip HTML tags when displaying results
+        type: bugfix
+        body: >-
+          The Dev Portal will now strip HTML tags when displaying search results, showing just the
+          actual content of the search result.
+        docs: topics/using/dev-portal
+
+      - title: Consul certificate rotation logs more information
+        type: change
+        body: >-
+          Consul certificate-rotation logging now includes the fingerprints and validity timestamps
+          of certificates being rotated.
+        docs: howtos/consul/
+        image: ../images/edge-stack-1.13.10-consul-cert-log.png
+
+  - version: 1.13.9
+    date: '2021-06-30'
+    notes:
+      - title: Fix for TCPMappings
+        body: "Fixed a bug which caused $productName$ to generate invalid Envoy configuration when two TCPMappings were configured with the same port, but different hosts."
+        type: bugfix
+        docs: topics/using/tcpmappings/
+  - version: 1.13.8
+    date: '2021-06-08'
+    notes:
+      - title: Fix Ambassador Cloud Service Details
+        body: "Fixed a bug that occasionally caused missing version information for a service in the Ambassador Service Catalog, especially in clusters with high pod churn."
+        type: bugfix
+        docs: tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
+        image: ../images/edge-stack-1.13.8-cloud-bugfix.png
+      - title: Improved Argo Rollouts Experience with Ambassador Cloud
+        body: "Ambassador Agent now reports the state of ArgoCD configurations and Deployments in order to provide proper configurations to the users while setting up the Argo Rollouts feature."
+        type: feature
+        docs: https://www.getambassador.io/docs/argo
+
+  - version: 1.13.7
+    date: '2021-06-03'
+    notes:
+      - title: JSON logging support
+        body: "An <code>AMBASSADOR_JSON_LOGGING</code> environment variable has been added. When set to <code>true</code> JSON format will be used for most of the control plane logs. Some (but few) logs from <code>gunicorn</code> and the Kubernetes <code>client-go</code> package will still be in text only format."
+        image: ../images/edge-stack-1.13.7-json-logging.png
+        docs: topics/running/running/#log-format
+        type: feature
+      - title: Consul resolver bugfix with TCPMappings
+        body: "The TCPMapping has the ability to specify a resolver, however the <code>ConsulResolver</code> did not work properly with it. It now utilizes the Consul Connect service discovery instead of falling back to attempting to register an arbitrary endpoint."
+        image: ../images/edge-stack-1.13.7-tcpmapping-consul.png
+        docs: topics/running/resolvers/#the-consul-resolver
+        type: bugfix
+      - title: Memory usage calculation improvements
+        body: "The internal memory usage calculation that $productName$ performs has been updated to exclude cache memory. This now matches how the kernel OOMKiller calculates memory and should avoid situations where Envoy updates are throttled unnecessarily."
+        image: ../images/edge-stack-1.13.7-memory.png
+        docs: topics/running/scaling/#inspecting-ambassador-performance
+        type: change
+  - version: 1.13.4
+    date: '2021-05-13'
+    notes:
+      - title: Envoy 1.15.5
+        body: $productName$ has been updated to Envoy 1.15.5, which addresses a high severity security vulnerability (CVE-2021-29492). $productName$ can now be configured to reject client requests that contain escaped slashes.
+        image: ../images/edge-stack-1.13.4.png
+        docs: topics/running/ambassador/#rejecting-client-requests-with-escaped-slashes
+        type: security

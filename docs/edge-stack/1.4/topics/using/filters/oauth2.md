@@ -111,7 +111,7 @@ General settings:
  - `accessTokenValidation`: How to verify the liveness and scope of Access Tokens issued by the identity provider.  Valid values are either `"auto"`, `"jwt"`, or `"userinfo"`.  Empty or unset is equivalent to `"auto"`.
    * `"jwt"`: Validates the Access Token as a JWT.
      + By default: It accepts the RS256, RS384, or RS512 signature algorithms, and validates the signature against the JWKS from OIDC Discovery.  It then validates the `exp`, `iat`, `nbf`, `iss` (with the Issuer from OIDC Discovery), and `scope` claims: if present, none of the scopes are required to be present.  This relies on the identity provider using non-encrypted signed JWTs as Access Tokens, and configuring the signing appropriately
-     + This behavior can be modified by delegating to [`JWT` Filter](#filter-type-jwt) with `accessTokenJWTFilter`. The arguments are the same as the arguments when referring to a JWT Filter from a FilterPolicy.
+     + This behavior can be modified by delegating to [`JWT` Filter](../jwt/) with `accessTokenJWTFilter`. The arguments are the same as the arguments when referring to a JWT Filter from a FilterPolicy.
    * `"userinfo"`: Validates the access token by polling the OIDC UserInfo Endpoint. This means that the Ambassador Edge Stack must initiate an HTTP request to the identity provider for each authorized request to a protected resource.  This performs poorly, but functions properly with a wider range of identity providers.  It is not valid to set `accessTokenJWTFilter` if `accessTokenValidation: userinfo`.
    * `"auto"` attempts to do `"jwt"` validation if `accessTokenJWTFilter` is set or if the Access Token parses as a JWT and the signature is valid, and otherwise falls back to `"userinfo"` validation.
 
@@ -130,8 +130,8 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
 
     * If you provide more than one `protectedOrigin`, all are assumed to share the same authentication system, so that logging into one origin logs you into all origins. To have multiple independent origins, use multiple `Filter`s.
 
-  - `clientURL` (**DEPRECATED**): If present, setting `clientURL` is exactly the same as setting 
-     
+  - `clientURL` (**DEPRECATED**): If present, setting `clientURL` is exactly the same as setting
+
     ```
     protectedOrigins:
     - origin: clientURL-value
@@ -139,13 +139,13 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
 
     `clientURL` will be removed in a future release; you should switch to using `protectedOrigins` instead.
 
-* By default, any cookies set by the Ambassador Edge Stack will be set to expire when the session expires naturally. Use the `useSessionCookies` setting to specify expiration on session cookies instead; the cookies will be deleted when the user closes their web browser.  
+* By default, any cookies set by the Ambassador Edge Stack will be set to expire when the session expires naturally. Use the `useSessionCookies` setting to specify expiration on session cookies instead; the cookies will be deleted when the user closes their web browser.
 		* However, this can prematurely delete cookies if the user closes their web browser. Conversely, it also means that cookies can persist for longer than normal if the user does not close their browser.
 		* Any prematurely deleted cookies may or may not affect user-perceived behavior, depending on
-		   the behavior of the identity provider.  
+		   the behavior of the identity provider.
 		* Any cookies persisting longer will not affect behavior of the system; the Ambassador Edge
 		   Stack validates whether the session is expired when considering the
-		   cookie.  
+		   cookie.
 	* If `useSessionCookies` is non-`null`, then by default it will have the cookies for all requests be session cookies or not  according to the `useSessionCookies.value` sub-argument.  Setting the `ifRequestHeader` sub-argument to use `value` for requests that have (and `!value` for requests that don't have) the HTTP header field `name` (case-insensitive) either set to (if `negate: false`) or not set to (if `negate: true`)
     + a non-empty string if neither `value` nor `valueRegex` are set
     + the exact string `value` (case-sensitive) (if `value` is set)

@@ -116,7 +116,7 @@
         - title: Developer Portal
           link: /topics/using/dev-portal
         - title: Edge Policy Console
-          items: 
+          items:
           - title: Introduction to Edge Policy Console
             link: /topics/using/edge-policy-console
           - title: Rate Limit Speedometers
@@ -278,6 +278,6 @@
 - title: Community
   items:
     - title: Contributor's Guide
-      link: https://github.com/datawire/ambassador/blob/release/v1.8/DEVELOPING.md
+      link: https://github.com/emissary-ingress/emissary/blob/release/v1.8/DEVELOPING.md
     - title: CHANGELOG
-      link: https://github.com/datawire/ambassador/blob/release/v1.8/CHANGELOG.md
+      link: https://github.com/emissary-ingress/emissary/blob/release/v1.8/CHANGELOG.md

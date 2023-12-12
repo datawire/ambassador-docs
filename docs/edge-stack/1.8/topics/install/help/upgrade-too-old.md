@@ -6,4 +6,3 @@ The upgrader has failed to upgrade the cluster.
 
 * Try to edit the installation resource with `kubectl edit -n ambassador ambassadorinstallations ambassador`
   and remove the `installOSS`.
-

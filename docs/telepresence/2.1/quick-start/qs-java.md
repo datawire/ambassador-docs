@@ -3,7 +3,7 @@ description: "Install Telepresence and learn to use it to intercept services run
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import QSTabs from './qs-tabs'
+import Platform from '@src/components/Platform';
 import QSCards from './qs-cards'
 
 <div class="docs-language-toc">
@@ -34,7 +34,12 @@ import QSCards from './qs-cards'
 </div>
 
 ## Prerequisites
-You’ll need [`kubectl` installed](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [setup](https://kubernetes.io/docs/tasks/tools/install-kubectl/#verifying-kubectl-configuration) to use a Kubernetes cluster, preferably an empty test cluster.
+You’ll need [`kubectl` installed](https://kubernetes.io/docs/tasks/tools/#kubectl)
+and set up
+([Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#verify-kubectl-configuration) /
+ [macOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#verify-kubectl-configuration) /
+ [Windows](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#verify-kubectl-configuration))
+to use a Kubernetes cluster, preferably an empty test cluster.
 
 <Alert severity="info">
     <strong>Need a cluster?</strong> We provide free demo clusters preconfigured to follow this quick start. <a href="../demo-node/">Switch over to that version of the guide here</a>.
@@ -45,7 +50,30 @@ If you have used Telepresence previously, please first reset your Telepresence d
 
 ## 1. Install the Telepresence CLI
 
-<QSTabs/>
+<Platform.TabGroup>
+<Platform.MacOSTab>
+
+```shell
+# 1. Download the latest binary (~60 MB):
+sudo curl -fL https://app.getambassador.io/download/tel2/darwin/amd64/$dlVersion$/telepresence -o /usr/local/bin/telepresence
+
+# 2. Make the binary executable:
+sudo chmod a+x /usr/local/bin/telepresence
+```
+
+</Platform.MacOSTab>
+<Platform.GNULinuxTab>
+
+```shell
+# 1. Download the latest binary (~50 MB):
+sudo curl -fL https://app.getambassador.io/download/tel2/linux/amd64/$dlVersion$/telepresence -o /usr/local/bin/telepresence
+
+# 2. Make the binary executable:
+sudo chmod a+x /usr/local/bin/telepresence
+```
+
+</Platform.GNULinuxTab>
+</Platform.TabGroup>
 
 ## 2. Test Telepresence
 
@@ -228,7 +256,7 @@ We’ve now set up a local development environment for the DataProcessingService
 
 <Alert severity="success">
   We’ve just shown how we can edit code locally, and <strong>immediately</strong> see these changes in the cluster.
-  <br / >
+  <br />
   Normally, this process would require a container build, push to registry, and deploy.
   <br />
   With Telepresence, these changes happen instantly.
@@ -262,26 +290,26 @@ Create preview URLs to do selective intercepts, meaning only traffic coming from
 
       To create a preview URL, telepresence needs to know how cluster
       ingress works for this service.  Please Select the ingress to use.
-      
+
       1/4: What's your ingress' layer 3 (IP) address?
            You may use an IP address or a DNS name (this is usually a
            "service.namespace" DNS name).
-      
+
              [no default]: verylargejavaservice.default
-      
+
       2/4: What's your ingress' layer 4 address (TCP port number)?
-      
+
              [no default]: 8080
-      
+
       3/4: Does that TCP port on your ingress use TLS (as opposed to cleartext)?
-      
+
              [default: n]:
-      
+
       4/4: If required by your ingress, specify a different layer 5 hostname
            (TLS-SNI, HTTP "Host" header) to access this service.
-      
+
              [default: verylargejavaservice.default]:
-      
+
       Using Deployment dataprocessingservice
       intercepted
           Intercept name  : dataprocessingservice

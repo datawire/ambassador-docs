@@ -65,7 +65,7 @@ acmeProvider:
 * If the authority is not supplied, the Let’s Encrypt production environment is assumed.
 
 * In general, `email-of-registrant` is mandatory when using ACME: it should be
-a valid email address that will reach someone responsible for certificate 
+a valid email address that will reach someone responsible for certificate
 management.
 
 * ACME stores certificates in Kubernetes secrets. The name of the secret can be
@@ -169,11 +169,11 @@ It's important to realize that Envoy manages the `X-Forwarded-Proto` header such
 In the definitions below, "L4 LB" refers to a layer 4 load balancer, while "L7
 LB" refers to a layer 7 load balancer.
 
-* [HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext)
-* [HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080](#https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080)
+* [HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext](#https-only-tls-terminated-at-productname-not-redirecting-cleartext)
+* [HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080](#https-only-tls-terminated-at-productname-redirecting-cleartext-from-port-8080)
 * [HTTP-only](#http-only)
 * [L4 LB, HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext](#l4-lb-https-only-tls-terminated-at-ambassador-not-redirecting-cleartext)
-* [L4 LB, HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080](#l4-lb-https-only-tls-terminated-at-ambassador-redirecting-cleartext-from-port-8080)
+* [L4 LB, HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080](#l4-lb-https-only-tls-terminated-at-productname-redirecting-cleartext-from-port-8080)
 * [L4 LB, HTTP-only](#l4-lb-http-only)
 * [L4 LB, TLS terminated at LB, LB speaks cleartext to Ambassador](#l4-lb-tls-terminated-at-lb-lb-speaks-cleartext-to-ambassador)
 * [L4 LB, TLS terminated at LB, LB speaks TLS to Ambassador](#l4-lb-tls-terminated-at-lb-lb-speaks-tls-to-ambassador)
@@ -278,13 +278,13 @@ This example is the same for an L4 LB, or without a load balancer at all.
     requestPolicy:
       insecure:
         action: Route
-  ```  
+  ```
 
   In this case, the Host resource explicitly requests no ACME handling and no TLS, then states that insecure requests must be routed instead of redirected.
 
 ### L4 LB, HTTPS-only, TLS terminated at Ambassador, not redirecting cleartext
 
-  Configure this exactly like [case 1](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
+  Configure this exactly like [case 1](#https-only-tls-terminated-at-productname-not-redirecting-cleartext). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
 
 ### L4 LB, HTTPS-only, TLS terminated at Ambassador, redirecting cleartext from port 8080
 
@@ -300,7 +300,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 ### L4 LB, TLS terminated at LB, LB speaks TLS to Ambassador
 
-  Configure this exactly like [case 1](#https-only-tls-terminated-at-ambassador-not-redirecting-cleartext). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
+  Configure this exactly like [case 1](#https-only-tls-terminated-at-productname-not-redirecting-cleartext). Leave `xff_num_trusted_hops` in the `ambassador` module at its default of 0.
 
   Note that since Ambassador _is_ terminating TLS, managing Ambassador's TLS certificate will be important.
 
@@ -318,7 +318,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 ### L7 LB
 
-  In general, L7 load balancers will be expected to provide a correct `X-Forwarded-Proto` header, and will require `xff_num_trusted_hops` set to the depth of the L7 LB stack in front of Ambassador. 
+  In general, L7 load balancers will be expected to provide a correct `X-Forwarded-Proto` header, and will require `xff_num_trusted_hops` set to the depth of the L7 LB stack in front of Ambassador.
 
   - `client -> L7 LB -> Ambassador` would require `xff_num_trusted_hops: 1`
   - `client -> L7 LB -> L7 LB -> Ambassador` would require `xff_num_trusted_hops: 2`
@@ -352,4 +352,4 @@ The Host CRD defines how Ambassador will be visible to the outside world. A mini
 
 ### CRD Specification
 
-The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/datawire/ambassador/blob/master/api/getambassador.io/v2/Host.proto).
+The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v2/Host.proto).

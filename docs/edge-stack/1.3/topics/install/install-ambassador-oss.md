@@ -38,19 +38,19 @@ kubectl create clusterrolebinding my-cluster-admin-binding --clusterrole=cluster
 Start by installing CRDs required by Ambassador:
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-crds.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-crds.yaml
 ```
 
 If RBAC is enabled:
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml
 ```
 
 Without RBAC, you can use:
 
 ```shell
-kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-no-rbac.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-no-rbac.yaml
 ```
 
 We recommend downloading the YAML files and exploring the content. You will see that an `ambassador-admin` NodePort Service is created (which provides an Ambassador ODD Diagnostic web UI), along with an ambassador ClusterRole, ServiceAccount, and ClusterRoleBinding (if RBAC is enabled). An Ambassador Deployment is also created.
@@ -132,9 +132,9 @@ The versatile HTTPS configuration of Ambassador lets it support various HTTPS us
 ## Helm
 
 In the following instructions, we'll install the open-source Ambassador API
-Gateway with Helm. 
+Gateway with Helm.
 
-Although the [Helm chart](https://github.com/datawire/ambassador/tree/master/charts/ambassador) installs
+Although the [Helm chart](https://github.com/emissary-ingress/emissary/tree/release/v1.13/charts/ambassador) installs
 the Ambassador Edge Stack by default, the Ambassador API Gateway is still
 available for installation for both Helm 2 and Helm 3.
 

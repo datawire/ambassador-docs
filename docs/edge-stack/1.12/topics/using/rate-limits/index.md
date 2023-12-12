@@ -2,8 +2,8 @@
 
 Rate limiting in Ambassador is composed of two parts:
 
-* `RateLimitService` that tells Ambassador what service to use for rate 
-  limiting. (The Ambassador Edge Stack provides a `RateLimitService` 
+* `RateLimitService` that tells Ambassador what service to use for rate
+  limiting. (The Ambassador Edge Stack provides a `RateLimitService`
   implementation for you).
 * Labels that get attached to requests; a label is basic metadata that
   is used by the `RateLimitService` to decide which limits to apply to
@@ -104,7 +104,7 @@ There are 5 types of label specifiers in Ambassador:
 | 5             | `{ "generic_key": "my_val" }`          | Sets the label "`generic_key`=«`my_val`»"                                                                                               | `{ "generic_key": { "descriptor_value": "my_val" } }`                          |
 | 5 (shorthand) | `"my_val"`                             | Shorthand for `{ "generic_key": "my_val" }`                                                                                             |                                                                                |
 
-[`envoy.api.v2.route.RateLimit.Action`]: https://github.com/datawire/ambassador/blob/$branch$/api/envoy/api/v2/route/route_components.proto#L1328-L1439
+[`envoy.api.v2.route.RateLimit.Action`]: https://github.com/emissary-ingress/emissary/blob/$branch$/api/envoy/api/v2/route/route_components.proto#L1328-L1439
 
 1. The Envoy source cluster name is the name of the Envoy listener
    cluster that the request name in on.
@@ -125,13 +125,13 @@ There are 5 types of label specifiers in Ambassador:
 
 ## Rate limiting requests based on their labels
 
-This is determined by your `RateLimitService` implementation. 
+This is determined by your `RateLimitService` implementation.
 
-The Ambassador Edge Stack provides a `RateLimitService` implementation that is 
+The Ambassador Edge Stack provides a `RateLimitService` implementation that is
 configured by a `RateLimit` custom resource.
 
-See the [AES RateLimit Reference](./rate-limits) for information on how 
+See the [AES RateLimit Reference](./rate-limits) for information on how
 to configure `RateLimit`s in Ambassador Edge Stack.
 
-See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an 
+See the [Basic Rate Limiting](../../../howtos/rate-limiting-tutorial) for an
 example `RateLimitService` implementation for Ambassador OSS.

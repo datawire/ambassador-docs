@@ -24,7 +24,7 @@ spec:
 | `ambassador_id` | Use only if you are using multiple ambassadors in the same cluster. [Learn more](#ambassador_id). | `ambassador_id: "<ambassador_id>"` |
 | `cluster_idle_timeout_ms` | Set the default upstream-connection idle timeout. If not set (the default), upstream connections will never be closed due to idling. | `cluster_idle_timeout_ms: 30000` |
 | `default_label_domain  and default_labels` | Set a default domain and request labels to every request for use by rate limiting. For more on how to use these, see the Rate Limit reference. |  |
-| `defaults` | The `defaults` element allows setting system-wide defaults that will be applied to various Ambassador resources. See [using defaults](../../using/defaults) for more information. | None | 
+| `defaults` | The `defaults` element allows setting system-wide defaults that will be applied to various Ambassador resources. See [using defaults](../../using/defaults) for more information. | None |
 | `enable_grpc_http11_bridge` | Should we enable the gRPC-http11 bridge? | `enable_grpc_http11_bridge: false `|
 | `enable_grpc_web` | Should we enable the grpc-Web protocol? | `enable_grpc_web: false` |
 | `enable_http10` | Should we enable http/1.0 protocol? | `enable_http10: false` |
@@ -50,7 +50,7 @@ spec:
 
 ### Using `defaults`
 
-The `defaults` element is a dictionary of default values that will be applied to various 
+The `defaults` element is a dictionary of default values that will be applied to various
 Ambassador resources. See [using defaults](../../using/defaults) for more information.
 
 ### Additional `config` Field Examples

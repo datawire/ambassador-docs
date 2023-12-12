@@ -1,26 +1,18 @@
-- title: Home
-  link: /docs/
-
-- title: Products
-  collapsable: false
-  items:
-    - title: Kubernetes
-      items: 
-        - title: Quick start
-          link: /quick-start
-        - title: Core concepts
-          items:
-            - title: "Kubernetes basics: Kubernetes for developers"
-              link: /concepts/basics
-            - title: Using K8s for app development
-              link: /concepts/appdev
-            - title: How can Kubernetes help me code and ship faster?
-              link: /concepts/faster
-            - title: Kubernetes nuts and bolts - video
-              link: /concepts/nutsandbolts
-        - title: How do I...
-          items:
-            - title: Get code running on my cluster
-              link: /howtos/codetocluster
-            - title: Debug issues in Kubernetes
-              link: /howtos/debug
+ - title: Quick start
+   link: /quick-start
+ - title: Core concepts
+   items:
+     - title: "Kubernetes basics: Kubernetes for developers"
+       link: /concepts/basics
+     - title: Using K8s for app development
+       link: /concepts/appdev
+     - title: How can Kubernetes help me code and ship faster?
+       link: /concepts/faster
+     - title: Kubernetes nuts and bolts - video
+       link: /concepts/nutsandbolts
+ - title: How do I...
+   items:
+     - title: Get code running on my cluster
+       link: /howtos/codetocluster
+     - title: Debug issues in Kubernetes
+       link: /howtos/debug

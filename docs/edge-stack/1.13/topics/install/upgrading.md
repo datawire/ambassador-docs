@@ -11,7 +11,7 @@ If you installed using the Operator, then you'll need to [use the Operator to pe
 To verify whether the Operator was used to install Ambassador Edge Stack, run the following command
 to see if it returns resources:
 ```
-$ kubectl get deployment -n ambassador -l 'app.kubernetes.io/name=ambassador,app.kubernetes.io/managed-by in (amb-oper,amb-oper-manifest,amb-oper-helm,amb-oper-azure)' 
+$ kubectl get deployment -n ambassador -l 'app.kubernetes.io/name=ambassador,app.kubernetes.io/managed-by in (amb-oper,amb-oper-manifest,amb-oper-helm,amb-oper-azure)'
 NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 ambassador         1/1     1            1           ...
 ```
@@ -27,7 +27,7 @@ NAME               READY   UP-TO-DATE   AVAILABLE   AGE
 ambassador         1/1     1            1           ...
 ```
 
-## Installed via YAML manifests?
+## Installed via YAML Manifests?
 
 Finally, if you installed using YAML manifests, simply run the commands in the following section. To verify whether manifests were used to install Ambassador Edge Stack, run the following command to see if it returns resources:
 ```
@@ -39,14 +39,14 @@ ambassador         1/1     1            1           ...
 If none of the commands above return resources, you probably have an old installation and you should follow
 the instructions for [upgrading to Ambassador Edge Stack](../upgrade-to-edge-stack/).
 
-### Upgrading an installation with YAML manifests
+### Upgrading an Installation with YAML Manifests
 
 If you previously installed Edge Stack using YAML manifests, you can upgrade with
 these commands:
 
 ```
-kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml
-kubectl apply -f https://www.getambassador.io/yaml/aes.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml
+kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml
 ```
 
 This will trigger a rolling upgrade of Ambassador Edge Stack.

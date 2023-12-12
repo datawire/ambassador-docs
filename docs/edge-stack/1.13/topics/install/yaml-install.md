@@ -1,7 +1,7 @@
 ---
     description: In this guide, we'll walk through the process of deploying Ambassador Edge Stack in Kubernetes for ingress routing.
 ---
-# Install manually
+# Manual Installation Guide
 
 In this guide, we'll walk you through installing, configuring, and customizing
 the Ambassador Edge Stack in your Kubernetes cluster.
@@ -10,7 +10,7 @@ The manual install process does require more user configuration than the [quick
 start method](../../../tutorials/getting-started/), but it does allow you to control the
 aspects of your base Edge Stack installation.
 
-## Before you begin
+## Before You Begin
 
 The Ambassador Edge Stack is designed to run in Kubernetes for production. The most essential requirements are:
 
@@ -24,9 +24,9 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
 1. In your terminal, run the following command:
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml && \
     kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \
-    kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml && \
     kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
     ```
 
@@ -70,7 +70,7 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
   * `edgectl login -n <namespace> <AES_host>` or
   * `https://{{AES_URL}}/edge_stack/admin`
 
-## Configure TLS termination and automatic HTTPS
+## Configure TLS Termination and Automatic HTTPS
 
 **The Ambassador Edge Stack enables TLS termination by default using a self-signed certificate. See the [Host CRD](../../../topics/running/host-crd) for more information about disabling TLS.** If you have the ability to update your DNS, Ambassador can automatically configure a valid TLS certificate for you, eliminating the TLS warning. If you do not have the ability to update your DNS, skip to the next section, "Create a Mapping."
 
@@ -83,7 +83,7 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
    * Review the Terms of Service and check the box that you agree to the Terms of Service.
    * Enter the email address to be associated with your TLS certificate.
    * Click the **Save** button.
-  
+
   You'll see the newly created `Host` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [Host CRD](../../../topics/running/host-crd).
 
 3. Once the Host is ready, navigate to `https://<hostname>` in your browser.
@@ -92,84 +92,51 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
 
 ## Create a Mapping
 
-In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of Ambassador Edge Stack. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
+In a typical configuration workflow, Custom Resource Definitions (CRDs) are used to define the intended behavior of $productName$. In this example, we'll deploy a sample service and create a `Mapping` resource. Mappings allow you to associate parts of your domain with different URLs, IP addresses, or prefixes.
 
-1. We'll start by deploying the `quote` service. Save the below configuration into a file named `quote.yaml`. This is a basic configuration that tells Kubernetes to deploy the `quote` container and create a Kubernetes `service` that points to the `quote` container.
+1. First, apply the YAML for the [“Quote of the Moment" service](https://github.com/datawire/quote).
 
-   ```yaml
-   ---
-   apiVersion: v1
-   kind: Service
-   metadata:
-     name: quote
-     namespace: ambassador
-   spec:
-     ports:
-     - name: http
-       port: 80
-       targetPort: 8080
-     selector:
-       app: quote
-   ---
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-     name: quote
-     namespace: ambassador
-   spec:
-     replicas: 1
-     selector:
-       matchLabels:
-         app: quote
-     strategy:
-       type: RollingUpdate
-     template:
-       metadata:
-         labels:
-           app: quote
-       spec:
-         containers:
-         - name: backend
-           image: docker.io/datawire/quote:0.2.7
-           ports:
-           - name: http
-             containerPort: 8080
+  ```
+  kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/quickstart/qotm.yaml
+  ```
+
+2. Copy the configuration below and save it to a file called `quote-backend.yaml` so that you can create a Mapping on your cluster. This Mapping tells $productName$ to route all traffic inbound to the `/backend/` path to the `quote` Service.
+
+  ```yaml
+  ---
+  apiVersion: getambassador.io/v2
+  kind: Mapping
+  metadata:
+    name: quote-backend
+  spec:
+    prefix: /backend/
+    service: quote
+
+3. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
+
+4. Grab the IP of your $productName$
+
+   ```shell
+   export AMBASSADOR_LB_ENDPOINT=$(kubectl get svc ambassador -n ambassador \
+  -o "go-template={{range .status.loadBalancer.ingress}}{{or .ip .hostname}}{{end}}")
    ```
 
-2. Deploy the `quote` service to the cluster by typing the command `kubectl apply -f quote.yaml`.
-
-3. Now, create a `Mapping` configuration that tells Ambassador to route all traffic from `/backend/` to the `quote` service. Copy the YAML and save it to a file called `quote-backend.yaml`.
-
-   ```yaml
-   ---
-   apiVersion: getambassador.io/v2
-   kind: Mapping
-   metadata:
-     name: quote-backend
-     namespace: ambassador
-   spec:
-     prefix: /backend/
-     service: quote
-   ```
-
-4. Apply the configuration to the cluster by typing the command `kubectl apply -f quote-backend.yaml`.
-
-5. Test the configuration by typing `curl -Lk https://<hostname>/backend/` or `curl -Lk https://<IP address>/backend/`. You should see something similar to the following:
+5. Test the configuration by typing `curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/` or `curl -Lk https://<hostname>/backend/`. You should see something similar to the following:
 
    ```
-   (⎈ |rdl-1:default)$ curl -Lk https://aes.ri.k36.net/backend/
+   $ curl -Lk https://$AMBASSADOR_LB_ENDPOINT/backend/
    {
     "server": "idle-cranberry-8tbb6iks",
     "quote": "Non-locality is the driver of truth. By summoning, we vibrate.",
     "time": "2019-12-11T20:10:16.525471212Z"
    }
-   ```
 
-## View your Service metadata using Service Catalog
+
+## View your Service Metadata using Service Catalog
 
 [Set up Service Catalog](../../../tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud) to view all of your service metadata in Ambassador Cloud.
 
-## A single source of configuration
+## A Single Source of Configuration
 
 In the Ambassador Edge Stack, Kubernetes serves as the single source of
 configuration. Changes made on the command line (via `kubectl`) are reflected in
@@ -189,7 +156,7 @@ just created on the command line.
    aes.ri.k36.net     aes.ri.k36.net     Ready                                    158m
    ```
 
-## Developer onboarding
+## Developer Onboarding
 
 The Quote service we just deployed publishes its API as a Swagger document. This API is automatically detected by the Ambassador Edge Stack and published.
 
@@ -200,6 +167,6 @@ The Quote service we just deployed publishes its API as a Swagger document. This
    `/`). This is a fully customizable portal that you can share with third
    parties who need information about your APIs.
 
-## What’s next?
+## What’s Next?
 
 The Ambassador Edge Stack has a comprehensive range of [features](/features/) to support the requirements of any edge microservice.

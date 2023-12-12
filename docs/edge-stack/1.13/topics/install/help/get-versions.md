@@ -1,6 +1,6 @@
 # Edgectl Install: Can't communicate with the Kubernetes cluster
 
-Installation of Ambassador Edge Stack (AES) requires a Kubernetes cluster. The installer was unable to access your Kubernetes cluster using `kubectl`.
+Installation of $productName$ (AES) requires a Kubernetes cluster. The installer was unable to access your Kubernetes cluster using `kubectl`.
 
 ## Details
 

@@ -4,7 +4,7 @@ Ambassador Edge Stack and Istio: Edge Proxy and Service Mesh together in one. Th
 
 Ambassador Edge Stack and Istio can be deployed together on Kubernetes. In this configuration, incoming traffic from outside the cluster is first routed through the Ambassador Edge Stack, which then routes the traffic to Istio-powered services. The Ambassador Edge Stack handles authentication, edge routing, TLS termination, and other traditional edge functions.
 
-This allows the operator to have the best of both worlds: a high performance, modern edge service (Ambassador Edge Stack) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/docs/tasks/traffic-management/ingress/#configuring-ingress-using-an-istio-gateway) abstraction, the Ambassador Edge Stack still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
+This allows the operator to have the best of both worlds: a high performance, modern edge service (Ambassador Edge Stack) combined with a state-of-the-art service mesh (Istio). While Istio has introduced a [Gateway](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/#configuring-ingress-using-an-istio-gateway) abstraction, the Ambassador Edge Stack still has a much broader feature set for edge routing than Istio. For more on this topic, see our blog post on [API Gateway vs Service Mesh](https://blog.getambassador.io/api-gateway-vs-service-mesh-104c01fa4784).
 
 ## Getting Ambassador Edge Stack Working With Istio
 
@@ -23,9 +23,9 @@ By default, the Bookinfo application uses the Istio ingress. To use the Ambassad
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
-metadata: 
+metadata:
   name: httpbin
-spec:     
+spec:
   prefix: /httpbin/
   service: httpbin.org
   host_rewrite: httpbin.org
@@ -89,9 +89,9 @@ If you're seeing a similar response, then everything is working great!
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
-metadata: 
+metadata:
   name: productpage
-spec:     
+spec:
   prefix: /productpage/
   rewrite: /productpage
   service: productpage:9080
@@ -128,7 +128,7 @@ Newer versions of Istio support Kubernetes initializers to [automatically inject
 
 ## Istio Mutual TLS
 
-Istio versions prior to 1.5 store its TLS certificates as Kubernetes secrets by default, so accessing them is a matter of YAML configuration changes. Istio 1.5 changes how secrets are handled; please contact us on [Slack](https://a8r.io/Slack) for more details.
+Istio versions prior to 1.5 store its TLS certificates as Kubernetes secrets by default, so accessing them is a matter of YAML configuration changes. Istio 1.5 changes how secrets are handled; please contact us on [Slack](http://a8r.io/slack) for more details.
 
 1. Load Istio's TLS certificates
 
@@ -230,10 +230,10 @@ spec:
 
 Istio also provides a Prometheus service that is an open-source monitoring and alerting system which is supported by the Ambassador Edge Stack as well. It is possible to integrate the Ambassador Edge Stack into Istio's Prometheus to have all statistics and monitoring in a single place.
 
-First, we need to change our Ambassador Edge Stack Deployment to use the [Prometheus StatsD Exporter](https://github.com/prometheus/statsd_exporter) as its sidecar. Do this by applying the [ambassador-rbac-prometheus.yaml](../../../../yaml/ambassador/ambassador-rbac-prometheus.yaml):
+First, we need to change our Ambassador Edge Stack Deployment to use the [Prometheus StatsD Exporter](https://github.com/prometheus/statsd_exporter) as its sidecar. Do this by applying the [ambassador-rbac-prometheus.yaml](https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac-prometheus.yaml):
 
 ```sh
-$ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac-prometheus.yaml
+$ kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac-prometheus.yaml
 ```
 
 This YAML is changing the StatsD container definition on our Deployment to use the Prometheus StatsD Exporter as a sidecar:
@@ -266,7 +266,7 @@ spec:
 Now we need to add a `scrape` configuration to Istio's Prometheus so that it can pool data from our Ambassador Edge Stack. This is done by applying the new ConfigMap:
 
 ```sh
-$ kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-istio-configmap.yaml
+$ kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-istio-configmap.yaml
 ```
 
 This ConfigMap YAML changes the `prometheus` ConfigMap that is on `istio-system` Namespace and adds the following:

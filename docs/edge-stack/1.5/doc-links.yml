@@ -8,7 +8,7 @@
       link: /tutorials/quickstart-demo
 - title: Install Ambassador Edge Stack
   link: /topics/install/
-  items: 
+  items:
   - title: Install with Helm
     link: /topics/install/helm
   - title: Upgrade to the Ambassador Edge Stack
@@ -29,10 +29,10 @@
     link: /topics/install/help/
 - title: Running and Using Ambassador
   collapsable: false
-  items:  
+  items:
     - title: Core Concepts
       link: /topics/concepts/
-      items: 
+      items:
         - title: Kubernetes Network Architecture
           link: /topics/concepts/kubernetes-network-architecture
         - title: "The Ambassador Operating Model: GitOps and Continuous Delivery"
@@ -45,12 +45,12 @@
           link: /topics/concepts/architecture
     - title: Using Ambassador
       link: /topics/using/
-      items: 
+      items:
         - title: The Mapping Resource
           link: /topics/using/intro-mappings
         - title: Mapping Configuration
           link: /topics/using/mappings
-          items: 
+          items:
             - title: Automatic Retries
               link: /topics/using/retries
             - title: Canary Releases
@@ -61,7 +61,7 @@
               link: /topics/using/cors
             - title: Headers
               link: /topics/using/headers/headers
-              items: 
+              items:
                 - title: Add Request Headers
                   link: /topics/using/headers/add_request_headers
                 - title: Remove Request Headers
@@ -97,7 +97,7 @@
             - title: Traffic Shadowing
               link: /topics/using/shadowing
         - title: Filters and Authentication
-          items: 
+          items:
             - title: Filters and Filter Policies
               link: /topics/using/filters/
             - title: OAuth2 Filter
@@ -134,7 +134,7 @@
               link: /topics/using/project-customization
     - title: Running Ambassador in Production
       link: /topics/running/
-      items: 
+      items:
         - title: The Ambassador Module
           link: /topics/running/ambassador
         - title: Deploying Ambassador
@@ -192,7 +192,7 @@
           link: /topics/running/debugging
 - title: HOWTO Guides
   link: /howtos
-  items: 
+  items:
     - title: Authentication
       items:
         - title: Basic Authentication
@@ -262,6 +262,6 @@
 - title: Community
   items:
     - title: Contributor's Guide
-      link: https://github.com/datawire/ambassador/blob/release/v1.5/DEVELOPING.md
+      link: https://github.com/emissary-ingress/emissary/blob/release/v1.5/DEVELOPING.md
     - title: CHANGELOG
-      link: https://github.com/datawire/ambassador/blob/release/v1.5/CHANGELOG.md
+      link: https://github.com/emissary-ingress/emissary/blob/release/v1.5/CHANGELOG.md

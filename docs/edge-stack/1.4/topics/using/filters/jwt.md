@@ -37,7 +37,7 @@ spec:
     injectRequestHeaders:           # optional; default is []
     - name:   "header-name-string"    # required
       value:  "go-template-string"    # required
-       
+
     errorResponse:                  # optional
       contentType: "string"         # deprecated; use 'headers' instead
       realm: "string"               # optional; default is "{{.metadata.name}}.{{.metadata.namespace}}"

@@ -1,0 +1,24 @@
+- title: Quick start
+  link: getting-started
+- title: Run with Edge Stack
+  items:
+     - title: What is Edge Stack?
+       link: /gitops-continuous-delivery
+     - title: The Kubernetes network architecture
+       link: /kubernetes-network-architecture
+     - title: Microservices API gateways
+       link: /microservices-api-gateways
+     - title: Edge Stack architecture
+       link: /architecture     
+- title: Edge Stack operations overview
+  items:
+     - title: Installation
+       link: /install-edge-stack
+     - title: Connecting to Ambassador Cloud
+       link: /connect-edge-stack-ambassador-cloud
+     - title: Routing and communication
+       link: /routing-and-communication
+     - title: Rate limiting overview
+       link: /rate-limiting-overview
+- title: Edge Stack advanced user guide
+  link: ../../edge-stack

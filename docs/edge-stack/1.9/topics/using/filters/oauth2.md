@@ -365,7 +365,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
        non-encrypted signed JWTs as Access Tokens, and configuring the
        signing appropriately
      + This behavior can be modified by delegating to [`JWT`
-       Filter](#filter-type-jwt) with `accessTokenJWTFilter`:
+       Filter](../jwt/) with `accessTokenJWTFilter`:
        - `name` and `namespace` are used to identify which JWT Filter
          to use.  It is an error to point at a Filter that is not a
          JWT filter.

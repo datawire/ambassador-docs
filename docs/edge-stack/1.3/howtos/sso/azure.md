@@ -13,7 +13,7 @@ To use Azure as your IdP, you will first need to register an OAuth application w
 4. Click on `Authentication` in the left sidebar.
 
       - Under `Redirect URIs` at the top, add a `Redirect URI` with the type `Web` and set it to `https://{{AMBASSADOR_URL}}/.ambassador/oauth2/redirection-endpoint`
-        
+
         **Note:** Azure AD requires the redirect endpoint to handle TLS
       - Under `Advanced settings`, make sure the application is issuing `Access tokens` by checking next to the box that says `Access tokens`
       - Under `Supported account types` select whichever option fits your use case
@@ -34,7 +34,7 @@ After configuring an OAuth application in Azure AD, configuring Ambassador Edge 
     spec:
       OAuth2:
         # Azure AD openid-configuration endpoint can be found at https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
-        authorizationURL: https://login.microsoftonline.com/{{TENANT_ID}}/v2.0 
+        authorizationURL: https://login.microsoftonline.com/{{TENANT_ID}}/v2.0
         # The clientURL is the scheme and Host of your Ambassador endpoint
         clientURL: https://{{AMBASSADOR_URL}}
         # Client ID from step 3 above
@@ -54,7 +54,7 @@ After configuring an OAuth application in Azure AD, configuring Ambassador Edge 
       rules:
           # Requires authentication on requests from any hostname
         - host: "*"
-          # Tells Ambassador Edge Stack to apply the Filter only on request to the quote /backend/get-quote/ endpoint 
+          # Tells Ambassador Edge Stack to apply the Filter only on request to the quote /backend/get-quote/ endpoint
           path: /backend/get-quote/
           # Identifies which Filter to use for the path and hose above
           filters:

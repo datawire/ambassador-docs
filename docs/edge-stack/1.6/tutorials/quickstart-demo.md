@@ -88,7 +88,7 @@ In the Ambassador Edge Stack, Kubernetes serves as the single source of configur
 
 2. Type `kubectl get hosts` to see the `Host` resource that was created:
 
-```  
+```
   (⎈ |rdl-1:default)$ kubectl get hosts
  NAME                          HOSTNAME                      STATE   PHASE COMPLETED   PHASE PENDING   AGE
  blackbird-123.edgestack.me    blackbird-123.edgestack.me    Ready                                     158m

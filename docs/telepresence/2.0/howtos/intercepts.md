@@ -3,7 +3,7 @@ description: "Telepresence help you develop Kubernetes services locally without 
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import QSTabs from '../quick-start/qs-tabs'
+import Platform from '@src/components/Platform';
 
 # Intercept a Service
 
@@ -19,13 +19,36 @@ While preview URLs selectively proxy traffic to your laptop, you can also run an
 
 ## Creating an Intercept
 
-The following quick overview on creating an intercept assumes you have a deployment and service accessible publicly by an ingress controller and that you can run a copy of that service on your laptop.  
+The following quick overview on creating an intercept assumes you have a deployment and service accessible publicly by an ingress controller and that you can run a copy of that service on your laptop.
 
 1. Install Telepresence if needed.
 
-<QSTabs/>
+   <Platform.TabGroup>
+   <Platform.MacOSTab>
 
-1. In your terminal run `telepresence login`. This logs you into the Ambassador Cloud, which will track your intercepts and let you share them with colleagues. 
+   ```shell
+   # 1. Download the latest binary (~60 MB):
+   sudo curl -fL https://app.getambassador.io/download/tel2/darwin/amd64/$dlVersion$/telepresence -o /usr/local/bin/telepresence
+
+   # 2. Make the binary executable:
+   sudo chmod a+x /usr/local/bin/telepresence
+   ```
+
+   </Platform.MacOSTab>
+   <Platform.GNULinuxTab>
+
+   ```shell
+   # 1. Download the latest binary (~50 MB):
+   sudo curl -fL https://app.getambassador.io/download/tel2/linux/amd64/$dlVersion$/telepresence -o /usr/local/bin/telepresence
+
+   # 2. Make the binary executable:
+   sudo chmod a+x /usr/local/bin/telepresence
+   ```
+
+   </Platform.GNULinuxTab>
+   </Platform.TabGroup>
+
+1. In your terminal run `telepresence login`. This logs you into the Ambassador Cloud, which will track your intercepts and let you share them with colleagues.
 
   <Alert severity="info">If you are logged in and close the dashboard browser tab, you can quickly reopen it by running <code>telepresence dashboard</code>.</Alert>
 
@@ -75,7 +98,7 @@ The following quick overview on creating an intercept assumes you have a deploym
 5. Open the preview URL in your browser. The page that loads will proxy requests to the intercepted service to your laptop. You will also see a banner at the bottom on the page informing that you are viewing a preview URL with your name and org name.
 
 6. Switch back in your browser to the Ambassador Cloud dashboard page and refresh it to see your preview URL listed. Click the box to expand out options where you can disable authentication or remove the preview.
-  
+
 7. Stop the intercept with the `leave` command and `quit` to stop the daemon.  Finally, use `uninstall --everything` to remove the Traffic Manager and Agents from your cluster.
 
    ```

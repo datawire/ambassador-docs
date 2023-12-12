@@ -1,8 +1,8 @@
-import { Component } from "react";
+import { Component } from 'react';
 
 export default class DetectOS extends Component {
   componentDidMount() {
-    var os = "other";
+    var os = 'other';
     if (/Mac(intosh|Intel|PPC|68K)/.test(window.navigator.platform)) {
       os = 'mac';
     } else if (/Win(dows|36|64|CE)/.test(window.navigator.platform)) {
@@ -11,9 +11,11 @@ export default class DetectOS extends Component {
       os = 'linux';
     }
 
-    document.querySelectorAll(`details.os-instructions[data-os="${os}"]`).forEach((el) => {
-      el.open = true;
-    })
+    document
+      .querySelectorAll(`details.os-instructions[data-os="${os}"]`)
+      .forEach((el) => {
+        el.open = true;
+      });
   }
 
   render() {

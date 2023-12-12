@@ -19,7 +19,7 @@ import Alert from '@material-ui/lab/Alert';
 
 </div>
 
-The core Edge Stack resource used to manage cluster ingress is the Mapping resource. 
+The core Edge Stack resource used to manage cluster ingress is the Mapping resource.
 
 **A Mapping resource routes a URL path (or prefix) to a service (either a Kubernetes service or other web service).**
 

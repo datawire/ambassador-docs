@@ -88,7 +88,7 @@ env:
 - name: AMBASSADOR_NAMESPACE
   valueFrom:
     fieldRef:
-      fieldPath: metadata.namespace 
+      fieldPath: metadata.namespace
 - name: AMBASSADOR_SINGLE_NAMESPACE
   value: "true"
 ```
@@ -208,7 +208,7 @@ The Ambassador Edge Stack uses some TCP ports in the range 8000-8499 internally,
 The Ambassador Edge Stack integrates Scout, a service that periodically checks with Datawire servers to advise of available updates. Scout also sends anonymized usage data and the Ambassador Edge Stack version. This information is important to us as we prioritize test coverage, bug fixes, and feature development. Note that the Ambassador Edge Stack will run regardless of the status of Scout (i.e., our uptime has zero impact on your uptime.)
 
 We do not recommend you disable Scout, since we use this mechanism to notify users of new releases (including critical fixes and security issues). This check can be disabled by setting the environment variable `SCOUT_DISABLE` to `1` in your Ambassador Edge Stack deployment.
-  
+
 Each Ambassador Edge Stack installation generates a unique cluster ID based on the UID of its Kubernetes namespace and its Ambassador Edge Stack ID: the resulting cluster ID is a UUID which cannot be used to reveal the namespace name nor Ambassador Edge Stack ID itself. Ambassador Edge Stack needs RBAC permission to get namespaces for this purpose, as shown in the default YAML files provided by Datawire; if not granted this permission it will generate a UUID based only on the Ambassador Edge Stack ID. To disable cluster ID generation entirely, set the environment variable `AMBASSADOR_CLUSTER_ID` to a UUID that will be used for the cluster ID.
 
 Unless disabled, the Ambassador Edge Stack will also report the following anonymized information back to Datawire:
@@ -267,16 +267,16 @@ Unless disabled, the Ambassador Edge Stack will also report the following anonym
 | `ratelimit_custom_domain` | bool | has the rate limiting domain been changed from 'ambassador'? |
 | `ratelimit_data_plane_proto` | bool | is rate limiting using the data plane proto? |
 | `readiness_probe` | bool | are readiness probes enabled? |
-| `request_4xx_count` | int | lower bound for how many requests have gotten a 4xx response | 
-| `request_5xx_count` | int | lower bound for how many requests have gotten a 5xx response | 
-| `request_bad_count` | int | lower bound for how many requests have failed (either 4xx or 5xx) | 
-| `request_elapsed` | float | seconds over which the request_ counts are valid | 
-| `request_hr_elapsed` | string | human-readable version of `request_elapsed` (e.g. "3 hours 35 minutes 20 seconds" | 
-| `request_ok_count` | int | lower bound for how many requests have succeeded (not a 4xx or 5xx) | 
-| `request_total_count` | int | lower bound for how many requests were handled in total | 
+| `request_4xx_count` | int | lower bound for how many requests have gotten a 4xx response |
+| `request_5xx_count` | int | lower bound for how many requests have gotten a 5xx response |
+| `request_bad_count` | int | lower bound for how many requests have failed (either 4xx or 5xx) |
+| `request_elapsed` | float | seconds over which the request_ counts are valid |
+| `request_hr_elapsed` | string | human-readable version of `request_elapsed` (e.g. "3 hours 35 minutes 20 seconds" |
+| `request_ok_count` | int | lower bound for how many requests have succeeded (not a 4xx or 5xx) |
+| `request_total_count` | int | lower bound for how many requests were handled in total |
 | `statsd` | bool | is StatsD enabled? |
 | `server_name` | bool | is the `server_name` response header overridden? |
-| `service_resource_total` | int | total count of service resources loaded from all discovery sources | 
+| `service_resource_total` | int | total count of service resources loaded from all discovery sources |
 | `tls_origination_count` | int | count of TLS origination contexts |
 | `tls_termination_count` | int | count of TLS termination contexts |
 | `tls_using_contexts` | bool | are new TLSContext resources in use? ? |
@@ -286,7 +286,7 @@ Unless disabled, the Ambassador Edge Stack will also report the following anonym
 | `use_proxy_proto` | bool | is the `PROXY` protocol in use? |
 | `use_remote_address` | bool | is Ambassador honoring remote addresses? |
 | `x_forwarded_proto_redirect` | bool | is Ambassador redirecting based on `X-Forwarded-Proto`? |
-| `xff_num_trusted_hops` | int | what is the count of trusted hops for `X-Forwarded-For`? | 
+| `xff_num_trusted_hops` | int | what is the count of trusted hops for `X-Forwarded-For`? |
 
 The `request_*` counts are always incremental: they contain only information about the last `request_elapsed` seconds. Additionally, they only provide a lower bound -- notably, if an Ambassador Edge Stack pod crashes or exits, no effort is made to ship out a final update, so it's very easy for counts to never be reported.
 

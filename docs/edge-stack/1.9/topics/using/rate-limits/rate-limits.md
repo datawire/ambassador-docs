@@ -108,7 +108,7 @@ There are 5 types of label specifiers in Ambassador:
 | 5             | `{ "generic_key": "my_val" }`          | Sets the label "`generic_key`=«`my_val`»"                                                                                               | `{ "generic_key": { "descriptor_value": "my_val" } }`                          |
 | 5 (shorthand) | `"my_val"`                             | Shorthand for `{ "generic_key": "my_val" }`                                                                                             |                                                                                |
 
-[`envoy.api.v2.route.RateLimit.Action`]: https://github.com/datawire/ambassador/blob/$branch$/api/envoy/api/v2/route/route_components.proto#L1328-L1439
+[`envoy.api.v2.route.RateLimit.Action`]: https://github.com/emissary-ingress/emissary/blob/$branch$/api/envoy/api/v2/route/route_components.proto#L1328-L1439
 
 1. The Envoy source cluster name is the name of the Envoy listener
    cluster that the request name in on.
@@ -255,7 +255,7 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
     * `.RateLimitResponse.OverallCode` → `int` : `1` for OK, `2` for
       OVER_LIMIT.
     * `.RateLimitResponse.Statuses` →
-      [`[]*RateLimitResponse_DescriptorStatus]`][`v2.RateLimitResponse_DescriptorStatus`]
+      [`[]*RateLimitResponse_DescriptorStatus]`]`v2.RateLimitResponse_DescriptorStatus`
       The itemized status codes for each limit that was selected for
       this request.
     * `.RetryAfter` → `time.Duration` the amount of time until all of
@@ -285,7 +285,7 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
        * `.RateLimitResponse.OverallCode` → `int` : `1` for OK, `2` for
          OVER_LIMIT.
        * `.RateLimitResponse.Statuses` →
-         [`[]*RateLimitResponse_DescriptorStatus]`][`v2.RateLimitResponse_DescriptorStatus`]
+         [`[]*RateLimitResponse_DescriptorStatus]`]`v2.RateLimitResponse_DescriptorStatus`
          The itemized status codes for each limit that was selected for
          this request.
        * `.RetryAfter` → `time.Duration` the amount of time until all of
@@ -304,7 +304,6 @@ and/or `lib/rltypes/rls.go:Config.Add()` -->
 [`JWT` Filter]: ../../filters/jwt
 [Go `text/template`]: https://golang.org/pkg/text/template/
 [Go `text/template` functions]: https://golang.org/pkg/text/template/#hdr-Functions
-[`v2.RateLimitResponse_DescriptorStatus`]: https://godoc.org/github.com/datawire/ambassador/pkg/api/envoy/service/ratelimit/v2#RateLimitResponse_DescriptorStatus
 [Sprig `hasKey`]: https://masterminds.github.io/sprig/dicts.html#haskey
 
 ## Examples

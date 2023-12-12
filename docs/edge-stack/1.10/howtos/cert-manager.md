@@ -18,7 +18,7 @@ changes and reload certificates upon renewal.
 
 ## Install Cert-Manager
 
-There are many different ways to [install cert-manager](https://docs.cert-manager.io/en/latest/getting-started/install.html). For simplicity, we will use Helm v3.
+There are many different ways to [install cert-manager](https://cert-manager.io/docs/installation/). For simplicity, we will use Helm v3.
 
 1. Create the cert-manager CRDs.
     ```shell
@@ -47,7 +47,7 @@ An `Issuer` or `ClusterIssuer` identifies which Certificate Authority cert-manag
 
 ### Certificate
 
-A [Certificate](https://cert-manager.readthedocs.io/en/latest/reference/certificates.html) is a namespaced resource that references an `Issuer` or `ClusterIssuer` for issuing certificates. `Certificate`s define the DNS name(s) a key and certificate should be issued for, as well as the secret to store those files (e.g. `ambassador-certs`). Configuration depends on which ACME [challenge](#challenge) you are using.
+A [Certificate](https://cert-manager.io/docs/concepts/certificate/) is a namespaced resource that references an `Issuer` or `ClusterIssuer` for issuing certificates. `Certificate`s define the DNS name(s) a key and certificate should be issued for, as well as the secret to store those files (e.g. `ambassador-certs`). Configuration depends on which ACME [challenge](#challenge) you are using.
 
 By duplicating issuers, certificates, and secrets one can support multiple domains with [SNI](../../topics/running/tls/sni).
 
@@ -57,13 +57,13 @@ cert-manager supports two kinds of ACME challenges that verify domain ownership 
 
 ### DNS-01 Challenge
 
-The DNS-01 challenge verifies domain ownership by proving you have control over its DNS records. Issuer configuration will depend on your [DNS provider](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/index.html#supported-dns01-providers). This example uses [AWS Route53](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/route53.html).
+The DNS-01 challenge verifies domain ownership by proving you have control over its DNS records. Issuer configuration will depend on your [DNS provider](https://cert-manager.io/docs/configuration/acme/dns01/#supported-dns01-providers). This example uses [AWS Route53](https://cert-manager.io/docs/configuration/acme/dns01/route53/).
 
-1. Create the IAM policy specified in the cert-manager [AWS Route53](https://cert-manager.readthedocs.io/en/latest/tasks/acme/configuring-dns01/route53.html) documentation.
+1. Create the IAM policy specified in the cert-manager [AWS Route53](https://cert-manager.io/docs/configuration/acme/dns01/route53/) documentation.
 
 2. Note the `accessKeyID` and create a `secret` named `prod-route53-credentials-secret` in the cert-manager namespace that has a key value: `secret-access-key` from your AWS IaM credentials.
 
-3. Create and apply a `ClusterIssuer`. 
+3. Create and apply a `ClusterIssuer`.
 
     ```yaml
     ---
@@ -91,7 +91,7 @@ The DNS-01 challenge verifies domain ownership by proving you have control over 
                 key: secret-access-key
     ```
 
-4. Create and apply a `Certificate`. 
+4. Create and apply a `Certificate`.
 
     ```yaml
     ---
@@ -99,8 +99,8 @@ The DNS-01 challenge verifies domain ownership by proving you have control over 
     kind: Certificate
     metadata:
       name: myzone.route53.com
-      # cert-manager will put the resulting Secret in the same Kubernetes 
-      # namespace as the Certificate. You should create the certificate in 
+      # cert-manager will put the resulting Secret in the same Kubernetes
+      # namespace as the Certificate. You should create the certificate in
       # whichever namespace you want to configure a Host.
     spec:
       secretName: ambassador-certs
@@ -153,8 +153,8 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
     kind: Certificate
     metadata:
       name: ambassador-certs
-      # cert-manager will put the resulting Secret in the same Kubernetes 
-      # namespace as the Certificate. You should create the certificate in 
+      # cert-manager will put the resulting Secret in the same Kubernetes
+      # namespace as the Certificate. You should create the certificate in
       # whichever namespace you want to configure a Host.
       namespace: ambassador
     spec:
@@ -187,7 +187,7 @@ The HTTP-01 challenge verifies ownership of the domain by sending a request for 
 4. Create a Mapping for the `/.well-known/acme-challenge/` route.
 
     cert-manager uses an `Ingress` to issue the challenge to `/.well-known/acme-challenge/` that is incompatible with Ambassador. We will need to create a `Mapping` so the cert-manager can reach the temporary pod.
- 
+
     ```yaml
     ---
     apiVersion: getambassador.io/v2

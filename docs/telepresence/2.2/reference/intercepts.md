@@ -1,6 +1,8 @@
-# Intercepts 
+import Alert from '@material-ui/lab/Alert';
 
-## Intercept behvaior when logged into Ambassador Cloud
+# Intercepts
+
+## Intercept behavior when logged into Ambassador Cloud
 
 After logging into Ambassador Cloud (with `telepresence login`), Telepresence will default to `--preview-url=true`, which will use Ambassador Cloud to create a sharable preview URL for this intercept. (Creating an intercept without logging in will default to `--preview-url=false`).
 

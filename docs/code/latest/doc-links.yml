@@ -1,0 +1,26 @@
+- title: Quick start
+  items:
+    - title: Quick start guide
+      link: quick-start
+    - title: Create a dev environment with Go
+      link: qs-go-advanced
+    - title: Create a dev environment with Java
+      link: qs-java-advanced
+- title: Coding with Telepresence
+  items:
+    - title: What is Telepresence?
+      link: what-is-telepresence
+    - title: Technical details
+      link: telepresence-technical-details
+    - title: Intercepts overview
+      link: intercepts-overview
+- title: Telepresence basic operations
+  items:
+    - title: Installation and updates
+      link: install-and-update-telepresence
+    - title: Basic user commands
+      link: telepresence-basic-commands
+    - title: Creating an intercept
+      link: telepresence-intercept
+- title: Telepresence advanced user guide
+  link: ../../telepresence

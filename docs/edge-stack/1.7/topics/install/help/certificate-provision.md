@@ -1,5 +1,5 @@
 # Edgectl Install: Failed to Acquire TLS Certificate
- 
+
 The installer was unable to acquire a TLS certificate from [Let's Encrypt](https://letsencrypt.org/).
 
 ## What's next?
@@ -14,4 +14,4 @@ edgectl install
 
 Don't worry: it is safe to run the installer repeatedly on a Kubernetes cluster.
 
-If running the installer again does not work, please reach out to us on [Slack](https://a8r.io/Slack).
+If running the installer again does not work, please reach out to us on [Slack](http://a8r.io/slack).

@@ -63,7 +63,7 @@ After configuring an OAuth application in Salesforce, configuring Ambassador Edg
             #  arguments:
             #    scopes:
             #    - refresh_token
-                
+
     ```
 
 3. Apply both the `Filter` and `FilterPolicy` above with `kubectl`

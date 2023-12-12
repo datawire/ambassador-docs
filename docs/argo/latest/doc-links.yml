@@ -1,29 +1,24 @@
-- title: Home
-  link: /docs/
-
-- title: Products
-  collapsable: false
+- title: Quick start
+  link: /quick-start/
+- title: User guide
   items:
-    - title: Argo
-      items:
-        - title: Quick start
-          link: /quick-start
-        - title: Core concepts
-          collapsable: false
-          items:
-            - title: What is Argo?
-              link: /concepts/argo
-            - title: CI/CD and progressive delivery - Safely shipping code
-              link: /concepts/cicd
-            - title: Developer-centric GitOps-style deployment
-              link: /concepts/gitops
-            - title: Canary deployments
-              link: /concepts/canary
-            - title: How to monitor the canary deployment
-              link: /concepts/metrics
-        - title: Technical reference
-          items:
-            - title: Rollout CRD
-              link: /reference/rolloutcrd
-        # - title: Release Notes
-        #  link: /release-notes
+    - title: Manage traffic through Ambassador Edge Stack
+      link: /howtos/traffic-management/
+    - title: Observe a canary deployment
+      link: /howtos/observability/
+    - title: Transform a Deployment to a Rollout
+      link: /howtos/deployment-to-rollout/
+    - title: Configure Canary Rollout in my own Cluster
+      link: /howtos/configure-argo-rollouts/
+    - title: Manage Rollouts using Cloud
+      link: /howtos/manage-rollouts-using-cloud
+- title: Technical reference
+  items:
+    - title: Ambassador Cloud Rollouts
+      link: /reference/ambassador-cloud-rollouts/
+    - title: Rollout CRD
+      link: /reference/rolloutcrd
+- title: FAQs
+  link: /faqs/
+# - title: Release Notes
+#  link: /release-notes

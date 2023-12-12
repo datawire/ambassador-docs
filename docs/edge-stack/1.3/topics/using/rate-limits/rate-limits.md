@@ -61,7 +61,7 @@ Tip: For testing purposes, it is helpful to configure per-minute rate limits bef
 
 ## Request Labels
 
-Mappings can have multiple `labels` which annotate a given request. 
+Mappings can have multiple `labels` which annotate a given request.
 
 ```yaml
 ---

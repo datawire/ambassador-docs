@@ -1,10 +1,10 @@
 # Edgectl Install: Unable to talk to an AES Pod
- 
+
 The installer failed to communicate with an Ambassador Edge Stack (AES) Pod in your Kubernetes cluster to validate the installation.
 
 ## What's next?
 
-This is an unusual failure case, so we will have to help you on our Support channel. Please run these commands and then get in touch on [Slack](https://a8r.io/Slack).
+This is an unusual failure case, so we will have to help you on our Support channel. Please run these commands and then get in touch on [Slack](http://a8r.io/slack).
 
 * What is the status of the associated Deployment?
   * `kubectl -n ambassador get deploy ambassador`
@@ -15,4 +15,3 @@ This is an unusual failure case, so we will have to help you on our Support chan
   * `kubectl -n ambassador logs <name of the pod>`
 
 Those commands capture the state of things in your Kubernetes cluster. This information will allow us to start from a good spot to help you.
-

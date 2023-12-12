@@ -1,7 +1,7 @@
 # Ambassador Edge Stack Extensions
 
 The Ambassador Edge Stack contains a number of pre-built extensions that make
-running, deploying, and exposing your applications in Kubernetes easier. 
+running, deploying, and exposing your applications in Kubernetes easier.
 
 Use of AES extensions is implemented via Kubernetes Custom Resources.
 Documentation for how to uses the various extensions can be found throughout the
@@ -10,7 +10,7 @@ is concerned with how to operate and tune deployment of these extensions in AES.
 
 ## Redis
 
-Sine AES does not use a database, Redis is uses for caching state information
+Since AES does not use a database, Redis is uses for caching state information
 when an extension requires it.
 
 The Ambassador Edge Stack shares the same Redis pool for all features that use

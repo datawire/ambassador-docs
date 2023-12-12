@@ -13,7 +13,7 @@ If you're new to the Ambassador Edge Stack and to Kubernetes, we'd recommend you
    In Kubernetes 1.13 and below, the `Ingress` was only included in the `extensions` api.
 
    Starting in Kubernetes 1.14, the `Ingress` was added to the new `networking.k8s.io` api.
-   
+
    Kubernetes 1.18 introduced the `IngressClass` resource to the existing `networking.k8s.io/v1beta1` api.
 
    **Note:** If you are using 1.14 and above, it is recommended to use `apiVersion: networking.k8s.io/v1beta1` when defining `Ingresses`. Since both are still supported in all 1.14+ versions of Kubernetes, this document will use `extensions/v1beta1` for compatibility reasons.
@@ -26,7 +26,7 @@ If you're new to the Ambassador Edge Stack and to Kubernetes, we'd recommend you
 
 - The Ambassador Edge Stack will need RBAC permissions to get, list, watch, and update `Ingress` resources.
 
-  You can see this in the [`aes-crds.yaml`](/yaml/aes.yaml)
+  You can see this in the [`aes-crds.yaml`](https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml)
   file, but this is the critical rule to add to the Ambassador Edge Stack's `Role` or `ClusterRole`:
 
       - apiGroups: [ "extensions", "networking.k8s.io" ]
@@ -50,9 +50,9 @@ If you're new to the Ambassador Edge Stack and to Kubernetes, we'd recommend you
 
 - You must create a `Service` resource with the correct `app.kubernetes.io/component` label.
 
-  The Ambassador Edge Stack will automatically load balance Ingress resources using the endpoint exposed 
+  The Ambassador Edge Stack will automatically load balance Ingress resources using the endpoint exposed
   from the Service with the annotation `app.kubernetes.io/component: ambassador-service`.
-  
+
   ```yaml
       kind: Service
       apiVersion: v1
@@ -126,7 +126,7 @@ spec:
           servicePort: 80
 ```
 
-is **exactly equivalent** to a `Mapping` CRD of 
+is **exactly equivalent** to a `Mapping` CRD of
 
 ```yaml
 ---

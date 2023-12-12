@@ -36,7 +36,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
    - [Microsoft Azure Kubernetes Service (AKS)](https://learn.hashicorp.com/tutorials/consul/kubernetes-aks-azure?utm_source=consul.io&utm_medium=docs)
    - [Amazon Elastic Kubernetes Service (EKS)](https://learn.hashicorp.com/tutorials/consul/kubernetes-eks-aws?utm_source=consul.io&utm_medium=docs)
    - [Google Kubernetes Engine (GKE)](https://learn.hashicorp.com/tutorials/consul/kubernetes-gke-google?utm_source=consul.io&utm_medium=docs)
-     
+
   <Alert severity="info">
     If you did not find your Kubernetes platform above, check the <a href="https://www.consul.io/docs/k8s">Consul documentation here</a> to see if there are specific setup instructions for your platform.
   </Alert>
@@ -46,7 +46,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
    ```
    helm repo add hashicorp https://helm.releases.hashicorp.com
    ```
-    
+
 3. Create a new YAML file (eg. `consul-install.yaml`) for the Consul installation values and copy the values below into that file.
 
    ```yaml
@@ -59,7 +59,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 
    syncCatalog:
      enabled: true
-    
+
    server:
      replicas: 1
      bootstrapExpect: 1
@@ -90,7 +90,7 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 1. Deploy Ambassador Edge Stack. Note: If this is your first time deploying Ambassador Edge Stack, reviewing the [quick start guide](../../tutorials/getting-started) is strongly recommended.
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/ambassador/ambassador-rbac.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/ambassador/ambassador-rbac.yaml
    ```
 
    If you're on GKE, or haven't previously created the Ambassador Edge Stack service, please see the [quick start guide](../../tutorials/getting-started).
@@ -116,9 +116,9 @@ In this guide, you will register a service with Consul and use Ambassador Edge S
 
 
    This will tell Ambassador Edge Stack that Consul is a service discovery endpoint. Save the configuration to a file (e.g., `consul-resolver.yaml`, and apply this configuration with `kubectl apply -f consul-resolver.yaml`. For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
-    
 
-    
+
+
    The ConsulResolver is Opt-In. In other words, after applying the ConsulResolver you need to add `resolver: consul-dc1` in each Mapping that you want to use this resolver for. Otherwise it will use your default resolver, and the service associated with that Mapping will not be registered in Consul.
 
    For more information about resolver configuration, see the [resolver reference documentation](../../topics/running/resolvers). (If you're using Consul deployed elsewhere in your data center, make sure the `address` points to your Consul FQDN or IP address).
@@ -165,8 +165,8 @@ You'll now register a demo application with Consul, and show how Ambassador Edge
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-            - name: SERVICE_NAME 
-              value: "quote-consul" 
+            - name: SERVICE_NAME
+              value: "quote-consul"
             readinessProbe:
               httpGet:
                 path: /health
@@ -183,7 +183,7 @@ You'll now register a demo application with Consul, and show how Ambassador Edge
 
     Save the above to a file called `quote.yaml` and run `kubectl apply -f quote.yaml`. This will register the quote pod as a Consul service with the name `quote-consul` and the IP address of the quote pod.
 
-   > The `"consul.hashicorp.com/connect-inject": "false"` annotation tells consul that we do not want to use a Consul-Connect sidecar to register this service. Without a Consul-Connect sidecar to proxy requests, the service needs to include code to make a request to Consul to register the service. We include the environment variables `CONSUL_IP`, `POD_IP`, and `SERVICE_NAME` to provide the Quote service with enough information to build that request and send it to Consul. If you would like to see how that code works, please check out [our repo for the Quote service](https://github.com/datawire/quote). Later in this guide we will show how to configure Consul-Connect as well. 
+   > The `"consul.hashicorp.com/connect-inject": "false"` annotation tells consul that we do not want to use a Consul-Connect sidecar to register this service. Without a Consul-Connect sidecar to proxy requests, the service needs to include code to make a request to Consul to register the service. We include the environment variables `CONSUL_IP`, `POD_IP`, and `SERVICE_NAME` to provide the Quote service with enough information to build that request and send it to Consul. If you would like to see how that code works, please check out [our repo for the Quote service](https://github.com/datawire/quote). Later in this guide we will show how to configure Consul-Connect as well.
 
 2. Verify the quote pod has been registered with Consul. You can verify the quote pod is registered correctly by accessing the Consul UI.
 
@@ -191,7 +191,7 @@ You'll now register a demo application with Consul, and show how Ambassador Edge
    ```
    kubectl port-forward service/hashicorp-consul-ui 8500:80
    ```
-  <Alert severity="info"> 
+  <Alert severity="info">
     Port forwarding not working for you? Make sure the service name matches your consul UI service by checking <code>kubectl get svc -A</code>
   </Alert>
 
@@ -248,7 +248,7 @@ Ambassador Edge Stack can also use certificates stored in Consul to originate en
 1. The Ambassador Consul connector retrieves the TLS certificate issued by the Consul CA and stores it in a Kubernetes secret for Ambassador Edge Stack to use. Deploy the Ambassador Edge Stack Consul Connector with `kubectl`:
 
    ```
-   kubectl apply -f https://www.getambassador.io/yaml/consul/ambassador-consul-connector.yaml
+   kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/consul/ambassador-consul-connector.yaml
    ```
 
 This will install into your cluster:
@@ -267,7 +267,7 @@ Having duplicates of the Consul connector resources in the `ambassador` and `def
 First, delete the service account, Consul connector service and TLSContext resources from the `default` namespace:
 
     ```
-    kubectl delete -f https://www.getambassador.io/yaml/consul/ambassador-consul-connector-old.yaml
+    kubectl delete -f https://app.getambassador.io/yaml/ambassador-docs/$version$/consul/ambassador-consul-connector-old.yaml
     ```
 
 Then, delete the secret created by the connector service in the `default` namespace.
@@ -356,7 +356,7 @@ you should sub in that secret name value for `ambassador-consul-connect` in the 
     - `resolver` must be set to the ConsulResolver created when configuring Ambassador Edge Stack
     - `tls` must be set to the TLSContext storing the Consul mTLS certificates (e.g. `ambassador-consul`)
     - `load_balancer` must be set to configure Ambassador Edge Stack to route directly to the application endpoint(s) that are retrieved from Consul
-  
+
 
     Copy this YAML to a file named `quote-connect-mapping.yaml` and apply it to your cluster with `kubectl apply -f quote-connect-mapping.yaml`.
 

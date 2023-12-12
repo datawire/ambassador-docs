@@ -15,7 +15,7 @@ When Service Preview is used, incoming requests get routed by Ambassador to a Tr
 
 ## Preview URLs
 
-Ambassador Edge Stack, when used as your cluster's API gateway, offers the ability to use preview URLs. Just as you can access your application at a specific URL, you can access the development version of the same application through a Preview URL. When AES detects a Preview URL at the edge, it rewrites the request to look like a normal request but with a service preview header added. 
+Ambassador Edge Stack, when used as your cluster's API gateway, offers the ability to use preview URLs. Just as you can access your application at a specific URL, you can access the development version of the same application through a Preview URL. When AES detects a Preview URL at the edge, it rewrites the request to look like a normal request but with a service preview header added.
 
 ## Service Preview Components
 
@@ -155,7 +155,7 @@ Note that if you do not wish to grant read privileges on `Secrets` to the `traff
   - name: ambassador-edge-stack-secrets
     secret:
       secretName: ambassador-edge-stack
-``` 
+```
 
 ### Traffic Agent
 
@@ -242,7 +242,7 @@ subjects:
   - name: system:serviceaccounts
     kind: Group
     apiGroup: rbac.authorization.k8s.io
-``` 
+```
 
 #### Manual Traffic Agent Sidecar Configuration
 
@@ -366,7 +366,7 @@ Key points include:
 - **Note 5**: The `AGENT_SERVICE` environment variable is mandatory. It sets the name that the Traffic Agent will report to the Traffic Manager for this microservice: you will have to provide this name to intercept this microservice.
 - **Note 6**: The `AGENT_PORT` environment variable is mandatory. It tells the Traffic Agent the local port on which the microservice is listening.
 - **Note 7**: The `AGENT_MANAGER_NAMESPACE` environment variable tells the Traffic Agent the namespace in which it will be able to find the Traffic Manager. If not present, it defaults to the `ambassador` namespace.
-- **Note 8**: The `AMBASSADOR_NAMESPACE` environment variable is mandatory. It lets the Traffic Agent tell the Traffic Manager the namespace in which the microservice is running. 
+- **Note 8**: The `AMBASSADOR_NAMESPACE` environment variable is mandatory. It lets the Traffic Agent tell the Traffic Manager the namespace in which the microservice is running.
 - **Note 9**: The `AMBASSADOR_SINGLE_NAMESPACE` environment variable tells the Traffic Agent to watch resources only in its current namespace. This allows the `traffic-agent` `ServiceAccount` to only have `Role` permissions instead of a cluster-wide `ClusterRole`.
 - **Note 10**: The `AGENT_LISTEN_PORT` environment variable tells the Traffic Agent the port on which to listen for incoming connections. The `Service` must point to this port (see Note 1). If not present, it defaults to port 9900.
 
@@ -384,7 +384,7 @@ If you wish to allow automatic Traffic Agent sidecar injection in any deployment
     # Generate a Certificate Signing Request (CSR) for the private key, and sign it with the private key of the CA.
     openssl req -new -key key.pem -subj "/CN=ambassador-injector.ambassador.svc" \
         | openssl x509 -req -days 365 -CA ca.crt -CAkey ca.key -CAcreateserial -out crt.pem
-    
+
     # Encode the certificates
     cat ca.crt | base64 > ca.bundle.base64
     cat key.pem | base64 > key.pem.base64

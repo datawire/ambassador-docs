@@ -8,7 +8,7 @@ import Alert from '@material-ui/lab/Alert';
 
 While preview URLs are a powerful feature, there are other options to use Telepresence for proxying traffic between your laptop and the cluster.
 
-<Alert severity="info"> We'll assume below that you have the <a href="../../quick-start/qs-node/">quick start</a> sample web app running in your cluster so that we can test accessing the <code>verylargejavaservice</code> service. That service can be substituted however for any service you are running.</Alert>
+<Alert severity="info"> We'll assume below that you have the <a href="../../quick-start/demo-node/">quick start</a> sample web app running in your cluster so that we can test accessing the <code>web-app</code> service. That service can be substituted however for any service you are running.</Alert>
 
 ## Proxying outbound traffic
 
@@ -20,7 +20,7 @@ Connecting to the cluster starts the background daemon on your machine and insta
 
   ```
   $ telepresence connect
-  Launching Telepresence Daemon v2.1.4 (api v3)
+  Launching Telepresence Daemon v2.3.7 (api v3)
   Need root privileges to run "/usr/local/bin/telepresence daemon-foreground /home/<user>/.cache/telepresence/logs '' ''"
   [sudo] password:
   Connecting to traffic manager...
@@ -32,11 +32,11 @@ Connecting to the cluster starts the background daemon on your machine and insta
   ```
   $ telepresence status
   Root Daemon: Running
-    Version     : v2.1.4 (api 3)
+    Version     : v2.3.7 (api 3)
     Primary DNS : ""
     Fallback DNS: ""
   User Daemon: Running
-    Version           : v2.1.4 (api 3)
+    Version           : v2.3.7 (api 3)
     Ambassador Cloud  : Logged out
     Status            : Connected
     Kubernetes server : https://<cluster public IP>
@@ -45,14 +45,15 @@ Connecting to the cluster starts the background daemon on your machine and insta
     Intercepts        : 0 total
   ```
 
-1. Now try to access your service by name with `curl verylargejavaservice.default:8080`. Telepresence will route the request to the cluster, as if your laptop is actually running in the cluster.
+1. Now try to access your service by name with `curl web-app.emojivoto:80`. Telepresence will route the request to the cluster, as if your laptop is actually running in the cluster.
 
   ```
-  $ curl verylargejavaservice.default:8080
-  <!DOCTYPE HTML>
+  $ curl web-app.emojivoto:80
+  <!DOCTYPE html>
   <html>
   <head>
-      <title>Welcome to the EdgyCorp WebApp</title>
+      <meta charset="UTF-8">
+      <title>Emoji Vote</title>
   ...
   ```
 
@@ -75,7 +76,7 @@ When using this option, it is important to include all namespaces containing ser
 
 An intercept with the flag`--local-only` can be used to control outbound connectivity to specific namespaces.
 
-When developing services that have not yet been deployed to the cluster, it can be necessary to provide outbound connectivity to the namespace where the service is intended to be deployed so that it can access other services in that namespace without using qualified names. 
+When developing services that have not yet been deployed to the cluster, it can be necessary to provide outbound connectivity to the namespace where the service is intended to be deployed so that it can access other services in that namespace without using qualified names. Worth noting though, is that a local-only intercept will not cause outbound connections to originate from the intercepted namespace. Only a real intercept can do that. The reason for this is that in order to establish correct origin, the connection must be routed to a `traffic-agent`of an intercepted pod. For local-only intercepts, the outbound connections will originate from the `traffic-manager`.
 
   ```
   $ telepresence intercept <deployment name> --namespace <namespace> --local-only

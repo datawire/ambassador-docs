@@ -1,0 +1,11 @@
+version: 1.13.10
+qotmVersion: 1.7
+quoteVersion: 0.5.0
+branch: release/v1.13
+productName: 'Emissary-ingress'
+productNamePlural: 'Emissary-ingresses'
+OSSproductName: 'Emissary-ingress'
+OSSproductNamePlural: 'Emissary-ingresses'
+AESproductName: 'Ambassador Edge Stack'
+AESproductNamePlural: 'Ambassador Edge Stacks'
+productNameId: 'ambassador'

@@ -3,7 +3,7 @@
 ## Rendering API documentation
 
 The _Dev Portal_ uses the `Mapping` resource to automatically discover services known by
-the Ambassador Edge Stack.
+the $productName$.
 
 For each `Mapping`, the _Dev Portal_ will attempt to fetch an OpenAPI V3 document
 when a `docs` attribute is specified.
@@ -17,13 +17,14 @@ This documentation endpoint is defined by the optional `docs` attribute in the `
     path: "string"          # optional; default is ""
     url: "string"           # optional; default is ""
     ignored: bool           # optional; default is false
+    timeout_ms: integer     # optional; default is 5000
     display_name: "string"  # optional; default is ""
 ```
 
 where:
 
 * `path`: path for the OpenAPI V3 document.
-The Ambassador Edge Stack will append the value of `docs.path` to the `prefix`
+The $productName$ will append the value of `docs.path` to the `prefix`
 in the `Mapping` so it will be able to use Envoy's routing capabilities for
 fetching the documentation from the upstream service . You will need to update
 your microservice to return a Swagger or OAPI document at this URL.
@@ -31,6 +32,8 @@ your microservice to return a Swagger or OAPI document at this URL.
 * `ignored`: ignore this `Mapping` for documenting services. Note that the service
 will appear in the _Dev Portal_ anyway if another, non-ignored `Mapping` exists
 for the same service.
+* `timeout_ms`: number of milliseconds that the devportal HTTP client will wait for a service
+to respond on their docs endpoint
 * `display_name`: custom name to show for this service in the devportal.
 
 > Note:
@@ -42,19 +45,22 @@ for the same service.
 > in order to keep the previous behavior.
 >
 >
-> The `docs` field of Mappings was not introduced until `Ambassador Edge Stack` version 1.9 because Ambassador was automatically searching for docs on `/.ambassador-internal/openapi-docs`
-> Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of Ambassador.
+> The `docs` field of Mappings was not introduced until `$productName$` version 1.9 because
+> $productName$ was automatically searching for docs on `/.ambassador-internal/openapi-docs`.
+> Make sure to update your CRDs with the following command if you are encountering problems after upgrading from an earlier version of $productName$.
+
 ```yaml
- `kubectl apply -f https://getambassador.io/yaml/aes-crds.yaml`
+ `kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml`
 ```
 
-> If you are on an earlier version of Ambassador, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`
+> If you are on an earlier version of $productName$, either upgrade to a newer version, or make your documentation available on `/.ambassador-internal/openapi-docs`
 
 Example:
 
 With the `Mapping`s below, the _Dev Portal_ would fetch OpenAPI documentation
 from `service-a:5000` at the path `/srv/openapi/` and from `httpbin` from an
-external URL. `service-b` would have no documentation.
+external URL. `service-b` would have no documentation. The httpbin service must
+respond in 4000 seconds or else the request will time out.
 
 ```yaml
 ---
@@ -86,13 +92,14 @@ spec:
   prefix: /httpbin/
   service: httpbin.org
   docs:
+    timeout_ms:4000
     url: https://httpbin.org/spec.json
 ```
 
 > Notes on access to documentation `path`s:
 >
 > By default, all the `path`s where documentation has been found will **NOT** be publicly
-> exposed by the Ambassador Edge Stack. This is controlled by a special
+> exposed by the $productName$. This is controlled by a special
 > `FilterPolicy` installed internally.
 
 > Limitations on Mappings with a `host` attribute
@@ -148,7 +155,7 @@ spec:
 where:
 
 * `default`: `true` when this is the default Dev Portal configuration.
-* `content`: see [section below](#styling).
+* `content`: see [section below](#styling-the-devportal).
 * `selector`: rules for filtering `Mapping`s:
   * `matchNamespaces`: list of namespaces, used for filtering the `Mapping`s that
   will be shown in the `DevPortal`. When multiple namespaces are provided, the `DevPortal`
@@ -170,7 +177,7 @@ where:
   * "name.prefix" will display the docs with the name and prefix of the mapping.
   e.g. a Mapping named `quote` with a prefix `backend` will be displayed as `quote.backend`
   and its docs will have the relative path of `/quote/backend`
-* `search`: as of Edge Stack 1.13.0, the DevPortal content is now searchable
+* `search`: as of $productName$ 1.13.0, the DevPortal content is now searchable
   * `enabled`: default `false``; set to true to enable search functionality.
     * When `enabled=false`, the DevPortal search endpoint (`/[DEVPORTAL_PATH/api/search`) will return an empty response
   * `type`: Configure the items fed into search
@@ -225,12 +232,12 @@ spec:
 
 > Note:
 >
-> The free and unlicensed versions of `Ambassador Edge Stack` only support documentation for five services in the `DevPortal`.
+> The free and unlicensed versions of `$productName$` only support documentation for five services in the `DevPortal`.
 > When you start publishing documentation for more services to your `DevPortal`, keep in mind that you will not see more than 5 OpenAPI documents even if you have more than 5 services properly configured to report their OpenAPI specifications.
 > For more information on extending the number of services in your `DevPortal` please contact sales via our [pricing information page](/editions/).
 
 
-#### <a href="#styling"></a>Styling the `DevPortal`
+#### Styling the `DevPortal`
 
 The look and feel of a `DevPortal` can be fully customized for your particular
 organization by specifying a different `content`, customizing not only _what_
@@ -297,7 +304,7 @@ devportal content will be reflected immediately on page refresh.
 >
 > The docker command above will only work for AES versions 1.13.0+.
 
-**Remote Ambassador**
+**Remote $productName$**
 
 After committing and pushing changes to your devportal content repo changes to git, set your DevPortal to fetch from your branch:
 
@@ -329,7 +336,7 @@ curl -X POST -Lk ${AMBASSADOR_LB_ENDPOINT}/docs/api/refreshContent
 >
 > The DevPortal does not share a cache between replicas, so the content refresh endpoint
 > will only refresh the content on a single replica. It is suggested that you use this
-> endpoint in a single replica Edge Stack setup.
+> endpoint in a single replica $productName$ setup.
 
 #### Customizing documentation names and paths
 
@@ -391,7 +398,7 @@ Will be displayed in the _Dev Portal_ as `Cat Service`, and the documentation wi
 accessed at `$AMBASSADOR_URL/docs/doc/Cat%20Service`.
 
 
-## <a href="#global-config"></a>Default configuration
+## Default configuration
 
 The _Dev Portal_ supports some default configuration in some environment variables
 (for backwards compatibility).
@@ -405,7 +412,7 @@ the `ambassador` `DevPortal`.
 
 | Setting                  | Description                                                                    |
 | ------------------------ | ------------------------------------------------------------------------------ |
-| AMBASSADOR_URL           | External URL of Ambassador Edge Stack; include the protocol (e.g., `https://`) |
+| AMBASSADOR_URL           | External URL of $productName$; include the protocol (e.g., `https://`) |
 | POLL_EVERY_SECS          | Interval for polling OpenAPI docs; default 60 seconds                          |
 | DEVPORTAL_CONTENT_URL    | Default URL to the repository hosting the content for the Portal               |
 | DEVPORTAL_CONTENT_DIR    | Default content subdir (defaults to `/`)                                       |

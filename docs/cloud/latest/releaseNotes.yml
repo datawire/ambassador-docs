@@ -1,0 +1,223 @@
+# This file should be placed in the folder for the version of the
+# product that's meant to be documented. A `/release-notes` page will
+# be automatically generated and populated at build time.
+#
+# Note that an entry needs to be added to the `doc-links.yml` file in
+# order to surface the release notes in the table of contents.
+#
+# The YAML in this file should contain:
+#
+# changelog: An (optional) URL to the CHANGELOG for the product.
+# items: An array of releases with the following attributes:
+#     - version: The (optional) version number of the release, if applicable.
+#     - date: The date of the release in the format YYYY-MM-DD.
+#     - notes: An array of noteworthy changes included in the release, each having the following attributes:
+#         - type: The type of change, one of `bugfix`, `feature`, `security` or `change`.
+#         - title: A short title of the noteworthy change.
+#         - body: >-
+#             Two or three sentences describing the change and why it
+#             is noteworthy.  This is HTML, not plain text or
+#             markdown.  It is handy to use YAML's ">-" feature to
+#             allow line-wrapping.
+#         - image: >-
+#             The URL of an image that visually represents the
+#             noteworthy change.  This path is relative to the
+#             `release-notes` directory; if this file is
+#             `FOO/releaseNotes.yml`, then the image paths are
+#             relative to `FOO/release-notes/`.
+#         - docs: The path to the documentation page where additional information can be found.
+#         - href: A path from the root to a resource on the getambassador website, takes precedence over a docs link.
+
+changelog: ''
+items:
+  - date: '2023-10-02'
+    notes:
+      - title: 'Organization Dashboard redesign'
+        body: The Dashboard was redesigned to better highlight users and organization's usage of Telepresence and Edge Stack.
+        image: './new-organization-dashboard.png'
+        type: feature
+  - date: '2023-08-29'
+    notes:
+      - title: 'New subscription plans'
+        body: Sign up now and enjoy a 30-day trial to explore our product’s capabilities, helping you find the perfect plan that suits your needs.
+        image: '/images/cloud/telepresence-pricing.png'
+        href: '/editions'
+        type: feature
+  - date: '2023-06-05'
+    notes:
+      - title: 'Air-gapped for Telepresence'
+        body: Air-gapped license generation for Telepresence through the account settings is now exclusively available to users of our Business and Enterprise plans.
+        docs: ../../telepresence/latest/reference/cluster-config#air-gapped-cluster
+        type: change
+  - date: '2023-03-22'
+    notes:
+      - title: 'Sign in with Docker'
+        body: Now you can sign in into Ambassador Cloud using Docker as identity provider.
+        docs: https://app.getambassador.io/cloud/
+        image: './docker-login.png'
+        type: feature
+  - date: '2023-02-22'
+    notes:
+      - title: 'Organization dashboard'
+        body: Now all users in your organization can see who is onboarded, the most recent intercepts, active services, saved intercepts, all in one place. This will give you a sense of what is happening in your organization and also speed up the onboarding process with your development tools.
+        docs: './onboarding-dashboard'
+        image: './onboarding-dashboard.png'
+        type: feature
+  - date: '2023-01-03'
+    notes:
+      - title: 'Active service view'
+        body: You can now view which of your services are counting against your quota, how they were considered active, and the last time they were used.
+        docs: './subscriptions/howtos/manage-my-subscriptions'
+        type: feature
+  - date: '2022-11-07'
+    notes:
+      - title: 'Subscriptions grouped by organization'
+        body: The subscription model moves from a team-centric model, to an organization one.
+        docs: './subscriptions/howtos/manage-my-subscriptions'
+        type: feature
+  - date: '2022-10-04'
+    notes:
+      - title: 'Organizations'
+        body: Group all the teams in your company under one organization
+        docs: './organization '
+        type: feature
+      - title: 'Single Sign On'
+        body: Sign into Ambassador Cloud using your own SAML 2.0 Identity Provider.
+        image: './sso.png'
+        docs: './sso'
+        type: feature
+  - date: '2022-09-27'
+    notes:
+      - title: 'Diagnostics Overview'
+        body: Check your cluster diagnostics, now without leaving Ambassador Cloud
+        docs: './diagnostics-ui/view-diagnostics'
+        type: feature
+  - date: '2022-08-08'
+    notes:
+      - title: Telepresence Saved Intercepts
+        body: Share Telepresence Saved Intercepts with your team members
+        image: ./telepresence-saved-intercepts.png
+        docs: ./telepresence-saved-intercepts/
+        type: feature
+  - date: '2022-08-02'
+    notes:
+      - title: 'Developer Portal'
+        body: 'Consolidate your OpenAPI specifications! With this new edition to Ambassador Cloud you will be able to consolidate all of your services API specs into one manageable place to be shared amongst your team, or even expose it to the web and share it with your non Cloud users!'
+        docs: './developer-portal/how-to-use'
+        type: feature
+  - date: '2022-08-02'
+    notes:
+      - title: 'API Key Management'
+        body: 'With our new API Key Management system it will now be easier for you to restrict access to your individual services. You will be able to create Filters specific to routes of your own choosing and create API keys to distribute for each individual filter.'
+        docs: './security/api-keys/introduction'
+        type: feature
+  - date: '2022-06-06'
+    notes:
+      - title: 'Role-Based Access Control'
+        body: 'With Role-Based Access Control (RBAC) it is now easier for Ambassador Cloud account administrators to manage access, control subscriptions and invite teammates to collaborate.'
+        image: './rbac.png'
+        docs: './service-catalog/reference/access/'
+        type: feature
+  - date: '2022-06-06'
+    notes:
+      - title: 'Subscriptions'
+        body: 'Monitor your teams current utilization of Ambassador Cloud.
+          Adjust your subscription according to your needs to get the best
+          Kubernetes developer experience.'
+  - date: '2022-04-11'
+    notes:
+      - title: 'Deployment Previews'
+        body: 'Connecting Ambassador Cloud to your GitHub pull request workflow allows you to easily setup preview URLs and share unreleased changes with your teammates.'
+        image: './deployment-previews.png'
+        docs: deployment-previews/quick-start/
+        type: feature
+  - date: '2022-04-15'
+    notes:
+      - title: New service catalog view
+        body: 'The service catalog moved from a grid view to a more readable and collapsible list of services. Now you can group services to manage your applications.'
+        image: './service-catalog-preview.png'
+        docs: './service-catalog/howtos/organize-service-catalog/'
+        type: feature
+  - date: '2022-02-21'
+    notes:
+      - title: 'Mapping Editor'
+        body: 'The new Ambassador Cloud Mapping Editor lets you craft Mapping resources following best practices to easily expose services to the internet. Get started with Edge Stack 2.2 and follow our guide to set up your first Mapping.'
+        image: './mapping-editor.png'
+        docs: '../../edge-stack/latest/tutorials/getting-started/'
+        type: feature
+  - date: '2022-02-18'
+    notes:
+      - title: Intercept from the cloud
+        body: Starting with Telepresence 2.5.0, intercepting a service can now be initiated from Ambassador Cloud.
+        docs: service-catalog/howtos/intercept/
+        image: './intercept-slideout-service-list.png'
+        type: feature
+  - date: '2022-02-10'
+    notes:
+      - title: 'Edge Stack community licenses'
+        body: 'Starting with Edge Stack 2.2, activating a free community license in your cluster is now easier than ever for cloud-connected installations.'
+        image: './community-license.png'
+        docs: '../../edge-stack/latest/about/faq/#can-i-use-the-add-on-features-for-aesproductname-for-free'
+        type: change
+  - date: '2021-12-08'
+    notes:
+      - title: 'Subscriptions'
+        body: 'Secure payments and convenient self-service subscriptions, featuring several tiers of plans to accommodate projects of every size.'
+        image: './payment-tiers.png'
+        href: '/editions'
+        type: feature
+      - title: To Cells From Environments
+        body: 'Ambassador Cloud switched to Cells from the Environment concept. A Cell is an instance of your entire application. With Cells you are not limited to just three stages, you have the freedom to define the stages and their relationships to represent the application lifecycle.'
+        image: ./cloud-new-multi-cells.png
+        docs: service-catalog/concepts/cells
+        type: feature
+  - date: '2021-10-05'
+    notes:
+      - title: 'Rollouts from your GitLab repositories'
+        body: 'GitLab support to use Ambassador Cloud Rollouts for deploying your services using the canary release pattern.'
+        image: './cloud-rollouts-beta.png'
+        docs: '../../argo/latest/quick-start'
+        type: feature
+  - date: '2021-09-20'
+    notes:
+      - title: 'Heads Up Display'
+        body: 'Develop your services using the HUD (Heads Up Display). With many widgets available, the HUD is your new day-to-day assistant to create intercepts, visualize the progress of rollouts, and more!'
+        type: feature
+        image: ./cloud-hud.png
+        docs: service-catalog/concepts/hud
+  - date: '2021-08-18'
+    notes:
+      - title: Automated Configuration Analysis with the Ambassador DCP
+        body: 'Visualize the impact of Edge Stack and Emissary-ingress configuration changes to Kubernetes clusters before deploying any changes.'
+        type: feature
+        image: ./gitops-quickstart-warning.png
+        docs: config-analysis/quick-start/
+  - date: '2021-08-16'
+    notes:
+      - title: 'Visualize your APIs'
+        body: 'Visualize your service’s OpenAPI documentation (formally known as Swagger Specifications) in the cloud, allowing you to interact and query your REST APIs directly from the Developer Control Plane.'
+        image: ./cloud-apis-swagger.png
+        docs: visualize-api/quick-start/
+        type: feature
+      - title: 'Manage your clusters'
+        body: 'View connected Edge Stack and Emissary-ingress clusters in the cloud. Glimpse at usage metrics and register your installation using a free community licence to unlock Edge Stack traffic management features.'
+        image: ./cloud-cluster-rps.png
+        docs: ../../edge-stack/latest/tutorials/getting-started/#3-connect-your-cluster-to-ambassador-cloud
+        type: feature
+  - date: '2021-06-14'
+    notes:
+      - title: Updated views for Service Catalog
+        body: 'Develop and manage your services through its entire cloud-native lifecycle. As services span multiple environments, you can now visualize the flow of services through the different stages. As versions get rolled out, the Service Catalog will guide you through the promotion pipeline from development to production.'
+        image: ./cloud-new-catalog-view.png
+        docs: service-catalog/quick-start/
+        type: feature
+      - title: View all intercepts details
+        body: "The Service Catalog shows all Telepresence intercepts, allowing you to quickly visualize all of your team's intercepted services."
+        image: ./cloud-intercept-details.png
+        docs: ../../telepresence/latest/quick-start/
+        type: feature
+      - title: Rollouts in developer preview
+        body: 'Rollouts is a feature of Ambassador Cloud currently in developer preview. With rollouts, Ambassador Cloud and Argo will guide you through the GitOps operations for deploying your services using the canary release pattern.'
+        image: ./cloud-rollouts-beta.png
+        docs: ../../argo/latest/quick-start/
+        type: feature

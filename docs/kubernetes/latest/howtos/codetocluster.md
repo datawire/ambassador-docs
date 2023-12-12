@@ -1,5 +1,10 @@
+---
+  reading_time: 10
+  reading_time_text: tutorial
+---
+
 import Alert from '@material-ui/lab/Alert';
-import GSTabs from './gs-tabs.js'
+import KubeGSTabs from './gs-tabs.js'
 
 # Get code running on my cluster
 
@@ -14,7 +19,7 @@ import GSTabs from './gs-tabs.js'
 * [5. Create a Deployment, Service, and Mapping in Kubernetes](#5-create-a-deployment-service-and-mapping-in-kubernetes)
 * [6. Deploy app and test](#6-deploy-app-and-test)
 * [7. Setup a Host and SSL (optional)](#7-setup-a-host-and-ssl-optional)
-* [What's next?](#img-classos-logo-srcimageslogopng-whats-next)
+* [What's next?](#img-classos-logo-srcimageslogopng-alttelepresence-logo--whats-next)
 
 </div>
 
@@ -25,7 +30,7 @@ This guide will walk you through going from code to building a Docker container 
 * [Kubectl](../../quick-start/#1-kubectl)
 * a Kubernetes cluster <!--([minikube](../howtos/howtos/devenv/#minikube) would work if you don't have access to a real cluster)-->
 * [Docker](https://docs.docker.com/get-docker/) and a basic knowledge of running and building containers
-* A Docker Hub account ([sign up](https://hub.docker.com) if you don't have one]
+* A Docker Hub account ([sign up](https://hub.docker.com) if you don't have one)
 
 ## 1. Install ingress controller
 
@@ -33,7 +38,7 @@ We'll need an ingress controller for your cluster to get traffic from the intern
 
 **We recommend installing using Helm** but there are other options below to choose from.
 
-<GSTabs/>
+<KubeGSTabs/>
 
 If needed, see the list of <a href="../../../../edge-stack/latest/topics/install/" target="_blank">other installation options</a>.
 
@@ -59,7 +64,7 @@ Open and inspect the Dockerfile. It follows these basic steps:
 
 ## 3. Build container and test
 
-Next, we'll build the container and start running it locally, to make sure everything works and see what the app looks like.  Run the commands to build and run the container, **substituting in your Docker Hub username**:
+Next, we'll build the container and start running it locally, to make sure everything works and see what the app looks like.  Make sure Docker is running, then run these commands to build and run the container (**substituting in your Docker Hub username**):
 
 ```
 docker build . -t <your docker hub username>/nodebb:1.0
@@ -69,11 +74,11 @@ docker run -d -p 80:8080 --name nodebb <your Docker Hub username>/nodebb:1.0
 Let's look at the flags on the `docker run` command:
 
 * `-d` runs in detached mode, runs in the background after starting 
-* `-p` sets a `localhost` port to map to a container port, in this case `localhost:80` will map to 8080 on the container
+* `-p` sets a localhost port to map to a container port, in this case http://localhost (implying port 80) will map to 8080 on the container
 * `--name` sets the name of the running container
 * `<your Docker Hub username>/nodebb:1.0` is the built image that the container will run
 
-Go to `http://localhost` to see the web app in action.
+Go to [http://localhost](http://localhost) to see the web app in action.
 
 <Alert severity="success">
 <strong>Success!</strong> The container is built and running locally!
@@ -104,7 +109,11 @@ When it finishes go to [Docker Hub](https://hub.docker.com/) and you should see 
 
 Save this file as `nodebb.yaml`, **replacing the value for your Docker Hub username**.  
 
-This manifest file first creates a Deployment, which defines and runs the Pod.  Pods in Kubernetes are usually made up of a single container, in this case, the `nodebb` container you pushed to Docker Hub. [Learn more about the basics of Kubernetes](../../concepts/basics).
+This manifest file first creates a Deployment, which defines and runs the Pod.  Pods in Kubernetes are usually made up of a single container, in this case, the `nodebb` container you pushed to Docker Hub. 
+
+<Alert severity="info">
+  <a href="../../concepts/basics">Learn more about the basics of Kubernetes.</a>
+</Alert>
 
 Next, it creates a Service, which handles getting the traffic on the specified port to the Pod.
 
@@ -173,7 +182,7 @@ kubectl -n ambassador get svc ambassador \
 Finally, go to `http://<load balancer IP>/` and you should see your app.
 
 <Alert severity="info">
-  If you get an error in your browser about the certificate being invalid, just hit *Proceed*. Edge Stack forwarded you to an HTTPS version of the site by default and is using a self-signed certificate, which is ok for this guide.  In a production deployment you can use Edge Stack to generate a valid cert automatically.
+  If you get an error in your browser about the certificate being invalid, just click <strong>Proceed</strong>. Edge Stack forwarded you to an HTTPS version of the site by default and is using a self-signed certificate, which is fine for this guide.  In a production deployment you can use Edge Stack to generate a valid certificate automatically, which we'll do in the next step.
 </Alert>
 
 <Alert severity="success">
@@ -205,7 +214,7 @@ You can check the certificate's status with `kubectl describe host nodebb-host`.
 
 Finally, go to your domain in the browser and you should see the app with a valid SSL certificate installed.
 
-## <img class="os-logo" src="../../../../../images/logo.png"/> What's next?
+## <img class="os-logo" src="../../../../../images/logo.png" alt="Telepresence Logo" /> What's next?
 
 YAML files used to deploy Kubernetes resources are generally kept under version control.  You can automate deploying and updating resources as changes are committed to your code repositories using a CI/CD system like Argo!  [Check out our guide on getting started with Argo](../../../../argo/latest/quick-start/).
 

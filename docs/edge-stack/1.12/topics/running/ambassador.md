@@ -26,7 +26,7 @@ spec:
 | `ambassador_id` | Use only if you are using multiple ambassadors in the same cluster. See [this page](../running/#ambassador_id) for more information. | `ambassador_id: "<ambassador_id>"` |
 | `cluster_idle_timeout_ms` | Set the default upstream-connection idle timeout. Default is 1 hour. | `cluster_idle_timeout_ms: 30000` |
 | `cluster_max_connection_lifetime_ms` | Set the default maximum upstream-connection lifetime. Default is 0 which means unlimited. | `cluster_max_connection_lifetime_ms: 0` |
-| `cluster_request_timeout_ms` | Set the default end-to-end timeout for requests. Default is 3000ms.  | `cluster_request_timeout_ms: 3000` |
+| `cluster_request_timeout_ms` | Set the default end-to-end timeout for requests. Default is 3000 ms.  | `cluster_request_timeout_ms: 3000` |
 | `default_label_domain  and default_labels` | Set a default domain and request labels to every request for use by rate limiting. For more on how to use these, see the [Rate Limit reference](../../using/rate-limits/rate-limits##an-example-with-global-labels-and-groups). | None |
 | `defaults` | The `defaults` element allows setting system-wide defaults that will be applied to various Ambassador resources. See [using defaults](../../using/defaults) for more information. | None |
 | `diagnostics.enabled` | Enable or disable the [Edge Policy Console](../../using/edge-policy-console) and `/ambassador/v0/diag/` endpoints.  See below for more details. | None |
@@ -148,7 +148,7 @@ If set, `cluster_idle_timeout_ms` specifies the timeout (in milliseconds) after 
 
 ### Upstream Max Lifetime (`cluster_max_connection_lifetime_ms`)
 
-If set, `cluster_max_connection_lifetime_ms` specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
+If set, `cluster_max_connection_lifetime_ms` specifies the maximum amount of time (in milliseconds) after which an upstream connection is drained and closed, regardless of whether it is idle or not. Connection recreation incurs additional overhead when processing requests. The overhead tends to be nominal for plaintext (HTTP) connections within the same cluster, but may be more significant for secure HTTPS connections or upstreams with high latency. For this reason, it is generally recommended to set this value to at least 10000 ms to minimize the amortized cost of connection recreation while providing a reasonable bound for connection lifetime.
 
 If `cluster_max_connection_lifetime_ms` is not set (or set to zero), then upstream connections may remain open for arbitrarily long. This can be set on a per-Mapping basis by setting [`cluster_max_connection_lifetime_ms` on the `Mapping`](../../using/timeouts/).
 
@@ -352,7 +352,7 @@ Many load balancers can use the [PROXY protocol](https://www.haproxy.org/downloa
 
 In Ambassador 0.50 and later, the default value for `use_remote_address` is set to `true`. When set to `true`, Ambassador Edge Stack will append to the `X-Forwarded-For` header its IP address so upstream clients of Ambassador Edge Stack can get the full set of IP addresses that have propagated a request.  You may also need to set `externalTrafficPolicy: Local` on your `LoadBalancer` as well to propagate the original source IP address.  See the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/headers) and the [Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for more details.
 
-  **Note well** that if you need to use `x_forwarded_proto_redirect`, you **must** set `use_remote_address` to `false`. Otherwise, unexpected behaviour can occur.
+  **Note well** that if you need to use `x_forwarded_proto_redirect`, you **must** set `use_remote_address` to `false`. Otherwise, unexpected behavior can occur.
 
 ### `X-Forwarded-For` Trusted Hops (`xff_num_trusted_hops`)
 

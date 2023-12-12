@@ -98,7 +98,7 @@ standard YAML files.  Alternatively, you can install it with
     First, create RBAC resources for your Prometheus instance
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/monitoring/prometheus-rbac.yaml
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/monitoring/prometheus-rbac.yaml
     ```
 
     Then, copy the YAML below, and save it in a file called
@@ -195,7 +195,7 @@ documentation.
 
 1. Install the Prometheus Operator from the helm chart
 
-    ```	
+    ```
     helm install -n prometheus stable/prometheus-operator
     ```
 
@@ -291,9 +291,9 @@ To deploy Grafana behind Ambassador Edge Stack: replace
 Edge Stack service, copy the YAML below, and apply it with `kubectl`:
 
 
-**Note:** If you forgot how to get the value of your `AMBASSADOR_IP` or 
-have not set-up DNS, you can get the IP by using the `kubectl get services -n ambassador` 
-command, and select the External-IP of your Ambassador LoadBalancer service. 
+**Note:** If you forgot how to get the value of your `AMBASSADOR_IP` or
+have not set-up DNS, you can get the IP by using the `kubectl get services -n ambassador`
+command, and select the External-IP of your Ambassador LoadBalancer service.
 
 
 
@@ -401,7 +401,7 @@ in with `username: admin` : `password: admin`.
 Before you can import the Ambassador dashboard. You need to add a data source.
 From the Grafana home page, select `Create your first data source`. Now,
 select 'Prometheus'. In the URL section, type in `http://prometheus.default:9090`.
-We deployed prometheus to the default namespace in our example, but if you 
+We deployed prometheus to the default namespace in our example, but if you
 deployed it to a different namespace, make sure to replace `default` with your
 namespace. Press `Save & Test` to confirm that the data source works.
 
@@ -461,7 +461,7 @@ Exporter](https://github.com/prometheus/statsd_exporter) to do this.
 1. Deploy the StatsD Exporter in the `default` namespace
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/monitoring/statsd-sink.yaml
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/monitoring/statsd-sink.yaml
     ```
 
 2. Configure Ambassador Edge Stack to output statistics to `statsd`
@@ -514,7 +514,7 @@ spec:
 #### Dashboard
 
 Now that you have metrics scraping from StatsD You can use [this version of
-the dashboard](https://grafana.com/grafana/dashboards/4698) (ID: 4698) configured to work 
+the dashboard](https://grafana.com/grafana/dashboards/4698) (ID: 4698) configured to work
 with metrics scraped from StatsD or the metrics Endpoint. You can configure it the
-same way as the previous dashboard. Adding the prometheus data source is also required, 
-so if you did not add that yet, make sure to configure it before adding the dashboard. 
+same way as the previous dashboard. Adding the prometheus data source is also required,
+so if you did not add that yet, make sure to configure it before adding the dashboard.

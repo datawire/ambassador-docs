@@ -40,7 +40,7 @@ Use the following variables for the environment of your Ambassador container:
 
 [^1]: This may change in a future release to reflect the Pods's
     namespace if deployed to a namespace other than `default`.
-    https://github.com/datawire/ambassador/issues/1583
+    https://github.com/emissary-ingress/emissary/issues/1583
 
 [Go `net.Dial`]: https://golang.org/pkg/net/#Dial
 [Go `strconv.ParseBool`]: https://golang.org/pkg/strconv/#ParseBool
@@ -56,6 +56,3 @@ The Ambassador Edge Stack uses the following ports to listen for HTTP/HTTPS traf
 | 8003	| ambex	  | Internal ambex snapshot access; not exposed outside pod |
 | 8080	| envoy	  | Default HTTP service port |
 | 8443	| envoy	  | Default HTTPS service port |
-
-
-

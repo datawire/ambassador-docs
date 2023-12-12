@@ -1,17 +1,19 @@
+import Alert from '@material-ui/lab/Alert';
+
 # The OAuth2 Filter
 
-The `OAuth2` filter type performs OAuth2 authorization against an identity provider implementing [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html). The filter is both:
+The OAuth2 filter type performs OAuth2 authorization against an identity provider implementing [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html). The filter is both:
 
 * An OAuth Client, which fetches resources from the Resource Server on the user's behalf.
 * Half of a Resource Server, validating the Access Token before allowing the request through to the upstream service, which implements the other half of the Resource Server.
 
-This is different from most OAuth implementations where the Authorization Server and the Resource Server are in the same security domain. With the Ambassador Edge Stack, the Client and the Resource Server are in the same security domain, and there is an independent Authorization Server.
+This is different from most OAuth implementations where the Authorization Server and the Resource Server are in the same security domain. With Ambassador Edge Stack, the Client and the Resource Server are in the same security domain, and there is an independent Authorization Server.
 
 ## The Ambassador authentication flow
 
 This is what the authentication process looks like at a high level when using Ambassador Edge Stack with an external identity provider. The use case is an end-user accessing a secured app service.
 
-![Ambassador Authentication OAuth/OIDC](../../../../images/ambassador_oidc_flow.jpg)
+![Ambassador Authentication OAuth/OIDC](../../../images/ambassador_oidc_flow.jpg)
 
 ### Some basic authentication terms
 
@@ -38,7 +40,7 @@ The Auth0 docs provide a guide for adding social IdP "[connections](https://auth
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: Filter
 metadata:
   name: "example-oauth2-filter"
@@ -89,8 +91,10 @@ spec:
         # It is invalid to specify both "value" and "valueRegex".
         value: "string"                    # optional; default is any non-empty string
         valueRegex: "regex"                # optional; default is any non-empty string
+    clientSessionMaxIdle:   "duration" # optional; default is to use the access token lifetime or 14 days if a refresh token is present
     extraAuthorizationParameters:      # optional; default is {}
       "string": "string"
+    postLogoutRedirectURI:   "url"     # optional; default is empty string
 
     ## OAuth Client settings: grantType=="AuthorizationCode" or "Password" #####
     clientID:               "string"   # required
@@ -306,7 +310,18 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
      internalOrigin: "*://*"
    ```
 
+- `postLogoutRedirectURI`: Set this field to a valid URL to have $productName$ redirect there upon a successful logout. You must register the following endpoint with your IDP as the Post Logout Redirect `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect`. This informs your IDP to redirect back to $productName$ once the IDP has cleared the session data. Once the IDP has redirected back to $productName$, this clears the local $productName$ session information before redirecting to the destination specified by the `postLogoutRedirectURI` value.
+    * If Post Logout Redirect is configured in your IDP to `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` then, after a successful logout, a redirect is issued to the URL configured in `postLogoutRedirectURI`.
+    * If `{{ORIGIN}}/.ambassador/oauth2/post-logout-redirect` is configured as the Post Logout Redirect in your IDP, but `postLogoutRedirectURI` is not configured in $productName$, then your IDP will error out as it will be expecting specific instructions for the post logout behavior.
+      Refer to your IDP’s documentation to verify if it supports Post Logout Redirects.
+      For more information on `post_logout_redirect_uri functionality`, refer to the [OpenID Connect RP-Initiated Logout 1.0 specs](https://openid.net/specs/openid-connect-rpinitiated-1_0.html).
+
  - `extraAuthorizationParameters`: Extra (non-standard or extension) OAuth authorization parameters to use.  It is not valid to specify a parameter used by OAuth itself ("response_type", "client_id", "redirect_uri", "scope", or "state").
+
+ - `clientSessionMaxIdle`: Control how long the session held by Ambassador Edge Stack's OAuth client will last until we automatically expire it.
+    * Ambassador Edge Stack creates a new session when submitting requests to the upstream backend server and sets a cookie containing the sessionID. When a user makes a request to a backend service protected by the OAuth2 Filter, the OAuth Client in Ambassador Edge Stack will use the sessionID contained in the cookie to fetch the access token (and optional refresh token) for the current session so that it can be used when submitting a request to the upstream backend service. This session has a limited lifetime before it expires or extended, prompting the user to log back in.
+    * Setting a `clientSessionMaxIdle` duration is useful when your IdP is configured to return a refresh token along with an access token from your IdP's authorization server. `clientSessionMaxIdle` can be set to match Ambassador Edge Stack OAuth client's session lifetime to the lifetime of the refresh token configured within the IdP.
+    * If this is not set, then we tie the OAuth client's session lifetime to the lifetime of the access token received from the IdP's authorization server when no refresh token is also provided. If there is a refresh token, then by default we set it to be 14 days.
 
  - By default, any cookies set by the Ambassador Edge Stack will be
    set to expire when the session expires naturally.  The
@@ -323,7 +338,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
       user-perceived behavior, depending on the behavior of the
       identity provider.
     * Any cookies persisting longer will not affect behavior of the
-      system; the Ambassador Edge Stack validates whether the session
+      system; Ambassador Edge Stack validates whether the session
       is expired when considering the cookie.
 
    If `useSessionCookies` is non-`null`, then:
@@ -383,7 +398,7 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
        non-encrypted signed JWTs as Access Tokens, and configuring the
        signing appropriately
      + This behavior can be modified by delegating to [`JWT`
-       Filter](#filter-type-jwt) with `accessTokenJWTFilter`:
+       Filter](../jwt/) with `accessTokenJWTFilter`:
        - `name` and `namespace` are used to identify which JWT Filter
          to use.  It is an error to point at a Filter that is not a
          JWT filter.
@@ -414,14 +429,14 @@ Settings that are only valid when `grantType: "AuthorizationCode"`:
      and otherwise falls back to `"userinfo"` validation.
 
 [RE2]: https://github.com/google/re2/wiki/Syntax
-[`regex_type` in the `ambassador Module`]: ../../../running/ambassador/#regular-expressions-regex_type
+[`regex_type` in the `ambassador Module`]: ../../../running/ambassador/
 
 ### HTTP client
 
 These HTTP client settings are used for talking to the identity
 provider:
 
- - `maxStale`: How long to keep stale cached OIDC replies for. This sets the `max-stale` Cache-Control directive on requests, and also ignores the `no-store` and `no-cache` Cache-Control directives on responses.  This is useful for maintaining good performance when working with identity providers with misconfigured Cache-Control.
+ - `maxStale`: How long to keep stale cached OIDC replies for. This sets the `max-stale` Cache-Control directive on requests, and also ignores the `no-store` and `no-cache` Cache-Control directives on responses.  This is useful for maintaining good performance when working with identity providers with misconfigured Cache-Control. Note that if you are reusing the same `authorizationURL` and `jwksURI` across different OAuth and JWT filters respectively, then you MUST set `maxStale` as a consistent value on each filter to get predictable caching behavior.
  - `insecureTLS` disables TLS verification when speaking to an identity provider with an `https://` `authorizationURL`.  This is discouraged in favor of either using plain `http://` or [installing a self-signed certificate](../#installing-self-signed-certificates).
  - `renegotiateTLS` allows a remote server to request TLS renegotiation.  Accepted values are "never", "onceAsClient", and "freelyAsClient".
 
@@ -431,7 +446,7 @@ provider:
 
 ```yaml
 ---
-apiVersion: getambassador.io/v2
+apiVersion: getambassador.io/v3alpha1
 kind: FilterPolicy
 metadata:
   name: "example-filter-policy"
@@ -456,7 +471,7 @@ spec:
             valueRegex: "regex"  # optional; default is any non-empty string
           # option 1:
           httpStatusCode: integer     # optional; default is 403 (unless `filters` is set)
-          # option 2:
+          # option 2 (deprecated - will be removed in future version):
           filters:                    # optional; default is to use `httpStatusCode` instead
           - name: "string"              # required
             namespace: "string"         # optional; default is the same namespace as the FilterPolicy
@@ -506,7 +521,7 @@ spec:
          obeying [`regex_type` in the `ambassador Module`][]) but does
          not support the `\C` escape sequence.
     * By default, it serves an authorization-denied error page; by default HTTP 403 ("Forbidden"), but this can be configured by the `httpStatusCode` sub-argument.
-    * Instead of serving that simple error page, it can instead be configured to call out to a list of other Filters, by setting the `filters` list. The syntax and semantics of this list are the same as `.spec.rules[].filters` in a [`FilterPolicy`](#filterpolicy-definition). Be aware that if one of these filters modify the request rather than returning a response, then the request will be allowed through to the backend service, even though the `OAuth2` Filter denied it.
+    * __DEPRECATED__ Instead of serving that simple error page, it can instead be configured to call out to a list of other Filters, by setting the `filters` list. The syntax and semantics of this list are the same as `.spec.rules[].filters` in a [`FilterPolicy`](../#filterpolicy-definition). Be aware that if one of these filters modify the request rather than returning a response, then the request will be allowed through to the backend service, even though the `OAuth2` Filter denied it.
     * It is invalid to specify both `httpStatusCode` and `filters`.
 
 ## XSRF protection
@@ -516,15 +531,12 @@ The `ambassador_xsrf.NAME.NAMESPACE` cookie is an opaque string that should be u
  1. When generating an HTML form, the server should read the cookie, and include a `<input type="hidden" name="_xsrf" value="COOKIE_VALUE" />` element in the form.
  2. When handling submitted form data should verify that the form value and the cookie value match.  If they do not match, it should refuse to handle the request, and return an HTTP 4XX response.
 
-Applications using request submission formats other than HTML forms should perform analogous steps of ensuring that the value is present in the request duplicated in the cookie and also in either the request body or secure header field.  A secure header field is one that is not `Cookie`, is not "[simple][simple-header]", and is not explicitly allowed by the CORS policy.
+Applications using request submission formats other than HTML forms should perform analogous steps of ensuring that the value is present in the request duplicated in the cookie and also in either the request body or secure header field.  A secure header field is one that is not `Cookie`, is not "[simple](https://www.w3.org/TR/cors/#simple-header)", and is not explicitly allowed by the CORS policy.
 
-[simple-header]: https://www.w3.org/TR/cors/#simple-header
 
-**Note**: Prior versions of the Ambassador Edge Stack did not have an
-`ambassador_xsrf.NAME.NAMESPACE` cookie, and instead required you to
-use the `ambassador_session.NAME.NAMESPACE` cookie.  The
-`ambassador_session.NAME.NAMESPACE` cookie should no longer be used
-for XSRF-protection purposes
+<Alert severity="info">
+  Prior versions of the Ambassador Edge Stack did not have an <code>ambassador_xsrf.NAME.NAMESPACE</code> cookie, and instead required you to use the <code>ambassador_session.NAME.NAMESPACE</code> cookie.  The <code>ambassador_session.NAME.NAMESPACE</code> cookie should no longer be used for XSRF-protection purposes.
+</Alert>
 
 ## RP-initiated logout
 
@@ -536,14 +548,13 @@ re-authorize the user; it would be like the logout never even
 happened.
 
 To solve this, the Ambassador Edge Stack can use [OpenID Connect Session
-Management][oidc-session] to perform an "RP-Initiated Logout", where the
-Ambassador Edge Stack (the OpenID Connect "Relying Party" or "RP")
+Management](https://openid.net/specs/openid-connect-session-1_0.html)
+to perform an "RP-Initiated Logout", where Edge Stack
+(the OpenID Connect "Relying Party" or "RP")
 communicates directly with Identity Providers that support OpenID
 Connect Session Management, to properly log out the user.
 Unfortunately, many Identity Providers do not support OpenID Connect
 Session Management.
-
-[oidc-session]: https://openid.net/specs/openid-connect-session-1_0.html
 
 This is done by having your application direct the web browser `POST`
 *and navigate* to `/.ambassador/oauth2/logout`.  There are 2
@@ -554,7 +565,7 @@ form-encoded values that you need to include:
  2. `_xsrf`: The value of the `ambassador_xsrf.{{realm}}` cookie
     (where `{{realm}}` is as described above).  This must be set in the POST body, the URL query part will not be checked.
 
-For example:
+### Example configurations
 
 ```html
 <form method="POST" action="/.ambassador/oauth2/logout" target="_blank">
@@ -564,7 +575,6 @@ For example:
 </form>
 ```
 
-or
 
 ```html
 <form method="POST" action="/.ambassador/oauth2/logout?realm=myfilter.mynamespace" target="_blank">
@@ -573,7 +583,7 @@ or
 </form>
 ```
 
-or from JavaScript
+Using JavaScript:
 
 ```js
 function getCookie(name) {

@@ -1,0 +1,20 @@
+- title: Learning Journey
+  description: Create and integrate an effective build pipeline for deploying applications safely
+  readingTime: 25 minutes • 6 lessons
+  topics:
+  - title: 'Deploying applications to Kubernetes'
+    items:
+      - title: 'Taking on "ship" responsibilities'
+        link: argo/latest/concepts/responsibilities/
+      - title: 'Safely shipping code: CI/CD and progressive delivery'
+        link: argo/latest/concepts/cicd/
+      - title: 'Using GitOps for developer-friendly continuous deployment'
+        link: argo/latest/concepts/gitops/
+  - title: 'Deploying code safely'
+    items:
+      - title: 'Progressive canary deployments for automated deployments and rollbacks'
+        link: argo/latest/concepts/canary/
+      - title: 'Deeper dive: Progressive delivery and testing in production'
+        link: edge-stack/1.13/topics/concepts/progressive-delivery/
+      - title: 'Quick Start: Safely deploy code to production with Argo'
+        link: argo/latest/quick-start/

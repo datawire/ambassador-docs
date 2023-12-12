@@ -1,8 +1,12 @@
+import { useLocation } from '@reach/router';
 import React, { useMemo } from 'react';
+
 import Button from '../../../../src/components/Button/Button';
-import ClickableImage from '../../../../src/components/ClickableImage';
 import Icon from '../../../../src/components/Icon/Icon';
-import styles from './releaseNotes.module.less';
+import { isBrowser } from '../../../../src/utils/isBrowser';
+import template from '../../../../src/utils/template';
+
+import * as styles from './releaseNotes.module.less';
 
 const titlePrefix = {
   bugfix: 'Bug Fix',
@@ -18,34 +22,29 @@ const typeIcon = {
   security: 'security',
 };
 
-const Note = ({ note, images, onViewMore }) => {
+const Note = ({ note, onViewMore, versions }) => {
+  const { pathname } = useLocation();
+
   const title = useMemo(() => {
-    if (titlePrefix[note.type]) {
+    if (titlePrefix[note.type] && note.image) {
       return `${titlePrefix[note.type]}: ${note.title}`;
     }
     return note.title;
-  }, [note.title, note.type]);
+  }, [note.title, note.type, note.image]);
 
-  const image = useMemo(() => {
-    if (note.image?.indexOf('://') !== -1) {
-      return note.image;
-    }
-
-    const imagePath = note.image.split('./');
-    if (imagePath.length > 0) {
-      const imageName = imagePath.pop();
-      const found = images.find(
-        (img) => img.relativePath === `public/${imageName}`,
-      );
-      return found?.publicURL;
-    }
-    return null;
-  }, [images, note]);
+  const imgSrc = note?.image?.startsWith('.') ? `${pathname}/${note.image}` : note.image;
 
   return (
     <div className={styles.note}>
       <div className={styles.note__description}>
-        <h3 className={styles.note__title}>
+        <h3
+          className={
+            note.docs || note.href
+              ? styles.note__title
+              : styles.note__title_no_link
+          }
+          onClick={onViewMore}
+        >
           {typeIcon[note.type] && (
             <Icon
               name={typeIcon[note.type]}
@@ -56,27 +55,31 @@ const Note = ({ note, images, onViewMore }) => {
         </h3>
         <div
           className={styles.note__body}
-          dangerouslySetInnerHTML={{ __html: note.body }}
-        ></div>
-        <div className={styles.note__image_xs}>
-          {image && <ClickableImage src={image} alt={title} />}
+          dangerouslySetInnerHTML={{ __html: template(note.body, versions) }}
+        />
+        {note.image && (
+          <div className={styles.note__image_xs}>
+            <img
+              alt={note.title}
+              height="172"
+              width="207"
+              src={imgSrc}
+              loading="lazy"
+            />
+          </div>
+        )}
+      </div>
+      {note.image && (
+        <div className={styles.note__image}>
+          <img
+            src={imgSrc}
+            alt={note.title}
+            height="172"
+            width="207"
+            loading="lazy"
+          />
         </div>
-        {note.docs && (
-          <Button
-            onClick={onViewMore}
-            size="sm"
-            color="blue-outline"
-            className={styles.note__more}
-          >
-            More Information <Icon name="arrow" />
-          </Button>
-        )}
-      </div>
-      <div className={styles.note__image}>
-        {image && (
-          <ClickableImage src={image} alt={title} height="172" width="207" />
-        )}
-      </div>
+      )}
     </div>
   );
 };

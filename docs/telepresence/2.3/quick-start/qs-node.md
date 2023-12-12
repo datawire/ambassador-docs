@@ -3,7 +3,7 @@ description: "Install Telepresence and learn to use it to intercept services run
 ---
 
 import Alert from '@material-ui/lab/Alert';
-import QSTabs from './qs-tabs'
+import Platform from '@src/components/Platform';
 import QSCards from './qs-cards'
 
 <div class="docs-language-toc">
@@ -34,7 +34,15 @@ import QSCards from './qs-cards'
 </div>
 
 ## Prerequisites
-You’ll need [`kubectl` installed](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and [setup](https://kubernetes.io/docs/tasks/tools/install-kubectl/#verifying-kubectl-configuration) to use a Kubernetes cluster, preferably an empty test cluster.
+
+You’ll need [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/) or `oc` installed
+and set up
+([Linux](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#verify-kubectl-configuration) /
+ [macOS](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/#verify-kubectl-configuration) /
+ [Windows](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#verify-kubectl-configuration))
+to use a Kubernetes cluster, preferably an empty test cluster.  This
+document uses `kubectl` in all example commands, but OpenShift
+users should have no problem substituting in the `oc` command instead.
 
 <Alert severity="info">
     <strong>Need a cluster?</strong> We provide free demo clusters preconfigured to follow this quick start. <a href="../demo-node/">Switch over to that version of the guide here</a>.
@@ -45,18 +53,45 @@ If you have used Telepresence previously, please first reset your Telepresence d
 
 ## 1. Install the Telepresence CLI
 
-<QSTabs/>
+<Platform.TabGroup>
+<Platform.MacOSTab>
+
+```shell
+# Install via brew:
+brew install datawire/blackbird/telepresence
+
+# OR install manually:
+# 1. Download the latest binary (~60 MB):
+sudo curl -fL https://app.getambassador.io/download/tel2/darwin/amd64/$dlVersion$/telepresence -o /usr/local/bin/telepresence
+
+# 2. Make the binary executable:
+sudo chmod a+x /usr/local/bin/telepresence
+```
+
+</Platform.MacOSTab>
+<Platform.GNULinuxTab>
+
+```shell
+# 1. Download the latest binary (~50 MB):
+sudo curl -fL https://app.getambassador.io/download/tel2/linux/amd64/$dlVersion$/telepresence -o /usr/local/bin/telepresence
+
+# 2. Make the binary executable:
+sudo chmod a+x /usr/local/bin/telepresence
+```
+
+</Platform.GNULinuxTab>
+</Platform.TabGroup>
 
 ## 2. Test Telepresence
 
 Telepresence connects your local workstation to a remote Kubernetes cluster.
 
-1. Connect to the cluster:  
+1. Connect to the cluster:
 `telepresence connect`
 
   ```
   $ telepresence connect
-    
+
     Launching Telepresence Daemon
     ...
     Connected to context default (https://<cluster-public-IP>)
@@ -70,7 +105,7 @@ Telepresence connects your local workstation to a remote Kubernetes cluster.
     Click <strong>Open Anyway</strong> at the bottom to bypass the security block. Then retry the <code>telepresence connect</code> command.
   </Alert>
 
-2. Test that Telepresence is working properly by connecting to the Kubernetes API server:  
+2. Test that Telepresence is working properly by connecting to the Kubernetes API server:
 `curl -ik https://kubernetes.default`
 
   <Alert severity="info">
@@ -79,7 +114,7 @@ Telepresence connects your local workstation to a remote Kubernetes cluster.
 
   ```
   $ curl -ik https://kubernetes.default
-    
+
     HTTP/1.1 401 Unauthorized
     Cache-Control: no-cache, private
     Content-Type: application/json
@@ -102,12 +137,12 @@ Your local workstation may not have the compute or memory resources necessary to
     While Telepresence works with any language, this guide uses a sample app written in Node.js. We have versions in <a href="../qs-go/">Go</a>, <a href="../qs-java/">Java</a>,<a href="../qs-python/">Python using Flask</a>, and <a href="../qs-python-fastapi/">Python using FastAPI</a> if you prefer.
 </Alert>
 
-1. Start by installing a sample application that consists of multiple services:  
+1. Start by installing a sample application that consists of multiple services:
 `kubectl apply -f https://raw.githubusercontent.com/datawire/edgey-corp-nodejs/main/k8s-config/edgey-corp-web-app-no-mapping.yaml`
 
   ```
   $ kubectl apply -f https://raw.githubusercontent.com/datawire/edgey-corp-nodejs/main/k8s-config/edgey-corp-web-app-no-mapping.yaml
-    
+
     deployment.apps/dataprocessingservice created
     service/dataprocessingservice created
     ...
@@ -120,7 +155,7 @@ Your local workstation may not have the compute or memory resources necessary to
 
   ```
   $ kubectl get pods
-    
+
     NAME                                         READY   STATUS    RESTARTS   AGE
     verylargedatastore-855c8b8789-z8nhs          1/1     Running   0          78s
     verylargejavaservice-7dfddbc95c-696br        1/1     Running   0          78s
@@ -142,26 +177,26 @@ You will now download the repo containing the services' code and run the DataPro
     Confirm first that nothing is running locally on port 3000! If <code>curl localhost:3000</code> returns <code>Connection refused</code> then you should be good to go.
 </Alert>
 
-1. Clone the web app’s GitHub repo:  
+1. Clone the web app’s GitHub repo:
 `git clone https://github.com/datawire/edgey-corp-nodejs.git`
 
   ```
   $ git clone https://github.com/datawire/edgey-corp-nodejs.git
-    
+
     Cloning into 'edgey-corp-nodejs'...
     remote: Enumerating objects: 441, done.
     ...
   ```
 
-2. Change into the repo directory, then into DataProcessingService:  
+2. Change into the repo directory, then into DataProcessingService:
 `cd edgey-corp-nodejs/DataProcessingService/`
 
-3. Install the dependencies and start the Node server:  
+3. Install the dependencies and start the Node server:
 `npm install && npm start`
 
   ```
   $ npm install && npm start
-    
+
     ...
     Welcome to the DataProcessingService!
     { _: [] }
@@ -172,12 +207,12 @@ You will now download the repo containing the services' code and run the DataPro
     <a href="https://nodejs.org/en/download/package-manager/">Install Node.js from here</a> if needed.
   </Alert>
 
-4. In a **new terminal window**, curl the service running locally to confirm it’s set to <strong style="color:blue">blue</strong>:  
+4. In a **new terminal window**, curl the service running locally to confirm it’s set to <strong style="color:blue">blue</strong>:
 `curl localhost:3000/color`
 
   ```
   $ curl localhost:3000/color
-    
+
     "blue"
   ```
 
@@ -188,12 +223,12 @@ You will now download the repo containing the services' code and run the DataPro
 ## 5. Intercept all traffic to the service
 Next, we’ll create an intercept. An intercept is a rule that tells Telepresence where to send traffic. In this example, we will send all traffic destined for the DataProcessingService to the version of the DataProcessingService running locally instead:
 
-1. Start the intercept with the `intercept` command, setting the service name and port:  
+1. Start the intercept with the `intercept` command, setting the service name and port:
 `telepresence intercept dataprocessingservice --port 3000`
 
   ```
   $ telepresence intercept dataprocessingservice --port 3000
-    
+
     Using Deployment dataprocessingservice
     intercepted
         Intercept name: dataprocessingservice
@@ -222,7 +257,7 @@ We’ve now set up a local development environment for the DataProcessingService
 
 <Alert severity="success">
   We’ve just shown how we can edit code locally, and <strong>immediately</strong> see these changes in the cluster.
-  <br / >
+  <br />
   Normally, this process would require a container build, push to registry, and deploy.
   <br />
   With Telepresence, these changes happen instantly.
@@ -231,51 +266,54 @@ We’ve now set up a local development environment for the DataProcessingService
 ## 7. Create a Preview URL
 Create preview URLs to do selective intercepts, meaning only traffic coming from the preview URL will be intercepted, so you can easily share the services you’re working on with your teammates.
 
-1. Clean up your previous intercept by removing it:  
+1. Clean up your previous intercept by removing it:
 `telepresence leave dataprocessingservice`
 
-2. Login to Ambassador Cloud, a web interface for managing and sharing preview URLs:
-`telepresence login`
+2. Log in to Ambassador Cloud, a web interface for managing and
+   sharing preview URLs:
 
-  This opens your browser; login with your preferred identity provider and choose your org.
+   ```console
+   $ telepresence login
+   Launching browser authentication flow...
+   <web browser opens, log in and choose your organization>
+   Login successful.
+   ```
 
-  ```
-  $ telepresence login
-    Launching browser authentication flow...
-    <browser opens, login>
-    Login successful.
-  ```
+   If you are in an environment where Telepresence cannot launch a
+   local browser for you to interact with, you will need to pass the
+   [`--apikey` flag to `telepresence
+   login`](../../reference/client/login/).
 
-3. Start the intercept again:  
+3. Start the intercept again:
 `telepresence intercept dataprocessingservice --port 3000`
    You will be asked for your ingress layer 3 address; specify the front end service: `verylargejavaservice.default`
    Then when asked for the port, type `8080`, for "use TLS", type `n` and finally confirm the layer 5 hostname.
 
   ```
   $ telepresence intercept dataprocessingservice --port 3000
-    
+
     To create a preview URL, telepresence needs to know how cluster
     ingress works for this service.  Please Select the ingress to use.
-    
+
     1/4: What's your ingress' layer 3 (IP) address?
          You may use an IP address or a DNS name (this is usually a
          "service.namespace" DNS name).
-    
+
            [no default]: verylargejavaservice.default
-    
+
     2/4: What's your ingress' layer 4 address (TCP port number)?
-    
+
            [no default]: 8080
-    
+
     3/4: Does that TCP port on your ingress use TLS (as opposed to cleartext)?
-    
+
            [default: n]:
-    
+
     4/4: If required by your ingress, specify a different layer 5 hostname
          (TLS-SNI, HTTP "Host" header) to access this service.
-    
+
            [default: verylargejavaservice.default]:
-    
+
     Using Deployment dataprocessingservice
     intercepted
         Intercept name  : dataprocessingservice

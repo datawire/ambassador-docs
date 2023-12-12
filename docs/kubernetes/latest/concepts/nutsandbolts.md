@@ -1,5 +1,6 @@
 ---
-  hide_reading_time: true
+  reading_time: 6
+  reading_time_text: video
 ---
 
 import Alert from '@material-ui/lab/Alert'

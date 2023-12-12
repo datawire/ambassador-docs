@@ -24,9 +24,9 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
 1. In your terminal, run the following command:
 
     ```
-    kubectl apply -f https://www.getambassador.io/yaml/aes-crds.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes-crds.yaml && \
     kubectl wait --for condition=established --timeout=90s crd -lproduct=aes && \
-    kubectl apply -f https://www.getambassador.io/yaml/aes.yaml && \
+    kubectl apply -f https://app.getambassador.io/yaml/ambassador-docs/$version$/aes.yaml && \
     kubectl -n ambassador wait --for condition=available --timeout=90s deploy -lproduct=aes
     ```
 
@@ -83,7 +83,7 @@ The Ambassador Edge Stack is typically deployed to Kubernetes from the command l
    * Review the Terms of Service and check the box that you agree to the Terms of Service.
    * Enter the email address to be associated with your TLS certificate.
    * Click the **Save** button.
-  
+
   You'll see the newly created `Host` resource appear in the UI with a status of "Pending." This will change to "Ready" once the certificate is fully provisioned. If you receive an error that your hostname does not qualify for ACME management, you can still configure TLS manually or by reviewing configuration in the [Host CRD](../../../topics/running/host-crd).
 
 3. Once the Host is ready, navigate to `https://<hostname>` in your browser.

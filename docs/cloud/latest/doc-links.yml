@@ -1,28 +1,56 @@
-- title: Home
-  link: /docs/
-
-- title: Products
-  collapsable: false
+- title: Quick Start
+  link: /service-catalog/quick-start/
+- title: User Guide
   items:
-    - title: Cloud
-      items:
-        - title: Service Catalog
-          items:
-            - title: Quick start
-              link: /service-catalog/quick-start/
-            - title: Core concepts
-              items:
-                - title: The power of Kubernetes annotations
-                  link: /service-catalog/concepts/annotations/
-            - title: How do I...
-              items:
-                - title: Annotate a service
-                  link: /service-catalog/howtos/annotate/
-            - title: Technical reference
-              items:
-                - title: Annotations
-                  link: /service-catalog/reference/annotations/
-            - title: FAQs
-              link: /service-catalog/faqs/
-            # - title: Release Notes
-            #  link: /release-notes
+    - title: Onboarding dashboard
+      link: /onboarding-dashboard/
+    - title: Services and Service Groups
+      link: /service-catalog/concepts/services/
+    - title: Organizing the Service Catalog
+      link: /service-catalog/howtos/organize-service-catalog
+    - title: Favoriting and Filtering services
+      link: /service-catalog/howtos/favorites/
+    - title: Managing cells
+      link: /service-catalog/howtos/cells/
+    - title: Enabling GitOps workflows
+      link: /gitops/quick-start
+    - title: Annotations Overview
+      link: /service-catalog/concepts/annotating/
+    - title: Annotating services
+      link: /service-catalog/howtos/annotate/
+    - title: Creating intercepts
+      link: /service-catalog/howtos/intercept/
+    - title: Managing Saved Intercepts
+      link: /telepresence-saved-intercepts
+    - title: Using Deployment Previews
+      link: /deployment-previews/quick-start
+    - title: Securing your services
+      link: /security/security/
+    - title: Adding API documentation
+      link: /visualize-api/quick-start
+    - title: Using the Developer Portal
+      link: /developer-portal/developer-portal/
+    - title: Configuring single sign-on
+      link: /sso/
+    - title: Managing subscriptions
+      link: /subscriptions/howtos/manage-my-subscriptions
+    - title: Diagnostics Overview
+      link: /diagnostics-ui/view-diagnostics/
+    - title: Automated configuration analysis overview
+      link: /config-analysis/reference
+    - title: Automated configuration analysis configuration
+      link: /config-analysis/quick-start
+    - title: Authenticating to Ambassador Cloud
+      link: /authenticating/
+- title: Reference
+  items:
+    - title: Create a local K8s Dev Environment
+      link: service-catalog/howtos/qs-java-advanced/
+    - title: Incident response in the cloud-native world
+      link: /service-catalog/concepts/ir
+    - title: Developer Portal troubleshooting
+      link: /developer-portal/troubleshooting/
+    - title: FAQs
+      link: /service-catalog/faqs/
+    - title: Release Notes
+      link: /release-notes/

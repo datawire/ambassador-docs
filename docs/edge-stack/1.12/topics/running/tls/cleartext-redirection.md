@@ -4,8 +4,8 @@ While most modern web applications will choose to encrypt all traffic, there
 are reasons why you will want to support clients who access your website
 without encryption in cleartext.
 
-Ambassador supports both forcing 
-[automatic redirection to HTTPS](#http-https-redirection) and 
+Ambassador supports both forcing
+[automatic redirection to HTTPS](#http-https-redirection) and
 [serving cleartext](#cleartext-routing) traffic on a `Host`.
 
 ## Cleartext Routing
@@ -20,8 +20,8 @@ port 8080 in the container. See [TLS documentation](../) for information on
 how to configure TLS termination.
 
 For the Ambassador Edge Stack, TLS termination is enabled by default with a
-self-signed certificate or an ACME `Host`. To disable TLS termination in the 
-Ambassador Edge Stack, delete any existing `Host`s and set the 
+self-signed certificate or an ACME `Host`. To disable TLS termination in the
+Ambassador Edge Stack, delete any existing `Host`s and set the
 `requestPolicy.insecure.action` to `Route` in a `Host`:
 
 ```yaml
@@ -38,12 +38,12 @@ spec:
       action: Route
 ```
 
-> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config. 
-> 
-> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources. 
-> 
-> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`. 
-> 
+> **WARNING - Host Configuration:** The `requestPolicy` property of the `Host` `CRD` is applied globally within an Edge Stack instance, even if it is applied to only one `Host` when multiple `Host`s are configured. Different `requestPolicy` behaviors cannot be applied to different `Host`s. It is recommended to apply an identical `requestPolicy` to all `Host`s instead of assuming the behavior, to create a more human readable config.
+>
+> If a requestPolicy is not defined for a `Host`, it's assumed to be `Redirect`, so even if a `Host` does not specify it, the default `requestPolicy` of `Redirect` will be applied to all `Host`s in that Edge Stack instance. If the behavior expected out of Edge Stack is anything other than `Redirect`, it must be explicitly enumerated in all Host resources.
+>
+> Unexpected behavior can occur when multiple `Host` resources are not using the same value for `requestPolicy`.
+>
 > For more information, please refer to the [`Host` documentation](../../host-crd#secure-and-insecure-requests).
 >
 >The `insecure-action` can be one of:
@@ -58,7 +58,7 @@ spec:
 Ambassador can also support serving both HTTPS and cleartext traffic from a
 single Ambassador.
 
-This configuration is the same whether you are running the Open-Source API 
+This configuration is the same whether you are running the Open-Source API
 Gateway or the Ambassador Edge Stack. The configuration is very similar to the
 `Host` above but with the `Host` configured to terminate TLS.
 
@@ -93,7 +93,7 @@ requestPolicy:
 
 ## HTTP->HTTPS Redirection
 
-Most modern websites that force HTTPS will also automatically redirect any 
+Most modern websites that force HTTPS will also automatically redirect any
 requests that come into it over HTTP. In the Ambassador Edge Stack, this is
 enabled by default but can easily be enabled in any version of Ambassador.
 
@@ -109,8 +109,8 @@ Client              Ambassador Edge Stack
 |                             |
 ```
 
-In Ambassador, this is configured by setting the 
-`insecure.action` in a `Host` to `Redirect`. 
+In Ambassador, this is configured by setting the
+`insecure.action` in a `Host` to `Redirect`.
 
 ```yaml
 requestPolicy:
@@ -122,7 +122,7 @@ requestPolicy:
 Ambassador will then enable cleartext redrection in two ways.
 
 First, Ambassador will listen on the `insecure.additionalPort` and consider any
-traffic on this port as `insecure` and redirect it to HTTPS. 
+traffic on this port as `insecure` and redirect it to HTTPS.
 
 ```yaml
 requestPolicy:
@@ -131,8 +131,8 @@ requestPolicy:
     additionalPort: 8080
 ```
 
-Additionally, Ambassador will also check the `X-Forwarded-Proto` header of 
-the incoming request on the `secure` port (`8443`)and issue a 301 redirect if 
+Additionally, Ambassador will also check the `X-Forwarded-Proto` header of
+the incoming request on the `secure` port (`8443`)and issue a 301 redirect if
 it is set to `HTTP`.
 
 The value of `X-Forwarded-Proto` is dependent on whatever is forwarding traffic
@@ -140,7 +140,7 @@ to Ambassador. A couple of options are
 
 - Layer 4 Load Balancer, Proxy, or direct from the client:
 
-   `X-Forwarded-Proto`  is not set or is untrusted. Envoy will set it based 
+   `X-Forwarded-Proto`  is not set or is untrusted. Envoy will set it based
    off the protocol of the incoming request.
 
    If Envoy determines the request is encrypted, it will be set to `HTTPS`. If

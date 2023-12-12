@@ -13,7 +13,7 @@ report its access logs to a remote service, in addition to the usual
 The remote access log service (or ALS) must implement the
 `AccessLogService` gRPC interface, defined in [Envoy's `als.proto`][als.proto].
 
-[als.proto]: https://github.com/datawire/ambassador/blob/master/api/envoy/service/accesslog/v2/als.proto
+[als.proto]: https://github.com/emissary-ingress/emissary/blob/master/api/envoy/service/accesslog/v2/als.proto
 
 ```yaml
 ---

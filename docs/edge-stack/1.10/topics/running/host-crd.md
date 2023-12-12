@@ -66,7 +66,7 @@ acmeProvider:
 * If the authority is not supplied, the Let’s Encrypt production environment is assumed.
 
 * In general, `email-of-registrant` is mandatory when using ACME: it should be
-a valid email address that will reach someone responsible for certificate 
+a valid email address that will reach someone responsible for certificate
 management.
 
 * ACME stores certificates in Kubernetes secrets. The name of the secret can be
@@ -281,7 +281,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
     requestPolicy:
       insecure:
         action: Route
-  ```  
+  ```
 
   In this case, the Host resource explicitly requests no ACME handling and no TLS, then states that insecure requests must be routed instead of redirected.
 
@@ -321,7 +321,7 @@ This example is the same for an L4 LB, or without a load balancer at all.
 
 ### L7 LB
 
-  In general, L7 load balancers will be expected to provide a correct `X-Forwarded-Proto` header, and will require `xff_num_trusted_hops` set to the depth of the L7 LB stack in front of Ambassador. 
+  In general, L7 load balancers will be expected to provide a correct `X-Forwarded-Proto` header, and will require `xff_num_trusted_hops` set to the depth of the L7 LB stack in front of Ambassador.
 
   - `client -> L7 LB -> Ambassador` would require `xff_num_trusted_hops: 1`
   - `client -> L7 LB -> L7 LB -> Ambassador` would require `xff_num_trusted_hops: 2`
@@ -359,4 +359,4 @@ The Host CRD defines how Ambassador will be visible to the outside world. A mini
 
 ### CRD Specification
 
-The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/datawire/ambassador/blob/master/api/getambassador.io/v2/Host.proto).
+The `Host` CRD is formally described by its protobuf specification. Developers who need access to the specification can find it [here](https://github.com/emissary-ingress/emissary/blob/master/api/getambassador.io/v2/Host.proto).

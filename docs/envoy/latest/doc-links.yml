@@ -1,20 +1,12 @@
-- title: Home
-  link: /docs/
-
-- title: Products
-  collapsable: false
-  items:
-    - title: Envoy
-      items: 
-        - title: Core Concepts
-          items:
-            - title: Why is cloud-native development full lifecycle development?
-              link: /concepts/cloudnative
-            - title: "It's a layer 7 world: Why does an edge proxy matter for developers?"
-              link: /concepts/whyenvoy/
-            - title: Introduction to Modern Network Load Balancing and Proxying
-              link: /concepts/modernlb/
-        - title: How Do I...
-          items:
-            - title: Get started with Envoy Proxy
-              link: /howtos/getstarted
+ - title: Core Concepts
+   items:
+     - title: Why is cloud-native development full lifecycle development?
+       link: /concepts/cloudnative
+     - title: "It's a layer 7 world: Why does an edge proxy matter for developers?"
+       link: /concepts/whyenvoy/
+     - title: Introduction to Modern Network Load Balancing and Proxying
+       link: /concepts/modernlb/
+ - title: How Do I...
+   items:
+     - title: Get started with Envoy Proxy
+       link: /howtos/getstarted

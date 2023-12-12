@@ -1,18 +1,24 @@
+---
+title: "Frequently Asked Questions | Ambassador Cloud"
+description: "Frequently asked question about Ambassador Cloud, the service catalog, and more."
+---
+import { FaqsSigIn, FaqsGoToCloud } from '../../../../../src/components/Docs/Cloud';
+
 # Service Catalog FAQs
 
 **Where do I sign in to Service Catalog?**
 
-Sign in to Service Catalog [here](https://app.getambassador.io/cloud/catalog).
+<FaqsSigIn />
 
 **How can I see Service Catalog in action?**
 
-Check out our [demo video](https://www.youtube.com/watch?v=Osedx_ksD7Q)!
+Check out our [demo video](https://youtu.be/oUj6aWqP7jU)!
 
 **Why Service Catalog?**
 
 Service Catalog provides a comprehensive view of all services deployed across your cluster.
 
-Service Catalog also supports [a set of annotations](../reference/annotations#supported-annotations) that you can add to your services to provide critical human-visible metadata: the owner of the service, a link to the GitHub repo, and more.
+Service Catalog also supports [a set of annotations](/docs/cloud/latest/service-catalog/concepts/annotating) that you can add to your services to provide critical human-visible metadata: the owner of the service, a link to the GitHub repo, and more.
 
 Having this type of service metadata easily available in a single location is invaluable when reacting to a production incident.
 
@@ -24,11 +30,11 @@ When you connect your Edge Stack to Ambassador Cloud all of the Services within 
 
 **What type of metadata can be added to each service in the catalog?**
 
-Please find the entire list of supported annotations [here](../reference/annotations#supported-annotations).
+Please find the entire list of supported annotations [here](/docs/cloud/latest/service-catalog/concepts/annotating).
 
 **How can I *add* metadata to a service within the catalog?**
 
-Please find instructions on annotating services [here](../reference/annotations/#annotate-via-kubectl).
+Please find instructions on annotating services [here](/docs/cloud/latest/service-catalog/concepts/annotating).
 
 **How do I *update* metadata on a service within the catalog?**
 
@@ -71,9 +77,7 @@ Annotations added to a Kubernetes Service via YAML (or associated config templat
 
 Please check the following:
 
-* Has the Edge Stack been successfully installed in your cluster? Are all of the Edge Stack Pods in a healthy state (e.g. no status of `CrashLoopBackoff`)?
-* Have you successfully applied your Cloud Connect token to your installation of the Edge Stack? If not, please sign in to [Ambassador Cloud](https://app.getambassador.io/cloud/catalog) and follow the instructions to add a cluster to the Service Catalog.
-* Are you running Ambassador Edge Stack 1.12 or later? Earlier versions of the Edge Stack, or an Edge Stack running in “legacy” mode, do not support reporting Service metadata to Ambassador Cloud.
+<FaqsGoToCloud />
 
 **Why have my cluster/services disappeared from Service Catalog?**
 
@@ -84,8 +88,20 @@ Please check the following:
 
 **What components get installed into my cluster when connecting to Service Catalog?**
 
-The standard [Edge Stack Services](../../../../edge-stack/latest/topics/install/) get installed within your cluster. The Edge Stack components are responsible for synchronizing the list of Services within your cluster with the list displayed within the Service Catalog.
+The standard [Edge Stack Services](../../../../edge-stack/1.13/topics/install/) get installed within your cluster. The Edge Stack components are responsible for synchronizing the list of Services within your cluster with the list displayed within the Service Catalog.
+
+**Does Ambassador cloud have RBAC functionality?**
+
+Ambassador Cloud features Role-Based Access Control (RBAC) to regulate user permissions.
+
+Roles are accessible in the [Settings section of Ambassador Cloud](https://app.getambassador.io/cloud/settings) on the Members page. Only members with Administrator roles can change other members' roles.
+
+Members can be assigned one of the following roles:
+* Administrator - grants member access to all functions in Ambassador Cloud.
+* User - has access to all functions in Ambassador Cloud except for the ability to manage other member's accounts or change the [payment plans](https://www.getambassador.io/editions/).
 
 **How do I share my feedback on Ambassador Cloud and Service Catalog?**
 
-Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../../feedback), or you can join our [Slack channel](https://a8r.io/Slack) to share your thoughts.
+Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../../feedback), or you can join our [Slack channel](http://a8r.io/slack) to share your thoughts.
+
+

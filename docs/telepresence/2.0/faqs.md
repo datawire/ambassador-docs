@@ -41,7 +41,7 @@ Yes. After you have successfully connected to your cluster via `telepresence con
 
 This means you can curl endpoints directly e.g. `curl <my_service_name>.<my_service_namespace>:8080/mypath`.
 
-If you create an intercept for a service in a namespace, you will be able to use the service name directly. 
+If you create an intercept for a service in a namespace, you will be able to use the service name directly.
 
 This means if you `telepresence intercept <my_service_name> -n <my_service_namespace>`, you will be able to resolve just the `<my_service_name>` DNS record.
 
@@ -101,4 +101,4 @@ Telepresence will be open source soon, in the meantime it is free to download. W
 
 ** How do I share my feedback on Telepresence?**
 
-Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../feedback), or you can [join our Slack channel](https://a8r.io/Slack) to share your thoughts.
+Your feedback is always appreciated and helps us build a product that provides as much value as possible for our community. You can chat with us directly on our [feedback page](../../../../feedback), or you can [join our Slack channel](http://a8r.io/slack) to share your thoughts.

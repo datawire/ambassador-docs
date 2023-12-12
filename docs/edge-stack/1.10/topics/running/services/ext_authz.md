@@ -25,7 +25,7 @@ There are two variants of the `ext_authz`: gRPC, and plain HTTP.
 
 When `proto: grpc`, the external auth service must implement the `Authorization` gRPC interface, defined in [Envoy's `external_auth.proto`][external_auth.proto].
 
-[external_auth.proto]: https://github.com/datawire/ambassador/blob/master/api/envoy/service/auth/v2/external_auth.proto
+[external_auth.proto]: https://github.com/emissary-ingress/emissary/blob/master/api/envoy/service/auth/v2/external_auth.proto
 
 ### The `proto: http` Protocol
 
@@ -55,7 +55,7 @@ User-Agent: curl/7.54.0
 Accept: */*
 Content-Type: application/json
 Content-Length: 27
-  
+
 { "greeting": "hello world!", "spiders": "OMG no" }
 ```
 
