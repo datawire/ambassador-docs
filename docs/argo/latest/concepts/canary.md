@@ -60,7 +60,7 @@ To get started with canary releasing, you'll need:
 *   a CI/CD pipeline integrated with a continuous deployment workflow, e.g., Argo
 *   an observability system
 
-Canary releases are typically implemented via a proxy like [Envoy](https://www.envoyproxy.io/)y, a smart router, or configurable load balancer. Releases can be triggered by continuous integration/delivery pipeline tooling. 
+Canary releases are typically implemented via a proxy like [Envoy](https://www.envoyproxy.io/), a smart router, or configurable load balancer. Releases can be triggered by continuous integration/delivery pipeline tooling. 
 
 ## What is required for a successful canary deployment?
 
