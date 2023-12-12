@@ -56,7 +56,7 @@ If you do not have a service running locally, the Traffic Agent will use the res
 it gets from the HTTP check against your app in the cluster to configure requests
 from the local process once it has started.
 
-## Creating an intercept Without a preview URL
+## Creating an intercept without a preview URL
 
 If you *are not* logged in to Ambassador Cloud, the following command
 will intercept all traffic bound to the service and proxy it to your
@@ -130,7 +130,7 @@ When intercepting a service that has multiple ports, the name of the service por
 
 If you want to change which port has been intercepted, you can create a new intercept the same way you did above and it will change which service port is being intercepted.
 
-## Creating an intercept When multiple services match your workload
+## Creating an intercept when multiple services match your workload
 
 Oftentimes, there's a 1-to-1 relationship between a service and a workload, so telepresence is able to auto-detect which service it should intercept based on the workload you are trying to intercept.  But if you use something like [Argo](https://www.getambassador.io/docs/argo/latest/), it uses two services (that use the same labels) to manage traffic between a canary and a stable service.
 
