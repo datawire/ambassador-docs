@@ -36,8 +36,8 @@ spec:
       port: 443
       targetPort: 8443
       protocol: TCP
-  ---
-  apiVersion: v1
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: $productDeploymentName$-udp
