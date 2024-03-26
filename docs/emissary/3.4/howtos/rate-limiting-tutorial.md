@@ -122,7 +122,7 @@ spec:
     emissary:
       - request_label_group:
         - x-emissary-test-allow:
-          request_headers:
+            request_headers:
               key: "x-emissary-test-allow"
               header_name: "x-emissary-test-allow"
 ```
