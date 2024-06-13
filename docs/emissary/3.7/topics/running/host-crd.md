@@ -18,7 +18,7 @@ single configuration resource:
 </Alert>
 
 <Alert severity="warning">
-  Remember than $productName$ does not make sure that a wildcard <code>Host</code> exists! If the
+  Remember that $productName$ does not make sure that a wildcard <code>Host</code> exists! If the
   wildcard behavior is needed, a <code>Host</code> with a <code>hostname</code> of <code>"*"</code>
   must be defined by the user.
 </Alert>
