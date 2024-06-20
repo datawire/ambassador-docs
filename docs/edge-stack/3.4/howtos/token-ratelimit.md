@@ -112,6 +112,7 @@ metadata:
   name: token-name-rate-limit
 spec:
   domain: ambassador
+  limits:
   - name: token-name-per-minute
     action: Enforce
     pattern:
