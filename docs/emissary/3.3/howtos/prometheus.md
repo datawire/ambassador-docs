@@ -172,6 +172,9 @@ standard YAML files.  Alternatively, you can install it with
           service: ambassador-admin
       endpoints:
       - port: ambassador-admin
+        path: /metrics
+        scrapeTimeout: 5s
+        targetPort: 8877  
     ```
 
 Prometheus is now configured to gather metrics from $productName$.
