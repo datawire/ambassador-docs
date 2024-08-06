@@ -223,7 +223,7 @@ Then, we simply need to edit our TracingService to point to the OpenTelemetry Co
 
 If you were using the Lightstep tracing driver, you may have your Lightstep Access Token information set in your TracingService config. Using a Kubernetes Secret, we no longer need to reference the token here.
 
-Once our TracingService configuration has been updated, a restart of $productName$ is necessary for Lightstep to recieve our Distributed Tracing information. This can be done with the following command:
+Once our TracingService configuration has been updated, a restart of $productName$ is necessary for Lightstep to receive our Distributed Tracing information. This can be done with the following command:
 
 ```bash
   kubectl -n ambassador rollout restart deploy

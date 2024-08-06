@@ -18,7 +18,7 @@ Ambassador Edge Stack displays the health of your services on the Dashboard of y
 * Red is used when the success rate ranges from 0% - 70%.
 * Yellow is used when the success rate ranges from 70% - 90%.
 * Green is used when the success rate is > 90%.
-* Grey is used when a service is "waiting". This means the success rate cannot be determined because the service has not recieved any requests yet.
+* Grey is used when a service is "waiting". This means the success rate cannot be determined because the service has not received any requests yet.
 
 ![](../../../images/diagnostics-example.png)
 
